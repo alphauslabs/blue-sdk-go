@@ -147,6 +147,7 @@ func (x *HelloRequest) GetUint64Val() *wrappers.UInt64Value {
 	return nil
 }
 
+// Response
 type HelloReply struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
