@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AwsCostClient interface {
-	GetCosts(ctx context.Context, in *GetCostsRequest, opts ...grpc.CallOption) (*GetCostsReply, error)
+	GetCosts(ctx context.Context, in *GetCostsRequest, opts ...grpc.CallOption) (AwsCost_GetCostsClient, error)
 }
 
 type awsCostClient struct {
@@ -29,20 +29,43 @@ func NewAwsCostClient(cc grpc.ClientConnInterface) AwsCostClient {
 	return &awsCostClient{cc}
 }
 
-func (c *awsCostClient) GetCosts(ctx context.Context, in *GetCostsRequest, opts ...grpc.CallOption) (*GetCostsReply, error) {
-	out := new(GetCostsReply)
-	err := c.cc.Invoke(ctx, "/blueapi.awscost.v1.AwsCost/GetCosts", in, out, opts...)
+func (c *awsCostClient) GetCosts(ctx context.Context, in *GetCostsRequest, opts ...grpc.CallOption) (AwsCost_GetCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[0], "/blueapi.awscost.v1.AwsCost/GetCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &awsCostGetCostsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AwsCost_GetCostsClient interface {
+	Recv() (*GetCostsReply, error)
+	grpc.ClientStream
+}
+
+type awsCostGetCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *awsCostGetCostsClient) Recv() (*GetCostsReply, error) {
+	m := new(GetCostsReply)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // AwsCostServer is the server API for AwsCost service.
 // All implementations must embed UnimplementedAwsCostServer
 // for forward compatibility
 type AwsCostServer interface {
-	GetCosts(context.Context, *GetCostsRequest) (*GetCostsReply, error)
+	GetCosts(*GetCostsRequest, AwsCost_GetCostsServer) error
 	mustEmbedUnimplementedAwsCostServer()
 }
 
@@ -50,8 +73,8 @@ type AwsCostServer interface {
 type UnimplementedAwsCostServer struct {
 }
 
-func (UnimplementedAwsCostServer) GetCosts(context.Context, *GetCostsRequest) (*GetCostsReply, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCosts not implemented")
+func (UnimplementedAwsCostServer) GetCosts(*GetCostsRequest, AwsCost_GetCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCosts not implemented")
 }
 func (UnimplementedAwsCostServer) mustEmbedUnimplementedAwsCostServer() {}
 
@@ -66,22 +89,25 @@ func RegisterAwsCostServer(s grpc.ServiceRegistrar, srv AwsCostServer) {
 	s.RegisterService(&AwsCost_ServiceDesc, srv)
 }
 
-func _AwsCost_GetCosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCostsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _AwsCost_GetCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(AwsCostServer).GetCosts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.awscost.v1.AwsCost/GetCosts",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AwsCostServer).GetCosts(ctx, req.(*GetCostsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(AwsCostServer).GetCosts(m, &awsCostGetCostsServer{stream})
+}
+
+type AwsCost_GetCostsServer interface {
+	Send(*GetCostsReply) error
+	grpc.ServerStream
+}
+
+type awsCostGetCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *awsCostGetCostsServer) Send(m *GetCostsReply) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // AwsCost_ServiceDesc is the grpc.ServiceDesc for AwsCost service.
@@ -90,12 +116,13 @@ func _AwsCost_GetCosts_Handler(srv interface{}, ctx context.Context, dec func(in
 var AwsCost_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.awscost.v1.AwsCost",
 	HandlerType: (*AwsCostServer)(nil),
-	Methods: []grpc.MethodDesc{
+	Methods:     []grpc.MethodDesc{},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "GetCosts",
-			Handler:    _AwsCost_GetCosts_Handler,
+			StreamName:    "GetCosts",
+			Handler:       _AwsCost_GetCosts_Handler,
+			ServerStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "awscost/v1/awscost.proto",
 }
