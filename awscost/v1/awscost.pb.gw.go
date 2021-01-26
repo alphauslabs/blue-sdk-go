@@ -31,8 +31,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_AwsCost_GetCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_GetCostsClient, runtime.ServerMetadata, error) {
-	var protoReq GetCostsRequest
+func request_AwsCost_GetAccountCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_GetAccountCostsClient, runtime.ServerMetadata, error) {
+	var protoReq GetAccountCostsRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -52,7 +52,7 @@ func request_AwsCost_GetCosts_0(ctx context.Context, marshaler runtime.Marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
-	stream, err := client.GetCosts(ctx, &protoReq)
+	stream, err := client.GetAccountCosts(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -71,7 +71,7 @@ func request_AwsCost_GetCosts_0(ctx context.Context, marshaler runtime.Marshaler
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterAwsCostHandlerFromEndpoint instead.
 func RegisterAwsCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, server AwsCostServer) error {
 
-	mux.Handle("GET", pattern_AwsCost_GetCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_AwsCost_GetAccountCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -119,23 +119,23 @@ func RegisterAwsCostHandler(ctx context.Context, mux *runtime.ServeMux, conn *gr
 // "AwsCostClient" to call the correct interceptors.
 func RegisterAwsCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, client AwsCostClient) error {
 
-	mux.Handle("GET", pattern_AwsCost_GetCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_AwsCost_GetAccountCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/GetCosts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/GetAccountCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_GetCosts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_GetAccountCosts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_GetCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_GetAccountCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -143,9 +143,9 @@ func RegisterAwsCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 }
 
 var (
-	pattern_AwsCost_GetCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "costs"}, ""))
+	pattern_AwsCost_GetAccountCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "costs"}, ""))
 )
 
 var (
-	forward_AwsCost_GetCosts_0 = runtime.ForwardResponseStream
+	forward_AwsCost_GetAccountCosts_0 = runtime.ForwardResponseStream
 )
