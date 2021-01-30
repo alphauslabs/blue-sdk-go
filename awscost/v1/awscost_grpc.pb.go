@@ -18,7 +18,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AwsCostClient interface {
-	GetAccountCosts(ctx context.Context, in *GetAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_GetAccountCostsClient, error)
+	// Streams back the cost details of an account. If date range parameters are not set,
+	// month-to-date (current month) will be returned.
+	StreamReadAccountCosts(ctx context.Context, in *StreamReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountCostsClient, error)
 }
 
 type awsCostClient struct {
@@ -29,12 +31,12 @@ func NewAwsCostClient(cc grpc.ClientConnInterface) AwsCostClient {
 	return &awsCostClient{cc}
 }
 
-func (c *awsCostClient) GetAccountCosts(ctx context.Context, in *GetAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_GetAccountCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[0], "/blueapi.awscost.v1.AwsCost/GetAccountCosts", opts...)
+func (c *awsCostClient) StreamReadAccountCosts(ctx context.Context, in *StreamReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[0], "/blueapi.awscost.v1.AwsCost/StreamReadAccountCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostGetAccountCostsClient{stream}
+	x := &awsCostStreamReadAccountCostsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -44,17 +46,17 @@ func (c *awsCostClient) GetAccountCosts(ctx context.Context, in *GetAccountCosts
 	return x, nil
 }
 
-type AwsCost_GetAccountCostsClient interface {
-	Recv() (*GetAccountCostsReply, error)
+type AwsCost_StreamReadAccountCostsClient interface {
+	Recv() (*Cost, error)
 	grpc.ClientStream
 }
 
-type awsCostGetAccountCostsClient struct {
+type awsCostStreamReadAccountCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostGetAccountCostsClient) Recv() (*GetAccountCostsReply, error) {
-	m := new(GetAccountCostsReply)
+func (x *awsCostStreamReadAccountCostsClient) Recv() (*Cost, error) {
+	m := new(Cost)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -65,7 +67,9 @@ func (x *awsCostGetAccountCostsClient) Recv() (*GetAccountCostsReply, error) {
 // All implementations must embed UnimplementedAwsCostServer
 // for forward compatibility
 type AwsCostServer interface {
-	GetAccountCosts(*GetAccountCostsRequest, AwsCost_GetAccountCostsServer) error
+	// Streams back the cost details of an account. If date range parameters are not set,
+	// month-to-date (current month) will be returned.
+	StreamReadAccountCosts(*StreamReadAccountCostsRequest, AwsCost_StreamReadAccountCostsServer) error
 	mustEmbedUnimplementedAwsCostServer()
 }
 
@@ -73,8 +77,8 @@ type AwsCostServer interface {
 type UnimplementedAwsCostServer struct {
 }
 
-func (UnimplementedAwsCostServer) GetAccountCosts(*GetAccountCostsRequest, AwsCost_GetAccountCostsServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetAccountCosts not implemented")
+func (UnimplementedAwsCostServer) StreamReadAccountCosts(*StreamReadAccountCostsRequest, AwsCost_StreamReadAccountCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamReadAccountCosts not implemented")
 }
 func (UnimplementedAwsCostServer) mustEmbedUnimplementedAwsCostServer() {}
 
@@ -89,24 +93,24 @@ func RegisterAwsCostServer(s grpc.ServiceRegistrar, srv AwsCostServer) {
 	s.RegisterService(&AwsCost_ServiceDesc, srv)
 }
 
-func _AwsCost_GetAccountCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetAccountCostsRequest)
+func _AwsCost_StreamReadAccountCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamReadAccountCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).GetAccountCosts(m, &awsCostGetAccountCostsServer{stream})
+	return srv.(AwsCostServer).StreamReadAccountCosts(m, &awsCostStreamReadAccountCostsServer{stream})
 }
 
-type AwsCost_GetAccountCostsServer interface {
-	Send(*GetAccountCostsReply) error
+type AwsCost_StreamReadAccountCostsServer interface {
+	Send(*Cost) error
 	grpc.ServerStream
 }
 
-type awsCostGetAccountCostsServer struct {
+type awsCostStreamReadAccountCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostGetAccountCostsServer) Send(m *GetAccountCostsReply) error {
+func (x *awsCostStreamReadAccountCostsServer) Send(m *Cost) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -119,8 +123,8 @@ var AwsCost_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GetAccountCosts",
-			Handler:       _AwsCost_GetAccountCosts_Handler,
+			StreamName:    "StreamReadAccountCosts",
+			Handler:       _AwsCost_StreamReadAccountCosts_Handler,
 			ServerStreams: true,
 		},
 	},
