@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AwsCostClient interface {
-	// Streams back the cost details of an account. If date range parameters are not set,
+	// Streams back the cost details of an account. If datetime range parameters are not set,
 	// month-to-date (current month) will be returned.
 	StreamReadAccountCosts(ctx context.Context, in *StreamReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountCostsClient, error)
 }
@@ -67,7 +67,7 @@ func (x *awsCostStreamReadAccountCostsClient) Recv() (*Cost, error) {
 // All implementations must embed UnimplementedAwsCostServer
 // for forward compatibility
 type AwsCostServer interface {
-	// Streams back the cost details of an account. If date range parameters are not set,
+	// Streams back the cost details of an account. If datetime range parameters are not set,
 	// month-to-date (current month) will be returned.
 	StreamReadAccountCosts(*StreamReadAccountCostsRequest, AwsCost_StreamReadAccountCostsServer) error
 	mustEmbedUnimplementedAwsCostServer()
