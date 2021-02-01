@@ -115,6 +115,48 @@ func request_AwsCost_StreamReadAccountFees_0(ctx context.Context, marshaler runt
 
 }
 
+func request_AwsCost_StreamReadBillingGroupCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadBillingGroupCostsClient, runtime.ServerMetadata, error) {
+	var protoReq StreamReadBillingGroupCostsRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
+	}
+
+	protoReq.Name, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
+	}
+
+	stream, err := client.StreamReadBillingGroupCosts(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterAwsCostHandlerServer registers the http handlers for service AwsCost to "mux".
 // UnaryRPC     :call AwsCostServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -129,6 +171,13 @@ func RegisterAwsCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 	})
 
 	mux.Handle("POST", pattern_AwsCost_StreamReadAccountFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle("POST", pattern_AwsCost_StreamReadBillingGroupCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -216,6 +265,26 @@ func RegisterAwsCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 
 	})
 
+	mux.Handle("POST", pattern_AwsCost_StreamReadBillingGroupCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadBillingGroupCosts")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_AwsCost_StreamReadBillingGroupCosts_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_AwsCost_StreamReadBillingGroupCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -223,10 +292,14 @@ var (
 	pattern_AwsCost_StreamReadAccountCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "costs"}, "streamReadAccountCosts"))
 
 	pattern_AwsCost_StreamReadAccountFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "fees"}, "streamReadAccountFees"))
+
+	pattern_AwsCost_StreamReadBillingGroupCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "costs"}, "streamReadBillingGroupCosts"))
 )
 
 var (
 	forward_AwsCost_StreamReadAccountCosts_0 = runtime.ForwardResponseStream
 
 	forward_AwsCost_StreamReadAccountFees_0 = runtime.ForwardResponseStream
+
+	forward_AwsCost_StreamReadBillingGroupCosts_0 = runtime.ForwardResponseStream
 )

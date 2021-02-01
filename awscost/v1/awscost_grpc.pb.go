@@ -25,6 +25,9 @@ type AwsCostClient interface {
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadAccountFees(ctx context.Context, in *StreamReadAccountFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountFeesClient, error)
+	// Streams back the usage-based cost details of a billing group. If datetime range
+	// parameters are not set, month-to-date (current month) will be returned.
+	StreamReadBillingGroupCosts(ctx context.Context, in *StreamReadBillingGroupCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupCostsClient, error)
 }
 
 type awsCostClient struct {
@@ -99,6 +102,38 @@ func (x *awsCostStreamReadAccountFeesClient) Recv() (*Fee, error) {
 	return m, nil
 }
 
+func (c *awsCostClient) StreamReadBillingGroupCosts(ctx context.Context, in *StreamReadBillingGroupCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[2], "/blueapi.awscost.v1.AwsCost/StreamReadBillingGroupCosts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &awsCostStreamReadBillingGroupCostsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type AwsCost_StreamReadBillingGroupCostsClient interface {
+	Recv() (*Cost, error)
+	grpc.ClientStream
+}
+
+type awsCostStreamReadBillingGroupCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *awsCostStreamReadBillingGroupCostsClient) Recv() (*Cost, error) {
+	m := new(Cost)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // AwsCostServer is the server API for AwsCost service.
 // All implementations must embed UnimplementedAwsCostServer
 // for forward compatibility
@@ -110,6 +145,9 @@ type AwsCostServer interface {
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadAccountFees(*StreamReadAccountFeesRequest, AwsCost_StreamReadAccountFeesServer) error
+	// Streams back the usage-based cost details of a billing group. If datetime range
+	// parameters are not set, month-to-date (current month) will be returned.
+	StreamReadBillingGroupCosts(*StreamReadBillingGroupCostsRequest, AwsCost_StreamReadBillingGroupCostsServer) error
 	mustEmbedUnimplementedAwsCostServer()
 }
 
@@ -122,6 +160,9 @@ func (UnimplementedAwsCostServer) StreamReadAccountCosts(*StreamReadAccountCosts
 }
 func (UnimplementedAwsCostServer) StreamReadAccountFees(*StreamReadAccountFeesRequest, AwsCost_StreamReadAccountFeesServer) error {
 	return status.Errorf(codes.Unimplemented, "method StreamReadAccountFees not implemented")
+}
+func (UnimplementedAwsCostServer) StreamReadBillingGroupCosts(*StreamReadBillingGroupCostsRequest, AwsCost_StreamReadBillingGroupCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method StreamReadBillingGroupCosts not implemented")
 }
 func (UnimplementedAwsCostServer) mustEmbedUnimplementedAwsCostServer() {}
 
@@ -178,6 +219,27 @@ func (x *awsCostStreamReadAccountFeesServer) Send(m *Fee) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _AwsCost_StreamReadBillingGroupCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(StreamReadBillingGroupCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AwsCostServer).StreamReadBillingGroupCosts(m, &awsCostStreamReadBillingGroupCostsServer{stream})
+}
+
+type AwsCost_StreamReadBillingGroupCostsServer interface {
+	Send(*Cost) error
+	grpc.ServerStream
+}
+
+type awsCostStreamReadBillingGroupCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *awsCostStreamReadBillingGroupCostsServer) Send(m *Cost) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // AwsCost_ServiceDesc is the grpc.ServiceDesc for AwsCost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -194,6 +256,11 @@ var AwsCost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "StreamReadAccountFees",
 			Handler:       _AwsCost_StreamReadAccountFees_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "StreamReadBillingGroupCosts",
+			Handler:       _AwsCost_StreamReadBillingGroupCosts_Handler,
 			ServerStreams: true,
 		},
 	},
