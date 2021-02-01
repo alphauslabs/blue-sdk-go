@@ -18,12 +18,12 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AwsCostClient interface {
-	// Streams back the usage-based cost details of an account. If datetime range parameters
-	// are not set, month-to-date (current month) will be returned.
+	// Streams back the usage-based cost details of an AWS account. If datetime range
+	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadAccountCosts(ctx context.Context, in *StreamReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountCostsClient, error)
-	// Streams back the fee-based details of an account. This API covers non-usage-based fees,
-	// such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range parameters
-	// are not set, month-to-date (current month) will be returned.
+	// Streams back the fee-based details of an AWS account. This API covers non-usage-based
+	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
+	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadAccountFees(ctx context.Context, in *StreamReadAccountFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountFeesClient, error)
 }
 
@@ -103,12 +103,12 @@ func (x *awsCostStreamReadAccountFeesClient) Recv() (*Fee, error) {
 // All implementations must embed UnimplementedAwsCostServer
 // for forward compatibility
 type AwsCostServer interface {
-	// Streams back the usage-based cost details of an account. If datetime range parameters
-	// are not set, month-to-date (current month) will be returned.
+	// Streams back the usage-based cost details of an AWS account. If datetime range
+	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadAccountCosts(*StreamReadAccountCostsRequest, AwsCost_StreamReadAccountCostsServer) error
-	// Streams back the fee-based details of an account. This API covers non-usage-based fees,
-	// such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range parameters
-	// are not set, month-to-date (current month) will be returned.
+	// Streams back the fee-based details of an AWS account. This API covers non-usage-based
+	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
+	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadAccountFees(*StreamReadAccountFeesRequest, AwsCost_StreamReadAccountFeesServer) error
 	mustEmbedUnimplementedAwsCostServer()
 }
