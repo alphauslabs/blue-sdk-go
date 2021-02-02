@@ -498,7 +498,7 @@ func RegisterAwsCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 var (
 	pattern_AwsCost_StreamReadAccountCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "costs"}, "streamReadAccountCosts"))
 
-	pattern_AwsCost_StreamReadCompanyCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "companies", "name", "costs"}, "streamReadCompaniesCosts"))
+	pattern_AwsCost_StreamReadCompanyCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "companies", "name", "costs"}, "streamReadCompanyCosts"))
 
 	pattern_AwsCost_StreamReadBillingGroupCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "billinggroups", "name", "costs"}, "streamReadBillingGroupCosts"))
 
