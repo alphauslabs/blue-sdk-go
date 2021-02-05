@@ -112,7 +112,7 @@ func (s *Session) AccessToken() (string, error) {
 
 func New(o ...Option) *Session {
 	s := &Session{
-		loginUrl:     LoginRipple,
+		loginUrl:     LoginUrlRipple,
 		clientId:     os.Getenv("ALPHAUS_CLIENT_ID"),
 		clientSecret: os.Getenv("ALPHAUS_CLIENT_SECRET"),
 		grantType:    "client_credentials",
