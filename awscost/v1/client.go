@@ -26,13 +26,6 @@ type ClientOption interface {
 	apply(*clientOptions)
 }
 
-type client struct {
-	AwsCostClient
-	opts clientOptions
-}
-
-func (c *client) Close() { c.opts.conn.Close() }
-
 // fnClientOption wraps a function that modifies clientOptions into an
 // implementation of the ClientOption interface.
 type fnClientOption struct {
@@ -75,7 +68,14 @@ func WithGrpcConnection(v *grpc.ClientConn) ClientOption {
 	})
 }
 
-func NewClient(ctx context.Context, opts ...ClientOption) (*client, error) {
+type grpcClient struct {
+	AwsCostClient
+	opts clientOptions
+}
+
+func (c *grpcClient) Close() { c.opts.conn.Close() }
+
+func NewClient(ctx context.Context, opts ...ClientOption) (*grpcClient, error) {
 	co := clientOptions{
 		target:       Address,
 		loginUrl:     session.LoginUrlRipple,
@@ -108,5 +108,5 @@ func NewClient(ctx context.Context, opts ...ClientOption) (*client, error) {
 	}
 
 	cc := NewAwsCostClient(co.conn)
-	return &client{cc, co}, nil
+	return &grpcClient{cc, co}, nil
 }
