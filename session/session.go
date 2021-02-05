@@ -9,6 +9,11 @@ import (
 	"os"
 )
 
+const (
+	LoginUrlRipple = "https://login.alphaus.cloud/ripple/access_token"
+	LoginUrlWave   = "https://login.alphaus.cloud/access_token"
+)
+
 type Option interface {
 	Apply(*Session)
 }
@@ -107,7 +112,7 @@ func (s *Session) AccessToken() (string, error) {
 
 func New(o ...Option) *Session {
 	s := &Session{
-		loginUrl:     "https://login.alphaus.cloud/ripple/access_token",
+		loginUrl:     LoginRipple,
 		clientId:     os.Getenv("ALPHAUS_CLIENT_ID"),
 		clientSecret: os.Getenv("ALPHAUS_CLIENT_SECRET"),
 		grantType:    "client_credentials",

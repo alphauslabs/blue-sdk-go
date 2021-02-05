@@ -11,17 +11,15 @@ import (
 )
 
 const (
-	addr        = ":443" // to be updated after prod deployment
-	loginRipple = "https://login.alphaus.cloud/ripple/access_token"
-	loginWave   = "https://login.alphaus.cloud/access_token"
+	Address = ":443" // to be updated after prod deployment
 )
 
 type clientOptions struct {
-	target   string // gRPC server address
-	loginUrl string // url to get access token
-	key      string // Alphaus client id
-	secret   string // Alphaus client secret
-	conn     *grpc.ClientConn
+	target       string // gRPC server address
+	loginUrl     string // url to get access token
+	clientId     string // Alphaus client id
+	clientSecret string // Alphaus client secret
+	conn         *grpc.ClientConn
 }
 
 type ClientOption interface {
@@ -59,24 +57,30 @@ func WithLoginUrl(s string) ClientOption {
 	})
 }
 
-func WithKey(s string) ClientOption {
+func WithClientId(s string) ClientOption {
 	return newFnClientOption(func(o *clientOptions) {
-		o.key = s
+		o.clientId = s
 	})
 }
 
-func WithSecret(s string) ClientOption {
+func WithClientSecret(s string) ClientOption {
 	return newFnClientOption(func(o *clientOptions) {
-		o.secret = s
+		o.clientSecret = s
 	})
 }
 
-func NewClient(opts ...ClientOption) (*client, error) {
+func WithGrpcConnection(v *grpc.ClientConn) ClientOption {
+	return newFnClientOption(func(o *clientOptions) {
+		o.conn = v
+	})
+}
+
+func NewClient(ctx context.Context, opts ...ClientOption) (*client, error) {
 	co := clientOptions{
-		target:   addr,
-		loginUrl: loginRipple,
-		key:      os.Getenv("ALPHAUS_CLIENT_ID"),
-		secret:   os.Getenv("ALPHAUS_CLIENT_SECRET"),
+		target:       Address,
+		loginUrl:     session.LoginUrlRipple,
+		clientId:     os.Getenv("ALPHAUS_CLIENT_ID"),
+		clientSecret: os.Getenv("ALPHAUS_CLIENT_SECRET"),
 	}
 
 	for _, opt := range opts {
@@ -89,13 +93,15 @@ func NewClient(opts ...ClientOption) (*client, error) {
 		creds := credentials.NewTLS(&tls.Config{})
 		gopts = append(gopts, grpc.WithTransportCredentials(creds))
 		gopts = append(gopts, grpc.WithBlock())
-		gopts = append(gopts, grpc.WithPerRPCCredentials(tokenAuth{
-			loginUrl: co.loginUrl,
-			key:      co.key,
-			secret:   co.secret,
-		}))
+		gopts = append(gopts, grpc.WithPerRPCCredentials(
+			session.NewRpcCredentials(session.RpcCredentialsInput{
+				LoginUrl:     co.loginUrl,
+				ClientId:     co.clientId,
+				ClientSecret: co.clientSecret,
+			}),
+		))
 
-		co.conn, err = grpc.Dial(co.target, gopts...)
+		co.conn, err = grpc.DialContext(ctx, co.target, gopts...)
 		if err != nil {
 			return nil, err
 		}
@@ -104,26 +110,3 @@ func NewClient(opts ...ClientOption) (*client, error) {
 	cc := NewAwsCostClient(co.conn)
 	return &client{cc, co}, nil
 }
-
-type tokenAuth struct {
-	loginUrl string
-	key      string
-	secret   string
-}
-
-func (t tokenAuth) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
-	s := session.New(
-		session.WithLoginUrl(t.loginUrl),
-		session.WithClientId(t.key),
-		session.WithClientSecret(t.secret),
-	)
-
-	token, err := s.AccessToken()
-	if err != nil {
-		return map[string]string{}, err
-	}
-
-	return map[string]string{"authorization": "Bearer " + token}, nil
-}
-
-func (tokenAuth) RequireTransportSecurity() bool { return false }
