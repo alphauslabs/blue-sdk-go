@@ -168,7 +168,7 @@ func (c *awsCostClient) StreamReadCosts(ctx context.Context, in *StreamReadCosts
 }
 
 type AwsCost_StreamReadCostsClient interface {
-	Recv() (*Fee, error)
+	Recv() (*Cost, error)
 	grpc.ClientStream
 }
 
@@ -176,8 +176,8 @@ type awsCostStreamReadCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadCostsClient) Recv() (*Fee, error) {
-	m := new(Fee)
+func (x *awsCostStreamReadCostsClient) Recv() (*Cost, error) {
+	m := new(Cost)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -460,7 +460,7 @@ func _AwsCost_StreamReadCosts_Handler(srv interface{}, stream grpc.ServerStream)
 }
 
 type AwsCost_StreamReadCostsServer interface {
-	Send(*Fee) error
+	Send(*Cost) error
 	grpc.ServerStream
 }
 
@@ -468,7 +468,7 @@ type awsCostStreamReadCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadCostsServer) Send(m *Fee) error {
+func (x *awsCostStreamReadCostsServer) Send(m *Cost) error {
 	return x.ServerStream.SendMsg(m)
 }
 
