@@ -12,6 +12,9 @@ import (
 const (
 	LoginUrlRipple = "https://login.alphaus.cloud/ripple/access_token"
 	LoginUrlWave   = "https://login.alphaus.cloud/access_token"
+
+	BlueAwsEndpoint = "blueawsd-production-u554nqhjka-an.a.run.app:443"
+	AwsCostEndpoint = "awscostd-production-u554nqhjka-an.a.run.app:443"
 )
 
 type Option interface {
