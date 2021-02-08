@@ -10,10 +10,6 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
-const (
-	Address = ":443" // to be updated after prod deployment
-)
-
 type clientOptions struct {
 	target       string // gRPC server address
 	loginUrl     string // url to get access token
@@ -77,7 +73,7 @@ func (c *grpcClient) Close() { c.opts.conn.Close() }
 
 func NewClient(ctx context.Context, opts ...ClientOption) (*grpcClient, error) {
 	co := clientOptions{
-		target:       Address,
+		target:       session.AwsCostEndpoint,
 		loginUrl:     session.LoginUrlRipple,
 		clientId:     os.Getenv("ALPHAUS_CLIENT_ID"),
 		clientSecret: os.Getenv("ALPHAUS_CLIENT_SECRET"),
