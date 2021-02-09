@@ -28,8 +28,8 @@ opts = append(opts, grpc.WithBlock())
 opts = append(opts, grpc.WithPerRPCCredentials(
 	session.NewRpcCredentials(session.RpcCredentialsInput{
 		LoginUrl:     session.LoginUrlRipple,
-		ClientId:     params.ClientId,
-		ClientSecret: params.ClientSecret,
+		ClientId:     "my-client-id",
+		ClientSecret: "my-client-secret",
 	}),
 ))
 
