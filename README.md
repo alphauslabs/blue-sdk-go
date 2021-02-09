@@ -33,8 +33,8 @@ opts = append(opts, grpc.WithPerRPCCredentials(
 	}),
 ))
 
-conn, _ := grpc.DialContext(context.Background(), session.BlueAwsEndpoint, opts...)
+conn, _ := grpc.DialContext(context.Background(), session.BlueEndpoint, opts...)
 defer conn.Close()
-client := blueaws.NewBlueAwsClient(conn)
+client := blue.NewBlueClient(conn)
 ...
 ```
