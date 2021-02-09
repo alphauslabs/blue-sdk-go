@@ -26,8 +26,8 @@ creds := credentials.NewTLS(&tls.Config{})
 opts = append(opts, grpc.WithTransportCredentials(creds))
 opts = append(opts, grpc.WithBlock())
 opts = append(opts, grpc.WithPerRPCCredentials(
-  session.NewRpcCredentials(session.RpcCredentialsInput{
-	  LoginUrl:     session.LoginUrlRipple,
+	session.NewRpcCredentials(session.RpcCredentialsInput{
+		LoginUrl:     session.LoginUrlRipple,
 		ClientId:     params.ClientId,
 		ClientSecret: params.ClientSecret,
 	}),
