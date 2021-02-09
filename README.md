@@ -8,3 +8,12 @@ By default, this library will look for the following environment variables for [
 ALPHAUS_CLIENT_ID
 ALPHAUS_CLIENT_SECRET
 ```
+
+To use the default client, you can try something like:
+
+```go
+ctx := context.Background()
+client, _ := awscost.NewClient(ctx)
+defer client.Close()
+...
+```
