@@ -1,5 +1,7 @@
 ![main](https://github.com/alphauslabs/blue-sdk-go/workflows/main/badge.svg)
 
+**(work-in-progress)**
+
 The main branch can be broken. Make sure to use tagged releases.
 
 By default, this library will look for the following environment variables for [authentication](https://alphauslabs.github.io/blueapi/authentication/apikey.html):
