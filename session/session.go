@@ -10,8 +10,10 @@ import (
 )
 
 const (
-	LoginUrlRipple = "https://login.alphaus.cloud/ripple/access_token"
-	LoginUrlWave   = "https://login.alphaus.cloud/access_token"
+	LoginUrlRipple     = "https://login.alphaus.cloud/ripple/access_token"
+	LoginUrlWave       = "https://login.alphaus.cloud/access_token"
+	LoginUrlRippleNext = "https://loginnext.alphaus.cloud/ripple/access_token"
+	LoginUrlWaveNext   = "https://loginnext.alphaus.cloud/access_token"
 
 	BlueEndpoint    = "blued-production-u554nqhjka-an.a.run.app:443"
 	AwsCostEndpoint = "awscostd-production-u554nqhjka-an.a.run.app:443"
