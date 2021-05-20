@@ -29,15 +29,15 @@ func (t tokenAuth) GetRequestMetadata(ctx context.Context, uri ...string) (map[s
 func (tokenAuth) RequireTransportSecurity() bool { return false }
 
 type RpcCredentialsInput struct {
-	LoginUrl     string // default: Ripple
-	ClientId     string // default: $ALPHAUS_CLIENT_ID
-	ClientSecret string // default: $ALPHAUS_CLIENT_SECRET
+	LoginUrl     string
+	ClientId     string
+	ClientSecret string
 }
 
 func NewRpcCredentials(in ...RpcCredentialsInput) tokenAuth {
 	loginUrl := LoginUrlRipple
-	clientId := os.Getenv("ALPHAUS_CLIENT_ID")
-	clientSecret := os.Getenv("ALPHAUS_CLIENT_SECRET")
+	clientId := os.Getenv("ALPHAUS_RIPPLE_CLIENT_ID")
+	clientSecret := os.Getenv("ALPHAUS_RIPPLE_CLIENT_SECRET")
 	if len(in) > 0 {
 		if in[0].LoginUrl != "" {
 			loginUrl = in[0].LoginUrl
