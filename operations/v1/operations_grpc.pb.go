@@ -4,10 +4,10 @@ package operations
 
 import (
 	context "context"
-	empty "github.com/golang/protobuf/ptypes/empty"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -30,7 +30,7 @@ type OperationsClient interface {
 	// no longer interested in the operation result. It does not cancel the
 	// operation. If the server doesn't support this method, it returns
 	// `google.rpc.Code.UNIMPLEMENTED`.
-	DeleteOperation(ctx context.Context, in *DeleteOperationRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	DeleteOperation(ctx context.Context, in *DeleteOperationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Starts asynchronous cancellation on a long-running operation.  The server
 	// makes a best effort to cancel the operation, but success is not
 	// guaranteed.  If the server doesn't support this method, it returns
@@ -41,7 +41,7 @@ type OperationsClient interface {
 	// the operation is not deleted; instead, it becomes an operation with
 	// an [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
 	// corresponding to `Code.CANCELLED`.
-	CancelOperation(ctx context.Context, in *CancelOperationRequest, opts ...grpc.CallOption) (*empty.Empty, error)
+	CancelOperation(ctx context.Context, in *CancelOperationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Waits for the specified long-running operation until it is done or reaches
 	// at most a specified timeout, returning the latest state.  If the operation
 	// is already done, the latest state is immediately returned.  If the timeout
@@ -80,8 +80,8 @@ func (c *operationsClient) GetOperation(ctx context.Context, in *GetOperationReq
 	return out, nil
 }
 
-func (c *operationsClient) DeleteOperation(ctx context.Context, in *DeleteOperationRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *operationsClient) DeleteOperation(ctx context.Context, in *DeleteOperationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.operations.v1.Operations/DeleteOperation", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -89,8 +89,8 @@ func (c *operationsClient) DeleteOperation(ctx context.Context, in *DeleteOperat
 	return out, nil
 }
 
-func (c *operationsClient) CancelOperation(ctx context.Context, in *CancelOperationRequest, opts ...grpc.CallOption) (*empty.Empty, error) {
-	out := new(empty.Empty)
+func (c *operationsClient) CancelOperation(ctx context.Context, in *CancelOperationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.operations.v1.Operations/CancelOperation", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -122,7 +122,7 @@ type OperationsServer interface {
 	// no longer interested in the operation result. It does not cancel the
 	// operation. If the server doesn't support this method, it returns
 	// `google.rpc.Code.UNIMPLEMENTED`.
-	DeleteOperation(context.Context, *DeleteOperationRequest) (*empty.Empty, error)
+	DeleteOperation(context.Context, *DeleteOperationRequest) (*emptypb.Empty, error)
 	// Starts asynchronous cancellation on a long-running operation.  The server
 	// makes a best effort to cancel the operation, but success is not
 	// guaranteed.  If the server doesn't support this method, it returns
@@ -133,7 +133,7 @@ type OperationsServer interface {
 	// the operation is not deleted; instead, it becomes an operation with
 	// an [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
 	// corresponding to `Code.CANCELLED`.
-	CancelOperation(context.Context, *CancelOperationRequest) (*empty.Empty, error)
+	CancelOperation(context.Context, *CancelOperationRequest) (*emptypb.Empty, error)
 	// Waits for the specified long-running operation until it is done or reaches
 	// at most a specified timeout, returning the latest state.  If the operation
 	// is already done, the latest state is immediately returned.  If the timeout
@@ -157,10 +157,10 @@ func (UnimplementedOperationsServer) ListOperations(context.Context, *ListOperat
 func (UnimplementedOperationsServer) GetOperation(context.Context, *GetOperationRequest) (*Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperation not implemented")
 }
-func (UnimplementedOperationsServer) DeleteOperation(context.Context, *DeleteOperationRequest) (*empty.Empty, error) {
+func (UnimplementedOperationsServer) DeleteOperation(context.Context, *DeleteOperationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOperation not implemented")
 }
-func (UnimplementedOperationsServer) CancelOperation(context.Context, *CancelOperationRequest) (*empty.Empty, error) {
+func (UnimplementedOperationsServer) CancelOperation(context.Context, *CancelOperationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOperation not implemented")
 }
 func (UnimplementedOperationsServer) WaitOperation(context.Context, *WaitOperationRequest) (*Operation, error) {
