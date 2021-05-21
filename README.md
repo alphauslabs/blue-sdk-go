@@ -7,8 +7,13 @@ The main branch can be broken. Make sure to use tagged releases.
 By default, this library will look for the following environment variables for [authentication](https://alphauslabs.github.io/blueapi/authentication/apikey.html):
 
 ```bash
-ALPHAUS_CLIENT_ID
-ALPHAUS_CLIENT_SECRET
+# For Ripple users:
+ALPHAUS_RIPPLE_CLIENT_ID
+ALPHAUS_RIPPLE_CLIENT_SECRET
+
+# For Wave users:
+ALPHAUS_WAVE_CLIENT_ID
+ALPHAUS_WAVE_CLIENT_SECRET
 ```
 
 To use the default client, you can try something like:
