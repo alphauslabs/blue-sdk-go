@@ -31,20 +31,20 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_Iam_Me_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MeRequest
+func request_Iam_WhoAmI_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq WhoAmIRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.Me(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.WhoAmI(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Iam_Me_0(ctx context.Context, marshaler runtime.Marshaler, server IamServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MeRequest
+func local_request_Iam_WhoAmI_0(ctx context.Context, marshaler runtime.Marshaler, server IamServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq WhoAmIRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := server.Me(ctx, &protoReq)
+	msg, err := server.WhoAmI(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -55,18 +55,18 @@ func local_request_Iam_Me_0(ctx context.Context, marshaler runtime.Marshaler, se
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterIamHandlerFromEndpoint instead.
 func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server IamServer) error {
 
-	mux.Handle("GET", pattern_Iam_Me_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Iam_WhoAmI_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/Me")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/WhoAmI")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Iam_Me_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Iam_WhoAmI_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -74,7 +74,7 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 			return
 		}
 
-		forward_Iam_Me_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Iam_WhoAmI_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -119,23 +119,23 @@ func RegisterIamHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.C
 // "IamClient" to call the correct interceptors.
 func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client IamClient) error {
 
-	mux.Handle("GET", pattern_Iam_Me_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Iam_WhoAmI_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/Me")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/WhoAmI")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Iam_Me_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Iam_WhoAmI_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Iam_Me_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Iam_WhoAmI_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -143,9 +143,9 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 }
 
 var (
-	pattern_Iam_Me_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "me"}, ""))
+	pattern_Iam_WhoAmI_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "iam", "whoami"}, ""))
 )
 
 var (
-	forward_Iam_Me_0 = runtime.ForwardResponseMessage
+	forward_Iam_WhoAmI_0 = runtime.ForwardResponseMessage
 )

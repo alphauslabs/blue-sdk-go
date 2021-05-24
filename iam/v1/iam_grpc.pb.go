@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IamClient interface {
-	Me(ctx context.Context, in *MeRequest, opts ...grpc.CallOption) (*MeResponse, error)
+	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error)
 }
 
 type iamClient struct {
@@ -29,9 +29,9 @@ func NewIamClient(cc grpc.ClientConnInterface) IamClient {
 	return &iamClient{cc}
 }
 
-func (c *iamClient) Me(ctx context.Context, in *MeRequest, opts ...grpc.CallOption) (*MeResponse, error) {
-	out := new(MeResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/Me", in, out, opts...)
+func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error) {
+	out := new(WhoAmIResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/WhoAmI", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (c *iamClient) Me(ctx context.Context, in *MeRequest, opts ...grpc.CallOpti
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
 type IamServer interface {
-	Me(context.Context, *MeRequest) (*MeResponse, error)
+	WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -50,8 +50,8 @@ type IamServer interface {
 type UnimplementedIamServer struct {
 }
 
-func (UnimplementedIamServer) Me(context.Context, *MeRequest) (*MeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Me not implemented")
+func (UnimplementedIamServer) WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WhoAmI not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -66,20 +66,20 @@ func RegisterIamServer(s grpc.ServiceRegistrar, srv IamServer) {
 	s.RegisterService(&Iam_ServiceDesc, srv)
 }
 
-func _Iam_Me_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MeRequest)
+func _Iam_WhoAmI_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WhoAmIRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IamServer).Me(ctx, in)
+		return srv.(IamServer).WhoAmI(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.iam.v1.Iam/Me",
+		FullMethod: "/blueapi.iam.v1.Iam/WhoAmI",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IamServer).Me(ctx, req.(*MeRequest))
+		return srv.(IamServer).WhoAmI(ctx, req.(*WhoAmIRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -92,8 +92,8 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*IamServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Me",
-			Handler:    _Iam_Me_Handler,
+			MethodName: "WhoAmI",
+			Handler:    _Iam_WhoAmI_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

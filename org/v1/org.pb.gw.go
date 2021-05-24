@@ -31,20 +31,20 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_Org_Me_0(ctx context.Context, marshaler runtime.Marshaler, client OrgClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MeRequest
+func request_Org_WhoAmI_0(ctx context.Context, marshaler runtime.Marshaler, client OrgClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq WhoAmIRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.Me(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.WhoAmI(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Org_Me_0(ctx context.Context, marshaler runtime.Marshaler, server OrgServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq MeRequest
+func local_request_Org_WhoAmI_0(ctx context.Context, marshaler runtime.Marshaler, server OrgServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq WhoAmIRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := server.Me(ctx, &protoReq)
+	msg, err := server.WhoAmI(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -55,18 +55,18 @@ func local_request_Org_Me_0(ctx context.Context, marshaler runtime.Marshaler, se
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOrgHandlerFromEndpoint instead.
 func RegisterOrgHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OrgServer) error {
 
-	mux.Handle("GET", pattern_Org_Me_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Org_WhoAmI_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Org/Me")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Org/WhoAmI")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Org_Me_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Org_WhoAmI_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -74,7 +74,7 @@ func RegisterOrgHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 			return
 		}
 
-		forward_Org_Me_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Org_WhoAmI_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -119,23 +119,23 @@ func RegisterOrgHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.C
 // "OrgClient" to call the correct interceptors.
 func RegisterOrgHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OrgClient) error {
 
-	mux.Handle("GET", pattern_Org_Me_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Org_WhoAmI_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Org/Me")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Org/WhoAmI")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Org_Me_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Org_WhoAmI_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Org_Me_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Org_WhoAmI_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -143,9 +143,9 @@ func RegisterOrgHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 }
 
 var (
-	pattern_Org_Me_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "me"}, ""))
+	pattern_Org_WhoAmI_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "org", "whoami"}, ""))
 )
 
 var (
-	forward_Org_Me_0 = runtime.ForwardResponseMessage
+	forward_Org_WhoAmI_0 = runtime.ForwardResponseMessage
 )

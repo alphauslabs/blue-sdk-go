@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrgClient interface {
-	Me(ctx context.Context, in *MeRequest, opts ...grpc.CallOption) (*MeResponse, error)
+	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error)
 }
 
 type orgClient struct {
@@ -29,9 +29,9 @@ func NewOrgClient(cc grpc.ClientConnInterface) OrgClient {
 	return &orgClient{cc}
 }
 
-func (c *orgClient) Me(ctx context.Context, in *MeRequest, opts ...grpc.CallOption) (*MeResponse, error) {
-	out := new(MeResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Org/Me", in, out, opts...)
+func (c *orgClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error) {
+	out := new(WhoAmIResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Org/WhoAmI", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (c *orgClient) Me(ctx context.Context, in *MeRequest, opts ...grpc.CallOpti
 // All implementations must embed UnimplementedOrgServer
 // for forward compatibility
 type OrgServer interface {
-	Me(context.Context, *MeRequest) (*MeResponse, error)
+	WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error)
 	mustEmbedUnimplementedOrgServer()
 }
 
@@ -50,8 +50,8 @@ type OrgServer interface {
 type UnimplementedOrgServer struct {
 }
 
-func (UnimplementedOrgServer) Me(context.Context, *MeRequest) (*MeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Me not implemented")
+func (UnimplementedOrgServer) WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method WhoAmI not implemented")
 }
 func (UnimplementedOrgServer) mustEmbedUnimplementedOrgServer() {}
 
@@ -66,20 +66,20 @@ func RegisterOrgServer(s grpc.ServiceRegistrar, srv OrgServer) {
 	s.RegisterService(&Org_ServiceDesc, srv)
 }
 
-func _Org_Me_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MeRequest)
+func _Org_WhoAmI_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(WhoAmIRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrgServer).Me(ctx, in)
+		return srv.(OrgServer).WhoAmI(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.org.v1.Org/Me",
+		FullMethod: "/blueapi.org.v1.Org/WhoAmI",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrgServer).Me(ctx, req.(*MeRequest))
+		return srv.(OrgServer).WhoAmI(ctx, req.(*WhoAmIRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -92,8 +92,8 @@ var Org_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OrgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "Me",
-			Handler:    _Org_Me_Handler,
+			MethodName: "WhoAmI",
+			Handler:    _Org_WhoAmI_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
