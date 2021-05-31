@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrgClient interface {
-	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error)
+	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
 }
 
 type orgClient struct {
@@ -29,9 +29,9 @@ func NewOrgClient(cc grpc.ClientConnInterface) OrgClient {
 	return &orgClient{cc}
 }
 
-func (c *orgClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error) {
-	out := new(WhoAmIResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Org/WhoAmI", in, out, opts...)
+func (c *orgClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error) {
+	out := new(GetInfoResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Org/GetInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (c *orgClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.
 // All implementations must embed UnimplementedOrgServer
 // for forward compatibility
 type OrgServer interface {
-	WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error)
+	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
 	mustEmbedUnimplementedOrgServer()
 }
 
@@ -50,8 +50,8 @@ type OrgServer interface {
 type UnimplementedOrgServer struct {
 }
 
-func (UnimplementedOrgServer) WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method WhoAmI not implemented")
+func (UnimplementedOrgServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
 }
 func (UnimplementedOrgServer) mustEmbedUnimplementedOrgServer() {}
 
@@ -66,20 +66,20 @@ func RegisterOrgServer(s grpc.ServiceRegistrar, srv OrgServer) {
 	s.RegisterService(&Org_ServiceDesc, srv)
 }
 
-func _Org_WhoAmI_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(WhoAmIRequest)
+func _Org_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInfoRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrgServer).WhoAmI(ctx, in)
+		return srv.(OrgServer).GetInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.org.v1.Org/WhoAmI",
+		FullMethod: "/blueapi.org.v1.Org/GetInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrgServer).WhoAmI(ctx, req.(*WhoAmIRequest))
+		return srv.(OrgServer).GetInfo(ctx, req.(*GetInfoRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -92,8 +92,8 @@ var Org_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OrgServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "WhoAmI",
-			Handler:    _Org_WhoAmI_Handler,
+			MethodName: "GetInfo",
+			Handler:    _Org_GetInfo_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
