@@ -143,7 +143,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 }
 
 var (
-	pattern_Iam_WhoAmI_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "whoami"}, ""))
+	pattern_Iam_WhoAmI_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"iam", "v1", "whoami"}, ""))
 )
 
 var (
