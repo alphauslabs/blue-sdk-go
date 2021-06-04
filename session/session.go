@@ -82,7 +82,7 @@ func (s *Session) Username() string     { return s.username }
 func (s *Session) Password() string     { return s.password }
 func (s *Session) LoginUrl() string     { return s.loginUrl }
 
-// AccessToken returns the access token after successful authentication to Blue.
+// AccessToken returns the access token after successful authentication to Blue API.
 func (s *Session) AccessToken() (string, error) {
 	var err error
 	var token string
@@ -124,7 +124,7 @@ func (s *Session) AccessToken() (string, error) {
 	return token, nil
 }
 
-// New returns a Session object for Blue authentication.
+// New returns a Session object for Blue API authentication.
 func New(o ...Option) *Session {
 	id, secret, user, pass, loginUrl := GetLocalCreds()
 	gt := "client_credentials"
@@ -149,7 +149,7 @@ func New(o ...Option) *Session {
 	return s
 }
 
-// GetLocalCreds returns id, secret, user, password, and login url.
+// GetLocalCreds returns caller's id, secret, user, password, and login url.
 func GetLocalCreds() (string, string, string, string, string) {
 	// Default environment variables.
 	id := os.Getenv("ALPHAUS_CLIENT_ID")

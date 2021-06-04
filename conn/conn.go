@@ -54,13 +54,15 @@ type GrpcClientConn struct {
 	opts clientOptions
 }
 
+// Close closes the underlying connection.
 func (c *GrpcClientConn) Close() {
 	if c.opts.conn != nil {
 		c.opts.conn.Close()
 	}
 }
 
-func NewClientConn(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
+// New returns a grpc connection to a Blue API target service.
+func New(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
 	sess := session.New()
 	co := clientOptions{
 		target: session.BlueEndpoint,

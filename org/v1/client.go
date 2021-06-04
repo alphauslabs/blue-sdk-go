@@ -1,4 +1,4 @@
-package awscost
+package org
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 )
 
 type GrpcClient struct {
-	AwsCostClient
+	OrgClient
 	conn *conn.GrpcClientConn
 }
 
@@ -22,6 +22,7 @@ type NewClientOptions struct {
 	Conn *conn.GrpcClientConn
 }
 
+// NewClient returns a client connection to the 'org' service.
 func NewClient(ctx context.Context, opts ...*NewClientOptions) (*GrpcClient, error) {
 	var fconn *conn.GrpcClientConn
 	var err error
@@ -37,6 +38,6 @@ func NewClient(ctx context.Context, opts ...*NewClientOptions) (*GrpcClient, err
 		}
 	}
 
-	cc := NewAwsCostClient(fconn)
+	cc := NewOrgClient(fconn)
 	return &GrpcClient{cc, fconn}, nil
 }
