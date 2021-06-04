@@ -2,7 +2,6 @@ package session
 
 import (
 	"context"
-	"os"
 )
 
 type tokenAuth struct {
@@ -35,9 +34,10 @@ type RpcCredentialsInput struct {
 }
 
 func NewRpcCredentials(in ...RpcCredentialsInput) tokenAuth {
-	loginUrl := LoginUrlRipple
-	clientId := os.Getenv("ALPHAUS_RIPPLE_CLIENT_ID")
-	clientSecret := os.Getenv("ALPHAUS_RIPPLE_CLIENT_SECRET")
+	sess := New()
+	loginUrl := sess.LoginUrl()
+	clientId := sess.ClientId()
+	clientSecret := sess.ClientSecret()
 	if len(in) > 0 {
 		if in[0].LoginUrl != "" {
 			loginUrl = in[0].LoginUrl

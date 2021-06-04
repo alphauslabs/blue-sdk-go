@@ -74,6 +74,15 @@ type Session struct {
 	httpClient   *http.Client
 }
 
+func (s *Session) ClientId() string     { return s.clientId }
+func (s *Session) ClientSecret() string { return s.clientSecret }
+func (s *Session) GrantType() string    { return s.grantType }
+func (s *Session) Scope() string        { return s.scope }
+func (s *Session) Username() string     { return s.username }
+func (s *Session) Password() string     { return s.password }
+func (s *Session) LoginUrl() string     { return s.loginUrl }
+
+// AccessToken returns the access token after successful authentication to Blue.
 func (s *Session) AccessToken() (string, error) {
 	var err error
 	var token string
@@ -81,16 +90,16 @@ func (s *Session) AccessToken() (string, error) {
 	var resp *http.Response
 
 	form := url.Values{}
-	form.Add("client_id", s.clientId)
-	form.Add("client_secret", s.clientSecret)
-	form.Add("grant_type", s.grantType)
-	form.Add("scope", s.scope)
-	if s.grantType == "password" {
-		form.Add("username", s.username)
-		form.Add("password", s.password)
+	form.Add("client_id", s.ClientId())
+	form.Add("client_secret", s.ClientSecret())
+	form.Add("grant_type", s.GrantType())
+	form.Add("scope", s.Scope())
+	if s.GrantType() == "password" {
+		form.Add("username", s.Username())
+		form.Add("password", s.Password())
 	}
 
-	resp, err = http.PostForm(s.loginUrl, form)
+	resp, err = http.PostForm(s.LoginUrl(), form)
 	if err != nil {
 		return token, err
 	}
@@ -115,15 +124,22 @@ func (s *Session) AccessToken() (string, error) {
 	return token, nil
 }
 
+// New returns a Session object for Blue authentication.
 func New(o ...Option) *Session {
+	id, secret, user, pass, loginUrl := GetLocalCreds()
+	gt := "client_credentials"
+	if user != "" && pass != "" {
+		gt = "password"
+	}
+
 	s := &Session{
-		loginUrl:     LoginUrlRipple,
-		clientId:     os.Getenv("ALPHAUS_RIPPLE_CLIENT_ID"),
-		clientSecret: os.Getenv("ALPHAUS_RIPPLE_CLIENT_SECRET"),
-		grantType:    "client_credentials",
+		loginUrl:     loginUrl,
+		clientId:     id,
+		clientSecret: secret,
+		grantType:    gt,
 		scope:        "openid",
-		username:     os.Getenv("ALPHAUS_RIPPLE_USERNAME"),
-		password:     os.Getenv("ALPHAUS_RIPPLE_PASSWORD"),
+		username:     user,
+		password:     pass,
 	}
 
 	for _, opt := range o {
@@ -131,4 +147,40 @@ func New(o ...Option) *Session {
 	}
 
 	return s
+}
+
+// GetLocalCreds returns id, secret, user, password, and login url.
+func GetLocalCreds() (string, string, string, string, string) {
+	// Default environment variables.
+	id := os.Getenv("ALPHAUS_CLIENT_ID")
+	secret := os.Getenv("ALPHAUS_CLIENT_SECRET")
+	user := os.Getenv("ALPHAUS_USERNAME")
+	pass := os.Getenv("ALPHAUS_PASSWORD")
+	loginUrl := LoginUrlRipple
+	func() {
+		if id != "" && secret != "" {
+			return
+		}
+
+		// Then Ripple environment variables.
+		id = os.Getenv("ALPHAUS_RIPPLE_CLIENT_ID")
+		secret = os.Getenv("ALPHAUS_RIPPLE_CLIENT_SECRET")
+		if id != "" && secret != "" {
+			user = os.Getenv("ALPHAUS_RIPPLE_USERNAME")
+			pass = os.Getenv("ALPHAUS_RIPPLE_PASSWORD")
+			return
+		}
+
+		// Finally, Wave environment variables.
+		id = os.Getenv("ALPHAUS_WAVE_CLIENT_ID")
+		secret = os.Getenv("ALPHAUS_WAVE_CLIENT_SECRET")
+		if id != "" && secret != "" {
+			user = os.Getenv("ALPHAUS_WAVE_USERNAME")
+			pass = os.Getenv("ALPHAUS_WAVE_PASSWORD")
+			loginUrl = LoginUrlWave
+			return
+		}
+	}()
+
+	return id, secret, user, pass, loginUrl
 }
