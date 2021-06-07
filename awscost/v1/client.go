@@ -22,6 +22,7 @@ type NewClientOptions struct {
 	Conn *conn.GrpcClientConn
 }
 
+// NewClient returns a client connection to the 'awscost' service.
 func NewClient(ctx context.Context, opts ...*NewClientOptions) (*GrpcClient, error) {
 	var fconn *conn.GrpcClientConn
 	var err error
