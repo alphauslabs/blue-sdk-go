@@ -7,12 +7,14 @@ import (
 	"github.com/alphauslabs/blue-sdk-go/session"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
+	"google.golang.org/grpc/metadata"
 )
 
 type clientOptions struct {
 	target string // gRPC server address
 	sess   *session.Session
 	conn   *grpc.ClientConn
+	svc    string // our target service
 }
 
 type ClientOption interface {
@@ -34,6 +36,12 @@ func newFnClientOption(f func(*clientOptions)) *fnClientOption {
 func WithTarget(s string) ClientOption {
 	return newFnClientOption(func(o *clientOptions) {
 		o.target = s
+	})
+}
+
+func WithTargetService(s string) ClientOption {
+	return newFnClientOption(func(o *clientOptions) {
+		o.svc = s
 	})
 }
 
@@ -86,6 +94,24 @@ func New(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
 				ClientSecret: co.sess.ClientSecret(),
 			}),
 		))
+
+		if co.svc != "" {
+			gopts = append(gopts, grpc.WithUnaryInterceptor(func(ctx context.Context,
+				method string, req interface{}, reply interface{}, cc *grpc.ClientConn,
+				invoker grpc.UnaryInvoker, opts ...grpc.CallOption,
+			) error {
+				ctx = metadata.AppendToOutgoingContext(ctx, "service-name", co.svc)
+				return invoker(ctx, method, req, reply, cc, opts...)
+			}))
+
+			gopts = append(gopts, grpc.WithStreamInterceptor(func(ctx context.Context,
+				desc *grpc.StreamDesc, cc *grpc.ClientConn, method string,
+				streamer grpc.Streamer, opts ...grpc.CallOption,
+			) (grpc.ClientStream, error) {
+				ctx = metadata.AppendToOutgoingContext(ctx, "service-name", co.svc)
+				return streamer(ctx, desc, cc, method, opts...)
+			}))
+		}
 
 		co.conn, err = grpc.DialContext(ctx, co.target, gopts...)
 		if err != nil {

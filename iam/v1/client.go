@@ -22,7 +22,7 @@ type NewClientOptions struct {
 	Conn *conn.GrpcClientConn
 }
 
-// NewClient returns a client connection to the 'org' service.
+// NewClient returns a client connection to the 'iam' service.
 func NewClient(ctx context.Context, opts ...*NewClientOptions) (*GrpcClient, error) {
 	var fconn *conn.GrpcClientConn
 	var err error
@@ -32,7 +32,7 @@ func NewClient(ctx context.Context, opts ...*NewClientOptions) (*GrpcClient, err
 			fconn = opts[0].Conn
 		}
 	default:
-		fconn, err = conn.New(ctx)
+		fconn, err = conn.New(ctx, conn.WithTargetService("blue"))
 		if err != nil {
 			return nil, err
 		}

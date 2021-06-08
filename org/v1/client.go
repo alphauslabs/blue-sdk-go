@@ -32,7 +32,7 @@ func NewClient(ctx context.Context, opts ...*NewClientOptions) (*GrpcClient, err
 			fconn = opts[0].Conn
 		}
 	default:
-		fconn, err = conn.New(ctx)
+		fconn, err = conn.New(ctx, conn.WithTargetService("blue"))
 		if err != nil {
 			return nil, err
 		}
