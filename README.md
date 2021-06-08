@@ -4,14 +4,20 @@
 
 The main branch can be broken. Make sure to use tagged releases.
 
-By default, this library will look for the following environment variables for [authentication](https://alphauslabs.github.io/blueapi/authentication/apikey.html):
-
+By default, this library will look for the following environment variables for [authentication](https://alphauslabs.github.io/blueapi/authentication/apikey.html). First, it will look for:
 ```bash
-# For Ripple users:
+ALPHAUS_CLIENT_ID
+ALPHAUS_CLIENT_SECRET
+```
+
+If those are not set, it will then look for:
+```bash
 ALPHAUS_RIPPLE_CLIENT_ID
 ALPHAUS_RIPPLE_CLIENT_SECRET
+```
 
-# For Wave users:
+If those are not set, it will then look for:
+```bash
 ALPHAUS_WAVE_CLIENT_ID
 ALPHAUS_WAVE_CLIENT_SECRET
 ```
