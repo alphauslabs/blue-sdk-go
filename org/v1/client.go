@@ -17,13 +17,13 @@ func (c *GrpcClient) Close() {
 	}
 }
 
-// NewClientOptions represents the optional options to NewClient.
-type NewClientOptions struct {
+// ClientOptions represents the optional options to NewClient.
+type ClientOptions struct {
 	Conn *conn.GrpcClientConn
 }
 
 // NewClient returns a client connection to the 'org' service.
-func NewClient(ctx context.Context, opts ...*NewClientOptions) (*GrpcClient, error) {
+func NewClient(ctx context.Context, opts ...*ClientOptions) (*GrpcClient, error) {
 	var fconn *conn.GrpcClientConn
 	var err error
 	switch {
