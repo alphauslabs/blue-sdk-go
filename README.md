@@ -27,12 +27,6 @@ ALPHAUS_CLIENT_SECRET=myclientsecret
 ALPHAUS_CLIENT_ID=myclientid
 ALPHAUS_CLIENT_SECRET=myclientsecret
 ALPHAUS_AUTH_URL=https://login.alphaus.cloud/access_token
-
-# If you're using both Ripple and Wave, we recommend you to set the following:
-ALPHAUS_RIPPLE_CLIENT_ID=myrippleclientid
-ALPHAUS_RIPPLE_CLIENT_SECRET=myrippleclientsecret
-ALPHAUS_WAVE_CLIENT_ID=mywaveclientid
-ALPHAUS_WAVE_CLIENT_SECRET=mywaveclientsecret
 ```
 
 To use the default client, you can try something like:
