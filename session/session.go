@@ -15,8 +15,7 @@ const (
 	LoginUrlRippleNext = "https://loginnext.alphaus.cloud/ripple/access_token"
 	LoginUrlWaveNext   = "https://loginnext.alphaus.cloud/access_token"
 
-	BlueEndpoint    = "blued-production-u554nqhjka-an.a.run.app:443"
-	AwsCostEndpoint = "awscostd-production-u554nqhjka-an.a.run.app:443"
+	BlueEndpoint = "blue.alphaus.cloud:8443"
 )
 
 type Option interface {
@@ -87,7 +86,6 @@ func (s *Session) AccessToken() (string, error) {
 	var err error
 	var token string
 	var body []byte
-	var resp *http.Response
 
 	form := url.Values{}
 	form.Add("client_id", s.ClientId())
@@ -99,9 +97,18 @@ func (s *Session) AccessToken() (string, error) {
 		form.Add("password", s.Password())
 	}
 
-	resp, err = http.PostForm(s.LoginUrl(), form)
-	if err != nil {
-		return token, err
+	var resp *http.Response
+	switch {
+	case s.httpClient != nil:
+		resp, err = s.httpClient.PostForm(s.LoginUrl(), form)
+		if err != nil {
+			return token, err
+		}
+	default:
+		resp, err = http.PostForm(s.LoginUrl(), form)
+		if err != nil {
+			return token, err
+		}
 	}
 
 	defer resp.Body.Close()
