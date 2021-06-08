@@ -163,7 +163,11 @@ func GetLocalCreds() (string, string, string, string, string) {
 	secret := os.Getenv("ALPHAUS_CLIENT_SECRET")
 	user := os.Getenv("ALPHAUS_USERNAME")
 	pass := os.Getenv("ALPHAUS_PASSWORD")
-	loginUrl := LoginUrlRipple
+	loginUrl := os.Getenv("ALPHAUS_AUTH_URL")
+	if loginUrl == "" {
+		loginUrl = LoginUrlRipple
+	}
+
 	func() {
 		if id != "" && secret != "" {
 			return
@@ -173,6 +177,10 @@ func GetLocalCreds() (string, string, string, string, string) {
 		id = os.Getenv("ALPHAUS_RIPPLE_CLIENT_ID")
 		secret = os.Getenv("ALPHAUS_RIPPLE_CLIENT_SECRET")
 		if id != "" && secret != "" {
+			if loginUrl == "" {
+				loginUrl = LoginUrlRipple
+			}
+
 			user = os.Getenv("ALPHAUS_RIPPLE_USERNAME")
 			pass = os.Getenv("ALPHAUS_RIPPLE_PASSWORD")
 			return
@@ -182,6 +190,10 @@ func GetLocalCreds() (string, string, string, string, string) {
 		id = os.Getenv("ALPHAUS_WAVE_CLIENT_ID")
 		secret = os.Getenv("ALPHAUS_WAVE_CLIENT_SECRET")
 		if id != "" && secret != "" {
+			if loginUrl == "" {
+				loginUrl = LoginUrlWave
+			}
+
 			user = os.Getenv("ALPHAUS_WAVE_USERNAME")
 			pass = os.Getenv("ALPHAUS_WAVE_PASSWORD")
 			loginUrl = LoginUrlWave
