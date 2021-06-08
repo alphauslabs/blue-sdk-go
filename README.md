@@ -35,5 +35,7 @@ To use the default client(s), you can try something like:
 ctx := context.Background()
 client, _ := iam.NewClient(ctx)
 defer client.Close()
+out, err := client.WhoAmI(ctx, &iam.WhoAmIRequest{})
+log.Println(out, err)
 ...
 ```
