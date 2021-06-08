@@ -7,7 +7,7 @@ The main branch can be broken. Make sure to use tagged releases.
 By default, this library will look for the following environment variables for [authentication](https://alphauslabs.github.io/blueapi/authentication/apikey.html).
 
 ```bash
-First, it will look for:
+# First, it will look for:
 ALPHAUS_CLIENT_ID
 ALPHAUS_CLIENT_SECRET
 
@@ -18,25 +18,17 @@ ALPHAUS_RIPPLE_CLIENT_SECRET
 # If those are not set, it will then look for:
 ALPHAUS_WAVE_CLIENT_ID
 ALPHAUS_WAVE_CLIENT_SECRET
-```
 
-If you're mainly a Ripple user, we recommend you to set the following:
-```bash
-ALPHAUS_CLIENT_ID
-ALPHAUS_CLIENT_SECRET
-```
+# If you're mainly a Ripple user, we recommend you to set the following:
+ALPHAUS_CLIENT_ID=myclientid
+ALPHAUS_CLIENT_SECRET=myclientsecret
 
-If you're mainly a Wave/WavePro user, we recommend you to set the following:
-
-```bash
+# If you're mainly a Wave/WavePro user, we recommend you to set the following:
 ALPHAUS_CLIENT_ID=myclientid
 ALPHAUS_CLIENT_SECRET=myclientsecret
 ALPHAUS_AUTH_URL=https://login.alphaus.cloud/access_token
-```
 
-If you're using both Ripple and Wave, we recommend you to set the following:
-
-```bash
+# If you're using both Ripple and Wave, we recommend you to set the following:
 ALPHAUS_RIPPLE_CLIENT_ID=myrippleclientid
 ALPHAUS_RIPPLE_CLIENT_SECRET=myrippleclientsecret
 ALPHAUS_WAVE_CLIENT_ID=mywaveclientid
