@@ -29,32 +29,11 @@ ALPHAUS_CLIENT_SECRET=myclientsecret
 ALPHAUS_AUTH_URL=https://login.alphaus.cloud/access_token
 ```
 
-To use the default client, you can try something like:
+To use the default client(s), you can try something like:
 
 ```go
 ctx := context.Background()
-client, _ := awscost.NewClient(ctx)
+client, _ := iam.NewClient(ctx)
 defer client.Close()
-...
-```
-
-You can also provide your own gRPC connection:
-
-```go
-var opts []grpc.DialOption
-creds := credentials.NewTLS(&tls.Config{})
-opts = append(opts, grpc.WithTransportCredentials(creds))
-opts = append(opts, grpc.WithBlock())
-opts = append(opts, grpc.WithPerRPCCredentials(
-	session.NewRpcCredentials(session.RpcCredentialsInput{
-		LoginUrl:     session.LoginUrlRipple,
-		ClientId:     "my-client-id",
-		ClientSecret: "my-client-secret",
-	}),
-))
-
-conn, _ := grpc.DialContext(context.Background(), session.BlueEndpoint, opts...)
-defer conn.Close()
-client := blue.NewBlueClient(conn)
 ...
 ```
