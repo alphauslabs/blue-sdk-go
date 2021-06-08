@@ -27,8 +27,8 @@ type AwsCostClient interface {
 	// Streams back the usage-based cost details of a billing group. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadBillingGroupCosts(ctx context.Context, in *StreamReadBillingGroupCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupCostsClient, error)
-	// Streams back the usage-based cost details of an MSP (Ripple) or company (Wave). If
-	// datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Streams back the usage-based cost details of an organization (Ripple) or company (Wave).
+	// If datetime range parameters are not set, month-to-date (current month) will be returned.
 	StreamReadCosts(ctx context.Context, in *StreamReadCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadCostsClient, error)
 	// Streams back the fee-based details of an AWS account. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
@@ -42,9 +42,9 @@ type AwsCostClient interface {
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadBillingGroupFees(ctx context.Context, in *StreamReadBillingGroupFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupFeesClient, error)
-	// Streams back the fee-based details of an MSP (Ripple) or company (Wave). This API covers
-	// non-usage-based fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If
-	// datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Streams back the fee-based details of an organization (Ripple) or company (Wave). This API covers
+	// non-usage-based fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime
+	// range parameters are not set, month-to-date (current month) will be returned.
 	StreamReadFees(ctx context.Context, in *StreamReadFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadFeesClient, error)
 }
 
@@ -325,8 +325,8 @@ type AwsCostServer interface {
 	// Streams back the usage-based cost details of a billing group. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadBillingGroupCosts(*StreamReadBillingGroupCostsRequest, AwsCost_StreamReadBillingGroupCostsServer) error
-	// Streams back the usage-based cost details of an MSP (Ripple) or company (Wave). If
-	// datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Streams back the usage-based cost details of an organization (Ripple) or company (Wave).
+	// If datetime range parameters are not set, month-to-date (current month) will be returned.
 	StreamReadCosts(*StreamReadCostsRequest, AwsCost_StreamReadCostsServer) error
 	// Streams back the fee-based details of an AWS account. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
@@ -340,9 +340,9 @@ type AwsCostServer interface {
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
 	StreamReadBillingGroupFees(*StreamReadBillingGroupFeesRequest, AwsCost_StreamReadBillingGroupFeesServer) error
-	// Streams back the fee-based details of an MSP (Ripple) or company (Wave). This API covers
-	// non-usage-based fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If
-	// datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Streams back the fee-based details of an organization (Ripple) or company (Wave). This API covers
+	// non-usage-based fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime
+	// range parameters are not set, month-to-date (current month) will be returned.
 	StreamReadFees(*StreamReadFeesRequest, AwsCost_StreamReadFeesServer) error
 	mustEmbedUnimplementedAwsCostServer()
 }
