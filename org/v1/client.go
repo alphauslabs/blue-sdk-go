@@ -7,7 +7,7 @@ import (
 )
 
 type GrpcClient struct {
-	OrgClient
+	OrgApiClient
 	conn *conn.GrpcClientConn
 }
 
@@ -38,6 +38,6 @@ func NewClient(ctx context.Context, opts ...*ClientOptions) (*GrpcClient, error)
 		}
 	}
 
-	cc := NewOrgClient(fconn)
+	cc := NewOrgApiClient(fconn)
 	return &GrpcClient{cc, fconn}, nil
 }

@@ -14,7 +14,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	out, err := client.GetInfo(ctx, &org.GetInfoRequest{})
+	out, err := client.GetOrg(ctx, &org.GetOrgRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}
