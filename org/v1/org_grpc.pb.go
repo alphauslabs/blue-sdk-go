@@ -14,86 +14,86 @@ import (
 // Requires gRPC-Go v1.32.0 or later.
 const _ = grpc.SupportPackageIsVersion7
 
-// OrgClient is the client API for Org service.
+// OrgApiClient is the client API for OrgApi service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type OrgClient interface {
-	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
+type OrgApiClient interface {
+	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error)
 }
 
-type orgClient struct {
+type orgApiClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewOrgClient(cc grpc.ClientConnInterface) OrgClient {
-	return &orgClient{cc}
+func NewOrgApiClient(cc grpc.ClientConnInterface) OrgApiClient {
+	return &orgApiClient{cc}
 }
 
-func (c *orgClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error) {
-	out := new(GetInfoResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Org/GetInfo", in, out, opts...)
+func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error) {
+	out := new(Org)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/GetOrg", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// OrgServer is the server API for Org service.
-// All implementations must embed UnimplementedOrgServer
+// OrgApiServer is the server API for OrgApi service.
+// All implementations must embed UnimplementedOrgApiServer
 // for forward compatibility
-type OrgServer interface {
-	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
-	mustEmbedUnimplementedOrgServer()
+type OrgApiServer interface {
+	GetOrg(context.Context, *GetOrgRequest) (*Org, error)
+	mustEmbedUnimplementedOrgApiServer()
 }
 
-// UnimplementedOrgServer must be embedded to have forward compatible implementations.
-type UnimplementedOrgServer struct {
+// UnimplementedOrgApiServer must be embedded to have forward compatible implementations.
+type UnimplementedOrgApiServer struct {
 }
 
-func (UnimplementedOrgServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
+func (UnimplementedOrgApiServer) GetOrg(context.Context, *GetOrgRequest) (*Org, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrg not implemented")
 }
-func (UnimplementedOrgServer) mustEmbedUnimplementedOrgServer() {}
+func (UnimplementedOrgApiServer) mustEmbedUnimplementedOrgApiServer() {}
 
-// UnsafeOrgServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to OrgServer will
+// UnsafeOrgApiServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to OrgApiServer will
 // result in compilation errors.
-type UnsafeOrgServer interface {
-	mustEmbedUnimplementedOrgServer()
+type UnsafeOrgApiServer interface {
+	mustEmbedUnimplementedOrgApiServer()
 }
 
-func RegisterOrgServer(s grpc.ServiceRegistrar, srv OrgServer) {
-	s.RegisterService(&Org_ServiceDesc, srv)
+func RegisterOrgApiServer(s grpc.ServiceRegistrar, srv OrgApiServer) {
+	s.RegisterService(&OrgApi_ServiceDesc, srv)
 }
 
-func _Org_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetInfoRequest)
+func _OrgApi_GetOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrgRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrgServer).GetInfo(ctx, in)
+		return srv.(OrgApiServer).GetOrg(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.org.v1.Org/GetInfo",
+		FullMethod: "/blueapi.org.v1.OrgApi/GetOrg",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrgServer).GetInfo(ctx, req.(*GetInfoRequest))
+		return srv.(OrgApiServer).GetOrg(ctx, req.(*GetOrgRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Org_ServiceDesc is the grpc.ServiceDesc for Org service.
+// OrgApi_ServiceDesc is the grpc.ServiceDesc for OrgApi service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Org_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "blueapi.org.v1.Org",
-	HandlerType: (*OrgServer)(nil),
+var OrgApi_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "blueapi.org.v1.OrgApi",
+	HandlerType: (*OrgApiServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetInfo",
-			Handler:    _Org_GetInfo_Handler,
+			MethodName: "GetOrg",
+			Handler:    _OrgApi_GetOrg_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -31,42 +31,42 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_Org_GetInfo_0(ctx context.Context, marshaler runtime.Marshaler, client OrgClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetInfoRequest
+func request_OrgApi_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetOrgRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.GetInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetOrg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Org_GetInfo_0(ctx context.Context, marshaler runtime.Marshaler, server OrgServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetInfoRequest
+func local_request_OrgApi_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetOrgRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := server.GetInfo(ctx, &protoReq)
+	msg, err := server.GetOrg(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-// RegisterOrgHandlerServer registers the http handlers for service Org to "mux".
-// UnaryRPC     :call OrgServer directly.
+// RegisterOrgApiHandlerServer registers the http handlers for service OrgApi to "mux".
+// UnaryRPC     :call OrgApiServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOrgHandlerFromEndpoint instead.
-func RegisterOrgHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OrgServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOrgApiHandlerFromEndpoint instead.
+func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OrgApiServer) error {
 
-	mux.Handle("GET", pattern_Org_GetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OrgApi_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Org/GetInfo")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/GetOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Org_GetInfo_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_OrgApi_GetOrg_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -74,16 +74,16 @@ func RegisterOrgHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 			return
 		}
 
-		forward_Org_GetInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OrgApi_GetOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterOrgHandlerFromEndpoint is same as RegisterOrgHandler but
+// RegisterOrgApiHandlerFromEndpoint is same as RegisterOrgApiHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterOrgHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterOrgApiHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -103,39 +103,39 @@ func RegisterOrgHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, 
 		}()
 	}()
 
-	return RegisterOrgHandler(ctx, mux, conn)
+	return RegisterOrgApiHandler(ctx, mux, conn)
 }
 
-// RegisterOrgHandler registers the http handlers for service Org to "mux".
+// RegisterOrgApiHandler registers the http handlers for service OrgApi to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterOrgHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterOrgHandlerClient(ctx, mux, NewOrgClient(conn))
+func RegisterOrgApiHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterOrgApiHandlerClient(ctx, mux, NewOrgApiClient(conn))
 }
 
-// RegisterOrgHandlerClient registers the http handlers for service Org
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OrgClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OrgClient"
+// RegisterOrgApiHandlerClient registers the http handlers for service OrgApi
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OrgApiClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OrgApiClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "OrgClient" to call the correct interceptors.
-func RegisterOrgHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OrgClient) error {
+// "OrgApiClient" to call the correct interceptors.
+func RegisterOrgApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OrgApiClient) error {
 
-	mux.Handle("GET", pattern_Org_GetInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_OrgApi_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Org/GetInfo")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/GetOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Org_GetInfo_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_OrgApi_GetOrg_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Org_GetInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_OrgApi_GetOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -143,9 +143,9 @@ func RegisterOrgHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 }
 
 var (
-	pattern_Org_GetInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "info"}, ""))
+	pattern_OrgApi_GetOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 0}, []string{"org", "v1"}, ""))
 )
 
 var (
-	forward_Org_GetInfo_0 = runtime.ForwardResponseMessage
+	forward_OrgApi_GetOrg_0 = runtime.ForwardResponseMessage
 )
