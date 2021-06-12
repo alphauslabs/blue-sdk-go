@@ -18,6 +18,9 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrgApiClient interface {
+	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*Org, error)
+	SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*Org, error)
+	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*Org, error)
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error)
 }
 
@@ -27,6 +30,33 @@ type orgApiClient struct {
 
 func NewOrgApiClient(cc grpc.ClientConnInterface) OrgApiClient {
 	return &orgApiClient{cc}
+}
+
+func (c *orgApiClient) CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*Org, error) {
+	out := new(Org)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/CreateOrg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orgApiClient) SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*Org, error) {
+	out := new(Org)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/SendVerification", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orgApiClient) VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*Org, error) {
+	out := new(Org)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/VerifyOrg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error) {
@@ -42,6 +72,9 @@ func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...gr
 // All implementations must embed UnimplementedOrgApiServer
 // for forward compatibility
 type OrgApiServer interface {
+	CreateOrg(context.Context, *CreateOrgRequest) (*Org, error)
+	SendVerification(context.Context, *SendVerificationRequest) (*Org, error)
+	VerifyOrg(context.Context, *VerifyOrgRequest) (*Org, error)
 	GetOrg(context.Context, *GetOrgRequest) (*Org, error)
 	mustEmbedUnimplementedOrgApiServer()
 }
@@ -50,6 +83,15 @@ type OrgApiServer interface {
 type UnimplementedOrgApiServer struct {
 }
 
+func (UnimplementedOrgApiServer) CreateOrg(context.Context, *CreateOrgRequest) (*Org, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOrg not implemented")
+}
+func (UnimplementedOrgApiServer) SendVerification(context.Context, *SendVerificationRequest) (*Org, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendVerification not implemented")
+}
+func (UnimplementedOrgApiServer) VerifyOrg(context.Context, *VerifyOrgRequest) (*Org, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyOrg not implemented")
+}
 func (UnimplementedOrgApiServer) GetOrg(context.Context, *GetOrgRequest) (*Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrg not implemented")
 }
@@ -64,6 +106,60 @@ type UnsafeOrgApiServer interface {
 
 func RegisterOrgApiServer(s grpc.ServiceRegistrar, srv OrgApiServer) {
 	s.RegisterService(&OrgApi_ServiceDesc, srv)
+}
+
+func _OrgApi_CreateOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrgRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrgApiServer).CreateOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.org.v1.OrgApi/CreateOrg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrgApiServer).CreateOrg(ctx, req.(*CreateOrgRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrgApi_SendVerification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendVerificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrgApiServer).SendVerification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.org.v1.OrgApi/SendVerification",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrgApiServer).SendVerification(ctx, req.(*SendVerificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrgApi_VerifyOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyOrgRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrgApiServer).VerifyOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.org.v1.OrgApi/VerifyOrg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrgApiServer).VerifyOrg(ctx, req.(*VerifyOrgRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _OrgApi_GetOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -91,6 +187,18 @@ var OrgApi_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.org.v1.OrgApi",
 	HandlerType: (*OrgApiServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "CreateOrg",
+			Handler:    _OrgApi_CreateOrg_Handler,
+		},
+		{
+			MethodName: "SendVerification",
+			Handler:    _OrgApi_SendVerification_Handler,
+		},
+		{
+			MethodName: "VerifyOrg",
+			Handler:    _OrgApi_VerifyOrg_Handler,
+		},
 		{
 			MethodName: "GetOrg",
 			Handler:    _OrgApi_GetOrg_Handler,
