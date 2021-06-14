@@ -18,6 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IamClient interface {
+	// Gets information about the caller.
 	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error)
 }
 
@@ -42,6 +43,7 @@ func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
 type IamServer interface {
+	// Gets information about the caller.
 	WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error)
 	mustEmbedUnimplementedIamServer()
 }
