@@ -27,6 +27,12 @@ type OrgApiClient interface {
 	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error)
+	// Updates organization attributes. Supported attributes include:
+	// - email
+	// - description
+	UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Org, error)
+	// Updates the organization password.
+	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error)
 }
@@ -75,6 +81,24 @@ func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...gr
 	return out, nil
 }
 
+func (c *orgApiClient) UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Org, error) {
+	out := new(Org)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/UpdateAttribute", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orgApiClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*Org, error) {
+	out := new(Org)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/UpdatePassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orgApiClient) ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error) {
 	out := new(ListMasterAccountsResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/ListMasterAccounts", in, out, opts...)
@@ -97,6 +121,12 @@ type OrgApiServer interface {
 	VerifyOrg(context.Context, *VerifyOrgRequest) (*Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(context.Context, *GetOrgRequest) (*Org, error)
+	// Updates organization attributes. Supported attributes include:
+	// - email
+	// - description
+	UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Org, error)
+	// Updates the organization password.
+	UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error)
 	mustEmbedUnimplementedOrgApiServer()
@@ -117,6 +147,12 @@ func (UnimplementedOrgApiServer) VerifyOrg(context.Context, *VerifyOrgRequest) (
 }
 func (UnimplementedOrgApiServer) GetOrg(context.Context, *GetOrgRequest) (*Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrg not implemented")
+}
+func (UnimplementedOrgApiServer) UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Org, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAttribute not implemented")
+}
+func (UnimplementedOrgApiServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
 func (UnimplementedOrgApiServer) ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMasterAccounts not implemented")
@@ -206,6 +242,42 @@ func _OrgApi_GetOrg_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrgApi_UpdateAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAttributeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrgApiServer).UpdateAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.org.v1.OrgApi/UpdateAttribute",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrgApiServer).UpdateAttribute(ctx, req.(*UpdateAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _OrgApi_UpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrgApiServer).UpdatePassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.org.v1.OrgApi/UpdatePassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrgApiServer).UpdatePassword(ctx, req.(*UpdatePasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _OrgApi_ListMasterAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListMasterAccountsRequest)
 	if err := dec(in); err != nil {
@@ -246,6 +318,14 @@ var OrgApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrg",
 			Handler:    _OrgApi_GetOrg_Handler,
+		},
+		{
+			MethodName: "UpdateAttribute",
+			Handler:    _OrgApi_UpdateAttribute_Handler,
+		},
+		{
+			MethodName: "UpdatePassword",
+			Handler:    _OrgApi_UpdatePassword_Handler,
 		},
 		{
 			MethodName: "ListMasterAccounts",
