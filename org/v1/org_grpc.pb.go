@@ -21,15 +21,14 @@ type OrgApiClient interface {
 	// Creates the organization account.
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*Org, error)
 	// Sends (or resends) the verification email. Only valid for unverified
-	// organizations.
+	// organizations. The verification key will be valid for a day.
 	SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*Org, error)
 	// Verifies an organization using the key received from the verification email.
+	// The verification key is only valid for a day.
 	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error)
-	// Updates organization attributes. Supported attributes include:
-	// - email
-	// - description
+	// Updates organization attributes. Supported attributes include 'email', and 'description'.
 	UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Org, error)
 	// Updates the organization password.
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*Org, error)
@@ -115,15 +114,14 @@ type OrgApiServer interface {
 	// Creates the organization account.
 	CreateOrg(context.Context, *CreateOrgRequest) (*Org, error)
 	// Sends (or resends) the verification email. Only valid for unverified
-	// organizations.
+	// organizations. The verification key will be valid for a day.
 	SendVerification(context.Context, *SendVerificationRequest) (*Org, error)
 	// Verifies an organization using the key received from the verification email.
+	// The verification key is only valid for a day.
 	VerifyOrg(context.Context, *VerifyOrgRequest) (*Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(context.Context, *GetOrgRequest) (*Org, error)
-	// Updates organization attributes. Supported attributes include:
-	// - email
-	// - description
+	// Updates organization attributes. Supported attributes include 'email', and 'description'.
 	UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Org, error)
 	// Updates the organization password.
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error)
