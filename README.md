@@ -6,6 +6,8 @@ The main branch can be broken. Make sure to use tagged releases.
 
 For authentication, check out this [document](https://alphauslabs.github.io/blueapi/authentication/apikey.html).
 
+You can search the documentation [here](https://pkg.go.dev/search?q=blue-sdk-go).
+
 To use the default client(s), you can try something like:
 
 ```go
