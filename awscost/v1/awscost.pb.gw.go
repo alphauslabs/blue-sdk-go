@@ -31,8 +31,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_AwsCost_StreamReadAccountCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadAccountCostsClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadAccountCostsRequest
+func request_AwsCost_ReadAccountCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadAccountCostsClient, runtime.ServerMetadata, error) {
+	var protoReq ReadAccountCostsRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -60,7 +60,7 @@ func request_AwsCost_StreamReadAccountCosts_0(ctx context.Context, marshaler run
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
-	stream, err := client.StreamReadAccountCosts(ctx, &protoReq)
+	stream, err := client.ReadAccountCosts(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -73,8 +73,8 @@ func request_AwsCost_StreamReadAccountCosts_0(ctx context.Context, marshaler run
 
 }
 
-func request_AwsCost_StreamReadCompanyCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadCompanyCostsClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadCompanyCostsRequest
+func request_AwsCost_ReadCompanyCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadCompanyCostsClient, runtime.ServerMetadata, error) {
+	var protoReq ReadCompanyCostsRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -102,7 +102,7 @@ func request_AwsCost_StreamReadCompanyCosts_0(ctx context.Context, marshaler run
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
-	stream, err := client.StreamReadCompanyCosts(ctx, &protoReq)
+	stream, err := client.ReadCompanyCosts(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -115,8 +115,8 @@ func request_AwsCost_StreamReadCompanyCosts_0(ctx context.Context, marshaler run
 
 }
 
-func request_AwsCost_StreamReadBillingGroupCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadBillingGroupCostsClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadBillingGroupCostsRequest
+func request_AwsCost_ReadBillingGroupCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadBillingGroupCostsClient, runtime.ServerMetadata, error) {
+	var protoReq ReadBillingGroupCostsRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -144,7 +144,7 @@ func request_AwsCost_StreamReadBillingGroupCosts_0(ctx context.Context, marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
-	stream, err := client.StreamReadBillingGroupCosts(ctx, &protoReq)
+	stream, err := client.ReadBillingGroupCosts(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -157,8 +157,8 @@ func request_AwsCost_StreamReadBillingGroupCosts_0(ctx context.Context, marshale
 
 }
 
-func request_AwsCost_StreamReadCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadCostsClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadCostsRequest
+func request_AwsCost_ReadCosts_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadCostsClient, runtime.ServerMetadata, error) {
+	var protoReq ReadCostsRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -169,7 +169,7 @@ func request_AwsCost_StreamReadCosts_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	stream, err := client.StreamReadCosts(ctx, &protoReq)
+	stream, err := client.ReadCosts(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -182,50 +182,8 @@ func request_AwsCost_StreamReadCosts_0(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func request_AwsCost_StreamReadAccountFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadAccountFeesClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadAccountFeesRequest
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["name"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
-	}
-
-	protoReq.Name, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
-	}
-
-	stream, err := client.StreamReadAccountFees(ctx, &protoReq)
-	if err != nil {
-		return nil, metadata, err
-	}
-	header, err := stream.Header()
-	if err != nil {
-		return nil, metadata, err
-	}
-	metadata.HeaderMD = header
-	return stream, metadata, nil
-
-}
-
-func request_AwsCost_StreamReadCompanyFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadCompanyFeesClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadCompanyFeesRequest
+func request_AwsCost_ReadAccountFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadAccountFeesClient, runtime.ServerMetadata, error) {
+	var protoReq ReadAccountFeesRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -253,7 +211,7 @@ func request_AwsCost_StreamReadCompanyFees_0(ctx context.Context, marshaler runt
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
-	stream, err := client.StreamReadCompanyFees(ctx, &protoReq)
+	stream, err := client.ReadAccountFees(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -266,8 +224,8 @@ func request_AwsCost_StreamReadCompanyFees_0(ctx context.Context, marshaler runt
 
 }
 
-func request_AwsCost_StreamReadBillingGroupFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadBillingGroupFeesClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadBillingGroupFeesRequest
+func request_AwsCost_ReadCompanyFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadCompanyFeesClient, runtime.ServerMetadata, error) {
+	var protoReq ReadCompanyFeesRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -295,7 +253,7 @@ func request_AwsCost_StreamReadBillingGroupFees_0(ctx context.Context, marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
 	}
 
-	stream, err := client.StreamReadBillingGroupFees(ctx, &protoReq)
+	stream, err := client.ReadCompanyFees(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -308,8 +266,8 @@ func request_AwsCost_StreamReadBillingGroupFees_0(ctx context.Context, marshaler
 
 }
 
-func request_AwsCost_StreamReadFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_StreamReadFeesClient, runtime.ServerMetadata, error) {
-	var protoReq StreamReadFeesRequest
+func request_AwsCost_ReadBillingGroupFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadBillingGroupFeesClient, runtime.ServerMetadata, error) {
+	var protoReq ReadBillingGroupFeesRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -320,7 +278,49 @@ func request_AwsCost_StreamReadFees_0(ctx context.Context, marshaler runtime.Mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	stream, err := client.StreamReadFees(ctx, &protoReq)
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["name"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "name")
+	}
+
+	protoReq.Name, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "name", err)
+	}
+
+	stream, err := client.ReadBillingGroupFees(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
+func request_AwsCost_ReadFees_0(ctx context.Context, marshaler runtime.Marshaler, client AwsCostClient, req *http.Request, pathParams map[string]string) (AwsCost_ReadFeesClient, runtime.ServerMetadata, error) {
+	var protoReq ReadFeesRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	stream, err := client.ReadFees(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -339,56 +339,56 @@ func request_AwsCost_StreamReadFees_0(ctx context.Context, marshaler runtime.Mar
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterAwsCostHandlerFromEndpoint instead.
 func RegisterAwsCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, server AwsCostServer) error {
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadAccountCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadAccountCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadCompanyCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadCompanyCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadBillingGroupCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadBillingGroupCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadAccountFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadAccountFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadCompanyFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadCompanyFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadBillingGroupFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadBillingGroupFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -436,163 +436,163 @@ func RegisterAwsCostHandler(ctx context.Context, mux *runtime.ServeMux, conn *gr
 // "AwsCostClient" to call the correct interceptors.
 func RegisterAwsCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, client AwsCostClient) error {
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadAccountCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadAccountCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadAccountCosts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadAccountCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadAccountCosts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadAccountCosts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadAccountCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadAccountCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadCompanyCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadCompanyCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadCompanyCosts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadCompanyCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadCompanyCosts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadCompanyCosts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadCompanyCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadCompanyCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadBillingGroupCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadBillingGroupCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadBillingGroupCosts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadBillingGroupCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadBillingGroupCosts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadBillingGroupCosts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadBillingGroupCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadBillingGroupCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadCosts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadCosts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadCosts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadAccountFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadAccountFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadAccountFees")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadAccountFees")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadAccountFees_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadAccountFees_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadAccountFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadAccountFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadCompanyFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadCompanyFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadCompanyFees")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadCompanyFees")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadCompanyFees_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadCompanyFees_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadCompanyFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadCompanyFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadBillingGroupFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadBillingGroupFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadBillingGroupFees")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadBillingGroupFees")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadBillingGroupFees_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadBillingGroupFees_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadBillingGroupFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadBillingGroupFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_AwsCost_StreamReadFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_AwsCost_ReadFees_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/StreamReadFees")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.awscost.v1.AwsCost/ReadFees")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_AwsCost_StreamReadFees_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_AwsCost_ReadFees_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_AwsCost_StreamReadFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_AwsCost_ReadFees_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -600,37 +600,37 @@ func RegisterAwsCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 }
 
 var (
-	pattern_AwsCost_StreamReadAccountCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "costs"}, "streamReadAccountCosts"))
+	pattern_AwsCost_ReadAccountCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "costs"}, "readAccountCosts"))
 
-	pattern_AwsCost_StreamReadCompanyCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "companies", "name", "costs"}, "streamReadCompanyCosts"))
+	pattern_AwsCost_ReadCompanyCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "companies", "name", "costs"}, "readCompanyCosts"))
 
-	pattern_AwsCost_StreamReadBillingGroupCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "billinggroups", "name", "costs"}, "streamReadBillingGroupCosts"))
+	pattern_AwsCost_ReadBillingGroupCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "billinggroups", "name", "costs"}, "readBillingGroupCosts"))
 
-	pattern_AwsCost_StreamReadCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "costs"}, "streamReadCosts"))
+	pattern_AwsCost_ReadCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "costs"}, "readCosts"))
 
-	pattern_AwsCost_StreamReadAccountFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "fees"}, "streamReadAccountFees"))
+	pattern_AwsCost_ReadAccountFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "accounts", "name", "fees"}, "readAccountFees"))
 
-	pattern_AwsCost_StreamReadCompanyFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "companies", "name", "fees"}, "streamReadCompanyFees"))
+	pattern_AwsCost_ReadCompanyFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "companies", "name", "fees"}, "readCompanyFees"))
 
-	pattern_AwsCost_StreamReadBillingGroupFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "billinggroups", "name", "fees"}, "streamReadBillingGroupFees"))
+	pattern_AwsCost_ReadBillingGroupFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "billinggroups", "name", "fees"}, "readBillingGroupFees"))
 
-	pattern_AwsCost_StreamReadFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "fees"}, "streamReadFees"))
+	pattern_AwsCost_ReadFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "fees"}, "readFees"))
 )
 
 var (
-	forward_AwsCost_StreamReadAccountCosts_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadAccountCosts_0 = runtime.ForwardResponseStream
 
-	forward_AwsCost_StreamReadCompanyCosts_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadCompanyCosts_0 = runtime.ForwardResponseStream
 
-	forward_AwsCost_StreamReadBillingGroupCosts_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadBillingGroupCosts_0 = runtime.ForwardResponseStream
 
-	forward_AwsCost_StreamReadCosts_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadCosts_0 = runtime.ForwardResponseStream
 
-	forward_AwsCost_StreamReadAccountFees_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadAccountFees_0 = runtime.ForwardResponseStream
 
-	forward_AwsCost_StreamReadCompanyFees_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadCompanyFees_0 = runtime.ForwardResponseStream
 
-	forward_AwsCost_StreamReadBillingGroupFees_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadBillingGroupFees_0 = runtime.ForwardResponseStream
 
-	forward_AwsCost_StreamReadFees_0 = runtime.ForwardResponseStream
+	forward_AwsCost_ReadFees_0 = runtime.ForwardResponseStream
 )

@@ -18,34 +18,34 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AwsCostClient interface {
-	// Streams back the usage-based cost details of an AWS account. If datetime range
+	// Reads the usage-based cost details of an AWS account. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadAccountCosts(ctx context.Context, in *StreamReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountCostsClient, error)
-	// Streams back the usage-based cost details of a company. If datetime range
+	ReadAccountCosts(ctx context.Context, in *ReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadAccountCostsClient, error)
+	// Reads the usage-based cost details of a company. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadCompanyCosts(ctx context.Context, in *StreamReadCompanyCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadCompanyCostsClient, error)
-	// Streams back the usage-based cost details of a billing group. If datetime range
+	ReadCompanyCosts(ctx context.Context, in *ReadCompanyCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadCompanyCostsClient, error)
+	// Reads the usage-based cost details of a billing group. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadBillingGroupCosts(ctx context.Context, in *StreamReadBillingGroupCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupCostsClient, error)
-	// Streams back the usage-based cost details of an organization (Ripple) or company (Wave).
+	ReadBillingGroupCosts(ctx context.Context, in *ReadBillingGroupCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadBillingGroupCostsClient, error)
+	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// If datetime range parameters are not set, month-to-date (current month) will be returned.
-	StreamReadCosts(ctx context.Context, in *StreamReadCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadCostsClient, error)
-	// Streams back the fee-based details of an AWS account. This API covers non-usage-based
+	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadCostsClient, error)
+	// Reads the non-usaged-based details of an AWS account. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadAccountFees(ctx context.Context, in *StreamReadAccountFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountFeesClient, error)
-	// Streams back the fee-based details of a company. This API covers non-usage-based
+	ReadAccountFees(ctx context.Context, in *ReadAccountFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadAccountFeesClient, error)
+	// Reads the non-usage-based details of a company. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadCompanyFees(ctx context.Context, in *StreamReadCompanyFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadCompanyFeesClient, error)
-	// Streams back the fee-based details of a billing group. This API covers non-usage-based
+	ReadCompanyFees(ctx context.Context, in *ReadCompanyFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadCompanyFeesClient, error)
+	// Reads the non-usage-based details of a billing group. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadBillingGroupFees(ctx context.Context, in *StreamReadBillingGroupFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupFeesClient, error)
-	// Streams back the fee-based details of an organization (Ripple) or company (Wave). This API covers
+	ReadBillingGroupFees(ctx context.Context, in *ReadBillingGroupFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadBillingGroupFeesClient, error)
+	// Reads the non-usage-based details of an organization (Ripple) or company (Wave). This API covers
 	// non-usage-based fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
-	StreamReadFees(ctx context.Context, in *StreamReadFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadFeesClient, error)
+	ReadFees(ctx context.Context, in *ReadFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadFeesClient, error)
 }
 
 type awsCostClient struct {
@@ -56,12 +56,12 @@ func NewAwsCostClient(cc grpc.ClientConnInterface) AwsCostClient {
 	return &awsCostClient{cc}
 }
 
-func (c *awsCostClient) StreamReadAccountCosts(ctx context.Context, in *StreamReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[0], "/blueapi.awscost.v1.AwsCost/StreamReadAccountCosts", opts...)
+func (c *awsCostClient) ReadAccountCosts(ctx context.Context, in *ReadAccountCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadAccountCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[0], "/blueapi.awscost.v1.AwsCost/ReadAccountCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadAccountCostsClient{stream}
+	x := &awsCostReadAccountCostsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -71,16 +71,16 @@ func (c *awsCostClient) StreamReadAccountCosts(ctx context.Context, in *StreamRe
 	return x, nil
 }
 
-type AwsCost_StreamReadAccountCostsClient interface {
+type AwsCost_ReadAccountCostsClient interface {
 	Recv() (*Cost, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadAccountCostsClient struct {
+type awsCostReadAccountCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadAccountCostsClient) Recv() (*Cost, error) {
+func (x *awsCostReadAccountCostsClient) Recv() (*Cost, error) {
 	m := new(Cost)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -88,12 +88,12 @@ func (x *awsCostStreamReadAccountCostsClient) Recv() (*Cost, error) {
 	return m, nil
 }
 
-func (c *awsCostClient) StreamReadCompanyCosts(ctx context.Context, in *StreamReadCompanyCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadCompanyCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[1], "/blueapi.awscost.v1.AwsCost/StreamReadCompanyCosts", opts...)
+func (c *awsCostClient) ReadCompanyCosts(ctx context.Context, in *ReadCompanyCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadCompanyCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[1], "/blueapi.awscost.v1.AwsCost/ReadCompanyCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadCompanyCostsClient{stream}
+	x := &awsCostReadCompanyCostsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -103,16 +103,16 @@ func (c *awsCostClient) StreamReadCompanyCosts(ctx context.Context, in *StreamRe
 	return x, nil
 }
 
-type AwsCost_StreamReadCompanyCostsClient interface {
+type AwsCost_ReadCompanyCostsClient interface {
 	Recv() (*Cost, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadCompanyCostsClient struct {
+type awsCostReadCompanyCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadCompanyCostsClient) Recv() (*Cost, error) {
+func (x *awsCostReadCompanyCostsClient) Recv() (*Cost, error) {
 	m := new(Cost)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -120,12 +120,12 @@ func (x *awsCostStreamReadCompanyCostsClient) Recv() (*Cost, error) {
 	return m, nil
 }
 
-func (c *awsCostClient) StreamReadBillingGroupCosts(ctx context.Context, in *StreamReadBillingGroupCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[2], "/blueapi.awscost.v1.AwsCost/StreamReadBillingGroupCosts", opts...)
+func (c *awsCostClient) ReadBillingGroupCosts(ctx context.Context, in *ReadBillingGroupCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadBillingGroupCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[2], "/blueapi.awscost.v1.AwsCost/ReadBillingGroupCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadBillingGroupCostsClient{stream}
+	x := &awsCostReadBillingGroupCostsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -135,16 +135,16 @@ func (c *awsCostClient) StreamReadBillingGroupCosts(ctx context.Context, in *Str
 	return x, nil
 }
 
-type AwsCost_StreamReadBillingGroupCostsClient interface {
+type AwsCost_ReadBillingGroupCostsClient interface {
 	Recv() (*Cost, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadBillingGroupCostsClient struct {
+type awsCostReadBillingGroupCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadBillingGroupCostsClient) Recv() (*Cost, error) {
+func (x *awsCostReadBillingGroupCostsClient) Recv() (*Cost, error) {
 	m := new(Cost)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -152,12 +152,12 @@ func (x *awsCostStreamReadBillingGroupCostsClient) Recv() (*Cost, error) {
 	return m, nil
 }
 
-func (c *awsCostClient) StreamReadCosts(ctx context.Context, in *StreamReadCostsRequest, opts ...grpc.CallOption) (AwsCost_StreamReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[3], "/blueapi.awscost.v1.AwsCost/StreamReadCosts", opts...)
+func (c *awsCostClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (AwsCost_ReadCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[3], "/blueapi.awscost.v1.AwsCost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadCostsClient{stream}
+	x := &awsCostReadCostsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -167,16 +167,16 @@ func (c *awsCostClient) StreamReadCosts(ctx context.Context, in *StreamReadCosts
 	return x, nil
 }
 
-type AwsCost_StreamReadCostsClient interface {
+type AwsCost_ReadCostsClient interface {
 	Recv() (*Cost, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadCostsClient struct {
+type awsCostReadCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadCostsClient) Recv() (*Cost, error) {
+func (x *awsCostReadCostsClient) Recv() (*Cost, error) {
 	m := new(Cost)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -184,12 +184,12 @@ func (x *awsCostStreamReadCostsClient) Recv() (*Cost, error) {
 	return m, nil
 }
 
-func (c *awsCostClient) StreamReadAccountFees(ctx context.Context, in *StreamReadAccountFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadAccountFeesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[4], "/blueapi.awscost.v1.AwsCost/StreamReadAccountFees", opts...)
+func (c *awsCostClient) ReadAccountFees(ctx context.Context, in *ReadAccountFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadAccountFeesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[4], "/blueapi.awscost.v1.AwsCost/ReadAccountFees", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadAccountFeesClient{stream}
+	x := &awsCostReadAccountFeesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -199,16 +199,16 @@ func (c *awsCostClient) StreamReadAccountFees(ctx context.Context, in *StreamRea
 	return x, nil
 }
 
-type AwsCost_StreamReadAccountFeesClient interface {
+type AwsCost_ReadAccountFeesClient interface {
 	Recv() (*Fee, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadAccountFeesClient struct {
+type awsCostReadAccountFeesClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadAccountFeesClient) Recv() (*Fee, error) {
+func (x *awsCostReadAccountFeesClient) Recv() (*Fee, error) {
 	m := new(Fee)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -216,12 +216,12 @@ func (x *awsCostStreamReadAccountFeesClient) Recv() (*Fee, error) {
 	return m, nil
 }
 
-func (c *awsCostClient) StreamReadCompanyFees(ctx context.Context, in *StreamReadCompanyFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadCompanyFeesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[5], "/blueapi.awscost.v1.AwsCost/StreamReadCompanyFees", opts...)
+func (c *awsCostClient) ReadCompanyFees(ctx context.Context, in *ReadCompanyFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadCompanyFeesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[5], "/blueapi.awscost.v1.AwsCost/ReadCompanyFees", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadCompanyFeesClient{stream}
+	x := &awsCostReadCompanyFeesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -231,16 +231,16 @@ func (c *awsCostClient) StreamReadCompanyFees(ctx context.Context, in *StreamRea
 	return x, nil
 }
 
-type AwsCost_StreamReadCompanyFeesClient interface {
+type AwsCost_ReadCompanyFeesClient interface {
 	Recv() (*Fee, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadCompanyFeesClient struct {
+type awsCostReadCompanyFeesClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadCompanyFeesClient) Recv() (*Fee, error) {
+func (x *awsCostReadCompanyFeesClient) Recv() (*Fee, error) {
 	m := new(Fee)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -248,12 +248,12 @@ func (x *awsCostStreamReadCompanyFeesClient) Recv() (*Fee, error) {
 	return m, nil
 }
 
-func (c *awsCostClient) StreamReadBillingGroupFees(ctx context.Context, in *StreamReadBillingGroupFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadBillingGroupFeesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[6], "/blueapi.awscost.v1.AwsCost/StreamReadBillingGroupFees", opts...)
+func (c *awsCostClient) ReadBillingGroupFees(ctx context.Context, in *ReadBillingGroupFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadBillingGroupFeesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[6], "/blueapi.awscost.v1.AwsCost/ReadBillingGroupFees", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadBillingGroupFeesClient{stream}
+	x := &awsCostReadBillingGroupFeesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -263,16 +263,16 @@ func (c *awsCostClient) StreamReadBillingGroupFees(ctx context.Context, in *Stre
 	return x, nil
 }
 
-type AwsCost_StreamReadBillingGroupFeesClient interface {
+type AwsCost_ReadBillingGroupFeesClient interface {
 	Recv() (*Fee, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadBillingGroupFeesClient struct {
+type awsCostReadBillingGroupFeesClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadBillingGroupFeesClient) Recv() (*Fee, error) {
+func (x *awsCostReadBillingGroupFeesClient) Recv() (*Fee, error) {
 	m := new(Fee)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -280,12 +280,12 @@ func (x *awsCostStreamReadBillingGroupFeesClient) Recv() (*Fee, error) {
 	return m, nil
 }
 
-func (c *awsCostClient) StreamReadFees(ctx context.Context, in *StreamReadFeesRequest, opts ...grpc.CallOption) (AwsCost_StreamReadFeesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[7], "/blueapi.awscost.v1.AwsCost/StreamReadFees", opts...)
+func (c *awsCostClient) ReadFees(ctx context.Context, in *ReadFeesRequest, opts ...grpc.CallOption) (AwsCost_ReadFeesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &AwsCost_ServiceDesc.Streams[7], "/blueapi.awscost.v1.AwsCost/ReadFees", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &awsCostStreamReadFeesClient{stream}
+	x := &awsCostReadFeesClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -295,16 +295,16 @@ func (c *awsCostClient) StreamReadFees(ctx context.Context, in *StreamReadFeesRe
 	return x, nil
 }
 
-type AwsCost_StreamReadFeesClient interface {
+type AwsCost_ReadFeesClient interface {
 	Recv() (*Fee, error)
 	grpc.ClientStream
 }
 
-type awsCostStreamReadFeesClient struct {
+type awsCostReadFeesClient struct {
 	grpc.ClientStream
 }
 
-func (x *awsCostStreamReadFeesClient) Recv() (*Fee, error) {
+func (x *awsCostReadFeesClient) Recv() (*Fee, error) {
 	m := new(Fee)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -316,34 +316,34 @@ func (x *awsCostStreamReadFeesClient) Recv() (*Fee, error) {
 // All implementations must embed UnimplementedAwsCostServer
 // for forward compatibility
 type AwsCostServer interface {
-	// Streams back the usage-based cost details of an AWS account. If datetime range
+	// Reads the usage-based cost details of an AWS account. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadAccountCosts(*StreamReadAccountCostsRequest, AwsCost_StreamReadAccountCostsServer) error
-	// Streams back the usage-based cost details of a company. If datetime range
+	ReadAccountCosts(*ReadAccountCostsRequest, AwsCost_ReadAccountCostsServer) error
+	// Reads the usage-based cost details of a company. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadCompanyCosts(*StreamReadCompanyCostsRequest, AwsCost_StreamReadCompanyCostsServer) error
-	// Streams back the usage-based cost details of a billing group. If datetime range
+	ReadCompanyCosts(*ReadCompanyCostsRequest, AwsCost_ReadCompanyCostsServer) error
+	// Reads the usage-based cost details of a billing group. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadBillingGroupCosts(*StreamReadBillingGroupCostsRequest, AwsCost_StreamReadBillingGroupCostsServer) error
-	// Streams back the usage-based cost details of an organization (Ripple) or company (Wave).
+	ReadBillingGroupCosts(*ReadBillingGroupCostsRequest, AwsCost_ReadBillingGroupCostsServer) error
+	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// If datetime range parameters are not set, month-to-date (current month) will be returned.
-	StreamReadCosts(*StreamReadCostsRequest, AwsCost_StreamReadCostsServer) error
-	// Streams back the fee-based details of an AWS account. This API covers non-usage-based
+	ReadCosts(*ReadCostsRequest, AwsCost_ReadCostsServer) error
+	// Reads the non-usaged-based details of an AWS account. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadAccountFees(*StreamReadAccountFeesRequest, AwsCost_StreamReadAccountFeesServer) error
-	// Streams back the fee-based details of a company. This API covers non-usage-based
+	ReadAccountFees(*ReadAccountFeesRequest, AwsCost_ReadAccountFeesServer) error
+	// Reads the non-usage-based details of a company. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadCompanyFees(*StreamReadCompanyFeesRequest, AwsCost_StreamReadCompanyFeesServer) error
-	// Streams back the fee-based details of a billing group. This API covers non-usage-based
+	ReadCompanyFees(*ReadCompanyFeesRequest, AwsCost_ReadCompanyFeesServer) error
+	// Reads the non-usage-based details of a billing group. This API covers non-usage-based
 	// fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
 	// parameters are not set, month-to-date (current month) will be returned.
-	StreamReadBillingGroupFees(*StreamReadBillingGroupFeesRequest, AwsCost_StreamReadBillingGroupFeesServer) error
-	// Streams back the fee-based details of an organization (Ripple) or company (Wave). This API covers
+	ReadBillingGroupFees(*ReadBillingGroupFeesRequest, AwsCost_ReadBillingGroupFeesServer) error
+	// Reads the non-usage-based details of an organization (Ripple) or company (Wave). This API covers
 	// non-usage-based fees, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
-	StreamReadFees(*StreamReadFeesRequest, AwsCost_StreamReadFeesServer) error
+	ReadFees(*ReadFeesRequest, AwsCost_ReadFeesServer) error
 	mustEmbedUnimplementedAwsCostServer()
 }
 
@@ -351,29 +351,29 @@ type AwsCostServer interface {
 type UnimplementedAwsCostServer struct {
 }
 
-func (UnimplementedAwsCostServer) StreamReadAccountCosts(*StreamReadAccountCostsRequest, AwsCost_StreamReadAccountCostsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadAccountCosts not implemented")
+func (UnimplementedAwsCostServer) ReadAccountCosts(*ReadAccountCostsRequest, AwsCost_ReadAccountCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadAccountCosts not implemented")
 }
-func (UnimplementedAwsCostServer) StreamReadCompanyCosts(*StreamReadCompanyCostsRequest, AwsCost_StreamReadCompanyCostsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadCompanyCosts not implemented")
+func (UnimplementedAwsCostServer) ReadCompanyCosts(*ReadCompanyCostsRequest, AwsCost_ReadCompanyCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadCompanyCosts not implemented")
 }
-func (UnimplementedAwsCostServer) StreamReadBillingGroupCosts(*StreamReadBillingGroupCostsRequest, AwsCost_StreamReadBillingGroupCostsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadBillingGroupCosts not implemented")
+func (UnimplementedAwsCostServer) ReadBillingGroupCosts(*ReadBillingGroupCostsRequest, AwsCost_ReadBillingGroupCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadBillingGroupCosts not implemented")
 }
-func (UnimplementedAwsCostServer) StreamReadCosts(*StreamReadCostsRequest, AwsCost_StreamReadCostsServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadCosts not implemented")
+func (UnimplementedAwsCostServer) ReadCosts(*ReadCostsRequest, AwsCost_ReadCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
 }
-func (UnimplementedAwsCostServer) StreamReadAccountFees(*StreamReadAccountFeesRequest, AwsCost_StreamReadAccountFeesServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadAccountFees not implemented")
+func (UnimplementedAwsCostServer) ReadAccountFees(*ReadAccountFeesRequest, AwsCost_ReadAccountFeesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadAccountFees not implemented")
 }
-func (UnimplementedAwsCostServer) StreamReadCompanyFees(*StreamReadCompanyFeesRequest, AwsCost_StreamReadCompanyFeesServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadCompanyFees not implemented")
+func (UnimplementedAwsCostServer) ReadCompanyFees(*ReadCompanyFeesRequest, AwsCost_ReadCompanyFeesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadCompanyFees not implemented")
 }
-func (UnimplementedAwsCostServer) StreamReadBillingGroupFees(*StreamReadBillingGroupFeesRequest, AwsCost_StreamReadBillingGroupFeesServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadBillingGroupFees not implemented")
+func (UnimplementedAwsCostServer) ReadBillingGroupFees(*ReadBillingGroupFeesRequest, AwsCost_ReadBillingGroupFeesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadBillingGroupFees not implemented")
 }
-func (UnimplementedAwsCostServer) StreamReadFees(*StreamReadFeesRequest, AwsCost_StreamReadFeesServer) error {
-	return status.Errorf(codes.Unimplemented, "method StreamReadFees not implemented")
+func (UnimplementedAwsCostServer) ReadFees(*ReadFeesRequest, AwsCost_ReadFeesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadFees not implemented")
 }
 func (UnimplementedAwsCostServer) mustEmbedUnimplementedAwsCostServer() {}
 
@@ -388,171 +388,171 @@ func RegisterAwsCostServer(s grpc.ServiceRegistrar, srv AwsCostServer) {
 	s.RegisterService(&AwsCost_ServiceDesc, srv)
 }
 
-func _AwsCost_StreamReadAccountCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadAccountCostsRequest)
+func _AwsCost_ReadAccountCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadAccountCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadAccountCosts(m, &awsCostStreamReadAccountCostsServer{stream})
+	return srv.(AwsCostServer).ReadAccountCosts(m, &awsCostReadAccountCostsServer{stream})
 }
 
-type AwsCost_StreamReadAccountCostsServer interface {
+type AwsCost_ReadAccountCostsServer interface {
 	Send(*Cost) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadAccountCostsServer struct {
+type awsCostReadAccountCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadAccountCostsServer) Send(m *Cost) error {
+func (x *awsCostReadAccountCostsServer) Send(m *Cost) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AwsCost_StreamReadCompanyCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadCompanyCostsRequest)
+func _AwsCost_ReadCompanyCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadCompanyCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadCompanyCosts(m, &awsCostStreamReadCompanyCostsServer{stream})
+	return srv.(AwsCostServer).ReadCompanyCosts(m, &awsCostReadCompanyCostsServer{stream})
 }
 
-type AwsCost_StreamReadCompanyCostsServer interface {
+type AwsCost_ReadCompanyCostsServer interface {
 	Send(*Cost) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadCompanyCostsServer struct {
+type awsCostReadCompanyCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadCompanyCostsServer) Send(m *Cost) error {
+func (x *awsCostReadCompanyCostsServer) Send(m *Cost) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AwsCost_StreamReadBillingGroupCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadBillingGroupCostsRequest)
+func _AwsCost_ReadBillingGroupCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadBillingGroupCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadBillingGroupCosts(m, &awsCostStreamReadBillingGroupCostsServer{stream})
+	return srv.(AwsCostServer).ReadBillingGroupCosts(m, &awsCostReadBillingGroupCostsServer{stream})
 }
 
-type AwsCost_StreamReadBillingGroupCostsServer interface {
+type AwsCost_ReadBillingGroupCostsServer interface {
 	Send(*Cost) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadBillingGroupCostsServer struct {
+type awsCostReadBillingGroupCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadBillingGroupCostsServer) Send(m *Cost) error {
+func (x *awsCostReadBillingGroupCostsServer) Send(m *Cost) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AwsCost_StreamReadCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadCostsRequest)
+func _AwsCost_ReadCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadCosts(m, &awsCostStreamReadCostsServer{stream})
+	return srv.(AwsCostServer).ReadCosts(m, &awsCostReadCostsServer{stream})
 }
 
-type AwsCost_StreamReadCostsServer interface {
+type AwsCost_ReadCostsServer interface {
 	Send(*Cost) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadCostsServer struct {
+type awsCostReadCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadCostsServer) Send(m *Cost) error {
+func (x *awsCostReadCostsServer) Send(m *Cost) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AwsCost_StreamReadAccountFees_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadAccountFeesRequest)
+func _AwsCost_ReadAccountFees_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadAccountFeesRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadAccountFees(m, &awsCostStreamReadAccountFeesServer{stream})
+	return srv.(AwsCostServer).ReadAccountFees(m, &awsCostReadAccountFeesServer{stream})
 }
 
-type AwsCost_StreamReadAccountFeesServer interface {
+type AwsCost_ReadAccountFeesServer interface {
 	Send(*Fee) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadAccountFeesServer struct {
+type awsCostReadAccountFeesServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadAccountFeesServer) Send(m *Fee) error {
+func (x *awsCostReadAccountFeesServer) Send(m *Fee) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AwsCost_StreamReadCompanyFees_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadCompanyFeesRequest)
+func _AwsCost_ReadCompanyFees_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadCompanyFeesRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadCompanyFees(m, &awsCostStreamReadCompanyFeesServer{stream})
+	return srv.(AwsCostServer).ReadCompanyFees(m, &awsCostReadCompanyFeesServer{stream})
 }
 
-type AwsCost_StreamReadCompanyFeesServer interface {
+type AwsCost_ReadCompanyFeesServer interface {
 	Send(*Fee) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadCompanyFeesServer struct {
+type awsCostReadCompanyFeesServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadCompanyFeesServer) Send(m *Fee) error {
+func (x *awsCostReadCompanyFeesServer) Send(m *Fee) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AwsCost_StreamReadBillingGroupFees_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadBillingGroupFeesRequest)
+func _AwsCost_ReadBillingGroupFees_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadBillingGroupFeesRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadBillingGroupFees(m, &awsCostStreamReadBillingGroupFeesServer{stream})
+	return srv.(AwsCostServer).ReadBillingGroupFees(m, &awsCostReadBillingGroupFeesServer{stream})
 }
 
-type AwsCost_StreamReadBillingGroupFeesServer interface {
+type AwsCost_ReadBillingGroupFeesServer interface {
 	Send(*Fee) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadBillingGroupFeesServer struct {
+type awsCostReadBillingGroupFeesServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadBillingGroupFeesServer) Send(m *Fee) error {
+func (x *awsCostReadBillingGroupFeesServer) Send(m *Fee) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _AwsCost_StreamReadFees_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(StreamReadFeesRequest)
+func _AwsCost_ReadFees_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadFeesRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AwsCostServer).StreamReadFees(m, &awsCostStreamReadFeesServer{stream})
+	return srv.(AwsCostServer).ReadFees(m, &awsCostReadFeesServer{stream})
 }
 
-type AwsCost_StreamReadFeesServer interface {
+type AwsCost_ReadFeesServer interface {
 	Send(*Fee) error
 	grpc.ServerStream
 }
 
-type awsCostStreamReadFeesServer struct {
+type awsCostReadFeesServer struct {
 	grpc.ServerStream
 }
 
-func (x *awsCostStreamReadFeesServer) Send(m *Fee) error {
+func (x *awsCostReadFeesServer) Send(m *Fee) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -565,43 +565,43 @@ var AwsCost_ServiceDesc = grpc.ServiceDesc{
 	Methods:     []grpc.MethodDesc{},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "StreamReadAccountCosts",
-			Handler:       _AwsCost_StreamReadAccountCosts_Handler,
+			StreamName:    "ReadAccountCosts",
+			Handler:       _AwsCost_ReadAccountCosts_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamReadCompanyCosts",
-			Handler:       _AwsCost_StreamReadCompanyCosts_Handler,
+			StreamName:    "ReadCompanyCosts",
+			Handler:       _AwsCost_ReadCompanyCosts_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamReadBillingGroupCosts",
-			Handler:       _AwsCost_StreamReadBillingGroupCosts_Handler,
+			StreamName:    "ReadBillingGroupCosts",
+			Handler:       _AwsCost_ReadBillingGroupCosts_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamReadCosts",
-			Handler:       _AwsCost_StreamReadCosts_Handler,
+			StreamName:    "ReadCosts",
+			Handler:       _AwsCost_ReadCosts_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamReadAccountFees",
-			Handler:       _AwsCost_StreamReadAccountFees_Handler,
+			StreamName:    "ReadAccountFees",
+			Handler:       _AwsCost_ReadAccountFees_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamReadCompanyFees",
-			Handler:       _AwsCost_StreamReadCompanyFees_Handler,
+			StreamName:    "ReadCompanyFees",
+			Handler:       _AwsCost_ReadCompanyFees_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamReadBillingGroupFees",
-			Handler:       _AwsCost_StreamReadBillingGroupFees_Handler,
+			StreamName:    "ReadBillingGroupFees",
+			Handler:       _AwsCost_ReadBillingGroupFees_Handler,
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "StreamReadFees",
-			Handler:       _AwsCost_StreamReadFees_Handler,
+			StreamName:    "ReadFees",
+			Handler:       _AwsCost_ReadFees_Handler,
 			ServerStreams: true,
 		},
 	},
