@@ -7,6 +7,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -34,6 +35,8 @@ type OrgApiClient interface {
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error)
+	// Deletes the organization.
+	DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type orgApiClient struct {
@@ -107,6 +110,15 @@ func (c *orgApiClient) ListMasterAccounts(ctx context.Context, in *ListMasterAcc
 	return out, nil
 }
 
+func (c *orgApiClient) DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/DeleteOrg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrgApiServer is the server API for OrgApi service.
 // All implementations must embed UnimplementedOrgApiServer
 // for forward compatibility
@@ -127,6 +139,8 @@ type OrgApiServer interface {
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error)
+	// Deletes the organization.
+	DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedOrgApiServer()
 }
 
@@ -154,6 +168,9 @@ func (UnimplementedOrgApiServer) UpdatePassword(context.Context, *UpdatePassword
 }
 func (UnimplementedOrgApiServer) ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMasterAccounts not implemented")
+}
+func (UnimplementedOrgApiServer) DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrg not implemented")
 }
 func (UnimplementedOrgApiServer) mustEmbedUnimplementedOrgApiServer() {}
 
@@ -294,6 +311,24 @@ func _OrgApi_ListMasterAccounts_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _OrgApi_DeleteOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrgRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrgApiServer).DeleteOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.org.v1.OrgApi/DeleteOrg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrgApiServer).DeleteOrg(ctx, req.(*DeleteOrgRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // OrgApi_ServiceDesc is the grpc.ServiceDesc for OrgApi service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -328,6 +363,10 @@ var OrgApi_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMasterAccounts",
 			Handler:    _OrgApi_ListMasterAccounts_Handler,
+		},
+		{
+			MethodName: "DeleteOrg",
+			Handler:    _OrgApi_DeleteOrg_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
