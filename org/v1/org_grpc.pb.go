@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OrgApiClient interface {
 	// Creates the organization account.
-	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*Org, error)
+	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
 	// Sends (or resends) the verification email. Only valid for unverified
 	// organizations. The verification key will be valid for a day.
 	SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*Org, error)
@@ -47,8 +47,8 @@ func NewOrgApiClient(cc grpc.ClientConnInterface) OrgApiClient {
 	return &orgApiClient{cc}
 }
 
-func (c *orgApiClient) CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*Org, error) {
-	out := new(Org)
+func (c *orgApiClient) CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error) {
+	out := new(CreateOrgResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/CreateOrg", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -124,7 +124,7 @@ func (c *orgApiClient) DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts
 // for forward compatibility
 type OrgApiServer interface {
 	// Creates the organization account.
-	CreateOrg(context.Context, *CreateOrgRequest) (*Org, error)
+	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
 	// Sends (or resends) the verification email. Only valid for unverified
 	// organizations. The verification key will be valid for a day.
 	SendVerification(context.Context, *SendVerificationRequest) (*Org, error)
@@ -148,7 +148,7 @@ type OrgApiServer interface {
 type UnimplementedOrgApiServer struct {
 }
 
-func (UnimplementedOrgApiServer) CreateOrg(context.Context, *CreateOrgRequest) (*Org, error) {
+func (UnimplementedOrgApiServer) CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrg not implemented")
 }
 func (UnimplementedOrgApiServer) SendVerification(context.Context, *SendVerificationRequest) (*Org, error) {
