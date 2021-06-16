@@ -30,8 +30,8 @@ type OrgApiClient interface {
 	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error)
-	// Updates organization attributes. Supported attributes include 'email', and 'description'.
-	UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Org, error)
+	// Updates organization metadata. Supported metadata include 'email', and 'description'.
+	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*Org, error)
 	// Updates the organization password.
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*Org, error)
 	// Lists master accounts that belongs to the caller's organization.
@@ -86,9 +86,9 @@ func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...gr
 	return out, nil
 }
 
-func (c *orgApiClient) UpdateAttribute(ctx context.Context, in *UpdateAttributeRequest, opts ...grpc.CallOption) (*Org, error) {
+func (c *orgApiClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*Org, error) {
 	out := new(Org)
-	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/UpdateAttribute", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/UpdateMetadata", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -145,8 +145,8 @@ type OrgApiServer interface {
 	VerifyOrg(context.Context, *VerifyOrgRequest) (*Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(context.Context, *GetOrgRequest) (*Org, error)
-	// Updates organization attributes. Supported attributes include 'email', and 'description'.
-	UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Org, error)
+	// Updates organization metadata. Supported metadata include 'email', and 'description'.
+	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*Org, error)
 	// Updates the organization password.
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error)
 	// Lists master accounts that belongs to the caller's organization.
@@ -174,8 +174,8 @@ func (UnimplementedOrgApiServer) VerifyOrg(context.Context, *VerifyOrgRequest) (
 func (UnimplementedOrgApiServer) GetOrg(context.Context, *GetOrgRequest) (*Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrg not implemented")
 }
-func (UnimplementedOrgApiServer) UpdateAttribute(context.Context, *UpdateAttributeRequest) (*Org, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateAttribute not implemented")
+func (UnimplementedOrgApiServer) UpdateMetadata(context.Context, *UpdateMetadataRequest) (*Org, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMetadata not implemented")
 }
 func (UnimplementedOrgApiServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
@@ -274,20 +274,20 @@ func _OrgApi_GetOrg_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _OrgApi_UpdateAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateAttributeRequest)
+func _OrgApi_UpdateMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMetadataRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(OrgApiServer).UpdateAttribute(ctx, in)
+		return srv.(OrgApiServer).UpdateMetadata(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.org.v1.OrgApi/UpdateAttribute",
+		FullMethod: "/blueapi.org.v1.OrgApi/UpdateMetadata",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrgApiServer).UpdateAttribute(ctx, req.(*UpdateAttributeRequest))
+		return srv.(OrgApiServer).UpdateMetadata(ctx, req.(*UpdateMetadataRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -388,8 +388,8 @@ var OrgApi_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _OrgApi_GetOrg_Handler,
 		},
 		{
-			MethodName: "UpdateAttribute",
-			Handler:    _OrgApi_UpdateAttribute_Handler,
+			MethodName: "UpdateMetadata",
+			Handler:    _OrgApi_UpdateMetadata_Handler,
 		},
 		{
 			MethodName: "UpdatePassword",
