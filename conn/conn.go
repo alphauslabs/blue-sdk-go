@@ -101,6 +101,7 @@ func New(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
 				invoker grpc.UnaryInvoker, opts ...grpc.CallOption,
 			) error {
 				ctx = metadata.AppendToOutgoingContext(ctx, "service-name", co.svc)
+				ctx = metadata.AppendToOutgoingContext(ctx, "x-agent", "blue-sdk-go")
 				return invoker(ctx, method, req, reply, cc, opts...)
 			}))
 
@@ -109,6 +110,7 @@ func New(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
 				streamer grpc.Streamer, opts ...grpc.CallOption,
 			) (grpc.ClientStream, error) {
 				ctx = metadata.AppendToOutgoingContext(ctx, "service-name", co.svc)
+				ctx = metadata.AppendToOutgoingContext(ctx, "x-agent", "blue-sdk-go")
 				return streamer(ctx, desc, cc, method, opts...)
 			}))
 		}
