@@ -37,7 +37,7 @@ type Org struct {
 	// The optional description of the organization.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// The metadata (key/value pair) of the organization. If hierarchy is supported, it will be
-	// separated by '/', such as 'metakey/subkey=value'. Supported metadata include 'createTime'.
+	// separated by '/', such as 'metakey/subkey=value'. Supported metadata include 'createTime', and 'status'.
 	Metadata map[string]string `protobuf:"bytes,4,rep,name=metadata,proto3" json:"metadata,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
