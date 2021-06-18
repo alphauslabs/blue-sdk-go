@@ -4,6 +4,7 @@ package iam
 
 import (
 	context "context"
+	types "github.com/alphauslabs/blue-sdk-go/types"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -18,8 +19,16 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IamClient interface {
-	// Gets information about the caller.
-	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error)
+	// Gets user information about the caller. This call includes all of the user metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*types.User, error)
+	// List users.
+	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	// Get user information. This call includes all of the user metadata. See
+	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// If {name} parameter is 'me' or '-', return the caller information, which is
+	// equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*types.User, error)
 }
 
 type iamClient struct {
@@ -30,9 +39,27 @@ func NewIamClient(cc grpc.ClientConnInterface) IamClient {
 	return &iamClient{cc}
 }
 
-func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*WhoAmIResponse, error) {
-	out := new(WhoAmIResponse)
+func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*types.User, error) {
+	out := new(types.User)
 	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/WhoAmI", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
+	out := new(ListUsersResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListUsers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*types.User, error) {
+	out := new(types.User)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -43,8 +70,16 @@ func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
 type IamServer interface {
-	// Gets information about the caller.
-	WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error)
+	// Gets user information about the caller. This call includes all of the user metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	WhoAmI(context.Context, *WhoAmIRequest) (*types.User, error)
+	// List users.
+	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	// Get user information. This call includes all of the user metadata. See
+	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// If {name} parameter is 'me' or '-', return the caller information, which is
+	// equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
+	GetUser(context.Context, *GetUserRequest) (*types.User, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -52,8 +87,14 @@ type IamServer interface {
 type UnimplementedIamServer struct {
 }
 
-func (UnimplementedIamServer) WhoAmI(context.Context, *WhoAmIRequest) (*WhoAmIResponse, error) {
+func (UnimplementedIamServer) WhoAmI(context.Context, *WhoAmIRequest) (*types.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WhoAmI not implemented")
+}
+func (UnimplementedIamServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedIamServer) GetUser(context.Context, *GetUserRequest) (*types.User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -86,6 +127,42 @@ func _Iam_WhoAmI_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).ListUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/ListUsers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/GetUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).GetUser(ctx, req.(*GetUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Iam_ServiceDesc is the grpc.ServiceDesc for Iam service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -96,6 +173,14 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "WhoAmI",
 			Handler:    _Iam_WhoAmI_Handler,
+		},
+		{
+			MethodName: "ListUsers",
+			Handler:    _Iam_ListUsers_Handler,
+		},
+		{
+			MethodName: "GetUser",
+			Handler:    _Iam_GetUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

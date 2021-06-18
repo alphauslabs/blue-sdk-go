@@ -31,13 +31,15 @@ type OrgApiClient interface {
 	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
-	// Updates organization metadata. Supported metadata include 'email', and 'description'.
+	// Updates organization metadata. See https://alphauslabs.github.io/blueapi/
+	// for the list of supported attributes.
 	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Updates the organization password.
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error)
-	// Get master account. This call includes all of the account's metadata.
+	// Get master account. This call includes all of the account's metadata. See
+	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetMasterAccount(ctx context.Context, in *GetMasterAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Deletes the organization.
 	DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -146,13 +148,15 @@ type OrgApiServer interface {
 	VerifyOrg(context.Context, *VerifyOrgRequest) (*ripple.Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error)
-	// Updates organization metadata. Supported metadata include 'email', and 'description'.
+	// Updates organization metadata. See https://alphauslabs.github.io/blueapi/
+	// for the list of supported attributes.
 	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error)
 	// Updates the organization password.
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error)
-	// Get master account. This call includes all of the account's metadata.
+	// Get master account. This call includes all of the account's metadata. See
+	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetMasterAccount(context.Context, *GetMasterAccountRequest) (*aws.Account, error)
 	// Deletes the organization.
 	DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error)
