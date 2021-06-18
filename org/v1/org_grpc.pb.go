@@ -5,6 +5,7 @@ package org
 import (
 	context "context"
 	aws "github.com/alphauslabs/blue-sdk-go/types/aws"
+	ripple "github.com/alphauslabs/blue-sdk-go/types/ripple"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -24,16 +25,16 @@ type OrgApiClient interface {
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
 	// Sends (or resends) the verification email. Only valid for unverified
 	// organizations. The verification key will be valid for a day.
-	SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*Org, error)
+	SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Verifies an organization using the key received from the verification email.
 	// The verification key is only valid for a day.
-	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*Org, error)
+	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Gets information about the caller's organization.
-	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error)
+	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Updates organization metadata. Supported metadata include 'email', and 'description'.
-	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*Org, error)
+	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Updates the organization password.
-	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*Org, error)
+	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error)
 	// Get master account. This call includes all of the account's metadata.
@@ -59,8 +60,8 @@ func (c *orgApiClient) CreateOrg(ctx context.Context, in *CreateOrgRequest, opts
 	return out, nil
 }
 
-func (c *orgApiClient) SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*Org, error) {
-	out := new(Org)
+func (c *orgApiClient) SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
+	out := new(ripple.Org)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/SendVerification", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -68,8 +69,8 @@ func (c *orgApiClient) SendVerification(ctx context.Context, in *SendVerificatio
 	return out, nil
 }
 
-func (c *orgApiClient) VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*Org, error) {
-	out := new(Org)
+func (c *orgApiClient) VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
+	out := new(ripple.Org)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/VerifyOrg", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -77,8 +78,8 @@ func (c *orgApiClient) VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts
 	return out, nil
 }
 
-func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*Org, error) {
-	out := new(Org)
+func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
+	out := new(ripple.Org)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/GetOrg", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -86,8 +87,8 @@ func (c *orgApiClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts ...gr
 	return out, nil
 }
 
-func (c *orgApiClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*Org, error) {
-	out := new(Org)
+func (c *orgApiClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
+	out := new(ripple.Org)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/UpdateMetadata", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -95,8 +96,8 @@ func (c *orgApiClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataReq
 	return out, nil
 }
 
-func (c *orgApiClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*Org, error) {
-	out := new(Org)
+func (c *orgApiClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
+	out := new(ripple.Org)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.OrgApi/UpdatePassword", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -139,16 +140,16 @@ type OrgApiServer interface {
 	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
 	// Sends (or resends) the verification email. Only valid for unverified
 	// organizations. The verification key will be valid for a day.
-	SendVerification(context.Context, *SendVerificationRequest) (*Org, error)
+	SendVerification(context.Context, *SendVerificationRequest) (*ripple.Org, error)
 	// Verifies an organization using the key received from the verification email.
 	// The verification key is only valid for a day.
-	VerifyOrg(context.Context, *VerifyOrgRequest) (*Org, error)
+	VerifyOrg(context.Context, *VerifyOrgRequest) (*ripple.Org, error)
 	// Gets information about the caller's organization.
-	GetOrg(context.Context, *GetOrgRequest) (*Org, error)
+	GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error)
 	// Updates organization metadata. Supported metadata include 'email', and 'description'.
-	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*Org, error)
+	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error)
 	// Updates the organization password.
-	UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error)
+	UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error)
 	// Lists master accounts that belongs to the caller's organization.
 	ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error)
 	// Get master account. This call includes all of the account's metadata.
@@ -165,19 +166,19 @@ type UnimplementedOrgApiServer struct {
 func (UnimplementedOrgApiServer) CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrg not implemented")
 }
-func (UnimplementedOrgApiServer) SendVerification(context.Context, *SendVerificationRequest) (*Org, error) {
+func (UnimplementedOrgApiServer) SendVerification(context.Context, *SendVerificationRequest) (*ripple.Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendVerification not implemented")
 }
-func (UnimplementedOrgApiServer) VerifyOrg(context.Context, *VerifyOrgRequest) (*Org, error) {
+func (UnimplementedOrgApiServer) VerifyOrg(context.Context, *VerifyOrgRequest) (*ripple.Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyOrg not implemented")
 }
-func (UnimplementedOrgApiServer) GetOrg(context.Context, *GetOrgRequest) (*Org, error) {
+func (UnimplementedOrgApiServer) GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrg not implemented")
 }
-func (UnimplementedOrgApiServer) UpdateMetadata(context.Context, *UpdateMetadataRequest) (*Org, error) {
+func (UnimplementedOrgApiServer) UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMetadata not implemented")
 }
-func (UnimplementedOrgApiServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*Org, error) {
+func (UnimplementedOrgApiServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
 func (UnimplementedOrgApiServer) ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error) {
