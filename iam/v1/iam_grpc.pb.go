@@ -22,12 +22,12 @@ type IamClient interface {
 	// Gets user information about the caller. This call includes all of the user metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*types.User, error)
-	// List users.
+	// Lists users.
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	// Get user information. This call includes all of the user metadata. See
+	// Gets user information. This call includes all of the user metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// If {name} parameter is 'me' or '-', return the caller information, which is
-	// equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
+	// If the {name} parameter is 'me' or '-', returns the caller information, which
+	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*types.User, error)
 }
 
@@ -73,12 +73,12 @@ type IamServer interface {
 	// Gets user information about the caller. This call includes all of the user metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	WhoAmI(context.Context, *WhoAmIRequest) (*types.User, error)
-	// List users.
+	// Lists users.
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	// Get user information. This call includes all of the user metadata. See
+	// Gets user information. This call includes all of the user metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// If {name} parameter is 'me' or '-', return the caller information, which is
-	// equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
+	// If the {name} parameter is 'me' or '-', returns the caller information, which
+	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(context.Context, *GetUserRequest) (*types.User, error)
 	mustEmbedUnimplementedIamServer()
 }
