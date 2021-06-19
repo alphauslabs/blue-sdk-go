@@ -745,23 +745,23 @@ func RegisterOrgApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 }
 
 var (
-	pattern_OrgApi_CreateOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "me"}, ""))
+	pattern_OrgApi_CreateOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
 
-	pattern_OrgApi_SendVerification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "me"}, "sendVerification"))
+	pattern_OrgApi_SendVerification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "sendVerification"))
 
-	pattern_OrgApi_VerifyOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "me"}, "verifyOrg"))
+	pattern_OrgApi_VerifyOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "verifyOrg"))
 
-	pattern_OrgApi_GetOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "me"}, ""))
+	pattern_OrgApi_GetOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
 
-	pattern_OrgApi_UpdateMetadata_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"org", "v1", "me", "metadata"}, ""))
+	pattern_OrgApi_UpdateMetadata_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "metadata"}, ""))
 
-	pattern_OrgApi_UpdatePassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"org", "v1", "me", "passwd"}, ""))
+	pattern_OrgApi_UpdatePassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "passwd"}, ""))
 
-	pattern_OrgApi_ListMasterAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"org", "v1", "me", "masteraccts"}, ""))
+	pattern_OrgApi_ListMasterAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "masteraccts"}, ""))
 
-	pattern_OrgApi_GetMasterAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"org", "v1", "me", "masteraccts", "id"}, ""))
+	pattern_OrgApi_GetMasterAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"org", "v1", "masteraccts", "id"}, ""))
 
-	pattern_OrgApi_DeleteOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "me"}, ""))
+	pattern_OrgApi_DeleteOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
 )
 
 var (
