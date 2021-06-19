@@ -749,7 +749,7 @@ var (
 
 	pattern_OrgApi_SendVerification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "sendVerification"))
 
-	pattern_OrgApi_VerifyOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "verifyOrg"))
+	pattern_OrgApi_VerifyOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "verify"))
 
 	pattern_OrgApi_GetOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
 
