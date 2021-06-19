@@ -24,7 +24,7 @@ type IamClient interface {
 	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*types.User, error)
 	// Lists all subusers.
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
-	// Gets user information. This call includes all of the user metadata. See
+	// Gets subuser information. This call includes all of the subuser metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
@@ -75,7 +75,7 @@ type IamServer interface {
 	WhoAmI(context.Context, *WhoAmIRequest) (*types.User, error)
 	// Lists all subusers.
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
-	// Gets user information. This call includes all of the user metadata. See
+	// Gets subuser information. This call includes all of the subuser metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
