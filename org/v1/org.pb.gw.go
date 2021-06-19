@@ -31,7 +31,7 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_OrgApi_CreateOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_CreateOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -48,7 +48,7 @@ func request_OrgApi_CreateOrg_0(ctx context.Context, marshaler runtime.Marshaler
 
 }
 
-func local_request_OrgApi_CreateOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_CreateOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq CreateOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -65,7 +65,7 @@ func local_request_OrgApi_CreateOrg_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-func request_OrgApi_SendVerification_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_SendVerification_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SendVerificationRequest
 	var metadata runtime.ServerMetadata
 
@@ -82,7 +82,7 @@ func request_OrgApi_SendVerification_0(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func local_request_OrgApi_SendVerification_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_SendVerification_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq SendVerificationRequest
 	var metadata runtime.ServerMetadata
 
@@ -99,7 +99,7 @@ func local_request_OrgApi_SendVerification_0(ctx context.Context, marshaler runt
 
 }
 
-func request_OrgApi_VerifyOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_VerifyOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq VerifyOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -116,7 +116,7 @@ func request_OrgApi_VerifyOrg_0(ctx context.Context, marshaler runtime.Marshaler
 
 }
 
-func local_request_OrgApi_VerifyOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_VerifyOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq VerifyOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -133,7 +133,7 @@ func local_request_OrgApi_VerifyOrg_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-func request_OrgApi_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -142,7 +142,7 @@ func request_OrgApi_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, c
 
 }
 
-func local_request_OrgApi_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -151,7 +151,7 @@ func local_request_OrgApi_GetOrg_0(ctx context.Context, marshaler runtime.Marsha
 
 }
 
-func request_OrgApi_UpdateMetadata_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_UpdateMetadata_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateMetadataRequest
 	var metadata runtime.ServerMetadata
 
@@ -168,7 +168,7 @@ func request_OrgApi_UpdateMetadata_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func local_request_OrgApi_UpdateMetadata_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_UpdateMetadata_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateMetadataRequest
 	var metadata runtime.ServerMetadata
 
@@ -185,7 +185,7 @@ func local_request_OrgApi_UpdateMetadata_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_OrgApi_UpdatePassword_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_UpdatePassword_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdatePasswordRequest
 	var metadata runtime.ServerMetadata
 
@@ -202,7 +202,7 @@ func request_OrgApi_UpdatePassword_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func local_request_OrgApi_UpdatePassword_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_UpdatePassword_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdatePasswordRequest
 	var metadata runtime.ServerMetadata
 
@@ -219,7 +219,7 @@ func local_request_OrgApi_UpdatePassword_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_OrgApi_ListMasterAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_ListMasterAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListMasterAccountsRequest
 	var metadata runtime.ServerMetadata
 
@@ -228,7 +228,7 @@ func request_OrgApi_ListMasterAccounts_0(ctx context.Context, marshaler runtime.
 
 }
 
-func local_request_OrgApi_ListMasterAccounts_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_ListMasterAccounts_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ListMasterAccountsRequest
 	var metadata runtime.ServerMetadata
 
@@ -237,7 +237,7 @@ func local_request_OrgApi_ListMasterAccounts_0(ctx context.Context, marshaler ru
 
 }
 
-func request_OrgApi_GetMasterAccount_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_GetMasterAccount_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetMasterAccountRequest
 	var metadata runtime.ServerMetadata
 
@@ -263,7 +263,7 @@ func request_OrgApi_GetMasterAccount_0(ctx context.Context, marshaler runtime.Ma
 
 }
 
-func local_request_OrgApi_GetMasterAccount_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_GetMasterAccount_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetMasterAccountRequest
 	var metadata runtime.ServerMetadata
 
@@ -289,7 +289,7 @@ func local_request_OrgApi_GetMasterAccount_0(ctx context.Context, marshaler runt
 
 }
 
-func request_OrgApi_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrgApiClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Organization_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler, client OrganizationClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -298,7 +298,7 @@ func request_OrgApi_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler
 
 }
 
-func local_request_OrgApi_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrgApiServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Organization_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler, server OrganizationServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq DeleteOrgRequest
 	var metadata runtime.ServerMetadata
 
@@ -307,24 +307,24 @@ func local_request_OrgApi_DeleteOrg_0(ctx context.Context, marshaler runtime.Mar
 
 }
 
-// RegisterOrgApiHandlerServer registers the http handlers for service OrgApi to "mux".
-// UnaryRPC     :call OrgApiServer directly.
+// RegisterOrganizationHandlerServer registers the http handlers for service Organization to "mux".
+// UnaryRPC     :call OrganizationServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOrgApiHandlerFromEndpoint instead.
-func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OrgApiServer) error {
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOrganizationHandlerFromEndpoint instead.
+func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OrganizationServer) error {
 
-	mux.Handle("POST", pattern_OrgApi_CreateOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Organization_CreateOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/CreateOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/CreateOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_CreateOrg_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_CreateOrg_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -332,22 +332,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_CreateOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_CreateOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_OrgApi_SendVerification_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Organization_SendVerification_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/SendVerification")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/SendVerification")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_SendVerification_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_SendVerification_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -355,22 +355,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_SendVerification_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_SendVerification_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_OrgApi_VerifyOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Organization_VerifyOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/VerifyOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/VerifyOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_VerifyOrg_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_VerifyOrg_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -378,22 +378,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_VerifyOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_VerifyOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OrgApi_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Organization_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/GetOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_GetOrg_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_GetOrg_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -401,22 +401,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_GetOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_GetOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_OrgApi_UpdateMetadata_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Organization_UpdateMetadata_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/UpdateMetadata")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdateMetadata")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_UpdateMetadata_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_UpdateMetadata_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -424,22 +424,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_UpdateMetadata_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_UpdateMetadata_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_OrgApi_UpdatePassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Organization_UpdatePassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/UpdatePassword")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdatePassword")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_UpdatePassword_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_UpdatePassword_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -447,22 +447,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_UpdatePassword_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_UpdatePassword_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OrgApi_ListMasterAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Organization_ListMasterAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/ListMasterAccounts")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/ListMasterAccounts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_ListMasterAccounts_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_ListMasterAccounts_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -470,22 +470,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_ListMasterAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_ListMasterAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OrgApi_GetMasterAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Organization_GetMasterAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/GetMasterAccount")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetMasterAccount")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_GetMasterAccount_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_GetMasterAccount_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -493,22 +493,22 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_GetMasterAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_GetMasterAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_OrgApi_DeleteOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Organization_DeleteOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/DeleteOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/DeleteOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_OrgApi_DeleteOrg_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Organization_DeleteOrg_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -516,16 +516,16 @@ func RegisterOrgApiHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 
-		forward_OrgApi_DeleteOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_DeleteOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
 	return nil
 }
 
-// RegisterOrgApiHandlerFromEndpoint is same as RegisterOrgApiHandler but
+// RegisterOrganizationHandlerFromEndpoint is same as RegisterOrganizationHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterOrgApiHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterOrganizationHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.Dial(endpoint, opts...)
 	if err != nil {
 		return err
@@ -545,199 +545,199 @@ func RegisterOrgApiHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMu
 		}()
 	}()
 
-	return RegisterOrgApiHandler(ctx, mux, conn)
+	return RegisterOrganizationHandler(ctx, mux, conn)
 }
 
-// RegisterOrgApiHandler registers the http handlers for service OrgApi to "mux".
+// RegisterOrganizationHandler registers the http handlers for service Organization to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterOrgApiHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterOrgApiHandlerClient(ctx, mux, NewOrgApiClient(conn))
+func RegisterOrganizationHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterOrganizationHandlerClient(ctx, mux, NewOrganizationClient(conn))
 }
 
-// RegisterOrgApiHandlerClient registers the http handlers for service OrgApi
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OrgApiClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OrgApiClient"
+// RegisterOrganizationHandlerClient registers the http handlers for service Organization
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OrganizationClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OrganizationClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "OrgApiClient" to call the correct interceptors.
-func RegisterOrgApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OrgApiClient) error {
+// "OrganizationClient" to call the correct interceptors.
+func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OrganizationClient) error {
 
-	mux.Handle("POST", pattern_OrgApi_CreateOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Organization_CreateOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/CreateOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/CreateOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_CreateOrg_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_CreateOrg_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_CreateOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_CreateOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_OrgApi_SendVerification_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Organization_SendVerification_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/SendVerification")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/SendVerification")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_SendVerification_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_SendVerification_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_SendVerification_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_SendVerification_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_OrgApi_VerifyOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Organization_VerifyOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/VerifyOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/VerifyOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_VerifyOrg_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_VerifyOrg_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_VerifyOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_VerifyOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OrgApi_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Organization_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/GetOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_GetOrg_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_GetOrg_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_GetOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_GetOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_OrgApi_UpdateMetadata_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Organization_UpdateMetadata_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/UpdateMetadata")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdateMetadata")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_UpdateMetadata_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_UpdateMetadata_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_UpdateMetadata_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_UpdateMetadata_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_OrgApi_UpdatePassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Organization_UpdatePassword_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/UpdatePassword")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdatePassword")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_UpdatePassword_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_UpdatePassword_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_UpdatePassword_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_UpdatePassword_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OrgApi_ListMasterAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Organization_ListMasterAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/ListMasterAccounts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/ListMasterAccounts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_ListMasterAccounts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_ListMasterAccounts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_ListMasterAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_ListMasterAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_OrgApi_GetMasterAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Organization_GetMasterAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/GetMasterAccount")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetMasterAccount")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_GetMasterAccount_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_GetMasterAccount_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_GetMasterAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_GetMasterAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_OrgApi_DeleteOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Organization_DeleteOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.OrgApi/DeleteOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/DeleteOrg")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_OrgApi_DeleteOrg_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Organization_DeleteOrg_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_OrgApi_DeleteOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Organization_DeleteOrg_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -745,41 +745,41 @@ func RegisterOrgApiHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 }
 
 var (
-	pattern_OrgApi_CreateOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
+	pattern_Organization_CreateOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
 
-	pattern_OrgApi_SendVerification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "sendVerification"))
+	pattern_Organization_SendVerification_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "sendVerification"))
 
-	pattern_OrgApi_VerifyOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "verify"))
+	pattern_Organization_VerifyOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, "verify"))
 
-	pattern_OrgApi_GetOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
+	pattern_Organization_GetOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
 
-	pattern_OrgApi_UpdateMetadata_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "metadata"}, ""))
+	pattern_Organization_UpdateMetadata_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "metadata"}, ""))
 
-	pattern_OrgApi_UpdatePassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "passwd"}, ""))
+	pattern_Organization_UpdatePassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "passwd"}, ""))
 
-	pattern_OrgApi_ListMasterAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "masteraccts"}, ""))
+	pattern_Organization_ListMasterAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"org", "v1", "masteraccts"}, ""))
 
-	pattern_OrgApi_GetMasterAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"org", "v1", "masteraccts", "id"}, ""))
+	pattern_Organization_GetMasterAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"org", "v1", "masteraccts", "id"}, ""))
 
-	pattern_OrgApi_DeleteOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
+	pattern_Organization_DeleteOrg_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"org", "v1"}, ""))
 )
 
 var (
-	forward_OrgApi_CreateOrg_0 = runtime.ForwardResponseMessage
+	forward_Organization_CreateOrg_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_SendVerification_0 = runtime.ForwardResponseMessage
+	forward_Organization_SendVerification_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_VerifyOrg_0 = runtime.ForwardResponseMessage
+	forward_Organization_VerifyOrg_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_GetOrg_0 = runtime.ForwardResponseMessage
+	forward_Organization_GetOrg_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_UpdateMetadata_0 = runtime.ForwardResponseMessage
+	forward_Organization_UpdateMetadata_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_UpdatePassword_0 = runtime.ForwardResponseMessage
+	forward_Organization_UpdatePassword_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_ListMasterAccounts_0 = runtime.ForwardResponseMessage
+	forward_Organization_ListMasterAccounts_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_GetMasterAccount_0 = runtime.ForwardResponseMessage
+	forward_Organization_GetMasterAccount_0 = runtime.ForwardResponseMessage
 
-	forward_OrgApi_DeleteOrg_0 = runtime.ForwardResponseMessage
+	forward_Organization_DeleteOrg_0 = runtime.ForwardResponseMessage
 )
