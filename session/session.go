@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"time"
 )
 
 const (
@@ -106,7 +107,8 @@ func (s *Session) AccessToken() (string, error) {
 			return token, err
 		}
 	default:
-		resp, err = http.PostForm(s.LoginUrl(), form)
+		httpClient := &http.Client{Timeout: 60 * time.Second}
+		resp, err = httpClient.PostForm(s.LoginUrl(), form)
 		if err != nil {
 			return token, err
 		}
