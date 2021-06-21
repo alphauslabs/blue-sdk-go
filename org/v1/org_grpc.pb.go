@@ -4,8 +4,8 @@ package org
 
 import (
 	context "context"
-	aws "github.com/alphauslabs/blue-sdk-go/types/aws"
-	ripple "github.com/alphauslabs/blue-sdk-go/types/ripple"
+	aws "github.com/alphauslabs/blue-sdk-go/api/aws"
+	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"

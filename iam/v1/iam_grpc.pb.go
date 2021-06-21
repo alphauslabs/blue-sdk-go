@@ -4,7 +4,7 @@ package iam
 
 import (
 	context "context"
-	types "github.com/alphauslabs/blue-sdk-go/types"
+	api "github.com/alphauslabs/blue-sdk-go/api"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -21,14 +21,14 @@ const _ = grpc.SupportPackageIsVersion7
 type IamClient interface {
 	// Gets user information about the caller. This call includes all of the user metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*types.User, error)
+	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Lists all subusers.
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	// Gets subuser information. This call includes all of the subuser metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
-	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*types.User, error)
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error)
 }
 
 type iamClient struct {
@@ -39,8 +39,8 @@ func NewIamClient(cc grpc.ClientConnInterface) IamClient {
 	return &iamClient{cc}
 }
 
-func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*types.User, error) {
-	out := new(types.User)
+func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*api.User, error) {
+	out := new(api.User)
 	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/WhoAmI", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -57,8 +57,8 @@ func (c *iamClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ..
 	return out, nil
 }
 
-func (c *iamClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*types.User, error) {
-	out := new(types.User)
+func (c *iamClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error) {
+	out := new(api.User)
 	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -72,14 +72,14 @@ func (c *iamClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grp
 type IamServer interface {
 	// Gets user information about the caller. This call includes all of the user metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	WhoAmI(context.Context, *WhoAmIRequest) (*types.User, error)
+	WhoAmI(context.Context, *WhoAmIRequest) (*api.User, error)
 	// Lists all subusers.
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	// Gets subuser information. This call includes all of the subuser metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
-	GetUser(context.Context, *GetUserRequest) (*types.User, error)
+	GetUser(context.Context, *GetUserRequest) (*api.User, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -87,13 +87,13 @@ type IamServer interface {
 type UnimplementedIamServer struct {
 }
 
-func (UnimplementedIamServer) WhoAmI(context.Context, *WhoAmIRequest) (*types.User, error) {
+func (UnimplementedIamServer) WhoAmI(context.Context, *WhoAmIRequest) (*api.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WhoAmI not implemented")
 }
 func (UnimplementedIamServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
-func (UnimplementedIamServer) GetUser(context.Context, *GetUserRequest) (*types.User, error) {
+func (UnimplementedIamServer) GetUser(context.Context, *GetUserRequest) (*api.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
