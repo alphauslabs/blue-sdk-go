@@ -1,4 +1,4 @@
-package awscost
+package cost
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 )
 
 type GrpcClient struct {
-	AwsCostClient
+	CostClient
 	conn *conn.GrpcClientConn
 }
 
@@ -22,7 +22,7 @@ type ClientOptions struct {
 	Conn *conn.GrpcClientConn
 }
 
-// NewClient returns a client connection to the 'awscost' service.
+// NewClient returns a client connection to the 'cost' service.
 func NewClient(ctx context.Context, opts ...*ClientOptions) (*GrpcClient, error) {
 	var fconn *conn.GrpcClientConn
 	var err error
@@ -32,12 +32,12 @@ func NewClient(ctx context.Context, opts ...*ClientOptions) (*GrpcClient, error)
 			fconn = opts[0].Conn
 		}
 	default:
-		fconn, err = conn.New(ctx, conn.WithTargetService("awscost"))
+		fconn, err = conn.New(ctx, conn.WithTargetService("cost"))
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	cc := NewAwsCostClient(fconn)
+	cc := NewCostClient(fconn)
 	return &GrpcClient{cc, fconn}, nil
 }
