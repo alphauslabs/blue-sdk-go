@@ -130,7 +130,7 @@ func RegisterGlobalConfigHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.globalconfig.v1.GlobalConfig/StreamReadWaveConfig")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.globalconfig.v1.GlobalConfig/StreamReadWaveConfig", runtime.WithHTTPPathPattern("/wave/v1/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -150,7 +150,7 @@ func RegisterGlobalConfigHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.globalconfig.v1.GlobalConfig/StreamReadRippleConfig")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.globalconfig.v1.GlobalConfig/StreamReadRippleConfig", runtime.WithHTTPPathPattern("/ripple/v1/config"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

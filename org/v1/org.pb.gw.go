@@ -319,7 +319,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/CreateOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/CreateOrg", runtime.WithHTTPPathPattern("/org/v1"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -342,7 +342,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/SendVerification")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/SendVerification", runtime.WithHTTPPathPattern("/org/v1:sendVerification"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -365,7 +365,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/VerifyOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/VerifyOrg", runtime.WithHTTPPathPattern("/org/v1:verify"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -388,7 +388,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetOrg", runtime.WithHTTPPathPattern("/org/v1"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -411,7 +411,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdateMetadata")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdateMetadata", runtime.WithHTTPPathPattern("/org/v1/metadata"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -434,7 +434,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdatePassword")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdatePassword", runtime.WithHTTPPathPattern("/org/v1/passwd"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -457,7 +457,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/ListMasterAccounts")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/ListMasterAccounts", runtime.WithHTTPPathPattern("/org/v1/masteraccts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -480,7 +480,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetMasterAccount")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetMasterAccount", runtime.WithHTTPPathPattern("/org/v1/masteraccts/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -503,7 +503,7 @@ func RegisterOrganizationHandlerServer(ctx context.Context, mux *runtime.ServeMu
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/DeleteOrg")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.org.v1.Organization/DeleteOrg", runtime.WithHTTPPathPattern("/org/v1"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -565,7 +565,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/CreateOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/CreateOrg", runtime.WithHTTPPathPattern("/org/v1"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -585,7 +585,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/SendVerification")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/SendVerification", runtime.WithHTTPPathPattern("/org/v1:sendVerification"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -605,7 +605,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/VerifyOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/VerifyOrg", runtime.WithHTTPPathPattern("/org/v1:verify"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -625,7 +625,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetOrg", runtime.WithHTTPPathPattern("/org/v1"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -645,7 +645,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdateMetadata")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdateMetadata", runtime.WithHTTPPathPattern("/org/v1/metadata"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -665,7 +665,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdatePassword")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/UpdatePassword", runtime.WithHTTPPathPattern("/org/v1/passwd"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -685,7 +685,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/ListMasterAccounts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/ListMasterAccounts", runtime.WithHTTPPathPattern("/org/v1/masteraccts"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -705,7 +705,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetMasterAccount")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/GetMasterAccount", runtime.WithHTTPPathPattern("/org/v1/masteraccts/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -725,7 +725,7 @@ func RegisterOrganizationHandlerClient(ctx context.Context, mux *runtime.ServeMu
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/DeleteOrg")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.org.v1.Organization/DeleteOrg", runtime.WithHTTPPathPattern("/org/v1"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
