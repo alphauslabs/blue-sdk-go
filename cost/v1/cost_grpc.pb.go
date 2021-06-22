@@ -20,7 +20,8 @@ const _ = grpc.SupportPackageIsVersion7
 type CostClient interface {
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned.
+	// not set, month-to-date (current month) will be returned. Date range parameters
+	// are 'start_time' and 'end_time, with the 'yyyymmdd' format.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
 	// Reads the usage-based cost details of a billing group. At the moment, the supported
 	// {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
@@ -253,7 +254,8 @@ func (x *costReadAccountAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 type CostServer interface {
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned.
+	// not set, month-to-date (current month) will be returned. Date range parameters
+	// are 'start_time' and 'end_time, with the 'yyyymmdd' format.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
 	// Reads the usage-based cost details of a billing group. At the moment, the supported
 	// {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
