@@ -131,7 +131,7 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/WhoAmI", runtime.WithHTTPPathPattern("/iam/v1/whoami"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/WhoAmI")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -154,7 +154,7 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/ListUsers", runtime.WithHTTPPathPattern("/iam/v1/users"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/ListUsers")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -177,7 +177,7 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/GetUser", runtime.WithHTTPPathPattern("/iam/v1/users/{name}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/GetUser")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -239,7 +239,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/WhoAmI", runtime.WithHTTPPathPattern("/iam/v1/whoami"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/WhoAmI")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -259,7 +259,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/ListUsers", runtime.WithHTTPPathPattern("/iam/v1/users"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/ListUsers")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -279,7 +279,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/GetUser", runtime.WithHTTPPathPattern("/iam/v1/users/{name}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/GetUser")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

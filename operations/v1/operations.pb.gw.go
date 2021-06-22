@@ -251,7 +251,7 @@ func RegisterOperationsHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/ListOperations", runtime.WithHTTPPathPattern("/ops/v1"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/ListOperations")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -274,7 +274,7 @@ func RegisterOperationsHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/GetOperation", runtime.WithHTTPPathPattern("/ops/v1/{name}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/GetOperation")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -297,7 +297,7 @@ func RegisterOperationsHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/DeleteOperation", runtime.WithHTTPPathPattern("/ops/v1/{name}"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/DeleteOperation")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -320,7 +320,7 @@ func RegisterOperationsHandlerServer(ctx context.Context, mux *runtime.ServeMux,
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/CancelOperation", runtime.WithHTTPPathPattern("/ops/v1/{name}:cancel"))
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.operations.v1.Operations/CancelOperation")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -382,7 +382,7 @@ func RegisterOperationsHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/ListOperations", runtime.WithHTTPPathPattern("/ops/v1"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/ListOperations")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -402,7 +402,7 @@ func RegisterOperationsHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/GetOperation", runtime.WithHTTPPathPattern("/ops/v1/{name}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/GetOperation")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -422,7 +422,7 @@ func RegisterOperationsHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/DeleteOperation", runtime.WithHTTPPathPattern("/ops/v1/{name}"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/DeleteOperation")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -442,7 +442,7 @@ func RegisterOperationsHandlerClient(ctx context.Context, mux *runtime.ServeMux,
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/CancelOperation", runtime.WithHTTPPathPattern("/ops/v1/{name}:cancel"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.operations.v1.Operations/CancelOperation")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return

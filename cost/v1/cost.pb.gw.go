@@ -416,7 +416,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadCosts", runtime.WithHTTPPathPattern("/v1/{vendor}/costs:readCosts"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -436,7 +436,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadBillingGroupCosts", runtime.WithHTTPPathPattern("/v1/{vendor}/billinggroups/{name}/costs:readBillingGroupCosts"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadBillingGroupCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -456,7 +456,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadAccountCosts", runtime.WithHTTPPathPattern("/v1/{vendor}/accounts/{name}/costs:readAccountCosts"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadAccountCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -476,7 +476,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadAdjustments", runtime.WithHTTPPathPattern("/v1/{vendor}/adjustments:readAdjustments"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadAdjustments")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -496,7 +496,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadBillingGroupAdjustments", runtime.WithHTTPPathPattern("/v1/{vendor}/billinggroups/{name}/adjustments:readBillingGroupAdjustments"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadBillingGroupAdjustments")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -516,7 +516,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadAccountAdjustments", runtime.WithHTTPPathPattern("/v1/{vendor}/accounts/{name}/adjustments:readAccountAdjustments"))
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadAccountAdjustments")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
