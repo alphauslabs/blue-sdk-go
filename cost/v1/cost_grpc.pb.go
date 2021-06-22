@@ -19,25 +19,31 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
-	// If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
+	// not set, month-to-date (current month) will be returned.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
-	// Reads the usage-based cost details of a billing group. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based cost details of a billing group. At the moment, the supported
+	// {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadBillingGroupCosts(ctx context.Context, in *ReadBillingGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupCostsClient, error)
-	// Reads the usage-based cost details of an account. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based cost details of an account. At the moment, the supported
+	// {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadAccountCosts(ctx context.Context, in *ReadAccountCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountCostsClient, error)
-	// Reads the non-usage-based details of an organization (Ripple) or company (Wave). This API covers
-	// non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime
+	// Reads the non-usage-based details of an organization (Ripple) or company (Wave).
+	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
+	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error)
 	// Reads the non-usage-based details of a billing group. This API covers non-usage-based
-	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment,
+	// the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadBillingGroupAdjustments(ctx context.Context, in *ReadBillingGroupAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupAdjustmentsClient, error)
 	// Reads the non-usaged-based details of an AWS account. This API covers non-usage-based
-	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment,
+	// the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadAccountAdjustments(ctx context.Context, in *ReadAccountAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAccountAdjustmentsClient, error)
 }
 
@@ -246,25 +252,31 @@ func (x *costReadAccountAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 // for forward compatibility
 type CostServer interface {
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
-	// If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
+	// not set, month-to-date (current month) will be returned.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
-	// Reads the usage-based cost details of a billing group. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based cost details of a billing group. At the moment, the supported
+	// {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadBillingGroupCosts(*ReadBillingGroupCostsRequest, Cost_ReadBillingGroupCostsServer) error
-	// Reads the usage-based cost details of an account. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based cost details of an account. At the moment, the supported
+	// {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadAccountCosts(*ReadAccountCostsRequest, Cost_ReadAccountCostsServer) error
-	// Reads the non-usage-based details of an organization (Ripple) or company (Wave). This API covers
-	// non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime
+	// Reads the non-usage-based details of an organization (Ripple) or company (Wave).
+	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
+	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(*ReadAdjustmentsRequest, Cost_ReadAdjustmentsServer) error
 	// Reads the non-usage-based details of a billing group. This API covers non-usage-based
-	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment,
+	// the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadBillingGroupAdjustments(*ReadBillingGroupAdjustmentsRequest, Cost_ReadBillingGroupAdjustmentsServer) error
 	// Reads the non-usaged-based details of an AWS account. This API covers non-usage-based
-	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. If datetime range
-	// parameters are not set, month-to-date (current month) will be returned.
+	// adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment,
+	// the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
 	ReadAccountAdjustments(*ReadAccountAdjustmentsRequest, Cost_ReadAccountAdjustmentsServer) error
 	mustEmbedUnimplementedCostServer()
 }
