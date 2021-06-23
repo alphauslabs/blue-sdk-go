@@ -30,9 +30,9 @@ type IamClient interface {
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error)
-	// Lists all IP filters. At the moment, this API is only for root users.
+	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error)
-	// Deletes an IP filter item. At the moment, this API is only for root users.
+	// Deletes an IP filter item. At the moment, this API is only available for root users.
 	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -103,9 +103,9 @@ type IamServer interface {
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(context.Context, *GetUserRequest) (*api.User, error)
-	// Lists all IP filters. At the moment, this API is only for root users.
+	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error)
-	// Deletes an IP filter item. At the moment, this API is only for root users.
+	// Deletes an IP filter item. At the moment, this API is only available for root users.
 	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIamServer()
 }
