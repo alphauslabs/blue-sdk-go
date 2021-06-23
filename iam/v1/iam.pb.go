@@ -378,7 +378,7 @@ type CreateIpFilterRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Required. The IP input to filter, either blacklist or whitelist. Should be in
-	// CIDR format, i.e. 1.2.3.4/32
+	// CIDR format (i.e. 1.2.3.4/32).
 	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	// Optional. Can be 'whitelist' or 'blacklist'. Defaults to 'blacklist' if empty.
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
