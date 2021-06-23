@@ -32,6 +32,8 @@ type IamClient interface {
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error)
+	// Creates an IP filter. At the moment, this API is only available for root users.
+	CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available for root users.
 	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -80,6 +82,15 @@ func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest,
 	return out, nil
 }
 
+func (c *iamClient) CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error) {
+	out := new(IpFilter)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/CreateIpFilter", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/DeleteIpFilter", in, out, opts...)
@@ -105,6 +116,8 @@ type IamServer interface {
 	GetUser(context.Context, *GetUserRequest) (*api.User, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error)
+	// Creates an IP filter. At the moment, this API is only available for root users.
+	CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available for root users.
 	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIamServer()
@@ -125,6 +138,9 @@ func (UnimplementedIamServer) GetUser(context.Context, *GetUserRequest) (*api.Us
 }
 func (UnimplementedIamServer) ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
+}
+func (UnimplementedIamServer) CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateIpFilter not implemented")
 }
 func (UnimplementedIamServer) DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteIpFilter not implemented")
@@ -214,6 +230,24 @@ func _Iam_ListIpFilters_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_CreateIpFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateIpFilterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).CreateIpFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/CreateIpFilter",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).CreateIpFilter(ctx, req.(*CreateIpFilterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_DeleteIpFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteIpFilterRequest)
 	if err := dec(in); err != nil {
@@ -254,6 +288,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListIpFilters",
 			Handler:    _Iam_ListIpFilters_Handler,
+		},
+		{
+			MethodName: "CreateIpFilter",
+			Handler:    _Iam_CreateIpFilter_Handler,
 		},
 		{
 			MethodName: "DeleteIpFilter",
