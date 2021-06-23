@@ -8,6 +8,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -29,6 +30,10 @@ type IamClient interface {
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error)
+	// Lists all IP filters. At the moment, this API is only for root users.
+	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error)
+	// Deletes an IP filter item. At the moment, this API is only for root users.
+	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type iamClient struct {
@@ -66,6 +71,24 @@ func (c *iamClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grp
 	return out, nil
 }
 
+func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error) {
+	out := new(ListIpFiltersResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListIpFilters", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/DeleteIpFilter", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IamServer is the server API for Iam service.
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
@@ -80,6 +103,10 @@ type IamServer interface {
 	// If the {name} parameter is 'me' or '-', returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(context.Context, *GetUserRequest) (*api.User, error)
+	// Lists all IP filters. At the moment, this API is only for root users.
+	ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error)
+	// Deletes an IP filter item. At the moment, this API is only for root users.
+	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -95,6 +122,12 @@ func (UnimplementedIamServer) ListUsers(context.Context, *ListUsersRequest) (*Li
 }
 func (UnimplementedIamServer) GetUser(context.Context, *GetUserRequest) (*api.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedIamServer) ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
+}
+func (UnimplementedIamServer) DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteIpFilter not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -163,6 +196,42 @@ func _Iam_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_ListIpFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListIpFiltersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).ListIpFilters(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/ListIpFilters",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).ListIpFilters(ctx, req.(*ListIpFiltersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_DeleteIpFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteIpFilterRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).DeleteIpFilter(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/DeleteIpFilter",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).DeleteIpFilter(ctx, req.(*DeleteIpFilterRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Iam_ServiceDesc is the grpc.ServiceDesc for Iam service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -181,6 +250,14 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _Iam_GetUser_Handler,
+		},
+		{
+			MethodName: "ListIpFilters",
+			Handler:    _Iam_ListIpFilters_Handler,
+		},
+		{
+			MethodName: "DeleteIpFilter",
+			Handler:    _Iam_DeleteIpFilter_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
