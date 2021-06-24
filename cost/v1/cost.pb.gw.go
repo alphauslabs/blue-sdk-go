@@ -31,8 +31,8 @@ var _ = runtime.String
 var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
-func request_Cost_ListMasterAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListMasterAccountsRequest
+func request_Cost_ListManagementAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListManagementAccountsRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -52,13 +52,13 @@ func request_Cost_ListMasterAccounts_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	msg, err := client.ListMasterAccounts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.ListManagementAccounts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Cost_ListMasterAccounts_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListMasterAccountsRequest
+func local_request_Cost_ListManagementAccounts_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListManagementAccountsRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -78,13 +78,13 @@ func local_request_Cost_ListMasterAccounts_0(ctx context.Context, marshaler runt
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	msg, err := server.ListMasterAccounts(ctx, &protoReq)
+	msg, err := server.ListManagementAccounts(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_Cost_GetMasterAccount_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMasterAccountRequest
+func request_Cost_GetManagementAccount_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetManagementAccountRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -114,13 +114,13 @@ func request_Cost_GetMasterAccount_0(ctx context.Context, marshaler runtime.Mars
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
 
-	msg, err := client.GetMasterAccount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetManagementAccount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Cost_GetMasterAccount_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetMasterAccountRequest
+func local_request_Cost_GetManagementAccount_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetManagementAccountRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -150,7 +150,7 @@ func local_request_Cost_GetMasterAccount_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
 
-	msg, err := server.GetMasterAccount(ctx, &protoReq)
+	msg, err := server.GetManagementAccount(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -471,18 +471,18 @@ func request_Cost_ReadAccountAdjustments_0(ctx context.Context, marshaler runtim
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterCostHandlerFromEndpoint instead.
 func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, server CostServer) error {
 
-	mux.Handle("GET", pattern_Cost_ListMasterAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cost_ListManagementAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListMasterAccounts")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListManagementAccounts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Cost_ListMasterAccounts_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Cost_ListManagementAccounts_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -490,22 +490,22 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 			return
 		}
 
-		forward_Cost_ListMasterAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cost_ListManagementAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Cost_GetMasterAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cost_GetManagementAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetMasterAccount")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetManagementAccount")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Cost_GetMasterAccount_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Cost_GetManagementAccount_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -513,7 +513,7 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 			return
 		}
 
-		forward_Cost_GetMasterAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cost_GetManagementAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -600,43 +600,43 @@ func RegisterCostHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.
 // "CostClient" to call the correct interceptors.
 func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CostClient) error {
 
-	mux.Handle("GET", pattern_Cost_ListMasterAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cost_ListManagementAccounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListMasterAccounts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListManagementAccounts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cost_ListMasterAccounts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cost_ListManagementAccounts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cost_ListMasterAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cost_ListManagementAccounts_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Cost_GetMasterAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cost_GetManagementAccount_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetMasterAccount")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetManagementAccount")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cost_GetMasterAccount_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cost_GetManagementAccount_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cost_GetMasterAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cost_GetManagementAccount_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -764,9 +764,9 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 }
 
 var (
-	pattern_Cost_ListMasterAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "masteraccts"}, ""))
+	pattern_Cost_ListManagementAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "mgtaccts"}, ""))
 
-	pattern_Cost_GetMasterAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "masteraccts", "id"}, ""))
+	pattern_Cost_GetManagementAccount_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "mgtaccts", "id"}, ""))
 
 	pattern_Cost_ReadCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "costs"}, "read"))
 
@@ -782,9 +782,9 @@ var (
 )
 
 var (
-	forward_Cost_ListMasterAccounts_0 = runtime.ForwardResponseMessage
+	forward_Cost_ListManagementAccounts_0 = runtime.ForwardResponseMessage
 
-	forward_Cost_GetMasterAccount_0 = runtime.ForwardResponseMessage
+	forward_Cost_GetManagementAccount_0 = runtime.ForwardResponseMessage
 
 	forward_Cost_ReadCosts_0 = runtime.ForwardResponseStream
 

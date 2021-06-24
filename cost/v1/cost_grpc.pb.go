@@ -19,12 +19,12 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
-	// Lists master (or billing, payer) accounts. Only applies to the 'aws' vendor at the moment.
-	ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error)
-	// Get master (or billing, payer) account. This call includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// Only applies to the 'aws' vendor at the moment.
-	GetMasterAccount(ctx context.Context, in *GetMasterAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
+	// Lists management accounts. Only applies to the 'aws' vendor at the moment.
+	ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (*ListManagementAccountsResponse, error)
+	// Get management account. This call includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported
+	// attributes. Only applies to the 'aws' vendor at the moment.
+	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -63,18 +63,18 @@ func NewCostClient(cc grpc.ClientConnInterface) CostClient {
 	return &costClient{cc}
 }
 
-func (c *costClient) ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error) {
-	out := new(ListMasterAccountsResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListMasterAccounts", in, out, opts...)
+func (c *costClient) ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (*ListManagementAccountsResponse, error) {
+	out := new(ListManagementAccountsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListManagementAccounts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *costClient) GetMasterAccount(ctx context.Context, in *GetMasterAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
+func (c *costClient) GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
 	out := new(aws.Account)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetMasterAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetManagementAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -277,12 +277,12 @@ func (x *costReadAccountAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
 type CostServer interface {
-	// Lists master (or billing, payer) accounts. Only applies to the 'aws' vendor at the moment.
-	ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error)
-	// Get master (or billing, payer) account. This call includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// Only applies to the 'aws' vendor at the moment.
-	GetMasterAccount(context.Context, *GetMasterAccountRequest) (*aws.Account, error)
+	// Lists management accounts. Only applies to the 'aws' vendor at the moment.
+	ListManagementAccounts(context.Context, *ListManagementAccountsRequest) (*ListManagementAccountsResponse, error)
+	// Get management account. This call includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported
+	// attributes. Only applies to the 'aws' vendor at the moment.
+	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -318,11 +318,11 @@ type CostServer interface {
 type UnimplementedCostServer struct {
 }
 
-func (UnimplementedCostServer) ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMasterAccounts not implemented")
+func (UnimplementedCostServer) ListManagementAccounts(context.Context, *ListManagementAccountsRequest) (*ListManagementAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListManagementAccounts not implemented")
 }
-func (UnimplementedCostServer) GetMasterAccount(context.Context, *GetMasterAccountRequest) (*aws.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMasterAccount not implemented")
+func (UnimplementedCostServer) GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetManagementAccount not implemented")
 }
 func (UnimplementedCostServer) ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
@@ -355,38 +355,38 @@ func RegisterCostServer(s grpc.ServiceRegistrar, srv CostServer) {
 	s.RegisterService(&Cost_ServiceDesc, srv)
 }
 
-func _Cost_ListMasterAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMasterAccountsRequest)
+func _Cost_ListManagementAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListManagementAccountsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).ListMasterAccounts(ctx, in)
+		return srv.(CostServer).ListManagementAccounts(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/ListMasterAccounts",
+		FullMethod: "/blueapi.cost.v1.Cost/ListManagementAccounts",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).ListMasterAccounts(ctx, req.(*ListMasterAccountsRequest))
+		return srv.(CostServer).ListManagementAccounts(ctx, req.(*ListManagementAccountsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_GetMasterAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMasterAccountRequest)
+func _Cost_GetManagementAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetManagementAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).GetMasterAccount(ctx, in)
+		return srv.(CostServer).GetManagementAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/GetMasterAccount",
+		FullMethod: "/blueapi.cost.v1.Cost/GetManagementAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetMasterAccount(ctx, req.(*GetMasterAccountRequest))
+		return srv.(CostServer).GetManagementAccount(ctx, req.(*GetManagementAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -525,12 +525,12 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CostServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListMasterAccounts",
-			Handler:    _Cost_ListMasterAccounts_Handler,
+			MethodName: "ListManagementAccounts",
+			Handler:    _Cost_ListManagementAccounts_Handler,
 		},
 		{
-			MethodName: "GetMasterAccount",
-			Handler:    _Cost_GetMasterAccount_Handler,
+			MethodName: "GetManagementAccount",
+			Handler:    _Cost_GetManagementAccount_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
