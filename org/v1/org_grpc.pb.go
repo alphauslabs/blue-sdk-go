@@ -4,7 +4,6 @@ package org
 
 import (
 	context "context"
-	aws "github.com/alphauslabs/blue-sdk-go/api/aws"
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -36,11 +35,6 @@ type OrganizationClient interface {
 	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Updates the organization password.
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*ripple.Org, error)
-	// Lists master accounts that belongs to the caller's organization.
-	ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error)
-	// Get master account. This call includes all of the account's metadata. See
-	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	GetMasterAccount(ctx context.Context, in *GetMasterAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Deletes the organization.
 	DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -107,24 +101,6 @@ func (c *organizationClient) UpdatePassword(ctx context.Context, in *UpdatePassw
 	return out, nil
 }
 
-func (c *organizationClient) ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error) {
-	out := new(ListMasterAccountsResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Organization/ListMasterAccounts", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *organizationClient) GetMasterAccount(ctx context.Context, in *GetMasterAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
-	out := new(aws.Account)
-	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Organization/GetMasterAccount", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *organizationClient) DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Organization/DeleteOrg", in, out, opts...)
@@ -153,11 +129,6 @@ type OrganizationServer interface {
 	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error)
 	// Updates the organization password.
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error)
-	// Lists master accounts that belongs to the caller's organization.
-	ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error)
-	// Get master account. This call includes all of the account's metadata. See
-	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	GetMasterAccount(context.Context, *GetMasterAccountRequest) (*aws.Account, error)
 	// Deletes the organization.
 	DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedOrganizationServer()
@@ -184,12 +155,6 @@ func (UnimplementedOrganizationServer) UpdateMetadata(context.Context, *UpdateMe
 }
 func (UnimplementedOrganizationServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
-}
-func (UnimplementedOrganizationServer) ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListMasterAccounts not implemented")
-}
-func (UnimplementedOrganizationServer) GetMasterAccount(context.Context, *GetMasterAccountRequest) (*aws.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMasterAccount not implemented")
 }
 func (UnimplementedOrganizationServer) DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrg not implemented")
@@ -315,42 +280,6 @@ func _Organization_UpdatePassword_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Organization_ListMasterAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListMasterAccountsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrganizationServer).ListMasterAccounts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.org.v1.Organization/ListMasterAccounts",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrganizationServer).ListMasterAccounts(ctx, req.(*ListMasterAccountsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Organization_GetMasterAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMasterAccountRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(OrganizationServer).GetMasterAccount(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.org.v1.Organization/GetMasterAccount",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OrganizationServer).GetMasterAccount(ctx, req.(*GetMasterAccountRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Organization_DeleteOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteOrgRequest)
 	if err := dec(in); err != nil {
@@ -399,14 +328,6 @@ var Organization_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdatePassword",
 			Handler:    _Organization_UpdatePassword_Handler,
-		},
-		{
-			MethodName: "ListMasterAccounts",
-			Handler:    _Organization_ListMasterAccounts_Handler,
-		},
-		{
-			MethodName: "GetMasterAccount",
-			Handler:    _Organization_GetMasterAccount_Handler,
 		},
 		{
 			MethodName: "DeleteOrg",

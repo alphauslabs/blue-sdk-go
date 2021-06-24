@@ -4,6 +4,7 @@ package cost
 
 import (
 	context "context"
+	aws "github.com/alphauslabs/blue-sdk-go/api/aws"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -18,6 +19,12 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
+	// Lists master (or billing, payer) accounts. Only applies to the 'aws' vendor at the moment.
+	ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error)
+	// Get master (or billing, payer) account. This call includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// Only applies to the 'aws' vendor at the moment.
+	GetMasterAccount(ctx context.Context, in *GetMasterAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -54,6 +61,24 @@ type costClient struct {
 
 func NewCostClient(cc grpc.ClientConnInterface) CostClient {
 	return &costClient{cc}
+}
+
+func (c *costClient) ListMasterAccounts(ctx context.Context, in *ListMasterAccountsRequest, opts ...grpc.CallOption) (*ListMasterAccountsResponse, error) {
+	out := new(ListMasterAccountsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListMasterAccounts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) GetMasterAccount(ctx context.Context, in *GetMasterAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
+	out := new(aws.Account)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetMasterAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
@@ -252,6 +277,12 @@ func (x *costReadAccountAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
 type CostServer interface {
+	// Lists master (or billing, payer) accounts. Only applies to the 'aws' vendor at the moment.
+	ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error)
+	// Get master (or billing, payer) account. This call includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// Only applies to the 'aws' vendor at the moment.
+	GetMasterAccount(context.Context, *GetMasterAccountRequest) (*aws.Account, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -287,6 +318,12 @@ type CostServer interface {
 type UnimplementedCostServer struct {
 }
 
+func (UnimplementedCostServer) ListMasterAccounts(context.Context, *ListMasterAccountsRequest) (*ListMasterAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListMasterAccounts not implemented")
+}
+func (UnimplementedCostServer) GetMasterAccount(context.Context, *GetMasterAccountRequest) (*aws.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMasterAccount not implemented")
+}
 func (UnimplementedCostServer) ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
 }
@@ -316,6 +353,42 @@ type UnsafeCostServer interface {
 
 func RegisterCostServer(s grpc.ServiceRegistrar, srv CostServer) {
 	s.RegisterService(&Cost_ServiceDesc, srv)
+}
+
+func _Cost_ListMasterAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListMasterAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).ListMasterAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/ListMasterAccounts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).ListMasterAccounts(ctx, req.(*ListMasterAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_GetMasterAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMasterAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetMasterAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetMasterAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetMasterAccount(ctx, req.(*GetMasterAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Cost_ReadCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -450,7 +523,16 @@ func (x *costReadAccountAdjustmentsServer) Send(m *AdjustmentItem) error {
 var Cost_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.cost.v1.Cost",
 	HandlerType: (*CostServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListMasterAccounts",
+			Handler:    _Cost_ListMasterAccounts_Handler,
+		},
+		{
+			MethodName: "GetMasterAccount",
+			Handler:    _Cost_GetMasterAccount_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ReadCosts",
