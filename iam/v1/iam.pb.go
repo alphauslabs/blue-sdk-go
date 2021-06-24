@@ -203,7 +203,9 @@ type IpFilter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Ip filter id. Note that this id is transcient and is not fixed.
+	// Ip filter item id. Note that this id is transcient and is not fixed. However,
+	// you can use any of this id's permutations to endpoints that accept this id
+	// without issues, such as the 'DELETE:/iam/vx/ipfilters/{id}' endpoint.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Can be 'global', 'rootuser', or 'subuser'.
 	Scope string `protobuf:"bytes,2,opt,name=scope,proto3" json:"scope,omitempty"`
