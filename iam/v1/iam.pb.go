@@ -207,9 +207,9 @@ type IpFilter struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Can be 'global', 'rootuser', or 'subuser'.
 	Scope string `protobuf:"bytes,2,opt,name=scope,proto3" json:"scope,omitempty"`
-	// The target of the filter. If global scope, this could be the organization
-	// id or billing group id. Rootuser id for rootuser scope, and subuser id
-	// for subuser scope. For subuser targets, format is 'rootuserid/subuserid'.
+	// The target of the filter. If global scope, this is usually empty.
+	// Rootuser id for rootuser scope, and subuser id for subuser scope.
+	// For subuser targets, format is 'rootuserid/subuserid'.
 	Target string `protobuf:"bytes,3,opt,name=target,proto3" json:"target,omitempty"`
 	// The type of ip filter. It could be 'whitelist' or 'blacklist'.
 	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
