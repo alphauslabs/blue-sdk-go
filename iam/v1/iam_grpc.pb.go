@@ -32,7 +32,8 @@ type IamClient interface {
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error)
-	// Creates an IP filter. At the moment, this API is only available for root users.
+	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
+	// this API is only available for root users.
 	CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available for root users.
 	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -116,7 +117,8 @@ type IamServer interface {
 	GetUser(context.Context, *GetUserRequest) (*api.User, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error)
-	// Creates an IP filter. At the moment, this API is only available for root users.
+	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
+	// this API is only available for root users.
 	CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available for root users.
 	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
