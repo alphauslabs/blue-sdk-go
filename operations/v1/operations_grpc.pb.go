@@ -4,6 +4,7 @@ package operations
 
 import (
 	context "context"
+	api "github.com/alphauslabs/blue-sdk-go/api"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,39 +20,30 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type OperationsClient interface {
-	// Lists operations that match the specified filter in the request. If the
-	// server doesn't support this method, it returns `UNIMPLEMENTED`.
-	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (*ListOperationsResponse, error)
-	// Gets the latest state of a long-running operation.  Clients can use this
-	// method to poll the operation result at intervals as recommended by the API
-	// service.
-	GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*Operation, error)
-	// Deletes a long-running operation. This method indicates that the client is
-	// no longer interested in the operation result. It does not cancel the
-	// operation. If the server doesn't support this method, it returns
-	// `google.rpc.Code.UNIMPLEMENTED`.
+	// Lists long-running operations.
+	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (Operations_ListOperationsClient, error)
+	// Gets the latest state of a long-running operation.  Clients can use this method
+	// to poll the operation result at intervals as recommended by the API service.
+	GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// Deletes a long-running operation. This method indicates that the client is no
+	// longer interested in the operation result. It does not cancel the operation.
 	DeleteOperation(ctx context.Context, in *DeleteOperationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Starts asynchronous cancellation on a long-running operation.  The server
-	// makes a best effort to cancel the operation, but success is not
-	// guaranteed.  If the server doesn't support this method, it returns
-	// `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-	// [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
-	// other methods to check whether the cancellation succeeded or whether the
-	// operation completed despite cancellation. On successful cancellation,
-	// the operation is not deleted; instead, it becomes an operation with
-	// an [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
-	// corresponding to `Code.CANCELLED`.
+	// Starts asynchronous cancellation on a long-running operation. The server makes
+	// a best effort to cancel the operation, but success is not guaranteed. On successful
+	// cancellation, the operation is not deleted; instead, it becomes an operation with
+	// a value of [google.rpc.Status.code][google.rpc.Status.code] 1, corresponding
+	// to `Code.CANCELLED`.
 	CancelOperation(ctx context.Context, in *CancelOperationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Waits for the specified long-running operation until it is done or reaches
-	// at most a specified timeout, returning the latest state.  If the operation
-	// is already done, the latest state is immediately returned.  If the timeout
+	// at most a specified timeout, returning the latest state. If the operation
+	// is already done, the latest state is immediately returned. If the timeout
 	// specified is greater than the default HTTP/RPC timeout, the HTTP/RPC
-	// timeout is used.  If the server does not support this method, it returns
+	// timeout is used. If the server does not support this method, it returns
 	// `google.rpc.Code.UNIMPLEMENTED`.
-	// Note that this method is on a best-effort basis.  It may return the latest
+	// Note that this method is on a best-effort basis. It may return the latest
 	// state before the specified timeout (including immediately), meaning even an
 	// immediate response is no guarantee that the operation is done.
-	WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*Operation, error)
+	WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*api.Operation, error)
 }
 
 type operationsClient struct {
@@ -62,17 +54,40 @@ func NewOperationsClient(cc grpc.ClientConnInterface) OperationsClient {
 	return &operationsClient{cc}
 }
 
-func (c *operationsClient) ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (*ListOperationsResponse, error) {
-	out := new(ListOperationsResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.operations.v1.Operations/ListOperations", in, out, opts...)
+func (c *operationsClient) ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (Operations_ListOperationsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Operations_ServiceDesc.Streams[0], "/blueapi.operations.v1.Operations/ListOperations", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &operationsListOperationsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
 }
 
-func (c *operationsClient) GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*Operation, error) {
-	out := new(Operation)
+type Operations_ListOperationsClient interface {
+	Recv() (*api.Operation, error)
+	grpc.ClientStream
+}
+
+type operationsListOperationsClient struct {
+	grpc.ClientStream
+}
+
+func (x *operationsListOperationsClient) Recv() (*api.Operation, error) {
+	m := new(api.Operation)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *operationsClient) GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
 	err := c.cc.Invoke(ctx, "/blueapi.operations.v1.Operations/GetOperation", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -98,8 +113,8 @@ func (c *operationsClient) CancelOperation(ctx context.Context, in *CancelOperat
 	return out, nil
 }
 
-func (c *operationsClient) WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*Operation, error) {
-	out := new(Operation)
+func (c *operationsClient) WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
 	err := c.cc.Invoke(ctx, "/blueapi.operations.v1.Operations/WaitOperation", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -111,39 +126,30 @@ func (c *operationsClient) WaitOperation(ctx context.Context, in *WaitOperationR
 // All implementations must embed UnimplementedOperationsServer
 // for forward compatibility
 type OperationsServer interface {
-	// Lists operations that match the specified filter in the request. If the
-	// server doesn't support this method, it returns `UNIMPLEMENTED`.
-	ListOperations(context.Context, *ListOperationsRequest) (*ListOperationsResponse, error)
-	// Gets the latest state of a long-running operation.  Clients can use this
-	// method to poll the operation result at intervals as recommended by the API
-	// service.
-	GetOperation(context.Context, *GetOperationRequest) (*Operation, error)
-	// Deletes a long-running operation. This method indicates that the client is
-	// no longer interested in the operation result. It does not cancel the
-	// operation. If the server doesn't support this method, it returns
-	// `google.rpc.Code.UNIMPLEMENTED`.
+	// Lists long-running operations.
+	ListOperations(*ListOperationsRequest, Operations_ListOperationsServer) error
+	// Gets the latest state of a long-running operation.  Clients can use this method
+	// to poll the operation result at intervals as recommended by the API service.
+	GetOperation(context.Context, *GetOperationRequest) (*api.Operation, error)
+	// Deletes a long-running operation. This method indicates that the client is no
+	// longer interested in the operation result. It does not cancel the operation.
 	DeleteOperation(context.Context, *DeleteOperationRequest) (*emptypb.Empty, error)
-	// Starts asynchronous cancellation on a long-running operation.  The server
-	// makes a best effort to cancel the operation, but success is not
-	// guaranteed.  If the server doesn't support this method, it returns
-	// `google.rpc.Code.UNIMPLEMENTED`.  Clients can use
-	// [Operations.GetOperation][google.longrunning.Operations.GetOperation] or
-	// other methods to check whether the cancellation succeeded or whether the
-	// operation completed despite cancellation. On successful cancellation,
-	// the operation is not deleted; instead, it becomes an operation with
-	// an [Operation.error][google.longrunning.Operation.error] value with a [google.rpc.Status.code][google.rpc.Status.code] of 1,
-	// corresponding to `Code.CANCELLED`.
+	// Starts asynchronous cancellation on a long-running operation. The server makes
+	// a best effort to cancel the operation, but success is not guaranteed. On successful
+	// cancellation, the operation is not deleted; instead, it becomes an operation with
+	// a value of [google.rpc.Status.code][google.rpc.Status.code] 1, corresponding
+	// to `Code.CANCELLED`.
 	CancelOperation(context.Context, *CancelOperationRequest) (*emptypb.Empty, error)
 	// Waits for the specified long-running operation until it is done or reaches
-	// at most a specified timeout, returning the latest state.  If the operation
-	// is already done, the latest state is immediately returned.  If the timeout
+	// at most a specified timeout, returning the latest state. If the operation
+	// is already done, the latest state is immediately returned. If the timeout
 	// specified is greater than the default HTTP/RPC timeout, the HTTP/RPC
-	// timeout is used.  If the server does not support this method, it returns
+	// timeout is used. If the server does not support this method, it returns
 	// `google.rpc.Code.UNIMPLEMENTED`.
-	// Note that this method is on a best-effort basis.  It may return the latest
+	// Note that this method is on a best-effort basis. It may return the latest
 	// state before the specified timeout (including immediately), meaning even an
 	// immediate response is no guarantee that the operation is done.
-	WaitOperation(context.Context, *WaitOperationRequest) (*Operation, error)
+	WaitOperation(context.Context, *WaitOperationRequest) (*api.Operation, error)
 	mustEmbedUnimplementedOperationsServer()
 }
 
@@ -151,10 +157,10 @@ type OperationsServer interface {
 type UnimplementedOperationsServer struct {
 }
 
-func (UnimplementedOperationsServer) ListOperations(context.Context, *ListOperationsRequest) (*ListOperationsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
+func (UnimplementedOperationsServer) ListOperations(*ListOperationsRequest, Operations_ListOperationsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
 }
-func (UnimplementedOperationsServer) GetOperation(context.Context, *GetOperationRequest) (*Operation, error) {
+func (UnimplementedOperationsServer) GetOperation(context.Context, *GetOperationRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperation not implemented")
 }
 func (UnimplementedOperationsServer) DeleteOperation(context.Context, *DeleteOperationRequest) (*emptypb.Empty, error) {
@@ -163,7 +169,7 @@ func (UnimplementedOperationsServer) DeleteOperation(context.Context, *DeleteOpe
 func (UnimplementedOperationsServer) CancelOperation(context.Context, *CancelOperationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOperation not implemented")
 }
-func (UnimplementedOperationsServer) WaitOperation(context.Context, *WaitOperationRequest) (*Operation, error) {
+func (UnimplementedOperationsServer) WaitOperation(context.Context, *WaitOperationRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WaitOperation not implemented")
 }
 func (UnimplementedOperationsServer) mustEmbedUnimplementedOperationsServer() {}
@@ -179,22 +185,25 @@ func RegisterOperationsServer(s grpc.ServiceRegistrar, srv OperationsServer) {
 	s.RegisterService(&Operations_ServiceDesc, srv)
 }
 
-func _Operations_ListOperations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListOperationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Operations_ListOperations_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListOperationsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(OperationsServer).ListOperations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.operations.v1.Operations/ListOperations",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(OperationsServer).ListOperations(ctx, req.(*ListOperationsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(OperationsServer).ListOperations(m, &operationsListOperationsServer{stream})
+}
+
+type Operations_ListOperationsServer interface {
+	Send(*api.Operation) error
+	grpc.ServerStream
+}
+
+type operationsListOperationsServer struct {
+	grpc.ServerStream
+}
+
+func (x *operationsListOperationsServer) Send(m *api.Operation) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Operations_GetOperation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -277,10 +286,6 @@ var Operations_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*OperationsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListOperations",
-			Handler:    _Operations_ListOperations_Handler,
-		},
-		{
 			MethodName: "GetOperation",
 			Handler:    _Operations_GetOperation_Handler,
 		},
@@ -297,6 +302,12 @@ var Operations_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Operations_WaitOperation_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ListOperations",
+			Handler:       _Operations_ListOperations_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "operations/v1/operations.proto",
 }
