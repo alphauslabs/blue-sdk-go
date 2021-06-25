@@ -8,6 +8,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,12 +20,17 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
-	// Lists management accounts. Only applies to the 'aws' vendor at the moment.
+	// Lists AWS management accounts.
 	ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (*ListManagementAccountsResponse, error)
-	// Get management account. This call includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported
-	// attributes. Only applies to the 'aws' vendor at the moment.
+	// Get an AWS management account. This call includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
+	// Register an AWS management account. See https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
+	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
+	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
+	CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
+	// Delete an AWS management account.
+	DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -75,6 +81,24 @@ func (c *costClient) ListManagementAccounts(ctx context.Context, in *ListManagem
 func (c *costClient) GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
 	out := new(aws.Account)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetManagementAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
+	out := new(aws.Account)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateManagementAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteManagementAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -277,12 +301,17 @@ func (x *costReadAccountAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
 type CostServer interface {
-	// Lists management accounts. Only applies to the 'aws' vendor at the moment.
+	// Lists AWS management accounts.
 	ListManagementAccounts(context.Context, *ListManagementAccountsRequest) (*ListManagementAccountsResponse, error)
-	// Get management account. This call includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported
-	// attributes. Only applies to the 'aws' vendor at the moment.
+	// Get an AWS management account. This call includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
+	// Register an AWS management account. See https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
+	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
+	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
+	CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error)
+	// Delete an AWS management account.
+	DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -323,6 +352,12 @@ func (UnimplementedCostServer) ListManagementAccounts(context.Context, *ListMana
 }
 func (UnimplementedCostServer) GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetManagementAccount not implemented")
+}
+func (UnimplementedCostServer) CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateManagementAccount not implemented")
+}
+func (UnimplementedCostServer) DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteManagementAccount not implemented")
 }
 func (UnimplementedCostServer) ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
@@ -387,6 +422,42 @@ func _Cost_GetManagementAccount_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).GetManagementAccount(ctx, req.(*GetManagementAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_CreateManagementAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateManagementAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).CreateManagementAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/CreateManagementAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).CreateManagementAccount(ctx, req.(*CreateManagementAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_DeleteManagementAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteManagementAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).DeleteManagementAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/DeleteManagementAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).DeleteManagementAccount(ctx, req.(*DeleteManagementAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -531,6 +602,14 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetManagementAccount",
 			Handler:    _Cost_GetManagementAccount_Handler,
+		},
+		{
+			MethodName: "CreateManagementAccount",
+			Handler:    _Cost_CreateManagementAccount_Handler,
+		},
+		{
+			MethodName: "DeleteManagementAccount",
+			Handler:    _Cost_DeleteManagementAccount_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
