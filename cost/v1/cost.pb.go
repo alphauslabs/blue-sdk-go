@@ -279,7 +279,7 @@ type CreateManagementAccountRequest struct {
 	// Required. The id of the management account.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Optional. The name, or description of the management account.
-	// This is set to 'id' when not specified.
+	// This is set to `id` when not specified.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Required. S3 Bucket name.
 	BucketName string `protobuf:"bytes,3,opt,name=bucket_name,proto3" json:"bucket_name,omitempty"`
@@ -421,7 +421,7 @@ type ImportCurFilesRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Optional. The month to import. If empty, it defaults to the current month.
-	// Format is 'yyyymm'. For example, June 2021 will be '202106'.
+	// Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,1,opt,name=month,proto3" json:"month,omitempty"`
 }
 
@@ -470,7 +470,7 @@ type CalculateCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. If set to a particular billing group, calculate for that billing group.
 	// If empty, calculate for all billing groups.
@@ -480,7 +480,7 @@ type CalculateCostsRequest struct {
 	// calculation is done for the whole organization.
 	BillingGroup string `protobuf:"bytes,2,opt,name=billing_group,proto3" json:"billing_group,omitempty"`
 	// Optional. The month to calculate. If empty, it defaults to the previous month.
-	// Format is 'yyyymm'. For example, June 2021 will be '202106'.
+	// Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,3,opt,name=month,proto3" json:"month,omitempty"`
 }
 
@@ -543,13 +543,13 @@ type ReadCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
 	// current month will be used. Format: yyyymmdd.
 	StartTime string `protobuf:"bytes,2,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmd.
+	// Format: `yyyymmd`.
 	EndTime string `protobuf:"bytes,3,opt,name=end_time,proto3" json:"end_time,omitempty"`
 	// Optional. AWS-specific request options.
 	AwsOptions *AwsOptions `protobuf:"bytes,4,opt,name=aws_options,proto3" json:"aws_options,omitempty"`
@@ -621,15 +621,15 @@ type ReadBillingGroupCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The billing group id to stream.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmd.
+	// current month will be used. Format: `yyyymmd`.
 	StartTime string `protobuf:"bytes,3,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmdd.
+	// Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=end_time,proto3" json:"end_time,omitempty"`
 	// Optional. AWS-specific request options.
 	AwsOptions *AwsOptions `protobuf:"bytes,5,opt,name=aws_options,proto3" json:"aws_options,omitempty"`
@@ -708,15 +708,15 @@ type ReadAccountCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The account id to stream.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd.
+	// current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,3,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmdd.
+	// Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=end_time,proto3" json:"end_time,omitempty"`
 	// Optional. AWS-specific request options.
 	AwsOptions *AwsOptions `protobuf:"bytes,5,opt,name=aws_options,proto3" json:"aws_options,omitempty"`
@@ -843,13 +843,13 @@ type ReadAdjustmentsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd.
+	// current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,2,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmdd.
+	// Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,3,opt,name=end_time,proto3" json:"end_time,omitempty"`
 }
 
@@ -912,15 +912,15 @@ type ReadBillingGroupAdjustmentsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The billing group id to stream.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd.
+	// current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,3,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmdd.
+	// Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=end_time,proto3" json:"end_time,omitempty"`
 }
 
@@ -990,15 +990,15 @@ type ReadAccountAdjustmentsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The AWS account id to stream.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd.
+	// current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,3,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmdd.
+	// Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=end_time,proto3" json:"end_time,omitempty"`
 }
 
@@ -1068,15 +1068,15 @@ type ReadBillingGroupTagCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The billing group id to stream.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd.
+	// current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,3,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmdd.
+	// Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=end_time,proto3" json:"end_time,omitempty"`
 }
 
@@ -1146,15 +1146,15 @@ type ReadAccountTagCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are 'aws', 'azure', and 'gcp'.
+	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The AWS account id to stream.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd.
+	// current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,3,opt,name=start_time,proto3" json:"start_time,omitempty"`
 	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: yyyymmdd.
+	// Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=end_time,proto3" json:"end_time,omitempty"`
 }
 

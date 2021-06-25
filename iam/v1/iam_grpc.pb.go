@@ -27,7 +27,7 @@ type IamClient interface {
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
 	// Gets subuser information. This call includes all of the subuser metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// If the {name} parameter is 'me' or '-', returns the caller information, which
+	// If the `{name}` parameter is `me` or `-`, returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
@@ -112,7 +112,7 @@ type IamServer interface {
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
 	// Gets subuser information. This call includes all of the subuser metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// If the {name} parameter is 'me' or '-', returns the caller information, which
+	// If the `{name}` parameter is `me` or `-`, returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(context.Context, *GetUserRequest) (*api.User, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.

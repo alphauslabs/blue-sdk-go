@@ -205,15 +205,15 @@ type IpFilter struct {
 
 	// IP filter item name. Note that this name is transcient and is not fixed. However,
 	// you can use any of its permutations to endpoints that accept it, such as
-	// the 'DELETE:/iam/v?/ipfilters/{name}' endpoint, without issues.
+	// the `DELETE:/iam/v?/ipfilters/{name}` endpoint, without issues.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Can be 'global', 'rootuser', or 'subuser'.
+	// Can be `global`, `rootuser`, or `subuser`.
 	Scope string `protobuf:"bytes,2,opt,name=scope,proto3" json:"scope,omitempty"`
 	// The target of the filter. If global scope, this is usually empty.
 	// Rootuser name for rootuser scope, and subuser name for subuser scope.
-	// For subuser targets, format is 'rootuser/subuser'.
+	// For subuser targets, format is `rootuser/subuser`.
 	Target string `protobuf:"bytes,3,opt,name=target,proto3" json:"target,omitempty"`
-	// The type of IP filter. It could be 'whitelist' or 'blacklist'.
+	// The type of IP filter. It could be `whitelist` or `blacklist`.
 	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
 	// The IP filter value. Should be in CIDR format.
 	Value string `protobuf:"bytes,5,opt,name=value,proto3" json:"value,omitempty"`
@@ -382,7 +382,7 @@ type CreateIpFilterRequest struct {
 	// Required. The IP input to filter, either blacklist or whitelist. Should be in
 	// CIDR format (i.e. 1.2.3.4/32).
 	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
-	// Optional. Can be 'whitelist' or 'blacklist'. Defaults to 'blacklist' if empty.
+	// Optional. Can be `whitelist` or `blacklist`. Defaults to `blacklist` if empty.
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// Optional. If valid rootuser and sub_user is empty, filter is for this rootuser.
 	// If both root_user and sub_user inputs are empty, filter is at global scope.
