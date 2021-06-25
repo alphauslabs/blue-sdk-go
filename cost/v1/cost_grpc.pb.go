@@ -59,6 +59,12 @@ type CostClient interface {
 	// the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
 	// (current month) will be returned.
 	ReadAccountAdjustments(ctx context.Context, in *ReadAccountAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAccountAdjustmentsClient, error)
+	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
+	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	ReadBillingGroupTagCosts(ctx context.Context, in *ReadBillingGroupTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupTagCostsClient, error)
+	// Reads the usage-based tag costs of an AWS account. At the moment, the supported {vendor} is
+	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	ReadAccountTagCosts(ctx context.Context, in *ReadAccountTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountTagCostsClient, error)
 }
 
 type costClient struct {
@@ -297,6 +303,70 @@ func (x *costReadAccountAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 	return m, nil
 }
 
+func (c *costClient) ReadBillingGroupTagCosts(ctx context.Context, in *ReadBillingGroupTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupTagCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadBillingGroupTagCosts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadBillingGroupTagCostsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadBillingGroupTagCostsClient interface {
+	Recv() (*CostItem, error)
+	grpc.ClientStream
+}
+
+type costReadBillingGroupTagCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadBillingGroupTagCostsClient) Recv() (*CostItem, error) {
+	m := new(CostItem)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *costClient) ReadAccountTagCosts(ctx context.Context, in *ReadAccountTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountTagCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadAccountTagCosts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadAccountTagCostsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadAccountTagCostsClient interface {
+	Recv() (*CostItem, error)
+	grpc.ClientStream
+}
+
+type costReadAccountTagCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadAccountTagCostsClient) Recv() (*CostItem, error) {
+	m := new(CostItem)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -340,6 +410,12 @@ type CostServer interface {
 	// the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
 	// (current month) will be returned.
 	ReadAccountAdjustments(*ReadAccountAdjustmentsRequest, Cost_ReadAccountAdjustmentsServer) error
+	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
+	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	ReadBillingGroupTagCosts(*ReadBillingGroupTagCostsRequest, Cost_ReadBillingGroupTagCostsServer) error
+	// Reads the usage-based tag costs of an AWS account. At the moment, the supported {vendor} is
+	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	ReadAccountTagCosts(*ReadAccountTagCostsRequest, Cost_ReadAccountTagCostsServer) error
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -376,6 +452,12 @@ func (UnimplementedCostServer) ReadBillingGroupAdjustments(*ReadBillingGroupAdju
 }
 func (UnimplementedCostServer) ReadAccountAdjustments(*ReadAccountAdjustmentsRequest, Cost_ReadAccountAdjustmentsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadAccountAdjustments not implemented")
+}
+func (UnimplementedCostServer) ReadBillingGroupTagCosts(*ReadBillingGroupTagCostsRequest, Cost_ReadBillingGroupTagCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadBillingGroupTagCosts not implemented")
+}
+func (UnimplementedCostServer) ReadAccountTagCosts(*ReadAccountTagCostsRequest, Cost_ReadAccountTagCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadAccountTagCosts not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -588,6 +670,48 @@ func (x *costReadAccountAdjustmentsServer) Send(m *AdjustmentItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cost_ReadBillingGroupTagCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadBillingGroupTagCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadBillingGroupTagCosts(m, &costReadBillingGroupTagCostsServer{stream})
+}
+
+type Cost_ReadBillingGroupTagCostsServer interface {
+	Send(*CostItem) error
+	grpc.ServerStream
+}
+
+type costReadBillingGroupTagCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadBillingGroupTagCostsServer) Send(m *CostItem) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cost_ReadAccountTagCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadAccountTagCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadAccountTagCosts(m, &costReadAccountTagCostsServer{stream})
+}
+
+type Cost_ReadAccountTagCostsServer interface {
+	Send(*CostItem) error
+	grpc.ServerStream
+}
+
+type costReadAccountTagCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadAccountTagCostsServer) Send(m *CostItem) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -641,6 +765,16 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadAccountAdjustments",
 			Handler:       _Cost_ReadAccountAdjustments_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadBillingGroupTagCosts",
+			Handler:       _Cost_ReadBillingGroupTagCosts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadAccountTagCosts",
+			Handler:       _Cost_ReadAccountTagCosts_Handler,
 			ServerStreams: true,
 		},
 	},
