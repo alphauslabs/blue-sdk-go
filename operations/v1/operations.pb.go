@@ -27,7 +27,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Request message for Operations.ListOperations.
+// Request message for the Operations.ListOperations rpc.
 type ListOperationsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -76,7 +76,7 @@ func (x *ListOperationsRequest) GetName() string {
 	return ""
 }
 
-// Request message for Operations.GetOperation.
+// Request message for the Operations.GetOperation rpc.
 type GetOperationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -125,7 +125,7 @@ func (x *GetOperationRequest) GetName() string {
 	return ""
 }
 
-// Request message for Operations.DeleteOperation.
+// Request message for the Operations.DeleteOperation rpc.
 type DeleteOperationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -174,7 +174,7 @@ func (x *DeleteOperationRequest) GetName() string {
 	return ""
 }
 
-// Request message for Operations.CancelOperation.
+// Request message for the Operations.CancelOperation rpc.
 type CancelOperationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -223,7 +223,7 @@ func (x *CancelOperationRequest) GetName() string {
 	return ""
 }
 
-// The request message for Operations.WaitOperation.
+// The request message for the Operations.WaitOperation rpc.
 type WaitOperationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

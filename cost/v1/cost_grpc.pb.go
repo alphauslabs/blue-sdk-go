@@ -4,6 +4,7 @@ package cost
 
 import (
 	context "context"
+	api "github.com/alphauslabs/blue-sdk-go/api"
 	aws "github.com/alphauslabs/blue-sdk-go/api/aws"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
@@ -31,6 +32,10 @@ type CostClient interface {
 	CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Initiates an ondemand import of all registered CUR files.
+	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// Triggers monthly calculations for costs and invoice at either organization or billing group level.
+	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -105,6 +110,24 @@ func (c *costClient) CreateManagementAccount(ctx context.Context, in *CreateMana
 func (c *costClient) DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteManagementAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ImportCurFiles", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CalculateCosts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -382,6 +405,10 @@ type CostServer interface {
 	CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error)
+	// Initiates an ondemand import of all registered CUR files.
+	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
+	// Triggers monthly calculations for costs and invoice at either organization or billing group level.
+	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned. Date range parameters
@@ -434,6 +461,12 @@ func (UnimplementedCostServer) CreateManagementAccount(context.Context, *CreateM
 }
 func (UnimplementedCostServer) DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteManagementAccount not implemented")
+}
+func (UnimplementedCostServer) ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ImportCurFiles not implemented")
+}
+func (UnimplementedCostServer) CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalculateCosts not implemented")
 }
 func (UnimplementedCostServer) ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
@@ -540,6 +573,42 @@ func _Cost_DeleteManagementAccount_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).DeleteManagementAccount(ctx, req.(*DeleteManagementAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ImportCurFiles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ImportCurFilesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).ImportCurFiles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/ImportCurFiles",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).ImportCurFiles(ctx, req.(*ImportCurFilesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_CalculateCosts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CalculateCostsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).CalculateCosts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/CalculateCosts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).CalculateCosts(ctx, req.(*CalculateCostsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -734,6 +803,14 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteManagementAccount",
 			Handler:    _Cost_DeleteManagementAccount_Handler,
+		},
+		{
+			MethodName: "ImportCurFiles",
+			Handler:    _Cost_ImportCurFiles_Handler,
+		},
+		{
+			MethodName: "CalculateCosts",
+			Handler:    _Cost_CalculateCosts_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

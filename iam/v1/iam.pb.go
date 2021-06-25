@@ -24,7 +24,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Request message for Iam.WhoAmI rpc.
+// Request message for the Iam.WhoAmI rpc.
 type WhoAmIRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -63,7 +63,7 @@ func (*WhoAmIRequest) Descriptor() ([]byte, []int) {
 	return file_iam_v1_iam_proto_rawDescGZIP(), []int{0}
 }
 
-// Request message for Iam.ListUsers rpc.
+// Request message for the Iam.ListUsers rpc.
 type ListUsersRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -102,7 +102,7 @@ func (*ListUsersRequest) Descriptor() ([]byte, []int) {
 	return file_iam_v1_iam_proto_rawDescGZIP(), []int{1}
 }
 
-// Response message for Iam.ListUsers rpc.
+// Response message for the Iam.ListUsers rpc.
 type ListUsersResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -150,7 +150,7 @@ func (x *ListUsersResponse) GetUsers() []*api.User {
 	return nil
 }
 
-// Request message for Iam.GetUser rpc.
+// Request message for the Iam.GetUser rpc.
 type GetUserRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -286,7 +286,7 @@ func (x *IpFilter) GetValue() string {
 	return ""
 }
 
-// Request message for Iam.ListIpFilters rpc.
+// Request message for the Iam.ListIpFilters rpc.
 type ListIpFiltersRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -325,7 +325,7 @@ func (*ListIpFiltersRequest) Descriptor() ([]byte, []int) {
 	return file_iam_v1_iam_proto_rawDescGZIP(), []int{5}
 }
 
-// Response message for Iam.ListIpFilters rpc.
+// Response message for the Iam.ListIpFilters rpc.
 type ListIpFiltersResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -373,7 +373,7 @@ func (x *ListIpFiltersResponse) GetItems() []*IpFilter {
 	return nil
 }
 
-// Request message for Iam.CreateIpFilter rpc.
+// Request message for the Iam.CreateIpFilter rpc.
 type CreateIpFilterRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -452,7 +452,7 @@ func (x *CreateIpFilterRequest) GetSubUser() string {
 	return ""
 }
 
-// Request message for Iam.DeleteIpFilter rpc.
+// Request message for the Iam.DeleteIpFilter rpc.
 type DeleteIpFilterRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

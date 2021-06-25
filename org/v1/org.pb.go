@@ -24,7 +24,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// Request message for Organization.CreateOrg rpc.
+// Request message for the Organization.CreateOrg rpc.
 type CreateOrgRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -80,7 +80,7 @@ func (x *CreateOrgRequest) GetDescription() string {
 	return ""
 }
 
-// Response message for Organization.CreateOrg rpc.
+// Response message for the Organization.CreateOrg rpc.
 type CreateOrgResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -136,7 +136,7 @@ func (x *CreateOrgResponse) GetPassword() string {
 	return ""
 }
 
-// Request message for Organization.SendVerification rpc.
+// Request message for the Organization.SendVerification rpc.
 type SendVerificationRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -175,7 +175,7 @@ func (*SendVerificationRequest) Descriptor() ([]byte, []int) {
 	return file_org_v1_org_proto_rawDescGZIP(), []int{2}
 }
 
-// Request message for Organization.VerifyOrg rpc.
+// Request message for the Organization.VerifyOrg rpc.
 type VerifyOrgRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -223,7 +223,7 @@ func (x *VerifyOrgRequest) GetKey() string {
 	return ""
 }
 
-// Request message for Organization.GetOrg rpc.
+// Request message for the Organization.GetOrg rpc.
 type GetOrgRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -262,7 +262,7 @@ func (*GetOrgRequest) Descriptor() ([]byte, []int) {
 	return file_org_v1_org_proto_rawDescGZIP(), []int{4}
 }
 
-// Request message for Organization.UpdateMetadata rpc.
+// Request message for the Organization.UpdateMetadata rpc.
 type UpdateMetadataRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -318,7 +318,7 @@ func (x *UpdateMetadataRequest) GetValue() string {
 	return ""
 }
 
-// Request message for Organization.UpdatePassword rpc.
+// Request message for the Organization.UpdatePassword rpc.
 type UpdatePasswordRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -374,7 +374,7 @@ func (x *UpdatePasswordRequest) GetNewPassword() string {
 	return ""
 }
 
-// Request message for Organization.DeleteOrg rpc.
+// Request message for the Organization.DeleteOrg rpc.
 type DeleteOrgRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
