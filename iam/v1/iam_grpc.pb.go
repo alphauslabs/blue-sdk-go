@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type IamClient interface {
 	// Gets user information about the caller. This call includes all of the user metadata.
-	// See [here](https://alphauslabs.github.io/blueapi/) for the list of supported attributes.
+	// See [https://alphauslabs.github.io/blueapi/] for the list of supported attributes.
 	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Lists all subusers.
 	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
@@ -106,7 +106,7 @@ func (c *iamClient) DeleteIpFilter(ctx context.Context, in *DeleteIpFilterReques
 // for forward compatibility
 type IamServer interface {
 	// Gets user information about the caller. This call includes all of the user metadata.
-	// See [here](https://alphauslabs.github.io/blueapi/) for the list of supported attributes.
+	// See [https://alphauslabs.github.io/blueapi/] for the list of supported attributes.
 	WhoAmI(context.Context, *WhoAmIRequest) (*api.User, error)
 	// Lists all subusers.
 	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
