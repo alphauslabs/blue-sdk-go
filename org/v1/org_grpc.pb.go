@@ -30,7 +30,7 @@ type OrganizationClient interface {
 	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
-	// Updates organization metadata. See https://alphauslabs.github.io/blueapi/
+	// Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
 	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// Updates the organization password.
@@ -124,7 +124,7 @@ type OrganizationServer interface {
 	VerifyOrg(context.Context, *VerifyOrgRequest) (*ripple.Org, error)
 	// Gets information about the caller's organization.
 	GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error)
-	// Updates organization metadata. See https://alphauslabs.github.io/blueapi/
+	// Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
 	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error)
 	// Updates the organization password.
