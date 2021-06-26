@@ -27,7 +27,7 @@ type CostClient interface {
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
-	// exported to your S3, which in turn, triggers the import from your S3 to our system for processing.
+	// exported to your S3 by AWS, which in turn, triggers the import from your S3 to our system for processing.
 	GetManagementAccountUpdateHistory(ctx context.Context, in *GetManagementAccountUpdateHistoryRequest, opts ...grpc.CallOption) (*GetManagementAccountUpdateHistoryResponse, error)
 	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
@@ -412,7 +412,7 @@ type CostServer interface {
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
 	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
-	// exported to your S3, which in turn, triggers the import from your S3 to our system for processing.
+	// exported to your S3 by AWS, which in turn, triggers the import from your S3 to our system for processing.
 	GetManagementAccountUpdateHistory(context.Context, *GetManagementAccountUpdateHistoryRequest) (*GetManagementAccountUpdateHistoryResponse, error)
 	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
