@@ -26,7 +26,7 @@ type CostClient interface {
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
-	// Registers an AWS management account. See https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
+	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
 	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
 	CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
@@ -399,7 +399,7 @@ type CostServer interface {
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
-	// Registers an AWS management account. See https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html
+	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
 	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
 	CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error)
