@@ -26,6 +26,9 @@ type CostClient interface {
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
+	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
+	// exported to your S3, which in turn, triggers the import from your S3 to our system for processing.
+	GetManagementAccountUpdateHistory(ctx context.Context, in *GetManagementAccountUpdateHistoryRequest, opts ...grpc.CallOption) (*GetManagementAccountUpdateHistoryResponse, error)
 	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
 	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
@@ -92,6 +95,15 @@ func (c *costClient) ListManagementAccounts(ctx context.Context, in *ListManagem
 func (c *costClient) GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
 	out := new(aws.Account)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetManagementAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) GetManagementAccountUpdateHistory(ctx context.Context, in *GetManagementAccountUpdateHistoryRequest, opts ...grpc.CallOption) (*GetManagementAccountUpdateHistoryResponse, error) {
+	out := new(GetManagementAccountUpdateHistoryResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetManagementAccountUpdateHistory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -399,6 +411,9 @@ type CostServer interface {
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
+	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
+	// exported to your S3, which in turn, triggers the import from your S3 to our system for processing.
+	GetManagementAccountUpdateHistory(context.Context, *GetManagementAccountUpdateHistoryRequest) (*GetManagementAccountUpdateHistoryResponse, error)
 	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
 	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
@@ -455,6 +470,9 @@ func (UnimplementedCostServer) ListManagementAccounts(context.Context, *ListMana
 }
 func (UnimplementedCostServer) GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetManagementAccount not implemented")
+}
+func (UnimplementedCostServer) GetManagementAccountUpdateHistory(context.Context, *GetManagementAccountUpdateHistoryRequest) (*GetManagementAccountUpdateHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetManagementAccountUpdateHistory not implemented")
 }
 func (UnimplementedCostServer) CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateManagementAccount not implemented")
@@ -537,6 +555,24 @@ func _Cost_GetManagementAccount_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).GetManagementAccount(ctx, req.(*GetManagementAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_GetManagementAccountUpdateHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetManagementAccountUpdateHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetManagementAccountUpdateHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetManagementAccountUpdateHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetManagementAccountUpdateHistory(ctx, req.(*GetManagementAccountUpdateHistoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -795,6 +831,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetManagementAccount",
 			Handler:    _Cost_GetManagementAccount_Handler,
+		},
+		{
+			MethodName: "GetManagementAccountUpdateHistory",
+			Handler:    _Cost_GetManagementAccountUpdateHistory_Handler,
 		},
 		{
 			MethodName: "CreateManagementAccount",
