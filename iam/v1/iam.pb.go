@@ -211,7 +211,7 @@ type CreateUserRequest struct {
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
 	// Optional. Email address of the subuser.
 	Email string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	// Optional. Nickname or description.
+	// Optional. Nickname or description. It is set to 'name' if empty.
 	NickName string `protobuf:"bytes,4,opt,name=nick_name,proto3" json:"nick_name,omitempty"`
 }
 
