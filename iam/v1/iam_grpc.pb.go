@@ -30,6 +30,10 @@ type IamClient interface {
 	// If the `{name}` parameter is `me` or `-`, returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error)
+	// Creates a subuser.
+	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*api.User, error)
+	// Deletes a subuser.
+	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -68,6 +72,24 @@ func (c *iamClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ..
 func (c *iamClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error) {
 	out := new(api.User)
 	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/GetUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*api.User, error) {
+	out := new(api.User)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/CreateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/DeleteUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -115,6 +137,10 @@ type IamServer interface {
 	// If the `{name}` parameter is `me` or `-`, returns the caller information, which
 	// is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.
 	GetUser(context.Context, *GetUserRequest) (*api.User, error)
+	// Creates a subuser.
+	CreateUser(context.Context, *CreateUserRequest) (*api.User, error)
+	// Deletes a subuser.
+	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -137,6 +163,12 @@ func (UnimplementedIamServer) ListUsers(context.Context, *ListUsersRequest) (*Li
 }
 func (UnimplementedIamServer) GetUser(context.Context, *GetUserRequest) (*api.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedIamServer) CreateUser(context.Context, *CreateUserRequest) (*api.User, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUser not implemented")
+}
+func (UnimplementedIamServer) DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
 }
 func (UnimplementedIamServer) ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
@@ -214,6 +246,42 @@ func _Iam_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_CreateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).CreateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/CreateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).CreateUser(ctx, req.(*CreateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/DeleteUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).DeleteUser(ctx, req.(*DeleteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ListIpFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListIpFiltersRequest)
 	if err := dec(in); err != nil {
@@ -286,6 +354,14 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _Iam_GetUser_Handler,
+		},
+		{
+			MethodName: "CreateUser",
+			Handler:    _Iam_CreateUser_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _Iam_DeleteUser_Handler,
 		},
 		{
 			MethodName: "ListIpFilters",
