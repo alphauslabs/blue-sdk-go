@@ -34,14 +34,11 @@ type IamClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Deletes a subuser.
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Lists all API clients. Setting `{id}` to `me` or `-` (hyphen) will return
-	// the caller's API clients.
+	// Lists all API clients belonging to the caller.
 	ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (*ListApiClientsResponse, error)
-	// Creates an API client. Setting `{id}` to `me` or `-` (hyphen) will create
-	// the API client under the caller.
+	// Creates an API client for the caller.
 	CreateApiClient(ctx context.Context, in *CreateApiClientRequest, opts ...grpc.CallOption) (*api.ApiClient, error)
-	// Deletes an API client. Setting `{userId}` to `me` or `-` (hyphen) will delete
-	// the caller's specified API client.
+	// Deletes an API client belonging to the caller.
 	DeleteApiClient(ctx context.Context, in *DeleteApiClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error)
@@ -177,14 +174,11 @@ type IamServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*api.User, error)
 	// Deletes a subuser.
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
-	// Lists all API clients. Setting `{id}` to `me` or `-` (hyphen) will return
-	// the caller's API clients.
+	// Lists all API clients belonging to the caller.
 	ListApiClients(context.Context, *ListApiClientsRequest) (*ListApiClientsResponse, error)
-	// Creates an API client. Setting `{id}` to `me` or `-` (hyphen) will create
-	// the API client under the caller.
+	// Creates an API client for the caller.
 	CreateApiClient(context.Context, *CreateApiClientRequest) (*api.ApiClient, error)
-	// Deletes an API client. Setting `{userId}` to `me` or `-` (hyphen) will delete
-	// the caller's specified API client.
+	// Deletes an API client belonging to the caller.
 	DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error)
