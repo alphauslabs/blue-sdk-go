@@ -37,7 +37,7 @@ type CostClient interface {
 	DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// Triggers monthly calculations for costs and invoice at either organization or billing group level.
+	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
@@ -422,7 +422,7 @@ type CostServer interface {
 	DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
-	// Triggers monthly calculations for costs and invoice at either organization or billing group level.
+	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
