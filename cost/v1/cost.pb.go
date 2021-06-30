@@ -550,7 +550,7 @@ type ImportCurFilesRequest struct {
 	// Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,1,opt,name=month,proto3" json:"month,omitempty"`
 	// Optional. A comma-separated list of management accounts to import. If empty,
-	// all CURs associated will all your management accounts will be imported.
+	// all CURs associated with all your management accounts will be imported.
 	Filter string `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
