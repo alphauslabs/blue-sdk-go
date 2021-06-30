@@ -33,7 +33,7 @@ type ListOperationsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. The name of the operation's parent resource.
+	// Optional. The name of the operation's parent resource. Not used at the moment.
 	Parent string `protobuf:"bytes,4,opt,name=parent,proto3" json:"parent,omitempty"`
 }
 
