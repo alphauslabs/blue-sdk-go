@@ -73,17 +73,17 @@ type CostClient interface {
 	// Reads the usage-based tag costs of an AWS account. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadAccountTagCosts(ctx context.Context, in *ReadAccountTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountTagCostsClient, error)
-	// Saves Budget Configuration to database
+	// Creates a budget configuration.
 	CreateBudgetConfig(ctx context.Context, in *CreateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Updates Budget Configuration in database
+	// Updates an existing budget configuration.
 	UpdateBudgetConfig(ctx context.Context, in *UpdateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Fetches Budget Configurations for all accounts under the specified Billing Group.
-	// Set accountId to fetch Budget Configuration for specific account only.
+	// Fetches budget configurations for all accounts under the specified billing group.
+	// Set accountId to fetch budget configuration for specific account only.
 	GetBudgetConfig(ctx context.Context, in *GetBudgetConfigRequest, opts ...grpc.CallOption) (*GetBudgetConfigResponse, error)
-	// Fetches Cost Forecasts for the specified Billing Group.
-	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now)
+	// Fetches cost forecasts for the specified billing group.
+	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
 	GetForecasts(ctx context.Context, in *GetForecastsRequest, opts ...grpc.CallOption) (*GetForecastsResponse, error)
-	// Fetches Month-to-Date Accumulated Costs vs Forecasted Cost vs Budget for the specified Billing Group
+	// Fetches month-to-date accumulated costs vs forecasted cost vs budget for the specified billing group.
 	GetMonthToDateForecast(ctx context.Context, in *GetMonthToDateForecastRequest, opts ...grpc.CallOption) (*GetMonthToDateForecastResponse, error)
 }
 
@@ -515,17 +515,17 @@ type CostServer interface {
 	// Reads the usage-based tag costs of an AWS account. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadAccountTagCosts(*ReadAccountTagCostsRequest, Cost_ReadAccountTagCostsServer) error
-	// Saves Budget Configuration to database
+	// Creates a budget configuration.
 	CreateBudgetConfig(context.Context, *CreateBudgetConfigRequest) (*emptypb.Empty, error)
-	// Updates Budget Configuration in database
+	// Updates an existing budget configuration.
 	UpdateBudgetConfig(context.Context, *UpdateBudgetConfigRequest) (*emptypb.Empty, error)
-	// Fetches Budget Configurations for all accounts under the specified Billing Group.
-	// Set accountId to fetch Budget Configuration for specific account only.
+	// Fetches budget configurations for all accounts under the specified billing group.
+	// Set accountId to fetch budget configuration for specific account only.
 	GetBudgetConfig(context.Context, *GetBudgetConfigRequest) (*GetBudgetConfigResponse, error)
-	// Fetches Cost Forecasts for the specified Billing Group.
-	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now)
+	// Fetches cost forecasts for the specified billing group.
+	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
 	GetForecasts(context.Context, *GetForecastsRequest) (*GetForecastsResponse, error)
-	// Fetches Month-to-Date Accumulated Costs vs Forecasted Cost vs Budget for the specified Billing Group
+	// Fetches month-to-date accumulated costs vs forecasted cost vs budget for the specified billing group.
 	GetMonthToDateForecast(context.Context, *GetMonthToDateForecastRequest) (*GetMonthToDateForecastResponse, error)
 	mustEmbedUnimplementedCostServer()
 }

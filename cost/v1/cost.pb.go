@@ -1362,7 +1362,7 @@ type CreateBudgetConfigRequest struct {
 
 	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. Budget configuration to save
+	// Required. Budget configuration to save.
 	BudgetConfig *api.BudgetConfiguration `protobuf:"bytes,2,opt,name=budgetConfig,proto3" json:"budgetConfig,omitempty"`
 }
 
@@ -1420,9 +1420,9 @@ type UpdateBudgetConfigRequest struct {
 
 	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. Budget configuration Id to update
+	// Required. Budget configuration id to update.
 	BudgetConfigId string `protobuf:"bytes,2,opt,name=budgetConfigId,proto3" json:"budgetConfigId,omitempty"`
-	// Required. Budget configuration with update information
+	// Required. Budget configuration with update information.
 	BudgetConfig *api.BudgetConfiguration `protobuf:"bytes,3,opt,name=budgetConfig,proto3" json:"budgetConfig,omitempty"`
 }
 
@@ -1487,9 +1487,9 @@ type GetBudgetConfigRequest struct {
 
 	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. Billing Group ID
+	// Required. Billing group id to retrieve.
 	BillingGroupId string `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
-	// Optional. If set, only Budget Configuration for the specified account is returned.
+	// Optional. If set, only budget configuration for the specified account is returned.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
 }
 
@@ -1547,7 +1547,7 @@ func (x *GetBudgetConfigRequest) GetAccountId() string {
 }
 
 // Response message for GetBudgetConfig.
-// If accountId is specified in the request, only one Budget Configuration is returned.
+// If accountId is specified in the request, only one budget configuration is returned.
 type GetBudgetConfigResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1595,7 +1595,7 @@ func (x *GetBudgetConfigResponse) GetData() []*api.BudgetConfiguration {
 	return nil
 }
 
-// Request message for GetForecasts per Billing Group
+// Request message for GetForecasts per billing group.
 type GetForecastsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1603,10 +1603,10 @@ type GetForecastsRequest struct {
 
 	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. Billing Group ID
+	// Required. Billing group id to retrieve.
 	BillingGroupId string `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
 	// Optional. Forecast frequency. Valid values are `daily` and `monthly`.
-	// Default value is `daily`
+	// Default value is `daily`.
 	Frequency string `protobuf:"bytes,3,opt,name=frequency,proto3" json:"frequency,omitempty"`
 	// Optional. Forecast granularity. Valid values are `account`, `category` and `product`.
 	// Default value is `account`.
@@ -1696,7 +1696,7 @@ func (x *GetForecastsRequest) GetToDate() string {
 	return ""
 }
 
-// Response message for GetForecasts per Billing Group
+// Response message for GetForecasts per billing group.
 type GetForecastsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1744,7 +1744,7 @@ func (x *GetForecastsResponse) GetData() *api.BillingGroupForecast {
 	return nil
 }
 
-// Request message for GetMonthToDateForecast per Billing Group
+// Request message for GetMonthToDateForecast per billing group.
 type GetMonthToDateForecastRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1752,7 +1752,7 @@ type GetMonthToDateForecastRequest struct {
 
 	// Required. Valid values are `aws`, `azure`, and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. Billing Group ID
+	// Required. Billing group id to retrieve.
 	BillingGroupId string `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
 }
 
@@ -1802,7 +1802,7 @@ func (x *GetMonthToDateForecastRequest) GetBillingGroupId() string {
 	return ""
 }
 
-// Response message for GetMonthToDateForecast per Billing Group
+// Response message for GetMonthToDateForecast per billing group.
 type GetMonthToDateForecastResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
