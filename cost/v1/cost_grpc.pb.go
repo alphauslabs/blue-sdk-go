@@ -39,11 +39,11 @@ type CostClient interface {
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
+	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
-	// Reads the non-usage-based details of an organization (Ripple) or company (Wave).
+	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave).
 	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
 	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
@@ -334,11 +334,11 @@ type CostServer interface {
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
-	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
+	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
-	// Reads the non-usage-based details of an organization (Ripple) or company (Wave).
+	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave).
 	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
 	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
