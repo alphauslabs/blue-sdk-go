@@ -41,8 +41,7 @@ type CostClient interface {
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned. Date range parameters
-	// are 'start_time' and 'end_time, with the 'yyyymmdd' format.
+	// not set, month-to-date (current month) will be returned.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
 	// Reads the non-usage-based details of an organization (Ripple) or company (Wave).
 	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
@@ -337,8 +336,7 @@ type CostServer interface {
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Reads the usage-based cost details of an organization (Ripple) or company (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned. Date range parameters
-	// are 'start_time' and 'end_time, with the 'yyyymmdd' format.
+	// not set, month-to-date (current month) will be returned.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
 	// Reads the non-usage-based details of an organization (Ripple) or company (Wave).
 	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
