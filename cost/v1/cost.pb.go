@@ -684,6 +684,7 @@ type ReadCostsRequest struct {
 	// Optional. If set, reads the usage-based cost details of this billing group. Valid only
 	// if `accountId` is not set. If both `billingGroupId` and `accountId` are not set,
 	// reads the usage-based cost details of the whole organization.
+	// Only valid for Ripple users. Implied for Wave(Pro) users.
 	BillingGroupId string `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
 	// Optional. If set, reads the usage-based cost details of this account. Also invalidates
 	// the `billingGroupId` value even if set. If both `billingGroupId` and `accountId` are
@@ -832,6 +833,7 @@ type ReadAdjustmentsRequest struct {
 	// Optional. If set, reads the non-usage-based adjustment details of this billing group.
 	// Valid only if `accountId` is not set. If both `billingGroupId` and `accountId` are not
 	// set, reads the adjustment details of the whole organization.
+	// Only valid for Ripple users. Implied for Wave(Pro) users.
 	BillingGroupId string `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
 	// Optional. If set, reads the non-usaged-based adjustment details of this account. Also
 	// invalidates the `billingGroupId` value even if set. If both `billingGroupId` and
