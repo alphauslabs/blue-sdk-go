@@ -22,8 +22,8 @@ const _ = grpc.SupportPackageIsVersion7
 type OperationsClient interface {
 	// Lists long-running operations.
 	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (Operations_ListOperationsClient, error)
-	// Gets the latest state of a long-running operation.  Clients can use this method
-	// to poll the operation result at intervals as recommended by the API service.
+	// Gets the latest state of a long-running operation. You can use this method to
+	// poll the operation result at intervals.
 	GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Deletes a long-running operation. This method indicates that the client is no
 	// longer interested in the operation result. It does not cancel the operation.
@@ -41,8 +41,9 @@ type OperationsClient interface {
 	// timeout is used. If the server does not support this method, it returns
 	// `google.rpc.Code.UNIMPLEMENTED`.
 	// Note that this method is on a best-effort basis. It may return the latest
-	// state before the specified timeout (including immediately), meaning even an
+	// state before the specified timeout (including immediately), meaning, even an
 	// immediate response is no guarantee that the operation is done.
+	// At the moment, Blue's default RPC timeout is around one hour.
 	WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*api.Operation, error)
 }
 
@@ -128,8 +129,8 @@ func (c *operationsClient) WaitOperation(ctx context.Context, in *WaitOperationR
 type OperationsServer interface {
 	// Lists long-running operations.
 	ListOperations(*ListOperationsRequest, Operations_ListOperationsServer) error
-	// Gets the latest state of a long-running operation.  Clients can use this method
-	// to poll the operation result at intervals as recommended by the API service.
+	// Gets the latest state of a long-running operation. You can use this method to
+	// poll the operation result at intervals.
 	GetOperation(context.Context, *GetOperationRequest) (*api.Operation, error)
 	// Deletes a long-running operation. This method indicates that the client is no
 	// longer interested in the operation result. It does not cancel the operation.
@@ -147,8 +148,9 @@ type OperationsServer interface {
 	// timeout is used. If the server does not support this method, it returns
 	// `google.rpc.Code.UNIMPLEMENTED`.
 	// Note that this method is on a best-effort basis. It may return the latest
-	// state before the specified timeout (including immediately), meaning even an
+	// state before the specified timeout (including immediately), meaning, even an
 	// immediate response is no guarantee that the operation is done.
+	// At the moment, Blue's default RPC timeout is around one hour.
 	WaitOperation(context.Context, *WaitOperationRequest) (*api.Operation, error)
 	mustEmbedUnimplementedOperationsServer()
 }
