@@ -21,7 +21,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
-	// Lists AWS management accounts.
+	// Lists AWS management accounts (formerly known as master or payer accounts).
 	ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (Cost_ListManagementAccountsClient, error)
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
@@ -339,7 +339,7 @@ func (c *costClient) GetMonthToDateForecast(ctx context.Context, in *GetMonthToD
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
 type CostServer interface {
-	// Lists AWS management accounts.
+	// Lists AWS management accounts (formerly known as master or payer accounts).
 	ListManagementAccounts(*ListManagementAccountsRequest, Cost_ListManagementAccountsServer) error
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
