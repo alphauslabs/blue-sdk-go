@@ -49,21 +49,20 @@ func local_request_Iam_WhoAmI_0(ctx context.Context, marshaler runtime.Marshaler
 
 }
 
-func request_Iam_ListUsers_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Iam_ListUsers_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (Iam_ListUsersClient, runtime.ServerMetadata, error) {
 	var protoReq ListUsersRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.ListUsers(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_Iam_ListUsers_0(ctx context.Context, marshaler runtime.Marshaler, server IamServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListUsersRequest
-	var metadata runtime.ServerMetadata
-
-	msg, err := server.ListUsers(ctx, &protoReq)
-	return msg, metadata, err
+	stream, err := client.ListUsers(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -205,21 +204,20 @@ func local_request_Iam_DeleteUser_0(ctx context.Context, marshaler runtime.Marsh
 
 }
 
-func request_Iam_ListApiClients_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Iam_ListApiClients_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (Iam_ListApiClientsClient, runtime.ServerMetadata, error) {
 	var protoReq ListApiClientsRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.ListApiClients(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_Iam_ListApiClients_0(ctx context.Context, marshaler runtime.Marshaler, server IamServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListApiClientsRequest
-	var metadata runtime.ServerMetadata
-
-	msg, err := server.ListApiClients(ctx, &protoReq)
-	return msg, metadata, err
+	stream, err := client.ListApiClients(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -309,21 +307,20 @@ func local_request_Iam_DeleteApiClient_0(ctx context.Context, marshaler runtime.
 
 }
 
-func request_Iam_ListIpFilters_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Iam_ListIpFilters_0(ctx context.Context, marshaler runtime.Marshaler, client IamClient, req *http.Request, pathParams map[string]string) (Iam_ListIpFiltersClient, runtime.ServerMetadata, error) {
 	var protoReq ListIpFiltersRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.ListIpFilters(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_Iam_ListIpFilters_0(ctx context.Context, marshaler runtime.Marshaler, server IamServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListIpFiltersRequest
-	var metadata runtime.ServerMetadata
-
-	msg, err := server.ListIpFilters(ctx, &protoReq)
-	return msg, metadata, err
+	stream, err := client.ListIpFilters(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -443,26 +440,10 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 	})
 
 	mux.Handle("GET", pattern_Iam_ListUsers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/ListUsers")
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_Iam_ListUsers_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		ctx = runtime.NewServerMetadataContext(ctx, md)
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_Iam_ListUsers_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	mux.Handle("GET", pattern_Iam_GetUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -535,26 +516,10 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 	})
 
 	mux.Handle("GET", pattern_Iam_ListApiClients_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/ListApiClients")
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_Iam_ListApiClients_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		ctx = runtime.NewServerMetadataContext(ctx, md)
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_Iam_ListApiClients_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	mux.Handle("POST", pattern_Iam_CreateApiClient_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -604,26 +569,10 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 	})
 
 	mux.Handle("GET", pattern_Iam_ListIpFilters_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/ListIpFilters")
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_Iam_ListIpFilters_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		ctx = runtime.NewServerMetadataContext(ctx, md)
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_Iam_ListIpFilters_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	mux.Handle("POST", pattern_Iam_CreateIpFilter_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -749,7 +698,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 			return
 		}
 
-		forward_Iam_ListUsers_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Iam_ListUsers_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -829,7 +778,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 			return
 		}
 
-		forward_Iam_ListApiClients_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Iam_ListApiClients_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -889,7 +838,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 			return
 		}
 
-		forward_Iam_ListIpFilters_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Iam_ListIpFilters_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -963,7 +912,7 @@ var (
 var (
 	forward_Iam_WhoAmI_0 = runtime.ForwardResponseMessage
 
-	forward_Iam_ListUsers_0 = runtime.ForwardResponseMessage
+	forward_Iam_ListUsers_0 = runtime.ForwardResponseStream
 
 	forward_Iam_GetUser_0 = runtime.ForwardResponseMessage
 
@@ -971,13 +920,13 @@ var (
 
 	forward_Iam_DeleteUser_0 = runtime.ForwardResponseMessage
 
-	forward_Iam_ListApiClients_0 = runtime.ForwardResponseMessage
+	forward_Iam_ListApiClients_0 = runtime.ForwardResponseStream
 
 	forward_Iam_CreateApiClient_0 = runtime.ForwardResponseMessage
 
 	forward_Iam_DeleteApiClient_0 = runtime.ForwardResponseMessage
 
-	forward_Iam_ListIpFilters_0 = runtime.ForwardResponseMessage
+	forward_Iam_ListIpFilters_0 = runtime.ForwardResponseStream
 
 	forward_Iam_CreateIpFilter_0 = runtime.ForwardResponseMessage
 

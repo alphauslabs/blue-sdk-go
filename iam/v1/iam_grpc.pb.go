@@ -24,7 +24,7 @@ type IamClient interface {
 	// See [https://alphauslabs.github.io/blueapi/] for the list of supported attributes.
 	WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Lists all subusers.
-	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (Iam_ListUsersClient, error)
 	// Gets subuser information. This call includes all of the subuser metadata. See
 	// [https://alphauslabs.github.io/blueapi/] for the list of supported attributes.
 	// If the `{name}` parameter is `me` or `-`, returns the caller information, which
@@ -35,13 +35,13 @@ type IamClient interface {
 	// Deletes a subuser.
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all API clients belonging to the caller.
-	ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (*ListApiClientsResponse, error)
+	ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (Iam_ListApiClientsClient, error)
 	// Creates an API client for the caller.
 	CreateApiClient(ctx context.Context, in *CreateApiClientRequest, opts ...grpc.CallOption) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(ctx context.Context, in *DeleteApiClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
-	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error)
+	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
 	// this API is only available for root users.
 	CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error)
@@ -66,13 +66,36 @@ func (c *iamClient) WhoAmI(ctx context.Context, in *WhoAmIRequest, opts ...grpc.
 	return out, nil
 }
 
-func (c *iamClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
-	out := new(ListUsersResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListUsers", in, out, opts...)
+func (c *iamClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (Iam_ListUsersClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[0], "/blueapi.iam.v1.Iam/ListUsers", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &iamListUsersClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Iam_ListUsersClient interface {
+	Recv() (*api.User, error)
+	grpc.ClientStream
+}
+
+type iamListUsersClient struct {
+	grpc.ClientStream
+}
+
+func (x *iamListUsersClient) Recv() (*api.User, error) {
+	m := new(api.User)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *iamClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*api.User, error) {
@@ -102,13 +125,36 @@ func (c *iamClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts 
 	return out, nil
 }
 
-func (c *iamClient) ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (*ListApiClientsResponse, error) {
-	out := new(ListApiClientsResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListApiClients", in, out, opts...)
+func (c *iamClient) ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (Iam_ListApiClientsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[1], "/blueapi.iam.v1.Iam/ListApiClients", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &iamListApiClientsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Iam_ListApiClientsClient interface {
+	Recv() (*api.ApiClient, error)
+	grpc.ClientStream
+}
+
+type iamListApiClientsClient struct {
+	grpc.ClientStream
+}
+
+func (x *iamListApiClientsClient) Recv() (*api.ApiClient, error) {
+	m := new(api.ApiClient)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *iamClient) CreateApiClient(ctx context.Context, in *CreateApiClientRequest, opts ...grpc.CallOption) (*api.ApiClient, error) {
@@ -129,13 +175,36 @@ func (c *iamClient) DeleteApiClient(ctx context.Context, in *DeleteApiClientRequ
 	return out, nil
 }
 
-func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (*ListIpFiltersResponse, error) {
-	out := new(ListIpFiltersResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListIpFilters", in, out, opts...)
+func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[2], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &iamListIpFiltersClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Iam_ListIpFiltersClient interface {
+	Recv() (*IpFilter, error)
+	grpc.ClientStream
+}
+
+type iamListIpFiltersClient struct {
+	grpc.ClientStream
+}
+
+func (x *iamListIpFiltersClient) Recv() (*IpFilter, error) {
+	m := new(IpFilter)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *iamClient) CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error) {
@@ -164,7 +233,7 @@ type IamServer interface {
 	// See [https://alphauslabs.github.io/blueapi/] for the list of supported attributes.
 	WhoAmI(context.Context, *WhoAmIRequest) (*api.User, error)
 	// Lists all subusers.
-	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	ListUsers(*ListUsersRequest, Iam_ListUsersServer) error
 	// Gets subuser information. This call includes all of the subuser metadata. See
 	// [https://alphauslabs.github.io/blueapi/] for the list of supported attributes.
 	// If the `{name}` parameter is `me` or `-`, returns the caller information, which
@@ -175,13 +244,13 @@ type IamServer interface {
 	// Deletes a subuser.
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
 	// Lists all API clients belonging to the caller.
-	ListApiClients(context.Context, *ListApiClientsRequest) (*ListApiClientsResponse, error)
+	ListApiClients(*ListApiClientsRequest, Iam_ListApiClientsServer) error
 	// Creates an API client for the caller.
 	CreateApiClient(context.Context, *CreateApiClientRequest) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
-	ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error)
+	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
 	// this API is only available for root users.
 	CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error)
@@ -197,8 +266,8 @@ type UnimplementedIamServer struct {
 func (UnimplementedIamServer) WhoAmI(context.Context, *WhoAmIRequest) (*api.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WhoAmI not implemented")
 }
-func (UnimplementedIamServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+func (UnimplementedIamServer) ListUsers(*ListUsersRequest, Iam_ListUsersServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
 }
 func (UnimplementedIamServer) GetUser(context.Context, *GetUserRequest) (*api.User, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
@@ -209,8 +278,8 @@ func (UnimplementedIamServer) CreateUser(context.Context, *CreateUserRequest) (*
 func (UnimplementedIamServer) DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
 }
-func (UnimplementedIamServer) ListApiClients(context.Context, *ListApiClientsRequest) (*ListApiClientsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListApiClients not implemented")
+func (UnimplementedIamServer) ListApiClients(*ListApiClientsRequest, Iam_ListApiClientsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListApiClients not implemented")
 }
 func (UnimplementedIamServer) CreateApiClient(context.Context, *CreateApiClientRequest) (*api.ApiClient, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateApiClient not implemented")
@@ -218,8 +287,8 @@ func (UnimplementedIamServer) CreateApiClient(context.Context, *CreateApiClientR
 func (UnimplementedIamServer) DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteApiClient not implemented")
 }
-func (UnimplementedIamServer) ListIpFilters(context.Context, *ListIpFiltersRequest) (*ListIpFiltersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
+func (UnimplementedIamServer) ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
 }
 func (UnimplementedIamServer) CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateIpFilter not implemented")
@@ -258,22 +327,25 @@ func _Iam_WhoAmI_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Iam_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListUsersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Iam_ListUsers_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListUsersRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(IamServer).ListUsers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.iam.v1.Iam/ListUsers",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IamServer).ListUsers(ctx, req.(*ListUsersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(IamServer).ListUsers(m, &iamListUsersServer{stream})
+}
+
+type Iam_ListUsersServer interface {
+	Send(*api.User) error
+	grpc.ServerStream
+}
+
+type iamListUsersServer struct {
+	grpc.ServerStream
+}
+
+func (x *iamListUsersServer) Send(m *api.User) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Iam_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -330,22 +402,25 @@ func _Iam_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Iam_ListApiClients_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListApiClientsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Iam_ListApiClients_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListApiClientsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(IamServer).ListApiClients(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.iam.v1.Iam/ListApiClients",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IamServer).ListApiClients(ctx, req.(*ListApiClientsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(IamServer).ListApiClients(m, &iamListApiClientsServer{stream})
+}
+
+type Iam_ListApiClientsServer interface {
+	Send(*api.ApiClient) error
+	grpc.ServerStream
+}
+
+type iamListApiClientsServer struct {
+	grpc.ServerStream
+}
+
+func (x *iamListApiClientsServer) Send(m *api.ApiClient) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Iam_CreateApiClient_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -384,22 +459,25 @@ func _Iam_DeleteApiClient_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Iam_ListIpFilters_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListIpFiltersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Iam_ListIpFilters_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListIpFiltersRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(IamServer).ListIpFilters(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.iam.v1.Iam/ListIpFilters",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IamServer).ListIpFilters(ctx, req.(*ListIpFiltersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(IamServer).ListIpFilters(m, &iamListIpFiltersServer{stream})
+}
+
+type Iam_ListIpFiltersServer interface {
+	Send(*IpFilter) error
+	grpc.ServerStream
+}
+
+type iamListIpFiltersServer struct {
+	grpc.ServerStream
+}
+
+func (x *iamListIpFiltersServer) Send(m *IpFilter) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Iam_CreateIpFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -450,10 +528,6 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Iam_WhoAmI_Handler,
 		},
 		{
-			MethodName: "ListUsers",
-			Handler:    _Iam_ListUsers_Handler,
-		},
-		{
 			MethodName: "GetUser",
 			Handler:    _Iam_GetUser_Handler,
 		},
@@ -466,20 +540,12 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Iam_DeleteUser_Handler,
 		},
 		{
-			MethodName: "ListApiClients",
-			Handler:    _Iam_ListApiClients_Handler,
-		},
-		{
 			MethodName: "CreateApiClient",
 			Handler:    _Iam_CreateApiClient_Handler,
 		},
 		{
 			MethodName: "DeleteApiClient",
 			Handler:    _Iam_DeleteApiClient_Handler,
-		},
-		{
-			MethodName: "ListIpFilters",
-			Handler:    _Iam_ListIpFilters_Handler,
 		},
 		{
 			MethodName: "CreateIpFilter",
@@ -490,6 +556,22 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Iam_DeleteIpFilter_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ListUsers",
+			Handler:       _Iam_ListUsers_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListApiClients",
+			Handler:       _Iam_ListApiClients_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListIpFilters",
+			Handler:       _Iam_ListIpFilters_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "iam/v1/iam.proto",
 }

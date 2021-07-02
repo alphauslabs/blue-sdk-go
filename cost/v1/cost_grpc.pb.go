@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
 	// Lists AWS management accounts.
-	ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (*ListManagementAccountsResponse, error)
+	ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (Cost_ListManagementAccountsClient, error)
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
@@ -76,13 +76,36 @@ func NewCostClient(cc grpc.ClientConnInterface) CostClient {
 	return &costClient{cc}
 }
 
-func (c *costClient) ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (*ListManagementAccountsResponse, error) {
-	out := new(ListManagementAccountsResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListManagementAccounts", in, out, opts...)
+func (c *costClient) ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (Cost_ListManagementAccountsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[0], "/blueapi.cost.v1.Cost/ListManagementAccounts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &costListManagementAccountsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ListManagementAccountsClient interface {
+	Recv() (*aws.Account, error)
+	grpc.ClientStream
+}
+
+type costListManagementAccountsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costListManagementAccountsClient) Recv() (*aws.Account, error) {
+	m := new(aws.Account)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *costClient) GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
@@ -140,7 +163,7 @@ func (c *costClient) CalculateCosts(ctx context.Context, in *CalculateCostsReque
 }
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[0], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -172,7 +195,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -204,7 +227,7 @@ func (x *costReadAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 }
 
 func (c *costClient) ReadBillingGroupTagCosts(ctx context.Context, in *ReadBillingGroupTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], "/blueapi.cost.v1.Cost/ReadBillingGroupTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ReadBillingGroupTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -236,7 +259,7 @@ func (x *costReadBillingGroupTagCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAccountTagCosts(ctx context.Context, in *ReadAccountTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ReadAccountTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadAccountTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -317,7 +340,7 @@ func (c *costClient) GetMonthToDateForecast(ctx context.Context, in *GetMonthToD
 // for forward compatibility
 type CostServer interface {
 	// Lists AWS management accounts.
-	ListManagementAccounts(context.Context, *ListManagementAccountsRequest) (*ListManagementAccountsResponse, error)
+	ListManagementAccounts(*ListManagementAccountsRequest, Cost_ListManagementAccountsServer) error
 	// Gets an AWS management account. This call includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
@@ -368,8 +391,8 @@ type CostServer interface {
 type UnimplementedCostServer struct {
 }
 
-func (UnimplementedCostServer) ListManagementAccounts(context.Context, *ListManagementAccountsRequest) (*ListManagementAccountsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListManagementAccounts not implemented")
+func (UnimplementedCostServer) ListManagementAccounts(*ListManagementAccountsRequest, Cost_ListManagementAccountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListManagementAccounts not implemented")
 }
 func (UnimplementedCostServer) GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetManagementAccount not implemented")
@@ -429,22 +452,25 @@ func RegisterCostServer(s grpc.ServiceRegistrar, srv CostServer) {
 	s.RegisterService(&Cost_ServiceDesc, srv)
 }
 
-func _Cost_ListManagementAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListManagementAccountsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Cost_ListManagementAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListManagementAccountsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(CostServer).ListManagementAccounts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/ListManagementAccounts",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).ListManagementAccounts(ctx, req.(*ListManagementAccountsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(CostServer).ListManagementAccounts(m, &costListManagementAccountsServer{stream})
+}
+
+type Cost_ListManagementAccountsServer interface {
+	Send(*aws.Account) error
+	grpc.ServerStream
+}
+
+type costListManagementAccountsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costListManagementAccountsServer) Send(m *aws.Account) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cost_GetManagementAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -737,10 +763,6 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CostServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "ListManagementAccounts",
-			Handler:    _Cost_ListManagementAccounts_Handler,
-		},
-		{
 			MethodName: "GetManagementAccount",
 			Handler:    _Cost_GetManagementAccount_Handler,
 		},
@@ -786,6 +808,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ListManagementAccounts",
+			Handler:       _Cost_ListManagementAccounts_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "ReadCosts",
 			Handler:       _Cost_ReadCosts_Handler,
