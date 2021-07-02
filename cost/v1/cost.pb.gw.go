@@ -709,7 +709,7 @@ func local_request_Cost_UpdateBudgetConfig_0(ctx context.Context, marshaler runt
 }
 
 var (
-	filter_Cost_GetBudgetConfig_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "billingGroupId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+	filter_Cost_GetBudgetConfig_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_GetBudgetConfig_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -731,16 +731,6 @@ func request_Cost_GetBudgetConfig_0(ctx context.Context, marshaler runtime.Marsh
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
-	}
-
-	val, ok = pathParams["billingGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "billingGroupId")
-	}
-
-	protoReq.BillingGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "billingGroupId", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -776,16 +766,6 @@ func local_request_Cost_GetBudgetConfig_0(ctx context.Context, marshaler runtime
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	val, ok = pathParams["billingGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "billingGroupId")
-	}
-
-	protoReq.BillingGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "billingGroupId", err)
-	}
-
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -799,7 +779,7 @@ func local_request_Cost_GetBudgetConfig_0(ctx context.Context, marshaler runtime
 }
 
 var (
-	filter_Cost_GetForecasts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "billingGroupId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+	filter_Cost_GetForecasts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_GetForecasts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -821,16 +801,6 @@ func request_Cost_GetForecasts_0(ctx context.Context, marshaler runtime.Marshale
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
-	}
-
-	val, ok = pathParams["billingGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "billingGroupId")
-	}
-
-	protoReq.BillingGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "billingGroupId", err)
 	}
 
 	if err := req.ParseForm(); err != nil {
@@ -866,16 +836,6 @@ func local_request_Cost_GetForecasts_0(ctx context.Context, marshaler runtime.Ma
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	val, ok = pathParams["billingGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "billingGroupId")
-	}
-
-	protoReq.BillingGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "billingGroupId", err)
-	}
-
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -887,6 +847,10 @@ func local_request_Cost_GetForecasts_0(ctx context.Context, marshaler runtime.Ma
 	return msg, metadata, err
 
 }
+
+var (
+	filter_Cost_GetMonthToDateForecast_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+)
 
 func request_Cost_GetMonthToDateForecast_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetMonthToDateForecastRequest
@@ -909,14 +873,11 @@ func request_Cost_GetMonthToDateForecast_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	val, ok = pathParams["billingGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "billingGroupId")
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
-	protoReq.BillingGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "billingGroupId", err)
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Cost_GetMonthToDateForecast_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.GetMonthToDateForecast(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -945,14 +906,11 @@ func local_request_Cost_GetMonthToDateForecast_0(ctx context.Context, marshaler 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	val, ok = pathParams["billingGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "billingGroupId")
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
-	protoReq.BillingGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "billingGroupId", err)
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Cost_GetMonthToDateForecast_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.GetMonthToDateForecast(ctx, &protoReq)
@@ -1645,11 +1603,11 @@ var (
 
 	pattern_Cost_UpdateBudgetConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "vendor", "budgets", "configuration", "budgetConfigId"}, ""))
 
-	pattern_Cost_GetBudgetConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "vendor", "budgets", "configuration", "billingGroupId"}, ""))
+	pattern_Cost_GetBudgetConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3}, []string{"v1", "vendor", "budgets", "configuration"}, ""))
 
-	pattern_Cost_GetForecasts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "forecasts", "billingGroupId"}, ""))
+	pattern_Cost_GetForecasts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "forecasts"}, ""))
 
-	pattern_Cost_GetMonthToDateForecast_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "vendor", "forecasts", "month-to-date", "billingGroupId"}, ""))
+	pattern_Cost_GetMonthToDateForecast_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3}, []string{"v1", "vendor", "forecasts", "month-to-date"}, ""))
 )
 
 var (
