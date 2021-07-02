@@ -1330,11 +1330,11 @@ type GetForecastsRequest struct {
 	// Optional. Starting date to get data.
 	// If from_date is less than current date, historical costs are included.
 	// If from_date is greater than current date, only forecasted costs are returned.
-	// Format: `yyyymmdd`.
+	// Format: `yyyy-mm-dd`.
 	FromDate string `protobuf:"bytes,5,opt,name=fromDate,proto3" json:"fromDate,omitempty"`
 	// Optional. Last date to get forecast cost.
 	// Currently, we only support 90 days forecasting from the first day of current month.
-	// Format: `yyyymmdd`.
+	// Format: `yyyy-mm-dd`.
 	ToDate string `protobuf:"bytes,6,opt,name=toDate,proto3" json:"toDate,omitempty"`
 }
 
