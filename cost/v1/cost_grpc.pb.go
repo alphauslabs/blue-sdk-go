@@ -35,14 +35,14 @@ type CostClient interface {
 	CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Lists all AWS linked accounts.
+	// Lists all vendor accounts.
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error)
-	// Gets an AWS linked account. This API includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// Gets a vendor account. This API includes all of the account's metadata. See
+	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
-	// Registers an AWS linked account.
+	// Registers an vendor account.
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
-	// Deletes an AWS linked account.
+	// Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
@@ -421,14 +421,14 @@ type CostServer interface {
 	CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error)
-	// Lists all AWS linked accounts.
+	// Lists all vendor accounts.
 	ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error
-	// Gets an AWS linked account. This API includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// Gets a vendor account. This API includes all of the account's metadata. See
+	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
-	// Registers an AWS linked account.
+	// Registers an vendor account.
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
-	// Deletes an AWS linked account.
+	// Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
