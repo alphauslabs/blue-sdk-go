@@ -23,7 +23,7 @@ const _ = grpc.SupportPackageIsVersion7
 type CostClient interface {
 	// Lists AWS management accounts (formerly known as master or payer accounts).
 	ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (Cost_ListManagementAccountsClient, error)
-	// Gets an AWS management account. This call includes all of the account's metadata.
+	// Gets an AWS management account. This API includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
@@ -35,6 +35,15 @@ type CostClient interface {
 	CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Lists all AWS linked accounts.
+	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error)
+	// Gets an AWS linked account. This API includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
+	// Registers an AWS linked account.
+	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
+	// Deletes an AWS linked account.
+	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
@@ -144,6 +153,65 @@ func (c *costClient) DeleteManagementAccount(ctx context.Context, in *DeleteMana
 	return out, nil
 }
 
+func (c *costClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], "/blueapi.cost.v1.Cost/ListAccounts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costListAccountsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ListAccountsClient interface {
+	Recv() (*ListAccountsResponse, error)
+	grpc.ClientStream
+}
+
+type costListAccountsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costListAccountsClient) Recv() (*ListAccountsResponse, error) {
+	m := new(ListAccountsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *costClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
+	out := new(GetAccountResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
+	out := new(CreateAccountResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *costClient) ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error) {
 	out := new(api.Operation)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ImportCurFiles", in, out, opts...)
@@ -163,7 +231,7 @@ func (c *costClient) CalculateCosts(ctx context.Context, in *CalculateCostsReque
 }
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -195,7 +263,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -227,7 +295,7 @@ func (x *costReadAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 }
 
 func (c *costClient) ReadBillingGroupTagCosts(ctx context.Context, in *ReadBillingGroupTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ReadBillingGroupTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadBillingGroupTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -259,7 +327,7 @@ func (x *costReadBillingGroupTagCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAccountTagCosts(ctx context.Context, in *ReadAccountTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadAccountTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadAccountTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -341,7 +409,7 @@ func (c *costClient) GetMonthToDateForecast(ctx context.Context, in *GetMonthToD
 type CostServer interface {
 	// Lists AWS management accounts (formerly known as master or payer accounts).
 	ListManagementAccounts(*ListManagementAccountsRequest, Cost_ListManagementAccountsServer) error
-	// Gets an AWS management account. This call includes all of the account's metadata.
+	// Gets an AWS management account. This API includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
 	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
@@ -353,6 +421,15 @@ type CostServer interface {
 	CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error)
+	// Lists all AWS linked accounts.
+	ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error
+	// Gets an AWS linked account. This API includes all of the account's metadata.
+	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
+	// Registers an AWS linked account.
+	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
+	// Deletes an AWS linked account.
+	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
@@ -405,6 +482,18 @@ func (UnimplementedCostServer) CreateManagementAccount(context.Context, *CreateM
 }
 func (UnimplementedCostServer) DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteManagementAccount not implemented")
+}
+func (UnimplementedCostServer) ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
+}
+func (UnimplementedCostServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
+}
+func (UnimplementedCostServer) CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedCostServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
 }
 func (UnimplementedCostServer) ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportCurFiles not implemented")
@@ -541,6 +630,81 @@ func _Cost_DeleteManagementAccount_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).DeleteManagementAccount(ctx, req.(*DeleteManagementAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ListAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAccountsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ListAccounts(m, &costListAccountsServer{stream})
+}
+
+type Cost_ListAccountsServer interface {
+	Send(*ListAccountsResponse) error
+	grpc.ServerStream
+}
+
+type costListAccountsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costListAccountsServer) Send(m *ListAccountsResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cost_GetAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetAccount(ctx, req.(*GetAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).CreateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/CreateAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).DeleteAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/DeleteAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -779,6 +943,18 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_DeleteManagementAccount_Handler,
 		},
 		{
+			MethodName: "GetAccount",
+			Handler:    _Cost_GetAccount_Handler,
+		},
+		{
+			MethodName: "CreateAccount",
+			Handler:    _Cost_CreateAccount_Handler,
+		},
+		{
+			MethodName: "DeleteAccount",
+			Handler:    _Cost_DeleteAccount_Handler,
+		},
+		{
 			MethodName: "ImportCurFiles",
 			Handler:    _Cost_ImportCurFiles_Handler,
 		},
@@ -811,6 +987,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListManagementAccounts",
 			Handler:       _Cost_ListManagementAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAccounts",
+			Handler:       _Cost_ListAccounts_Handler,
 			ServerStreams: true,
 		},
 		{
