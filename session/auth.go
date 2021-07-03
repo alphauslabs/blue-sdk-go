@@ -8,6 +8,7 @@ type tokenAuth struct {
 	loginUrl     string
 	clientId     string
 	clientSecret string
+	accessToken  string
 }
 
 func (t tokenAuth) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
@@ -17,9 +18,13 @@ func (t tokenAuth) GetRequestMetadata(ctx context.Context, uri ...string) (map[s
 		WithClientSecret(t.clientSecret),
 	)
 
-	token, err := s.AccessToken()
-	if err != nil {
-		return map[string]string{}, err
+	token := t.accessToken
+	if token == "" {
+		var err error
+		token, err = s.AccessToken()
+		if err != nil {
+			return map[string]string{}, err
+		}
 	}
 
 	return map[string]string{"authorization": "Bearer " + token}, nil
@@ -31,14 +36,17 @@ type RpcCredentialsInput struct {
 	LoginUrl     string
 	ClientId     string
 	ClientSecret string
+	AccessToken  string // use directly if non-empty; disregard others
 }
 
 func NewRpcCredentials(in ...RpcCredentialsInput) tokenAuth {
+	var accessToken string
 	sess := New()
 	loginUrl := sess.LoginUrl()
 	clientId := sess.ClientId()
 	clientSecret := sess.ClientSecret()
 	if len(in) > 0 {
+		accessToken = in[0].AccessToken
 		if in[0].LoginUrl != "" {
 			loginUrl = in[0].LoginUrl
 		}
@@ -56,5 +64,6 @@ func NewRpcCredentials(in ...RpcCredentialsInput) tokenAuth {
 		loginUrl:     loginUrl,
 		clientId:     clientId,
 		clientSecret: clientSecret,
+		accessToken:  accessToken,
 	}
 }
