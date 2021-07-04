@@ -32,6 +32,8 @@ type CostClient interface {
 	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
 	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
+	// See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
+	// for more information.
 	CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -44,7 +46,9 @@ type CostClient interface {
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
 	// Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Initiates an ondemand import of all registered CUR files.
+	// Initiates an ondemand import of all registered CUR files. See
+	// [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
+	// for more information.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
@@ -418,6 +422,8 @@ type CostServer interface {
 	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
 	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
 	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
+	// See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
+	// for more information.
 	CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error)
 	// Deletes an AWS management account.
 	DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error)
@@ -430,7 +436,9 @@ type CostServer interface {
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
 	// Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
-	// Initiates an ondemand import of all registered CUR files.
+	// Initiates an ondemand import of all registered CUR files. See
+	// [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
+	// for more information.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
