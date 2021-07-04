@@ -40,7 +40,7 @@ type CostClient interface {
 	// Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
-	// Registers an vendor account.
+	// Registers a vendor account.
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
 	// Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -426,7 +426,7 @@ type CostServer interface {
 	// Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
-	// Registers an vendor account.
+	// Registers a vendor account.
 	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
 	// Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
