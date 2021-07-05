@@ -30,9 +30,7 @@ type Operation struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The server-assigned name, which is only unique within the same service that
-	// originally returns it. If you use the default HTTP mapping, the
-	// `name` should be a resource name ending with `operations/{unique_id}`.
+	// The server-assigned name.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Service-specific metadata associated with the operation.  It typically
 	// contains progress information and common metadata such as create time.
