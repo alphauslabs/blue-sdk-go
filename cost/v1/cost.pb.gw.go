@@ -744,11 +744,11 @@ func request_Cost_ReadBillingGroupTagCosts_0(ctx context.Context, marshaler runt
 }
 
 var (
-	filter_Cost_ReadAccountTagCosts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "id": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+	filter_Cost_ReadBillingGroupNonTagCosts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "id": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
-func request_Cost_ReadAccountTagCosts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ReadAccountTagCostsClient, runtime.ServerMetadata, error) {
-	var protoReq ReadAccountTagCostsRequest
+func request_Cost_ReadBillingGroupNonTagCosts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ReadBillingGroupNonTagCostsClient, runtime.ServerMetadata, error) {
+	var protoReq ReadBillingGroupNonTagCostsRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -781,11 +781,11 @@ func request_Cost_ReadAccountTagCosts_0(ctx context.Context, marshaler runtime.M
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Cost_ReadAccountTagCosts_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Cost_ReadBillingGroupNonTagCosts_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	stream, err := client.ReadAccountTagCosts(ctx, &protoReq)
+	stream, err := client.ReadBillingGroupNonTagCosts(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -1412,7 +1412,7 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		return
 	})
 
-	mux.Handle("POST", pattern_Cost_ReadAccountTagCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cost_ReadBillingGroupNonTagCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -1855,23 +1855,23 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 
 	})
 
-	mux.Handle("POST", pattern_Cost_ReadAccountTagCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cost_ReadBillingGroupNonTagCosts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadAccountTagCosts")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadBillingGroupNonTagCosts")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cost_ReadAccountTagCosts_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cost_ReadBillingGroupNonTagCosts_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cost_ReadAccountTagCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_Cost_ReadBillingGroupNonTagCosts_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -2007,7 +2007,7 @@ var (
 
 	pattern_Cost_ReadBillingGroupTagCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "vendor", "billinggroups", "id", "tagcosts"}, "read"))
 
-	pattern_Cost_ReadAccountTagCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "vendor", "accounts", "id", "tagcosts"}, "read"))
+	pattern_Cost_ReadBillingGroupNonTagCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "vendor", "billinggroups", "id", "nontagcosts"}, "read"))
 
 	pattern_Cost_CreateBudgetConfig_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3}, []string{"v1", "vendor", "budgets", "configuration"}, ""))
 
@@ -2049,7 +2049,7 @@ var (
 
 	forward_Cost_ReadBillingGroupTagCosts_0 = runtime.ForwardResponseStream
 
-	forward_Cost_ReadAccountTagCosts_0 = runtime.ForwardResponseStream
+	forward_Cost_ReadBillingGroupNonTagCosts_0 = runtime.ForwardResponseStream
 
 	forward_Cost_CreateBudgetConfig_0 = runtime.ForwardResponseMessage
 

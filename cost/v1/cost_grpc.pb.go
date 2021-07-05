@@ -64,9 +64,9 @@ type CostClient interface {
 	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadBillingGroupTagCosts(ctx context.Context, in *ReadBillingGroupTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupTagCostsClient, error)
-	// Reads the usage-based tag costs of an AWS account. At the moment, the supported {vendor} is
+	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
-	ReadAccountTagCosts(ctx context.Context, in *ReadAccountTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountTagCostsClient, error)
+	ReadBillingGroupNonTagCosts(ctx context.Context, in *ReadBillingGroupNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupNonTagCostsClient, error)
 	// Creates a budget configuration.
 	CreateBudgetConfig(ctx context.Context, in *CreateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Updates an existing budget configuration.
@@ -330,12 +330,12 @@ func (x *costReadBillingGroupTagCostsClient) Recv() (*CostItem, error) {
 	return m, nil
 }
 
-func (c *costClient) ReadAccountTagCosts(ctx context.Context, in *ReadAccountTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadAccountTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadAccountTagCosts", opts...)
+func (c *costClient) ReadBillingGroupNonTagCosts(ctx context.Context, in *ReadBillingGroupNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupNonTagCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadBillingGroupNonTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &costReadAccountTagCostsClient{stream}
+	x := &costReadBillingGroupNonTagCostsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -345,16 +345,16 @@ func (c *costClient) ReadAccountTagCosts(ctx context.Context, in *ReadAccountTag
 	return x, nil
 }
 
-type Cost_ReadAccountTagCostsClient interface {
+type Cost_ReadBillingGroupNonTagCostsClient interface {
 	Recv() (*CostItem, error)
 	grpc.ClientStream
 }
 
-type costReadAccountTagCostsClient struct {
+type costReadBillingGroupNonTagCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costReadAccountTagCostsClient) Recv() (*CostItem, error) {
+func (x *costReadBillingGroupNonTagCostsClient) Recv() (*CostItem, error) {
 	m := new(CostItem)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -454,9 +454,9 @@ type CostServer interface {
 	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadBillingGroupTagCosts(*ReadBillingGroupTagCostsRequest, Cost_ReadBillingGroupTagCostsServer) error
-	// Reads the usage-based tag costs of an AWS account. At the moment, the supported {vendor} is
+	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
-	ReadAccountTagCosts(*ReadAccountTagCostsRequest, Cost_ReadAccountTagCostsServer) error
+	ReadBillingGroupNonTagCosts(*ReadBillingGroupNonTagCostsRequest, Cost_ReadBillingGroupNonTagCostsServer) error
 	// Creates a budget configuration.
 	CreateBudgetConfig(context.Context, *CreateBudgetConfigRequest) (*emptypb.Empty, error)
 	// Updates an existing budget configuration.
@@ -518,8 +518,8 @@ func (UnimplementedCostServer) ReadAdjustments(*ReadAdjustmentsRequest, Cost_Rea
 func (UnimplementedCostServer) ReadBillingGroupTagCosts(*ReadBillingGroupTagCostsRequest, Cost_ReadBillingGroupTagCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadBillingGroupTagCosts not implemented")
 }
-func (UnimplementedCostServer) ReadAccountTagCosts(*ReadAccountTagCostsRequest, Cost_ReadAccountTagCostsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ReadAccountTagCosts not implemented")
+func (UnimplementedCostServer) ReadBillingGroupNonTagCosts(*ReadBillingGroupNonTagCostsRequest, Cost_ReadBillingGroupNonTagCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadBillingGroupNonTagCosts not implemented")
 }
 func (UnimplementedCostServer) CreateBudgetConfig(context.Context, *CreateBudgetConfigRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBudgetConfig not implemented")
@@ -816,24 +816,24 @@ func (x *costReadBillingGroupTagCostsServer) Send(m *CostItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cost_ReadAccountTagCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ReadAccountTagCostsRequest)
+func _Cost_ReadBillingGroupNonTagCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadBillingGroupNonTagCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(CostServer).ReadAccountTagCosts(m, &costReadAccountTagCostsServer{stream})
+	return srv.(CostServer).ReadBillingGroupNonTagCosts(m, &costReadBillingGroupNonTagCostsServer{stream})
 }
 
-type Cost_ReadAccountTagCostsServer interface {
+type Cost_ReadBillingGroupNonTagCostsServer interface {
 	Send(*CostItem) error
 	grpc.ServerStream
 }
 
-type costReadAccountTagCostsServer struct {
+type costReadBillingGroupNonTagCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costReadAccountTagCostsServer) Send(m *CostItem) error {
+func (x *costReadBillingGroupNonTagCostsServer) Send(m *CostItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -1018,8 +1018,8 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ReadAccountTagCosts",
-			Handler:       _Cost_ReadAccountTagCosts_Handler,
+			StreamName:    "ReadBillingGroupNonTagCosts",
+			Handler:       _Cost_ReadBillingGroupNonTagCosts_Handler,
 			ServerStreams: true,
 		},
 	},
