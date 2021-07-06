@@ -1005,7 +1005,7 @@ type CalculateCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. If set to a particular billing group, calculate for that billing group.
 	// If empty, calculate for all billing groups.
@@ -1078,7 +1078,7 @@ type ReadCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. If set, reads the usage-based cost details of this billing group. Valid
 	// only if `accountId` is not set. If both `companyId` and `accountId` are not set,
@@ -1227,7 +1227,7 @@ type ReadAdjustmentsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. If set, reads the non-usage-based adjustment details of this billing group.
 	// Valid only if `accountId` is not set. If both `companyId` and `accountId` are not
@@ -1319,7 +1319,7 @@ type ReadBillingGroupTagCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The company id to stream.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1397,7 +1397,7 @@ type ReadBillingGroupNonTagCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The company id to stream.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -1475,7 +1475,7 @@ type CreateBudgetConfigRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Budget configuration to save.
 	BudgetConfig *api.BudgetConfiguration `protobuf:"bytes,2,opt,name=budgetConfig,proto3" json:"budgetConfig,omitempty"`
@@ -1533,7 +1533,7 @@ type UpdateBudgetConfigRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Budget configuration id to update.
 	BudgetConfigId string `protobuf:"bytes,2,opt,name=budgetConfigId,proto3" json:"budgetConfigId,omitempty"`
@@ -1716,7 +1716,7 @@ type GetForecastsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. Company Id of Billing Group to retrieve.
 	// Default value is user's Company Id
@@ -1866,7 +1866,7 @@ type GetMonthToDateForecastRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values are `aws`, `azure`, and `gcp`.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. Company Id of Billing Group to retrieve.
 	// Default value is user's Company Id
