@@ -32,9 +32,9 @@ type Operation struct {
 
 	// The server-assigned name.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	// Service-specific metadata associated with the operation.  It typically
+	// Service-specific metadata associated with the operation. It typically
 	// contains progress information and common metadata such as create time.
-	// Some services might not provide such metadata.  Any method that returns a
+	// Some services might not provide such metadata. Any method that returns a
 	// long-running operation should document the metadata type, if any.
 	Metadata *anypb.Any `protobuf:"bytes,2,opt,name=metadata,proto3" json:"metadata,omitempty"`
 	// If the value is `false`, it means the operation is still in progress.
@@ -135,20 +135,89 @@ type Operation_Error struct {
 }
 
 type Operation_Response struct {
-	// The normal response of the operation in case of success.  If the original
-	// method returns no data on success, such as `Delete`, the response is
-	// `google.protobuf.Empty`.  If the original method is standard
-	// `Get`/`Create`/`Update`, the response should be the resource.  For other
-	// methods, the response should have the type `XxxResponse`, where `Xxx`
-	// is the original method name.  For example, if the original method name
-	// is `TakeSnapshot()`, the inferred response type is
-	// `TakeSnapshotResponse`.
+	// The normal response of the operation in case of success. If the original method returns
+	// no data on success, such as `Delete`, the response is `google.protobuf.Empty`. If the
+	// original method is standard `Get`/`Create`/`Update`, the response should be the
+	// resource. For other methods, the response should have the type `XxxResponse`, where
+	// `Xxx` is the original method name. For example, if the original method name is
+	// `TakeSnapshot()`, the inferred response type is `TakeSnapshotResponse`.
 	Response *anypb.Any `protobuf:"bytes,5,opt,name=response,proto3,oneof"`
 }
 
 func (*Operation_Error) isOperation_Result() {}
 
 func (*Operation_Response) isOperation_Result() {}
+
+type OperationImportCurMetadataV1 struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Month    string   `protobuf:"bytes,1,opt,name=month,proto3" json:"month,omitempty"`
+	Accounts []string `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	Created  string   `protobuf:"bytes,3,opt,name=created,proto3" json:"created,omitempty"`
+	Updated  string   `protobuf:"bytes,4,opt,name=updated,proto3" json:"updated,omitempty"`
+}
+
+func (x *OperationImportCurMetadataV1) Reset() {
+	*x = OperationImportCurMetadataV1{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_operation_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OperationImportCurMetadataV1) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OperationImportCurMetadataV1) ProtoMessage() {}
+
+func (x *OperationImportCurMetadataV1) ProtoReflect() protoreflect.Message {
+	mi := &file_api_operation_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OperationImportCurMetadataV1.ProtoReflect.Descriptor instead.
+func (*OperationImportCurMetadataV1) Descriptor() ([]byte, []int) {
+	return file_api_operation_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *OperationImportCurMetadataV1) GetMonth() string {
+	if x != nil {
+		return x.Month
+	}
+	return ""
+}
+
+func (x *OperationImportCurMetadataV1) GetAccounts() []string {
+	if x != nil {
+		return x.Accounts
+	}
+	return nil
+}
+
+func (x *OperationImportCurMetadataV1) GetCreated() string {
+	if x != nil {
+		return x.Created
+	}
+	return ""
+}
+
+func (x *OperationImportCurMetadataV1) GetUpdated() string {
+	if x != nil {
+		return x.Updated
+	}
+	return ""
+}
 
 var File_api_operation_proto protoreflect.FileDescriptor
 
@@ -173,13 +242,21 @@ var file_api_operation_proto_rawDesc = []byte{
 	0x6f, 0x6e, 0x73, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x14, 0x2e, 0x67, 0x6f, 0x6f,
 	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x41, 0x6e, 0x79,
 	0x48, 0x00, 0x52, 0x08, 0x72, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x42, 0x08, 0x0a, 0x06,
-	0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x42, 0x56, 0x0a, 0x19, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e,
-	0x61, 0x70, 0x69, 0x42, 0x11, 0x41, 0x70, 0x69, 0x4f, 0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62,
-	0x6c, 0x75, 0x65, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x72, 0x65, 0x73, 0x75, 0x6c, 0x74, 0x22, 0x84, 0x01, 0x0a, 0x1c, 0x4f, 0x70, 0x65, 0x72, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x49, 0x6d, 0x70, 0x6f, 0x72, 0x74, 0x43, 0x75, 0x72, 0x4d, 0x65, 0x74,
+	0x61, 0x64, 0x61, 0x74, 0x61, 0x56, 0x31, 0x12, 0x14, 0x0a, 0x05, 0x6d, 0x6f, 0x6e, 0x74, 0x68,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x6d, 0x6f, 0x6e, 0x74, 0x68, 0x12, 0x1a, 0x0a,
+	0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52,
+	0x08, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x75, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x42, 0x56, 0x0a,
+	0x19, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x62,
+	0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x42, 0x11, 0x41, 0x70, 0x69, 0x4f,
+	0x70, 0x65, 0x72, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x26, 0x67,
+	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75,
+	0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67,
+	0x6f, 0x2f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -194,16 +271,17 @@ func file_api_operation_proto_rawDescGZIP() []byte {
 	return file_api_operation_proto_rawDescData
 }
 
-var file_api_operation_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
+var file_api_operation_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_api_operation_proto_goTypes = []interface{}{
-	(*Operation)(nil),     // 0: blueapi.api.Operation
-	(*anypb.Any)(nil),     // 1: google.protobuf.Any
-	(*status.Status)(nil), // 2: google.rpc.Status
+	(*Operation)(nil),                    // 0: blueapi.api.Operation
+	(*OperationImportCurMetadataV1)(nil), // 1: blueapi.api.OperationImportCurMetadataV1
+	(*anypb.Any)(nil),                    // 2: google.protobuf.Any
+	(*status.Status)(nil),                // 3: google.rpc.Status
 }
 var file_api_operation_proto_depIdxs = []int32{
-	1, // 0: blueapi.api.Operation.metadata:type_name -> google.protobuf.Any
-	2, // 1: blueapi.api.Operation.error:type_name -> google.rpc.Status
-	1, // 2: blueapi.api.Operation.response:type_name -> google.protobuf.Any
+	2, // 0: blueapi.api.Operation.metadata:type_name -> google.protobuf.Any
+	3, // 1: blueapi.api.Operation.error:type_name -> google.rpc.Status
+	2, // 2: blueapi.api.Operation.response:type_name -> google.protobuf.Any
 	3, // [3:3] is the sub-list for method output_type
 	3, // [3:3] is the sub-list for method input_type
 	3, // [3:3] is the sub-list for extension type_name
@@ -229,6 +307,18 @@ func file_api_operation_proto_init() {
 				return nil
 			}
 		}
+		file_api_operation_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*OperationImportCurMetadataV1); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_api_operation_proto_msgTypes[0].OneofWrappers = []interface{}{
 		(*Operation_Error)(nil),
@@ -240,7 +330,7 @@ func file_api_operation_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_operation_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   1,
+			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
