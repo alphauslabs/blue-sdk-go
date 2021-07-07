@@ -2110,7 +2110,7 @@ var (
 
 	pattern_Cost_ImportCurFiles_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "aws"}, "importCurFiles"))
 
-	pattern_Cost_CalculateCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1}, []string{"v1", "vendor"}, "calculateCosts"))
+	pattern_Cost_CalculateCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "costs"}, "calculate"))
 
 	pattern_Cost_ReadCosts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "costs"}, "read"))
 
