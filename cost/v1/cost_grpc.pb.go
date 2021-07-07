@@ -5,7 +5,6 @@ package cost
 import (
 	context "context"
 	api "github.com/alphauslabs/blue-sdk-go/api"
-	aws "github.com/alphauslabs/blue-sdk-go/api/aws"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -21,29 +20,29 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
-	// Lists AWS management accounts (formerly known as master or payer accounts).
-	ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (Cost_ListManagementAccountsClient, error)
-	// Gets an AWS management account. This API includes all of the account's metadata.
+	// Lists vendor payer accounts. For AWS, these are management accounts (formerly known
+	// as master or payer accounts); for Azure, these are subscriptions, for GCP, these
+	// are projects.
+	ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (Cost_ListPayerAccountsClient, error)
+	// Gets a vendor payer account. This API includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
-	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
-	// exported to your S3 by AWS, which in turn, triggers the import from your S3 to our system for processing.
-	GetManagementAccountUpdateHistory(ctx context.Context, in *GetManagementAccountUpdateHistoryRequest, opts ...grpc.CallOption) (*GetManagementAccountUpdateHistoryResponse, error)
-	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
-	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
-	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
-	// See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
-	// for more information.
-	CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error)
-	// Deletes an AWS management account.
-	DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// For AWS, this means a management account (formerly known as master or payer account);
+	// for Azure, this means a subscription, for GCP, this means a project.
+	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
+	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
+	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
+	GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (*GetPayerAccountImportHistoryResponse, error)
+	// Registers a vendor payer account.
+	CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
+	// Deletes a vendor payer account.
+	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error)
 	// Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error)
+	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Registers a vendor account.
-	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error)
+	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See
@@ -89,12 +88,12 @@ func NewCostClient(cc grpc.ClientConnInterface) CostClient {
 	return &costClient{cc}
 }
 
-func (c *costClient) ListManagementAccounts(ctx context.Context, in *ListManagementAccountsRequest, opts ...grpc.CallOption) (Cost_ListManagementAccountsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[0], "/blueapi.cost.v1.Cost/ListManagementAccounts", opts...)
+func (c *costClient) ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (Cost_ListPayerAccountsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[0], "/blueapi.cost.v1.Cost/ListPayerAccounts", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &costListManagementAccountsClient{stream}
+	x := &costListPayerAccountsClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -104,53 +103,53 @@ func (c *costClient) ListManagementAccounts(ctx context.Context, in *ListManagem
 	return x, nil
 }
 
-type Cost_ListManagementAccountsClient interface {
-	Recv() (*aws.Account, error)
+type Cost_ListPayerAccountsClient interface {
+	Recv() (*api.Account, error)
 	grpc.ClientStream
 }
 
-type costListManagementAccountsClient struct {
+type costListPayerAccountsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costListManagementAccountsClient) Recv() (*aws.Account, error) {
-	m := new(aws.Account)
+func (x *costListPayerAccountsClient) Recv() (*api.Account, error) {
+	m := new(api.Account)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *costClient) GetManagementAccount(ctx context.Context, in *GetManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
-	out := new(aws.Account)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetManagementAccount", in, out, opts...)
+func (c *costClient) GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
+	out := new(api.Account)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetPayerAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *costClient) GetManagementAccountUpdateHistory(ctx context.Context, in *GetManagementAccountUpdateHistoryRequest, opts ...grpc.CallOption) (*GetManagementAccountUpdateHistoryResponse, error) {
-	out := new(GetManagementAccountUpdateHistoryResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetManagementAccountUpdateHistory", in, out, opts...)
+func (c *costClient) GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (*GetPayerAccountImportHistoryResponse, error) {
+	out := new(GetPayerAccountImportHistoryResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *costClient) CreateManagementAccount(ctx context.Context, in *CreateManagementAccountRequest, opts ...grpc.CallOption) (*aws.Account, error) {
-	out := new(aws.Account)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateManagementAccount", in, out, opts...)
+func (c *costClient) CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
+	out := new(api.Account)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreatePayerAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *costClient) DeleteManagementAccount(ctx context.Context, in *DeleteManagementAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *costClient) DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteManagementAccount", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeletePayerAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -173,7 +172,7 @@ func (c *costClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, 
 }
 
 type Cost_ListAccountsClient interface {
-	Recv() (*ListAccountsResponse, error)
+	Recv() (*api.Account, error)
 	grpc.ClientStream
 }
 
@@ -181,16 +180,16 @@ type costListAccountsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costListAccountsClient) Recv() (*ListAccountsResponse, error) {
-	m := new(ListAccountsResponse)
+func (x *costListAccountsClient) Recv() (*api.Account, error) {
+	m := new(api.Account)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *costClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*GetAccountResponse, error) {
-	out := new(GetAccountResponse)
+func (c *costClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
+	out := new(api.Account)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -198,8 +197,8 @@ func (c *costClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts
 	return out, nil
 }
 
-func (c *costClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*CreateAccountResponse, error) {
-	out := new(CreateAccountResponse)
+func (c *costClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
+	out := new(api.Account)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -411,29 +410,29 @@ func (c *costClient) GetMonthToDateForecast(ctx context.Context, in *GetMonthToD
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
 type CostServer interface {
-	// Lists AWS management accounts (formerly known as master or payer accounts).
-	ListManagementAccounts(*ListManagementAccountsRequest, Cost_ListManagementAccountsServer) error
-	// Gets an AWS management account. This API includes all of the account's metadata.
+	// Lists vendor payer accounts. For AWS, these are management accounts (formerly known
+	// as master or payer accounts); for Azure, these are subscriptions, for GCP, these
+	// are projects.
+	ListPayerAccounts(*ListPayerAccountsRequest, Cost_ListPayerAccountsServer) error
+	// Gets a vendor payer account. This API includes all of the account's metadata.
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error)
-	// Gets an AWS management account's update history, which is a list of timestamps our system tracks when the account's CUR files are
-	// exported to your S3 by AWS, which in turn, triggers the import from your S3 to our system for processing.
-	GetManagementAccountUpdateHistory(context.Context, *GetManagementAccountUpdateHistoryRequest) (*GetManagementAccountUpdateHistoryResponse, error)
-	// Registers an AWS management account. See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html]
-	// for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled,
-	// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
-	// See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
-	// for more information.
-	CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error)
-	// Deletes an AWS management account.
-	DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error)
+	// For AWS, this means a management account (formerly known as master or payer account);
+	// for Azure, this means a subscription, for GCP, this means a project.
+	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*api.Account, error)
+	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
+	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
+	GetPayerAccountImportHistory(context.Context, *GetPayerAccountImportHistoryRequest) (*GetPayerAccountImportHistoryResponse, error)
+	// Registers a vendor payer account.
+	CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error)
+	// Deletes a vendor payer account.
+	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error
 	// Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error)
+	GetAccount(context.Context, *GetAccountRequest) (*api.Account, error)
 	// Registers a vendor account.
-	CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error)
+	CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error)
 	// Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See
@@ -476,28 +475,28 @@ type CostServer interface {
 type UnimplementedCostServer struct {
 }
 
-func (UnimplementedCostServer) ListManagementAccounts(*ListManagementAccountsRequest, Cost_ListManagementAccountsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListManagementAccounts not implemented")
+func (UnimplementedCostServer) ListPayerAccounts(*ListPayerAccountsRequest, Cost_ListPayerAccountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListPayerAccounts not implemented")
 }
-func (UnimplementedCostServer) GetManagementAccount(context.Context, *GetManagementAccountRequest) (*aws.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetManagementAccount not implemented")
+func (UnimplementedCostServer) GetPayerAccount(context.Context, *GetPayerAccountRequest) (*api.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccount not implemented")
 }
-func (UnimplementedCostServer) GetManagementAccountUpdateHistory(context.Context, *GetManagementAccountUpdateHistoryRequest) (*GetManagementAccountUpdateHistoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetManagementAccountUpdateHistory not implemented")
+func (UnimplementedCostServer) GetPayerAccountImportHistory(context.Context, *GetPayerAccountImportHistoryRequest) (*GetPayerAccountImportHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccountImportHistory not implemented")
 }
-func (UnimplementedCostServer) CreateManagementAccount(context.Context, *CreateManagementAccountRequest) (*aws.Account, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateManagementAccount not implemented")
+func (UnimplementedCostServer) CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePayerAccount not implemented")
 }
-func (UnimplementedCostServer) DeleteManagementAccount(context.Context, *DeleteManagementAccountRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteManagementAccount not implemented")
+func (UnimplementedCostServer) DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeletePayerAccount not implemented")
 }
 func (UnimplementedCostServer) ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
 }
-func (UnimplementedCostServer) GetAccount(context.Context, *GetAccountRequest) (*GetAccountResponse, error) {
+func (UnimplementedCostServer) GetAccount(context.Context, *GetAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
 }
-func (UnimplementedCostServer) CreateAccount(context.Context, *CreateAccountRequest) (*CreateAccountResponse, error) {
+func (UnimplementedCostServer) CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
 }
 func (UnimplementedCostServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error) {
@@ -549,95 +548,95 @@ func RegisterCostServer(s grpc.ServiceRegistrar, srv CostServer) {
 	s.RegisterService(&Cost_ServiceDesc, srv)
 }
 
-func _Cost_ListManagementAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListManagementAccountsRequest)
+func _Cost_ListPayerAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListPayerAccountsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(CostServer).ListManagementAccounts(m, &costListManagementAccountsServer{stream})
+	return srv.(CostServer).ListPayerAccounts(m, &costListPayerAccountsServer{stream})
 }
 
-type Cost_ListManagementAccountsServer interface {
-	Send(*aws.Account) error
+type Cost_ListPayerAccountsServer interface {
+	Send(*api.Account) error
 	grpc.ServerStream
 }
 
-type costListManagementAccountsServer struct {
+type costListPayerAccountsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costListManagementAccountsServer) Send(m *aws.Account) error {
+func (x *costListPayerAccountsServer) Send(m *api.Account) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cost_GetManagementAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetManagementAccountRequest)
+func _Cost_GetPayerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPayerAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).GetManagementAccount(ctx, in)
+		return srv.(CostServer).GetPayerAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/GetManagementAccount",
+		FullMethod: "/blueapi.cost.v1.Cost/GetPayerAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetManagementAccount(ctx, req.(*GetManagementAccountRequest))
+		return srv.(CostServer).GetPayerAccount(ctx, req.(*GetPayerAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_GetManagementAccountUpdateHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetManagementAccountUpdateHistoryRequest)
+func _Cost_GetPayerAccountImportHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPayerAccountImportHistoryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).GetManagementAccountUpdateHistory(ctx, in)
+		return srv.(CostServer).GetPayerAccountImportHistory(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/GetManagementAccountUpdateHistory",
+		FullMethod: "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetManagementAccountUpdateHistory(ctx, req.(*GetManagementAccountUpdateHistoryRequest))
+		return srv.(CostServer).GetPayerAccountImportHistory(ctx, req.(*GetPayerAccountImportHistoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_CreateManagementAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateManagementAccountRequest)
+func _Cost_CreatePayerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePayerAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).CreateManagementAccount(ctx, in)
+		return srv.(CostServer).CreatePayerAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/CreateManagementAccount",
+		FullMethod: "/blueapi.cost.v1.Cost/CreatePayerAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).CreateManagementAccount(ctx, req.(*CreateManagementAccountRequest))
+		return srv.(CostServer).CreatePayerAccount(ctx, req.(*CreatePayerAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_DeleteManagementAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteManagementAccountRequest)
+func _Cost_DeletePayerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeletePayerAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).DeleteManagementAccount(ctx, in)
+		return srv.(CostServer).DeletePayerAccount(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/DeleteManagementAccount",
+		FullMethod: "/blueapi.cost.v1.Cost/DeletePayerAccount",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).DeleteManagementAccount(ctx, req.(*DeleteManagementAccountRequest))
+		return srv.(CostServer).DeletePayerAccount(ctx, req.(*DeletePayerAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -651,7 +650,7 @@ func _Cost_ListAccounts_Handler(srv interface{}, stream grpc.ServerStream) error
 }
 
 type Cost_ListAccountsServer interface {
-	Send(*ListAccountsResponse) error
+	Send(*api.Account) error
 	grpc.ServerStream
 }
 
@@ -659,7 +658,7 @@ type costListAccountsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costListAccountsServer) Send(m *ListAccountsResponse) error {
+func (x *costListAccountsServer) Send(m *api.Account) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -935,20 +934,20 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CostServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetManagementAccount",
-			Handler:    _Cost_GetManagementAccount_Handler,
+			MethodName: "GetPayerAccount",
+			Handler:    _Cost_GetPayerAccount_Handler,
 		},
 		{
-			MethodName: "GetManagementAccountUpdateHistory",
-			Handler:    _Cost_GetManagementAccountUpdateHistory_Handler,
+			MethodName: "GetPayerAccountImportHistory",
+			Handler:    _Cost_GetPayerAccountImportHistory_Handler,
 		},
 		{
-			MethodName: "CreateManagementAccount",
-			Handler:    _Cost_CreateManagementAccount_Handler,
+			MethodName: "CreatePayerAccount",
+			Handler:    _Cost_CreatePayerAccount_Handler,
 		},
 		{
-			MethodName: "DeleteManagementAccount",
-			Handler:    _Cost_DeleteManagementAccount_Handler,
+			MethodName: "DeletePayerAccount",
+			Handler:    _Cost_DeletePayerAccount_Handler,
 		},
 		{
 			MethodName: "GetAccount",
@@ -993,8 +992,8 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "ListManagementAccounts",
-			Handler:       _Cost_ListManagementAccounts_Handler,
+			StreamName:    "ListPayerAccounts",
+			Handler:       _Cost_ListPayerAccounts_Handler,
 			ServerStreams: true,
 		},
 		{
