@@ -985,11 +985,11 @@ type ReadCostsRequestAwsOptions struct {
 	// definition in `api/aws/cost.proto`), which is generic to specific, top to bottom.
 	// Invalid values are discarded. Excluded columns will be empty.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
-	// Optional. If set to true, stream will include resource tags. Discarded when either
-	// `groupByMonth` or `groupByColumns` (or both) are set.
+	// Optional. If set to true, stream will include resource tags. Discarded when
+	// `groupByColumns` field is set.
 	IncludeTags bool `protobuf:"varint,2,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
 	// Optional. If set to true, stream will include resource cost category information.
-	// Discarded when either `groupByMonth` or `groupByColumns` (or both) are set.
+	// Discarded when `groupByColumns` field is set.
 	IncludeCostCategories bool `protobuf:"varint,3,opt,name=includeCostCategories,proto3" json:"includeCostCategories,omitempty"`
 	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can
 	// set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which
