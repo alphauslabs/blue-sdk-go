@@ -43,6 +43,17 @@ type IamClient interface {
 	// Lists all permissions based on the input's scope. For reference, supported
 	// permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error)
+	// Lists all available roles.
+	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
+	// Creates a role. If your `permissions` list contains an `Admin` entry, all other
+	// entries will be discarded except `Admin`. Roles are root user-level. That means
+	// all roles created by the root user, or any subuser that has permissions to
+	// create roles, are available to all subusers.
+	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
+	// Updates a role. If role name is different, rename mapped role name.
+	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Deletes a role. Deleting a role will also remove all mappings.
+	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -187,6 +198,42 @@ func (c *iamClient) ListPermissions(ctx context.Context, in *ListPermissionsRequ
 	return out, nil
 }
 
+func (c *iamClient) ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error) {
+	out := new(ListRolesResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListRoles", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*api.Role, error) {
+	out := new(api.Role)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/CreateRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/UpdateRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*api.Role, error) {
+	out := new(api.Role)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/DeleteRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[2], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
 	if err != nil {
@@ -264,6 +311,17 @@ type IamServer interface {
 	// Lists all permissions based on the input's scope. For reference, supported
 	// permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error)
+	// Lists all available roles.
+	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
+	// Creates a role. If your `permissions` list contains an `Admin` entry, all other
+	// entries will be discarded except `Admin`. Roles are root user-level. That means
+	// all roles created by the root user, or any subuser that has permissions to
+	// create roles, are available to all subusers.
+	CreateRole(context.Context, *CreateRoleRequest) (*api.Role, error)
+	// Updates a role. If role name is different, rename mapped role name.
+	UpdateRole(context.Context, *UpdateRoleRequest) (*emptypb.Empty, error)
+	// Deletes a role. Deleting a role will also remove all mappings.
+	DeleteRole(context.Context, *DeleteRoleRequest) (*api.Role, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -304,6 +362,18 @@ func (UnimplementedIamServer) DeleteApiClient(context.Context, *DeleteApiClientR
 }
 func (UnimplementedIamServer) ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPermissions not implemented")
+}
+func (UnimplementedIamServer) ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRoles not implemented")
+}
+func (UnimplementedIamServer) CreateRole(context.Context, *CreateRoleRequest) (*api.Role, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRole not implemented")
+}
+func (UnimplementedIamServer) UpdateRole(context.Context, *UpdateRoleRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateRole not implemented")
+}
+func (UnimplementedIamServer) DeleteRole(context.Context, *DeleteRoleRequest) (*api.Role, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
 }
 func (UnimplementedIamServer) ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
@@ -495,6 +565,78 @@ func _Iam_ListPermissions_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_ListRoles_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRolesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).ListRoles(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/ListRoles",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).ListRoles(ctx, req.(*ListRolesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_CreateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).CreateRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/CreateRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).CreateRole(ctx, req.(*CreateRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_UpdateRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).UpdateRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/UpdateRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).UpdateRole(ctx, req.(*UpdateRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).DeleteRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/DeleteRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).DeleteRole(ctx, req.(*DeleteRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ListIpFilters_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListIpFiltersRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -586,6 +728,22 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPermissions",
 			Handler:    _Iam_ListPermissions_Handler,
+		},
+		{
+			MethodName: "ListRoles",
+			Handler:    _Iam_ListRoles_Handler,
+		},
+		{
+			MethodName: "CreateRole",
+			Handler:    _Iam_CreateRole_Handler,
+		},
+		{
+			MethodName: "UpdateRole",
+			Handler:    _Iam_UpdateRole_Handler,
+		},
+		{
+			MethodName: "DeleteRole",
+			Handler:    _Iam_DeleteRole_Handler,
 		},
 		{
 			MethodName: "CreateIpFilter",
