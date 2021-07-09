@@ -45,6 +45,8 @@ type CostClient interface {
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Gets the vendor cost calculator's current configuration.
+	GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error)
 	// Initiates an ondemand import of all registered CUR files. See
 	// [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
 	// for more information.
@@ -217,6 +219,15 @@ func (c *costClient) CreateAccount(ctx context.Context, in *CreateAccountRequest
 func (c *costClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error) {
+	out := new(GetCalculatorConfigResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetCalculatorConfig", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -507,6 +518,8 @@ type CostServer interface {
 	CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error)
 	// Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
+	// Gets the vendor cost calculator's current configuration.
+	GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error)
 	// Initiates an ondemand import of all registered CUR files. See
 	// [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
 	// for more information.
@@ -581,6 +594,9 @@ func (UnimplementedCostServer) CreateAccount(context.Context, *CreateAccountRequ
 }
 func (UnimplementedCostServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedCostServer) GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCalculatorConfig not implemented")
 }
 func (UnimplementedCostServer) ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportCurFiles not implemented")
@@ -798,6 +814,24 @@ func _Cost_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_GetCalculatorConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCalculatorConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetCalculatorConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetCalculatorConfig",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetCalculatorConfig(ctx, req.(*GetCalculatorConfigRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1088,6 +1122,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccount",
 			Handler:    _Cost_DeleteAccount_Handler,
+		},
+		{
+			MethodName: "GetCalculatorConfig",
+			Handler:    _Cost_GetCalculatorConfig_Handler,
 		},
 		{
 			MethodName: "ImportCurFiles",
