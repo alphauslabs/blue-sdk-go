@@ -40,6 +40,8 @@ type IamClient interface {
 	CreateApiClient(ctx context.Context, in *CreateApiClientRequest, opts ...grpc.CallOption) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(ctx context.Context, in *DeleteApiClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Lists currently supported permissions.
+	ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -175,6 +177,15 @@ func (c *iamClient) DeleteApiClient(ctx context.Context, in *DeleteApiClientRequ
 	return out, nil
 }
 
+func (c *iamClient) ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error) {
+	out := new(ListPermissionsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListPermissions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[2], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
 	if err != nil {
@@ -249,6 +260,8 @@ type IamServer interface {
 	CreateApiClient(context.Context, *CreateApiClientRequest) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error)
+	// Lists currently supported permissions.
+	ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -286,6 +299,9 @@ func (UnimplementedIamServer) CreateApiClient(context.Context, *CreateApiClientR
 }
 func (UnimplementedIamServer) DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteApiClient not implemented")
+}
+func (UnimplementedIamServer) ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPermissions not implemented")
 }
 func (UnimplementedIamServer) ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
@@ -459,6 +475,24 @@ func _Iam_DeleteApiClient_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_ListPermissions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPermissionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).ListPermissions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/ListPermissions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).ListPermissions(ctx, req.(*ListPermissionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ListIpFilters_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListIpFiltersRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -546,6 +580,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteApiClient",
 			Handler:    _Iam_DeleteApiClient_Handler,
+		},
+		{
+			MethodName: "ListPermissions",
+			Handler:    _Iam_ListPermissions_Handler,
 		},
 		{
 			MethodName: "CreateIpFilter",
