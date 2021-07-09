@@ -143,7 +143,7 @@ func RegisterPreferencesHandlerClient(ctx context.Context, mux *runtime.ServeMux
 }
 
 var (
-	pattern_Preferences_GetPreferences_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"v1"}, ""))
+	pattern_Preferences_GetPreferences_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"prefs", "v1"}, ""))
 )
 
 var (
