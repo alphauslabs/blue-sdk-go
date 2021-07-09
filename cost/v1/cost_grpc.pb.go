@@ -60,12 +60,20 @@ type CostClient interface {
 	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error)
+	// (Deprecated, use cost.ReadTagCosts instead) Reads the usage-based tag costs of a billing group.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
+	ReadBillingGroupTagCosts(ctx context.Context, in *ReadBillingGroupTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupTagCostsClient, error)
+	// (Deprecated, use cost.ReadNonTagCosts instead) Reads the usage-based non tag costs of a billing group.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
+	ReadBillingGroupNonTagCosts(ctx context.Context, in *ReadBillingGroupNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupNonTagCostsClient, error)
 	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
-	ReadBillingGroupTagCosts(ctx context.Context, in *ReadBillingGroupTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupTagCostsClient, error)
+	ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error)
 	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
-	ReadBillingGroupNonTagCosts(ctx context.Context, in *ReadBillingGroupNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadBillingGroupNonTagCostsClient, error)
+	ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error)
 	// Creates a budget configuration.
 	CreateBudgetConfig(ctx context.Context, in *CreateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Updates an existing budget configuration.
@@ -361,6 +369,70 @@ func (x *costReadBillingGroupNonTagCostsClient) Recv() (*CostItem, error) {
 	return m, nil
 }
 
+func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadTagCostsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadTagCostsClient interface {
+	Recv() (*CostItem, error)
+	grpc.ClientStream
+}
+
+type costReadTagCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
+	m := new(CostItem)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadNonTagCostsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadNonTagCostsClient interface {
+	Recv() (*CostItem, error)
+	grpc.ClientStream
+}
+
+type costReadNonTagCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadNonTagCostsClient) Recv() (*CostItem, error) {
+	m := new(CostItem)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *costClient) CreateBudgetConfig(ctx context.Context, in *CreateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateBudgetConfig", in, out, opts...)
@@ -450,12 +522,20 @@ type CostServer interface {
 	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
 	// range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(*ReadAdjustmentsRequest, Cost_ReadAdjustmentsServer) error
+	// (Deprecated, use cost.ReadTagCosts instead) Reads the usage-based tag costs of a billing group.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
+	ReadBillingGroupTagCosts(*ReadBillingGroupTagCostsRequest, Cost_ReadBillingGroupTagCostsServer) error
+	// (Deprecated, use cost.ReadNonTagCosts instead) Reads the usage-based non tag costs of a billing group.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date
+	// (current month) will be returned.
+	ReadBillingGroupNonTagCosts(*ReadBillingGroupNonTagCostsRequest, Cost_ReadBillingGroupNonTagCostsServer) error
 	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
-	ReadBillingGroupTagCosts(*ReadBillingGroupTagCostsRequest, Cost_ReadBillingGroupTagCostsServer) error
+	ReadTagCosts(*ReadTagCostsRequest, Cost_ReadTagCostsServer) error
 	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
-	ReadBillingGroupNonTagCosts(*ReadBillingGroupNonTagCostsRequest, Cost_ReadBillingGroupNonTagCostsServer) error
+	ReadNonTagCosts(*ReadNonTagCostsRequest, Cost_ReadNonTagCostsServer) error
 	// Creates a budget configuration.
 	CreateBudgetConfig(context.Context, *CreateBudgetConfigRequest) (*emptypb.Empty, error)
 	// Updates an existing budget configuration.
@@ -519,6 +599,12 @@ func (UnimplementedCostServer) ReadBillingGroupTagCosts(*ReadBillingGroupTagCost
 }
 func (UnimplementedCostServer) ReadBillingGroupNonTagCosts(*ReadBillingGroupNonTagCostsRequest, Cost_ReadBillingGroupNonTagCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadBillingGroupNonTagCosts not implemented")
+}
+func (UnimplementedCostServer) ReadTagCosts(*ReadTagCostsRequest, Cost_ReadTagCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadTagCosts not implemented")
+}
+func (UnimplementedCostServer) ReadNonTagCosts(*ReadNonTagCostsRequest, Cost_ReadNonTagCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadNonTagCosts not implemented")
 }
 func (UnimplementedCostServer) CreateBudgetConfig(context.Context, *CreateBudgetConfigRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBudgetConfig not implemented")
@@ -836,6 +922,48 @@ func (x *costReadBillingGroupNonTagCostsServer) Send(m *CostItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cost_ReadTagCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadTagCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadTagCosts(m, &costReadTagCostsServer{stream})
+}
+
+type Cost_ReadTagCostsServer interface {
+	Send(*CostItem) error
+	grpc.ServerStream
+}
+
+type costReadTagCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadTagCostsServer) Send(m *CostItem) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cost_ReadNonTagCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadNonTagCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadNonTagCosts(m, &costReadNonTagCostsServer{stream})
+}
+
+type Cost_ReadNonTagCostsServer interface {
+	Send(*CostItem) error
+	grpc.ServerStream
+}
+
+type costReadNonTagCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadNonTagCostsServer) Send(m *CostItem) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Cost_CreateBudgetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateBudgetConfigRequest)
 	if err := dec(in); err != nil {
@@ -1019,6 +1147,16 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadBillingGroupNonTagCosts",
 			Handler:       _Cost_ReadBillingGroupNonTagCosts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadTagCosts",
+			Handler:       _Cost_ReadTagCosts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadNonTagCosts",
+			Handler:       _Cost_ReadNonTagCosts_Handler,
 			ServerStreams: true,
 		},
 	},
