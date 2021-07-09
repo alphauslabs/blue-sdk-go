@@ -40,7 +40,8 @@ type IamClient interface {
 	CreateApiClient(ctx context.Context, in *CreateApiClientRequest, opts ...grpc.CallOption) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(ctx context.Context, in *DeleteApiClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Lists currently supported permissions.
+	// Lists all permissions based on the input's scope. For reference, supported
+	// permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
@@ -260,7 +261,8 @@ type IamServer interface {
 	CreateApiClient(context.Context, *CreateApiClientRequest) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error)
-	// Lists currently supported permissions.
+	// Lists all permissions based on the input's scope. For reference, supported
+	// permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
