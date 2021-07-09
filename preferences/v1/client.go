@@ -1,4 +1,4 @@
-package billing
+package preferences
 
 import (
 	"context"
@@ -7,7 +7,7 @@ import (
 )
 
 type GrpcClient struct {
-	BillingClient
+	PreferencesClient
 	conn *conn.GrpcClientConn
 }
 
@@ -22,7 +22,7 @@ type ClientOptions struct {
 	Conn *conn.GrpcClientConn
 }
 
-// NewClient returns a client connection to the 'billing' service.
+// NewClient returns a client connection to the 'preferences' service.
 func NewClient(ctx context.Context, opts ...*ClientOptions) (*GrpcClient, error) {
 	var fconn *conn.GrpcClientConn
 	var err error
@@ -32,12 +32,12 @@ func NewClient(ctx context.Context, opts ...*ClientOptions) (*GrpcClient, error)
 			fconn = opts[0].Conn
 		}
 	default:
-		fconn, err = conn.New(ctx, conn.WithTargetService("billing"))
+		fconn, err = conn.New(ctx, conn.WithTargetService("blue"))
 		if err != nil {
 			return nil, err
 		}
 	}
 
-	cc := NewBillingClient(fconn)
+	cc := NewPreferencesClient(fconn)
 	return &GrpcClient{cc, fconn}, nil
 }
