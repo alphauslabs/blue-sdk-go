@@ -51,7 +51,7 @@ type IamClient interface {
 	// create roles, are available to all subusers.
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
 	// Updates a role. If role name is different, rename mapped role name.
-	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
 	// Deletes a role. Deleting a role will also remove all mappings.
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
@@ -216,8 +216,8 @@ func (c *iamClient) CreateRole(ctx context.Context, in *CreateRoleRequest, opts 
 	return out, nil
 }
 
-func (c *iamClient) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *iamClient) UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*api.Role, error) {
+	out := new(api.Role)
 	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/UpdateRole", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -319,7 +319,7 @@ type IamServer interface {
 	// create roles, are available to all subusers.
 	CreateRole(context.Context, *CreateRoleRequest) (*api.Role, error)
 	// Updates a role. If role name is different, rename mapped role name.
-	UpdateRole(context.Context, *UpdateRoleRequest) (*emptypb.Empty, error)
+	UpdateRole(context.Context, *UpdateRoleRequest) (*api.Role, error)
 	// Deletes a role. Deleting a role will also remove all mappings.
 	DeleteRole(context.Context, *DeleteRoleRequest) (*api.Role, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
@@ -369,7 +369,7 @@ func (UnimplementedIamServer) ListRoles(context.Context, *ListRolesRequest) (*Li
 func (UnimplementedIamServer) CreateRole(context.Context, *CreateRoleRequest) (*api.Role, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRole not implemented")
 }
-func (UnimplementedIamServer) UpdateRole(context.Context, *UpdateRoleRequest) (*emptypb.Empty, error) {
+func (UnimplementedIamServer) UpdateRole(context.Context, *UpdateRoleRequest) (*api.Role, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRole not implemented")
 }
 func (UnimplementedIamServer) DeleteRole(context.Context, *DeleteRoleRequest) (*api.Role, error) {
