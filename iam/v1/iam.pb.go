@@ -1095,7 +1095,8 @@ type UpdateUserRoleMappingRequest struct {
 
 	// Optional. The subuser to map the roles. Defaults to caller if not set.
 	SubUser string `protobuf:"bytes,1,opt,name=subUser,proto3" json:"subUser,omitempty"`
-	// Required. The roles to map to the user. Limited to 5 items.
+	// Required. The roles to map to the user. Limited to 5 items. Setting `role` to
+	// empty will remove the mapping.
 	Roles []*MapRole `protobuf:"bytes,2,rep,name=roles,proto3" json:"roles,omitempty"`
 }
 
