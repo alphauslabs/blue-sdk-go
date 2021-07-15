@@ -54,6 +54,14 @@ type IamClient interface {
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
 	// Deletes a role. Deleting a role will also remove all mappings.
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Lists roles attached to the caller or the input.
+	ListUserRoleMappings(ctx context.Context, in *ListUserRoleMappingsRequest, opts ...grpc.CallOption) (*ListUserRoleMappingsResponse, error)
+	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace.
+	// There is no limit for filtering rules per user.
+	CreateUserRoleMapping(ctx context.Context, in *CreateUserRoleMappingRequest, opts ...grpc.CallOption) (*CreateUserRoleMappingResponse, error)
+	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
+	// There is no limit for filtering rules per user.
+	UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -234,6 +242,33 @@ func (c *iamClient) DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts 
 	return out, nil
 }
 
+func (c *iamClient) ListUserRoleMappings(ctx context.Context, in *ListUserRoleMappingsRequest, opts ...grpc.CallOption) (*ListUserRoleMappingsResponse, error) {
+	out := new(ListUserRoleMappingsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListUserRoleMappings", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) CreateUserRoleMapping(ctx context.Context, in *CreateUserRoleMappingRequest, opts ...grpc.CallOption) (*CreateUserRoleMappingResponse, error) {
+	out := new(CreateUserRoleMappingResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/CreateUserRoleMapping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error) {
+	out := new(UpdateUserRoleMappingResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/UpdateUserRoleMapping", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[2], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
 	if err != nil {
@@ -322,6 +357,14 @@ type IamServer interface {
 	UpdateRole(context.Context, *UpdateRoleRequest) (*api.Role, error)
 	// Deletes a role. Deleting a role will also remove all mappings.
 	DeleteRole(context.Context, *DeleteRoleRequest) (*emptypb.Empty, error)
+	// Lists roles attached to the caller or the input.
+	ListUserRoleMappings(context.Context, *ListUserRoleMappingsRequest) (*ListUserRoleMappingsResponse, error)
+	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace.
+	// There is no limit for filtering rules per user.
+	CreateUserRoleMapping(context.Context, *CreateUserRoleMappingRequest) (*CreateUserRoleMappingResponse, error)
+	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
+	// There is no limit for filtering rules per user.
+	UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error)
 	// Lists all IP filters. At the moment, this API is only available for root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -374,6 +417,15 @@ func (UnimplementedIamServer) UpdateRole(context.Context, *UpdateRoleRequest) (*
 }
 func (UnimplementedIamServer) DeleteRole(context.Context, *DeleteRoleRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteRole not implemented")
+}
+func (UnimplementedIamServer) ListUserRoleMappings(context.Context, *ListUserRoleMappingsRequest) (*ListUserRoleMappingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUserRoleMappings not implemented")
+}
+func (UnimplementedIamServer) CreateUserRoleMapping(context.Context, *CreateUserRoleMappingRequest) (*CreateUserRoleMappingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUserRoleMapping not implemented")
+}
+func (UnimplementedIamServer) UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRoleMapping not implemented")
 }
 func (UnimplementedIamServer) ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
@@ -637,6 +689,60 @@ func _Iam_DeleteRole_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_ListUserRoleMappings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUserRoleMappingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).ListUserRoleMappings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/ListUserRoleMappings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).ListUserRoleMappings(ctx, req.(*ListUserRoleMappingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_CreateUserRoleMapping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUserRoleMappingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).CreateUserRoleMapping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/CreateUserRoleMapping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).CreateUserRoleMapping(ctx, req.(*CreateUserRoleMappingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_UpdateUserRoleMapping_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRoleMappingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).UpdateUserRoleMapping(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/UpdateUserRoleMapping",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).UpdateUserRoleMapping(ctx, req.(*UpdateUserRoleMappingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ListIpFilters_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListIpFiltersRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -744,6 +850,18 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteRole",
 			Handler:    _Iam_DeleteRole_Handler,
+		},
+		{
+			MethodName: "ListUserRoleMappings",
+			Handler:    _Iam_ListUserRoleMappings_Handler,
+		},
+		{
+			MethodName: "CreateUserRoleMapping",
+			Handler:    _Iam_CreateUserRoleMapping_Handler,
+		},
+		{
+			MethodName: "UpdateUserRoleMapping",
+			Handler:    _Iam_UpdateUserRoleMapping_Handler,
 		},
 		{
 			MethodName: "CreateIpFilter",
