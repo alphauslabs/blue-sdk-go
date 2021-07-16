@@ -53,6 +53,8 @@ type CostClient interface {
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// Lists vendor costs calculations history and statuses.
+	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
@@ -246,6 +248,15 @@ func (c *costClient) ImportCurFiles(ctx context.Context, in *ImportCurFilesReque
 func (c *costClient) CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error) {
 	out := new(api.Operation)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CalculateCosts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error) {
+	out := new(ListCalculationsHistoryResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListCalculationsHistory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -526,6 +537,8 @@ type CostServer interface {
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
+	// Lists vendor costs calculations history and statuses.
+	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
@@ -603,6 +616,9 @@ func (UnimplementedCostServer) ImportCurFiles(context.Context, *ImportCurFilesRe
 }
 func (UnimplementedCostServer) CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CalculateCosts not implemented")
+}
+func (UnimplementedCostServer) ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationsHistory not implemented")
 }
 func (UnimplementedCostServer) ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
@@ -872,6 +888,24 @@ func _Cost_CalculateCosts_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_ListCalculationsHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCalculationsHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).ListCalculationsHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/ListCalculationsHistory",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).ListCalculationsHistory(ctx, req.(*ListCalculationsHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cost_ReadCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ReadCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1134,6 +1168,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CalculateCosts",
 			Handler:    _Cost_CalculateCosts_Handler,
+		},
+		{
+			MethodName: "ListCalculationsHistory",
+			Handler:    _Cost_ListCalculationsHistory_Handler,
 		},
 		{
 			MethodName: "CreateBudgetConfig",
