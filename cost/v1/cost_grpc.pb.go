@@ -78,18 +78,15 @@ type CostClient interface {
 	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error)
-	// Creates a budget configuration.
-	CreateBudgetConfig(ctx context.Context, in *CreateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Updates an existing budget configuration.
-	UpdateBudgetConfig(ctx context.Context, in *UpdateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Fetches budget configurations for all accounts under the specified billing group.
-	// Set accountId to fetch budget configuration for specific account only.
-	GetBudgetConfig(ctx context.Context, in *GetBudgetConfigRequest, opts ...grpc.CallOption) (*GetBudgetConfigResponse, error)
 	// Fetches cost forecasts for the specified billing group.
 	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
 	GetForecasts(ctx context.Context, in *GetForecastsRequest, opts ...grpc.CallOption) (*GetForecastsResponse, error)
-	// Fetches month-to-date accumulated costs vs forecasted cost vs budget for the specified billing group.
-	GetMonthToDateForecast(ctx context.Context, in *GetMonthToDateForecastRequest, opts ...grpc.CallOption) (*GetMonthToDateForecastResponse, error)
+	// Fetches monthly accumulated costs vs forecasted cost vs budget for the id.
+	GetMonthlyCostForecast(ctx context.Context, in *GetMonthlyCostForecastRequest, opts ...grpc.CallOption) (*GetMonthlyCostForecastResponse, error)
+	// Fetches previous month cost vs current month forecast vs current accumulated cost per category for id
+	GetMonthOnMonthCostForecast(ctx context.Context, in *GetMonthOnMonthCostForecastRequest, opts ...grpc.CallOption) (*GetMonthOnMonthCostForecastResponse, error)
+	// Fetches current month daily forecast vs current accumulated daily cost for id
+	GetMonthToDateCostForecast(ctx context.Context, in *GetMonthToDateCostForecastRequest, opts ...grpc.CallOption) (*GetMonthToDateCostForecastResponse, error)
 }
 
 type costClient struct {
@@ -455,33 +452,6 @@ func (x *costReadNonTagCostsClient) Recv() (*CostItem, error) {
 	return m, nil
 }
 
-func (c *costClient) CreateBudgetConfig(ctx context.Context, in *CreateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateBudgetConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *costClient) UpdateBudgetConfig(ctx context.Context, in *UpdateBudgetConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/UpdateBudgetConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *costClient) GetBudgetConfig(ctx context.Context, in *GetBudgetConfigRequest, opts ...grpc.CallOption) (*GetBudgetConfigResponse, error) {
-	out := new(GetBudgetConfigResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetBudgetConfig", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *costClient) GetForecasts(ctx context.Context, in *GetForecastsRequest, opts ...grpc.CallOption) (*GetForecastsResponse, error) {
 	out := new(GetForecastsResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetForecasts", in, out, opts...)
@@ -491,9 +461,27 @@ func (c *costClient) GetForecasts(ctx context.Context, in *GetForecastsRequest, 
 	return out, nil
 }
 
-func (c *costClient) GetMonthToDateForecast(ctx context.Context, in *GetMonthToDateForecastRequest, opts ...grpc.CallOption) (*GetMonthToDateForecastResponse, error) {
-	out := new(GetMonthToDateForecastResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetMonthToDateForecast", in, out, opts...)
+func (c *costClient) GetMonthlyCostForecast(ctx context.Context, in *GetMonthlyCostForecastRequest, opts ...grpc.CallOption) (*GetMonthlyCostForecastResponse, error) {
+	out := new(GetMonthlyCostForecastResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetMonthlyCostForecast", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) GetMonthOnMonthCostForecast(ctx context.Context, in *GetMonthOnMonthCostForecastRequest, opts ...grpc.CallOption) (*GetMonthOnMonthCostForecastResponse, error) {
+	out := new(GetMonthOnMonthCostForecastResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetMonthOnMonthCostForecast", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) GetMonthToDateCostForecast(ctx context.Context, in *GetMonthToDateCostForecastRequest, opts ...grpc.CallOption) (*GetMonthToDateCostForecastResponse, error) {
+	out := new(GetMonthToDateCostForecastResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetMonthToDateCostForecast", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -562,18 +550,15 @@ type CostServer interface {
 	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
 	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadNonTagCosts(*ReadNonTagCostsRequest, Cost_ReadNonTagCostsServer) error
-	// Creates a budget configuration.
-	CreateBudgetConfig(context.Context, *CreateBudgetConfigRequest) (*emptypb.Empty, error)
-	// Updates an existing budget configuration.
-	UpdateBudgetConfig(context.Context, *UpdateBudgetConfigRequest) (*emptypb.Empty, error)
-	// Fetches budget configurations for all accounts under the specified billing group.
-	// Set accountId to fetch budget configuration for specific account only.
-	GetBudgetConfig(context.Context, *GetBudgetConfigRequest) (*GetBudgetConfigResponse, error)
 	// Fetches cost forecasts for the specified billing group.
 	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
 	GetForecasts(context.Context, *GetForecastsRequest) (*GetForecastsResponse, error)
-	// Fetches month-to-date accumulated costs vs forecasted cost vs budget for the specified billing group.
-	GetMonthToDateForecast(context.Context, *GetMonthToDateForecastRequest) (*GetMonthToDateForecastResponse, error)
+	// Fetches monthly accumulated costs vs forecasted cost vs budget for the id.
+	GetMonthlyCostForecast(context.Context, *GetMonthlyCostForecastRequest) (*GetMonthlyCostForecastResponse, error)
+	// Fetches previous month cost vs current month forecast vs current accumulated cost per category for id
+	GetMonthOnMonthCostForecast(context.Context, *GetMonthOnMonthCostForecastRequest) (*GetMonthOnMonthCostForecastResponse, error)
+	// Fetches current month daily forecast vs current accumulated daily cost for id
+	GetMonthToDateCostForecast(context.Context, *GetMonthToDateCostForecastRequest) (*GetMonthToDateCostForecastResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -638,20 +623,17 @@ func (UnimplementedCostServer) ReadTagCosts(*ReadTagCostsRequest, Cost_ReadTagCo
 func (UnimplementedCostServer) ReadNonTagCosts(*ReadNonTagCostsRequest, Cost_ReadNonTagCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadNonTagCosts not implemented")
 }
-func (UnimplementedCostServer) CreateBudgetConfig(context.Context, *CreateBudgetConfigRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateBudgetConfig not implemented")
-}
-func (UnimplementedCostServer) UpdateBudgetConfig(context.Context, *UpdateBudgetConfigRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateBudgetConfig not implemented")
-}
-func (UnimplementedCostServer) GetBudgetConfig(context.Context, *GetBudgetConfigRequest) (*GetBudgetConfigResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBudgetConfig not implemented")
-}
 func (UnimplementedCostServer) GetForecasts(context.Context, *GetForecastsRequest) (*GetForecastsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetForecasts not implemented")
 }
-func (UnimplementedCostServer) GetMonthToDateForecast(context.Context, *GetMonthToDateForecastRequest) (*GetMonthToDateForecastResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMonthToDateForecast not implemented")
+func (UnimplementedCostServer) GetMonthlyCostForecast(context.Context, *GetMonthlyCostForecastRequest) (*GetMonthlyCostForecastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMonthlyCostForecast not implemented")
+}
+func (UnimplementedCostServer) GetMonthOnMonthCostForecast(context.Context, *GetMonthOnMonthCostForecastRequest) (*GetMonthOnMonthCostForecastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMonthOnMonthCostForecast not implemented")
+}
+func (UnimplementedCostServer) GetMonthToDateCostForecast(context.Context, *GetMonthToDateCostForecastRequest) (*GetMonthToDateCostForecastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMonthToDateCostForecast not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -1032,60 +1014,6 @@ func (x *costReadNonTagCostsServer) Send(m *CostItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cost_CreateBudgetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateBudgetConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CostServer).CreateBudgetConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/CreateBudgetConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).CreateBudgetConfig(ctx, req.(*CreateBudgetConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cost_UpdateBudgetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateBudgetConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CostServer).UpdateBudgetConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/UpdateBudgetConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).UpdateBudgetConfig(ctx, req.(*UpdateBudgetConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cost_GetBudgetConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBudgetConfigRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CostServer).GetBudgetConfig(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/GetBudgetConfig",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetBudgetConfig(ctx, req.(*GetBudgetConfigRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Cost_GetForecasts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetForecastsRequest)
 	if err := dec(in); err != nil {
@@ -1104,20 +1032,56 @@ func _Cost_GetForecasts_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_GetMonthToDateForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMonthToDateForecastRequest)
+func _Cost_GetMonthlyCostForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMonthlyCostForecastRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).GetMonthToDateForecast(ctx, in)
+		return srv.(CostServer).GetMonthlyCostForecast(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/GetMonthToDateForecast",
+		FullMethod: "/blueapi.cost.v1.Cost/GetMonthlyCostForecast",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetMonthToDateForecast(ctx, req.(*GetMonthToDateForecastRequest))
+		return srv.(CostServer).GetMonthlyCostForecast(ctx, req.(*GetMonthlyCostForecastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_GetMonthOnMonthCostForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMonthOnMonthCostForecastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetMonthOnMonthCostForecast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetMonthOnMonthCostForecast",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetMonthOnMonthCostForecast(ctx, req.(*GetMonthOnMonthCostForecastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_GetMonthToDateCostForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMonthToDateCostForecastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetMonthToDateCostForecast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetMonthToDateCostForecast",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetMonthToDateCostForecast(ctx, req.(*GetMonthToDateCostForecastRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1174,24 +1138,20 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_ListCalculationsHistory_Handler,
 		},
 		{
-			MethodName: "CreateBudgetConfig",
-			Handler:    _Cost_CreateBudgetConfig_Handler,
-		},
-		{
-			MethodName: "UpdateBudgetConfig",
-			Handler:    _Cost_UpdateBudgetConfig_Handler,
-		},
-		{
-			MethodName: "GetBudgetConfig",
-			Handler:    _Cost_GetBudgetConfig_Handler,
-		},
-		{
 			MethodName: "GetForecasts",
 			Handler:    _Cost_GetForecasts_Handler,
 		},
 		{
-			MethodName: "GetMonthToDateForecast",
-			Handler:    _Cost_GetMonthToDateForecast_Handler,
+			MethodName: "GetMonthlyCostForecast",
+			Handler:    _Cost_GetMonthlyCostForecast_Handler,
+		},
+		{
+			MethodName: "GetMonthOnMonthCostForecast",
+			Handler:    _Cost_GetMonthOnMonthCostForecast_Handler,
+		},
+		{
+			MethodName: "GetMonthToDateCostForecast",
+			Handler:    _Cost_GetMonthToDateCostForecast_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
