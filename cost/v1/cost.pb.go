@@ -1000,10 +1000,12 @@ type CalculateCostsRequestAwsOptions struct {
 	// make this as the active/latest one. By default, if there is an ongoing operation
 	// during the call, the request will fail.
 	Force bool `protobuf:"varint,1,opt,name=force,proto3" json:"force,omitempty"`
-	// Optional. If set to true, only calculate for account-type billing groups.
+	// Optional. If set to true, only calculate for account-type billing groups. If both
+	// `accountsOnly` and `tagsOnly` are set to true, `accountsOnly` will prevail.
 	AccountsOnly bool `protobuf:"varint,2,opt,name=accountsOnly,proto3" json:"accountsOnly,omitempty"`
 	// Optional. If set to true, only calculate for tags-type billing groups. Discarded
-	// when the organization doesn't have any tag-based billing groups configured.
+	// when the organization doesn't have any tag-based billing groups configured. If
+	// both `accountsOnly` and `tagsOnly` are set to true, `accountsOnly` will prevail.
 	TagsOnly bool `protobuf:"varint,3,opt,name=tagsOnly,proto3" json:"tagsOnly,omitempty"`
 }
 
