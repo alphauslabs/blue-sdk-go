@@ -25,28 +25,32 @@ type Cost struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Account        string            `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	BillingGroupId string            `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
-	Date           string            `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
-	ProductCode    string            `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
-	ServiceCode    string            `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
-	Region         string            `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
-	Zone           string            `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
-	UsageType      string            `protobuf:"bytes,8,opt,name=usageType,proto3" json:"usageType,omitempty"`
-	InstanceType   string            `protobuf:"bytes,9,opt,name=instanceType,proto3" json:"instanceType,omitempty"`
-	Operation      string            `protobuf:"bytes,10,opt,name=operation,proto3" json:"operation,omitempty"`
-	InvoiceId      string            `protobuf:"bytes,11,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
-	Description    string            `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
-	ResourceId     string            `protobuf:"bytes,13,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
-	Tags           map[string]string `protobuf:"bytes,14,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	CostCategories map[string]string `protobuf:"bytes,15,rep,name=costCategories,proto3" json:"costCategories,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Usage          float64           `protobuf:"fixed64,16,opt,name=usage,proto3" json:"usage,omitempty"`
-	Cost           float64           `protobuf:"fixed64,17,opt,name=cost,proto3" json:"cost,omitempty"`
-	BaseCurrency   string            `protobuf:"bytes,18,opt,name=baseCurrency,proto3" json:"baseCurrency,omitempty"`
-	ExchangeRate   float64           `protobuf:"fixed64,19,opt,name=exchangeRate,proto3" json:"exchangeRate,omitempty"`
-	TargetCost     float64           `protobuf:"fixed64,20,opt,name=targetCost,proto3" json:"targetCost,omitempty"`
-	TargetCurrency string            `protobuf:"bytes,21,opt,name=targetCurrency,proto3" json:"targetCurrency,omitempty"`
-	TagId          string            `protobuf:"bytes,22,opt,name=tagId,proto3" json:"tagId,omitempty"`
+	Account             string            `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
+	BillingGroupId      string            `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
+	Date                string            `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
+	ProductCode         string            `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
+	ServiceCode         string            `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
+	Region              string            `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
+	Zone                string            `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
+	UsageType           string            `protobuf:"bytes,8,opt,name=usageType,proto3" json:"usageType,omitempty"`
+	InstanceType        string            `protobuf:"bytes,9,opt,name=instanceType,proto3" json:"instanceType,omitempty"`
+	Operation           string            `protobuf:"bytes,10,opt,name=operation,proto3" json:"operation,omitempty"`
+	InvoiceId           string            `protobuf:"bytes,11,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
+	Description         string            `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	ResourceId          string            `protobuf:"bytes,13,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
+	Tags                map[string]string `protobuf:"bytes,14,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	CostCategories      map[string]string `protobuf:"bytes,15,rep,name=costCategories,proto3" json:"costCategories,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Usage               float64           `protobuf:"fixed64,16,opt,name=usage,proto3" json:"usage,omitempty"`
+	Cost                float64           `protobuf:"fixed64,17,opt,name=cost,proto3" json:"cost,omitempty"`
+	BaseCurrency        string            `protobuf:"bytes,18,opt,name=baseCurrency,proto3" json:"baseCurrency,omitempty"`
+	ExchangeRate        float64           `protobuf:"fixed64,19,opt,name=exchangeRate,proto3" json:"exchangeRate,omitempty"`
+	TargetCost          float64           `protobuf:"fixed64,20,opt,name=targetCost,proto3" json:"targetCost,omitempty"`
+	TargetCurrency      string            `protobuf:"bytes,21,opt,name=targetCurrency,proto3" json:"targetCurrency,omitempty"`
+	TagId               string            `protobuf:"bytes,22,opt,name=tagId,proto3" json:"tagId,omitempty"`
+	EffectiveCost       float64           `protobuf:"fixed64,23,opt,name=effectiveCost,proto3" json:"effectiveCost,omitempty"`
+	TargetEffectiveCost float64           `protobuf:"fixed64,24,opt,name=targetEffectiveCost,proto3" json:"targetEffectiveCost,omitempty"`
+	AmortizedCost       float64           `protobuf:"fixed64,25,opt,name=amortizedCost,proto3" json:"amortizedCost,omitempty"`
+	TargetAmortizedCost float64           `protobuf:"fixed64,26,opt,name=targetAmortizedCost,proto3" json:"targetAmortizedCost,omitempty"`
 }
 
 func (x *Cost) Reset() {
@@ -235,12 +239,40 @@ func (x *Cost) GetTagId() string {
 	return ""
 }
 
+func (x *Cost) GetEffectiveCost() float64 {
+	if x != nil {
+		return x.EffectiveCost
+	}
+	return 0
+}
+
+func (x *Cost) GetTargetEffectiveCost() float64 {
+	if x != nil {
+		return x.TargetEffectiveCost
+	}
+	return 0
+}
+
+func (x *Cost) GetAmortizedCost() float64 {
+	if x != nil {
+		return x.AmortizedCost
+	}
+	return 0
+}
+
+func (x *Cost) GetTargetAmortizedCost() float64 {
+	if x != nil {
+		return x.TargetAmortizedCost
+	}
+	return 0
+}
+
 var File_api_aws_cost_proto protoreflect.FileDescriptor
 
 var file_api_aws_cost_proto_rawDesc = []byte{
 	0x0a, 0x12, 0x61, 0x70, 0x69, 0x2f, 0x61, 0x77, 0x73, 0x2f, 0x63, 0x6f, 0x73, 0x74, 0x2e, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0f, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x61, 0x77, 0x73, 0x22, 0xe0, 0x06, 0x0a, 0x04, 0x43, 0x6f, 0x73, 0x74, 0x12, 0x18,
+	0x69, 0x2e, 0x61, 0x77, 0x73, 0x22, 0x90, 0x08, 0x0a, 0x04, 0x43, 0x6f, 0x73, 0x74, 0x12, 0x18,
 	0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x26, 0x0a, 0x0e, 0x62, 0x69, 0x6c, 0x6c,
 	0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
@@ -286,7 +318,18 @@ var file_api_aws_cost_proto_rawDesc = []byte{
 	0x0a, 0x0e, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x43, 0x75, 0x72, 0x72, 0x65, 0x6e, 0x63, 0x79,
 	0x18, 0x15, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x43, 0x75,
 	0x72, 0x72, 0x65, 0x6e, 0x63, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x61, 0x67, 0x49, 0x64, 0x18,
-	0x16, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x61, 0x67, 0x49, 0x64, 0x1a, 0x37, 0x0a, 0x09,
+	0x16, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x74, 0x61, 0x67, 0x49, 0x64, 0x12, 0x24, 0x0a, 0x0d,
+	0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x43, 0x6f, 0x73, 0x74, 0x18, 0x17, 0x20,
+	0x01, 0x28, 0x01, 0x52, 0x0d, 0x65, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65, 0x43, 0x6f,
+	0x73, 0x74, 0x12, 0x30, 0x0a, 0x13, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x45, 0x66, 0x66, 0x65,
+	0x63, 0x74, 0x69, 0x76, 0x65, 0x43, 0x6f, 0x73, 0x74, 0x18, 0x18, 0x20, 0x01, 0x28, 0x01, 0x52,
+	0x13, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x45, 0x66, 0x66, 0x65, 0x63, 0x74, 0x69, 0x76, 0x65,
+	0x43, 0x6f, 0x73, 0x74, 0x12, 0x24, 0x0a, 0x0d, 0x61, 0x6d, 0x6f, 0x72, 0x74, 0x69, 0x7a, 0x65,
+	0x64, 0x43, 0x6f, 0x73, 0x74, 0x18, 0x19, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0d, 0x61, 0x6d, 0x6f,
+	0x72, 0x74, 0x69, 0x7a, 0x65, 0x64, 0x43, 0x6f, 0x73, 0x74, 0x12, 0x30, 0x0a, 0x13, 0x74, 0x61,
+	0x72, 0x67, 0x65, 0x74, 0x41, 0x6d, 0x6f, 0x72, 0x74, 0x69, 0x7a, 0x65, 0x64, 0x43, 0x6f, 0x73,
+	0x74, 0x18, 0x1a, 0x20, 0x01, 0x28, 0x01, 0x52, 0x13, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x41,
+	0x6d, 0x6f, 0x72, 0x74, 0x69, 0x7a, 0x65, 0x64, 0x43, 0x6f, 0x73, 0x74, 0x1a, 0x37, 0x0a, 0x09,
 	0x54, 0x61, 0x67, 0x73, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79,
 	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76,
 	0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75,
