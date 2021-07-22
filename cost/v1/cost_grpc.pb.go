@@ -87,6 +87,14 @@ type CostClient interface {
 	GetMonthOnMonthCostForecast(ctx context.Context, in *GetMonthOnMonthCostForecastRequest, opts ...grpc.CallOption) (*GetMonthOnMonthCostForecastResponse, error)
 	// Fetches current month daily forecast vs current accumulated daily cost for id
 	GetMonthToDateCostForecast(ctx context.Context, in *GetMonthToDateCostForecastRequest, opts ...grpc.CallOption) (*GetMonthToDateCostForecastResponse, error)
+	// Fetches monthly budget for the account/acctgroup id.
+	GetAccountBudget(ctx context.Context, in *GetAccountBudgetRequest, opts ...grpc.CallOption) (*GetAccountBudgetResponse, error)
+	// Creates monthly budget for the account/acctgroup id.
+	CreateAccountBudget(ctx context.Context, in *CreateAccountBudgetRequest, opts ...grpc.CallOption) (*CreateAccountBudgetResponse, error)
+	// Updates monthly budget for the account/acctgroup id.
+	UpdateAccountBudget(ctx context.Context, in *UpdateAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Removes monthly budget for the account/acctgroup id from database.
+	DeleteAccountBudget(ctx context.Context, in *DeleteAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type costClient struct {
@@ -488,6 +496,42 @@ func (c *costClient) GetMonthToDateCostForecast(ctx context.Context, in *GetMont
 	return out, nil
 }
 
+func (c *costClient) GetAccountBudget(ctx context.Context, in *GetAccountBudgetRequest, opts ...grpc.CallOption) (*GetAccountBudgetResponse, error) {
+	out := new(GetAccountBudgetResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetAccountBudget", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) CreateAccountBudget(ctx context.Context, in *CreateAccountBudgetRequest, opts ...grpc.CallOption) (*CreateAccountBudgetResponse, error) {
+	out := new(CreateAccountBudgetResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateAccountBudget", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) UpdateAccountBudget(ctx context.Context, in *UpdateAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/UpdateAccountBudget", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) DeleteAccountBudget(ctx context.Context, in *DeleteAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteAccountBudget", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -559,6 +603,14 @@ type CostServer interface {
 	GetMonthOnMonthCostForecast(context.Context, *GetMonthOnMonthCostForecastRequest) (*GetMonthOnMonthCostForecastResponse, error)
 	// Fetches current month daily forecast vs current accumulated daily cost for id
 	GetMonthToDateCostForecast(context.Context, *GetMonthToDateCostForecastRequest) (*GetMonthToDateCostForecastResponse, error)
+	// Fetches monthly budget for the account/acctgroup id.
+	GetAccountBudget(context.Context, *GetAccountBudgetRequest) (*GetAccountBudgetResponse, error)
+	// Creates monthly budget for the account/acctgroup id.
+	CreateAccountBudget(context.Context, *CreateAccountBudgetRequest) (*CreateAccountBudgetResponse, error)
+	// Updates monthly budget for the account/acctgroup id.
+	UpdateAccountBudget(context.Context, *UpdateAccountBudgetRequest) (*emptypb.Empty, error)
+	// Removes monthly budget for the account/acctgroup id from database.
+	DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -634,6 +686,18 @@ func (UnimplementedCostServer) GetMonthOnMonthCostForecast(context.Context, *Get
 }
 func (UnimplementedCostServer) GetMonthToDateCostForecast(context.Context, *GetMonthToDateCostForecastRequest) (*GetMonthToDateCostForecastResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMonthToDateCostForecast not implemented")
+}
+func (UnimplementedCostServer) GetAccountBudget(context.Context, *GetAccountBudgetRequest) (*GetAccountBudgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBudget not implemented")
+}
+func (UnimplementedCostServer) CreateAccountBudget(context.Context, *CreateAccountBudgetRequest) (*CreateAccountBudgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountBudget not implemented")
+}
+func (UnimplementedCostServer) UpdateAccountBudget(context.Context, *UpdateAccountBudgetRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountBudget not implemented")
+}
+func (UnimplementedCostServer) DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountBudget not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -1086,6 +1150,78 @@ func _Cost_GetMonthToDateCostForecast_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetAccountBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetAccountBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetAccountBudget",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetAccountBudget(ctx, req.(*GetAccountBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_CreateAccountBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).CreateAccountBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/CreateAccountBudget",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).CreateAccountBudget(ctx, req.(*CreateAccountBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_UpdateAccountBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).UpdateAccountBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/UpdateAccountBudget",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).UpdateAccountBudget(ctx, req.(*UpdateAccountBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_DeleteAccountBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).DeleteAccountBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/DeleteAccountBudget",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).DeleteAccountBudget(ctx, req.(*DeleteAccountBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1152,6 +1288,22 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMonthToDateCostForecast",
 			Handler:    _Cost_GetMonthToDateCostForecast_Handler,
+		},
+		{
+			MethodName: "GetAccountBudget",
+			Handler:    _Cost_GetAccountBudget_Handler,
+		},
+		{
+			MethodName: "CreateAccountBudget",
+			Handler:    _Cost_CreateAccountBudget_Handler,
+		},
+		{
+			MethodName: "UpdateAccountBudget",
+			Handler:    _Cost_UpdateAccountBudget_Handler,
+		},
+		{
+			MethodName: "DeleteAccountBudget",
+			Handler:    _Cost_DeleteAccountBudget_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
