@@ -1335,29 +1335,26 @@ type ReadCostsRequestAwsOptions struct {
 	// If you want data that is grouped per account per month, set this to `true`, then set
 	// `groupByColumns` to `none`.
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
-	// Optional. A list of column filters. Dependent on `groupByColumns` and/or `groupByMonth`.
-	// The `key` field indicates the column name while the `value` field is the filter value
+	// Optional. A list of "key:value" column filters. Dependent on `groupByColumns` and/or
+	// `groupByMonth`. The key indicates the column name while the value is the filter value
 	// prefixed by either "eq:" (equal), "re:" (regexp based on https://github.com/google/re2),
 	// or "!re:" (reverse "re:"). For example, if you like to filter `productCode` to return
 	// only `AmazonEC2`, set to
 	//
 	//   [{
-	//     "key": "productCode",
-	//     "value": "eq:AmazonEC2"
+	//     "productCode": "eq:AmazonEC2"
 	//   }]
 	//
 	// You can also use a regular expression like so
 	//
 	//   [{
-	//     "key": "description",
-	//     "value": "re:.*napshot.*"
+	//     "description": "re:.*napshot.*"
 	//   }]
 	//
 	// Or reverse regexp, such as, return all items except `AmazonEC2`
 	//
 	//   [{
-	//     "key": "productCode",
-	//     "value": "!re:^AmazonEC2$"
+	//     "productCode": "!re:^AmazonEC2$"
 	//   }]
 	Filters []*api.KeyValue `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	// Optional. If set to true, stream will include resource tags. Discarded when
