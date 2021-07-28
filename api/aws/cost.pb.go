@@ -25,18 +25,19 @@ type Cost struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Account             string            `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
-	BillingGroupId      string            `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
-	Date                string            `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
-	ProductCode         string            `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
-	ServiceCode         string            `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
-	Region              string            `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
-	Zone                string            `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
-	UsageType           string            `protobuf:"bytes,8,opt,name=usageType,proto3" json:"usageType,omitempty"`
-	InstanceType        string            `protobuf:"bytes,9,opt,name=instanceType,proto3" json:"instanceType,omitempty"`
-	Operation           string            `protobuf:"bytes,10,opt,name=operation,proto3" json:"operation,omitempty"`
-	InvoiceId           string            `protobuf:"bytes,11,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
-	Description         string            `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	Account        string `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
+	BillingGroupId string `protobuf:"bytes,2,opt,name=billingGroupId,proto3" json:"billingGroupId,omitempty"`
+	Date           string `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
+	ProductCode    string `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
+	ServiceCode    string `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
+	Region         string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
+	Zone           string `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
+	UsageType      string `protobuf:"bytes,8,opt,name=usageType,proto3" json:"usageType,omitempty"`
+	InstanceType   string `protobuf:"bytes,9,opt,name=instanceType,proto3" json:"instanceType,omitempty"`
+	Operation      string `protobuf:"bytes,10,opt,name=operation,proto3" json:"operation,omitempty"`
+	InvoiceId      string `protobuf:"bytes,11,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
+	Description    string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	// At the moment, this is not yet supported, always empty.
 	ResourceId          string            `protobuf:"bytes,13,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
 	Tags                map[string]string `protobuf:"bytes,14,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	CostCategories      map[string]string `protobuf:"bytes,15,rep,name=costCategories,proto3" json:"costCategories,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
