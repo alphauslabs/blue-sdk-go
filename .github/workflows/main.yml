@@ -20,3 +20,7 @@ jobs:
 
     - name: Test all
       run: go test -v ./...
+
+    - name: List all function names
+      run: |
+        grep -o -R -i -E '"/blueapi\..*"' . | awk -F':' '{gsub(/"/, "", $2); print substr($2,2);}' | sort | uniq
