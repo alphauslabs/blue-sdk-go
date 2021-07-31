@@ -21,7 +21,10 @@ jobs:
     - name: Test all
       run: go test -v ./...
 
-    - name: List all function names
+    - name: Generate function names
+      env:
+        DEPLOYER_TOKEN: ${{secrets.GH_TOKEN}}
       run: |
-        echo "permissions:"
-        grep -o -R -i -E '"/blueapi\..*"' . | awk -F':' '{gsub(/"/, "", $2); print "-", substr($2, 2);}' | sort | uniq
+        echo "functions:" > /tmp/funcs.yaml
+        grep -o -R -i -E '"/blueapi\..*"' . | awk -F':' '{gsub(/"/, "", $2); print "-", substr($2, 2);}' | sort | uniq >> /tmp/funcs.yaml
+        cat /tmp/funcs.yaml
