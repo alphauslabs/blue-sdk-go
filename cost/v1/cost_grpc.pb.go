@@ -53,9 +53,8 @@ type CostClient interface {
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	// For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the
-	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced by the `/` (forward-slash)
-	// character. This is due to the `|` (pipe) character having a special designation in the backend data
-	// processing workflows.
+	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash)
+	// character. This is due to the `|` character having a special designation in the data processing workflows.
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
@@ -573,9 +572,8 @@ type CostServer interface {
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	// For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the
-	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced by the `/` (forward-slash)
-	// character. This is due to the `|` (pipe) character having a special designation in the backend data
-	// processing workflows.
+	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash)
+	// character. This is due to the `|` character having a special designation in the data processing workflows.
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
