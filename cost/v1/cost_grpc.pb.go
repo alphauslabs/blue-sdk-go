@@ -86,9 +86,9 @@ type CostClient interface {
 	GetForecasts(ctx context.Context, in *GetForecastsRequest, opts ...grpc.CallOption) (*GetForecastsResponse, error)
 	// Fetches monthly accumulated costs vs forecasted cost vs budget for the id.
 	GetMonthlyCostForecast(ctx context.Context, in *GetMonthlyCostForecastRequest, opts ...grpc.CallOption) (*GetMonthlyCostForecastResponse, error)
-	// Fetches previous month cost vs current month forecast vs current accumulated cost per category for id
+	// Fetches previous month cost vs current month forecast vs current accumulated cost per category for id.
 	GetMonthOnMonthCostForecast(ctx context.Context, in *GetMonthOnMonthCostForecastRequest, opts ...grpc.CallOption) (*GetMonthOnMonthCostForecastResponse, error)
-	// Fetches current month daily forecast vs current accumulated daily cost for id
+	// Fetches current month daily forecast vs current accumulated daily cost for id.
 	GetMonthToDateCostForecast(ctx context.Context, in *GetMonthToDateCostForecastRequest, opts ...grpc.CallOption) (*GetMonthToDateCostForecastResponse, error)
 	// Fetches monthly budget for the account/acctgroup id.
 	GetAccountBudget(ctx context.Context, in *GetAccountBudgetRequest, opts ...grpc.CallOption) (*GetAccountBudgetResponse, error)
@@ -605,9 +605,9 @@ type CostServer interface {
 	GetForecasts(context.Context, *GetForecastsRequest) (*GetForecastsResponse, error)
 	// Fetches monthly accumulated costs vs forecasted cost vs budget for the id.
 	GetMonthlyCostForecast(context.Context, *GetMonthlyCostForecastRequest) (*GetMonthlyCostForecastResponse, error)
-	// Fetches previous month cost vs current month forecast vs current accumulated cost per category for id
+	// Fetches previous month cost vs current month forecast vs current accumulated cost per category for id.
 	GetMonthOnMonthCostForecast(context.Context, *GetMonthOnMonthCostForecastRequest) (*GetMonthOnMonthCostForecastResponse, error)
-	// Fetches current month daily forecast vs current accumulated daily cost for id
+	// Fetches current month daily forecast vs current accumulated daily cost for id.
 	GetMonthToDateCostForecast(context.Context, *GetMonthToDateCostForecastRequest) (*GetMonthToDateCostForecastResponse, error)
 	// Fetches monthly budget for the account/acctgroup id.
 	GetAccountBudget(context.Context, *GetAccountBudgetRequest) (*GetAccountBudgetResponse, error)
