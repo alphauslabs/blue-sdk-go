@@ -21,7 +21,7 @@ jobs:
     - name: Test all
       run: go test -v ./...
 
-    - name: Generate function names
+    - name: Generate functions
       env:
         DEPLOYER_TOKEN: ${{secrets.GH_TOKEN}}
         UPLOAD_FUNCSFILE_KEY: ${{secrets.UPLOAD_FUNCSFILE_KEY}}
