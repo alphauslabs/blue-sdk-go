@@ -140,7 +140,7 @@ type GetPayerAccountImportHistoryRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. The account id to query.
+	// Required. The account id to query. Could be `*`, which implies all payers.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Optional. The UTC month to query. If empty, defaults to current month.
 	// Format is `yyyymm`. For example, June 2021 will be `202106`.
@@ -206,9 +206,9 @@ type GetPayerAccountImportHistoryResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// The queried account id. Could be `*`, which implies all payers.
+	// The queried account id.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// The queried UTC month using the format `yyyymm`.
+	// The queried UTC month.
 	Month string `protobuf:"bytes,2,opt,name=month,proto3" json:"month,omitempty"`
 	// List of timestamps in RFC3339 format with the `T` separator.
 	// Example: `2019-10-12T07:20:50.52Z`
