@@ -31,7 +31,8 @@ type CostClient interface {
 	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
 	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
-	GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (*GetPayerAccountImportHistoryResponse, error)
+	// You can also set {id} to `*` to return all payers' information under the organization.
+	GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (Cost_GetPayerAccountImportHistoryClient, error)
 	// Registers a vendor payer account.
 	CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Deletes a vendor payer account.
@@ -141,13 +142,36 @@ func (c *costClient) GetPayerAccount(ctx context.Context, in *GetPayerAccountReq
 	return out, nil
 }
 
-func (c *costClient) GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (*GetPayerAccountImportHistoryResponse, error) {
-	out := new(GetPayerAccountImportHistoryResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory", in, out, opts...)
+func (c *costClient) GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (Cost_GetPayerAccountImportHistoryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &costGetPayerAccountImportHistoryClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_GetPayerAccountImportHistoryClient interface {
+	Recv() (*GetPayerAccountImportHistoryResponse, error)
+	grpc.ClientStream
+}
+
+type costGetPayerAccountImportHistoryClient struct {
+	grpc.ClientStream
+}
+
+func (x *costGetPayerAccountImportHistoryClient) Recv() (*GetPayerAccountImportHistoryResponse, error) {
+	m := new(GetPayerAccountImportHistoryResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *costClient) CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
@@ -169,7 +193,7 @@ func (c *costClient) DeletePayerAccount(ctx context.Context, in *DeletePayerAcco
 }
 
 func (c *costClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], "/blueapi.cost.v1.Cost/ListAccounts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], "/blueapi.cost.v1.Cost/ListAccounts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -264,7 +288,7 @@ func (c *costClient) ListCalculationsHistory(ctx context.Context, in *ListCalcul
 }
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -296,7 +320,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -328,7 +352,7 @@ func (x *costReadAdjustmentsClient) Recv() (*AdjustmentItem, error) {
 }
 
 func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -360,7 +384,7 @@ func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -478,7 +502,8 @@ type CostServer interface {
 	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*api.Account, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
 	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
-	GetPayerAccountImportHistory(context.Context, *GetPayerAccountImportHistoryRequest) (*GetPayerAccountImportHistoryResponse, error)
+	// You can also set {id} to `*` to return all payers' information under the organization.
+	GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error
 	// Registers a vendor payer account.
 	CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error)
 	// Deletes a vendor payer account.
@@ -550,8 +575,8 @@ func (UnimplementedCostServer) ListPayerAccounts(*ListPayerAccountsRequest, Cost
 func (UnimplementedCostServer) GetPayerAccount(context.Context, *GetPayerAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccount not implemented")
 }
-func (UnimplementedCostServer) GetPayerAccountImportHistory(context.Context, *GetPayerAccountImportHistoryRequest) (*GetPayerAccountImportHistoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccountImportHistory not implemented")
+func (UnimplementedCostServer) GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetPayerAccountImportHistory not implemented")
 }
 func (UnimplementedCostServer) CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePayerAccount not implemented")
@@ -671,22 +696,25 @@ func _Cost_GetPayerAccount_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_GetPayerAccountImportHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPayerAccountImportHistoryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Cost_GetPayerAccountImportHistory_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetPayerAccountImportHistoryRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(CostServer).GetPayerAccountImportHistory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetPayerAccountImportHistory(ctx, req.(*GetPayerAccountImportHistoryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(CostServer).GetPayerAccountImportHistory(m, &costGetPayerAccountImportHistoryServer{stream})
+}
+
+type Cost_GetPayerAccountImportHistoryServer interface {
+	Send(*GetPayerAccountImportHistoryResponse) error
+	grpc.ServerStream
+}
+
+type costGetPayerAccountImportHistoryServer struct {
+	grpc.ServerStream
+}
+
+func (x *costGetPayerAccountImportHistoryServer) Send(m *GetPayerAccountImportHistoryResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cost_CreatePayerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1112,10 +1140,6 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_GetPayerAccount_Handler,
 		},
 		{
-			MethodName: "GetPayerAccountImportHistory",
-			Handler:    _Cost_GetPayerAccountImportHistory_Handler,
-		},
-		{
 			MethodName: "CreatePayerAccount",
 			Handler:    _Cost_CreatePayerAccount_Handler,
 		},
@@ -1188,6 +1212,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListPayerAccounts",
 			Handler:       _Cost_ListPayerAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetPayerAccountImportHistory",
+			Handler:       _Cost_GetPayerAccountImportHistory_Handler,
 			ServerStreams: true,
 		},
 		{
