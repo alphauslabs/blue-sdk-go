@@ -1512,9 +1512,9 @@ type ReadCostsRequest struct {
 	// Optional. If set, reads the usage-based cost details of this group. Only valid for Ripple
 	// users. Implied as the parent billing group for Wave(Pro) users.
 	//
-	// For AWS, only billing internal ids are supported at the moment. Overriden when `accountId`
-	// is set to anything other than `*`. Set this and `accountId` to `*` to read the usage-based
-	// cost details of the whole organization.
+	// For AWS Ripple, only billing internal ids are supported at the moment. Overriden when
+	// `accountId` is set to anything other than `*`. Set this and `accountId` to `*` to read
+	// the usage-based cost details of the whole organization. Optional for AWS Wave(Pro).
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
 	// Optional. If set, reads the usage-based cost details of this account.
 	//
