@@ -1509,14 +1509,17 @@ type ReadCostsRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. At the moment, only billing internal ids are supported. If set, reads the
-	// usage-based cost details of this group. Valid only if `accountId` is not set. If both
-	// `groupId` and `accountId` are not set, reads the usage-based cost details of the whole
-	// organization. Only valid for Ripple users. Implied (or discarded) for Wave(Pro) users.
+	// Optional. If set, reads the usage-based cost details of this group. Only valid for Ripple
+	// users. Implied as the parent billing group for Wave(Pro) users.
+	//
+	// For AWS, only billing internal ids are supported at the moment. Overriden when `accountId`
+	// is set to anything other than `*`. Set this and `accountId` to `*` to read the usage-based
+	// cost details of the whole organization.
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// Optional. If set, reads the usage-based cost details of this account. Also invalidates
-	// the `groupId` value even if set. If both `billingInternalId` and `accountId` are not
-	// set, reads the usage-based cost details of the whole organization.
+	// Optional. If set, reads the usage-based cost details of this account.
+	//
+	// For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to read the
+	// usage-based cost details of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
 	// Optional. The UTC date to start streaming data from. If not set, the first day of the
 	// current month will be used. Format: yyyymmdd.
