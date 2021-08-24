@@ -15,9 +15,6 @@ const (
 	LoginUrlWave       = "https://login.alphaus.cloud/access_token"
 	LoginUrlRippleNext = "https://loginnext.alphaus.cloud/ripple/access_token"
 	LoginUrlWaveNext   = "https://loginnext.alphaus.cloud/access_token"
-
-	BlueEndpoint     = "blue.alphaus.cloud:8443"
-	BlueEndpointNext = "bluenext.alphaus.cloud:8443"
 )
 
 type Option interface {

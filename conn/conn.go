@@ -10,6 +10,11 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
+const (
+	BlueEndpoint     = "blue.alphaus.cloud:8443"
+	BlueEndpointNext = "bluenext.alphaus.cloud:8443"
+)
+
 type clientOptions struct {
 	target string // gRPC server address
 	sess   *session.Session
@@ -73,7 +78,7 @@ func (c *GrpcClientConn) Close() {
 func New(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
 	sess := session.New()
 	co := clientOptions{
-		target: session.BlueEndpoint,
+		target: BlueEndpoint,
 		sess:   sess,
 	}
 
