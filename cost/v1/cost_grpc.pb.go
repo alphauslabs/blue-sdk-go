@@ -335,7 +335,7 @@ func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsReq
 }
 
 type Cost_ReadAdjustmentsClient interface {
-	Recv() (*AdjustmentItem, error)
+	Recv() (*CostItem, error)
 	grpc.ClientStream
 }
 
@@ -343,8 +343,8 @@ type costReadAdjustmentsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costReadAdjustmentsClient) Recv() (*AdjustmentItem, error) {
-	m := new(AdjustmentItem)
+func (x *costReadAdjustmentsClient) Recv() (*CostItem, error) {
+	m := new(CostItem)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -930,7 +930,7 @@ func _Cost_ReadAdjustments_Handler(srv interface{}, stream grpc.ServerStream) er
 }
 
 type Cost_ReadAdjustmentsServer interface {
-	Send(*AdjustmentItem) error
+	Send(*CostItem) error
 	grpc.ServerStream
 }
 
@@ -938,7 +938,7 @@ type costReadAdjustmentsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costReadAdjustmentsServer) Send(m *AdjustmentItem) error {
+func (x *costReadAdjustmentsServer) Send(m *CostItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
