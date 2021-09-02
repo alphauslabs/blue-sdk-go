@@ -20,6 +20,8 @@ const _ = grpc.SupportPackageIsVersion7
 type AdminClient interface {
 	// Lists all account groups.
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
+	// Get Accout Group by Id
+	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
 }
 
 type adminClient struct {
@@ -62,12 +64,23 @@ func (x *adminListAccountGroupsClient) Recv() (*ListAccountGroupsResponse, error
 	return m, nil
 }
 
+func (c *adminClient) GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error) {
+	out := new(GetAccountGroupResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetAccountGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
 type AdminServer interface {
 	// Lists all account groups.
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
+	// Get Accout Group by Id
+	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -77,6 +90,9 @@ type UnimplementedAdminServer struct {
 
 func (UnimplementedAdminServer) ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccountGroups not implemented")
+}
+func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountGroup not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -112,13 +128,36 @@ func (x *adminListAccountGroupsServer) Send(m *ListAccountGroupsResponse) error 
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Admin_GetAccountGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetAccountGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetAccountGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetAccountGroup(ctx, req.(*GetAccountGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Admin_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.admin.v1.Admin",
 	HandlerType: (*AdminServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetAccountGroup",
+			Handler:    _Admin_GetAccountGroup_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ListAccountGroups",
