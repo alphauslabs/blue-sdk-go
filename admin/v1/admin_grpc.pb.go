@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion7
 type AdminClient interface {
 	// Lists all account groups.
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
-	// Get Accout Group by Id
+	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
 }
 
@@ -79,7 +79,7 @@ func (c *adminClient) GetAccountGroup(ctx context.Context, in *GetAccountGroupRe
 type AdminServer interface {
 	// Lists all account groups.
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
-	// Get Accout Group by Id
+	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
 	mustEmbedUnimplementedAdminServer()
 }

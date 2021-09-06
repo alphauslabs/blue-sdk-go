@@ -22,7 +22,7 @@ type BillingClient interface {
 	ListBillingGroups(ctx context.Context, in *ListBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupsClient, error)
 	// Registers a billing group.
 	CreateBillingGroup(ctx context.Context, in *CreateBillingGroupRequest, opts ...grpc.CallOption) (*BillingGroup, error)
-	// Get Billing Group by ID
+	// Gets a billing group.
 	GetBillingGroup(ctx context.Context, in *GetBillingGroupRequest, opts ...grpc.CallOption) (*GetBillingGroupResponse, error)
 }
 
@@ -92,7 +92,7 @@ type BillingServer interface {
 	ListBillingGroups(*ListBillingGroupsRequest, Billing_ListBillingGroupsServer) error
 	// Registers a billing group.
 	CreateBillingGroup(context.Context, *CreateBillingGroupRequest) (*BillingGroup, error)
-	// Get Billing Group by ID
+	// Gets a billing group.
 	GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
