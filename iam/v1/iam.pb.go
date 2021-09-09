@@ -1348,11 +1348,11 @@ type CreateIpFilterRequest struct {
 	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	// Optional. Can be `whitelist` or `blacklist`. Defaults to `blacklist` if empty.
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// Optional. If valid rootUser and subUser is empty, filter is for this rootuser.
-	// If both rootUser and subUser inputs are empty, filter is at global scope.
+	// Optional. If `rootUser` is valid and `subUser` is empty, filter is for this rootuser.
+	// If both `rootUser` and `subUser` inputs are empty, filter is at global scope.
 	RootUser string `protobuf:"bytes,3,opt,name=rootUser,proto3" json:"rootUser,omitempty"`
-	// Optional. If valid subuser, filter is for this subuser; rootUser value is discarded.
-	// If both rootUser and subUser inputs are empty, filter is at global scope.
+	// Optional. If `subuser` is valid, filter is for this subuser; `rootUser` value is discarded.
+	// If both `rootUser` and `subUser` inputs are empty, filter is at global scope.
 	SubUser string `protobuf:"bytes,4,opt,name=subUser,proto3" json:"subUser,omitempty"`
 }
 
