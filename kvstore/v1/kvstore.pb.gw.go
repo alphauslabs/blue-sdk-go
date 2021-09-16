@@ -742,7 +742,7 @@ var (
 
 	pattern_KvStore_Update_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"v1"}, ""))
 
-	pattern_KvStore_UpdateString_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0}, []string{"v1"}, ""))
+	pattern_KvStore_UpdateString_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "str"}, ""))
 
 	pattern_KvStore_Delete_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "keys", "key"}, ""))
 )
