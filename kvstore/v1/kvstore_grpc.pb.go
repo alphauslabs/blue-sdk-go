@@ -19,13 +19,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type KvStoreClient interface {
-	// WORK-IN-PROGRESS. Scans all keys from your store.
+	// WORK-IN-PROGRESS. Scans keys from your store.
 	Scan(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (KvStore_ScanClient, error)
 	// WORK-IN-PROGRESS. Reads a key from your store.
 	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValue, error)
 	// WORK-IN-PROGRESS. Writes a key:value data to your store.
 	Write(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates an existing key:value data in your store.
+	// WORK-IN-PROGRESS. Updates, or inserts if non-existent, a key:value data in your store.
 	Update(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
@@ -112,13 +112,13 @@ func (c *kvStoreClient) Delete(ctx context.Context, in *DeleteRequest, opts ...g
 // All implementations must embed UnimplementedKvStoreServer
 // for forward compatibility
 type KvStoreServer interface {
-	// WORK-IN-PROGRESS. Scans all keys from your store.
+	// WORK-IN-PROGRESS. Scans keys from your store.
 	Scan(*ScanRequest, KvStore_ScanServer) error
 	// WORK-IN-PROGRESS. Reads a key from your store.
 	Read(context.Context, *ReadRequest) (*KeyValue, error)
 	// WORK-IN-PROGRESS. Writes a key:value data to your store.
 	Write(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates an existing key:value data in your store.
+	// WORK-IN-PROGRESS. Updates, or inserts if non-existent, a key:value data in your store.
 	Update(context.Context, *KeyValue) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
