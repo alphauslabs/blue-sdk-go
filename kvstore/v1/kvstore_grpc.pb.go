@@ -19,13 +19,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type KvStoreClient interface {
-	// WORK-IN-PROGRESS. Scans keys from your store.
+	// Scans keys from your store.
 	Scan(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (KvStore_ScanClient, error)
-	// WORK-IN-PROGRESS. Reads a key from your store.
+	// Reads a key from your store.
 	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValue, error)
-	// WORK-IN-PROGRESS. Writes a new (or update an existing) key:value data in your store.
+	// Writes a new (or update an existing) key:value data in your store.
 	Write(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
+	// Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -101,13 +101,13 @@ func (c *kvStoreClient) Delete(ctx context.Context, in *DeleteRequest, opts ...g
 // All implementations must embed UnimplementedKvStoreServer
 // for forward compatibility
 type KvStoreServer interface {
-	// WORK-IN-PROGRESS. Scans keys from your store.
+	// Scans keys from your store.
 	Scan(*ScanRequest, KvStore_ScanServer) error
-	// WORK-IN-PROGRESS. Reads a key from your store.
+	// Reads a key from your store.
 	Read(context.Context, *ReadRequest) (*KeyValue, error)
-	// WORK-IN-PROGRESS. Writes a new (or update an existing) key:value data in your store.
+	// Writes a new (or update an existing) key:value data in your store.
 	Write(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
+	// Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedKvStoreServer()
