@@ -21,18 +21,12 @@ const _ = grpc.SupportPackageIsVersion7
 type KvStoreClient interface {
 	// WORK-IN-PROGRESS. Scans all keys from your store.
 	Scan(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (KvStore_ScanClient, error)
-	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in raw bytes.
+	// WORK-IN-PROGRESS. Reads a key from your store.
 	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValue, error)
-	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in string.
-	ReadString(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValueStr, error)
-	// WORK-IN-PROGRESS. Writes a key:value data (raw bytes) to your store.
+	// WORK-IN-PROGRESS. Writes a key:value data to your store.
 	Write(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Writes a key:value data (string) to your store.
-	WriteString(ctx context.Context, in *KeyValueStr, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates an existing key:value data (bytes) in your store.
+	// WORK-IN-PROGRESS. Updates an existing key:value data in your store.
 	Update(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates an existing key:value data (string) in your store.
-	UpdateString(ctx context.Context, in *KeyValueStr, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -87,15 +81,6 @@ func (c *kvStoreClient) Read(ctx context.Context, in *ReadRequest, opts ...grpc.
 	return out, nil
 }
 
-func (c *kvStoreClient) ReadString(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValueStr, error) {
-	out := new(KeyValueStr)
-	err := c.cc.Invoke(ctx, "/blueapi.kvstore.v1.KvStore/ReadString", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *kvStoreClient) Write(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.kvstore.v1.KvStore/Write", in, out, opts...)
@@ -105,27 +90,9 @@ func (c *kvStoreClient) Write(ctx context.Context, in *KeyValue, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *kvStoreClient) WriteString(ctx context.Context, in *KeyValueStr, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.kvstore.v1.KvStore/WriteString", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *kvStoreClient) Update(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.kvstore.v1.KvStore/Update", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *kvStoreClient) UpdateString(ctx context.Context, in *KeyValueStr, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.kvstore.v1.KvStore/UpdateString", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -147,18 +114,12 @@ func (c *kvStoreClient) Delete(ctx context.Context, in *DeleteRequest, opts ...g
 type KvStoreServer interface {
 	// WORK-IN-PROGRESS. Scans all keys from your store.
 	Scan(*ScanRequest, KvStore_ScanServer) error
-	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in raw bytes.
+	// WORK-IN-PROGRESS. Reads a key from your store.
 	Read(context.Context, *ReadRequest) (*KeyValue, error)
-	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in string.
-	ReadString(context.Context, *ReadRequest) (*KeyValueStr, error)
-	// WORK-IN-PROGRESS. Writes a key:value data (raw bytes) to your store.
+	// WORK-IN-PROGRESS. Writes a key:value data to your store.
 	Write(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Writes a key:value data (string) to your store.
-	WriteString(context.Context, *KeyValueStr) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates an existing key:value data (bytes) in your store.
+	// WORK-IN-PROGRESS. Updates an existing key:value data in your store.
 	Update(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates an existing key:value data (string) in your store.
-	UpdateString(context.Context, *KeyValueStr) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error)
@@ -175,20 +136,11 @@ func (UnimplementedKvStoreServer) Scan(*ScanRequest, KvStore_ScanServer) error {
 func (UnimplementedKvStoreServer) Read(context.Context, *ReadRequest) (*KeyValue, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Read not implemented")
 }
-func (UnimplementedKvStoreServer) ReadString(context.Context, *ReadRequest) (*KeyValueStr, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ReadString not implemented")
-}
 func (UnimplementedKvStoreServer) Write(context.Context, *KeyValue) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Write not implemented")
 }
-func (UnimplementedKvStoreServer) WriteString(context.Context, *KeyValueStr) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method WriteString not implemented")
-}
 func (UnimplementedKvStoreServer) Update(context.Context, *KeyValue) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
-}
-func (UnimplementedKvStoreServer) UpdateString(context.Context, *KeyValueStr) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateString not implemented")
 }
 func (UnimplementedKvStoreServer) Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -245,24 +197,6 @@ func _KvStore_Read_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _KvStore_ReadString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ReadRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(KvStoreServer).ReadString(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.kvstore.v1.KvStore/ReadString",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(KvStoreServer).ReadString(ctx, req.(*ReadRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _KvStore_Write_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(KeyValue)
 	if err := dec(in); err != nil {
@@ -281,24 +215,6 @@ func _KvStore_Write_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _KvStore_WriteString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(KeyValueStr)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(KvStoreServer).WriteString(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.kvstore.v1.KvStore/WriteString",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(KvStoreServer).WriteString(ctx, req.(*KeyValueStr))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _KvStore_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(KeyValue)
 	if err := dec(in); err != nil {
@@ -313,24 +229,6 @@ func _KvStore_Update_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(KvStoreServer).Update(ctx, req.(*KeyValue))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _KvStore_UpdateString_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(KeyValueStr)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(KvStoreServer).UpdateString(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.kvstore.v1.KvStore/UpdateString",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(KvStoreServer).UpdateString(ctx, req.(*KeyValueStr))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -365,24 +263,12 @@ var KvStore_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _KvStore_Read_Handler,
 		},
 		{
-			MethodName: "ReadString",
-			Handler:    _KvStore_ReadString_Handler,
-		},
-		{
 			MethodName: "Write",
 			Handler:    _KvStore_Write_Handler,
 		},
 		{
-			MethodName: "WriteString",
-			Handler:    _KvStore_WriteString_Handler,
-		},
-		{
 			MethodName: "Update",
 			Handler:    _KvStore_Update_Handler,
-		},
-		{
-			MethodName: "UpdateString",
-			Handler:    _KvStore_UpdateString_Handler,
 		},
 		{
 			MethodName: "Delete",
