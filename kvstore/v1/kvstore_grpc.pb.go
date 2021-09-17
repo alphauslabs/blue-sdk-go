@@ -23,10 +23,8 @@ type KvStoreClient interface {
 	Scan(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (KvStore_ScanClient, error)
 	// WORK-IN-PROGRESS. Reads a key from your store.
 	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValue, error)
-	// WORK-IN-PROGRESS. Writes a key:value data to your store.
+	// WORK-IN-PROGRESS. Writes a new (or update an existing) key:value data in your store.
 	Write(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates, or inserts if non-existent, a key:value data in your store.
-	Update(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -90,15 +88,6 @@ func (c *kvStoreClient) Write(ctx context.Context, in *KeyValue, opts ...grpc.Ca
 	return out, nil
 }
 
-func (c *kvStoreClient) Update(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.kvstore.v1.KvStore/Update", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *kvStoreClient) Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.kvstore.v1.KvStore/Delete", in, out, opts...)
@@ -116,10 +105,8 @@ type KvStoreServer interface {
 	Scan(*ScanRequest, KvStore_ScanServer) error
 	// WORK-IN-PROGRESS. Reads a key from your store.
 	Read(context.Context, *ReadRequest) (*KeyValue, error)
-	// WORK-IN-PROGRESS. Writes a key:value data to your store.
+	// WORK-IN-PROGRESS. Writes a new (or update an existing) key:value data in your store.
 	Write(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS. Updates, or inserts if non-existent, a key:value data in your store.
-	Update(context.Context, *KeyValue) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error)
@@ -138,9 +125,6 @@ func (UnimplementedKvStoreServer) Read(context.Context, *ReadRequest) (*KeyValue
 }
 func (UnimplementedKvStoreServer) Write(context.Context, *KeyValue) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Write not implemented")
-}
-func (UnimplementedKvStoreServer) Update(context.Context, *KeyValue) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Update not implemented")
 }
 func (UnimplementedKvStoreServer) Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Delete not implemented")
@@ -215,24 +199,6 @@ func _KvStore_Write_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
-func _KvStore_Update_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(KeyValue)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(KvStoreServer).Update(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.kvstore.v1.KvStore/Update",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(KvStoreServer).Update(ctx, req.(*KeyValue))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _KvStore_Delete_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteRequest)
 	if err := dec(in); err != nil {
@@ -265,10 +231,6 @@ var KvStore_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "Write",
 			Handler:    _KvStore_Write_Handler,
-		},
-		{
-			MethodName: "Update",
-			Handler:    _KvStore_Update_Handler,
 		},
 		{
 			MethodName: "Delete",
