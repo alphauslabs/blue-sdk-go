@@ -19,14 +19,13 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type KvStoreClient interface {
-	// Scans keys from your store.
+	// Scans key:value data from your store.
 	Scan(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (KvStore_ScanClient, error)
-	// Reads a key from your store.
+	// Reads a key:value data from your store.
 	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValue, error)
 	// Writes a new (or update an existing) key:value data in your store.
 	Write(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Deletes a key from your store. Using a `-` (hyphen) as {key} input
-	// translates to all keys to be deleted.
+	// Deletes a key:value data from your store.
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -54,7 +53,7 @@ func (c *kvStoreClient) Scan(ctx context.Context, in *ScanRequest, opts ...grpc.
 }
 
 type KvStore_ScanClient interface {
-	Recv() (*ScanResponse, error)
+	Recv() (*KeyValue, error)
 	grpc.ClientStream
 }
 
@@ -62,8 +61,8 @@ type kvStoreScanClient struct {
 	grpc.ClientStream
 }
 
-func (x *kvStoreScanClient) Recv() (*ScanResponse, error) {
-	m := new(ScanResponse)
+func (x *kvStoreScanClient) Recv() (*KeyValue, error) {
+	m := new(KeyValue)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -101,14 +100,13 @@ func (c *kvStoreClient) Delete(ctx context.Context, in *DeleteRequest, opts ...g
 // All implementations must embed UnimplementedKvStoreServer
 // for forward compatibility
 type KvStoreServer interface {
-	// Scans keys from your store.
+	// Scans key:value data from your store.
 	Scan(*ScanRequest, KvStore_ScanServer) error
-	// Reads a key from your store.
+	// Reads a key:value data from your store.
 	Read(context.Context, *ReadRequest) (*KeyValue, error)
 	// Writes a new (or update an existing) key:value data in your store.
 	Write(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// Deletes a key from your store. Using a `-` (hyphen) as {key} input
-	// translates to all keys to be deleted.
+	// Deletes a key:value data from your store.
 	Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedKvStoreServer()
 }
@@ -151,7 +149,7 @@ func _KvStore_Scan_Handler(srv interface{}, stream grpc.ServerStream) error {
 }
 
 type KvStore_ScanServer interface {
-	Send(*ScanResponse) error
+	Send(*KeyValue) error
 	grpc.ServerStream
 }
 
@@ -159,7 +157,7 @@ type kvStoreScanServer struct {
 	grpc.ServerStream
 }
 
-func (x *kvStoreScanServer) Send(m *ScanResponse) error {
+func (x *kvStoreScanServer) Send(m *KeyValue) error {
 	return x.ServerStream.SendMsg(m)
 }
 
