@@ -19,21 +19,21 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type KvStoreClient interface {
-	// Work-in-progress. Scans all keys from your store.
+	// WORK-IN-PROGRESS. Scans all keys from your store.
 	Scan(ctx context.Context, in *ScanRequest, opts ...grpc.CallOption) (KvStore_ScanClient, error)
-	// Work-in-progress. Reads a key from your store and returns the value in raw bytes.
+	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in raw bytes.
 	Read(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValue, error)
-	// Work-in-progress. Reads a key from your store and returns the value in string.
+	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in string.
 	ReadString(ctx context.Context, in *ReadRequest, opts ...grpc.CallOption) (*KeyValueStr, error)
-	// Work-in-progress. Writes a key:value data (raw bytes) to your store.
+	// WORK-IN-PROGRESS. Writes a key:value data (raw bytes) to your store.
 	Write(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Work-in-progress. Writes a key:value data (string) to your store.
+	// WORK-IN-PROGRESS. Writes a key:value data (string) to your store.
 	WriteString(ctx context.Context, in *KeyValueStr, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Work-in-progress. Updates an existing key:value data (bytes) in your store.
+	// WORK-IN-PROGRESS. Updates an existing key:value data (bytes) in your store.
 	Update(ctx context.Context, in *KeyValue, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Work-in-progress. Updates an existing key:value data (string) in your store.
+	// WORK-IN-PROGRESS. Updates an existing key:value data (string) in your store.
 	UpdateString(ctx context.Context, in *KeyValueStr, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Work-in-progress. Deletes a key from your store. Using a `-` (hyphen) as {key} input
+	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(ctx context.Context, in *DeleteRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -145,21 +145,21 @@ func (c *kvStoreClient) Delete(ctx context.Context, in *DeleteRequest, opts ...g
 // All implementations must embed UnimplementedKvStoreServer
 // for forward compatibility
 type KvStoreServer interface {
-	// Work-in-progress. Scans all keys from your store.
+	// WORK-IN-PROGRESS. Scans all keys from your store.
 	Scan(*ScanRequest, KvStore_ScanServer) error
-	// Work-in-progress. Reads a key from your store and returns the value in raw bytes.
+	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in raw bytes.
 	Read(context.Context, *ReadRequest) (*KeyValue, error)
-	// Work-in-progress. Reads a key from your store and returns the value in string.
+	// WORK-IN-PROGRESS. Reads a key from your store and returns the value in string.
 	ReadString(context.Context, *ReadRequest) (*KeyValueStr, error)
-	// Work-in-progress. Writes a key:value data (raw bytes) to your store.
+	// WORK-IN-PROGRESS. Writes a key:value data (raw bytes) to your store.
 	Write(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// Work-in-progress. Writes a key:value data (string) to your store.
+	// WORK-IN-PROGRESS. Writes a key:value data (string) to your store.
 	WriteString(context.Context, *KeyValueStr) (*emptypb.Empty, error)
-	// Work-in-progress. Updates an existing key:value data (bytes) in your store.
+	// WORK-IN-PROGRESS. Updates an existing key:value data (bytes) in your store.
 	Update(context.Context, *KeyValue) (*emptypb.Empty, error)
-	// Work-in-progress. Updates an existing key:value data (string) in your store.
+	// WORK-IN-PROGRESS. Updates an existing key:value data (string) in your store.
 	UpdateString(context.Context, *KeyValueStr) (*emptypb.Empty, error)
-	// Work-in-progress. Deletes a key from your store. Using a `-` (hyphen) as {key} input
+	// WORK-IN-PROGRESS. Deletes a key from your store. Using a `-` (hyphen) as {key} input
 	// translates to all keys to be deleted.
 	Delete(context.Context, *DeleteRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedKvStoreServer()
