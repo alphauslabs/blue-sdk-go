@@ -91,6 +91,8 @@ type CostClient interface {
 	UpdateAccountBudget(ctx context.Context, in *UpdateAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(ctx context.Context, in *DeleteAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Get cost opmtimization recommendations for Organization ID
+	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
 }
 
 type costClient struct {
@@ -487,6 +489,15 @@ func (c *costClient) DeleteAccountBudget(ctx context.Context, in *DeleteAccountB
 	return out, nil
 }
 
+func (c *costClient) GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error) {
+	out := new(GetRecommendationsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetRecommendations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -562,6 +573,8 @@ type CostServer interface {
 	UpdateAccountBudget(context.Context, *UpdateAccountBudgetRequest) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error)
+	// Get cost opmtimization recommendations for Organization ID
+	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -643,6 +656,9 @@ func (UnimplementedCostServer) UpdateAccountBudget(context.Context, *UpdateAccou
 }
 func (UnimplementedCostServer) DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountBudget not implemented")
+}
+func (UnimplementedCostServer) GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendations not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -1128,6 +1144,24 @@ func _Cost_DeleteAccountBudget_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecommendationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetRecommendations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetRecommendations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetRecommendations(ctx, req.(*GetRecommendationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1206,6 +1240,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccountBudget",
 			Handler:    _Cost_DeleteAccountBudget_Handler,
+		},
+		{
+			MethodName: "GetRecommendations",
+			Handler:    _Cost_GetRecommendations_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
