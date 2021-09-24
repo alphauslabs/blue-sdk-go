@@ -91,6 +91,7 @@ type CostClient interface {
 	UpdateAccountBudget(ctx context.Context, in *UpdateAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(ctx context.Context, in *DeleteAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS
 	// Get cost opmtimization recommendations for Organization ID
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
 }
@@ -573,6 +574,7 @@ type CostServer interface {
 	UpdateAccountBudget(context.Context, *UpdateAccountBudgetRequest) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS
 	// Get cost opmtimization recommendations for Organization ID
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
 	mustEmbedUnimplementedCostServer()
