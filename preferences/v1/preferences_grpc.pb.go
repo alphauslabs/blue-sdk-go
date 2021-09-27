@@ -18,7 +18,7 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type PreferencesClient interface {
-	// Gets current preferences.
+	// WORK-IN-PROGRESS: Gets current preferences.
 	GetPreferences(ctx context.Context, in *GetPreferencesRequest, opts ...grpc.CallOption) (*Preference, error)
 }
 
@@ -43,7 +43,7 @@ func (c *preferencesClient) GetPreferences(ctx context.Context, in *GetPreferenc
 // All implementations must embed UnimplementedPreferencesServer
 // for forward compatibility
 type PreferencesServer interface {
-	// Gets current preferences.
+	// WORK-IN-PROGRESS: Gets current preferences.
 	GetPreferences(context.Context, *GetPreferencesRequest) (*Preference, error)
 	mustEmbedUnimplementedPreferencesServer()
 }
