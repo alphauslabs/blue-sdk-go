@@ -3171,9 +3171,9 @@ var (
 
 	pattern_Cost_DeleteAccountBudget_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "budget", "budgetId"}, ""))
 
-	pattern_Cost_GetRecommendations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "recommendations", "orgId"}, ""))
+	pattern_Cost_GetRecommendations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "recommendations", "orgId"}, "read"))
 
-	pattern_Cost_GetCostReduction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "reduction", "orgId"}, ""))
+	pattern_Cost_GetCostReduction_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "reduction", "orgId"}, "read"))
 )
 
 var (
