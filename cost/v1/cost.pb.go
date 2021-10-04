@@ -3067,11 +3067,11 @@ type GetRecommendationsRequestAwsOptions struct {
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
 	// For recommendationType = 'reservation'
 	// Optional. List of Services ["AmazonEC2", "AmazonRDS", "AmazonElastiCache", "AmazonES"]
-	// Default: All services with Reserved Instance
+	// Default: Empty list
 	RiServices []string `protobuf:"bytes,3,rep,name=riServices,proto3" json:"riServices,omitempty"`
 	// For recommendationType = 'reservation'
 	// Optional. List of Services ["AmazonECS", "AmazonEKS", "AWSLambda"]
-	// Default: All services with Savings Plans except AmazonEC2
+	// Default: Empty list
 	SpServices []string `protobuf:"bytes,4,rep,name=spServices,proto3" json:"spServices,omitempty"`
 	// For recommendationType = 'reservation'
 	// Optional. If set to "true", recommends EC2 Instance Savings Plan that will cover usage not covered by RI
