@@ -794,8 +794,8 @@ type GetCalculatorStatusRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. The UTC month to query. Format is `yyyymm`.
-	// For example, June 2021 will be `202106`.
+	// Optional. The UTC month to query. Defaults to current month if empty.
+	// Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,2,opt,name=month,proto3" json:"month,omitempty"`
 }
 
