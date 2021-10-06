@@ -3541,8 +3541,9 @@ type GetCalculatorStatusResponse_AwsStatus struct {
 	// queried month. Format is RFC3339. An empty value means calculations hasn't
 	// started yet for the queried month.
 	LastCompleted string `protobuf:"bytes,1,opt,name=lastCompleted,proto3" json:"lastCompleted,omitempty"`
-	// Calculation completion state in percent, i.e. 70 means 70%. If the queried
-	// month doesn't have an ongoing calculation, this field is set to 100.
+	// Calculation completion state in percent, i.e. 70 means 70%. Any value other
+	// than 100 means there is still an ongoing calculation, otherwise, this field
+	// is set to 100.
 	CurrentProgress float64 `protobuf:"fixed64,2,opt,name=currentProgress,proto3" json:"currentProgress,omitempty"`
 }
 
