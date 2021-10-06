@@ -14,6 +14,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	defer client.Close()
 	out, err := client.GetOrg(ctx, &org.GetOrgRequest{})
 	if err != nil {
 		log.Fatal(err)

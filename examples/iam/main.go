@@ -14,6 +14,7 @@ func main() {
 		log.Fatal(err)
 	}
 
+	defer client.Close()
 	out, err := client.WhoAmI(ctx, &iam.WhoAmIRequest{})
 	if err != nil {
 		log.Fatal(err)
