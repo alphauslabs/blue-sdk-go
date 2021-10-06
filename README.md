@@ -16,3 +16,5 @@ out, err := client.WhoAmI(ctx, &iam.WhoAmIRequest{})
 log.Println(out, err)
 ...
 ```
+
+You can also check the examples [here](./examples/).
