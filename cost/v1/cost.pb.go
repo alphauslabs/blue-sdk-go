@@ -3538,7 +3538,8 @@ type GetCalculatorStatusResponse_AwsStatus struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The last timestamp in UTC of the completed calculation at org-level for the
-	// queried month. Format is RFC3339.
+	// queried month. Format is RFC3339. An empty value means calculations hasn't
+	// started yet for the queried month.
 	LastCompleted string `protobuf:"bytes,1,opt,name=lastCompleted,proto3" json:"lastCompleted,omitempty"`
 	// Calculation completion state in percent, i.e. 70 means 70%. If the queried
 	// month doesn't have an ongoing calculation, this field is set to 100.
