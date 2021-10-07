@@ -3545,7 +3545,8 @@ type GetCalculatorStatusResponse_AwsStatus struct {
 	LastCompleted string `protobuf:"bytes,2,opt,name=lastCompleted,proto3" json:"lastCompleted,omitempty"`
 	// Calculation completion state in percent, i.e. 70 means 70%. Any value other
 	// than 100 means there is still an ongoing calculation, otherwise, this field
-	// is set to 100.
+	// is set to 100. The percentage value means the number of AWS accounts completed
+	// over the total accounts under the organization for the given month.
 	CurrentProgress float64 `protobuf:"fixed64,3,opt,name=currentProgress,proto3" json:"currentProgress,omitempty"`
 }
 
