@@ -3540,8 +3540,11 @@ type GetCalculatorStatusResponse_AwsStatus struct {
 	// The queried month. Format is yyyy-mm.
 	Month string `protobuf:"bytes,1,opt,name=month,proto3" json:"month,omitempty"`
 	// The last timestamp in UTC of the completed calculation at org-level for the
-	// queried month. Format is RFC3339. An empty value means calculations hasn't
-	// started yet for the queried month.
+	// queried month. Format is RFC3339. Note that these calculations are not the same
+	// as the invoice calculations you manually request every month; these are the
+	// daily calculations in response to daily CUR updates, which provides data to
+	// your daily graphs, reports, and daily budget alerts. An empty value means
+	// calculations hasn't started yet for the queried month.
 	LastCompleted string `protobuf:"bytes,2,opt,name=lastCompleted,proto3" json:"lastCompleted,omitempty"`
 	// Calculation completion state in percent, i.e. 70 means 70%. Any value other
 	// than 100 means there is still an ongoing calculation, otherwise, this field
