@@ -59,7 +59,7 @@ type CostClient interface {
 	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash)
 	// character. This is due to the `|` character having a special designation in the data processing workflows.
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// Lists vendor costs calculations history and statuses.
+	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
@@ -563,7 +563,7 @@ type CostServer interface {
 	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash)
 	// character. This is due to the `|` character having a special designation in the data processing workflows.
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
-	// Lists vendor costs calculations history and statuses.
+	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
