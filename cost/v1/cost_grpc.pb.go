@@ -95,7 +95,7 @@ type CostClient interface {
 	DeleteAccountBudget(ctx context.Context, in *DeleteAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
-	// WORK-IN-PROGRESS: Get cost reduction details for an organization (or MSP).
+	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(ctx context.Context, in *GetCostReductionRequest, opts ...grpc.CallOption) (*GetCostReductionResponse, error)
 }
 
@@ -599,7 +599,7 @@ type CostServer interface {
 	DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
-	// WORK-IN-PROGRESS: Get cost reduction details for an organization (or MSP).
+	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
