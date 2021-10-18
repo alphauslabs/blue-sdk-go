@@ -62,12 +62,12 @@ type IamClient interface {
 	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
 	// There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error)
-	// Lists all IP filters. At the moment, this API is only available for root users.
+	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
-	// this API is only available for root users.
+	// this API is only available to root users.
 	CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error)
-	// Deletes an IP filter item. At the moment, this API is only available for root users.
+	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -365,12 +365,12 @@ type IamServer interface {
 	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
 	// There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error)
-	// Lists all IP filters. At the moment, this API is only available for root users.
+	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
-	// this API is only available for root users.
+	// this API is only available to root users.
 	CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error)
-	// Deletes an IP filter item. At the moment, this API is only available for root users.
+	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIamServer()
 }
