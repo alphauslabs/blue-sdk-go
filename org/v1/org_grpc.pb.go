@@ -22,20 +22,20 @@ const _ = grpc.SupportPackageIsVersion7
 type OrganizationClient interface {
 	// Creates the organization account.
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
-	// Sends (or resends) the verification email. Only valid for unverified
+	// WORK-IN-PROGRESS: Sends (or resends) the verification email. Only valid for unverified
 	// organizations. The verification key will be valid for a day.
-	SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*ripple.Org, error)
-	// Verifies an organization using the key received from the verification email.
+	SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Verifies an organization using the key received from the verification email.
 	// The verification key is only valid for a day.
-	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
+	VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Gets information about the caller's organization.
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
-	// Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
+	// WORK-IN-PROGRESS: Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
 	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error)
-	// Updates the organization password.
+	// WORK-IN-PROGRESS: Updates the organization password.
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*ripple.Org, error)
-	// Deletes the organization.
+	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -56,8 +56,8 @@ func (c *organizationClient) CreateOrg(ctx context.Context, in *CreateOrgRequest
 	return out, nil
 }
 
-func (c *organizationClient) SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
-	out := new(ripple.Org)
+func (c *organizationClient) SendVerification(ctx context.Context, in *SendVerificationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Organization/SendVerification", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -65,8 +65,8 @@ func (c *organizationClient) SendVerification(ctx context.Context, in *SendVerif
 	return out, nil
 }
 
-func (c *organizationClient) VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
-	out := new(ripple.Org)
+func (c *organizationClient) VerifyOrg(ctx context.Context, in *VerifyOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Organization/VerifyOrg", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -116,20 +116,20 @@ func (c *organizationClient) DeleteOrg(ctx context.Context, in *DeleteOrgRequest
 type OrganizationServer interface {
 	// Creates the organization account.
 	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
-	// Sends (or resends) the verification email. Only valid for unverified
+	// WORK-IN-PROGRESS: Sends (or resends) the verification email. Only valid for unverified
 	// organizations. The verification key will be valid for a day.
-	SendVerification(context.Context, *SendVerificationRequest) (*ripple.Org, error)
-	// Verifies an organization using the key received from the verification email.
+	SendVerification(context.Context, *SendVerificationRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Verifies an organization using the key received from the verification email.
 	// The verification key is only valid for a day.
-	VerifyOrg(context.Context, *VerifyOrgRequest) (*ripple.Org, error)
+	VerifyOrg(context.Context, *VerifyOrgRequest) (*emptypb.Empty, error)
 	// Gets information about the caller's organization.
 	GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error)
-	// Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
+	// WORK-IN-PROGRESS: Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
 	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error)
-	// Updates the organization password.
+	// WORK-IN-PROGRESS: Updates the organization password.
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error)
-	// Deletes the organization.
+	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedOrganizationServer()
 }
@@ -141,10 +141,10 @@ type UnimplementedOrganizationServer struct {
 func (UnimplementedOrganizationServer) CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrg not implemented")
 }
-func (UnimplementedOrganizationServer) SendVerification(context.Context, *SendVerificationRequest) (*ripple.Org, error) {
+func (UnimplementedOrganizationServer) SendVerification(context.Context, *SendVerificationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendVerification not implemented")
 }
-func (UnimplementedOrganizationServer) VerifyOrg(context.Context, *VerifyOrgRequest) (*ripple.Org, error) {
+func (UnimplementedOrganizationServer) VerifyOrg(context.Context, *VerifyOrgRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyOrg not implemented")
 }
 func (UnimplementedOrganizationServer) GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error) {
