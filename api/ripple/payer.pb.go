@@ -33,7 +33,7 @@ type Payer struct {
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The attributes (key/value pair) of the account.
 	Metadata []*api.KeyValue `protobuf:"bytes,3,rep,name=metadata,proto3" json:"metadata,omitempty"`
-	//List of all accounts under payer id
+	// List of all members under this payer.
 	Members []*api.Account `protobuf:"bytes,4,rep,name=members,proto3" json:"members,omitempty"`
 }
 
