@@ -5,6 +5,7 @@ package cost
 import (
 	context "context"
 	api "github.com/alphauslabs/blue-sdk-go/api"
+	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -28,7 +29,7 @@ type CostClient interface {
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	// For AWS, this means a management account (formerly known as master or payer account);
 	// for Azure, this means a subscription, for GCP, this means a project.
-	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
+	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*ripple.Payer, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
 	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
 	// You can also set {id} to `*` to return all payers' information under the organization.
@@ -139,8 +140,8 @@ func (x *costListPayerAccountsClient) Recv() (*api.Account, error) {
 	return m, nil
 }
 
-func (c *costClient) GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
-	out := new(api.Account)
+func (c *costClient) GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*ripple.Payer, error) {
+	out := new(ripple.Payer)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetPayerAccount", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -532,7 +533,7 @@ type CostServer interface {
 	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	// For AWS, this means a management account (formerly known as master or payer account);
 	// for Azure, this means a subscription, for GCP, this means a project.
-	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*api.Account, error)
+	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*ripple.Payer, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
 	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
 	// You can also set {id} to `*` to return all payers' information under the organization.
@@ -611,7 +612,7 @@ type UnimplementedCostServer struct {
 func (UnimplementedCostServer) ListPayerAccounts(*ListPayerAccountsRequest, Cost_ListPayerAccountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListPayerAccounts not implemented")
 }
-func (UnimplementedCostServer) GetPayerAccount(context.Context, *GetPayerAccountRequest) (*api.Account, error) {
+func (UnimplementedCostServer) GetPayerAccount(context.Context, *GetPayerAccountRequest) (*ripple.Payer, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccount not implemented")
 }
 func (UnimplementedCostServer) GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error {
