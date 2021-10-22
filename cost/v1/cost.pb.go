@@ -1487,8 +1487,7 @@ type ReadCostsRequestAwsOptions struct {
 	// Optional. A comma-separated list of columns to aggregate the data into. Valid values
 	// are `productCode`, `serviceCode`, `region`, `zone`, `usageType`, `instanceType`,
 	// `operation`, `invoiceId`, `description`, and `resourceId`. A special value of `none`
-	// is also supported, which means no additional columns will be queried, which translates
-	// to data aggregated daily (or monthly, see `groupByMonth`) per account.
+	// is also supported, which means query by date or month per account only.
 	//
 	// For example, if you only want the services and region data, you can set this field to
 	// `productCode,region`. Your input sequence doesn't matter (although the sequence above
@@ -1497,20 +1496,23 @@ type ReadCostsRequestAwsOptions struct {
 	// which is generic to specific, top to bottom. Invalid values are discarded. Excluded
 	// columns will be empty.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
-	// Optional. If set to true, return data grouped by month. At the moment, it only supports
-	// `productCode` column when enabled; meaning, costs per account per service per month.
-	// If you want data that is grouped per account per month, set this to `true`, then set
-	// `groupByColumns` to `none`.
+	// Optional. If set to true, return data grouped by month. If you want data that is grouped
+	// per account per month, set this to `true`, then set `groupByColumns` to `none`.
+	//
+	// You can also use `groupByColumns` while setting this to true. If `groupByColumns` is empty,
+	// the default grouping is `productCode`. However, at the moment, this is only limited to
+	// the current and previous months. If your date range includes out-of-range months, those
+	// will only return data grouped by `productCode`.
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
 	// Optional. A list of filtering options. See [ReadCostsRequestAwsOptionsFilters] for more
 	// information on each filter item. Multiple filter items will use the logical 'or' operator,
 	// e.g. filter1 || filter2 || filter3, etc.
 	Filters []*ReadCostsRequestAwsOptionsFilters `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	// Optional. If set to true, stream will include resource tags. Discarded when
-	// `groupByColumns` field is set.
+	// `groupByColumns` field is set or if `groupByMonth` is true.
 	IncludeTags bool `protobuf:"varint,4,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
 	// Optional. If set to true, stream will include resource cost category information.
-	// Discarded when `groupByColumns` field is set.
+	// Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	IncludeCostCategories bool `protobuf:"varint,5,opt,name=includeCostCategories,proto3" json:"includeCostCategories,omitempty"`
 	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can
 	// set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which
