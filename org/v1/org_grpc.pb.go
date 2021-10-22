@@ -32,9 +32,9 @@ type OrganizationClient interface {
 	GetOrg(ctx context.Context, in *GetOrgRequest, opts ...grpc.CallOption) (*ripple.Org, error)
 	// WORK-IN-PROGRESS: Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
-	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error)
+	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Updates the organization password.
-	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*ripple.Org, error)
+	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -83,8 +83,8 @@ func (c *organizationClient) GetOrg(ctx context.Context, in *GetOrgRequest, opts
 	return out, nil
 }
 
-func (c *organizationClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
-	out := new(ripple.Org)
+func (c *organizationClient) UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Organization/UpdateMetadata", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -92,8 +92,8 @@ func (c *organizationClient) UpdateMetadata(ctx context.Context, in *UpdateMetad
 	return out, nil
 }
 
-func (c *organizationClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*ripple.Org, error) {
-	out := new(ripple.Org)
+func (c *organizationClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.org.v1.Organization/UpdatePassword", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -126,9 +126,9 @@ type OrganizationServer interface {
 	GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error)
 	// WORK-IN-PROGRESS: Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
-	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error)
+	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Updates the organization password.
-	UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error)
+	UpdatePassword(context.Context, *UpdatePasswordRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedOrganizationServer()
@@ -150,10 +150,10 @@ func (UnimplementedOrganizationServer) VerifyOrg(context.Context, *VerifyOrgRequ
 func (UnimplementedOrganizationServer) GetOrg(context.Context, *GetOrgRequest) (*ripple.Org, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrg not implemented")
 }
-func (UnimplementedOrganizationServer) UpdateMetadata(context.Context, *UpdateMetadataRequest) (*ripple.Org, error) {
+func (UnimplementedOrganizationServer) UpdateMetadata(context.Context, *UpdateMetadataRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateMetadata not implemented")
 }
-func (UnimplementedOrganizationServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*ripple.Org, error) {
+func (UnimplementedOrganizationServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
 }
 func (UnimplementedOrganizationServer) DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error) {
