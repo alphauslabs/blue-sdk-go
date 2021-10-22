@@ -33,7 +33,7 @@ type OrganizationClient interface {
 	// WORK-IN-PROGRESS: Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
 	UpdateMetadata(ctx context.Context, in *UpdateMetadataRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Updates the organization password.
+	// Updates the organization password.
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -127,7 +127,7 @@ type OrganizationServer interface {
 	// WORK-IN-PROGRESS: Updates organization metadata. See [https://alphauslabs.github.io/blueapi/]
 	// for the list of supported attributes.
 	UpdateMetadata(context.Context, *UpdateMetadataRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Updates the organization password.
+	// Updates the organization password.
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error)
