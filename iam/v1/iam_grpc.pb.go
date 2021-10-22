@@ -34,6 +34,28 @@ type IamClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Deletes a subuser.
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK IN PROGRESS:
+	// Creates a new root user for a billing group or access group.
+	CreateGroupRootUser(ctx context.Context, in *CreateGroupRootUserRequest, opts ...grpc.CallOption) (*api.GroupRootUser, error)
+	// WORK IN PROGRESS
+	// Retrieves all the existing group root users asscoiated with the organization.
+	ListGroupRootUsers(ctx context.Context, in *ListGroupRootUsersRequest, opts ...grpc.CallOption) (Iam_ListGroupRootUsersClient, error)
+	// WORK IN PROGRESS:
+	// Retrieves an group root user.
+	GetGroupRootUser(ctx context.Context, in *GetGroupRootRequest, opts ...grpc.CallOption) (*api.GroupRootUser, error)
+	// WORK IN PROGRESS
+	// Deletes an existing group root user.
+	DeleteGroupRootUser(ctx context.Context, in *DeleteGroupRootUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK IN PROGRESS:
+	// Retrieves the features available to a user on an Alphaus product. Currently,
+	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
+	// WORK IN PROGRESS:
+	// Updates the features available to a user on an Alphaus product. Currently,
+	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
 	// Lists all API clients belonging to the caller.
 	ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (Iam_ListApiClientsClient, error)
 	// Creates an API client for the caller.
@@ -147,8 +169,85 @@ func (c *iamClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts 
 	return out, nil
 }
 
+func (c *iamClient) CreateGroupRootUser(ctx context.Context, in *CreateGroupRootUserRequest, opts ...grpc.CallOption) (*api.GroupRootUser, error) {
+	out := new(api.GroupRootUser)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/CreateGroupRootUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) ListGroupRootUsers(ctx context.Context, in *ListGroupRootUsersRequest, opts ...grpc.CallOption) (Iam_ListGroupRootUsersClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[1], "/blueapi.iam.v1.Iam/ListGroupRootUsers", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &iamListGroupRootUsersClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Iam_ListGroupRootUsersClient interface {
+	Recv() (*api.GroupRootUser, error)
+	grpc.ClientStream
+}
+
+type iamListGroupRootUsersClient struct {
+	grpc.ClientStream
+}
+
+func (x *iamListGroupRootUsersClient) Recv() (*api.GroupRootUser, error) {
+	m := new(api.GroupRootUser)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *iamClient) GetGroupRootUser(ctx context.Context, in *GetGroupRootRequest, opts ...grpc.CallOption) (*api.GroupRootUser, error) {
+	out := new(api.GroupRootUser)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/GetGroupRootUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) DeleteGroupRootUser(ctx context.Context, in *DeleteGroupRootUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/DeleteGroupRootUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error) {
+	out := new(api.FeatureFlags)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/GetFeatureFlags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error) {
+	out := new(api.FeatureFlags)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/UpdateFeatureFlags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (Iam_ListApiClientsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[1], "/blueapi.iam.v1.Iam/ListApiClients", opts...)
+	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[2], "/blueapi.iam.v1.Iam/ListApiClients", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -270,7 +369,7 @@ func (c *iamClient) UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRol
 }
 
 func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[2], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
+	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[3], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -337,6 +436,28 @@ type IamServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*api.User, error)
 	// Deletes a subuser.
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
+	// WORK IN PROGRESS:
+	// Creates a new root user for a billing group or access group.
+	CreateGroupRootUser(context.Context, *CreateGroupRootUserRequest) (*api.GroupRootUser, error)
+	// WORK IN PROGRESS
+	// Retrieves all the existing group root users asscoiated with the organization.
+	ListGroupRootUsers(*ListGroupRootUsersRequest, Iam_ListGroupRootUsersServer) error
+	// WORK IN PROGRESS:
+	// Retrieves an group root user.
+	GetGroupRootUser(context.Context, *GetGroupRootRequest) (*api.GroupRootUser, error)
+	// WORK IN PROGRESS
+	// Deletes an existing group root user.
+	DeleteGroupRootUser(context.Context, *DeleteGroupRootUserRequest) (*emptypb.Empty, error)
+	// WORK IN PROGRESS:
+	// Retrieves the features available to a user on an Alphaus product. Currently,
+	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*api.FeatureFlags, error)
+	// WORK IN PROGRESS:
+	// Updates the features available to a user on an Alphaus product. Currently,
+	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*api.FeatureFlags, error)
 	// Lists all API clients belonging to the caller.
 	ListApiClients(*ListApiClientsRequest, Iam_ListApiClientsServer) error
 	// Creates an API client for the caller.
@@ -393,6 +514,24 @@ func (UnimplementedIamServer) CreateUser(context.Context, *CreateUserRequest) (*
 }
 func (UnimplementedIamServer) DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedIamServer) CreateGroupRootUser(context.Context, *CreateGroupRootUserRequest) (*api.GroupRootUser, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGroupRootUser not implemented")
+}
+func (UnimplementedIamServer) ListGroupRootUsers(*ListGroupRootUsersRequest, Iam_ListGroupRootUsersServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListGroupRootUsers not implemented")
+}
+func (UnimplementedIamServer) GetGroupRootUser(context.Context, *GetGroupRootRequest) (*api.GroupRootUser, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGroupRootUser not implemented")
+}
+func (UnimplementedIamServer) DeleteGroupRootUser(context.Context, *DeleteGroupRootUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteGroupRootUser not implemented")
+}
+func (UnimplementedIamServer) GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*api.FeatureFlags, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFeatureFlags not implemented")
+}
+func (UnimplementedIamServer) UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*api.FeatureFlags, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFeatureFlags not implemented")
 }
 func (UnimplementedIamServer) ListApiClients(*ListApiClientsRequest, Iam_ListApiClientsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListApiClients not implemented")
@@ -538,6 +677,117 @@ func _Iam_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(IamServer).DeleteUser(ctx, req.(*DeleteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_CreateGroupRootUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGroupRootUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).CreateGroupRootUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/CreateGroupRootUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).CreateGroupRootUser(ctx, req.(*CreateGroupRootUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_ListGroupRootUsers_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListGroupRootUsersRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(IamServer).ListGroupRootUsers(m, &iamListGroupRootUsersServer{stream})
+}
+
+type Iam_ListGroupRootUsersServer interface {
+	Send(*api.GroupRootUser) error
+	grpc.ServerStream
+}
+
+type iamListGroupRootUsersServer struct {
+	grpc.ServerStream
+}
+
+func (x *iamListGroupRootUsersServer) Send(m *api.GroupRootUser) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Iam_GetGroupRootUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGroupRootRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).GetGroupRootUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/GetGroupRootUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).GetGroupRootUser(ctx, req.(*GetGroupRootRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_DeleteGroupRootUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteGroupRootUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).DeleteGroupRootUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/DeleteGroupRootUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).DeleteGroupRootUser(ctx, req.(*DeleteGroupRootUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_GetFeatureFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFeatureFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).GetFeatureFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/GetFeatureFlags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).GetFeatureFlags(ctx, req.(*GetFeatureFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_UpdateFeatureFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFeatureFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).UpdateFeatureFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/UpdateFeatureFlags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).UpdateFeatureFlags(ctx, req.(*UpdateFeatureFlagsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -824,6 +1074,26 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Iam_DeleteUser_Handler,
 		},
 		{
+			MethodName: "CreateGroupRootUser",
+			Handler:    _Iam_CreateGroupRootUser_Handler,
+		},
+		{
+			MethodName: "GetGroupRootUser",
+			Handler:    _Iam_GetGroupRootUser_Handler,
+		},
+		{
+			MethodName: "DeleteGroupRootUser",
+			Handler:    _Iam_DeleteGroupRootUser_Handler,
+		},
+		{
+			MethodName: "GetFeatureFlags",
+			Handler:    _Iam_GetFeatureFlags_Handler,
+		},
+		{
+			MethodName: "UpdateFeatureFlags",
+			Handler:    _Iam_UpdateFeatureFlags_Handler,
+		},
+		{
 			MethodName: "CreateApiClient",
 			Handler:    _Iam_CreateApiClient_Handler,
 		},
@@ -876,6 +1146,11 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListUsers",
 			Handler:       _Iam_ListUsers_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListGroupRootUsers",
+			Handler:       _Iam_ListGroupRootUsers_Handler,
 			ServerStreams: true,
 		},
 		{
