@@ -4,6 +4,8 @@ package admin
 
 import (
 	context "context"
+	api "github.com/alphauslabs/blue-sdk-go/api"
+	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -23,10 +25,29 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
+	// WORK IN PROGRESS:
+	// Create a new Wave root account (also referred to as a reseller)
+	CreateResellerAccount(ctx context.Context, in *CreateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
+	// WORK IN PROGRESS
+	// Retrieve all the existing Wave root accounts (also referred to as resellers)
+	// asscoiated with the organization
+	ListResellerAccounts(ctx context.Context, in *ListResellersRequest, opts ...grpc.CallOption) (Admin_ListResellerAccountsClient, error)
+	// WORK IN PROGRESS:
+	// Retrieve an existing Wave root account (also referred to as a reseller)
+	GetResellerAccount(ctx context.Context, in *GetResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
+	// WORK IN PROGRESS
+	// Delete an existing Wave root account (also referred to as a reseller)
+	DeleteResellerAccount(ctx context.Context, in *DeleteResellerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK IN PROGRESS:
+	// Retrieve the features available to a user on an Alphaus product. Currently,
+	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/admin.html.
+	GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
+	// WORK IN PROGRESS:
 	// Update the features available to a user on an Alphaus product. Currently,
 	// only values of "wave" and "aqua" are supported for {product}. For a list of
 	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/admin.html.
-	UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
 }
 
 type adminClient struct {
@@ -78,8 +99,76 @@ func (c *adminClient) GetAccountGroup(ctx context.Context, in *GetAccountGroupRe
 	return out, nil
 }
 
-func (c *adminClient) UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *adminClient) CreateResellerAccount(ctx context.Context, in *CreateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error) {
+	out := new(ripple.Reseller)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateResellerAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) ListResellerAccounts(ctx context.Context, in *ListResellersRequest, opts ...grpc.CallOption) (Admin_ListResellerAccountsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Admin_ServiceDesc.Streams[1], "/blueapi.admin.v1.Admin/ListResellerAccounts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &adminListResellerAccountsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Admin_ListResellerAccountsClient interface {
+	Recv() (*ripple.Reseller, error)
+	grpc.ClientStream
+}
+
+type adminListResellerAccountsClient struct {
+	grpc.ClientStream
+}
+
+func (x *adminListResellerAccountsClient) Recv() (*ripple.Reseller, error) {
+	m := new(ripple.Reseller)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *adminClient) GetResellerAccount(ctx context.Context, in *GetResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error) {
+	out := new(ripple.Reseller)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetResellerAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteResellerAccount(ctx context.Context, in *DeleteResellerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/DeleteResellerAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error) {
+	out := new(api.FeatureFlags)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetFeatureFlags", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error) {
+	out := new(api.FeatureFlags)
 	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/UpdateFeatureFlags", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -95,10 +184,29 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
+	// WORK IN PROGRESS:
+	// Create a new Wave root account (also referred to as a reseller)
+	CreateResellerAccount(context.Context, *CreateResellerRequest) (*ripple.Reseller, error)
+	// WORK IN PROGRESS
+	// Retrieve all the existing Wave root accounts (also referred to as resellers)
+	// asscoiated with the organization
+	ListResellerAccounts(*ListResellersRequest, Admin_ListResellerAccountsServer) error
+	// WORK IN PROGRESS:
+	// Retrieve an existing Wave root account (also referred to as a reseller)
+	GetResellerAccount(context.Context, *GetResellerRequest) (*ripple.Reseller, error)
+	// WORK IN PROGRESS
+	// Delete an existing Wave root account (also referred to as a reseller)
+	DeleteResellerAccount(context.Context, *DeleteResellerRequest) (*emptypb.Empty, error)
+	// WORK IN PROGRESS:
+	// Retrieve the features available to a user on an Alphaus product. Currently,
+	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/admin.html.
+	GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*api.FeatureFlags, error)
+	// WORK IN PROGRESS:
 	// Update the features available to a user on an Alphaus product. Currently,
 	// only values of "wave" and "aqua" are supported for {product}. For a list of
 	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/admin.html.
-	UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*emptypb.Empty, error)
+	UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*api.FeatureFlags, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -112,7 +220,22 @@ func (UnimplementedAdminServer) ListAccountGroups(*ListAccountGroupsRequest, Adm
 func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountGroup not implemented")
 }
-func (UnimplementedAdminServer) UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*emptypb.Empty, error) {
+func (UnimplementedAdminServer) CreateResellerAccount(context.Context, *CreateResellerRequest) (*ripple.Reseller, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateResellerAccount not implemented")
+}
+func (UnimplementedAdminServer) ListResellerAccounts(*ListResellersRequest, Admin_ListResellerAccountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListResellerAccounts not implemented")
+}
+func (UnimplementedAdminServer) GetResellerAccount(context.Context, *GetResellerRequest) (*ripple.Reseller, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResellerAccount not implemented")
+}
+func (UnimplementedAdminServer) DeleteResellerAccount(context.Context, *DeleteResellerRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteResellerAccount not implemented")
+}
+func (UnimplementedAdminServer) GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*api.FeatureFlags, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFeatureFlags not implemented")
+}
+func (UnimplementedAdminServer) UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*api.FeatureFlags, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFeatureFlags not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
@@ -167,6 +290,99 @@ func _Admin_GetAccountGroup_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_CreateResellerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateResellerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateResellerAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/CreateResellerAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateResellerAccount(ctx, req.(*CreateResellerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListResellerAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListResellersRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AdminServer).ListResellerAccounts(m, &adminListResellerAccountsServer{stream})
+}
+
+type Admin_ListResellerAccountsServer interface {
+	Send(*ripple.Reseller) error
+	grpc.ServerStream
+}
+
+type adminListResellerAccountsServer struct {
+	grpc.ServerStream
+}
+
+func (x *adminListResellerAccountsServer) Send(m *ripple.Reseller) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Admin_GetResellerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResellerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetResellerAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetResellerAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetResellerAccount(ctx, req.(*GetResellerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteResellerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteResellerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteResellerAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/DeleteResellerAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteResellerAccount(ctx, req.(*DeleteResellerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_GetFeatureFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFeatureFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetFeatureFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetFeatureFlags",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetFeatureFlags(ctx, req.(*GetFeatureFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Admin_UpdateFeatureFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateFeatureFlagsRequest)
 	if err := dec(in); err != nil {
@@ -197,6 +413,22 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Admin_GetAccountGroup_Handler,
 		},
 		{
+			MethodName: "CreateResellerAccount",
+			Handler:    _Admin_CreateResellerAccount_Handler,
+		},
+		{
+			MethodName: "GetResellerAccount",
+			Handler:    _Admin_GetResellerAccount_Handler,
+		},
+		{
+			MethodName: "DeleteResellerAccount",
+			Handler:    _Admin_DeleteResellerAccount_Handler,
+		},
+		{
+			MethodName: "GetFeatureFlags",
+			Handler:    _Admin_GetFeatureFlags_Handler,
+		},
+		{
 			MethodName: "UpdateFeatureFlags",
 			Handler:    _Admin_UpdateFeatureFlags_Handler,
 		},
@@ -205,6 +437,11 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccountGroups",
 			Handler:       _Admin_ListAccountGroups_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListResellerAccounts",
+			Handler:       _Admin_ListResellerAccounts_Handler,
 			ServerStreams: true,
 		},
 	},
