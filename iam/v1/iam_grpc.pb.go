@@ -47,13 +47,11 @@ type IamClient interface {
 	// Deletes an existing group root user.
 	DeleteGroupRootUser(ctx context.Context, in *DeleteGroupRootUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK IN PROGRESS:
-	// Retrieves the features available to a user on an Alphaus product. Currently,
-	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// Retrieves the features available to a user on an Alphaus product. For a list of
 	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
 	// WORK IN PROGRESS:
-	// Updates the features available to a user on an Alphaus product. Currently,
-	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// Updates the features available to a user on an Alphaus product. For a list of
 	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
 	// Lists all API clients belonging to the caller.
@@ -449,13 +447,11 @@ type IamServer interface {
 	// Deletes an existing group root user.
 	DeleteGroupRootUser(context.Context, *DeleteGroupRootUserRequest) (*emptypb.Empty, error)
 	// WORK IN PROGRESS:
-	// Retrieves the features available to a user on an Alphaus product. Currently,
-	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// Retrieves the features available to a user on an Alphaus product. For a list of
 	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*api.FeatureFlags, error)
 	// WORK IN PROGRESS:
-	// Updates the features available to a user on an Alphaus product. Currently,
-	// only values of "wave" and "aqua" are supported for {product}. For a list of
+	// Updates the features available to a user on an Alphaus product. For a list of
 	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*api.FeatureFlags, error)
 	// Lists all API clients belonging to the caller.
