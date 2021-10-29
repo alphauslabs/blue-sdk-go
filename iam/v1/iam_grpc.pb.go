@@ -82,6 +82,8 @@ type IamClient interface {
 	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
 	// There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error)
+	// WORK-IN-PROGRESS: Lists all SSO Identity Providers (IdP).
+	ListIdentityProviders(ctx context.Context, in *ListIdentityProvidersRequest, opts ...grpc.CallOption) (*ListIdentityProvidersResponse, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -366,6 +368,15 @@ func (c *iamClient) UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRol
 	return out, nil
 }
 
+func (c *iamClient) ListIdentityProviders(ctx context.Context, in *ListIdentityProvidersRequest, opts ...grpc.CallOption) (*ListIdentityProvidersResponse, error) {
+	out := new(ListIdentityProvidersResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/ListIdentityProviders", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[3], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
 	if err != nil {
@@ -482,6 +493,8 @@ type IamServer interface {
 	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
 	// There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error)
+	// WORK-IN-PROGRESS: Lists all SSO Identity Providers (IdP).
+	ListIdentityProviders(context.Context, *ListIdentityProvidersRequest) (*ListIdentityProvidersResponse, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -561,6 +574,9 @@ func (UnimplementedIamServer) CreateUserRoleMapping(context.Context, *CreateUser
 }
 func (UnimplementedIamServer) UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRoleMapping not implemented")
+}
+func (UnimplementedIamServer) ListIdentityProviders(context.Context, *ListIdentityProvidersRequest) (*ListIdentityProvidersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListIdentityProviders not implemented")
 }
 func (UnimplementedIamServer) ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
@@ -989,6 +1005,24 @@ func _Iam_UpdateUserRoleMapping_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_ListIdentityProviders_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListIdentityProvidersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).ListIdentityProviders(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/ListIdentityProviders",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).ListIdentityProviders(ctx, req.(*ListIdentityProvidersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ListIpFilters_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListIpFiltersRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1128,6 +1162,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserRoleMapping",
 			Handler:    _Iam_UpdateUserRoleMapping_Handler,
+		},
+		{
+			MethodName: "ListIdentityProviders",
+			Handler:    _Iam_ListIdentityProviders_Handler,
 		},
 		{
 			MethodName: "CreateIpFilter",
