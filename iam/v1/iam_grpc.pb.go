@@ -84,8 +84,12 @@ type IamClient interface {
 	UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error)
 	// WORK-IN-PROGRESS: Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(ctx context.Context, in *ListIdentityProvidersRequest, opts ...grpc.CallOption) (*ListIdentityProvidersResponse, error)
-	// WORK-IN-PROGRESS: Register an SSO Identity Provider (IdP).
+	// WORK-IN-PROGRESS: Registers an SSO Identity Provider (IdP).
 	CreateIdentityProvider(ctx context.Context, in *CreateIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Updates an SSO Identity Provider (IdP).
+	UpdateIdentityProvider(ctx context.Context, in *UpdateIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Deletes an SSO Identity Provider (IdP).
+	DeleteIdentityProvider(ctx context.Context, in *DeleteIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -388,6 +392,24 @@ func (c *iamClient) CreateIdentityProvider(ctx context.Context, in *CreateIdenti
 	return out, nil
 }
 
+func (c *iamClient) UpdateIdentityProvider(ctx context.Context, in *UpdateIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/UpdateIdentityProvider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) DeleteIdentityProvider(ctx context.Context, in *DeleteIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/DeleteIdentityProvider", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Iam_ServiceDesc.Streams[3], "/blueapi.iam.v1.Iam/ListIpFilters", opts...)
 	if err != nil {
@@ -506,8 +528,12 @@ type IamServer interface {
 	UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error)
 	// WORK-IN-PROGRESS: Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(context.Context, *ListIdentityProvidersRequest) (*ListIdentityProvidersResponse, error)
-	// WORK-IN-PROGRESS: Register an SSO Identity Provider (IdP).
+	// WORK-IN-PROGRESS: Registers an SSO Identity Provider (IdP).
 	CreateIdentityProvider(context.Context, *CreateIdentityProviderRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Updates an SSO Identity Provider (IdP).
+	UpdateIdentityProvider(context.Context, *UpdateIdentityProviderRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Deletes an SSO Identity Provider (IdP).
+	DeleteIdentityProvider(context.Context, *DeleteIdentityProviderRequest) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
 	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
@@ -593,6 +619,12 @@ func (UnimplementedIamServer) ListIdentityProviders(context.Context, *ListIdenti
 }
 func (UnimplementedIamServer) CreateIdentityProvider(context.Context, *CreateIdentityProviderRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateIdentityProvider not implemented")
+}
+func (UnimplementedIamServer) UpdateIdentityProvider(context.Context, *UpdateIdentityProviderRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateIdentityProvider not implemented")
+}
+func (UnimplementedIamServer) DeleteIdentityProvider(context.Context, *DeleteIdentityProviderRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteIdentityProvider not implemented")
 }
 func (UnimplementedIamServer) ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListIpFilters not implemented")
@@ -1057,6 +1089,42 @@ func _Iam_CreateIdentityProvider_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_UpdateIdentityProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateIdentityProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).UpdateIdentityProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/UpdateIdentityProvider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).UpdateIdentityProvider(ctx, req.(*UpdateIdentityProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_DeleteIdentityProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteIdentityProviderRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).DeleteIdentityProvider(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.iam.v1.Iam/DeleteIdentityProvider",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).DeleteIdentityProvider(ctx, req.(*DeleteIdentityProviderRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ListIpFilters_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListIpFiltersRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -1204,6 +1272,14 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateIdentityProvider",
 			Handler:    _Iam_CreateIdentityProvider_Handler,
+		},
+		{
+			MethodName: "UpdateIdentityProvider",
+			Handler:    _Iam_UpdateIdentityProvider_Handler,
+		},
+		{
+			MethodName: "DeleteIdentityProvider",
+			Handler:    _Iam_DeleteIdentityProvider_Handler,
 		},
 		{
 			MethodName: "CreateIpFilter",
