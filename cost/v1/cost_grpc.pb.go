@@ -98,6 +98,8 @@ type CostClient interface {
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(ctx context.Context, in *GetCostReductionRequest, opts ...grpc.CallOption) (*GetCostReductionResponse, error)
+	// WORK-IN-PROGRESS: Get the utilization details for an organization (or MSP).
+	GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error)
 }
 
 type costClient struct {
@@ -521,6 +523,15 @@ func (c *costClient) GetCostReduction(ctx context.Context, in *GetCostReductionR
 	return out, nil
 }
 
+func (c *costClient) GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error) {
+	out := new(GetUtilizationResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetUtilization", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -602,6 +613,8 @@ type CostServer interface {
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error)
+	// WORK-IN-PROGRESS: Get the utilization details for an organization (or MSP).
+	GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -692,6 +705,9 @@ func (UnimplementedCostServer) GetRecommendations(context.Context, *GetRecommend
 }
 func (UnimplementedCostServer) GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCostReduction not implemented")
+}
+func (UnimplementedCostServer) GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUtilization not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -1231,6 +1247,24 @@ func _Cost_GetCostReduction_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetUtilization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUtilizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetUtilization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetUtilization",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetUtilization(ctx, req.(*GetUtilizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1321,6 +1355,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCostReduction",
 			Handler:    _Cost_GetCostReduction_Handler,
+		},
+		{
+			MethodName: "GetUtilization",
+			Handler:    _Cost_GetUtilization_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
