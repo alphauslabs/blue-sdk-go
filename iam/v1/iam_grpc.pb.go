@@ -82,13 +82,11 @@ type IamClient interface {
 	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
 	// There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error)
-	// WORK-IN-PROGRESS: Lists all SSO Identity Providers (IdP).
+	// Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(ctx context.Context, in *ListIdentityProvidersRequest, opts ...grpc.CallOption) (*ListIdentityProvidersResponse, error)
-	// WORK-IN-PROGRESS: Registers an SSO Identity Provider (IdP).
+	// Registers an SSO Identity Provider (IdP).
 	CreateIdentityProvider(ctx context.Context, in *CreateIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Updates an SSO Identity Provider (IdP).
-	UpdateIdentityProvider(ctx context.Context, in *UpdateIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Deletes an SSO Identity Provider (IdP).
+	// Deletes an SSO Identity Provider (IdP).
 	DeleteIdentityProvider(ctx context.Context, in *DeleteIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
@@ -392,15 +390,6 @@ func (c *iamClient) CreateIdentityProvider(ctx context.Context, in *CreateIdenti
 	return out, nil
 }
 
-func (c *iamClient) UpdateIdentityProvider(ctx context.Context, in *UpdateIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/UpdateIdentityProvider", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *iamClient) DeleteIdentityProvider(ctx context.Context, in *DeleteIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.iam.v1.Iam/DeleteIdentityProvider", in, out, opts...)
@@ -526,13 +515,11 @@ type IamServer interface {
 	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
 	// There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error)
-	// WORK-IN-PROGRESS: Lists all SSO Identity Providers (IdP).
+	// Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(context.Context, *ListIdentityProvidersRequest) (*ListIdentityProvidersResponse, error)
-	// WORK-IN-PROGRESS: Registers an SSO Identity Provider (IdP).
+	// Registers an SSO Identity Provider (IdP).
 	CreateIdentityProvider(context.Context, *CreateIdentityProviderRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Updates an SSO Identity Provider (IdP).
-	UpdateIdentityProvider(context.Context, *UpdateIdentityProviderRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Deletes an SSO Identity Provider (IdP).
+	// Deletes an SSO Identity Provider (IdP).
 	DeleteIdentityProvider(context.Context, *DeleteIdentityProviderRequest) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
@@ -619,9 +606,6 @@ func (UnimplementedIamServer) ListIdentityProviders(context.Context, *ListIdenti
 }
 func (UnimplementedIamServer) CreateIdentityProvider(context.Context, *CreateIdentityProviderRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateIdentityProvider not implemented")
-}
-func (UnimplementedIamServer) UpdateIdentityProvider(context.Context, *UpdateIdentityProviderRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateIdentityProvider not implemented")
 }
 func (UnimplementedIamServer) DeleteIdentityProvider(context.Context, *DeleteIdentityProviderRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteIdentityProvider not implemented")
@@ -1089,24 +1073,6 @@ func _Iam_CreateIdentityProvider_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Iam_UpdateIdentityProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateIdentityProviderRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(IamServer).UpdateIdentityProvider(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.iam.v1.Iam/UpdateIdentityProvider",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IamServer).UpdateIdentityProvider(ctx, req.(*UpdateIdentityProviderRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Iam_DeleteIdentityProvider_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteIdentityProviderRequest)
 	if err := dec(in); err != nil {
@@ -1272,10 +1238,6 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateIdentityProvider",
 			Handler:    _Iam_CreateIdentityProvider_Handler,
-		},
-		{
-			MethodName: "UpdateIdentityProvider",
-			Handler:    _Iam_UpdateIdentityProvider_Handler,
 		},
 		{
 			MethodName: "DeleteIdentityProvider",
