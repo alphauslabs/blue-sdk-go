@@ -1,10 +1,9 @@
 ![main](https://github.com/alphauslabs/blue-sdk-go/workflows/main/badge.svg)
+[![Go Reference](https://pkg.go.dev/badge/github.com/alphauslabs/blue-sdk-go.svg)](https://pkg.go.dev/github.com/alphauslabs/blue-sdk-go)
 
 The main branch can be broken. Make sure to use tagged releases.
 
 For authentication, check out this [document](https://alphauslabs.github.io/blueapi/authentication/apikey.html).
-
-You can check out the documentation [here](https://pkg.go.dev/github.com/alphauslabs/blue-sdk-go).
 
 To use the default client(s), you can try something like:
 
