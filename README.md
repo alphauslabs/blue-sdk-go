@@ -3,7 +3,7 @@
 
 The main branch can be broken. Make sure to use tagged releases.
 
-For authentication, check out this [document](https://alphauslabs.github.io/blueapi/authentication/apikey.html).
+For authentication, check out this [document](https://alphauslabs.github.io/docs/blueapi/authentication/).
 
 To use the default client(s), you can try something like:
 
