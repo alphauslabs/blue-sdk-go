@@ -100,6 +100,10 @@ type CostClient interface {
 	GetCostReduction(ctx context.Context, in *GetCostReductionRequest, opts ...grpc.CallOption) (*GetCostReductionResponse, error)
 	// WORK-IN-PROGRESS: Get the utilization details for an organization (or MSP).
 	GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error)
+	// WORK-IN-PROGRESS: Get coverage options details for an organization (or MSP).
+	GetCoverageOptions(ctx context.Context, in *GetCoverageOptionsRequest, opts ...grpc.CallOption) (*GetCoverageOptionsResponse, error)
+	// WORK-IN-PROGRESS: Get ondemand cost details for an organization (or MSP).
+	GetCoverageOndemand(ctx context.Context, in *GetCoverageOndemandRequest, opts ...grpc.CallOption) (*GetCoverageOndemandResponse, error)
 }
 
 type costClient struct {
@@ -532,6 +536,24 @@ func (c *costClient) GetUtilization(ctx context.Context, in *GetUtilizationReque
 	return out, nil
 }
 
+func (c *costClient) GetCoverageOptions(ctx context.Context, in *GetCoverageOptionsRequest, opts ...grpc.CallOption) (*GetCoverageOptionsResponse, error) {
+	out := new(GetCoverageOptionsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetCoverageOptions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) GetCoverageOndemand(ctx context.Context, in *GetCoverageOndemandRequest, opts ...grpc.CallOption) (*GetCoverageOndemandResponse, error) {
+	out := new(GetCoverageOndemandResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetCoverageOndemand", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -615,6 +637,10 @@ type CostServer interface {
 	GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error)
 	// WORK-IN-PROGRESS: Get the utilization details for an organization (or MSP).
 	GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error)
+	// WORK-IN-PROGRESS: Get coverage options details for an organization (or MSP).
+	GetCoverageOptions(context.Context, *GetCoverageOptionsRequest) (*GetCoverageOptionsResponse, error)
+	// WORK-IN-PROGRESS: Get ondemand cost details for an organization (or MSP).
+	GetCoverageOndemand(context.Context, *GetCoverageOndemandRequest) (*GetCoverageOndemandResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -708,6 +734,12 @@ func (UnimplementedCostServer) GetCostReduction(context.Context, *GetCostReducti
 }
 func (UnimplementedCostServer) GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUtilization not implemented")
+}
+func (UnimplementedCostServer) GetCoverageOptions(context.Context, *GetCoverageOptionsRequest) (*GetCoverageOptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCoverageOptions not implemented")
+}
+func (UnimplementedCostServer) GetCoverageOndemand(context.Context, *GetCoverageOndemandRequest) (*GetCoverageOndemandResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCoverageOndemand not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -1265,6 +1297,42 @@ func _Cost_GetUtilization_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetCoverageOptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCoverageOptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetCoverageOptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetCoverageOptions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetCoverageOptions(ctx, req.(*GetCoverageOptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_GetCoverageOndemand_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCoverageOndemandRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetCoverageOndemand(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetCoverageOndemand",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetCoverageOndemand(ctx, req.(*GetCoverageOndemandRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1359,6 +1427,14 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUtilization",
 			Handler:    _Cost_GetUtilization_Handler,
+		},
+		{
+			MethodName: "GetCoverageOptions",
+			Handler:    _Cost_GetCoverageOptions_Handler,
+		},
+		{
+			MethodName: "GetCoverageOndemand",
+			Handler:    _Cost_GetCoverageOndemand_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
