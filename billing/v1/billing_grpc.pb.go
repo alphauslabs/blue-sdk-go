@@ -24,6 +24,8 @@ type BillingClient interface {
 	CreateBillingGroup(ctx context.Context, in *CreateBillingGroupRequest, opts ...grpc.CallOption) (*BillingGroup, error)
 	// Gets a billing group.
 	GetBillingGroup(ctx context.Context, in *GetBillingGroupRequest, opts ...grpc.CallOption) (*GetBillingGroupResponse, error)
+	// Gets an access group.
+	GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error)
 }
 
 type billingClient struct {
@@ -84,6 +86,15 @@ func (c *billingClient) GetBillingGroup(ctx context.Context, in *GetBillingGroup
 	return out, nil
 }
 
+func (c *billingClient) GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error) {
+	out := new(GetAccessGroupResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/GetAccessGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -94,6 +105,8 @@ type BillingServer interface {
 	CreateBillingGroup(context.Context, *CreateBillingGroupRequest) (*BillingGroup, error)
 	// Gets a billing group.
 	GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error)
+	// Gets an access group.
+	GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -109,6 +122,9 @@ func (UnimplementedBillingServer) CreateBillingGroup(context.Context, *CreateBil
 }
 func (UnimplementedBillingServer) GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccessGroup not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -180,6 +196,24 @@ func _Billing_GetBillingGroup_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetAccessGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccessGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetAccessGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.billing.v1.Billing/GetAccessGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetAccessGroup(ctx, req.(*GetAccessGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -194,6 +228,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBillingGroup",
 			Handler:    _Billing_GetBillingGroup_Handler,
+		},
+		{
+			MethodName: "GetAccessGroup",
+			Handler:    _Billing_GetAccessGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
