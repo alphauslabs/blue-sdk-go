@@ -24,7 +24,7 @@ type BillingClient interface {
 	CreateBillingGroup(ctx context.Context, in *CreateBillingGroupRequest, opts ...grpc.CallOption) (*BillingGroup, error)
 	// Gets a billing group.
 	GetBillingGroup(ctx context.Context, in *GetBillingGroupRequest, opts ...grpc.CallOption) (*GetBillingGroupResponse, error)
-	// Gets an access group.
+	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error)
 }
 
@@ -105,7 +105,7 @@ type BillingServer interface {
 	CreateBillingGroup(context.Context, *CreateBillingGroupRequest) (*BillingGroup, error)
 	// Gets a billing group.
 	GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error)
-	// Gets an access group.
+	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
