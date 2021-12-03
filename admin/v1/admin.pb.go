@@ -212,9 +212,10 @@ type GetDefaultBillingInfoTemplateUrlRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. Set to the desired target region. Defaults to 'ap-northeast-1 (Tokyo)'.
+	// Optional. Set to the desired target region code. Defaults to 'ap-northeast-1' (Tokyo).
 	// You can still change the final target region in the CloudFormation console before
-	// the stack creation.
+	// the stack creation. You can check https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions
+	// for the region list.
 	Region string `protobuf:"bytes,1,opt,name=region,proto3" json:"region,omitempty"`
 }
 
