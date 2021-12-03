@@ -8,6 +8,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -26,9 +27,16 @@ type AdminClient interface {
 	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful, the new IAM role will be
-	// added/registered to the target account's records.
+	// WORK-IN-PROGRESS: Gets the current role attached to input account.
+	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoResponse, error)
+	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
+	// the new IAM role will be registered to the target account.
 	CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
+	UpdateDefaultBillingInfoRole(ctx context.Context, in *UpdateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
+	// CloudFormation deployment in your account.
+	DeleteDefaultBillingInfoRole(ctx context.Context, in *DeleteDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type adminClient struct {
@@ -89,9 +97,36 @@ func (c *adminClient) GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *adminClient) GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoResponse, error) {
+	out := new(GetDefaultBillingInfoResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultBillingInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *adminClient) CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error) {
 	out := new(api.Operation)
 	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateDefaultBillingInfoRole(ctx context.Context, in *UpdateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/UpdateDefaultBillingInfoRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteDefaultBillingInfoRole(ctx context.Context, in *DeleteDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/DeleteDefaultBillingInfoRole", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -109,9 +144,16 @@ type AdminServer interface {
 	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful, the new IAM role will be
-	// added/registered to the target account's records.
+	// WORK-IN-PROGRESS: Gets the current role attached to input account.
+	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*GetDefaultBillingInfoResponse, error)
+	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
+	// the new IAM role will be registered to the target account.
 	CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*api.Operation, error)
+	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
+	UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error)
+	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
+	// CloudFormation deployment in your account.
+	DeleteDefaultBillingInfoRole(context.Context, *DeleteDefaultBillingInfoRoleRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -128,8 +170,17 @@ func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGrou
 func (UnimplementedAdminServer) GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfoTemplateUrl not implemented")
 }
+func (UnimplementedAdminServer) GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*GetDefaultBillingInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfo not implemented")
+}
 func (UnimplementedAdminServer) CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDefaultBillingInfoRole not implemented")
+}
+func (UnimplementedAdminServer) UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDefaultBillingInfoRole not implemented")
+}
+func (UnimplementedAdminServer) DeleteDefaultBillingInfoRole(context.Context, *DeleteDefaultBillingInfoRoleRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDefaultBillingInfoRole not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -201,6 +252,24 @@ func _Admin_GetDefaultBillingInfoTemplateUrl_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_GetDefaultBillingInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDefaultBillingInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetDefaultBillingInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetDefaultBillingInfo",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetDefaultBillingInfo(ctx, req.(*GetDefaultBillingInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Admin_CreateDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateDefaultBillingInfoRoleRequest)
 	if err := dec(in); err != nil {
@@ -215,6 +284,42 @@ func _Admin_CreateDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AdminServer).CreateDefaultBillingInfoRole(ctx, req.(*CreateDefaultBillingInfoRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDefaultBillingInfoRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateDefaultBillingInfoRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/UpdateDefaultBillingInfoRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateDefaultBillingInfoRole(ctx, req.(*UpdateDefaultBillingInfoRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDefaultBillingInfoRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteDefaultBillingInfoRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/DeleteDefaultBillingInfoRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteDefaultBillingInfoRole(ctx, req.(*DeleteDefaultBillingInfoRoleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -235,8 +340,20 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Admin_GetDefaultBillingInfoTemplateUrl_Handler,
 		},
 		{
+			MethodName: "GetDefaultBillingInfo",
+			Handler:    _Admin_GetDefaultBillingInfo_Handler,
+		},
+		{
 			MethodName: "CreateDefaultBillingInfoRole",
 			Handler:    _Admin_CreateDefaultBillingInfoRole_Handler,
+		},
+		{
+			MethodName: "UpdateDefaultBillingInfoRole",
+			Handler:    _Admin_UpdateDefaultBillingInfoRole_Handler,
+		},
+		{
+			MethodName: "DeleteDefaultBillingInfoRole",
+			Handler:    _Admin_DeleteDefaultBillingInfoRole_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
