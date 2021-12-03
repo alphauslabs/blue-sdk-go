@@ -22,6 +22,8 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross account access to your account's billing information.
+	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
 }
 
 type adminClient struct {
@@ -73,6 +75,15 @@ func (c *adminClient) GetAccountGroup(ctx context.Context, in *GetAccountGroupRe
 	return out, nil
 }
 
+func (c *adminClient) GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
+	out := new(GetDefaultBillingInfoTemplateUrlResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultBillingInfoTemplateUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -81,6 +92,8 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross account access to your account's billing information.
+	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -93,6 +106,9 @@ func (UnimplementedAdminServer) ListAccountGroups(*ListAccountGroupsRequest, Adm
 }
 func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountGroup not implemented")
+}
+func (UnimplementedAdminServer) GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfoTemplateUrl not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -146,6 +162,24 @@ func _Admin_GetAccountGroup_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_GetDefaultBillingInfoTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDefaultBillingInfoTemplateUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetDefaultBillingInfoTemplateUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetDefaultBillingInfoTemplateUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetDefaultBillingInfoTemplateUrl(ctx, req.(*GetDefaultBillingInfoTemplateUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -156,6 +190,10 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccountGroup",
 			Handler:    _Admin_GetAccountGroup_Handler,
+		},
+		{
+			MethodName: "GetDefaultBillingInfoTemplateUrl",
+			Handler:    _Admin_GetDefaultBillingInfoTemplateUrl_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
