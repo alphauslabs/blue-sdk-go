@@ -28,10 +28,10 @@ type AdminClient interface {
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
 	// WORK-IN-PROGRESS: Gets the current role attached to input account.
-	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoResponse, error)
+	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
 	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
 	// the new IAM role will be registered to the target account.
-	CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
 	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
 	UpdateDefaultBillingInfoRole(ctx context.Context, in *UpdateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
@@ -97,8 +97,8 @@ func (c *adminClient) GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *
 	return out, nil
 }
 
-func (c *adminClient) GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoResponse, error) {
-	out := new(GetDefaultBillingInfoResponse)
+func (c *adminClient) GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error) {
+	out := new(DefaultBillingInfo)
 	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultBillingInfo", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -106,8 +106,8 @@ func (c *adminClient) GetDefaultBillingInfo(ctx context.Context, in *GetDefaultB
 	return out, nil
 }
 
-func (c *adminClient) CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error) {
-	out := new(api.Operation)
+func (c *adminClient) CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error) {
+	out := new(DefaultBillingInfo)
 	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -145,10 +145,10 @@ type AdminServer interface {
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
 	// WORK-IN-PROGRESS: Gets the current role attached to input account.
-	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*GetDefaultBillingInfoResponse, error)
+	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error)
 	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
 	// the new IAM role will be registered to the target account.
-	CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*api.Operation, error)
+	CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*DefaultBillingInfo, error)
 	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
 	UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error)
 	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
@@ -170,10 +170,10 @@ func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGrou
 func (UnimplementedAdminServer) GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfoTemplateUrl not implemented")
 }
-func (UnimplementedAdminServer) GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*GetDefaultBillingInfoResponse, error) {
+func (UnimplementedAdminServer) GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfo not implemented")
 }
-func (UnimplementedAdminServer) CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*api.Operation, error) {
+func (UnimplementedAdminServer) CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*DefaultBillingInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDefaultBillingInfoRole not implemented")
 }
 func (UnimplementedAdminServer) UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error) {
