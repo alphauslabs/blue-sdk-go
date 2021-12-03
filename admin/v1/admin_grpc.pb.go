@@ -4,6 +4,7 @@ package admin
 
 import (
 	context "context"
+	api "github.com/alphauslabs/blue-sdk-go/api"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -22,8 +23,12 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
-	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross account access to your account's billing information.
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
+	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful, the new IAM role will be
+	// added/registered to the target account's records.
+	CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
 }
 
 type adminClient struct {
@@ -84,6 +89,15 @@ func (c *adminClient) GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *adminClient) CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -92,8 +106,12 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
-	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross account access to your account's billing information.
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
+	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful, the new IAM role will be
+	// added/registered to the target account's records.
+	CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*api.Operation, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -109,6 +127,9 @@ func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGrou
 }
 func (UnimplementedAdminServer) GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfoTemplateUrl not implemented")
+}
+func (UnimplementedAdminServer) CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*api.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDefaultBillingInfoRole not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -180,6 +201,24 @@ func _Admin_GetDefaultBillingInfoTemplateUrl_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_CreateDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDefaultBillingInfoRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateDefaultBillingInfoRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateDefaultBillingInfoRole(ctx, req.(*CreateDefaultBillingInfoRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -194,6 +233,10 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDefaultBillingInfoTemplateUrl",
 			Handler:    _Admin_GetDefaultBillingInfoTemplateUrl_Handler,
+		},
+		{
+			MethodName: "CreateDefaultBillingInfoRole",
+			Handler:    _Admin_CreateDefaultBillingInfoRole_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
