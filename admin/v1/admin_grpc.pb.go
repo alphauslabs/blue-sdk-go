@@ -34,7 +34,7 @@ type AdminClient interface {
 	CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
 	// Starts an update to an existing CloudFormation for template changes, if any.
 	UpdateDefaultBillingInfoRole(ctx context.Context, in *UpdateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
+	// Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
 	DeleteDefaultBillingInfoRole(ctx context.Context, in *DeleteDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -151,7 +151,7 @@ type AdminServer interface {
 	CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*DefaultBillingInfo, error)
 	// Starts an update to an existing CloudFormation for template changes, if any.
 	UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error)
-	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
+	// Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
 	DeleteDefaultBillingInfoRole(context.Context, *DeleteDefaultBillingInfoRoleRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAdminServer()

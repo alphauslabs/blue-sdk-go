@@ -666,15 +666,15 @@ var (
 
 	pattern_Admin_GetAccountGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "acctgroups", "id"}, ""))
 
-	pattern_Admin_GetDefaultBillingInfoTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "crossacctaccess", "default"}, ""))
+	pattern_Admin_GetDefaultBillingInfoTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "default"}, ""))
 
-	pattern_Admin_GetDefaultBillingInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "crossacctaccess", "default", "target"}, ""))
+	pattern_Admin_GetDefaultBillingInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
 
-	pattern_Admin_CreateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "crossacctaccess", "default"}, ""))
+	pattern_Admin_CreateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "default"}, ""))
 
-	pattern_Admin_UpdateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "crossacctaccess", "default", "target"}, ""))
+	pattern_Admin_UpdateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
 
-	pattern_Admin_DeleteDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "crossacctaccess", "default", "target"}, ""))
+	pattern_Admin_DeleteDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
 )
 
 var (
