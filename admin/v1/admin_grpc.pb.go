@@ -25,7 +25,7 @@ type AdminClient interface {
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
 	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
-	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
+	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
 	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
 	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
@@ -142,7 +142,7 @@ type AdminServer interface {
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
 	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
-	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
+	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
 	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
 	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error)
