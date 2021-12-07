@@ -24,15 +24,15 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
-	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
+	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Gets the current role attached to input account.
+	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
-	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
+	// Starts validation of a cross-account access stack deployment. If successful,
 	// the new IAM role will be registered to the target account.
 	CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
-	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
+	// Starts an update to an existing CloudFormation for template changes, if any.
 	UpdateDefaultBillingInfoRole(ctx context.Context, in *UpdateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
@@ -141,15 +141,15 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
-	// WORK-IN-PROGRESS: Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
+	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/crossacctaccess/default'.
 	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Gets the current role attached to input account.
+	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error)
-	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
+	// Starts validation of a cross-account access stack deployment. If successful,
 	// the new IAM role will be registered to the target account.
 	CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*DefaultBillingInfo, error)
-	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
+	// Starts an update to an existing CloudFormation for template changes, if any.
 	UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error)
 	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
