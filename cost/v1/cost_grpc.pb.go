@@ -104,6 +104,8 @@ type CostClient interface {
 	GetCoverageOptions(ctx context.Context, in *GetCoverageOptionsRequest, opts ...grpc.CallOption) (*GetCoverageOptionsResponse, error)
 	// WORK-IN-PROGRESS: Get ondemand cost details for an organization (or MSP).
 	GetCoverageOndemand(ctx context.Context, in *GetCoverageOndemandRequest, opts ...grpc.CallOption) (*GetCoverageOndemandResponse, error)
+	// WORK-IN-PROGRESS: Get the breakeven point details for the RI or SP.
+	GetBreakevenPoint(ctx context.Context, in *GetBreakevenPointRequest, opts ...grpc.CallOption) (*GetBreakevenPointResponse, error)
 }
 
 type costClient struct {
@@ -554,6 +556,15 @@ func (c *costClient) GetCoverageOndemand(ctx context.Context, in *GetCoverageOnd
 	return out, nil
 }
 
+func (c *costClient) GetBreakevenPoint(ctx context.Context, in *GetBreakevenPointRequest, opts ...grpc.CallOption) (*GetBreakevenPointResponse, error) {
+	out := new(GetBreakevenPointResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetBreakevenPoint", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -641,6 +652,8 @@ type CostServer interface {
 	GetCoverageOptions(context.Context, *GetCoverageOptionsRequest) (*GetCoverageOptionsResponse, error)
 	// WORK-IN-PROGRESS: Get ondemand cost details for an organization (or MSP).
 	GetCoverageOndemand(context.Context, *GetCoverageOndemandRequest) (*GetCoverageOndemandResponse, error)
+	// WORK-IN-PROGRESS: Get the breakeven point details for the RI or SP.
+	GetBreakevenPoint(context.Context, *GetBreakevenPointRequest) (*GetBreakevenPointResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -740,6 +753,9 @@ func (UnimplementedCostServer) GetCoverageOptions(context.Context, *GetCoverageO
 }
 func (UnimplementedCostServer) GetCoverageOndemand(context.Context, *GetCoverageOndemandRequest) (*GetCoverageOndemandResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCoverageOndemand not implemented")
+}
+func (UnimplementedCostServer) GetBreakevenPoint(context.Context, *GetBreakevenPointRequest) (*GetBreakevenPointResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBreakevenPoint not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -1333,6 +1349,24 @@ func _Cost_GetCoverageOndemand_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetBreakevenPoint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBreakevenPointRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetBreakevenPoint(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetBreakevenPoint",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetBreakevenPoint(ctx, req.(*GetBreakevenPointRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1435,6 +1469,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCoverageOndemand",
 			Handler:    _Cost_GetCoverageOndemand_Handler,
+		},
+		{
+			MethodName: "GetBreakevenPoint",
+			Handler:    _Cost_GetBreakevenPoint_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
