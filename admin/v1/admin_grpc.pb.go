@@ -27,7 +27,7 @@ type AdminClient interface {
 	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
 	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Lists the current role attached to accounts under caller.
+	// Lists the default cross-account role(s) attached to accounts under caller.
 	ListDefaultBillingInfo(ctx context.Context, in *ListDefaultBillingInfoRequest, opts ...grpc.CallOption) (Admin_ListDefaultBillingInfoClient, error)
 	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
@@ -178,7 +178,7 @@ type AdminServer interface {
 	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
 	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Lists the current role attached to accounts under caller.
+	// Lists the default cross-account role(s) attached to accounts under caller.
 	ListDefaultBillingInfo(*ListDefaultBillingInfoRequest, Admin_ListDefaultBillingInfoServer) error
 	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error)
