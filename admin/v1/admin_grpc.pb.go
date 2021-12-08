@@ -27,6 +27,8 @@ type AdminClient interface {
 	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
 	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Lists the current role attached to accounts under caller.
+	ListDefaultBillingInfo(ctx context.Context, in *ListDefaultBillingInfoRequest, opts ...grpc.CallOption) (Admin_ListDefaultBillingInfoClient, error)
 	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
 	// Starts validation of a cross-account access stack deployment. If successful,
@@ -97,6 +99,38 @@ func (c *adminClient) GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *adminClient) ListDefaultBillingInfo(ctx context.Context, in *ListDefaultBillingInfoRequest, opts ...grpc.CallOption) (Admin_ListDefaultBillingInfoClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Admin_ServiceDesc.Streams[1], "/blueapi.admin.v1.Admin/ListDefaultBillingInfo", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &adminListDefaultBillingInfoClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Admin_ListDefaultBillingInfoClient interface {
+	Recv() (*DefaultBillingInfo, error)
+	grpc.ClientStream
+}
+
+type adminListDefaultBillingInfoClient struct {
+	grpc.ClientStream
+}
+
+func (x *adminListDefaultBillingInfoClient) Recv() (*DefaultBillingInfo, error) {
+	m := new(DefaultBillingInfo)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *adminClient) GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error) {
 	out := new(DefaultBillingInfo)
 	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultBillingInfo", in, out, opts...)
@@ -144,6 +178,8 @@ type AdminServer interface {
 	// Gets a CloudFormation launch url for enabling cross-account access to your account's billing information.
 	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
 	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Lists the current role attached to accounts under caller.
+	ListDefaultBillingInfo(*ListDefaultBillingInfoRequest, Admin_ListDefaultBillingInfoServer) error
 	// Gets the current role attached to input account.
 	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error)
 	// Starts validation of a cross-account access stack deployment. If successful,
@@ -169,6 +205,9 @@ func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGrou
 }
 func (UnimplementedAdminServer) GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfoTemplateUrl not implemented")
+}
+func (UnimplementedAdminServer) ListDefaultBillingInfo(*ListDefaultBillingInfoRequest, Admin_ListDefaultBillingInfoServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListDefaultBillingInfo not implemented")
 }
 func (UnimplementedAdminServer) GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfo not implemented")
@@ -250,6 +289,27 @@ func _Admin_GetDefaultBillingInfoTemplateUrl_Handler(srv interface{}, ctx contex
 		return srv.(AdminServer).GetDefaultBillingInfoTemplateUrl(ctx, req.(*GetDefaultBillingInfoTemplateUrlRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListDefaultBillingInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListDefaultBillingInfoRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(AdminServer).ListDefaultBillingInfo(m, &adminListDefaultBillingInfoServer{stream})
+}
+
+type Admin_ListDefaultBillingInfoServer interface {
+	Send(*DefaultBillingInfo) error
+	grpc.ServerStream
+}
+
+type adminListDefaultBillingInfoServer struct {
+	grpc.ServerStream
+}
+
+func (x *adminListDefaultBillingInfoServer) Send(m *DefaultBillingInfo) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Admin_GetDefaultBillingInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -360,6 +420,11 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccountGroups",
 			Handler:       _Admin_ListAccountGroups_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListDefaultBillingInfo",
+			Handler:       _Admin_ListDefaultBillingInfo_Handler,
 			ServerStreams: true,
 		},
 	},

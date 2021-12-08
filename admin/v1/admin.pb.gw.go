@@ -136,6 +136,23 @@ func local_request_Admin_GetDefaultBillingInfoTemplateUrl_0(ctx context.Context,
 
 }
 
+func request_Admin_ListDefaultBillingInfo_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (Admin_ListDefaultBillingInfoClient, runtime.ServerMetadata, error) {
+	var protoReq ListDefaultBillingInfoRequest
+	var metadata runtime.ServerMetadata
+
+	stream, err := client.ListDefaultBillingInfo(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 func request_Admin_GetDefaultBillingInfo_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetDefaultBillingInfoRequest
 	var metadata runtime.ServerMetadata
@@ -385,6 +402,13 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 
 	})
 
+	mux.Handle("POST", pattern_Admin_ListDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	mux.Handle("GET", pattern_Admin_GetDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -578,6 +602,26 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 
 	})
 
+	mux.Handle("POST", pattern_Admin_ListDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/ListDefaultBillingInfo")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_ListDefaultBillingInfo_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_ListDefaultBillingInfo_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_Admin_GetDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -668,6 +712,8 @@ var (
 
 	pattern_Admin_GetDefaultBillingInfoTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "default"}, ""))
 
+	pattern_Admin_ListDefaultBillingInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5}, []string{"admin", "v1", "aws", "xacct", "default", "all"}, "read"))
+
 	pattern_Admin_GetDefaultBillingInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
 
 	pattern_Admin_CreateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "default"}, ""))
@@ -683,6 +729,8 @@ var (
 	forward_Admin_GetAccountGroup_0 = runtime.ForwardResponseMessage
 
 	forward_Admin_GetDefaultBillingInfoTemplateUrl_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_ListDefaultBillingInfo_0 = runtime.ForwardResponseStream
 
 	forward_Admin_GetDefaultBillingInfo_0 = runtime.ForwardResponseMessage
 
