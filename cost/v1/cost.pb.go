@@ -1500,9 +1500,7 @@ type ReadCostsRequestAwsOptions struct {
 	// per account per month, set this to `true`, then set `groupByColumns` to `none`.
 	//
 	// You can also use `groupByColumns` while setting this to true. If `groupByColumns` is empty,
-	// the default grouping is `productCode`. However, at the moment, this is only limited to
-	// the current and previous months. If your date range includes out-of-range months, those
-	// will only return data grouped by `productCode`.
+	// the default grouping is `productCode`.
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
 	// Optional. A list of filtering options. See [ReadCostsRequestAwsOptionsFilters] for more
 	// information on each filter item. Multiple filter items will use the logical 'or' operator,
@@ -1633,7 +1631,7 @@ type ReadCostsRequest struct {
 	// usage-based cost details of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
 	// Optional. The UTC date to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd.
+	// current month will be used. Format: yyyymmdd. The oldest supported date is 2020-01-01.
 	StartTime string `protobuf:"bytes,4,opt,name=startTime,proto3" json:"startTime,omitempty"`
 	// Optional. The UTC date to end the streaming data. If not set, current date will be
 	// used. Format: `yyyymmd`.
