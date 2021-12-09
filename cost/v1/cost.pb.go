@@ -1496,8 +1496,8 @@ type ReadCostsRequestAwsOptions struct {
 	// which is generic to specific, top to bottom. Invalid values are discarded. Excluded
 	// columns will be empty.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
-	// Optional. If set to true, return data grouped by month. If you want data that is grouped
-	// per account per month, set this to `true`, then set `groupByColumns` to `none`.
+	// Optional. If set to true, return data grouped by month within the date range. If you want data
+	// that is grouped per account per month, set this to `true`, then set `groupByColumns` to `none`.
 	//
 	// You can also use `groupByColumns` while setting this to true. If `groupByColumns` is empty,
 	// the default grouping is `productCode`.
