@@ -26,7 +26,7 @@ type BillingClient interface {
 	GetBillingGroup(ctx context.Context, in *GetBillingGroupRequest, opts ...grpc.CallOption) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error)
-	// WORK-IN-PROGRESS: Reads the calculation history of each accounts in your billing groups. Only available in Ripple.
+	// WORK-IN-PROGRESS: Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
 	ListAwsCalculationHistory(ctx context.Context, in *ListAwsCalculationHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsCalculationHistoryClient, error)
 }
 
@@ -141,7 +141,7 @@ type BillingServer interface {
 	GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error)
-	// WORK-IN-PROGRESS: Reads the calculation history of each accounts in your billing groups. Only available in Ripple.
+	// WORK-IN-PROGRESS: Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
 	ListAwsCalculationHistory(*ListAwsCalculationHistoryRequest, Billing_ListAwsCalculationHistoryServer) error
 	mustEmbedUnimplementedBillingServer()
 }
