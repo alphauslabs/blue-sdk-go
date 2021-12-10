@@ -26,6 +26,8 @@ type BillingClient interface {
 	GetBillingGroup(ctx context.Context, in *GetBillingGroupRequest, opts ...grpc.CallOption) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error)
+	// WORK-IN-PROGRESS: Reads the calculation history of each accounts in your billing groups. Only available in Ripple.
+	ListAwsCalculationHistory(ctx context.Context, in *ListAwsCalculationHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsCalculationHistoryClient, error)
 }
 
 type billingClient struct {
@@ -95,6 +97,38 @@ func (c *billingClient) GetAccessGroup(ctx context.Context, in *GetAccessGroupRe
 	return out, nil
 }
 
+func (c *billingClient) ListAwsCalculationHistory(ctx context.Context, in *ListAwsCalculationHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsCalculationHistoryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[1], "/blueapi.billing.v1.Billing/ListAwsCalculationHistory", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListAwsCalculationHistoryClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListAwsCalculationHistoryClient interface {
+	Recv() (*AwsCalculationHistory, error)
+	grpc.ClientStream
+}
+
+type billingListAwsCalculationHistoryClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListAwsCalculationHistoryClient) Recv() (*AwsCalculationHistory, error) {
+	m := new(AwsCalculationHistory)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -107,6 +141,8 @@ type BillingServer interface {
 	GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error)
+	// WORK-IN-PROGRESS: Reads the calculation history of each accounts in your billing groups. Only available in Ripple.
+	ListAwsCalculationHistory(*ListAwsCalculationHistoryRequest, Billing_ListAwsCalculationHistoryServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -125,6 +161,9 @@ func (UnimplementedBillingServer) GetBillingGroup(context.Context, *GetBillingGr
 }
 func (UnimplementedBillingServer) GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessGroup not implemented")
+}
+func (UnimplementedBillingServer) ListAwsCalculationHistory(*ListAwsCalculationHistoryRequest, Billing_ListAwsCalculationHistoryServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAwsCalculationHistory not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -214,6 +253,27 @@ func _Billing_GetAccessGroup_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ListAwsCalculationHistory_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAwsCalculationHistoryRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListAwsCalculationHistory(m, &billingListAwsCalculationHistoryServer{stream})
+}
+
+type Billing_ListAwsCalculationHistoryServer interface {
+	Send(*AwsCalculationHistory) error
+	grpc.ServerStream
+}
+
+type billingListAwsCalculationHistoryServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListAwsCalculationHistoryServer) Send(m *AwsCalculationHistory) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -238,6 +298,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListBillingGroups",
 			Handler:       _Billing_ListBillingGroups_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAwsCalculationHistory",
+			Handler:       _Billing_ListAwsCalculationHistory_Handler,
 			ServerStreams: true,
 		},
 	},
