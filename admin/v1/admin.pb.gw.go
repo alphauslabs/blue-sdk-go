@@ -343,6 +343,284 @@ func local_request_Admin_DeleteDefaultBillingInfoRole_0(ctx context.Context, mar
 
 }
 
+func request_Admin_GetNotificationSettings_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetNotificationSettingsRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := client.GetNotificationSettings(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Admin_GetNotificationSettings_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetNotificationSettingsRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := server.GetNotificationSettings(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_Admin_SaveNotificationSettings_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SaveNotificationSettingsRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.SaveNotificationSettings(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Admin_SaveNotificationSettings_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq SaveNotificationSettingsRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.SaveNotificationSettings(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_Admin_ListNotificationChannels_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListNotificationChannelsRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := client.ListNotificationChannels(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Admin_ListNotificationChannels_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ListNotificationChannelsRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := server.ListNotificationChannels(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_Admin_GetNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	msg, err := client.GetNotificationChannel(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Admin_GetNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	msg, err := server.GetNotificationChannel(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_Admin_CreateNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.CreateNotificationChannel(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Admin_CreateNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.CreateNotificationChannel(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+var (
+	filter_Admin_UpdateNotificationChannel_0 = &utilities.DoubleArray{Encoding: map[string]int{"id": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+)
+
+func request_Admin_UpdateNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Admin_UpdateNotificationChannel_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := client.UpdateNotificationChannel(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Admin_UpdateNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Admin_UpdateNotificationChannel_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	msg, err := server.UpdateNotificationChannel(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_Admin_DeleteNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeleteNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	msg, err := client.DeleteNotificationChannel(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Admin_DeleteNotificationChannel_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeleteNotificationChannelRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	msg, err := server.DeleteNotificationChannel(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
 // RegisterAdminHandlerServer registers the http handlers for service Admin to "mux".
 // UnaryRPC     :call AdminServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -498,6 +776,167 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 
 		forward_Admin_DeleteDefaultBillingInfoRole_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_Admin_GetNotificationSettings_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetNotificationSettings")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Admin_GetNotificationSettings_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_GetNotificationSettings_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_Admin_SaveNotificationSettings_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/SaveNotificationSettings")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Admin_SaveNotificationSettings_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_SaveNotificationSettings_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_Admin_ListNotificationChannels_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/ListNotificationChannels")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Admin_ListNotificationChannels_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_ListNotificationChannels_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_Admin_GetNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Admin_GetNotificationChannel_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_GetNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_Admin_CreateNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/CreateNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Admin_CreateNotificationChannel_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_CreateNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("PUT", pattern_Admin_UpdateNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/UpdateNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Admin_UpdateNotificationChannel_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_UpdateNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("DELETE", pattern_Admin_DeleteNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/DeleteNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Admin_DeleteNotificationChannel_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_DeleteNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -702,6 +1141,146 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 
 	})
 
+	mux.Handle("GET", pattern_Admin_GetNotificationSettings_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetNotificationSettings")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_GetNotificationSettings_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_GetNotificationSettings_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_Admin_SaveNotificationSettings_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/SaveNotificationSettings")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_SaveNotificationSettings_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_SaveNotificationSettings_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_Admin_ListNotificationChannels_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/ListNotificationChannels")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_ListNotificationChannels_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_ListNotificationChannels_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("GET", pattern_Admin_GetNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_GetNotificationChannel_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_GetNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("POST", pattern_Admin_CreateNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/CreateNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_CreateNotificationChannel_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_CreateNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("PUT", pattern_Admin_UpdateNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/UpdateNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_UpdateNotificationChannel_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_UpdateNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
+	mux.Handle("DELETE", pattern_Admin_DeleteNotificationChannel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/DeleteNotificationChannel")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Admin_DeleteNotificationChannel_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Admin_DeleteNotificationChannel_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -721,6 +1300,20 @@ var (
 	pattern_Admin_UpdateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
 
 	pattern_Admin_DeleteDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
+
+	pattern_Admin_GetNotificationSettings_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "notification", "settings"}, ""))
+
+	pattern_Admin_SaveNotificationSettings_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "notification", "settings"}, ""))
+
+	pattern_Admin_ListNotificationChannels_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "notification", "channels"}, ""))
+
+	pattern_Admin_GetNotificationChannel_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "notification", "channels", "id"}, ""))
+
+	pattern_Admin_CreateNotificationChannel_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "notification", "channels"}, ""))
+
+	pattern_Admin_UpdateNotificationChannel_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "notification", "channels", "id"}, ""))
+
+	pattern_Admin_DeleteNotificationChannel_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"admin", "v1", "notification", "channels", "id"}, ""))
 )
 
 var (
@@ -739,4 +1332,18 @@ var (
 	forward_Admin_UpdateDefaultBillingInfoRole_0 = runtime.ForwardResponseMessage
 
 	forward_Admin_DeleteDefaultBillingInfoRole_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_GetNotificationSettings_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_SaveNotificationSettings_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_ListNotificationChannels_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_GetNotificationChannel_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_CreateNotificationChannel_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_UpdateNotificationChannel_0 = runtime.ForwardResponseMessage
+
+	forward_Admin_DeleteNotificationChannel_0 = runtime.ForwardResponseMessage
 )

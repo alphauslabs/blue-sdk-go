@@ -39,6 +39,20 @@ type AdminClient interface {
 	// Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
 	DeleteDefaultBillingInfoRole(ctx context.Context, in *DeleteDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
+	GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
+	// WORK-IN-PROGRESS: Creates or updates notification settings for login user's organization or group.
+	SaveNotificationSettings(ctx context.Context, in *SaveNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
+	// WORK-IN-PROGRESS: Lists all notification channels for login user's organization or group.
+	ListNotificationChannels(ctx context.Context, in *ListNotificationChannelsRequest, opts ...grpc.CallOption) (*ListNotificationChannelsResponse, error)
+	// WORK-IN-PROGRESS: Gets notification channel for login user's organization or group.
+	GetNotificationChannel(ctx context.Context, in *GetNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Creates notification settings for login user's organization or group.
+	CreateNotificationChannel(ctx context.Context, in *CreateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Updates notification settings for login user's organization or group.
+	UpdateNotificationChannel(ctx context.Context, in *UpdateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Deletes notification settings for login user's organization or group.
+	DeleteNotificationChannel(ctx context.Context, in *DeleteNotificationChannelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type adminClient struct {
@@ -167,6 +181,69 @@ func (c *adminClient) DeleteDefaultBillingInfoRole(ctx context.Context, in *Dele
 	return out, nil
 }
 
+func (c *adminClient) GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error) {
+	out := new(api.NotificationSettings)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetNotificationSettings", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) SaveNotificationSettings(ctx context.Context, in *SaveNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error) {
+	out := new(api.NotificationSettings)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/SaveNotificationSettings", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) ListNotificationChannels(ctx context.Context, in *ListNotificationChannelsRequest, opts ...grpc.CallOption) (*ListNotificationChannelsResponse, error) {
+	out := new(ListNotificationChannelsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/ListNotificationChannels", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) GetNotificationChannel(ctx context.Context, in *GetNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error) {
+	out := new(api.NotificationChannel)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetNotificationChannel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateNotificationChannel(ctx context.Context, in *CreateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error) {
+	out := new(api.NotificationChannel)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateNotificationChannel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateNotificationChannel(ctx context.Context, in *UpdateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error) {
+	out := new(api.NotificationChannel)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/UpdateNotificationChannel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteNotificationChannel(ctx context.Context, in *DeleteNotificationChannelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/DeleteNotificationChannel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -190,6 +267,20 @@ type AdminServer interface {
 	// Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
 	DeleteDefaultBillingInfoRole(context.Context, *DeleteDefaultBillingInfoRoleRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
+	GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error)
+	// WORK-IN-PROGRESS: Creates or updates notification settings for login user's organization or group.
+	SaveNotificationSettings(context.Context, *SaveNotificationSettingsRequest) (*api.NotificationSettings, error)
+	// WORK-IN-PROGRESS: Lists all notification channels for login user's organization or group.
+	ListNotificationChannels(context.Context, *ListNotificationChannelsRequest) (*ListNotificationChannelsResponse, error)
+	// WORK-IN-PROGRESS: Gets notification channel for login user's organization or group.
+	GetNotificationChannel(context.Context, *GetNotificationChannelRequest) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Creates notification settings for login user's organization or group.
+	CreateNotificationChannel(context.Context, *CreateNotificationChannelRequest) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Updates notification settings for login user's organization or group.
+	UpdateNotificationChannel(context.Context, *UpdateNotificationChannelRequest) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Deletes notification settings for login user's organization or group.
+	DeleteNotificationChannel(context.Context, *DeleteNotificationChannelRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -220,6 +311,27 @@ func (UnimplementedAdminServer) UpdateDefaultBillingInfoRole(context.Context, *U
 }
 func (UnimplementedAdminServer) DeleteDefaultBillingInfoRole(context.Context, *DeleteDefaultBillingInfoRoleRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDefaultBillingInfoRole not implemented")
+}
+func (UnimplementedAdminServer) GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNotificationSettings not implemented")
+}
+func (UnimplementedAdminServer) SaveNotificationSettings(context.Context, *SaveNotificationSettingsRequest) (*api.NotificationSettings, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SaveNotificationSettings not implemented")
+}
+func (UnimplementedAdminServer) ListNotificationChannels(context.Context, *ListNotificationChannelsRequest) (*ListNotificationChannelsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListNotificationChannels not implemented")
+}
+func (UnimplementedAdminServer) GetNotificationChannel(context.Context, *GetNotificationChannelRequest) (*api.NotificationChannel, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetNotificationChannel not implemented")
+}
+func (UnimplementedAdminServer) CreateNotificationChannel(context.Context, *CreateNotificationChannelRequest) (*api.NotificationChannel, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateNotificationChannel not implemented")
+}
+func (UnimplementedAdminServer) UpdateNotificationChannel(context.Context, *UpdateNotificationChannelRequest) (*api.NotificationChannel, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotificationChannel not implemented")
+}
+func (UnimplementedAdminServer) DeleteNotificationChannel(context.Context, *DeleteNotificationChannelRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteNotificationChannel not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -384,6 +496,132 @@ func _Admin_DeleteDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_GetNotificationSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNotificationSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetNotificationSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetNotificationSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetNotificationSettings(ctx, req.(*GetNotificationSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_SaveNotificationSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveNotificationSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).SaveNotificationSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/SaveNotificationSettings",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).SaveNotificationSettings(ctx, req.(*SaveNotificationSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_ListNotificationChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListNotificationChannelsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ListNotificationChannels(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/ListNotificationChannels",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ListNotificationChannels(ctx, req.(*ListNotificationChannelsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_GetNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetNotificationChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetNotificationChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetNotificationChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetNotificationChannel(ctx, req.(*GetNotificationChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateNotificationChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateNotificationChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/CreateNotificationChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateNotificationChannel(ctx, req.(*CreateNotificationChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateNotificationChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateNotificationChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/UpdateNotificationChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateNotificationChannel(ctx, req.(*UpdateNotificationChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteNotificationChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteNotificationChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/DeleteNotificationChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteNotificationChannel(ctx, req.(*DeleteNotificationChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -414,6 +652,34 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteDefaultBillingInfoRole",
 			Handler:    _Admin_DeleteDefaultBillingInfoRole_Handler,
+		},
+		{
+			MethodName: "GetNotificationSettings",
+			Handler:    _Admin_GetNotificationSettings_Handler,
+		},
+		{
+			MethodName: "SaveNotificationSettings",
+			Handler:    _Admin_SaveNotificationSettings_Handler,
+		},
+		{
+			MethodName: "ListNotificationChannels",
+			Handler:    _Admin_ListNotificationChannels_Handler,
+		},
+		{
+			MethodName: "GetNotificationChannel",
+			Handler:    _Admin_GetNotificationChannel_Handler,
+		},
+		{
+			MethodName: "CreateNotificationChannel",
+			Handler:    _Admin_CreateNotificationChannel_Handler,
+		},
+		{
+			MethodName: "UpdateNotificationChannel",
+			Handler:    _Admin_UpdateNotificationChannel_Handler,
+		},
+		{
+			MethodName: "DeleteNotificationChannel",
+			Handler:    _Admin_DeleteNotificationChannel_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
