@@ -213,16 +213,16 @@ type GetDefaultCostAccessTemplateUrlRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. Valid values are `default`, `s3only`, and `apionly`. Set to `default` if empty.
+	// Optional. Valid values are `default`, `s3only`, and `apionly`. Defaults to `default` if empty.
 	//
 	// `default` - Template for setting up both CUR export and read-only access to cost information.
 	//
 	// `apionly` - Template for setting up ready-only access to cost information. Use if you already
-	// exported your CUR to Alphaus through other means (i.e. manual setup).
+	// have exported your CUR to Alphaus through other means (i.e. manual setup).
 	//
 	// `s3only` - A helper template for creating an S3 bucket to be used for CUR export.
 	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	// Optional. Set to the desired target region code. Defaults to 'us-east-1' (N. Virginia).
+	// Optional. Set to the desired target region code. Defaults to `us-east-1` (N. Virginia).
 	// You can still change the final target region in the CloudFormation console before
 	// the stack creation.
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
