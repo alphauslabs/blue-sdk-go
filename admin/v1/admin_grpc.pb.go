@@ -24,21 +24,21 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
-	// Gets a CloudFormation launch URL for enabling cross-account access to your account's billing information.
-	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
-	GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// Lists the default cross-account role(s) attached to accounts under caller.
-	ListDefaultBillingInfo(ctx context.Context, in *ListDefaultBillingInfoRequest, opts ...grpc.CallOption) (Admin_ListDefaultBillingInfoClient, error)
-	// Gets the current role attached to input account.
-	GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
-	// Starts validation of a cross-account access stack deployment. If successful,
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling various cross-account access to your
+	// account's cost information based on type.
+	GetDefaultCostAccessTemplateUrl(ctx context.Context, in *GetDefaultCostAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultCostAccessTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Lists the default cross-account role(s) attached to accounts under caller.
+	ListDefaultCostAccess(ctx context.Context, in *ListDefaultCostAccessRequest, opts ...grpc.CallOption) (Admin_ListDefaultCostAccessClient, error)
+	// WORK-IN-PROGRESS: Gets the current role attached to input account.
+	GetDefaultCostAccess(ctx context.Context, in *GetDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error)
+	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
 	// the new IAM role will be registered to the target account.
-	CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error)
-	// Starts an update to an existing CloudFormation for template changes, if any.
-	UpdateDefaultBillingInfoRole(ctx context.Context, in *UpdateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// Deletes the current role attached to this target account. This does not delete the
+	CreateDefaultCostAccess(ctx context.Context, in *CreateDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error)
+	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
+	UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
-	DeleteDefaultBillingInfoRole(ctx context.Context, in *DeleteDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteDefaultCostAccess(ctx context.Context, in *DeleteDefaultCostAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
 	GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
 	// WORK-IN-PROGRESS: Creates or updates notification settings for login user's organization or group.
@@ -104,21 +104,21 @@ func (c *adminClient) GetAccountGroup(ctx context.Context, in *GetAccountGroupRe
 	return out, nil
 }
 
-func (c *adminClient) GetDefaultBillingInfoTemplateUrl(ctx context.Context, in *GetDefaultBillingInfoTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
-	out := new(GetDefaultBillingInfoTemplateUrlResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultBillingInfoTemplateUrl", in, out, opts...)
+func (c *adminClient) GetDefaultCostAccessTemplateUrl(ctx context.Context, in *GetDefaultCostAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultCostAccessTemplateUrlResponse, error) {
+	out := new(GetDefaultCostAccessTemplateUrlResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultCostAccessTemplateUrl", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) ListDefaultBillingInfo(ctx context.Context, in *ListDefaultBillingInfoRequest, opts ...grpc.CallOption) (Admin_ListDefaultBillingInfoClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Admin_ServiceDesc.Streams[1], "/blueapi.admin.v1.Admin/ListDefaultBillingInfo", opts...)
+func (c *adminClient) ListDefaultCostAccess(ctx context.Context, in *ListDefaultCostAccessRequest, opts ...grpc.CallOption) (Admin_ListDefaultCostAccessClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Admin_ServiceDesc.Streams[1], "/blueapi.admin.v1.Admin/ListDefaultCostAccess", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &adminListDefaultBillingInfoClient{stream}
+	x := &adminListDefaultCostAccessClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -128,53 +128,53 @@ func (c *adminClient) ListDefaultBillingInfo(ctx context.Context, in *ListDefaul
 	return x, nil
 }
 
-type Admin_ListDefaultBillingInfoClient interface {
-	Recv() (*DefaultBillingInfo, error)
+type Admin_ListDefaultCostAccessClient interface {
+	Recv() (*DefaultCostAccess, error)
 	grpc.ClientStream
 }
 
-type adminListDefaultBillingInfoClient struct {
+type adminListDefaultCostAccessClient struct {
 	grpc.ClientStream
 }
 
-func (x *adminListDefaultBillingInfoClient) Recv() (*DefaultBillingInfo, error) {
-	m := new(DefaultBillingInfo)
+func (x *adminListDefaultCostAccessClient) Recv() (*DefaultCostAccess, error) {
+	m := new(DefaultCostAccess)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *adminClient) GetDefaultBillingInfo(ctx context.Context, in *GetDefaultBillingInfoRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error) {
-	out := new(DefaultBillingInfo)
-	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultBillingInfo", in, out, opts...)
+func (c *adminClient) GetDefaultCostAccess(ctx context.Context, in *GetDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error) {
+	out := new(DefaultCostAccess)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetDefaultCostAccess", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) CreateDefaultBillingInfoRole(ctx context.Context, in *CreateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*DefaultBillingInfo, error) {
-	out := new(DefaultBillingInfo)
-	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole", in, out, opts...)
+func (c *adminClient) CreateDefaultCostAccess(ctx context.Context, in *CreateDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error) {
+	out := new(DefaultCostAccess)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateDefaultCostAccess", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) UpdateDefaultBillingInfoRole(ctx context.Context, in *UpdateDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+func (c *adminClient) UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error) {
 	out := new(api.Operation)
-	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/UpdateDefaultBillingInfoRole", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/UpdateDefaultCostAccess", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adminClient) DeleteDefaultBillingInfoRole(ctx context.Context, in *DeleteDefaultBillingInfoRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *adminClient) DeleteDefaultCostAccess(ctx context.Context, in *DeleteDefaultCostAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/DeleteDefaultBillingInfoRole", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/DeleteDefaultCostAccess", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -252,21 +252,21 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
-	// Gets a CloudFormation launch URL for enabling cross-account access to your account's billing information.
-	// Upon successful deployment, you need to validate the access by calling 'POST /admin/v1/aws/xacct/default'.
-	GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error)
-	// Lists the default cross-account role(s) attached to accounts under caller.
-	ListDefaultBillingInfo(*ListDefaultBillingInfoRequest, Admin_ListDefaultBillingInfoServer) error
-	// Gets the current role attached to input account.
-	GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error)
-	// Starts validation of a cross-account access stack deployment. If successful,
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling various cross-account access to your
+	// account's cost information based on type.
+	GetDefaultCostAccessTemplateUrl(context.Context, *GetDefaultCostAccessTemplateUrlRequest) (*GetDefaultCostAccessTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Lists the default cross-account role(s) attached to accounts under caller.
+	ListDefaultCostAccess(*ListDefaultCostAccessRequest, Admin_ListDefaultCostAccessServer) error
+	// WORK-IN-PROGRESS: Gets the current role attached to input account.
+	GetDefaultCostAccess(context.Context, *GetDefaultCostAccessRequest) (*DefaultCostAccess, error)
+	// WORK-IN-PROGRESS: Starts validation of a cross-account access stack deployment. If successful,
 	// the new IAM role will be registered to the target account.
-	CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*DefaultBillingInfo, error)
-	// Starts an update to an existing CloudFormation for template changes, if any.
-	UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error)
-	// Deletes the current role attached to this target account. This does not delete the
+	CreateDefaultCostAccess(context.Context, *CreateDefaultCostAccessRequest) (*DefaultCostAccess, error)
+	// WORK-IN-PROGRESS: Starts an update to an existing CloudFormation for template changes, if any.
+	UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error)
+	// WORK-IN-PROGRESS: Deletes the current role attached to this target account. This does not delete the
 	// CloudFormation deployment in your account.
-	DeleteDefaultBillingInfoRole(context.Context, *DeleteDefaultBillingInfoRoleRequest) (*emptypb.Empty, error)
+	DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
 	GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error)
 	// WORK-IN-PROGRESS: Creates or updates notification settings for login user's organization or group.
@@ -294,23 +294,23 @@ func (UnimplementedAdminServer) ListAccountGroups(*ListAccountGroupsRequest, Adm
 func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountGroup not implemented")
 }
-func (UnimplementedAdminServer) GetDefaultBillingInfoTemplateUrl(context.Context, *GetDefaultBillingInfoTemplateUrlRequest) (*GetDefaultBillingInfoTemplateUrlResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfoTemplateUrl not implemented")
+func (UnimplementedAdminServer) GetDefaultCostAccessTemplateUrl(context.Context, *GetDefaultCostAccessTemplateUrlRequest) (*GetDefaultCostAccessTemplateUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultCostAccessTemplateUrl not implemented")
 }
-func (UnimplementedAdminServer) ListDefaultBillingInfo(*ListDefaultBillingInfoRequest, Admin_ListDefaultBillingInfoServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListDefaultBillingInfo not implemented")
+func (UnimplementedAdminServer) ListDefaultCostAccess(*ListDefaultCostAccessRequest, Admin_ListDefaultCostAccessServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListDefaultCostAccess not implemented")
 }
-func (UnimplementedAdminServer) GetDefaultBillingInfo(context.Context, *GetDefaultBillingInfoRequest) (*DefaultBillingInfo, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultBillingInfo not implemented")
+func (UnimplementedAdminServer) GetDefaultCostAccess(context.Context, *GetDefaultCostAccessRequest) (*DefaultCostAccess, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultCostAccess not implemented")
 }
-func (UnimplementedAdminServer) CreateDefaultBillingInfoRole(context.Context, *CreateDefaultBillingInfoRoleRequest) (*DefaultBillingInfo, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateDefaultBillingInfoRole not implemented")
+func (UnimplementedAdminServer) CreateDefaultCostAccess(context.Context, *CreateDefaultCostAccessRequest) (*DefaultCostAccess, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDefaultCostAccess not implemented")
 }
-func (UnimplementedAdminServer) UpdateDefaultBillingInfoRole(context.Context, *UpdateDefaultBillingInfoRoleRequest) (*api.Operation, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateDefaultBillingInfoRole not implemented")
+func (UnimplementedAdminServer) UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDefaultCostAccess not implemented")
 }
-func (UnimplementedAdminServer) DeleteDefaultBillingInfoRole(context.Context, *DeleteDefaultBillingInfoRoleRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteDefaultBillingInfoRole not implemented")
+func (UnimplementedAdminServer) DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDefaultCostAccess not implemented")
 }
 func (UnimplementedAdminServer) GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNotificationSettings not implemented")
@@ -385,113 +385,113 @@ func _Admin_GetAccountGroup_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_GetDefaultBillingInfoTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDefaultBillingInfoTemplateUrlRequest)
+func _Admin_GetDefaultCostAccessTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDefaultCostAccessTemplateUrlRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).GetDefaultBillingInfoTemplateUrl(ctx, in)
+		return srv.(AdminServer).GetDefaultCostAccessTemplateUrl(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.admin.v1.Admin/GetDefaultBillingInfoTemplateUrl",
+		FullMethod: "/blueapi.admin.v1.Admin/GetDefaultCostAccessTemplateUrl",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetDefaultBillingInfoTemplateUrl(ctx, req.(*GetDefaultBillingInfoTemplateUrlRequest))
+		return srv.(AdminServer).GetDefaultCostAccessTemplateUrl(ctx, req.(*GetDefaultCostAccessTemplateUrlRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_ListDefaultBillingInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListDefaultBillingInfoRequest)
+func _Admin_ListDefaultCostAccess_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListDefaultCostAccessRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(AdminServer).ListDefaultBillingInfo(m, &adminListDefaultBillingInfoServer{stream})
+	return srv.(AdminServer).ListDefaultCostAccess(m, &adminListDefaultCostAccessServer{stream})
 }
 
-type Admin_ListDefaultBillingInfoServer interface {
-	Send(*DefaultBillingInfo) error
+type Admin_ListDefaultCostAccessServer interface {
+	Send(*DefaultCostAccess) error
 	grpc.ServerStream
 }
 
-type adminListDefaultBillingInfoServer struct {
+type adminListDefaultCostAccessServer struct {
 	grpc.ServerStream
 }
 
-func (x *adminListDefaultBillingInfoServer) Send(m *DefaultBillingInfo) error {
+func (x *adminListDefaultCostAccessServer) Send(m *DefaultCostAccess) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Admin_GetDefaultBillingInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDefaultBillingInfoRequest)
+func _Admin_GetDefaultCostAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDefaultCostAccessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).GetDefaultBillingInfo(ctx, in)
+		return srv.(AdminServer).GetDefaultCostAccess(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.admin.v1.Admin/GetDefaultBillingInfo",
+		FullMethod: "/blueapi.admin.v1.Admin/GetDefaultCostAccess",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).GetDefaultBillingInfo(ctx, req.(*GetDefaultBillingInfoRequest))
+		return srv.(AdminServer).GetDefaultCostAccess(ctx, req.(*GetDefaultCostAccessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_CreateDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateDefaultBillingInfoRoleRequest)
+func _Admin_CreateDefaultCostAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDefaultCostAccessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).CreateDefaultBillingInfoRole(ctx, in)
+		return srv.(AdminServer).CreateDefaultCostAccess(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole",
+		FullMethod: "/blueapi.admin.v1.Admin/CreateDefaultCostAccess",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).CreateDefaultBillingInfoRole(ctx, req.(*CreateDefaultBillingInfoRoleRequest))
+		return srv.(AdminServer).CreateDefaultCostAccess(ctx, req.(*CreateDefaultCostAccessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_UpdateDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateDefaultBillingInfoRoleRequest)
+func _Admin_UpdateDefaultCostAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDefaultCostAccessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).UpdateDefaultBillingInfoRole(ctx, in)
+		return srv.(AdminServer).UpdateDefaultCostAccess(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.admin.v1.Admin/UpdateDefaultBillingInfoRole",
+		FullMethod: "/blueapi.admin.v1.Admin/UpdateDefaultCostAccess",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).UpdateDefaultBillingInfoRole(ctx, req.(*UpdateDefaultBillingInfoRoleRequest))
+		return srv.(AdminServer).UpdateDefaultCostAccess(ctx, req.(*UpdateDefaultCostAccessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Admin_DeleteDefaultBillingInfoRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteDefaultBillingInfoRoleRequest)
+func _Admin_DeleteDefaultCostAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteDefaultCostAccessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(AdminServer).DeleteDefaultBillingInfoRole(ctx, in)
+		return srv.(AdminServer).DeleteDefaultCostAccess(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.admin.v1.Admin/DeleteDefaultBillingInfoRole",
+		FullMethod: "/blueapi.admin.v1.Admin/DeleteDefaultCostAccess",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(AdminServer).DeleteDefaultBillingInfoRole(ctx, req.(*DeleteDefaultBillingInfoRoleRequest))
+		return srv.(AdminServer).DeleteDefaultCostAccess(ctx, req.(*DeleteDefaultCostAccessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -634,24 +634,24 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Admin_GetAccountGroup_Handler,
 		},
 		{
-			MethodName: "GetDefaultBillingInfoTemplateUrl",
-			Handler:    _Admin_GetDefaultBillingInfoTemplateUrl_Handler,
+			MethodName: "GetDefaultCostAccessTemplateUrl",
+			Handler:    _Admin_GetDefaultCostAccessTemplateUrl_Handler,
 		},
 		{
-			MethodName: "GetDefaultBillingInfo",
-			Handler:    _Admin_GetDefaultBillingInfo_Handler,
+			MethodName: "GetDefaultCostAccess",
+			Handler:    _Admin_GetDefaultCostAccess_Handler,
 		},
 		{
-			MethodName: "CreateDefaultBillingInfoRole",
-			Handler:    _Admin_CreateDefaultBillingInfoRole_Handler,
+			MethodName: "CreateDefaultCostAccess",
+			Handler:    _Admin_CreateDefaultCostAccess_Handler,
 		},
 		{
-			MethodName: "UpdateDefaultBillingInfoRole",
-			Handler:    _Admin_UpdateDefaultBillingInfoRole_Handler,
+			MethodName: "UpdateDefaultCostAccess",
+			Handler:    _Admin_UpdateDefaultCostAccess_Handler,
 		},
 		{
-			MethodName: "DeleteDefaultBillingInfoRole",
-			Handler:    _Admin_DeleteDefaultBillingInfoRole_Handler,
+			MethodName: "DeleteDefaultCostAccess",
+			Handler:    _Admin_DeleteDefaultCostAccess_Handler,
 		},
 		{
 			MethodName: "GetNotificationSettings",
@@ -689,8 +689,8 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ListDefaultBillingInfo",
-			Handler:       _Admin_ListDefaultBillingInfo_Handler,
+			StreamName:    "ListDefaultCostAccess",
+			Handler:       _Admin_ListDefaultCostAccess_Handler,
 			ServerStreams: true,
 		},
 	},

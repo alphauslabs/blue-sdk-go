@@ -101,46 +101,46 @@ func local_request_Admin_GetAccountGroup_0(ctx context.Context, marshaler runtim
 }
 
 var (
-	filter_Admin_GetDefaultBillingInfoTemplateUrl_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+	filter_Admin_GetDefaultCostAccessTemplateUrl_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 )
 
-func request_Admin_GetDefaultBillingInfoTemplateUrl_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetDefaultBillingInfoTemplateUrlRequest
+func request_Admin_GetDefaultCostAccessTemplateUrl_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetDefaultCostAccessTemplateUrlRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Admin_GetDefaultBillingInfoTemplateUrl_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Admin_GetDefaultCostAccessTemplateUrl_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetDefaultBillingInfoTemplateUrl(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetDefaultCostAccessTemplateUrl(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Admin_GetDefaultBillingInfoTemplateUrl_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetDefaultBillingInfoTemplateUrlRequest
+func local_request_Admin_GetDefaultCostAccessTemplateUrl_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetDefaultCostAccessTemplateUrlRequest
 	var metadata runtime.ServerMetadata
 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Admin_GetDefaultBillingInfoTemplateUrl_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Admin_GetDefaultCostAccessTemplateUrl_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.GetDefaultBillingInfoTemplateUrl(ctx, &protoReq)
+	msg, err := server.GetDefaultCostAccessTemplateUrl(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_Admin_ListDefaultBillingInfo_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (Admin_ListDefaultBillingInfoClient, runtime.ServerMetadata, error) {
-	var protoReq ListDefaultBillingInfoRequest
+func request_Admin_ListDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (Admin_ListDefaultCostAccessClient, runtime.ServerMetadata, error) {
+	var protoReq ListDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
-	stream, err := client.ListDefaultBillingInfo(ctx, &protoReq)
+	stream, err := client.ListDefaultCostAccess(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -153,8 +153,8 @@ func request_Admin_ListDefaultBillingInfo_0(ctx context.Context, marshaler runti
 
 }
 
-func request_Admin_GetDefaultBillingInfo_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetDefaultBillingInfoRequest
+func request_Admin_GetDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -174,13 +174,13 @@ func request_Admin_GetDefaultBillingInfo_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "target", err)
 	}
 
-	msg, err := client.GetDefaultBillingInfo(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetDefaultCostAccess(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Admin_GetDefaultBillingInfo_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetDefaultBillingInfoRequest
+func local_request_Admin_GetDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -200,13 +200,13 @@ func local_request_Admin_GetDefaultBillingInfo_0(ctx context.Context, marshaler 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "target", err)
 	}
 
-	msg, err := server.GetDefaultBillingInfo(ctx, &protoReq)
+	msg, err := server.GetDefaultCostAccess(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_Admin_CreateDefaultBillingInfoRole_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateDefaultBillingInfoRoleRequest
+func request_Admin_CreateDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -217,13 +217,13 @@ func request_Admin_CreateDefaultBillingInfoRole_0(ctx context.Context, marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.CreateDefaultBillingInfoRole(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.CreateDefaultCostAccess(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Admin_CreateDefaultBillingInfoRole_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateDefaultBillingInfoRoleRequest
+func local_request_Admin_CreateDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -234,13 +234,13 @@ func local_request_Admin_CreateDefaultBillingInfoRole_0(ctx context.Context, mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.CreateDefaultBillingInfoRole(ctx, &protoReq)
+	msg, err := server.CreateDefaultCostAccess(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_Admin_UpdateDefaultBillingInfoRole_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateDefaultBillingInfoRoleRequest
+func request_Admin_UpdateDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -260,13 +260,13 @@ func request_Admin_UpdateDefaultBillingInfoRole_0(ctx context.Context, marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "target", err)
 	}
 
-	msg, err := client.UpdateDefaultBillingInfoRole(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.UpdateDefaultCostAccess(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Admin_UpdateDefaultBillingInfoRole_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq UpdateDefaultBillingInfoRoleRequest
+func local_request_Admin_UpdateDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq UpdateDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -286,13 +286,13 @@ func local_request_Admin_UpdateDefaultBillingInfoRole_0(ctx context.Context, mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "target", err)
 	}
 
-	msg, err := server.UpdateDefaultBillingInfoRole(ctx, &protoReq)
+	msg, err := server.UpdateDefaultCostAccess(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_Admin_DeleteDefaultBillingInfoRole_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DeleteDefaultBillingInfoRoleRequest
+func request_Admin_DeleteDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, client AdminClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeleteDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -312,13 +312,13 @@ func request_Admin_DeleteDefaultBillingInfoRole_0(ctx context.Context, marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "target", err)
 	}
 
-	msg, err := client.DeleteDefaultBillingInfoRole(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.DeleteDefaultCostAccess(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Admin_DeleteDefaultBillingInfoRole_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DeleteDefaultBillingInfoRoleRequest
+func local_request_Admin_DeleteDefaultCostAccess_0(ctx context.Context, marshaler runtime.Marshaler, server AdminServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeleteDefaultCostAccessRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -338,7 +338,7 @@ func local_request_Admin_DeleteDefaultBillingInfoRole_0(ctx context.Context, mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "target", err)
 	}
 
-	msg, err := server.DeleteDefaultBillingInfoRole(ctx, &protoReq)
+	msg, err := server.DeleteDefaultCostAccess(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -657,18 +657,18 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 
 	})
 
-	mux.Handle("GET", pattern_Admin_GetDefaultBillingInfoTemplateUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Admin_GetDefaultCostAccessTemplateUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultBillingInfoTemplateUrl")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultCostAccessTemplateUrl")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Admin_GetDefaultBillingInfoTemplateUrl_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Admin_GetDefaultCostAccessTemplateUrl_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -676,29 +676,29 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Admin_GetDefaultBillingInfoTemplateUrl_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_GetDefaultCostAccessTemplateUrl_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Admin_ListDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Admin_ListDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("GET", pattern_Admin_GetDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Admin_GetDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultBillingInfo")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Admin_GetDefaultBillingInfo_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Admin_GetDefaultCostAccess_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -706,22 +706,22 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Admin_GetDefaultBillingInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_GetDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Admin_CreateDefaultBillingInfoRole_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Admin_CreateDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/CreateDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Admin_CreateDefaultBillingInfoRole_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Admin_CreateDefaultCostAccess_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -729,22 +729,22 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Admin_CreateDefaultBillingInfoRole_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_CreateDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_Admin_UpdateDefaultBillingInfoRole_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Admin_UpdateDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/UpdateDefaultBillingInfoRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/UpdateDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Admin_UpdateDefaultBillingInfoRole_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Admin_UpdateDefaultCostAccess_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -752,22 +752,22 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Admin_UpdateDefaultBillingInfoRole_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_UpdateDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_Admin_DeleteDefaultBillingInfoRole_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Admin_DeleteDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/DeleteDefaultBillingInfoRole")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.admin.v1.Admin/DeleteDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Admin_DeleteDefaultBillingInfoRole_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Admin_DeleteDefaultCostAccess_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -775,7 +775,7 @@ func RegisterAdminHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Admin_DeleteDefaultBillingInfoRole_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_DeleteDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1021,123 +1021,123 @@ func RegisterAdminHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 
 	})
 
-	mux.Handle("GET", pattern_Admin_GetDefaultBillingInfoTemplateUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Admin_GetDefaultCostAccessTemplateUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultBillingInfoTemplateUrl")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultCostAccessTemplateUrl")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Admin_GetDefaultBillingInfoTemplateUrl_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Admin_GetDefaultCostAccessTemplateUrl_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Admin_GetDefaultBillingInfoTemplateUrl_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_GetDefaultCostAccessTemplateUrl_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Admin_ListDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Admin_ListDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/ListDefaultBillingInfo")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/ListDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Admin_ListDefaultBillingInfo_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Admin_ListDefaultCostAccess_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Admin_ListDefaultBillingInfo_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_Admin_ListDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("GET", pattern_Admin_GetDefaultBillingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Admin_GetDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultBillingInfo")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/GetDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Admin_GetDefaultBillingInfo_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Admin_GetDefaultCostAccess_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Admin_GetDefaultBillingInfo_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_GetDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Admin_CreateDefaultBillingInfoRole_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Admin_CreateDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/CreateDefaultBillingInfoRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/CreateDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Admin_CreateDefaultBillingInfoRole_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Admin_CreateDefaultCostAccess_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Admin_CreateDefaultBillingInfoRole_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_CreateDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_Admin_UpdateDefaultBillingInfoRole_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Admin_UpdateDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/UpdateDefaultBillingInfoRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/UpdateDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Admin_UpdateDefaultBillingInfoRole_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Admin_UpdateDefaultCostAccess_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Admin_UpdateDefaultBillingInfoRole_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_UpdateDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_Admin_DeleteDefaultBillingInfoRole_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Admin_DeleteDefaultCostAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/DeleteDefaultBillingInfoRole")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.admin.v1.Admin/DeleteDefaultCostAccess")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Admin_DeleteDefaultBillingInfoRole_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Admin_DeleteDefaultCostAccess_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Admin_DeleteDefaultBillingInfoRole_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Admin_DeleteDefaultCostAccess_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -1289,17 +1289,17 @@ var (
 
 	pattern_Admin_GetAccountGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"admin", "v1", "acctgroups", "id"}, ""))
 
-	pattern_Admin_GetDefaultBillingInfoTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "default"}, ""))
+	pattern_Admin_GetDefaultCostAccessTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "dca"}, ""))
 
-	pattern_Admin_ListDefaultBillingInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5}, []string{"admin", "v1", "aws", "xacct", "default", "all"}, "read"))
+	pattern_Admin_ListDefaultCostAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 2, 5}, []string{"admin", "v1", "aws", "xacct", "dca", "all"}, "read"))
 
-	pattern_Admin_GetDefaultBillingInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
+	pattern_Admin_GetDefaultCostAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "dca", "target"}, ""))
 
-	pattern_Admin_CreateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "default"}, ""))
+	pattern_Admin_CreateDefaultCostAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"admin", "v1", "aws", "xacct", "dca"}, ""))
 
-	pattern_Admin_UpdateDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
+	pattern_Admin_UpdateDefaultCostAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "dca", "target"}, ""))
 
-	pattern_Admin_DeleteDefaultBillingInfoRole_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "default", "target"}, ""))
+	pattern_Admin_DeleteDefaultCostAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"admin", "v1", "aws", "xacct", "dca", "target"}, ""))
 
 	pattern_Admin_GetNotificationSettings_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"admin", "v1", "notification", "settings"}, ""))
 
@@ -1321,17 +1321,17 @@ var (
 
 	forward_Admin_GetAccountGroup_0 = runtime.ForwardResponseMessage
 
-	forward_Admin_GetDefaultBillingInfoTemplateUrl_0 = runtime.ForwardResponseMessage
+	forward_Admin_GetDefaultCostAccessTemplateUrl_0 = runtime.ForwardResponseMessage
 
-	forward_Admin_ListDefaultBillingInfo_0 = runtime.ForwardResponseStream
+	forward_Admin_ListDefaultCostAccess_0 = runtime.ForwardResponseStream
 
-	forward_Admin_GetDefaultBillingInfo_0 = runtime.ForwardResponseMessage
+	forward_Admin_GetDefaultCostAccess_0 = runtime.ForwardResponseMessage
 
-	forward_Admin_CreateDefaultBillingInfoRole_0 = runtime.ForwardResponseMessage
+	forward_Admin_CreateDefaultCostAccess_0 = runtime.ForwardResponseMessage
 
-	forward_Admin_UpdateDefaultBillingInfoRole_0 = runtime.ForwardResponseMessage
+	forward_Admin_UpdateDefaultCostAccess_0 = runtime.ForwardResponseMessage
 
-	forward_Admin_DeleteDefaultBillingInfoRole_0 = runtime.ForwardResponseMessage
+	forward_Admin_DeleteDefaultCostAccess_0 = runtime.ForwardResponseMessage
 
 	forward_Admin_GetNotificationSettings_0 = runtime.ForwardResponseMessage
 
