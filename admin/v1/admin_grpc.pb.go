@@ -24,18 +24,20 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
-	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type.
+	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type.
+	// See comments on the type for more information on what each template does.
 	GetDefaultCostAccessTemplateUrl(ctx context.Context, in *GetDefaultCostAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultCostAccessTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Lists the default cross-account access role(s) attached to accounts under caller.
+	// Lists the default cross-account access role(s) attached to accounts under caller.
 	ListDefaultCostAccess(ctx context.Context, in *ListDefaultCostAccessRequest, opts ...grpc.CallOption) (Admin_ListDefaultCostAccessClient, error)
-	// WORK-IN-PROGRESS: Gets the current default cross-account role attached to input account.
+	// Gets the current default cross-account role attached to the input target.
 	GetDefaultCostAccess(ctx context.Context, in *GetDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error)
-	// WORK-IN-PROGRESS: Starts validation of a default cross-account access stack deployment.
-	// If successful, the new IAM role will be registered to the target account.
+	// Starts validation of a default cross-account access stack deployment. If successful, the
+	// IAM role created from the CloudFormation stack will be registered to the target.
 	CreateDefaultCostAccess(ctx context.Context, in *CreateDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error)
-	// WORK-IN-PROGRESS: Starts an update to an existing default cross-account access CloudFormation for template changes, if any.
+	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any.
+	// Only call this API if the status of your default cross-account access is 'outdated'.
 	UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// WORK-IN-PROGRESS: Deletes the current default cross-account access role attached to this target account.
+	// Deletes the current default cross-account access role attached to this target account.
 	// This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(ctx context.Context, in *DeleteDefaultCostAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
@@ -251,18 +253,20 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
-	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type.
+	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type.
+	// See comments on the type for more information on what each template does.
 	GetDefaultCostAccessTemplateUrl(context.Context, *GetDefaultCostAccessTemplateUrlRequest) (*GetDefaultCostAccessTemplateUrlResponse, error)
-	// WORK-IN-PROGRESS: Lists the default cross-account access role(s) attached to accounts under caller.
+	// Lists the default cross-account access role(s) attached to accounts under caller.
 	ListDefaultCostAccess(*ListDefaultCostAccessRequest, Admin_ListDefaultCostAccessServer) error
-	// WORK-IN-PROGRESS: Gets the current default cross-account role attached to input account.
+	// Gets the current default cross-account role attached to the input target.
 	GetDefaultCostAccess(context.Context, *GetDefaultCostAccessRequest) (*DefaultCostAccess, error)
-	// WORK-IN-PROGRESS: Starts validation of a default cross-account access stack deployment.
-	// If successful, the new IAM role will be registered to the target account.
+	// Starts validation of a default cross-account access stack deployment. If successful, the
+	// IAM role created from the CloudFormation stack will be registered to the target.
 	CreateDefaultCostAccess(context.Context, *CreateDefaultCostAccessRequest) (*DefaultCostAccess, error)
-	// WORK-IN-PROGRESS: Starts an update to an existing default cross-account access CloudFormation for template changes, if any.
+	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any.
+	// Only call this API if the status of your default cross-account access is 'outdated'.
 	UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error)
-	// WORK-IN-PROGRESS: Deletes the current default cross-account access role attached to this target account.
+	// Deletes the current default cross-account access role attached to this target account.
 	// This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.

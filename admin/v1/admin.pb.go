@@ -215,16 +215,26 @@ type GetDefaultCostAccessTemplateUrlRequest struct {
 
 	// Optional. Valid values are `default`, `s3only`, and `apionly`. Defaults to `default` if empty.
 	//
-	// `default` - Template for setting up both CUR export and read-only access to cost information.
+	// `default` - Template for setting up both CUR export and read-only access to cost information. If selected, you need to
+	// deploy this template to `us-east-1` region as CloudFormation only supports the `AWS::CUR::ReportDefinition` in that
+	// region at the moment. The target S3 bucket will also be created in that region. If you prefer your S3 bucket to be located
+	// in a different region, you can use the template from this API by setting the type to `s3only`. After your S3 bucket is
+	// ready, call this API again (type is `default`) and set the `CurS3BucketOption` parameter to `USE_EXISTING`, then set your
+	// bucket name and region accordingly.
 	//
-	// `apionly` - Template for setting up ready-only access to cost information. Use if you already
-	// have exported your CUR to Alphaus through other means (i.e. manual setup).
+	// `apionly` - Template for setting up ready-only access to cost information. Handy if you already have exported your CUR to
+	// Alphaus through other means (i.e. manual setup). This template is the same as the `default` type but without the CUR
+	// export definitions. Although not required, we recommend you to deploy this template to allow us to query your cost-related
+	// information such as Reserved Instances, Saving Plans, etc. through the AWS API. At the moment, we only rely on CUR data
+	// which is a best-effort basis and sometimes not accurate.
 	//
 	// `s3only` - A helper template for creating an S3 bucket to be used for CUR export.
+	//
+	// All templates are publicly available from the reponse link (`templateUrl`) if you want to audit the included permissions.
 	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	// Optional. Set to the desired target region code. Defaults to `us-east-1` (N. Virginia).
-	// You can still change the final target region in the CloudFormation console before
-	// the stack creation.
+	// Optional. Set to the desired target region code. Defaults to `us-east-1` (N. Virginia). You can still change the final
+	// target region in the CloudFormation console before the stack creation. This parameter will only affect the resulting
+	// `launchUrl` in the response.
 	Region string `protobuf:"bytes,2,opt,name=region,proto3" json:"region,omitempty"`
 }
 
