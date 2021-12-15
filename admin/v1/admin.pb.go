@@ -464,7 +464,7 @@ type DefaultCostAccess struct {
 	StackRegion string `protobuf:"bytes,4,opt,name=stackRegion,proto3" json:"stackRegion,omitempty"`
 	// The latest template used to deploy the stack.
 	TemplateUrl string `protobuf:"bytes,5,opt,name=templateUrl,proto3" json:"templateUrl,omitempty"`
-	// This can be 'latest', 'outdated', or 'invalid'.
+	// This can be `latest`, `outdated`, or some error information.
 	Status string `protobuf:"bytes,6,opt,name=status,proto3" json:"status,omitempty"`
 	// The last updated timestamp, RFC3339 UTC.
 	LastUpdated string `protobuf:"bytes,7,opt,name=lastUpdated,proto3" json:"lastUpdated,omitempty"`
