@@ -40,12 +40,12 @@ type CostClient interface {
 	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error)
-	// Gets a vendor account. This API includes all of the account's metadata. See
+	// WORK-IN-PROGRESS: Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Registers a vendor account.
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
-	// Deletes a vendor account.
+	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current status.
 	GetCalculatorStatus(ctx context.Context, in *GetCalculatorStatusRequest, opts ...grpc.CallOption) (*GetCalculatorStatusResponse, error)
@@ -588,12 +588,12 @@ type CostServer interface {
 	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error
-	// Gets a vendor account. This API includes all of the account's metadata. See
+	// WORK-IN-PROGRESS: Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(context.Context, *GetAccountRequest) (*api.Account, error)
 	// Registers a vendor account.
 	CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error)
-	// Deletes a vendor account.
+	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current status.
 	GetCalculatorStatus(context.Context, *GetCalculatorStatusRequest) (*GetCalculatorStatusResponse, error)
