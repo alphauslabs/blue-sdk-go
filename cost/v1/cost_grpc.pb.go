@@ -40,7 +40,7 @@ type CostClient interface {
 	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error)
-	// WORK-IN-PROGRESS: Gets a vendor account. This API includes all of the account's metadata. See
+	// Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Registers a vendor account.
@@ -588,7 +588,7 @@ type CostServer interface {
 	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error
-	// WORK-IN-PROGRESS: Gets a vendor account. This API includes all of the account's metadata. See
+	// Gets a vendor account. This API includes all of the account's metadata. See
 	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(context.Context, *GetAccountRequest) (*api.Account, error)
 	// Registers a vendor account.
