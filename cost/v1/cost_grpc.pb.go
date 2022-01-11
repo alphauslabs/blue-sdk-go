@@ -51,8 +51,8 @@ type CostClient interface {
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current status.
-	GetCalculatorStatus(ctx context.Context, in *GetCalculatorStatusRequest, opts ...grpc.CallOption) (*GetCalculatorStatusResponse, error)
+	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current calculation status.
+	GetCalculatorRunStatus(ctx context.Context, in *GetCalculatorRunStatusRequest, opts ...grpc.CallOption) (*GetCalculatorRunStatusResponse, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error)
 	// Initiates an ondemand import of all registered CUR files. See
@@ -270,9 +270,9 @@ func (c *costClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest
 	return out, nil
 }
 
-func (c *costClient) GetCalculatorStatus(ctx context.Context, in *GetCalculatorStatusRequest, opts ...grpc.CallOption) (*GetCalculatorStatusResponse, error) {
-	out := new(GetCalculatorStatusResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetCalculatorStatus", in, out, opts...)
+func (c *costClient) GetCalculatorRunStatus(ctx context.Context, in *GetCalculatorRunStatusRequest, opts ...grpc.CallOption) (*GetCalculatorRunStatusResponse, error) {
+	out := new(GetCalculatorRunStatusResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetCalculatorRunStatus", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -599,8 +599,8 @@ type CostServer interface {
 	CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current status.
-	GetCalculatorStatus(context.Context, *GetCalculatorStatusRequest) (*GetCalculatorStatusResponse, error)
+	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current calculation status.
+	GetCalculatorRunStatus(context.Context, *GetCalculatorRunStatusRequest) (*GetCalculatorRunStatusResponse, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error)
 	// Initiates an ondemand import of all registered CUR files. See
@@ -692,8 +692,8 @@ func (UnimplementedCostServer) CreateAccount(context.Context, *CreateAccountRequ
 func (UnimplementedCostServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
 }
-func (UnimplementedCostServer) GetCalculatorStatus(context.Context, *GetCalculatorStatusRequest) (*GetCalculatorStatusResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCalculatorStatus not implemented")
+func (UnimplementedCostServer) GetCalculatorRunStatus(context.Context, *GetCalculatorRunStatusRequest) (*GetCalculatorRunStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCalculatorRunStatus not implemented")
 }
 func (UnimplementedCostServer) GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCalculatorConfig not implemented")
@@ -945,20 +945,20 @@ func _Cost_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_GetCalculatorStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCalculatorStatusRequest)
+func _Cost_GetCalculatorRunStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCalculatorRunStatusRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).GetCalculatorStatus(ctx, in)
+		return srv.(CostServer).GetCalculatorRunStatus(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/GetCalculatorStatus",
+		FullMethod: "/blueapi.cost.v1.Cost/GetCalculatorRunStatus",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetCalculatorStatus(ctx, req.(*GetCalculatorStatusRequest))
+		return srv.(CostServer).GetCalculatorRunStatus(ctx, req.(*GetCalculatorRunStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1403,8 +1403,8 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_DeleteAccount_Handler,
 		},
 		{
-			MethodName: "GetCalculatorStatus",
-			Handler:    _Cost_GetCalculatorStatus_Handler,
+			MethodName: "GetCalculatorRunStatus",
+			Handler:    _Cost_GetCalculatorRunStatus_Handler,
 		},
 		{
 			MethodName: "GetCalculatorConfig",
