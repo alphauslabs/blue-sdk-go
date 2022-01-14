@@ -1502,8 +1502,7 @@ type ReadCostsRequestAwsOptions struct {
 	// You can also use `groupByColumns` while setting this to true. If `groupByColumns` is empty,
 	// the default grouping is `productCode`.
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
-	// WORK-IN-PROGRESS: Optional. If set to true, group all input accounts into one. Valid only if
-	// `groupByMonth` is true.
+	// Optional. If set to true, group all input accounts into one. Valid only if `groupByMonth` is true.
 	GroupAccounts bool `protobuf:"varint,8,opt,name=groupAccounts,proto3" json:"groupAccounts,omitempty"`
 	// Optional. A list of filtering options. See [ReadCostsRequestAwsOptionsFilters] for more
 	// information on each filter item. Multiple filter items will use the logical 'or' operator,
