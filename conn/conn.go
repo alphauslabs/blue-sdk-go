@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	BlueEndpoint     = "blue.alphaus.cloud:8443"
+	BlueEndpoint     = "bluerpc.alphaus.cloud:443"
 	BlueEndpointNext = "bluenext.alphaus.cloud:8443"
 )
 
