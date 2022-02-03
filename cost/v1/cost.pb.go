@@ -1441,10 +1441,10 @@ type ReadCostAttributesRequest struct {
 	// cost attributes of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
 	// Optional. The UTC date to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: yyyymmdd. The oldest supported date is 2020-01-01.
+	// current month will be used. Format: `yyyymmdd`. The oldest supported date is `2020-01-01`.
 	StartTime string `protobuf:"bytes,4,opt,name=startTime,proto3" json:"startTime,omitempty"`
 	// Optional. The UTC date to end the streaming data. If not set, current date will be
-	// used. Format: `yyyymmd`.
+	// used. Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,5,opt,name=endTime,proto3" json:"endTime,omitempty"`
 	// Optional. Valid only for the `aws` vendor. AWS-specific options.
 	AwsOptions *ReadCostAttributesRequest_AwsOptions `protobuf:"bytes,6,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
