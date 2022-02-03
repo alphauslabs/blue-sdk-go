@@ -67,7 +67,7 @@ type CostClient interface {
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
-	// WORK-IN-PROGRESS: Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
+	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
 	// Similar to the `ReadCosts` API but without the aggregated usages and costs.
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
@@ -676,7 +676,7 @@ type CostServer interface {
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
-	// WORK-IN-PROGRESS: Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
+	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
 	// Similar to the `ReadCosts` API but without the aggregated usages and costs.
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
