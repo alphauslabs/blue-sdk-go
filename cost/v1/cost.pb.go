@@ -1609,7 +1609,7 @@ type ReadCostsRequestAwsOptions struct {
 	GroupAccounts bool `protobuf:"varint,8,opt,name=groupAccounts,proto3" json:"groupAccounts,omitempty"`
 	// Optional. A list of filtering options. See [ReadCostsRequestAwsOptionsFilters] for more information on each filter item. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
 	Filters []*ReadCostsRequestAwsOptionsFilters `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
-	// Optional. A list of filtering options specific for tags. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc. `includeTags` is implied true if this is non-empty. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
+	// WORK-IN-PROGRESS: Optional. A list of filtering options specific for tags. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc. `includeTags` is implied true if this is non-empty. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	TagFilters []*ReadCostsRequestAwsOptions_TagFilters `protobuf:"bytes,9,rep,name=tagFilters,proto3" json:"tagFilters,omitempty"`
 	// Optional. If set to true, stream will include resource tags. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	IncludeTags bool `protobuf:"varint,4,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
@@ -4381,6 +4381,8 @@ func (x *ReadCostAttributesRequest_AwsOptions) GetDimensions() string {
 }
 
 // A map of "key:value" tag filters. The key indicates the tag key while the value is the filter tag value. Tag keys and values can be prefixed by either "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.
+//
+// For example, if you want to query lineitems with the tag `project:MY_PROJECT`, set to `{"project":"MY_PROJECT"}`. You can also use regular expressions for both keys and values, such as `{"re:[N|n]ame":"re:[A-Za-z0-9]*"}`.
 type ReadCostsRequestAwsOptions_TagFilters struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
