@@ -1428,23 +1428,17 @@ type ReadCostAttributesRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. If set, reads the cost attributes of this group. Only valid for Ripple
-	// users. Implied as the parent billing group for Wave(Pro) users.
+	// Optional. If set, reads the cost attributes of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
 	//
-	// For AWS Ripple, only billing internal ids are supported at the moment. Overriden when
-	// `accountId` is set to anything other than `*`. Set this and `accountId` to `*` to read
-	// the cost attributes of the whole organization. Optional for AWS Wave(Pro).
+	// For AWS Ripple, only billing internal ids are supported at the moment. Overriden when `accountId` is set to anything other than `*`. Set this and `accountId` to `*` to read the cost attributes of the whole organization. Optional for AWS Wave(Pro).
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
 	// Optional. If set, reads the cost attributes of this account.
 	//
-	// For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to read the
-	// cost attributes of the whole organization.
+	// For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to read the cost attributes of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
-	// Optional. The UTC date to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: `yyyymmdd`. The oldest supported date is `2020-01-01`.
+	// Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`. The oldest supported date is `2020-01-01`.
 	StartTime string `protobuf:"bytes,4,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	// Optional. The UTC date to end the streaming data. If not set, current date will be
-	// used. Format: `yyyymmdd`.
+	// Optional. The UTC date to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,5,opt,name=endTime,proto3" json:"endTime,omitempty"`
 	// Optional. Valid only for the `aws` vendor. AWS-specific options.
 	AwsOptions *ReadCostAttributesRequest_AwsOptions `protobuf:"bytes,6,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
@@ -1572,17 +1566,9 @@ func (x *CostAttributeItem) GetAws() *aws.CostAttribute {
 	return nil
 }
 
-// A map of "key:value" column filters. Dependent on `groupByColumns` and/or `groupByMonth`.
-// The key indicates the column name while the value is the filter value prefixed by either
-// "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or
-// "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the
-// logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.
+// A map of "key:value" column filters. Dependent on `groupByColumns` and/or `groupByMonth`. The key indicates the column name while the value is the filter value prefixed by either "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.
 //
-// For example, if you like to filter `productCode` to return only `AmazonEC2`, set to
-// `{"productCode":"eq:AmazonEC2"}` or `{"productCode":"AmazonEC2"}`. You can also use a regular
-// expression like `{"productCode":"re:AmazonEC2|AmazonRDS"}`, which means return all AmazonEC2
-// or AmazonRDS lineitems. Or reverse regexp, such as `{"productCode":"!re:^AmazonEC2$"}`, which
-// means return all items except `AmazonEC2`.
+// For example, if you like to filter `productCode` to return only `AmazonEC2`, set to `{"productCode":"eq:AmazonEC2"}` or `{"productCode":"AmazonEC2"}`. You can also use a regular expression like `{"productCode":"re:AmazonEC2|AmazonRDS"}`, which means return all AmazonEC2 or AmazonRDS lineitems. Or reverse regexp, such as `{"productCode":"!re:^AmazonEC2$"}`, which means return all items except `AmazonEC2`.
 type ReadCostsRequestAwsOptionsFilters struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1636,50 +1622,29 @@ type ReadCostsRequestAwsOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. A comma-separated list of columns to aggregate the data into. Valid values
-	// are `productCode`, `serviceCode`, `region`, `zone`, `usageType`, `instanceType`,
-	// `operation`, `invoiceId`, `description`, and `resourceId`. A special value of `none`
-	// is also supported, which means query by date or month per account only.
+	// Optional. A comma-separated list of columns to aggregate the data into. Valid values are `productCode`, `serviceCode`, `region`, `zone`, `usageType`, `instanceType`, `operation`, `invoiceId`, `description`, and `resourceId`. A special value of `none` is also supported, which means query by date or month per account only.
 	//
-	// For example, if you only want the services and region data, you can set this field to
-	// `productCode,region`. Your input sequence doesn't matter (although the sequence above
-	// is recommended) as the actual sequence is already fixed in the return data (see the
-	// definition in https://github.com/alphauslabs/blueapi/blob/main/api/aws/cost.proto),
-	// which is generic to specific, top to bottom. Invalid values are discarded. Excluded
-	// columns will be empty.
+	// For example, if you only want the services and region data, you can set this field to `productCode,region`. Your input sequence doesn't matter (although the sequence above is recommended) as the actual sequence is already fixed in the return data (see the definition in https://github.com/alphauslabs/blueapi/blob/main/api/aws/cost.proto), which is generic to specific, top to bottom. Invalid values are discarded. Excluded columns will be empty.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
-	// Optional. If set to true, return data grouped by month within the date range. If you want data
-	// that is grouped per account per month, set this to `true`, then set `groupByColumns` to `none`.
+	// Optional. If set to true, return data grouped by month within the date range. If you want data that is grouped per account per month, set this to `true`, then set `groupByColumns` to `none`.
 	//
-	// You can also use `groupByColumns` while setting this to true. If `groupByColumns` is empty,
-	// the default grouping is `productCode`.
+	// You can also use `groupByColumns` while setting this to true. If `groupByColumns` is empty, the default grouping is `productCode`.
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
 	// Optional. If set to true, group all input accounts into one. Valid only if `groupByMonth` is true.
 	GroupAccounts bool `protobuf:"varint,8,opt,name=groupAccounts,proto3" json:"groupAccounts,omitempty"`
-	// Optional. A list of filtering options. See [ReadCostsRequestAwsOptionsFilters] for more
-	// information on each filter item. Multiple filter items will use the logical 'or' operator,
-	// e.g. filter1 || filter2 || filter3, etc.
+	// Optional. A list of filtering options. See [ReadCostsRequestAwsOptionsFilters] for more information on each filter item. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
 	Filters []*ReadCostsRequestAwsOptionsFilters `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
-	// Optional. A list of filtering options specific for tags. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
+	// Optional. A list of filtering options specific for tags. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc. `includeTags` is implied true if this is non-empty. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	TagFilters []*ReadCostsRequestAwsOptions_TagFilters `protobuf:"bytes,9,rep,name=tagFilters,proto3" json:"tagFilters,omitempty"`
 	// Optional. If set to true, stream will include resource tags. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	IncludeTags bool `protobuf:"varint,4,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
 	// Optional. If set to true, stream will include resource cost category information. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	IncludeCostCategories bool `protobuf:"varint,5,opt,name=includeCostCategories,proto3" json:"includeCostCategories,omitempty"`
-	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can
-	// set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which
-	// case, it will use the latest exchange rates provided by https://fixer.io. If you
-	// prefer a custom exchange rate, you can append the rate to the currency's three-letter
-	// symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate
-	// should be against the US dollar (USD).
+	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency's three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD).
 	ToCurrency string `protobuf:"bytes,6,opt,name=toCurrency,proto3" json:"toCurrency,omitempty"`
-	// Optional. If set to true, always get the up-to-date calculation results. This data
-	// isn't necessarily in-sync with your invoice data as AWS could still have updated your
-	// CUR files even after you created your invoices. By default, returned data are those
-	// that are always in-sync with your invoices.
+	// Optional. If set to true, always get the up-to-date calculation results. This data isn't necessarily in-sync with your invoice data as AWS could still have updated your CUR files even after you created your invoices. By default, returned data are those that are always in-sync with your invoices.
 	//
-	// This field is discarded for Wave(Pro) users. You will always get the latest data that
-	// is in-sync with your invoices.
+	// This field is discarded for Wave(Pro) users. You will always get the latest data that is in-sync with your invoices.
 	ForceLatest bool `protobuf:"varint,7,opt,name=forceLatest,proto3" json:"forceLatest,omitempty"`
 }
 
@@ -4452,10 +4417,7 @@ type ReadCostAttributesRequest_AwsOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. A comma-separated list of dimensions to query. Valid values
-	// are `productCode`, `serviceCode`, `region`, `zone`, `usageType`, `instanceType`,
-	// `operation`, `invoiceId`, `description`, `resourceId`, `tags`, and `costCategories`.
-	// Sequence doesn't matter. An empty value implies all attributes will be returned.
+	// Optional. A comma-separated list of dimensions to query. Valid values are `productCode`, `serviceCode`, `region`, `zone`, `usageType`, `instanceType`, `operation`, `invoiceId`, `description`, `resourceId`, `tags`, and `costCategories`. Sequence doesn't matter. An empty value implies all attributes will be returned.
 	Dimensions string `protobuf:"bytes,1,opt,name=dimensions,proto3" json:"dimensions,omitempty"`
 }
 
