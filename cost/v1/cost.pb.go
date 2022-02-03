@@ -143,8 +143,7 @@ type GetPayerAccountImportHistoryRequest struct {
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The account id to query. Could be `*`, which implies all payers.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional. The UTC month to query. If empty, defaults to current month.
-	// Format is `yyyymm`. For example, June 2021 will be `202106`.
+	// Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,3,opt,name=month,proto3" json:"month,omitempty"`
 }
 
@@ -211,8 +210,7 @@ type GetPayerAccountImportHistoryResponse struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The queried UTC month.
 	Month string `protobuf:"bytes,2,opt,name=month,proto3" json:"month,omitempty"`
-	// List of timestamps in RFC3339 format with the `T` separator.
-	// Example: `2019-10-12T07:20:50.52Z`
+	// List of timestamps in RFC3339 format with the `T` separator. Example: `2019-10-12T07:20:50.52Z`
 	Timestamps []string `protobuf:"bytes,3,rep,name=timestamps,proto3" json:"timestamps,omitempty"`
 }
 
@@ -269,11 +267,9 @@ func (x *GetPayerAccountImportHistoryResponse) GetTimestamps() []string {
 	return nil
 }
 
-// See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
-// for more information.
-// See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html] for more information.
-// Requirements include: Additional report details = 'Include Resource IDS' enabled,
-// Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
+// See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
+//
+// See [https://docs.aws.amazon.com/cur/latest/userguide/cur-create.html] for more information. Requirements include: Additional report details = 'Include Resource IDS' enabled, Prefix = non-empty (recommendation only), Time granularity = 'Hourly', File format = 'text/csv'.
 type CreatePayerAccountRequestAwsOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -281,8 +277,7 @@ type CreatePayerAccountRequestAwsOptions struct {
 
 	// Required. The id of the management account.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional. The name, or description of the management account.
-	// This is set to `id` when not specified.
+	// Optional. The name, or description of the management account. This is set to `id` when not specified.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// Required. S3 Bucket name.
 	BucketName string `protobuf:"bytes,3,opt,name=bucketName,proto3" json:"bucketName,omitempty"`
@@ -597,10 +592,7 @@ type CreateAccountRequestAwsOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. The management account id (formerly known as master, or payer) to
-	// which an account belongs to, initially. If the account is moved to another
-	// management account, the system is able to detect it and set this value
-	// accordingly.
+	// Optional. The management account id (formerly known as master, or payer) to which an account belongs to, initially. If the account is moved to another management account, the system is able to detect it and set this value accordingly.
 	ManagementAccountId string `protobuf:"bytes,1,opt,name=managementAccountId,proto3" json:"managementAccountId,omitempty"`
 }
 
@@ -655,8 +647,7 @@ type CreateAccountRequest struct {
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
 	// Optional. If empty, set to the value of `id`.
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// Optional. The parent `billingInternalId` of the billing group to which this account
-	// will belong to.
+	// Optional. The parent `billingInternalId` of the billing group to which this account will belong to.
 	Parent string `protobuf:"bytes,4,opt,name=parent,proto3" json:"parent,omitempty"`
 	// Required for the `aws` vendor. AWS-specific options.
 	AwsOptions *CreateAccountRequestAwsOptions `protobuf:"bytes,5,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
@@ -795,8 +786,7 @@ type ListCalculatorRunningAccountsRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. The UTC month to query. Defaults to current month if empty.
-	// Format is `yyyymm`. For example, June 2021 will be `202106`.
+	// Optional. The UTC month to query. Defaults to current month if empty. Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,2,opt,name=month,proto3" json:"month,omitempty"`
 }
 
@@ -998,11 +988,9 @@ type ImportCurFilesRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. The UTC month to import. If empty, it defaults to the current month.
-	// Format is `yyyymm`. For example, June 2021 will be `202106`.
+	// Optional. The UTC month to import. If empty, it defaults to the current month. Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,1,opt,name=month,proto3" json:"month,omitempty"`
-	// Optional. A comma-separated list of management accounts to import. If empty,
-	// all CURs associated with all your management accounts will be imported.
+	// Optional. A comma-separated list of management accounts to import. If empty, all CURs associated with all your management accounts will be imported.
 	Filter string `protobuf:"bytes,2,opt,name=filter,proto3" json:"filter,omitempty"`
 }
 
@@ -1105,16 +1093,11 @@ type CalculateCostsRequestAwsOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. If set to true, discard existing calculation operation(s), if any, and
-	// make this as the active/latest one. By default, if there is an ongoing operation
-	// during the call, the request will fail.
+	// Optional. If set to true, discard existing calculation operation(s), if any, and make this as the active/latest one. By default, if there is an ongoing operation during the call, the request will fail.
 	Force bool `protobuf:"varint,1,opt,name=force,proto3" json:"force,omitempty"`
-	// Optional. If set to true, only calculate for account-type billing groups. If both
-	// `accountsOnly` and `tagsOnly` are set to true, `accountsOnly` will prevail.
+	// Optional. If set to true, only calculate for account-type billing groups. If both `accountsOnly` and `tagsOnly` are set to true, `accountsOnly` will prevail.
 	AccountsOnly bool `protobuf:"varint,2,opt,name=accountsOnly,proto3" json:"accountsOnly,omitempty"`
-	// Optional. If set to true, only calculate for tags-type billing groups. Discarded
-	// when the organization doesn't have any tag-based billing groups configured. If
-	// both `accountsOnly` and `tagsOnly` are set to true, `accountsOnly` will prevail.
+	// Optional. If set to true, only calculate for tags-type billing groups. Discarded when the organization doesn't have any tag-based billing groups configured. If both `accountsOnly` and `tagsOnly` are set to true, `accountsOnly` will prevail.
 	TagsOnly bool `protobuf:"varint,3,opt,name=tagsOnly,proto3" json:"tagsOnly,omitempty"`
 }
 
@@ -1179,15 +1162,11 @@ type CalculateCostsRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. If set to a particular billing group, calculate for that billing group.
-	// If empty, calculate for all billing groups.
+	// Optional. If set to a particular billing group, calculate for that billing group. If empty, calculate for all billing groups.
 	//
-	// At the moment, for AWS, this is only valid for account type billing groups, not
-	// tag billing groups. If a tag billing group is provided, it is discarded and the
-	// calculation is done for the whole organization.
+	// At the moment, for AWS, this is only valid for account type billing groups, not tag billing groups. If a tag billing group is provided, it is discarded and the calculation is done for the whole organization.
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// Optional. The UTC month to calculate. If empty, it defaults to the previous month.
-	// Format is `yyyymm`. For example, June 2021 will be `202106`.
+	// Optional. The UTC month to calculate. If empty, it defaults to the previous month. Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,3,opt,name=month,proto3" json:"month,omitempty"`
 	// Optional. Valid only for the `aws` vendor. AWS-specific options.
 	AwsOptions *CalculateCostsRequestAwsOptions `protobuf:"bytes,4,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
@@ -1261,12 +1240,9 @@ type ListCalculationsHistoryRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. List operations on and after this date. Format is yyyymmdd. For example,
-	// if you want to list all operations starting from June 01, 2021, set to `20210601`.
-	// If not set, defaults to the first day of the current UTC month.
+	// Optional. List operations on and after this date. Format is yyyymmdd. For example, if you want to list all operations starting from June 01, 2021, set to `20210601`. If not set, defaults to the first day of the current UTC month.
 	AsOf string `protobuf:"bytes,2,opt,name=asOf,proto3" json:"asOf,omitempty"`
-	// Optional. If true, exclude all operations that are marked as done. Include by
-	// default.
+	// Optional. If true, exclude all operations that are marked as done. Include by default.
 	ExcludeDone bool `protobuf:"varint,3,opt,name=excludeDone,proto3" json:"excludeDone,omitempty"`
 }
 
@@ -1323,8 +1299,7 @@ func (x *ListCalculationsHistoryRequest) GetExcludeDone() bool {
 	return false
 }
 
-// AWS-specific response message for the Cost.ListCalculationsHistory rpc. Should be
-// compatible with the Operations API.
+// AWS-specific response message for the Cost.ListCalculationsHistory rpc. Should be compatible with the Operations API.
 type ListCalculationsHistoryAwsResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1846,12 +1821,7 @@ type ReadAdjustmentsRequestAwsOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can
-	// set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which
-	// case, it will use the latest exchange rates provided by https://fixer.io. If you
-	// prefer a custom exchange rate, you can append the rate to the currency's three-letter
-	// symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate
-	// should be against the US dollar (USD).
+	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency's three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD).
 	ToCurrency string `protobuf:"bytes,1,opt,name=toCurrency,proto3" json:"toCurrency,omitempty"`
 }
 
@@ -1902,20 +1872,13 @@ type ReadAdjustmentsRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. At the moment, only billing internal ids are supported. If set, reads the
-	// non-usage-based adjustment details of this group. Valid only if `accountId` is not set.
-	// If both `groupId` and `accountId` are not set, reads the adjustment details of the whole
-	// organization. Only valid for Ripple users. Implied (or discarded) for Wave(Pro) users.
+	// Optional. At the moment, only billing internal ids are supported. If set, reads the non-usage-based adjustment details of this group. Valid only if `accountId` is not set. If both `groupId` and `accountId` are not set, reads the adjustment details of the whole organization. Only valid for Ripple users. Implied (or discarded) for Wave(Pro) users.
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// Optional. If set, reads the non-usaged-based adjustment details of this account. Also
-	// invalidates the `billingInternalId` value even if set. If both `billingInternalId`
-	// and `accountId` are not set, reads the adjustment details of the whole organization.
+	// Optional. If set, reads the non-usaged-based adjustment details of this account. Also invalidates the `billingInternalId` value even if set. If both `billingInternalId` and `accountId` are not set, reads the adjustment details of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
-	// Optional. The UTC date to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: `yyyymmdd`.
+	// Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,4,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	// Optional. The UTC date to end the streaming data. If not set, current date will be
-	// used. Format: `yyyymmdd`.
+	// Optional. The UTC date to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,5,opt,name=endTime,proto3" json:"endTime,omitempty"`
 	// Optional. Valid only for the `aws` vendor. AWS-specific options.
 	AwsOptions *ReadAdjustmentsRequestAwsOptions `protobuf:"bytes,6,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
@@ -2053,14 +2016,11 @@ type ReadTagCostsRequest struct {
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The billing internal id to stream.
 	BillingInternalId string `protobuf:"bytes,2,opt,name=billingInternalId,proto3" json:"billingInternalId,omitempty"`
-	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: `yyyymmdd`.
+	// Optional. Timestamp to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,3,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: `yyyymmdd`.
+	// Optional. Timestamp to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=endTime,proto3" json:"endTime,omitempty"`
-	// Optional. Group services and costs by months in the range of `startTime` and `endTime`.
-	// If not set, daily data will be returned.
+	// Optional. Group services and costs by months in the range of `startTime` and `endTime`. If not set, daily data will be returned.
 	GroupByMonths bool `protobuf:"varint,5,opt,name=groupByMonths,proto3" json:"groupByMonths,omitempty"`
 	// Optional. Valid only for the `aws` vendor. AWS-specific options.
 	AwsOptions *ReadTagCostsRequestAwsOptions `protobuf:"bytes,6,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
@@ -2150,14 +2110,11 @@ type ReadNonTagCostsRequest struct {
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The billing internal id to stream.
 	BillingInternalId string `protobuf:"bytes,2,opt,name=billingInternalId,proto3" json:"billingInternalId,omitempty"`
-	// Optional. Timestamp to start streaming data from. If not set, the first day of the
-	// current month will be used. Format: `yyyymmdd`.
+	// Optional. Timestamp to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,3,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	// Optional. Timestamp to end the streaming data. If not set, current date will be used.
-	// Format: `yyyymmdd`.
+	// Optional. Timestamp to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,4,opt,name=endTime,proto3" json:"endTime,omitempty"`
-	// Optional. Group services and costs by months in the range of `startTime` and `endTime`.
-	// If not set, daily data will be returned.
+	// Optional. Group services and costs by months in the range of `startTime` and `endTime`. If not set, daily data will be returned.
 	GroupByMonths bool `protobuf:"varint,5,opt,name=groupByMonths,proto3" json:"groupByMonths,omitempty"`
 }
 
@@ -2236,23 +2193,16 @@ type GetForecastsRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. Company Id of Billing Group to retrieve.
-	// Default value is user's Company Id
+	// Optional. Company Id of Billing Group to retrieve. Default value is user's Company Id
 	BillingInternalId string `protobuf:"bytes,2,opt,name=billingInternalId,proto3" json:"billingInternalId,omitempty"`
 	// Optional. Forecast frequency. Valid values are `daily` and `monthly`.
 	// Default value is `daily`.
 	Frequency string `protobuf:"bytes,3,opt,name=frequency,proto3" json:"frequency,omitempty"`
-	// Optional. Forecast granularity. Valid values are `account`, `category` and `product`.
-	// Default value is `account`.
+	// Optional. Forecast granularity. Valid values are `account`, `category` and `product`. Default value is `account`.
 	Level string `protobuf:"bytes,4,opt,name=level,proto3" json:"level,omitempty"`
-	// Optional. Start date to get cost forecast.
-	// If from_date is less than current date, historical costs are included.
-	// If from_date is greater than current date, only forecasted costs are returned.
-	// Format: `yyyy-mm-dd`.
+	// Optional. Start date to get cost forecast. If from_date is less than current date, historical costs are included. If from_date is greater than current date, only forecasted costs are returned. Format: `yyyy-mm-dd`.
 	FromDate string `protobuf:"bytes,5,opt,name=fromDate,proto3" json:"fromDate,omitempty"`
-	// Optional. End date to get cost forecast.
-	// Currently, we only support 90 days forecasting from the first day of current month.
-	// Format: `yyyy-mm-dd`.
+	// Optional. End date to get cost forecast. Currently, we only support 90 days forecasting from the first day of current month. Format: `yyyy-mm-dd`.
 	ToDate string `protobuf:"bytes,6,opt,name=toDate,proto3" json:"toDate,omitempty"`
 }
 
@@ -2390,11 +2340,9 @@ type GetMonthlyCostForecastRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional. Start month to get cost forecast.
-	// Format: `yyyymm`.
+	// Optional. Start month to get cost forecast. Format: `yyyymm`.
 	FromDate string `protobuf:"bytes,4,opt,name=fromDate,proto3" json:"fromDate,omitempty"`
-	// Optional. Last month to get cost forecast.
-	// Format: `yyyymm`.
+	// Optional. Last month to get cost forecast. Format: `yyyymm`.
 	ToDate string `protobuf:"bytes,5,opt,name=toDate,proto3" json:"toDate,omitempty"`
 }
 
@@ -2541,8 +2489,7 @@ type GetMonthOnMonthCostForecastRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	//Optional. Default is current month.
-	//Format: yyyymm
+	//Optional. Default is current month. Format: `yyyymm`.
 	Date string `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
 }
 
@@ -2682,8 +2629,7 @@ type GetMonthToDateCostForecastRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	//Optional. Default is current month.
-	//Format: yyyymm
+	//Optional. Default is current month. Format: `yyyymm`.
 	Date string `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
 }
 
@@ -2831,8 +2777,7 @@ type GetAccountBudgetRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional. Default is current year
-	// Format: yyyy
+	// Optional. Default is current year. Format: `yyyy`.
 	Year string `protobuf:"bytes,4,opt,name=year,proto3" json:"year,omitempty"`
 }
 
@@ -3197,40 +3142,24 @@ type GetRecommendationsRequestAwsOptions struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Valid values: 'reservation', 'rightsizing', 'scheduling'
-	// Only 'reservation' is supported for now.
+	// Required. Valid values: 'reservation', 'rightsizing', 'scheduling'. Only 'reservation' is supported for now.
 	RecommendationType string `protobuf:"bytes,1,opt,name=recommendationType,proto3" json:"recommendationType,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. Valid values: 'combined', 'individual'
+	// For recommendationType = 'reservation'. Optional. Valid values: 'combined', 'individual'
 	// Default: 'combined'
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. List of Services ["AmazonEC2", "AmazonRDS", "AmazonElastiCache", "AmazonES", "AmazonRedshift"]
-	// Default: Empty list
+	// For recommendationType = 'reservation'. Optional. List of Services ["AmazonEC2", "AmazonRDS", "AmazonElastiCache", "AmazonES", "AmazonRedshift"]. Default: Empty list.
 	RiServices []string `protobuf:"bytes,3,rep,name=riServices,proto3" json:"riServices,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. List of Services ["AmazonECS", "AmazonEKS", "AWSLambda"]
-	// Default: Empty list
+	// For recommendationType = 'reservation'. Optional. List of Services ["AmazonECS", "AmazonEKS", "AWSLambda"]. Default: Empty list.
 	SpServices []string `protobuf:"bytes,4,rep,name=spServices,proto3" json:"spServices,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. If set to "true", recommends EC2 Instance Savings Plan that will cover usage not covered by RI
-	// Default: false
+	// For recommendationType = 'reservation'. Optional. If set to "true", recommends EC2 Instance Savings Plan that will cover usage not covered by RI. Default: false.
 	PurchaseEC2SavingsPlan bool `protobuf:"varint,5,opt,name=purchaseEC2SavingsPlan,proto3" json:"purchaseEC2SavingsPlan,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. Valid values: '1yr', '3yr'
-	// Default: '1yr'
+	// For recommendationType = 'reservation'. Optional. Valid values: '1yr', '3yr'. Default: '1yr'.
 	Term string `protobuf:"bytes,6,opt,name=term,proto3" json:"term,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. Valid values: 'standard', 'convertible'
-	// Default: 'standard'
+	// For recommendationType = 'reservation'. Optional. Valid values: 'standard', 'convertible'. Default: 'standard'.
 	OfferingClass string `protobuf:"bytes,7,opt,name=offeringClass,proto3" json:"offeringClass,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. Valid values: 'allUpfront', 'partialUpfront', 'noUpfront'
-	// Default: 'allUpfront'
+	// For recommendationType = 'reservation'. Optional. Valid values: 'allUpfront', 'partialUpfront', 'noUpfront'. Default: 'allUpfront'.
 	PaymentOption string `protobuf:"bytes,8,opt,name=paymentOption,proto3" json:"paymentOption,omitempty"`
-	// For recommendationType = 'reservation'
-	// Optional. Percentage of the usage (in NormalizedUnits) to be covered by Reserved Instance or Savings Plan
-	// Default: 100
+	// For recommendationType = 'reservation'. Optional. Percentage of the usage (in NormalizedUnits) to be covered by Reserved Instance or Savings Plan. Default: 100.
 	CoveragePercentage float64 `protobuf:"fixed64,9,opt,name=coveragePercentage,proto3" json:"coveragePercentage,omitempty"`
 }
 
@@ -3473,14 +3402,11 @@ type GetCostReductionRequest struct {
 	OrgId string `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
 	// Required. Valid values: 'all', 'reservation', 'savingsplan'
 	ReductionDisplay string `protobuf:"bytes,3,opt,name=reductionDisplay,proto3" json:"reductionDisplay,omitempty"`
-	// Optional. If set to "true", details of the RI or SP list is returned.
-	// Default: false
+	// Optional. If set to "true", details of the RI or SP list is returned. Default: false.
 	IncludeDetails bool `protobuf:"varint,4,opt,name=includeDetails,proto3" json:"includeDetails,omitempty"`
-	// Optional. The start date of the displayed data. If not set, the first day of the
-	// current month will be used. Format: yyyy-mm-dd.
+	// Optional. The start date of the displayed data. If not set, the first day of the current month will be used. Format: yyyy-mm-dd.
 	FromDate string `protobuf:"bytes,5,opt,name=fromDate,proto3" json:"fromDate,omitempty"`
-	// Optional. The end date of the displayed data. If not set, current date will be
-	// used. Format: yyyy-mm-dd.
+	// Optional. The end date of the displayed data. If not set, current date will be used. Format: yyyy-mm-dd.
 	ToDate string `protobuf:"bytes,6,opt,name=toDate,proto3" json:"toDate,omitempty"`
 	// Optional. Payer Id.
 	PayerId string `protobuf:"bytes,7,opt,name=payerId,proto3" json:"payerId,omitempty"`
@@ -3671,11 +3597,9 @@ type GetUtilizationRequest struct {
 	OrgId string `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
 	// Required. For AWS, "ri" or "sp".
 	Type string `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	// Optional. The start date of the displayed data. If not set, the first day of the
-	// current month will be used. Format: yyyy-mm-dd.
+	// Optional. The start date of the displayed data. If not set, the first day of the current month will be used. Format: yyyy-mm-dd.
 	FromDate string `protobuf:"bytes,4,opt,name=fromDate,proto3" json:"fromDate,omitempty"`
-	// Optional. The end date of the displayed data. If not set, current date will be
-	// used. Format: yyyy-mm-dd.
+	// Optional. The end date of the displayed data. If not set, current date will be used. Format: yyyy-mm-dd.
 	ToDate string `protobuf:"bytes,5,opt,name=toDate,proto3" json:"toDate,omitempty"`
 	// Optional. Payer Id.
 	PayerId string `protobuf:"bytes,6,opt,name=payerId,proto3" json:"payerId,omitempty"`
@@ -3839,13 +3763,11 @@ type GetCoverageOptionsRequest struct {
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Organization Id.
 	OrgId string `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
-	// Required. Available values: day, hour
+	// Required. Available values: day, hour.
 	Period string `protobuf:"bytes,3,opt,name=period,proto3" json:"period,omitempty"`
-	// Optional. The start date of the displayed data. If not set, the first day of the
-	// current month will be used. Format: yyyy-mm-dd.
+	// Optional. The start date of the displayed data. If not set, the first day of the current month will be used. Format: yyyy-mm-dd.
 	FromDate string `protobuf:"bytes,4,opt,name=fromDate,proto3" json:"fromDate,omitempty"`
-	// Optional. The end date of the displayed data. If not set, current date will be
-	// used. Format: yyyy-mm-dd.
+	// Optional. The end date of the displayed data. If not set, current date will be used. Format: yyyy-mm-dd.
 	ToDate string `protobuf:"bytes,5,opt,name=toDate,proto3" json:"toDate,omitempty"`
 	// Optional. Payer Id.
 	PayerId string `protobuf:"bytes,6,opt,name=payerId,proto3" json:"payerId,omitempty"`
@@ -4029,11 +3951,9 @@ type GetCoverageOndemandRequest struct {
 	OrgId string `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
 	// Required. Available values: day, hour
 	Period string `protobuf:"bytes,3,opt,name=period,proto3" json:"period,omitempty"`
-	// Optional. The start date of the displayed data. If not set, the first day of the
-	// current month will be used. Format: yyyy-mm-dd.
+	// Optional. The start date of the displayed data. If not set, the first day of the current month will be used. Format: yyyy-mm-dd.
 	FromDate string `protobuf:"bytes,4,opt,name=fromDate,proto3" json:"fromDate,omitempty"`
-	// Optional. The end date of the displayed data. If not set, current date will be
-	// used. Format: yyyy-mm-dd.
+	// Optional. The end date of the displayed data. If not set, current date will be used. Format: yyyy-mm-dd.
 	ToDate string `protobuf:"bytes,5,opt,name=toDate,proto3" json:"toDate,omitempty"`
 	// Optional. Payer Id.
 	PayerId string `protobuf:"bytes,6,opt,name=payerId,proto3" json:"payerId,omitempty"`

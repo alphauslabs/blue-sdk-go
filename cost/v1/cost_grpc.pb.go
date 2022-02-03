@@ -25,18 +25,11 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CostClient interface {
-	// Lists vendor payer accounts. For AWS, these are management accounts (formerly known
-	// as master or payer accounts); for Azure, these are subscriptions, for GCP, these
-	// are projects.
+	// Lists vendor payer accounts. For AWS, these are management accounts (formerly known as master or payer accounts); for Azure, these are subscriptions, for GCP, these are projects.
 	ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (Cost_ListPayerAccountsClient, error)
-	// Gets a vendor payer account. This API includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// For AWS, this means a management account (formerly known as master or payer account);
-	// for Azure, this means a subscription, for GCP, this means a project.
+	// Gets a vendor payer account. This API includes all of the account's metadata. See https://alphauslabs.github.io/blueapi/ for the list of supported attributes. For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.
 	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*ripple.Payer, error)
-	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
-	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
-	// You can also set {id} to `*` to return all payers' information under the organization.
+	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set {id} to `*` to return all payers' information under the organization.
 	GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (Cost_GetPayerAccountImportHistoryClient, error)
 	// Registers a vendor payer account.
 	CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
@@ -44,51 +37,33 @@ type CostClient interface {
 	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error)
-	// Gets a vendor account. This API includes all of the account's metadata. See
-	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// Gets a vendor account. This API includes all of the account's metadata. See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Registers a vendor account.
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Lists the vendor calculator's queued accounts for calculation. If result is non-empty, it means calculation is still in progress
-	// for the returned accounts. Only available in Ripple.
+	// Lists the vendor calculator's queued accounts for calculation. If result is non-empty, it means calculation is still in progress for the returned accounts. Only available in Ripple.
 	ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error)
-	// Initiates an ondemand import of all registered CUR files. See
-	// [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
-	// for more information.
+	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
-	// For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the
-	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash)
-	// character. This is due to the `|` character having a special designation in the data processing workflows.
+	// Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
-	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
-	// Similar to the `ReadCosts` API but without the aggregated usages and costs.
-	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned.
+	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
-	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
-	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned.
+	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
-	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave).
-	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
-	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
-	// range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error)
-	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
-	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error)
-	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
-	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error)
-	// Fetches cost forecasts for the specified billing group.
-	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
+	// Fetches cost forecasts for the specified billing group. Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
 	GetForecasts(ctx context.Context, in *GetForecastsRequest, opts ...grpc.CallOption) (*GetForecastsResponse, error)
 	// Fetches monthly accumulated costs vs forecasted cost vs budget for the id.
 	GetMonthlyCostForecast(ctx context.Context, in *GetMonthlyCostForecastRequest, opts ...grpc.CallOption) (*GetMonthlyCostForecastResponse, error)
@@ -634,18 +609,11 @@ func (c *costClient) GetBreakevenPoint(ctx context.Context, in *GetBreakevenPoin
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
 type CostServer interface {
-	// Lists vendor payer accounts. For AWS, these are management accounts (formerly known
-	// as master or payer accounts); for Azure, these are subscriptions, for GCP, these
-	// are projects.
+	// Lists vendor payer accounts. For AWS, these are management accounts (formerly known as master or payer accounts); for Azure, these are subscriptions, for GCP, these are projects.
 	ListPayerAccounts(*ListPayerAccountsRequest, Cost_ListPayerAccountsServer) error
-	// Gets a vendor payer account. This API includes all of the account's metadata.
-	// See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
-	// For AWS, this means a management account (formerly known as master or payer account);
-	// for Azure, this means a subscription, for GCP, this means a project.
+	// Gets a vendor payer account. This API includes all of the account's metadata. See https://alphauslabs.github.io/blueapi/ for the list of supported attributes. For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.
 	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*ripple.Payer, error)
-	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are
-	// imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files).
-	// You can also set {id} to `*` to return all payers' information under the organization.
+	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set {id} to `*` to return all payers' information under the organization.
 	GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error
 	// Registers a vendor payer account.
 	CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error)
@@ -653,51 +621,33 @@ type CostServer interface {
 	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error
-	// Gets a vendor account. This API includes all of the account's metadata. See
-	// https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
+	// Gets a vendor account. This API includes all of the account's metadata. See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(context.Context, *GetAccountRequest) (*api.Account, error)
 	// Registers a vendor account.
 	CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
-	// Lists the vendor calculator's queued accounts for calculation. If result is non-empty, it means calculation is still in progress
-	// for the returned accounts. Only available in Ripple.
+	// Lists the vendor calculator's queued accounts for calculation. If result is non-empty, it means calculation is still in progress for the returned accounts. Only available in Ripple.
 	ListCalculatorRunningAccounts(*ListCalculatorRunningAccountsRequest, Cost_ListCalculatorRunningAccountsServer) error
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error)
-	// Initiates an ondemand import of all registered CUR files. See
-	// [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting]
-	// for more information.
+	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
-	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
-	// For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the
-	// character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash)
-	// character. This is due to the `|` character having a special designation in the data processing workflows.
+	// Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
-	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
-	// Similar to the `ReadCosts` API but without the aggregated usages and costs.
-	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned.
+	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
-	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
-	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
-	// not set, month-to-date (current month) will be returned.
+	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
-	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave).
-	// This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax,
-	// Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime
-	// range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(*ReadAdjustmentsRequest, Cost_ReadAdjustmentsServer) error
-	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is
-	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadTagCosts(*ReadTagCostsRequest, Cost_ReadTagCostsServer) error
-	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is
-	// 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadNonTagCosts(*ReadNonTagCostsRequest, Cost_ReadNonTagCostsServer) error
-	// Fetches cost forecasts for the specified billing group.
-	// Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
+	// Fetches cost forecasts for the specified billing group. Includes historical cost (up to previous month) and forecasted cost (up to three months for now).
 	GetForecasts(context.Context, *GetForecastsRequest) (*GetForecastsResponse, error)
 	// Fetches monthly accumulated costs vs forecasted cost vs budget for the id.
 	GetMonthlyCostForecast(context.Context, *GetMonthlyCostForecastRequest) (*GetMonthlyCostForecastResponse, error)
