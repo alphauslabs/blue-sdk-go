@@ -67,6 +67,11 @@ type CostClient interface {
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
+	// WORK-IN-PROGRESS: Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
+	// Similar to the `ReadCosts` API but without the aggregated usages and costs.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
+	// not set, month-to-date (current month) will be returned.
+	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
@@ -339,8 +344,40 @@ func (c *costClient) ListCalculationsHistory(ctx context.Context, in *ListCalcul
 	return out, nil
 }
 
+func (c *costClient) ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadCostAttributes", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadCostAttributesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadCostAttributesClient interface {
+	Recv() (*CostAttributeItem, error)
+	grpc.ClientStream
+}
+
+type costReadCostAttributesClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadCostAttributesClient) Recv() (*CostAttributeItem, error) {
+	m := new(CostAttributeItem)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -372,7 +409,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -404,7 +441,7 @@ func (x *costReadAdjustmentsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -436,7 +473,7 @@ func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -639,6 +676,11 @@ type CostServer interface {
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses. Note that status information is sometimes unstable.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
+	// WORK-IN-PROGRESS: Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
+	// Similar to the `ReadCosts` API but without the aggregated usages and costs.
+	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
+	// not set, month-to-date (current month) will be returned.
+	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	// At the moment, the supported {vendor} is 'aws'. If datetime range parameters are
 	// not set, month-to-date (current month) will be returned.
@@ -731,6 +773,9 @@ func (UnimplementedCostServer) CalculateCosts(context.Context, *CalculateCostsRe
 }
 func (UnimplementedCostServer) ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationsHistory not implemented")
+}
+func (UnimplementedCostServer) ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadCostAttributes not implemented")
 }
 func (UnimplementedCostServer) ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
@@ -1061,6 +1106,27 @@ func _Cost_ListCalculationsHistory_Handler(srv interface{}, ctx context.Context,
 		return srv.(CostServer).ListCalculationsHistory(ctx, req.(*ListCalculationsHistoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ReadCostAttributes_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadCostAttributesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadCostAttributes(m, &costReadCostAttributesServer{stream})
+}
+
+type Cost_ReadCostAttributesServer interface {
+	Send(*CostAttributeItem) error
+	grpc.ServerStream
+}
+
+type costReadCostAttributesServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadCostAttributesServer) Send(m *CostAttributeItem) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cost_ReadCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -1522,6 +1588,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListCalculatorRunningAccounts",
 			Handler:       _Cost_ListCalculatorRunningAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadCostAttributes",
+			Handler:       _Cost_ReadCostAttributes_Handler,
 			ServerStreams: true,
 		},
 		{
