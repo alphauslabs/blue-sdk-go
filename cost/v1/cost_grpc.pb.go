@@ -31,7 +31,7 @@ type CostClient interface {
 	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*ripple.Payer, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set {id} to `*` to return all payers' information under the organization.
 	GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (Cost_GetPayerAccountImportHistoryClient, error)
-	// Registers a vendor payer account.
+	// Registers a vendor payer account. This is now deprecated for AWS payer accounts. To register an AWS payer account, check out the 'CreateDefaultCostAccess' API.
 	CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Deletes a vendor payer account.
 	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -615,7 +615,7 @@ type CostServer interface {
 	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*ripple.Payer, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set {id} to `*` to return all payers' information under the organization.
 	GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error
-	// Registers a vendor payer account.
+	// Registers a vendor payer account. This is now deprecated for AWS payer accounts. To register an AWS payer account, check out the 'CreateDefaultCostAccess' API.
 	CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error)
 	// Deletes a vendor payer account.
 	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
