@@ -195,15 +195,13 @@ type Cost struct {
 	ResourceId     string            `protobuf:"bytes,13,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
 	Tags           map[string]string `protobuf:"bytes,14,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	CostCategories map[string]string `protobuf:"bytes,15,rep,name=costCategories,proto3" json:"costCategories,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Only set when all columns are specified. Any type of grouping will set
-	// this value to zero.
+	// Only set when `description` and/or `resourceId` attributes are specified.
 	Usage float64 `protobuf:"fixed64,16,opt,name=usage,proto3" json:"usage,omitempty"`
 	// The true cost (calculated) for this lineitem.
 	Cost float64 `protobuf:"fixed64,17,opt,name=cost,proto3" json:"cost,omitempty"`
 	// The unblended cost as reflected in the CUR for this lineitem.
 	UnblendedCost float64 `protobuf:"fixed64,27,opt,name=unblendedCost,proto3" json:"unblendedCost,omitempty"`
-	// The base currency for cost, unblendedCost, effectiveCost, amortizedCost.
-	// Always set to USD, CUR's default currency.
+	// The base currency for cost, unblendedCost, effectiveCost, amortizedCost. Always set to USD, CUR's default currency.
 	BaseCurrency string `protobuf:"bytes,18,opt,name=baseCurrency,proto3" json:"baseCurrency,omitempty"`
 	// The exchange rate used to convert baseCurrency to targetCurrency.
 	ExchangeRate float64 `protobuf:"fixed64,19,opt,name=exchangeRate,proto3" json:"exchangeRate,omitempty"`
