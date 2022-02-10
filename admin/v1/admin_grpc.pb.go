@@ -28,21 +28,17 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
-	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type.
-	// See comments on the type for more information on what each template does.
+	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type. See comments on the type for more information on what each template does.
 	GetDefaultCostAccessTemplateUrl(ctx context.Context, in *GetDefaultCostAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultCostAccessTemplateUrlResponse, error)
 	// Lists the default cross-account access role(s) attached to accounts under caller.
 	ListDefaultCostAccess(ctx context.Context, in *ListDefaultCostAccessRequest, opts ...grpc.CallOption) (Admin_ListDefaultCostAccessClient, error)
 	// Gets the current default cross-account role attached to the input target.
 	GetDefaultCostAccess(ctx context.Context, in *GetDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error)
-	// Starts validation of a default cross-account access stack deployment. If successful, the
-	// IAM role created from the CloudFormation stack will be registered to the target.
+	// Starts validation of a default cross-account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateDefaultCostAccess(ctx context.Context, in *CreateDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error)
-	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any.
-	// Only call this API if the status of your default cross-account access is 'outdated'.
+	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any. Only call this API if the status of your default cross-account access is 'outdated'.
 	UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
-	// Deletes the current default cross-account access role attached to this target account.
-	// This does not delete the CloudFormation deployment in your account.
+	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(ctx context.Context, in *DeleteDefaultCostAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
 	GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
@@ -54,6 +50,8 @@ type AdminClient interface {
 	GetNotificationChannel(ctx context.Context, in *GetNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Creates notification settings for login user's organization or group.
 	CreateNotificationChannel(ctx context.Context, in *CreateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Creates a default notification channel of type email based on the caller's primary email address.
+	CreateDefaultNotificationChannel(ctx context.Context, in *CreateDefaultNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Updates notification settings for login user's organization or group.
 	UpdateNotificationChannel(ctx context.Context, in *UpdateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Deletes notification settings for login user's organization or group.
@@ -231,6 +229,15 @@ func (c *adminClient) CreateNotificationChannel(ctx context.Context, in *CreateN
 	return out, nil
 }
 
+func (c *adminClient) CreateDefaultNotificationChannel(ctx context.Context, in *CreateDefaultNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error) {
+	out := new(api.NotificationChannel)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateDefaultNotificationChannel", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *adminClient) UpdateNotificationChannel(ctx context.Context, in *UpdateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error) {
 	out := new(api.NotificationChannel)
 	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/UpdateNotificationChannel", in, out, opts...)
@@ -257,21 +264,17 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
-	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type.
-	// See comments on the type for more information on what each template does.
+	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type. See comments on the type for more information on what each template does.
 	GetDefaultCostAccessTemplateUrl(context.Context, *GetDefaultCostAccessTemplateUrlRequest) (*GetDefaultCostAccessTemplateUrlResponse, error)
 	// Lists the default cross-account access role(s) attached to accounts under caller.
 	ListDefaultCostAccess(*ListDefaultCostAccessRequest, Admin_ListDefaultCostAccessServer) error
 	// Gets the current default cross-account role attached to the input target.
 	GetDefaultCostAccess(context.Context, *GetDefaultCostAccessRequest) (*DefaultCostAccess, error)
-	// Starts validation of a default cross-account access stack deployment. If successful, the
-	// IAM role created from the CloudFormation stack will be registered to the target.
+	// Starts validation of a default cross-account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateDefaultCostAccess(context.Context, *CreateDefaultCostAccessRequest) (*DefaultCostAccess, error)
-	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any.
-	// Only call this API if the status of your default cross-account access is 'outdated'.
+	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any. Only call this API if the status of your default cross-account access is 'outdated'.
 	UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error)
-	// Deletes the current default cross-account access role attached to this target account.
-	// This does not delete the CloudFormation deployment in your account.
+	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
 	GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error)
@@ -283,6 +286,8 @@ type AdminServer interface {
 	GetNotificationChannel(context.Context, *GetNotificationChannelRequest) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Creates notification settings for login user's organization or group.
 	CreateNotificationChannel(context.Context, *CreateNotificationChannelRequest) (*api.NotificationChannel, error)
+	// WORK-IN-PROGRESS: Creates a default notification channel of type email based on the caller's primary email address.
+	CreateDefaultNotificationChannel(context.Context, *CreateDefaultNotificationChannelRequest) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Updates notification settings for login user's organization or group.
 	UpdateNotificationChannel(context.Context, *UpdateNotificationChannelRequest) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Deletes notification settings for login user's organization or group.
@@ -332,6 +337,9 @@ func (UnimplementedAdminServer) GetNotificationChannel(context.Context, *GetNoti
 }
 func (UnimplementedAdminServer) CreateNotificationChannel(context.Context, *CreateNotificationChannelRequest) (*api.NotificationChannel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateNotificationChannel not implemented")
+}
+func (UnimplementedAdminServer) CreateDefaultNotificationChannel(context.Context, *CreateDefaultNotificationChannelRequest) (*api.NotificationChannel, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDefaultNotificationChannel not implemented")
 }
 func (UnimplementedAdminServer) UpdateNotificationChannel(context.Context, *UpdateNotificationChannelRequest) (*api.NotificationChannel, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateNotificationChannel not implemented")
@@ -592,6 +600,24 @@ func _Admin_CreateNotificationChannel_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_CreateDefaultNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDefaultNotificationChannelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateDefaultNotificationChannel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/CreateDefaultNotificationChannel",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateDefaultNotificationChannel(ctx, req.(*CreateDefaultNotificationChannelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Admin_UpdateNotificationChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateNotificationChannelRequest)
 	if err := dec(in); err != nil {
@@ -678,6 +704,10 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateNotificationChannel",
 			Handler:    _Admin_CreateNotificationChannel_Handler,
+		},
+		{
+			MethodName: "CreateDefaultNotificationChannel",
+			Handler:    _Admin_CreateDefaultNotificationChannel_Handler,
 		},
 		{
 			MethodName: "UpdateNotificationChannel",
