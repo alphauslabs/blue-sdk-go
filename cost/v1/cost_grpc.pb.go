@@ -54,8 +54,8 @@ type CostClient interface {
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
 	// WORK-IN-PROGRESS: Lists the schedules of your monthly calculations. At the moment, only one schedule is allowed per account. Only available in Ripple.
-	ListCalculationsSchedule(ctx context.Context, in *ListCalculationsScheduleRequest, opts ...grpc.CallOption) (*ListCalculationsScheduleResponse, error)
-	// WORK-IN-PROGRESS: Creates a schedule of your monthly calculations.  Only available in Ripple.
+	ListCalculationsSchedules(ctx context.Context, in *ListCalculationsSchedulesRequest, opts ...grpc.CallOption) (*ListCalculationsSchedulesResponse, error)
+	// WORK-IN-PROGRESS: Creates a schedule to trigger your monthly calculations.  Only available in Ripple.
 	CreateCalculationsSchedule(ctx context.Context, in *CreateCalculationsScheduleRequest, opts ...grpc.CallOption) (*CalculationsSchedule, error)
 	// WORK-IN-PROGRESS: Deletes the schedule of your monthly calculations. Only available in Ripple.
 	DeleteCalculationsSchedule(ctx context.Context, in *DeleteCalculationsScheduleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -325,9 +325,9 @@ func (c *costClient) ListCalculationsHistory(ctx context.Context, in *ListCalcul
 	return out, nil
 }
 
-func (c *costClient) ListCalculationsSchedule(ctx context.Context, in *ListCalculationsScheduleRequest, opts ...grpc.CallOption) (*ListCalculationsScheduleResponse, error) {
-	out := new(ListCalculationsScheduleResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListCalculationsSchedule", in, out, opts...)
+func (c *costClient) ListCalculationsSchedules(ctx context.Context, in *ListCalculationsSchedulesRequest, opts ...grpc.CallOption) (*ListCalculationsSchedulesResponse, error) {
+	out := new(ListCalculationsSchedulesResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListCalculationsSchedules", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -671,8 +671,8 @@ type CostServer interface {
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
 	// WORK-IN-PROGRESS: Lists the schedules of your monthly calculations. At the moment, only one schedule is allowed per account. Only available in Ripple.
-	ListCalculationsSchedule(context.Context, *ListCalculationsScheduleRequest) (*ListCalculationsScheduleResponse, error)
-	// WORK-IN-PROGRESS: Creates a schedule of your monthly calculations.  Only available in Ripple.
+	ListCalculationsSchedules(context.Context, *ListCalculationsSchedulesRequest) (*ListCalculationsSchedulesResponse, error)
+	// WORK-IN-PROGRESS: Creates a schedule to trigger your monthly calculations.  Only available in Ripple.
 	CreateCalculationsSchedule(context.Context, *CreateCalculationsScheduleRequest) (*CalculationsSchedule, error)
 	// WORK-IN-PROGRESS: Deletes the schedule of your monthly calculations. Only available in Ripple.
 	DeleteCalculationsSchedule(context.Context, *DeleteCalculationsScheduleRequest) (*emptypb.Empty, error)
@@ -763,8 +763,8 @@ func (UnimplementedCostServer) CalculateCosts(context.Context, *CalculateCostsRe
 func (UnimplementedCostServer) ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationsHistory not implemented")
 }
-func (UnimplementedCostServer) ListCalculationsSchedule(context.Context, *ListCalculationsScheduleRequest) (*ListCalculationsScheduleResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationsSchedule not implemented")
+func (UnimplementedCostServer) ListCalculationsSchedules(context.Context, *ListCalculationsSchedulesRequest) (*ListCalculationsSchedulesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationsSchedules not implemented")
 }
 func (UnimplementedCostServer) CreateCalculationsSchedule(context.Context, *CreateCalculationsScheduleRequest) (*CalculationsSchedule, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCalculationsSchedule not implemented")
@@ -1106,20 +1106,20 @@ func _Cost_ListCalculationsHistory_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_ListCalculationsSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCalculationsScheduleRequest)
+func _Cost_ListCalculationsSchedules_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCalculationsSchedulesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).ListCalculationsSchedule(ctx, in)
+		return srv.(CostServer).ListCalculationsSchedules(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/ListCalculationsSchedule",
+		FullMethod: "/blueapi.cost.v1.Cost/ListCalculationsSchedules",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).ListCalculationsSchedule(ctx, req.(*ListCalculationsScheduleRequest))
+		return srv.(CostServer).ListCalculationsSchedules(ctx, req.(*ListCalculationsSchedulesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1565,8 +1565,8 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_ListCalculationsHistory_Handler,
 		},
 		{
-			MethodName: "ListCalculationsSchedule",
-			Handler:    _Cost_ListCalculationsSchedule_Handler,
+			MethodName: "ListCalculationsSchedules",
+			Handler:    _Cost_ListCalculationsSchedules_Handler,
 		},
 		{
 			MethodName: "CreateCalculationsSchedule",
