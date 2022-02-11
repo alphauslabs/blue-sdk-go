@@ -32,8 +32,7 @@ type BillingClient interface {
 	GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error)
 	// Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
 	ListAwsCalculationHistory(ctx context.Context, in *ListAwsCalculationHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsCalculationHistoryClient, error)
-	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along
-	// with the differences in costs, if any. Only available in Ripple.
+	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
 }
 
@@ -182,8 +181,7 @@ type BillingServer interface {
 	GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error)
 	// Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
 	ListAwsCalculationHistory(*ListAwsCalculationHistoryRequest, Billing_ListAwsCalculationHistoryServer) error
-	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along
-	// with the differences in costs, if any. Only available in Ripple.
+	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
 	mustEmbedUnimplementedBillingServer()
 }
