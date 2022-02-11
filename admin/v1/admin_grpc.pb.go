@@ -40,21 +40,21 @@ type AdminClient interface {
 	UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(ctx context.Context, in *DeleteDefaultCostAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
+	// Get notification settings for login user's organization or group.
 	GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
-	// WORK-IN-PROGRESS: Creates or updates notification settings for login user's organization or group.
+	// Creates or updates notification settings for login user's organization or group.
 	SaveNotificationSettings(ctx context.Context, in *SaveNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
-	// WORK-IN-PROGRESS: Lists all notification channels for login user's organization or group.
+	// Lists all notification channels for login user's organization or group.
 	ListNotificationChannels(ctx context.Context, in *ListNotificationChannelsRequest, opts ...grpc.CallOption) (*ListNotificationChannelsResponse, error)
-	// WORK-IN-PROGRESS: Gets notification channel for login user's organization or group.
+	// Gets notification channel for login user's organization or group.
 	GetNotificationChannel(ctx context.Context, in *GetNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Creates notification settings for login user's organization or group.
 	CreateNotificationChannel(ctx context.Context, in *CreateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
-	// WORK-IN-PROGRESS: Creates a default notification channel of type email based on the caller's primary email address.
+	// Creates a default notification channel of type email based on the caller's primary email address.
 	CreateDefaultNotificationChannel(ctx context.Context, in *CreateDefaultNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Updates notification settings for login user's organization or group.
 	UpdateNotificationChannel(ctx context.Context, in *UpdateNotificationChannelRequest, opts ...grpc.CallOption) (*api.NotificationChannel, error)
-	// WORK-IN-PROGRESS: Deletes notification settings for login user's organization or group.
+	// Deletes notification settings for login user's organization or group.
 	DeleteNotificationChannel(ctx context.Context, in *DeleteNotificationChannelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -276,21 +276,21 @@ type AdminServer interface {
 	UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error)
 	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Get notification settings for login user's organization or group.
+	// Get notification settings for login user's organization or group.
 	GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error)
-	// WORK-IN-PROGRESS: Creates or updates notification settings for login user's organization or group.
+	// Creates or updates notification settings for login user's organization or group.
 	SaveNotificationSettings(context.Context, *SaveNotificationSettingsRequest) (*api.NotificationSettings, error)
-	// WORK-IN-PROGRESS: Lists all notification channels for login user's organization or group.
+	// Lists all notification channels for login user's organization or group.
 	ListNotificationChannels(context.Context, *ListNotificationChannelsRequest) (*ListNotificationChannelsResponse, error)
-	// WORK-IN-PROGRESS: Gets notification channel for login user's organization or group.
+	// Gets notification channel for login user's organization or group.
 	GetNotificationChannel(context.Context, *GetNotificationChannelRequest) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Creates notification settings for login user's organization or group.
 	CreateNotificationChannel(context.Context, *CreateNotificationChannelRequest) (*api.NotificationChannel, error)
-	// WORK-IN-PROGRESS: Creates a default notification channel of type email based on the caller's primary email address.
+	// Creates a default notification channel of type email based on the caller's primary email address.
 	CreateDefaultNotificationChannel(context.Context, *CreateDefaultNotificationChannelRequest) (*api.NotificationChannel, error)
 	// WORK-IN-PROGRESS: Updates notification settings for login user's organization or group.
 	UpdateNotificationChannel(context.Context, *UpdateNotificationChannelRequest) (*api.NotificationChannel, error)
-	// WORK-IN-PROGRESS: Deletes notification settings for login user's organization or group.
+	// Deletes notification settings for login user's organization or group.
 	DeleteNotificationChannel(context.Context, *DeleteNotificationChannelRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAdminServer()
 }
