@@ -53,6 +53,12 @@ type CostClient interface {
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
+	// WORK-IN-PROGRESS: Gets the schedule of your monthly calculations. Only available in Ripple.
+	GetCalculationsSchedule(ctx context.Context, in *GetCalculationsScheduleRequest, opts ...grpc.CallOption) (*CalculationsSchedule, error)
+	// WORK-IN-PROGRESS: Creates a schedule of your monthly calculations.  Only available in Ripple.
+	CreateCalculationsSchedule(ctx context.Context, in *CreateCalculationsScheduleRequest, opts ...grpc.CallOption) (*CalculationsSchedule, error)
+	// WORK-IN-PROGRESS: Deletes the schedule of your monthly calculations. Only available in Ripple.
+	DeleteCalculationsSchedule(ctx context.Context, in *DeleteCalculationsScheduleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -313,6 +319,33 @@ func (c *costClient) CalculateCosts(ctx context.Context, in *CalculateCostsReque
 func (c *costClient) ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error) {
 	out := new(ListCalculationsHistoryResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListCalculationsHistory", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) GetCalculationsSchedule(ctx context.Context, in *GetCalculationsScheduleRequest, opts ...grpc.CallOption) (*CalculationsSchedule, error) {
+	out := new(CalculationsSchedule)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetCalculationsSchedule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) CreateCalculationsSchedule(ctx context.Context, in *CreateCalculationsScheduleRequest, opts ...grpc.CallOption) (*CalculationsSchedule, error) {
+	out := new(CalculationsSchedule)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateCalculationsSchedule", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) DeleteCalculationsSchedule(ctx context.Context, in *DeleteCalculationsScheduleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteCalculationsSchedule", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -637,6 +670,12 @@ type CostServer interface {
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
+	// WORK-IN-PROGRESS: Gets the schedule of your monthly calculations. Only available in Ripple.
+	GetCalculationsSchedule(context.Context, *GetCalculationsScheduleRequest) (*CalculationsSchedule, error)
+	// WORK-IN-PROGRESS: Creates a schedule of your monthly calculations.  Only available in Ripple.
+	CreateCalculationsSchedule(context.Context, *CreateCalculationsScheduleRequest) (*CalculationsSchedule, error)
+	// WORK-IN-PROGRESS: Deletes the schedule of your monthly calculations. Only available in Ripple.
+	DeleteCalculationsSchedule(context.Context, *DeleteCalculationsScheduleRequest) (*emptypb.Empty, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -723,6 +762,15 @@ func (UnimplementedCostServer) CalculateCosts(context.Context, *CalculateCostsRe
 }
 func (UnimplementedCostServer) ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationsHistory not implemented")
+}
+func (UnimplementedCostServer) GetCalculationsSchedule(context.Context, *GetCalculationsScheduleRequest) (*CalculationsSchedule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCalculationsSchedule not implemented")
+}
+func (UnimplementedCostServer) CreateCalculationsSchedule(context.Context, *CreateCalculationsScheduleRequest) (*CalculationsSchedule, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCalculationsSchedule not implemented")
+}
+func (UnimplementedCostServer) DeleteCalculationsSchedule(context.Context, *DeleteCalculationsScheduleRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCalculationsSchedule not implemented")
 }
 func (UnimplementedCostServer) ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCostAttributes not implemented")
@@ -1054,6 +1102,60 @@ func _Cost_ListCalculationsHistory_Handler(srv interface{}, ctx context.Context,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).ListCalculationsHistory(ctx, req.(*ListCalculationsHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_GetCalculationsSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCalculationsScheduleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetCalculationsSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/GetCalculationsSchedule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetCalculationsSchedule(ctx, req.(*GetCalculationsScheduleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_CreateCalculationsSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCalculationsScheduleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).CreateCalculationsSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/CreateCalculationsSchedule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).CreateCalculationsSchedule(ctx, req.(*CreateCalculationsScheduleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_DeleteCalculationsSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCalculationsScheduleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).DeleteCalculationsSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/DeleteCalculationsSchedule",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).DeleteCalculationsSchedule(ctx, req.(*DeleteCalculationsScheduleRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1461,6 +1563,18 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCalculationsHistory",
 			Handler:    _Cost_ListCalculationsHistory_Handler,
+		},
+		{
+			MethodName: "GetCalculationsSchedule",
+			Handler:    _Cost_GetCalculationsSchedule_Handler,
+		},
+		{
+			MethodName: "CreateCalculationsSchedule",
+			Handler:    _Cost_CreateCalculationsSchedule_Handler,
+		},
+		{
+			MethodName: "DeleteCalculationsSchedule",
+			Handler:    _Cost_DeleteCalculationsSchedule_Handler,
 		},
 		{
 			MethodName: "GetForecasts",
