@@ -44,16 +44,18 @@ type RpcCredentialsInput struct {
 	LoginUrl     string
 	ClientId     string
 	ClientSecret string
+	AuthType     string // default: Bearer
 	AccessToken  string // use directly if non-empty; disregard others
 }
 
 func NewRpcCredentials(in ...RpcCredentialsInput) tokenAuth {
-	var accessToken string
+	var authType, accessToken string
 	sess := New()
 	loginUrl := sess.LoginUrl()
 	clientId := sess.ClientId()
 	clientSecret := sess.ClientSecret()
 	if len(in) > 0 {
+		authType = in[0].AuthType
 		accessToken = in[0].AccessToken
 		if in[0].LoginUrl != "" {
 			loginUrl = in[0].LoginUrl
@@ -72,6 +74,7 @@ func NewRpcCredentials(in ...RpcCredentialsInput) tokenAuth {
 		loginUrl:     loginUrl,
 		clientId:     clientId,
 		clientSecret: clientSecret,
+		authType:     authType,
 		accessToken:  accessToken,
 	}
 }
