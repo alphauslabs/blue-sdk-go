@@ -1602,7 +1602,7 @@ type CreateCalculationsScheduleRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. The desired schedule in UTC, using the [cron](https://man7.org/linux/man-pages/man5/crontab.5.html) format.
+	// Required. The desired schedule in UTC, using the [cron](https://man7.org/linux/man-pages/man5/crontab.5.html) format, and applies to the previous month upon trigger.
 	Schedule string `protobuf:"bytes,2,opt,name=schedule,proto3" json:"schedule,omitempty"`
 	// Optional. The channel id to use for notifications. At the moment, only email-type notification channels are supported. If not set, your default channel will be used. And if non-existent, an email-type notification channel will be created using your primary email address.
 	NotificationChannel string `protobuf:"bytes,3,opt,name=notificationChannel,proto3" json:"notificationChannel,omitempty"`
