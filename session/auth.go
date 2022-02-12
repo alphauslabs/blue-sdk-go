@@ -2,13 +2,15 @@ package session
 
 import (
 	"context"
+	"fmt"
 )
 
 type tokenAuth struct {
 	loginUrl     string
 	clientId     string
 	clientSecret string
-	accessToken  string
+	authType     string // default: Bearer
+	accessToken  string // use directly if set
 }
 
 func (t tokenAuth) GetRequestMetadata(ctx context.Context, uri ...string) (map[string]string, error) {
@@ -27,7 +29,13 @@ func (t tokenAuth) GetRequestMetadata(ctx context.Context, uri ...string) (map[s
 		}
 	}
 
-	return map[string]string{"authorization": "Bearer " + token}, nil
+	authType := "Bearer"
+	if t.authType != "" {
+		authType = t.authType
+	}
+
+	ftoken := fmt.Sprintf("%s %s", authType, token)
+	return map[string]string{"authorization": ftoken}, nil
 }
 
 func (tokenAuth) RequireTransportSecurity() bool { return false }
