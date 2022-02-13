@@ -1606,7 +1606,7 @@ type CreateCalculationsScheduleRequest struct {
 	Schedule string `protobuf:"bytes,2,opt,name=schedule,proto3" json:"schedule,omitempty"`
 	// Optional. The channel id to use for notifications. At the moment, only email-type notification channels are supported. If not set, your default channel will be used. And if non-existent, an email-type notification channel will be created using your primary email address.
 	NotificationChannel string `protobuf:"bytes,3,opt,name=notificationChannel,proto3" json:"notificationChannel,omitempty"`
-	// Optional. If set to true, force calculations to proceed regardless of run status.
+	// Optional. Not used at the moment.
 	Force bool `protobuf:"varint,4,opt,name=force,proto3" json:"force,omitempty"`
 	// Optional. If set to true, skips the actual calculations. Useful as test, or reminder.
 	DryRun bool `protobuf:"varint,5,opt,name=dryRun,proto3" json:"dryRun,omitempty"`
