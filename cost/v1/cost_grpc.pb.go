@@ -53,11 +53,11 @@ type CostClient interface {
 	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
-	// WORK-IN-PROGRESS: Lists the schedules of your monthly calculations. Only available in Ripple.
+	// Lists the schedules of your monthly calculations. Only available in Ripple.
 	ListCalculationsSchedules(ctx context.Context, in *ListCalculationsSchedulesRequest, opts ...grpc.CallOption) (*ListCalculationsSchedulesResponse, error)
-	// WORK-IN-PROGRESS: Creates a schedule to trigger your monthly calculations. At the moment, only one schedule is allowed per account. Only available in Ripple.
+	// Creates a schedule to trigger your monthly calculations. At the moment, only one schedule is allowed per account. Only available in Ripple.
 	CreateCalculationsSchedule(ctx context.Context, in *CreateCalculationsScheduleRequest, opts ...grpc.CallOption) (*CalculationsSchedule, error)
-	// WORK-IN-PROGRESS: Deletes the schedule of your monthly calculations. Only available in Ripple.
+	// Deletes the schedule of your monthly calculations. Only available in Ripple.
 	DeleteCalculationsSchedule(ctx context.Context, in *DeleteCalculationsScheduleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
@@ -670,11 +670,11 @@ type CostServer interface {
 	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
-	// WORK-IN-PROGRESS: Lists the schedules of your monthly calculations. Only available in Ripple.
+	// Lists the schedules of your monthly calculations. Only available in Ripple.
 	ListCalculationsSchedules(context.Context, *ListCalculationsSchedulesRequest) (*ListCalculationsSchedulesResponse, error)
-	// WORK-IN-PROGRESS: Creates a schedule to trigger your monthly calculations. At the moment, only one schedule is allowed per account. Only available in Ripple.
+	// Creates a schedule to trigger your monthly calculations. At the moment, only one schedule is allowed per account. Only available in Ripple.
 	CreateCalculationsSchedule(context.Context, *CreateCalculationsScheduleRequest) (*CalculationsSchedule, error)
-	// WORK-IN-PROGRESS: Deletes the schedule of your monthly calculations. Only available in Ripple.
+	// Deletes the schedule of your monthly calculations. Only available in Ripple.
 	DeleteCalculationsSchedule(context.Context, *DeleteCalculationsScheduleRequest) (*emptypb.Empty, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
