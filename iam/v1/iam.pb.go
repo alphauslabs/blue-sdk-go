@@ -156,8 +156,7 @@ type CreateUserRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Min: 4, max: 18, allowed characters: letters, numbers, `_` (underscore),
-	// `.` (period) and `-` (hyphen) characters.
+	// Required. Min: 4, max: 18, allowed characters: letters, numbers, `_` (underscore), `.` (period) and `-` (hyphen) characters.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Required. Minimum of 8 characters.
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
@@ -284,29 +283,19 @@ type CreateGroupRootUserRequest struct {
 
 	// The email address of the user being created.
 	Email string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	// The password of the user being created. A value will be generated
-	// if not is provided for this field
+	// The password of the user being created. A value will be generated if not is provided for this field
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	// The ID of the group to which the user will be added. This must
-	// either be a billing group ID or an access group ID.
+	// The ID of the group to which the user will be added. This must either be a billing group ID or an access group ID.
 	GroupId string `protobuf:"bytes,3,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// The type of group which is represented by the group ID. Valid values
-	// include "billing_group" or "access_group".
+	// The type of group which is represented by the group ID. Valid values include "billing_group" or "access_group".
 	GroupType string `protobuf:"bytes,4,opt,name=groupType,proto3" json:"groupType,omitempty"`
-	// This value determines whether the password should be auto-generated
-	// or if the plaintext value received with the request should be used. A
-	// value of "Auto" will result in an auto-generated password whereas a
-	// value of "Custom" will result in the password included with the request
-	// being used.
+	// This value determines whether the password should be auto-generated or if the plaintext value received with the request should be used. A value of "Auto" will result in an auto-generated password whereas a value of "Custom" will result in the password included with the request being used.
 	InputType string `protobuf:"bytes,5,opt,name=inputType,proto3" json:"inputType,omitempty"`
-	// The plan associated with the root-user account. Valid values include
-	// "trial", "limited3" and "limited4".
+	// The plan associated with the root-user account. Valid values include "trial", "limited3" and "limited4".
 	Plan string `protobuf:"bytes,6,opt,name=plan,proto3" json:"plan,omitempty"`
-	// Whether or not a notification should be sent to the provided email after
-	// the user has been created.
+	// Whether or not a notification should be sent to the provided email after the user has been created.
 	EmailNotification bool `protobuf:"varint,7,opt,name=emailNotification,proto3" json:"emailNotification,omitempty"`
-	// A collection of feature flags and whether or not they should be enabled. For
-	// a full list of such flags, see https://alphauslabs.github.io/blueapi/apis/iam.html.
+	// A collection of feature flags and whether or not they should be enabled. For a full list of such flags, see https://alphauslabs.github.io/blueapi/apis/iam.html.
 	Meta *api.FeatureFlags `protobuf:"bytes,8,opt,name=meta,proto3" json:"meta,omitempty"`
 }
 
@@ -398,7 +387,7 @@ func (x *CreateGroupRootUserRequest) GetMeta() *api.FeatureFlags {
 	return nil
 }
 
-// Request message for the Iam.ListGroupRootUsers rpc
+// Request message for the Iam.ListGroupRootUsers rpc.
 type ListGroupRootUsersRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -437,7 +426,7 @@ func (*ListGroupRootUsersRequest) Descriptor() ([]byte, []int) {
 	return file_iam_v1_iam_proto_rawDescGZIP(), []int{6}
 }
 
-// Request message for the Iam.GetGroupRootUser rpc
+// Request message for the Iam.GetGroupRootUser rpc.
 type GetGroupRootRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -485,7 +474,7 @@ func (x *GetGroupRootRequest) GetId() string {
 	return ""
 }
 
-// Request message for the Iam.DeleteGroupRootUser rpc
+// Request message for the Iam.DeleteGroupRootUser rpc.
 type DeleteGroupRootUserRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -533,7 +522,7 @@ func (x *DeleteGroupRootUserRequest) GetId() string {
 	return ""
 }
 
-// Request message for the Iam.GetUpdateFeatureFlags rpc
+// Request message for the Iam.GetUpdateFeatureFlags rpc.
 type GetFeatureFlagsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -581,7 +570,7 @@ func (x *GetFeatureFlagsRequest) GetId() string {
 	return ""
 }
 
-// Request message for the Iam.UpdateFeatureFlags rpc
+// Request message for the Iam.UpdateFeatureFlags rpc.
 type UpdateFeatureFlagsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -780,9 +769,7 @@ type ListPermissionsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. The subuser to query. If empty (default), query all available permissions.
-	// If set to a valid subuser, query that subuser's permissions, if allowed. You can
-	// also set this field to `me` to query your own permissions.
+	// Optional. The subuser to query. If empty (default), query all available permissions. If set to a valid subuser, query that subuser's permissions, if allowed. You can also set this field to `me` to query your own permissions.
 	SubUser string `protobuf:"bytes,1,opt,name=subUser,proto3" json:"subUser,omitempty"`
 }
 
@@ -976,10 +963,7 @@ type CreateRoleRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. The name of the role to create. Role names should have at least 6
-	// characters in length and 32 characters maximum. It should also be alphanumeric.
-	// Hyphens and underscores are allowed in between. The regular expression used
-	// for validation is `^[A-Za-z0-9][A-Za-z0-9_-]*[A-Za-z0-9]$`.
+	// Required. The name of the role to create. Role names should have at least 6 characters in length and 32 characters maximum. It should also be alphanumeric. Hyphens and underscores are allowed in between. The regular expression used for validation is `^[A-Za-z0-9][A-Za-z0-9_-]*[A-Za-z0-9]$`.
 	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	// Required. The namespace where this role will belong.
 	Namespace string `protobuf:"bytes,2,opt,name=namespace,proto3" json:"namespace,omitempty"`
@@ -1456,8 +1440,7 @@ type UpdateUserRoleMappingRequest struct {
 
 	// Optional. The subuser to map the roles. Defaults to caller if not set.
 	SubUser string `protobuf:"bytes,1,opt,name=subUser,proto3" json:"subUser,omitempty"`
-	// Required. The roles to map to the user. Limited to 5 items. Setting `role` to
-	// empty will remove the mapping.
+	// Required. The roles to map to the user. Limited to 5 items. Setting `role` to empty will remove the mapping.
 	Roles []*MapRole `protobuf:"bytes,2,rep,name=roles,proto3" json:"roles,omitempty"`
 }
 
@@ -1779,15 +1762,11 @@ type IpFilter struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// IP filter item id. Note that this name is transcient and is not fixed. However,
-	// you can use any of its permutations to endpoints that accept it, such as
-	// the `DELETE:/iam/v?/ipfilters/{id}` endpoint, without issues.
+	// IP filter item id. Note that this name is transcient and is not fixed. However, you can use any of its permutations to endpoints that accept it, such as the `DELETE:/iam/v?/ipfilters/{id}` endpoint, without issues.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Can be `global`, `rootuser`, or `subuser`.
 	Scope string `protobuf:"bytes,2,opt,name=scope,proto3" json:"scope,omitempty"`
-	// The target of the filter. If global scope, this is usually empty.
-	// Rootuser name for rootuser scope, and subuser name for subuser scope.
-	// For subuser targets, format is `rootuser/subuser`.
+	// The target of the filter. If global scope, this is usually empty. Rootuser name for rootuser scope, and subuser name for subuser scope. For subuser targets, format is `rootuser/subuser`.
 	Target string `protobuf:"bytes,3,opt,name=target,proto3" json:"target,omitempty"`
 	// The type of IP filter. It could be `whitelist` or `blacklist`.
 	Type string `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
@@ -1907,16 +1886,13 @@ type CreateIpFilterRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. The IP input to filter, either blacklist or whitelist. Should be in
-	// CIDR format (i.e. 1.2.3.4/32).
+	// Required. The IP input to filter, either blacklist or whitelist. Should be in CIDR format (i.e. `1.2.3.4/32`).
 	Value string `protobuf:"bytes,1,opt,name=value,proto3" json:"value,omitempty"`
 	// Optional. Can be `whitelist` or `blacklist`. Defaults to `blacklist` if empty.
 	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	// Optional. If `rootUser` is valid and `subUser` is empty, filter is for this rootuser.
-	// If both `rootUser` and `subUser` inputs are empty, filter is at global scope.
+	// Optional. If `rootUser` is valid and `subUser` is empty, filter is for this rootuser. If both `rootUser` and `subUser` inputs are empty, filter is at global scope.
 	RootUser string `protobuf:"bytes,3,opt,name=rootUser,proto3" json:"rootUser,omitempty"`
-	// Optional. If `subuser` is valid, filter is for this subuser; `rootUser` value is discarded.
-	// If both `rootUser` and `subUser` inputs are empty, filter is at global scope.
+	// Optional. If `subuser` is valid, filter is for this subuser; `rootUser` value is discarded. If both `rootUser` and `subUser` inputs are empty, filter is at global scope.
 	SubUser string `protobuf:"bytes,4,opt,name=subUser,proto3" json:"subUser,omitempty"`
 }
 

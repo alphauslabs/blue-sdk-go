@@ -38,25 +38,17 @@ type IamClient interface {
 	CreateUser(ctx context.Context, in *CreateUserRequest, opts ...grpc.CallOption) (*api.User, error)
 	// Deletes a subuser.
 	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK IN PROGRESS:
-	// Creates a new root user for a billing group or access group.
+	// WORK-IN-PROGRESS: Creates a new root user for a billing group or access group.
 	CreateGroupRootUser(ctx context.Context, in *CreateGroupRootUserRequest, opts ...grpc.CallOption) (*api.GroupRootUser, error)
-	// WORK IN PROGRESS
-	// Retrieves all the existing group root users asscoiated with the organization.
+	// WORK-IN-PROGRESS: Retrieves all the existing group root users asscoiated with the organization.
 	ListGroupRootUsers(ctx context.Context, in *ListGroupRootUsersRequest, opts ...grpc.CallOption) (Iam_ListGroupRootUsersClient, error)
-	// WORK IN PROGRESS:
-	// Retrieves an group root user.
+	// WORK-IN-PROGRESS: Retrieves a group root user.
 	GetGroupRootUser(ctx context.Context, in *GetGroupRootRequest, opts ...grpc.CallOption) (*api.GroupRootUser, error)
-	// WORK IN PROGRESS
-	// Deletes an existing group root user.
+	// WORK-IN-PROGRESS: Deletes an existing group root user.
 	DeleteGroupRootUser(ctx context.Context, in *DeleteGroupRootUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK IN PROGRESS:
-	// Retrieves the features available to a user on an Alphaus product. For a list of
-	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	// WORK-IN-PROGRESS: Retrieves the features available to a user on an Alphaus product. For a list of valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
-	// WORK IN PROGRESS:
-	// Updates the features available to a user on an Alphaus product. For a list of
-	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	// WORK-IN-PROGRESS: Updates the features available to a user on an Alphaus product. For a list of valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	UpdateFeatureFlags(ctx context.Context, in *UpdateFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
 	// Lists all API clients belonging to the caller.
 	ListApiClients(ctx context.Context, in *ListApiClientsRequest, opts ...grpc.CallOption) (Iam_ListApiClientsClient, error)
@@ -64,15 +56,11 @@ type IamClient interface {
 	CreateApiClient(ctx context.Context, in *CreateApiClientRequest, opts ...grpc.CallOption) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(ctx context.Context, in *DeleteApiClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Lists all permissions based on the input's scope. For reference, supported
-	// permissions can be found on [https://github.com/mobingi/rbac-permissions].
+	// Lists all permissions based on the input's scope. For reference, supported permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error)
 	// Lists all available roles.
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
-	// Creates a role. If your `permissions` list contains an `Admin` entry, all other
-	// entries will be discarded except `Admin`. Roles are root user-level. That means
-	// all roles created by the root user, or any subuser that has permissions to
-	// create roles, are available to all subusers.
+	// Creates a role. If your `permissions` list contains an `Admin` entry, all other entries will be discarded except `Admin`. Roles are root user-level. That means all roles created by the root user, or any subuser that has permissions to create roles, are available to all subusers.
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
 	// Updates a role. If role name is different, rename mapped role name.
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
@@ -80,11 +68,9 @@ type IamClient interface {
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists roles attached to the caller or the input.
 	ListUserRoleMappings(ctx context.Context, in *ListUserRoleMappingsRequest, opts ...grpc.CallOption) (*ListUserRoleMappingsResponse, error)
-	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace.
-	// There is no limit for filtering rules per user.
+	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	CreateUserRoleMapping(ctx context.Context, in *CreateUserRoleMappingRequest, opts ...grpc.CallOption) (*CreateUserRoleMappingResponse, error)
-	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
-	// There is no limit for filtering rules per user.
+	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error)
 	// Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(ctx context.Context, in *ListIdentityProvidersRequest, opts ...grpc.CallOption) (*ListIdentityProvidersResponse, error)
@@ -94,8 +80,7 @@ type IamClient interface {
 	DeleteIdentityProvider(ctx context.Context, in *DeleteIdentityProviderRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(ctx context.Context, in *ListIpFiltersRequest, opts ...grpc.CallOption) (Iam_ListIpFiltersClient, error)
-	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
-	// this API is only available to root users.
+	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment, this API is only available to root users.
 	CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -471,25 +456,17 @@ type IamServer interface {
 	CreateUser(context.Context, *CreateUserRequest) (*api.User, error)
 	// Deletes a subuser.
 	DeleteUser(context.Context, *DeleteUserRequest) (*emptypb.Empty, error)
-	// WORK IN PROGRESS:
-	// Creates a new root user for a billing group or access group.
+	// WORK-IN-PROGRESS: Creates a new root user for a billing group or access group.
 	CreateGroupRootUser(context.Context, *CreateGroupRootUserRequest) (*api.GroupRootUser, error)
-	// WORK IN PROGRESS
-	// Retrieves all the existing group root users asscoiated with the organization.
+	// WORK-IN-PROGRESS: Retrieves all the existing group root users asscoiated with the organization.
 	ListGroupRootUsers(*ListGroupRootUsersRequest, Iam_ListGroupRootUsersServer) error
-	// WORK IN PROGRESS:
-	// Retrieves an group root user.
+	// WORK-IN-PROGRESS: Retrieves a group root user.
 	GetGroupRootUser(context.Context, *GetGroupRootRequest) (*api.GroupRootUser, error)
-	// WORK IN PROGRESS
-	// Deletes an existing group root user.
+	// WORK-IN-PROGRESS: Deletes an existing group root user.
 	DeleteGroupRootUser(context.Context, *DeleteGroupRootUserRequest) (*emptypb.Empty, error)
-	// WORK IN PROGRESS:
-	// Retrieves the features available to a user on an Alphaus product. For a list of
-	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	// WORK-IN-PROGRESS: Retrieves the features available to a user on an Alphaus product. For a list of valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*api.FeatureFlags, error)
-	// WORK IN PROGRESS:
-	// Updates the features available to a user on an Alphaus product. For a list of
-	// valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
+	// WORK-IN-PROGRESS: Updates the features available to a user on an Alphaus product. For a list of valid feature flags, see our documentation at https://alphauslabs.github.io/blueapi/apis/iam.html.
 	UpdateFeatureFlags(context.Context, *UpdateFeatureFlagsRequest) (*api.FeatureFlags, error)
 	// Lists all API clients belonging to the caller.
 	ListApiClients(*ListApiClientsRequest, Iam_ListApiClientsServer) error
@@ -497,15 +474,11 @@ type IamServer interface {
 	CreateApiClient(context.Context, *CreateApiClientRequest) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error)
-	// Lists all permissions based on the input's scope. For reference, supported
-	// permissions can be found on [https://github.com/mobingi/rbac-permissions].
+	// Lists all permissions based on the input's scope. For reference, supported permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error)
 	// Lists all available roles.
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
-	// Creates a role. If your `permissions` list contains an `Admin` entry, all other
-	// entries will be discarded except `Admin`. Roles are root user-level. That means
-	// all roles created by the root user, or any subuser that has permissions to
-	// create roles, are available to all subusers.
+	// Creates a role. If your `permissions` list contains an `Admin` entry, all other entries will be discarded except `Admin`. Roles are root user-level. That means all roles created by the root user, or any subuser that has permissions to create roles, are available to all subusers.
 	CreateRole(context.Context, *CreateRoleRequest) (*api.Role, error)
 	// Updates a role. If role name is different, rename mapped role name.
 	UpdateRole(context.Context, *UpdateRoleRequest) (*api.Role, error)
@@ -513,11 +486,9 @@ type IamServer interface {
 	DeleteRole(context.Context, *DeleteRoleRequest) (*emptypb.Empty, error)
 	// Lists roles attached to the caller or the input.
 	ListUserRoleMappings(context.Context, *ListUserRoleMappingsRequest) (*ListUserRoleMappingsResponse, error)
-	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace.
-	// There is no limit for filtering rules per user.
+	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	CreateUserRoleMapping(context.Context, *CreateUserRoleMappingRequest) (*CreateUserRoleMappingResponse, error)
-	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace.
-	// There is no limit for filtering rules per user.
+	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error)
 	// Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(context.Context, *ListIdentityProvidersRequest) (*ListIdentityProvidersResponse, error)
@@ -527,8 +498,7 @@ type IamServer interface {
 	DeleteIdentityProvider(context.Context, *DeleteIdentityProviderRequest) (*emptypb.Empty, error)
 	// Lists all IP filters. At the moment, this API is only available to root users.
 	ListIpFilters(*ListIpFiltersRequest, Iam_ListIpFiltersServer) error
-	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment,
-	// this API is only available to root users.
+	// Creates an IP filter item for IP blacklisting or whitelisting. At the moment, this API is only available to root users.
 	CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
