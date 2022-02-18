@@ -56,21 +56,21 @@ type IamClient interface {
 	CreateApiClient(ctx context.Context, in *CreateApiClientRequest, opts ...grpc.CallOption) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(ctx context.Context, in *DeleteApiClientRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Lists all permissions based on the input's scope. For reference, supported permissions can be found on [https://github.com/mobingi/rbac-permissions].
+	// WORK-IN-PROGRESS: Lists all permissions based on the input's scope. For reference, supported permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(ctx context.Context, in *ListPermissionsRequest, opts ...grpc.CallOption) (*ListPermissionsResponse, error)
-	// Lists all available roles.
+	// WORK-IN-PROGRESS: Lists all available roles.
 	ListRoles(ctx context.Context, in *ListRolesRequest, opts ...grpc.CallOption) (*ListRolesResponse, error)
-	// Creates a role. If your `permissions` list contains an `Admin` entry, all other entries will be discarded except `Admin`. Roles are root user-level. That means all roles created by the root user, or any subuser that has permissions to create roles, are available to all subusers.
+	// WORK-IN-PROGRESS: Creates a role. If your `permissions` list contains an `Admin` entry, all other entries will be discarded except `Admin`. Roles are root user-level. That means all roles created by the root user, or any subuser that has permissions to create roles, are available to all subusers.
 	CreateRole(ctx context.Context, in *CreateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
-	// Updates a role. If role name is different, rename mapped role name.
+	// WORK-IN-PROGRESS: Updates a role. If role name is different, rename mapped role name.
 	UpdateRole(ctx context.Context, in *UpdateRoleRequest, opts ...grpc.CallOption) (*api.Role, error)
-	// Deletes a role. Deleting a role will also remove all mappings.
+	// WORK-IN-PROGRESS: Deletes a role. Deleting a role will also remove all mappings.
 	DeleteRole(ctx context.Context, in *DeleteRoleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Lists roles attached to the caller or the input.
+	// WORK-IN-PROGRESS: Lists roles attached to the caller or the input.
 	ListUserRoleMappings(ctx context.Context, in *ListUserRoleMappingsRequest, opts ...grpc.CallOption) (*ListUserRoleMappingsResponse, error)
-	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
+	// WORK-IN-PROGRESS: Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	CreateUserRoleMapping(ctx context.Context, in *CreateUserRoleMappingRequest, opts ...grpc.CallOption) (*CreateUserRoleMappingResponse, error)
-	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
+	// WORK-IN-PROGRESS: Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(ctx context.Context, in *UpdateUserRoleMappingRequest, opts ...grpc.CallOption) (*UpdateUserRoleMappingResponse, error)
 	// Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(ctx context.Context, in *ListIdentityProvidersRequest, opts ...grpc.CallOption) (*ListIdentityProvidersResponse, error)
@@ -474,21 +474,21 @@ type IamServer interface {
 	CreateApiClient(context.Context, *CreateApiClientRequest) (*api.ApiClient, error)
 	// Deletes an API client belonging to the caller.
 	DeleteApiClient(context.Context, *DeleteApiClientRequest) (*emptypb.Empty, error)
-	// Lists all permissions based on the input's scope. For reference, supported permissions can be found on [https://github.com/mobingi/rbac-permissions].
+	// WORK-IN-PROGRESS: Lists all permissions based on the input's scope. For reference, supported permissions can be found on [https://github.com/mobingi/rbac-permissions].
 	ListPermissions(context.Context, *ListPermissionsRequest) (*ListPermissionsResponse, error)
-	// Lists all available roles.
+	// WORK-IN-PROGRESS: Lists all available roles.
 	ListRoles(context.Context, *ListRolesRequest) (*ListRolesResponse, error)
-	// Creates a role. If your `permissions` list contains an `Admin` entry, all other entries will be discarded except `Admin`. Roles are root user-level. That means all roles created by the root user, or any subuser that has permissions to create roles, are available to all subusers.
+	// WORK-IN-PROGRESS: Creates a role. If your `permissions` list contains an `Admin` entry, all other entries will be discarded except `Admin`. Roles are root user-level. That means all roles created by the root user, or any subuser that has permissions to create roles, are available to all subusers.
 	CreateRole(context.Context, *CreateRoleRequest) (*api.Role, error)
-	// Updates a role. If role name is different, rename mapped role name.
+	// WORK-IN-PROGRESS: Updates a role. If role name is different, rename mapped role name.
 	UpdateRole(context.Context, *UpdateRoleRequest) (*api.Role, error)
-	// Deletes a role. Deleting a role will also remove all mappings.
+	// WORK-IN-PROGRESS: Deletes a role. Deleting a role will also remove all mappings.
 	DeleteRole(context.Context, *DeleteRoleRequest) (*emptypb.Empty, error)
-	// Lists roles attached to the caller or the input.
+	// WORK-IN-PROGRESS: Lists roles attached to the caller or the input.
 	ListUserRoleMappings(context.Context, *ListUserRoleMappingsRequest) (*ListUserRoleMappingsResponse, error)
-	// Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
+	// WORK-IN-PROGRESS: Maps roles to a subuser. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	CreateUserRoleMapping(context.Context, *CreateUserRoleMappingRequest) (*CreateUserRoleMappingResponse, error)
-	// Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
+	// WORK-IN-PROGRESS: Updates user-to-role mappings. You can only map (or attach) up to 5 roles to a user per namespace. There is no limit for filtering rules per user.
 	UpdateUserRoleMapping(context.Context, *UpdateUserRoleMappingRequest) (*UpdateUserRoleMappingResponse, error)
 	// Lists all SSO Identity Providers (IdP).
 	ListIdentityProviders(context.Context, *ListIdentityProvidersRequest) (*ListIdentityProvidersResponse, error)
