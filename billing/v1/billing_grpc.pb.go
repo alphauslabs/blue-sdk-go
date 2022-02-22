@@ -30,8 +30,8 @@ type BillingClient interface {
 	GetBillingGroup(ctx context.Context, in *GetBillingGroupRequest, opts ...grpc.CallOption) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error)
-	// Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
-	ListAwsCalculationHistory(ctx context.Context, in *ListAwsCalculationHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsCalculationHistoryClient, error)
+	// WORK-IN-PROGRESS: Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
+	ListAwsDailyRunHistory(ctx context.Context, in *ListAwsDailyRunHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsDailyRunHistoryClient, error)
 	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
 }
@@ -103,12 +103,12 @@ func (c *billingClient) GetAccessGroup(ctx context.Context, in *GetAccessGroupRe
 	return out, nil
 }
 
-func (c *billingClient) ListAwsCalculationHistory(ctx context.Context, in *ListAwsCalculationHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsCalculationHistoryClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[1], "/blueapi.billing.v1.Billing/ListAwsCalculationHistory", opts...)
+func (c *billingClient) ListAwsDailyRunHistory(ctx context.Context, in *ListAwsDailyRunHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsDailyRunHistoryClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[1], "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &billingListAwsCalculationHistoryClient{stream}
+	x := &billingListAwsDailyRunHistoryClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -118,17 +118,17 @@ func (c *billingClient) ListAwsCalculationHistory(ctx context.Context, in *ListA
 	return x, nil
 }
 
-type Billing_ListAwsCalculationHistoryClient interface {
-	Recv() (*AwsCalculationHistory, error)
+type Billing_ListAwsDailyRunHistoryClient interface {
+	Recv() (*AwsDailyRunHistory, error)
 	grpc.ClientStream
 }
 
-type billingListAwsCalculationHistoryClient struct {
+type billingListAwsDailyRunHistoryClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingListAwsCalculationHistoryClient) Recv() (*AwsCalculationHistory, error) {
-	m := new(AwsCalculationHistory)
+func (x *billingListAwsDailyRunHistoryClient) Recv() (*AwsDailyRunHistory, error) {
+	m := new(AwsDailyRunHistory)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -179,8 +179,8 @@ type BillingServer interface {
 	GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error)
-	// Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
-	ListAwsCalculationHistory(*ListAwsCalculationHistoryRequest, Billing_ListAwsCalculationHistoryServer) error
+	// WORK-IN-PROGRESS: Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
+	ListAwsDailyRunHistory(*ListAwsDailyRunHistoryRequest, Billing_ListAwsDailyRunHistoryServer) error
 	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
 	mustEmbedUnimplementedBillingServer()
@@ -202,8 +202,8 @@ func (UnimplementedBillingServer) GetBillingGroup(context.Context, *GetBillingGr
 func (UnimplementedBillingServer) GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessGroup not implemented")
 }
-func (UnimplementedBillingServer) ListAwsCalculationHistory(*ListAwsCalculationHistoryRequest, Billing_ListAwsCalculationHistoryServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListAwsCalculationHistory not implemented")
+func (UnimplementedBillingServer) ListAwsDailyRunHistory(*ListAwsDailyRunHistoryRequest, Billing_ListAwsDailyRunHistoryServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAwsDailyRunHistory not implemented")
 }
 func (UnimplementedBillingServer) ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListUsageCostsDrift not implemented")
@@ -296,24 +296,24 @@ func _Billing_GetAccessGroup_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Billing_ListAwsCalculationHistory_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListAwsCalculationHistoryRequest)
+func _Billing_ListAwsDailyRunHistory_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAwsDailyRunHistoryRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(BillingServer).ListAwsCalculationHistory(m, &billingListAwsCalculationHistoryServer{stream})
+	return srv.(BillingServer).ListAwsDailyRunHistory(m, &billingListAwsDailyRunHistoryServer{stream})
 }
 
-type Billing_ListAwsCalculationHistoryServer interface {
-	Send(*AwsCalculationHistory) error
+type Billing_ListAwsDailyRunHistoryServer interface {
+	Send(*AwsDailyRunHistory) error
 	grpc.ServerStream
 }
 
-type billingListAwsCalculationHistoryServer struct {
+type billingListAwsDailyRunHistoryServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingListAwsCalculationHistoryServer) Send(m *AwsCalculationHistory) error {
+func (x *billingListAwsDailyRunHistoryServer) Send(m *AwsDailyRunHistory) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -365,8 +365,8 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ListAwsCalculationHistory",
-			Handler:       _Billing_ListAwsCalculationHistory_Handler,
+			StreamName:    "ListAwsDailyRunHistory",
+			Handler:       _Billing_ListAwsDailyRunHistory_Handler,
 			ServerStreams: true,
 		},
 		{
