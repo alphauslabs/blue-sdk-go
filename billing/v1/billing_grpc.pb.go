@@ -30,7 +30,7 @@ type BillingClient interface {
 	GetBillingGroup(ctx context.Context, in *GetBillingGroupRequest, opts ...grpc.CallOption) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(ctx context.Context, in *GetAccessGroupRequest, opts ...grpc.CallOption) (*GetAccessGroupResponse, error)
-	// WORK-IN-PROGRESS: Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
+	// Reads the daily calculation history of all accounts in your billing groups. Only available in Ripple.
 	ListAwsDailyRunHistory(ctx context.Context, in *ListAwsDailyRunHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsDailyRunHistoryClient, error)
 	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
@@ -179,7 +179,7 @@ type BillingServer interface {
 	GetBillingGroup(context.Context, *GetBillingGroupRequest) (*GetBillingGroupResponse, error)
 	// WORK-IN-PROGRESS: Gets an access group.
 	GetAccessGroup(context.Context, *GetAccessGroupRequest) (*GetAccessGroupResponse, error)
-	// WORK-IN-PROGRESS: Reads the calculation history of all accounts in your billing groups. Only available in Ripple.
+	// Reads the daily calculation history of all accounts in your billing groups. Only available in Ripple.
 	ListAwsDailyRunHistory(*ListAwsDailyRunHistoryRequest, Billing_ListAwsDailyRunHistoryServer) error
 	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
