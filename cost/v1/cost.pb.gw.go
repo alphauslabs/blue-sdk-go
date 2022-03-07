@@ -1037,7 +1037,7 @@ func local_request_Cost_DeleteCalculationsSchedule_0(ctx context.Context, marsha
 }
 
 func request_Cost_ListCostsFilter_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListCostsFilterConditionRequest
+	var protoReq ListCostsFilterRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -1063,7 +1063,7 @@ func request_Cost_ListCostsFilter_0(ctx context.Context, marshaler runtime.Marsh
 }
 
 func local_request_Cost_ListCostsFilter_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListCostsFilterConditionRequest
+	var protoReq ListCostsFilterRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -1089,7 +1089,7 @@ func local_request_Cost_ListCostsFilter_0(ctx context.Context, marshaler runtime
 }
 
 func request_Cost_CreateCostsFilter_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateCostsFilterConditionRequest
+	var protoReq CreateCostsFilterRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -1123,7 +1123,7 @@ func request_Cost_CreateCostsFilter_0(ctx context.Context, marshaler runtime.Mar
 }
 
 func local_request_Cost_CreateCostsFilter_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateCostsFilterConditionRequest
+	var protoReq CreateCostsFilterRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -1157,7 +1157,7 @@ func local_request_Cost_CreateCostsFilter_0(ctx context.Context, marshaler runti
 }
 
 func request_Cost_DeleteCostsFilter_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DeleteCostsFilterConditionRequest
+	var protoReq DeleteCostsFilterRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -1193,7 +1193,7 @@ func request_Cost_DeleteCostsFilter_0(ctx context.Context, marshaler runtime.Mar
 }
 
 func local_request_Cost_DeleteCostsFilter_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DeleteCostsFilterConditionRequest
+	var protoReq DeleteCostsFilterRequest
 	var metadata runtime.ServerMetadata
 
 	var (

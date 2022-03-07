@@ -60,11 +60,11 @@ type CostClient interface {
 	// Deletes the schedule of your monthly calculations. Only available in Ripple.
 	DeleteCalculationsSchedule(ctx context.Context, in *DeleteCalculationsScheduleRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists the usage-based cost filter condition.
-	ListCostsFilter(ctx context.Context, in *ListCostsFilterConditionRequest, opts ...grpc.CallOption) (*ListCostsFilterConditionResponse, error)
+	ListCostsFilter(ctx context.Context, in *ListCostsFilterRequest, opts ...grpc.CallOption) (*ListCostsFilterResponse, error)
 	// WORK-IN-PROGRESS: Creates the usage-based cost filter condition.
-	CreateCostsFilter(ctx context.Context, in *CreateCostsFilterConditionRequest, opts ...grpc.CallOption) (*CreateCostsFilterConditionResponse, error)
+	CreateCostsFilter(ctx context.Context, in *CreateCostsFilterRequest, opts ...grpc.CallOption) (*CreateCostsFilterResponse, error)
 	// WORK-IN-PROGRESS: Deletes the usage-based cost filter condition.
-	DeleteCostsFilter(ctx context.Context, in *DeleteCostsFilterConditionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteCostsFilter(ctx context.Context, in *DeleteCostsFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -358,8 +358,8 @@ func (c *costClient) DeleteCalculationsSchedule(ctx context.Context, in *DeleteC
 	return out, nil
 }
 
-func (c *costClient) ListCostsFilter(ctx context.Context, in *ListCostsFilterConditionRequest, opts ...grpc.CallOption) (*ListCostsFilterConditionResponse, error) {
-	out := new(ListCostsFilterConditionResponse)
+func (c *costClient) ListCostsFilter(ctx context.Context, in *ListCostsFilterRequest, opts ...grpc.CallOption) (*ListCostsFilterResponse, error) {
+	out := new(ListCostsFilterResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListCostsFilter", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -367,8 +367,8 @@ func (c *costClient) ListCostsFilter(ctx context.Context, in *ListCostsFilterCon
 	return out, nil
 }
 
-func (c *costClient) CreateCostsFilter(ctx context.Context, in *CreateCostsFilterConditionRequest, opts ...grpc.CallOption) (*CreateCostsFilterConditionResponse, error) {
-	out := new(CreateCostsFilterConditionResponse)
+func (c *costClient) CreateCostsFilter(ctx context.Context, in *CreateCostsFilterRequest, opts ...grpc.CallOption) (*CreateCostsFilterResponse, error) {
+	out := new(CreateCostsFilterResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateCostsFilter", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -376,7 +376,7 @@ func (c *costClient) CreateCostsFilter(ctx context.Context, in *CreateCostsFilte
 	return out, nil
 }
 
-func (c *costClient) DeleteCostsFilter(ctx context.Context, in *DeleteCostsFilterConditionRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *costClient) DeleteCostsFilter(ctx context.Context, in *DeleteCostsFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteCostsFilter", in, out, opts...)
 	if err != nil {
@@ -710,11 +710,11 @@ type CostServer interface {
 	// Deletes the schedule of your monthly calculations. Only available in Ripple.
 	DeleteCalculationsSchedule(context.Context, *DeleteCalculationsScheduleRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists the usage-based cost filter condition.
-	ListCostsFilter(context.Context, *ListCostsFilterConditionRequest) (*ListCostsFilterConditionResponse, error)
+	ListCostsFilter(context.Context, *ListCostsFilterRequest) (*ListCostsFilterResponse, error)
 	// WORK-IN-PROGRESS: Creates the usage-based cost filter condition.
-	CreateCostsFilter(context.Context, *CreateCostsFilterConditionRequest) (*CreateCostsFilterConditionResponse, error)
+	CreateCostsFilter(context.Context, *CreateCostsFilterRequest) (*CreateCostsFilterResponse, error)
 	// WORK-IN-PROGRESS: Deletes the usage-based cost filter condition.
-	DeleteCostsFilter(context.Context, *DeleteCostsFilterConditionRequest) (*emptypb.Empty, error)
+	DeleteCostsFilter(context.Context, *DeleteCostsFilterRequest) (*emptypb.Empty, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -811,13 +811,13 @@ func (UnimplementedCostServer) CreateCalculationsSchedule(context.Context, *Crea
 func (UnimplementedCostServer) DeleteCalculationsSchedule(context.Context, *DeleteCalculationsScheduleRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCalculationsSchedule not implemented")
 }
-func (UnimplementedCostServer) ListCostsFilter(context.Context, *ListCostsFilterConditionRequest) (*ListCostsFilterConditionResponse, error) {
+func (UnimplementedCostServer) ListCostsFilter(context.Context, *ListCostsFilterRequest) (*ListCostsFilterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCostsFilter not implemented")
 }
-func (UnimplementedCostServer) CreateCostsFilter(context.Context, *CreateCostsFilterConditionRequest) (*CreateCostsFilterConditionResponse, error) {
+func (UnimplementedCostServer) CreateCostsFilter(context.Context, *CreateCostsFilterRequest) (*CreateCostsFilterResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCostsFilter not implemented")
 }
-func (UnimplementedCostServer) DeleteCostsFilter(context.Context, *DeleteCostsFilterConditionRequest) (*emptypb.Empty, error) {
+func (UnimplementedCostServer) DeleteCostsFilter(context.Context, *DeleteCostsFilterRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCostsFilter not implemented")
 }
 func (UnimplementedCostServer) ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error {
@@ -1209,7 +1209,7 @@ func _Cost_DeleteCalculationsSchedule_Handler(srv interface{}, ctx context.Conte
 }
 
 func _Cost_ListCostsFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCostsFilterConditionRequest)
+	in := new(ListCostsFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1221,13 +1221,13 @@ func _Cost_ListCostsFilter_Handler(srv interface{}, ctx context.Context, dec fun
 		FullMethod: "/blueapi.cost.v1.Cost/ListCostsFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).ListCostsFilter(ctx, req.(*ListCostsFilterConditionRequest))
+		return srv.(CostServer).ListCostsFilter(ctx, req.(*ListCostsFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Cost_CreateCostsFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateCostsFilterConditionRequest)
+	in := new(CreateCostsFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1239,13 +1239,13 @@ func _Cost_CreateCostsFilter_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/blueapi.cost.v1.Cost/CreateCostsFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).CreateCostsFilter(ctx, req.(*CreateCostsFilterConditionRequest))
+		return srv.(CostServer).CreateCostsFilter(ctx, req.(*CreateCostsFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
 func _Cost_DeleteCostsFilter_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteCostsFilterConditionRequest)
+	in := new(DeleteCostsFilterRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -1257,7 +1257,7 @@ func _Cost_DeleteCostsFilter_Handler(srv interface{}, ctx context.Context, dec f
 		FullMethod: "/blueapi.cost.v1.Cost/DeleteCostsFilter",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).DeleteCostsFilter(ctx, req.(*DeleteCostsFilterConditionRequest))
+		return srv.(CostServer).DeleteCostsFilter(ctx, req.(*DeleteCostsFilterRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
