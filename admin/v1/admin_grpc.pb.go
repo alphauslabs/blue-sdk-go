@@ -40,6 +40,10 @@ type AdminClient interface {
 	UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(ctx context.Context, in *DeleteDefaultCostAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling CloudWatch metrics streaming on a target account.
+	GetCloudWatchMetricsStreamTemplateUrl(ctx context.Context, in *GetCloudWatchMetricsStreamTemplateUrlRequest, opts ...grpc.CallOption) (*GetCloudWatchMetricsStreamTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Starts validation of a CloudWatch Metrics streaming stack deployment.
+	CreateCloudWatchMetricsStream(ctx context.Context, in *CreateCloudWatchMetricsStreamRequest, opts ...grpc.CallOption) (*CloudWatchMetricsStream, error)
 	// Get notification settings for login user's organization or group.
 	GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
 	// Creates or updates notification settings for login user's organization or group.
@@ -184,6 +188,24 @@ func (c *adminClient) DeleteDefaultCostAccess(ctx context.Context, in *DeleteDef
 	return out, nil
 }
 
+func (c *adminClient) GetCloudWatchMetricsStreamTemplateUrl(ctx context.Context, in *GetCloudWatchMetricsStreamTemplateUrlRequest, opts ...grpc.CallOption) (*GetCloudWatchMetricsStreamTemplateUrlResponse, error) {
+	out := new(GetCloudWatchMetricsStreamTemplateUrlResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetCloudWatchMetricsStreamTemplateUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateCloudWatchMetricsStream(ctx context.Context, in *CreateCloudWatchMetricsStreamRequest, opts ...grpc.CallOption) (*CloudWatchMetricsStream, error) {
+	out := new(CloudWatchMetricsStream)
+	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/CreateCloudWatchMetricsStream", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *adminClient) GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error) {
 	out := new(api.NotificationSettings)
 	err := c.cc.Invoke(ctx, "/blueapi.admin.v1.Admin/GetNotificationSettings", in, out, opts...)
@@ -276,6 +298,10 @@ type AdminServer interface {
 	UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error)
 	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling CloudWatch metrics streaming on a target account.
+	GetCloudWatchMetricsStreamTemplateUrl(context.Context, *GetCloudWatchMetricsStreamTemplateUrlRequest) (*GetCloudWatchMetricsStreamTemplateUrlResponse, error)
+	// WORK-IN-PROGRESS: Starts validation of a CloudWatch Metrics streaming stack deployment.
+	CreateCloudWatchMetricsStream(context.Context, *CreateCloudWatchMetricsStreamRequest) (*CloudWatchMetricsStream, error)
 	// Get notification settings for login user's organization or group.
 	GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error)
 	// Creates or updates notification settings for login user's organization or group.
@@ -322,6 +348,12 @@ func (UnimplementedAdminServer) UpdateDefaultCostAccess(context.Context, *Update
 }
 func (UnimplementedAdminServer) DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDefaultCostAccess not implemented")
+}
+func (UnimplementedAdminServer) GetCloudWatchMetricsStreamTemplateUrl(context.Context, *GetCloudWatchMetricsStreamTemplateUrlRequest) (*GetCloudWatchMetricsStreamTemplateUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCloudWatchMetricsStreamTemplateUrl not implemented")
+}
+func (UnimplementedAdminServer) CreateCloudWatchMetricsStream(context.Context, *CreateCloudWatchMetricsStreamRequest) (*CloudWatchMetricsStream, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCloudWatchMetricsStream not implemented")
 }
 func (UnimplementedAdminServer) GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetNotificationSettings not implemented")
@@ -510,6 +542,42 @@ func _Admin_DeleteDefaultCostAccess_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_GetCloudWatchMetricsStreamTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCloudWatchMetricsStreamTemplateUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetCloudWatchMetricsStreamTemplateUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/GetCloudWatchMetricsStreamTemplateUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetCloudWatchMetricsStreamTemplateUrl(ctx, req.(*GetCloudWatchMetricsStreamTemplateUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateCloudWatchMetricsStream_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCloudWatchMetricsStreamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateCloudWatchMetricsStream(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.admin.v1.Admin/CreateCloudWatchMetricsStream",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateCloudWatchMetricsStream(ctx, req.(*CreateCloudWatchMetricsStreamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Admin_GetNotificationSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetNotificationSettingsRequest)
 	if err := dec(in); err != nil {
@@ -684,6 +752,14 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteDefaultCostAccess",
 			Handler:    _Admin_DeleteDefaultCostAccess_Handler,
+		},
+		{
+			MethodName: "GetCloudWatchMetricsStreamTemplateUrl",
+			Handler:    _Admin_GetCloudWatchMetricsStreamTemplateUrl_Handler,
+		},
+		{
+			MethodName: "CreateCloudWatchMetricsStream",
+			Handler:    _Admin_CreateCloudWatchMetricsStream_Handler,
 		},
 		{
 			MethodName: "GetNotificationSettings",
