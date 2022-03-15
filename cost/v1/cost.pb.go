@@ -4822,9 +4822,11 @@ type CreateCostsFilterRequest struct {
 	Services []string `protobuf:"bytes,3,rep,name=services,proto3" json:"services,omitempty"`
 	// Optional. Not supported
 	Crosstags map[string]string `protobuf:"bytes,4,rep,name=crosstags,proto3" json:"crosstags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Optional. For example, Set `tag key` and `tag name`, set to `{"tag key":"tag name"}`. To set multiple `{"tag key1":"tag name1", "tag key2":"tag name2"}`
+	// Optional.
+	// For example, Set "tag name" and "tag value", set to `{"tag name":"tag value"}`. To set multiple `{"tag name1":"tag value1", "tag name2":"tag value2"}`
 	Costtags map[string]string `protobuf:"bytes,5,rep,name=costtags,proto3" json:"costtags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Optional. For example, to specify a resrouceId, set to "resrouceId1".To specify multiple resourceId, set to  "resourceId1:resourceId2:resourceId3".
+	// Optional.
+	// For example, to specify a resrouceId, set to "resrouceId1".To specify multiple resourceId, set to  "resourceId1:resourceId2:resourceId3".
 	Resources string `protobuf:"bytes,6,opt,name=resources,proto3" json:"resources,omitempty"`
 }
 
