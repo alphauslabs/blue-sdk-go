@@ -1749,11 +1749,11 @@ type ReadCostAttributesRequest struct {
 	//
 	// For AWS Ripple, only billing internal ids are supported at the moment. Overriden when `accountId` is set to anything other than `*`. Set this and `accountId` to `*` to read the cost attributes of the whole organization. Optional for AWS Wave(Pro).
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// Optional. If set, reads the cost attributes of this account.
+	// Optional. You can set it to a single account or a comma-separated list of accounts.
 	//
 	// For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to read the cost attributes of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
-	// Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`. The oldest supported date is `2020-01-01`.
+	// Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`. The oldest supported date is `20200101`.
 	StartTime string `protobuf:"bytes,4,opt,name=startTime,proto3" json:"startTime,omitempty"`
 	// Optional. The UTC date to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`.
 	EndTime string `protobuf:"bytes,5,opt,name=endTime,proto3" json:"endTime,omitempty"`
