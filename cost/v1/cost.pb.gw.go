@@ -4636,7 +4636,7 @@ var (
 
 	pattern_Cost_DeleteCostFilters_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "costfilters", "filterId"}, ""))
 
-	pattern_Cost_ExportCostFiltersFile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "vendor", "costfilters", "export", "filterId"}, ""))
+	pattern_Cost_ExportCostFiltersFile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "costfilters", "filterId"}, "export"))
 
 	pattern_Cost_ReadCostAttributes_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "costattrs"}, "read"))
 
