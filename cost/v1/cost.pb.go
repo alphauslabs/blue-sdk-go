@@ -4802,15 +4802,15 @@ type CreateCostFiltersRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. If set, reads the usage-based cost details of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
+	// Required. If set, reads the usage-based cost details of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
 	//
 	// For AWS Ripple, only billing internal ids are supported at the moment. Overriden when `accountId` is set to anything other than `*`. Set this and `accountId` to `*` to read the usage-based cost details of the whole organization. Optional for AWS Wave(Pro).
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// Optional. You can set it to a single account or a comma-separated list of accounts.
+	// Required. You can set it to a single account or a comma-separated list of accounts.
 	//
 	// For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to read the usage-based cost details of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
-	// Optional. Valid only for the `aws` vendor. AWS-specific options.
+	// Required. Valid only for the `aws` vendor. AWS-specific options.
 	AwsOptions *ReadCostsRequestAwsOptions `protobuf:"bytes,4,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
 }
 
@@ -4933,15 +4933,15 @@ type UpdateCostFiltersRequest struct {
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Filter Id.
 	FilterId string `protobuf:"bytes,2,opt,name=filterId,proto3" json:"filterId,omitempty"`
-	// Optional. If set, reads the usage-based cost details of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
+	// Required. If set, reads the usage-based cost details of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
 	//
 	// For AWS Ripple, only billing internal ids are supported at the moment. Overriden when `accountId` is set to anything other than `*`. Set this and `accountId` to `*` to read the usage-based cost details of the whole organization. Optional for AWS Wave(Pro).
 	GroupId string `protobuf:"bytes,3,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// Optional. You can set it to a single account or a comma-separated list of accounts.
+	// Required. You can set it to a single account or a comma-separated list of accounts.
 	//
 	// For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to read the usage-based cost details of the whole organization.
 	AccountId string `protobuf:"bytes,4,opt,name=accountId,proto3" json:"accountId,omitempty"`
-	// Optional. Valid only for the `aws` vendor. AWS-specific options.
+	// Required. Valid only for the `aws` vendor. AWS-specific options.
 	AwsOptions *ReadCostsRequestAwsOptions `protobuf:"bytes,5,opt,name=awsOptions,proto3" json:"awsOptions,omitempty"`
 }
 
