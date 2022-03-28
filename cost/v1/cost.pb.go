@@ -4811,7 +4811,7 @@ type CreateCostFiltersRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. Filter Name.
+	// Required. Filter Name. Specify characters between 1 ~ 100
 	FilterName string `protobuf:"bytes,2,opt,name=filterName,proto3" json:"filterName,omitempty"`
 	// Required. If set, reads the usage-based cost details of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
 	//
@@ -4951,7 +4951,7 @@ type UpdateCostFiltersRequest struct {
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Filter Id.
 	FilterId string `protobuf:"bytes,2,opt,name=filterId,proto3" json:"filterId,omitempty"`
-	// Required. Filter Name.
+	// Required. Filter Name. Specify characters between 1 ~ 100
 	FilterName string `protobuf:"bytes,3,opt,name=filterName,proto3" json:"filterName,omitempty"`
 	// Required. If set, reads the usage-based cost details of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
 	//
