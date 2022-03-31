@@ -63,11 +63,11 @@ type CostClient interface {
 	ListCostFilters(ctx context.Context, in *ListCostFiltersRequest, opts ...grpc.CallOption) (*ListCostFiltersResponse, error)
 	// Creates the usage-based cost filter condition. Only available in Wave(Pro).
 	CreateCostFilters(ctx context.Context, in *CreateCostFiltersRequest, opts ...grpc.CallOption) (*CreateCostFiltersResponse, error)
-	// WORK-IN-PROGRESS: Updates the usage-based cost filter condition. Only available in Wave(Pro).
+	// Updates the usage-based cost filter condition. Only available in Wave(Pro).
 	UpdateCostFilters(ctx context.Context, in *UpdateCostFiltersRequest, opts ...grpc.CallOption) (*UpdateCostFiltersResponse, error)
 	// Deletes the usage-based cost filter condition. Only available in Wave(Pro).
 	DeleteCostFilters(ctx context.Context, in *DeleteCostFiltersRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Exports the usage-based cost filter condition. Only available in Wave(Pro).
+	// Exports the usage-based cost filter condition. Only available in Wave(Pro).
 	ExportCostFiltersFile(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*ExportCostFiltersFileResponse, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
@@ -735,11 +735,11 @@ type CostServer interface {
 	ListCostFilters(context.Context, *ListCostFiltersRequest) (*ListCostFiltersResponse, error)
 	// Creates the usage-based cost filter condition. Only available in Wave(Pro).
 	CreateCostFilters(context.Context, *CreateCostFiltersRequest) (*CreateCostFiltersResponse, error)
-	// WORK-IN-PROGRESS: Updates the usage-based cost filter condition. Only available in Wave(Pro).
+	// Updates the usage-based cost filter condition. Only available in Wave(Pro).
 	UpdateCostFilters(context.Context, *UpdateCostFiltersRequest) (*UpdateCostFiltersResponse, error)
 	// Deletes the usage-based cost filter condition. Only available in Wave(Pro).
 	DeleteCostFilters(context.Context, *DeleteCostFiltersRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Exports the usage-based cost filter condition. Only available in Wave(Pro).
+	// Exports the usage-based cost filter condition. Only available in Wave(Pro).
 	ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*ExportCostFiltersFileResponse, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
