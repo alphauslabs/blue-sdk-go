@@ -176,22 +176,32 @@ type Cost struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The account being queried.
 	Account string `protobuf:"bytes,1,opt,name=account,proto3" json:"account,omitempty"`
 	// The group id the account is associated with during the query.
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
 	Type    string `protobuf:"bytes,29,opt,name=type,proto3" json:"type,omitempty"`
 	// For daily data, format is yyyy-mm-dd; for monthly, yyyy-mm.
-	Date         string `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
-	ProductCode  string `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
-	ServiceCode  string `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
-	Region       string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
-	Zone         string `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
-	UsageType    string `protobuf:"bytes,8,opt,name=usageType,proto3" json:"usageType,omitempty"`
+	Date string `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
+	// The CUR product code for an AWS service, such as AmazonEC2, AmazonRDS, etc.
+	ProductCode string `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
+	// The CUR service code as provided in the CUR. Sometimes, this is the same as 'productCode', or a subset of 'productCode', or empty.
+	ServiceCode string `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
+	// The region of the lineitem, if applicable.
+	Region string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
+	// The zone of the lineitem, if applicable.
+	Zone string `protobuf:"bytes,7,opt,name=zone,proto3" json:"zone,omitempty"`
+	// The CUR usage type of the lineitem, if applicable.
+	UsageType string `protobuf:"bytes,8,opt,name=usageType,proto3" json:"usageType,omitempty"`
+	// The CUR instance type of the lineitem, if applicable.
 	InstanceType string `protobuf:"bytes,9,opt,name=instanceType,proto3" json:"instanceType,omitempty"`
-	Operation    string `protobuf:"bytes,10,opt,name=operation,proto3" json:"operation,omitempty"`
-	InvoiceId    string `protobuf:"bytes,11,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
-	Description  string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
-	// At the moment, this is not yet supported, always empty.
+	// The CUR operation of the lineitem, if applicable.
+	Operation string `protobuf:"bytes,10,opt,name=operation,proto3" json:"operation,omitempty"`
+	// The AWS invoice ID of the lineitem, if applicable.
+	InvoiceId string `protobuf:"bytes,11,opt,name=invoiceId,proto3" json:"invoiceId,omitempty"`
+	// The description of the lineitem, if applicable.
+	Description string `protobuf:"bytes,12,opt,name=description,proto3" json:"description,omitempty"`
+	// The resource id of the lineitem, if applicable. At the moment, this is not yet fully supported.
 	ResourceId     string            `protobuf:"bytes,13,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
 	Tags           map[string]string `protobuf:"bytes,14,rep,name=tags,proto3" json:"tags,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	CostCategories map[string]string `protobuf:"bytes,15,rep,name=costCategories,proto3" json:"costCategories,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
