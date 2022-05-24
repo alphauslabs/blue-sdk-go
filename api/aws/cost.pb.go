@@ -181,11 +181,11 @@ type Cost struct {
 	// The group id the account is associated with during the query.
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
 	Type    string `protobuf:"bytes,29,opt,name=type,proto3" json:"type,omitempty"`
-	// For daily data, format is yyyy-mm-dd; for monthly, yyyy-mm.
+	// For daily data, format is `yyyy-mm-dd`; for monthly, `yyyy-mm`.
 	Date string `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
-	// The CUR product code for an AWS service, such as AmazonEC2, AmazonRDS, etc.
+	// The product code for an AWS service, such as `AmazonEC2`, `AmazonRDS`, etc.
 	ProductCode string `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
-	// The CUR service code as provided in the CUR. Sometimes, this is the same as 'productCode', or a subset of 'productCode', or empty.
+	// The CUR service code of the lineitem, if applicable. Sometimes, this is the same as `productCode`, or a subset of `productCode`, or empty.
 	ServiceCode string `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
 	// The region of the lineitem, if applicable.
 	Region string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
@@ -211,21 +211,21 @@ type Cost struct {
 	Cost float64 `protobuf:"fixed64,17,opt,name=cost,proto3" json:"cost,omitempty"`
 	// The unblended cost as reflected in the CUR for this lineitem.
 	UnblendedCost float64 `protobuf:"fixed64,27,opt,name=unblendedCost,proto3" json:"unblendedCost,omitempty"`
-	// The base currency for cost, unblendedCost, effectiveCost, amortizedCost. Always set to USD, CUR's default currency.
+	// The base currency for `cost`, `unblendedCost`, `effectiveCost`, `amortizedCost`. Always set to `USD`, CUR's default currency.
 	BaseCurrency string `protobuf:"bytes,18,opt,name=baseCurrency,proto3" json:"baseCurrency,omitempty"`
-	// The exchange rate used to convert baseCurrency to targetCurrency.
+	// The exchange rate used to convert `baseCurrency` to `targetCurrency`.
 	ExchangeRate float64 `protobuf:"fixed64,19,opt,name=exchangeRate,proto3" json:"exchangeRate,omitempty"`
-	// Converted cost.
+	// Converted `cost`.
 	TargetCost float64 `protobuf:"fixed64,20,opt,name=targetCost,proto3" json:"targetCost,omitempty"`
-	// Converted unblendedCost.
+	// Converted `unblendedCost`.
 	TargetUnblendedCost float64 `protobuf:"fixed64,28,opt,name=targetUnblendedCost,proto3" json:"targetUnblendedCost,omitempty"`
 	// The currency set by `toCurrency`.
 	TargetCurrency string  `protobuf:"bytes,21,opt,name=targetCurrency,proto3" json:"targetCurrency,omitempty"`
 	EffectiveCost  float64 `protobuf:"fixed64,23,opt,name=effectiveCost,proto3" json:"effectiveCost,omitempty"`
-	// Converted effectiveCost.
+	// Converted `effectiveCost`.
 	TargetEffectiveCost float64 `protobuf:"fixed64,24,opt,name=targetEffectiveCost,proto3" json:"targetEffectiveCost,omitempty"`
 	AmortizedCost       float64 `protobuf:"fixed64,25,opt,name=amortizedCost,proto3" json:"amortizedCost,omitempty"`
-	// Converted amortizedCost.
+	// Converted `amortizedCost`.
 	TargetAmortizedCost float64 `protobuf:"fixed64,26,opt,name=targetAmortizedCost,proto3" json:"targetAmortizedCost,omitempty"`
 	TagId               string  `protobuf:"bytes,22,opt,name=tagId,proto3" json:"tagId,omitempty"`
 }
