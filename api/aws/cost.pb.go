@@ -185,7 +185,7 @@ type Cost struct {
 	Date string `protobuf:"bytes,3,opt,name=date,proto3" json:"date,omitempty"`
 	// The product code for an AWS service, such as `AmazonEC2`, `AmazonRDS`, etc. This can also be an Alphaus-specified custom value.
 	ProductCode string `protobuf:"bytes,4,opt,name=productCode,proto3" json:"productCode,omitempty"`
-	// The CUR service code of the lineitem, if applicable. Sometimes, this is the same as `productCode`, or a subset of `productCode`, empty, or an Alphaus-specified custom value.
+	// The CUR service code of the lineitem, if applicable. Sometimes, this is the same as `productCode`, a subset of `productCode`, an Alphaus-specified custom value, or empty.
 	ServiceCode string `protobuf:"bytes,5,opt,name=serviceCode,proto3" json:"serviceCode,omitempty"`
 	// The region of the lineitem, if applicable.
 	Region string `protobuf:"bytes,6,opt,name=region,proto3" json:"region,omitempty"`
