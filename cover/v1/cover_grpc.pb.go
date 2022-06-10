@@ -30,16 +30,18 @@ type CoverClient interface {
 	GetMembers(ctx context.Context, in *GetMembersRequest, opts ...grpc.CallOption) (*GetMembersResponse, error)
 	// Get the details of the user
 	GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error)
+	// Get the details of the logged-in user
+	GetUserDetails(ctx context.Context, in *GetUserDetailsRequest, opts ...grpc.CallOption) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
-	UpdateMemberAvatar(ctx context.Context, in *UpdateMemberAvatarRequest, opts ...grpc.CallOption) (*UpdateMemberAvatarResponse, error)
+	UpdateUserAvatar(ctx context.Context, in *UpdateUserAvatarRequest, opts ...grpc.CallOption) (*UpdateUserAvatarResponse, error)
 	// Modify user's icon
-	UpdateMemberIcon(ctx context.Context, in *UpdateMemberIconRequest, opts ...grpc.CallOption) (*UpdateMemberIconResponse, error)
+	UpdateUserIcon(ctx context.Context, in *UpdateUserIconRequest, opts ...grpc.CallOption) (*UpdateUserIconResponse, error)
 	// Modify user's color theme
-	UpdateMemberColorTheme(ctx context.Context, in *UpdateMemberColorThemeRequest, opts ...grpc.CallOption) (*UpdateMemberColorThemeResponse, error)
-	// Modify username
-	UpdateMemberUsername(ctx context.Context, in *UpdateMemberUsernameRequest, opts ...grpc.CallOption) (*UpdateMemberUsernameResponse, error)
+	UpdateUserColorTheme(ctx context.Context, in *UpdateUserColorThemeRequest, opts ...grpc.CallOption) (*UpdateUserColorThemeResponse, error)
 	// Modify user's email
-	UpdateMemberEmail(ctx context.Context, in *UpdateMemberEmailRequest, opts ...grpc.CallOption) (*UpdateMemberEmailResponse, error)
+	UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*UpdateUserEmailResponse, error)
+	// Reset user's password
+	ResetUserPassword(ctx context.Context, in *ResetUserPasswordRequest, opts ...grpc.CallOption) (*ResetUserPasswordResponse, error)
 	// Deletes a user
 	DeleteMember(ctx context.Context, in *DeleteMemberRequest, opts ...grpc.CallOption) (*DeleteMemberResponse, error)
 	// Trigger reset password from Admin
@@ -102,45 +104,54 @@ func (c *coverClient) GetMemberDetails(ctx context.Context, in *GetMemberDetails
 	return out, nil
 }
 
-func (c *coverClient) UpdateMemberAvatar(ctx context.Context, in *UpdateMemberAvatarRequest, opts ...grpc.CallOption) (*UpdateMemberAvatarResponse, error) {
-	out := new(UpdateMemberAvatarResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateMemberAvatar", in, out, opts...)
+func (c *coverClient) GetUserDetails(ctx context.Context, in *GetUserDetailsRequest, opts ...grpc.CallOption) (*GetUserDetailsResponse, error) {
+	out := new(GetUserDetailsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetUserDetails", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *coverClient) UpdateMemberIcon(ctx context.Context, in *UpdateMemberIconRequest, opts ...grpc.CallOption) (*UpdateMemberIconResponse, error) {
-	out := new(UpdateMemberIconResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateMemberIcon", in, out, opts...)
+func (c *coverClient) UpdateUserAvatar(ctx context.Context, in *UpdateUserAvatarRequest, opts ...grpc.CallOption) (*UpdateUserAvatarResponse, error) {
+	out := new(UpdateUserAvatarResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserAvatar", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *coverClient) UpdateMemberColorTheme(ctx context.Context, in *UpdateMemberColorThemeRequest, opts ...grpc.CallOption) (*UpdateMemberColorThemeResponse, error) {
-	out := new(UpdateMemberColorThemeResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateMemberColorTheme", in, out, opts...)
+func (c *coverClient) UpdateUserIcon(ctx context.Context, in *UpdateUserIconRequest, opts ...grpc.CallOption) (*UpdateUserIconResponse, error) {
+	out := new(UpdateUserIconResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserIcon", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *coverClient) UpdateMemberUsername(ctx context.Context, in *UpdateMemberUsernameRequest, opts ...grpc.CallOption) (*UpdateMemberUsernameResponse, error) {
-	out := new(UpdateMemberUsernameResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateMemberUsername", in, out, opts...)
+func (c *coverClient) UpdateUserColorTheme(ctx context.Context, in *UpdateUserColorThemeRequest, opts ...grpc.CallOption) (*UpdateUserColorThemeResponse, error) {
+	out := new(UpdateUserColorThemeResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserColorTheme", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *coverClient) UpdateMemberEmail(ctx context.Context, in *UpdateMemberEmailRequest, opts ...grpc.CallOption) (*UpdateMemberEmailResponse, error) {
-	out := new(UpdateMemberEmailResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateMemberEmail", in, out, opts...)
+func (c *coverClient) UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*UpdateUserEmailResponse, error) {
+	out := new(UpdateUserEmailResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ResetUserPassword(ctx context.Context, in *ResetUserPasswordRequest, opts ...grpc.CallOption) (*ResetUserPasswordResponse, error) {
+	out := new(ResetUserPasswordResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ResetUserPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -231,16 +242,18 @@ type CoverServer interface {
 	GetMembers(context.Context, *GetMembersRequest) (*GetMembersResponse, error)
 	// Get the details of the user
 	GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error)
+	// Get the details of the logged-in user
+	GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
-	UpdateMemberAvatar(context.Context, *UpdateMemberAvatarRequest) (*UpdateMemberAvatarResponse, error)
+	UpdateUserAvatar(context.Context, *UpdateUserAvatarRequest) (*UpdateUserAvatarResponse, error)
 	// Modify user's icon
-	UpdateMemberIcon(context.Context, *UpdateMemberIconRequest) (*UpdateMemberIconResponse, error)
+	UpdateUserIcon(context.Context, *UpdateUserIconRequest) (*UpdateUserIconResponse, error)
 	// Modify user's color theme
-	UpdateMemberColorTheme(context.Context, *UpdateMemberColorThemeRequest) (*UpdateMemberColorThemeResponse, error)
-	// Modify username
-	UpdateMemberUsername(context.Context, *UpdateMemberUsernameRequest) (*UpdateMemberUsernameResponse, error)
+	UpdateUserColorTheme(context.Context, *UpdateUserColorThemeRequest) (*UpdateUserColorThemeResponse, error)
 	// Modify user's email
-	UpdateMemberEmail(context.Context, *UpdateMemberEmailRequest) (*UpdateMemberEmailResponse, error)
+	UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*UpdateUserEmailResponse, error)
+	// Reset user's password
+	ResetUserPassword(context.Context, *ResetUserPasswordRequest) (*ResetUserPasswordResponse, error)
 	// Deletes a user
 	DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error)
 	// Trigger reset password from Admin
@@ -276,20 +289,23 @@ func (UnimplementedCoverServer) GetMembers(context.Context, *GetMembersRequest) 
 func (UnimplementedCoverServer) GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMemberDetails not implemented")
 }
-func (UnimplementedCoverServer) UpdateMemberAvatar(context.Context, *UpdateMemberAvatarRequest) (*UpdateMemberAvatarResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberAvatar not implemented")
+func (UnimplementedCoverServer) GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserDetails not implemented")
 }
-func (UnimplementedCoverServer) UpdateMemberIcon(context.Context, *UpdateMemberIconRequest) (*UpdateMemberIconResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberIcon not implemented")
+func (UnimplementedCoverServer) UpdateUserAvatar(context.Context, *UpdateUserAvatarRequest) (*UpdateUserAvatarResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAvatar not implemented")
 }
-func (UnimplementedCoverServer) UpdateMemberColorTheme(context.Context, *UpdateMemberColorThemeRequest) (*UpdateMemberColorThemeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberColorTheme not implemented")
+func (UnimplementedCoverServer) UpdateUserIcon(context.Context, *UpdateUserIconRequest) (*UpdateUserIconResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserIcon not implemented")
 }
-func (UnimplementedCoverServer) UpdateMemberUsername(context.Context, *UpdateMemberUsernameRequest) (*UpdateMemberUsernameResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberUsername not implemented")
+func (UnimplementedCoverServer) UpdateUserColorTheme(context.Context, *UpdateUserColorThemeRequest) (*UpdateUserColorThemeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserColorTheme not implemented")
 }
-func (UnimplementedCoverServer) UpdateMemberEmail(context.Context, *UpdateMemberEmailRequest) (*UpdateMemberEmailResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberEmail not implemented")
+func (UnimplementedCoverServer) UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*UpdateUserEmailResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserEmail not implemented")
+}
+func (UnimplementedCoverServer) ResetUserPassword(context.Context, *ResetUserPasswordRequest) (*ResetUserPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetUserPassword not implemented")
 }
 func (UnimplementedCoverServer) DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMember not implemented")
@@ -400,92 +416,110 @@ func _Cover_GetMemberDetails_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_UpdateMemberAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberAvatarRequest)
+func _Cover_GetUserDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).UpdateMemberAvatar(ctx, in)
+		return srv.(CoverServer).GetUserDetails(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/UpdateMemberAvatar",
+		FullMethod: "/blueapi.cover.v1.Cover/GetUserDetails",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateMemberAvatar(ctx, req.(*UpdateMemberAvatarRequest))
+		return srv.(CoverServer).GetUserDetails(ctx, req.(*GetUserDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_UpdateMemberIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberIconRequest)
+func _Cover_UpdateUserAvatar_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserAvatarRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).UpdateMemberIcon(ctx, in)
+		return srv.(CoverServer).UpdateUserAvatar(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/UpdateMemberIcon",
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserAvatar",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateMemberIcon(ctx, req.(*UpdateMemberIconRequest))
+		return srv.(CoverServer).UpdateUserAvatar(ctx, req.(*UpdateUserAvatarRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_UpdateMemberColorTheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberColorThemeRequest)
+func _Cover_UpdateUserIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserIconRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).UpdateMemberColorTheme(ctx, in)
+		return srv.(CoverServer).UpdateUserIcon(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/UpdateMemberColorTheme",
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserIcon",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateMemberColorTheme(ctx, req.(*UpdateMemberColorThemeRequest))
+		return srv.(CoverServer).UpdateUserIcon(ctx, req.(*UpdateUserIconRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_UpdateMemberUsername_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberUsernameRequest)
+func _Cover_UpdateUserColorTheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserColorThemeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).UpdateMemberUsername(ctx, in)
+		return srv.(CoverServer).UpdateUserColorTheme(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/UpdateMemberUsername",
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserColorTheme",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateMemberUsername(ctx, req.(*UpdateMemberUsernameRequest))
+		return srv.(CoverServer).UpdateUserColorTheme(ctx, req.(*UpdateUserColorThemeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_UpdateMemberEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberEmailRequest)
+func _Cover_UpdateUserEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserEmailRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).UpdateMemberEmail(ctx, in)
+		return srv.(CoverServer).UpdateUserEmail(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/UpdateMemberEmail",
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserEmail",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateMemberEmail(ctx, req.(*UpdateMemberEmailRequest))
+		return srv.(CoverServer).UpdateUserEmail(ctx, req.(*UpdateUserEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ResetUserPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetUserPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ResetUserPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/ResetUserPassword",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ResetUserPassword(ctx, req.(*ResetUserPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -658,24 +692,28 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetMemberDetails_Handler,
 		},
 		{
-			MethodName: "UpdateMemberAvatar",
-			Handler:    _Cover_UpdateMemberAvatar_Handler,
+			MethodName: "GetUserDetails",
+			Handler:    _Cover_GetUserDetails_Handler,
 		},
 		{
-			MethodName: "UpdateMemberIcon",
-			Handler:    _Cover_UpdateMemberIcon_Handler,
+			MethodName: "UpdateUserAvatar",
+			Handler:    _Cover_UpdateUserAvatar_Handler,
 		},
 		{
-			MethodName: "UpdateMemberColorTheme",
-			Handler:    _Cover_UpdateMemberColorTheme_Handler,
+			MethodName: "UpdateUserIcon",
+			Handler:    _Cover_UpdateUserIcon_Handler,
 		},
 		{
-			MethodName: "UpdateMemberUsername",
-			Handler:    _Cover_UpdateMemberUsername_Handler,
+			MethodName: "UpdateUserColorTheme",
+			Handler:    _Cover_UpdateUserColorTheme_Handler,
 		},
 		{
-			MethodName: "UpdateMemberEmail",
-			Handler:    _Cover_UpdateMemberEmail_Handler,
+			MethodName: "UpdateUserEmail",
+			Handler:    _Cover_UpdateUserEmail_Handler,
+		},
+		{
+			MethodName: "ResetUserPassword",
+			Handler:    _Cover_ResetUserPassword_Handler,
 		},
 		{
 			MethodName: "DeleteMember",
