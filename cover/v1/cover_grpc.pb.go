@@ -38,8 +38,12 @@ type CoverClient interface {
 	UpdateUserIcon(ctx context.Context, in *UpdateUserIconRequest, opts ...grpc.CallOption) (*UpdateUserIconResponse, error)
 	// Modify user's color theme
 	UpdateUserColorTheme(ctx context.Context, in *UpdateUserColorThemeRequest, opts ...grpc.CallOption) (*UpdateUserColorThemeResponse, error)
+	// Modify user's name
+	UpdateUserName(ctx context.Context, in *UpdateUserNameRequest, opts ...grpc.CallOption) (*UpdateUserNameResponse, error)
 	// Modify user's email
 	UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*UpdateUserEmailResponse, error)
+	// Modify user's main view
+	UpdateUserMainView(ctx context.Context, in *UpdateUserMainViewRequest, opts ...grpc.CallOption) (*UpdateUserMainViewResponse, error)
 	// Reset user's password
 	ResetUserPassword(ctx context.Context, in *ResetUserPasswordRequest, opts ...grpc.CallOption) (*ResetUserPasswordResponse, error)
 	// Deletes a user
@@ -54,10 +58,42 @@ type CoverClient interface {
 	GetViews(ctx context.Context, in *GetViewsRequest, opts ...grpc.CallOption) (*GetViewsResponse, error)
 	// Get the details of the current view
 	GetCurrentView(ctx context.Context, in *GetCurrentViewRequest, opts ...grpc.CallOption) (*GetCurrentViewResponse, error)
+	// Get favorite views
+	GetFavoriteViews(ctx context.Context, in *GetFavoriteViewsRequest, opts ...grpc.CallOption) (*GetFavoriteViewsResponse, error)
+	// Publish current view
+	PublishView(ctx context.Context, in *PublishViewRequest, opts ...grpc.CallOption) (*PublishViewResponse, error)
+	// Add to favorites
+	AddFavorite(ctx context.Context, in *AddFavoriteRequest, opts ...grpc.CallOption) (*AddFavoriteResponse, error)
+	// Remove from favorites
+	RemoveFavorite(ctx context.Context, in *RemoveFavoriteRequest, opts ...grpc.CallOption) (*RemoveFavoriteResponse, error)
 	// Updates the view details
 	UpdateView(ctx context.Context, in *UpdateViewRequest, opts ...grpc.CallOption) (*UpdateViewResponse, error)
 	// Deletes a view
 	DeleteView(ctx context.Context, in *DeleteViewRequest, opts ...grpc.CallOption) (*DeleteViewResponse, error)
+	// Create a cost group
+	CreateCostGroup(ctx context.Context, in *CreateCostGroupRequest, opts ...grpc.CallOption) (*CreateCostGroupResponse, error)
+	// Get all the cost groups
+	GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (*GetCostGroupsResponse, error)
+	// Get the details of the cost group
+	GetCostGroupDetails(ctx context.Context, in *GetCostGroupDetailsRequest, opts ...grpc.CallOption) (*GetCostGroupDetailsResponse, error)
+	// Update cost group's name
+	UpdateCostGroupName(ctx context.Context, in *UpdateCostGroupNameRequest, opts ...grpc.CallOption) (*UpdateCostGroupNameResponse, error)
+	// Update cost group's description
+	UpdateCostGroupDescription(ctx context.Context, in *UpdateCostGroupDescriptionRequest, opts ...grpc.CallOption) (*UpdateCostGroupDescriptionResponse, error)
+	// Update cost group's image
+	UpdateCostGroupImage(ctx context.Context, in *UpdateCostGroupImageRequest, opts ...grpc.CallOption) (*UpdateCostGroupImageResponse, error)
+	// Update cost group's icon
+	UpdateCostGroupIcon(ctx context.Context, in *UpdateCostGroupIconRequest, opts ...grpc.CallOption) (*UpdateCostGroupIconResponse, error)
+	// Update cost group's color theme
+	UpdateCostGroupColorTheme(ctx context.Context, in *UpdateCostGroupColorThemeRequest, opts ...grpc.CallOption) (*UpdateCostGroupColorThemeResponse, error)
+	// Update cost group's combinations
+	UpdateCostGroupCombinations(ctx context.Context, in *UpdateCostGroupCombinationsRequest, opts ...grpc.CallOption) (*UpdateCostGroupCombinationsResponse, error)
+	// Assign a member to a cost group
+	AssignCostGroupMember(ctx context.Context, in *AssignCostGroupMemberRequest, opts ...grpc.CallOption) (*AssignCostGroupMemberResponse, error)
+	// Remove a member from a cost group
+	RemoveCostGroupMember(ctx context.Context, in *RemoveCostGroupMemberRequest, opts ...grpc.CallOption) (*RemoveCostGroupMemberResponse, error)
+	// Deletes a cost group
+	DeleteCostGroup(ctx context.Context, in *DeleteCostGroupRequest, opts ...grpc.CallOption) (*DeleteCostGroupResponse, error)
 }
 
 type coverClient struct {
@@ -140,9 +176,27 @@ func (c *coverClient) UpdateUserColorTheme(ctx context.Context, in *UpdateUserCo
 	return out, nil
 }
 
+func (c *coverClient) UpdateUserName(ctx context.Context, in *UpdateUserNameRequest, opts ...grpc.CallOption) (*UpdateUserNameResponse, error) {
+	out := new(UpdateUserNameResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserName", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) UpdateUserEmail(ctx context.Context, in *UpdateUserEmailRequest, opts ...grpc.CallOption) (*UpdateUserEmailResponse, error) {
 	out := new(UpdateUserEmailResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserEmail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUserMainView(ctx context.Context, in *UpdateUserMainViewRequest, opts ...grpc.CallOption) (*UpdateUserMainViewResponse, error) {
+	out := new(UpdateUserMainViewResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserMainView", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -212,6 +266,42 @@ func (c *coverClient) GetCurrentView(ctx context.Context, in *GetCurrentViewRequ
 	return out, nil
 }
 
+func (c *coverClient) GetFavoriteViews(ctx context.Context, in *GetFavoriteViewsRequest, opts ...grpc.CallOption) (*GetFavoriteViewsResponse, error) {
+	out := new(GetFavoriteViewsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetFavoriteViews", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) PublishView(ctx context.Context, in *PublishViewRequest, opts ...grpc.CallOption) (*PublishViewResponse, error) {
+	out := new(PublishViewResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/PublishView", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) AddFavorite(ctx context.Context, in *AddFavoriteRequest, opts ...grpc.CallOption) (*AddFavoriteResponse, error) {
+	out := new(AddFavoriteResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/AddFavorite", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) RemoveFavorite(ctx context.Context, in *RemoveFavoriteRequest, opts ...grpc.CallOption) (*RemoveFavoriteResponse, error) {
+	out := new(RemoveFavoriteResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/RemoveFavorite", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) UpdateView(ctx context.Context, in *UpdateViewRequest, opts ...grpc.CallOption) (*UpdateViewResponse, error) {
 	out := new(UpdateViewResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateView", in, out, opts...)
@@ -224,6 +314,114 @@ func (c *coverClient) UpdateView(ctx context.Context, in *UpdateViewRequest, opt
 func (c *coverClient) DeleteView(ctx context.Context, in *DeleteViewRequest, opts ...grpc.CallOption) (*DeleteViewResponse, error) {
 	out := new(DeleteViewResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/DeleteView", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateCostGroup(ctx context.Context, in *CreateCostGroupRequest, opts ...grpc.CallOption) (*CreateCostGroupResponse, error) {
+	out := new(CreateCostGroupResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/CreateCostGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (*GetCostGroupsResponse, error) {
+	out := new(GetCostGroupsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetCostGroups", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetCostGroupDetails(ctx context.Context, in *GetCostGroupDetailsRequest, opts ...grpc.CallOption) (*GetCostGroupDetailsResponse, error) {
+	out := new(GetCostGroupDetailsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetCostGroupDetails", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateCostGroupName(ctx context.Context, in *UpdateCostGroupNameRequest, opts ...grpc.CallOption) (*UpdateCostGroupNameResponse, error) {
+	out := new(UpdateCostGroupNameResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateCostGroupName", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateCostGroupDescription(ctx context.Context, in *UpdateCostGroupDescriptionRequest, opts ...grpc.CallOption) (*UpdateCostGroupDescriptionResponse, error) {
+	out := new(UpdateCostGroupDescriptionResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateCostGroupDescription", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateCostGroupImage(ctx context.Context, in *UpdateCostGroupImageRequest, opts ...grpc.CallOption) (*UpdateCostGroupImageResponse, error) {
+	out := new(UpdateCostGroupImageResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateCostGroupImage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateCostGroupIcon(ctx context.Context, in *UpdateCostGroupIconRequest, opts ...grpc.CallOption) (*UpdateCostGroupIconResponse, error) {
+	out := new(UpdateCostGroupIconResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateCostGroupIcon", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateCostGroupColorTheme(ctx context.Context, in *UpdateCostGroupColorThemeRequest, opts ...grpc.CallOption) (*UpdateCostGroupColorThemeResponse, error) {
+	out := new(UpdateCostGroupColorThemeResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateCostGroupColorTheme", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateCostGroupCombinations(ctx context.Context, in *UpdateCostGroupCombinationsRequest, opts ...grpc.CallOption) (*UpdateCostGroupCombinationsResponse, error) {
+	out := new(UpdateCostGroupCombinationsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateCostGroupCombinations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) AssignCostGroupMember(ctx context.Context, in *AssignCostGroupMemberRequest, opts ...grpc.CallOption) (*AssignCostGroupMemberResponse, error) {
+	out := new(AssignCostGroupMemberResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/AssignCostGroupMember", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) RemoveCostGroupMember(ctx context.Context, in *RemoveCostGroupMemberRequest, opts ...grpc.CallOption) (*RemoveCostGroupMemberResponse, error) {
+	out := new(RemoveCostGroupMemberResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/RemoveCostGroupMember", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteCostGroup(ctx context.Context, in *DeleteCostGroupRequest, opts ...grpc.CallOption) (*DeleteCostGroupResponse, error) {
+	out := new(DeleteCostGroupResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/DeleteCostGroup", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -250,8 +448,12 @@ type CoverServer interface {
 	UpdateUserIcon(context.Context, *UpdateUserIconRequest) (*UpdateUserIconResponse, error)
 	// Modify user's color theme
 	UpdateUserColorTheme(context.Context, *UpdateUserColorThemeRequest) (*UpdateUserColorThemeResponse, error)
+	// Modify user's name
+	UpdateUserName(context.Context, *UpdateUserNameRequest) (*UpdateUserNameResponse, error)
 	// Modify user's email
 	UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*UpdateUserEmailResponse, error)
+	// Modify user's main view
+	UpdateUserMainView(context.Context, *UpdateUserMainViewRequest) (*UpdateUserMainViewResponse, error)
 	// Reset user's password
 	ResetUserPassword(context.Context, *ResetUserPasswordRequest) (*ResetUserPasswordResponse, error)
 	// Deletes a user
@@ -266,10 +468,42 @@ type CoverServer interface {
 	GetViews(context.Context, *GetViewsRequest) (*GetViewsResponse, error)
 	// Get the details of the current view
 	GetCurrentView(context.Context, *GetCurrentViewRequest) (*GetCurrentViewResponse, error)
+	// Get favorite views
+	GetFavoriteViews(context.Context, *GetFavoriteViewsRequest) (*GetFavoriteViewsResponse, error)
+	// Publish current view
+	PublishView(context.Context, *PublishViewRequest) (*PublishViewResponse, error)
+	// Add to favorites
+	AddFavorite(context.Context, *AddFavoriteRequest) (*AddFavoriteResponse, error)
+	// Remove from favorites
+	RemoveFavorite(context.Context, *RemoveFavoriteRequest) (*RemoveFavoriteResponse, error)
 	// Updates the view details
 	UpdateView(context.Context, *UpdateViewRequest) (*UpdateViewResponse, error)
 	// Deletes a view
 	DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error)
+	// Create a cost group
+	CreateCostGroup(context.Context, *CreateCostGroupRequest) (*CreateCostGroupResponse, error)
+	// Get all the cost groups
+	GetCostGroups(context.Context, *GetCostGroupsRequest) (*GetCostGroupsResponse, error)
+	// Get the details of the cost group
+	GetCostGroupDetails(context.Context, *GetCostGroupDetailsRequest) (*GetCostGroupDetailsResponse, error)
+	// Update cost group's name
+	UpdateCostGroupName(context.Context, *UpdateCostGroupNameRequest) (*UpdateCostGroupNameResponse, error)
+	// Update cost group's description
+	UpdateCostGroupDescription(context.Context, *UpdateCostGroupDescriptionRequest) (*UpdateCostGroupDescriptionResponse, error)
+	// Update cost group's image
+	UpdateCostGroupImage(context.Context, *UpdateCostGroupImageRequest) (*UpdateCostGroupImageResponse, error)
+	// Update cost group's icon
+	UpdateCostGroupIcon(context.Context, *UpdateCostGroupIconRequest) (*UpdateCostGroupIconResponse, error)
+	// Update cost group's color theme
+	UpdateCostGroupColorTheme(context.Context, *UpdateCostGroupColorThemeRequest) (*UpdateCostGroupColorThemeResponse, error)
+	// Update cost group's combinations
+	UpdateCostGroupCombinations(context.Context, *UpdateCostGroupCombinationsRequest) (*UpdateCostGroupCombinationsResponse, error)
+	// Assign a member to a cost group
+	AssignCostGroupMember(context.Context, *AssignCostGroupMemberRequest) (*AssignCostGroupMemberResponse, error)
+	// Remove a member from a cost group
+	RemoveCostGroupMember(context.Context, *RemoveCostGroupMemberRequest) (*RemoveCostGroupMemberResponse, error)
+	// Deletes a cost group
+	DeleteCostGroup(context.Context, *DeleteCostGroupRequest) (*DeleteCostGroupResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -301,8 +535,14 @@ func (UnimplementedCoverServer) UpdateUserIcon(context.Context, *UpdateUserIconR
 func (UnimplementedCoverServer) UpdateUserColorTheme(context.Context, *UpdateUserColorThemeRequest) (*UpdateUserColorThemeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserColorTheme not implemented")
 }
+func (UnimplementedCoverServer) UpdateUserName(context.Context, *UpdateUserNameRequest) (*UpdateUserNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserName not implemented")
+}
 func (UnimplementedCoverServer) UpdateUserEmail(context.Context, *UpdateUserEmailRequest) (*UpdateUserEmailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserEmail not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserMainView(context.Context, *UpdateUserMainViewRequest) (*UpdateUserMainViewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserMainView not implemented")
 }
 func (UnimplementedCoverServer) ResetUserPassword(context.Context, *ResetUserPasswordRequest) (*ResetUserPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetUserPassword not implemented")
@@ -325,11 +565,59 @@ func (UnimplementedCoverServer) GetViews(context.Context, *GetViewsRequest) (*Ge
 func (UnimplementedCoverServer) GetCurrentView(context.Context, *GetCurrentViewRequest) (*GetCurrentViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCurrentView not implemented")
 }
+func (UnimplementedCoverServer) GetFavoriteViews(context.Context, *GetFavoriteViewsRequest) (*GetFavoriteViewsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFavoriteViews not implemented")
+}
+func (UnimplementedCoverServer) PublishView(context.Context, *PublishViewRequest) (*PublishViewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PublishView not implemented")
+}
+func (UnimplementedCoverServer) AddFavorite(context.Context, *AddFavoriteRequest) (*AddFavoriteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddFavorite not implemented")
+}
+func (UnimplementedCoverServer) RemoveFavorite(context.Context, *RemoveFavoriteRequest) (*RemoveFavoriteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveFavorite not implemented")
+}
 func (UnimplementedCoverServer) UpdateView(context.Context, *UpdateViewRequest) (*UpdateViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateView not implemented")
 }
 func (UnimplementedCoverServer) DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteView not implemented")
+}
+func (UnimplementedCoverServer) CreateCostGroup(context.Context, *CreateCostGroupRequest) (*CreateCostGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCostGroup not implemented")
+}
+func (UnimplementedCoverServer) GetCostGroups(context.Context, *GetCostGroupsRequest) (*GetCostGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroups not implemented")
+}
+func (UnimplementedCoverServer) GetCostGroupDetails(context.Context, *GetCostGroupDetailsRequest) (*GetCostGroupDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroupDetails not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostGroupName(context.Context, *UpdateCostGroupNameRequest) (*UpdateCostGroupNameResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupName not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostGroupDescription(context.Context, *UpdateCostGroupDescriptionRequest) (*UpdateCostGroupDescriptionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupDescription not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostGroupImage(context.Context, *UpdateCostGroupImageRequest) (*UpdateCostGroupImageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupImage not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostGroupIcon(context.Context, *UpdateCostGroupIconRequest) (*UpdateCostGroupIconResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupIcon not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostGroupColorTheme(context.Context, *UpdateCostGroupColorThemeRequest) (*UpdateCostGroupColorThemeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupColorTheme not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostGroupCombinations(context.Context, *UpdateCostGroupCombinationsRequest) (*UpdateCostGroupCombinationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupCombinations not implemented")
+}
+func (UnimplementedCoverServer) AssignCostGroupMember(context.Context, *AssignCostGroupMemberRequest) (*AssignCostGroupMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AssignCostGroupMember not implemented")
+}
+func (UnimplementedCoverServer) RemoveCostGroupMember(context.Context, *RemoveCostGroupMemberRequest) (*RemoveCostGroupMemberResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveCostGroupMember not implemented")
+}
+func (UnimplementedCoverServer) DeleteCostGroup(context.Context, *DeleteCostGroupRequest) (*DeleteCostGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCostGroup not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -488,6 +776,24 @@ func _Cover_UpdateUserColorTheme_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_UpdateUserName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserName",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserName(ctx, req.(*UpdateUserNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_UpdateUserEmail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserEmailRequest)
 	if err := dec(in); err != nil {
@@ -502,6 +808,24 @@ func _Cover_UpdateUserEmail_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateUserEmail(ctx, req.(*UpdateUserEmailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUserMainView_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserMainViewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserMainView(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserMainView",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserMainView(ctx, req.(*UpdateUserMainViewRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -632,6 +956,78 @@ func _Cover_GetCurrentView_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetFavoriteViews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFavoriteViewsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetFavoriteViews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetFavoriteViews",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetFavoriteViews(ctx, req.(*GetFavoriteViewsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_PublishView_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PublishViewRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).PublishView(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/PublishView",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).PublishView(ctx, req.(*PublishViewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_AddFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddFavoriteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).AddFavorite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/AddFavorite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).AddFavorite(ctx, req.(*AddFavoriteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_RemoveFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveFavoriteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).RemoveFavorite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/RemoveFavorite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).RemoveFavorite(ctx, req.(*RemoveFavoriteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_UpdateView_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateViewRequest)
 	if err := dec(in); err != nil {
@@ -664,6 +1060,222 @@ func _Cover_DeleteView_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).DeleteView(ctx, req.(*DeleteViewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCostGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateCostGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/CreateCostGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateCostGroup(ctx, req.(*CreateCostGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetCostGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCostGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetCostGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetCostGroups",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetCostGroups(ctx, req.(*GetCostGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetCostGroupDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCostGroupDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetCostGroupDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetCostGroupDetails",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetCostGroupDetails(ctx, req.(*GetCostGroupDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateCostGroupName_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostGroupNameRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostGroupName(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateCostGroupName",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostGroupName(ctx, req.(*UpdateCostGroupNameRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateCostGroupDescription_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostGroupDescriptionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostGroupDescription(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateCostGroupDescription",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostGroupDescription(ctx, req.(*UpdateCostGroupDescriptionRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateCostGroupImage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostGroupImageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostGroupImage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateCostGroupImage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostGroupImage(ctx, req.(*UpdateCostGroupImageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateCostGroupIcon_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostGroupIconRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostGroupIcon(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateCostGroupIcon",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostGroupIcon(ctx, req.(*UpdateCostGroupIconRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateCostGroupColorTheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostGroupColorThemeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostGroupColorTheme(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateCostGroupColorTheme",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostGroupColorTheme(ctx, req.(*UpdateCostGroupColorThemeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateCostGroupCombinations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostGroupCombinationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostGroupCombinations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateCostGroupCombinations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostGroupCombinations(ctx, req.(*UpdateCostGroupCombinationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_AssignCostGroupMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssignCostGroupMemberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).AssignCostGroupMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/AssignCostGroupMember",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).AssignCostGroupMember(ctx, req.(*AssignCostGroupMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_RemoveCostGroupMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveCostGroupMemberRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).RemoveCostGroupMember(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/RemoveCostGroupMember",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).RemoveCostGroupMember(ctx, req.(*RemoveCostGroupMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCostGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteCostGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/DeleteCostGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteCostGroup(ctx, req.(*DeleteCostGroupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -708,8 +1320,16 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_UpdateUserColorTheme_Handler,
 		},
 		{
+			MethodName: "UpdateUserName",
+			Handler:    _Cover_UpdateUserName_Handler,
+		},
+		{
 			MethodName: "UpdateUserEmail",
 			Handler:    _Cover_UpdateUserEmail_Handler,
+		},
+		{
+			MethodName: "UpdateUserMainView",
+			Handler:    _Cover_UpdateUserMainView_Handler,
 		},
 		{
 			MethodName: "ResetUserPassword",
@@ -740,12 +1360,76 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetCurrentView_Handler,
 		},
 		{
+			MethodName: "GetFavoriteViews",
+			Handler:    _Cover_GetFavoriteViews_Handler,
+		},
+		{
+			MethodName: "PublishView",
+			Handler:    _Cover_PublishView_Handler,
+		},
+		{
+			MethodName: "AddFavorite",
+			Handler:    _Cover_AddFavorite_Handler,
+		},
+		{
+			MethodName: "RemoveFavorite",
+			Handler:    _Cover_RemoveFavorite_Handler,
+		},
+		{
 			MethodName: "UpdateView",
 			Handler:    _Cover_UpdateView_Handler,
 		},
 		{
 			MethodName: "DeleteView",
 			Handler:    _Cover_DeleteView_Handler,
+		},
+		{
+			MethodName: "CreateCostGroup",
+			Handler:    _Cover_CreateCostGroup_Handler,
+		},
+		{
+			MethodName: "GetCostGroups",
+			Handler:    _Cover_GetCostGroups_Handler,
+		},
+		{
+			MethodName: "GetCostGroupDetails",
+			Handler:    _Cover_GetCostGroupDetails_Handler,
+		},
+		{
+			MethodName: "UpdateCostGroupName",
+			Handler:    _Cover_UpdateCostGroupName_Handler,
+		},
+		{
+			MethodName: "UpdateCostGroupDescription",
+			Handler:    _Cover_UpdateCostGroupDescription_Handler,
+		},
+		{
+			MethodName: "UpdateCostGroupImage",
+			Handler:    _Cover_UpdateCostGroupImage_Handler,
+		},
+		{
+			MethodName: "UpdateCostGroupIcon",
+			Handler:    _Cover_UpdateCostGroupIcon_Handler,
+		},
+		{
+			MethodName: "UpdateCostGroupColorTheme",
+			Handler:    _Cover_UpdateCostGroupColorTheme_Handler,
+		},
+		{
+			MethodName: "UpdateCostGroupCombinations",
+			Handler:    _Cover_UpdateCostGroupCombinations_Handler,
+		},
+		{
+			MethodName: "AssignCostGroupMember",
+			Handler:    _Cover_AssignCostGroupMember_Handler,
+		},
+		{
+			MethodName: "RemoveCostGroupMember",
+			Handler:    _Cover_RemoveCostGroupMember_Handler,
+		},
+		{
+			MethodName: "DeleteCostGroup",
+			Handler:    _Cover_DeleteCostGroup_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
