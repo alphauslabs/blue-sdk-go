@@ -46,6 +46,14 @@ type CoverClient interface {
 	UpdateUserMainView(ctx context.Context, in *UpdateUserMainViewRequest, opts ...grpc.CallOption) (*UpdateUserMainViewResponse, error)
 	// Reset user's password
 	ResetUserPassword(ctx context.Context, in *ResetUserPasswordRequest, opts ...grpc.CallOption) (*ResetUserPasswordResponse, error)
+	// Modify user's locale
+	UpdateUserLocale(ctx context.Context, in *UpdateUserLocaleRequest, opts ...grpc.CallOption) (*UpdateUserLocaleResponse, error)
+	// Modify user's app theme
+	UpdateUserAppTheme(ctx context.Context, in *UpdateUserAppThemeRequest, opts ...grpc.CallOption) (*UpdateUserAppThemeResponse, error)
+	// Modify user's timezone
+	UpdateUserTimezone(ctx context.Context, in *UpdateUserTimezoneRequest, opts ...grpc.CallOption) (*UpdateUserTimezoneResponse, error)
+	// Modify attributes
+	UpdateUserAttributes(ctx context.Context, in *UpdateUserAttributesRequest, opts ...grpc.CallOption) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
 	DeleteMember(ctx context.Context, in *DeleteMemberRequest, opts ...grpc.CallOption) (*DeleteMemberResponse, error)
 	// Trigger reset password from Admin
@@ -206,6 +214,42 @@ func (c *coverClient) UpdateUserMainView(ctx context.Context, in *UpdateUserMain
 func (c *coverClient) ResetUserPassword(ctx context.Context, in *ResetUserPasswordRequest, opts ...grpc.CallOption) (*ResetUserPasswordResponse, error) {
 	out := new(ResetUserPasswordResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ResetUserPassword", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUserLocale(ctx context.Context, in *UpdateUserLocaleRequest, opts ...grpc.CallOption) (*UpdateUserLocaleResponse, error) {
+	out := new(UpdateUserLocaleResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserLocale", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUserAppTheme(ctx context.Context, in *UpdateUserAppThemeRequest, opts ...grpc.CallOption) (*UpdateUserAppThemeResponse, error) {
+	out := new(UpdateUserAppThemeResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserAppTheme", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUserTimezone(ctx context.Context, in *UpdateUserTimezoneRequest, opts ...grpc.CallOption) (*UpdateUserTimezoneResponse, error) {
+	out := new(UpdateUserTimezoneResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserTimezone", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUserAttributes(ctx context.Context, in *UpdateUserAttributesRequest, opts ...grpc.CallOption) (*UpdateUserAttributesResponse, error) {
+	out := new(UpdateUserAttributesResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateUserAttributes", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -456,6 +500,14 @@ type CoverServer interface {
 	UpdateUserMainView(context.Context, *UpdateUserMainViewRequest) (*UpdateUserMainViewResponse, error)
 	// Reset user's password
 	ResetUserPassword(context.Context, *ResetUserPasswordRequest) (*ResetUserPasswordResponse, error)
+	// Modify user's locale
+	UpdateUserLocale(context.Context, *UpdateUserLocaleRequest) (*UpdateUserLocaleResponse, error)
+	// Modify user's app theme
+	UpdateUserAppTheme(context.Context, *UpdateUserAppThemeRequest) (*UpdateUserAppThemeResponse, error)
+	// Modify user's timezone
+	UpdateUserTimezone(context.Context, *UpdateUserTimezoneRequest) (*UpdateUserTimezoneResponse, error)
+	// Modify attributes
+	UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
 	DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error)
 	// Trigger reset password from Admin
@@ -546,6 +598,18 @@ func (UnimplementedCoverServer) UpdateUserMainView(context.Context, *UpdateUserM
 }
 func (UnimplementedCoverServer) ResetUserPassword(context.Context, *ResetUserPasswordRequest) (*ResetUserPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetUserPassword not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserLocale(context.Context, *UpdateUserLocaleRequest) (*UpdateUserLocaleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserLocale not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserAppTheme(context.Context, *UpdateUserAppThemeRequest) (*UpdateUserAppThemeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAppTheme not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserTimezone(context.Context, *UpdateUserTimezoneRequest) (*UpdateUserTimezoneResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserTimezone not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAttributes not implemented")
 }
 func (UnimplementedCoverServer) DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMember not implemented")
@@ -844,6 +908,78 @@ func _Cover_ResetUserPassword_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).ResetUserPassword(ctx, req.(*ResetUserPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUserLocale_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserLocaleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserLocale(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserLocale",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserLocale(ctx, req.(*UpdateUserLocaleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUserAppTheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserAppThemeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserAppTheme(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserAppTheme",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserAppTheme(ctx, req.(*UpdateUserAppThemeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUserTimezone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserTimezoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserTimezone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserTimezone",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserTimezone(ctx, req.(*UpdateUserTimezoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUserAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserAttributesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserAttributes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateUserAttributes",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserAttributes(ctx, req.(*UpdateUserAttributesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1334,6 +1470,22 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetUserPassword",
 			Handler:    _Cover_ResetUserPassword_Handler,
+		},
+		{
+			MethodName: "UpdateUserLocale",
+			Handler:    _Cover_UpdateUserLocale_Handler,
+		},
+		{
+			MethodName: "UpdateUserAppTheme",
+			Handler:    _Cover_UpdateUserAppTheme_Handler,
+		},
+		{
+			MethodName: "UpdateUserTimezone",
+			Handler:    _Cover_UpdateUserTimezone_Handler,
+		},
+		{
+			MethodName: "UpdateUserAttributes",
+			Handler:    _Cover_UpdateUserAttributes_Handler,
 		},
 		{
 			MethodName: "DeleteMember",
