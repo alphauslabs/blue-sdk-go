@@ -34,7 +34,7 @@ type UserData struct {
 	Initial    string          `protobuf:"bytes,7,opt,name=initial,proto3" json:"initial,omitempty"`
 	Activated  bool            `protobuf:"varint,8,opt,name=activated,proto3" json:"activated,omitempty"`
 	IsAdmin    bool            `protobuf:"varint,9,opt,name=isAdmin,proto3" json:"isAdmin,omitempty"`
-	Attributes string          `protobuf:"bytes,10,opt,name=attributes,proto3" json:"attributes,omitempty"`
+	Attributes []string        `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty"`
 	Locale     string          `protobuf:"bytes,11,opt,name=locale,proto3" json:"locale,omitempty"`
 	Timezone   string          `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
 	Registered string          `protobuf:"bytes,13,opt,name=registered,proto3" json:"registered,omitempty"`
@@ -140,11 +140,11 @@ func (x *UserData) GetIsAdmin() bool {
 	return false
 }
 
-func (x *UserData) GetAttributes() string {
+func (x *UserData) GetAttributes() []string {
 	if x != nil {
 		return x.Attributes
 	}
-	return ""
+	return nil
 }
 
 func (x *UserData) GetLocale() string {
@@ -208,23 +208,23 @@ type MemberUserData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name       string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Email      string `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Avatar     string `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Icon       string `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
-	ColorTheme string `protobuf:"bytes,6,opt,name=colorTheme,proto3" json:"colorTheme,omitempty"`
-	Initial    string `protobuf:"bytes,7,opt,name=initial,proto3" json:"initial,omitempty"`
-	Activated  bool   `protobuf:"varint,8,opt,name=activated,proto3" json:"activated,omitempty"`
-	IsAdmin    bool   `protobuf:"varint,9,opt,name=isAdmin,proto3" json:"isAdmin,omitempty"`
-	Attributes string `protobuf:"bytes,10,opt,name=attributes,proto3" json:"attributes,omitempty"`
-	Locale     string `protobuf:"bytes,11,opt,name=locale,proto3" json:"locale,omitempty"`
-	Timezone   string `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	Registered string `protobuf:"bytes,13,opt,name=registered,proto3" json:"registered,omitempty"`
-	SsoEnabled bool   `protobuf:"varint,14,opt,name=ssoEnabled,proto3" json:"ssoEnabled,omitempty"`
-	MfaEnabled bool   `protobuf:"varint,15,opt,name=mfaEnabled,proto3" json:"mfaEnabled,omitempty"`
-	AppTheme   string `protobuf:"bytes,16,opt,name=appTheme,proto3" json:"appTheme,omitempty"`
-	MainView   string `protobuf:"bytes,17,opt,name=mainView,proto3" json:"mainView,omitempty"`
+	Id         string   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Email      string   `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Avatar     string   `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Icon       string   `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
+	ColorTheme string   `protobuf:"bytes,6,opt,name=colorTheme,proto3" json:"colorTheme,omitempty"`
+	Initial    string   `protobuf:"bytes,7,opt,name=initial,proto3" json:"initial,omitempty"`
+	Activated  bool     `protobuf:"varint,8,opt,name=activated,proto3" json:"activated,omitempty"`
+	IsAdmin    bool     `protobuf:"varint,9,opt,name=isAdmin,proto3" json:"isAdmin,omitempty"`
+	Attributes []string `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	Locale     string   `protobuf:"bytes,11,opt,name=locale,proto3" json:"locale,omitempty"`
+	Timezone   string   `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Registered string   `protobuf:"bytes,13,opt,name=registered,proto3" json:"registered,omitempty"`
+	SsoEnabled bool     `protobuf:"varint,14,opt,name=ssoEnabled,proto3" json:"ssoEnabled,omitempty"`
+	MfaEnabled bool     `protobuf:"varint,15,opt,name=mfaEnabled,proto3" json:"mfaEnabled,omitempty"`
+	AppTheme   string   `protobuf:"bytes,16,opt,name=appTheme,proto3" json:"appTheme,omitempty"`
+	MainView   string   `protobuf:"bytes,17,opt,name=mainView,proto3" json:"mainView,omitempty"`
 }
 
 func (x *MemberUserData) Reset() {
@@ -322,11 +322,11 @@ func (x *MemberUserData) GetIsAdmin() bool {
 	return false
 }
 
-func (x *MemberUserData) GetAttributes() string {
+func (x *MemberUserData) GetAttributes() []string {
 	if x != nil {
 		return x.Attributes
 	}
-	return ""
+	return nil
 }
 
 func (x *MemberUserData) GetLocale() string {
@@ -398,7 +398,7 @@ var file_api_cover_user_proto_rawDesc = []byte{
 	0x74, 0x65, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x08, 0x52, 0x09, 0x61, 0x63, 0x74, 0x69, 0x76,
 	0x61, 0x74, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x18,
 	0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x1e,
-	0x0a, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x18, 0x0a, 0x20, 0x01,
+	0x0a, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x18, 0x0a, 0x20, 0x03,
 	0x28, 0x09, 0x52, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x12, 0x16,
 	0x0a, 0x06, 0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
 	0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x74, 0x69, 0x6d, 0x65, 0x7a, 0x6f,
@@ -432,7 +432,7 @@ var file_api_cover_user_proto_rawDesc = []byte{
 	0x08, 0x52, 0x09, 0x61, 0x63, 0x74, 0x69, 0x76, 0x61, 0x74, 0x65, 0x64, 0x12, 0x18, 0x0a, 0x07,
 	0x69, 0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x18, 0x09, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x69,
 	0x73, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x12, 0x1e, 0x0a, 0x0a, 0x61, 0x74, 0x74, 0x72, 0x69, 0x62,
-	0x75, 0x74, 0x65, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x74, 0x74, 0x72,
+	0x75, 0x74, 0x65, 0x73, 0x18, 0x0a, 0x20, 0x03, 0x28, 0x09, 0x52, 0x0a, 0x61, 0x74, 0x74, 0x72,
 	0x69, 0x62, 0x75, 0x74, 0x65, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x65,
 	0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x6c, 0x6f, 0x63, 0x61, 0x6c, 0x65, 0x12, 0x1a,
 	0x0a, 0x08, 0x74, 0x69, 0x6d, 0x65, 0x7a, 0x6f, 0x6e, 0x65, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09,
