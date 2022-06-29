@@ -30,6 +30,8 @@ type CoverClient interface {
 	GetMembers(ctx context.Context, in *GetMembersRequest, opts ...grpc.CallOption) (*GetMembersResponse, error)
 	// Get the details of the user
 	GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error)
+	// Get the cost group to which the member is attached
+	GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error)
 	// Get the details of the logged-in user
 	GetUserDetails(ctx context.Context, in *GetUserDetailsRequest, opts ...grpc.CallOption) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
@@ -56,8 +58,6 @@ type CoverClient interface {
 	UpdateUserAttributes(ctx context.Context, in *UpdateUserAttributesRequest, opts ...grpc.CallOption) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
 	DeleteMember(ctx context.Context, in *DeleteMemberRequest, opts ...grpc.CallOption) (*DeleteMemberResponse, error)
-	// Trigger reset password from Admin
-	AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error)
 	// Reset member's password
 	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
 	// Create a view
@@ -142,6 +142,15 @@ func (c *coverClient) GetMembers(ctx context.Context, in *GetMembersRequest, opt
 func (c *coverClient) GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error) {
 	out := new(GetMemberDetailsResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetMemberDetails", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error) {
+	out := new(GetMemberCostGroupResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetMemberCostGroup", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -259,15 +268,6 @@ func (c *coverClient) UpdateUserAttributes(ctx context.Context, in *UpdateUserAt
 func (c *coverClient) DeleteMember(ctx context.Context, in *DeleteMemberRequest, opts ...grpc.CallOption) (*DeleteMemberResponse, error) {
 	out := new(DeleteMemberResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/DeleteMember", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) AdminResetPassword(ctx context.Context, in *AdminResetPasswordRequest, opts ...grpc.CallOption) (*AdminResetPasswordResponse, error) {
-	out := new(AdminResetPasswordResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/AdminResetPassword", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -484,6 +484,8 @@ type CoverServer interface {
 	GetMembers(context.Context, *GetMembersRequest) (*GetMembersResponse, error)
 	// Get the details of the user
 	GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error)
+	// Get the cost group to which the member is attached
+	GetMemberCostGroup(context.Context, *GetMemberCostGroupRequest) (*GetMemberCostGroupResponse, error)
 	// Get the details of the logged-in user
 	GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
@@ -510,8 +512,6 @@ type CoverServer interface {
 	UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
 	DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error)
-	// Trigger reset password from Admin
-	AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error)
 	// Reset member's password
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
 	// Create a view
@@ -575,6 +575,9 @@ func (UnimplementedCoverServer) GetMembers(context.Context, *GetMembersRequest) 
 func (UnimplementedCoverServer) GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMemberDetails not implemented")
 }
+func (UnimplementedCoverServer) GetMemberCostGroup(context.Context, *GetMemberCostGroupRequest) (*GetMemberCostGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMemberCostGroup not implemented")
+}
 func (UnimplementedCoverServer) GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserDetails not implemented")
 }
@@ -613,9 +616,6 @@ func (UnimplementedCoverServer) UpdateUserAttributes(context.Context, *UpdateUse
 }
 func (UnimplementedCoverServer) DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMember not implemented")
-}
-func (UnimplementedCoverServer) AdminResetPassword(context.Context, *AdminResetPasswordRequest) (*AdminResetPasswordResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AdminResetPassword not implemented")
 }
 func (UnimplementedCoverServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
@@ -764,6 +764,24 @@ func _Cover_GetMemberDetails_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).GetMemberDetails(ctx, req.(*GetMemberDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetMemberCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMemberCostGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetMemberCostGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetMemberCostGroup",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetMemberCostGroup(ctx, req.(*GetMemberCostGroupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -998,24 +1016,6 @@ func _Cover_DeleteMember_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).DeleteMember(ctx, req.(*DeleteMemberRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_AdminResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AdminResetPasswordRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).AdminResetPassword(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/AdminResetPassword",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).AdminResetPassword(ctx, req.(*AdminResetPasswordRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1440,6 +1440,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetMemberDetails_Handler,
 		},
 		{
+			MethodName: "GetMemberCostGroup",
+			Handler:    _Cover_GetMemberCostGroup_Handler,
+		},
+		{
 			MethodName: "GetUserDetails",
 			Handler:    _Cover_GetUserDetails_Handler,
 		},
@@ -1490,10 +1494,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteMember",
 			Handler:    _Cover_DeleteMember_Handler,
-		},
-		{
-			MethodName: "AdminResetPassword",
-			Handler:    _Cover_AdminResetPassword_Handler,
 		},
 		{
 			MethodName: "ResetPassword",
