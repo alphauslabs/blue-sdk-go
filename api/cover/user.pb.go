@@ -25,25 +25,25 @@ type UserData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         string           `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name       string           `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Email      string           `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Avatar     string           `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Icon       string           `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
-	ColorTheme string           `protobuf:"bytes,6,opt,name=colorTheme,proto3" json:"colorTheme,omitempty"`
-	Initial    string           `protobuf:"bytes,7,opt,name=initial,proto3" json:"initial,omitempty"`
-	Activated  bool             `protobuf:"varint,8,opt,name=activated,proto3" json:"activated,omitempty"`
-	IsAdmin    bool             `protobuf:"varint,9,opt,name=isAdmin,proto3" json:"isAdmin,omitempty"`
-	Attributes []string         `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty"`
-	Locale     string           `protobuf:"bytes,11,opt,name=locale,proto3" json:"locale,omitempty"`
-	Timezone   string           `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	Registered string           `protobuf:"bytes,13,opt,name=registered,proto3" json:"registered,omitempty"`
-	SsoEnabled bool             `protobuf:"varint,14,opt,name=ssoEnabled,proto3" json:"ssoEnabled,omitempty"`
-	MfaEnabled bool             `protobuf:"varint,15,opt,name=mfaEnabled,proto3" json:"mfaEnabled,omitempty"`
-	AppTheme   string           `protobuf:"bytes,16,opt,name=appTheme,proto3" json:"appTheme,omitempty"`
-	MainView   string           `protobuf:"bytes,17,opt,name=mainView,proto3" json:"mainView,omitempty"`
-	CostGroups *MemberCostGroup `protobuf:"bytes,18,opt,name=costGroups,proto3" json:"costGroups,omitempty"`
-	CreatedBy  *MemberUserData  `protobuf:"bytes,19,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
+	Id         string             `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string             `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Email      string             `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Avatar     string             `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Icon       string             `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
+	ColorTheme string             `protobuf:"bytes,6,opt,name=colorTheme,proto3" json:"colorTheme,omitempty"`
+	Initial    string             `protobuf:"bytes,7,opt,name=initial,proto3" json:"initial,omitempty"`
+	Activated  bool               `protobuf:"varint,8,opt,name=activated,proto3" json:"activated,omitempty"`
+	IsAdmin    bool               `protobuf:"varint,9,opt,name=isAdmin,proto3" json:"isAdmin,omitempty"`
+	Attributes []string           `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	Locale     string             `protobuf:"bytes,11,opt,name=locale,proto3" json:"locale,omitempty"`
+	Timezone   string             `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Registered string             `protobuf:"bytes,13,opt,name=registered,proto3" json:"registered,omitempty"`
+	SsoEnabled bool               `protobuf:"varint,14,opt,name=ssoEnabled,proto3" json:"ssoEnabled,omitempty"`
+	MfaEnabled bool               `protobuf:"varint,15,opt,name=mfaEnabled,proto3" json:"mfaEnabled,omitempty"`
+	AppTheme   string             `protobuf:"bytes,16,opt,name=appTheme,proto3" json:"appTheme,omitempty"`
+	MainView   string             `protobuf:"bytes,17,opt,name=mainView,proto3" json:"mainView,omitempty"`
+	CostGroups []*MemberCostGroup `protobuf:"bytes,18,rep,name=costGroups,proto3" json:"costGroups,omitempty"`
+	CreatedBy  *MemberUserData    `protobuf:"bytes,19,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
 }
 
 func (x *UserData) Reset() {
@@ -197,7 +197,7 @@ func (x *UserData) GetMainView() string {
 	return ""
 }
 
-func (x *UserData) GetCostGroups() *MemberCostGroup {
+func (x *UserData) GetCostGroups() []*MemberCostGroup {
 	if x != nil {
 		return x.CostGroups
 	}
@@ -216,24 +216,24 @@ type MemberUserData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id         string           `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name       string           `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Email      string           `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
-	Avatar     string           `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Icon       string           `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
-	ColorTheme string           `protobuf:"bytes,6,opt,name=colorTheme,proto3" json:"colorTheme,omitempty"`
-	Initial    string           `protobuf:"bytes,7,opt,name=initial,proto3" json:"initial,omitempty"`
-	Activated  bool             `protobuf:"varint,8,opt,name=activated,proto3" json:"activated,omitempty"`
-	IsAdmin    bool             `protobuf:"varint,9,opt,name=isAdmin,proto3" json:"isAdmin,omitempty"`
-	Attributes []string         `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty"`
-	Locale     string           `protobuf:"bytes,11,opt,name=locale,proto3" json:"locale,omitempty"`
-	Timezone   string           `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
-	Registered string           `protobuf:"bytes,13,opt,name=registered,proto3" json:"registered,omitempty"`
-	SsoEnabled bool             `protobuf:"varint,14,opt,name=ssoEnabled,proto3" json:"ssoEnabled,omitempty"`
-	MfaEnabled bool             `protobuf:"varint,15,opt,name=mfaEnabled,proto3" json:"mfaEnabled,omitempty"`
-	AppTheme   string           `protobuf:"bytes,16,opt,name=appTheme,proto3" json:"appTheme,omitempty"`
-	MainView   string           `protobuf:"bytes,17,opt,name=mainView,proto3" json:"mainView,omitempty"`
-	CostGroups *MemberCostGroup `protobuf:"bytes,18,opt,name=costGroups,proto3" json:"costGroups,omitempty"`
+	Id         string             `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name       string             `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Email      string             `protobuf:"bytes,3,opt,name=email,proto3" json:"email,omitempty"`
+	Avatar     string             `protobuf:"bytes,4,opt,name=avatar,proto3" json:"avatar,omitempty"`
+	Icon       string             `protobuf:"bytes,5,opt,name=icon,proto3" json:"icon,omitempty"`
+	ColorTheme string             `protobuf:"bytes,6,opt,name=colorTheme,proto3" json:"colorTheme,omitempty"`
+	Initial    string             `protobuf:"bytes,7,opt,name=initial,proto3" json:"initial,omitempty"`
+	Activated  bool               `protobuf:"varint,8,opt,name=activated,proto3" json:"activated,omitempty"`
+	IsAdmin    bool               `protobuf:"varint,9,opt,name=isAdmin,proto3" json:"isAdmin,omitempty"`
+	Attributes []string           `protobuf:"bytes,10,rep,name=attributes,proto3" json:"attributes,omitempty"`
+	Locale     string             `protobuf:"bytes,11,opt,name=locale,proto3" json:"locale,omitempty"`
+	Timezone   string             `protobuf:"bytes,12,opt,name=timezone,proto3" json:"timezone,omitempty"`
+	Registered string             `protobuf:"bytes,13,opt,name=registered,proto3" json:"registered,omitempty"`
+	SsoEnabled bool               `protobuf:"varint,14,opt,name=ssoEnabled,proto3" json:"ssoEnabled,omitempty"`
+	MfaEnabled bool               `protobuf:"varint,15,opt,name=mfaEnabled,proto3" json:"mfaEnabled,omitempty"`
+	AppTheme   string             `protobuf:"bytes,16,opt,name=appTheme,proto3" json:"appTheme,omitempty"`
+	MainView   string             `protobuf:"bytes,17,opt,name=mainView,proto3" json:"mainView,omitempty"`
+	CostGroups []*MemberCostGroup `protobuf:"bytes,18,rep,name=costGroups,proto3" json:"costGroups,omitempty"`
 }
 
 func (x *MemberUserData) Reset() {
@@ -387,7 +387,7 @@ func (x *MemberUserData) GetMainView() string {
 	return ""
 }
 
-func (x *MemberUserData) GetCostGroups() *MemberCostGroup {
+func (x *MemberUserData) GetCostGroups() []*MemberCostGroup {
 	if x != nil {
 		return x.CostGroups
 	}
@@ -532,7 +532,7 @@ var file_api_cover_user_proto_rawDesc = []byte{
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x61, 0x70, 0x70, 0x54, 0x68, 0x65, 0x6d, 0x65, 0x12, 0x1a,
 	0x0a, 0x08, 0x6d, 0x61, 0x69, 0x6e, 0x56, 0x69, 0x65, 0x77, 0x18, 0x11, 0x20, 0x01, 0x28, 0x09,
 	0x52, 0x08, 0x6d, 0x61, 0x69, 0x6e, 0x56, 0x69, 0x65, 0x77, 0x12, 0x42, 0x0a, 0x0a, 0x63, 0x6f,
-	0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x18, 0x12, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22,
+	0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x18, 0x12, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22,
 	0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76,
 	0x65, 0x72, 0x2e, 0x4d, 0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f,
 	0x75, 0x70, 0x52, 0x0a, 0x63, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x12, 0x3f,
@@ -570,7 +570,7 @@ var file_api_cover_user_proto_rawDesc = []byte{
 	0x52, 0x08, 0x61, 0x70, 0x70, 0x54, 0x68, 0x65, 0x6d, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x6d, 0x61,
 	0x69, 0x6e, 0x56, 0x69, 0x65, 0x77, 0x18, 0x11, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x6d, 0x61,
 	0x69, 0x6e, 0x56, 0x69, 0x65, 0x77, 0x12, 0x42, 0x0a, 0x0a, 0x63, 0x6f, 0x73, 0x74, 0x47, 0x72,
-	0x6f, 0x75, 0x70, 0x73, 0x18, 0x12, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x62, 0x6c, 0x75,
+	0x6f, 0x75, 0x70, 0x73, 0x18, 0x12, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x22, 0x2e, 0x62, 0x6c, 0x75,
 	0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x4d,
 	0x65, 0x6d, 0x62, 0x65, 0x72, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x0a,
 	0x63, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x22, 0xdd, 0x01, 0x0a, 0x0f, 0x4d,
