@@ -78,6 +78,12 @@ type CoverClient interface {
 	UpdateView(ctx context.Context, in *UpdateViewRequest, opts ...grpc.CallOption) (*UpdateViewResponse, error)
 	// Deletes a view
 	DeleteView(ctx context.Context, in *DeleteViewRequest, opts ...grpc.CallOption) (*DeleteViewResponse, error)
+	// Updates the side menu state
+	UpdateSideMenuState(ctx context.Context, in *UpdateSideMenuStateRequest, opts ...grpc.CallOption) (*UpdateSideMenuStateResponse, error)
+	// Add as side menu favorite
+	AddSideMenuFavorite(ctx context.Context, in *AddSideMenuFavoriteRequest, opts ...grpc.CallOption) (*AddSideMenuFavoriteResponse, error)
+	// Remove from side menu favorite
+	RemoveSideMenuFavorite(ctx context.Context, in *RemoveSideMenuFavoriteRequest, opts ...grpc.CallOption) (*RemoveSideMenuFavoriteResponse, error)
 	// Create a cost group
 	CreateCostGroup(ctx context.Context, in *CreateCostGroupRequest, opts ...grpc.CallOption) (*CreateCostGroupResponse, error)
 	// Get all the cost groups
@@ -364,6 +370,33 @@ func (c *coverClient) DeleteView(ctx context.Context, in *DeleteViewRequest, opt
 	return out, nil
 }
 
+func (c *coverClient) UpdateSideMenuState(ctx context.Context, in *UpdateSideMenuStateRequest, opts ...grpc.CallOption) (*UpdateSideMenuStateResponse, error) {
+	out := new(UpdateSideMenuStateResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateSideMenuState", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) AddSideMenuFavorite(ctx context.Context, in *AddSideMenuFavoriteRequest, opts ...grpc.CallOption) (*AddSideMenuFavoriteResponse, error) {
+	out := new(AddSideMenuFavoriteResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/AddSideMenuFavorite", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) RemoveSideMenuFavorite(ctx context.Context, in *RemoveSideMenuFavoriteRequest, opts ...grpc.CallOption) (*RemoveSideMenuFavoriteResponse, error) {
+	out := new(RemoveSideMenuFavoriteResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/RemoveSideMenuFavorite", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) CreateCostGroup(ctx context.Context, in *CreateCostGroupRequest, opts ...grpc.CallOption) (*CreateCostGroupResponse, error) {
 	out := new(CreateCostGroupResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/CreateCostGroup", in, out, opts...)
@@ -532,6 +565,12 @@ type CoverServer interface {
 	UpdateView(context.Context, *UpdateViewRequest) (*UpdateViewResponse, error)
 	// Deletes a view
 	DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error)
+	// Updates the side menu state
+	UpdateSideMenuState(context.Context, *UpdateSideMenuStateRequest) (*UpdateSideMenuStateResponse, error)
+	// Add as side menu favorite
+	AddSideMenuFavorite(context.Context, *AddSideMenuFavoriteRequest) (*AddSideMenuFavoriteResponse, error)
+	// Remove from side menu favorite
+	RemoveSideMenuFavorite(context.Context, *RemoveSideMenuFavoriteRequest) (*RemoveSideMenuFavoriteResponse, error)
 	// Create a cost group
 	CreateCostGroup(context.Context, *CreateCostGroupRequest) (*CreateCostGroupResponse, error)
 	// Get all the cost groups
@@ -646,6 +685,15 @@ func (UnimplementedCoverServer) UpdateView(context.Context, *UpdateViewRequest) 
 }
 func (UnimplementedCoverServer) DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteView not implemented")
+}
+func (UnimplementedCoverServer) UpdateSideMenuState(context.Context, *UpdateSideMenuStateRequest) (*UpdateSideMenuStateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSideMenuState not implemented")
+}
+func (UnimplementedCoverServer) AddSideMenuFavorite(context.Context, *AddSideMenuFavoriteRequest) (*AddSideMenuFavoriteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddSideMenuFavorite not implemented")
+}
+func (UnimplementedCoverServer) RemoveSideMenuFavorite(context.Context, *RemoveSideMenuFavoriteRequest) (*RemoveSideMenuFavoriteResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RemoveSideMenuFavorite not implemented")
 }
 func (UnimplementedCoverServer) CreateCostGroup(context.Context, *CreateCostGroupRequest) (*CreateCostGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCostGroup not implemented")
@@ -1200,6 +1248,60 @@ func _Cover_DeleteView_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_UpdateSideMenuState_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSideMenuStateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateSideMenuState(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateSideMenuState",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateSideMenuState(ctx, req.(*UpdateSideMenuStateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_AddSideMenuFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddSideMenuFavoriteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).AddSideMenuFavorite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/AddSideMenuFavorite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).AddSideMenuFavorite(ctx, req.(*AddSideMenuFavoriteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_RemoveSideMenuFavorite_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RemoveSideMenuFavoriteRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).RemoveSideMenuFavorite(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/RemoveSideMenuFavorite",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).RemoveSideMenuFavorite(ctx, req.(*RemoveSideMenuFavoriteRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_CreateCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCostGroupRequest)
 	if err := dec(in); err != nil {
@@ -1534,6 +1636,18 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteView",
 			Handler:    _Cover_DeleteView_Handler,
+		},
+		{
+			MethodName: "UpdateSideMenuState",
+			Handler:    _Cover_UpdateSideMenuState_Handler,
+		},
+		{
+			MethodName: "AddSideMenuFavorite",
+			Handler:    _Cover_AddSideMenuFavorite_Handler,
+		},
+		{
+			MethodName: "RemoveSideMenuFavorite",
+			Handler:    _Cover_RemoveSideMenuFavorite_Handler,
 		},
 		{
 			MethodName: "CreateCostGroup",
