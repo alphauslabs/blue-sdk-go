@@ -24,7 +24,7 @@ const _ = grpc.SupportPackageIsVersion7
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type InvoiceClient interface {
 	// Gets a invoice.
-	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (Invoice_GetInvoiceClient, error)
+	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
 	// Exports a invoice.
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
 }
@@ -37,36 +37,13 @@ func NewInvoiceClient(cc grpc.ClientConnInterface) InvoiceClient {
 	return &invoiceClient{cc}
 }
 
-func (c *invoiceClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (Invoice_GetInvoiceClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Invoice_ServiceDesc.Streams[0], "/blueapi.invoice.v1.Invoice/GetInvoice", opts...)
+func (c *invoiceClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error) {
+	out := new(api.Invoice)
+	err := c.cc.Invoke(ctx, "/blueapi.invoice.v1.Invoice/GetInvoice", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &invoiceGetInvoiceClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Invoice_GetInvoiceClient interface {
-	Recv() (*api.Invoice, error)
-	grpc.ClientStream
-}
-
-type invoiceGetInvoiceClient struct {
-	grpc.ClientStream
-}
-
-func (x *invoiceGetInvoiceClient) Recv() (*api.Invoice, error) {
-	m := new(api.Invoice)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 func (c *invoiceClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error) {
@@ -83,7 +60,7 @@ func (c *invoiceClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoice
 // for forward compatibility
 type InvoiceServer interface {
 	// Gets a invoice.
-	GetInvoice(*GetInvoiceRequest, Invoice_GetInvoiceServer) error
+	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
 	// Exports a invoice.
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
 	mustEmbedUnimplementedInvoiceServer()
@@ -93,8 +70,8 @@ type InvoiceServer interface {
 type UnimplementedInvoiceServer struct {
 }
 
-func (UnimplementedInvoiceServer) GetInvoice(*GetInvoiceRequest, Invoice_GetInvoiceServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
+func (UnimplementedInvoiceServer) GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
 }
 func (UnimplementedInvoiceServer) ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoiceFile not implemented")
@@ -112,25 +89,22 @@ func RegisterInvoiceServer(s grpc.ServiceRegistrar, srv InvoiceServer) {
 	s.RegisterService(&Invoice_ServiceDesc, srv)
 }
 
-func _Invoice_GetInvoice_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetInvoiceRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _Invoice_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(InvoiceServer).GetInvoice(m, &invoiceGetInvoiceServer{stream})
-}
-
-type Invoice_GetInvoiceServer interface {
-	Send(*api.Invoice) error
-	grpc.ServerStream
-}
-
-type invoiceGetInvoiceServer struct {
-	grpc.ServerStream
-}
-
-func (x *invoiceGetInvoiceServer) Send(m *api.Invoice) error {
-	return x.ServerStream.SendMsg(m)
+	if interceptor == nil {
+		return srv.(InvoiceServer).GetInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.invoice.v1.Invoice/GetInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(InvoiceServer).GetInvoice(ctx, req.(*GetInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Invoice_ExportInvoiceFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -159,16 +133,14 @@ var Invoice_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*InvoiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "GetInvoice",
+			Handler:    _Invoice_GetInvoice_Handler,
+		},
+		{
 			MethodName: "ExportInvoiceFile",
 			Handler:    _Invoice_ExportInvoiceFile_Handler,
 		},
 	},
-	Streams: []grpc.StreamDesc{
-		{
-			StreamName:    "GetInvoice",
-			Handler:       _Invoice_GetInvoice_Handler,
-			ServerStreams: true,
-		},
-	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "invoice/v1/invoice.proto",
 }
