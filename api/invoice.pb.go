@@ -162,7 +162,17 @@ type AccountDetails struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id            string           `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Resource Id.
+	//
+	// if account, customer id.
+	//
+	// if tag, tag resource id.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Resource Name.
+	//
+	// if account, customer name.
+	//
+	// if tag, tag resources.
 	Name          string           `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Details       []*UsageDetails  `protobuf:"bytes,3,rep,name=details,proto3" json:"details,omitempty"`
 	CustomDetails []*CustomDetails `protobuf:"bytes,4,rep,name=customDetails,proto3" json:"customDetails,omitempty"`
