@@ -8,6 +8,7 @@ package billing
 
 import (
 	context "context"
+	api "github.com/alphauslabs/blue-sdk-go/api"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -34,6 +35,10 @@ type BillingClient interface {
 	ListAwsDailyRunHistory(ctx context.Context, in *ListAwsDailyRunHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsDailyRunHistoryClient, error)
 	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
+	// Gets a invoice.
+	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
+	// Exports a invoice.
+	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
 }
 
 type billingClient struct {
@@ -167,6 +172,24 @@ func (x *billingListUsageCostsDriftClient) Recv() (*UsageCostsDrift, error) {
 	return m, nil
 }
 
+func (c *billingClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error) {
+	out := new(api.Invoice)
+	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/GetInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error) {
+	out := new(ExportInvoiceFileResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/ExportInvoiceFile", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -183,6 +206,10 @@ type BillingServer interface {
 	ListAwsDailyRunHistory(*ListAwsDailyRunHistoryRequest, Billing_ListAwsDailyRunHistoryServer) error
 	// WORK-IN-PROGRESS: Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
+	// Gets a invoice.
+	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
+	// Exports a invoice.
+	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -207,6 +234,12 @@ func (UnimplementedBillingServer) ListAwsDailyRunHistory(*ListAwsDailyRunHistory
 }
 func (UnimplementedBillingServer) ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListUsageCostsDrift not implemented")
+}
+func (UnimplementedBillingServer) GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
+}
+func (UnimplementedBillingServer) ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoiceFile not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -338,6 +371,42 @@ func (x *billingListUsageCostsDriftServer) Send(m *UsageCostsDrift) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.billing.v1.Billing/GetInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetInvoice(ctx, req.(*GetInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ExportInvoiceFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportInvoiceFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ExportInvoiceFile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.billing.v1.Billing/ExportInvoiceFile",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ExportInvoiceFile(ctx, req.(*ExportInvoiceFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -356,6 +425,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccessGroup",
 			Handler:    _Billing_GetAccessGroup_Handler,
+		},
+		{
+			MethodName: "GetInvoice",
+			Handler:    _Billing_GetInvoice_Handler,
+		},
+		{
+			MethodName: "ExportInvoiceFile",
+			Handler:    _Billing_ExportInvoiceFile_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
