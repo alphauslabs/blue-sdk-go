@@ -91,10 +91,14 @@ type VendorDetail struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Details      []*AccountDetails `protobuf:"bytes,1,rep,name=details,proto3" json:"details,omitempty"`
-	GroupDetails []*GroupDetails   `protobuf:"bytes,2,rep,name=groupDetails,proto3" json:"groupDetails,omitempty"`
-	Total        []*InvoiceTotal   `protobuf:"bytes,3,rep,name=total,proto3" json:"total,omitempty"`
-	Settings     *InvoiceSettings  `protobuf:"bytes,4,opt,name=settings,proto3" json:"settings,omitempty"`
+	// details: Includes account-by-account details
+	Details []*AccountDetails `protobuf:"bytes,1,rep,name=details,proto3" json:"details,omitempty"`
+	// groupDetails: Includes account-by-account details(custom service and additional item data).
+	GroupDetails []*GroupDetails `protobuf:"bytes,2,rep,name=groupDetails,proto3" json:"groupDetails,omitempty"`
+	// total: Includes data on billing totals
+	Total []*InvoiceTotal `protobuf:"bytes,3,rep,name=total,proto3" json:"total,omitempty"`
+	// settings: Includes settings related to billing
+	Settings *InvoiceSettings `protobuf:"bytes,4,opt,name=settings,proto3" json:"settings,omitempty"`
 }
 
 func (x *VendorDetail) Reset() {
@@ -173,11 +177,20 @@ type AccountDetails struct {
 	// if account, customer name.
 	//
 	// if tag, tag resources.
-	Name          string           `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Details       []*UsageDetails  `protobuf:"bytes,3,rep,name=details,proto3" json:"details,omitempty"`
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// details: Vendor service fees included
+	Details []*UsageDetails `protobuf:"bytes,3,rep,name=details,proto3" json:"details,omitempty"`
+	// customDetails: Includes details of custom service and additional item data
 	CustomDetails []*CustomDetails `protobuf:"bytes,4,rep,name=customDetails,proto3" json:"customDetails,omitempty"`
-	FeeDetails    []*FeeDetails    `protobuf:"bytes,5,rep,name=feeDetails,proto3" json:"feeDetails,omitempty"`
-	Total         []*AccountTotal  `protobuf:"bytes,6,rep,name=total,proto3" json:"total,omitempty"`
+	// feeDetails: Includes details of re-caluclated fee data
+	FeeDetails []*FeeDetails `protobuf:"bytes,5,rep,name=feeDetails,proto3" json:"feeDetails,omitempty"`
+	// The keys included in the account total column have the following values
+	//
+	// substitution
+	// supportFee
+	// usageOnlyTotal
+	// usageTotal
+	Total []*AccountTotal `protobuf:"bytes,6,rep,name=total,proto3" json:"total,omitempty"`
 }
 
 func (x *AccountDetails) Reset() {
