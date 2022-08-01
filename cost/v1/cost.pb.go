@@ -5318,13 +5318,13 @@ func (x *ExportCostFiltersFileResponse) GetUrl() string {
 	return ""
 }
 
-// WORK-IN-PROGRESS: GCP-specific options for ReadCostsRequest.
+// GCP-specific options for ReadCostsRequest.
 type ReadCostsRequestGcpOptions struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. A comma-separated list of columns to aggregate the data into. Valid values are `service`, `sku`, `region`, and `zone`. A special value of `none` is also supported, which means query by date or month per account only.
+	// Optional. A comma-separated list of columns to aggregate the data into. Valid values are `service`, `sku`, `region`, `zone`, and `usageUnit`. A special value of `none` is also supported, which means query by date or month per account only.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
 	// Optional. If set to true, return data grouped by month within the date range. If you want data that is grouped per account per month, set this to `true`, then set `groupByColumns` to `none`.
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
@@ -5403,7 +5403,9 @@ func (x *ReadCostsRequestGcpOptions) GetNoCache() bool {
 	return false
 }
 
-// WORK-IN-PROGRESS: A map of "key:value" column filters. Dependent on `groupByColumns` and/or `groupByMonth`. The key indicates the column name while the value is the filter value prefixed by either "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.
+// A map of "key:value" column filters. Dependent on `groupByColumns` and/or `groupByMonth`. The key indicates the column name while the value is the filter value prefixed by either "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.
+//
+// For example, if you like to filter `service` to return only `Compute Engine`, set to `{"service":"eq:Compute Engine"}` or `{"service":"Compute Engine"}`. You can also use a regular expression like `{"service":"re:Compute Engine|Cloud Storage"}`, which means return all Compute Engine or Cloud Storage lineitems. Or reverse regexp, such as `{"service":"!re:^Cloud Engine$"}`, which means return all items except `Cloud Engine`.
 type ReadCostsRequestGcpOptionsFilters struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

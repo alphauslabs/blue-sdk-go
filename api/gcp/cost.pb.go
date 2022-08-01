@@ -20,7 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// WORK-IN-PROGRESS: Cost
+// Cost for Api Response
 //
 // see gcp billing data schema details:[https://cloud.google.com/billing/docs/how-to/export-data-bigquery-tables]
 type Cost struct {
