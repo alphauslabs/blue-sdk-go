@@ -8,9 +8,11 @@ package cover
 
 import (
 	context "context"
+	api "github.com/alphauslabs/blue-sdk-go/api"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -108,6 +110,18 @@ type CoverClient interface {
 	RemoveCostGroupMember(ctx context.Context, in *RemoveCostGroupMemberRequest, opts ...grpc.CallOption) (*RemoveCostGroupMemberResponse, error)
 	// Deletes a cost group
 	DeleteCostGroup(ctx context.Context, in *DeleteCostGroupRequest, opts ...grpc.CallOption) (*DeleteCostGroupResponse, error)
+	// Gets a CloudFormation launch URL for enabling the account access.
+	GetAccountAccessTemplateUrl(ctx context.Context, in *GetAccountAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetAccountAccessTemplateUrlResponse, error)
+	// Lists the account access role(s) attached to accounts under caller.
+	ListAccountAccess(ctx context.Context, in *ListAccountAccessRequest, opts ...grpc.CallOption) (Cover_ListAccountAccessClient, error)
+	// Gets the current account role attached to the input target.
+	GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
+	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
+	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
+	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
+	UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
+	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type coverClient struct {
@@ -505,6 +519,83 @@ func (c *coverClient) DeleteCostGroup(ctx context.Context, in *DeleteCostGroupRe
 	return out, nil
 }
 
+func (c *coverClient) GetAccountAccessTemplateUrl(ctx context.Context, in *GetAccountAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetAccountAccessTemplateUrlResponse, error) {
+	out := new(GetAccountAccessTemplateUrlResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ListAccountAccess(ctx context.Context, in *ListAccountAccessRequest, opts ...grpc.CallOption) (Cover_ListAccountAccessClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[0], "/blueapi.cover.v1.Cover/ListAccountAccess", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListAccountAccessClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListAccountAccessClient interface {
+	Recv() (*AccountAccess, error)
+	grpc.ClientStream
+}
+
+type coverListAccountAccessClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListAccountAccessClient) Recv() (*AccountAccess, error) {
+	m := new(AccountAccess)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *coverClient) GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
+	out := new(AccountAccess)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetAccountAccess", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
+	out := new(AccountAccess)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/CreateAccountAccess", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateAccountAccess", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/DeleteAccountAccess", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -595,6 +686,18 @@ type CoverServer interface {
 	RemoveCostGroupMember(context.Context, *RemoveCostGroupMemberRequest) (*RemoveCostGroupMemberResponse, error)
 	// Deletes a cost group
 	DeleteCostGroup(context.Context, *DeleteCostGroupRequest) (*DeleteCostGroupResponse, error)
+	// Gets a CloudFormation launch URL for enabling the account access.
+	GetAccountAccessTemplateUrl(context.Context, *GetAccountAccessTemplateUrlRequest) (*GetAccountAccessTemplateUrlResponse, error)
+	// Lists the account access role(s) attached to accounts under caller.
+	ListAccountAccess(*ListAccountAccessRequest, Cover_ListAccountAccessServer) error
+	// Gets the current account role attached to the input target.
+	GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error)
+	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
+	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
+	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
+	UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error)
+	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
+	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -730,6 +833,24 @@ func (UnimplementedCoverServer) RemoveCostGroupMember(context.Context, *RemoveCo
 }
 func (UnimplementedCoverServer) DeleteCostGroup(context.Context, *DeleteCostGroupRequest) (*DeleteCostGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCostGroup not implemented")
+}
+func (UnimplementedCoverServer) GetAccountAccessTemplateUrl(context.Context, *GetAccountAccessTemplateUrlRequest) (*GetAccountAccessTemplateUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAccessTemplateUrl not implemented")
+}
+func (UnimplementedCoverServer) ListAccountAccess(*ListAccountAccessRequest, Cover_ListAccountAccessServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountAccess not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -1518,6 +1639,117 @@ func _Cover_DeleteCostGroup_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetAccountAccessTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountAccessTemplateUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAccountAccessTemplateUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAccountAccessTemplateUrl(ctx, req.(*GetAccountAccessTemplateUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ListAccountAccess_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAccountAccessRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListAccountAccess(m, &coverListAccountAccessServer{stream})
+}
+
+type Cover_ListAccountAccessServer interface {
+	Send(*AccountAccess) error
+	grpc.ServerStream
+}
+
+type coverListAccountAccessServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListAccountAccessServer) Send(m *AccountAccess) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_GetAccountAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAccountAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetAccountAccess",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAccountAccess(ctx, req.(*GetAccountAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateAccountAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateAccountAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/CreateAccountAccess",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateAccountAccess(ctx, req.(*CreateAccountAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateAccountAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateAccountAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateAccountAccess",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateAccountAccess(ctx, req.(*UpdateAccountAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteAccountAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteAccountAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/DeleteAccountAccess",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteAccountAccess(ctx, req.(*DeleteAccountAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1697,7 +1929,33 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DeleteCostGroup",
 			Handler:    _Cover_DeleteCostGroup_Handler,
 		},
+		{
+			MethodName: "GetAccountAccessTemplateUrl",
+			Handler:    _Cover_GetAccountAccessTemplateUrl_Handler,
+		},
+		{
+			MethodName: "GetAccountAccess",
+			Handler:    _Cover_GetAccountAccess_Handler,
+		},
+		{
+			MethodName: "CreateAccountAccess",
+			Handler:    _Cover_CreateAccountAccess_Handler,
+		},
+		{
+			MethodName: "UpdateAccountAccess",
+			Handler:    _Cover_UpdateAccountAccess_Handler,
+		},
+		{
+			MethodName: "DeleteAccountAccess",
+			Handler:    _Cover_DeleteAccountAccess_Handler,
+		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ListAccountAccess",
+			Handler:       _Cover_ListAccountAccess_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "cover/v1/cover.proto",
 }
