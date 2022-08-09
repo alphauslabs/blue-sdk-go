@@ -4332,15 +4332,15 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 }
 
 var (
-	pattern_Cover_InviteMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "member", "invite"}, ""))
+	pattern_Cover_InviteMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "members", "invite"}, ""))
 
-	pattern_Cover_CreateMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "member"}, ""))
+	pattern_Cover_CreateMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "members"}, ""))
 
-	pattern_Cover_GetMembers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "member"}, ""))
+	pattern_Cover_GetMembers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "members"}, ""))
 
-	pattern_Cover_GetMemberDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "member", "userId"}, ""))
+	pattern_Cover_GetMemberDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "members", "userId"}, ""))
 
-	pattern_Cover_GetMemberCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "member", "userId", "costgroup"}, ""))
+	pattern_Cover_GetMemberCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "members", "userId", "costgroup"}, ""))
 
 	pattern_Cover_GetUserDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "me"}, ""))
 
@@ -4366,57 +4366,57 @@ var (
 
 	pattern_Cover_UpdateUserAttributes_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "me", "attributes"}, ""))
 
-	pattern_Cover_DeleteMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "member", "userId"}, ""))
+	pattern_Cover_DeleteMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "members", "userId"}, ""))
 
-	pattern_Cover_ResetPassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "member", "resetpassword"}, ""))
+	pattern_Cover_ResetPassword_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "members", "resetpassword"}, ""))
 
-	pattern_Cover_CreateView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "view"}, ""))
+	pattern_Cover_CreateView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "views"}, ""))
 
-	pattern_Cover_GetViews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "view"}, ""))
+	pattern_Cover_GetViews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "views"}, ""))
 
-	pattern_Cover_GetCurrentView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "view", "viewId"}, ""))
+	pattern_Cover_GetCurrentView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "views", "viewId"}, ""))
 
-	pattern_Cover_GetFavoriteViews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "view", "favorites"}, ""))
+	pattern_Cover_GetFavoriteViews_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "views", "favorites"}, ""))
 
-	pattern_Cover_PublishView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "view", "publish"}, ""))
+	pattern_Cover_PublishView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "views", "publish"}, ""))
 
-	pattern_Cover_AddFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "view", "favorite"}, ""))
+	pattern_Cover_AddFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "views", "favorite"}, ""))
 
-	pattern_Cover_RemoveFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "view", "unfavorite"}, ""))
+	pattern_Cover_RemoveFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "views", "unfavorite"}, ""))
 
-	pattern_Cover_UpdateView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "view", "viewId"}, ""))
+	pattern_Cover_UpdateView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "views", "viewId"}, ""))
 
-	pattern_Cover_DeleteView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "view", "viewId"}, ""))
+	pattern_Cover_DeleteView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "views", "viewId"}, ""))
 
-	pattern_Cover_UpdateSideMenuState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "view", "viewId", "sidemenustate"}, ""))
+	pattern_Cover_UpdateSideMenuState_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "views", "viewId", "sidemenustate"}, ""))
 
-	pattern_Cover_AddSideMenuFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "view", "viewId", "sidemenufavorite"}, ""))
+	pattern_Cover_AddSideMenuFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "views", "viewId", "sidemenufavorite"}, ""))
 
-	pattern_Cover_RemoveSideMenuFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "view", "viewId", "sidemenuunfavorite"}, ""))
+	pattern_Cover_RemoveSideMenuFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "views", "viewId", "sidemenuunfavorite"}, ""))
 
-	pattern_Cover_CreateCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "costgroup"}, ""))
+	pattern_Cover_CreateCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "costgroups"}, ""))
 
-	pattern_Cover_GetCostGroups_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "costgroup"}, ""))
+	pattern_Cover_GetCostGroups_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "costgroups"}, ""))
 
-	pattern_Cover_GetCostGroupDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "costgroup", "costGroupId"}, ""))
+	pattern_Cover_GetCostGroupDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "costgroups", "costGroupId"}, ""))
 
-	pattern_Cover_UpdateCostGroupName_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroup", "costGroupId", "name"}, ""))
+	pattern_Cover_UpdateCostGroupName_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroups", "costGroupId", "name"}, ""))
 
-	pattern_Cover_UpdateCostGroupDescription_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroup", "costGroupId", "description"}, ""))
+	pattern_Cover_UpdateCostGroupDescription_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroups", "costGroupId", "description"}, ""))
 
-	pattern_Cover_UpdateCostGroupImage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroup", "costGroupId", "image"}, ""))
+	pattern_Cover_UpdateCostGroupImage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroups", "costGroupId", "image"}, ""))
 
-	pattern_Cover_UpdateCostGroupIcon_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroup", "costGroupId", "icon"}, ""))
+	pattern_Cover_UpdateCostGroupIcon_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroups", "costGroupId", "icon"}, ""))
 
-	pattern_Cover_UpdateCostGroupColorTheme_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroup", "costGroupId", "colortheme"}, ""))
+	pattern_Cover_UpdateCostGroupColorTheme_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroups", "costGroupId", "colortheme"}, ""))
 
-	pattern_Cover_UpdateCostGroupCombinations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroup", "costGroupId", "combinations"}, ""))
+	pattern_Cover_UpdateCostGroupCombinations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "costgroups", "costGroupId", "combinations"}, ""))
 
-	pattern_Cover_AssignCostGroupMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1", "costgroup", "costGroupId", "member", "add"}, ""))
+	pattern_Cover_AssignCostGroupMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1", "costgroups", "costGroupId", "member", "add"}, ""))
 
-	pattern_Cover_RemoveCostGroupMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1", "costgroup", "costGroupId", "member", "remove"}, ""))
+	pattern_Cover_RemoveCostGroupMember_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4}, []string{"v1", "costgroups", "costGroupId", "member", "remove"}, ""))
 
-	pattern_Cover_DeleteCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "costgroup", "costGroupId"}, ""))
+	pattern_Cover_DeleteCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "costgroups", "costGroupId"}, ""))
 
 	pattern_Cover_GetAccountAccessTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aws", "acctaccess"}, ""))
 
