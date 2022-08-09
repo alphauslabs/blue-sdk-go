@@ -122,6 +122,8 @@ type CoverClient interface {
 	UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Lists all assets per service.
+	ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (*ListAssetsResponse, error)
 }
 
 type coverClient struct {
@@ -596,6 +598,15 @@ func (c *coverClient) DeleteAccountAccess(ctx context.Context, in *DeleteAccount
 	return out, nil
 }
 
+func (c *coverClient) ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (*ListAssetsResponse, error) {
+	out := new(ListAssetsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ListAssets", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -698,6 +709,8 @@ type CoverServer interface {
 	UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Lists all assets per service.
+	ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -851,6 +864,9 @@ func (UnimplementedCoverServer) UpdateAccountAccess(context.Context, *UpdateAcco
 }
 func (UnimplementedCoverServer) DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) ListAssets(context.Context, *ListAssetsRequest) (*ListAssetsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAssets not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -1750,6 +1766,24 @@ func _Cover_DeleteAccountAccess_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListAssets_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAssetsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListAssets(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/ListAssets",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListAssets(ctx, req.(*ListAssetsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1948,6 +1982,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccountAccess",
 			Handler:    _Cover_DeleteAccountAccess_Handler,
+		},
+		{
+			MethodName: "ListAssets",
+			Handler:    _Cover_ListAssets_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
