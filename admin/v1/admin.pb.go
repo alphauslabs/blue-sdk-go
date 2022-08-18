@@ -1325,7 +1325,7 @@ type UpdateNotificationChannelRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//Required. ID of the notification channel to update.
+	// Required. ID of the notification channel to update.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Required. Name of the notification channel.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
@@ -1419,7 +1419,7 @@ type DeleteNotificationChannelRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//Required. ID of the notification channel to delete.
+	// Required. ID of the notification channel to delete.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 }
 

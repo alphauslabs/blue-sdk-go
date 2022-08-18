@@ -2858,7 +2858,7 @@ type GetMonthOnMonthCostForecastRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	//Optional. Default is current month. Format: `yyyymm`.
+	// Optional. Default is current month. Format: `yyyymm`.
 	Date string `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
 }
 
@@ -2998,7 +2998,7 @@ type GetMonthToDateCostForecastRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	//Optional. Default is current month. Format: `yyyymm`.
+	// Optional. Default is current month. Format: `yyyymm`.
 	Date string `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
 }
 
@@ -3339,7 +3339,7 @@ type CreateAccountBudgetResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//Budget Id
+	// Budget Id
 	BudgetId string `protobuf:"bytes,1,opt,name=budgetId,proto3" json:"budgetId,omitempty"`
 }
 

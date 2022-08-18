@@ -102,11 +102,11 @@ type RiRecommendation struct {
 	InstanceType   string  `protobuf:"bytes,4,opt,name=instanceType,proto3" json:"instanceType,omitempty"`
 	Quantity       int64   `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
 	NormalizedUnit float64 `protobuf:"fixed64,6,opt,name=normalizedUnit,proto3" json:"normalizedUnit,omitempty"`
-	//for amazon ec2 only
+	// for amazon ec2 only
 	OperatingSystem string `protobuf:"bytes,7,opt,name=operatingSystem,proto3" json:"operatingSystem,omitempty"`
 	PreInstalledSW  string `protobuf:"bytes,8,opt,name=preInstalledSW,proto3" json:"preInstalledSW,omitempty"`
 	Tenancy         string `protobuf:"bytes,9,opt,name=tenancy,proto3" json:"tenancy,omitempty"`
-	//for amazon rds only
+	// for amazon rds only
 	DbEngine                string  `protobuf:"bytes,10,opt,name=dbEngine,proto3" json:"dbEngine,omitempty"`
 	DeploymentOption        string  `protobuf:"bytes,22,opt,name=deploymentOption,proto3" json:"deploymentOption,omitempty"`
 	OndemandCost            float64 `protobuf:"fixed64,11,opt,name=ondemandCost,proto3" json:"ondemandCost,omitempty"`

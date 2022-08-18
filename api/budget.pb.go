@@ -89,7 +89,7 @@ type MonthlyBudget struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	//Format: yyyymm
+	// Format: yyyymm
 	YearMonth string  `protobuf:"bytes,1,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
 	Amount    float64 `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
 }
