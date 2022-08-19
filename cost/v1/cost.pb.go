@@ -1952,9 +1952,7 @@ type ReadCostsRequestAwsOptions struct {
 	//
 	// For example, if you only want the services and region data, you can set this field to `productCode,region`. Your input sequence doesn't matter (although the sequence above is recommended) as the actual sequence is already fixed in the return data (see the definition in https://github.com/alphauslabs/blueapi/blob/main/api/aws/cost.proto), which is generic to specific, top to bottom. Invalid values are discarded. Excluded columns will be empty.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
-	// Optional. If set to true, return data grouped by month within the date range. If you want data that is grouped per account per month, set this to `true`, then set `groupByColumns` to `none`.
-	//
-	// You can also use `groupByColumns` while setting this to true. If `groupByColumns` is empty, the default grouping is `productCode`.
+	// Optional. If set to true, return data grouped by month within the date range. If you want data that is grouped per account per month, set this to `true`, then set `groupByColumns` to `none`. You can also use `groupByColumns` while setting this to true.
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
 	// Optional. If set to true, group all input accounts into one.
 	GroupAccounts bool `protobuf:"varint,8,opt,name=groupAccounts,proto3" json:"groupAccounts,omitempty"`
