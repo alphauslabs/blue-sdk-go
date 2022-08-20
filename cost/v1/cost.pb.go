@@ -1960,9 +1960,9 @@ type ReadCostsRequestAwsOptions struct {
 	Filters []*ReadCostsRequestAwsOptionsFilters `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	// Optional. A list of filtering options specific for tags. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	TagFilters []*ReadCostsRequestAwsOptions_TagFilters `protobuf:"bytes,9,rep,name=tagFilters,proto3" json:"tagFilters,omitempty"`
-	// Optional. If set to true, stream will include resource tags. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
+	// Optional. If set to true, stream will include resource tags. Discarded when `groupByColumns` field is set to `none`.
 	IncludeTags bool `protobuf:"varint,4,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
-	// Optional. If set to true, stream will include resource cost category information. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
+	// Optional. If set to true, stream will include resource cost category information. Discarded when `groupByColumns` field is set to `none`.
 	IncludeCostCategories bool `protobuf:"varint,5,opt,name=includeCostCategories,proto3" json:"includeCostCategories,omitempty"`
 	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency's three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD).
 	ToCurrency string `protobuf:"bytes,6,opt,name=toCurrency,proto3" json:"toCurrency,omitempty"`
