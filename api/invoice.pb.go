@@ -524,6 +524,51 @@ type InvoiceTotal struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Key names related to the total. Each key is described in the following detail
+	//
+	// supportFee:
+	//
+	//	Total amount of Support Fee costs
+	//
+	// substitution:
+	//
+	//	Total amount of agency fee costs
+	//
+	// charge:
+	//
+	//	Total amount of vendor usage fee costs
+	//
+	// discount:
+	//
+	//	Total amount after discounts. Inculuded Support fee costs
+	//
+	// discountWithSubstitution:
+	//
+	//	Total Discounts plus agency fee costs
+	//
+	// chargeTaxFree:
+	//
+	//	Amounts not included in consumption tax
+	//
+	// additionalItem:
+	//
+	//	Total amount of additional item costs
+	//
+	// customService:
+	//
+	//	Total amount of custom service item costs
+	//
+	// sumOfBeforeTax:
+	//
+	//	Total amount before consumption tax
+	//
+	// tax:
+	//
+	//	Consumption tax amount on the total amount
+	//
+	// total:
+	//
+	//	Total billing amount including tax
 	Name     string  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Currency string  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Amount   float64 `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
