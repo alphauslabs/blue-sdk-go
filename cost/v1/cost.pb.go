@@ -1611,7 +1611,12 @@ type CreateCalculationsScheduleRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. The desired schedule in UTC, using the the unix-cron string format (* * * * *) which is a set of five fields in a line using the order: `minute hour day-of-the-month month day-of-the-week`. `minute` values can be `0-59`; `hour` is `0-23`; `day-of-the-month` is `1-31`; `month` is `1-12`, or `JAN-DEC`; `day-of-the-week` is `0-6`, or `SUN-SAT`, or `7` for Sunday.
+	// Required. The desired schedule in UTC, using the the unix-cron string format (* * * * *) which is a set of five fields in a line using the order: `minute hour day-of-the-month month day-of-the-week`.
+	// * `minute` values can be `0-59`
+	// * `hour` values can be `0-23`
+	// * `day-of-the-month` values can be `1-31`
+	// * `month` values can be `1-12`, or `JAN-DEC`
+	// * `day-of-the-week` values can be `0-6`, or `SUN-SAT`, or `7` for Sunday
 	//
 	// Special characters:
 	// * A field can contain an asterisk (*), which always stands for "first-last".
