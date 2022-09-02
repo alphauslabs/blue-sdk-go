@@ -1617,7 +1617,7 @@ type CreateCalculationsScheduleRequest struct {
 	// * A field can contain an asterisk (*), which always stands for "first-last".
 	// * Ranges are two numbers separated with a hyphen (-) and the specified range is inclusive.
 	// * Following a range with `/NUMBER` specifies skips of the number's value through the range. For example, both 0-23/2 and */2 can be used in the `hour` field to specify execution every two hours.
-	// * A list is a set of numbers (or ranges) separated by commas (,). For example, 1,2,5,6 in the Month field specifies an execution on the first, second, fifth, and sixth days of the month.
+	// * A list is a set of numbers (or ranges) separated by commas (,). For example, `1,2,5,6` in the `month` field specifies an execution on the first, second, fifth, and sixth days of the month.
 	Schedule string `protobuf:"bytes,2,opt,name=schedule,proto3" json:"schedule,omitempty"`
 	// Optional. The channel id to use for notifications. At the moment, only email-type notification channels are supported. If not set, your default channel will be used. And if non-existent, an email-type notification channel will be created using your primary email address.
 	NotificationChannel string `protobuf:"bytes,3,opt,name=notificationChannel,proto3" json:"notificationChannel,omitempty"`
