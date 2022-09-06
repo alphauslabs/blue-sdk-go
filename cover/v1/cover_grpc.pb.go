@@ -105,6 +105,7 @@ type CoverClient interface {
 	UpdateCostGroupColorTheme(ctx context.Context, in *UpdateCostGroupColorThemeRequest, opts ...grpc.CallOption) (*UpdateCostGroupColorThemeResponse, error)
 	// Update cost group's combinations
 	UpdateCostGroupCombinations(ctx context.Context, in *UpdateCostGroupCombinationsRequest, opts ...grpc.CallOption) (*UpdateCostGroupCombinationsResponse, error)
+	ResolveCostGroupCombinations(ctx context.Context, in *ResolveCostGroupCombinationsRequest, opts ...grpc.CallOption) (*ResolveCostGroupCombinationsResponse, error)
 	// Assign a member to a cost group
 	AssignCostGroupMember(ctx context.Context, in *AssignCostGroupMemberRequest, opts ...grpc.CallOption) (*AssignCostGroupMemberResponse, error)
 	// Remove a member from a cost group
@@ -499,6 +500,15 @@ func (c *coverClient) UpdateCostGroupCombinations(ctx context.Context, in *Updat
 	return out, nil
 }
 
+func (c *coverClient) ResolveCostGroupCombinations(ctx context.Context, in *ResolveCostGroupCombinationsRequest, opts ...grpc.CallOption) (*ResolveCostGroupCombinationsResponse, error) {
+	out := new(ResolveCostGroupCombinationsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ResolveCostGroupCombinations", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) AssignCostGroupMember(ctx context.Context, in *AssignCostGroupMemberRequest, opts ...grpc.CallOption) (*AssignCostGroupMemberResponse, error) {
 	out := new(AssignCostGroupMemberResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/AssignCostGroupMember", in, out, opts...)
@@ -737,6 +747,7 @@ type CoverServer interface {
 	UpdateCostGroupColorTheme(context.Context, *UpdateCostGroupColorThemeRequest) (*UpdateCostGroupColorThemeResponse, error)
 	// Update cost group's combinations
 	UpdateCostGroupCombinations(context.Context, *UpdateCostGroupCombinationsRequest) (*UpdateCostGroupCombinationsResponse, error)
+	ResolveCostGroupCombinations(context.Context, *ResolveCostGroupCombinationsRequest) (*ResolveCostGroupCombinationsResponse, error)
 	// Assign a member to a cost group
 	AssignCostGroupMember(context.Context, *AssignCostGroupMemberRequest) (*AssignCostGroupMemberResponse, error)
 	// Remove a member from a cost group
@@ -887,6 +898,9 @@ func (UnimplementedCoverServer) UpdateCostGroupColorTheme(context.Context, *Upda
 }
 func (UnimplementedCoverServer) UpdateCostGroupCombinations(context.Context, *UpdateCostGroupCombinationsRequest) (*UpdateCostGroupCombinationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupCombinations not implemented")
+}
+func (UnimplementedCoverServer) ResolveCostGroupCombinations(context.Context, *ResolveCostGroupCombinationsRequest) (*ResolveCostGroupCombinationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResolveCostGroupCombinations not implemented")
 }
 func (UnimplementedCoverServer) AssignCostGroupMember(context.Context, *AssignCostGroupMemberRequest) (*AssignCostGroupMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignCostGroupMember not implemented")
@@ -1657,6 +1671,24 @@ func _Cover_UpdateCostGroupCombinations_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ResolveCostGroupCombinations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveCostGroupCombinationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ResolveCostGroupCombinations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/ResolveCostGroupCombinations",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ResolveCostGroupCombinations(ctx, req.(*ResolveCostGroupCombinationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_AssignCostGroupMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AssignCostGroupMemberRequest)
 	if err := dec(in); err != nil {
@@ -2045,6 +2077,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCostGroupCombinations",
 			Handler:    _Cover_UpdateCostGroupCombinations_Handler,
+		},
+		{
+			MethodName: "ResolveCostGroupCombinations",
+			Handler:    _Cover_ResolveCostGroupCombinations_Handler,
 		},
 		{
 			MethodName: "AssignCostGroupMember",
