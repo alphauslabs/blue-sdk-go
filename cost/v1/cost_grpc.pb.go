@@ -73,7 +73,7 @@ type CostClient interface {
 	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} are 'aws' and 'gcp'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
-	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws' or 'azure'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error)
 	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error)
@@ -745,7 +745,7 @@ type CostServer interface {
 	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} are 'aws' and 'gcp'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
-	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
+	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws' or 'azure'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadAdjustments(*ReadAdjustmentsRequest, Cost_ReadAdjustmentsServer) error
 	// Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadTagCosts(*ReadTagCostsRequest, Cost_ReadTagCostsServer) error
