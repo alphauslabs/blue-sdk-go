@@ -124,6 +124,10 @@ type CoverClient interface {
 	UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Registers an account
+	RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Gets the account type of the target account.
+	GetAccountType(ctx context.Context, in *GetAccountTypeRequest, opts ...grpc.CallOption) (*GetAccountTypeResponse, error)
 	// WORK-IN-PROGRESS: Lists all assets per service.
 	ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (Cover_ListAssetsClient, error)
 	// WORK-IN-PROGRESS: Send request to discover resources in cloud.
@@ -613,6 +617,24 @@ func (c *coverClient) DeleteAccountAccess(ctx context.Context, in *DeleteAccount
 	return out, nil
 }
 
+func (c *coverClient) RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/RegisterAccount", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetAccountType(ctx context.Context, in *GetAccountTypeRequest, opts ...grpc.CallOption) (*GetAccountTypeResponse, error) {
+	out := new(GetAccountTypeResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetAccountType", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (Cover_ListAssetsClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[1], "/blueapi.cover.v1.Cover/ListAssets", opts...)
 	if err != nil {
@@ -766,6 +788,10 @@ type CoverServer interface {
 	UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error)
+	// Registers an account
+	RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error)
+	// Gets the account type of the target account.
+	GetAccountType(context.Context, *GetAccountTypeRequest) (*GetAccountTypeResponse, error)
 	// WORK-IN-PROGRESS: Lists all assets per service.
 	ListAssets(*ListAssetsRequest, Cover_ListAssetsServer) error
 	// WORK-IN-PROGRESS: Send request to discover resources in cloud.
@@ -928,6 +954,12 @@ func (UnimplementedCoverServer) UpdateAccountAccess(context.Context, *UpdateAcco
 }
 func (UnimplementedCoverServer) DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterAccount not implemented")
+}
+func (UnimplementedCoverServer) GetAccountType(context.Context, *GetAccountTypeRequest) (*GetAccountTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountType not implemented")
 }
 func (UnimplementedCoverServer) ListAssets(*ListAssetsRequest, Cover_ListAssetsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAssets not implemented")
@@ -1854,6 +1886,42 @@ func _Cover_DeleteAccountAccess_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_RegisterAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).RegisterAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/RegisterAccount",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).RegisterAccount(ctx, req.(*RegisterAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetAccountType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAccountType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetAccountType",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAccountType(ctx, req.(*GetAccountTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ListAssets_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListAssetsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2113,6 +2181,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccountAccess",
 			Handler:    _Cover_DeleteAccountAccess_Handler,
+		},
+		{
+			MethodName: "RegisterAccount",
+			Handler:    _Cover_RegisterAccount_Handler,
+		},
+		{
+			MethodName: "GetAccountType",
+			Handler:    _Cover_GetAccountType_Handler,
 		},
 		{
 			MethodName: "DiscoverResources",
