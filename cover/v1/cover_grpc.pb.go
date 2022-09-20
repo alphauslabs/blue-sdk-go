@@ -132,6 +132,8 @@ type CoverClient interface {
 	DiscoverResources(ctx context.Context, in *DiscoverResourcesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: List all discovery requests and their status requested by the login user.
 	ListDiscoveryRequests(ctx context.Context, in *ListDiscoveryRequestsRequest, opts ...grpc.CallOption) (*ListDiscoveryRequestsResponse, error)
+	// WORK-IN-PROGRESS: Get usage and usage-based costs for the specified costgroup
+	GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error)
 }
 
 type coverClient struct {
@@ -674,6 +676,38 @@ func (c *coverClient) ListDiscoveryRequests(ctx context.Context, in *ListDiscove
 	return out, nil
 }
 
+func (c *coverClient) GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[2], "/blueapi.cover.v1.Cover/GetCostUsage", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverGetCostUsageClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetCostUsageClient interface {
+	Recv() (*CostItem, error)
+	grpc.ClientStream
+}
+
+type coverGetCostUsageClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetCostUsageClient) Recv() (*CostItem, error) {
+	m := new(CostItem)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -785,6 +819,8 @@ type CoverServer interface {
 	DiscoverResources(context.Context, *DiscoverResourcesRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: List all discovery requests and their status requested by the login user.
 	ListDiscoveryRequests(context.Context, *ListDiscoveryRequestsRequest) (*ListDiscoveryRequestsResponse, error)
+	// WORK-IN-PROGRESS: Get usage and usage-based costs for the specified costgroup
+	GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -953,6 +989,9 @@ func (UnimplementedCoverServer) DiscoverResources(context.Context, *DiscoverReso
 }
 func (UnimplementedCoverServer) ListDiscoveryRequests(context.Context, *ListDiscoveryRequestsRequest) (*ListDiscoveryRequestsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDiscoveryRequests not implemented")
+}
+func (UnimplementedCoverServer) GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCostUsage not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -1945,6 +1984,27 @@ func _Cover_ListDiscoveryRequests_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetCostUsage_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCostUsageRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).GetCostUsage(m, &coverGetCostUsageServer{stream})
+}
+
+type Cover_GetCostUsageServer interface {
+	Send(*CostItem) error
+	grpc.ServerStream
+}
+
+type coverGetCostUsageServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetCostUsageServer) Send(m *CostItem) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2170,6 +2230,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAssets",
 			Handler:       _Cover_ListAssets_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCostUsage",
+			Handler:       _Cover_GetCostUsage_Handler,
 			ServerStreams: true,
 		},
 	},
