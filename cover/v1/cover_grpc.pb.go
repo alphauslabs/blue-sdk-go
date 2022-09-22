@@ -123,7 +123,7 @@ type CoverClient interface {
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
 	UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
-	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*DeleteAccountAccessResponse, error)
 	// Registers an account
 	RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists all assets per service.
@@ -608,8 +608,8 @@ func (c *coverClient) UpdateAccountAccess(ctx context.Context, in *UpdateAccount
 	return out, nil
 }
 
-func (c *coverClient) DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *coverClient) DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*DeleteAccountAccessResponse, error) {
+	out := new(DeleteAccountAccessResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/DeleteAccountAccess", in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -810,7 +810,7 @@ type CoverServer interface {
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
 	UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
-	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error)
+	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*DeleteAccountAccessResponse, error)
 	// Registers an account
 	RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists all assets per service.
@@ -975,7 +975,7 @@ func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAcco
 func (UnimplementedCoverServer) UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountAccess not implemented")
 }
-func (UnimplementedCoverServer) DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*emptypb.Empty, error) {
+func (UnimplementedCoverServer) DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*DeleteAccountAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountAccess not implemented")
 }
 func (UnimplementedCoverServer) RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error) {
