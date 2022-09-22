@@ -1559,9 +1559,9 @@ type GetNotificationRequest struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Required
 	// Valid values:
-	// `invoice_calculation_start`,
-	// `invoice_calculation_end`,
-	// `cur_changed_after_invoicing`.
+	// `InvoiceCalculationStarted`,
+	// `InvoiceCalculationFinished`,
+	// `CurUpdatedAfterInvoice`.
 	NotificationType string `protobuf:"bytes,2,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 }
 
@@ -1619,9 +1619,9 @@ type CreateNotificationRequest struct {
 
 	// Required
 	// Valid values:
-	// `invoice_calculation_start`,
-	// `invoice_calculation_end`,
-	// `cur_changed_after_invoicing`.
+	// `InvoiceCalculationStarted`,
+	// `InvoiceCalculationFinished`,
+	// `CurUpdatedAfterInvoice`.
 	NotificationType string `protobuf:"bytes,1,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 	// Required
 	Channels []string `protobuf:"bytes,2,rep,name=channels,proto3" json:"channels,omitempty"`
@@ -1696,9 +1696,9 @@ type UpdateNotificationRequest struct {
 	Enabled bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 	// Required
 	// Valid values:
-	// `invoice_calculation_start`,
-	// `invoice_calculation_end`,
-	// `cur_changed_after_invoicing`.
+	// `InvoiceCalculationStarted`,
+	// `InvoiceCalculationFinished`,
+	// `CurUpdatedAfterInvoice`.
 	NotificationType string `protobuf:"bytes,4,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 }
 
@@ -1772,9 +1772,9 @@ type DeleteNotificationRequest struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Required
 	// Valid values:
-	// `invoice_calculation_start`,
-	// `invoice_calculation_end`,
-	// `cur_changed_after_invoicing`.
+	// `InvoiceCalculationStarted`,
+	// `InvoiceCalculationFinished`,
+	// `CurUpdatedAfterInvoice`.
 	NotificationType string `protobuf:"bytes,2,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 }
 
