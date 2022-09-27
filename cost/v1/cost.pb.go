@@ -487,7 +487,7 @@ type ListAccountsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. At the moment, only `aws` is supported.
+	// Required. At the moment, `aws` and `gcp` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 }
 
@@ -536,7 +536,7 @@ type GetAccountRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. At the moment, only `aws` is supported.
+	// Required. At the moment, `aws` and `gcp` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The account id to retrieve.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
