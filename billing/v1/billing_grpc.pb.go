@@ -39,6 +39,8 @@ type BillingClient interface {
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
 	// Exports an invoice.
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
+	// WORK-IN-PROGRESS: Reads the invoice service discounts. Only available in Ripple.
+	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
 }
 
 type billingClient struct {
@@ -190,6 +192,38 @@ func (c *billingClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoice
 	return out, nil
 }
 
+func (c *billingClient) ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[3], "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListInvoiceServiceDiscountsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListInvoiceServiceDiscountsClient interface {
+	Recv() (*InvoiceServiceDiscounts, error)
+	grpc.ClientStream
+}
+
+type billingListInvoiceServiceDiscountsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListInvoiceServiceDiscountsClient) Recv() (*InvoiceServiceDiscounts, error) {
+	m := new(InvoiceServiceDiscounts)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -210,6 +244,8 @@ type BillingServer interface {
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
 	// Exports an invoice.
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
+	// WORK-IN-PROGRESS: Reads the invoice service discounts. Only available in Ripple.
+	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -240,6 +276,9 @@ func (UnimplementedBillingServer) GetInvoice(context.Context, *GetInvoiceRequest
 }
 func (UnimplementedBillingServer) ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoiceFile not implemented")
+}
+func (UnimplementedBillingServer) ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListInvoiceServiceDiscounts not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -407,6 +446,27 @@ func _Billing_ExportInvoiceFile_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ListInvoiceServiceDiscounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListInvoiceServiceDiscountsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListInvoiceServiceDiscounts(m, &billingListInvoiceServiceDiscountsServer{stream})
+}
+
+type Billing_ListInvoiceServiceDiscountsServer interface {
+	Send(*InvoiceServiceDiscounts) error
+	grpc.ServerStream
+}
+
+type billingListInvoiceServiceDiscountsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListInvoiceServiceDiscountsServer) Send(m *InvoiceServiceDiscounts) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -449,6 +509,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListUsageCostsDrift",
 			Handler:       _Billing_ListUsageCostsDrift_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListInvoiceServiceDiscounts",
+			Handler:       _Billing_ListInvoiceServiceDiscounts_Handler,
 			ServerStreams: true,
 		},
 	},
