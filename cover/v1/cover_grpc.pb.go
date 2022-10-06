@@ -78,6 +78,10 @@ type CoverClient interface {
 	RemoveFavorite(ctx context.Context, in *RemoveFavoriteRequest, opts ...grpc.CallOption) (*RemoveFavoriteResponse, error)
 	// Updates the view details
 	UpdateView(ctx context.Context, in *UpdateViewRequest, opts ...grpc.CallOption) (*UpdateViewResponse, error)
+	// Updates the view's layout
+	UpdateViewLayout(ctx context.Context, in *UpdateViewLayoutRequest, opts ...grpc.CallOption) (*UpdateViewLayoutResponse, error)
+	// Updates the view's widget
+	UpdateViewWidget(ctx context.Context, in *UpdateViewWidgetRequest, opts ...grpc.CallOption) (*UpdateViewWidgetResponse, error)
 	// Deletes a view
 	DeleteView(ctx context.Context, in *DeleteViewRequest, opts ...grpc.CallOption) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -376,6 +380,24 @@ func (c *coverClient) RemoveFavorite(ctx context.Context, in *RemoveFavoriteRequ
 func (c *coverClient) UpdateView(ctx context.Context, in *UpdateViewRequest, opts ...grpc.CallOption) (*UpdateViewResponse, error) {
 	out := new(UpdateViewResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateView", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateViewLayout(ctx context.Context, in *UpdateViewLayoutRequest, opts ...grpc.CallOption) (*UpdateViewLayoutResponse, error) {
+	out := new(UpdateViewLayoutResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateViewLayout", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateViewWidget(ctx context.Context, in *UpdateViewWidgetRequest, opts ...grpc.CallOption) (*UpdateViewWidgetResponse, error) {
+	out := new(UpdateViewWidgetResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateViewWidget", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -743,6 +765,10 @@ type CoverServer interface {
 	RemoveFavorite(context.Context, *RemoveFavoriteRequest) (*RemoveFavoriteResponse, error)
 	// Updates the view details
 	UpdateView(context.Context, *UpdateViewRequest) (*UpdateViewResponse, error)
+	// Updates the view's layout
+	UpdateViewLayout(context.Context, *UpdateViewLayoutRequest) (*UpdateViewLayoutResponse, error)
+	// Updates the view's widget
+	UpdateViewWidget(context.Context, *UpdateViewWidgetRequest) (*UpdateViewWidgetResponse, error)
 	// Deletes a view
 	DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -881,6 +907,12 @@ func (UnimplementedCoverServer) RemoveFavorite(context.Context, *RemoveFavoriteR
 }
 func (UnimplementedCoverServer) UpdateView(context.Context, *UpdateViewRequest) (*UpdateViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateView not implemented")
+}
+func (UnimplementedCoverServer) UpdateViewLayout(context.Context, *UpdateViewLayoutRequest) (*UpdateViewLayoutResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewLayout not implemented")
+}
+func (UnimplementedCoverServer) UpdateViewWidget(context.Context, *UpdateViewWidgetRequest) (*UpdateViewWidgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewWidget not implemented")
 }
 func (UnimplementedCoverServer) DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteView not implemented")
@@ -1455,6 +1487,42 @@ func _Cover_UpdateView_Handler(srv interface{}, ctx context.Context, dec func(in
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateView(ctx, req.(*UpdateViewRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateViewLayout_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateViewLayoutRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateViewLayout(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateViewLayout",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateViewLayout(ctx, req.(*UpdateViewLayoutRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateViewWidget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateViewWidgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateViewWidget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateViewWidget",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateViewWidget(ctx, req.(*UpdateViewWidgetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2050,6 +2118,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateView",
 			Handler:    _Cover_UpdateView_Handler,
+		},
+		{
+			MethodName: "UpdateViewLayout",
+			Handler:    _Cover_UpdateViewLayout_Handler,
+		},
+		{
+			MethodName: "UpdateViewWidget",
+			Handler:    _Cover_UpdateViewWidget_Handler,
 		},
 		{
 			MethodName: "DeleteView",
