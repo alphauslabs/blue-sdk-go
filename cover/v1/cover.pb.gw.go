@@ -4932,9 +4932,9 @@ var (
 
 	pattern_Cover_PublishView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "views", "publish"}, ""))
 
-	pattern_Cover_AddFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "views", "favorite"}, ""))
+	pattern_Cover_AddFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "views", "favorite", "add"}, ""))
 
-	pattern_Cover_RemoveFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "views", "unfavorite"}, ""))
+	pattern_Cover_RemoveFavorite_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "views", "favorite", "remove"}, ""))
 
 	pattern_Cover_UpdateView_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "views", "viewId"}, ""))
 
