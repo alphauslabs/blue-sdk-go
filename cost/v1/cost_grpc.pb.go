@@ -37,8 +37,6 @@ type CostClient interface {
 	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error)
-	// Lists all account resource for vendor.
-	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Cost_ListAccountResourcesClient, error)
 	// Gets a vendor account. This API includes all of the account's metadata. See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Registers a vendor account.
@@ -242,38 +240,6 @@ func (x *costListAccountsClient) Recv() (*api.Account, error) {
 	return m, nil
 }
 
-func (c *costClient) ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Cost_ListAccountResourcesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ListAccountResources", opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &costListAccountResourcesClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cost_ListAccountResourcesClient interface {
-	Recv() (*api.AccountResource, error)
-	grpc.ClientStream
-}
-
-type costListAccountResourcesClient struct {
-	grpc.ClientStream
-}
-
-func (x *costListAccountResourcesClient) Recv() (*api.AccountResource, error) {
-	m := new(api.AccountResource)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *costClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
 	out := new(api.Account)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetAccount", in, out, opts...)
@@ -302,7 +268,7 @@ func (c *costClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest
 }
 
 func (c *costClient) ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -442,7 +408,7 @@ func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFi
 }
 
 func (c *costClient) ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadCostAttributes", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadCostAttributes", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -474,7 +440,7 @@ func (x *costReadCostAttributesClient) Recv() (*CostAttributeItem, error) {
 }
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -506,7 +472,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -538,7 +504,7 @@ func (x *costReadAdjustmentsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -570,7 +536,7 @@ func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -743,8 +709,6 @@ type CostServer interface {
 	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
 	ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error
-	// Lists all account resource for vendor.
-	ListAccountResources(*ListAccountResourcesRequest, Cost_ListAccountResourcesServer) error
 	// Gets a vendor account. This API includes all of the account's metadata. See https://alphauslabs.github.io/blueapi/ for the list of supported attributes.
 	GetAccount(context.Context, *GetAccountRequest) (*api.Account, error)
 	// Registers a vendor account.
@@ -839,9 +803,6 @@ func (UnimplementedCostServer) DeletePayerAccount(context.Context, *DeletePayerA
 }
 func (UnimplementedCostServer) ListAccounts(*ListAccountsRequest, Cost_ListAccountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccounts not implemented")
-}
-func (UnimplementedCostServer) ListAccountResources(*ListAccountResourcesRequest, Cost_ListAccountResourcesServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListAccountResources not implemented")
 }
 func (UnimplementedCostServer) GetAccount(context.Context, *GetAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccount not implemented")
@@ -1075,27 +1036,6 @@ type costListAccountsServer struct {
 }
 
 func (x *costListAccountsServer) Send(m *api.Account) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cost_ListAccountResources_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListAccountResourcesRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CostServer).ListAccountResources(m, &costListAccountResourcesServer{stream})
-}
-
-type Cost_ListAccountResourcesServer interface {
-	Send(*api.AccountResource) error
-	grpc.ServerStream
-}
-
-type costListAccountResourcesServer struct {
-	grpc.ServerStream
-}
-
-func (x *costListAccountResourcesServer) Send(m *api.AccountResource) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -1897,11 +1837,6 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccounts",
 			Handler:       _Cost_ListAccounts_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "ListAccountResources",
-			Handler:       _Cost_ListAccountResources_Handler,
 			ServerStreams: true,
 		},
 		{
