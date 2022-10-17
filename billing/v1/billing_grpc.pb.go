@@ -40,17 +40,17 @@ type BillingClient interface {
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
 	// Exports an invoice.
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
-	// WORK-IN-PROGRESS: Reads the invoice service discounts. Only available in Ripple.
+	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
-	// WORK-IN-PROGRESS: Reads the account invoice service discounts. Only available in Ripple.
+	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error)
-	// WORK-IN-PROGRESS: Registers the account invoice service discounts. Only available in Ripple.
+	// Registers the account invoice service discounts. Only available in Ripple.
 	CreateAccountInvoiceServiceDiscounts(ctx context.Context, in *CreateAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*CreateAccountInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Updates the account invoice service discounts. Only available in Ripple.
+	// Updates the account invoice service discounts. Only available in Ripple.
 	UpdateAccountInvoiceServiceDiscounts(ctx context.Context, in *UpdateAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*UpdateAccountInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Removes the account invoice service discounts. Only available in Ripple.
+	// Removes the account invoice service discounts. Only available in Ripple.
 	RemoveAccountInvoiceServiceDiscounts(ctx context.Context, in *RemoveAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Deletes the account invoice service discounts. Only available in Ripple.
+	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(ctx context.Context, in *DeleteAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -323,17 +323,17 @@ type BillingServer interface {
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
 	// Exports an invoice.
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
-	// WORK-IN-PROGRESS: Reads the invoice service discounts. Only available in Ripple.
+	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
-	// WORK-IN-PROGRESS: Reads the account invoice service discounts. Only available in Ripple.
+	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(*ListAccountInvoiceServiceDiscountsRequest, Billing_ListAccountInvoiceServiceDiscountsServer) error
-	// WORK-IN-PROGRESS: Registers the account invoice service discounts. Only available in Ripple.
+	// Registers the account invoice service discounts. Only available in Ripple.
 	CreateAccountInvoiceServiceDiscounts(context.Context, *CreateAccountInvoiceServiceDiscountsRequest) (*CreateAccountInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Updates the account invoice service discounts. Only available in Ripple.
+	// Updates the account invoice service discounts. Only available in Ripple.
 	UpdateAccountInvoiceServiceDiscounts(context.Context, *UpdateAccountInvoiceServiceDiscountsRequest) (*UpdateAccountInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Removes the account invoice service discounts. Only available in Ripple.
+	// Removes the account invoice service discounts. Only available in Ripple.
 	RemoveAccountInvoiceServiceDiscounts(context.Context, *RemoveAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Deletes the account invoice service discounts. Only available in Ripple.
+	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(context.Context, *DeleteAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
