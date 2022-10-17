@@ -490,6 +490,8 @@ type ListAccountsRequest struct {
 	// Required. At the moment, `aws` and `gcp` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. The billing group internal id. Only valid for Ripple users.
+	//
+	// Not available for GET method, only use POST method.
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
 }
 
