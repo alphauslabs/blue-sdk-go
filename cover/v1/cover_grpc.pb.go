@@ -135,6 +135,8 @@ type CoverClient interface {
 	GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error)
 	// Gets the right sizing recommendation of all the accounts in the costgroup
 	GetRightSizingRecommendation(ctx context.Context, in *GetRightSizingRecommendationRequest, opts ...grpc.CallOption) (*GetRightSizingRecommendationResponse, error)
+	// Gets the EC2 instances of all accounts in Cost Group
+	GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error)
 }
 
 type coverClient struct {
@@ -718,6 +720,15 @@ func (c *coverClient) GetRightSizingRecommendation(ctx context.Context, in *GetR
 	return out, nil
 }
 
+func (c *coverClient) GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error) {
+	out := new(GetEC2InstancesResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetEC2Instances", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -833,6 +844,8 @@ type CoverServer interface {
 	GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error
 	// Gets the right sizing recommendation of all the accounts in the costgroup
 	GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error)
+	// Gets the EC2 instances of all accounts in Cost Group
+	GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -1007,6 +1020,9 @@ func (UnimplementedCoverServer) GetCostUsage(*GetCostUsageRequest, Cover_GetCost
 }
 func (UnimplementedCoverServer) GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRightSizingRecommendation not implemented")
+}
+func (UnimplementedCoverServer) GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEC2Instances not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -2038,6 +2054,24 @@ func _Cover_GetRightSizingRecommendation_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetEC2Instances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEC2InstancesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetEC2Instances(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetEC2Instances",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetEC2Instances(ctx, req.(*GetEC2InstancesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2256,6 +2290,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRightSizingRecommendation",
 			Handler:    _Cover_GetRightSizingRecommendation_Handler,
+		},
+		{
+			MethodName: "GetEC2Instances",
+			Handler:    _Cover_GetEC2Instances_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
