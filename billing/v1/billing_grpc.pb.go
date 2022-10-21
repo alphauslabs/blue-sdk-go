@@ -36,6 +36,8 @@ type BillingClient interface {
 	ListAwsDailyRunHistory(ctx context.Context, in *ListAwsDailyRunHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsDailyRunHistoryClient, error)
 	// Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
+	// WORK-IN-PROGRESS: Creates an invoice. Only available in Ripple.
+	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
 	// Exports an invoice.
@@ -185,6 +187,15 @@ func (x *billingListUsageCostsDriftClient) Recv() (*UsageCostsDrift, error) {
 	return m, nil
 }
 
+func (c *billingClient) CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error) {
+	out := new(api.InvoiceMessage)
+	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/CreateInvoice", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error) {
 	out := new(api.Invoice)
 	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/GetInvoice", in, out, opts...)
@@ -319,6 +330,8 @@ type BillingServer interface {
 	ListAwsDailyRunHistory(*ListAwsDailyRunHistoryRequest, Billing_ListAwsDailyRunHistoryServer) error
 	// Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
+	// WORK-IN-PROGRESS: Creates an invoice. Only available in Ripple.
+	CreateInvoice(context.Context, *CreateInvoiceRequest) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
 	// Exports an invoice.
@@ -359,6 +372,9 @@ func (UnimplementedBillingServer) ListAwsDailyRunHistory(*ListAwsDailyRunHistory
 }
 func (UnimplementedBillingServer) ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListUsageCostsDrift not implemented")
+}
+func (UnimplementedBillingServer) CreateInvoice(context.Context, *CreateInvoiceRequest) (*api.InvoiceMessage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
 }
 func (UnimplementedBillingServer) GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
@@ -512,6 +528,24 @@ type billingListUsageCostsDriftServer struct {
 
 func (x *billingListUsageCostsDriftServer) Send(m *UsageCostsDrift) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateInvoiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateInvoice(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.billing.v1.Billing/CreateInvoice",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateInvoice(ctx, req.(*CreateInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Billing_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -682,6 +716,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccessGroup",
 			Handler:    _Billing_GetAccessGroup_Handler,
+		},
+		{
+			MethodName: "CreateInvoice",
+			Handler:    _Billing_CreateInvoice_Handler,
 		},
 		{
 			MethodName: "GetInvoice",
