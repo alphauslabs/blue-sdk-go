@@ -11,7 +11,8 @@ import (
 )
 
 const (
-	BlueEndpoint     = "bluerpc.alphaus.cloud:443"
+	// BlueEndpoint     = "bluerpc.alphaus.cloud:443" // previously for global LB, not working
+	BlueEndpoint     = "bluerpc.alphaus.cloud:8443" // network LB (JP)
 	BlueEndpointNext = "bluenext.alphaus.cloud:8443"
 )
 
