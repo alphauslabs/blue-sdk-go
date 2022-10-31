@@ -135,6 +135,8 @@ type CoverClient interface {
 	GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error)
 	// Gets the right sizing recommendation of all the accounts in the costgroup
 	GetRightSizingRecommendation(ctx context.Context, in *GetRightSizingRecommendationRequest, opts ...grpc.CallOption) (*GetRightSizingRecommendationResponse, error)
+	// Applies the right sizing recommendation of a resource
+	ApplyRightSizingRecommendation(ctx context.Context, in *ApplyRightSizingRecommendationRequest, opts ...grpc.CallOption) (*ApplyRightSizingRecommendationResponse, error)
 	// Gets the EC2 instances of all accounts in Cost Group
 	GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error)
 }
@@ -720,6 +722,15 @@ func (c *coverClient) GetRightSizingRecommendation(ctx context.Context, in *GetR
 	return out, nil
 }
 
+func (c *coverClient) ApplyRightSizingRecommendation(ctx context.Context, in *ApplyRightSizingRecommendationRequest, opts ...grpc.CallOption) (*ApplyRightSizingRecommendationResponse, error) {
+	out := new(ApplyRightSizingRecommendationResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ApplyRightSizingRecommendation", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error) {
 	out := new(GetEC2InstancesResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetEC2Instances", in, out, opts...)
@@ -844,6 +855,8 @@ type CoverServer interface {
 	GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error
 	// Gets the right sizing recommendation of all the accounts in the costgroup
 	GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error)
+	// Applies the right sizing recommendation of a resource
+	ApplyRightSizingRecommendation(context.Context, *ApplyRightSizingRecommendationRequest) (*ApplyRightSizingRecommendationResponse, error)
 	// Gets the EC2 instances of all accounts in Cost Group
 	GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error)
 	mustEmbedUnimplementedCoverServer()
@@ -1020,6 +1033,9 @@ func (UnimplementedCoverServer) GetCostUsage(*GetCostUsageRequest, Cover_GetCost
 }
 func (UnimplementedCoverServer) GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRightSizingRecommendation not implemented")
+}
+func (UnimplementedCoverServer) ApplyRightSizingRecommendation(context.Context, *ApplyRightSizingRecommendationRequest) (*ApplyRightSizingRecommendationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApplyRightSizingRecommendation not implemented")
 }
 func (UnimplementedCoverServer) GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEC2Instances not implemented")
@@ -2054,6 +2070,24 @@ func _Cover_GetRightSizingRecommendation_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ApplyRightSizingRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplyRightSizingRecommendationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ApplyRightSizingRecommendation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/ApplyRightSizingRecommendation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ApplyRightSizingRecommendation(ctx, req.(*ApplyRightSizingRecommendationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_GetEC2Instances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetEC2InstancesRequest)
 	if err := dec(in); err != nil {
@@ -2290,6 +2324,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRightSizingRecommendation",
 			Handler:    _Cover_GetRightSizingRecommendation_Handler,
+		},
+		{
+			MethodName: "ApplyRightSizingRecommendation",
+			Handler:    _Cover_ApplyRightSizingRecommendation_Handler,
 		},
 		{
 			MethodName: "GetEC2Instances",
