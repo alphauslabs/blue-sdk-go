@@ -38,6 +38,8 @@ type BillingClient interface {
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
 	// WORK-IN-PROGRESS: Creates an invoice. Only available in Ripple.
 	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
+	// WORK-IN-PROGRESS: Gets an invoice. Only available in Ripple.
+	GetInvoiceStatus(ctx context.Context, in *GetInvoiceStatusRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
 	// Exports an invoice.
@@ -196,6 +198,15 @@ func (c *billingClient) CreateInvoice(ctx context.Context, in *CreateInvoiceRequ
 	return out, nil
 }
 
+func (c *billingClient) GetInvoiceStatus(ctx context.Context, in *GetInvoiceStatusRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error) {
+	out := new(api.InvoiceMessage)
+	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/GetInvoiceStatus", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error) {
 	out := new(api.Invoice)
 	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/GetInvoice", in, out, opts...)
@@ -332,6 +343,8 @@ type BillingServer interface {
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
 	// WORK-IN-PROGRESS: Creates an invoice. Only available in Ripple.
 	CreateInvoice(context.Context, *CreateInvoiceRequest) (*api.InvoiceMessage, error)
+	// WORK-IN-PROGRESS: Gets an invoice. Only available in Ripple.
+	GetInvoiceStatus(context.Context, *GetInvoiceStatusRequest) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
 	// Exports an invoice.
@@ -375,6 +388,9 @@ func (UnimplementedBillingServer) ListUsageCostsDrift(*ListUsageCostsDriftReques
 }
 func (UnimplementedBillingServer) CreateInvoice(context.Context, *CreateInvoiceRequest) (*api.InvoiceMessage, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (UnimplementedBillingServer) GetInvoiceStatus(context.Context, *GetInvoiceStatusRequest) (*api.InvoiceMessage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceStatus not implemented")
 }
 func (UnimplementedBillingServer) GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
@@ -544,6 +560,24 @@ func _Billing_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServer).CreateInvoice(ctx, req.(*CreateInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_GetInvoiceStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetInvoiceStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.billing.v1.Billing/GetInvoiceStatus",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetInvoiceStatus(ctx, req.(*GetInvoiceStatusRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -720,6 +754,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateInvoice",
 			Handler:    _Billing_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "GetInvoiceStatus",
+			Handler:    _Billing_GetInvoiceStatus_Handler,
 		},
 		{
 			MethodName: "GetInvoice",
