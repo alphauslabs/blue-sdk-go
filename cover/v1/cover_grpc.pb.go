@@ -135,8 +135,10 @@ type CoverClient interface {
 	GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error)
 	// Gets the right sizing recommendation of all the accounts in the costgroup
 	GetRightSizingRecommendation(ctx context.Context, in *GetRightSizingRecommendationRequest, opts ...grpc.CallOption) (*GetRightSizingRecommendationResponse, error)
-	// Applies the right sizing recommendation of a resource
-	ApplyRightSizingRecommendation(ctx context.Context, in *ApplyRightSizingRecommendationRequest, opts ...grpc.CallOption) (*ApplyRightSizingRecommendationResponse, error)
+	// Modify resource type from right sizing recommendation
+	ModifyResourceType(ctx context.Context, in *ModifyResourceTypeRequest, opts ...grpc.CallOption) (*ModifyResourceTypeResponse, error)
+	// Terminate a resource from right sizing recommendation
+	TerminateResource(ctx context.Context, in *TerminateResourceRequest, opts ...grpc.CallOption) (*TerminateResourceResponse, error)
 	// Gets the EC2 instances of all accounts in Cost Group
 	GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error)
 }
@@ -722,9 +724,18 @@ func (c *coverClient) GetRightSizingRecommendation(ctx context.Context, in *GetR
 	return out, nil
 }
 
-func (c *coverClient) ApplyRightSizingRecommendation(ctx context.Context, in *ApplyRightSizingRecommendationRequest, opts ...grpc.CallOption) (*ApplyRightSizingRecommendationResponse, error) {
-	out := new(ApplyRightSizingRecommendationResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ApplyRightSizingRecommendation", in, out, opts...)
+func (c *coverClient) ModifyResourceType(ctx context.Context, in *ModifyResourceTypeRequest, opts ...grpc.CallOption) (*ModifyResourceTypeResponse, error) {
+	out := new(ModifyResourceTypeResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ModifyResourceType", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) TerminateResource(ctx context.Context, in *TerminateResourceRequest, opts ...grpc.CallOption) (*TerminateResourceResponse, error) {
+	out := new(TerminateResourceResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/TerminateResource", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -855,8 +866,10 @@ type CoverServer interface {
 	GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error
 	// Gets the right sizing recommendation of all the accounts in the costgroup
 	GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error)
-	// Applies the right sizing recommendation of a resource
-	ApplyRightSizingRecommendation(context.Context, *ApplyRightSizingRecommendationRequest) (*ApplyRightSizingRecommendationResponse, error)
+	// Modify resource type from right sizing recommendation
+	ModifyResourceType(context.Context, *ModifyResourceTypeRequest) (*ModifyResourceTypeResponse, error)
+	// Terminate a resource from right sizing recommendation
+	TerminateResource(context.Context, *TerminateResourceRequest) (*TerminateResourceResponse, error)
 	// Gets the EC2 instances of all accounts in Cost Group
 	GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error)
 	mustEmbedUnimplementedCoverServer()
@@ -1034,8 +1047,11 @@ func (UnimplementedCoverServer) GetCostUsage(*GetCostUsageRequest, Cover_GetCost
 func (UnimplementedCoverServer) GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRightSizingRecommendation not implemented")
 }
-func (UnimplementedCoverServer) ApplyRightSizingRecommendation(context.Context, *ApplyRightSizingRecommendationRequest) (*ApplyRightSizingRecommendationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApplyRightSizingRecommendation not implemented")
+func (UnimplementedCoverServer) ModifyResourceType(context.Context, *ModifyResourceTypeRequest) (*ModifyResourceTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ModifyResourceType not implemented")
+}
+func (UnimplementedCoverServer) TerminateResource(context.Context, *TerminateResourceRequest) (*TerminateResourceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TerminateResource not implemented")
 }
 func (UnimplementedCoverServer) GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEC2Instances not implemented")
@@ -2070,20 +2086,38 @@ func _Cover_GetRightSizingRecommendation_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_ApplyRightSizingRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ApplyRightSizingRecommendationRequest)
+func _Cover_ModifyResourceType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ModifyResourceTypeRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).ApplyRightSizingRecommendation(ctx, in)
+		return srv.(CoverServer).ModifyResourceType(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/ApplyRightSizingRecommendation",
+		FullMethod: "/blueapi.cover.v1.Cover/ModifyResourceType",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).ApplyRightSizingRecommendation(ctx, req.(*ApplyRightSizingRecommendationRequest))
+		return srv.(CoverServer).ModifyResourceType(ctx, req.(*ModifyResourceTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_TerminateResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TerminateResourceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).TerminateResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/TerminateResource",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).TerminateResource(ctx, req.(*TerminateResourceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2326,8 +2360,12 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetRightSizingRecommendation_Handler,
 		},
 		{
-			MethodName: "ApplyRightSizingRecommendation",
-			Handler:    _Cover_ApplyRightSizingRecommendation_Handler,
+			MethodName: "ModifyResourceType",
+			Handler:    _Cover_ModifyResourceType_Handler,
+		},
+		{
+			MethodName: "TerminateResource",
+			Handler:    _Cover_TerminateResource_Handler,
 		},
 		{
 			MethodName: "GetEC2Instances",
