@@ -377,6 +377,10 @@ func request_Cost_ListAccounts_0(ctx context.Context, marshaler runtime.Marshale
 
 }
 
+var (
+	filter_Cost_ListAccounts_1 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "groupId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+)
+
 func request_Cost_ListAccounts_1(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ListAccountsClient, runtime.ServerMetadata, error) {
 	var protoReq ListAccountsRequest
 	var metadata runtime.ServerMetadata
@@ -406,6 +410,13 @@ func request_Cost_ListAccounts_1(ctx context.Context, marshaler runtime.Marshale
 	protoReq.GroupId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Cost_ListAccounts_1); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	stream, err := client.ListAccounts(ctx, &protoReq)
