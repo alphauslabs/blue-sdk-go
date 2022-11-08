@@ -28,6 +28,10 @@ type InvoiceMessage struct {
 	// invoice generate request id
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// invoice generate request status
+	//
+	// done: Invoicing is complete.
+	// running: Invoicing in progress.
+	// faild: Invoicing is failure.
 	Status string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 }
 
