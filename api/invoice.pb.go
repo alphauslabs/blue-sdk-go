@@ -31,7 +31,7 @@ type InvoiceMessage struct {
 	//
 	// done: Invoicing is complete.
 	// running: Invoicing in progress.
-	// faild: Invoicing is failure.
+	// failed: Invoicing is failure.
 	Status string `protobuf:"bytes,2,opt,name=status,proto3" json:"status,omitempty"`
 }
 
