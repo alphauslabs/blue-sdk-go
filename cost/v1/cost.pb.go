@@ -5382,6 +5382,9 @@ type ReadCostsRequestGcpOptions struct {
 	// Optional. A list of filtering options. See [ReadCostsRequestGcpOptionsFilters] for more information on each filter item. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
 	Filters []*ReadCostsRequestGcpOptionsFilters `protobuf:"bytes,4,rep,name=filters,proto3" json:"filters,omitempty"`
 	// Optional. If set to true, stream will include invoice month. Discarded when `groupByColumns` field is set to `none`.
+	//
+	// The last usage occurrence of invoice month based on endTime is set to endTime.
+	// For example, (Assumption: Last usage start time 2022-02-01 01:00:00 UTC) If you set to "endTime:20210131", automatically set to "endTime:20220101". Ignored if the batch calculation for invoice month has not been completed.
 	IncludeInvoiceMonth bool `protobuf:"varint,6,opt,name=includeInvoiceMonth,proto3" json:"includeInvoiceMonth,omitempty"`
 	// If true, force API to not use cached data.
 	NoCache bool `protobuf:"varint,5,opt,name=noCache,proto3" json:"noCache,omitempty"`
