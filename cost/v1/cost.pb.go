@@ -5386,7 +5386,7 @@ type ReadCostsRequestGcpOptions struct {
 	// The last usage occurrence of invoice month based on endTime is set to endTime.
 	// For example, (Assumption: Last usage start time 2022-02-01 01:00:00 UTC) If you set to "endTime:20210131", automatically set to "endTime:20220101". Ignored if the batch calculation for invoice month has not been completed.
 	IncludeInvoiceMonth bool `protobuf:"varint,6,opt,name=includeInvoiceMonth,proto3" json:"includeInvoiceMonth,omitempty"`
-	// Optional. If set to true, stream will include credits. Discarded when `groupByColumns` field is set to `none`.
+	// Optional. If set to true, stream will include credits{"creditsType","creditsName"}. Discarded when `groupByColumns` field is set to `none`.
 	IncludeCredits bool `protobuf:"varint,7,opt,name=includeCredits,proto3" json:"includeCredits,omitempty"`
 	// If true, force API to not use cached data.
 	NoCache bool `protobuf:"varint,5,opt,name=noCache,proto3" json:"noCache,omitempty"`
