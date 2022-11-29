@@ -2195,6 +2195,14 @@ func request_Cover_ListAccountAccess_0(ctx context.Context, marshaler runtime.Ma
 	var protoReq ListAccountAccessRequest
 	var metadata runtime.ServerMetadata
 
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	stream, err := client.ListAccountAccess(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -5372,7 +5380,7 @@ var (
 
 	pattern_Cover_GetAccountAccessTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aws", "acctaccess"}, ""))
 
-	pattern_Cover_ListAccountAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aws", "acctaccess"}, "read"))
+	pattern_Cover_ListAccountAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "aws", "acctaccess", "all"}, "read"))
 
 	pattern_Cover_GetAccountAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aws", "acctaccess", "target"}, ""))
 
