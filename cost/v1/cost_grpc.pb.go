@@ -43,6 +43,8 @@ type CostClient interface {
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Lists all vendor tags.
+	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (Cost_ListTagsClient, error)
 	// Lists the vendor calculator's queued accounts for calculation. If result is non-empty, it means calculation is still in progress for the returned accounts. Only available in Ripple.
 	ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
@@ -267,8 +269,40 @@ func (c *costClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest
 	return out, nil
 }
 
+func (c *costClient) ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (Cost_ListTagsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ListTags", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costListTagsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ListTagsClient interface {
+	Recv() (*api.CostTag, error)
+	grpc.ClientStream
+}
+
+type costListTagsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costListTagsClient) Recv() (*api.CostTag, error) {
+	m := new(api.CostTag)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *costClient) ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -408,7 +442,7 @@ func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFi
 }
 
 func (c *costClient) ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], "/blueapi.cost.v1.Cost/ReadCostAttributes", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadCostAttributes", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -440,7 +474,7 @@ func (x *costReadCostAttributesClient) Recv() (*CostAttributeItem, error) {
 }
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -472,7 +506,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -504,7 +538,7 @@ func (x *costReadAdjustmentsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -536,7 +570,7 @@ func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -715,6 +749,8 @@ type CostServer interface {
 	CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Lists all vendor tags.
+	ListTags(*ListTagsRequest, Cost_ListTagsServer) error
 	// Lists the vendor calculator's queued accounts for calculation. If result is non-empty, it means calculation is still in progress for the returned accounts. Only available in Ripple.
 	ListCalculatorRunningAccounts(*ListCalculatorRunningAccountsRequest, Cost_ListCalculatorRunningAccountsServer) error
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
@@ -812,6 +848,9 @@ func (UnimplementedCostServer) CreateAccount(context.Context, *CreateAccountRequ
 }
 func (UnimplementedCostServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedCostServer) ListTags(*ListTagsRequest, Cost_ListTagsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListTags not implemented")
 }
 func (UnimplementedCostServer) ListCalculatorRunningAccounts(*ListCalculatorRunningAccountsRequest, Cost_ListCalculatorRunningAccountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListCalculatorRunningAccounts not implemented")
@@ -1091,6 +1130,27 @@ func _Cost_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(
 		return srv.(CostServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ListTags_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListTagsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ListTags(m, &costListTagsServer{stream})
+}
+
+type Cost_ListTagsServer interface {
+	Send(*api.CostTag) error
+	grpc.ServerStream
+}
+
+type costListTagsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costListTagsServer) Send(m *api.CostTag) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cost_ListCalculatorRunningAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -1837,6 +1897,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccounts",
 			Handler:       _Cost_ListAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListTags",
+			Handler:       _Cost_ListTags_Handler,
 			ServerStreams: true,
 		},
 		{
