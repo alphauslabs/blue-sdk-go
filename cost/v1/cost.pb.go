@@ -799,7 +799,7 @@ func (x *DeleteAccountRequest) GetId() string {
 	return ""
 }
 
-// WORK-IN-PROGRESS: Request message for the Cost.ListTags rpc.
+// Request message for the Cost.ListTags rpc.
 type ListTagsRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
