@@ -34,6 +34,8 @@ type CoverClient interface {
 	GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error)
 	// Get the cost group to which the member is attached
 	GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error)
+	// Modify member's permission
+	UpdateMemberPermission(ctx context.Context, in *UpdateMemberPermissionRequest, opts ...grpc.CallOption) (*UpdateMemberPermissionResponse, error)
 	// Get the details of the logged-in user
 	GetUserDetails(ctx context.Context, in *GetUserDetailsRequest, opts ...grpc.CallOption) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
@@ -190,6 +192,15 @@ func (c *coverClient) GetMemberDetails(ctx context.Context, in *GetMemberDetails
 func (c *coverClient) GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error) {
 	out := new(GetMemberCostGroupResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetMemberCostGroup", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateMemberPermission(ctx context.Context, in *UpdateMemberPermissionRequest, opts ...grpc.CallOption) (*UpdateMemberPermissionResponse, error) {
+	out := new(UpdateMemberPermissionResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/UpdateMemberPermission", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -765,6 +776,8 @@ type CoverServer interface {
 	GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error)
 	// Get the cost group to which the member is attached
 	GetMemberCostGroup(context.Context, *GetMemberCostGroupRequest) (*GetMemberCostGroupResponse, error)
+	// Modify member's permission
+	UpdateMemberPermission(context.Context, *UpdateMemberPermissionRequest) (*UpdateMemberPermissionResponse, error)
 	// Get the details of the logged-in user
 	GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
@@ -893,6 +906,9 @@ func (UnimplementedCoverServer) GetMemberDetails(context.Context, *GetMemberDeta
 }
 func (UnimplementedCoverServer) GetMemberCostGroup(context.Context, *GetMemberCostGroupRequest) (*GetMemberCostGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMemberCostGroup not implemented")
+}
+func (UnimplementedCoverServer) UpdateMemberPermission(context.Context, *UpdateMemberPermissionRequest) (*UpdateMemberPermissionResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberPermission not implemented")
 }
 func (UnimplementedCoverServer) GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserDetails not implemented")
@@ -1155,6 +1171,24 @@ func _Cover_GetMemberCostGroup_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).GetMemberCostGroup(ctx, req.(*GetMemberCostGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateMemberPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMemberPermissionRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateMemberPermission(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/UpdateMemberPermission",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateMemberPermission(ctx, req.(*UpdateMemberPermissionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2166,6 +2200,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMemberCostGroup",
 			Handler:    _Cover_GetMemberCostGroup_Handler,
+		},
+		{
+			MethodName: "UpdateMemberPermission",
+			Handler:    _Cover_UpdateMemberPermission_Handler,
 		},
 		{
 			MethodName: "GetUserDetails",
