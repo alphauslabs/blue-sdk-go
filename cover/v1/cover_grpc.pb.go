@@ -24,8 +24,14 @@ const _ = grpc.SupportPackageIsVersion7
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CoverClient interface {
+	// Onboard an organization with an admin account and default cost group
+	OnboardOrg(ctx context.Context, in *OnboardOrgRequest, opts ...grpc.CallOption) (*OnboardOrgResponse, error)
 	// Invite members to the system
 	InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error)
+	// Activate the added user
+	ActivateUser(ctx context.Context, in *ActivateUserRequest, opts ...grpc.CallOption) (*ActivateUserResponse, error)
+	// Check user activation status
+	CheckUserActivation(ctx context.Context, in *CheckUserActivationRequest, opts ...grpc.CallOption) (*CheckUserActivationResponse, error)
 	// Create a member
 	CreateMember(ctx context.Context, in *CreateMemberRequest, opts ...grpc.CallOption) (*CreateMemberResponse, error)
 	// Get all the members/subusers of the company
@@ -153,9 +159,36 @@ func NewCoverClient(cc grpc.ClientConnInterface) CoverClient {
 	return &coverClient{cc}
 }
 
+func (c *coverClient) OnboardOrg(ctx context.Context, in *OnboardOrgRequest, opts ...grpc.CallOption) (*OnboardOrgResponse, error) {
+	out := new(OnboardOrgResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/OnboardOrg", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error) {
 	out := new(InviteMemberResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/InviteMember", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ActivateUser(ctx context.Context, in *ActivateUserRequest, opts ...grpc.CallOption) (*ActivateUserResponse, error) {
+	out := new(ActivateUserResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ActivateUser", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CheckUserActivation(ctx context.Context, in *CheckUserActivationRequest, opts ...grpc.CallOption) (*CheckUserActivationResponse, error) {
+	out := new(CheckUserActivationResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/CheckUserActivation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -766,8 +799,14 @@ func (c *coverClient) GetEC2Instances(ctx context.Context, in *GetEC2InstancesRe
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
 type CoverServer interface {
+	// Onboard an organization with an admin account and default cost group
+	OnboardOrg(context.Context, *OnboardOrgRequest) (*OnboardOrgResponse, error)
 	// Invite members to the system
 	InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error)
+	// Activate the added user
+	ActivateUser(context.Context, *ActivateUserRequest) (*ActivateUserResponse, error)
+	// Check user activation status
+	CheckUserActivation(context.Context, *CheckUserActivationRequest) (*CheckUserActivationResponse, error)
 	// Create a member
 	CreateMember(context.Context, *CreateMemberRequest) (*CreateMemberResponse, error)
 	// Get all the members/subusers of the company
@@ -892,8 +931,17 @@ type CoverServer interface {
 type UnimplementedCoverServer struct {
 }
 
+func (UnimplementedCoverServer) OnboardOrg(context.Context, *OnboardOrgRequest) (*OnboardOrgResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OnboardOrg not implemented")
+}
 func (UnimplementedCoverServer) InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InviteMember not implemented")
+}
+func (UnimplementedCoverServer) ActivateUser(context.Context, *ActivateUserRequest) (*ActivateUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ActivateUser not implemented")
+}
+func (UnimplementedCoverServer) CheckUserActivation(context.Context, *CheckUserActivationRequest) (*CheckUserActivationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckUserActivation not implemented")
 }
 func (UnimplementedCoverServer) CreateMember(context.Context, *CreateMemberRequest) (*CreateMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMember not implemented")
@@ -1085,6 +1133,24 @@ func RegisterCoverServer(s grpc.ServiceRegistrar, srv CoverServer) {
 	s.RegisterService(&Cover_ServiceDesc, srv)
 }
 
+func _Cover_OnboardOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OnboardOrgRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).OnboardOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/OnboardOrg",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).OnboardOrg(ctx, req.(*OnboardOrgRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_InviteMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(InviteMemberRequest)
 	if err := dec(in); err != nil {
@@ -1099,6 +1165,42 @@ func _Cover_InviteMember_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).InviteMember(ctx, req.(*InviteMemberRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ActivateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ActivateUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ActivateUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/ActivateUser",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ActivateUser(ctx, req.(*ActivateUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CheckUserActivation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckUserActivationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CheckUserActivation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/CheckUserActivation",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CheckUserActivation(ctx, req.(*CheckUserActivationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2182,8 +2284,20 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*CoverServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
+			MethodName: "OnboardOrg",
+			Handler:    _Cover_OnboardOrg_Handler,
+		},
+		{
 			MethodName: "InviteMember",
 			Handler:    _Cover_InviteMember_Handler,
+		},
+		{
+			MethodName: "ActivateUser",
+			Handler:    _Cover_ActivateUser_Handler,
+		},
+		{
+			MethodName: "CheckUserActivation",
+			Handler:    _Cover_CheckUserActivation_Handler,
 		},
 		{
 			MethodName: "CreateMember",
