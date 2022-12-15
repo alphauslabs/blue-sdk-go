@@ -149,6 +149,8 @@ type CoverClient interface {
 	TerminateResource(ctx context.Context, in *TerminateResourceRequest, opts ...grpc.CallOption) (*TerminateResourceResponse, error)
 	// Gets the EC2 instances of all accounts in Cost Group
 	GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error)
+	// Upload charge code
+	UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error)
 }
 
 type coverClient struct {
@@ -795,6 +797,40 @@ func (c *coverClient) GetEC2Instances(ctx context.Context, in *GetEC2InstancesRe
 	return out, nil
 }
 
+func (c *coverClient) UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[3], "/blueapi.cover.v1.Cover/UploadChargeCode", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverUploadChargeCodeClient{stream}
+	return x, nil
+}
+
+type Cover_UploadChargeCodeClient interface {
+	Send(*UploadChargeCodeRequest) error
+	CloseAndRecv() (*UploadChargeCodeResponse, error)
+	grpc.ClientStream
+}
+
+type coverUploadChargeCodeClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverUploadChargeCodeClient) Send(m *UploadChargeCodeRequest) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *coverUploadChargeCodeClient) CloseAndRecv() (*UploadChargeCodeResponse, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(UploadChargeCodeResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -924,6 +960,8 @@ type CoverServer interface {
 	TerminateResource(context.Context, *TerminateResourceRequest) (*TerminateResourceResponse, error)
 	// Gets the EC2 instances of all accounts in Cost Group
 	GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error)
+	// Upload charge code
+	UploadChargeCode(Cover_UploadChargeCodeServer) error
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -1119,6 +1157,9 @@ func (UnimplementedCoverServer) TerminateResource(context.Context, *TerminateRes
 }
 func (UnimplementedCoverServer) GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetEC2Instances not implemented")
+}
+func (UnimplementedCoverServer) UploadChargeCode(Cover_UploadChargeCodeServer) error {
+	return status.Errorf(codes.Unimplemented, "method UploadChargeCode not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -2276,6 +2317,32 @@ func _Cover_GetEC2Instances_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_UploadChargeCode_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(CoverServer).UploadChargeCode(&coverUploadChargeCodeServer{stream})
+}
+
+type Cover_UploadChargeCodeServer interface {
+	SendAndClose(*UploadChargeCodeResponse) error
+	Recv() (*UploadChargeCodeRequest, error)
+	grpc.ServerStream
+}
+
+type coverUploadChargeCodeServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverUploadChargeCodeServer) SendAndClose(m *UploadChargeCodeResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *coverUploadChargeCodeServer) Recv() (*UploadChargeCodeRequest, error) {
+	m := new(UploadChargeCodeRequest)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2539,6 +2606,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "GetCostUsage",
 			Handler:       _Cover_GetCostUsage_Handler,
 			ServerStreams: true,
+		},
+		{
+			StreamName:    "UploadChargeCode",
+			Handler:       _Cover_UploadChargeCode_Handler,
+			ClientStreams: true,
 		},
 	},
 	Metadata: "cover/v1/cover.proto",
