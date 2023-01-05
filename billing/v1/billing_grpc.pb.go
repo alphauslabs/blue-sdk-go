@@ -42,6 +42,8 @@ type BillingClient interface {
 	GetInvoiceStatus(ctx context.Context, in *GetInvoiceStatusRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
+	// Updates an invoice preview. Only available in Ripple.
+	UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Exports an invoice.
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
 	// Reads the invoice service discounts. Only available in Ripple.
@@ -216,6 +218,15 @@ func (c *billingClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, o
 	return out, nil
 }
 
+func (c *billingClient) UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/UpdateInvoicePreviews", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error) {
 	out := new(ExportInvoiceFileResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/ExportInvoiceFile", in, out, opts...)
@@ -347,6 +358,8 @@ type BillingServer interface {
 	GetInvoiceStatus(context.Context, *GetInvoiceStatusRequest) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
+	// Updates an invoice preview. Only available in Ripple.
+	UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error)
 	// Exports an invoice.
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
 	// Reads the invoice service discounts. Only available in Ripple.
@@ -394,6 +407,9 @@ func (UnimplementedBillingServer) GetInvoiceStatus(context.Context, *GetInvoiceS
 }
 func (UnimplementedBillingServer) GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
+}
+func (UnimplementedBillingServer) UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoicePreviews not implemented")
 }
 func (UnimplementedBillingServer) ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoiceFile not implemented")
@@ -600,6 +616,24 @@ func _Billing_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_UpdateInvoicePreviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInvoicePreviewsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateInvoicePreviews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.billing.v1.Billing/UpdateInvoicePreviews",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateInvoicePreviews(ctx, req.(*UpdateInvoicePreviewsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_ExportInvoiceFile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ExportInvoiceFileRequest)
 	if err := dec(in); err != nil {
@@ -762,6 +796,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInvoice",
 			Handler:    _Billing_GetInvoice_Handler,
+		},
+		{
+			MethodName: "UpdateInvoicePreviews",
+			Handler:    _Billing_UpdateInvoicePreviews_Handler,
 		},
 		{
 			MethodName: "ExportInvoiceFile",
