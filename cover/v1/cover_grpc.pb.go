@@ -151,6 +151,14 @@ type CoverClient interface {
 	GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error)
 	// Upload charge code
 	UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error)
+	// Assign payer to a linked account
+	AssignPayer(ctx context.Context, in *AssignPayerRequest, opts ...grpc.CallOption) (*AssignPayerResponse, error)
+	// Get list of all payers
+	GetPayers(ctx context.Context, in *GetPayersRequest, opts ...grpc.CallOption) (*GetPayersResponse, error)
+	// Get list of registered accounts
+	GetAccounts(ctx context.Context, in *GetAccountsRequest, opts ...grpc.CallOption) (*GetAccountsResponse, error)
+	// Get list of supported services
+	GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error)
 }
 
 type coverClient struct {
@@ -831,6 +839,42 @@ func (x *coverUploadChargeCodeClient) CloseAndRecv() (*UploadChargeCodeResponse,
 	return m, nil
 }
 
+func (c *coverClient) AssignPayer(ctx context.Context, in *AssignPayerRequest, opts ...grpc.CallOption) (*AssignPayerResponse, error) {
+	out := new(AssignPayerResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/AssignPayer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetPayers(ctx context.Context, in *GetPayersRequest, opts ...grpc.CallOption) (*GetPayersResponse, error) {
+	out := new(GetPayersResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetPayers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetAccounts(ctx context.Context, in *GetAccountsRequest, opts ...grpc.CallOption) (*GetAccountsResponse, error) {
+	out := new(GetAccountsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetAccounts", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error) {
+	out := new(GetServicesResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetServices", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -962,6 +1006,14 @@ type CoverServer interface {
 	GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error)
 	// Upload charge code
 	UploadChargeCode(Cover_UploadChargeCodeServer) error
+	// Assign payer to a linked account
+	AssignPayer(context.Context, *AssignPayerRequest) (*AssignPayerResponse, error)
+	// Get list of all payers
+	GetPayers(context.Context, *GetPayersRequest) (*GetPayersResponse, error)
+	// Get list of registered accounts
+	GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error)
+	// Get list of supported services
+	GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -1160,6 +1212,18 @@ func (UnimplementedCoverServer) GetEC2Instances(context.Context, *GetEC2Instance
 }
 func (UnimplementedCoverServer) UploadChargeCode(Cover_UploadChargeCodeServer) error {
 	return status.Errorf(codes.Unimplemented, "method UploadChargeCode not implemented")
+}
+func (UnimplementedCoverServer) AssignPayer(context.Context, *AssignPayerRequest) (*AssignPayerResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AssignPayer not implemented")
+}
+func (UnimplementedCoverServer) GetPayers(context.Context, *GetPayersRequest) (*GetPayersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayers not implemented")
+}
+func (UnimplementedCoverServer) GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccounts not implemented")
+}
+func (UnimplementedCoverServer) GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServices not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -2343,6 +2407,78 @@ func (x *coverUploadChargeCodeServer) Recv() (*UploadChargeCodeRequest, error) {
 	return m, nil
 }
 
+func _Cover_AssignPayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssignPayerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).AssignPayer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/AssignPayer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).AssignPayer(ctx, req.(*AssignPayerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetPayers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPayersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetPayers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetPayers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetPayers(ctx, req.(*GetPayersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetAccounts",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAccounts(ctx, req.(*GetAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetServices",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetServices(ctx, req.(*GetServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2589,6 +2725,22 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetEC2Instances",
 			Handler:    _Cover_GetEC2Instances_Handler,
+		},
+		{
+			MethodName: "AssignPayer",
+			Handler:    _Cover_AssignPayer_Handler,
+		},
+		{
+			MethodName: "GetPayers",
+			Handler:    _Cover_GetPayers_Handler,
+		},
+		{
+			MethodName: "GetAccounts",
+			Handler:    _Cover_GetAccounts_Handler,
+		},
+		{
+			MethodName: "GetServices",
+			Handler:    _Cover_GetServices_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
