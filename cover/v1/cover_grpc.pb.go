@@ -30,8 +30,6 @@ type CoverClient interface {
 	InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error)
 	// Activate the added user
 	ActivateUser(ctx context.Context, in *ActivateUserRequest, opts ...grpc.CallOption) (*ActivateUserResponse, error)
-	// Check user activation status
-	CheckUserActivation(ctx context.Context, in *CheckUserActivationRequest, opts ...grpc.CallOption) (*CheckUserActivationResponse, error)
 	// Create a member
 	CreateMember(ctx context.Context, in *CreateMemberRequest, opts ...grpc.CallOption) (*CreateMemberResponse, error)
 	// Get all the members/subusers of the company
@@ -190,15 +188,6 @@ func (c *coverClient) InviteMember(ctx context.Context, in *InviteMemberRequest,
 func (c *coverClient) ActivateUser(ctx context.Context, in *ActivateUserRequest, opts ...grpc.CallOption) (*ActivateUserResponse, error) {
 	out := new(ActivateUserResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/ActivateUser", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) CheckUserActivation(ctx context.Context, in *CheckUserActivationRequest, opts ...grpc.CallOption) (*CheckUserActivationResponse, error) {
-	out := new(CheckUserActivationResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/CheckUserActivation", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -885,8 +874,6 @@ type CoverServer interface {
 	InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error)
 	// Activate the added user
 	ActivateUser(context.Context, *ActivateUserRequest) (*ActivateUserResponse, error)
-	// Check user activation status
-	CheckUserActivation(context.Context, *CheckUserActivationRequest) (*CheckUserActivationResponse, error)
 	// Create a member
 	CreateMember(context.Context, *CreateMemberRequest) (*CreateMemberResponse, error)
 	// Get all the members/subusers of the company
@@ -1029,9 +1016,6 @@ func (UnimplementedCoverServer) InviteMember(context.Context, *InviteMemberReque
 }
 func (UnimplementedCoverServer) ActivateUser(context.Context, *ActivateUserRequest) (*ActivateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ActivateUser not implemented")
-}
-func (UnimplementedCoverServer) CheckUserActivation(context.Context, *CheckUserActivationRequest) (*CheckUserActivationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CheckUserActivation not implemented")
 }
 func (UnimplementedCoverServer) CreateMember(context.Context, *CreateMemberRequest) (*CreateMemberResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMember not implemented")
@@ -1288,24 +1272,6 @@ func _Cover_ActivateUser_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).ActivateUser(ctx, req.(*ActivateUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_CheckUserActivation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CheckUserActivationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).CheckUserActivation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cover.v1.Cover/CheckUserActivation",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).CheckUserActivation(ctx, req.(*CheckUserActivationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2497,10 +2463,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ActivateUser",
 			Handler:    _Cover_ActivateUser_Handler,
-		},
-		{
-			MethodName: "CheckUserActivation",
-			Handler:    _Cover_CheckUserActivation_Handler,
 		},
 		{
 			MethodName: "CreateMember",
