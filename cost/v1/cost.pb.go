@@ -6121,7 +6121,9 @@ type CreateCalculatorCostModifierRequest_AwsOptions_Simple struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. A simple arithmetic-based modifier. Supported operators are `+`, `-`, `*`, and `/`. Operator precedence follows the C/C++ rules described in https://en.cppreference.com/w/cpp/language/operator_precedence. You can also use parenthesis `()` to control precedence.
+	// Required. A simple arithmetic-based modifier.
+	//
+	// Supported operators are `+`, `-`, `*`, and `/`. Operator precedence follows the C/C++ rules described in https://en.cppreference.com/w/cpp/language/operator_precedence. You can also use parenthesis `()` to control precedence.
 	// Examples:
 	//
 	//	`1 + 2 * 3`
