@@ -5993,7 +5993,7 @@ type CreateCalculatorCostModifierRequest_AwsOptions struct {
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
 	// Optional. The payer id to which the modifier is applied. A comma-separated list of payer ids is also valid.
 	PayerId string `protobuf:"bytes,3,opt,name=payerId,proto3" json:"payerId,omitempty"`
-	// Optional. Conditional qualifiers to further filter the modifier targets. Multiple qualifiers use the the logical `or` operator; `qualifiers[0] || qualifiers[1] || qualifiers[n]`.
+	// Optional. Conditional qualifiers to further filter the modifier targets. Multiple qualifiers use the logical `or` operator; `qualifiers[0] || qualifiers[1] || qualifiers[n]`.
 	Qualifiers []*CreateCalculatorCostModifierRequest_AwsOptions_Qualifier `protobuf:"bytes,4,rep,name=qualifiers,proto3" json:"qualifiers,omitempty"`
 	Simple     *CreateCalculatorCostModifierRequest_AwsOptions_Simple      `protobuf:"bytes,5,opt,name=simple,proto3" json:"simple,omitempty"`
 }
@@ -6121,7 +6121,7 @@ type CreateCalculatorCostModifierRequest_AwsOptions_Simple struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. A simple arithmetic-based modifier. Supported operators are `+`, `-`, `*`, and `/`. Operator precedence follows the [C/C++](https://en.cppreference.com/w/cpp/language/operator_precedence) rules. You can also use parenthesis `()` to control precedence.
+	// Required. A simple arithmetic-based modifier. Supported operators are `+`, `-`, `*`, and `/`. Operator precedence follows the C/C++ rules described in https://en.cppreference.com/w/cpp/language/operator_precedence. You can also use parenthesis `()` to control precedence.
 	// Examples:
 	//
 	//	`1 + 2 * 3`
