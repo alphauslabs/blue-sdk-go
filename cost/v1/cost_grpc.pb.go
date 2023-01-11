@@ -49,6 +49,12 @@ type CostClient interface {
 	ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error)
+	// WORK-IN-PROGRESS: Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (*ListCalculatorCostModifiersResponse, error)
+	// WORK-IN-PROGRESS: Creates a cost modifier. A cost modifier allows you to manipulate the cost per lineitem. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	CreateCalculatorCostModifier(ctx context.Context, in *CreateCalculatorCostModifierRequest, opts ...grpc.CallOption) (*CreateCalculatorCostModifierResponse, error)
+	// WORK-IN-PROGRESS: Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	DeleteCalculatorCostModifier(ctx context.Context, in *DeleteCalculatorCostModifierRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.
@@ -336,6 +342,33 @@ func (x *costListCalculatorRunningAccountsClient) Recv() (*ListCalculatorRunning
 func (c *costClient) GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error) {
 	out := new(GetCalculatorConfigResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/GetCalculatorConfig", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (*ListCalculatorCostModifiersResponse, error) {
+	out := new(ListCalculatorCostModifiersResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) CreateCalculatorCostModifier(ctx context.Context, in *CreateCalculatorCostModifierRequest, opts ...grpc.CallOption) (*CreateCalculatorCostModifierResponse, error) {
+	out := new(CreateCalculatorCostModifierResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/CreateCalculatorCostModifier", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) DeleteCalculatorCostModifier(ctx context.Context, in *DeleteCalculatorCostModifierRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/DeleteCalculatorCostModifier", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -755,6 +788,12 @@ type CostServer interface {
 	ListCalculatorRunningAccounts(*ListCalculatorRunningAccountsRequest, Cost_ListCalculatorRunningAccountsServer) error
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error)
+	// WORK-IN-PROGRESS: Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	ListCalculatorCostModifiers(context.Context, *ListCalculatorCostModifiersRequest) (*ListCalculatorCostModifiersResponse, error)
+	// WORK-IN-PROGRESS: Creates a cost modifier. A cost modifier allows you to manipulate the cost per lineitem. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	CreateCalculatorCostModifier(context.Context, *CreateCalculatorCostModifierRequest) (*CreateCalculatorCostModifierResponse, error)
+	// WORK-IN-PROGRESS: Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	DeleteCalculatorCostModifier(context.Context, *DeleteCalculatorCostModifierRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.
@@ -857,6 +896,15 @@ func (UnimplementedCostServer) ListCalculatorRunningAccounts(*ListCalculatorRunn
 }
 func (UnimplementedCostServer) GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCalculatorConfig not implemented")
+}
+func (UnimplementedCostServer) ListCalculatorCostModifiers(context.Context, *ListCalculatorCostModifiersRequest) (*ListCalculatorCostModifiersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCalculatorCostModifiers not implemented")
+}
+func (UnimplementedCostServer) CreateCalculatorCostModifier(context.Context, *CreateCalculatorCostModifierRequest) (*CreateCalculatorCostModifierResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCalculatorCostModifier not implemented")
+}
+func (UnimplementedCostServer) DeleteCalculatorCostModifier(context.Context, *DeleteCalculatorCostModifierRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCalculatorCostModifier not implemented")
 }
 func (UnimplementedCostServer) ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportCurFiles not implemented")
@@ -1188,6 +1236,60 @@ func _Cost_GetCalculatorConfig_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).GetCalculatorConfig(ctx, req.(*GetCalculatorConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ListCalculatorCostModifiers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCalculatorCostModifiersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).ListCalculatorCostModifiers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).ListCalculatorCostModifiers(ctx, req.(*ListCalculatorCostModifiersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_CreateCalculatorCostModifier_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCalculatorCostModifierRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).CreateCalculatorCostModifier(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/CreateCalculatorCostModifier",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).CreateCalculatorCostModifier(ctx, req.(*CreateCalculatorCostModifierRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_DeleteCalculatorCostModifier_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCalculatorCostModifierRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).DeleteCalculatorCostModifier(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cost.v1.Cost/DeleteCalculatorCostModifier",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).DeleteCalculatorCostModifier(ctx, req.(*DeleteCalculatorCostModifierRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1781,6 +1883,18 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCalculatorConfig",
 			Handler:    _Cost_GetCalculatorConfig_Handler,
+		},
+		{
+			MethodName: "ListCalculatorCostModifiers",
+			Handler:    _Cost_ListCalculatorCostModifiers_Handler,
+		},
+		{
+			MethodName: "CreateCalculatorCostModifier",
+			Handler:    _Cost_CreateCalculatorCostModifier_Handler,
+		},
+		{
+			MethodName: "DeleteCalculatorCostModifier",
+			Handler:    _Cost_DeleteCalculatorCostModifier_Handler,
 		},
 		{
 			MethodName: "ImportCurFiles",
