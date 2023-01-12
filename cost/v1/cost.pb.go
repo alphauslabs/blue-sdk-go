@@ -6143,7 +6143,7 @@ type CreateCalculatorCostModifierRequest_AwsOptions_Simple struct {
 	//
 	// You can use the `{{cost}}` variable to reference the original lineitem cost. For example, if you want to add $10 to the cost, you can use the formula: `{{cost}} + 10`. For trueunblended-type billing groups, `{{cost}}` refers to the calculated trueunblended cost.
 	//
-	// The `{{usage}}` variable can also refer to the usage amount of a lineitem. For example, if you want to use a different rate of $1.5, you can use the formula: `{{usage}} * 1.5`.
+	// The `{{usage}}` variable refers to the usage amount of a lineitem. For example, if you want to use a different rate of $1.5, you can use the formula: `{{usage}} * 1.5`.
 	Modifier string `protobuf:"bytes,1,opt,name=modifier,proto3" json:"modifier,omitempty"`
 	// Optional. A simple description modifier.
 	DescriptionModifier *CreateCalculatorCostModifierRequest_AwsOptions_Simple_DescriptionModifier `protobuf:"bytes,2,opt,name=descriptionModifier,proto3" json:"descriptionModifier,omitempty"`
