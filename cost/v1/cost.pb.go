@@ -6216,11 +6216,11 @@ type CalculatorCostModifierAwsOptions_Simple_DescriptionModifier struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Optional. Add a prefix to the original description.
+	// Optional. Add a prefix to the description.
 	Prefix string `protobuf:"bytes,1,opt,name=prefix,proto3" json:"prefix,omitempty"`
-	// Optional. Add a suffix to the original description.
+	// Optional. Add a suffix to the description.
 	Suffix string `protobuf:"bytes,2,opt,name=suffix,proto3" json:"suffix,omitempty"`
-	// Optional. Replace the original description with the input.
+	// Optional. Replace the description with the input.
 	Replace string `protobuf:"bytes,3,opt,name=replace,proto3" json:"replace,omitempty"`
 	// Optional. Replace matching occurences with the input. The key part is the regular expression matcher based on https://github.com/google/re2, while the value is the replacement. The order of replacement is not guaranteed.
 	ReplaceMatch map[string]string `protobuf:"bytes,4,rep,name=replaceMatch,proto3" json:"replaceMatch,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
