@@ -6222,7 +6222,7 @@ type CalculatorCostModifierAwsOptions_Simple_DescriptionModifier struct {
 	Suffix string `protobuf:"bytes,2,opt,name=suffix,proto3" json:"suffix,omitempty"`
 	// Optional. Replace the original description with the input.
 	Replace string `protobuf:"bytes,3,opt,name=replace,proto3" json:"replace,omitempty"`
-	// Optional. Replace matching occurences with the input. The key part is the regular expression matcher based on https://github.com/google/re2, while the value is the replacement. Multiple entries are applied in sequence.
+	// Optional. Replace matching occurences with the input. The key part is the regular expression matcher based on https://github.com/google/re2, while the value is the replacement. The order of replacement is not guaranteed.
 	ReplaceMatch map[string]string `protobuf:"bytes,4,rep,name=replaceMatch,proto3" json:"replaceMatch,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
