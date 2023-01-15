@@ -49,11 +49,11 @@ type CostClient interface {
 	ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error)
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error)
-	// WORK-IN-PROGRESS: Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	// Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
 	ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (*ListCalculatorCostModifiersResponse, error)
 	// WORK-IN-PROGRESS: Creates a cost modifier. A cost modifier allows you to manipulate the cost per lineitem. At the moment, the supported {vendor} is 'aws' and only applies to items not affected by trueunblended calculations, such as some usages under AmazonEC2, AmazonRDS, AmazonElastiCache, AmazonES, and AmazonRedShift, that are covered by their respective RIs and/or SPs. Modifiers only affect usage-based items. Non-usage items such as discounts, refunds, fees, etc. are not supported. Only available in Ripple.
 	CreateCalculatorCostModifier(ctx context.Context, in *CreateCalculatorCostModifierRequest, opts ...grpc.CallOption) (*CreateCalculatorCostModifierResponse, error)
-	// WORK-IN-PROGRESS: Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	// Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
 	DeleteCalculatorCostModifier(ctx context.Context, in *DeleteCalculatorCostModifierRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
@@ -788,11 +788,11 @@ type CostServer interface {
 	ListCalculatorRunningAccounts(*ListCalculatorRunningAccountsRequest, Cost_ListCalculatorRunningAccountsServer) error
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error)
-	// WORK-IN-PROGRESS: Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	// Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
 	ListCalculatorCostModifiers(context.Context, *ListCalculatorCostModifiersRequest) (*ListCalculatorCostModifiersResponse, error)
 	// WORK-IN-PROGRESS: Creates a cost modifier. A cost modifier allows you to manipulate the cost per lineitem. At the moment, the supported {vendor} is 'aws' and only applies to items not affected by trueunblended calculations, such as some usages under AmazonEC2, AmazonRDS, AmazonElastiCache, AmazonES, and AmazonRedShift, that are covered by their respective RIs and/or SPs. Modifiers only affect usage-based items. Non-usage items such as discounts, refunds, fees, etc. are not supported. Only available in Ripple.
 	CreateCalculatorCostModifier(context.Context, *CreateCalculatorCostModifierRequest) (*CreateCalculatorCostModifierResponse, error)
-	// WORK-IN-PROGRESS: Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
+	// Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
 	DeleteCalculatorCostModifier(context.Context, *DeleteCalculatorCostModifierRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
