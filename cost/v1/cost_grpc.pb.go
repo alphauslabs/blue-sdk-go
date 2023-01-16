@@ -50,7 +50,7 @@ type CostClient interface {
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(ctx context.Context, in *GetCalculatorConfigRequest, opts ...grpc.CallOption) (*GetCalculatorConfigResponse, error)
 	// Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
-	ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (*ListCalculatorCostModifiersResponse, error)
+	ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (Cost_ListCalculatorCostModifiersClient, error)
 	// Creates a cost modifier. A cost modifier allows you to modify the cost per lineitem. At the moment, the supported {vendor} is 'aws' and only applies to items not affected by trueunblended calculations. Items not covered include some usages under AmazonEC2, AmazonRDS, AmazonElastiCache, AmazonES, and AmazonRedShift, that are covered by their respective RIs and/or SPs. Non-usage items such as discounts, refunds, fees, etc. are also not covered. Only available in Ripple.
 	CreateCalculatorCostModifier(ctx context.Context, in *CreateCalculatorCostModifierRequest, opts ...grpc.CallOption) (*CreateCalculatorCostModifierResponse, error)
 	// Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
@@ -348,13 +348,36 @@ func (c *costClient) GetCalculatorConfig(ctx context.Context, in *GetCalculatorC
 	return out, nil
 }
 
-func (c *costClient) ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (*ListCalculatorCostModifiersResponse, error) {
-	out := new(ListCalculatorCostModifiersResponse)
-	err := c.cc.Invoke(ctx, "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers", in, out, opts...)
+func (c *costClient) ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (Cost_ListCalculatorCostModifiersClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers", opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &costListCalculatorCostModifiersClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ListCalculatorCostModifiersClient interface {
+	Recv() (*CalculatorCostModifier, error)
+	grpc.ClientStream
+}
+
+type costListCalculatorCostModifiersClient struct {
+	grpc.ClientStream
+}
+
+func (x *costListCalculatorCostModifiersClient) Recv() (*CalculatorCostModifier, error) {
+	m := new(CalculatorCostModifier)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *costClient) CreateCalculatorCostModifier(ctx context.Context, in *CreateCalculatorCostModifierRequest, opts ...grpc.CallOption) (*CreateCalculatorCostModifierResponse, error) {
@@ -475,7 +498,7 @@ func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFi
 }
 
 func (c *costClient) ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], "/blueapi.cost.v1.Cost/ReadCostAttributes", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadCostAttributes", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -507,7 +530,7 @@ func (x *costReadCostAttributesClient) Recv() (*CostAttributeItem, error) {
 }
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -539,7 +562,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], "/blueapi.cost.v1.Cost/ReadAdjustments", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -571,7 +594,7 @@ func (x *costReadAdjustmentsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], "/blueapi.cost.v1.Cost/ReadTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -603,7 +626,7 @@ func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
 }
 
 func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[10], "/blueapi.cost.v1.Cost/ReadNonTagCosts", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -789,7 +812,7 @@ type CostServer interface {
 	// WORK-IN-PROGRESS: Gets the vendor cost calculator's current configuration.
 	GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error)
 	// Lists the cost calculator's cost modifiers. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
-	ListCalculatorCostModifiers(context.Context, *ListCalculatorCostModifiersRequest) (*ListCalculatorCostModifiersResponse, error)
+	ListCalculatorCostModifiers(*ListCalculatorCostModifiersRequest, Cost_ListCalculatorCostModifiersServer) error
 	// Creates a cost modifier. A cost modifier allows you to modify the cost per lineitem. At the moment, the supported {vendor} is 'aws' and only applies to items not affected by trueunblended calculations. Items not covered include some usages under AmazonEC2, AmazonRDS, AmazonElastiCache, AmazonES, and AmazonRedShift, that are covered by their respective RIs and/or SPs. Non-usage items such as discounts, refunds, fees, etc. are also not covered. Only available in Ripple.
 	CreateCalculatorCostModifier(context.Context, *CreateCalculatorCostModifierRequest) (*CreateCalculatorCostModifierResponse, error)
 	// Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
@@ -897,8 +920,8 @@ func (UnimplementedCostServer) ListCalculatorRunningAccounts(*ListCalculatorRunn
 func (UnimplementedCostServer) GetCalculatorConfig(context.Context, *GetCalculatorConfigRequest) (*GetCalculatorConfigResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCalculatorConfig not implemented")
 }
-func (UnimplementedCostServer) ListCalculatorCostModifiers(context.Context, *ListCalculatorCostModifiersRequest) (*ListCalculatorCostModifiersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCalculatorCostModifiers not implemented")
+func (UnimplementedCostServer) ListCalculatorCostModifiers(*ListCalculatorCostModifiersRequest, Cost_ListCalculatorCostModifiersServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListCalculatorCostModifiers not implemented")
 }
 func (UnimplementedCostServer) CreateCalculatorCostModifier(context.Context, *CreateCalculatorCostModifierRequest) (*CreateCalculatorCostModifierResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCalculatorCostModifier not implemented")
@@ -1240,22 +1263,25 @@ func _Cost_GetCalculatorConfig_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_ListCalculatorCostModifiers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCalculatorCostModifiersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Cost_ListCalculatorCostModifiers_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListCalculatorCostModifiersRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(CostServer).ListCalculatorCostModifiers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).ListCalculatorCostModifiers(ctx, req.(*ListCalculatorCostModifiersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(CostServer).ListCalculatorCostModifiers(m, &costListCalculatorCostModifiersServer{stream})
+}
+
+type Cost_ListCalculatorCostModifiersServer interface {
+	Send(*CalculatorCostModifier) error
+	grpc.ServerStream
+}
+
+type costListCalculatorCostModifiersServer struct {
+	grpc.ServerStream
+}
+
+func (x *costListCalculatorCostModifiersServer) Send(m *CalculatorCostModifier) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cost_CreateCalculatorCostModifier_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1885,10 +1911,6 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_GetCalculatorConfig_Handler,
 		},
 		{
-			MethodName: "ListCalculatorCostModifiers",
-			Handler:    _Cost_ListCalculatorCostModifiers_Handler,
-		},
-		{
 			MethodName: "CreateCalculatorCostModifier",
 			Handler:    _Cost_CreateCalculatorCostModifier_Handler,
 		},
@@ -2021,6 +2043,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListCalculatorRunningAccounts",
 			Handler:       _Cost_ListCalculatorRunningAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListCalculatorCostModifiers",
+			Handler:       _Cost_ListCalculatorCostModifiers_Handler,
 			ServerStreams: true,
 		},
 		{

@@ -838,7 +838,7 @@ func local_request_Cost_GetCalculatorConfig_0(ctx context.Context, marshaler run
 
 }
 
-func request_Cost_ListCalculatorCostModifiers_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Cost_ListCalculatorCostModifiers_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ListCalculatorCostModifiersClient, runtime.ServerMetadata, error) {
 	var protoReq ListCalculatorCostModifiersRequest
 	var metadata runtime.ServerMetadata
 
@@ -859,34 +859,16 @@ func request_Cost_ListCalculatorCostModifiers_0(ctx context.Context, marshaler r
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	msg, err := client.ListCalculatorCostModifiers(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_Cost_ListCalculatorCostModifiers_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ListCalculatorCostModifiersRequest
-	var metadata runtime.ServerMetadata
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["vendor"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
-	}
-
-	protoReq.Vendor, err = runtime.String(val)
+	stream, err := client.ListCalculatorCostModifiers(ctx, &protoReq)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+		return nil, metadata, err
 	}
-
-	msg, err := server.ListCalculatorCostModifiers(ctx, &protoReq)
-	return msg, metadata, err
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -3499,26 +3481,10 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 	})
 
 	mux.Handle("GET", pattern_Cost_ListCalculatorCostModifiers_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers")
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_Cost_ListCalculatorCostModifiers_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		ctx = runtime.NewServerMetadataContext(ctx, md)
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_Cost_ListCalculatorCostModifiers_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	mux.Handle("POST", pattern_Cost_CreateCalculatorCostModifier_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -4514,7 +4480,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 			return
 		}
 
-		forward_Cost_ListCalculatorCostModifiers_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cost_ListCalculatorCostModifiers_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -5286,7 +5252,7 @@ var (
 
 	forward_Cost_GetCalculatorConfig_0 = runtime.ForwardResponseMessage
 
-	forward_Cost_ListCalculatorCostModifiers_0 = runtime.ForwardResponseMessage
+	forward_Cost_ListCalculatorCostModifiers_0 = runtime.ForwardResponseStream
 
 	forward_Cost_CreateCalculatorCostModifier_0 = runtime.ForwardResponseMessage
 
