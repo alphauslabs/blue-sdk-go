@@ -6088,7 +6088,7 @@ type CalculatorCostModifierAwsOptions_Modifier struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Our modifier formula.
+	// Required. Our modifier formula. The final result should be a number. Integers are converted to floating points.
 	//
 	// Supported operators are `*`, `/`, `+`, `-`, and `%`. You can use parenthesis `()` to control precedence. Additional supported operators include `==`, `!=`, `!`, `>`, `<`, `>=`, `<=`, and the ternary operator `? :`, or `cond ? expr1 : expr2`.
 	// Examples:
@@ -6102,6 +6102,8 @@ type CalculatorCostModifierAwsOptions_Modifier struct {
 	// You can use the `cost` variable to reference the original lineitem cost. For example, if you want to add $10 to the cost, you can use the formula: `cost + 10`. For trueunblended-type billing groups, `cost` refers to the calculated trueunblended cost.
 	//
 	// The `usage` variable refers to the usage amount of a lineitem. For example, if you want to use a different rate of $1.5, you can use the formula: `usage * 1.5`.
+	//
+	// You can check out this [guide](https://alphauslabs.github.io/docs/guides/aws-cost-mods/) for more examples.
 	Formula string `protobuf:"bytes,1,opt,name=formula,proto3" json:"formula,omitempty"`
 	// Optional. A simple description modifier.
 	DescriptionModifier *CalculatorCostModifierAwsOptions_Modifier_DescriptionModifier `protobuf:"bytes,2,opt,name=descriptionModifier,proto3" json:"descriptionModifier,omitempty"`
