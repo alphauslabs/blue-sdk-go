@@ -3067,6 +3067,16 @@ func request_Cover_GetAccounts_0(ctx context.Context, marshaler runtime.Marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
+	}
+
 	msg, err := client.GetAccounts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -3091,6 +3101,16 @@ func local_request_Cover_GetAccounts_0(ctx context.Context, marshaler runtime.Ma
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
 	}
 
 	msg, err := server.GetAccounts(ctx, &protoReq)
@@ -3119,6 +3139,16 @@ func request_Cover_GetServices_0(ctx context.Context, marshaler runtime.Marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
+	}
+
 	msg, err := client.GetServices(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -3143,6 +3173,16 @@ func local_request_Cover_GetServices_0(ctx context.Context, marshaler runtime.Ma
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
 	}
 
 	msg, err := server.GetServices(ctx, &protoReq)
@@ -3171,6 +3211,16 @@ func request_Cover_GetRegions_0(ctx context.Context, marshaler runtime.Marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
+	}
+
 	msg, err := client.GetRegions(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -3195,6 +3245,16 @@ func local_request_Cover_GetRegions_0(ctx context.Context, marshaler runtime.Mar
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
 	}
 
 	msg, err := server.GetRegions(ctx, &protoReq)
@@ -3223,6 +3283,16 @@ func request_Cover_GetTags_0(ctx context.Context, marshaler runtime.Marshaler, c
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
+	}
+
 	msg, err := client.GetTags(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -3247,6 +3317,16 @@ func local_request_Cover_GetTags_0(ctx context.Context, marshaler runtime.Marsha
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+
+	val, ok = pathParams["costGroupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
+	}
+
+	protoReq.CostGroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
 	}
 
 	msg, err := server.GetTags(ctx, &protoReq)
@@ -6338,13 +6418,13 @@ var (
 
 	pattern_Cover_GetPayers_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "payers"}, ""))
 
-	pattern_Cover_GetAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "accounts"}, ""))
+	pattern_Cover_GetAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "accounts", "costGroupId"}, ""))
 
-	pattern_Cover_GetServices_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "services"}, ""))
+	pattern_Cover_GetServices_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "services", "costGroupId"}, ""))
 
-	pattern_Cover_GetRegions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "regions"}, ""))
+	pattern_Cover_GetRegions_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "regions", "costGroupId"}, ""))
 
-	pattern_Cover_GetTags_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "tags"}, ""))
+	pattern_Cover_GetTags_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tags", "costGroupId"}, ""))
 )
 
 var (
