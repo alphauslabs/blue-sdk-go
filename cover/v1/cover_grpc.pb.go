@@ -157,6 +157,8 @@ type CoverClient interface {
 	GetAccounts(ctx context.Context, in *GetAccountsRequest, opts ...grpc.CallOption) (*GetAccountsResponse, error)
 	// Get list of supported services
 	GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error)
+	// Get list of available regions
+	GetRegions(ctx context.Context, in *GetRegionsRequest, opts ...grpc.CallOption) (*GetRegionsResponse, error)
 	// Get list of available tags
 	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (*GetTagsResponse, error)
 }
@@ -866,6 +868,15 @@ func (c *coverClient) GetServices(ctx context.Context, in *GetServicesRequest, o
 	return out, nil
 }
 
+func (c *coverClient) GetRegions(ctx context.Context, in *GetRegionsRequest, opts ...grpc.CallOption) (*GetRegionsResponse, error) {
+	out := new(GetRegionsResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetRegions", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (*GetTagsResponse, error) {
 	out := new(GetTagsResponse)
 	err := c.cc.Invoke(ctx, "/blueapi.cover.v1.Cover/GetTags", in, out, opts...)
@@ -1012,6 +1023,8 @@ type CoverServer interface {
 	GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error)
 	// Get list of supported services
 	GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error)
+	// Get list of available regions
+	GetRegions(context.Context, *GetRegionsRequest) (*GetRegionsResponse, error)
 	// Get list of available tags
 	GetTags(context.Context, *GetTagsRequest) (*GetTagsResponse, error)
 	mustEmbedUnimplementedCoverServer()
@@ -1221,6 +1234,9 @@ func (UnimplementedCoverServer) GetAccounts(context.Context, *GetAccountsRequest
 }
 func (UnimplementedCoverServer) GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServices not implemented")
+}
+func (UnimplementedCoverServer) GetRegions(context.Context, *GetRegionsRequest) (*GetRegionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRegions not implemented")
 }
 func (UnimplementedCoverServer) GetTags(context.Context, *GetTagsRequest) (*GetTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTags not implemented")
@@ -2461,6 +2477,24 @@ func _Cover_GetServices_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRegionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetRegions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.cover.v1.Cover/GetRegions",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetRegions(ctx, req.(*GetRegionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_GetTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTagsRequest)
 	if err := dec(in); err != nil {
@@ -2737,6 +2771,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetServices",
 			Handler:    _Cover_GetServices_Handler,
+		},
+		{
+			MethodName: "GetRegions",
+			Handler:    _Cover_GetRegions_Handler,
 		},
 		{
 			MethodName: "GetTags",
