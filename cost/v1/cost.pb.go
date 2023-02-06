@@ -2716,7 +2716,7 @@ type ReadAdjustmentsRequest struct {
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. At the moment, only billing internal ids are supported. If set, reads the non-usage-based adjustment details of this group. Valid only if `accountId` is not set. If both `groupId` and `accountId` are not set, reads the adjustment details of the whole organization. Only valid for Ripple users. Implied (or discarded) for Wave(Pro) users.
 	GroupId string `protobuf:"bytes,2,opt,name=groupId,proto3" json:"groupId,omitempty"`
-	// Optional. If set, reads the non-usaged-based adjustment details of this account. Also invalidates the `billingInternalId` value even if set. If both `billingInternalId` and `accountId` are not set, reads the adjustment details of the whole organization.
+	// Optional. If set, reads the non-usaged-based adjustment details of this account. Also invalidates the `groupId` value even if set. If both `groupId` and `accountId` are not set, reads the adjustment details of the whole organization.
 	AccountId string `protobuf:"bytes,3,opt,name=accountId,proto3" json:"accountId,omitempty"`
 	// Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`.
 	StartTime string `protobuf:"bytes,4,opt,name=startTime,proto3" json:"startTime,omitempty"`
