@@ -69,6 +69,8 @@ type BillingClient interface {
 	UpdateReseller(ctx context.Context, in *UpdateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
 	// WORK-IN-PROGRESS: Deletes the reseller account. Only available in Ripple.
 	DeleteReseller(ctx context.Context, in *DeleteResellerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets all billing settings.
+	GetBillingSetting(ctx context.Context, in *GetBillingSettingRequest, opts ...grpc.CallOption) (*GetBillingSettingResponse, error)
 }
 
 type billingClient struct {
@@ -415,6 +417,15 @@ func (c *billingClient) DeleteReseller(ctx context.Context, in *DeleteResellerRe
 	return out, nil
 }
 
+func (c *billingClient) GetBillingSetting(ctx context.Context, in *GetBillingSettingRequest, opts ...grpc.CallOption) (*GetBillingSettingResponse, error) {
+	out := new(GetBillingSettingResponse)
+	err := c.cc.Invoke(ctx, "/blueapi.billing.v1.Billing/GetBillingSetting", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -463,6 +474,8 @@ type BillingServer interface {
 	UpdateReseller(context.Context, *UpdateResellerRequest) (*ripple.Reseller, error)
 	// WORK-IN-PROGRESS: Deletes the reseller account. Only available in Ripple.
 	DeleteReseller(context.Context, *DeleteResellerRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets all billing settings.
+	GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -535,6 +548,9 @@ func (UnimplementedBillingServer) UpdateReseller(context.Context, *UpdateReselle
 }
 func (UnimplementedBillingServer) DeleteReseller(context.Context, *DeleteResellerRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteReseller not implemented")
+}
+func (UnimplementedBillingServer) GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBillingSetting not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -963,6 +979,24 @@ func _Billing_DeleteReseller_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetBillingSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetBillingSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/blueapi.billing.v1.Billing/GetBillingSetting",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetBillingSetting(ctx, req.(*GetBillingSettingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1033,6 +1067,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteReseller",
 			Handler:    _Billing_DeleteReseller_Handler,
+		},
+		{
+			MethodName: "GetBillingSetting",
+			Handler:    _Billing_GetBillingSetting_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
