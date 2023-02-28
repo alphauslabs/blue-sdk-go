@@ -6202,13 +6202,12 @@ type GetCostUsageRequestAzureOptions struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Optional. A comma-separated list of columns to aggregate the data into.
-	// Valid values are
+	// Valid values are `accountId`, `serviceName`, `serviceTier`, `location`, `product`, `partNumber`, `resourceGuid`, `offerId`, `consumedService`, `departmentId`, `departmentName`, `resourceGroup`, `enrollment`, `additionalInfo`
 	// A special value of `none` is also supported, which means query by date or month per account only.
 	//
-	// For example, if you only want the services and region data, you can set this field to `productCode,region`.
-	// Your input sequence doesn't matter (although the sequence above is recommended) as the actual sequence is already fixed in the return data (see the definition in https://github.com/alphauslabs/blueapi/blob/main/api/aws/cost.proto), which is generic to specific, top to bottom. Invalid values are discarded. Excluded columns will be empty.
+	// For example, if you only want the services and location data, you can set this field to `serviceName,location`.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
-	// Optional. If set to true, group all input accounts into one.
+	// Optional. If set to true, group all input subscription into one.
 	GroupAccounts bool `protobuf:"varint,2,opt,name=groupAccounts,proto3" json:"groupAccounts,omitempty"`
 	// Optional. A list of filtering options. See [ReadCostsRequestOptionsFilters] for more information on each filter item.
 	// Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
