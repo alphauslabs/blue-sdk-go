@@ -78,11 +78,11 @@ const (
 	Cover_DeleteAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
 	Cover_RegisterAccount_FullMethodName              = "/blueapi.cover.v1.Cover/RegisterAccount"
 	Cover_ListAssets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListAssets"
+	Cover_GetAssetsSummary_FullMethodName             = "/blueapi.cover.v1.Cover/GetAssetsSummary"
 	Cover_GetCostUsage_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCostUsage"
 	Cover_GetRightSizingRecommendation_FullMethodName = "/blueapi.cover.v1.Cover/GetRightSizingRecommendation"
 	Cover_ModifyResourceType_FullMethodName           = "/blueapi.cover.v1.Cover/ModifyResourceType"
 	Cover_TerminateResource_FullMethodName            = "/blueapi.cover.v1.Cover/TerminateResource"
-	Cover_GetEC2Instances_FullMethodName              = "/blueapi.cover.v1.Cover/GetEC2Instances"
 	Cover_UploadChargeCode_FullMethodName             = "/blueapi.cover.v1.Cover/UploadChargeCode"
 	Cover_AssignPayer_FullMethodName                  = "/blueapi.cover.v1.Cover/AssignPayer"
 	Cover_GetPayers_FullMethodName                    = "/blueapi.cover.v1.Cover/GetPayers"
@@ -207,8 +207,10 @@ type CoverClient interface {
 	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*DeleteAccountAccessResponse, error)
 	// Registers an account
 	RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Lists all assets per service.
+	// WORK-IN-PROGRESS: Lists assets for costgroup
 	ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (Cover_ListAssetsClient, error)
+	// WORK-IN-PROGRESS: Assets summary for costgroup
+	GetAssetsSummary(ctx context.Context, in *GetAssetsSummaryRequest, opts ...grpc.CallOption) (*GetAssetsSummaryResponse, error)
 	// WORK-IN-PROGRESS: Get usage and usage-based costs for the specified costgroup
 	GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error)
 	// Gets the right sizing recommendation of all the accounts in the costgroup
@@ -217,8 +219,6 @@ type CoverClient interface {
 	ModifyResourceType(ctx context.Context, in *ModifyResourceTypeRequest, opts ...grpc.CallOption) (*ModifyResourceTypeResponse, error)
 	// Terminate a resource from right sizing recommendation
 	TerminateResource(ctx context.Context, in *TerminateResourceRequest, opts ...grpc.CallOption) (*TerminateResourceResponse, error)
-	// Gets the EC2 instances of all accounts in Cost Group
-	GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error)
 	// Upload charge code
 	UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error)
 	// Assign payer to a linked account
@@ -786,7 +786,7 @@ func (c *coverClient) ListAssets(ctx context.Context, in *ListAssetsRequest, opt
 }
 
 type Cover_ListAssetsClient interface {
-	Recv() (*Asset, error)
+	Recv() (*Resource, error)
 	grpc.ClientStream
 }
 
@@ -794,12 +794,21 @@ type coverListAssetsClient struct {
 	grpc.ClientStream
 }
 
-func (x *coverListAssetsClient) Recv() (*Asset, error) {
-	m := new(Asset)
+func (x *coverListAssetsClient) Recv() (*Resource, error) {
+	m := new(Resource)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *coverClient) GetAssetsSummary(ctx context.Context, in *GetAssetsSummaryRequest, opts ...grpc.CallOption) (*GetAssetsSummaryResponse, error) {
+	out := new(GetAssetsSummaryResponse)
+	err := c.cc.Invoke(ctx, Cover_GetAssetsSummary_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *coverClient) GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error) {
@@ -855,15 +864,6 @@ func (c *coverClient) ModifyResourceType(ctx context.Context, in *ModifyResource
 func (c *coverClient) TerminateResource(ctx context.Context, in *TerminateResourceRequest, opts ...grpc.CallOption) (*TerminateResourceResponse, error) {
 	out := new(TerminateResourceResponse)
 	err := c.cc.Invoke(ctx, Cover_TerminateResource_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) GetEC2Instances(ctx context.Context, in *GetEC2InstancesRequest, opts ...grpc.CallOption) (*GetEC2InstancesResponse, error) {
-	out := new(GetEC2InstancesResponse)
-	err := c.cc.Invoke(ctx, Cover_GetEC2Instances_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1073,8 +1073,10 @@ type CoverServer interface {
 	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*DeleteAccountAccessResponse, error)
 	// Registers an account
 	RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Lists all assets per service.
+	// WORK-IN-PROGRESS: Lists assets for costgroup
 	ListAssets(*ListAssetsRequest, Cover_ListAssetsServer) error
+	// WORK-IN-PROGRESS: Assets summary for costgroup
+	GetAssetsSummary(context.Context, *GetAssetsSummaryRequest) (*GetAssetsSummaryResponse, error)
 	// WORK-IN-PROGRESS: Get usage and usage-based costs for the specified costgroup
 	GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error
 	// Gets the right sizing recommendation of all the accounts in the costgroup
@@ -1083,8 +1085,6 @@ type CoverServer interface {
 	ModifyResourceType(context.Context, *ModifyResourceTypeRequest) (*ModifyResourceTypeResponse, error)
 	// Terminate a resource from right sizing recommendation
 	TerminateResource(context.Context, *TerminateResourceRequest) (*TerminateResourceResponse, error)
-	// Gets the EC2 instances of all accounts in Cost Group
-	GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error)
 	// Upload charge code
 	UploadChargeCode(Cover_UploadChargeCodeServer) error
 	// Assign payer to a linked account
@@ -1277,6 +1277,9 @@ func (UnimplementedCoverServer) RegisterAccount(context.Context, *RegisterAccoun
 func (UnimplementedCoverServer) ListAssets(*ListAssetsRequest, Cover_ListAssetsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAssets not implemented")
 }
+func (UnimplementedCoverServer) GetAssetsSummary(context.Context, *GetAssetsSummaryRequest) (*GetAssetsSummaryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAssetsSummary not implemented")
+}
 func (UnimplementedCoverServer) GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetCostUsage not implemented")
 }
@@ -1288,9 +1291,6 @@ func (UnimplementedCoverServer) ModifyResourceType(context.Context, *ModifyResou
 }
 func (UnimplementedCoverServer) TerminateResource(context.Context, *TerminateResourceRequest) (*TerminateResourceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TerminateResource not implemented")
-}
-func (UnimplementedCoverServer) GetEC2Instances(context.Context, *GetEC2InstancesRequest) (*GetEC2InstancesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetEC2Instances not implemented")
 }
 func (UnimplementedCoverServer) UploadChargeCode(Cover_UploadChargeCodeServer) error {
 	return status.Errorf(codes.Unimplemented, "method UploadChargeCode not implemented")
@@ -2346,7 +2346,7 @@ func _Cover_ListAssets_Handler(srv interface{}, stream grpc.ServerStream) error 
 }
 
 type Cover_ListAssetsServer interface {
-	Send(*Asset) error
+	Send(*Resource) error
 	grpc.ServerStream
 }
 
@@ -2354,8 +2354,26 @@ type coverListAssetsServer struct {
 	grpc.ServerStream
 }
 
-func (x *coverListAssetsServer) Send(m *Asset) error {
+func (x *coverListAssetsServer) Send(m *Resource) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_GetAssetsSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAssetsSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAssetsSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetAssetsSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAssetsSummary(ctx, req.(*GetAssetsSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Cover_GetCostUsage_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -2429,24 +2447,6 @@ func _Cover_TerminateResource_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).TerminateResource(ctx, req.(*TerminateResourceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetEC2Instances_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetEC2InstancesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetEC2Instances(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetEC2Instances_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetEC2Instances(ctx, req.(*GetEC2InstancesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2813,6 +2813,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_RegisterAccount_Handler,
 		},
 		{
+			MethodName: "GetAssetsSummary",
+			Handler:    _Cover_GetAssetsSummary_Handler,
+		},
+		{
 			MethodName: "GetRightSizingRecommendation",
 			Handler:    _Cover_GetRightSizingRecommendation_Handler,
 		},
@@ -2823,10 +2827,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TerminateResource",
 			Handler:    _Cover_TerminateResource_Handler,
-		},
-		{
-			MethodName: "GetEC2Instances",
-			Handler:    _Cover_GetEC2Instances_Handler,
 		},
 		{
 			MethodName: "AssignPayer",
