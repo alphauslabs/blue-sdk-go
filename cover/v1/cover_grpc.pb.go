@@ -90,6 +90,11 @@ const (
 	Cover_GetServices_FullMethodName                  = "/blueapi.cover.v1.Cover/GetServices"
 	Cover_GetRegions_FullMethodName                   = "/blueapi.cover.v1.Cover/GetRegions"
 	Cover_GetTags_FullMethodName                      = "/blueapi.cover.v1.Cover/GetTags"
+	Cover_ListFees_FullMethodName                     = "/blueapi.cover.v1.Cover/ListFees"
+	Cover_GetFeeDetails_FullMethodName                = "/blueapi.cover.v1.Cover/GetFeeDetails"
+	Cover_CreateFeeReallocation_FullMethodName        = "/blueapi.cover.v1.Cover/CreateFeeReallocation"
+	Cover_UpdateFeeDetails_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateFeeDetails"
+	Cover_DeleteFeeDetails_FullMethodName             = "/blueapi.cover.v1.Cover/DeleteFeeDetails"
 )
 
 // CoverClient is the client API for Cover service.
@@ -233,6 +238,16 @@ type CoverClient interface {
 	GetRegions(ctx context.Context, in *GetRegionsRequest, opts ...grpc.CallOption) (*GetRegionsResponse, error)
 	// Get list of available tags
 	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (*GetTagsResponse, error)
+	// Lists the fees
+	ListFees(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListFeesClient, error)
+	// Gets the fee details
+	GetFeeDetails(ctx context.Context, in *GetFeeDetailsRequest, opts ...grpc.CallOption) (*FeeDetails, error)
+	// Create assignments for fee reallocation
+	CreateFeeReallocation(ctx context.Context, in *CreateFeeReallocationRequest, opts ...grpc.CallOption) (Cover_CreateFeeReallocationClient, error)
+	// Update fee details
+	UpdateFeeDetails(ctx context.Context, in *UpdateFeeDetailsRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	// Deletes fee details
+	DeleteFeeDetails(ctx context.Context, in *DeleteFeeDetailsRequest, opts ...grpc.CallOption) (*DeleteFeeDetailsResponse, error)
 }
 
 type coverClient struct {
@@ -958,6 +973,97 @@ func (c *coverClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...g
 	return out, nil
 }
 
+func (c *coverClient) ListFees(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListFeesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[4], Cover_ListFees_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListFeesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListFeesClient interface {
+	Recv() (*FeeDetails, error)
+	grpc.ClientStream
+}
+
+type coverListFeesClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListFeesClient) Recv() (*FeeDetails, error) {
+	m := new(FeeDetails)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *coverClient) GetFeeDetails(ctx context.Context, in *GetFeeDetailsRequest, opts ...grpc.CallOption) (*FeeDetails, error) {
+	out := new(FeeDetails)
+	err := c.cc.Invoke(ctx, Cover_GetFeeDetails_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateFeeReallocation(ctx context.Context, in *CreateFeeReallocationRequest, opts ...grpc.CallOption) (Cover_CreateFeeReallocationClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_CreateFeeReallocation_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverCreateFeeReallocationClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_CreateFeeReallocationClient interface {
+	Recv() (*FeeDetails, error)
+	grpc.ClientStream
+}
+
+type coverCreateFeeReallocationClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverCreateFeeReallocationClient) Recv() (*FeeDetails, error) {
+	m := new(FeeDetails)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *coverClient) UpdateFeeDetails(ctx context.Context, in *UpdateFeeDetailsRequest, opts ...grpc.CallOption) (*api.Operation, error) {
+	out := new(api.Operation)
+	err := c.cc.Invoke(ctx, Cover_UpdateFeeDetails_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteFeeDetails(ctx context.Context, in *DeleteFeeDetailsRequest, opts ...grpc.CallOption) (*DeleteFeeDetailsResponse, error) {
+	out := new(DeleteFeeDetailsResponse)
+	err := c.cc.Invoke(ctx, Cover_DeleteFeeDetails_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -1099,6 +1205,16 @@ type CoverServer interface {
 	GetRegions(context.Context, *GetRegionsRequest) (*GetRegionsResponse, error)
 	// Get list of available tags
 	GetTags(context.Context, *GetTagsRequest) (*GetTagsResponse, error)
+	// Lists the fees
+	ListFees(*ListFeesRequest, Cover_ListFeesServer) error
+	// Gets the fee details
+	GetFeeDetails(context.Context, *GetFeeDetailsRequest) (*FeeDetails, error)
+	// Create assignments for fee reallocation
+	CreateFeeReallocation(*CreateFeeReallocationRequest, Cover_CreateFeeReallocationServer) error
+	// Update fee details
+	UpdateFeeDetails(context.Context, *UpdateFeeDetailsRequest) (*api.Operation, error)
+	// Deletes fee details
+	DeleteFeeDetails(context.Context, *DeleteFeeDetailsRequest) (*DeleteFeeDetailsResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -1312,6 +1428,21 @@ func (UnimplementedCoverServer) GetRegions(context.Context, *GetRegionsRequest) 
 }
 func (UnimplementedCoverServer) GetTags(context.Context, *GetTagsRequest) (*GetTagsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTags not implemented")
+}
+func (UnimplementedCoverServer) ListFees(*ListFeesRequest, Cover_ListFeesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListFees not implemented")
+}
+func (UnimplementedCoverServer) GetFeeDetails(context.Context, *GetFeeDetailsRequest) (*FeeDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFeeDetails not implemented")
+}
+func (UnimplementedCoverServer) CreateFeeReallocation(*CreateFeeReallocationRequest, Cover_CreateFeeReallocationServer) error {
+	return status.Errorf(codes.Unimplemented, "method CreateFeeReallocation not implemented")
+}
+func (UnimplementedCoverServer) UpdateFeeDetails(context.Context, *UpdateFeeDetailsRequest) (*api.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateFeeDetails not implemented")
+}
+func (UnimplementedCoverServer) DeleteFeeDetails(context.Context, *DeleteFeeDetailsRequest) (*DeleteFeeDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFeeDetails not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -2585,6 +2716,102 @@ func _Cover_GetTags_Handler(srv interface{}, ctx context.Context, dec func(inter
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListFees_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListFeesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListFees(m, &coverListFeesServer{stream})
+}
+
+type Cover_ListFeesServer interface {
+	Send(*FeeDetails) error
+	grpc.ServerStream
+}
+
+type coverListFeesServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListFeesServer) Send(m *FeeDetails) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_GetFeeDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFeeDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetFeeDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetFeeDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetFeeDetails(ctx, req.(*GetFeeDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateFeeReallocation_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(CreateFeeReallocationRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).CreateFeeReallocation(m, &coverCreateFeeReallocationServer{stream})
+}
+
+type Cover_CreateFeeReallocationServer interface {
+	Send(*FeeDetails) error
+	grpc.ServerStream
+}
+
+type coverCreateFeeReallocationServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverCreateFeeReallocationServer) Send(m *FeeDetails) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_UpdateFeeDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateFeeDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateFeeDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateFeeDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateFeeDetails(ctx, req.(*UpdateFeeDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteFeeDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFeeDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteFeeDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteFeeDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteFeeDetails(ctx, req.(*DeleteFeeDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2852,6 +3079,18 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetTags",
 			Handler:    _Cover_GetTags_Handler,
 		},
+		{
+			MethodName: "GetFeeDetails",
+			Handler:    _Cover_GetFeeDetails_Handler,
+		},
+		{
+			MethodName: "UpdateFeeDetails",
+			Handler:    _Cover_UpdateFeeDetails_Handler,
+		},
+		{
+			MethodName: "DeleteFeeDetails",
+			Handler:    _Cover_DeleteFeeDetails_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -2873,6 +3112,16 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			StreamName:    "UploadChargeCode",
 			Handler:       _Cover_UploadChargeCode_Handler,
 			ClientStreams: true,
+		},
+		{
+			StreamName:    "ListFees",
+			Handler:       _Cover_ListFees_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "CreateFeeReallocation",
+			Handler:       _Cover_CreateFeeReallocation_Handler,
+			ServerStreams: true,
 		},
 	},
 	Metadata: "cover/v1/cover.proto",
