@@ -49,6 +49,7 @@ const (
 	Iam_ListIpFilters_FullMethodName          = "/blueapi.iam.v1.Iam/ListIpFilters"
 	Iam_CreateIpFilter_FullMethodName         = "/blueapi.iam.v1.Iam/CreateIpFilter"
 	Iam_DeleteIpFilter_FullMethodName         = "/blueapi.iam.v1.Iam/DeleteIpFilter"
+	Iam_CreatePartnerToken_FullMethodName     = "/blueapi.iam.v1.Iam/CreatePartnerToken"
 )
 
 // IamClient is the client API for Iam service.
@@ -115,6 +116,8 @@ type IamClient interface {
 	CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// BETA: Creates a partner token for custom integrations.
+	CreatePartnerToken(ctx context.Context, in *CreatePartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
 }
 
 type iamClient struct {
@@ -469,6 +472,15 @@ func (c *iamClient) DeleteIpFilter(ctx context.Context, in *DeleteIpFilterReques
 	return out, nil
 }
 
+func (c *iamClient) CreatePartnerToken(ctx context.Context, in *CreatePartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error) {
+	out := new(PartnerToken)
+	err := c.cc.Invoke(ctx, Iam_CreatePartnerToken_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IamServer is the server API for Iam service.
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
@@ -533,6 +545,8 @@ type IamServer interface {
 	CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
+	// BETA: Creates a partner token for custom integrations.
+	CreatePartnerToken(context.Context, *CreatePartnerTokenRequest) (*PartnerToken, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -623,6 +637,9 @@ func (UnimplementedIamServer) CreateIpFilter(context.Context, *CreateIpFilterReq
 }
 func (UnimplementedIamServer) DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteIpFilter not implemented")
+}
+func (UnimplementedIamServer) CreatePartnerToken(context.Context, *CreatePartnerTokenRequest) (*PartnerToken, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreatePartnerToken not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -1153,6 +1170,24 @@ func _Iam_DeleteIpFilter_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_CreatePartnerToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreatePartnerTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).CreatePartnerToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_CreatePartnerToken_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).CreatePartnerToken(ctx, req.(*CreatePartnerTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Iam_ServiceDesc is the grpc.ServiceDesc for Iam service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1255,6 +1290,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteIpFilter",
 			Handler:    _Iam_DeleteIpFilter_Handler,
+		},
+		{
+			MethodName: "CreatePartnerToken",
+			Handler:    _Iam_CreatePartnerToken_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
