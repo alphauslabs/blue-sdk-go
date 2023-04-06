@@ -95,6 +95,9 @@ const (
 	Cover_RecalculateFee_FullMethodName               = "/blueapi.cover.v1.Cover/RecalculateFee"
 	Cover_RestoreFee_FullMethodName                   = "/blueapi.cover.v1.Cover/RestoreFee"
 	Cover_GetCostGroupFee_FullMethodName              = "/blueapi.cover.v1.Cover/GetCostGroupFee"
+	Cover_ListFeeAdjustmentAllocators_FullMethodName  = "/blueapi.cover.v1.Cover/ListFeeAdjustmentAllocators"
+	Cover_CreateFeeAdjustmentAllocator_FullMethodName = "/blueapi.cover.v1.Cover/CreateFeeAdjustmentAllocator"
+	Cover_DeleteFeeAdjustmentAllocator_FullMethodName = "/blueapi.cover.v1.Cover/DeleteFeeAdjustmentAllocator"
 )
 
 // CoverClient is the client API for Cover service.
@@ -248,6 +251,12 @@ type CoverClient interface {
 	RestoreFee(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreFeeClient, error)
 	// Get all available fees for the specified cost group
 	GetCostGroupFee(ctx context.Context, in *GetCostGroupFeeRequest, opts ...grpc.CallOption) (Cover_GetCostGroupFeeClient, error)
+	// WORK-IN-PROGRESS: Lists the fee adjustment allocators
+	ListFeeAdjustmentAllocators(ctx context.Context, in *ListFeeAdjustmentAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListFeeAdjustmentAllocatorsClient, error)
+	// WORK-IN-PROGRESS: Creates fee adjustment allocator
+	CreateFeeAdjustmentAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*CreateFeeAdjustmentAllocatorResponse, error)
+	// WORK-IN-PROGRESS: Deletes a fee adjustment allocator
+	DeleteFeeAdjustmentAllocator(ctx context.Context, in *DeleteFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type coverClient struct {
@@ -1110,6 +1119,56 @@ func (x *coverGetCostGroupFeeClient) Recv() (*FeeItem, error) {
 	return m, nil
 }
 
+func (c *coverClient) ListFeeAdjustmentAllocators(ctx context.Context, in *ListFeeAdjustmentAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListFeeAdjustmentAllocatorsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ListFeeAdjustmentAllocators_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListFeeAdjustmentAllocatorsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListFeeAdjustmentAllocatorsClient interface {
+	Recv() (*FeeAdjustmentAllocator, error)
+	grpc.ClientStream
+}
+
+type coverListFeeAdjustmentAllocatorsClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListFeeAdjustmentAllocatorsClient) Recv() (*FeeAdjustmentAllocator, error) {
+	m := new(FeeAdjustmentAllocator)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *coverClient) CreateFeeAdjustmentAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*CreateFeeAdjustmentAllocatorResponse, error) {
+	out := new(CreateFeeAdjustmentAllocatorResponse)
+	err := c.cc.Invoke(ctx, Cover_CreateFeeAdjustmentAllocator_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteFeeAdjustmentAllocator(ctx context.Context, in *DeleteFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_DeleteFeeAdjustmentAllocator_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -1261,6 +1320,12 @@ type CoverServer interface {
 	RestoreFee(*RestoreFeeRequest, Cover_RestoreFeeServer) error
 	// Get all available fees for the specified cost group
 	GetCostGroupFee(*GetCostGroupFeeRequest, Cover_GetCostGroupFeeServer) error
+	// WORK-IN-PROGRESS: Lists the fee adjustment allocators
+	ListFeeAdjustmentAllocators(*ListFeeAdjustmentAllocatorsRequest, Cover_ListFeeAdjustmentAllocatorsServer) error
+	// WORK-IN-PROGRESS: Creates fee adjustment allocator
+	CreateFeeAdjustmentAllocator(context.Context, *CreateFeeAdjustmentAllocatorRequest) (*CreateFeeAdjustmentAllocatorResponse, error)
+	// WORK-IN-PROGRESS: Deletes a fee adjustment allocator
+	DeleteFeeAdjustmentAllocator(context.Context, *DeleteFeeAdjustmentAllocatorRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -1489,6 +1554,15 @@ func (UnimplementedCoverServer) RestoreFee(*RestoreFeeRequest, Cover_RestoreFeeS
 }
 func (UnimplementedCoverServer) GetCostGroupFee(*GetCostGroupFeeRequest, Cover_GetCostGroupFeeServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetCostGroupFee not implemented")
+}
+func (UnimplementedCoverServer) ListFeeAdjustmentAllocators(*ListFeeAdjustmentAllocatorsRequest, Cover_ListFeeAdjustmentAllocatorsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListFeeAdjustmentAllocators not implemented")
+}
+func (UnimplementedCoverServer) CreateFeeAdjustmentAllocator(context.Context, *CreateFeeAdjustmentAllocatorRequest) (*CreateFeeAdjustmentAllocatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateFeeAdjustmentAllocator not implemented")
+}
+func (UnimplementedCoverServer) DeleteFeeAdjustmentAllocator(context.Context, *DeleteFeeAdjustmentAllocatorRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFeeAdjustmentAllocator not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -2864,6 +2938,63 @@ func (x *coverGetCostGroupFeeServer) Send(m *FeeItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cover_ListFeeAdjustmentAllocators_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListFeeAdjustmentAllocatorsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListFeeAdjustmentAllocators(m, &coverListFeeAdjustmentAllocatorsServer{stream})
+}
+
+type Cover_ListFeeAdjustmentAllocatorsServer interface {
+	Send(*FeeAdjustmentAllocator) error
+	grpc.ServerStream
+}
+
+type coverListFeeAdjustmentAllocatorsServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListFeeAdjustmentAllocatorsServer) Send(m *FeeAdjustmentAllocator) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_CreateFeeAdjustmentAllocator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFeeAdjustmentAllocatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateFeeAdjustmentAllocator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateFeeAdjustmentAllocator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateFeeAdjustmentAllocator(ctx, req.(*CreateFeeAdjustmentAllocatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteFeeAdjustmentAllocator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFeeAdjustmentAllocatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteFeeAdjustmentAllocator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteFeeAdjustmentAllocator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteFeeAdjustmentAllocator(ctx, req.(*DeleteFeeAdjustmentAllocatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3135,6 +3266,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetFeeDetails",
 			Handler:    _Cover_GetFeeDetails_Handler,
 		},
+		{
+			MethodName: "CreateFeeAdjustmentAllocator",
+			Handler:    _Cover_CreateFeeAdjustmentAllocator_Handler,
+		},
+		{
+			MethodName: "DeleteFeeAdjustmentAllocator",
+			Handler:    _Cover_DeleteFeeAdjustmentAllocator_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -3175,6 +3314,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetCostGroupFee",
 			Handler:       _Cover_GetCostGroupFee_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListFeeAdjustmentAllocators",
+			Handler:       _Cover_ListFeeAdjustmentAllocators_Handler,
 			ServerStreams: true,
 		},
 	},
