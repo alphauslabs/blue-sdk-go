@@ -45,6 +45,7 @@ const (
 	Billing_UpdateReseller_FullMethodName                       = "/blueapi.billing.v1.Billing/UpdateReseller"
 	Billing_DeleteReseller_FullMethodName                       = "/blueapi.billing.v1.Billing/DeleteReseller"
 	Billing_GetBillingSetting_FullMethodName                    = "/blueapi.billing.v1.Billing/GetBillingSetting"
+	Billing_ListExchangeRates_FullMethodName                    = "/blueapi.billing.v1.Billing/ListExchangeRates"
 )
 
 // BillingClient is the client API for Billing service.
@@ -97,6 +98,8 @@ type BillingClient interface {
 	DeleteReseller(ctx context.Context, in *DeleteResellerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets all billing settings.
 	GetBillingSetting(ctx context.Context, in *GetBillingSettingRequest, opts ...grpc.CallOption) (*GetBillingSettingResponse, error)
+	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
+	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
 }
 
 type billingClient struct {
@@ -452,6 +455,15 @@ func (c *billingClient) GetBillingSetting(ctx context.Context, in *GetBillingSet
 	return out, nil
 }
 
+func (c *billingClient) ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error) {
+	out := new(ListExchangeRatesResponse)
+	err := c.cc.Invoke(ctx, Billing_ListExchangeRates_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -502,6 +514,8 @@ type BillingServer interface {
 	DeleteReseller(context.Context, *DeleteResellerRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets all billing settings.
 	GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error)
+	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
+	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -577,6 +591,9 @@ func (UnimplementedBillingServer) DeleteReseller(context.Context, *DeleteReselle
 }
 func (UnimplementedBillingServer) GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBillingSetting not implemented")
+}
+func (UnimplementedBillingServer) ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1023,6 +1040,24 @@ func _Billing_GetBillingSetting_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ListExchangeRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExchangeRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ListExchangeRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ListExchangeRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ListExchangeRates(ctx, req.(*ListExchangeRatesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1097,6 +1132,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBillingSetting",
 			Handler:    _Billing_GetBillingSetting_Handler,
+		},
+		{
+			MethodName: "ListExchangeRates",
+			Handler:    _Billing_ListExchangeRates_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
