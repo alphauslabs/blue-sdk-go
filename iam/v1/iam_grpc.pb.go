@@ -117,7 +117,7 @@ type IamClient interface {
 	CreateIpFilter(ctx context.Context, in *CreateIpFilterRequest, opts ...grpc.CallOption) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(ctx context.Context, in *DeleteIpFilterRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// BETA: Creates a partner token for custom integrations.
+	// BETA: Creates a partner token for custom integrations. Available only to Ripple and Cover users.
 	CreatePartnerToken(ctx context.Context, in *CreatePartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Refreshes an expired partner token. Only partners are expected to call this API.
 	RefreshPartnerToken(ctx context.Context, in *RefreshPartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
@@ -557,7 +557,7 @@ type IamServer interface {
 	CreateIpFilter(context.Context, *CreateIpFilterRequest) (*IpFilter, error)
 	// Deletes an IP filter item. At the moment, this API is only available to root users.
 	DeleteIpFilter(context.Context, *DeleteIpFilterRequest) (*emptypb.Empty, error)
-	// BETA: Creates a partner token for custom integrations.
+	// BETA: Creates a partner token for custom integrations. Available only to Ripple and Cover users.
 	CreatePartnerToken(context.Context, *CreatePartnerTokenRequest) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Refreshes an expired partner token. Only partners are expected to call this API.
 	RefreshPartnerToken(context.Context, *RefreshPartnerTokenRequest) (*PartnerToken, error)
