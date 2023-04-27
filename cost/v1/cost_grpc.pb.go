@@ -49,6 +49,7 @@ const (
 	Cost_DeleteCostFilters_FullMethodName             = "/blueapi.cost.v1.Cost/DeleteCostFilters"
 	Cost_ExportCostFiltersFile_FullMethodName         = "/blueapi.cost.v1.Cost/ExportCostFiltersFile"
 	Cost_ReadCostAttributes_FullMethodName            = "/blueapi.cost.v1.Cost/ReadCostAttributes"
+	Cost_GetCostAttributes_FullMethodName             = "/blueapi.cost.v1.Cost/GetCostAttributes"
 	Cost_ReadCosts_FullMethodName                     = "/blueapi.cost.v1.Cost/ReadCosts"
 	Cost_ReadAdjustments_FullMethodName               = "/blueapi.cost.v1.Cost/ReadAdjustments"
 	Cost_ReadTagCosts_FullMethodName                  = "/blueapi.cost.v1.Cost/ReadTagCosts"
@@ -127,6 +128,8 @@ type CostClient interface {
 	ExportCostFiltersFile(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*ExportCostFiltersFileResponse, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the 'ReadCosts' API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error)
+	// WORK-IN-PROGRESS: Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
+	GetCostAttributes(ctx context.Context, in *GetCostAttributesRequest, opts ...grpc.CallOption) (*GetCostAttributesResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} are 'aws' and 'gcp'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
 	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws' or 'azure'. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -577,6 +580,15 @@ func (x *costReadCostAttributesClient) Recv() (*CostAttributeItem, error) {
 	return m, nil
 }
 
+func (c *costClient) GetCostAttributes(ctx context.Context, in *GetCostAttributesRequest, opts ...grpc.CallOption) (*GetCostAttributesResponse, error) {
+	out := new(GetCostAttributesResponse)
+	err := c.cc.Invoke(ctx, Cost_GetCostAttributes_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
 	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], Cost_ReadCosts_FullMethodName, opts...)
 	if err != nil {
@@ -889,6 +901,8 @@ type CostServer interface {
 	ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*ExportCostFiltersFileResponse, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the 'ReadCosts' API but without the aggregated usages and costs. At the moment, the supported {vendor} is 'aws'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error
+	// WORK-IN-PROGRESS: Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
+	GetCostAttributes(context.Context, *GetCostAttributesRequest) (*GetCostAttributesResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} are 'aws' and 'gcp'. If datetime range parameters are not set, month-to-date (current month) will be returned.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
 	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is 'aws' or 'azure'. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -1012,6 +1026,9 @@ func (UnimplementedCostServer) ExportCostFiltersFile(context.Context, *ExportCos
 }
 func (UnimplementedCostServer) ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCostAttributes not implemented")
+}
+func (UnimplementedCostServer) GetCostAttributes(context.Context, *GetCostAttributesRequest) (*GetCostAttributesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCostAttributes not implemented")
 }
 func (UnimplementedCostServer) ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCosts not implemented")
@@ -1587,6 +1604,24 @@ func (x *costReadCostAttributesServer) Send(m *CostAttributeItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cost_GetCostAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCostAttributesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetCostAttributes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_GetCostAttributes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetCostAttributes(ctx, req.(*GetCostAttributesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cost_ReadCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ReadCostsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2009,6 +2044,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportCostFiltersFile",
 			Handler:    _Cost_ExportCostFiltersFile_Handler,
+		},
+		{
+			MethodName: "GetCostAttributes",
+			Handler:    _Cost_GetCostAttributes_Handler,
 		},
 		{
 			MethodName: "GetForecasts",
