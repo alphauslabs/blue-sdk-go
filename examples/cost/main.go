@@ -15,17 +15,13 @@ func main() {
 		log.Fatal(err)
 	}
 
-	request := cost.ListAccountsRequest{
-		Vendor: "aws",
-	}
-
+	request := cost.ListAccountsRequest{Vendor: "aws"}
 	stream, err := client.ListAccounts(ctx, &request)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	for {
-
 		acct, err := stream.Recv()
 		if err == io.EOF {
 			break
