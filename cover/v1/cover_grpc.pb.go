@@ -53,6 +53,7 @@ const (
 	Cover_UpdateView_FullMethodName                   = "/blueapi.cover.v1.Cover/UpdateView"
 	Cover_UpdateViewLayout_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateViewLayout"
 	Cover_UpdateViewWidget_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateViewWidget"
+	Cover_UpdateViewColorTheme_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
 	Cover_DeleteView_FullMethodName                   = "/blueapi.cover.v1.Cover/DeleteView"
 	Cover_UpdateSideMenuState_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
 	Cover_AddSideMenuFavorite_FullMethodName          = "/blueapi.cover.v1.Cover/AddSideMenuFavorite"
@@ -91,8 +92,6 @@ const (
 	Cover_GetRegions_FullMethodName                   = "/blueapi.cover.v1.Cover/GetRegions"
 	Cover_GetTags_FullMethodName                      = "/blueapi.cover.v1.Cover/GetTags"
 	Cover_ListFees_FullMethodName                     = "/blueapi.cover.v1.Cover/ListFees"
-	Cover_GetFeeDetails_FullMethodName                = "/blueapi.cover.v1.Cover/GetFeeDetails"
-	Cover_RecalculateFee_FullMethodName               = "/blueapi.cover.v1.Cover/RecalculateFee"
 	Cover_RestoreFee_FullMethodName                   = "/blueapi.cover.v1.Cover/RestoreFee"
 	Cover_GetCostGroupFee_FullMethodName              = "/blueapi.cover.v1.Cover/GetCostGroupFee"
 	Cover_ListFeeAdjustmentAllocators_FullMethodName  = "/blueapi.cover.v1.Cover/ListFeeAdjustmentAllocators"
@@ -170,6 +169,8 @@ type CoverClient interface {
 	UpdateViewLayout(ctx context.Context, in *UpdateViewLayoutRequest, opts ...grpc.CallOption) (*UpdateViewLayoutResponse, error)
 	// Updates the view's widget
 	UpdateViewWidget(ctx context.Context, in *UpdateViewWidgetRequest, opts ...grpc.CallOption) (*UpdateViewWidgetResponse, error)
+	// Update view's color theme
+	UpdateViewColorTheme(ctx context.Context, in *UpdateViewColorThemeRequest, opts ...grpc.CallOption) (*UpdateViewColorThemeResponse, error)
 	// Deletes a view
 	DeleteView(ctx context.Context, in *DeleteViewRequest, opts ...grpc.CallOption) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -245,10 +246,6 @@ type CoverClient interface {
 	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (*GetTagsResponse, error)
 	// Lists the fees
 	ListFees(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListFeesClient, error)
-	// Gets the fee details
-	GetFeeDetails(ctx context.Context, in *GetFeeDetailsRequest, opts ...grpc.CallOption) (*FeeDetails, error)
-	// Recalculate fee based on criteria
-	RecalculateFee(ctx context.Context, in *RecalculateFeeRequest, opts ...grpc.CallOption) (Cover_RecalculateFeeClient, error)
 	// Restore distributed fees
 	RestoreFee(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreFeeClient, error)
 	// Get all available fees for the specified cost group
@@ -256,9 +253,9 @@ type CoverClient interface {
 	// WORK-IN-PROGRESS: Lists the fee adjustment allocators
 	ListFeeAdjustmentAllocators(ctx context.Context, in *ListFeeAdjustmentAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListFeeAdjustmentAllocatorsClient, error)
 	// WORK-IN-PROGRESS: Creates fee adjustment allocator
-	CreateFeeAdjustmentAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*CreateFeeAdjustmentAllocatorResponse, error)
+	CreateFeeAdjustmentAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*FeeAdjustmentAllocatorResponse, error)
 	// WORK-IN-PROGRESS: Creates fee adjustment allocator
-	UpdateFeeAdjustmentAllocator(ctx context.Context, in *UpdateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*UpdateFeeAdjustmentAllocatorResponse, error)
+	UpdateFeeAdjustmentAllocator(ctx context.Context, in *FeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*FeeAdjustmentAllocatorResponse, error)
 	// WORK-IN-PROGRESS: Deletes a fee adjustment allocator
 	DeleteFeeAdjustmentAllocator(ctx context.Context, in *DeleteFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Do not use.
@@ -555,6 +552,15 @@ func (c *coverClient) UpdateViewLayout(ctx context.Context, in *UpdateViewLayout
 func (c *coverClient) UpdateViewWidget(ctx context.Context, in *UpdateViewWidgetRequest, opts ...grpc.CallOption) (*UpdateViewWidgetResponse, error) {
 	out := new(UpdateViewWidgetResponse)
 	err := c.cc.Invoke(ctx, Cover_UpdateViewWidget_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateViewColorTheme(ctx context.Context, in *UpdateViewColorThemeRequest, opts ...grpc.CallOption) (*UpdateViewColorThemeResponse, error) {
+	out := new(UpdateViewColorThemeResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateViewColorTheme_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1020,49 +1026,8 @@ func (x *coverListFeesClient) Recv() (*FeeDetails, error) {
 	return m, nil
 }
 
-func (c *coverClient) GetFeeDetails(ctx context.Context, in *GetFeeDetailsRequest, opts ...grpc.CallOption) (*FeeDetails, error) {
-	out := new(FeeDetails)
-	err := c.cc.Invoke(ctx, Cover_GetFeeDetails_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) RecalculateFee(ctx context.Context, in *RecalculateFeeRequest, opts ...grpc.CallOption) (Cover_RecalculateFeeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_RecalculateFee_FullMethodName, opts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverRecalculateFeeClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_RecalculateFeeClient interface {
-	Recv() (*FeeDetails, error)
-	grpc.ClientStream
-}
-
-type coverRecalculateFeeClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverRecalculateFeeClient) Recv() (*FeeDetails, error) {
-	m := new(FeeDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *coverClient) RestoreFee(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreFeeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_RestoreFee_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_RestoreFee_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1094,7 +1059,7 @@ func (x *coverRestoreFeeClient) Recv() (*FeeDetails, error) {
 }
 
 func (c *coverClient) GetCostGroupFee(ctx context.Context, in *GetCostGroupFeeRequest, opts ...grpc.CallOption) (Cover_GetCostGroupFeeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_GetCostGroupFee_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_GetCostGroupFee_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1126,7 +1091,7 @@ func (x *coverGetCostGroupFeeClient) Recv() (*FeeItem, error) {
 }
 
 func (c *coverClient) ListFeeAdjustmentAllocators(ctx context.Context, in *ListFeeAdjustmentAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListFeeAdjustmentAllocatorsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ListFeeAdjustmentAllocators_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_ListFeeAdjustmentAllocators_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1141,7 +1106,7 @@ func (c *coverClient) ListFeeAdjustmentAllocators(ctx context.Context, in *ListF
 }
 
 type Cover_ListFeeAdjustmentAllocatorsClient interface {
-	Recv() (*FeeAdjustmentAllocator, error)
+	Recv() (*FeeAdjustmentAllocatorResponse, error)
 	grpc.ClientStream
 }
 
@@ -1149,16 +1114,16 @@ type coverListFeeAdjustmentAllocatorsClient struct {
 	grpc.ClientStream
 }
 
-func (x *coverListFeeAdjustmentAllocatorsClient) Recv() (*FeeAdjustmentAllocator, error) {
-	m := new(FeeAdjustmentAllocator)
+func (x *coverListFeeAdjustmentAllocatorsClient) Recv() (*FeeAdjustmentAllocatorResponse, error) {
+	m := new(FeeAdjustmentAllocatorResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *coverClient) CreateFeeAdjustmentAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*CreateFeeAdjustmentAllocatorResponse, error) {
-	out := new(CreateFeeAdjustmentAllocatorResponse)
+func (c *coverClient) CreateFeeAdjustmentAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*FeeAdjustmentAllocatorResponse, error) {
+	out := new(FeeAdjustmentAllocatorResponse)
 	err := c.cc.Invoke(ctx, Cover_CreateFeeAdjustmentAllocator_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1166,8 +1131,8 @@ func (c *coverClient) CreateFeeAdjustmentAllocator(ctx context.Context, in *Crea
 	return out, nil
 }
 
-func (c *coverClient) UpdateFeeAdjustmentAllocator(ctx context.Context, in *UpdateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*UpdateFeeAdjustmentAllocatorResponse, error) {
-	out := new(UpdateFeeAdjustmentAllocatorResponse)
+func (c *coverClient) UpdateFeeAdjustmentAllocator(ctx context.Context, in *FeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*FeeAdjustmentAllocatorResponse, error) {
+	out := new(FeeAdjustmentAllocatorResponse)
 	err := c.cc.Invoke(ctx, Cover_UpdateFeeAdjustmentAllocator_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1185,7 +1150,7 @@ func (c *coverClient) DeleteFeeAdjustmentAllocator(ctx context.Context, in *Dele
 }
 
 func (c *coverClient) ProxyCreateCompletion(ctx context.Context, in *ProxyCreateCompletionRequest, opts ...grpc.CallOption) (Cover_ProxyCreateCompletionClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_ProxyCreateCompletion_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ProxyCreateCompletion_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1284,6 +1249,8 @@ type CoverServer interface {
 	UpdateViewLayout(context.Context, *UpdateViewLayoutRequest) (*UpdateViewLayoutResponse, error)
 	// Updates the view's widget
 	UpdateViewWidget(context.Context, *UpdateViewWidgetRequest) (*UpdateViewWidgetResponse, error)
+	// Update view's color theme
+	UpdateViewColorTheme(context.Context, *UpdateViewColorThemeRequest) (*UpdateViewColorThemeResponse, error)
 	// Deletes a view
 	DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -1359,10 +1326,6 @@ type CoverServer interface {
 	GetTags(context.Context, *GetTagsRequest) (*GetTagsResponse, error)
 	// Lists the fees
 	ListFees(*ListFeesRequest, Cover_ListFeesServer) error
-	// Gets the fee details
-	GetFeeDetails(context.Context, *GetFeeDetailsRequest) (*FeeDetails, error)
-	// Recalculate fee based on criteria
-	RecalculateFee(*RecalculateFeeRequest, Cover_RecalculateFeeServer) error
 	// Restore distributed fees
 	RestoreFee(*RestoreFeeRequest, Cover_RestoreFeeServer) error
 	// Get all available fees for the specified cost group
@@ -1370,9 +1333,9 @@ type CoverServer interface {
 	// WORK-IN-PROGRESS: Lists the fee adjustment allocators
 	ListFeeAdjustmentAllocators(*ListFeeAdjustmentAllocatorsRequest, Cover_ListFeeAdjustmentAllocatorsServer) error
 	// WORK-IN-PROGRESS: Creates fee adjustment allocator
-	CreateFeeAdjustmentAllocator(context.Context, *CreateFeeAdjustmentAllocatorRequest) (*CreateFeeAdjustmentAllocatorResponse, error)
+	CreateFeeAdjustmentAllocator(context.Context, *CreateFeeAdjustmentAllocatorRequest) (*FeeAdjustmentAllocatorResponse, error)
 	// WORK-IN-PROGRESS: Creates fee adjustment allocator
-	UpdateFeeAdjustmentAllocator(context.Context, *UpdateFeeAdjustmentAllocatorRequest) (*UpdateFeeAdjustmentAllocatorResponse, error)
+	UpdateFeeAdjustmentAllocator(context.Context, *FeeAdjustmentAllocatorRequest) (*FeeAdjustmentAllocatorResponse, error)
 	// WORK-IN-PROGRESS: Deletes a fee adjustment allocator
 	DeleteFeeAdjustmentAllocator(context.Context, *DeleteFeeAdjustmentAllocatorRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Do not use.
@@ -1479,6 +1442,9 @@ func (UnimplementedCoverServer) UpdateViewLayout(context.Context, *UpdateViewLay
 }
 func (UnimplementedCoverServer) UpdateViewWidget(context.Context, *UpdateViewWidgetRequest) (*UpdateViewWidgetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewWidget not implemented")
+}
+func (UnimplementedCoverServer) UpdateViewColorTheme(context.Context, *UpdateViewColorThemeRequest) (*UpdateViewColorThemeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewColorTheme not implemented")
 }
 func (UnimplementedCoverServer) DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteView not implemented")
@@ -1594,12 +1560,6 @@ func (UnimplementedCoverServer) GetTags(context.Context, *GetTagsRequest) (*GetT
 func (UnimplementedCoverServer) ListFees(*ListFeesRequest, Cover_ListFeesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListFees not implemented")
 }
-func (UnimplementedCoverServer) GetFeeDetails(context.Context, *GetFeeDetailsRequest) (*FeeDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFeeDetails not implemented")
-}
-func (UnimplementedCoverServer) RecalculateFee(*RecalculateFeeRequest, Cover_RecalculateFeeServer) error {
-	return status.Errorf(codes.Unimplemented, "method RecalculateFee not implemented")
-}
 func (UnimplementedCoverServer) RestoreFee(*RestoreFeeRequest, Cover_RestoreFeeServer) error {
 	return status.Errorf(codes.Unimplemented, "method RestoreFee not implemented")
 }
@@ -1609,10 +1569,10 @@ func (UnimplementedCoverServer) GetCostGroupFee(*GetCostGroupFeeRequest, Cover_G
 func (UnimplementedCoverServer) ListFeeAdjustmentAllocators(*ListFeeAdjustmentAllocatorsRequest, Cover_ListFeeAdjustmentAllocatorsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListFeeAdjustmentAllocators not implemented")
 }
-func (UnimplementedCoverServer) CreateFeeAdjustmentAllocator(context.Context, *CreateFeeAdjustmentAllocatorRequest) (*CreateFeeAdjustmentAllocatorResponse, error) {
+func (UnimplementedCoverServer) CreateFeeAdjustmentAllocator(context.Context, *CreateFeeAdjustmentAllocatorRequest) (*FeeAdjustmentAllocatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateFeeAdjustmentAllocator not implemented")
 }
-func (UnimplementedCoverServer) UpdateFeeAdjustmentAllocator(context.Context, *UpdateFeeAdjustmentAllocatorRequest) (*UpdateFeeAdjustmentAllocatorResponse, error) {
+func (UnimplementedCoverServer) UpdateFeeAdjustmentAllocator(context.Context, *FeeAdjustmentAllocatorRequest) (*FeeAdjustmentAllocatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateFeeAdjustmentAllocator not implemented")
 }
 func (UnimplementedCoverServer) DeleteFeeAdjustmentAllocator(context.Context, *DeleteFeeAdjustmentAllocatorRequest) (*emptypb.Empty, error) {
@@ -2206,6 +2166,24 @@ func _Cover_UpdateViewWidget_Handler(srv interface{}, ctx context.Context, dec f
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateViewWidget(ctx, req.(*UpdateViewWidgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateViewColorTheme_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateViewColorThemeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateViewColorTheme(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateViewColorTheme_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateViewColorTheme(ctx, req.(*UpdateViewColorThemeRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2914,45 +2892,6 @@ func (x *coverListFeesServer) Send(m *FeeDetails) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cover_GetFeeDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFeeDetailsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetFeeDetails(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetFeeDetails_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetFeeDetails(ctx, req.(*GetFeeDetailsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_RecalculateFee_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(RecalculateFeeRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).RecalculateFee(m, &coverRecalculateFeeServer{stream})
-}
-
-type Cover_RecalculateFeeServer interface {
-	Send(*FeeDetails) error
-	grpc.ServerStream
-}
-
-type coverRecalculateFeeServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverRecalculateFeeServer) Send(m *FeeDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 func _Cover_RestoreFee_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(RestoreFeeRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -3004,7 +2943,7 @@ func _Cover_ListFeeAdjustmentAllocators_Handler(srv interface{}, stream grpc.Ser
 }
 
 type Cover_ListFeeAdjustmentAllocatorsServer interface {
-	Send(*FeeAdjustmentAllocator) error
+	Send(*FeeAdjustmentAllocatorResponse) error
 	grpc.ServerStream
 }
 
@@ -3012,7 +2951,7 @@ type coverListFeeAdjustmentAllocatorsServer struct {
 	grpc.ServerStream
 }
 
-func (x *coverListFeeAdjustmentAllocatorsServer) Send(m *FeeAdjustmentAllocator) error {
+func (x *coverListFeeAdjustmentAllocatorsServer) Send(m *FeeAdjustmentAllocatorResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -3035,7 +2974,7 @@ func _Cover_CreateFeeAdjustmentAllocator_Handler(srv interface{}, ctx context.Co
 }
 
 func _Cover_UpdateFeeAdjustmentAllocator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateFeeAdjustmentAllocatorRequest)
+	in := new(FeeAdjustmentAllocatorRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3047,7 +2986,7 @@ func _Cover_UpdateFeeAdjustmentAllocator_Handler(srv interface{}, ctx context.Co
 		FullMethod: Cover_UpdateFeeAdjustmentAllocator_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateFeeAdjustmentAllocator(ctx, req.(*UpdateFeeAdjustmentAllocatorRequest))
+		return srv.(CoverServer).UpdateFeeAdjustmentAllocator(ctx, req.(*FeeAdjustmentAllocatorRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3227,6 +3166,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_UpdateViewWidget_Handler,
 		},
 		{
+			MethodName: "UpdateViewColorTheme",
+			Handler:    _Cover_UpdateViewColorTheme_Handler,
+		},
+		{
 			MethodName: "DeleteView",
 			Handler:    _Cover_DeleteView_Handler,
 		},
@@ -3359,10 +3302,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetTags_Handler,
 		},
 		{
-			MethodName: "GetFeeDetails",
-			Handler:    _Cover_GetFeeDetails_Handler,
-		},
-		{
 			MethodName: "CreateFeeAdjustmentAllocator",
 			Handler:    _Cover_CreateFeeAdjustmentAllocator_Handler,
 		},
@@ -3399,11 +3338,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListFees",
 			Handler:       _Cover_ListFees_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "RecalculateFee",
-			Handler:       _Cover_RecalculateFee_Handler,
 			ServerStreams: true,
 		},
 		{
