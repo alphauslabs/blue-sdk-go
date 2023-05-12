@@ -7116,13 +7116,13 @@ var (
 
 	pattern_Cover_GetCostGroupFee_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "fees"}, "read"))
 
-	pattern_Cover_ListFeeAdjustmentAllocators_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "fees", "adjustment", "allocators"}, ""))
+	pattern_Cover_ListFeeAdjustmentAllocators_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "fees", "adjustment"}, ""))
 
-	pattern_Cover_CreateFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "fees", "adjustment", "allocators"}, ""))
+	pattern_Cover_CreateFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "fees", "adjustment"}, ""))
 
-	pattern_Cover_UpdateFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "fees", "adjustment", "allocators", "id"}, ""))
+	pattern_Cover_UpdateFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "fees", "adjustment", "id"}, ""))
 
-	pattern_Cover_DeleteFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "fees", "adjustment", "allocators", "id"}, ""))
+	pattern_Cover_DeleteFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "fees", "adjustment", "id"}, ""))
 
 	pattern_Cover_ProxyCreateCompletion_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "x", "pcc"}, ""))
 )
