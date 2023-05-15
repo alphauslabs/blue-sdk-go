@@ -1256,6 +1256,16 @@ func request_Billing_ListExchangeRates_0(ctx context.Context, marshaler runtime.
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
+	val, ok = pathParams["month"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "month")
+	}
+
+	protoReq.Month, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "month", err)
+	}
+
 	msg, err := client.ListExchangeRates(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -1280,6 +1290,16 @@ func local_request_Billing_ListExchangeRates_0(ctx context.Context, marshaler ru
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+
+	val, ok = pathParams["month"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "month")
+	}
+
+	protoReq.Month, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "month", err)
 	}
 
 	msg, err := server.ListExchangeRates(ctx, &protoReq)
@@ -2320,7 +2340,7 @@ var (
 
 	pattern_Billing_GetBillingSetting_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "settings"}, ""))
 
-	pattern_Billing_ListExchangeRates_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "exchangerate"}, ""))
+	pattern_Billing_ListExchangeRates_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "exchangerate", "month"}, ""))
 )
 
 var (
