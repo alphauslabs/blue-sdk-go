@@ -6383,6 +6383,8 @@ type CalculatorCostModifierAwsOptions_Modifier struct {
 	//
 	// The `usage` variable refers to the usage amount of a lineitem. For example, if you want to use a different rate of $1.5, you can use the formula: `usage * 1.5`.
 	//
+	// The `unblendedcost` refers to the lineitem's unblended cost as indicated in the CUR. Note that the `unblendedcost` variable is different than the `cost` variable, although there are cases where the two are equal.
+	//
 	// You can check out this [guide](https://alphauslabs.github.io/docs/guides/aws-cost-mods/) for more examples.
 	Formula string `protobuf:"bytes,1,opt,name=formula,proto3" json:"formula,omitempty"`
 	// Optional. A simple description modifier.
