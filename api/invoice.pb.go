@@ -260,6 +260,8 @@ type AccountDetails struct {
 	// supportFee
 	// usageOnlyTotal
 	// usageTotal
+	// marketplace
+	// marketplaceFees
 	Total []*AccountTotal `protobuf:"bytes,6,rep,name=total,proto3" json:"total,omitempty"`
 }
 
@@ -603,6 +605,18 @@ type InvoiceTotal struct {
 	// substitution:
 	//
 	//	Total amount of agency fee costs
+	//
+	// chargeOnly:
+	//
+	//	Total amount of vendor usage fee only costs
+	//
+	// marketplace:
+	//
+	//	Total amount of vendor marketplace usage costs
+	//
+	// marketplaceFees:
+	//
+	//	Total amount of vendor marketplace fee costs
 	//
 	// charge:
 	//
