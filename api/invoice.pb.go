@@ -20,6 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// InvoiceMessage resource definition.
 type InvoiceMessage struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -81,6 +82,7 @@ func (x *InvoiceMessage) GetStatus() string {
 	return ""
 }
 
+// Invoice resource definition.
 type Invoice struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -147,6 +149,7 @@ func (x *Invoice) GetAzure() *VendorDetail {
 	return nil
 }
 
+// VendorDetail resource definition.
 type VendorDetail struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -231,6 +234,7 @@ func (x *VendorDetail) GetSettings() *InvoiceSettings {
 	return nil
 }
 
+// AccountDetails resource definition.
 type AccountDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -256,12 +260,29 @@ type AccountDetails struct {
 	FeeDetails []*FeeDetails `protobuf:"bytes,5,rep,name=feeDetails,proto3" json:"feeDetails,omitempty"`
 	// The keys included in the account total column have the following values
 	//
-	// substitution
-	// supportFee
-	// usageOnlyTotal
-	// usageTotal
-	// marketplace
-	// marketplaceFees
+	// substitution:
+	//
+	//	Total amount of agency fee costs
+	//
+	// supportFee:
+	//
+	//	Total amount of Support Fee costs
+	//
+	// usageOnlyTotal:
+	//
+	//	Total amount of vendor usage fee only costs
+	//
+	// usageTotal:
+	//
+	//	Total amount of vendor usage fee costs
+	//
+	// marketplace:
+	//
+	//	Total amount of vendor marketplace usage costs
+	//
+	// marketplaceFees:
+	//
+	//	Total amount of vendor marketplace fee costs
 	Total []*AccountTotal `protobuf:"bytes,6,rep,name=total,proto3" json:"total,omitempty"`
 }
 
@@ -339,6 +360,7 @@ func (x *AccountDetails) GetTotal() []*AccountTotal {
 	return nil
 }
 
+// UsageDetails resource definition.
 type UsageDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -402,6 +424,7 @@ func (x *UsageDetails) GetAmount() float64 {
 	return 0
 }
 
+// CustomDetails resource definition.
 type CustomDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -465,6 +488,7 @@ func (x *CustomDetails) GetAmount() float64 {
 	return 0
 }
 
+// FeeDetails resource definition.
 type FeeDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -528,6 +552,7 @@ func (x *FeeDetails) GetAmount() float64 {
 	return 0
 }
 
+// AccountTotal resource definition.
 type AccountTotal struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -591,6 +616,7 @@ func (x *AccountTotal) GetAmount() float64 {
 	return 0
 }
 
+// InvoiceTotal resource definition.
 type InvoiceTotal struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -711,6 +737,7 @@ func (x *InvoiceTotal) GetAmount() float64 {
 	return 0
 }
 
+// GroupDetails resource definition.
 type GroupDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -774,6 +801,7 @@ func (x *GroupDetails) GetAmount() float64 {
 	return 0
 }
 
+// GroupCustomDetails resource definition.
 type GroupCustomDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -837,6 +865,7 @@ func (x *GroupCustomDetails) GetAmount() float64 {
 	return 0
 }
 
+// GroupUsageDetails resource definition.
 type GroupUsageDetails struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -900,6 +929,7 @@ func (x *GroupUsageDetails) GetAmount() float64 {
 	return 0
 }
 
+// InvoiceSettings resource definition.
 type InvoiceSettings struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1059,6 +1089,7 @@ func (x *InvoiceSettings) GetTitle() string {
 	return ""
 }
 
+// InvoiceSettingsAll resource definition.
 type InvoiceSettingsAll struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1442,6 +1473,7 @@ func (x *InvoiceSettingsAll) GetTitle() string {
 	return ""
 }
 
+// AccountSupportPlan resource definition.
 type AccountSupportPlan struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1513,6 +1545,7 @@ func (x *AccountSupportPlan) GetAwsDeveloper() bool {
 	return false
 }
 
+// AdditionalItems resource definition.
 type AdditionalItems struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1584,6 +1617,7 @@ func (x *AdditionalItems) GetQuantity() float64 {
 	return 0
 }
 
+// AccountSupportPlanSettings resource definition.
 type AccountSupportPlanSettings struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
