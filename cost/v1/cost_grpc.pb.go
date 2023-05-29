@@ -10,6 +10,7 @@ import (
 	context "context"
 	api "github.com/alphauslabs/blue-sdk-go/api"
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
+	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -62,6 +63,7 @@ const (
 	Cost_CreateAccountBudget_FullMethodName           = "/blueapi.cost.v1.Cost/CreateAccountBudget"
 	Cost_UpdateAccountBudget_FullMethodName           = "/blueapi.cost.v1.Cost/UpdateAccountBudget"
 	Cost_DeleteAccountBudget_FullMethodName           = "/blueapi.cost.v1.Cost/DeleteAccountBudget"
+	Cost_GetAccountBudgetAlerts_FullMethodName        = "/blueapi.cost.v1.Cost/GetAccountBudgetAlerts"
 	Cost_GetRecommendations_FullMethodName            = "/blueapi.cost.v1.Cost/GetRecommendations"
 	Cost_GetCostReduction_FullMethodName              = "/blueapi.cost.v1.Cost/GetCostReduction"
 	Cost_GetUtilization_FullMethodName                = "/blueapi.cost.v1.Cost/GetUtilization"
@@ -154,6 +156,8 @@ type CostClient interface {
 	UpdateAccountBudget(ctx context.Context, in *UpdateAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(ctx context.Context, in *DeleteAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Get the budget alerts for the account id. Only available in Wave(Pro).
+	GetAccountBudgetAlerts(ctx context.Context, in *GetAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*wave.BudgetAlert, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
@@ -789,6 +793,15 @@ func (c *costClient) DeleteAccountBudget(ctx context.Context, in *DeleteAccountB
 	return out, nil
 }
 
+func (c *costClient) GetAccountBudgetAlerts(ctx context.Context, in *GetAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*wave.BudgetAlert, error) {
+	out := new(wave.BudgetAlert)
+	err := c.cc.Invoke(ctx, Cost_GetAccountBudgetAlerts_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *costClient) GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error) {
 	out := new(GetRecommendationsResponse)
 	err := c.cc.Invoke(ctx, Cost_GetRecommendations_FullMethodName, in, out, opts...)
@@ -927,6 +940,8 @@ type CostServer interface {
 	UpdateAccountBudget(context.Context, *UpdateAccountBudgetRequest) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Get the budget alerts for the account id. Only available in Wave(Pro).
+	GetAccountBudgetAlerts(context.Context, *GetAccountBudgetAlertsRequest) (*wave.BudgetAlert, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
@@ -1065,6 +1080,9 @@ func (UnimplementedCostServer) UpdateAccountBudget(context.Context, *UpdateAccou
 }
 func (UnimplementedCostServer) DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountBudget not implemented")
+}
+func (UnimplementedCostServer) GetAccountBudgetAlerts(context.Context, *GetAccountBudgetAlertsRequest) (*wave.BudgetAlert, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAccountBudgetAlerts not implemented")
 }
 func (UnimplementedCostServer) GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendations not implemented")
@@ -1850,6 +1868,24 @@ func _Cost_DeleteAccountBudget_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetAccountBudgetAlerts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAccountBudgetAlertsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetAccountBudgetAlerts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_GetAccountBudgetAlerts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetAccountBudgetAlerts(ctx, req.(*GetAccountBudgetAlertsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cost_GetRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRecommendationsRequest)
 	if err := dec(in); err != nil {
@@ -2080,6 +2116,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccountBudget",
 			Handler:    _Cost_DeleteAccountBudget_Handler,
+		},
+		{
+			MethodName: "GetAccountBudgetAlerts",
+			Handler:    _Cost_GetAccountBudgetAlerts_Handler,
 		},
 		{
 			MethodName: "GetRecommendations",
