@@ -1095,7 +1095,7 @@ type CalculatorCostModifierAwsOptions struct {
 	// Optional. Conditional qualifiers to further filter the modifier targets. Multiple qualifiers use the logical `or` operator; `qualifiers[0] || qualifiers[1] || qualifiers[n]`.
 	Qualifiers []*CalculatorCostModifierAwsOptions_Qualifier `protobuf:"bytes,4,rep,name=qualifiers,proto3" json:"qualifiers,omitempty"`
 	Modifier   *CalculatorCostModifierAwsOptions_Modifier    `protobuf:"bytes,5,opt,name=modifier,proto3" json:"modifier,omitempty"`
-	// Optional. Specifies the modifier id in which this modifier will be applied after. For example, if you have another modifier `mod1` and you create a new modifier with `after` set to `mod1`, the calculator will apply `mod1` first, then this modifier. If `after` is not set, the application sequence for multiple overlapping modifiers will be by update timestamp, oldest to newest.
+	// Optional. Specifies the modifier id in which this modifier will be applied after. For example, if you have another modifier `mod1` and you create a new modifier with `after` set to `mod1`, the calculator will apply `mod1` first, then this modifier. If `after` is not set, the application sequence for multiple overlapping modifiers will be by update timestamp, newest to oldest.
 	After string `protobuf:"bytes,6,opt,name=after,proto3" json:"after,omitempty"`
 }
 
