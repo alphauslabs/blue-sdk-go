@@ -2118,7 +2118,7 @@ type CreateCalculationsScheduleRequest struct {
 	Schedule string `protobuf:"bytes,2,opt,name=schedule,proto3" json:"schedule,omitempty"`
 	// Optional. Non-standard macro(s) that augment(s) `schedule`'s behavior. The only supported value for now is `@endofmonth`.
 	//
-	// `@endofmonth` - If set, the backend scheduler will only use the `minute` and `hour` part of `schedule`'s value and set the days to 28th, 29th, 30th, and 31st but the runner will do the filtering for the actual end of the trigger month.
+	// `@endofmonth` - If set, the backend scheduler will only use the `minute` and `hour` part of `schedule`'s value and set the days to 28th, 29th, 30th, and 31st but the runner will do the filtering for the actual end of the trigger month. Note that this is different than setting `schedule` to, say, `0 0 28-31 * *`.
 	ScheduleMacro string `protobuf:"bytes,6,opt,name=scheduleMacro,proto3" json:"scheduleMacro,omitempty"`
 	// Optional. The channel id to use for notifications. At the moment, only email-type notification channels are supported. If not set, your default channel will be used. And if non-existent, an email-type notification channel will be created using your primary email address.
 	NotificationChannel string `protobuf:"bytes,3,opt,name=notificationChannel,proto3" json:"notificationChannel,omitempty"`
