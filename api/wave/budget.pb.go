@@ -95,8 +95,9 @@ type Notification struct {
 	unknownFields protoimpl.UnknownFields
 
 	// notification id
+	// `email` / `slack`
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// destination email/slack
+	// destination email address /slack webhook url
 	Destination string `protobuf:"bytes,2,opt,name=destination,proto3" json:"destination,omitempty"`
 	// notification enable/disable
 	Enabled bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
@@ -162,6 +163,7 @@ type Budget struct {
 	unknownFields protoimpl.UnknownFields
 
 	// budget id
+	// `previousDay` / `daily` / `monthly`
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// budget value
 	Value float64 `protobuf:"fixed64,2,opt,name=value,proto3" json:"value,omitempty"`
