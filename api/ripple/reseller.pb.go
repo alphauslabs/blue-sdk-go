@@ -149,6 +149,61 @@ type ResellerConfig struct {
 	unknownFields protoimpl.UnknownFields
 
 	// key
+	//
+	// For Wave
+	// The available values are shown below.
+	// - Dashboard
+	// `dashboardGraph`: Display graph
+	// `reportFilters`: Display report filters
+	//
+	// - Usage Reports
+	// `usageAccount`: Account
+	// `usageAccountGraph`: Display graph
+	// `usageAccountMenuAccountEdit`: Edit account name
+	// `usageAccountMenuBudget`: Display Budget
+	// `usageAccountMenuBudgetEdit`: Edit Budget
+	// `usageAccountMenuFeesFee`: Display fee
+	// `usageAccountMenuFeesCredit`: Display credit
+	// `usageAccountMenuFeesRefund`: Display refund
+	// `usageAccountMenuFeesOtherFees`: Display other fees
+	// `usageReportDownload`: Download report data
+	//
+	// - Cross Tag
+	// `usageCrosstag`: Cross Tag
+	// `usageCrosstagGraph`: Display graph
+	//
+	// - Group
+	// `usageGroup`: Group
+	// `usageGroupGraph`: Display graph
+	//
+	// - Cost management
+	// `riPurchased`: Display purchased RI
+	// `riUtilization`: Display RI Utilization
+	// `riRecommendation`: Display RI Recommendations
+	// `spPurchased`: Display purchased Savings Plans
+	//
+	// - Other
+	// `invoice`: Invoice link
+	// `openApi`: API Access Tokens
+	// `usersManagement`: Sub-user management
+	// `invoiceDownloadCsvDiscount`: Enable discount CSV download
+	// `invoiceDownloadcsvMerged`: Enable merged CSV download
+	// `aquaLink`: Aqua link
+	// `waveproReportFilters`: WavePro Report Filters
+	//
+	// For Aqua
+	// The available values are shown below.
+	// - Instance Usage Status
+	// `aqCoverageRatio`: Coverage Ratio
+	//
+	// - Reservations Management
+	// `aqRiManagement`: RI Management
+	// `aqSpManagement`: SP Management
+	//
+	// - Recommendation
+	// `aqRiSpInstances`: RI/SP Instances
+	// `aqRightSizing`: Right Sizing
+	// `aqScheduling`: Scheduling
 	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	// value
 	Value bool `protobuf:"varint,2,opt,name=value,proto3" json:"value,omitempty"`
