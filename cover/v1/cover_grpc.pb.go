@@ -99,6 +99,7 @@ const (
 	Cover_UpdateFeeAdjustmentAllocator_FullMethodName = "/blueapi.cover.v1.Cover/UpdateFeeAdjustmentAllocator"
 	Cover_DeleteFeeAdjustmentAllocator_FullMethodName = "/blueapi.cover.v1.Cover/DeleteFeeAdjustmentAllocator"
 	Cover_ProxyCreateCompletion_FullMethodName        = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
+	Cover_SimulateFeeAllocator_FullMethodName         = "/blueapi.cover.v1.Cover/SimulateFeeAllocator"
 )
 
 // CoverClient is the client API for Cover service.
@@ -260,6 +261,8 @@ type CoverClient interface {
 	DeleteFeeAdjustmentAllocator(ctx context.Context, in *DeleteFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Do not use.
 	ProxyCreateCompletion(ctx context.Context, in *ProxyCreateCompletionRequest, opts ...grpc.CallOption) (Cover_ProxyCreateCompletionClient, error)
+	// WORK-IN-PROGRESS: Simulate fee allocator
+	SimulateFeeAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateFeeAllocatorClient, error)
 }
 
 type coverClient struct {
@@ -1181,6 +1184,38 @@ func (x *coverProxyCreateCompletionClient) Recv() (*ProxyCreateCompletionRespons
 	return m, nil
 }
 
+func (c *coverClient) SimulateFeeAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateFeeAllocatorClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_SimulateFeeAllocator_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverSimulateFeeAllocatorClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_SimulateFeeAllocatorClient interface {
+	Recv() (*FeeDetails, error)
+	grpc.ClientStream
+}
+
+type coverSimulateFeeAllocatorClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverSimulateFeeAllocatorClient) Recv() (*FeeDetails, error) {
+	m := new(FeeDetails)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -1340,6 +1375,8 @@ type CoverServer interface {
 	DeleteFeeAdjustmentAllocator(context.Context, *DeleteFeeAdjustmentAllocatorRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Do not use.
 	ProxyCreateCompletion(*ProxyCreateCompletionRequest, Cover_ProxyCreateCompletionServer) error
+	// WORK-IN-PROGRESS: Simulate fee allocator
+	SimulateFeeAllocator(*CreateFeeAdjustmentAllocatorRequest, Cover_SimulateFeeAllocatorServer) error
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -1580,6 +1617,9 @@ func (UnimplementedCoverServer) DeleteFeeAdjustmentAllocator(context.Context, *D
 }
 func (UnimplementedCoverServer) ProxyCreateCompletion(*ProxyCreateCompletionRequest, Cover_ProxyCreateCompletionServer) error {
 	return status.Errorf(codes.Unimplemented, "method ProxyCreateCompletion not implemented")
+}
+func (UnimplementedCoverServer) SimulateFeeAllocator(*CreateFeeAdjustmentAllocatorRequest, Cover_SimulateFeeAllocatorServer) error {
+	return status.Errorf(codes.Unimplemented, "method SimulateFeeAllocator not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -3030,6 +3070,27 @@ func (x *coverProxyCreateCompletionServer) Send(m *ProxyCreateCompletionResponse
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cover_SimulateFeeAllocator_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(CreateFeeAdjustmentAllocatorRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).SimulateFeeAllocator(m, &coverSimulateFeeAllocatorServer{stream})
+}
+
+type Cover_SimulateFeeAllocatorServer interface {
+	Send(*FeeDetails) error
+	grpc.ServerStream
+}
+
+type coverSimulateFeeAllocatorServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverSimulateFeeAllocatorServer) Send(m *FeeDetails) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3358,6 +3419,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ProxyCreateCompletion",
 			Handler:       _Cover_ProxyCreateCompletion_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "SimulateFeeAllocator",
+			Handler:       _Cover_SimulateFeeAllocator_Handler,
 			ServerStreams: true,
 		},
 	},
