@@ -187,7 +187,7 @@ type ResellerConfig struct {
 	// `openApi`: API Access Tokens
 	// `usersManagement`: Sub-user management
 	// `invoiceDownloadCsvDiscount`: Enable discount CSV download
-	// `invoiceDownloadcsvMerged`: Enable merged CSV download
+	// `invoiceDownloadCsvMerged`: Enable merged CSV download
 	// `aquaLink`: Aqua link
 	// `waveproReportFilters`: WavePro Report Filters
 	//
