@@ -21,36 +21,37 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Iam_WhoAmI_FullMethodName                 = "/blueapi.iam.v1.Iam/WhoAmI"
-	Iam_ListUsers_FullMethodName              = "/blueapi.iam.v1.Iam/ListUsers"
-	Iam_GetUser_FullMethodName                = "/blueapi.iam.v1.Iam/GetUser"
-	Iam_CreateUser_FullMethodName             = "/blueapi.iam.v1.Iam/CreateUser"
-	Iam_DeleteUser_FullMethodName             = "/blueapi.iam.v1.Iam/DeleteUser"
-	Iam_CreateGroupRootUser_FullMethodName    = "/blueapi.iam.v1.Iam/CreateGroupRootUser"
-	Iam_ListGroupRootUsers_FullMethodName     = "/blueapi.iam.v1.Iam/ListGroupRootUsers"
-	Iam_GetGroupRootUser_FullMethodName       = "/blueapi.iam.v1.Iam/GetGroupRootUser"
-	Iam_DeleteGroupRootUser_FullMethodName    = "/blueapi.iam.v1.Iam/DeleteGroupRootUser"
-	Iam_GetFeatureFlags_FullMethodName        = "/blueapi.iam.v1.Iam/GetFeatureFlags"
-	Iam_UpdateFeatureFlags_FullMethodName     = "/blueapi.iam.v1.Iam/UpdateFeatureFlags"
-	Iam_ListApiClients_FullMethodName         = "/blueapi.iam.v1.Iam/ListApiClients"
-	Iam_CreateApiClient_FullMethodName        = "/blueapi.iam.v1.Iam/CreateApiClient"
-	Iam_DeleteApiClient_FullMethodName        = "/blueapi.iam.v1.Iam/DeleteApiClient"
-	Iam_ListPermissions_FullMethodName        = "/blueapi.iam.v1.Iam/ListPermissions"
-	Iam_ListRoles_FullMethodName              = "/blueapi.iam.v1.Iam/ListRoles"
-	Iam_CreateRole_FullMethodName             = "/blueapi.iam.v1.Iam/CreateRole"
-	Iam_UpdateRole_FullMethodName             = "/blueapi.iam.v1.Iam/UpdateRole"
-	Iam_DeleteRole_FullMethodName             = "/blueapi.iam.v1.Iam/DeleteRole"
-	Iam_ListUserRoleMappings_FullMethodName   = "/blueapi.iam.v1.Iam/ListUserRoleMappings"
-	Iam_CreateUserRoleMapping_FullMethodName  = "/blueapi.iam.v1.Iam/CreateUserRoleMapping"
-	Iam_UpdateUserRoleMapping_FullMethodName  = "/blueapi.iam.v1.Iam/UpdateUserRoleMapping"
-	Iam_ListIdentityProviders_FullMethodName  = "/blueapi.iam.v1.Iam/ListIdentityProviders"
-	Iam_CreateIdentityProvider_FullMethodName = "/blueapi.iam.v1.Iam/CreateIdentityProvider"
-	Iam_DeleteIdentityProvider_FullMethodName = "/blueapi.iam.v1.Iam/DeleteIdentityProvider"
-	Iam_ListIpFilters_FullMethodName          = "/blueapi.iam.v1.Iam/ListIpFilters"
-	Iam_CreateIpFilter_FullMethodName         = "/blueapi.iam.v1.Iam/CreateIpFilter"
-	Iam_DeleteIpFilter_FullMethodName         = "/blueapi.iam.v1.Iam/DeleteIpFilter"
-	Iam_CreatePartnerToken_FullMethodName     = "/blueapi.iam.v1.Iam/CreatePartnerToken"
-	Iam_RefreshPartnerToken_FullMethodName    = "/blueapi.iam.v1.Iam/RefreshPartnerToken"
+	Iam_WhoAmI_FullMethodName                      = "/blueapi.iam.v1.Iam/WhoAmI"
+	Iam_ListUsers_FullMethodName                   = "/blueapi.iam.v1.Iam/ListUsers"
+	Iam_GetUser_FullMethodName                     = "/blueapi.iam.v1.Iam/GetUser"
+	Iam_CreateUser_FullMethodName                  = "/blueapi.iam.v1.Iam/CreateUser"
+	Iam_DeleteUser_FullMethodName                  = "/blueapi.iam.v1.Iam/DeleteUser"
+	Iam_CreateGroupRootUser_FullMethodName         = "/blueapi.iam.v1.Iam/CreateGroupRootUser"
+	Iam_ListGroupRootUsers_FullMethodName          = "/blueapi.iam.v1.Iam/ListGroupRootUsers"
+	Iam_GetGroupRootUser_FullMethodName            = "/blueapi.iam.v1.Iam/GetGroupRootUser"
+	Iam_DeleteGroupRootUser_FullMethodName         = "/blueapi.iam.v1.Iam/DeleteGroupRootUser"
+	Iam_GetFeatureFlags_FullMethodName             = "/blueapi.iam.v1.Iam/GetFeatureFlags"
+	Iam_UpdateFeatureFlags_FullMethodName          = "/blueapi.iam.v1.Iam/UpdateFeatureFlags"
+	Iam_ListApiClients_FullMethodName              = "/blueapi.iam.v1.Iam/ListApiClients"
+	Iam_CreateApiClient_FullMethodName             = "/blueapi.iam.v1.Iam/CreateApiClient"
+	Iam_DeleteApiClient_FullMethodName             = "/blueapi.iam.v1.Iam/DeleteApiClient"
+	Iam_ListPermissions_FullMethodName             = "/blueapi.iam.v1.Iam/ListPermissions"
+	Iam_ListRoles_FullMethodName                   = "/blueapi.iam.v1.Iam/ListRoles"
+	Iam_CreateRole_FullMethodName                  = "/blueapi.iam.v1.Iam/CreateRole"
+	Iam_UpdateRole_FullMethodName                  = "/blueapi.iam.v1.Iam/UpdateRole"
+	Iam_DeleteRole_FullMethodName                  = "/blueapi.iam.v1.Iam/DeleteRole"
+	Iam_ListUserRoleMappings_FullMethodName        = "/blueapi.iam.v1.Iam/ListUserRoleMappings"
+	Iam_CreateUserRoleMapping_FullMethodName       = "/blueapi.iam.v1.Iam/CreateUserRoleMapping"
+	Iam_UpdateUserRoleMapping_FullMethodName       = "/blueapi.iam.v1.Iam/UpdateUserRoleMapping"
+	Iam_ListIdentityProviders_FullMethodName       = "/blueapi.iam.v1.Iam/ListIdentityProviders"
+	Iam_CreateIdentityProvider_FullMethodName      = "/blueapi.iam.v1.Iam/CreateIdentityProvider"
+	Iam_DeleteIdentityProvider_FullMethodName      = "/blueapi.iam.v1.Iam/DeleteIdentityProvider"
+	Iam_ListIpFilters_FullMethodName               = "/blueapi.iam.v1.Iam/ListIpFilters"
+	Iam_CreateIpFilter_FullMethodName              = "/blueapi.iam.v1.Iam/CreateIpFilter"
+	Iam_DeleteIpFilter_FullMethodName              = "/blueapi.iam.v1.Iam/DeleteIpFilter"
+	Iam_CreatePartnerToken_FullMethodName          = "/blueapi.iam.v1.Iam/CreatePartnerToken"
+	Iam_RefreshPartnerToken_FullMethodName         = "/blueapi.iam.v1.Iam/RefreshPartnerToken"
+	Iam_VerifyEmailForResetPassword_FullMethodName = "/blueapi.iam.v1.Iam/VerifyEmailForResetPassword"
 )
 
 // IamClient is the client API for Iam service.
@@ -121,6 +122,8 @@ type IamClient interface {
 	CreatePartnerToken(ctx context.Context, in *CreatePartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Refreshes an expired partner token. Only partners are expected to call this API.
 	RefreshPartnerToken(ctx context.Context, in *RefreshPartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
+	// Verify Email Input For Reset Password
+	VerifyEmailForResetPassword(ctx context.Context, in *VerifyEmailForResetPasswordRequest, opts ...grpc.CallOption) (*VerifyEmailForResetPasswordResponse, error)
 }
 
 type iamClient struct {
@@ -493,6 +496,15 @@ func (c *iamClient) RefreshPartnerToken(ctx context.Context, in *RefreshPartnerT
 	return out, nil
 }
 
+func (c *iamClient) VerifyEmailForResetPassword(ctx context.Context, in *VerifyEmailForResetPasswordRequest, opts ...grpc.CallOption) (*VerifyEmailForResetPasswordResponse, error) {
+	out := new(VerifyEmailForResetPasswordResponse)
+	err := c.cc.Invoke(ctx, Iam_VerifyEmailForResetPassword_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IamServer is the server API for Iam service.
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
@@ -561,6 +573,8 @@ type IamServer interface {
 	CreatePartnerToken(context.Context, *CreatePartnerTokenRequest) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Refreshes an expired partner token. Only partners are expected to call this API.
 	RefreshPartnerToken(context.Context, *RefreshPartnerTokenRequest) (*PartnerToken, error)
+	// Verify Email Input For Reset Password
+	VerifyEmailForResetPassword(context.Context, *VerifyEmailForResetPasswordRequest) (*VerifyEmailForResetPasswordResponse, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -657,6 +671,9 @@ func (UnimplementedIamServer) CreatePartnerToken(context.Context, *CreatePartner
 }
 func (UnimplementedIamServer) RefreshPartnerToken(context.Context, *RefreshPartnerTokenRequest) (*PartnerToken, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RefreshPartnerToken not implemented")
+}
+func (UnimplementedIamServer) VerifyEmailForResetPassword(context.Context, *VerifyEmailForResetPasswordRequest) (*VerifyEmailForResetPasswordResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyEmailForResetPassword not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -1223,6 +1240,24 @@ func _Iam_RefreshPartnerToken_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_VerifyEmailForResetPassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyEmailForResetPasswordRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).VerifyEmailForResetPassword(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_VerifyEmailForResetPassword_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).VerifyEmailForResetPassword(ctx, req.(*VerifyEmailForResetPasswordRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Iam_ServiceDesc is the grpc.ServiceDesc for Iam service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1333,6 +1368,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RefreshPartnerToken",
 			Handler:    _Iam_RefreshPartnerToken_Handler,
+		},
+		{
+			MethodName: "VerifyEmailForResetPassword",
+			Handler:    _Iam_VerifyEmailForResetPassword_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
