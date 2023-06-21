@@ -2639,7 +2639,7 @@ type UpdateResellerRequest struct {
 	//
 	// We recommend a password length of 8~32 characters. If you send 0 characters, a password will be generated automatically.
 	Password string `protobuf:"bytes,4,opt,name=password,proto3" json:"password,omitempty"`
-	// Optional. If valid, you will be notified via email address.
+	// Optional. If valid when email or password is updated, you will be notified via email address.
 	Notification bool `protobuf:"varint,5,opt,name=notification,proto3" json:"notification,omitempty"`
 }
 
