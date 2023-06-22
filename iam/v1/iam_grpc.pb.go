@@ -55,7 +55,7 @@ const (
 	Iam_VerifyUsernameForResetPassword_FullMethodName = "/blueapi.iam.v1.Iam/VerifyUsernameForResetPassword"
 	Iam_RequestForVerificationCode_FullMethodName     = "/blueapi.iam.v1.Iam/RequestForVerificationCode"
 	Iam_ValidateVerificationCode_FullMethodName       = "/blueapi.iam.v1.Iam/ValidateVerificationCode"
-	Iam_UpdatePassword_FullMethodName                 = "/blueapi.iam.v1.Iam/UpdatePassword"
+	Iam_UpdatePasswordFromLogin_FullMethodName        = "/blueapi.iam.v1.Iam/UpdatePasswordFromLogin"
 )
 
 // IamClient is the client API for Iam service.
@@ -135,7 +135,7 @@ type IamClient interface {
 	// Request for 6-digit verification code validation
 	ValidateVerificationCode(ctx context.Context, in *ValidateVerificationCodeRequest, opts ...grpc.CallOption) (*ValidateVerificationCodeResponse, error)
 	// Request for updating password after successful validation of the 6-digit verification code
-	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error)
+	UpdatePasswordFromLogin(ctx context.Context, in *UpdatePasswordFromLoginRequest, opts ...grpc.CallOption) (*UpdatePasswordFromLoginResponse, error)
 }
 
 type iamClient struct {
@@ -544,9 +544,9 @@ func (c *iamClient) ValidateVerificationCode(ctx context.Context, in *ValidateVe
 	return out, nil
 }
 
-func (c *iamClient) UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*UpdatePasswordResponse, error) {
-	out := new(UpdatePasswordResponse)
-	err := c.cc.Invoke(ctx, Iam_UpdatePassword_FullMethodName, in, out, opts...)
+func (c *iamClient) UpdatePasswordFromLogin(ctx context.Context, in *UpdatePasswordFromLoginRequest, opts ...grpc.CallOption) (*UpdatePasswordFromLoginResponse, error) {
+	out := new(UpdatePasswordFromLoginResponse)
+	err := c.cc.Invoke(ctx, Iam_UpdatePasswordFromLogin_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -630,7 +630,7 @@ type IamServer interface {
 	// Request for 6-digit verification code validation
 	ValidateVerificationCode(context.Context, *ValidateVerificationCodeRequest) (*ValidateVerificationCodeResponse, error)
 	// Request for updating password after successful validation of the 6-digit verification code
-	UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error)
+	UpdatePasswordFromLogin(context.Context, *UpdatePasswordFromLoginRequest) (*UpdatePasswordFromLoginResponse, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -740,8 +740,8 @@ func (UnimplementedIamServer) RequestForVerificationCode(context.Context, *Reque
 func (UnimplementedIamServer) ValidateVerificationCode(context.Context, *ValidateVerificationCodeRequest) (*ValidateVerificationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateVerificationCode not implemented")
 }
-func (UnimplementedIamServer) UpdatePassword(context.Context, *UpdatePasswordRequest) (*UpdatePasswordResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdatePassword not implemented")
+func (UnimplementedIamServer) UpdatePasswordFromLogin(context.Context, *UpdatePasswordFromLoginRequest) (*UpdatePasswordFromLoginResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePasswordFromLogin not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -1380,20 +1380,20 @@ func _Iam_ValidateVerificationCode_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Iam_UpdatePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdatePasswordRequest)
+func _Iam_UpdatePasswordFromLogin_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePasswordFromLoginRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(IamServer).UpdatePassword(ctx, in)
+		return srv.(IamServer).UpdatePasswordFromLogin(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Iam_UpdatePassword_FullMethodName,
+		FullMethod: Iam_UpdatePasswordFromLogin_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(IamServer).UpdatePassword(ctx, req.(*UpdatePasswordRequest))
+		return srv.(IamServer).UpdatePasswordFromLogin(ctx, req.(*UpdatePasswordFromLoginRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1526,8 +1526,8 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Iam_ValidateVerificationCode_Handler,
 		},
 		{
-			MethodName: "UpdatePassword",
-			Handler:    _Iam_UpdatePassword_Handler,
+			MethodName: "UpdatePasswordFromLogin",
+			Handler:    _Iam_UpdatePasswordFromLogin_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
