@@ -159,13 +159,13 @@ type CostClient interface {
 	UpdateAccountBudget(ctx context.Context, in *UpdateAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(ctx context.Context, in *DeleteAccountBudgetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Get the budget alerts for the account id. Only available in Wave(Pro).
+	// Get the budget alerts for the account id. Only available in Wave(Pro).
 	GetAccountBudgetAlerts(ctx context.Context, in *GetAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*wave.BudgetAlert, error)
-	// WORK-IN-PROGRESS: Create the budget alerts for the account id. Only available in Wave(Pro).
+	// Create the budget alerts for the account id. Only available in Wave(Pro).
 	CreateAccountBudgetAlerts(ctx context.Context, in *CreateAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*wave.BudgetAlert, error)
-	// WORK-IN-PROGRESS: Update the budget alerts for the account id. Only available in Wave(Pro).
+	// Update the budget alerts for the account id. Only available in Wave(Pro).
 	UpdateAccountBudgetAlerts(ctx context.Context, in *UpdateAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*wave.BudgetAlert, error)
-	// WORK-IN-PROGRESS: Delete the budget alerts for the account id. Only available in Wave(Pro).
+	// Delete the budget alerts for the account id. Only available in Wave(Pro).
 	DeleteAccountBudgetAlerts(ctx context.Context, in *DeleteAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
@@ -976,13 +976,13 @@ type CostServer interface {
 	UpdateAccountBudget(context.Context, *UpdateAccountBudgetRequest) (*emptypb.Empty, error)
 	// Removes monthly budget for the account/acctgroup id from database.
 	DeleteAccountBudget(context.Context, *DeleteAccountBudgetRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Get the budget alerts for the account id. Only available in Wave(Pro).
+	// Get the budget alerts for the account id. Only available in Wave(Pro).
 	GetAccountBudgetAlerts(context.Context, *GetAccountBudgetAlertsRequest) (*wave.BudgetAlert, error)
-	// WORK-IN-PROGRESS: Create the budget alerts for the account id. Only available in Wave(Pro).
+	// Create the budget alerts for the account id. Only available in Wave(Pro).
 	CreateAccountBudgetAlerts(context.Context, *CreateAccountBudgetAlertsRequest) (*wave.BudgetAlert, error)
-	// WORK-IN-PROGRESS: Update the budget alerts for the account id. Only available in Wave(Pro).
+	// Update the budget alerts for the account id. Only available in Wave(Pro).
 	UpdateAccountBudgetAlerts(context.Context, *UpdateAccountBudgetAlertsRequest) (*wave.BudgetAlert, error)
-	// WORK-IN-PROGRESS: Delete the budget alerts for the account id. Only available in Wave(Pro).
+	// Delete the budget alerts for the account id. Only available in Wave(Pro).
 	DeleteAccountBudgetAlerts(context.Context, *DeleteAccountBudgetAlertsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
