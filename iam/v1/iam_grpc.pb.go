@@ -126,15 +126,15 @@ type IamClient interface {
 	CreatePartnerToken(ctx context.Context, in *CreatePartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Refreshes an expired partner token. Only partners are expected to call this API.
 	RefreshPartnerToken(ctx context.Context, in *RefreshPartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
-	// Verify Email Input For Reset Password
+	// WORK-IN-PROGRESS: Verify Email Input For Reset Password.
 	VerifyEmailForResetPassword(ctx context.Context, in *VerifyEmailForResetPasswordRequest, opts ...grpc.CallOption) (*VerifyEmailForResetPasswordResponse, error)
-	// Verify Username Input for Reset Password
+	// WORK-IN-PROGRESS: Verify Username Input for Reset Password.
 	VerifyUsernameForResetPassword(ctx context.Context, in *VerifyUsernameForResetPasswordRequest, opts ...grpc.CallOption) (*VerifyUsernameForResetPasswordResponse, error)
-	// Request for 6-digit verification code from front-end
+	// WORK-IN-PROGRESS: Request for 6-digit verification code from front-end.
 	RequestForVerificationCode(ctx context.Context, in *RequestForVerificationCodeRequest, opts ...grpc.CallOption) (*RequestForVerificationCodeResponse, error)
-	// Request for 6-digit verification code validation
+	// WORK-IN-PROGRESS: Request for 6-digit verification code validation.
 	ValidateVerificationCode(ctx context.Context, in *ValidateVerificationCodeRequest, opts ...grpc.CallOption) (*ValidateVerificationCodeResponse, error)
-	// Request for updating password after successful validation of the 6-digit verification code
+	// WORK-IN-PROGRESS: Request for updating password after successful validation of the 6-digit verification code.
 	UpdatePasswordFromLogin(ctx context.Context, in *UpdatePasswordFromLoginRequest, opts ...grpc.CallOption) (*UpdatePasswordFromLoginResponse, error)
 }
 
@@ -621,15 +621,15 @@ type IamServer interface {
 	CreatePartnerToken(context.Context, *CreatePartnerTokenRequest) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Refreshes an expired partner token. Only partners are expected to call this API.
 	RefreshPartnerToken(context.Context, *RefreshPartnerTokenRequest) (*PartnerToken, error)
-	// Verify Email Input For Reset Password
+	// WORK-IN-PROGRESS: Verify Email Input For Reset Password.
 	VerifyEmailForResetPassword(context.Context, *VerifyEmailForResetPasswordRequest) (*VerifyEmailForResetPasswordResponse, error)
-	// Verify Username Input for Reset Password
+	// WORK-IN-PROGRESS: Verify Username Input for Reset Password.
 	VerifyUsernameForResetPassword(context.Context, *VerifyUsernameForResetPasswordRequest) (*VerifyUsernameForResetPasswordResponse, error)
-	// Request for 6-digit verification code from front-end
+	// WORK-IN-PROGRESS: Request for 6-digit verification code from front-end.
 	RequestForVerificationCode(context.Context, *RequestForVerificationCodeRequest) (*RequestForVerificationCodeResponse, error)
-	// Request for 6-digit verification code validation
+	// WORK-IN-PROGRESS: Request for 6-digit verification code validation.
 	ValidateVerificationCode(context.Context, *ValidateVerificationCodeRequest) (*ValidateVerificationCodeResponse, error)
-	// Request for updating password after successful validation of the 6-digit verification code
+	// WORK-IN-PROGRESS: Request for updating password after successful validation of the 6-digit verification code.
 	UpdatePasswordFromLogin(context.Context, *UpdatePasswordFromLoginRequest) (*UpdatePasswordFromLoginResponse, error)
 	mustEmbedUnimplementedIamServer()
 }
