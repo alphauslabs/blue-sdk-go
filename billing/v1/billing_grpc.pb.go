@@ -46,6 +46,10 @@ const (
 	Billing_DeleteReseller_FullMethodName                       = "/blueapi.billing.v1.Billing/DeleteReseller"
 	Billing_GetBillingSetting_FullMethodName                    = "/blueapi.billing.v1.Billing/GetBillingSetting"
 	Billing_ListExchangeRates_FullMethodName                    = "/blueapi.billing.v1.Billing/ListExchangeRates"
+	Billing_ListAccessGroups_FullMethodName                     = "/blueapi.billing.v1.Billing/ListAccessGroups"
+	Billing_CreateAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateAccessGroup"
+	Billing_UpdateAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
+	Billing_DeleteAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
 )
 
 // BillingClient is the client API for Billing service.
@@ -100,6 +104,14 @@ type BillingClient interface {
 	GetBillingSetting(ctx context.Context, in *GetBillingSettingRequest, opts ...grpc.CallOption) (*GetBillingSettingResponse, error)
 	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
 	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
+	// WORK-IN-PROGRESS: Lists access group. Only available in Ripple.
+	ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
+	// WORK-IN-PROGRESS: Registers the access group. Only available in Ripple.
+	CreateAccessGroup(ctx context.Context, in *CreateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
+	// WORK-IN-PROGRESS: Updates the access group. Only available in Ripple.
+	UpdateAccessGroup(ctx context.Context, in *UpdateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
+	// WORK-IN-PROGRESS: Deletes the access group. Only available in Ripple.
+	DeleteAccessGroup(ctx context.Context, in *DeleteAccessGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -464,6 +476,42 @@ func (c *billingClient) ListExchangeRates(ctx context.Context, in *ListExchangeR
 	return out, nil
 }
 
+func (c *billingClient) ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error) {
+	out := new(ripple.AccessGroup)
+	err := c.cc.Invoke(ctx, Billing_ListAccessGroups_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) CreateAccessGroup(ctx context.Context, in *CreateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error) {
+	out := new(ripple.AccessGroup)
+	err := c.cc.Invoke(ctx, Billing_CreateAccessGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateAccessGroup(ctx context.Context, in *UpdateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error) {
+	out := new(ripple.AccessGroup)
+	err := c.cc.Invoke(ctx, Billing_UpdateAccessGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteAccessGroup(ctx context.Context, in *DeleteAccessGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteAccessGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -516,6 +564,14 @@ type BillingServer interface {
 	GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error)
 	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
 	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
+	// WORK-IN-PROGRESS: Lists access group. Only available in Ripple.
+	ListAccessGroups(context.Context, *ListAccessGroupsRequest) (*ripple.AccessGroup, error)
+	// WORK-IN-PROGRESS: Registers the access group. Only available in Ripple.
+	CreateAccessGroup(context.Context, *CreateAccessGroupRequest) (*ripple.AccessGroup, error)
+	// WORK-IN-PROGRESS: Updates the access group. Only available in Ripple.
+	UpdateAccessGroup(context.Context, *UpdateAccessGroupRequest) (*ripple.AccessGroup, error)
+	// WORK-IN-PROGRESS: Deletes the access group. Only available in Ripple.
+	DeleteAccessGroup(context.Context, *DeleteAccessGroupRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -594,6 +650,18 @@ func (UnimplementedBillingServer) GetBillingSetting(context.Context, *GetBilling
 }
 func (UnimplementedBillingServer) ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
+}
+func (UnimplementedBillingServer) ListAccessGroups(context.Context, *ListAccessGroupsRequest) (*ripple.AccessGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAccessGroups not implemented")
+}
+func (UnimplementedBillingServer) CreateAccessGroup(context.Context, *CreateAccessGroupRequest) (*ripple.AccessGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccessGroup not implemented")
+}
+func (UnimplementedBillingServer) UpdateAccessGroup(context.Context, *UpdateAccessGroupRequest) (*ripple.AccessGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccessGroup not implemented")
+}
+func (UnimplementedBillingServer) DeleteAccessGroup(context.Context, *DeleteAccessGroupRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccessGroup not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1058,6 +1126,78 @@ func _Billing_ListExchangeRates_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ListAccessGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAccessGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ListAccessGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ListAccessGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ListAccessGroups(ctx, req.(*ListAccessGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_CreateAccessGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccessGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateAccessGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateAccessGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateAccessGroup(ctx, req.(*CreateAccessGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateAccessGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccessGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateAccessGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateAccessGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateAccessGroup(ctx, req.(*UpdateAccessGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteAccessGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccessGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteAccessGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteAccessGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteAccessGroup(ctx, req.(*DeleteAccessGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1136,6 +1276,22 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListExchangeRates",
 			Handler:    _Billing_ListExchangeRates_Handler,
+		},
+		{
+			MethodName: "ListAccessGroups",
+			Handler:    _Billing_ListAccessGroups_Handler,
+		},
+		{
+			MethodName: "CreateAccessGroup",
+			Handler:    _Billing_CreateAccessGroup_Handler,
+		},
+		{
+			MethodName: "UpdateAccessGroup",
+			Handler:    _Billing_UpdateAccessGroup_Handler,
+		},
+		{
+			MethodName: "DeleteAccessGroup",
+			Handler:    _Billing_DeleteAccessGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
