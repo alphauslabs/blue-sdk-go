@@ -105,7 +105,7 @@ type BillingClient interface {
 	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
 	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
 	// WORK-IN-PROGRESS: Lists access group. Only available in Ripple.
-	ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
+	ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (Billing_ListAccessGroupsClient, error)
 	// WORK-IN-PROGRESS: Registers the access group. Only available in Ripple.
 	CreateAccessGroup(ctx context.Context, in *CreateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
 	// WORK-IN-PROGRESS: Updates the access group. Only available in Ripple.
@@ -476,13 +476,36 @@ func (c *billingClient) ListExchangeRates(ctx context.Context, in *ListExchangeR
 	return out, nil
 }
 
-func (c *billingClient) ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error) {
-	out := new(ripple.AccessGroup)
-	err := c.cc.Invoke(ctx, Billing_ListAccessGroups_FullMethodName, in, out, opts...)
+func (c *billingClient) ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (Billing_ListAccessGroupsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[6], Billing_ListAccessGroups_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &billingListAccessGroupsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListAccessGroupsClient interface {
+	Recv() (*ripple.AccessGroup, error)
+	grpc.ClientStream
+}
+
+type billingListAccessGroupsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListAccessGroupsClient) Recv() (*ripple.AccessGroup, error) {
+	m := new(ripple.AccessGroup)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *billingClient) CreateAccessGroup(ctx context.Context, in *CreateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error) {
@@ -565,7 +588,7 @@ type BillingServer interface {
 	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
 	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
 	// WORK-IN-PROGRESS: Lists access group. Only available in Ripple.
-	ListAccessGroups(context.Context, *ListAccessGroupsRequest) (*ripple.AccessGroup, error)
+	ListAccessGroups(*ListAccessGroupsRequest, Billing_ListAccessGroupsServer) error
 	// WORK-IN-PROGRESS: Registers the access group. Only available in Ripple.
 	CreateAccessGroup(context.Context, *CreateAccessGroupRequest) (*ripple.AccessGroup, error)
 	// WORK-IN-PROGRESS: Updates the access group. Only available in Ripple.
@@ -651,8 +674,8 @@ func (UnimplementedBillingServer) GetBillingSetting(context.Context, *GetBilling
 func (UnimplementedBillingServer) ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
 }
-func (UnimplementedBillingServer) ListAccessGroups(context.Context, *ListAccessGroupsRequest) (*ripple.AccessGroup, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAccessGroups not implemented")
+func (UnimplementedBillingServer) ListAccessGroups(*ListAccessGroupsRequest, Billing_ListAccessGroupsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAccessGroups not implemented")
 }
 func (UnimplementedBillingServer) CreateAccessGroup(context.Context, *CreateAccessGroupRequest) (*ripple.AccessGroup, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccessGroup not implemented")
@@ -1126,22 +1149,25 @@ func _Billing_ListExchangeRates_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Billing_ListAccessGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListAccessGroupsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Billing_ListAccessGroups_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAccessGroupsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(BillingServer).ListAccessGroups(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Billing_ListAccessGroups_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).ListAccessGroups(ctx, req.(*ListAccessGroupsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(BillingServer).ListAccessGroups(m, &billingListAccessGroupsServer{stream})
+}
+
+type Billing_ListAccessGroupsServer interface {
+	Send(*ripple.AccessGroup) error
+	grpc.ServerStream
+}
+
+type billingListAccessGroupsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListAccessGroupsServer) Send(m *ripple.AccessGroup) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Billing_CreateAccessGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1278,10 +1304,6 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Billing_ListExchangeRates_Handler,
 		},
 		{
-			MethodName: "ListAccessGroups",
-			Handler:    _Billing_ListAccessGroups_Handler,
-		},
-		{
 			MethodName: "CreateAccessGroup",
 			Handler:    _Billing_CreateAccessGroup_Handler,
 		},
@@ -1323,6 +1345,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListResellers",
 			Handler:       _Billing_ListResellers_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAccessGroups",
+			Handler:       _Billing_ListAccessGroups_Handler,
 			ServerStreams: true,
 		},
 	},
