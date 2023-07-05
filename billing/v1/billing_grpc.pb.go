@@ -104,13 +104,13 @@ type BillingClient interface {
 	GetBillingSetting(ctx context.Context, in *GetBillingSettingRequest, opts ...grpc.CallOption) (*GetBillingSettingResponse, error)
 	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
 	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
-	// WORK-IN-PROGRESS: Lists access group. Only available in Ripple.
+	// Lists access group. Only available in Ripple.
 	ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (Billing_ListAccessGroupsClient, error)
-	// WORK-IN-PROGRESS: Registers the access group. Only available in Ripple.
+	// Registers the access group. Only available in Ripple.
 	CreateAccessGroup(ctx context.Context, in *CreateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
-	// WORK-IN-PROGRESS: Updates the access group. Only available in Ripple.
+	// Updates the access group. Only available in Ripple.
 	UpdateAccessGroup(ctx context.Context, in *UpdateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
-	// WORK-IN-PROGRESS: Deletes the access group. Only available in Ripple.
+	// Deletes the access group. Only available in Ripple.
 	DeleteAccessGroup(ctx context.Context, in *DeleteAccessGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -587,13 +587,13 @@ type BillingServer interface {
 	GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error)
 	// WORK-IN-PROGRESS: Lists all exchange rate. Only available in Ripple.
 	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
-	// WORK-IN-PROGRESS: Lists access group. Only available in Ripple.
+	// Lists access group. Only available in Ripple.
 	ListAccessGroups(*ListAccessGroupsRequest, Billing_ListAccessGroupsServer) error
-	// WORK-IN-PROGRESS: Registers the access group. Only available in Ripple.
+	// Registers the access group. Only available in Ripple.
 	CreateAccessGroup(context.Context, *CreateAccessGroupRequest) (*ripple.AccessGroup, error)
-	// WORK-IN-PROGRESS: Updates the access group. Only available in Ripple.
+	// Updates the access group. Only available in Ripple.
 	UpdateAccessGroup(context.Context, *UpdateAccessGroupRequest) (*ripple.AccessGroup, error)
-	// WORK-IN-PROGRESS: Deletes the access group. Only available in Ripple.
+	// Deletes the access group. Only available in Ripple.
 	DeleteAccessGroup(context.Context, *DeleteAccessGroupRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
