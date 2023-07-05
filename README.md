@@ -17,3 +17,5 @@ log.Println(out, err)
 ```
 
 You can also check the examples [here](./examples/).
+
+The gRPC documentation (generated) is [here](https://labs.alphaus.cloud/blue-sdk-go/).
