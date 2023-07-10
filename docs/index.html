@@ -1237,7 +1237,7 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.cover.v1.AccountCostDetails"><span class="badge">M</span>AccountCostDetails</a>
+                  <a href="#blueapi.cover.v1.AccountUsageDetails"><span class="badge">M</span>AccountUsageDetails</a>
                 </li>
               
                 <li>
@@ -1262,6 +1262,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.AddSideMenuFavoriteResponse"><span class="badge">M</span>AddSideMenuFavoriteResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.AllocationItem"><span class="badge">M</span>AllocationItem</a>
                 </li>
               
                 <li>
@@ -1413,6 +1417,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetCostGroupAllocationRequest"><span class="badge">M</span>GetCostGroupAllocationRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetCostGroupDetailsRequest"><span class="badge">M</span>GetCostGroupDetailsRequest</a>
                 </li>
               
@@ -1553,6 +1561,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListAccountUsageRequest"><span class="badge">M</span>ListAccountUsageRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ListAssetsFilters"><span class="badge">M</span>ListAssetsFilters</a>
                 </li>
               
@@ -1669,7 +1681,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.RestoreAccountUsageRequest"><span class="badge">M</span>RestoreAccountUsageRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.RestoreFeeRequest"><span class="badge">M</span>RestoreFeeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.SavingsDetails"><span class="badge">M</span>SavingsDetails</a>
                 </li>
               
                 <li>
@@ -13574,7 +13594,7 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
-        <h3 id="blueapi.cover.v1.AccountCostDetails">AccountCostDetails</h3>
+        <h3 id="blueapi.cover.v1.AccountUsageDetails">AccountUsageDetails</h3>
         <p>Response message for SimulateAccountCostAllocator rpc.</p>
 
         
@@ -13948,6 +13968,65 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                 <tr>
                   <td>viewId</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.AllocationItem">AllocationItem</h3>
+        <p>Response message wrapper for cost group allocations.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cost</td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -15442,6 +15521,53 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.GetCostGroupAllocationRequest">GetCostGroupAllocationRequest</h3>
+        <p>Request message for the GetCostGroupAllocation rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>allocationType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Cost Group Id.
+
+fee or savings </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetCostGroupDetailsRequest">GetCostGroupDetailsRequest</h3>
         <p>Request message for GetCostGroupDetails</p>
 
@@ -16335,6 +16461,37 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
         <p>Request message for the ListAccountAccess rpc.</p>
 
         
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListAccountUsageRequest">ListAccountUsageRequest</h3>
+        <p>Request message for the RestoreAccountUsage rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -17248,6 +17405,30 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.RestoreAccountUsageRequest">RestoreAccountUsageRequest</h3>
+        <p>Request message for the RestoreAccountUsage rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>allocationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The account usage to restore. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.RestoreFeeRequest">RestoreFeeRequest</h3>
         <p>Request message for the RestoreFee rpc.</p>
 
@@ -17263,6 +17444,135 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The fee to restore. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.SavingsDetails">SavingsDetails</h3>
+        <p>Response message for ListSavings, RestoreSavings, SimulateSavings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>arn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>productCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>offerClass</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ondemand</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>effectiveCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>splitStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isAllocated</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isApplied</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -19253,10 +19563,52 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>SimulateAccountCostAllocator</td>
+                <td>ListAccountUsage</td>
+                <td><a href="#blueapi.cover.v1.ListAccountUsageRequest">ListAccountUsageRequest</a></td>
+                <td><a href="#blueapi.cover.v1.AccountUsageDetails">AccountUsageDetails</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Lists the allocated account usages</p></td>
+              </tr>
+            
+              <tr>
+                <td>RestoreAccountUsage</td>
+                <td><a href="#blueapi.cover.v1.RestoreAccountUsageRequest">RestoreAccountUsageRequest</a></td>
+                <td><a href="#blueapi.cover.v1.AccountUsageDetails">AccountUsageDetails</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Restore the allocated account usages</p></td>
+              </tr>
+            
+              <tr>
+                <td>SimulateAccountUsage</td>
                 <td><a href="#blueapi.cover.v1.CreateFeeAdjustmentAllocatorRequest">CreateFeeAdjustmentAllocatorRequest</a></td>
-                <td><a href="#blueapi.cover.v1.AccountCostDetails">AccountCostDetails</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Simulate account cost allocator</p></td>
+                <td><a href="#blueapi.cover.v1.AccountUsageDetails">AccountUsageDetails</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Simulate the output of the account usage allocation</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListSavings</td>
+                <td><a href="#blueapi.cover.v1.ListFeesRequest">ListFeesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.SavingsDetails">SavingsDetails</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Lists the allocated ri and sp savings</p></td>
+              </tr>
+            
+              <tr>
+                <td>RestoreSavings</td>
+                <td><a href="#blueapi.cover.v1.RestoreFeeRequest">RestoreFeeRequest</a></td>
+                <td><a href="#blueapi.cover.v1.SavingsDetails">SavingsDetails</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Restore the allocated ri and sp savings</p></td>
+              </tr>
+            
+              <tr>
+                <td>SimulateSavings</td>
+                <td><a href="#blueapi.cover.v1.CreateFeeAdjustmentAllocatorRequest">CreateFeeAdjustmentAllocatorRequest</a></td>
+                <td><a href="#blueapi.cover.v1.SavingsDetails">SavingsDetails</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Simulate the output of the ri and sp savings allocation</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetCostGroupAllocation</td>
+                <td><a href="#blueapi.cover.v1.GetCostGroupAllocationRequest">GetCostGroupAllocationRequest</a></td>
+                <td><a href="#blueapi.cover.v1.AllocationItem">AllocationItem</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Get all available allocation items for the specified cost group</p></td>
               </tr>
             
           </tbody>
@@ -20070,9 +20422,69 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>SimulateAccountCostAllocator</td>
+                <td>ListAccountUsage</td>
                 <td>POST</td>
-                <td>/v1/account/simulate</td>
+                <td>/v1/allocations/accountusage/all:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RestoreAccountUsage</td>
+                <td>POST</td>
+                <td>/v1/allocations/accountusage/restore</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SimulateAccountUsage</td>
+                <td>POST</td>
+                <td>/v1/allocations/accountusage/simulate</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListSavings</td>
+                <td>POST</td>
+                <td>/v1/allocations/savings/all:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RestoreSavings</td>
+                <td>POST</td>
+                <td>/v1/allocations/savings/restore</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SimulateSavings</td>
+                <td>POST</td>
+                <td>/v1/allocations/savings/simulate</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCostGroupAllocation</td>
+                <td>POST</td>
+                <td>/v1/allocations:read</td>
                 <td>*</td>
               </tr>
               
