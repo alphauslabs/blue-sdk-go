@@ -1689,6 +1689,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.RestoreSavingsRequest"><span class="badge">M</span>RestoreSavingsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.SavingsDetails"><span class="badge">M</span>SavingsDetails</a>
                 </li>
               
@@ -15539,19 +15543,17 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
             <tbody>
               
                 <tr>
-                  <td>allocationType</td>
+                  <td>category</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Cost Group Id.
-
-fee or savings </p></td>
+                  <td><p>Required. The category to display on the cost group. Supports `fee` or `savings`. </p></td>
                 </tr>
               
                 <tr>
                   <td>costGroupId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Cost Group Id. </p></td>
                 </tr>
               
                 <tr>
@@ -15679,9 +15681,79 @@ fee or savings </p></td>
             <tbody>
               
                 <tr>
-                  <td>costGroupData</td>
-                  <td><a href="#blueapi.api.cover.CostGroupData">blueapi.api.cover.CostGroupData</a></td>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>image</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>icon</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>colorTheme</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updatedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>members</td>
+                  <td><a href="#blueapi.api.cover.MemberUserData">blueapi.api.cover.MemberUserData</a></td>
                   <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>combinations</td>
+                  <td><a href="#blueapi.api.cover.Combinations">blueapi.api.cover.Combinations</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#blueapi.api.cover.MemberUserData">blueapi.api.cover.MemberUserData</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -17451,6 +17523,30 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The fee to restore. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.RestoreSavingsRequest">RestoreSavingsRequest</h3>
+        <p>Request message for the RestoreSavings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The item to restore. </p></td>
                 </tr>
               
             </tbody>
@@ -19285,7 +19381,7 @@ file in bytes </p></td>
               <tr>
                 <td>GetCostGroups</td>
                 <td><a href="#blueapi.cover.v1.GetCostGroupsRequest">GetCostGroupsRequest</a></td>
-                <td><a href="#blueapi.cover.v1.GetCostGroupsResponse">GetCostGroupsResponse</a></td>
+                <td><a href="#blueapi.cover.v1.GetCostGroupsResponse">GetCostGroupsResponse</a> stream</td>
                 <td><p>Get all the cost groups</p></td>
               </tr>
             
@@ -19599,7 +19695,7 @@ file in bytes </p></td>
             
               <tr>
                 <td>RestoreSavings</td>
-                <td><a href="#blueapi.cover.v1.RestoreFeeRequest">RestoreFeeRequest</a></td>
+                <td><a href="#blueapi.cover.v1.RestoreSavingsRequest">RestoreSavingsRequest</a></td>
                 <td><a href="#blueapi.cover.v1.SavingsDetails">SavingsDetails</a> stream</td>
                 <td><p>WORK-IN-PROGRESS: Restore the allocated ri and sp savings</p></td>
               </tr>

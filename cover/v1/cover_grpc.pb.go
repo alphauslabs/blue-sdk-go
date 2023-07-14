@@ -190,7 +190,7 @@ type CoverClient interface {
 	// Create a cost group
 	CreateCostGroup(ctx context.Context, in *CreateCostGroupRequest, opts ...grpc.CallOption) (*CreateCostGroupResponse, error)
 	// Get all the cost groups
-	GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (*GetCostGroupsResponse, error)
+	GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (Cover_GetCostGroupsClient, error)
 	// Get the details of the cost group
 	GetCostGroupDetails(ctx context.Context, in *GetCostGroupDetailsRequest, opts ...grpc.CallOption) (*GetCostGroupDetailsResponse, error)
 	// Update cost group's name
@@ -279,7 +279,7 @@ type CoverClient interface {
 	// WORK-IN-PROGRESS: Lists the allocated ri and sp savings
 	ListSavings(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListSavingsClient, error)
 	// WORK-IN-PROGRESS: Restore the allocated ri and sp savings
-	RestoreSavings(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreSavingsClient, error)
+	RestoreSavings(ctx context.Context, in *RestoreSavingsRequest, opts ...grpc.CallOption) (Cover_RestoreSavingsClient, error)
 	// WORK-IN-PROGRESS: Simulate the output of the ri and sp savings allocation
 	SimulateSavings(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateSavingsClient, error)
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
@@ -636,13 +636,36 @@ func (c *coverClient) CreateCostGroup(ctx context.Context, in *CreateCostGroupRe
 	return out, nil
 }
 
-func (c *coverClient) GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (*GetCostGroupsResponse, error) {
-	out := new(GetCostGroupsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetCostGroups_FullMethodName, in, out, opts...)
+func (c *coverClient) GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (Cover_GetCostGroupsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[0], Cover_GetCostGroups_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &coverGetCostGroupsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetCostGroupsClient interface {
+	Recv() (*GetCostGroupsResponse, error)
+	grpc.ClientStream
+}
+
+type coverGetCostGroupsClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetCostGroupsClient) Recv() (*GetCostGroupsResponse, error) {
+	m := new(GetCostGroupsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *coverClient) GetCostGroupDetails(ctx context.Context, in *GetCostGroupDetailsRequest, opts ...grpc.CallOption) (*GetCostGroupDetailsResponse, error) {
@@ -754,7 +777,7 @@ func (c *coverClient) GetAccountAccessTemplateUrl(ctx context.Context, in *GetAc
 }
 
 func (c *coverClient) ListAccountAccess(ctx context.Context, in *ListAccountAccessRequest, opts ...grpc.CallOption) (Cover_ListAccountAccessClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[0], Cover_ListAccountAccess_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[1], Cover_ListAccountAccess_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -831,7 +854,7 @@ func (c *coverClient) RegisterAccount(ctx context.Context, in *RegisterAccountRe
 }
 
 func (c *coverClient) ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (Cover_ListAssetsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[1], Cover_ListAssets_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[2], Cover_ListAssets_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -872,7 +895,7 @@ func (c *coverClient) GetAssetsSummary(ctx context.Context, in *GetAssetsSummary
 }
 
 func (c *coverClient) GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[2], Cover_GetCostUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[3], Cover_GetCostUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -931,7 +954,7 @@ func (c *coverClient) TerminateResource(ctx context.Context, in *TerminateResour
 }
 
 func (c *coverClient) UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[3], Cover_UploadChargeCode_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[4], Cover_UploadChargeCode_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1019,7 +1042,7 @@ func (c *coverClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...g
 }
 
 func (c *coverClient) ListFees(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListFeesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[4], Cover_ListFees_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_ListFees_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1051,7 +1074,7 @@ func (x *coverListFeesClient) Recv() (*FeeDetails, error) {
 }
 
 func (c *coverClient) RestoreFee(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreFeeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_RestoreFee_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_RestoreFee_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1083,7 +1106,7 @@ func (x *coverRestoreFeeClient) Recv() (*FeeDetails, error) {
 }
 
 func (c *coverClient) GetCostGroupFee(ctx context.Context, in *GetCostGroupFeeRequest, opts ...grpc.CallOption) (Cover_GetCostGroupFeeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_GetCostGroupFee_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_GetCostGroupFee_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1115,7 +1138,7 @@ func (x *coverGetCostGroupFeeClient) Recv() (*FeeItem, error) {
 }
 
 func (c *coverClient) ListFeeAdjustmentAllocators(ctx context.Context, in *ListFeeAdjustmentAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListFeeAdjustmentAllocatorsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_ListFeeAdjustmentAllocators_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ListFeeAdjustmentAllocators_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1174,7 +1197,7 @@ func (c *coverClient) DeleteFeeAdjustmentAllocator(ctx context.Context, in *Dele
 }
 
 func (c *coverClient) ProxyCreateCompletion(ctx context.Context, in *ProxyCreateCompletionRequest, opts ...grpc.CallOption) (Cover_ProxyCreateCompletionClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ProxyCreateCompletion_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_ProxyCreateCompletion_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1206,7 +1229,7 @@ func (x *coverProxyCreateCompletionClient) Recv() (*ProxyCreateCompletionRespons
 }
 
 func (c *coverClient) SimulateFeeAllocator(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateFeeAllocatorClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_SimulateFeeAllocator_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[10], Cover_SimulateFeeAllocator_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1238,7 +1261,7 @@ func (x *coverSimulateFeeAllocatorClient) Recv() (*FeeDetails, error) {
 }
 
 func (c *coverClient) ListAccountUsage(ctx context.Context, in *ListAccountUsageRequest, opts ...grpc.CallOption) (Cover_ListAccountUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[10], Cover_ListAccountUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[11], Cover_ListAccountUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1270,7 +1293,7 @@ func (x *coverListAccountUsageClient) Recv() (*AccountUsageDetails, error) {
 }
 
 func (c *coverClient) RestoreAccountUsage(ctx context.Context, in *RestoreAccountUsageRequest, opts ...grpc.CallOption) (Cover_RestoreAccountUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[11], Cover_RestoreAccountUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[12], Cover_RestoreAccountUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1302,7 +1325,7 @@ func (x *coverRestoreAccountUsageClient) Recv() (*AccountUsageDetails, error) {
 }
 
 func (c *coverClient) SimulateAccountUsage(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateAccountUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[12], Cover_SimulateAccountUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[13], Cover_SimulateAccountUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1334,7 +1357,7 @@ func (x *coverSimulateAccountUsageClient) Recv() (*AccountUsageDetails, error) {
 }
 
 func (c *coverClient) ListSavings(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListSavingsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[13], Cover_ListSavings_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[14], Cover_ListSavings_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1365,8 +1388,8 @@ func (x *coverListSavingsClient) Recv() (*SavingsDetails, error) {
 	return m, nil
 }
 
-func (c *coverClient) RestoreSavings(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreSavingsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[14], Cover_RestoreSavings_FullMethodName, opts...)
+func (c *coverClient) RestoreSavings(ctx context.Context, in *RestoreSavingsRequest, opts ...grpc.CallOption) (Cover_RestoreSavingsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[15], Cover_RestoreSavings_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1398,7 +1421,7 @@ func (x *coverRestoreSavingsClient) Recv() (*SavingsDetails, error) {
 }
 
 func (c *coverClient) SimulateSavings(ctx context.Context, in *CreateFeeAdjustmentAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateSavingsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[15], Cover_SimulateSavings_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[16], Cover_SimulateSavings_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1430,7 +1453,7 @@ func (x *coverSimulateSavingsClient) Recv() (*SavingsDetails, error) {
 }
 
 func (c *coverClient) GetCostGroupAllocation(ctx context.Context, in *GetCostGroupAllocationRequest, opts ...grpc.CallOption) (Cover_GetCostGroupAllocationClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[16], Cover_GetCostGroupAllocation_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[17], Cover_GetCostGroupAllocation_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1542,7 +1565,7 @@ type CoverServer interface {
 	// Create a cost group
 	CreateCostGroup(context.Context, *CreateCostGroupRequest) (*CreateCostGroupResponse, error)
 	// Get all the cost groups
-	GetCostGroups(context.Context, *GetCostGroupsRequest) (*GetCostGroupsResponse, error)
+	GetCostGroups(*GetCostGroupsRequest, Cover_GetCostGroupsServer) error
 	// Get the details of the cost group
 	GetCostGroupDetails(context.Context, *GetCostGroupDetailsRequest) (*GetCostGroupDetailsResponse, error)
 	// Update cost group's name
@@ -1631,7 +1654,7 @@ type CoverServer interface {
 	// WORK-IN-PROGRESS: Lists the allocated ri and sp savings
 	ListSavings(*ListFeesRequest, Cover_ListSavingsServer) error
 	// WORK-IN-PROGRESS: Restore the allocated ri and sp savings
-	RestoreSavings(*RestoreFeeRequest, Cover_RestoreSavingsServer) error
+	RestoreSavings(*RestoreSavingsRequest, Cover_RestoreSavingsServer) error
 	// WORK-IN-PROGRESS: Simulate the output of the ri and sp savings allocation
 	SimulateSavings(*CreateFeeAdjustmentAllocatorRequest, Cover_SimulateSavingsServer) error
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
@@ -1757,8 +1780,8 @@ func (UnimplementedCoverServer) RemoveSideMenuFavorite(context.Context, *RemoveS
 func (UnimplementedCoverServer) CreateCostGroup(context.Context, *CreateCostGroupRequest) (*CreateCostGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCostGroup not implemented")
 }
-func (UnimplementedCoverServer) GetCostGroups(context.Context, *GetCostGroupsRequest) (*GetCostGroupsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroups not implemented")
+func (UnimplementedCoverServer) GetCostGroups(*GetCostGroupsRequest, Cover_GetCostGroupsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCostGroups not implemented")
 }
 func (UnimplementedCoverServer) GetCostGroupDetails(context.Context, *GetCostGroupDetailsRequest) (*GetCostGroupDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroupDetails not implemented")
@@ -1892,7 +1915,7 @@ func (UnimplementedCoverServer) SimulateAccountUsage(*CreateFeeAdjustmentAllocat
 func (UnimplementedCoverServer) ListSavings(*ListFeesRequest, Cover_ListSavingsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListSavings not implemented")
 }
-func (UnimplementedCoverServer) RestoreSavings(*RestoreFeeRequest, Cover_RestoreSavingsServer) error {
+func (UnimplementedCoverServer) RestoreSavings(*RestoreSavingsRequest, Cover_RestoreSavingsServer) error {
 	return status.Errorf(codes.Unimplemented, "method RestoreSavings not implemented")
 }
 func (UnimplementedCoverServer) SimulateSavings(*CreateFeeAdjustmentAllocatorRequest, Cover_SimulateSavingsServer) error {
@@ -2598,22 +2621,25 @@ func _Cover_CreateCostGroup_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_GetCostGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCostGroupsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Cover_GetCostGroups_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCostGroupsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetCostGroups(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetCostGroups_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetCostGroups(ctx, req.(*GetCostGroupsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(CoverServer).GetCostGroups(m, &coverGetCostGroupsServer{stream})
+}
+
+type Cover_GetCostGroupsServer interface {
+	Send(*GetCostGroupsResponse) error
+	grpc.ServerStream
+}
+
+type coverGetCostGroupsServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetCostGroupsServer) Send(m *GetCostGroupsResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cover_GetCostGroupDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -3456,7 +3482,7 @@ func (x *coverListSavingsServer) Send(m *SavingsDetails) error {
 }
 
 func _Cover_RestoreSavings_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(RestoreFeeRequest)
+	m := new(RestoreSavingsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
@@ -3678,10 +3704,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_CreateCostGroup_Handler,
 		},
 		{
-			MethodName: "GetCostGroups",
-			Handler:    _Cover_GetCostGroups_Handler,
-		},
-		{
 			MethodName: "GetCostGroupDetails",
 			Handler:    _Cover_GetCostGroupDetails_Handler,
 		},
@@ -3803,6 +3825,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "GetCostGroups",
+			Handler:       _Cover_GetCostGroups_Handler,
+			ServerStreams: true,
+		},
 		{
 			StreamName:    "ListAccountAccess",
 			Handler:       _Cover_ListAccountAccess_Handler,

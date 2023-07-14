@@ -1641,21 +1641,20 @@ func local_request_Cover_CreateCostGroup_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_Cover_GetCostGroups_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Cover_GetCostGroups_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_GetCostGroupsClient, runtime.ServerMetadata, error) {
 	var protoReq GetCostGroupsRequest
 	var metadata runtime.ServerMetadata
 
-	msg, err := client.GetCostGroups(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_Cover_GetCostGroups_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetCostGroupsRequest
-	var metadata runtime.ServerMetadata
-
-	msg, err := server.GetCostGroups(ctx, &protoReq)
-	return msg, metadata, err
+	stream, err := client.GetCostGroups(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -3835,7 +3834,7 @@ func request_Cover_ListSavings_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 func request_Cover_RestoreSavings_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_RestoreSavingsClient, runtime.ServerMetadata, error) {
-	var protoReq RestoreFeeRequest
+	var protoReq RestoreSavingsRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -4790,26 +4789,10 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 	})
 
 	mux.Handle("GET", pattern_Cover_GetCostGroups_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetCostGroups")
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_Cover_GetCostGroups_0(rctx, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		ctx = runtime.NewServerMetadataContext(ctx, md)
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_Cover_GetCostGroups_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	mux.Handle("GET", pattern_Cover_GetCostGroupDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -6438,7 +6421,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 			return
 		}
 
-		forward_Cover_GetCostGroups_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_GetCostGroups_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -7636,7 +7619,7 @@ var (
 
 	forward_Cover_CreateCostGroup_0 = runtime.ForwardResponseMessage
 
-	forward_Cover_GetCostGroups_0 = runtime.ForwardResponseMessage
+	forward_Cover_GetCostGroups_0 = runtime.ForwardResponseStream
 
 	forward_Cover_GetCostGroupDetails_0 = runtime.ForwardResponseMessage
 
