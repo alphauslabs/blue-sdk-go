@@ -1641,20 +1641,21 @@ func local_request_Cover_CreateCostGroup_0(ctx context.Context, marshaler runtim
 
 }
 
-func request_Cover_GetCostGroups_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_GetCostGroupsClient, runtime.ServerMetadata, error) {
+func request_Cover_GetCostGroups_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq GetCostGroupsRequest
 	var metadata runtime.ServerMetadata
 
-	stream, err := client.GetCostGroups(ctx, &protoReq)
-	if err != nil {
-		return nil, metadata, err
-	}
-	header, err := stream.Header()
-	if err != nil {
-		return nil, metadata, err
-	}
-	metadata.HeaderMD = header
-	return stream, metadata, nil
+	msg, err := client.GetCostGroups(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+
+}
+
+func local_request_Cover_GetCostGroups_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq GetCostGroupsRequest
+	var metadata runtime.ServerMetadata
+
+	msg, err := server.GetCostGroups(ctx, &protoReq)
+	return msg, metadata, err
 
 }
 
@@ -3512,11 +3513,11 @@ func request_Cover_GetCostGroupFee_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func request_Cover_ListFeeAdjustmentAllocators_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_ListFeeAdjustmentAllocatorsClient, runtime.ServerMetadata, error) {
-	var protoReq ListFeeAdjustmentAllocatorsRequest
+func request_Cover_ListAllocators_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_ListAllocatorsClient, runtime.ServerMetadata, error) {
+	var protoReq ListAllocatorsRequest
 	var metadata runtime.ServerMetadata
 
-	stream, err := client.ListFeeAdjustmentAllocators(ctx, &protoReq)
+	stream, err := client.ListAllocators(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -3529,8 +3530,8 @@ func request_Cover_ListFeeAdjustmentAllocators_0(ctx context.Context, marshaler 
 
 }
 
-func request_Cover_CreateFeeAdjustmentAllocator_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateFeeAdjustmentAllocatorRequest
+func request_Cover_CreateAllocator_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -3541,13 +3542,13 @@ func request_Cover_CreateFeeAdjustmentAllocator_0(ctx context.Context, marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.CreateFeeAdjustmentAllocator(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.CreateAllocator(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Cover_CreateFeeAdjustmentAllocator_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq CreateFeeAdjustmentAllocatorRequest
+func local_request_Cover_CreateAllocator_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CreateAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -3558,47 +3559,13 @@ func local_request_Cover_CreateFeeAdjustmentAllocator_0(ctx context.Context, mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.CreateFeeAdjustmentAllocator(ctx, &protoReq)
+	msg, err := server.CreateAllocator(ctx, &protoReq)
 	return msg, metadata, err
 
 }
 
-func request_Cover_UpdateFeeAdjustmentAllocator_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq FeeAdjustmentAllocatorRequest
-	var metadata runtime.ServerMetadata
-
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["id"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
-	}
-
-	protoReq.Id, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
-	}
-
-	msg, err := client.UpdateFeeAdjustmentAllocator(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_Cover_UpdateFeeAdjustmentAllocator_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq FeeAdjustmentAllocatorRequest
+func request_Cover_UpdateAllocator_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CostAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -3626,13 +3593,47 @@ func local_request_Cover_UpdateFeeAdjustmentAllocator_0(ctx context.Context, mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
 
-	msg, err := server.UpdateFeeAdjustmentAllocator(ctx, &protoReq)
+	msg, err := client.UpdateAllocator(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func request_Cover_DeleteFeeAdjustmentAllocator_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DeleteFeeAdjustmentAllocatorRequest
+func local_request_Cover_UpdateAllocator_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq CostAllocatorRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	msg, err := server.UpdateAllocator(ctx, &protoReq)
+	return msg, metadata, err
+
+}
+
+func request_Cover_DeleteAllocator_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeleteAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -3652,13 +3653,13 @@ func request_Cover_DeleteFeeAdjustmentAllocator_0(ctx context.Context, marshaler
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
 
-	msg, err := client.DeleteFeeAdjustmentAllocator(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.DeleteAllocator(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Cover_DeleteFeeAdjustmentAllocator_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq DeleteFeeAdjustmentAllocatorRequest
+func local_request_Cover_DeleteAllocator_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq DeleteAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -3678,7 +3679,7 @@ func local_request_Cover_DeleteFeeAdjustmentAllocator_0(ctx context.Context, mar
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
 
-	msg, err := server.DeleteFeeAdjustmentAllocator(ctx, &protoReq)
+	msg, err := server.DeleteAllocator(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -3709,7 +3710,7 @@ func request_Cover_ProxyCreateCompletion_0(ctx context.Context, marshaler runtim
 }
 
 func request_Cover_SimulateFeeAllocator_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_SimulateFeeAllocatorClient, runtime.ServerMetadata, error) {
-	var protoReq CreateFeeAdjustmentAllocatorRequest
+	var protoReq CreateAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -3784,7 +3785,7 @@ func request_Cover_RestoreAccountUsage_0(ctx context.Context, marshaler runtime.
 }
 
 func request_Cover_SimulateAccountUsage_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_SimulateAccountUsageClient, runtime.ServerMetadata, error) {
-	var protoReq CreateFeeAdjustmentAllocatorRequest
+	var protoReq CreateAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -3859,7 +3860,7 @@ func request_Cover_RestoreSavings_0(ctx context.Context, marshaler runtime.Marsh
 }
 
 func request_Cover_SimulateSavings_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_SimulateSavingsClient, runtime.ServerMetadata, error) {
-	var protoReq CreateFeeAdjustmentAllocatorRequest
+	var protoReq CreateAllocatorRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -4789,10 +4790,26 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 	})
 
 	mux.Handle("GET", pattern_Cover_GetCostGroups_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
-		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-		return
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetCostGroups")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Cover_GetCostGroups_0(rctx, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Cover_GetCostGroups_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+
 	})
 
 	mux.Handle("GET", pattern_Cover_GetCostGroupDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -5465,25 +5482,25 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		return
 	})
 
-	mux.Handle("GET", pattern_Cover_ListFeeAdjustmentAllocators_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cover_ListAllocators_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
 
-	mux.Handle("POST", pattern_Cover_CreateFeeAdjustmentAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cover_CreateAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/CreateFeeAdjustmentAllocator")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/CreateAllocator")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Cover_CreateFeeAdjustmentAllocator_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Cover_CreateAllocator_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -5491,22 +5508,22 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Cover_CreateFeeAdjustmentAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_CreateAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_Cover_UpdateFeeAdjustmentAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Cover_UpdateAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/UpdateFeeAdjustmentAllocator")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/UpdateAllocator")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Cover_UpdateFeeAdjustmentAllocator_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Cover_UpdateAllocator_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -5514,22 +5531,22 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Cover_UpdateFeeAdjustmentAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_UpdateAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_Cover_DeleteFeeAdjustmentAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Cover_DeleteAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/DeleteFeeAdjustmentAllocator")
+		rctx, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/DeleteAllocator")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Cover_DeleteFeeAdjustmentAllocator_0(rctx, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Cover_DeleteAllocator_0(rctx, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
@@ -5537,7 +5554,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Cover_DeleteFeeAdjustmentAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_DeleteAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -6421,7 +6438,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 			return
 		}
 
-		forward_Cover_GetCostGroups_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_Cover_GetCostGroups_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -7105,83 +7122,83 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 
 	})
 
-	mux.Handle("GET", pattern_Cover_ListFeeAdjustmentAllocators_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("GET", pattern_Cover_ListAllocators_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ListFeeAdjustmentAllocators")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ListAllocators")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cover_ListFeeAdjustmentAllocators_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cover_ListAllocators_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cover_ListFeeAdjustmentAllocators_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_Cover_ListAllocators_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("POST", pattern_Cover_CreateFeeAdjustmentAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cover_CreateAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/CreateFeeAdjustmentAllocator")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/CreateAllocator")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cover_CreateFeeAdjustmentAllocator_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cover_CreateAllocator_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cover_CreateFeeAdjustmentAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_CreateAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("PUT", pattern_Cover_UpdateFeeAdjustmentAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("PUT", pattern_Cover_UpdateAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/UpdateFeeAdjustmentAllocator")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/UpdateAllocator")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cover_UpdateFeeAdjustmentAllocator_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cover_UpdateAllocator_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cover_UpdateFeeAdjustmentAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_UpdateAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
-	mux.Handle("DELETE", pattern_Cover_DeleteFeeAdjustmentAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("DELETE", pattern_Cover_DeleteAllocator_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/DeleteFeeAdjustmentAllocator")
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/DeleteAllocator")
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cover_DeleteFeeAdjustmentAllocator_0(rctx, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cover_DeleteAllocator_0(rctx, inboundMarshaler, client, req, pathParams)
 		ctx = runtime.NewServerMetadataContext(ctx, md)
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cover_DeleteFeeAdjustmentAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_DeleteAllocator_0(ctx, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -7509,23 +7526,23 @@ var (
 
 	pattern_Cover_GetTags_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tags", "costGroupId"}, ""))
 
-	pattern_Cover_ListFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "fees", "all"}, "read"))
+	pattern_Cover_ListFees_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "allocations", "fees", "all"}, "read"))
 
-	pattern_Cover_RestoreFee_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "fees", "restore"}, ""))
+	pattern_Cover_RestoreFee_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "allocations", "fees", "restore"}, ""))
 
-	pattern_Cover_GetCostGroupFee_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "fees"}, "read"))
+	pattern_Cover_GetCostGroupFee_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "allocations", "fees"}, "read"))
 
-	pattern_Cover_ListFeeAdjustmentAllocators_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "fees", "adjustment"}, ""))
+	pattern_Cover_ListAllocators_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "allocators"}, ""))
 
-	pattern_Cover_CreateFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "fees", "adjustment"}, ""))
+	pattern_Cover_CreateAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "allocators"}, ""))
 
-	pattern_Cover_UpdateFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "fees", "adjustment", "id"}, ""))
+	pattern_Cover_UpdateAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "allocators", "id"}, ""))
 
-	pattern_Cover_DeleteFeeAdjustmentAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "fees", "adjustment", "id"}, ""))
+	pattern_Cover_DeleteAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "allocators", "id"}, ""))
 
 	pattern_Cover_ProxyCreateCompletion_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "x", "pcc"}, ""))
 
-	pattern_Cover_SimulateFeeAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "fees", "simulate"}, ""))
+	pattern_Cover_SimulateFeeAllocator_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "allocations", "fees", "simulate"}, ""))
 
 	pattern_Cover_ListAccountUsage_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "allocations", "accountusage", "all"}, "read"))
 
@@ -7619,7 +7636,7 @@ var (
 
 	forward_Cover_CreateCostGroup_0 = runtime.ForwardResponseMessage
 
-	forward_Cover_GetCostGroups_0 = runtime.ForwardResponseStream
+	forward_Cover_GetCostGroups_0 = runtime.ForwardResponseMessage
 
 	forward_Cover_GetCostGroupDetails_0 = runtime.ForwardResponseMessage
 
@@ -7689,13 +7706,13 @@ var (
 
 	forward_Cover_GetCostGroupFee_0 = runtime.ForwardResponseStream
 
-	forward_Cover_ListFeeAdjustmentAllocators_0 = runtime.ForwardResponseStream
+	forward_Cover_ListAllocators_0 = runtime.ForwardResponseStream
 
-	forward_Cover_CreateFeeAdjustmentAllocator_0 = runtime.ForwardResponseMessage
+	forward_Cover_CreateAllocator_0 = runtime.ForwardResponseMessage
 
-	forward_Cover_UpdateFeeAdjustmentAllocator_0 = runtime.ForwardResponseMessage
+	forward_Cover_UpdateAllocator_0 = runtime.ForwardResponseMessage
 
-	forward_Cover_DeleteFeeAdjustmentAllocator_0 = runtime.ForwardResponseMessage
+	forward_Cover_DeleteAllocator_0 = runtime.ForwardResponseMessage
 
 	forward_Cover_ProxyCreateCompletion_0 = runtime.ForwardResponseStream
 
