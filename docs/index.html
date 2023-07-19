@@ -999,6 +999,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AccountOptions"><span class="badge">M</span>AccountOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AccountServiceDiscounts"><span class="badge">M</span>AccountServiceDiscounts</a>
                 </li>
               
@@ -1152,6 +1156,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListUsageCostsDriftRequest"><span class="badge">M</span>ListUsageCostsDriftRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.RegisterAccounts"><span class="badge">M</span>RegisterAccounts</a>
                 </li>
               
                 <li>
@@ -10741,6 +10749,44 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
 
         
       
+        <h3 id="blueapi.billing.v1.AccountOptions">AccountOptions</h3>
+        <p>Account options definition.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>aws</td>
+                  <td><a href="#blueapi.billing.v1.RegisterAccounts">RegisterAccounts</a></td>
+                  <td></td>
+                  <td><p>AWS register accounts </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcp</td>
+                  <td><a href="#blueapi.billing.v1.RegisterAccounts">RegisterAccounts</a></td>
+                  <td></td>
+                  <td><p>GCP register accounts </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azure</td>
+                  <td><a href="#blueapi.billing.v1.RegisterAccounts">RegisterAccounts</a></td>
+                  <td></td>
+                  <td><p>Azure register accounts </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.AccountServiceDiscounts">AccountServiceDiscounts</h3>
         <p></p>
 
@@ -10915,6 +10961,13 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The company’s name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountOptions</td>
+                  <td><a href="#blueapi.billing.v1.AccountOptions">AccountOptions</a></td>
+                  <td></td>
+                  <td><p>The account options. </p></td>
                 </tr>
               
                 <tr>
@@ -11322,6 +11375,13 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. Exchange rate type, payer or billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountOptions</td>
+                  <td><a href="#blueapi.billing.v1.AccountOptions">AccountOptions</a></td>
+                  <td></td>
+                  <td><p>Optional. Account options. </p></td>
                 </tr>
               
                 <tr>
@@ -12349,6 +12409,42 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. If empty, defaults to current UTC month. Format: yyyymm. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.RegisterAccounts">RegisterAccounts</h3>
+        <p>Register Accounts definition</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional.
+If enabled, any additional accounts will be automatically enrolled into the billing group.
+If disabled, register the account manually.
+
+For GCP, Register projectId under the specific Sub billing account.
+For AWS, Register accountId under the specific payer account into the billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. AccountId to be used for registration into the billing group. </p></td>
                 </tr>
               
             </tbody>
