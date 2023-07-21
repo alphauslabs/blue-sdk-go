@@ -11,6 +11,7 @@ import (
 	api "github.com/alphauslabs/blue-sdk-go/api"
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
+	protos "github.com/alphauslabs/blue-sdk-go/protos"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -110,9 +111,9 @@ type CostClient interface {
 	// Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
 	DeleteCalculatorCostModifier(ctx context.Context, in *DeleteCalculatorCostModifierRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
-	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.
-	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(ctx context.Context, in *ListCalculationsHistoryRequest, opts ...grpc.CallOption) (*ListCalculationsHistoryResponse, error)
 	// Lists the schedules of your monthly calculations. Only available in Ripple.
@@ -462,8 +463,8 @@ func (c *costClient) DeleteCalculatorCostModifier(ctx context.Context, in *Delet
 	return out, nil
 }
 
-func (c *costClient) ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*api.Operation, error) {
-	out := new(api.Operation)
+func (c *costClient) ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Cost_ImportCurFiles_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -471,8 +472,8 @@ func (c *costClient) ImportCurFiles(ctx context.Context, in *ImportCurFilesReque
 	return out, nil
 }
 
-func (c *costClient) CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*api.Operation, error) {
-	out := new(api.Operation)
+func (c *costClient) CalculateCosts(ctx context.Context, in *CalculateCostsRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Cost_CalculateCosts_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -927,9 +928,9 @@ type CostServer interface {
 	// Deletes a cost modifier. At the moment, the supported {vendor} is 'aws'. Only available in Ripple.
 	DeleteCalculatorCostModifier(context.Context, *DeleteCalculatorCostModifierRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
-	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error)
+	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*protos.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.
-	CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error)
+	CalculateCosts(context.Context, *CalculateCostsRequest) (*protos.Operation, error)
 	// Lists vendor costs calculations history and statuses.
 	ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error)
 	// Lists the schedules of your monthly calculations. Only available in Ripple.
@@ -1048,10 +1049,10 @@ func (UnimplementedCostServer) CreateCalculatorCostModifier(context.Context, *Cr
 func (UnimplementedCostServer) DeleteCalculatorCostModifier(context.Context, *DeleteCalculatorCostModifierRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCalculatorCostModifier not implemented")
 }
-func (UnimplementedCostServer) ImportCurFiles(context.Context, *ImportCurFilesRequest) (*api.Operation, error) {
+func (UnimplementedCostServer) ImportCurFiles(context.Context, *ImportCurFilesRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ImportCurFiles not implemented")
 }
-func (UnimplementedCostServer) CalculateCosts(context.Context, *CalculateCostsRequest) (*api.Operation, error) {
+func (UnimplementedCostServer) CalculateCosts(context.Context, *CalculateCostsRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CalculateCosts not implemented")
 }
 func (UnimplementedCostServer) ListCalculationsHistory(context.Context, *ListCalculationsHistoryRequest) (*ListCalculationsHistoryResponse, error) {

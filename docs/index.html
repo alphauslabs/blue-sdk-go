@@ -5112,7 +5112,7 @@ Valid values:
               <tr>
                 <td>UpdateDefaultCostAccess</td>
                 <td><a href="#blueapi.admin.v1.UpdateDefaultCostAccessRequest">UpdateDefaultCostAccessRequest</a></td>
-                <td><a href="#blueapi.api.Operation">.blueapi.api.Operation</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
                 <td><p>Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any. Only call this API if the status of your default cross-account access is &#39;outdated&#39;.</p></td>
               </tr>
             
@@ -8340,7 +8340,7 @@ Default: &#39;combined&#39; </p></td>
               
                 <tr>
                   <td>operations</td>
-                  <td><a href="#blueapi.api.Operation">blueapi.api.Operation</a></td>
+                  <td><a href="#protos.Operation">protos.Operation</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -9938,14 +9938,14 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
               <tr>
                 <td>ImportCurFiles</td>
                 <td><a href="#blueapi.cost.v1.ImportCurFilesRequest">ImportCurFilesRequest</a></td>
-                <td><a href="#blueapi.api.Operation">.blueapi.api.Operation</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
                 <td><p>Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.</p></td>
               </tr>
             
               <tr>
                 <td>CalculateCosts</td>
                 <td><a href="#blueapi.cost.v1.CalculateCostsRequest">CalculateCostsRequest</a></td>
-                <td><a href="#blueapi.api.Operation">.blueapi.api.Operation</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
                 <td><p>Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.</p></td>
               </tr>
             
@@ -13513,14 +13513,14 @@ If RPC context deadline is also specified, the shorter one will be used. </p></t
               <tr>
                 <td>ListOperations</td>
                 <td><a href="#blueapi.operations.v1.ListOperationsRequest">ListOperationsRequest</a></td>
-                <td><a href="#blueapi.api.Operation">.blueapi.api.Operation</a> stream</td>
+                <td><a href="#protos.Operation">.protos.Operation</a> stream</td>
                 <td><p>Lists long-running operations.</p></td>
               </tr>
             
               <tr>
                 <td>GetOperation</td>
                 <td><a href="#blueapi.operations.v1.GetOperationRequest">GetOperationRequest</a></td>
-                <td><a href="#blueapi.api.Operation">.blueapi.api.Operation</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
                 <td><p>Gets the latest state of a long-running operation. You can use this method to
 poll the operation result at intervals.</p></td>
               </tr>
@@ -13547,7 +13547,7 @@ to `Code.CANCELLED`.</p></td>
               <tr>
                 <td>WaitOperation</td>
                 <td><a href="#blueapi.operations.v1.WaitOperationRequest">WaitOperationRequest</a></td>
-                <td><a href="#blueapi.api.Operation">.blueapi.api.Operation</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
                 <td><p>Waits for the specified long-running operation until it is done or reaches
 at most a specified timeout, returning the latest state. If the operation
 is already done, the latest state is immediately returned. If the timeout
@@ -19584,7 +19584,7 @@ file in bytes </p></td>
               <tr>
                 <td>UpdateAccountAccess</td>
                 <td><a href="#blueapi.cover.v1.UpdateAccountAccessRequest">UpdateAccountAccessRequest</a></td>
-                <td><a href="#blueapi.api.Operation">.blueapi.api.Operation</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
                 <td><p>Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is &#39;outdated&#39;.</p></td>
               </tr>
             

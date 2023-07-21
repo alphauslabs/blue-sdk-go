@@ -10,7 +10,7 @@ package operations
 
 import (
 	context "context"
-	api "github.com/alphauslabs/blue-sdk-go/api"
+	protos "github.com/alphauslabs/blue-sdk-go/protos"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -38,7 +38,7 @@ type OperationsClient interface {
 	ListOperations(ctx context.Context, in *ListOperationsRequest, opts ...grpc.CallOption) (Operations_ListOperationsClient, error)
 	// Gets the latest state of a long-running operation. You can use this method to
 	// poll the operation result at intervals.
-	GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Deletes a long-running operation. This method indicates that the client is no
 	// longer interested in the operation result. It does not cancel the operation.
 	DeleteOperation(ctx context.Context, in *DeleteOperationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -58,7 +58,7 @@ type OperationsClient interface {
 	// state before the specified timeout (including immediately), meaning, even an
 	// immediate response is no guarantee that the operation is done.
 	// At the moment, Blue's default RPC timeout is around one hour.
-	WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 }
 
 type operationsClient struct {
@@ -85,7 +85,7 @@ func (c *operationsClient) ListOperations(ctx context.Context, in *ListOperation
 }
 
 type Operations_ListOperationsClient interface {
-	Recv() (*api.Operation, error)
+	Recv() (*protos.Operation, error)
 	grpc.ClientStream
 }
 
@@ -93,16 +93,16 @@ type operationsListOperationsClient struct {
 	grpc.ClientStream
 }
 
-func (x *operationsListOperationsClient) Recv() (*api.Operation, error) {
-	m := new(api.Operation)
+func (x *operationsListOperationsClient) Recv() (*protos.Operation, error) {
+	m := new(protos.Operation)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *operationsClient) GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*api.Operation, error) {
-	out := new(api.Operation)
+func (c *operationsClient) GetOperation(ctx context.Context, in *GetOperationRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Operations_GetOperation_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -128,8 +128,8 @@ func (c *operationsClient) CancelOperation(ctx context.Context, in *CancelOperat
 	return out, nil
 }
 
-func (c *operationsClient) WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*api.Operation, error) {
-	out := new(api.Operation)
+func (c *operationsClient) WaitOperation(ctx context.Context, in *WaitOperationRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Operations_WaitOperation_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -145,7 +145,7 @@ type OperationsServer interface {
 	ListOperations(*ListOperationsRequest, Operations_ListOperationsServer) error
 	// Gets the latest state of a long-running operation. You can use this method to
 	// poll the operation result at intervals.
-	GetOperation(context.Context, *GetOperationRequest) (*api.Operation, error)
+	GetOperation(context.Context, *GetOperationRequest) (*protos.Operation, error)
 	// Deletes a long-running operation. This method indicates that the client is no
 	// longer interested in the operation result. It does not cancel the operation.
 	DeleteOperation(context.Context, *DeleteOperationRequest) (*emptypb.Empty, error)
@@ -165,7 +165,7 @@ type OperationsServer interface {
 	// state before the specified timeout (including immediately), meaning, even an
 	// immediate response is no guarantee that the operation is done.
 	// At the moment, Blue's default RPC timeout is around one hour.
-	WaitOperation(context.Context, *WaitOperationRequest) (*api.Operation, error)
+	WaitOperation(context.Context, *WaitOperationRequest) (*protos.Operation, error)
 	mustEmbedUnimplementedOperationsServer()
 }
 
@@ -176,7 +176,7 @@ type UnimplementedOperationsServer struct {
 func (UnimplementedOperationsServer) ListOperations(*ListOperationsRequest, Operations_ListOperationsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListOperations not implemented")
 }
-func (UnimplementedOperationsServer) GetOperation(context.Context, *GetOperationRequest) (*api.Operation, error) {
+func (UnimplementedOperationsServer) GetOperation(context.Context, *GetOperationRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOperation not implemented")
 }
 func (UnimplementedOperationsServer) DeleteOperation(context.Context, *DeleteOperationRequest) (*emptypb.Empty, error) {
@@ -185,7 +185,7 @@ func (UnimplementedOperationsServer) DeleteOperation(context.Context, *DeleteOpe
 func (UnimplementedOperationsServer) CancelOperation(context.Context, *CancelOperationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelOperation not implemented")
 }
-func (UnimplementedOperationsServer) WaitOperation(context.Context, *WaitOperationRequest) (*api.Operation, error) {
+func (UnimplementedOperationsServer) WaitOperation(context.Context, *WaitOperationRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method WaitOperation not implemented")
 }
 func (UnimplementedOperationsServer) mustEmbedUnimplementedOperationsServer() {}
@@ -210,7 +210,7 @@ func _Operations_ListOperations_Handler(srv interface{}, stream grpc.ServerStrea
 }
 
 type Operations_ListOperationsServer interface {
-	Send(*api.Operation) error
+	Send(*protos.Operation) error
 	grpc.ServerStream
 }
 
@@ -218,7 +218,7 @@ type operationsListOperationsServer struct {
 	grpc.ServerStream
 }
 
-func (x *operationsListOperationsServer) Send(m *api.Operation) error {
+func (x *operationsListOperationsServer) Send(m *protos.Operation) error {
 	return x.ServerStream.SendMsg(m)
 }
 

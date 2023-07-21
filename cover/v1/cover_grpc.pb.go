@@ -8,7 +8,7 @@ package cover
 
 import (
 	context "context"
-	api "github.com/alphauslabs/blue-sdk-go/api"
+	protos "github.com/alphauslabs/blue-sdk-go/protos"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -221,7 +221,7 @@ type CoverClient interface {
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
-	UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*DeleteAccountAccessResponse, error)
 	// Registers an account
@@ -803,8 +803,8 @@ func (c *coverClient) CreateAccountAccess(ctx context.Context, in *CreateAccount
 	return out, nil
 }
 
-func (c *coverClient) UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*api.Operation, error) {
-	out := new(api.Operation)
+func (c *coverClient) UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Cover_UpdateAccountAccess_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -1573,7 +1573,7 @@ type CoverServer interface {
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
-	UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error)
+	UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*protos.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*DeleteAccountAccessResponse, error)
 	// Registers an account
@@ -1805,7 +1805,7 @@ func (UnimplementedCoverServer) GetAccountAccess(context.Context, *GetAccountAcc
 func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccess not implemented")
 }
-func (UnimplementedCoverServer) UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*api.Operation, error) {
+func (UnimplementedCoverServer) UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountAccess not implemented")
 }
 func (UnimplementedCoverServer) DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*DeleteAccountAccessResponse, error) {

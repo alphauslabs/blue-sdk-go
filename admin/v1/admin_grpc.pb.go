@@ -9,6 +9,7 @@ package admin
 import (
 	context "context"
 	api "github.com/alphauslabs/blue-sdk-go/api"
+	protos "github.com/alphauslabs/blue-sdk-go/protos"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -63,7 +64,7 @@ type AdminClient interface {
 	// Starts validation of a default cross-account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateDefaultCostAccess(ctx context.Context, in *CreateDefaultCostAccessRequest, opts ...grpc.CallOption) (*DefaultCostAccess, error)
 	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any. Only call this API if the status of your default cross-account access is 'outdated'.
-	UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error)
+	UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(ctx context.Context, in *DeleteDefaultCostAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling CloudWatch metrics streaming on a target account.
@@ -206,8 +207,8 @@ func (c *adminClient) CreateDefaultCostAccess(ctx context.Context, in *CreateDef
 	return out, nil
 }
 
-func (c *adminClient) UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*api.Operation, error) {
-	out := new(api.Operation)
+func (c *adminClient) UpdateDefaultCostAccess(ctx context.Context, in *UpdateDefaultCostAccessRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Admin_UpdateDefaultCostAccess_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -376,7 +377,7 @@ type AdminServer interface {
 	// Starts validation of a default cross-account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateDefaultCostAccess(context.Context, *CreateDefaultCostAccessRequest) (*DefaultCostAccess, error)
 	// Starts an update to an existing default cross-account access CloudFormation stack for template changes, if any. Only call this API if the status of your default cross-account access is 'outdated'.
-	UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error)
+	UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*protos.Operation, error)
 	// Deletes the current default cross-account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
 	DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets a CloudFormation launch URL for enabling CloudWatch metrics streaming on a target account.
@@ -434,7 +435,7 @@ func (UnimplementedAdminServer) GetDefaultCostAccess(context.Context, *GetDefaul
 func (UnimplementedAdminServer) CreateDefaultCostAccess(context.Context, *CreateDefaultCostAccessRequest) (*DefaultCostAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateDefaultCostAccess not implemented")
 }
-func (UnimplementedAdminServer) UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*api.Operation, error) {
+func (UnimplementedAdminServer) UpdateDefaultCostAccess(context.Context, *UpdateDefaultCostAccessRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDefaultCostAccess not implemented")
 }
 func (UnimplementedAdminServer) DeleteDefaultCostAccess(context.Context, *DeleteDefaultCostAccessRequest) (*emptypb.Empty, error) {
