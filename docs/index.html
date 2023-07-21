@@ -928,6 +928,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.ReadCostsRequestAzureOptions"><span class="badge">M</span>ReadCostsRequestAzureOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.ReadCostsRequestGcpOptions"><span class="badge">M</span>ReadCostsRequestGcpOptions</a>
                 </li>
               
@@ -8988,6 +8992,13 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><p>Optional. Valid only for the `gcp` vendor. GCP-specific options. </p></td>
                 </tr>
               
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.cost.v1.ReadCostsRequestAzureOptions">ReadCostsRequestAzureOptions</a></td>
+                  <td></td>
+                  <td><p>Optional. Valid only for the `azure` vendor. Azure-specific options. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -9194,6 +9205,46 @@ This field is discarded for Wave(Pro) users. You will always get the latest data
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ReadCostsRequestAzureOptions">ReadCostsRequestAzureOptions</h3>
+        <p>Azure-specific options for ReadCostsRequest.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupByColumns</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. A comma-separated list of columns to aggregate the data into. Valid values are `serviceName`, `productName`, `region`, `chargeType`, `description`, `billableQuantity`, `effectiveUnitPrice`, `timeInterval`, `billingType`, `alternateId` and `domainName`. A special value of `none` is also supported, which means query by date or month per account only.
+
+For example, if you only want the services and region data, you can set this field to `serviceName,region`. Your input sequence doesn&#39;t matter (although the sequence above is recommended) as the actual sequence is already fixed in the return data (see the definition in https://github.com/alphauslabs/blueapi/blob/main/api/azure/cost.proto), which is generic to specific, top to bottom. Invalid values are discarded. Excluded columns will be empty. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupByMonth</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If set to true, return data grouped by month within the date range. If you want data that is grouped per account per month, set this to `true`. You can also use `groupByColumns` while setting this to true. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>noCache</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>If true, force API to not use cached data. </p></td>
                 </tr>
               
             </tbody>
