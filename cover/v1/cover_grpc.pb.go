@@ -107,6 +107,7 @@ const (
 	Cover_RestoreSavings_FullMethodName               = "/blueapi.cover.v1.Cover/RestoreSavings"
 	Cover_SimulateSavings_FullMethodName              = "/blueapi.cover.v1.Cover/SimulateSavings"
 	Cover_GetCostGroupAllocation_FullMethodName       = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
+	Cover_AddUserFromAuth0AsRoot_FullMethodName       = "/blueapi.cover.v1.Cover/AddUserFromAuth0asRoot"
 )
 
 // CoverClient is the client API for Cover service.
@@ -284,6 +285,8 @@ type CoverClient interface {
 	SimulateSavings(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateSavingsClient, error)
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
 	GetCostGroupAllocation(ctx context.Context, in *GetCostGroupAllocationRequest, opts ...grpc.CallOption) (Cover_GetCostGroupAllocationClient, error)
+	// WORK-IN-PROGRESS: Add user from Auth0 as Root user
+	AddUserFromAuth0AsRoot(ctx context.Context, in *AddUserFromAuth0AsRootRequest, opts ...grpc.CallOption) (*AddUserFromAuth0AsRootResponse, error)
 }
 
 type coverClient struct {
@@ -1461,6 +1464,15 @@ func (x *coverGetCostGroupAllocationClient) Recv() (*AllocationItem, error) {
 	return m, nil
 }
 
+func (c *coverClient) AddUserFromAuth0AsRoot(ctx context.Context, in *AddUserFromAuth0AsRootRequest, opts ...grpc.CallOption) (*AddUserFromAuth0AsRootResponse, error) {
+	out := new(AddUserFromAuth0AsRootResponse)
+	err := c.cc.Invoke(ctx, Cover_AddUserFromAuth0AsRoot_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -1636,6 +1648,8 @@ type CoverServer interface {
 	SimulateSavings(*CreateAllocatorRequest, Cover_SimulateSavingsServer) error
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
 	GetCostGroupAllocation(*GetCostGroupAllocationRequest, Cover_GetCostGroupAllocationServer) error
+	// WORK-IN-PROGRESS: Add user from Auth0 as Root user
+	AddUserFromAuth0AsRoot(context.Context, *AddUserFromAuth0AsRootRequest) (*AddUserFromAuth0AsRootResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -1900,6 +1914,9 @@ func (UnimplementedCoverServer) SimulateSavings(*CreateAllocatorRequest, Cover_S
 }
 func (UnimplementedCoverServer) GetCostGroupAllocation(*GetCostGroupAllocationRequest, Cover_GetCostGroupAllocationServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetCostGroupAllocation not implemented")
+}
+func (UnimplementedCoverServer) AddUserFromAuth0AsRoot(context.Context, *AddUserFromAuth0AsRootRequest) (*AddUserFromAuth0AsRootResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddUserFromAuth0AsRoot not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -3518,6 +3535,24 @@ func (x *coverGetCostGroupAllocationServer) Send(m *AllocationItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cover_AddUserFromAuth0AsRoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddUserFromAuth0AsRootRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).AddUserFromAuth0AsRoot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_AddUserFromAuth0AsRoot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).AddUserFromAuth0AsRoot(ctx, req.(*AddUserFromAuth0AsRootRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3800,6 +3835,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAllocator",
 			Handler:    _Cover_DeleteAllocator_Handler,
+		},
+		{
+			MethodName: "AddUserFromAuth0asRoot",
+			Handler:    _Cover_AddUserFromAuth0AsRoot_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
