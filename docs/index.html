@@ -1365,6 +1365,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.DataAccess"><span class="badge">M</span>DataAccess</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.DeleteAccountAccessRequest"><span class="badge">M</span>DeleteAccountAccessRequest</a>
                 </li>
               
@@ -1478,6 +1482,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.GetCurrentViewResponse"><span class="badge">M</span>GetCurrentViewResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetDataAccessRequest"><span class="badge">M</span>GetDataAccessRequest</a>
                 </li>
               
                 <li>
@@ -15072,6 +15080,65 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.DataAccess">DataAccess</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpOptions</td>
+                  <td><a href="#blueapi.api.cover.GcpOptions">blueapi.api.cover.GcpOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.api.cover.AzureOptions">blueapi.api.cover.AzureOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.DeleteAccountAccessRequest">DeleteAccountAccessRequest</h3>
         <p>Request message for the DeleteAccountAccess rpc.</p>
 
@@ -16145,6 +16212,37 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><a href="#blueapi.api.cover.ViewData">blueapi.api.cover.ViewData</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetDataAccessRequest">GetDataAccessRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. (Project ID for GCP / Account ID for Azure) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Vendor (GCP/Azure) </p></td>
                 </tr>
               
             </tbody>
@@ -19638,6 +19736,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>GetDataAccess</td>
+                <td><a href="#blueapi.cover.v1.GetDataAccessRequest">GetDataAccessRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DataAccess">DataAccess</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>CreateAccountAccess</td>
                 <td><a href="#blueapi.cover.v1.CreateAccountAccessRequest">CreateAccountAccessRequest</a></td>
                 <td><a href="#blueapi.cover.v1.AccountAccess">AccountAccess</a></td>
@@ -20419,6 +20524,16 @@ file in bytes </p></td>
                 <td>GetAccountAccess</td>
                 <td>GET</td>
                 <td>/v1/aws/acctaccess/{target}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetDataAccess</td>
+                <td>GET</td>
+                <td>/v1/acctaccess/{target}</td>
                 <td></td>
               </tr>
               

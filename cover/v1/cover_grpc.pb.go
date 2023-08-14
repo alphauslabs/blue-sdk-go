@@ -74,6 +74,7 @@ const (
 	Cover_GetAccountAccessTemplateUrl_FullMethodName  = "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl"
 	Cover_ListAccountAccess_FullMethodName            = "/blueapi.cover.v1.Cover/ListAccountAccess"
 	Cover_GetAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/GetAccountAccess"
+	Cover_GetDataAccess_FullMethodName                = "/blueapi.cover.v1.Cover/GetDataAccess"
 	Cover_CreateAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/CreateAccountAccess"
 	Cover_UpdateAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
 	Cover_DeleteAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
@@ -219,6 +220,7 @@ type CoverClient interface {
 	ListAccountAccess(ctx context.Context, in *ListAccountAccessRequest, opts ...grpc.CallOption) (Cover_ListAccountAccessClient, error)
 	// Gets the current account role attached to the input target.
 	GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
+	GetDataAccess(ctx context.Context, in *GetDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -791,6 +793,15 @@ func (x *coverListAccountAccessClient) Recv() (*AccountAccess, error) {
 func (c *coverClient) GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
 	out := new(AccountAccess)
 	err := c.cc.Invoke(ctx, Cover_GetAccountAccess_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetDataAccess(ctx context.Context, in *GetDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error) {
+	out := new(DataAccess)
+	err := c.cc.Invoke(ctx, Cover_GetDataAccess_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1582,6 +1593,7 @@ type CoverServer interface {
 	ListAccountAccess(*ListAccountAccessRequest, Cover_ListAccountAccessServer) error
 	// Gets the current account role attached to the input target.
 	GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error)
+	GetDataAccess(context.Context, *GetDataAccessRequest) (*DataAccess, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -1815,6 +1827,9 @@ func (UnimplementedCoverServer) ListAccountAccess(*ListAccountAccessRequest, Cov
 }
 func (UnimplementedCoverServer) GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) GetDataAccess(context.Context, *GetDataAccessRequest) (*DataAccess, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDataAccess not implemented")
 }
 func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccess not implemented")
@@ -2888,6 +2903,24 @@ func _Cover_GetAccountAccess_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetDataAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDataAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetDataAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetDataAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetDataAccess(ctx, req.(*GetDataAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_CreateAccountAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateAccountAccessRequest)
 	if err := dec(in); err != nil {
@@ -3767,6 +3800,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccountAccess",
 			Handler:    _Cover_GetAccountAccess_Handler,
+		},
+		{
+			MethodName: "GetDataAccess",
+			Handler:    _Cover_GetDataAccess_Handler,
 		},
 		{
 			MethodName: "CreateAccountAccess",
