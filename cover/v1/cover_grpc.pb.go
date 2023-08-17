@@ -79,6 +79,7 @@ const (
 	Cover_UpdateAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
 	Cover_DeleteAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
 	Cover_RegisterAccount_FullMethodName              = "/blueapi.cover.v1.Cover/RegisterAccount"
+	Cover_RegisterDataAccess_FullMethodName           = "/blueapi.cover.v1.Cover/RegisterDataAccess"
 	Cover_ListAssets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListAssets"
 	Cover_GetAssetsSummary_FullMethodName             = "/blueapi.cover.v1.Cover/GetAssetsSummary"
 	Cover_GetCostUsage_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCostUsage"
@@ -229,6 +230,8 @@ type CoverClient interface {
 	DeleteAccountAccess(ctx context.Context, in *DeleteAccountAccessRequest, opts ...grpc.CallOption) (*DeleteAccountAccessResponse, error)
 	// Registers an account
 	RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Registers GCP/Azure account.
+	RegisterDataAccess(ctx context.Context, in *RegisterDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists assets for costgroup
 	ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (Cover_ListAssetsClient, error)
 	// WORK-IN-PROGRESS: Assets summary for costgroup
@@ -838,6 +841,15 @@ func (c *coverClient) DeleteAccountAccess(ctx context.Context, in *DeleteAccount
 func (c *coverClient) RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Cover_RegisterAccount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) RegisterDataAccess(ctx context.Context, in *RegisterDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_RegisterDataAccess_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1602,6 +1614,8 @@ type CoverServer interface {
 	DeleteAccountAccess(context.Context, *DeleteAccountAccessRequest) (*DeleteAccountAccessResponse, error)
 	// Registers an account
 	RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error)
+	// Registers GCP/Azure account.
+	RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists assets for costgroup
 	ListAssets(*ListAssetsRequest, Cover_ListAssetsServer) error
 	// WORK-IN-PROGRESS: Assets summary for costgroup
@@ -1842,6 +1856,9 @@ func (UnimplementedCoverServer) DeleteAccountAccess(context.Context, *DeleteAcco
 }
 func (UnimplementedCoverServer) RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterAccount not implemented")
+}
+func (UnimplementedCoverServer) RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterDataAccess not implemented")
 }
 func (UnimplementedCoverServer) ListAssets(*ListAssetsRequest, Cover_ListAssetsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAssets not implemented")
@@ -2993,6 +3010,24 @@ func _Cover_RegisterAccount_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_RegisterDataAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterDataAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).RegisterDataAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_RegisterDataAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).RegisterDataAccess(ctx, req.(*RegisterDataAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ListAssets_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListAssetsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -3820,6 +3855,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterAccount",
 			Handler:    _Cover_RegisterAccount_Handler,
+		},
+		{
+			MethodName: "RegisterDataAccess",
+			Handler:    _Cover_RegisterDataAccess_Handler,
 		},
 		{
 			MethodName: "GetAssetsSummary",

@@ -1657,6 +1657,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.RegisterDataAccessRequest"><span class="badge">M</span>RegisterDataAccessRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.RemoveCostGroupMemberRequest"><span class="badge">M</span>RemoveCostGroupMemberRequest</a>
                 </li>
               
@@ -15081,7 +15085,7 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
         
       
         <h3 id="blueapi.cover.v1.DataAccess">DataAccess</h3>
-        <p></p>
+        <p>Message Response for GetDataAccess. For Azure and GCP</p>
 
         
           <table class="field-table">
@@ -15094,42 +15098,42 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td>target</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Project Id for GCP, Account Id for Azure </p></td>
                 </tr>
               
                 <tr>
                   <td>orgId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Org Id </p></td>
                 </tr>
               
                 <tr>
                   <td>gcpOptions</td>
                   <td><a href="#blueapi.api.cover.GcpOptions">blueapi.api.cover.GcpOptions</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>GCP Options </p></td>
                 </tr>
               
                 <tr>
                   <td>azureOptions</td>
                   <td><a href="#blueapi.api.cover.AzureOptions">blueapi.api.cover.AzureOptions</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Azure Options </p></td>
                 </tr>
               
                 <tr>
                   <td>lastUpdate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Last Update </p></td>
                 </tr>
               
                 <tr>
                   <td>createTime</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Time Created </p></td>
                 </tr>
               
             </tbody>
@@ -17310,6 +17314,51 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The account name </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.RegisterDataAccessRequest">RegisterDataAccessRequest</h3>
+        <p>Request message for Register Data Access. For azure and gcp.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Vendor (Azure/GCP) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Project Id for GCP, Account Id for Azure </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpOptions</td>
+                  <td><a href="#blueapi.api.cover.GcpOptions">blueapi.api.cover.GcpOptions</a></td>
+                  <td></td>
+                  <td><p>GCP Options. Specific for GCP </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.api.cover.AzureOptions">blueapi.api.cover.AzureOptions</a></td>
+                  <td></td>
+                  <td><p>Azure Options. Specific for Azure </p></td>
                 </tr>
               
             </tbody>
@@ -19771,6 +19820,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>RegisterDataAccess</td>
+                <td><a href="#blueapi.cover.v1.RegisterDataAccessRequest">RegisterDataAccessRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Registers GCP/Azure account.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListAssets</td>
                 <td><a href="#blueapi.cover.v1.ListAssetsRequest">ListAssetsRequest</a></td>
                 <td><a href="#blueapi.cover.v1.Resource">Resource</a> stream</td>
@@ -20574,6 +20630,16 @@ file in bytes </p></td>
                 <td>RegisterAccount</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/account</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RegisterDataAccess</td>
+                <td>POST</td>
+                <td>/v1/account</td>
                 <td>*</td>
               </tr>
               
