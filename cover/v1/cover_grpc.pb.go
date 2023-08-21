@@ -80,6 +80,7 @@ const (
 	Cover_DeleteAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
 	Cover_RegisterAccount_FullMethodName              = "/blueapi.cover.v1.Cover/RegisterAccount"
 	Cover_RegisterDataAccess_FullMethodName           = "/blueapi.cover.v1.Cover/RegisterDataAccess"
+	Cover_ListDataAccess_FullMethodName               = "/blueapi.cover.v1.Cover/ListDataAccess"
 	Cover_UpdateDataAccess_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateDataAccess"
 	Cover_ListAssets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListAssets"
 	Cover_GetAssetsSummary_FullMethodName             = "/blueapi.cover.v1.Cover/GetAssetsSummary"
@@ -222,6 +223,7 @@ type CoverClient interface {
 	ListAccountAccess(ctx context.Context, in *ListAccountAccessRequest, opts ...grpc.CallOption) (Cover_ListAccountAccessClient, error)
 	// Gets the current account role attached to the input target.
 	GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
+	// Gets the current account. For GCP and Azure.
 	GetDataAccess(ctx context.Context, in *GetDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
@@ -233,6 +235,8 @@ type CoverClient interface {
 	RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Registers GCP/Azure account.
 	RegisterDataAccess(ctx context.Context, in *RegisterDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Lists Azure and GCP accounts.
+	ListDataAccess(ctx context.Context, in *ListDataAccessRequest, opts ...grpc.CallOption) (Cover_ListDataAccessClient, error)
 	// Update GCP/Azure account info
 	UpdateDataAccess(ctx context.Context, in *UpdateDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists assets for costgroup
@@ -859,6 +863,38 @@ func (c *coverClient) RegisterDataAccess(ctx context.Context, in *RegisterDataAc
 	return out, nil
 }
 
+func (c *coverClient) ListDataAccess(ctx context.Context, in *ListDataAccessRequest, opts ...grpc.CallOption) (Cover_ListDataAccessClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[1], Cover_ListDataAccess_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListDataAccessClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListDataAccessClient interface {
+	Recv() (*DataAccess, error)
+	grpc.ClientStream
+}
+
+type coverListDataAccessClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListDataAccessClient) Recv() (*DataAccess, error) {
+	m := new(DataAccess)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *coverClient) UpdateDataAccess(ctx context.Context, in *UpdateDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Cover_UpdateDataAccess_FullMethodName, in, out, opts...)
@@ -869,7 +905,7 @@ func (c *coverClient) UpdateDataAccess(ctx context.Context, in *UpdateDataAccess
 }
 
 func (c *coverClient) ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (Cover_ListAssetsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[1], Cover_ListAssets_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[2], Cover_ListAssets_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -910,7 +946,7 @@ func (c *coverClient) GetAssetsSummary(ctx context.Context, in *GetAssetsSummary
 }
 
 func (c *coverClient) GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[2], Cover_GetCostUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[3], Cover_GetCostUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -969,7 +1005,7 @@ func (c *coverClient) TerminateResource(ctx context.Context, in *TerminateResour
 }
 
 func (c *coverClient) UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[3], Cover_UploadChargeCode_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[4], Cover_UploadChargeCode_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1057,7 +1093,7 @@ func (c *coverClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...g
 }
 
 func (c *coverClient) ListFees(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListFeesClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[4], Cover_ListFees_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_ListFees_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1089,7 +1125,7 @@ func (x *coverListFeesClient) Recv() (*FeeDetails, error) {
 }
 
 func (c *coverClient) RestoreFee(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreFeeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_RestoreFee_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_RestoreFee_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1121,7 +1157,7 @@ func (x *coverRestoreFeeClient) Recv() (*FeeDetails, error) {
 }
 
 func (c *coverClient) GetCostGroupFee(ctx context.Context, in *GetCostGroupFeeRequest, opts ...grpc.CallOption) (Cover_GetCostGroupFeeClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_GetCostGroupFee_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_GetCostGroupFee_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1153,7 +1189,7 @@ func (x *coverGetCostGroupFeeClient) Recv() (*FeeItem, error) {
 }
 
 func (c *coverClient) ListAllocators(ctx context.Context, in *ListAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListAllocatorsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_ListAllocators_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ListAllocators_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1212,7 +1248,7 @@ func (c *coverClient) DeleteAllocator(ctx context.Context, in *DeleteAllocatorRe
 }
 
 func (c *coverClient) ProxyCreateCompletion(ctx context.Context, in *ProxyCreateCompletionRequest, opts ...grpc.CallOption) (Cover_ProxyCreateCompletionClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ProxyCreateCompletion_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_ProxyCreateCompletion_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1244,7 +1280,7 @@ func (x *coverProxyCreateCompletionClient) Recv() (*ProxyCreateCompletionRespons
 }
 
 func (c *coverClient) SimulateFeeAllocator(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateFeeAllocatorClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_SimulateFeeAllocator_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[10], Cover_SimulateFeeAllocator_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1276,7 +1312,7 @@ func (x *coverSimulateFeeAllocatorClient) Recv() (*FeeDetails, error) {
 }
 
 func (c *coverClient) ListAccountUsage(ctx context.Context, in *ListAccountUsageRequest, opts ...grpc.CallOption) (Cover_ListAccountUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[10], Cover_ListAccountUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[11], Cover_ListAccountUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1308,7 +1344,7 @@ func (x *coverListAccountUsageClient) Recv() (*AccountUsageDetails, error) {
 }
 
 func (c *coverClient) RestoreAccountUsage(ctx context.Context, in *RestoreAccountUsageRequest, opts ...grpc.CallOption) (Cover_RestoreAccountUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[11], Cover_RestoreAccountUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[12], Cover_RestoreAccountUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1340,7 +1376,7 @@ func (x *coverRestoreAccountUsageClient) Recv() (*AccountUsageDetails, error) {
 }
 
 func (c *coverClient) SimulateAccountUsage(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateAccountUsageClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[12], Cover_SimulateAccountUsage_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[13], Cover_SimulateAccountUsage_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1372,7 +1408,7 @@ func (x *coverSimulateAccountUsageClient) Recv() (*AccountUsageDetails, error) {
 }
 
 func (c *coverClient) ListSavings(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListSavingsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[13], Cover_ListSavings_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[14], Cover_ListSavings_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1404,7 +1440,7 @@ func (x *coverListSavingsClient) Recv() (*SavingsDetails, error) {
 }
 
 func (c *coverClient) RestoreSavings(ctx context.Context, in *RestoreSavingsRequest, opts ...grpc.CallOption) (Cover_RestoreSavingsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[14], Cover_RestoreSavings_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[15], Cover_RestoreSavings_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1436,7 +1472,7 @@ func (x *coverRestoreSavingsClient) Recv() (*SavingsDetails, error) {
 }
 
 func (c *coverClient) SimulateSavings(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateSavingsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[15], Cover_SimulateSavings_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[16], Cover_SimulateSavings_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1468,7 +1504,7 @@ func (x *coverSimulateSavingsClient) Recv() (*SavingsDetails, error) {
 }
 
 func (c *coverClient) GetCostGroupAllocation(ctx context.Context, in *GetCostGroupAllocationRequest, opts ...grpc.CallOption) (Cover_GetCostGroupAllocationClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[16], Cover_GetCostGroupAllocation_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[17], Cover_GetCostGroupAllocation_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1617,6 +1653,7 @@ type CoverServer interface {
 	ListAccountAccess(*ListAccountAccessRequest, Cover_ListAccountAccessServer) error
 	// Gets the current account role attached to the input target.
 	GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error)
+	// Gets the current account. For GCP and Azure.
 	GetDataAccess(context.Context, *GetDataAccessRequest) (*DataAccess, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
@@ -1628,6 +1665,8 @@ type CoverServer interface {
 	RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error)
 	// Registers GCP/Azure account.
 	RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error)
+	// Lists Azure and GCP accounts.
+	ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error
 	// Update GCP/Azure account info
 	UpdateDataAccess(context.Context, *UpdateDataAccessRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists assets for costgroup
@@ -1873,6 +1912,9 @@ func (UnimplementedCoverServer) RegisterAccount(context.Context, *RegisterAccoun
 }
 func (UnimplementedCoverServer) RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterDataAccess not implemented")
+}
+func (UnimplementedCoverServer) ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListDataAccess not implemented")
 }
 func (UnimplementedCoverServer) UpdateDataAccess(context.Context, *UpdateDataAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDataAccess not implemented")
@@ -3045,6 +3087,27 @@ func _Cover_RegisterDataAccess_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListDataAccess_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListDataAccessRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListDataAccess(m, &coverListDataAccessServer{stream})
+}
+
+type Cover_ListDataAccessServer interface {
+	Send(*DataAccess) error
+	grpc.ServerStream
+}
+
+type coverListDataAccessServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListDataAccessServer) Send(m *DataAccess) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Cover_UpdateDataAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateDataAccessRequest)
 	if err := dec(in); err != nil {
@@ -3960,6 +4023,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccountAccess",
 			Handler:       _Cover_ListAccountAccess_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListDataAccess",
+			Handler:       _Cover_ListDataAccess_Handler,
 			ServerStreams: true,
 		},
 		{

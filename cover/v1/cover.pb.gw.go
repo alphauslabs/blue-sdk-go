@@ -2800,6 +2800,23 @@ func local_request_Cover_RegisterDataAccess_0(ctx context.Context, marshaler run
 
 }
 
+func request_Cover_ListDataAccess_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_ListDataAccessClient, runtime.ServerMetadata, error) {
+	var protoReq ListDataAccessRequest
+	var metadata runtime.ServerMetadata
+
+	stream, err := client.ListDataAccess(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 func request_Cover_UpdateDataAccess_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq UpdateDataAccessRequest
 	var metadata runtime.ServerMetadata
@@ -5480,6 +5497,13 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 
 	})
 
+	mux.Handle("POST", pattern_Cover_ListDataAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	mux.Handle("PUT", pattern_Cover_UpdateDataAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -7158,6 +7182,26 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 
 	})
 
+	mux.Handle("POST", pattern_Cover_ListDataAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		rctx, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ListDataAccess")
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Cover_ListDataAccess_0(rctx, inboundMarshaler, client, req, pathParams)
+		ctx = runtime.NewServerMetadataContext(ctx, md)
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Cover_ListDataAccess_0(ctx, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("PUT", pattern_Cover_UpdateDataAccess_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -7900,6 +7944,8 @@ var (
 
 	pattern_Cover_RegisterDataAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "account"}, ""))
 
+	pattern_Cover_ListDataAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "account", "all"}, "read"))
+
 	pattern_Cover_UpdateDataAccess_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "account", "target"}, ""))
 
 	pattern_Cover_ListAssets_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "assets"}, "read"))
@@ -8081,6 +8127,8 @@ var (
 	forward_Cover_RegisterAccount_0 = runtime.ForwardResponseMessage
 
 	forward_Cover_RegisterDataAccess_0 = runtime.ForwardResponseMessage
+
+	forward_Cover_ListDataAccess_0 = runtime.ForwardResponseStream
 
 	forward_Cover_UpdateDataAccess_0 = runtime.ForwardResponseMessage
 

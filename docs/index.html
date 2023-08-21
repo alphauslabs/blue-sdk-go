@@ -1609,6 +1609,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListDataAccessRequest"><span class="badge">M</span>ListDataAccessRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ListFeesRequest"><span class="badge">M</span>ListFeesRequest</a>
                 </li>
               
@@ -16955,6 +16959,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.ListDataAccessRequest">ListDataAccessRequest</h3>
+        <p>Request message for ListDataAccess</p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.ListFeesRequest">ListFeesRequest</h3>
         <p>Request message for the ListFees rpc.</p>
 
@@ -19844,7 +19855,7 @@ file in bytes </p></td>
                 <td>GetDataAccess</td>
                 <td><a href="#blueapi.cover.v1.GetDataAccessRequest">GetDataAccessRequest</a></td>
                 <td><a href="#blueapi.cover.v1.DataAccess">DataAccess</a></td>
-                <td><p></p></td>
+                <td><p>Gets the current account. For GCP and Azure.</p></td>
               </tr>
             
               <tr>
@@ -19880,6 +19891,13 @@ file in bytes </p></td>
                 <td><a href="#blueapi.cover.v1.RegisterDataAccessRequest">RegisterDataAccessRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>Registers GCP/Azure account.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListDataAccess</td>
+                <td><a href="#blueapi.cover.v1.ListDataAccessRequest">ListDataAccessRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DataAccess">DataAccess</a> stream</td>
+                <td><p>Lists Azure and GCP accounts.</p></td>
               </tr>
             
               <tr>
@@ -20704,6 +20722,16 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/account</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListDataAccess</td>
+                <td>POST</td>
+                <td>/v1/account/all:read</td>
+                <td></td>
               </tr>
               
             
