@@ -80,6 +80,7 @@ const (
 	Cover_DeleteAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
 	Cover_RegisterAccount_FullMethodName              = "/blueapi.cover.v1.Cover/RegisterAccount"
 	Cover_RegisterDataAccess_FullMethodName           = "/blueapi.cover.v1.Cover/RegisterDataAccess"
+	Cover_AddBillingAccount_FullMethodName            = "/blueapi.cover.v1.Cover/AddBillingAccount"
 	Cover_ListDataAccess_FullMethodName               = "/blueapi.cover.v1.Cover/ListDataAccess"
 	Cover_UpdateDataAccess_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateDataAccess"
 	Cover_ListAssets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListAssets"
@@ -235,6 +236,8 @@ type CoverClient interface {
 	RegisterAccount(ctx context.Context, in *RegisterAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Registers GCP/Azure account.
 	RegisterDataAccess(ctx context.Context, in *RegisterDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Add Billing Account ID for GCP.
+	AddBillingAccount(ctx context.Context, in *AddBillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists Azure and GCP accounts.
 	ListDataAccess(ctx context.Context, in *ListDataAccessRequest, opts ...grpc.CallOption) (Cover_ListDataAccessClient, error)
 	// Update GCP/Azure account info
@@ -857,6 +860,15 @@ func (c *coverClient) RegisterAccount(ctx context.Context, in *RegisterAccountRe
 func (c *coverClient) RegisterDataAccess(ctx context.Context, in *RegisterDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Cover_RegisterDataAccess_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) AddBillingAccount(ctx context.Context, in *AddBillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_AddBillingAccount_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1665,6 +1677,8 @@ type CoverServer interface {
 	RegisterAccount(context.Context, *RegisterAccountRequest) (*emptypb.Empty, error)
 	// Registers GCP/Azure account.
 	RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error)
+	// Add Billing Account ID for GCP.
+	AddBillingAccount(context.Context, *AddBillingAccountRequest) (*emptypb.Empty, error)
 	// Lists Azure and GCP accounts.
 	ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error
 	// Update GCP/Azure account info
@@ -1912,6 +1926,9 @@ func (UnimplementedCoverServer) RegisterAccount(context.Context, *RegisterAccoun
 }
 func (UnimplementedCoverServer) RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterDataAccess not implemented")
+}
+func (UnimplementedCoverServer) AddBillingAccount(context.Context, *AddBillingAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddBillingAccount not implemented")
 }
 func (UnimplementedCoverServer) ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListDataAccess not implemented")
@@ -3087,6 +3104,24 @@ func _Cover_RegisterDataAccess_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_AddBillingAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddBillingAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).AddBillingAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_AddBillingAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).AddBillingAccount(ctx, req.(*AddBillingAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ListDataAccess_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListDataAccessRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -3957,6 +3992,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterDataAccess",
 			Handler:    _Cover_RegisterDataAccess_Handler,
+		},
+		{
+			MethodName: "AddBillingAccount",
+			Handler:    _Cover_AddBillingAccount_Handler,
 		},
 		{
 			MethodName: "UpdateDataAccess",

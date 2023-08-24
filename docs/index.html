@@ -1261,6 +1261,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.AddBillingAccountRequest"><span class="badge">M</span>AddBillingAccountRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.AddFavoriteRequest"><span class="badge">M</span>AddFavoriteRequest</a>
                 </li>
               
@@ -14069,6 +14073,51 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.AddBillingAccountRequest">AddBillingAccountRequest</h3>
+        <p>Request message for AddBillingAccount</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing account id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>datasetId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Name of dataset you created. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>datasetRegion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>In creating dataset, It requires you to select a region. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>projectId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Project Id where the datasetId of BQ can be found. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.AddFavoriteRequest">AddFavoriteRequest</h3>
         <p>Request message for AddFavorite</p>
 
@@ -19908,6 +19957,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>AddBillingAccount</td>
+                <td><a href="#blueapi.cover.v1.AddBillingAccountRequest">AddBillingAccountRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Add Billing Account ID for GCP.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListDataAccess</td>
                 <td><a href="#blueapi.cover.v1.ListDataAccessRequest">ListDataAccessRequest</a></td>
                 <td><a href="#blueapi.cover.v1.DataAccess">DataAccess</a> stream</td>
@@ -20735,6 +20791,16 @@ file in bytes </p></td>
                 <td>RegisterDataAccess</td>
                 <td>POST</td>
                 <td>/v1/account</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AddBillingAccount</td>
+                <td>POST</td>
+                <td>/v1/billingacct</td>
                 <td>*</td>
               </tr>
               
