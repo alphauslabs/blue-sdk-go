@@ -75,12 +75,14 @@ const (
 	Cover_ListAccountAccess_FullMethodName            = "/blueapi.cover.v1.Cover/ListAccountAccess"
 	Cover_GetAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/GetAccountAccess"
 	Cover_GetDataAccess_FullMethodName                = "/blueapi.cover.v1.Cover/GetDataAccess"
+	Cover_DeleteDataAccess_FullMethodName             = "/blueapi.cover.v1.Cover/DeleteDataAccess"
 	Cover_CreateAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/CreateAccountAccess"
 	Cover_UpdateAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
 	Cover_DeleteAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
 	Cover_RegisterAccount_FullMethodName              = "/blueapi.cover.v1.Cover/RegisterAccount"
 	Cover_RegisterDataAccess_FullMethodName           = "/blueapi.cover.v1.Cover/RegisterDataAccess"
 	Cover_AddBillingAccount_FullMethodName            = "/blueapi.cover.v1.Cover/AddBillingAccount"
+	Cover_UpdateBillingAccount_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateBillingAccount"
 	Cover_ListDataAccess_FullMethodName               = "/blueapi.cover.v1.Cover/ListDataAccess"
 	Cover_UpdateDataAccess_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateDataAccess"
 	Cover_ListAssets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListAssets"
@@ -225,7 +227,9 @@ type CoverClient interface {
 	// Gets the current account role attached to the input target.
 	GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Gets the current account. For GCP and Azure.
-	GetDataAccess(ctx context.Context, in *GetDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error)
+	GetDataAccess(ctx context.Context, in *GetAndDeleteDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error)
+	// Deletes GCP or Azure accounts based on the provided request.
+	DeleteDataAccess(ctx context.Context, in *GetAndDeleteDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -237,7 +241,9 @@ type CoverClient interface {
 	// Registers GCP/Azure account.
 	RegisterDataAccess(ctx context.Context, in *RegisterDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Add Billing Account ID for GCP.
-	AddBillingAccount(ctx context.Context, in *AddBillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AddBillingAccount(ctx context.Context, in *BillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Update Billing Account ID for GCP. It updates DatasetId, DatasetRegion, etc.
+	UpdateBillingAccount(ctx context.Context, in *BillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists Azure and GCP accounts.
 	ListDataAccess(ctx context.Context, in *ListDataAccessRequest, opts ...grpc.CallOption) (Cover_ListDataAccessClient, error)
 	// Update GCP/Azure account info
@@ -812,9 +818,18 @@ func (c *coverClient) GetAccountAccess(ctx context.Context, in *GetAccountAccess
 	return out, nil
 }
 
-func (c *coverClient) GetDataAccess(ctx context.Context, in *GetDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error) {
+func (c *coverClient) GetDataAccess(ctx context.Context, in *GetAndDeleteDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error) {
 	out := new(DataAccess)
 	err := c.cc.Invoke(ctx, Cover_GetDataAccess_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteDataAccess(ctx context.Context, in *GetAndDeleteDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_DeleteDataAccess_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -866,9 +881,18 @@ func (c *coverClient) RegisterDataAccess(ctx context.Context, in *RegisterDataAc
 	return out, nil
 }
 
-func (c *coverClient) AddBillingAccount(ctx context.Context, in *AddBillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *coverClient) AddBillingAccount(ctx context.Context, in *BillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Cover_AddBillingAccount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateBillingAccount(ctx context.Context, in *BillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_UpdateBillingAccount_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1666,7 +1690,9 @@ type CoverServer interface {
 	// Gets the current account role attached to the input target.
 	GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error)
 	// Gets the current account. For GCP and Azure.
-	GetDataAccess(context.Context, *GetDataAccessRequest) (*DataAccess, error)
+	GetDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*DataAccess, error)
+	// Deletes GCP or Azure accounts based on the provided request.
+	DeleteDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*emptypb.Empty, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -1678,7 +1704,9 @@ type CoverServer interface {
 	// Registers GCP/Azure account.
 	RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error)
 	// Add Billing Account ID for GCP.
-	AddBillingAccount(context.Context, *AddBillingAccountRequest) (*emptypb.Empty, error)
+	AddBillingAccount(context.Context, *BillingAccountRequest) (*emptypb.Empty, error)
+	// Update Billing Account ID for GCP. It updates DatasetId, DatasetRegion, etc.
+	UpdateBillingAccount(context.Context, *BillingAccountRequest) (*emptypb.Empty, error)
 	// Lists Azure and GCP accounts.
 	ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error
 	// Update GCP/Azure account info
@@ -1909,8 +1937,11 @@ func (UnimplementedCoverServer) ListAccountAccess(*ListAccountAccessRequest, Cov
 func (UnimplementedCoverServer) GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAccess not implemented")
 }
-func (UnimplementedCoverServer) GetDataAccess(context.Context, *GetDataAccessRequest) (*DataAccess, error) {
+func (UnimplementedCoverServer) GetDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*DataAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDataAccess not implemented")
+}
+func (UnimplementedCoverServer) DeleteDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDataAccess not implemented")
 }
 func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccess not implemented")
@@ -1927,8 +1958,11 @@ func (UnimplementedCoverServer) RegisterAccount(context.Context, *RegisterAccoun
 func (UnimplementedCoverServer) RegisterDataAccess(context.Context, *RegisterDataAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterDataAccess not implemented")
 }
-func (UnimplementedCoverServer) AddBillingAccount(context.Context, *AddBillingAccountRequest) (*emptypb.Empty, error) {
+func (UnimplementedCoverServer) AddBillingAccount(context.Context, *BillingAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddBillingAccount not implemented")
+}
+func (UnimplementedCoverServer) UpdateBillingAccount(context.Context, *BillingAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingAccount not implemented")
 }
 func (UnimplementedCoverServer) ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListDataAccess not implemented")
@@ -2997,7 +3031,7 @@ func _Cover_GetAccountAccess_Handler(srv interface{}, ctx context.Context, dec f
 }
 
 func _Cover_GetDataAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDataAccessRequest)
+	in := new(GetAndDeleteDataAccessRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3009,7 +3043,25 @@ func _Cover_GetDataAccess_Handler(srv interface{}, ctx context.Context, dec func
 		FullMethod: Cover_GetDataAccess_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetDataAccess(ctx, req.(*GetDataAccessRequest))
+		return srv.(CoverServer).GetDataAccess(ctx, req.(*GetAndDeleteDataAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteDataAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAndDeleteDataAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteDataAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteDataAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteDataAccess(ctx, req.(*GetAndDeleteDataAccessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3105,7 +3157,7 @@ func _Cover_RegisterDataAccess_Handler(srv interface{}, ctx context.Context, dec
 }
 
 func _Cover_AddBillingAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddBillingAccountRequest)
+	in := new(BillingAccountRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -3117,7 +3169,25 @@ func _Cover_AddBillingAccount_Handler(srv interface{}, ctx context.Context, dec 
 		FullMethod: Cover_AddBillingAccount_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).AddBillingAccount(ctx, req.(*AddBillingAccountRequest))
+		return srv.(CoverServer).AddBillingAccount(ctx, req.(*BillingAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateBillingAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BillingAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateBillingAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateBillingAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateBillingAccount(ctx, req.(*BillingAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3974,6 +4044,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetDataAccess_Handler,
 		},
 		{
+			MethodName: "DeleteDataAccess",
+			Handler:    _Cover_DeleteDataAccess_Handler,
+		},
+		{
 			MethodName: "CreateAccountAccess",
 			Handler:    _Cover_CreateAccountAccess_Handler,
 		},
@@ -3996,6 +4070,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddBillingAccount",
 			Handler:    _Cover_AddBillingAccount_Handler,
+		},
+		{
+			MethodName: "UpdateBillingAccount",
+			Handler:    _Cover_UpdateBillingAccount_Handler,
 		},
 		{
 			MethodName: "UpdateDataAccess",
