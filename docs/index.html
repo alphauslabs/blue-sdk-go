@@ -1269,6 +1269,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.AddPartnerCenterCredentialsRequest"><span class="badge">M</span>AddPartnerCenterCredentialsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.AddPartnerCenterCredentialsResponse"><span class="badge">M</span>AddPartnerCenterCredentialsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.AddSideMenuFavoriteRequest"><span class="badge">M</span>AddSideMenuFavoriteRequest</a>
                 </li>
               
@@ -14121,6 +14129,68 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.AddPartnerCenterCredentialsRequest">AddPartnerCenterCredentialsRequest</h3>
+        <p>Request message for AddPartnerCenterCredentials</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The account Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>applicationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Application Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>secretKey</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Secret Key </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.AddPartnerCenterCredentialsResponse">AddPartnerCenterCredentialsResponse</h3>
+        <p>Response message for AddPartnerCenterCredentials</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Response message </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.AddSideMenuFavoriteRequest">AddSideMenuFavoriteRequest</h3>
         <p>Request message for AddSideMenuFavorite</p>
 
@@ -20215,6 +20285,13 @@ file in bytes </p></td>
                 <td><p>WORK-IN-PROGRESS: Add user from Auth0 as Root user</p></td>
               </tr>
             
+              <tr>
+                <td>AddPartnerCenterCredentials</td>
+                <td><a href="#blueapi.cover.v1.AddPartnerCenterCredentialsRequest">AddPartnerCenterCredentialsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.AddPartnerCenterCredentialsResponse">AddPartnerCenterCredentialsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: PartnerCenterCredentials for Azure</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -21169,6 +21246,16 @@ file in bytes </p></td>
                 <td>AddUserFromAuth0asRoot</td>
                 <td>POST</td>
                 <td>/v1/members/auth0</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AddPartnerCenterCredentials</td>
+                <td>POST</td>
+                <td>/v1/azure/credentials/partnercenter</td>
                 <td>*</td>
               </tr>
               
