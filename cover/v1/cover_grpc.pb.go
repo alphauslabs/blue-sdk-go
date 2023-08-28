@@ -116,6 +116,7 @@ const (
 	Cover_GetCostGroupAllocation_FullMethodName       = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
 	Cover_AddUserFromAuth0AsRoot_FullMethodName       = "/blueapi.cover.v1.Cover/AddUserFromAuth0asRoot"
 	Cover_AddPartnerCenterCredentials_FullMethodName  = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
+	Cover_AddMpnSetting_FullMethodName                = "/blueapi.cover.v1.Cover/AddMpnSetting"
 )
 
 // CoverClient is the client API for Cover service.
@@ -310,7 +311,9 @@ type CoverClient interface {
 	// WORK-IN-PROGRESS: Add user from Auth0 as Root user
 	AddUserFromAuth0AsRoot(ctx context.Context, in *AddUserFromAuth0AsRootRequest, opts ...grpc.CallOption) (*AddUserFromAuth0AsRootResponse, error)
 	// WORK-IN-PROGRESS: PartnerCenterCredentials for Azure
-	AddPartnerCenterCredentials(ctx context.Context, in *AddPartnerCenterCredentialsRequest, opts ...grpc.CallOption) (*AddPartnerCenterCredentialsResponse, error)
+	AddPartnerCenterCredentials(ctx context.Context, in *AddPartnerCenterCredentialsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Adding MpnSetting for Azure
+	AddMpnSetting(ctx context.Context, in *AddMpnSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type coverClient struct {
@@ -1583,9 +1586,18 @@ func (c *coverClient) AddUserFromAuth0AsRoot(ctx context.Context, in *AddUserFro
 	return out, nil
 }
 
-func (c *coverClient) AddPartnerCenterCredentials(ctx context.Context, in *AddPartnerCenterCredentialsRequest, opts ...grpc.CallOption) (*AddPartnerCenterCredentialsResponse, error) {
-	out := new(AddPartnerCenterCredentialsResponse)
+func (c *coverClient) AddPartnerCenterCredentials(ctx context.Context, in *AddPartnerCenterCredentialsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Cover_AddPartnerCenterCredentials_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) AddMpnSetting(ctx context.Context, in *AddMpnSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_AddMpnSetting_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1784,7 +1796,9 @@ type CoverServer interface {
 	// WORK-IN-PROGRESS: Add user from Auth0 as Root user
 	AddUserFromAuth0AsRoot(context.Context, *AddUserFromAuth0AsRootRequest) (*AddUserFromAuth0AsRootResponse, error)
 	// WORK-IN-PROGRESS: PartnerCenterCredentials for Azure
-	AddPartnerCenterCredentials(context.Context, *AddPartnerCenterCredentialsRequest) (*AddPartnerCenterCredentialsResponse, error)
+	AddPartnerCenterCredentials(context.Context, *AddPartnerCenterCredentialsRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Adding MpnSetting for Azure
+	AddMpnSetting(context.Context, *AddMpnSettingRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2074,8 +2088,11 @@ func (UnimplementedCoverServer) GetCostGroupAllocation(*GetCostGroupAllocationRe
 func (UnimplementedCoverServer) AddUserFromAuth0AsRoot(context.Context, *AddUserFromAuth0AsRootRequest) (*AddUserFromAuth0AsRootResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddUserFromAuth0AsRoot not implemented")
 }
-func (UnimplementedCoverServer) AddPartnerCenterCredentials(context.Context, *AddPartnerCenterCredentialsRequest) (*AddPartnerCenterCredentialsResponse, error) {
+func (UnimplementedCoverServer) AddPartnerCenterCredentials(context.Context, *AddPartnerCenterCredentialsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddPartnerCenterCredentials not implemented")
+}
+func (UnimplementedCoverServer) AddMpnSetting(context.Context, *AddMpnSettingRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddMpnSetting not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -3859,6 +3876,24 @@ func _Cover_AddPartnerCenterCredentials_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_AddMpnSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddMpnSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).AddMpnSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_AddMpnSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).AddMpnSetting(ctx, req.(*AddMpnSettingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4173,6 +4208,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddPartnerCenterCredentials",
 			Handler:    _Cover_AddPartnerCenterCredentials_Handler,
+		},
+		{
+			MethodName: "AddMpnSetting",
+			Handler:    _Cover_AddMpnSetting_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
