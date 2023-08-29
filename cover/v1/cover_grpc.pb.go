@@ -117,6 +117,7 @@ const (
 	Cover_AddUserFromAuth0AsRoot_FullMethodName       = "/blueapi.cover.v1.Cover/AddUserFromAuth0asRoot"
 	Cover_AddPartnerCenterCredentials_FullMethodName  = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
 	Cover_AddMpnSetting_FullMethodName                = "/blueapi.cover.v1.Cover/AddMpnSetting"
+	Cover_GetCostGroupAttribute_FullMethodName        = "/blueapi.cover.v1.Cover/GetCostGroupAttribute"
 )
 
 // CoverClient is the client API for Cover service.
@@ -314,6 +315,8 @@ type CoverClient interface {
 	AddPartnerCenterCredentials(ctx context.Context, in *AddPartnerCenterCredentialsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Adding MpnSetting for Azure
 	AddMpnSetting(ctx context.Context, in *AddMpnSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Get Cost Group by Attribute Type
+	GetCostGroupAttribute(ctx context.Context, in *GetCostGroupAttributeRequest, opts ...grpc.CallOption) (*GetCostGroupAttributeResponse, error)
 }
 
 type coverClient struct {
@@ -1604,6 +1607,15 @@ func (c *coverClient) AddMpnSetting(ctx context.Context, in *AddMpnSettingReques
 	return out, nil
 }
 
+func (c *coverClient) GetCostGroupAttribute(ctx context.Context, in *GetCostGroupAttributeRequest, opts ...grpc.CallOption) (*GetCostGroupAttributeResponse, error) {
+	out := new(GetCostGroupAttributeResponse)
+	err := c.cc.Invoke(ctx, Cover_GetCostGroupAttribute_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -1799,6 +1811,8 @@ type CoverServer interface {
 	AddPartnerCenterCredentials(context.Context, *AddPartnerCenterCredentialsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Adding MpnSetting for Azure
 	AddMpnSetting(context.Context, *AddMpnSettingRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Get Cost Group by Attribute Type
+	GetCostGroupAttribute(context.Context, *GetCostGroupAttributeRequest) (*GetCostGroupAttributeResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2093,6 +2107,9 @@ func (UnimplementedCoverServer) AddPartnerCenterCredentials(context.Context, *Ad
 }
 func (UnimplementedCoverServer) AddMpnSetting(context.Context, *AddMpnSettingRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddMpnSetting not implemented")
+}
+func (UnimplementedCoverServer) GetCostGroupAttribute(context.Context, *GetCostGroupAttributeRequest) (*GetCostGroupAttributeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroupAttribute not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -3894,6 +3911,24 @@ func _Cover_AddMpnSetting_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetCostGroupAttribute_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCostGroupAttributeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetCostGroupAttribute(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetCostGroupAttribute_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetCostGroupAttribute(ctx, req.(*GetCostGroupAttributeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4212,6 +4247,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddMpnSetting",
 			Handler:    _Cover_AddMpnSetting_Handler,
+		},
+		{
+			MethodName: "GetCostGroupAttribute",
+			Handler:    _Cover_GetCostGroupAttribute_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

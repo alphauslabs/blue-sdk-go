@@ -1461,6 +1461,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetCostGroupAttributeRequest"><span class="badge">M</span>GetCostGroupAttributeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCostGroupAttributeResponse"><span class="badge">M</span>GetCostGroupAttributeResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetCostGroupDetailsRequest"><span class="badge">M</span>GetCostGroupDetailsRequest</a>
                 </li>
               
@@ -16037,6 +16045,68 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.GetCostGroupAttributeRequest">GetCostGroupAttributeRequest</h3>
+        <p>Request message for GetCostGroupAttribute</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>attributeType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCostGroupAttributeResponse">GetCostGroupAttributeResponse</h3>
+        <p>Response message for GetCostGroupAttribute</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>result</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetCostGroupDetailsRequest">GetCostGroupDetailsRequest</h3>
         <p>Request message for GetCostGroupDetails</p>
 
@@ -20299,6 +20369,13 @@ file in bytes </p></td>
                 <td><p>WORK-IN-PROGRESS: Adding MpnSetting for Azure</p></td>
               </tr>
             
+              <tr>
+                <td>GetCostGroupAttribute</td>
+                <td><a href="#blueapi.cover.v1.GetCostGroupAttributeRequest">GetCostGroupAttributeRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetCostGroupAttributeResponse">GetCostGroupAttributeResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get Cost Group by Attribute Type</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -21274,6 +21351,16 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/azure/credentials/mpn</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCostGroupAttribute</td>
+                <td>POST</td>
+                <td>/v1/costgroups/{attributeType}/{costGroupId}</td>
+                <td></td>
               </tr>
               
             
