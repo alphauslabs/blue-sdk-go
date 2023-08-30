@@ -31,6 +31,7 @@ const (
 	Billing_CreateInvoice_FullMethodName                        = "/blueapi.billing.v1.Billing/CreateInvoice"
 	Billing_GetInvoiceStatus_FullMethodName                     = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
 	Billing_GetInvoice_FullMethodName                           = "/blueapi.billing.v1.Billing/GetInvoice"
+	Billing_ListInvoice_FullMethodName                          = "/blueapi.billing.v1.Billing/ListInvoice"
 	Billing_UpdateInvoicePreviews_FullMethodName                = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
 	Billing_ExportInvoiceFile_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
 	Billing_ListInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
@@ -68,12 +69,14 @@ type BillingClient interface {
 	ListAwsDailyRunHistory(ctx context.Context, in *ListAwsDailyRunHistoryRequest, opts ...grpc.CallOption) (Billing_ListAwsDailyRunHistoryClient, error)
 	// Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
-	// WORK-IN-PROGRESS: Creates an invoice. Only available in Ripple.
+	// Creates an invoice. Only available in Ripple.
 	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
-	// WORK-IN-PROGRESS: Gets an invoice. Only available in Ripple.
+	// Gets an invoice. Only available in Ripple.
 	GetInvoiceStatus(ctx context.Context, in *GetInvoiceStatusRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
+	// Reads list of the invoice.
+	ListInvoice(ctx context.Context, in *ListInvoiceRequest, opts ...grpc.CallOption) (Billing_ListInvoiceClient, error)
 	// Updates an invoice preview. Only available in Ripple.
 	UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Exports an invoice.
@@ -272,6 +275,38 @@ func (c *billingClient) GetInvoice(ctx context.Context, in *GetInvoiceRequest, o
 	return out, nil
 }
 
+func (c *billingClient) ListInvoice(ctx context.Context, in *ListInvoiceRequest, opts ...grpc.CallOption) (Billing_ListInvoiceClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[3], Billing_ListInvoice_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListInvoiceClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListInvoiceClient interface {
+	Recv() (*ListInvoiceResponse, error)
+	grpc.ClientStream
+}
+
+type billingListInvoiceClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListInvoiceClient) Recv() (*ListInvoiceResponse, error) {
+	m := new(ListInvoiceResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *billingClient) UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Billing_UpdateInvoicePreviews_FullMethodName, in, out, opts...)
@@ -291,7 +326,7 @@ func (c *billingClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoice
 }
 
 func (c *billingClient) ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[3], Billing_ListInvoiceServiceDiscounts_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[4], Billing_ListInvoiceServiceDiscounts_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -323,7 +358,7 @@ func (x *billingListInvoiceServiceDiscountsClient) Recv() (*InvoiceServiceDiscou
 }
 
 func (c *billingClient) ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[4], Billing_ListAccountInvoiceServiceDiscounts_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[5], Billing_ListAccountInvoiceServiceDiscounts_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -400,7 +435,7 @@ func (c *billingClient) CreateReseller(ctx context.Context, in *CreateResellerRe
 }
 
 func (c *billingClient) ListResellers(ctx context.Context, in *ListResellersRequest, opts ...grpc.CallOption) (Billing_ListResellersClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[5], Billing_ListResellers_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[6], Billing_ListResellers_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -477,7 +512,7 @@ func (c *billingClient) ListExchangeRates(ctx context.Context, in *ListExchangeR
 }
 
 func (c *billingClient) ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (Billing_ListAccessGroupsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[6], Billing_ListAccessGroups_FullMethodName, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[7], Billing_ListAccessGroups_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -551,12 +586,14 @@ type BillingServer interface {
 	ListAwsDailyRunHistory(*ListAwsDailyRunHistoryRequest, Billing_ListAwsDailyRunHistoryServer) error
 	// Returns a list of accounts that have been updated after invoice along with the differences in costs, if any. Only available in Ripple.
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
-	// WORK-IN-PROGRESS: Creates an invoice. Only available in Ripple.
+	// Creates an invoice. Only available in Ripple.
 	CreateInvoice(context.Context, *CreateInvoiceRequest) (*api.InvoiceMessage, error)
-	// WORK-IN-PROGRESS: Gets an invoice. Only available in Ripple.
+	// Gets an invoice. Only available in Ripple.
 	GetInvoiceStatus(context.Context, *GetInvoiceStatusRequest) (*api.InvoiceMessage, error)
 	// Gets an invoice.
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
+	// Reads list of the invoice.
+	ListInvoice(*ListInvoiceRequest, Billing_ListInvoiceServer) error
 	// Updates an invoice preview. Only available in Ripple.
 	UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error)
 	// Exports an invoice.
@@ -628,6 +665,9 @@ func (UnimplementedBillingServer) GetInvoiceStatus(context.Context, *GetInvoiceS
 }
 func (UnimplementedBillingServer) GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoice not implemented")
+}
+func (UnimplementedBillingServer) ListInvoice(*ListInvoiceRequest, Billing_ListInvoiceServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListInvoice not implemented")
 }
 func (UnimplementedBillingServer) UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoicePreviews not implemented")
@@ -868,6 +908,27 @@ func _Billing_GetInvoice_Handler(srv interface{}, ctx context.Context, dec func(
 		return srv.(BillingServer).GetInvoice(ctx, req.(*GetInvoiceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ListInvoice_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListInvoiceRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListInvoice(m, &billingListInvoiceServer{stream})
+}
+
+type Billing_ListInvoiceServer interface {
+	Send(*ListInvoiceResponse) error
+	grpc.ServerStream
+}
+
+type billingListInvoiceServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListInvoiceServer) Send(m *ListInvoiceResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Billing_UpdateInvoicePreviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1330,6 +1391,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListUsageCostsDrift",
 			Handler:       _Billing_ListUsageCostsDrift_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListInvoice",
+			Handler:       _Billing_ListInvoice_Handler,
 			ServerStreams: true,
 		},
 		{

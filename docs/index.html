@@ -1151,6 +1151,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceRequest"><span class="badge">M</span>ListInvoiceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceResponse"><span class="badge">M</span>ListInvoiceResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListInvoiceServiceDiscountsRequest"><span class="badge">M</span>ListInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -12446,6 +12454,75 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ListInvoiceRequest">ListInvoiceRequest</h3>
+        <p>Request message for the ListInvoice rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. billing internal id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceResponse">ListInvoiceResponse</h3>
+        <p>Response message for the ListInvoice rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing internal id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>BillingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>BillingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The date. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListInvoiceServiceDiscountsRequest">ListInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the ListInvoiceServiceDiscounts rpc.</p>
 
@@ -12938,14 +13015,14 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>CreateInvoice</td>
                 <td><a href="#blueapi.billing.v1.CreateInvoiceRequest">CreateInvoiceRequest</a></td>
                 <td><a href="#blueapi.api.InvoiceMessage">.blueapi.api.InvoiceMessage</a></td>
-                <td><p>WORK-IN-PROGRESS: Creates an invoice. Only available in Ripple.</p></td>
+                <td><p>Creates an invoice. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
                 <td>GetInvoiceStatus</td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceStatusRequest">GetInvoiceStatusRequest</a></td>
                 <td><a href="#blueapi.api.InvoiceMessage">.blueapi.api.InvoiceMessage</a></td>
-                <td><p>WORK-IN-PROGRESS: Gets an invoice. Only available in Ripple.</p></td>
+                <td><p>Gets an invoice. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -12953,6 +13030,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceRequest">GetInvoiceRequest</a></td>
                 <td><a href="#blueapi.api.Invoice">.blueapi.api.Invoice</a></td>
                 <td><p>Gets an invoice.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListInvoice</td>
+                <td><a href="#blueapi.billing.v1.ListInvoiceRequest">ListInvoiceRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListInvoiceResponse">ListInvoiceResponse</a> stream</td>
+                <td><p>Reads list of the invoice.</p></td>
               </tr>
             
               <tr>
@@ -13192,6 +13276,16 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>GetInvoice</td>
                 <td>POST</td>
                 <td>/v1/invoice/{date}:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListInvoice</td>
+                <td>POST</td>
+                <td>/v1/invoice:read</td>
                 <td>*</td>
               </tr>
               
