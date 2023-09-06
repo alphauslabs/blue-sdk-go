@@ -1023,6 +1023,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AwsOptions"><span class="badge">M</span>AwsOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BillingGroup"><span class="badge">M</span>BillingGroup</a>
                 </li>
               
@@ -11036,6 +11040,30 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
 
         
       
+        <h3 id="blueapi.billing.v1.AwsOptions">AwsOptions</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>useProFormaCur</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BillingGroup">BillingGroup</h3>
         <p></p>
 
@@ -11100,6 +11128,13 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><a href="#blueapi.billing.v1.BillingGroupInvoiceSettings">BillingGroupInvoiceSettings</a></td>
                   <td></td>
                   <td><p>The invoice settings for this billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsOptions</td>
+                  <td><a href="#blueapi.billing.v1.AwsOptions">AwsOptions</a></td>
+                  <td></td>
+                  <td><p>AWS-specific options </p></td>
                 </tr>
               
             </tbody>
@@ -11500,6 +11535,13 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#blueapi.billing.v1.CreateBillingGroupRequestInvoice">CreateBillingGroupRequestInvoice</a></td>
                   <td></td>
                   <td><p>Invoice settings </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsOptions</td>
+                  <td><a href="#blueapi.billing.v1.AwsOptions">AwsOptions</a></td>
+                  <td></td>
+                  <td><p>Optional. AWS-specific options </p></td>
                 </tr>
               
             </tbody>
