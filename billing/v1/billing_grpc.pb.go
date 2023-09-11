@@ -51,6 +51,8 @@ const (
 	Billing_CreateAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateAccessGroup"
 	Billing_UpdateAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
 	Billing_DeleteAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
+	Billing_ListAbcBillingGroups_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
+	Billing_ListAbcBillingGroupAccounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
 )
 
 // BillingClient is the client API for Billing service.
@@ -115,6 +117,10 @@ type BillingClient interface {
 	UpdateAccessGroup(ctx context.Context, in *UpdateAccessGroupRequest, opts ...grpc.CallOption) (*ripple.AccessGroup, error)
 	// Deletes the access group. Only available in Ripple.
 	DeleteAccessGroup(ctx context.Context, in *DeleteAccessGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets all Billing Groups in AWS Billing Conductor(ABC) for specific payer id.
+	ListAbcBillingGroups(ctx context.Context, in *ListAbcBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupsClient, error)
+	// WORK-IN-PROGRESS: Gets all accounts associated to AWS Billing Conductor(ABC) Billing group
+	ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error)
 }
 
 type billingClient struct {
@@ -570,6 +576,70 @@ func (c *billingClient) DeleteAccessGroup(ctx context.Context, in *DeleteAccessG
 	return out, nil
 }
 
+func (c *billingClient) ListAbcBillingGroups(ctx context.Context, in *ListAbcBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[8], Billing_ListAbcBillingGroups_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListAbcBillingGroupsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListAbcBillingGroupsClient interface {
+	Recv() (*AbcBillingGroup, error)
+	grpc.ClientStream
+}
+
+type billingListAbcBillingGroupsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListAbcBillingGroupsClient) Recv() (*AbcBillingGroup, error) {
+	m := new(AbcBillingGroup)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *billingClient) ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[9], Billing_ListAbcBillingGroupAccounts_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListAbcBillingGroupAccountsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListAbcBillingGroupAccountsClient interface {
+	Recv() (*AbcAccount, error)
+	grpc.ClientStream
+}
+
+type billingListAbcBillingGroupAccountsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListAbcBillingGroupAccountsClient) Recv() (*AbcAccount, error) {
+	m := new(AbcAccount)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -632,6 +702,10 @@ type BillingServer interface {
 	UpdateAccessGroup(context.Context, *UpdateAccessGroupRequest) (*ripple.AccessGroup, error)
 	// Deletes the access group. Only available in Ripple.
 	DeleteAccessGroup(context.Context, *DeleteAccessGroupRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets all Billing Groups in AWS Billing Conductor(ABC) for specific payer id.
+	ListAbcBillingGroups(*ListAbcBillingGroupsRequest, Billing_ListAbcBillingGroupsServer) error
+	// WORK-IN-PROGRESS: Gets all accounts associated to AWS Billing Conductor(ABC) Billing group
+	ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -725,6 +799,12 @@ func (UnimplementedBillingServer) UpdateAccessGroup(context.Context, *UpdateAcce
 }
 func (UnimplementedBillingServer) DeleteAccessGroup(context.Context, *DeleteAccessGroupRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccessGroup not implemented")
+}
+func (UnimplementedBillingServer) ListAbcBillingGroups(*ListAbcBillingGroupsRequest, Billing_ListAbcBillingGroupsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAbcBillingGroups not implemented")
+}
+func (UnimplementedBillingServer) ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAbcBillingGroupAccounts not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1285,6 +1365,48 @@ func _Billing_DeleteAccessGroup_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ListAbcBillingGroups_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAbcBillingGroupsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListAbcBillingGroups(m, &billingListAbcBillingGroupsServer{stream})
+}
+
+type Billing_ListAbcBillingGroupsServer interface {
+	Send(*AbcBillingGroup) error
+	grpc.ServerStream
+}
+
+type billingListAbcBillingGroupsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListAbcBillingGroupsServer) Send(m *AbcBillingGroup) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_ListAbcBillingGroupAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAbcBillingGroupAccountsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListAbcBillingGroupAccounts(m, &billingListAbcBillingGroupAccountsServer{stream})
+}
+
+type Billing_ListAbcBillingGroupAccountsServer interface {
+	Send(*AbcAccount) error
+	grpc.ServerStream
+}
+
+type billingListAbcBillingGroupAccountsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListAbcBillingGroupAccountsServer) Send(m *AbcAccount) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1416,6 +1538,16 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccessGroups",
 			Handler:       _Billing_ListAccessGroups_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAbcBillingGroups",
+			Handler:       _Billing_ListAbcBillingGroups_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAbcBillingGroupAccounts",
+			Handler:       _Billing_ListAbcBillingGroupAccounts_Handler,
 			ServerStreams: true,
 		},
 	},
