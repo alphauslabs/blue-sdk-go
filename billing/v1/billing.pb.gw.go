@@ -1548,6 +1548,10 @@ func request_Billing_ListAbcBillingGroups_0(ctx context.Context, marshaler runti
 
 }
 
+var (
+	filter_Billing_ListAbcBillingGroupAccounts_0 = &utilities.DoubleArray{Encoding: map[string]int{"payerId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+)
+
 func request_Billing_ListAbcBillingGroupAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ListAbcBillingGroupAccountsClient, runtime.ServerMetadata, error) {
 	var protoReq ListAbcBillingGroupAccountsRequest
 	var metadata runtime.ServerMetadata
@@ -1569,14 +1573,11 @@ func request_Billing_ListAbcBillingGroupAccounts_0(ctx context.Context, marshale
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "payerId", err)
 	}
 
-	val, ok = pathParams["billingGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "billingGroupId")
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-
-	protoReq.BillingGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "billingGroupId", err)
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Billing_ListAbcBillingGroupAccounts_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	stream, err := client.ListAbcBillingGroupAccounts(ctx, &protoReq)
@@ -2876,7 +2877,7 @@ var (
 
 	pattern_Billing_ListAbcBillingGroups_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "billinggroups", "billingconductor", "id"}, ""))
 
-	pattern_Billing_ListAbcBillingGroupAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "billinggroups", "billingconductor", "payerId", "billingGroupId"}, ""))
+	pattern_Billing_ListAbcBillingGroupAccounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "billinggroups", "billingconductor", "payerId", "accounts"}, ""))
 )
 
 var (
