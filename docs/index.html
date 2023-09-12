@@ -1525,6 +1525,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetCostUsageRequestAzureCspOptions"><span class="badge">M</span>GetCostUsageRequestAzureCspOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetCostUsageRequestAzureOptions"><span class="badge">M</span>GetCostUsageRequestAzureOptions</a>
                 </li>
               
@@ -16662,7 +16666,14 @@ Default value is `service`. Used only when limit is not 0. </p></td>
                   <td>gcpOptions</td>
                   <td><a href="#blueapi.cover.v1.GetCostUsageRequestGcpOptions">GetCostUsageRequestGcpOptions</a></td>
                   <td></td>
-                  <td><p>Optional. Valid only for the `azure` vendor. Azure-specific options. </p></td>
+                  <td><p>Optional. Valid only for the `gcp` vendor. gcp-specific options. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azurecspOptions</td>
+                  <td><a href="#blueapi.cover.v1.GetCostUsageRequestAzureCspOptions">GetCostUsageRequestAzureCspOptions</a></td>
+                  <td></td>
+                  <td><p>Optional. Valid only for the `azurecsp` vendor. AzureCsp-specific options. </p></td>
                 </tr>
               
                 <tr>
@@ -16722,6 +16733,56 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>repeated</td>
                   <td><p>Optional. A list of filtering options specific for tags. 
 Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 || filter2 || filter3, etc. Discarded when `groupByColumns` field is set or if `groupByMonth` is true. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCostUsageRequestAzureCspOptions">GetCostUsageRequestAzureCspOptions</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupByColumns</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. A comma-separated list of columns to aggregate the data into. 
+A special value of `none` is also supported, which means query by date or month per account only.
+
+For example, if you only want the services and location data, you can set this field to `serviceName,location`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupAccounts</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If set to true, group all input projects into one. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>filters</td>
+                  <td><a href="#blueapi.cover.v1.ReadCostsRequestOptionsFilters">ReadCostsRequestOptionsFilters</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. A list of filtering options. See [ReadCostsRequestOptionsFilters] for more information on each filter item. 
+Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 || filter2 || filter3, etc. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tagFilters</td>
+                  <td><a href="#blueapi.cover.v1.ReadCostsRequestOptionsFilters">ReadCostsRequestOptionsFilters</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. A list of filtering options specific for tags. 
+Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 || filter2 || filter3, etc. </p></td>
                 </tr>
               
             </tbody>
