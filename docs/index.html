@@ -1485,6 +1485,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetCategoriesRequest"><span class="badge">M</span>GetCategoriesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCategoriesResponse"><span class="badge">M</span>GetCategoriesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetCostGroupAllocationRequest"><span class="badge">M</span>GetCostGroupAllocationRequest</a>
                 </li>
               
@@ -15631,6 +15639,13 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><p>Time Created </p></td>
                 </tr>
               
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -16344,6 +16359,54 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Format: JSON String </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCategoriesRequest">GetCategoriesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCategoriesResponse">GetCategoriesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>results</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -20466,6 +20529,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>GetCategories</td>
+                <td><a href="#blueapi.cover.v1.GetCategoriesRequest">GetCategoriesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetCategoriesResponse">GetCategoriesResponse</a></td>
+                <td><p>Retrieve the categories to be utilized in the creation of the cost group.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetCostGroupDetails</td>
                 <td><a href="#blueapi.cover.v1.GetCostGroupDetailsRequest">GetCostGroupDetailsRequest</a></td>
                 <td><a href="#blueapi.cover.v1.GetCostGroupDetailsResponse">GetCostGroupDetailsResponse</a></td>
@@ -21268,6 +21338,16 @@ file in bytes </p></td>
                 <td>GetCostGroups</td>
                 <td>GET</td>
                 <td>/v1/costgroups</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCategories</td>
+                <td>GET</td>
+                <td>/v1/costgroups/categories</td>
                 <td></td>
               </tr>
               

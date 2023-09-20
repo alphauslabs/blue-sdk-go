@@ -60,6 +60,7 @@ const (
 	Cover_RemoveSideMenuFavorite_FullMethodName       = "/blueapi.cover.v1.Cover/RemoveSideMenuFavorite"
 	Cover_CreateCostGroup_FullMethodName              = "/blueapi.cover.v1.Cover/CreateCostGroup"
 	Cover_GetCostGroups_FullMethodName                = "/blueapi.cover.v1.Cover/GetCostGroups"
+	Cover_GetCategories_FullMethodName                = "/blueapi.cover.v1.Cover/GetCategories"
 	Cover_GetCostGroupDetails_FullMethodName          = "/blueapi.cover.v1.Cover/GetCostGroupDetails"
 	Cover_UpdateCostGroupName_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateCostGroupName"
 	Cover_UpdateCostGroupDescription_FullMethodName   = "/blueapi.cover.v1.Cover/UpdateCostGroupDescription"
@@ -201,6 +202,8 @@ type CoverClient interface {
 	CreateCostGroup(ctx context.Context, in *CreateCostGroupRequest, opts ...grpc.CallOption) (*CreateCostGroupResponse, error)
 	// Get all the cost groups
 	GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (*GetCostGroupsResponse, error)
+	// Retrieve the categories to be utilized in the creation of the cost group.
+	GetCategories(ctx context.Context, in *GetCategoriesRequest, opts ...grpc.CallOption) (*GetCategoriesResponse, error)
 	// Get the details of the cost group
 	GetCostGroupDetails(ctx context.Context, in *GetCostGroupDetailsRequest, opts ...grpc.CallOption) (*GetCostGroupDetailsResponse, error)
 	// Update cost group's name
@@ -669,6 +672,15 @@ func (c *coverClient) CreateCostGroup(ctx context.Context, in *CreateCostGroupRe
 func (c *coverClient) GetCostGroups(ctx context.Context, in *GetCostGroupsRequest, opts ...grpc.CallOption) (*GetCostGroupsResponse, error) {
 	out := new(GetCostGroupsResponse)
 	err := c.cc.Invoke(ctx, Cover_GetCostGroups_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetCategories(ctx context.Context, in *GetCategoriesRequest, opts ...grpc.CallOption) (*GetCategoriesResponse, error) {
+	out := new(GetCategoriesResponse)
+	err := c.cc.Invoke(ctx, Cover_GetCategories_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1686,6 +1698,8 @@ type CoverServer interface {
 	CreateCostGroup(context.Context, *CreateCostGroupRequest) (*CreateCostGroupResponse, error)
 	// Get all the cost groups
 	GetCostGroups(context.Context, *GetCostGroupsRequest) (*GetCostGroupsResponse, error)
+	// Retrieve the categories to be utilized in the creation of the cost group.
+	GetCategories(context.Context, *GetCategoriesRequest) (*GetCategoriesResponse, error)
 	// Get the details of the cost group
 	GetCostGroupDetails(context.Context, *GetCostGroupDetailsRequest) (*GetCostGroupDetailsResponse, error)
 	// Update cost group's name
@@ -1922,6 +1936,9 @@ func (UnimplementedCoverServer) CreateCostGroup(context.Context, *CreateCostGrou
 }
 func (UnimplementedCoverServer) GetCostGroups(context.Context, *GetCostGroupsRequest) (*GetCostGroupsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroups not implemented")
+}
+func (UnimplementedCoverServer) GetCategories(context.Context, *GetCategoriesRequest) (*GetCategoriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCategories not implemented")
 }
 func (UnimplementedCoverServer) GetCostGroupDetails(context.Context, *GetCostGroupDetailsRequest) (*GetCostGroupDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroupDetails not implemented")
@@ -2805,6 +2822,24 @@ func _Cover_GetCostGroups_Handler(srv interface{}, ctx context.Context, dec func
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).GetCostGroups(ctx, req.(*GetCostGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetCategories_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCategoriesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetCategories(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetCategories_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetCategories(ctx, req.(*GetCategoriesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4056,6 +4091,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCostGroups",
 			Handler:    _Cover_GetCostGroups_Handler,
+		},
+		{
+			MethodName: "GetCategories",
+			Handler:    _Cover_GetCategories_Handler,
 		},
 		{
 			MethodName: "GetCostGroupDetails",
