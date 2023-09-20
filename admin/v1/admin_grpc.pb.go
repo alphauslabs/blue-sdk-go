@@ -73,7 +73,7 @@ type AdminClient interface {
 	// WORK-IN-PROGRESS: Starts validation of a CloudWatch Metrics streaming stack deployment.
 	CreateCloudWatchMetricsStream(ctx context.Context, in *CreateCloudWatchMetricsStreamRequest, opts ...grpc.CallOption) (*CloudWatchMetricsStream, error)
 	// WORK-IN-PROGRESS: Configure AWS Proforma Cost and Usage Report.
-	CreateProformaCur(ctx context.Context, in *CreateProformaCurRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CreateProformaCur(ctx context.Context, in *CreateProformaCurRequest, opts ...grpc.CallOption) (*ProformaCur, error)
 	// Get notification settings for login user's organization or group.
 	GetNotificationSettings(ctx context.Context, in *GetNotificationSettingsRequest, opts ...grpc.CallOption) (*api.NotificationSettings, error)
 	// Creates or updates notification settings for login user's organization or group.
@@ -246,8 +246,8 @@ func (c *adminClient) CreateCloudWatchMetricsStream(ctx context.Context, in *Cre
 	return out, nil
 }
 
-func (c *adminClient) CreateProformaCur(ctx context.Context, in *CreateProformaCurRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *adminClient) CreateProformaCur(ctx context.Context, in *CreateProformaCurRequest, opts ...grpc.CallOption) (*ProformaCur, error) {
+	out := new(ProformaCur)
 	err := c.cc.Invoke(ctx, Admin_CreateProformaCur_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -397,7 +397,7 @@ type AdminServer interface {
 	// WORK-IN-PROGRESS: Starts validation of a CloudWatch Metrics streaming stack deployment.
 	CreateCloudWatchMetricsStream(context.Context, *CreateCloudWatchMetricsStreamRequest) (*CloudWatchMetricsStream, error)
 	// WORK-IN-PROGRESS: Configure AWS Proforma Cost and Usage Report.
-	CreateProformaCur(context.Context, *CreateProformaCurRequest) (*emptypb.Empty, error)
+	CreateProformaCur(context.Context, *CreateProformaCurRequest) (*ProformaCur, error)
 	// Get notification settings for login user's organization or group.
 	GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error)
 	// Creates or updates notification settings for login user's organization or group.
@@ -461,7 +461,7 @@ func (UnimplementedAdminServer) GetCloudWatchMetricsStreamTemplateUrl(context.Co
 func (UnimplementedAdminServer) CreateCloudWatchMetricsStream(context.Context, *CreateCloudWatchMetricsStreamRequest) (*CloudWatchMetricsStream, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCloudWatchMetricsStream not implemented")
 }
-func (UnimplementedAdminServer) CreateProformaCur(context.Context, *CreateProformaCurRequest) (*emptypb.Empty, error) {
+func (UnimplementedAdminServer) CreateProformaCur(context.Context, *CreateProformaCurRequest) (*ProformaCur, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProformaCur not implemented")
 }
 func (UnimplementedAdminServer) GetNotificationSettings(context.Context, *GetNotificationSettingsRequest) (*api.NotificationSettings, error) {
