@@ -114,7 +114,7 @@ const (
 	Cover_RestoreSavings_FullMethodName               = "/blueapi.cover.v1.Cover/RestoreSavings"
 	Cover_SimulateSavings_FullMethodName              = "/blueapi.cover.v1.Cover/SimulateSavings"
 	Cover_GetCostGroupAllocation_FullMethodName       = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
-	Cover_AddUserFromAuth0AsRoot_FullMethodName       = "/blueapi.cover.v1.Cover/AddUserFromAuth0asRoot"
+	Cover_ProcessAuth0User_FullMethodName             = "/blueapi.cover.v1.Cover/ProcessAuth0User"
 	Cover_AddPartnerCenterCredentials_FullMethodName  = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
 	Cover_AddMpnSetting_FullMethodName                = "/blueapi.cover.v1.Cover/AddMpnSetting"
 	Cover_GetCostGroupAttribute_FullMethodName        = "/blueapi.cover.v1.Cover/GetCostGroupAttribute"
@@ -309,8 +309,8 @@ type CoverClient interface {
 	SimulateSavings(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateSavingsClient, error)
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
 	GetCostGroupAllocation(ctx context.Context, in *GetCostGroupAllocationRequest, opts ...grpc.CallOption) (Cover_GetCostGroupAllocationClient, error)
-	// WORK-IN-PROGRESS: Add user from Auth0 as Root user
-	AddUserFromAuth0AsRoot(ctx context.Context, in *AddUserFromAuth0AsRootRequest, opts ...grpc.CallOption) (*AddUserFromAuth0AsRootResponse, error)
+	// WORK-IN-PROGRESS: Add or read user from Auth0
+	ProcessAuth0User(ctx context.Context, in *ProcessAuth0UserRequest, opts ...grpc.CallOption) (*ProcessAuth0UserResponse, error)
 	// WORK-IN-PROGRESS: PartnerCenterCredentials for Azure
 	AddPartnerCenterCredentials(ctx context.Context, in *AddPartnerCenterCredentialsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Adding MpnSetting for Azure
@@ -1580,9 +1580,9 @@ func (x *coverGetCostGroupAllocationClient) Recv() (*AllocationItem, error) {
 	return m, nil
 }
 
-func (c *coverClient) AddUserFromAuth0AsRoot(ctx context.Context, in *AddUserFromAuth0AsRootRequest, opts ...grpc.CallOption) (*AddUserFromAuth0AsRootResponse, error) {
-	out := new(AddUserFromAuth0AsRootResponse)
-	err := c.cc.Invoke(ctx, Cover_AddUserFromAuth0AsRoot_FullMethodName, in, out, opts...)
+func (c *coverClient) ProcessAuth0User(ctx context.Context, in *ProcessAuth0UserRequest, opts ...grpc.CallOption) (*ProcessAuth0UserResponse, error) {
+	out := new(ProcessAuth0UserResponse)
+	err := c.cc.Invoke(ctx, Cover_ProcessAuth0User_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1805,8 +1805,8 @@ type CoverServer interface {
 	SimulateSavings(*CreateAllocatorRequest, Cover_SimulateSavingsServer) error
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
 	GetCostGroupAllocation(*GetCostGroupAllocationRequest, Cover_GetCostGroupAllocationServer) error
-	// WORK-IN-PROGRESS: Add user from Auth0 as Root user
-	AddUserFromAuth0AsRoot(context.Context, *AddUserFromAuth0AsRootRequest) (*AddUserFromAuth0AsRootResponse, error)
+	// WORK-IN-PROGRESS: Add or read user from Auth0
+	ProcessAuth0User(context.Context, *ProcessAuth0UserRequest) (*ProcessAuth0UserResponse, error)
 	// WORK-IN-PROGRESS: PartnerCenterCredentials for Azure
 	AddPartnerCenterCredentials(context.Context, *AddPartnerCenterCredentialsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Adding MpnSetting for Azure
@@ -2099,8 +2099,8 @@ func (UnimplementedCoverServer) SimulateSavings(*CreateAllocatorRequest, Cover_S
 func (UnimplementedCoverServer) GetCostGroupAllocation(*GetCostGroupAllocationRequest, Cover_GetCostGroupAllocationServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetCostGroupAllocation not implemented")
 }
-func (UnimplementedCoverServer) AddUserFromAuth0AsRoot(context.Context, *AddUserFromAuth0AsRootRequest) (*AddUserFromAuth0AsRootResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddUserFromAuth0AsRoot not implemented")
+func (UnimplementedCoverServer) ProcessAuth0User(context.Context, *ProcessAuth0UserRequest) (*ProcessAuth0UserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProcessAuth0User not implemented")
 }
 func (UnimplementedCoverServer) AddPartnerCenterCredentials(context.Context, *AddPartnerCenterCredentialsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AddPartnerCenterCredentials not implemented")
@@ -3857,20 +3857,20 @@ func (x *coverGetCostGroupAllocationServer) Send(m *AllocationItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cover_AddUserFromAuth0AsRoot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddUserFromAuth0AsRootRequest)
+func _Cover_ProcessAuth0User_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProcessAuth0UserRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).AddUserFromAuth0AsRoot(ctx, in)
+		return srv.(CoverServer).ProcessAuth0User(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_AddUserFromAuth0AsRoot_FullMethodName,
+		FullMethod: Cover_ProcessAuth0User_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).AddUserFromAuth0AsRoot(ctx, req.(*AddUserFromAuth0AsRootRequest))
+		return srv.(CoverServer).ProcessAuth0User(ctx, req.(*ProcessAuth0UserRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4237,8 +4237,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_DeleteAllocator_Handler,
 		},
 		{
-			MethodName: "AddUserFromAuth0asRoot",
-			Handler:    _Cover_AddUserFromAuth0AsRoot_Handler,
+			MethodName: "ProcessAuth0User",
+			Handler:    _Cover_ProcessAuth0User_Handler,
 		},
 		{
 			MethodName: "AddPartnerCenterCredentials",
