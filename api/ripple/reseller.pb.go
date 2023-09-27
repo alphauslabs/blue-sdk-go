@@ -158,6 +158,7 @@ type ResellerConfig struct {
 	// `usageAccountMenuFeesRefund`: Display refund
 	// `usageAccountMenuFeesOtherFees`: Display other fees
 	// `usageReportDownload`: Download report data
+	// `cost_forecast_tab`: Cost Forecast
 	//
 	// - Cross Tag
 	// `usageCrosstag`: Cross Tag
