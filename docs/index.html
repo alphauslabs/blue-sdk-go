@@ -1369,7 +1369,23 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CreateAlertRequest"><span class="badge">M</span>CreateAlertRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateAlertResponse"><span class="badge">M</span>CreateAlertResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateAllocatorRequest"><span class="badge">M</span>CreateAllocatorRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateChannelRequest"><span class="badge">M</span>CreateChannelRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateChannelResponse"><span class="badge">M</span>CreateChannelResponse</a>
                 </li>
               
                 <li>
@@ -1417,7 +1433,23 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.DeleteAlertRequest"><span class="badge">M</span>DeleteAlertRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteAlertResponse"><span class="badge">M</span>DeleteAlertResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.DeleteAllocatorRequest"><span class="badge">M</span>DeleteAllocatorRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteChannelRequest"><span class="badge">M</span>DeleteChannelRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteChannelResponse"><span class="badge">M</span>DeleteChannelResponse</a>
                 </li>
               
                 <li>
@@ -1473,6 +1505,22 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetAlertDetailsRequest"><span class="badge">M</span>GetAlertDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetAlertDetailsResponse"><span class="badge">M</span>GetAlertDetailsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetAlertsRequest"><span class="badge">M</span>GetAlertsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetAlertsResponse"><span class="badge">M</span>GetAlertsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetAndDeleteDataAccessRequest"><span class="badge">M</span>GetAndDeleteDataAccessRequest</a>
                 </li>
               
@@ -1490,6 +1538,22 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.GetCategoriesResponse"><span class="badge">M</span>GetCategoriesResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetChannelDetailsRequest"><span class="badge">M</span>GetChannelDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetChannelDetailsResponse"><span class="badge">M</span>GetChannelDetailsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetChannelsRequest"><span class="badge">M</span>GetChannelsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetChannelsResponse"><span class="badge">M</span>GetChannelsResponse</a>
                 </li>
               
                 <li>
@@ -1818,6 +1882,22 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.UpdateAccountAccessRequest"><span class="badge">M</span>UpdateAccountAccessRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateAlertDetailsRequest"><span class="badge">M</span>UpdateAlertDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateAlertDetailsResponse"><span class="badge">M</span>UpdateAlertDetailsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateChannelDetailsRequest"><span class="badge">M</span>UpdateChannelDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateChannelDetailsResponse"><span class="badge">M</span>UpdateChannelDetailsResponse</a>
                 </li>
               
                 <li>
@@ -15323,6 +15403,89 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.CreateAlertRequest">CreateAlertRequest</h3>
+        <p>Request message for CreateAlert</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fixedAmount</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>At least one in either fixedAmount or percentage </p></td>
+                </tr>
+              
+                <tr>
+                  <td>percentage</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>granularity</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. daily or monthly. Only &#39;daily&#39; is supported for now. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroups</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Cost group IDs. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>channels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Channel IDs. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateAlertResponse">CreateAlertResponse</h3>
+        <p>Response message for CreateAlert</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>alertData</td>
+                  <td><a href="#blueapi.api.cover.AlertData">blueapi.api.cover.AlertData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CreateAllocatorRequest">CreateAllocatorRequest</h3>
         <p>Request message for the CreateAllocator rpc.</p>
 
@@ -15372,6 +15535,68 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td>allocator</td>
                   <td><a href="#blueapi.cover.v1.Allocator">Allocator</a></td>
                   <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateChannelRequest">CreateChannelRequest</h3>
+        <p>Request message for CreateChannel</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Either actual email address or slack/msteams channel name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. email, slack, or msteams. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>webhookUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Only needed for slack and msteams type. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateChannelResponse">CreateChannelResponse</h3>
+        <p>Response message for CreateChannel</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>channelData</td>
+                  <td><a href="#blueapi.api.cover.AlertData">blueapi.api.cover.AlertData</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -15814,6 +16039,54 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.DeleteAlertRequest">DeleteAlertRequest</h3>
+        <p>Request message for DeleteAlert</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Alert ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteAlertResponse">DeleteAlertResponse</h3>
+        <p>Response message for DeleteAlert</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.DeleteAllocatorRequest">DeleteAllocatorRequest</h3>
         <p>Request message for the DeleteAllocator rpc.</p>
 
@@ -15829,6 +16102,54 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The id of the allocator to delete. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteChannelRequest">DeleteChannelRequest</h3>
+        <p>Request message for DeleteChannel</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Channel ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteChannelResponse">DeleteChannelResponse</h3>
+        <p>Response message for DeleteChannel</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -16346,6 +16667,85 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.GetAlertDetailsRequest">GetAlertDetailsRequest</h3>
+        <p>Request message for GetAlertDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Alert ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAlertDetailsResponse">GetAlertDetailsResponse</h3>
+        <p>Response message for GetAlertDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>alertData</td>
+                  <td><a href="#blueapi.api.cover.AlertData">blueapi.api.cover.AlertData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAlertsRequest">GetAlertsRequest</h3>
+        <p>Request message for GetAlerts</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAlertsResponse">GetAlertsResponse</h3>
+        <p>Response message for GetAlerts</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>alertData</td>
+                  <td><a href="#blueapi.api.cover.AlertData">blueapi.api.cover.AlertData</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetAndDeleteDataAccessRequest">GetAndDeleteDataAccessRequest</h3>
         <p></p>
 
@@ -16511,6 +16911,85 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                 <tr>
                   <td>results</td>
                   <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetChannelDetailsRequest">GetChannelDetailsRequest</h3>
+        <p>Request message for GetChannelDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Channel ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetChannelDetailsResponse">GetChannelDetailsResponse</h3>
+        <p>Response message for GetChannelDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>channelData</td>
+                  <td><a href="#blueapi.api.cover.ChannelData">blueapi.api.cover.ChannelData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetChannelsRequest">GetChannelsRequest</h3>
+        <p>Request message for GetChannels</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetChannelsResponse">GetChannelsResponse</h3>
+        <p>Response message for GetChannels</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>channelData</td>
+                  <td><a href="#blueapi.api.cover.ChannelData">blueapi.api.cover.ChannelData</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -19077,6 +19556,167 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.UpdateAlertDetailsRequest">UpdateAlertDetailsRequest</h3>
+        <p>Request message for UpdateAlertDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Alert ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>If optional fields are not supplied, no changes occur.
+Optional. Actual email or channel name of slack/msteams </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fixedAmount</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Both are optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>percentage</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>granularity</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. daily or monthly. Only &#39;daily&#39; is supported for now. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroups</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Cost group IDs. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>channels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Channel IDs. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateAlertDetailsResponse">UpdateAlertDetailsResponse</h3>
+        <p>Response message for UpdateAlertDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>alertData</td>
+                  <td><a href="#blueapi.api.cover.AlertData">blueapi.api.cover.AlertData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateChannelDetailsRequest">UpdateChannelDetailsRequest</h3>
+        <p>Request message for UpdateChannelDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Channel ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>If optional fields are not supplied, no changes occur.
+Optional. Either actual email address or slack/msteams channel name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. email, slack, or msteams. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>webhookUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Only needed for slack and msteams type. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateChannelDetailsResponse">UpdateChannelDetailsResponse</h3>
+        <p>Response message for UpdateChannelDetails</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>channelData</td>
+                  <td><a href="#blueapi.api.cover.ChannelData">blueapi.api.cover.ChannelData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateCostGroupColorThemeRequest">UpdateCostGroupColorThemeRequest</h3>
         <p>Request message for UpdateCostGroupColorTheme</p>
 
@@ -21135,6 +21775,76 @@ file in bytes </p></td>
                 <td><p>WORK-IN-PROGRESS: Get Cost Group by Attribute Type</p></td>
               </tr>
             
+              <tr>
+                <td>GetAlerts</td>
+                <td><a href="#blueapi.cover.v1.GetAlertsRequest">GetAlertsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetAlertsResponse">GetAlertsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get Alerts under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateAlert</td>
+                <td><a href="#blueapi.cover.v1.CreateAlertRequest">CreateAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.CreateAlertResponse">CreateAlertResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Create Alerts under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetAlertDetails</td>
+                <td><a href="#blueapi.cover.v1.GetAlertDetailsRequest">GetAlertDetailsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetAlertDetailsResponse">GetAlertDetailsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get Specific Alert under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteAlert</td>
+                <td><a href="#blueapi.cover.v1.DeleteAlertRequest">DeleteAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DeleteAlertResponse">DeleteAlertResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Delete Specific Alert under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAlertDetails</td>
+                <td><a href="#blueapi.cover.v1.UpdateAlertDetailsRequest">UpdateAlertDetailsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateAlertDetailsResponse">UpdateAlertDetailsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Update Specific Alert under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetChannels</td>
+                <td><a href="#blueapi.cover.v1.GetChannelsRequest">GetChannelsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetChannelsResponse">GetChannelsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get Channels under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateChannel</td>
+                <td><a href="#blueapi.cover.v1.CreateChannelRequest">CreateChannelRequest</a></td>
+                <td><a href="#blueapi.cover.v1.CreateChannelResponse">CreateChannelResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Create Channel under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetChannelDetails</td>
+                <td><a href="#blueapi.cover.v1.GetChannelDetailsRequest">GetChannelDetailsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetChannelDetailsResponse">GetChannelDetailsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get Specific Channel under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteChannel</td>
+                <td><a href="#blueapi.cover.v1.DeleteChannelRequest">DeleteChannelRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DeleteChannelResponse">DeleteChannelResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Delete Specific Channel under organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateChannelDetails</td>
+                <td><a href="#blueapi.cover.v1.UpdateChannelDetailsRequest">UpdateChannelDetailsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateChannelDetailsResponse">UpdateChannelDetailsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Update Specific Channel under organization</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -22119,6 +22829,106 @@ file in bytes </p></td>
                 <td>GetCostGroupAttribute</td>
                 <td>POST</td>
                 <td>/v1/attributes</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAlerts</td>
+                <td>GET</td>
+                <td>/v1/alerts</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateAlert</td>
+                <td>POST</td>
+                <td>/v1/alerts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAlertDetails</td>
+                <td>GET</td>
+                <td>/v1/alerts/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteAlert</td>
+                <td>DELETE</td>
+                <td>/v1/alerts/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAlertDetails</td>
+                <td>PUT</td>
+                <td>/v1/alerts/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetChannels</td>
+                <td>GET</td>
+                <td>/v1/channels</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateChannel</td>
+                <td>POST</td>
+                <td>/v1/channels</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetChannelDetails</td>
+                <td>GET</td>
+                <td>/v1/channels/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteChannel</td>
+                <td>DELETE</td>
+                <td>/v1/channels/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateChannelDetails</td>
+                <td>PUT</td>
+                <td>/v1/channels/{id}</td>
                 <td>*</td>
               </tr>
               
