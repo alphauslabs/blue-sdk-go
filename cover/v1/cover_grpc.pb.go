@@ -328,7 +328,7 @@ type CoverClient interface {
 	// WORK-IN-PROGRESS: Get Cost Group by Attribute Type
 	GetCostGroupAttribute(ctx context.Context, in *GetCostGroupAttributeRequest, opts ...grpc.CallOption) (*GetCostGroupAttributeResponse, error)
 	// WORK-IN-PROGRESS: Get Alerts under organization
-	GetAlerts(ctx context.Context, in *GetAlertsRequest, opts ...grpc.CallOption) (*GetAlertsResponse, error)
+	GetAlerts(ctx context.Context, in *GetAlertsRequest, opts ...grpc.CallOption) (Cover_GetAlertsClient, error)
 	// WORK-IN-PROGRESS: Create Alerts under organization
 	CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error)
 	// WORK-IN-PROGRESS: Get Specific Alert under organization
@@ -338,7 +338,7 @@ type CoverClient interface {
 	// WORK-IN-PROGRESS: Update Specific Alert under organization
 	UpdateAlertDetails(ctx context.Context, in *UpdateAlertDetailsRequest, opts ...grpc.CallOption) (*UpdateAlertDetailsResponse, error)
 	// WORK-IN-PROGRESS: Get Channels under organization
-	GetChannels(ctx context.Context, in *GetChannelsRequest, opts ...grpc.CallOption) (*GetChannelsResponse, error)
+	GetChannels(ctx context.Context, in *GetChannelsRequest, opts ...grpc.CallOption) (Cover_GetChannelsClient, error)
 	// WORK-IN-PROGRESS: Create Channel under organization
 	CreateChannel(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error)
 	// WORK-IN-PROGRESS: Get Specific Channel under organization
@@ -1646,13 +1646,36 @@ func (c *coverClient) GetCostGroupAttribute(ctx context.Context, in *GetCostGrou
 	return out, nil
 }
 
-func (c *coverClient) GetAlerts(ctx context.Context, in *GetAlertsRequest, opts ...grpc.CallOption) (*GetAlertsResponse, error) {
-	out := new(GetAlertsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetAlerts_FullMethodName, in, out, opts...)
+func (c *coverClient) GetAlerts(ctx context.Context, in *GetAlertsRequest, opts ...grpc.CallOption) (Cover_GetAlertsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[18], Cover_GetAlerts_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &coverGetAlertsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetAlertsClient interface {
+	Recv() (*GetAlertsResponse, error)
+	grpc.ClientStream
+}
+
+type coverGetAlertsClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetAlertsClient) Recv() (*GetAlertsResponse, error) {
+	m := new(GetAlertsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *coverClient) CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error) {
@@ -1691,13 +1714,36 @@ func (c *coverClient) UpdateAlertDetails(ctx context.Context, in *UpdateAlertDet
 	return out, nil
 }
 
-func (c *coverClient) GetChannels(ctx context.Context, in *GetChannelsRequest, opts ...grpc.CallOption) (*GetChannelsResponse, error) {
-	out := new(GetChannelsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetChannels_FullMethodName, in, out, opts...)
+func (c *coverClient) GetChannels(ctx context.Context, in *GetChannelsRequest, opts ...grpc.CallOption) (Cover_GetChannelsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[19], Cover_GetChannels_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &coverGetChannelsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetChannelsClient interface {
+	Recv() (*GetChannelsResponse, error)
+	grpc.ClientStream
+}
+
+type coverGetChannelsClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetChannelsClient) Recv() (*GetChannelsResponse, error) {
+	m := new(GetChannelsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *coverClient) CreateChannel(ctx context.Context, in *CreateChannelRequest, opts ...grpc.CallOption) (*CreateChannelResponse, error) {
@@ -1934,7 +1980,7 @@ type CoverServer interface {
 	// WORK-IN-PROGRESS: Get Cost Group by Attribute Type
 	GetCostGroupAttribute(context.Context, *GetCostGroupAttributeRequest) (*GetCostGroupAttributeResponse, error)
 	// WORK-IN-PROGRESS: Get Alerts under organization
-	GetAlerts(context.Context, *GetAlertsRequest) (*GetAlertsResponse, error)
+	GetAlerts(*GetAlertsRequest, Cover_GetAlertsServer) error
 	// WORK-IN-PROGRESS: Create Alerts under organization
 	CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error)
 	// WORK-IN-PROGRESS: Get Specific Alert under organization
@@ -1944,7 +1990,7 @@ type CoverServer interface {
 	// WORK-IN-PROGRESS: Update Specific Alert under organization
 	UpdateAlertDetails(context.Context, *UpdateAlertDetailsRequest) (*UpdateAlertDetailsResponse, error)
 	// WORK-IN-PROGRESS: Get Channels under organization
-	GetChannels(context.Context, *GetChannelsRequest) (*GetChannelsResponse, error)
+	GetChannels(*GetChannelsRequest, Cover_GetChannelsServer) error
 	// WORK-IN-PROGRESS: Create Channel under organization
 	CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error)
 	// WORK-IN-PROGRESS: Get Specific Channel under organization
@@ -2251,8 +2297,8 @@ func (UnimplementedCoverServer) AddMpnSetting(context.Context, *AddMpnSettingReq
 func (UnimplementedCoverServer) GetCostGroupAttribute(context.Context, *GetCostGroupAttributeRequest) (*GetCostGroupAttributeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCostGroupAttribute not implemented")
 }
-func (UnimplementedCoverServer) GetAlerts(context.Context, *GetAlertsRequest) (*GetAlertsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAlerts not implemented")
+func (UnimplementedCoverServer) GetAlerts(*GetAlertsRequest, Cover_GetAlertsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetAlerts not implemented")
 }
 func (UnimplementedCoverServer) CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAlert not implemented")
@@ -2266,8 +2312,8 @@ func (UnimplementedCoverServer) DeleteAlert(context.Context, *DeleteAlertRequest
 func (UnimplementedCoverServer) UpdateAlertDetails(context.Context, *UpdateAlertDetailsRequest) (*UpdateAlertDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAlertDetails not implemented")
 }
-func (UnimplementedCoverServer) GetChannels(context.Context, *GetChannelsRequest) (*GetChannelsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetChannels not implemented")
+func (UnimplementedCoverServer) GetChannels(*GetChannelsRequest, Cover_GetChannelsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetChannels not implemented")
 }
 func (UnimplementedCoverServer) CreateChannel(context.Context, *CreateChannelRequest) (*CreateChannelResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateChannel not implemented")
@@ -4099,22 +4145,25 @@ func _Cover_GetCostGroupAttribute_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_GetAlerts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAlertsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Cover_GetAlerts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetAlertsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetAlerts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetAlerts_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetAlerts(ctx, req.(*GetAlertsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(CoverServer).GetAlerts(m, &coverGetAlertsServer{stream})
+}
+
+type Cover_GetAlertsServer interface {
+	Send(*GetAlertsResponse) error
+	grpc.ServerStream
+}
+
+type coverGetAlertsServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetAlertsServer) Send(m *GetAlertsResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cover_CreateAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -4189,22 +4238,25 @@ func _Cover_UpdateAlertDetails_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_GetChannels_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetChannelsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Cover_GetChannels_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetChannelsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetChannels(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetChannels_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetChannels(ctx, req.(*GetChannelsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(CoverServer).GetChannels(m, &coverGetChannelsServer{stream})
+}
+
+type Cover_GetChannelsServer interface {
+	Send(*GetChannelsResponse) error
+	grpc.ServerStream
+}
+
+type coverGetChannelsServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetChannelsServer) Send(m *GetChannelsResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cover_CreateChannel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -4603,10 +4655,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetCostGroupAttribute_Handler,
 		},
 		{
-			MethodName: "GetAlerts",
-			Handler:    _Cover_GetAlerts_Handler,
-		},
-		{
 			MethodName: "CreateAlert",
 			Handler:    _Cover_CreateAlert_Handler,
 		},
@@ -4621,10 +4669,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateAlertDetails",
 			Handler:    _Cover_UpdateAlertDetails_Handler,
-		},
-		{
-			MethodName: "GetChannels",
-			Handler:    _Cover_GetChannels_Handler,
 		},
 		{
 			MethodName: "CreateChannel",
@@ -4732,6 +4776,16 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetCostGroupAllocation",
 			Handler:       _Cover_GetCostGroupAllocation_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetAlerts",
+			Handler:       _Cover_GetAlerts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetChannels",
+			Handler:       _Cover_GetChannels_Handler,
 			ServerStreams: true,
 		},
 	},
