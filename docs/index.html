@@ -16974,6 +16974,24 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
         <p>Request message for GetChannels</p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Use email, slack, or msteams to filter the type of channels
+Otherwise, it returns all channels </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -22887,9 +22905,9 @@ file in bytes </p></td>
               
               <tr>
                 <td>GetChannels</td>
-                <td>GET</td>
-                <td>/v1/channels</td>
-                <td></td>
+                <td>POST</td>
+                <td>/v1/channels:read</td>
+                <td>*</td>
               </tr>
               
             
