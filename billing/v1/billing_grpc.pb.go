@@ -10,6 +10,7 @@ import (
 	context "context"
 	api "github.com/alphauslabs/blue-sdk-go/api"
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
+	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -53,6 +54,7 @@ const (
 	Billing_DeleteAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
 	Billing_ListAbcBillingGroups_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
 	Billing_ListAbcBillingGroupAccounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
+	Billing_ReadInvoiceAdjustments_FullMethodName               = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
 )
 
 // BillingClient is the client API for Billing service.
@@ -121,6 +123,8 @@ type BillingClient interface {
 	ListAbcBillingGroups(ctx context.Context, in *ListAbcBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupsClient, error)
 	// WORK-IN-PROGRESS: Gets all accounts associated to AWS Billing Conductor(ABC) Billing group
 	ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error)
+	// WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).
+	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
 }
 
 type billingClient struct {
@@ -640,6 +644,38 @@ func (x *billingListAbcBillingGroupAccountsClient) Recv() (*AbcAccount, error) {
 	return m, nil
 }
 
+func (c *billingClient) ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[10], Billing_ReadInvoiceAdjustments_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingReadInvoiceAdjustmentsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ReadInvoiceAdjustmentsClient interface {
+	Recv() (*wave.Adjustment, error)
+	grpc.ClientStream
+}
+
+type billingReadInvoiceAdjustmentsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingReadInvoiceAdjustmentsClient) Recv() (*wave.Adjustment, error) {
+	m := new(wave.Adjustment)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -706,6 +742,8 @@ type BillingServer interface {
 	ListAbcBillingGroups(*ListAbcBillingGroupsRequest, Billing_ListAbcBillingGroupsServer) error
 	// WORK-IN-PROGRESS: Gets all accounts associated to AWS Billing Conductor(ABC) Billing group
 	ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error
+	// WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).
+	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -805,6 +843,9 @@ func (UnimplementedBillingServer) ListAbcBillingGroups(*ListAbcBillingGroupsRequ
 }
 func (UnimplementedBillingServer) ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAbcBillingGroupAccounts not implemented")
+}
+func (UnimplementedBillingServer) ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadInvoiceAdjustments not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1407,6 +1448,27 @@ func (x *billingListAbcBillingGroupAccountsServer) Send(m *AbcAccount) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_ReadInvoiceAdjustments_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadInvoiceAdjustmentsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ReadInvoiceAdjustments(m, &billingReadInvoiceAdjustmentsServer{stream})
+}
+
+type Billing_ReadInvoiceAdjustmentsServer interface {
+	Send(*wave.Adjustment) error
+	grpc.ServerStream
+}
+
+type billingReadInvoiceAdjustmentsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingReadInvoiceAdjustmentsServer) Send(m *wave.Adjustment) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1548,6 +1610,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAbcBillingGroupAccounts",
 			Handler:       _Billing_ListAbcBillingGroupAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadInvoiceAdjustments",
+			Handler:       _Billing_ReadInvoiceAdjustments_Handler,
 			ServerStreams: true,
 		},
 	},

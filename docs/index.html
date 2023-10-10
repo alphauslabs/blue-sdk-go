@@ -1199,6 +1199,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ReadInvoiceAdjustmentsRequest"><span class="badge">M</span>ReadInvoiceAdjustmentsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.RegisterAccounts"><span class="badge">M</span>RegisterAccounts</a>
                 </li>
               
@@ -13054,6 +13058,44 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ReadInvoiceAdjustmentsRequest">ReadInvoiceAdjustmentsRequest</h3>
+        <p>Request message for the Billing.ReadInvoiceAdjustments rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.RegisterAccounts">RegisterAccounts</h3>
         <p>Register Accounts definition</p>
 
@@ -13646,6 +13688,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><p>WORK-IN-PROGRESS: Gets all accounts associated to AWS Billing Conductor(ABC) Billing group</p></td>
               </tr>
             
+              <tr>
+                <td>ReadInvoiceAdjustments</td>
+                <td><a href="#blueapi.billing.v1.ReadInvoiceAdjustmentsRequest">ReadInvoiceAdjustmentsRequest</a></td>
+                <td><a href="#blueapi.api.wave.Adjustment">.blueapi.api.wave.Adjustment</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -13971,6 +14020,16 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>GET</td>
                 <td>/v1/billinggroups/billingconductor/{payerId}/accounts</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadInvoiceAdjustments</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/invoiceadjustments:read</td>
+                <td>*</td>
               </tr>
               
             
