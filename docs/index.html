@@ -533,6 +533,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.admin.v1.NotificationAccount"><span class="badge">M</span>NotificationAccount</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.admin.v1.ProformaCur"><span class="badge">M</span>ProformaCur</a>
                 </li>
               
@@ -4541,6 +4545,13 @@ Valid values:
                   <td><p>Required </p></td>
                 </tr>
               
+                <tr>
+                  <td>account</td>
+                  <td><a href="#blueapi.admin.v1.NotificationAccount">NotificationAccount</a></td>
+                  <td></td>
+                  <td><p>Optional. only available Wave(Pro). </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -5137,6 +5148,37 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.NotificationAccount">NotificationAccount</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.ProformaCur">ProformaCur</h3>
         <p></p>
 
@@ -5357,6 +5399,13 @@ Valid values:
 `InvoiceCalculationStarted`, 
 `InvoiceCalculationFinished`, 
 `CurUpdatedAfterInvoice`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account</td>
+                  <td><a href="#blueapi.admin.v1.NotificationAccount">NotificationAccount</a></td>
+                  <td></td>
+                  <td><p>Optional. only available Wave(Pro). </p></td>
                 </tr>
               
             </tbody>

@@ -1550,6 +1550,63 @@ func (x *ListNotificationsResponse) GetNotifications() []*api.Notification {
 	return nil
 }
 
+type NotificationAccount struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Required.
+	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
+	// Required.
+	AccountId string `protobuf:"bytes,2,opt,name=accountId,proto3" json:"accountId,omitempty"`
+}
+
+func (x *NotificationAccount) Reset() {
+	*x = NotificationAccount{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_admin_v1_admin_proto_msgTypes[27]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *NotificationAccount) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NotificationAccount) ProtoMessage() {}
+
+func (x *NotificationAccount) ProtoReflect() protoreflect.Message {
+	mi := &file_admin_v1_admin_proto_msgTypes[27]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NotificationAccount.ProtoReflect.Descriptor instead.
+func (*NotificationAccount) Descriptor() ([]byte, []int) {
+	return file_admin_v1_admin_proto_rawDescGZIP(), []int{27}
+}
+
+func (x *NotificationAccount) GetVendor() string {
+	if x != nil {
+		return x.Vendor
+	}
+	return ""
+}
+
+func (x *NotificationAccount) GetAccountId() string {
+	if x != nil {
+		return x.AccountId
+	}
+	return ""
+}
+
 // Request message for the Admin.GetNotificationTypeChannels rpc.
 type GetNotificationRequest struct {
 	state         protoimpl.MessageState
@@ -1569,7 +1626,7 @@ type GetNotificationRequest struct {
 func (x *GetNotificationRequest) Reset() {
 	*x = GetNotificationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_admin_v1_admin_proto_msgTypes[27]
+		mi := &file_admin_v1_admin_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1582,7 +1639,7 @@ func (x *GetNotificationRequest) String() string {
 func (*GetNotificationRequest) ProtoMessage() {}
 
 func (x *GetNotificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_proto_msgTypes[27]
+	mi := &file_admin_v1_admin_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1595,7 +1652,7 @@ func (x *GetNotificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetNotificationRequest.ProtoReflect.Descriptor instead.
 func (*GetNotificationRequest) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_proto_rawDescGZIP(), []int{27}
+	return file_admin_v1_admin_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *GetNotificationRequest) GetId() string {
@@ -1628,12 +1685,14 @@ type CreateNotificationRequest struct {
 	Channels []string `protobuf:"bytes,2,rep,name=channels,proto3" json:"channels,omitempty"`
 	// Required
 	Enabled bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	// Optional. only available Wave(Pro).
+	Account *NotificationAccount `protobuf:"bytes,4,opt,name=account,proto3" json:"account,omitempty"`
 }
 
 func (x *CreateNotificationRequest) Reset() {
 	*x = CreateNotificationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_admin_v1_admin_proto_msgTypes[28]
+		mi := &file_admin_v1_admin_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1646,7 +1705,7 @@ func (x *CreateNotificationRequest) String() string {
 func (*CreateNotificationRequest) ProtoMessage() {}
 
 func (x *CreateNotificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_proto_msgTypes[28]
+	mi := &file_admin_v1_admin_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1659,7 +1718,7 @@ func (x *CreateNotificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateNotificationRequest.ProtoReflect.Descriptor instead.
 func (*CreateNotificationRequest) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_proto_rawDescGZIP(), []int{28}
+	return file_admin_v1_admin_proto_rawDescGZIP(), []int{29}
 }
 
 func (x *CreateNotificationRequest) GetNotificationType() string {
@@ -1683,6 +1742,13 @@ func (x *CreateNotificationRequest) GetEnabled() bool {
 	return false
 }
 
+func (x *CreateNotificationRequest) GetAccount() *NotificationAccount {
+	if x != nil {
+		return x.Account
+	}
+	return nil
+}
+
 // Request message for the Admin.UpdateNotificationTypeChannels rpc.
 type UpdateNotificationRequest struct {
 	state         protoimpl.MessageState
@@ -1701,12 +1767,14 @@ type UpdateNotificationRequest struct {
 	// `InvoiceCalculationFinished`,
 	// `CurUpdatedAfterInvoice`.
 	NotificationType string `protobuf:"bytes,4,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
+	// Optional. only available Wave(Pro).
+	Account *NotificationAccount `protobuf:"bytes,5,opt,name=account,proto3" json:"account,omitempty"`
 }
 
 func (x *UpdateNotificationRequest) Reset() {
 	*x = UpdateNotificationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_admin_v1_admin_proto_msgTypes[29]
+		mi := &file_admin_v1_admin_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1719,7 +1787,7 @@ func (x *UpdateNotificationRequest) String() string {
 func (*UpdateNotificationRequest) ProtoMessage() {}
 
 func (x *UpdateNotificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_proto_msgTypes[29]
+	mi := &file_admin_v1_admin_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1732,7 +1800,7 @@ func (x *UpdateNotificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateNotificationRequest.ProtoReflect.Descriptor instead.
 func (*UpdateNotificationRequest) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_proto_rawDescGZIP(), []int{29}
+	return file_admin_v1_admin_proto_rawDescGZIP(), []int{30}
 }
 
 func (x *UpdateNotificationRequest) GetId() string {
@@ -1763,6 +1831,13 @@ func (x *UpdateNotificationRequest) GetNotificationType() string {
 	return ""
 }
 
+func (x *UpdateNotificationRequest) GetAccount() *NotificationAccount {
+	if x != nil {
+		return x.Account
+	}
+	return nil
+}
+
 // Request message for the Admin.DeleteNotification rpc.
 type DeleteNotificationRequest struct {
 	state         protoimpl.MessageState
@@ -1782,7 +1857,7 @@ type DeleteNotificationRequest struct {
 func (x *DeleteNotificationRequest) Reset() {
 	*x = DeleteNotificationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_admin_v1_admin_proto_msgTypes[30]
+		mi := &file_admin_v1_admin_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1795,7 +1870,7 @@ func (x *DeleteNotificationRequest) String() string {
 func (*DeleteNotificationRequest) ProtoMessage() {}
 
 func (x *DeleteNotificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_proto_msgTypes[30]
+	mi := &file_admin_v1_admin_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1808,7 +1883,7 @@ func (x *DeleteNotificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteNotificationRequest.ProtoReflect.Descriptor instead.
 func (*DeleteNotificationRequest) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_proto_rawDescGZIP(), []int{30}
+	return file_admin_v1_admin_proto_rawDescGZIP(), []int{31}
 }
 
 func (x *DeleteNotificationRequest) GetId() string {
@@ -1848,7 +1923,7 @@ type CreateProformaCurRequest struct {
 func (x *CreateProformaCurRequest) Reset() {
 	*x = CreateProformaCurRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_admin_v1_admin_proto_msgTypes[31]
+		mi := &file_admin_v1_admin_proto_msgTypes[32]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1861,7 +1936,7 @@ func (x *CreateProformaCurRequest) String() string {
 func (*CreateProformaCurRequest) ProtoMessage() {}
 
 func (x *CreateProformaCurRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_proto_msgTypes[31]
+	mi := &file_admin_v1_admin_proto_msgTypes[32]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1874,7 +1949,7 @@ func (x *CreateProformaCurRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateProformaCurRequest.ProtoReflect.Descriptor instead.
 func (*CreateProformaCurRequest) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_proto_rawDescGZIP(), []int{31}
+	return file_admin_v1_admin_proto_rawDescGZIP(), []int{32}
 }
 
 func (x *CreateProformaCurRequest) GetPayerId() string {
@@ -1936,7 +2011,7 @@ type ProformaCur struct {
 func (x *ProformaCur) Reset() {
 	*x = ProformaCur{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_admin_v1_admin_proto_msgTypes[32]
+		mi := &file_admin_v1_admin_proto_msgTypes[33]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1949,7 +2024,7 @@ func (x *ProformaCur) String() string {
 func (*ProformaCur) ProtoMessage() {}
 
 func (x *ProformaCur) ProtoReflect() protoreflect.Message {
-	mi := &file_admin_v1_admin_proto_msgTypes[32]
+	mi := &file_admin_v1_admin_proto_msgTypes[33]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1962,7 +2037,7 @@ func (x *ProformaCur) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProformaCur.ProtoReflect.Descriptor instead.
 func (*ProformaCur) Descriptor() ([]byte, []int) {
-	return file_admin_v1_admin_proto_rawDescGZIP(), []int{32}
+	return file_admin_v1_admin_proto_rawDescGZIP(), []int{33}
 }
 
 func (x *ProformaCur) GetOrgId() string {
@@ -2190,30 +2265,43 @@ var file_admin_v1_admin_proto_rawDesc = []byte{
 	0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x03,
 	0x28, 0x0b, 0x32, 0x19, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69,
 	0x2e, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0d, 0x6e,
-	0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x54, 0x0a, 0x16,
-	0x47, 0x65, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x2a, 0x0a, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69,
-	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79,
-	0x70, 0x65, 0x22, 0x7d, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69,
-	0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x2a, 0x0a, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54,
-	0x79, 0x70, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66,
-	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x63,
-	0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x08, 0x63,
-	0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c,
-	0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65,
-	0x64, 0x22, 0x8d, 0x01, 0x0a, 0x19, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69,
-	0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12,
-	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12,
-	0x1a, 0x0a, 0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28,
-	0x09, 0x52, 0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x65,
-	0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e,
-	0x61, 0x62, 0x6c, 0x65, 0x64, 0x12, 0x2a, 0x0a, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63,
-	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x4b, 0x0a, 0x13,
+	0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x06, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x12, 0x1c, 0x0a, 0x09, 0x61,
+	0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09,
+	0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x22, 0x54, 0x0a, 0x16, 0x47, 0x65, 0x74,
+	0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x02, 0x69, 0x64, 0x12, 0x2a, 0x0a, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x6e,
+	0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x22,
+	0xbe, 0x01, 0x0a, 0x19, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69,
+	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x2a, 0x0a,
 	0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70,
-	0x65, 0x22, 0x57, 0x0a, 0x19, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x66,
+	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x12, 0x1a, 0x0a, 0x08, 0x63, 0x68, 0x61,
+	0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09, 0x52, 0x08, 0x63, 0x68, 0x61,
+	0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x12,
+	0x3f, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x25, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x64, 0x6d, 0x69, 0x6e,
+	0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74,
+	0x22, 0xce, 0x01, 0x0a, 0x19, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x66,
+	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x1a,
+	0x0a, 0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x09,
+	0x52, 0x08, 0x63, 0x68, 0x61, 0x6e, 0x6e, 0x65, 0x6c, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x65, 0x6e,
+	0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65, 0x6e, 0x61,
+	0x62, 0x6c, 0x65, 0x64, 0x12, 0x2a, 0x0a, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61,
+	0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x10,
+	0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79, 0x70, 0x65,
+	0x12, 0x3f, 0x0a, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x05, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x25, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x64, 0x6d, 0x69,
+	0x6e, 0x2e, 0x76, 0x31, 0x2e, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x07, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e,
+	0x74, 0x22, 0x57, 0x0a, 0x19, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x66,
 	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x0e,
 	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x12, 0x2a,
 	0x0a, 0x10, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x54, 0x79,
@@ -2507,7 +2595,7 @@ func file_admin_v1_admin_proto_rawDescGZIP() []byte {
 	return file_admin_v1_admin_proto_rawDescData
 }
 
-var file_admin_v1_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 33)
+var file_admin_v1_admin_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_admin_v1_admin_proto_goTypes = []interface{}{
 	(*ListAccountGroupsRequest)(nil),                      // 0: blueapi.admin.v1.ListAccountGroupsRequest
 	(*ListAccountGroupsResponse)(nil),                     // 1: blueapi.admin.v1.ListAccountGroupsResponse
@@ -2536,86 +2624,89 @@ var file_admin_v1_admin_proto_goTypes = []interface{}{
 	(*DeleteNotificationChannelRequest)(nil),              // 24: blueapi.admin.v1.DeleteNotificationChannelRequest
 	(*ListNotificationsRequest)(nil),                      // 25: blueapi.admin.v1.ListNotificationsRequest
 	(*ListNotificationsResponse)(nil),                     // 26: blueapi.admin.v1.ListNotificationsResponse
-	(*GetNotificationRequest)(nil),                        // 27: blueapi.admin.v1.GetNotificationRequest
-	(*CreateNotificationRequest)(nil),                     // 28: blueapi.admin.v1.CreateNotificationRequest
-	(*UpdateNotificationRequest)(nil),                     // 29: blueapi.admin.v1.UpdateNotificationRequest
-	(*DeleteNotificationRequest)(nil),                     // 30: blueapi.admin.v1.DeleteNotificationRequest
-	(*CreateProformaCurRequest)(nil),                      // 31: blueapi.admin.v1.CreateProformaCurRequest
-	(*ProformaCur)(nil),                                   // 32: blueapi.admin.v1.ProformaCur
-	(*api.AccountGroup)(nil),                              // 33: blueapi.api.AccountGroup
-	(*api.NotificationChannel)(nil),                       // 34: blueapi.api.NotificationChannel
-	(*api.EmailChannel)(nil),                              // 35: blueapi.api.EmailChannel
-	(*api.SlackChannel)(nil),                              // 36: blueapi.api.SlackChannel
-	(*api.MSTeamsChannel)(nil),                            // 37: blueapi.api.MSTeamsChannel
-	(*api.Notification)(nil),                              // 38: blueapi.api.Notification
-	(*protos.Operation)(nil),                              // 39: protos.Operation
-	(*emptypb.Empty)(nil),                                 // 40: google.protobuf.Empty
-	(*api.NotificationSettings)(nil),                      // 41: blueapi.api.NotificationSettings
+	(*NotificationAccount)(nil),                           // 27: blueapi.admin.v1.NotificationAccount
+	(*GetNotificationRequest)(nil),                        // 28: blueapi.admin.v1.GetNotificationRequest
+	(*CreateNotificationRequest)(nil),                     // 29: blueapi.admin.v1.CreateNotificationRequest
+	(*UpdateNotificationRequest)(nil),                     // 30: blueapi.admin.v1.UpdateNotificationRequest
+	(*DeleteNotificationRequest)(nil),                     // 31: blueapi.admin.v1.DeleteNotificationRequest
+	(*CreateProformaCurRequest)(nil),                      // 32: blueapi.admin.v1.CreateProformaCurRequest
+	(*ProformaCur)(nil),                                   // 33: blueapi.admin.v1.ProformaCur
+	(*api.AccountGroup)(nil),                              // 34: blueapi.api.AccountGroup
+	(*api.NotificationChannel)(nil),                       // 35: blueapi.api.NotificationChannel
+	(*api.EmailChannel)(nil),                              // 36: blueapi.api.EmailChannel
+	(*api.SlackChannel)(nil),                              // 37: blueapi.api.SlackChannel
+	(*api.MSTeamsChannel)(nil),                            // 38: blueapi.api.MSTeamsChannel
+	(*api.Notification)(nil),                              // 39: blueapi.api.Notification
+	(*protos.Operation)(nil),                              // 40: protos.Operation
+	(*emptypb.Empty)(nil),                                 // 41: google.protobuf.Empty
+	(*api.NotificationSettings)(nil),                      // 42: blueapi.api.NotificationSettings
 }
 var file_admin_v1_admin_proto_depIdxs = []int32{
-	33, // 0: blueapi.admin.v1.ListAccountGroupsResponse.accountGroups:type_name -> blueapi.api.AccountGroup
-	33, // 1: blueapi.admin.v1.GetAccountGroupResponse.acctGroup:type_name -> blueapi.api.AccountGroup
-	34, // 2: blueapi.admin.v1.ListNotificationChannelsResponse.channels:type_name -> blueapi.api.NotificationChannel
-	35, // 3: blueapi.admin.v1.CreateNotificationChannelRequest.email:type_name -> blueapi.api.EmailChannel
-	36, // 4: blueapi.admin.v1.CreateNotificationChannelRequest.slack:type_name -> blueapi.api.SlackChannel
-	37, // 5: blueapi.admin.v1.CreateNotificationChannelRequest.msteams:type_name -> blueapi.api.MSTeamsChannel
-	35, // 6: blueapi.admin.v1.UpdateNotificationChannelRequest.email:type_name -> blueapi.api.EmailChannel
-	36, // 7: blueapi.admin.v1.UpdateNotificationChannelRequest.slack:type_name -> blueapi.api.SlackChannel
-	37, // 8: blueapi.admin.v1.UpdateNotificationChannelRequest.msteams:type_name -> blueapi.api.MSTeamsChannel
-	38, // 9: blueapi.admin.v1.ListNotificationsResponse.notifications:type_name -> blueapi.api.Notification
-	0,  // 10: blueapi.admin.v1.Admin.ListAccountGroups:input_type -> blueapi.admin.v1.ListAccountGroupsRequest
-	2,  // 11: blueapi.admin.v1.Admin.GetAccountGroup:input_type -> blueapi.admin.v1.GetAccountGroupRequest
-	4,  // 12: blueapi.admin.v1.Admin.GetDefaultCostAccessTemplateUrl:input_type -> blueapi.admin.v1.GetDefaultCostAccessTemplateUrlRequest
-	6,  // 13: blueapi.admin.v1.Admin.ListDefaultCostAccess:input_type -> blueapi.admin.v1.ListDefaultCostAccessRequest
-	7,  // 14: blueapi.admin.v1.Admin.GetDefaultCostAccess:input_type -> blueapi.admin.v1.GetDefaultCostAccessRequest
-	9,  // 15: blueapi.admin.v1.Admin.CreateDefaultCostAccess:input_type -> blueapi.admin.v1.CreateDefaultCostAccessRequest
-	10, // 16: blueapi.admin.v1.Admin.UpdateDefaultCostAccess:input_type -> blueapi.admin.v1.UpdateDefaultCostAccessRequest
-	11, // 17: blueapi.admin.v1.Admin.DeleteDefaultCostAccess:input_type -> blueapi.admin.v1.DeleteDefaultCostAccessRequest
-	12, // 18: blueapi.admin.v1.Admin.GetCloudWatchMetricsStreamTemplateUrl:input_type -> blueapi.admin.v1.GetCloudWatchMetricsStreamTemplateUrlRequest
-	14, // 19: blueapi.admin.v1.Admin.CreateCloudWatchMetricsStream:input_type -> blueapi.admin.v1.CreateCloudWatchMetricsStreamRequest
-	31, // 20: blueapi.admin.v1.Admin.CreateProformaCur:input_type -> blueapi.admin.v1.CreateProformaCurRequest
-	16, // 21: blueapi.admin.v1.Admin.GetNotificationSettings:input_type -> blueapi.admin.v1.GetNotificationSettingsRequest
-	17, // 22: blueapi.admin.v1.Admin.SaveNotificationSettings:input_type -> blueapi.admin.v1.SaveNotificationSettingsRequest
-	18, // 23: blueapi.admin.v1.Admin.ListNotificationChannels:input_type -> blueapi.admin.v1.ListNotificationChannelsRequest
-	20, // 24: blueapi.admin.v1.Admin.GetNotificationChannel:input_type -> blueapi.admin.v1.GetNotificationChannelRequest
-	21, // 25: blueapi.admin.v1.Admin.CreateNotificationChannel:input_type -> blueapi.admin.v1.CreateNotificationChannelRequest
-	22, // 26: blueapi.admin.v1.Admin.CreateDefaultNotificationChannel:input_type -> blueapi.admin.v1.CreateDefaultNotificationChannelRequest
-	23, // 27: blueapi.admin.v1.Admin.UpdateNotificationChannel:input_type -> blueapi.admin.v1.UpdateNotificationChannelRequest
-	24, // 28: blueapi.admin.v1.Admin.DeleteNotificationChannel:input_type -> blueapi.admin.v1.DeleteNotificationChannelRequest
-	25, // 29: blueapi.admin.v1.Admin.ListNotifications:input_type -> blueapi.admin.v1.ListNotificationsRequest
-	27, // 30: blueapi.admin.v1.Admin.GetNotification:input_type -> blueapi.admin.v1.GetNotificationRequest
-	28, // 31: blueapi.admin.v1.Admin.CreateNotification:input_type -> blueapi.admin.v1.CreateNotificationRequest
-	29, // 32: blueapi.admin.v1.Admin.UpdateNotification:input_type -> blueapi.admin.v1.UpdateNotificationRequest
-	30, // 33: blueapi.admin.v1.Admin.DeleteNotification:input_type -> blueapi.admin.v1.DeleteNotificationRequest
-	1,  // 34: blueapi.admin.v1.Admin.ListAccountGroups:output_type -> blueapi.admin.v1.ListAccountGroupsResponse
-	3,  // 35: blueapi.admin.v1.Admin.GetAccountGroup:output_type -> blueapi.admin.v1.GetAccountGroupResponse
-	5,  // 36: blueapi.admin.v1.Admin.GetDefaultCostAccessTemplateUrl:output_type -> blueapi.admin.v1.GetDefaultCostAccessTemplateUrlResponse
-	8,  // 37: blueapi.admin.v1.Admin.ListDefaultCostAccess:output_type -> blueapi.admin.v1.DefaultCostAccess
-	8,  // 38: blueapi.admin.v1.Admin.GetDefaultCostAccess:output_type -> blueapi.admin.v1.DefaultCostAccess
-	8,  // 39: blueapi.admin.v1.Admin.CreateDefaultCostAccess:output_type -> blueapi.admin.v1.DefaultCostAccess
-	39, // 40: blueapi.admin.v1.Admin.UpdateDefaultCostAccess:output_type -> protos.Operation
-	40, // 41: blueapi.admin.v1.Admin.DeleteDefaultCostAccess:output_type -> google.protobuf.Empty
-	13, // 42: blueapi.admin.v1.Admin.GetCloudWatchMetricsStreamTemplateUrl:output_type -> blueapi.admin.v1.GetCloudWatchMetricsStreamTemplateUrlResponse
-	15, // 43: blueapi.admin.v1.Admin.CreateCloudWatchMetricsStream:output_type -> blueapi.admin.v1.CloudWatchMetricsStream
-	32, // 44: blueapi.admin.v1.Admin.CreateProformaCur:output_type -> blueapi.admin.v1.ProformaCur
-	41, // 45: blueapi.admin.v1.Admin.GetNotificationSettings:output_type -> blueapi.api.NotificationSettings
-	41, // 46: blueapi.admin.v1.Admin.SaveNotificationSettings:output_type -> blueapi.api.NotificationSettings
-	19, // 47: blueapi.admin.v1.Admin.ListNotificationChannels:output_type -> blueapi.admin.v1.ListNotificationChannelsResponse
-	34, // 48: blueapi.admin.v1.Admin.GetNotificationChannel:output_type -> blueapi.api.NotificationChannel
-	34, // 49: blueapi.admin.v1.Admin.CreateNotificationChannel:output_type -> blueapi.api.NotificationChannel
-	34, // 50: blueapi.admin.v1.Admin.CreateDefaultNotificationChannel:output_type -> blueapi.api.NotificationChannel
-	34, // 51: blueapi.admin.v1.Admin.UpdateNotificationChannel:output_type -> blueapi.api.NotificationChannel
-	40, // 52: blueapi.admin.v1.Admin.DeleteNotificationChannel:output_type -> google.protobuf.Empty
-	26, // 53: blueapi.admin.v1.Admin.ListNotifications:output_type -> blueapi.admin.v1.ListNotificationsResponse
-	38, // 54: blueapi.admin.v1.Admin.GetNotification:output_type -> blueapi.api.Notification
-	38, // 55: blueapi.admin.v1.Admin.CreateNotification:output_type -> blueapi.api.Notification
-	38, // 56: blueapi.admin.v1.Admin.UpdateNotification:output_type -> blueapi.api.Notification
-	40, // 57: blueapi.admin.v1.Admin.DeleteNotification:output_type -> google.protobuf.Empty
-	34, // [34:58] is the sub-list for method output_type
-	10, // [10:34] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	34, // 0: blueapi.admin.v1.ListAccountGroupsResponse.accountGroups:type_name -> blueapi.api.AccountGroup
+	34, // 1: blueapi.admin.v1.GetAccountGroupResponse.acctGroup:type_name -> blueapi.api.AccountGroup
+	35, // 2: blueapi.admin.v1.ListNotificationChannelsResponse.channels:type_name -> blueapi.api.NotificationChannel
+	36, // 3: blueapi.admin.v1.CreateNotificationChannelRequest.email:type_name -> blueapi.api.EmailChannel
+	37, // 4: blueapi.admin.v1.CreateNotificationChannelRequest.slack:type_name -> blueapi.api.SlackChannel
+	38, // 5: blueapi.admin.v1.CreateNotificationChannelRequest.msteams:type_name -> blueapi.api.MSTeamsChannel
+	36, // 6: blueapi.admin.v1.UpdateNotificationChannelRequest.email:type_name -> blueapi.api.EmailChannel
+	37, // 7: blueapi.admin.v1.UpdateNotificationChannelRequest.slack:type_name -> blueapi.api.SlackChannel
+	38, // 8: blueapi.admin.v1.UpdateNotificationChannelRequest.msteams:type_name -> blueapi.api.MSTeamsChannel
+	39, // 9: blueapi.admin.v1.ListNotificationsResponse.notifications:type_name -> blueapi.api.Notification
+	27, // 10: blueapi.admin.v1.CreateNotificationRequest.account:type_name -> blueapi.admin.v1.NotificationAccount
+	27, // 11: blueapi.admin.v1.UpdateNotificationRequest.account:type_name -> blueapi.admin.v1.NotificationAccount
+	0,  // 12: blueapi.admin.v1.Admin.ListAccountGroups:input_type -> blueapi.admin.v1.ListAccountGroupsRequest
+	2,  // 13: blueapi.admin.v1.Admin.GetAccountGroup:input_type -> blueapi.admin.v1.GetAccountGroupRequest
+	4,  // 14: blueapi.admin.v1.Admin.GetDefaultCostAccessTemplateUrl:input_type -> blueapi.admin.v1.GetDefaultCostAccessTemplateUrlRequest
+	6,  // 15: blueapi.admin.v1.Admin.ListDefaultCostAccess:input_type -> blueapi.admin.v1.ListDefaultCostAccessRequest
+	7,  // 16: blueapi.admin.v1.Admin.GetDefaultCostAccess:input_type -> blueapi.admin.v1.GetDefaultCostAccessRequest
+	9,  // 17: blueapi.admin.v1.Admin.CreateDefaultCostAccess:input_type -> blueapi.admin.v1.CreateDefaultCostAccessRequest
+	10, // 18: blueapi.admin.v1.Admin.UpdateDefaultCostAccess:input_type -> blueapi.admin.v1.UpdateDefaultCostAccessRequest
+	11, // 19: blueapi.admin.v1.Admin.DeleteDefaultCostAccess:input_type -> blueapi.admin.v1.DeleteDefaultCostAccessRequest
+	12, // 20: blueapi.admin.v1.Admin.GetCloudWatchMetricsStreamTemplateUrl:input_type -> blueapi.admin.v1.GetCloudWatchMetricsStreamTemplateUrlRequest
+	14, // 21: blueapi.admin.v1.Admin.CreateCloudWatchMetricsStream:input_type -> blueapi.admin.v1.CreateCloudWatchMetricsStreamRequest
+	32, // 22: blueapi.admin.v1.Admin.CreateProformaCur:input_type -> blueapi.admin.v1.CreateProformaCurRequest
+	16, // 23: blueapi.admin.v1.Admin.GetNotificationSettings:input_type -> blueapi.admin.v1.GetNotificationSettingsRequest
+	17, // 24: blueapi.admin.v1.Admin.SaveNotificationSettings:input_type -> blueapi.admin.v1.SaveNotificationSettingsRequest
+	18, // 25: blueapi.admin.v1.Admin.ListNotificationChannels:input_type -> blueapi.admin.v1.ListNotificationChannelsRequest
+	20, // 26: blueapi.admin.v1.Admin.GetNotificationChannel:input_type -> blueapi.admin.v1.GetNotificationChannelRequest
+	21, // 27: blueapi.admin.v1.Admin.CreateNotificationChannel:input_type -> blueapi.admin.v1.CreateNotificationChannelRequest
+	22, // 28: blueapi.admin.v1.Admin.CreateDefaultNotificationChannel:input_type -> blueapi.admin.v1.CreateDefaultNotificationChannelRequest
+	23, // 29: blueapi.admin.v1.Admin.UpdateNotificationChannel:input_type -> blueapi.admin.v1.UpdateNotificationChannelRequest
+	24, // 30: blueapi.admin.v1.Admin.DeleteNotificationChannel:input_type -> blueapi.admin.v1.DeleteNotificationChannelRequest
+	25, // 31: blueapi.admin.v1.Admin.ListNotifications:input_type -> blueapi.admin.v1.ListNotificationsRequest
+	28, // 32: blueapi.admin.v1.Admin.GetNotification:input_type -> blueapi.admin.v1.GetNotificationRequest
+	29, // 33: blueapi.admin.v1.Admin.CreateNotification:input_type -> blueapi.admin.v1.CreateNotificationRequest
+	30, // 34: blueapi.admin.v1.Admin.UpdateNotification:input_type -> blueapi.admin.v1.UpdateNotificationRequest
+	31, // 35: blueapi.admin.v1.Admin.DeleteNotification:input_type -> blueapi.admin.v1.DeleteNotificationRequest
+	1,  // 36: blueapi.admin.v1.Admin.ListAccountGroups:output_type -> blueapi.admin.v1.ListAccountGroupsResponse
+	3,  // 37: blueapi.admin.v1.Admin.GetAccountGroup:output_type -> blueapi.admin.v1.GetAccountGroupResponse
+	5,  // 38: blueapi.admin.v1.Admin.GetDefaultCostAccessTemplateUrl:output_type -> blueapi.admin.v1.GetDefaultCostAccessTemplateUrlResponse
+	8,  // 39: blueapi.admin.v1.Admin.ListDefaultCostAccess:output_type -> blueapi.admin.v1.DefaultCostAccess
+	8,  // 40: blueapi.admin.v1.Admin.GetDefaultCostAccess:output_type -> blueapi.admin.v1.DefaultCostAccess
+	8,  // 41: blueapi.admin.v1.Admin.CreateDefaultCostAccess:output_type -> blueapi.admin.v1.DefaultCostAccess
+	40, // 42: blueapi.admin.v1.Admin.UpdateDefaultCostAccess:output_type -> protos.Operation
+	41, // 43: blueapi.admin.v1.Admin.DeleteDefaultCostAccess:output_type -> google.protobuf.Empty
+	13, // 44: blueapi.admin.v1.Admin.GetCloudWatchMetricsStreamTemplateUrl:output_type -> blueapi.admin.v1.GetCloudWatchMetricsStreamTemplateUrlResponse
+	15, // 45: blueapi.admin.v1.Admin.CreateCloudWatchMetricsStream:output_type -> blueapi.admin.v1.CloudWatchMetricsStream
+	33, // 46: blueapi.admin.v1.Admin.CreateProformaCur:output_type -> blueapi.admin.v1.ProformaCur
+	42, // 47: blueapi.admin.v1.Admin.GetNotificationSettings:output_type -> blueapi.api.NotificationSettings
+	42, // 48: blueapi.admin.v1.Admin.SaveNotificationSettings:output_type -> blueapi.api.NotificationSettings
+	19, // 49: blueapi.admin.v1.Admin.ListNotificationChannels:output_type -> blueapi.admin.v1.ListNotificationChannelsResponse
+	35, // 50: blueapi.admin.v1.Admin.GetNotificationChannel:output_type -> blueapi.api.NotificationChannel
+	35, // 51: blueapi.admin.v1.Admin.CreateNotificationChannel:output_type -> blueapi.api.NotificationChannel
+	35, // 52: blueapi.admin.v1.Admin.CreateDefaultNotificationChannel:output_type -> blueapi.api.NotificationChannel
+	35, // 53: blueapi.admin.v1.Admin.UpdateNotificationChannel:output_type -> blueapi.api.NotificationChannel
+	41, // 54: blueapi.admin.v1.Admin.DeleteNotificationChannel:output_type -> google.protobuf.Empty
+	26, // 55: blueapi.admin.v1.Admin.ListNotifications:output_type -> blueapi.admin.v1.ListNotificationsResponse
+	39, // 56: blueapi.admin.v1.Admin.GetNotification:output_type -> blueapi.api.Notification
+	39, // 57: blueapi.admin.v1.Admin.CreateNotification:output_type -> blueapi.api.Notification
+	39, // 58: blueapi.admin.v1.Admin.UpdateNotification:output_type -> blueapi.api.Notification
+	41, // 59: blueapi.admin.v1.Admin.DeleteNotification:output_type -> google.protobuf.Empty
+	36, // [36:60] is the sub-list for method output_type
+	12, // [12:36] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_admin_v1_admin_proto_init() }
@@ -2949,7 +3040,7 @@ func file_admin_v1_admin_proto_init() {
 			}
 		}
 		file_admin_v1_admin_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetNotificationRequest); i {
+			switch v := v.(*NotificationAccount); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2961,7 +3052,7 @@ func file_admin_v1_admin_proto_init() {
 			}
 		}
 		file_admin_v1_admin_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateNotificationRequest); i {
+			switch v := v.(*GetNotificationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2973,7 +3064,7 @@ func file_admin_v1_admin_proto_init() {
 			}
 		}
 		file_admin_v1_admin_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateNotificationRequest); i {
+			switch v := v.(*CreateNotificationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2985,7 +3076,7 @@ func file_admin_v1_admin_proto_init() {
 			}
 		}
 		file_admin_v1_admin_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteNotificationRequest); i {
+			switch v := v.(*UpdateNotificationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -2997,7 +3088,7 @@ func file_admin_v1_admin_proto_init() {
 			}
 		}
 		file_admin_v1_admin_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateProformaCurRequest); i {
+			switch v := v.(*DeleteNotificationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3009,6 +3100,18 @@ func file_admin_v1_admin_proto_init() {
 			}
 		}
 		file_admin_v1_admin_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateProformaCurRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_admin_v1_admin_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ProformaCur); i {
 			case 0:
 				return &v.state
@@ -3027,7 +3130,7 @@ func file_admin_v1_admin_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_admin_v1_admin_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   33,
+			NumMessages:   34,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
