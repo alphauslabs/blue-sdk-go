@@ -1620,6 +1620,7 @@ type GetNotificationRequest struct {
 	// `InvoiceCalculationStarted`,
 	// `InvoiceCalculationFinished`,
 	// `CurUpdatedAfterInvoice`.
+	// `AccountBudgetAlert`.
 	NotificationType string `protobuf:"bytes,2,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 }
 
@@ -1680,6 +1681,7 @@ type CreateNotificationRequest struct {
 	// `InvoiceCalculationStarted`,
 	// `InvoiceCalculationFinished`,
 	// `CurUpdatedAfterInvoice`.
+	// `AccountBudgetAlert`.
 	NotificationType string `protobuf:"bytes,1,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 	// Required
 	Channels []string `protobuf:"bytes,2,rep,name=channels,proto3" json:"channels,omitempty"`
@@ -1766,6 +1768,7 @@ type UpdateNotificationRequest struct {
 	// `InvoiceCalculationStarted`,
 	// `InvoiceCalculationFinished`,
 	// `CurUpdatedAfterInvoice`.
+	// `AccountBudgetAlert`.
 	NotificationType string `protobuf:"bytes,4,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 	// Optional. only available Wave(Pro).
 	Account *NotificationAccount `protobuf:"bytes,5,opt,name=account,proto3" json:"account,omitempty"`
@@ -1851,6 +1854,7 @@ type DeleteNotificationRequest struct {
 	// `InvoiceCalculationStarted`,
 	// `InvoiceCalculationFinished`,
 	// `CurUpdatedAfterInvoice`.
+	// `AccountBudgetAlert`.
 	NotificationType string `protobuf:"bytes,2,opt,name=notificationType,proto3" json:"notificationType,omitempty"`
 }
 
