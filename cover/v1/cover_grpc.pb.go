@@ -128,6 +128,7 @@ const (
 	Cover_GetChannelDetails_FullMethodName            = "/blueapi.cover.v1.Cover/GetChannelDetails"
 	Cover_DeleteChannel_FullMethodName                = "/blueapi.cover.v1.Cover/DeleteChannel"
 	Cover_UpdateChannelDetails_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
+	Cover_GetRiSpRecommendations_FullMethodName       = "/blueapi.cover.v1.Cover/GetRiSpRecommendations"
 )
 
 // CoverClient is the client API for Cover service.
@@ -347,6 +348,8 @@ type CoverClient interface {
 	DeleteChannel(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*DeleteChannelResponse, error)
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(ctx context.Context, in *UpdateChannelDetailsRequest, opts ...grpc.CallOption) (*UpdateChannelDetailsResponse, error)
+	// Get the RI or SP recommendations for every account in a cost group
+	GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsRequest, error)
 }
 
 type coverClient struct {
@@ -1782,6 +1785,15 @@ func (c *coverClient) UpdateChannelDetails(ctx context.Context, in *UpdateChanne
 	return out, nil
 }
 
+func (c *coverClient) GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsRequest, error) {
+	out := new(GetRiSpRecommendationsRequest)
+	err := c.cc.Invoke(ctx, Cover_GetRiSpRecommendations_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -1999,6 +2011,8 @@ type CoverServer interface {
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelResponse, error)
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error)
+	// Get the RI or SP recommendations for every account in a cost group
+	GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsRequest, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2326,6 +2340,9 @@ func (UnimplementedCoverServer) DeleteChannel(context.Context, *DeleteChannelReq
 }
 func (UnimplementedCoverServer) UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChannelDetails not implemented")
+}
+func (UnimplementedCoverServer) GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsRequest, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRiSpRecommendations not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4331,6 +4348,24 @@ func _Cover_UpdateChannelDetails_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetRiSpRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRiSpRecommendationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetRiSpRecommendations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetRiSpRecommendations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetRiSpRecommendations(ctx, req.(*GetRiSpRecommendationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4685,6 +4720,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateChannelDetails",
 			Handler:    _Cover_UpdateChannelDetails_Handler,
+		},
+		{
+			MethodName: "GetRiSpRecommendations",
+			Handler:    _Cover_GetRiSpRecommendations_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
