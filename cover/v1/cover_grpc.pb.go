@@ -349,7 +349,7 @@ type CoverClient interface {
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(ctx context.Context, in *UpdateChannelDetailsRequest, opts ...grpc.CallOption) (*UpdateChannelDetailsResponse, error)
 	// Get the RI or SP recommendations for every account in a cost group
-	GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsRequest, error)
+	GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsResponse, error)
 }
 
 type coverClient struct {
@@ -1785,8 +1785,8 @@ func (c *coverClient) UpdateChannelDetails(ctx context.Context, in *UpdateChanne
 	return out, nil
 }
 
-func (c *coverClient) GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsRequest, error) {
-	out := new(GetRiSpRecommendationsRequest)
+func (c *coverClient) GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsResponse, error) {
+	out := new(GetRiSpRecommendationsResponse)
 	err := c.cc.Invoke(ctx, Cover_GetRiSpRecommendations_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2012,7 +2012,7 @@ type CoverServer interface {
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error)
 	// Get the RI or SP recommendations for every account in a cost group
-	GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsRequest, error)
+	GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2341,7 +2341,7 @@ func (UnimplementedCoverServer) DeleteChannel(context.Context, *DeleteChannelReq
 func (UnimplementedCoverServer) UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChannelDetails not implemented")
 }
-func (UnimplementedCoverServer) GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsRequest, error) {
+func (UnimplementedCoverServer) GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRiSpRecommendations not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
