@@ -18167,7 +18167,21 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
                   <td>costGroupId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Cost Group Id </p></td>
+                  <td><p>If costgroupId is not provided, accountId must be provided. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>If accountId is not provided, costGroupId must be provided. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Supported values are &#39;PAYER&#39;, &#39;LINKED&#39; </p></td>
                 </tr>
               
             </tbody>
