@@ -13161,7 +13161,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
                 </tr>
               
                 <tr>
@@ -13185,6 +13185,13 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><p>Optional. Get only the value that set fieldMask.
 
 see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
+                <tr>
+                  <td>feeType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. If empty, defaults to all fee type. At the moment, only `Fee`,`Refund`,`Credit`,`SppDiscount` is supported. </p></td>
                 </tr>
               
             </tbody>
