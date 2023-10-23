@@ -644,6 +644,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.CreateAccountRequestGcpOptions"><span class="badge">M</span>CreateAccountRequestGcpOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.CreateCalculationsScheduleRequest"><span class="badge">M</span>CreateCalculationsScheduleRequest</a>
                 </li>
               
@@ -6582,6 +6586,13 @@ You can use the `{{ondemandrate}}` variable in the replacement value part to ref
                   <td><p>Required for the `aws` vendor. AWS-specific options. </p></td>
                 </tr>
               
+                <tr>
+                  <td>gcpOptions</td>
+                  <td><a href="#blueapi.cost.v1.CreateAccountRequestGcpOptions">CreateAccountRequestGcpOptions</a></td>
+                  <td></td>
+                  <td><p>Required for the `gcp` vendor. GCP-specific options. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -6604,6 +6615,37 @@ You can use the `{{ondemandrate}}` variable in the replacement value part to ref
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. The management account id (formerly known as master, or payer) to which an account belongs to, initially. If the account is moved to another management account, the system is able to detect it and set this value accordingly. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CreateAccountRequestGcpOptions">CreateAccountRequestGcpOptions</h3>
+        <p>GCP-specific options for registering an account.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>managementAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>managementBillingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
                 </tr>
               
             </tbody>
