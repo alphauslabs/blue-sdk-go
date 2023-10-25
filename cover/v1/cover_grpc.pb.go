@@ -129,6 +129,7 @@ const (
 	Cover_DeleteChannel_FullMethodName                = "/blueapi.cover.v1.Cover/DeleteChannel"
 	Cover_UpdateChannelDetails_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
 	Cover_GetRiSpRecommendations_FullMethodName       = "/blueapi.cover.v1.Cover/GetRiSpRecommendations"
+	Cover_GetAnomalyinCostGroup_FullMethodName        = "/blueapi.cover.v1.Cover/GetAnomalyinCostGroup"
 )
 
 // CoverClient is the client API for Cover service.
@@ -350,6 +351,8 @@ type CoverClient interface {
 	UpdateChannelDetails(ctx context.Context, in *UpdateChannelDetailsRequest, opts ...grpc.CallOption) (*UpdateChannelDetailsResponse, error)
 	// Get the RI or SP recommendations for every account in a cost group
 	GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsResponse, error)
+	// Get the data of a cost group containing anomaly values
+	GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (*GetAnomalyinCostGroupResponse, error)
 }
 
 type coverClient struct {
@@ -1794,6 +1797,15 @@ func (c *coverClient) GetRiSpRecommendations(ctx context.Context, in *GetRiSpRec
 	return out, nil
 }
 
+func (c *coverClient) GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (*GetAnomalyinCostGroupResponse, error) {
+	out := new(GetAnomalyinCostGroupResponse)
+	err := c.cc.Invoke(ctx, Cover_GetAnomalyinCostGroup_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2013,6 +2025,8 @@ type CoverServer interface {
 	UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error)
 	// Get the RI or SP recommendations for every account in a cost group
 	GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error)
+	// Get the data of a cost group containing anomaly values
+	GetAnomalyinCostGroup(context.Context, *GetAnomalyinCostGroupRequest) (*GetAnomalyinCostGroupResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2343,6 +2357,9 @@ func (UnimplementedCoverServer) UpdateChannelDetails(context.Context, *UpdateCha
 }
 func (UnimplementedCoverServer) GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRiSpRecommendations not implemented")
+}
+func (UnimplementedCoverServer) GetAnomalyinCostGroup(context.Context, *GetAnomalyinCostGroupRequest) (*GetAnomalyinCostGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnomalyinCostGroup not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4366,6 +4383,24 @@ func _Cover_GetRiSpRecommendations_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetAnomalyinCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAnomalyinCostGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAnomalyinCostGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetAnomalyinCostGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAnomalyinCostGroup(ctx, req.(*GetAnomalyinCostGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4724,6 +4759,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRiSpRecommendations",
 			Handler:    _Cover_GetRiSpRecommendations_Handler,
+		},
+		{
+			MethodName: "GetAnomalyinCostGroup",
+			Handler:    _Cover_GetAnomalyinCostGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
