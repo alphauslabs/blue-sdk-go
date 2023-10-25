@@ -130,6 +130,7 @@ const (
 	Cover_UpdateChannelDetails_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
 	Cover_GetRiSpRecommendations_FullMethodName       = "/blueapi.cover.v1.Cover/GetRiSpRecommendations"
 	Cover_GetAnomalyinCostGroup_FullMethodName        = "/blueapi.cover.v1.Cover/GetAnomalyinCostGroup"
+	Cover_CreateRiSpExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/CreateRiSpExpirationAlert"
 )
 
 // CoverClient is the client API for Cover service.
@@ -353,6 +354,8 @@ type CoverClient interface {
 	GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
 	GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (*GetAnomalyinCostGroupResponse, error)
+	// Create RI or SP Expiration Alert.
+	CreateRiSpExpirationAlert(ctx context.Context, in *CreateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type coverClient struct {
@@ -1806,6 +1809,15 @@ func (c *coverClient) GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyi
 	return out, nil
 }
 
+func (c *coverClient) CreateRiSpExpirationAlert(ctx context.Context, in *CreateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_CreateRiSpExpirationAlert_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2027,6 +2039,8 @@ type CoverServer interface {
 	GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
 	GetAnomalyinCostGroup(context.Context, *GetAnomalyinCostGroupRequest) (*GetAnomalyinCostGroupResponse, error)
+	// Create RI or SP Expiration Alert.
+	CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2360,6 +2374,9 @@ func (UnimplementedCoverServer) GetRiSpRecommendations(context.Context, *GetRiSp
 }
 func (UnimplementedCoverServer) GetAnomalyinCostGroup(context.Context, *GetAnomalyinCostGroupRequest) (*GetAnomalyinCostGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAnomalyinCostGroup not implemented")
+}
+func (UnimplementedCoverServer) CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateRiSpExpirationAlert not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4401,6 +4418,24 @@ func _Cover_GetAnomalyinCostGroup_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_CreateRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateRiSpExpirationAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateRiSpExpirationAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateRiSpExpirationAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateRiSpExpirationAlert(ctx, req.(*CreateRiSpExpirationAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4763,6 +4798,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAnomalyinCostGroup",
 			Handler:    _Cover_GetAnomalyinCostGroup_Handler,
+		},
+		{
+			MethodName: "CreateRiSpExpirationAlert",
+			Handler:    _Cover_CreateRiSpExpirationAlert_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
