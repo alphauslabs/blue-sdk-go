@@ -353,7 +353,7 @@ type CoverClient interface {
 	// Get the RI or SP recommendations for every account in a cost group
 	GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
-	GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (*GetAnomalyinCostGroupResponse, error)
+	GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (Cover_GetAnomalyinCostGroupClient, error)
 	// Create RI or SP Expiration Alert.
 	CreateRiSpExpirationAlert(ctx context.Context, in *CreateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -1800,13 +1800,36 @@ func (c *coverClient) GetRiSpRecommendations(ctx context.Context, in *GetRiSpRec
 	return out, nil
 }
 
-func (c *coverClient) GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (*GetAnomalyinCostGroupResponse, error) {
-	out := new(GetAnomalyinCostGroupResponse)
-	err := c.cc.Invoke(ctx, Cover_GetAnomalyinCostGroup_FullMethodName, in, out, opts...)
+func (c *coverClient) GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (Cover_GetAnomalyinCostGroupClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[20], Cover_GetAnomalyinCostGroup_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &coverGetAnomalyinCostGroupClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetAnomalyinCostGroupClient interface {
+	Recv() (*AnomalyData, error)
+	grpc.ClientStream
+}
+
+type coverGetAnomalyinCostGroupClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetAnomalyinCostGroupClient) Recv() (*AnomalyData, error) {
+	m := new(AnomalyData)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *coverClient) CreateRiSpExpirationAlert(ctx context.Context, in *CreateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
@@ -2038,7 +2061,7 @@ type CoverServer interface {
 	// Get the RI or SP recommendations for every account in a cost group
 	GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
-	GetAnomalyinCostGroup(context.Context, *GetAnomalyinCostGroupRequest) (*GetAnomalyinCostGroupResponse, error)
+	GetAnomalyinCostGroup(*GetAnomalyinCostGroupRequest, Cover_GetAnomalyinCostGroupServer) error
 	// Create RI or SP Expiration Alert.
 	CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
@@ -2372,8 +2395,8 @@ func (UnimplementedCoverServer) UpdateChannelDetails(context.Context, *UpdateCha
 func (UnimplementedCoverServer) GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRiSpRecommendations not implemented")
 }
-func (UnimplementedCoverServer) GetAnomalyinCostGroup(context.Context, *GetAnomalyinCostGroupRequest) (*GetAnomalyinCostGroupResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAnomalyinCostGroup not implemented")
+func (UnimplementedCoverServer) GetAnomalyinCostGroup(*GetAnomalyinCostGroupRequest, Cover_GetAnomalyinCostGroupServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetAnomalyinCostGroup not implemented")
 }
 func (UnimplementedCoverServer) CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRiSpExpirationAlert not implemented")
@@ -4400,22 +4423,25 @@ func _Cover_GetRiSpRecommendations_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_GetAnomalyinCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAnomalyinCostGroupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Cover_GetAnomalyinCostGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetAnomalyinCostGroupRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetAnomalyinCostGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetAnomalyinCostGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetAnomalyinCostGroup(ctx, req.(*GetAnomalyinCostGroupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(CoverServer).GetAnomalyinCostGroup(m, &coverGetAnomalyinCostGroupServer{stream})
+}
+
+type Cover_GetAnomalyinCostGroupServer interface {
+	Send(*AnomalyData) error
+	grpc.ServerStream
+}
+
+type coverGetAnomalyinCostGroupServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetAnomalyinCostGroupServer) Send(m *AnomalyData) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cover_CreateRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -4796,10 +4822,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetRiSpRecommendations_Handler,
 		},
 		{
-			MethodName: "GetAnomalyinCostGroup",
-			Handler:    _Cover_GetAnomalyinCostGroup_Handler,
-		},
-		{
 			MethodName: "CreateRiSpExpirationAlert",
 			Handler:    _Cover_CreateRiSpExpirationAlert_Handler,
 		},
@@ -4903,6 +4925,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetChannels",
 			Handler:       _Cover_GetChannels_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetAnomalyinCostGroup",
+			Handler:       _Cover_GetAnomalyinCostGroup_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -1341,6 +1341,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.AnomalyData"><span class="badge">M</span>AnomalyData</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.AssetsSummary"><span class="badge">M</span>AssetsSummary</a>
                 </li>
               
@@ -1542,10 +1546,6 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.GetAnomalyinCostGroupRequest"><span class="badge">M</span>GetAnomalyinCostGroupRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.GetAnomalyinCostGroupResponse"><span class="badge">M</span>GetAnomalyinCostGroupResponse</a>
                 </li>
               
                 <li>
@@ -15155,6 +15155,72 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.AnomalyData">AnomalyData</h3>
+        <p>Message response for anomaly detection</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>account</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCost</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isAnomaly</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.AssetsSummary">AssetsSummary</h3>
         <p></p>
 
@@ -17060,30 +17126,6 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td>costGroupId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.GetAnomalyinCostGroupResponse">GetAnomalyinCostGroupResponse</h3>
-        <p>Response message for getting anomaly</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>anomalyData</td>
-                  <td><a href="#blueapi.api.cover.AnomalyData">blueapi.api.cover.AnomalyData</a></td>
-                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -22328,7 +22370,7 @@ file in bytes </p></td>
               <tr>
                 <td>GetAnomalyinCostGroup</td>
                 <td><a href="#blueapi.cover.v1.GetAnomalyinCostGroupRequest">GetAnomalyinCostGroupRequest</a></td>
-                <td><a href="#blueapi.cover.v1.GetAnomalyinCostGroupResponse">GetAnomalyinCostGroupResponse</a></td>
+                <td><a href="#blueapi.cover.v1.AnomalyData">AnomalyData</a> stream</td>
                 <td><p>Get the data of a cost group containing anomaly values</p></td>
               </tr>
             
