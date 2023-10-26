@@ -988,6 +988,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.UpdateAccountRequest"><span class="badge">M</span>UpdateAccountRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.UpdateCostFiltersRequest"><span class="badge">M</span>UpdateCostFiltersRequest</a>
                 </li>
               
@@ -10202,6 +10206,44 @@ The same goes for notification. If you want to change only email value, set `{&#
 
         
       
+        <h3 id="blueapi.cost.v1.UpdateAccountRequest">UpdateAccountRequest</h3>
+        <p>Request message for the Cost.UpdateAccount rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.UpdateCostFiltersRequest">UpdateCostFiltersRequest</h3>
         <p>Request message for the UpdateCostFilters rpc.</p>
 
@@ -10357,6 +10399,13 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td><a href="#blueapi.cost.v1.CreateAccountRequest">CreateAccountRequest</a></td>
                 <td><a href="#blueapi.api.Account">.blueapi.api.Account</a></td>
                 <td><p>Registers a vendor account.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAccount</td>
+                <td><a href="#blueapi.cost.v1.UpdateAccountRequest">UpdateAccountRequest</a></td>
+                <td><a href="#blueapi.api.Account">.blueapi.api.Account</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates a vendor account. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -10754,6 +10803,16 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td>CreateAccount</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/accounts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAccount</td>
+                <td>PUT</td>
+                <td>/v1/{vendor}/accounts/{id}</td>
                 <td>*</td>
               </tr>
               

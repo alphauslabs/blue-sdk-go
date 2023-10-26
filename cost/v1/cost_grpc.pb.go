@@ -32,6 +32,7 @@ const (
 	Cost_ListAccounts_FullMethodName                  = "/blueapi.cost.v1.Cost/ListAccounts"
 	Cost_GetAccount_FullMethodName                    = "/blueapi.cost.v1.Cost/GetAccount"
 	Cost_CreateAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/CreateAccount"
+	Cost_UpdateAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/UpdateAccount"
 	Cost_DeleteAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/DeleteAccount"
 	Cost_ListTags_FullMethodName                      = "/blueapi.cost.v1.Cost/ListTags"
 	Cost_ListCalculatorRunningAccounts_FullMethodName = "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts"
@@ -96,6 +97,8 @@ type CostClient interface {
 	GetAccount(ctx context.Context, in *GetAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Registers a vendor account.
 	CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
+	// WORK-IN-PROGRESS: Updates a vendor account. Only available in Ripple.
+	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor tags.
@@ -325,6 +328,15 @@ func (c *costClient) GetAccount(ctx context.Context, in *GetAccountRequest, opts
 func (c *costClient) CreateAccount(ctx context.Context, in *CreateAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
 	out := new(api.Account)
 	err := c.cc.Invoke(ctx, Cost_CreateAccount_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
+	out := new(api.Account)
+	err := c.cc.Invoke(ctx, Cost_UpdateAccount_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -913,6 +925,8 @@ type CostServer interface {
 	GetAccount(context.Context, *GetAccountRequest) (*api.Account, error)
 	// Registers a vendor account.
 	CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error)
+	// WORK-IN-PROGRESS: Updates a vendor account. Only available in Ripple.
+	UpdateAccount(context.Context, *UpdateAccountRequest) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor tags.
@@ -1027,6 +1041,9 @@ func (UnimplementedCostServer) GetAccount(context.Context, *GetAccountRequest) (
 }
 func (UnimplementedCostServer) CreateAccount(context.Context, *CreateAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccount not implemented")
+}
+func (UnimplementedCostServer) UpdateAccount(context.Context, *UpdateAccountRequest) (*api.Account, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccount not implemented")
 }
 func (UnimplementedCostServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
@@ -1316,6 +1333,24 @@ func _Cost_CreateAccount_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).CreateAccount(ctx, req.(*CreateAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_UpdateAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).UpdateAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_UpdateAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).UpdateAccount(ctx, req.(*UpdateAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2126,6 +2161,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAccount",
 			Handler:    _Cost_CreateAccount_Handler,
+		},
+		{
+			MethodName: "UpdateAccount",
+			Handler:    _Cost_UpdateAccount_Handler,
 		},
 		{
 			MethodName: "DeleteAccount",
