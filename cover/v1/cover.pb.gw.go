@@ -4990,8 +4990,12 @@ func local_request_Cover_CreateRiSpExpirationAlert_0(ctx context.Context, marsha
 
 }
 
+var (
+	filter_Cover_UpdateRiSpExpirationAlert_0 = &utilities.DoubleArray{Encoding: map[string]int{"orgId": 0, "type": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
+)
+
 func request_Cover_UpdateRiSpExpirationAlert_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ManipulateRiSpExpirationAlertRequest
+	var protoReq UpdateRiSpExpirationAlertRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -5019,6 +5023,13 @@ func request_Cover_UpdateRiSpExpirationAlert_0(ctx context.Context, marshaler ru
 	protoReq.Type, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "type", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Cover_UpdateRiSpExpirationAlert_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := client.UpdateRiSpExpirationAlert(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -5027,7 +5038,7 @@ func request_Cover_UpdateRiSpExpirationAlert_0(ctx context.Context, marshaler ru
 }
 
 func local_request_Cover_UpdateRiSpExpirationAlert_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ManipulateRiSpExpirationAlertRequest
+	var protoReq UpdateRiSpExpirationAlertRequest
 	var metadata runtime.ServerMetadata
 
 	var (
@@ -5055,6 +5066,13 @@ func local_request_Cover_UpdateRiSpExpirationAlert_0(ctx context.Context, marsha
 	protoReq.Type, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "type", err)
+	}
+
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Cover_UpdateRiSpExpirationAlert_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
 	msg, err := server.UpdateRiSpExpirationAlert(ctx, &protoReq)

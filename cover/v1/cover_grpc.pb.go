@@ -359,7 +359,7 @@ type CoverClient interface {
 	// Create RI or SP Expiration Alert.
 	CreateRiSpExpirationAlert(ctx context.Context, in *CreateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Update RI or SP Expiration Alert
-	UpdateRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateRiSpExpirationAlert(ctx context.Context, in *UpdateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Get RI or SP Expiration Alert Data
 	GetRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*GetRiSpExpirationAlertResponse, error)
 }
@@ -1847,7 +1847,7 @@ func (c *coverClient) CreateRiSpExpirationAlert(ctx context.Context, in *CreateR
 	return out, nil
 }
 
-func (c *coverClient) UpdateRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *coverClient) UpdateRiSpExpirationAlert(ctx context.Context, in *UpdateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Cover_UpdateRiSpExpirationAlert_FullMethodName, in, out, opts...)
 	if err != nil {
@@ -2089,7 +2089,7 @@ type CoverServer interface {
 	// Create RI or SP Expiration Alert.
 	CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
 	// Update RI or SP Expiration Alert
-	UpdateRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
+	UpdateRiSpExpirationAlert(context.Context, *UpdateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
 	// Get RI or SP Expiration Alert Data
 	GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*GetRiSpExpirationAlertResponse, error)
 	mustEmbedUnimplementedCoverServer()
@@ -2429,7 +2429,7 @@ func (UnimplementedCoverServer) GetAnomalyinCostGroup(*GetAnomalyinCostGroupRequ
 func (UnimplementedCoverServer) CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateRiSpExpirationAlert not implemented")
 }
-func (UnimplementedCoverServer) UpdateRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
+func (UnimplementedCoverServer) UpdateRiSpExpirationAlert(context.Context, *UpdateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRiSpExpirationAlert not implemented")
 }
 func (UnimplementedCoverServer) GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*GetRiSpExpirationAlertResponse, error) {
@@ -4497,7 +4497,7 @@ func _Cover_CreateRiSpExpirationAlert_Handler(srv interface{}, ctx context.Conte
 }
 
 func _Cover_UpdateRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ManipulateRiSpExpirationAlertRequest)
+	in := new(UpdateRiSpExpirationAlertRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -4509,7 +4509,7 @@ func _Cover_UpdateRiSpExpirationAlert_Handler(srv interface{}, ctx context.Conte
 		FullMethod: Cover_UpdateRiSpExpirationAlert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateRiSpExpirationAlert(ctx, req.(*ManipulateRiSpExpirationAlertRequest))
+		return srv.(CoverServer).UpdateRiSpExpirationAlert(ctx, req.(*UpdateRiSpExpirationAlertRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

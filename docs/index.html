@@ -2005,6 +2005,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.UpdateRiSpExpirationAlertRequest"><span class="badge">M</span>UpdateRiSpExpirationAlertRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.UpdateSideMenuStateRequest"><span class="badge">M</span>UpdateSideMenuStateRequest</a>
                 </li>
               
@@ -20855,6 +20859,65 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.UpdateRiSpExpirationAlertRequest">UpdateRiSpExpirationAlertRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required. MSP Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required. ri or sp </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alertEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. This field must not empty. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frequency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. This field must not empty </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. This field must not empty. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateSideMenuStateRequest">UpdateSideMenuStateRequest</h3>
         <p>Request message for UpdateSideMenuState</p>
 
@@ -22562,7 +22625,7 @@ file in bytes </p></td>
             
               <tr>
                 <td>UpdateRiSpExpirationAlert</td>
-                <td><a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateRiSpExpirationAlertRequest">UpdateRiSpExpirationAlertRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>Update RI or SP Expiration Alert</p></td>
               </tr>
