@@ -1697,6 +1697,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetRiSpExpirationAlertResponse"><span class="badge">M</span>GetRiSpExpirationAlertResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetRiSpRecommendationsRequest"><span class="badge">M</span>GetRiSpRecommendationsRequest</a>
                 </li>
               
@@ -1782,6 +1786,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListFeesRequest"><span class="badge">M</span>ListFeesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest"><span class="badge">M</span>ManipulateRiSpExpirationAlertRequest</a>
                 </li>
               
                 <li>
@@ -16107,7 +16115,8 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td>frequency</td>
                   <td><a href="#int64">int64</a></td>
                   <td>repeated</td>
-                  <td><p>Supported values are the following:
+                  <td><p>Required if the alertEnabled is set to true
+Supported values are the following:
 [0, 7, 30, 60, 90] </p></td>
                 </tr>
               
@@ -16122,21 +16131,21 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td>alertEnabled</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Switch in enabling alert. </p></td>
+                  <td><p>required. Switch in enabling alert. </p></td>
                 </tr>
               
                 <tr>
                   <td>notificationChannels</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Array of notificationChannel Ids from DynamoDB. Existing in ripple. </p></td>
+                  <td><p>required. Array of notificationChannel Ids from DynamoDB. Existing in ripple. </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>&#34;ri&#34; or &#34;sp&#34; </p></td>
+                  <td><p>required. &#34;ri&#34; or &#34;sp&#34; </p></td>
                 </tr>
               
             </tbody>
@@ -18364,6 +18373,79 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetRiSpExpirationAlertResponse">GetRiSpExpirationAlertResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alertEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frequency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetRiSpRecommendationsRequest">GetRiSpRecommendationsRequest</h3>
         <p>Request message for GetRiSpRecomemendations</p>
 
@@ -18934,6 +19016,37 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required. MSP Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required. ri or sp </p></td>
                 </tr>
               
             </tbody>
@@ -22447,6 +22560,20 @@ file in bytes </p></td>
                 <td><p>Create RI or SP Expiration Alert.</p></td>
               </tr>
             
+              <tr>
+                <td>UpdateRiSpExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Update RI or SP Expiration Alert</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetRiSpExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetRiSpExpirationAlertResponse">GetRiSpExpirationAlertResponse</a></td>
+                <td><p>Get RI or SP Expiration Alert Data</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -23562,6 +23689,26 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/alerts/expire/risp</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateRiSpExpirationAlert</td>
+                <td>PUT</td>
+                <td>/v1/alerts/expire/risp/{orgId}/{type}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetRiSpExpirationAlert</td>
+                <td>GET</td>
+                <td>/v1/alerts/expire/risp/{orgId}/{type}</td>
+                <td></td>
               </tr>
               
             
