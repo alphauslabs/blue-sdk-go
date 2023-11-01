@@ -1175,6 +1175,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListAccountResourcesRequest"><span class="badge">M</span>ListAccountResourcesRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListAwsDailyRunHistoryRequest"><span class="badge">M</span>ListAwsDailyRunHistoryRequest</a>
                 </li>
               
@@ -1220,6 +1224,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.RemoveAccountInvoiceServiceDiscountsRequest"><span class="badge">M</span>RemoveAccountInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ResourceAccount"><span class="badge">M</span>ResourceAccount</a>
                 </li>
               
                 <li>
@@ -12999,6 +13007,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ListAccountResourcesRequest">ListAccountResourcesRequest</h3>
+        <p>Request message for the Billing.ListAccountResources rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListAwsDailyRunHistoryRequest">ListAwsDailyRunHistoryRequest</h3>
         <p>Request message for the Billing.ListAwsCalculationHistory rpc.</p>
 
@@ -13379,6 +13418,44 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#blueapi.billing.v1.AccountServiceDiscounts">AccountServiceDiscounts</a></td>
                   <td>repeated</td>
                   <td><p>Required. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ResourceAccount">ResourceAccount</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>registered</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -13916,6 +13993,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><p>WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).</p></td>
               </tr>
             
+              <tr>
+                <td>ListAccountResources</td>
+                <td><a href="#blueapi.billing.v1.ListAccountResourcesRequest">ListAccountResourcesRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ResourceAccount">ResourceAccount</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -14251,6 +14335,16 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>POST</td>
                 <td>/v1/{vendor}/invoiceadjustments:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListAccountResources</td>
+                <td>GET</td>
+                <td>/v1/resources/accounts/{vendor}</td>
+                <td></td>
               </tr>
               
             

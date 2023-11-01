@@ -55,6 +55,7 @@ const (
 	Billing_ListAbcBillingGroups_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
 	Billing_ListAbcBillingGroupAccounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
 	Billing_ReadInvoiceAdjustments_FullMethodName               = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
+	Billing_ListAccountResources_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAccountResources"
 )
 
 // BillingClient is the client API for Billing service.
@@ -125,6 +126,8 @@ type BillingClient interface {
 	ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error)
 	// WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
+	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
+	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
 }
 
 type billingClient struct {
@@ -676,6 +679,38 @@ func (x *billingReadInvoiceAdjustmentsClient) Recv() (*wave.Adjustment, error) {
 	return m, nil
 }
 
+func (c *billingClient) ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[11], Billing_ListAccountResources_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListAccountResourcesClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListAccountResourcesClient interface {
+	Recv() (*ResourceAccount, error)
+	grpc.ClientStream
+}
+
+type billingListAccountResourcesClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListAccountResourcesClient) Recv() (*ResourceAccount, error) {
+	m := new(ResourceAccount)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -744,6 +779,8 @@ type BillingServer interface {
 	ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error
 	// WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
+	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
+	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -846,6 +883,9 @@ func (UnimplementedBillingServer) ListAbcBillingGroupAccounts(*ListAbcBillingGro
 }
 func (UnimplementedBillingServer) ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadInvoiceAdjustments not implemented")
+}
+func (UnimplementedBillingServer) ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAccountResources not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1469,6 +1509,27 @@ func (x *billingReadInvoiceAdjustmentsServer) Send(m *wave.Adjustment) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_ListAccountResources_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAccountResourcesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListAccountResources(m, &billingListAccountResourcesServer{stream})
+}
+
+type Billing_ListAccountResourcesServer interface {
+	Send(*ResourceAccount) error
+	grpc.ServerStream
+}
+
+type billingListAccountResourcesServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListAccountResourcesServer) Send(m *ResourceAccount) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1615,6 +1676,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadInvoiceAdjustments",
 			Handler:       _Billing_ReadInvoiceAdjustments_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAccountResources",
+			Handler:       _Billing_ListAccountResources_Handler,
 			ServerStreams: true,
 		},
 	},
