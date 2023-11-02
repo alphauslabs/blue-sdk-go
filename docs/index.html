@@ -15379,6 +15379,13 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><p>The value will be true if there is an anomaly for a specific account and product </p></td>
                 </tr>
               
+                <tr>
+                  <td>anomalyProbability</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>How many percentage does the data is considered anomaly </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -17303,10 +17310,17 @@ Supported values are the following:
                 </tr>
               
                 <tr>
-                  <td>date</td>
+                  <td>startDate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The date when you want to know if there is an anomaly, cannot be the current date </p></td>
+                  <td><p>Start date for detecting anomalies </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>End date for detection anomalies </p></td>
                 </tr>
               
             </tbody>
