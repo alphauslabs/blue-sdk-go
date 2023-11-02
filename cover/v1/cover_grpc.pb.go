@@ -133,6 +133,8 @@ const (
 	Cover_CreateRiSpExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/CreateRiSpExpirationAlert"
 	Cover_UpdateRiSpExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/UpdateRiSpExpirationAlert"
 	Cover_GetRiSpExpirationAlert_FullMethodName       = "/blueapi.cover.v1.Cover/GetRiSpExpirationAlert"
+	Cover_ListRiSpExpirationAlert_FullMethodName      = "/blueapi.cover.v1.Cover/ListRiSpExpirationAlert"
+	Cover_DeleteRiSpExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/DeleteRiSpExpirationAlert"
 )
 
 // CoverClient is the client API for Cover service.
@@ -361,7 +363,11 @@ type CoverClient interface {
 	// Update RI or SP Expiration Alert
 	UpdateRiSpExpirationAlert(ctx context.Context, in *UpdateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Get RI or SP Expiration Alert Data
-	GetRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*GetRiSpExpirationAlertResponse, error)
+	GetRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*RiSpExpiryAlertData, error)
+	// List all Ri and Sp Expiration Alert Data
+	ListRiSpExpirationAlert(ctx context.Context, in *ListRiSpExpirationAlertRequest, opts ...grpc.CallOption) (Cover_ListRiSpExpirationAlertClient, error)
+	// Delete selected Ri and Sp Expiration Alert Data
+	DeleteRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type coverClient struct {
@@ -1856,9 +1862,50 @@ func (c *coverClient) UpdateRiSpExpirationAlert(ctx context.Context, in *UpdateR
 	return out, nil
 }
 
-func (c *coverClient) GetRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*GetRiSpExpirationAlertResponse, error) {
-	out := new(GetRiSpExpirationAlertResponse)
+func (c *coverClient) GetRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*RiSpExpiryAlertData, error) {
+	out := new(RiSpExpiryAlertData)
 	err := c.cc.Invoke(ctx, Cover_GetRiSpExpirationAlert_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ListRiSpExpirationAlert(ctx context.Context, in *ListRiSpExpirationAlertRequest, opts ...grpc.CallOption) (Cover_ListRiSpExpirationAlertClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[21], Cover_ListRiSpExpirationAlert_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListRiSpExpirationAlertClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListRiSpExpirationAlertClient interface {
+	Recv() (*RiSpExpiryAlertData, error)
+	grpc.ClientStream
+}
+
+type coverListRiSpExpirationAlertClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListRiSpExpirationAlertClient) Recv() (*RiSpExpiryAlertData, error) {
+	m := new(RiSpExpiryAlertData)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *coverClient) DeleteRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_DeleteRiSpExpirationAlert_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2091,7 +2138,11 @@ type CoverServer interface {
 	// Update RI or SP Expiration Alert
 	UpdateRiSpExpirationAlert(context.Context, *UpdateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
 	// Get RI or SP Expiration Alert Data
-	GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*GetRiSpExpirationAlertResponse, error)
+	GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*RiSpExpiryAlertData, error)
+	// List all Ri and Sp Expiration Alert Data
+	ListRiSpExpirationAlert(*ListRiSpExpirationAlertRequest, Cover_ListRiSpExpirationAlertServer) error
+	// Delete selected Ri and Sp Expiration Alert Data
+	DeleteRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2432,8 +2483,14 @@ func (UnimplementedCoverServer) CreateRiSpExpirationAlert(context.Context, *Crea
 func (UnimplementedCoverServer) UpdateRiSpExpirationAlert(context.Context, *UpdateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateRiSpExpirationAlert not implemented")
 }
-func (UnimplementedCoverServer) GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*GetRiSpExpirationAlertResponse, error) {
+func (UnimplementedCoverServer) GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*RiSpExpiryAlertData, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRiSpExpirationAlert not implemented")
+}
+func (UnimplementedCoverServer) ListRiSpExpirationAlert(*ListRiSpExpirationAlertRequest, Cover_ListRiSpExpirationAlertServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListRiSpExpirationAlert not implemented")
+}
+func (UnimplementedCoverServer) DeleteRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteRiSpExpirationAlert not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4532,6 +4589,45 @@ func _Cover_GetRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListRiSpExpirationAlert_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListRiSpExpirationAlertRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListRiSpExpirationAlert(m, &coverListRiSpExpirationAlertServer{stream})
+}
+
+type Cover_ListRiSpExpirationAlertServer interface {
+	Send(*RiSpExpiryAlertData) error
+	grpc.ServerStream
+}
+
+type coverListRiSpExpirationAlertServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListRiSpExpirationAlertServer) Send(m *RiSpExpiryAlertData) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_DeleteRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManipulateRiSpExpirationAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteRiSpExpirationAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteRiSpExpirationAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteRiSpExpirationAlert(ctx, req.(*ManipulateRiSpExpirationAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4903,6 +4999,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetRiSpExpirationAlert",
 			Handler:    _Cover_GetRiSpExpirationAlert_Handler,
 		},
+		{
+			MethodName: "DeleteRiSpExpirationAlert",
+			Handler:    _Cover_DeleteRiSpExpirationAlert_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -5008,6 +5108,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetAnomalyinCostGroup",
 			Handler:       _Cover_GetAnomalyinCostGroup_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListRiSpExpirationAlert",
+			Handler:       _Cover_ListRiSpExpirationAlert_Handler,
 			ServerStreams: true,
 		},
 	},

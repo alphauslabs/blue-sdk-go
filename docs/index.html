@@ -1705,10 +1705,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.cover.v1.GetRiSpExpirationAlertResponse"><span class="badge">M</span>GetRiSpExpirationAlertResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.cover.v1.GetRiSpRecommendationsRequest"><span class="badge">M</span>GetRiSpRecommendationsRequest</a>
                 </li>
               
@@ -1794,6 +1790,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListFeesRequest"><span class="badge">M</span>ListFeesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListRiSpExpirationAlertRequest"><span class="badge">M</span>ListRiSpExpirationAlertRequest</a>
                 </li>
               
                 <li>
@@ -1918,6 +1918,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.RestoreSavingsRequest"><span class="badge">M</span>RestoreSavingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.RiSpExpiryAlertData"><span class="badge">M</span>RiSpExpiryAlertData</a>
                 </li>
               
                 <li>
@@ -16243,7 +16247,7 @@ Supported values are the following:
                   <td>costGroupId</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>required. CostGroupId </p></td>
+                  <td><p>Optional. if costGroupId is not provided, accountId must not empty. </p></td>
                 </tr>
               
                 <tr>
@@ -16271,7 +16275,7 @@ Supported values are the following:
                   <td>accountId</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Ri and Sp Expiry Alert also supports by account Ids. </p></td>
+                  <td><p>Optional. if accountId is not provided, CostGroupId must not empty. </p></td>
                 </tr>
               
             </tbody>
@@ -18506,86 +18510,6 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
-        <h3 id="blueapi.cover.v1.GetRiSpExpirationAlertResponse">GetRiSpExpirationAlertResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>orgId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>alertEnabled</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>frequency</td>
-                  <td><a href="#int64">int64</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>costGroupId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>details</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>notificationChannels</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.cover.v1.GetRiSpRecommendationsRequest">GetRiSpRecommendationsRequest</h3>
         <p>Request message for GetRiSpRecomemendations</p>
 
@@ -19165,6 +19089,13 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
 
         
       
+        <h3 id="blueapi.cover.v1.ListRiSpExpirationAlertRequest">ListRiSpExpirationAlertRequest</h3>
+        <p>Request message for ListRiSpExpirationAlert</p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</h3>
         <p></p>
 
@@ -19176,17 +19107,10 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
             <tbody>
               
                 <tr>
-                  <td>orgId</td>
+                  <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>required. MSP Id </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>required. ri or sp </p></td>
+                  <td><p>required. Id </p></td>
                 </tr>
               
             </tbody>
@@ -20147,6 +20071,86 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
 
         
       
+        <h3 id="blueapi.cover.v1.RiSpExpiryAlertData">RiSpExpiryAlertData</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alertEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frequency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.SavingsDetails">SavingsDetails</h3>
         <p>Response message for ListSavings, RestoreSavings, SimulateSavings rpc.</p>
 
@@ -21006,17 +21010,10 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
             <tbody>
               
                 <tr>
-                  <td>orgId</td>
+                  <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>required. MSP Id </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>required. ri or sp </p></td>
+                  <td><p>required. Id </p></td>
                 </tr>
               
                 <tr>
@@ -21030,28 +21027,28 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
                   <td>notificationChannels</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. This field must not empty. </p></td>
+                  <td><p>required. Notification Channel Ids. </p></td>
                 </tr>
               
                 <tr>
                   <td>frequency</td>
                   <td><a href="#int64">int64</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. This field must not empty </p></td>
+                  <td><p>required. Frequency. </p></td>
                 </tr>
               
                 <tr>
                   <td>costGroupId</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. This field must not empty. </p></td>
+                  <td><p>Optional. if costGroupId is not provided, accountId must not empty. </p></td>
                 </tr>
               
                 <tr>
                   <td>accountId</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Ri and Sp Expiry Alert also supports by account Ids. </p></td>
+                  <td><p>Optional. if accountId is not provided, CostGroupId must not empty. </p></td>
                 </tr>
               
             </tbody>
@@ -22776,8 +22773,22 @@ file in bytes </p></td>
               <tr>
                 <td>GetRiSpExpirationAlert</td>
                 <td><a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</a></td>
-                <td><a href="#blueapi.cover.v1.GetRiSpExpirationAlertResponse">GetRiSpExpirationAlertResponse</a></td>
+                <td><a href="#blueapi.cover.v1.RiSpExpiryAlertData">RiSpExpiryAlertData</a></td>
                 <td><p>Get RI or SP Expiration Alert Data</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListRiSpExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.ListRiSpExpirationAlertRequest">ListRiSpExpirationAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.RiSpExpiryAlertData">RiSpExpiryAlertData</a> stream</td>
+                <td><p>List all Ri and Sp Expiration Alert Data</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteRiSpExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Delete selected Ri and Sp Expiration Alert Data</p></td>
               </tr>
             
           </tbody>
@@ -23903,8 +23914,8 @@ file in bytes </p></td>
               <tr>
                 <td>UpdateRiSpExpirationAlert</td>
                 <td>PUT</td>
-                <td>/v1/alerts/expire/risp/{orgId}/{type}</td>
-                <td></td>
+                <td>/v1/alerts/expire/risp/{id}</td>
+                <td>*</td>
               </tr>
               
             
@@ -23913,7 +23924,27 @@ file in bytes </p></td>
               <tr>
                 <td>GetRiSpExpirationAlert</td>
                 <td>GET</td>
-                <td>/v1/alerts/expire/risp/{orgId}/{type}</td>
+                <td>/v1/alerts/expire/risp/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListRiSpExpirationAlert</td>
+                <td>POST</td>
+                <td>/v1/alerts/expire/risp/all:read</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteRiSpExpirationAlert</td>
+                <td>DELETE</td>
+                <td>/v1/alerts/expire/risp/{id}</td>
                 <td></td>
               </tr>
               
