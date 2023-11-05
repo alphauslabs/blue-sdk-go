@@ -4892,23 +4892,6 @@ func request_Cover_GetAnomalyinCostGroup_0(ctx context.Context, marshaler runtim
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	var (
-		val string
-		ok  bool
-		err error
-		_   = err
-	)
-
-	val, ok = pathParams["costGroupId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
-	}
-
-	protoReq.CostGroupId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "costGroupId", err)
-	}
-
 	stream, err := client.GetAnomalyinCostGroup(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -9962,7 +9945,7 @@ var (
 
 	pattern_Cover_GetRiSpRecommendations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "risprecommendations"}, ""))
 
-	pattern_Cover_GetAnomalyinCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "anomaly", "costGroupId"}, ""))
+	pattern_Cover_GetAnomalyinCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "anomaly"}, ""))
 
 	pattern_Cover_CreateRiSpExpirationAlert_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "alerts", "expire", "risp"}, ""))
 
