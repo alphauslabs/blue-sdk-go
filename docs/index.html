@@ -1409,6 +1409,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CreateAnomalyAlertRequest"><span class="badge">M</span>CreateAnomalyAlertRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateChannelRequest"><span class="badge">M</span>CreateChannelRequest</a>
                 </li>
               
@@ -16010,6 +16014,58 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.CreateAnomalyAlertRequest">CreateAnomalyAlertRequest</h3>
+        <p>Rquest message for CreateAnomalyAlert</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Name of the Anomaly Alert </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alertEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Required. Toggle disable and enable status of the alert </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frequency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. How often the user wants to receive alerts. Daily or Weekly </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Requried. The Id of the cost group you want to monitor if there is an anomaly </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. The Channels where you want to send the alerts. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CreateChannelRequest">CreateChannelRequest</h3>
         <p>Request message for CreateChannel</p>
 
@@ -22798,6 +22854,13 @@ file in bytes </p></td>
                 <td><p>Delete selected Ri and Sp Expiration Alert Data</p></td>
               </tr>
             
+              <tr>
+                <td>CreateAnomalyAlert</td>
+                <td><a href="#blueapi.cover.v1.CreateAnomalyAlertRequest">CreateAnomalyAlertRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Create Anomaly Alert</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -23953,6 +24016,16 @@ file in bytes </p></td>
                 <td>DELETE</td>
                 <td>/v1/alerts/expire/risp/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateAnomalyAlert</td>
+                <td>POST</td>
+                <td>/v1/alerts/anomaly</td>
+                <td>*</td>
               </tr>
               
             
