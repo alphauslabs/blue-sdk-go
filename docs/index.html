@@ -15402,6 +15402,27 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                 </tr>
               
                 <tr>
+                  <td>lowerLimit</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Lower bound. If the total cost is lesser than the lowerlimit it is considered as anomaly </p></td>
+                </tr>
+              
+                <tr>
+                  <td>upperLimit</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Upper bound. If the total cost is greater than the upperlimit it is considered as anomaly </p></td>
+                </tr>
+              
+                <tr>
+                  <td>anomalyCost</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>The difference of the total cost and the upperlimit or lowerlimit if it is anomamly, if not anomaly then anomaly cost is 0 </p></td>
+                </tr>
+              
+                <tr>
                   <td>anomalyProbability</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
