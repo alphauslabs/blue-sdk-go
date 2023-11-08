@@ -572,6 +572,10 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.cost.v1.BudgetAlerts"><span class="badge">M</span>BudgetAlerts</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.CalculateCostsRequest"><span class="badge">M</span>CalculateCostsRequest</a>
                 </li>
               
@@ -648,6 +652,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.CreateBudgetAlertsRequest"><span class="badge">M</span>CreateBudgetAlertsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.CreateCalculationsScheduleRequest"><span class="badge">M</span>CreateCalculationsScheduleRequest</a>
                 </li>
               
@@ -685,6 +693,10 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.DeleteAccountRequest"><span class="badge">M</span>DeleteAccountRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.DeleteBudgetAlertsRequest"><span class="badge">M</span>DeleteBudgetAlertsRequest</a>
                 </li>
               
                 <li>
@@ -733,6 +745,10 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.GetBreakevenPointResponse"><span class="badge">M</span>GetBreakevenPointResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.GetBudgetAlertsRequest"><span class="badge">M</span>GetBudgetAlertsRequest</a>
                 </li>
               
                 <li>
@@ -989,6 +1005,10 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.UpdateAccountRequest"><span class="badge">M</span>UpdateAccountRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.UpdateBudgetAlertsRequest"><span class="badge">M</span>UpdateBudgetAlertsRequest</a>
                 </li>
               
                 <li>
@@ -5941,6 +5961,65 @@ Valid values:
       <p></p>
 
       
+        <h3 id="blueapi.cost.v1.BudgetAlerts">BudgetAlerts</h3>
+        <p>Request message for the BudgetAlerts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>budget alert id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notification</td>
+                  <td><a href="#blueapi.api.BudgetAlertNotification">blueapi.api.BudgetAlertNotification</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>daily</td>
+                  <td><a href="#blueapi.api.DailyBudgetAlert">blueapi.api.DailyBudgetAlert</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthly</td>
+                  <td><a href="#blueapi.api.MonthlyBudgetAlert">blueapi.api.MonthlyBudgetAlert</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.CalculateCostsRequest">CalculateCostsRequest</h3>
         <p>Request message for the Cost.CalculateCosts rpc.</p>
 
@@ -6713,6 +6792,58 @@ You can use the `{{ondemandrate}}` variable in the replacement value part to ref
 
         
       
+        <h3 id="blueapi.cost.v1.CreateBudgetAlertsRequest">CreateBudgetAlertsRequest</h3>
+        <p>Request message for the CreateBudgetAlerts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notification</td>
+                  <td><a href="#blueapi.api.BudgetAlertNotification">blueapi.api.BudgetAlertNotification</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>daily</td>
+                  <td><a href="#blueapi.api.DailyBudgetAlert">blueapi.api.DailyBudgetAlert</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthly</td>
+                  <td><a href="#blueapi.api.MonthlyBudgetAlert">blueapi.api.MonthlyBudgetAlert</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.CreateCalculationsScheduleRequest">CreateCalculationsScheduleRequest</h3>
         <p>Request message for the Cost.CreateCalculationsSchedule rpc.</p>
 
@@ -7104,6 +7235,30 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The account id to delete. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.DeleteBudgetAlertsRequest">DeleteBudgetAlertsRequest</h3>
+        <p>Request message for the DeleteBudgetAlerts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. budget alert id </p></td>
                 </tr>
               
             </tbody>
@@ -7534,6 +7689,30 @@ For example, if you only want the services and region data, you can set this fie
                   <td><a href="#blueapi.api.aws.AwsCostBreakeven">blueapi.api.aws.AwsCostBreakeven</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.GetBudgetAlertsRequest">GetBudgetAlertsRequest</h3>
+        <p>Request message for the GetBudgetAlerts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. budget alert id </p></td>
                 </tr>
               
             </tbody>
@@ -10286,6 +10465,65 @@ The same goes for notification. If you want to change only email value, set `{&#
 
         
       
+        <h3 id="blueapi.cost.v1.UpdateBudgetAlertsRequest">UpdateBudgetAlertsRequest</h3>
+        <p>Request message for the UpdateBudgetAlerts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. budget alert id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notification</td>
+                  <td><a href="#blueapi.api.BudgetAlertNotification">blueapi.api.BudgetAlertNotification</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>daily</td>
+                  <td><a href="#blueapi.api.DailyBudgetAlert">blueapi.api.DailyBudgetAlert</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthly</td>
+                  <td><a href="#blueapi.api.MonthlyBudgetAlert">blueapi.api.MonthlyBudgetAlert</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.UpdateCostFiltersRequest">UpdateCostFiltersRequest</h3>
         <p>Request message for the UpdateCostFilters rpc.</p>
 
@@ -10700,6 +10938,34 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td><a href="#blueapi.cost.v1.DeleteAccountBudgetAlertsRequest">DeleteAccountBudgetAlertsRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>Delete the budget alerts for the account id. Only available in Wave(Pro).</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetBudgetAlerts</td>
+                <td><a href="#blueapi.cost.v1.GetBudgetAlertsRequest">GetBudgetAlertsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.BudgetAlerts">BudgetAlerts</a></td>
+                <td><p>Gets the budget alerts. Only available in Wave(Pro).</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateBudgetAlerts</td>
+                <td><a href="#blueapi.cost.v1.CreateBudgetAlertsRequest">CreateBudgetAlertsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.BudgetAlerts">BudgetAlerts</a></td>
+                <td><p>Create the budget alerts. Only available in Wave(Pro).</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBudgetAlerts</td>
+                <td><a href="#blueapi.cost.v1.UpdateBudgetAlertsRequest">UpdateBudgetAlertsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.BudgetAlerts">BudgetAlerts</a></td>
+                <td><p>Updates the budget alerts. Only available in Wave(Pro).</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteBudgetAlerts</td>
+                <td><a href="#blueapi.cost.v1.DeleteBudgetAlertsRequest">DeleteBudgetAlertsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Deletes the budget alerts. Only available in Wave(Pro).</p></td>
               </tr>
             
               <tr>
@@ -11222,6 +11488,46 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td>DeleteAccountBudgetAlerts</td>
                 <td>DELETE</td>
                 <td>/v1/{vendor}/alerts/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBudgetAlerts</td>
+                <td>GET</td>
+                <td>/v1/alerts/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateBudgetAlerts</td>
+                <td>POST</td>
+                <td>/v1/alerts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBudgetAlerts</td>
+                <td>PUT</td>
+                <td>/v1/alerts/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteBudgetAlerts</td>
+                <td>DELETE</td>
+                <td>/v1/alerts/{id}</td>
                 <td></td>
               </tr>
               
