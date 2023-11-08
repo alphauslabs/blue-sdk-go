@@ -12162,8 +12162,8 @@ type GetRiSpRecommendationsRequest struct {
 	// 'reservation' for RI, 'savingsplan' for SP
 	Type string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	// For RI recommendation input only.
-	// This are the supported values
-	// 'Amazon Elastic Compute Cloud - Compute' for AmazonEC2, 'Amazon Relational Database Service' for AmazonRDS, 'Amazon Redshift' for Redshift, 'Amazon ElastiCache' for ElastiCache and 'Amazon Opensearch Service' for AmazonES
+	// These are the supported values
+	// 'AmazonEC2', 'AmazonRDS', 'AmazonRedshift', 'AmazonElastiCache', 'AmazonOpenSearch' and 'AmazonMemoryDB'
 	Service string `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"`
 	// For RI recommendation input
 	// This supports only to AmazonEC2. Supported values are the following:
