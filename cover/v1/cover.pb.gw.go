@@ -10000,15 +10000,15 @@ var (
 
 	pattern_Cover_GetCostGroupAttribute_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "attributes"}, ""))
 
-	pattern_Cover_GetAlerts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "alerts"}, ""))
+	pattern_Cover_GetAlerts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "alerts", "cost"}, ""))
 
-	pattern_Cover_CreateAlert_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "alerts"}, ""))
+	pattern_Cover_CreateAlert_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "alerts", "cost"}, ""))
 
-	pattern_Cover_GetAlertDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "alerts", "id"}, ""))
+	pattern_Cover_GetAlertDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "alerts", "cost", "id"}, ""))
 
-	pattern_Cover_DeleteAlert_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "alerts", "id"}, ""))
+	pattern_Cover_DeleteAlert_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "alerts", "cost", "id"}, ""))
 
-	pattern_Cover_UpdateAlertDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "alerts", "id"}, ""))
+	pattern_Cover_UpdateAlertDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "alerts", "cost", "id"}, ""))
 
 	pattern_Cover_GetChannels_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "channels"}, "read"))
 
