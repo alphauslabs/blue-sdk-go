@@ -1449,15 +1449,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CreateDiscountExpirationAlertRequest"><span class="badge">M</span>CreateDiscountExpirationAlertRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateMemberRequest"><span class="badge">M</span>CreateMemberRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.cover.v1.CreateMemberResponse"><span class="badge">M</span>CreateMemberResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.CreateRiSpExpirationAlertRequest"><span class="badge">M</span>CreateRiSpExpirationAlertRequest</a>
                 </li>
               
                 <li>
@@ -1530,6 +1530,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.DeleteViewResponse"><span class="badge">M</span>DeleteViewResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DiscountExpiryAlertData"><span class="badge">M</span>DiscountExpiryAlertData</a>
                 </li>
               
                 <li>
@@ -1681,6 +1685,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetDiscountRecommendationsRequest"><span class="badge">M</span>GetDiscountRecommendationsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetDiscountRecommendationsResponse"><span class="badge">M</span>GetDiscountRecommendationsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetFavoriteViewsRequest"><span class="badge">M</span>GetFavoriteViewsRequest</a>
                 </li>
               
@@ -1726,14 +1738,6 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.GetRegionsResponse"><span class="badge">M</span>GetRegionsResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.GetRiSpRecommendationsRequest"><span class="badge">M</span>GetRiSpRecommendationsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.GetRiSpRecommendationsResponse"><span class="badge">M</span>GetRiSpRecommendationsResponse</a>
                 </li>
               
                 <li>
@@ -1813,15 +1817,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListDiscountExpirationAlertRequest"><span class="badge">M</span>ListDiscountExpirationAlertRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ListFeesRequest"><span class="badge">M</span>ListFeesRequest</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.cover.v1.ListRiSpExpirationAlertRequest"><span class="badge">M</span>ListRiSpExpirationAlertRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest"><span class="badge">M</span>ManipulateRiSpExpirationAlertRequest</a>
+                  <a href="#blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest"><span class="badge">M</span>ManipulateDiscountExpirationAlertRequest</a>
                 </li>
               
                 <li>
@@ -1945,10 +1949,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.cover.v1.RiSpExpiryAlertData"><span class="badge">M</span>RiSpExpiryAlertData</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.cover.v1.SavingsDetails"><span class="badge">M</span>SavingsDetails</a>
                 </li>
               
@@ -2033,15 +2033,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.UpdateDiscountExpirationAlertRequest"><span class="badge">M</span>UpdateDiscountExpirationAlertRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.UpdateMemberPermissionRequest"><span class="badge">M</span>UpdateMemberPermissionRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.cover.v1.UpdateMemberPermissionResponse"><span class="badge">M</span>UpdateMemberPermissionResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.UpdateRiSpExpirationAlertRequest"><span class="badge">M</span>UpdateRiSpExpirationAlertRequest</a>
                 </li>
               
                 <li>
@@ -16538,6 +16538,67 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.CreateDiscountExpirationAlertRequest">CreateDiscountExpirationAlertRequest</h3>
+        <p>Request message for CreateDiscountExpirationAlert</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>frequency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>repeated</td>
+                  <td><p>Required if the alertEnabled is set to true
+Supported values are the following:
+[0, 7, 30, 60, 90] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. if costGroupId is not provided, accountId must not empty. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alertEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>required. Switch in enabling alert. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>required. Array of notificationChannel Ids from DynamoDB. Existing in ripple. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required. &#34;ri&#34; or &#34;sp&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. if accountId is not provided, CostGroupId must not empty. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CreateMemberRequest">CreateMemberRequest</h3>
         <p>Request message for CreateMember</p>
 
@@ -16598,67 +16659,6 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><a href="#blueapi.api.cover.UserData">blueapi.api.cover.UserData</a></td>
                   <td></td>
                   <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.CreateRiSpExpirationAlertRequest">CreateRiSpExpirationAlertRequest</h3>
-        <p>Request message for CreateRiSpExpirationAlert</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>frequency</td>
-                  <td><a href="#int64">int64</a></td>
-                  <td>repeated</td>
-                  <td><p>Required if the alertEnabled is set to true
-Supported values are the following:
-[0, 7, 30, 60, 90] </p></td>
-                </tr>
-              
-                <tr>
-                  <td>costGroupId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. if costGroupId is not provided, accountId must not empty. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>alertEnabled</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>required. Switch in enabling alert. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>notificationChannels</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>required. Array of notificationChannel Ids from DynamoDB. Existing in ripple. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>required. &#34;ri&#34; or &#34;sp&#34; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. if accountId is not provided, CostGroupId must not empty. </p></td>
                 </tr>
               
             </tbody>
@@ -17202,6 +17202,86 @@ Supported values are the following:
                   <td>viewId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DiscountExpiryAlertData">DiscountExpiryAlertData</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alertEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frequency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -18632,6 +18712,96 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetDiscountRecommendationsRequest">GetDiscountRecommendationsRequest</h3>
+        <p>Request message for GetDiscountRecomemendations</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsInputs</td>
+                  <td><a href="#blueapi.api.cover.AwsInputs">blueapi.api.cover.AwsInputs</a></td>
+                  <td></td>
+                  <td><p>service (&#39;AmazonEC2&#39;, &#39;AmazonRDS&#39;, &#39;AmazonRedshift&#39;, &#39;AmazonElastiCache&#39;, &#39;AmazonOpenSearch&#39;, &#39;AmazonMemoryDB&#39;) -&gt; for RI only
+offeringClass (&#39;STANDARD&#39;, &#39;CONVERTIBLE&#39;) -&gt; for RI only
+savingsPlanType (&#39;COMPUTE_SP&#39;, &#39;EC2_INSTANCE_SP&#39;, &#39;SAGEMAKER_SP&#39;) -&gt; for SP only
+paymentOption (&#39;ALL_UPFRONT&#39;, &#39;PARTIAL_UPFRONT&#39;, &#39;NO_UPFRONT&#39;)
+termInYears (&#39;ONE_YEAR&#39;, &#39;THREE_YEARS&#39;)
+basedOnThePast (&#39;SEVEN_DAYS&#39;, &#39;THIRTY_DAYS&#39;, &#39;SIXTY_DAYS&#39;)
+accountScope (&#39;PAYER&#39;, &#39;LINKED&#39;)
+type (&#39;ri&#39;, &#39;sp&#39;) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureInputs</td>
+                  <td><a href="#blueapi.api.cover.AzureInputs">blueapi.api.cover.AzureInputs</a></td>
+                  <td></td>
+                  <td><p>NOT SUPPORTED YET </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpInputs</td>
+                  <td><a href="#blueapi.api.cover.GcpInputs">blueapi.api.cover.GcpInputs</a></td>
+                  <td></td>
+                  <td><p>NOT SUPPORTED YET </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetDiscountRecommendationsResponse">GetDiscountRecommendationsResponse</h3>
+        <p>Response message for GetDiscountRecommendations</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>awsRecommendations</td>
+                  <td><a href="#blueapi.api.cover.AwsDiscountRecommendations">blueapi.api.cover.AwsDiscountRecommendations</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureRecommendations</td>
+                  <td><a href="#blueapi.api.cover.AzureDiscountRecommendations">blueapi.api.cover.AzureDiscountRecommendations</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpRecommendations</td>
+                  <td><a href="#blueapi.api.cover.GcpDiscountRecommendations">blueapi.api.cover.GcpDiscountRecommendations</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetFavoriteViewsRequest">GetFavoriteViewsRequest</h3>
         <p>Request message for GetFavoriteViews</p>
 
@@ -18883,127 +19053,6 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>regions</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.GetRiSpRecommendationsRequest">GetRiSpRecommendationsRequest</h3>
-        <p>Request message for GetRiSpRecomemendations</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>&#39;reservation&#39; for RI, &#39;savingsplan&#39; for SP </p></td>
-                </tr>
-              
-                <tr>
-                  <td>service</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>For RI recommendation input only. 
-These are the supported values
-&#39;AmazonEC2&#39;, &#39;AmazonRDS&#39;, &#39;AmazonRedshift&#39;, &#39;AmazonElastiCache&#39;, &#39;AmazonOpenSearch&#39; and &#39;AmazonMemoryDB&#39; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>offeringClass</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>For RI recommendation input
-This supports only to AmazonEC2. Supported values are the following:
-&#39;STANDARD&#39;, &#39;CONVERTIBLE&#39; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>savingsPlanType</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>For SP recommendation input
-Supported Values are the following
-&#39;COMPUTE_SP&#39; for Compute Savings Plans, &#39;EC2_INSTANCE_SP&#39; for EC2 Savings Plans, &#39;SAGEMAKER_SP&#39; for SageMaker Savings Plans </p></td>
-                </tr>
-              
-                <tr>
-                  <td>paymentOption</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Supported values are the following
-&#39;ALL_UPFRONT&#39;, &#39;PARTIAL_UPFRONT&#39;, &#39;NO_UPFRONT&#39;
-When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATION&#39; value is also a valid choice. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>termInYears</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Supported values are the following
-&#39;ONE_YEAR&#39;, &#39;THREE_YEARS&#39; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>basedOnThePast</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Supported values are the following
-&#39;SEVEN_DAYS&#39;, &#39;THIRTY_DAYS&#39;, &#39;SIXTY_DAYS&#39; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>costGroupId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>If costgroupId is not provided, accountId must be provided. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>If accountId is not provided, costGroupId must be provided. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountScope</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Supported values are &#39;PAYER&#39;, &#39;LINKED&#39; </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.GetRiSpRecommendationsResponse">GetRiSpRecommendationsResponse</h3>
-        <p>Response message for GetRiSpRecommendations</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>awsRecommendations</td>
-                  <td><a href="#blueapi.api.cover.AwsRecommendations">blueapi.api.cover.AwsRecommendations</a></td>
-                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -19448,6 +19497,13 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
 
         
       
+        <h3 id="blueapi.cover.v1.ListDiscountExpirationAlertRequest">ListDiscountExpirationAlertRequest</h3>
+        <p>Request message for ListDiscountExpirationAlert</p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.ListFeesRequest">ListFeesRequest</h3>
         <p>Request message for the ListFees rpc.</p>
 
@@ -19472,14 +19528,7 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
 
         
       
-        <h3 id="blueapi.cover.v1.ListRiSpExpirationAlertRequest">ListRiSpExpirationAlertRequest</h3>
-        <p>Request message for ListRiSpExpirationAlert</p>
-
-        
-
-        
-      
-        <h3 id="blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</h3>
+        <h3 id="blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest">ManipulateDiscountExpirationAlertRequest</h3>
         <p></p>
 
         
@@ -20454,86 +20503,6 @@ When making RI recommendations for Amazon ElastiCache, the &#39;HEAVY_UTILIZATIO
 
         
       
-        <h3 id="blueapi.cover.v1.RiSpExpiryAlertData">RiSpExpiryAlertData</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>orgId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>alertEnabled</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>frequency</td>
-                  <td><a href="#int64">int64</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>costGroupId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>details</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>notificationChannels</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.cover.v1.SavingsDetails">SavingsDetails</h3>
         <p>Response message for ListSavings, RestoreSavings, SimulateSavings rpc.</p>
 
@@ -21327,62 +21296,7 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
-        <h3 id="blueapi.cover.v1.UpdateMemberPermissionRequest">UpdateMemberPermissionRequest</h3>
-        <p>Request message for UpdateMemberPermission</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>userId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. UserId. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>isAdmin</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Required. IsAdmin. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.UpdateMemberPermissionResponse">UpdateMemberPermissionResponse</h3>
-        <p>Response message for UpdateMemberPermission</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>userData</td>
-                  <td><a href="#blueapi.api.cover.UserData">blueapi.api.cover.UserData</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.UpdateRiSpExpirationAlertRequest">UpdateRiSpExpirationAlertRequest</h3>
+        <h3 id="blueapi.cover.v1.UpdateDiscountExpirationAlertRequest">UpdateDiscountExpirationAlertRequest</h3>
         <p></p>
 
         
@@ -21439,6 +21353,61 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>Optional. if accountId is not provided, CostGroupId must not empty. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateMemberPermissionRequest">UpdateMemberPermissionRequest</h3>
+        <p>Request message for UpdateMemberPermission</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>userId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. UserId. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isAdmin</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Required. IsAdmin. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateMemberPermissionResponse">UpdateMemberPermissionResponse</h3>
+        <p>Response message for UpdateMemberPermission</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>userData</td>
+                  <td><a href="#blueapi.api.cover.UserData">blueapi.api.cover.UserData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -23133,10 +23102,10 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>GetRiSpRecommendations</td>
-                <td><a href="#blueapi.cover.v1.GetRiSpRecommendationsRequest">GetRiSpRecommendationsRequest</a></td>
-                <td><a href="#blueapi.cover.v1.GetRiSpRecommendationsResponse">GetRiSpRecommendationsResponse</a></td>
-                <td><p>Get the RI or SP recommendations for every account in a cost group</p></td>
+                <td>GetDiscountRecommendations</td>
+                <td><a href="#blueapi.cover.v1.GetDiscountRecommendationsRequest">GetDiscountRecommendationsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetDiscountRecommendationsResponse">GetDiscountRecommendationsResponse</a></td>
+                <td><p>Get the discount recommendations for every account in a cost group</p></td>
               </tr>
             
               <tr>
@@ -23147,38 +23116,38 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>CreateRiSpExpirationAlert</td>
-                <td><a href="#blueapi.cover.v1.CreateRiSpExpirationAlertRequest">CreateRiSpExpirationAlertRequest</a></td>
+                <td>CreateDiscountExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.CreateDiscountExpirationAlertRequest">CreateDiscountExpirationAlertRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>Create RI or SP Expiration Alert.</p></td>
+                <td><p>Create discount Expiration Alert.</p></td>
               </tr>
             
               <tr>
-                <td>UpdateRiSpExpirationAlert</td>
-                <td><a href="#blueapi.cover.v1.UpdateRiSpExpirationAlertRequest">UpdateRiSpExpirationAlertRequest</a></td>
+                <td>UpdateDiscountExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.UpdateDiscountExpirationAlertRequest">UpdateDiscountExpirationAlertRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>Update RI or SP Expiration Alert</p></td>
+                <td><p>Update discount Expiration Alert</p></td>
               </tr>
             
               <tr>
-                <td>GetRiSpExpirationAlert</td>
-                <td><a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</a></td>
-                <td><a href="#blueapi.cover.v1.RiSpExpiryAlertData">RiSpExpiryAlertData</a></td>
-                <td><p>Get RI or SP Expiration Alert Data</p></td>
+                <td>GetDiscountExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest">ManipulateDiscountExpirationAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DiscountExpiryAlertData">DiscountExpiryAlertData</a></td>
+                <td><p>Get discount Expiration Alert Data</p></td>
               </tr>
             
               <tr>
-                <td>ListRiSpExpirationAlert</td>
-                <td><a href="#blueapi.cover.v1.ListRiSpExpirationAlertRequest">ListRiSpExpirationAlertRequest</a></td>
-                <td><a href="#blueapi.cover.v1.RiSpExpiryAlertData">RiSpExpiryAlertData</a> stream</td>
-                <td><p>List all Ri and Sp Expiration Alert Data</p></td>
+                <td>ListDiscountExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.ListDiscountExpirationAlertRequest">ListDiscountExpirationAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DiscountExpiryAlertData">DiscountExpiryAlertData</a> stream</td>
+                <td><p>List all discount Expiration Alert Data</p></td>
               </tr>
             
               <tr>
-                <td>DeleteRiSpExpirationAlert</td>
-                <td><a href="#blueapi.cover.v1.ManipulateRiSpExpirationAlertRequest">ManipulateRiSpExpirationAlertRequest</a></td>
+                <td>DeleteDiscountExpirationAlert</td>
+                <td><a href="#blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest">ManipulateDiscountExpirationAlertRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>Delete selected Ri and Sp Expiration Alert Data</p></td>
+                <td><p>Delete selected discount Expiration Alert Data</p></td>
               </tr>
             
               <tr>
@@ -24279,9 +24248,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>GetRiSpRecommendations</td>
+                <td>GetDiscountRecommendations</td>
                 <td>POST</td>
-                <td>/v1/risprecommendations</td>
+                <td>/v1/recommendations/discount</td>
                 <td>*</td>
               </tr>
               
@@ -24299,9 +24268,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>CreateRiSpExpirationAlert</td>
+                <td>CreateDiscountExpirationAlert</td>
                 <td>POST</td>
-                <td>/v1/alerts/expire/risp</td>
+                <td>/v1/alerts/expire/discount</td>
                 <td>*</td>
               </tr>
               
@@ -24309,9 +24278,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>UpdateRiSpExpirationAlert</td>
+                <td>UpdateDiscountExpirationAlert</td>
                 <td>PUT</td>
-                <td>/v1/alerts/expire/risp/{id}</td>
+                <td>/v1/alerts/expire/discount/{id}</td>
                 <td>*</td>
               </tr>
               
@@ -24319,9 +24288,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>GetRiSpExpirationAlert</td>
+                <td>GetDiscountExpirationAlert</td>
                 <td>GET</td>
-                <td>/v1/alerts/expire/risp/{id}</td>
+                <td>/v1/alerts/expire/discount/{id}</td>
                 <td></td>
               </tr>
               
@@ -24329,9 +24298,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>ListRiSpExpirationAlert</td>
+                <td>ListDiscountExpirationAlert</td>
                 <td>POST</td>
-                <td>/v1/alerts/expire/risp/all:read</td>
+                <td>/v1/alerts/expire/discount/all:read</td>
                 <td></td>
               </tr>
               
@@ -24339,9 +24308,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>DeleteRiSpExpirationAlert</td>
+                <td>DeleteDiscountExpirationAlert</td>
                 <td>DELETE</td>
-                <td>/v1/alerts/expire/risp/{id}</td>
+                <td>/v1/alerts/expire/discount/{id}</td>
                 <td></td>
               </tr>
               

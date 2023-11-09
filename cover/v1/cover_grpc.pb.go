@@ -21,121 +21,121 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Cover_OnboardOrg_FullMethodName                   = "/blueapi.cover.v1.Cover/OnboardOrg"
-	Cover_InviteMember_FullMethodName                 = "/blueapi.cover.v1.Cover/InviteMember"
-	Cover_ActivateUser_FullMethodName                 = "/blueapi.cover.v1.Cover/ActivateUser"
-	Cover_CreateMember_FullMethodName                 = "/blueapi.cover.v1.Cover/CreateMember"
-	Cover_GetMembers_FullMethodName                   = "/blueapi.cover.v1.Cover/GetMembers"
-	Cover_GetMemberDetails_FullMethodName             = "/blueapi.cover.v1.Cover/GetMemberDetails"
-	Cover_GetMemberCostGroup_FullMethodName           = "/blueapi.cover.v1.Cover/GetMemberCostGroup"
-	Cover_UpdateMemberPermission_FullMethodName       = "/blueapi.cover.v1.Cover/UpdateMemberPermission"
-	Cover_GetUserDetails_FullMethodName               = "/blueapi.cover.v1.Cover/GetUserDetails"
-	Cover_UpdateUserAvatar_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateUserAvatar"
-	Cover_UpdateUserIcon_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateUserIcon"
-	Cover_UpdateUserColorTheme_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateUserColorTheme"
-	Cover_UpdateUserName_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateUserName"
-	Cover_UpdateUserEmail_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserEmail"
-	Cover_UpdateUserMainView_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateUserMainView"
-	Cover_ResetUserPassword_FullMethodName            = "/blueapi.cover.v1.Cover/ResetUserPassword"
-	Cover_UpdateUserLocale_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateUserLocale"
-	Cover_UpdateUserAppTheme_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateUserAppTheme"
-	Cover_UpdateUserTimezone_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateUserTimezone"
-	Cover_UpdateUserAttributes_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateUserAttributes"
-	Cover_DeleteMember_FullMethodName                 = "/blueapi.cover.v1.Cover/DeleteMember"
-	Cover_ResetPassword_FullMethodName                = "/blueapi.cover.v1.Cover/ResetPassword"
-	Cover_CreateView_FullMethodName                   = "/blueapi.cover.v1.Cover/CreateView"
-	Cover_GetViews_FullMethodName                     = "/blueapi.cover.v1.Cover/GetViews"
-	Cover_GetCurrentView_FullMethodName               = "/blueapi.cover.v1.Cover/GetCurrentView"
-	Cover_GetFavoriteViews_FullMethodName             = "/blueapi.cover.v1.Cover/GetFavoriteViews"
-	Cover_PublishView_FullMethodName                  = "/blueapi.cover.v1.Cover/PublishView"
-	Cover_AddFavorite_FullMethodName                  = "/blueapi.cover.v1.Cover/AddFavorite"
-	Cover_RemoveFavorite_FullMethodName               = "/blueapi.cover.v1.Cover/RemoveFavorite"
-	Cover_UpdateView_FullMethodName                   = "/blueapi.cover.v1.Cover/UpdateView"
-	Cover_UpdateViewLayout_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateViewLayout"
-	Cover_UpdateViewWidget_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateViewWidget"
-	Cover_UpdateViewColorTheme_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
-	Cover_DeleteView_FullMethodName                   = "/blueapi.cover.v1.Cover/DeleteView"
-	Cover_UpdateSideMenuState_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
-	Cover_AddSideMenuFavorite_FullMethodName          = "/blueapi.cover.v1.Cover/AddSideMenuFavorite"
-	Cover_RemoveSideMenuFavorite_FullMethodName       = "/blueapi.cover.v1.Cover/RemoveSideMenuFavorite"
-	Cover_CreateCostGroup_FullMethodName              = "/blueapi.cover.v1.Cover/CreateCostGroup"
-	Cover_GetCostGroups_FullMethodName                = "/blueapi.cover.v1.Cover/GetCostGroups"
-	Cover_GetCategories_FullMethodName                = "/blueapi.cover.v1.Cover/GetCategories"
-	Cover_GetCostGroupDetails_FullMethodName          = "/blueapi.cover.v1.Cover/GetCostGroupDetails"
-	Cover_UpdateCostGroupName_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateCostGroupName"
-	Cover_UpdateCostGroupDescription_FullMethodName   = "/blueapi.cover.v1.Cover/UpdateCostGroupDescription"
-	Cover_UpdateCostGroupImage_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateCostGroupImage"
-	Cover_UpdateCostGroupIcon_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateCostGroupIcon"
-	Cover_UpdateCostGroupColorTheme_FullMethodName    = "/blueapi.cover.v1.Cover/UpdateCostGroupColorTheme"
-	Cover_UpdateCostGroupCombinations_FullMethodName  = "/blueapi.cover.v1.Cover/UpdateCostGroupCombinations"
-	Cover_ResolveCostGroupCombinations_FullMethodName = "/blueapi.cover.v1.Cover/ResolveCostGroupCombinations"
-	Cover_AssignCostGroupMember_FullMethodName        = "/blueapi.cover.v1.Cover/AssignCostGroupMember"
-	Cover_RemoveCostGroupMember_FullMethodName        = "/blueapi.cover.v1.Cover/RemoveCostGroupMember"
-	Cover_DeleteCostGroup_FullMethodName              = "/blueapi.cover.v1.Cover/DeleteCostGroup"
-	Cover_GetAccountAccessTemplateUrl_FullMethodName  = "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl"
-	Cover_ListAccountAccess_FullMethodName            = "/blueapi.cover.v1.Cover/ListAccountAccess"
-	Cover_GetAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/GetAccountAccess"
-	Cover_GetDataAccess_FullMethodName                = "/blueapi.cover.v1.Cover/GetDataAccess"
-	Cover_DeleteDataAccess_FullMethodName             = "/blueapi.cover.v1.Cover/DeleteDataAccess"
-	Cover_CreateAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/CreateAccountAccess"
-	Cover_UpdateAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
-	Cover_DeleteAccountAccess_FullMethodName          = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
-	Cover_RegisterAccount_FullMethodName              = "/blueapi.cover.v1.Cover/RegisterAccount"
-	Cover_RegisterDataAccess_FullMethodName           = "/blueapi.cover.v1.Cover/RegisterDataAccess"
-	Cover_AddBillingAccount_FullMethodName            = "/blueapi.cover.v1.Cover/AddBillingAccount"
-	Cover_ListDataAccess_FullMethodName               = "/blueapi.cover.v1.Cover/ListDataAccess"
-	Cover_UpdateDataAccess_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateDataAccess"
-	Cover_ListAssets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListAssets"
-	Cover_GetAssetsSummary_FullMethodName             = "/blueapi.cover.v1.Cover/GetAssetsSummary"
-	Cover_GetCostUsage_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCostUsage"
-	Cover_GetRightSizingRecommendation_FullMethodName = "/blueapi.cover.v1.Cover/GetRightSizingRecommendation"
-	Cover_ModifyResourceType_FullMethodName           = "/blueapi.cover.v1.Cover/ModifyResourceType"
-	Cover_TerminateResource_FullMethodName            = "/blueapi.cover.v1.Cover/TerminateResource"
-	Cover_UploadChargeCode_FullMethodName             = "/blueapi.cover.v1.Cover/UploadChargeCode"
-	Cover_AssignPayer_FullMethodName                  = "/blueapi.cover.v1.Cover/AssignPayer"
-	Cover_GetPayers_FullMethodName                    = "/blueapi.cover.v1.Cover/GetPayers"
-	Cover_GetAccounts_FullMethodName                  = "/blueapi.cover.v1.Cover/GetAccounts"
-	Cover_GetServices_FullMethodName                  = "/blueapi.cover.v1.Cover/GetServices"
-	Cover_GetRegions_FullMethodName                   = "/blueapi.cover.v1.Cover/GetRegions"
-	Cover_GetTags_FullMethodName                      = "/blueapi.cover.v1.Cover/GetTags"
-	Cover_ListFees_FullMethodName                     = "/blueapi.cover.v1.Cover/ListFees"
-	Cover_RestoreFee_FullMethodName                   = "/blueapi.cover.v1.Cover/RestoreFee"
-	Cover_GetCostGroupFee_FullMethodName              = "/blueapi.cover.v1.Cover/GetCostGroupFee"
-	Cover_ListAllocators_FullMethodName               = "/blueapi.cover.v1.Cover/ListAllocators"
-	Cover_CreateAllocator_FullMethodName              = "/blueapi.cover.v1.Cover/CreateAllocator"
-	Cover_UpdateAllocator_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateAllocator"
-	Cover_DeleteAllocator_FullMethodName              = "/blueapi.cover.v1.Cover/DeleteAllocator"
-	Cover_ProxyCreateCompletion_FullMethodName        = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
-	Cover_SimulateFeeAllocator_FullMethodName         = "/blueapi.cover.v1.Cover/SimulateFeeAllocator"
-	Cover_ListAccountUsage_FullMethodName             = "/blueapi.cover.v1.Cover/ListAccountUsage"
-	Cover_RestoreAccountUsage_FullMethodName          = "/blueapi.cover.v1.Cover/RestoreAccountUsage"
-	Cover_SimulateAccountUsage_FullMethodName         = "/blueapi.cover.v1.Cover/SimulateAccountUsage"
-	Cover_ListSavings_FullMethodName                  = "/blueapi.cover.v1.Cover/ListSavings"
-	Cover_RestoreSavings_FullMethodName               = "/blueapi.cover.v1.Cover/RestoreSavings"
-	Cover_SimulateSavings_FullMethodName              = "/blueapi.cover.v1.Cover/SimulateSavings"
-	Cover_GetCostGroupAllocation_FullMethodName       = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
-	Cover_ProcessAuth0User_FullMethodName             = "/blueapi.cover.v1.Cover/ProcessAuth0User"
-	Cover_AddPartnerCenterCredentials_FullMethodName  = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
-	Cover_AddMpnSetting_FullMethodName                = "/blueapi.cover.v1.Cover/AddMpnSetting"
-	Cover_GetCostGroupAttribute_FullMethodName        = "/blueapi.cover.v1.Cover/GetCostGroupAttribute"
-	Cover_GetAlerts_FullMethodName                    = "/blueapi.cover.v1.Cover/GetAlerts"
-	Cover_CreateAlert_FullMethodName                  = "/blueapi.cover.v1.Cover/CreateAlert"
-	Cover_GetAlertDetails_FullMethodName              = "/blueapi.cover.v1.Cover/GetAlertDetails"
-	Cover_DeleteAlert_FullMethodName                  = "/blueapi.cover.v1.Cover/DeleteAlert"
-	Cover_UpdateAlertDetails_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateAlertDetails"
-	Cover_GetChannels_FullMethodName                  = "/blueapi.cover.v1.Cover/GetChannels"
-	Cover_CreateChannel_FullMethodName                = "/blueapi.cover.v1.Cover/CreateChannel"
-	Cover_GetChannelDetails_FullMethodName            = "/blueapi.cover.v1.Cover/GetChannelDetails"
-	Cover_DeleteChannel_FullMethodName                = "/blueapi.cover.v1.Cover/DeleteChannel"
-	Cover_UpdateChannelDetails_FullMethodName         = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
-	Cover_GetRiSpRecommendations_FullMethodName       = "/blueapi.cover.v1.Cover/GetRiSpRecommendations"
-	Cover_GetAnomalyinCostGroup_FullMethodName        = "/blueapi.cover.v1.Cover/GetAnomalyinCostGroup"
-	Cover_CreateRiSpExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/CreateRiSpExpirationAlert"
-	Cover_UpdateRiSpExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/UpdateRiSpExpirationAlert"
-	Cover_GetRiSpExpirationAlert_FullMethodName       = "/blueapi.cover.v1.Cover/GetRiSpExpirationAlert"
-	Cover_ListRiSpExpirationAlert_FullMethodName      = "/blueapi.cover.v1.Cover/ListRiSpExpirationAlert"
-	Cover_DeleteRiSpExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/DeleteRiSpExpirationAlert"
-	Cover_CreateAnomalyAlert_FullMethodName           = "/blueapi.cover.v1.Cover/CreateAnomalyAlert"
+	Cover_OnboardOrg_FullMethodName                    = "/blueapi.cover.v1.Cover/OnboardOrg"
+	Cover_InviteMember_FullMethodName                  = "/blueapi.cover.v1.Cover/InviteMember"
+	Cover_ActivateUser_FullMethodName                  = "/blueapi.cover.v1.Cover/ActivateUser"
+	Cover_CreateMember_FullMethodName                  = "/blueapi.cover.v1.Cover/CreateMember"
+	Cover_GetMembers_FullMethodName                    = "/blueapi.cover.v1.Cover/GetMembers"
+	Cover_GetMemberDetails_FullMethodName              = "/blueapi.cover.v1.Cover/GetMemberDetails"
+	Cover_GetMemberCostGroup_FullMethodName            = "/blueapi.cover.v1.Cover/GetMemberCostGroup"
+	Cover_UpdateMemberPermission_FullMethodName        = "/blueapi.cover.v1.Cover/UpdateMemberPermission"
+	Cover_GetUserDetails_FullMethodName                = "/blueapi.cover.v1.Cover/GetUserDetails"
+	Cover_UpdateUserAvatar_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserAvatar"
+	Cover_UpdateUserIcon_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateUserIcon"
+	Cover_UpdateUserColorTheme_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateUserColorTheme"
+	Cover_UpdateUserName_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateUserName"
+	Cover_UpdateUserEmail_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateUserEmail"
+	Cover_UpdateUserMainView_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserMainView"
+	Cover_ResetUserPassword_FullMethodName             = "/blueapi.cover.v1.Cover/ResetUserPassword"
+	Cover_UpdateUserLocale_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserLocale"
+	Cover_UpdateUserAppTheme_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserAppTheme"
+	Cover_UpdateUserTimezone_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserTimezone"
+	Cover_UpdateUserAttributes_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateUserAttributes"
+	Cover_DeleteMember_FullMethodName                  = "/blueapi.cover.v1.Cover/DeleteMember"
+	Cover_ResetPassword_FullMethodName                 = "/blueapi.cover.v1.Cover/ResetPassword"
+	Cover_CreateView_FullMethodName                    = "/blueapi.cover.v1.Cover/CreateView"
+	Cover_GetViews_FullMethodName                      = "/blueapi.cover.v1.Cover/GetViews"
+	Cover_GetCurrentView_FullMethodName                = "/blueapi.cover.v1.Cover/GetCurrentView"
+	Cover_GetFavoriteViews_FullMethodName              = "/blueapi.cover.v1.Cover/GetFavoriteViews"
+	Cover_PublishView_FullMethodName                   = "/blueapi.cover.v1.Cover/PublishView"
+	Cover_AddFavorite_FullMethodName                   = "/blueapi.cover.v1.Cover/AddFavorite"
+	Cover_RemoveFavorite_FullMethodName                = "/blueapi.cover.v1.Cover/RemoveFavorite"
+	Cover_UpdateView_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateView"
+	Cover_UpdateViewLayout_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateViewLayout"
+	Cover_UpdateViewWidget_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateViewWidget"
+	Cover_UpdateViewColorTheme_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
+	Cover_DeleteView_FullMethodName                    = "/blueapi.cover.v1.Cover/DeleteView"
+	Cover_UpdateSideMenuState_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
+	Cover_AddSideMenuFavorite_FullMethodName           = "/blueapi.cover.v1.Cover/AddSideMenuFavorite"
+	Cover_RemoveSideMenuFavorite_FullMethodName        = "/blueapi.cover.v1.Cover/RemoveSideMenuFavorite"
+	Cover_CreateCostGroup_FullMethodName               = "/blueapi.cover.v1.Cover/CreateCostGroup"
+	Cover_GetCostGroups_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCostGroups"
+	Cover_GetCategories_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCategories"
+	Cover_GetCostGroupDetails_FullMethodName           = "/blueapi.cover.v1.Cover/GetCostGroupDetails"
+	Cover_UpdateCostGroupName_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateCostGroupName"
+	Cover_UpdateCostGroupDescription_FullMethodName    = "/blueapi.cover.v1.Cover/UpdateCostGroupDescription"
+	Cover_UpdateCostGroupImage_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateCostGroupImage"
+	Cover_UpdateCostGroupIcon_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateCostGroupIcon"
+	Cover_UpdateCostGroupColorTheme_FullMethodName     = "/blueapi.cover.v1.Cover/UpdateCostGroupColorTheme"
+	Cover_UpdateCostGroupCombinations_FullMethodName   = "/blueapi.cover.v1.Cover/UpdateCostGroupCombinations"
+	Cover_ResolveCostGroupCombinations_FullMethodName  = "/blueapi.cover.v1.Cover/ResolveCostGroupCombinations"
+	Cover_AssignCostGroupMember_FullMethodName         = "/blueapi.cover.v1.Cover/AssignCostGroupMember"
+	Cover_RemoveCostGroupMember_FullMethodName         = "/blueapi.cover.v1.Cover/RemoveCostGroupMember"
+	Cover_DeleteCostGroup_FullMethodName               = "/blueapi.cover.v1.Cover/DeleteCostGroup"
+	Cover_GetAccountAccessTemplateUrl_FullMethodName   = "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl"
+	Cover_ListAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/ListAccountAccess"
+	Cover_GetAccountAccess_FullMethodName              = "/blueapi.cover.v1.Cover/GetAccountAccess"
+	Cover_GetDataAccess_FullMethodName                 = "/blueapi.cover.v1.Cover/GetDataAccess"
+	Cover_DeleteDataAccess_FullMethodName              = "/blueapi.cover.v1.Cover/DeleteDataAccess"
+	Cover_CreateAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/CreateAccountAccess"
+	Cover_UpdateAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
+	Cover_DeleteAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
+	Cover_RegisterAccount_FullMethodName               = "/blueapi.cover.v1.Cover/RegisterAccount"
+	Cover_RegisterDataAccess_FullMethodName            = "/blueapi.cover.v1.Cover/RegisterDataAccess"
+	Cover_AddBillingAccount_FullMethodName             = "/blueapi.cover.v1.Cover/AddBillingAccount"
+	Cover_ListDataAccess_FullMethodName                = "/blueapi.cover.v1.Cover/ListDataAccess"
+	Cover_UpdateDataAccess_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateDataAccess"
+	Cover_ListAssets_FullMethodName                    = "/blueapi.cover.v1.Cover/ListAssets"
+	Cover_GetAssetsSummary_FullMethodName              = "/blueapi.cover.v1.Cover/GetAssetsSummary"
+	Cover_GetCostUsage_FullMethodName                  = "/blueapi.cover.v1.Cover/GetCostUsage"
+	Cover_GetRightSizingRecommendation_FullMethodName  = "/blueapi.cover.v1.Cover/GetRightSizingRecommendation"
+	Cover_ModifyResourceType_FullMethodName            = "/blueapi.cover.v1.Cover/ModifyResourceType"
+	Cover_TerminateResource_FullMethodName             = "/blueapi.cover.v1.Cover/TerminateResource"
+	Cover_UploadChargeCode_FullMethodName              = "/blueapi.cover.v1.Cover/UploadChargeCode"
+	Cover_AssignPayer_FullMethodName                   = "/blueapi.cover.v1.Cover/AssignPayer"
+	Cover_GetPayers_FullMethodName                     = "/blueapi.cover.v1.Cover/GetPayers"
+	Cover_GetAccounts_FullMethodName                   = "/blueapi.cover.v1.Cover/GetAccounts"
+	Cover_GetServices_FullMethodName                   = "/blueapi.cover.v1.Cover/GetServices"
+	Cover_GetRegions_FullMethodName                    = "/blueapi.cover.v1.Cover/GetRegions"
+	Cover_GetTags_FullMethodName                       = "/blueapi.cover.v1.Cover/GetTags"
+	Cover_ListFees_FullMethodName                      = "/blueapi.cover.v1.Cover/ListFees"
+	Cover_RestoreFee_FullMethodName                    = "/blueapi.cover.v1.Cover/RestoreFee"
+	Cover_GetCostGroupFee_FullMethodName               = "/blueapi.cover.v1.Cover/GetCostGroupFee"
+	Cover_ListAllocators_FullMethodName                = "/blueapi.cover.v1.Cover/ListAllocators"
+	Cover_CreateAllocator_FullMethodName               = "/blueapi.cover.v1.Cover/CreateAllocator"
+	Cover_UpdateAllocator_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateAllocator"
+	Cover_DeleteAllocator_FullMethodName               = "/blueapi.cover.v1.Cover/DeleteAllocator"
+	Cover_ProxyCreateCompletion_FullMethodName         = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
+	Cover_SimulateFeeAllocator_FullMethodName          = "/blueapi.cover.v1.Cover/SimulateFeeAllocator"
+	Cover_ListAccountUsage_FullMethodName              = "/blueapi.cover.v1.Cover/ListAccountUsage"
+	Cover_RestoreAccountUsage_FullMethodName           = "/blueapi.cover.v1.Cover/RestoreAccountUsage"
+	Cover_SimulateAccountUsage_FullMethodName          = "/blueapi.cover.v1.Cover/SimulateAccountUsage"
+	Cover_ListSavings_FullMethodName                   = "/blueapi.cover.v1.Cover/ListSavings"
+	Cover_RestoreSavings_FullMethodName                = "/blueapi.cover.v1.Cover/RestoreSavings"
+	Cover_SimulateSavings_FullMethodName               = "/blueapi.cover.v1.Cover/SimulateSavings"
+	Cover_GetCostGroupAllocation_FullMethodName        = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
+	Cover_ProcessAuth0User_FullMethodName              = "/blueapi.cover.v1.Cover/ProcessAuth0User"
+	Cover_AddPartnerCenterCredentials_FullMethodName   = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
+	Cover_AddMpnSetting_FullMethodName                 = "/blueapi.cover.v1.Cover/AddMpnSetting"
+	Cover_GetCostGroupAttribute_FullMethodName         = "/blueapi.cover.v1.Cover/GetCostGroupAttribute"
+	Cover_GetAlerts_FullMethodName                     = "/blueapi.cover.v1.Cover/GetAlerts"
+	Cover_CreateAlert_FullMethodName                   = "/blueapi.cover.v1.Cover/CreateAlert"
+	Cover_GetAlertDetails_FullMethodName               = "/blueapi.cover.v1.Cover/GetAlertDetails"
+	Cover_DeleteAlert_FullMethodName                   = "/blueapi.cover.v1.Cover/DeleteAlert"
+	Cover_UpdateAlertDetails_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateAlertDetails"
+	Cover_GetChannels_FullMethodName                   = "/blueapi.cover.v1.Cover/GetChannels"
+	Cover_CreateChannel_FullMethodName                 = "/blueapi.cover.v1.Cover/CreateChannel"
+	Cover_GetChannelDetails_FullMethodName             = "/blueapi.cover.v1.Cover/GetChannelDetails"
+	Cover_DeleteChannel_FullMethodName                 = "/blueapi.cover.v1.Cover/DeleteChannel"
+	Cover_UpdateChannelDetails_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
+	Cover_GetDiscountRecommendations_FullMethodName    = "/blueapi.cover.v1.Cover/GetDiscountRecommendations"
+	Cover_GetAnomalyinCostGroup_FullMethodName         = "/blueapi.cover.v1.Cover/GetAnomalyinCostGroup"
+	Cover_CreateDiscountExpirationAlert_FullMethodName = "/blueapi.cover.v1.Cover/CreateDiscountExpirationAlert"
+	Cover_UpdateDiscountExpirationAlert_FullMethodName = "/blueapi.cover.v1.Cover/UpdateDiscountExpirationAlert"
+	Cover_GetDiscountExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/GetDiscountExpirationAlert"
+	Cover_ListDiscountExpirationAlert_FullMethodName   = "/blueapi.cover.v1.Cover/ListDiscountExpirationAlert"
+	Cover_DeleteDiscountExpirationAlert_FullMethodName = "/blueapi.cover.v1.Cover/DeleteDiscountExpirationAlert"
+	Cover_CreateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/CreateAnomalyAlert"
 )
 
 // CoverClient is the client API for Cover service.
@@ -355,20 +355,20 @@ type CoverClient interface {
 	DeleteChannel(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*DeleteChannelResponse, error)
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(ctx context.Context, in *UpdateChannelDetailsRequest, opts ...grpc.CallOption) (*UpdateChannelDetailsResponse, error)
-	// Get the RI or SP recommendations for every account in a cost group
-	GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsResponse, error)
+	// Get the discount recommendations for every account in a cost group
+	GetDiscountRecommendations(ctx context.Context, in *GetDiscountRecommendationsRequest, opts ...grpc.CallOption) (*GetDiscountRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
 	GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (Cover_GetAnomalyinCostGroupClient, error)
-	// Create RI or SP Expiration Alert.
-	CreateRiSpExpirationAlert(ctx context.Context, in *CreateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Update RI or SP Expiration Alert
-	UpdateRiSpExpirationAlert(ctx context.Context, in *UpdateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Get RI or SP Expiration Alert Data
-	GetRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*RiSpExpiryAlertData, error)
-	// List all Ri and Sp Expiration Alert Data
-	ListRiSpExpirationAlert(ctx context.Context, in *ListRiSpExpirationAlertRequest, opts ...grpc.CallOption) (Cover_ListRiSpExpirationAlertClient, error)
-	// Delete selected Ri and Sp Expiration Alert Data
-	DeleteRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Create discount Expiration Alert.
+	CreateDiscountExpirationAlert(ctx context.Context, in *CreateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Update discount Expiration Alert
+	UpdateDiscountExpirationAlert(ctx context.Context, in *UpdateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Get discount Expiration Alert Data
+	GetDiscountExpirationAlert(ctx context.Context, in *ManipulateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*DiscountExpiryAlertData, error)
+	// List all discount Expiration Alert Data
+	ListDiscountExpirationAlert(ctx context.Context, in *ListDiscountExpirationAlertRequest, opts ...grpc.CallOption) (Cover_ListDiscountExpirationAlertClient, error)
+	// Delete selected discount Expiration Alert Data
+	DeleteDiscountExpirationAlert(ctx context.Context, in *ManipulateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Create Anomaly Alert
 	CreateAnomalyAlert(ctx context.Context, in *CreateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -1806,9 +1806,9 @@ func (c *coverClient) UpdateChannelDetails(ctx context.Context, in *UpdateChanne
 	return out, nil
 }
 
-func (c *coverClient) GetRiSpRecommendations(ctx context.Context, in *GetRiSpRecommendationsRequest, opts ...grpc.CallOption) (*GetRiSpRecommendationsResponse, error) {
-	out := new(GetRiSpRecommendationsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetRiSpRecommendations_FullMethodName, in, out, opts...)
+func (c *coverClient) GetDiscountRecommendations(ctx context.Context, in *GetDiscountRecommendationsRequest, opts ...grpc.CallOption) (*GetDiscountRecommendationsResponse, error) {
+	out := new(GetDiscountRecommendationsResponse)
+	err := c.cc.Invoke(ctx, Cover_GetDiscountRecommendations_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1847,39 +1847,39 @@ func (x *coverGetAnomalyinCostGroupClient) Recv() (*AnomalyData, error) {
 	return m, nil
 }
 
-func (c *coverClient) CreateRiSpExpirationAlert(ctx context.Context, in *CreateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *coverClient) CreateDiscountExpirationAlert(ctx context.Context, in *CreateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Cover_CreateRiSpExpirationAlert_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Cover_CreateDiscountExpirationAlert_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *coverClient) UpdateRiSpExpirationAlert(ctx context.Context, in *UpdateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *coverClient) UpdateDiscountExpirationAlert(ctx context.Context, in *UpdateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Cover_UpdateRiSpExpirationAlert_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Cover_UpdateDiscountExpirationAlert_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *coverClient) GetRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*RiSpExpiryAlertData, error) {
-	out := new(RiSpExpiryAlertData)
-	err := c.cc.Invoke(ctx, Cover_GetRiSpExpirationAlert_FullMethodName, in, out, opts...)
+func (c *coverClient) GetDiscountExpirationAlert(ctx context.Context, in *ManipulateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*DiscountExpiryAlertData, error) {
+	out := new(DiscountExpiryAlertData)
+	err := c.cc.Invoke(ctx, Cover_GetDiscountExpirationAlert_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *coverClient) ListRiSpExpirationAlert(ctx context.Context, in *ListRiSpExpirationAlertRequest, opts ...grpc.CallOption) (Cover_ListRiSpExpirationAlertClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[21], Cover_ListRiSpExpirationAlert_FullMethodName, opts...)
+func (c *coverClient) ListDiscountExpirationAlert(ctx context.Context, in *ListDiscountExpirationAlertRequest, opts ...grpc.CallOption) (Cover_ListDiscountExpirationAlertClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[21], Cover_ListDiscountExpirationAlert_FullMethodName, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &coverListRiSpExpirationAlertClient{stream}
+	x := &coverListDiscountExpirationAlertClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -1889,26 +1889,26 @@ func (c *coverClient) ListRiSpExpirationAlert(ctx context.Context, in *ListRiSpE
 	return x, nil
 }
 
-type Cover_ListRiSpExpirationAlertClient interface {
-	Recv() (*RiSpExpiryAlertData, error)
+type Cover_ListDiscountExpirationAlertClient interface {
+	Recv() (*DiscountExpiryAlertData, error)
 	grpc.ClientStream
 }
 
-type coverListRiSpExpirationAlertClient struct {
+type coverListDiscountExpirationAlertClient struct {
 	grpc.ClientStream
 }
 
-func (x *coverListRiSpExpirationAlertClient) Recv() (*RiSpExpiryAlertData, error) {
-	m := new(RiSpExpiryAlertData)
+func (x *coverListDiscountExpirationAlertClient) Recv() (*DiscountExpiryAlertData, error) {
+	m := new(DiscountExpiryAlertData)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
 	return m, nil
 }
 
-func (c *coverClient) DeleteRiSpExpirationAlert(ctx context.Context, in *ManipulateRiSpExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *coverClient) DeleteDiscountExpirationAlert(ctx context.Context, in *ManipulateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Cover_DeleteRiSpExpirationAlert_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Cover_DeleteDiscountExpirationAlert_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2141,20 +2141,20 @@ type CoverServer interface {
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelResponse, error)
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error)
-	// Get the RI or SP recommendations for every account in a cost group
-	GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error)
+	// Get the discount recommendations for every account in a cost group
+	GetDiscountRecommendations(context.Context, *GetDiscountRecommendationsRequest) (*GetDiscountRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
 	GetAnomalyinCostGroup(*GetAnomalyinCostGroupRequest, Cover_GetAnomalyinCostGroupServer) error
-	// Create RI or SP Expiration Alert.
-	CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
-	// Update RI or SP Expiration Alert
-	UpdateRiSpExpirationAlert(context.Context, *UpdateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
-	// Get RI or SP Expiration Alert Data
-	GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*RiSpExpiryAlertData, error)
-	// List all Ri and Sp Expiration Alert Data
-	ListRiSpExpirationAlert(*ListRiSpExpirationAlertRequest, Cover_ListRiSpExpirationAlertServer) error
-	// Delete selected Ri and Sp Expiration Alert Data
-	DeleteRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*emptypb.Empty, error)
+	// Create discount Expiration Alert.
+	CreateDiscountExpirationAlert(context.Context, *CreateDiscountExpirationAlertRequest) (*emptypb.Empty, error)
+	// Update discount Expiration Alert
+	UpdateDiscountExpirationAlert(context.Context, *UpdateDiscountExpirationAlertRequest) (*emptypb.Empty, error)
+	// Get discount Expiration Alert Data
+	GetDiscountExpirationAlert(context.Context, *ManipulateDiscountExpirationAlertRequest) (*DiscountExpiryAlertData, error)
+	// List all discount Expiration Alert Data
+	ListDiscountExpirationAlert(*ListDiscountExpirationAlertRequest, Cover_ListDiscountExpirationAlertServer) error
+	// Delete selected discount Expiration Alert Data
+	DeleteDiscountExpirationAlert(context.Context, *ManipulateDiscountExpirationAlertRequest) (*emptypb.Empty, error)
 	// Create Anomaly Alert
 	CreateAnomalyAlert(context.Context, *CreateAnomalyAlertRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
@@ -2485,26 +2485,26 @@ func (UnimplementedCoverServer) DeleteChannel(context.Context, *DeleteChannelReq
 func (UnimplementedCoverServer) UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChannelDetails not implemented")
 }
-func (UnimplementedCoverServer) GetRiSpRecommendations(context.Context, *GetRiSpRecommendationsRequest) (*GetRiSpRecommendationsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRiSpRecommendations not implemented")
+func (UnimplementedCoverServer) GetDiscountRecommendations(context.Context, *GetDiscountRecommendationsRequest) (*GetDiscountRecommendationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDiscountRecommendations not implemented")
 }
 func (UnimplementedCoverServer) GetAnomalyinCostGroup(*GetAnomalyinCostGroupRequest, Cover_GetAnomalyinCostGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetAnomalyinCostGroup not implemented")
 }
-func (UnimplementedCoverServer) CreateRiSpExpirationAlert(context.Context, *CreateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateRiSpExpirationAlert not implemented")
+func (UnimplementedCoverServer) CreateDiscountExpirationAlert(context.Context, *CreateDiscountExpirationAlertRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateDiscountExpirationAlert not implemented")
 }
-func (UnimplementedCoverServer) UpdateRiSpExpirationAlert(context.Context, *UpdateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateRiSpExpirationAlert not implemented")
+func (UnimplementedCoverServer) UpdateDiscountExpirationAlert(context.Context, *UpdateDiscountExpirationAlertRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateDiscountExpirationAlert not implemented")
 }
-func (UnimplementedCoverServer) GetRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*RiSpExpiryAlertData, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRiSpExpirationAlert not implemented")
+func (UnimplementedCoverServer) GetDiscountExpirationAlert(context.Context, *ManipulateDiscountExpirationAlertRequest) (*DiscountExpiryAlertData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDiscountExpirationAlert not implemented")
 }
-func (UnimplementedCoverServer) ListRiSpExpirationAlert(*ListRiSpExpirationAlertRequest, Cover_ListRiSpExpirationAlertServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListRiSpExpirationAlert not implemented")
+func (UnimplementedCoverServer) ListDiscountExpirationAlert(*ListDiscountExpirationAlertRequest, Cover_ListDiscountExpirationAlertServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListDiscountExpirationAlert not implemented")
 }
-func (UnimplementedCoverServer) DeleteRiSpExpirationAlert(context.Context, *ManipulateRiSpExpirationAlertRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteRiSpExpirationAlert not implemented")
+func (UnimplementedCoverServer) DeleteDiscountExpirationAlert(context.Context, *ManipulateDiscountExpirationAlertRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteDiscountExpirationAlert not implemented")
 }
 func (UnimplementedCoverServer) CreateAnomalyAlert(context.Context, *CreateAnomalyAlertRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAnomalyAlert not implemented")
@@ -4513,20 +4513,20 @@ func _Cover_UpdateChannelDetails_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_GetRiSpRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRiSpRecommendationsRequest)
+func _Cover_GetDiscountRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDiscountRecommendationsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).GetRiSpRecommendations(ctx, in)
+		return srv.(CoverServer).GetDiscountRecommendations(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_GetRiSpRecommendations_FullMethodName,
+		FullMethod: Cover_GetDiscountRecommendations_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetRiSpRecommendations(ctx, req.(*GetRiSpRecommendationsRequest))
+		return srv.(CoverServer).GetDiscountRecommendations(ctx, req.(*GetDiscountRecommendationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4552,95 +4552,95 @@ func (x *coverGetAnomalyinCostGroupServer) Send(m *AnomalyData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cover_CreateRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateRiSpExpirationAlertRequest)
+func _Cover_CreateDiscountExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateDiscountExpirationAlertRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).CreateRiSpExpirationAlert(ctx, in)
+		return srv.(CoverServer).CreateDiscountExpirationAlert(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_CreateRiSpExpirationAlert_FullMethodName,
+		FullMethod: Cover_CreateDiscountExpirationAlert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).CreateRiSpExpirationAlert(ctx, req.(*CreateRiSpExpirationAlertRequest))
+		return srv.(CoverServer).CreateDiscountExpirationAlert(ctx, req.(*CreateDiscountExpirationAlertRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_UpdateRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateRiSpExpirationAlertRequest)
+func _Cover_UpdateDiscountExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateDiscountExpirationAlertRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).UpdateRiSpExpirationAlert(ctx, in)
+		return srv.(CoverServer).UpdateDiscountExpirationAlert(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_UpdateRiSpExpirationAlert_FullMethodName,
+		FullMethod: Cover_UpdateDiscountExpirationAlert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateRiSpExpirationAlert(ctx, req.(*UpdateRiSpExpirationAlertRequest))
+		return srv.(CoverServer).UpdateDiscountExpirationAlert(ctx, req.(*UpdateDiscountExpirationAlertRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_GetRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ManipulateRiSpExpirationAlertRequest)
+func _Cover_GetDiscountExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManipulateDiscountExpirationAlertRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).GetRiSpExpirationAlert(ctx, in)
+		return srv.(CoverServer).GetDiscountExpirationAlert(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_GetRiSpExpirationAlert_FullMethodName,
+		FullMethod: Cover_GetDiscountExpirationAlert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetRiSpExpirationAlert(ctx, req.(*ManipulateRiSpExpirationAlertRequest))
+		return srv.(CoverServer).GetDiscountExpirationAlert(ctx, req.(*ManipulateDiscountExpirationAlertRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_ListRiSpExpirationAlert_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListRiSpExpirationAlertRequest)
+func _Cover_ListDiscountExpirationAlert_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListDiscountExpirationAlertRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(CoverServer).ListRiSpExpirationAlert(m, &coverListRiSpExpirationAlertServer{stream})
+	return srv.(CoverServer).ListDiscountExpirationAlert(m, &coverListDiscountExpirationAlertServer{stream})
 }
 
-type Cover_ListRiSpExpirationAlertServer interface {
-	Send(*RiSpExpiryAlertData) error
+type Cover_ListDiscountExpirationAlertServer interface {
+	Send(*DiscountExpiryAlertData) error
 	grpc.ServerStream
 }
 
-type coverListRiSpExpirationAlertServer struct {
+type coverListDiscountExpirationAlertServer struct {
 	grpc.ServerStream
 }
 
-func (x *coverListRiSpExpirationAlertServer) Send(m *RiSpExpiryAlertData) error {
+func (x *coverListDiscountExpirationAlertServer) Send(m *DiscountExpiryAlertData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cover_DeleteRiSpExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ManipulateRiSpExpirationAlertRequest)
+func _Cover_DeleteDiscountExpirationAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManipulateDiscountExpirationAlertRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).DeleteRiSpExpirationAlert(ctx, in)
+		return srv.(CoverServer).DeleteDiscountExpirationAlert(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_DeleteRiSpExpirationAlert_FullMethodName,
+		FullMethod: Cover_DeleteDiscountExpirationAlert_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).DeleteRiSpExpirationAlert(ctx, req.(*ManipulateRiSpExpirationAlertRequest))
+		return srv.(CoverServer).DeleteDiscountExpirationAlert(ctx, req.(*ManipulateDiscountExpirationAlertRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5019,24 +5019,24 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_UpdateChannelDetails_Handler,
 		},
 		{
-			MethodName: "GetRiSpRecommendations",
-			Handler:    _Cover_GetRiSpRecommendations_Handler,
+			MethodName: "GetDiscountRecommendations",
+			Handler:    _Cover_GetDiscountRecommendations_Handler,
 		},
 		{
-			MethodName: "CreateRiSpExpirationAlert",
-			Handler:    _Cover_CreateRiSpExpirationAlert_Handler,
+			MethodName: "CreateDiscountExpirationAlert",
+			Handler:    _Cover_CreateDiscountExpirationAlert_Handler,
 		},
 		{
-			MethodName: "UpdateRiSpExpirationAlert",
-			Handler:    _Cover_UpdateRiSpExpirationAlert_Handler,
+			MethodName: "UpdateDiscountExpirationAlert",
+			Handler:    _Cover_UpdateDiscountExpirationAlert_Handler,
 		},
 		{
-			MethodName: "GetRiSpExpirationAlert",
-			Handler:    _Cover_GetRiSpExpirationAlert_Handler,
+			MethodName: "GetDiscountExpirationAlert",
+			Handler:    _Cover_GetDiscountExpirationAlert_Handler,
 		},
 		{
-			MethodName: "DeleteRiSpExpirationAlert",
-			Handler:    _Cover_DeleteRiSpExpirationAlert_Handler,
+			MethodName: "DeleteDiscountExpirationAlert",
+			Handler:    _Cover_DeleteDiscountExpirationAlert_Handler,
 		},
 		{
 			MethodName: "CreateAnomalyAlert",
@@ -5150,8 +5150,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ListRiSpExpirationAlert",
-			Handler:       _Cover_ListRiSpExpirationAlert_Handler,
+			StreamName:    "ListDiscountExpirationAlert",
+			Handler:       _Cover_ListDiscountExpirationAlert_Handler,
 			ServerStreams: true,
 		},
 	},
