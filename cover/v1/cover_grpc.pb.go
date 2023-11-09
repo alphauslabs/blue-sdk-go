@@ -136,6 +136,8 @@ const (
 	Cover_ListDiscountExpirationAlert_FullMethodName   = "/blueapi.cover.v1.Cover/ListDiscountExpirationAlert"
 	Cover_DeleteDiscountExpirationAlert_FullMethodName = "/blueapi.cover.v1.Cover/DeleteDiscountExpirationAlert"
 	Cover_CreateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/CreateAnomalyAlert"
+	Cover_DeleteAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/DeleteAnomalyAlert"
+	Cover_ListAnomalyAlert_FullMethodName              = "/blueapi.cover.v1.Cover/ListAnomalyAlert"
 )
 
 // CoverClient is the client API for Cover service.
@@ -371,6 +373,10 @@ type CoverClient interface {
 	DeleteDiscountExpirationAlert(ctx context.Context, in *ManipulateDiscountExpirationAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Create Anomaly Alert
 	CreateAnomalyAlert(ctx context.Context, in *CreateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Delete Anomaly Alert
+	DeleteAnomalyAlert(ctx context.Context, in *ManipulateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// List all the Anomaly Alert Data
+	ListAnomalyAlert(ctx context.Context, in *ListAnomalyAlertRequest, opts ...grpc.CallOption) (Cover_ListAnomalyAlertClient, error)
 }
 
 type coverClient struct {
@@ -1924,6 +1930,47 @@ func (c *coverClient) CreateAnomalyAlert(ctx context.Context, in *CreateAnomalyA
 	return out, nil
 }
 
+func (c *coverClient) DeleteAnomalyAlert(ctx context.Context, in *ManipulateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_DeleteAnomalyAlert_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ListAnomalyAlert(ctx context.Context, in *ListAnomalyAlertRequest, opts ...grpc.CallOption) (Cover_ListAnomalyAlertClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[22], Cover_ListAnomalyAlert_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListAnomalyAlertClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListAnomalyAlertClient interface {
+	Recv() (*AnomalyAlertData, error)
+	grpc.ClientStream
+}
+
+type coverListAnomalyAlertClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListAnomalyAlertClient) Recv() (*AnomalyAlertData, error) {
+	m := new(AnomalyAlertData)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2157,6 +2204,10 @@ type CoverServer interface {
 	DeleteDiscountExpirationAlert(context.Context, *ManipulateDiscountExpirationAlertRequest) (*emptypb.Empty, error)
 	// Create Anomaly Alert
 	CreateAnomalyAlert(context.Context, *CreateAnomalyAlertRequest) (*emptypb.Empty, error)
+	// Delete Anomaly Alert
+	DeleteAnomalyAlert(context.Context, *ManipulateAnomalyAlertRequest) (*emptypb.Empty, error)
+	// List all the Anomaly Alert Data
+	ListAnomalyAlert(*ListAnomalyAlertRequest, Cover_ListAnomalyAlertServer) error
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2508,6 +2559,12 @@ func (UnimplementedCoverServer) DeleteDiscountExpirationAlert(context.Context, *
 }
 func (UnimplementedCoverServer) CreateAnomalyAlert(context.Context, *CreateAnomalyAlertRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAnomalyAlert not implemented")
+}
+func (UnimplementedCoverServer) DeleteAnomalyAlert(context.Context, *ManipulateAnomalyAlertRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAnomalyAlert not implemented")
+}
+func (UnimplementedCoverServer) ListAnomalyAlert(*ListAnomalyAlertRequest, Cover_ListAnomalyAlertServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListAnomalyAlert not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4663,6 +4720,45 @@ func _Cover_CreateAnomalyAlert_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_DeleteAnomalyAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManipulateAnomalyAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteAnomalyAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteAnomalyAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteAnomalyAlert(ctx, req.(*ManipulateAnomalyAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ListAnomalyAlert_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListAnomalyAlertRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListAnomalyAlert(m, &coverListAnomalyAlertServer{stream})
+}
+
+type Cover_ListAnomalyAlertServer interface {
+	Send(*AnomalyAlertData) error
+	grpc.ServerStream
+}
+
+type coverListAnomalyAlertServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListAnomalyAlertServer) Send(m *AnomalyAlertData) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5042,6 +5138,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "CreateAnomalyAlert",
 			Handler:    _Cover_CreateAnomalyAlert_Handler,
 		},
+		{
+			MethodName: "DeleteAnomalyAlert",
+			Handler:    _Cover_DeleteAnomalyAlert_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -5152,6 +5252,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListDiscountExpirationAlert",
 			Handler:       _Cover_ListDiscountExpirationAlert_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListAnomalyAlert",
+			Handler:       _Cover_ListAnomalyAlert_Handler,
 			ServerStreams: true,
 		},
 	},

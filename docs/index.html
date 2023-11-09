@@ -1373,6 +1373,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.AnomalyAlertData"><span class="badge">M</span>AnomalyAlertData</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.AnomalyData"><span class="badge">M</span>AnomalyData</a>
                 </li>
               
@@ -1801,6 +1805,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListAnomalyAlertRequest"><span class="badge">M</span>ListAnomalyAlertRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ListAssetsFilters"><span class="badge">M</span>ListAssetsFilters</a>
                 </li>
               
@@ -1822,6 +1830,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListFeesRequest"><span class="badge">M</span>ListFeesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ManipulateAnomalyAlertRequest"><span class="badge">M</span>ManipulateAnomalyAlertRequest</a>
                 </li>
               
                 <li>
@@ -15648,6 +15660,72 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.AnomalyAlertData">AnomalyAlertData</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>alertEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frequency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannels</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.AnomalyData">AnomalyData</h3>
         <p>Message response for anomaly detection</p>
 
@@ -19376,6 +19454,13 @@ type (&#39;ri&#39;, &#39;sp&#39;) </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.ListAnomalyAlertRequest">ListAnomalyAlertRequest</h3>
+        <p>Request message for ListAnomalyAlert</p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.ListAssetsFilters">ListAssetsFilters</h3>
         <p></p>
 
@@ -19519,6 +19604,30 @@ type (&#39;ri&#39;, &#39;sp&#39;) </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ManipulateAnomalyAlertRequest">ManipulateAnomalyAlertRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required. Id </p></td>
                 </tr>
               
             </tbody>
@@ -23157,6 +23266,20 @@ file in bytes </p></td>
                 <td><p>Create Anomaly Alert</p></td>
               </tr>
             
+              <tr>
+                <td>DeleteAnomalyAlert</td>
+                <td><a href="#blueapi.cover.v1.ManipulateAnomalyAlertRequest">ManipulateAnomalyAlertRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Delete Anomaly Alert</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListAnomalyAlert</td>
+                <td><a href="#blueapi.cover.v1.ListAnomalyAlertRequest">ListAnomalyAlertRequest</a></td>
+                <td><a href="#blueapi.cover.v1.AnomalyAlertData">AnomalyAlertData</a> stream</td>
+                <td><p>List all the Anomaly Alert Data</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -24322,6 +24445,26 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/alerts/anomaly</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteAnomalyAlert</td>
+                <td>DELETE</td>
+                <td>/v1/alerts/anomaly/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListAnomalyAlert</td>
+                <td>POST</td>
+                <td>/v1/alerts/anomaly/all:read</td>
+                <td></td>
               </tr>
               
             
