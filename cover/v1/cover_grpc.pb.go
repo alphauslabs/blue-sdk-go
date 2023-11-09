@@ -138,6 +138,8 @@ const (
 	Cover_CreateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/CreateAnomalyAlert"
 	Cover_DeleteAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/DeleteAnomalyAlert"
 	Cover_ListAnomalyAlert_FullMethodName              = "/blueapi.cover.v1.Cover/ListAnomalyAlert"
+	Cover_GetAnomalyAlert_FullMethodName               = "/blueapi.cover.v1.Cover/GetAnomalyAlert"
+	Cover_UpdateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateAnomalyAlert"
 )
 
 // CoverClient is the client API for Cover service.
@@ -377,6 +379,10 @@ type CoverClient interface {
 	DeleteAnomalyAlert(ctx context.Context, in *ManipulateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// List all the Anomaly Alert Data
 	ListAnomalyAlert(ctx context.Context, in *ListAnomalyAlertRequest, opts ...grpc.CallOption) (Cover_ListAnomalyAlertClient, error)
+	// Get Anomaly Alert Data
+	GetAnomalyAlert(ctx context.Context, in *ManipulateAnomalyAlertRequest, opts ...grpc.CallOption) (*AnomalyAlertData, error)
+	// Update Anomaly Alert
+	UpdateAnomalyAlert(ctx context.Context, in *UpdateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type coverClient struct {
@@ -1971,6 +1977,24 @@ func (x *coverListAnomalyAlertClient) Recv() (*AnomalyAlertData, error) {
 	return m, nil
 }
 
+func (c *coverClient) GetAnomalyAlert(ctx context.Context, in *ManipulateAnomalyAlertRequest, opts ...grpc.CallOption) (*AnomalyAlertData, error) {
+	out := new(AnomalyAlertData)
+	err := c.cc.Invoke(ctx, Cover_GetAnomalyAlert_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateAnomalyAlert(ctx context.Context, in *UpdateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_UpdateAnomalyAlert_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2208,6 +2232,10 @@ type CoverServer interface {
 	DeleteAnomalyAlert(context.Context, *ManipulateAnomalyAlertRequest) (*emptypb.Empty, error)
 	// List all the Anomaly Alert Data
 	ListAnomalyAlert(*ListAnomalyAlertRequest, Cover_ListAnomalyAlertServer) error
+	// Get Anomaly Alert Data
+	GetAnomalyAlert(context.Context, *ManipulateAnomalyAlertRequest) (*AnomalyAlertData, error)
+	// Update Anomaly Alert
+	UpdateAnomalyAlert(context.Context, *UpdateAnomalyAlertRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2565,6 +2593,12 @@ func (UnimplementedCoverServer) DeleteAnomalyAlert(context.Context, *ManipulateA
 }
 func (UnimplementedCoverServer) ListAnomalyAlert(*ListAnomalyAlertRequest, Cover_ListAnomalyAlertServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAnomalyAlert not implemented")
+}
+func (UnimplementedCoverServer) GetAnomalyAlert(context.Context, *ManipulateAnomalyAlertRequest) (*AnomalyAlertData, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnomalyAlert not implemented")
+}
+func (UnimplementedCoverServer) UpdateAnomalyAlert(context.Context, *UpdateAnomalyAlertRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAnomalyAlert not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4759,6 +4793,42 @@ func (x *coverListAnomalyAlertServer) Send(m *AnomalyAlertData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cover_GetAnomalyAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ManipulateAnomalyAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAnomalyAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetAnomalyAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAnomalyAlert(ctx, req.(*ManipulateAnomalyAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateAnomalyAlert_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAnomalyAlertRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateAnomalyAlert(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateAnomalyAlert_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateAnomalyAlert(ctx, req.(*UpdateAnomalyAlertRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5141,6 +5211,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAnomalyAlert",
 			Handler:    _Cover_DeleteAnomalyAlert_Handler,
+		},
+		{
+			MethodName: "GetAnomalyAlert",
+			Handler:    _Cover_GetAnomalyAlert_Handler,
+		},
+		{
+			MethodName: "UpdateAnomalyAlert",
+			Handler:    _Cover_UpdateAnomalyAlert_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
