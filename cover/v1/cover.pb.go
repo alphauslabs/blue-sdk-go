@@ -12161,14 +12161,10 @@ type GetDiscountRecommendationsRequest struct {
 
 	// Required.
 	CostGroupId string `protobuf:"bytes,1,opt,name=costGroupId,proto3" json:"costGroupId,omitempty"`
-	// service ('AmazonEC2', 'AmazonRDS', 'AmazonRedshift', 'AmazonElastiCache', 'AmazonOpenSearch', 'AmazonMemoryDB') -> for RI only
 	// offeringClass ('STANDARD', 'CONVERTIBLE') -> for RI only
-	// savingsPlanType ('COMPUTE_SP', 'EC2_INSTANCE_SP', 'SAGEMAKER_SP') -> for SP only
 	// paymentOption ('ALL_UPFRONT', 'PARTIAL_UPFRONT', 'NO_UPFRONT')
 	// termInYears ('ONE_YEAR', 'THREE_YEARS')
 	// basedOnThePast ('SEVEN_DAYS', 'THIRTY_DAYS', 'SIXTY_DAYS')
-	// accountScope ('PAYER', 'LINKED')
-	// type ('ri', 'sp')
 	AwsInputs *cover.AwsInputs `protobuf:"bytes,2,opt,name=awsInputs,proto3" json:"awsInputs,omitempty"`
 	// NOT SUPPORTED YET
 	AzureInputs *cover.AzureInputs `protobuf:"bytes,3,opt,name=azureInputs,proto3" json:"azureInputs,omitempty"`
