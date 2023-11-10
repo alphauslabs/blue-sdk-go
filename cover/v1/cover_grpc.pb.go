@@ -78,6 +78,7 @@ const (
 	Cover_GetDataAccess_FullMethodName                 = "/blueapi.cover.v1.Cover/GetDataAccess"
 	Cover_DeleteDataAccess_FullMethodName              = "/blueapi.cover.v1.Cover/DeleteDataAccess"
 	Cover_CreateAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/CreateAccountAccess"
+	Cover_CreateAccountAccessCur_FullMethodName        = "/blueapi.cover.v1.Cover/CreateAccountAccessCur"
 	Cover_UpdateAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
 	Cover_DeleteAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
 	Cover_RegisterAccount_FullMethodName               = "/blueapi.cover.v1.Cover/RegisterAccount"
@@ -259,6 +260,8 @@ type CoverClient interface {
 	DeleteDataAccess(ctx context.Context, in *GetAndDeleteDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
+	// Starts validation of the account access cur stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
+	CreateAccountAccessCur(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
 	UpdateAccountAccess(ctx context.Context, in *UpdateAccountAccessRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
@@ -923,6 +926,15 @@ func (c *coverClient) DeleteDataAccess(ctx context.Context, in *GetAndDeleteData
 func (c *coverClient) CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
 	out := new(AccountAccess)
 	err := c.cc.Invoke(ctx, Cover_CreateAccountAccess_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateAccountAccessCur(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
+	out := new(AccountAccess)
+	err := c.cc.Invoke(ctx, Cover_CreateAccountAccessCur_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2112,6 +2124,8 @@ type CoverServer interface {
 	DeleteDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*emptypb.Empty, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
+	// Starts validation of the account access cur stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
+	CreateAccountAccessCur(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
 	UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*protos.Operation, error)
 	// Deletes the current account access role attached to this target account. This does not delete the CloudFormation deployment in your account.
@@ -2413,6 +2427,9 @@ func (UnimplementedCoverServer) DeleteDataAccess(context.Context, *GetAndDeleteD
 }
 func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) CreateAccountAccessCur(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccessCur not implemented")
 }
 func (UnimplementedCoverServer) UpdateAccountAccess(context.Context, *UpdateAccountAccessRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountAccess not implemented")
@@ -3638,6 +3655,24 @@ func _Cover_CreateAccountAccess_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).CreateAccountAccess(ctx, req.(*CreateAccountAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateAccountAccessCur_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateAccountAccessCur(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateAccountAccessCur_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateAccountAccessCur(ctx, req.(*CreateAccountAccessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5059,6 +5094,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAccountAccess",
 			Handler:    _Cover_CreateAccountAccess_Handler,
+		},
+		{
+			MethodName: "CreateAccountAccessCur",
+			Handler:    _Cover_CreateAccountAccessCur_Handler,
 		},
 		{
 			MethodName: "UpdateAccountAccess",
