@@ -6833,13 +6833,18 @@ type BudgetAlerts struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// budget alert id
-	Id           string                       `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Vendor       string                       `protobuf:"bytes,2,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	Accounts     []string                     `protobuf:"bytes,3,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	// Budget alert Id.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// Vnedor. At the moment, only `aws` is supported.
+	Vendor string `protobuf:"bytes,2,opt,name=vendor,proto3" json:"vendor,omitempty"`
+	// Lsit of accountId.
+	Accounts []string `protobuf:"bytes,3,rep,name=accounts,proto3" json:"accounts,omitempty"`
+	// Notification setting for budget alert.
 	Notification *api.BudgetAlertNotification `protobuf:"bytes,4,opt,name=notification,proto3" json:"notification,omitempty"`
-	Daily        *api.DailyBudgetAlert        `protobuf:"bytes,5,opt,name=daily,proto3" json:"daily,omitempty"`
-	Monthly      *api.MonthlyBudgetAlert      `protobuf:"bytes,6,opt,name=monthly,proto3" json:"monthly,omitempty"`
+	// Daily setting for budget alert.
+	Daily *api.DailyBudgetAlert `protobuf:"bytes,5,opt,name=daily,proto3" json:"daily,omitempty"`
+	// Monthly setting for budget alert.
+	Monthly *api.MonthlyBudgetAlert `protobuf:"bytes,6,opt,name=monthly,proto3" json:"monthly,omitempty"`
 }
 
 func (x *BudgetAlerts) Reset() {
@@ -7022,7 +7027,7 @@ type CreateBudgetAlertsRequest struct {
 
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required.
+	// Required. Lsit of accountId. For example, you set to ["accountId1","accountId2","accountId3"].
 	Accounts []string `protobuf:"bytes,2,rep,name=accounts,proto3" json:"accounts,omitempty"`
 	// Required.
 	Notification *api.BudgetAlertNotification `protobuf:"bytes,3,opt,name=notification,proto3" json:"notification,omitempty"`
@@ -7109,7 +7114,7 @@ type UpdateBudgetAlertsRequest struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,2,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required.
+	// Required. Lsit of accountId. For example, you set to ["accountId1","accountId2","accountId3"].
 	Accounts []string `protobuf:"bytes,3,rep,name=accounts,proto3" json:"accounts,omitempty"`
 	// Required.
 	Notification *api.BudgetAlertNotification `protobuf:"bytes,4,opt,name=notification,proto3" json:"notification,omitempty"`

@@ -149,6 +149,7 @@ type DailyBudgetAlert struct {
 	// Required. threshold in budget alerts
 	Value float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
 	// Required. notification enable/disable
+	// If disabled, no alert is sent.
 	Enabled bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
 }
 
@@ -207,6 +208,7 @@ type MonthlyBudgetAlert struct {
 	// Required. threshold in budget alerts
 	Value float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
 	// Required. notification enable/disable
+	// If disabled, no alert is sent.
 	Enabled bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
 }
 
@@ -262,9 +264,10 @@ type BudgetAlertNotification struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required.
+	// Required. List of channelId. For example, you set to ["channelId1","channelId2","channelId3"].
 	Channels []string `protobuf:"bytes,2,rep,name=channels,proto3" json:"channels,omitempty"`
-	// Required.
+	// Required. notification enable/disable
+	// If disabled, no alert is sent.
 	Enabled bool `protobuf:"varint,3,opt,name=enabled,proto3" json:"enabled,omitempty"`
 }
 
