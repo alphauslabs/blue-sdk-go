@@ -16676,7 +16676,7 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
             <tbody>
               
                 <tr>
-                  <td>frequency</td>
+                  <td>frequencies</td>
                   <td><a href="#int64">int64</a></td>
                   <td>repeated</td>
                   <td><p>Required if the alertEnabled is set to true
@@ -16685,10 +16685,10 @@ Supported values are the following:
                 </tr>
               
                 <tr>
-                  <td>costGroupId</td>
+                  <td>costGroups</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. if costGroupId is not provided, accountId must not empty. </p></td>
+                  <td><p>Required. Cost Group Id </p></td>
                 </tr>
               
                 <tr>
@@ -16699,24 +16699,10 @@ Supported values are the following:
                 </tr>
               
                 <tr>
-                  <td>notificationChannels</td>
+                  <td>channels</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>required. Array of notificationChannel Ids from DynamoDB. Existing in ripple. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>required. &#34;ri&#34; or &#34;sp&#34; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. if accountId is not provided, CostGroupId must not empty. </p></td>
                 </tr>
               
             </tbody>
@@ -17364,13 +17350,6 @@ Supported values are the following:
                 </tr>
               
                 <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>alertEnabled</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
@@ -17378,15 +17357,15 @@ Supported values are the following:
                 </tr>
               
                 <tr>
-                  <td>frequency</td>
+                  <td>frequencies</td>
                   <td><a href="#int64">int64</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>costGroupId</td>
-                  <td><a href="#string">string</a></td>
+                  <td>costGroups</td>
+                  <td><a href="#blueapi.api.cover.AlertCostGroup">blueapi.api.cover.AlertCostGroup</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -17399,16 +17378,9 @@ Supported values are the following:
                 </tr>
               
                 <tr>
-                  <td>notificationChannels</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
+                  <td>channels</td>
+                  <td><a href="#blueapi.api.cover.AlertChannels">blueapi.api.cover.AlertChannels</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -21534,38 +21506,24 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
                 </tr>
               
                 <tr>
-                  <td>notificationChannels</td>
+                  <td>channels</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>required. Notification Channel Ids. </p></td>
                 </tr>
               
                 <tr>
-                  <td>frequency</td>
+                  <td>frequencies</td>
                   <td><a href="#int64">int64</a></td>
                   <td>repeated</td>
-                  <td><p>required. Frequency. </p></td>
+                  <td><p>required. Frequencies. </p></td>
                 </tr>
               
                 <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>required. ri or sp </p></td>
-                </tr>
-              
-                <tr>
-                  <td>costGroupId</td>
+                  <td>costGroups</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. if costGroupId is not provided, accountId must not empty. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. if accountId is not provided, CostGroupId must not empty. </p></td>
+                  <td><p>Required. Cost Group Ids </p></td>
                 </tr>
               
             </tbody>
