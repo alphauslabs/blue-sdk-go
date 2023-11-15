@@ -928,6 +928,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.ReadBudgetAlertsRequest"><span class="badge">M</span>ReadBudgetAlertsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.ReadCostAttributesRequest"><span class="badge">M</span>ReadCostAttributesRequest</a>
                 </li>
               
@@ -9556,6 +9560,30 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
 
         
       
+        <h3 id="blueapi.cost.v1.ReadBudgetAlertsRequest">ReadBudgetAlertsRequest</h3>
+        <p>Request message for the ReadBudgetAlerts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.ReadCostAttributesRequest">ReadCostAttributesRequest</h3>
         <p>Request message for the Cost.ReadCostAttributes rpc.</p>
 
@@ -10957,6 +10985,13 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
               </tr>
             
               <tr>
+                <td>ReadBudgetAlerts</td>
+                <td><a href="#blueapi.cost.v1.ReadBudgetAlertsRequest">ReadBudgetAlertsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.BudgetAlerts">BudgetAlerts</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Reads the budget alerts. Only available in Wave(Pro).</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetBudgetAlerts</td>
                 <td><a href="#blueapi.cost.v1.GetBudgetAlertsRequest">GetBudgetAlertsRequest</a></td>
                 <td><a href="#blueapi.cost.v1.BudgetAlerts">BudgetAlerts</a></td>
@@ -11505,6 +11540,16 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td>DELETE</td>
                 <td>/v1/{vendor}/alerts/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadBudgetAlerts</td>
+                <td>POST</td>
+                <td>/v1/alerts:read</td>
+                <td>*</td>
               </tr>
               
             

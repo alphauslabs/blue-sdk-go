@@ -69,6 +69,7 @@ const (
 	Cost_CreateAccountBudgetAlerts_FullMethodName     = "/blueapi.cost.v1.Cost/CreateAccountBudgetAlerts"
 	Cost_UpdateAccountBudgetAlerts_FullMethodName     = "/blueapi.cost.v1.Cost/UpdateAccountBudgetAlerts"
 	Cost_DeleteAccountBudgetAlerts_FullMethodName     = "/blueapi.cost.v1.Cost/DeleteAccountBudgetAlerts"
+	Cost_ReadBudgetAlerts_FullMethodName              = "/blueapi.cost.v1.Cost/ReadBudgetAlerts"
 	Cost_GetBudgetAlerts_FullMethodName               = "/blueapi.cost.v1.Cost/GetBudgetAlerts"
 	Cost_CreateBudgetAlerts_FullMethodName            = "/blueapi.cost.v1.Cost/CreateBudgetAlerts"
 	Cost_UpdateBudgetAlerts_FullMethodName            = "/blueapi.cost.v1.Cost/UpdateBudgetAlerts"
@@ -175,6 +176,8 @@ type CostClient interface {
 	UpdateAccountBudgetAlerts(ctx context.Context, in *UpdateAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*wave.BudgetAlert, error)
 	// Delete the budget alerts for the account id. Only available in Wave(Pro).
 	DeleteAccountBudgetAlerts(ctx context.Context, in *DeleteAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reads the budget alerts. Only available in Wave(Pro).
+	ReadBudgetAlerts(ctx context.Context, in *ReadBudgetAlertsRequest, opts ...grpc.CallOption) (Cost_ReadBudgetAlertsClient, error)
 	// WORK-IN-PROGRESS: Gets the budget alerts. Only available in Wave(Pro).
 	GetBudgetAlerts(ctx context.Context, in *GetBudgetAlertsRequest, opts ...grpc.CallOption) (*BudgetAlerts, error)
 	// WORK-IN-PROGRESS: Create the budget alerts. Only available in Wave(Pro).
@@ -863,6 +866,38 @@ func (c *costClient) DeleteAccountBudgetAlerts(ctx context.Context, in *DeleteAc
 	return out, nil
 }
 
+func (c *costClient) ReadBudgetAlerts(ctx context.Context, in *ReadBudgetAlertsRequest, opts ...grpc.CallOption) (Cost_ReadBudgetAlertsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[11], Cost_ReadBudgetAlerts_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadBudgetAlertsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadBudgetAlertsClient interface {
+	Recv() (*BudgetAlerts, error)
+	grpc.ClientStream
+}
+
+type costReadBudgetAlertsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadBudgetAlertsClient) Recv() (*BudgetAlerts, error) {
+	m := new(BudgetAlerts)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *costClient) GetBudgetAlerts(ctx context.Context, in *GetBudgetAlertsRequest, opts ...grpc.CallOption) (*BudgetAlerts, error) {
 	out := new(BudgetAlerts)
 	err := c.cc.Invoke(ctx, Cost_GetBudgetAlerts_FullMethodName, in, out, opts...)
@@ -1047,6 +1082,8 @@ type CostServer interface {
 	UpdateAccountBudgetAlerts(context.Context, *UpdateAccountBudgetAlertsRequest) (*wave.BudgetAlert, error)
 	// Delete the budget alerts for the account id. Only available in Wave(Pro).
 	DeleteAccountBudgetAlerts(context.Context, *DeleteAccountBudgetAlertsRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reads the budget alerts. Only available in Wave(Pro).
+	ReadBudgetAlerts(*ReadBudgetAlertsRequest, Cost_ReadBudgetAlertsServer) error
 	// WORK-IN-PROGRESS: Gets the budget alerts. Only available in Wave(Pro).
 	GetBudgetAlerts(context.Context, *GetBudgetAlertsRequest) (*BudgetAlerts, error)
 	// WORK-IN-PROGRESS: Create the budget alerts. Only available in Wave(Pro).
@@ -1208,6 +1245,9 @@ func (UnimplementedCostServer) UpdateAccountBudgetAlerts(context.Context, *Updat
 }
 func (UnimplementedCostServer) DeleteAccountBudgetAlerts(context.Context, *DeleteAccountBudgetAlertsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountBudgetAlerts not implemented")
+}
+func (UnimplementedCostServer) ReadBudgetAlerts(*ReadBudgetAlertsRequest, Cost_ReadBudgetAlertsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadBudgetAlerts not implemented")
 }
 func (UnimplementedCostServer) GetBudgetAlerts(context.Context, *GetBudgetAlertsRequest) (*BudgetAlerts, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBudgetAlerts not implemented")
@@ -2095,6 +2135,27 @@ func _Cost_DeleteAccountBudgetAlerts_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_ReadBudgetAlerts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadBudgetAlertsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadBudgetAlerts(m, &costReadBudgetAlertsServer{stream})
+}
+
+type Cost_ReadBudgetAlertsServer interface {
+	Send(*BudgetAlerts) error
+	grpc.ServerStream
+}
+
+type costReadBudgetAlertsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadBudgetAlertsServer) Send(m *BudgetAlerts) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Cost_GetBudgetAlerts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBudgetAlertsRequest)
 	if err := dec(in); err != nil {
@@ -2513,6 +2574,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadNonTagCosts",
 			Handler:       _Cost_ReadNonTagCosts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadBudgetAlerts",
+			Handler:       _Cost_ReadBudgetAlerts_Handler,
 			ServerStreams: true,
 		},
 	},
