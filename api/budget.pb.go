@@ -199,6 +199,65 @@ func (x *DailyBudgetAlert) GetEnabled() bool {
 	return false
 }
 
+// DailyRateIncreaseBudgetAlert resource definition.
+type DailyRateIncreaseBudgetAlert struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	// Required. threshold in budget alerts
+	Value float64 `protobuf:"fixed64,1,opt,name=value,proto3" json:"value,omitempty"`
+	// Required. notification enable/disable
+	// If disabled, no alert is sent.
+	Enabled bool `protobuf:"varint,2,opt,name=enabled,proto3" json:"enabled,omitempty"`
+}
+
+func (x *DailyRateIncreaseBudgetAlert) Reset() {
+	*x = DailyRateIncreaseBudgetAlert{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_budget_proto_msgTypes[3]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DailyRateIncreaseBudgetAlert) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DailyRateIncreaseBudgetAlert) ProtoMessage() {}
+
+func (x *DailyRateIncreaseBudgetAlert) ProtoReflect() protoreflect.Message {
+	mi := &file_api_budget_proto_msgTypes[3]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DailyRateIncreaseBudgetAlert.ProtoReflect.Descriptor instead.
+func (*DailyRateIncreaseBudgetAlert) Descriptor() ([]byte, []int) {
+	return file_api_budget_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *DailyRateIncreaseBudgetAlert) GetValue() float64 {
+	if x != nil {
+		return x.Value
+	}
+	return 0
+}
+
+func (x *DailyRateIncreaseBudgetAlert) GetEnabled() bool {
+	if x != nil {
+		return x.Enabled
+	}
+	return false
+}
+
 // MonthlyBudgetAlert resource definition.
 type MonthlyBudgetAlert struct {
 	state         protoimpl.MessageState
@@ -215,7 +274,7 @@ type MonthlyBudgetAlert struct {
 func (x *MonthlyBudgetAlert) Reset() {
 	*x = MonthlyBudgetAlert{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_budget_proto_msgTypes[3]
+		mi := &file_api_budget_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -228,7 +287,7 @@ func (x *MonthlyBudgetAlert) String() string {
 func (*MonthlyBudgetAlert) ProtoMessage() {}
 
 func (x *MonthlyBudgetAlert) ProtoReflect() protoreflect.Message {
-	mi := &file_api_budget_proto_msgTypes[3]
+	mi := &file_api_budget_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -241,7 +300,7 @@ func (x *MonthlyBudgetAlert) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use MonthlyBudgetAlert.ProtoReflect.Descriptor instead.
 func (*MonthlyBudgetAlert) Descriptor() ([]byte, []int) {
-	return file_api_budget_proto_rawDescGZIP(), []int{3}
+	return file_api_budget_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *MonthlyBudgetAlert) GetValue() float64 {
@@ -274,7 +333,7 @@ type BudgetAlertNotification struct {
 func (x *BudgetAlertNotification) Reset() {
 	*x = BudgetAlertNotification{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_budget_proto_msgTypes[4]
+		mi := &file_api_budget_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -287,7 +346,7 @@ func (x *BudgetAlertNotification) String() string {
 func (*BudgetAlertNotification) ProtoMessage() {}
 
 func (x *BudgetAlertNotification) ProtoReflect() protoreflect.Message {
-	mi := &file_api_budget_proto_msgTypes[4]
+	mi := &file_api_budget_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -300,7 +359,7 @@ func (x *BudgetAlertNotification) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BudgetAlertNotification.ProtoReflect.Descriptor instead.
 func (*BudgetAlertNotification) Descriptor() ([]byte, []int) {
-	return file_api_budget_proto_rawDescGZIP(), []int{4}
+	return file_api_budget_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *BudgetAlertNotification) GetChannels() []string {
@@ -338,6 +397,11 @@ var file_api_budget_proto_rawDesc = []byte{
 	0x74, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
 	0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x18, 0x0a, 0x07,
 	0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65,
+	0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x22, 0x4e, 0x0a, 0x1c, 0x44, 0x61, 0x69, 0x6c, 0x79, 0x52,
+	0x61, 0x74, 0x65, 0x49, 0x6e, 0x63, 0x72, 0x65, 0x61, 0x73, 0x65, 0x42, 0x75, 0x64, 0x67, 0x65,
+	0x74, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x18, 0x0a, 0x07,
+	0x65, 0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x08, 0x52, 0x07, 0x65,
 	0x6e, 0x61, 0x62, 0x6c, 0x65, 0x64, 0x22, 0x44, 0x0a, 0x12, 0x4d, 0x6f, 0x6e, 0x74, 0x68, 0x6c,
 	0x79, 0x42, 0x75, 0x64, 0x67, 0x65, 0x74, 0x41, 0x6c, 0x65, 0x72, 0x74, 0x12, 0x14, 0x0a, 0x05,
 	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x05, 0x76, 0x61, 0x6c,
@@ -368,13 +432,14 @@ func file_api_budget_proto_rawDescGZIP() []byte {
 	return file_api_budget_proto_rawDescData
 }
 
-var file_api_budget_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
+var file_api_budget_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_api_budget_proto_goTypes = []interface{}{
-	(*Budget)(nil),                  // 0: blueapi.api.Budget
-	(*MonthlyBudget)(nil),           // 1: blueapi.api.MonthlyBudget
-	(*DailyBudgetAlert)(nil),        // 2: blueapi.api.DailyBudgetAlert
-	(*MonthlyBudgetAlert)(nil),      // 3: blueapi.api.MonthlyBudgetAlert
-	(*BudgetAlertNotification)(nil), // 4: blueapi.api.BudgetAlertNotification
+	(*Budget)(nil),                       // 0: blueapi.api.Budget
+	(*MonthlyBudget)(nil),                // 1: blueapi.api.MonthlyBudget
+	(*DailyBudgetAlert)(nil),             // 2: blueapi.api.DailyBudgetAlert
+	(*DailyRateIncreaseBudgetAlert)(nil), // 3: blueapi.api.DailyRateIncreaseBudgetAlert
+	(*MonthlyBudgetAlert)(nil),           // 4: blueapi.api.MonthlyBudgetAlert
+	(*BudgetAlertNotification)(nil),      // 5: blueapi.api.BudgetAlertNotification
 }
 var file_api_budget_proto_depIdxs = []int32{
 	1, // 0: blueapi.api.Budget.monthlyBudget:type_name -> blueapi.api.MonthlyBudget
@@ -428,7 +493,7 @@ func file_api_budget_proto_init() {
 			}
 		}
 		file_api_budget_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*MonthlyBudgetAlert); i {
+			switch v := v.(*DailyRateIncreaseBudgetAlert); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -440,6 +505,18 @@ func file_api_budget_proto_init() {
 			}
 		}
 		file_api_budget_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*MonthlyBudgetAlert); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_budget_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*BudgetAlertNotification); i {
 			case 0:
 				return &v.state
@@ -458,7 +535,7 @@ func file_api_budget_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_budget_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   5,
+			NumMessages:   6,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
