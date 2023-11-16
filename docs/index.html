@@ -1901,6 +1901,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.RegisterNewUserRequest"><span class="badge">M</span>RegisterNewUserRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.RegisterNewUserResponse"><span class="badge">M</span>RegisterNewUserResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.RemoveCostGroupMemberRequest"><span class="badge">M</span>RemoveCostGroupMemberRequest</a>
                 </li>
               
@@ -20182,6 +20190,96 @@ basedOnThePast (&#39;SEVEN_DAYS&#39;, &#39;THIRTY_DAYS&#39;, &#39;SIXTY_DAYS&#39
 
         
       
+        <h3 id="blueapi.cover.v1.RegisterNewUserRequest">RegisterNewUserRequest</h3>
+        <p>Request message for RegisterNewUser</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required email </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required password </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required user Name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>company</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required company name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required company role </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>optional company monthly cloud usage </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intention</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>optional intention </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.RegisterNewUserResponse">RegisterNewUserResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>isAuthorized</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.RemoveCostGroupMemberRequest">RemoveCostGroupMemberRequest</h3>
         <p>Request message for RemoveCostGroupMember</p>
 
@@ -23405,6 +23503,13 @@ file in bytes </p></td>
                 <td><p>Update Anomaly Alert</p></td>
               </tr>
             
+              <tr>
+                <td>RegisterNewUser</td>
+                <td><a href="#blueapi.cover.v1.RegisterNewUserRequest">RegisterNewUserRequest</a></td>
+                <td><a href="#blueapi.cover.v1.RegisterNewUserResponse">RegisterNewUserResponse</a></td>
+                <td><p>Octo new user registration</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -24619,6 +24724,16 @@ file in bytes </p></td>
                 <td>UpdateAnomalyAlert</td>
                 <td>PUT</td>
                 <td>/v1/alerts/anomaly/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RegisterNewUser</td>
+                <td>POST</td>
+                <td>/v1/members/register</td>
                 <td>*</td>
               </tr>
               
