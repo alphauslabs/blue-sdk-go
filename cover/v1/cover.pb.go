@@ -12161,10 +12161,7 @@ type GetDiscountRecommendationsRequest struct {
 
 	// Required.
 	CostGroupId string `protobuf:"bytes,1,opt,name=costGroupId,proto3" json:"costGroupId,omitempty"`
-	// offeringClass ('STANDARD', 'CONVERTIBLE') -> for RI only
-	// paymentOption ('ALL_UPFRONT', 'PARTIAL_UPFRONT', 'NO_UPFRONT')
-	// termInYears ('ONE_YEAR', 'THREE_YEARS')
-	// basedOnThePast ('SEVEN_DAYS', 'THIRTY_DAYS', 'SIXTY_DAYS')
+	// AWS Inputs
 	AwsInputs *cover.AwsInputs `protobuf:"bytes,2,opt,name=awsInputs,proto3" json:"awsInputs,omitempty"`
 	// NOT SUPPORTED YET
 	AzureInputs *cover.AzureInputs `protobuf:"bytes,3,opt,name=azureInputs,proto3" json:"azureInputs,omitempty"`

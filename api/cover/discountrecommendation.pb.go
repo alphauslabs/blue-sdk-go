@@ -25,9 +25,13 @@ type AwsInputs struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	OfferingClass  string `protobuf:"bytes,1,opt,name=offeringClass,proto3" json:"offeringClass,omitempty"`
-	PaymentOption  string `protobuf:"bytes,2,opt,name=paymentOption,proto3" json:"paymentOption,omitempty"`
-	TermInYears    string `protobuf:"bytes,3,opt,name=termInYears,proto3" json:"termInYears,omitempty"`
+	// Supported values are the following: ('STANDARD', 'CONVERTIBLE') -> for RI only
+	OfferingClass string `protobuf:"bytes,1,opt,name=offeringClass,proto3" json:"offeringClass,omitempty"`
+	// Supported values are the following: ('ALL_UPFRONT', 'PARTIAL_UPFRONT', 'NO_UPFRONT')
+	PaymentOption string `protobuf:"bytes,2,opt,name=paymentOption,proto3" json:"paymentOption,omitempty"`
+	// Supported values are the following:('ONE_YEAR', 'THREE_YEARS')
+	TermInYears string `protobuf:"bytes,3,opt,name=termInYears,proto3" json:"termInYears,omitempty"`
+	// Supported values are the following:('SEVEN_DAYS', 'THIRTY_DAYS', 'SIXTY_DAYS')
 	BasedOnThePast string `protobuf:"bytes,4,opt,name=basedOnThePast,proto3" json:"basedOnThePast,omitempty"`
 }
 
