@@ -1781,6 +1781,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetUserProfileRequest"><span class="badge">M</span>GetUserProfileRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetUserProfileResponse"><span class="badge">M</span>GetUserProfileResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetViewsRequest"><span class="badge">M</span>GetViewsRequest</a>
                 </li>
               
@@ -19387,6 +19395,54 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetUserProfileRequest">GetUserProfileRequest</h3>
+        <p>Request message for GetUserProfile</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required email </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetUserProfileResponse">GetUserProfileResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>hasCreatedProfile</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetViewsRequest">GetViewsRequest</h3>
         <p>Request message for GetViews</p>
 
@@ -23507,6 +23563,13 @@ file in bytes </p></td>
                 <td><p>Octo new user registration</p></td>
               </tr>
             
+              <tr>
+                <td>GetUserProfile</td>
+                <td><a href="#blueapi.cover.v1.GetUserProfileRequest">GetUserProfileRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetUserProfileResponse">GetUserProfileResponse</a></td>
+                <td><p>Octo getting user profile</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -24732,6 +24795,16 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/members/register</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetUserProfile</td>
+                <td>GET</td>
+                <td>/v1/members/profile/{email}</td>
+                <td></td>
               </tr>
               
             

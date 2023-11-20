@@ -142,6 +142,7 @@ const (
 	Cover_GetAnomalyAlert_FullMethodName               = "/blueapi.cover.v1.Cover/GetAnomalyAlert"
 	Cover_UpdateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateAnomalyAlert"
 	Cover_RegisterNewUser_FullMethodName               = "/blueapi.cover.v1.Cover/RegisterNewUser"
+	Cover_GetUserProfile_FullMethodName                = "/blueapi.cover.v1.Cover/GetUserProfile"
 )
 
 // CoverClient is the client API for Cover service.
@@ -389,6 +390,8 @@ type CoverClient interface {
 	UpdateAnomalyAlert(ctx context.Context, in *UpdateAnomalyAlertRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Octo new user registration
 	RegisterNewUser(ctx context.Context, in *RegisterNewUserRequest, opts ...grpc.CallOption) (*RegisterNewUserResponse, error)
+	// Octo getting user profile
+	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 }
 
 type coverClient struct {
@@ -2019,6 +2022,15 @@ func (c *coverClient) RegisterNewUser(ctx context.Context, in *RegisterNewUserRe
 	return out, nil
 }
 
+func (c *coverClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error) {
+	out := new(GetUserProfileResponse)
+	err := c.cc.Invoke(ctx, Cover_GetUserProfile_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2264,6 +2276,8 @@ type CoverServer interface {
 	UpdateAnomalyAlert(context.Context, *UpdateAnomalyAlertRequest) (*emptypb.Empty, error)
 	// Octo new user registration
 	RegisterNewUser(context.Context, *RegisterNewUserRequest) (*RegisterNewUserResponse, error)
+	// Octo getting user profile
+	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2633,6 +2647,9 @@ func (UnimplementedCoverServer) UpdateAnomalyAlert(context.Context, *UpdateAnoma
 }
 func (UnimplementedCoverServer) RegisterNewUser(context.Context, *RegisterNewUserRequest) (*RegisterNewUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterNewUser not implemented")
+}
+func (UnimplementedCoverServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4899,6 +4916,24 @@ func _Cover_RegisterNewUser_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetUserProfile(ctx, req.(*GetUserProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5297,6 +5332,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterNewUser",
 			Handler:    _Cover_RegisterNewUser_Handler,
+		},
+		{
+			MethodName: "GetUserProfile",
+			Handler:    _Cover_GetUserProfile_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
