@@ -46,6 +46,7 @@ const (
 	Admin_CreateNotification_FullMethodName                    = "/blueapi.admin.v1.Admin/CreateNotification"
 	Admin_UpdateNotification_FullMethodName                    = "/blueapi.admin.v1.Admin/UpdateNotification"
 	Admin_DeleteNotification_FullMethodName                    = "/blueapi.admin.v1.Admin/DeleteNotification"
+	Admin_ExportAuditLogs_FullMethodName                       = "/blueapi.admin.v1.Admin/ExportAuditLogs"
 )
 
 // AdminClient is the client API for Admin service.
@@ -100,6 +101,8 @@ type AdminClient interface {
 	UpdateNotification(ctx context.Context, in *UpdateNotificationRequest, opts ...grpc.CallOption) (*api.Notification, error)
 	// WORK-IN-PROGRESS: Deletes notification for login user's organization.
 	DeleteNotification(ctx context.Context, in *DeleteNotificationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Exports audit logs for login user's organization.
+	ExportAuditLogs(ctx context.Context, in *ExportAuditLogsRequest, opts ...grpc.CallOption) (*api.AuditExport, error)
 }
 
 type adminClient struct {
@@ -372,6 +375,15 @@ func (c *adminClient) DeleteNotification(ctx context.Context, in *DeleteNotifica
 	return out, nil
 }
 
+func (c *adminClient) ExportAuditLogs(ctx context.Context, in *ExportAuditLogsRequest, opts ...grpc.CallOption) (*api.AuditExport, error) {
+	out := new(api.AuditExport)
+	err := c.cc.Invoke(ctx, Admin_ExportAuditLogs_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -424,6 +436,8 @@ type AdminServer interface {
 	UpdateNotification(context.Context, *UpdateNotificationRequest) (*api.Notification, error)
 	// WORK-IN-PROGRESS: Deletes notification for login user's organization.
 	DeleteNotification(context.Context, *DeleteNotificationRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Exports audit logs for login user's organization.
+	ExportAuditLogs(context.Context, *ExportAuditLogsRequest) (*api.AuditExport, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -502,6 +516,9 @@ func (UnimplementedAdminServer) UpdateNotification(context.Context, *UpdateNotif
 }
 func (UnimplementedAdminServer) DeleteNotification(context.Context, *DeleteNotificationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteNotification not implemented")
+}
+func (UnimplementedAdminServer) ExportAuditLogs(context.Context, *ExportAuditLogsRequest) (*api.AuditExport, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportAuditLogs not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -954,6 +971,24 @@ func _Admin_DeleteNotification_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_ExportAuditLogs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportAuditLogsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).ExportAuditLogs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Admin_ExportAuditLogs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).ExportAuditLogs(ctx, req.(*ExportAuditLogsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1048,6 +1083,10 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteNotification",
 			Handler:    _Admin_DeleteNotification_Handler,
+		},
+		{
+			MethodName: "ExportAuditLogs",
+			Handler:    _Admin_ExportAuditLogs_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

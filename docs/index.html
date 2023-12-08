@@ -465,6 +465,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.admin.v1.ExportAuditLogsRequest"><span class="badge">M</span>ExportAuditLogsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.admin.v1.GetAccountGroupRequest"><span class="badge">M</span>GetAccountGroupRequest</a>
                 </li>
               
@@ -4895,6 +4899,44 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.ExportAuditLogsRequest">ExportAuditLogsRequest</h3>
+        <p>Request message for the ExportAuditLogs rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>format</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `CSV`,`JSON` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The UTC date to start data from. If not set, the first day of the current year will be used. Format: `yyyymmdd`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The UTC date to end data from. If not set, the first day of the current year will be used. Format: `yyyymmdd`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.GetAccountGroupRequest">GetAccountGroupRequest</h3>
         <p>Request message for the Admin.GetAccountGroup rpc.</p>
 
@@ -5727,6 +5769,13 @@ Valid values:
                 <td><p>WORK-IN-PROGRESS: Deletes notification for login user&#39;s organization.</p></td>
               </tr>
             
+              <tr>
+                <td>ExportAuditLogs</td>
+                <td><a href="#blueapi.admin.v1.ExportAuditLogsRequest">ExportAuditLogsRequest</a></td>
+                <td><a href="#blueapi.api.AuditExport">.blueapi.api.AuditExport</a></td>
+                <td><p>WORK-IN-PROGRESS: Exports audit logs for login user&#39;s organization.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -5982,6 +6031,16 @@ Valid values:
                 <td>DELETE</td>
                 <td>/admin/v1/notifications/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportAuditLogs</td>
+                <td>POST</td>
+                <td>/admin/v1/auditlogs:export</td>
+                <td>*</td>
               </tr>
               
             
