@@ -143,6 +143,10 @@ const (
 	Cover_UpdateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateAnomalyAlert"
 	Cover_RegisterNewUser_FullMethodName               = "/blueapi.cover.v1.Cover/RegisterNewUser"
 	Cover_GetUserProfile_FullMethodName                = "/blueapi.cover.v1.Cover/GetUserProfile"
+	Cover_GetBudget_FullMethodName                     = "/blueapi.cover.v1.Cover/GetBudget"
+	Cover_CreateBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/CreateBudget"
+	Cover_DeleteBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/DeleteBudget"
+	Cover_UpdateBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/UpdateBudget"
 )
 
 // CoverClient is the client API for Cover service.
@@ -344,15 +348,15 @@ type CoverClient interface {
 	AddMpnSetting(ctx context.Context, in *AddMpnSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get Cost Group by Attribute Type
 	GetCostGroupAttribute(ctx context.Context, in *GetCostGroupAttributeRequest, opts ...grpc.CallOption) (*GetCostGroupAttributeResponse, error)
-	// WORK-IN-PROGRESS: Get Alerts under organization
+	// Get Alerts under organization
 	GetAlerts(ctx context.Context, in *GetAlertsRequest, opts ...grpc.CallOption) (Cover_GetAlertsClient, error)
-	// WORK-IN-PROGRESS: Create Alerts under organization
+	// Create Alerts under organization
 	CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error)
-	// WORK-IN-PROGRESS: Get Specific Alert under organization
+	// Get Specific Alert under organization
 	GetAlertDetails(ctx context.Context, in *GetAlertDetailsRequest, opts ...grpc.CallOption) (*GetAlertDetailsResponse, error)
-	// WORK-IN-PROGRESS: Delete Specific Alert under organization
+	// Delete Specific Alert under organization
 	DeleteAlert(ctx context.Context, in *DeleteAlertRequest, opts ...grpc.CallOption) (*DeleteAlertResponse, error)
-	// WORK-IN-PROGRESS: Update Specific Alert under organization
+	// Update Specific Alert under organization
 	UpdateAlertDetails(ctx context.Context, in *UpdateAlertDetailsRequest, opts ...grpc.CallOption) (*UpdateAlertDetailsResponse, error)
 	// WORK-IN-PROGRESS: Get Channels under organization
 	GetChannels(ctx context.Context, in *GetChannelsRequest, opts ...grpc.CallOption) (Cover_GetChannelsClient, error)
@@ -392,6 +396,14 @@ type CoverClient interface {
 	RegisterNewUser(ctx context.Context, in *RegisterNewUserRequest, opts ...grpc.CallOption) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
+	// Get Budget data for specific cost group in an organization
+	GetBudget(ctx context.Context, in *GetBudgetRequest, opts ...grpc.CallOption) (*GetBudgetResponse, error)
+	// Create Budget for specific cost group in an organization
+	CreateBudget(ctx context.Context, in *CreateBudgetRequest, opts ...grpc.CallOption) (*CreateBudgetResponse, error)
+	// Delete Budget for specific cost group in an organization
+	DeleteBudget(ctx context.Context, in *DeleteBudgetRequest, opts ...grpc.CallOption) (*DeleteBudgetResponse, error)
+	// Update Budget for specific cost group in an organization
+	UpdateBudget(ctx context.Context, in *UpdateBudgetRequest, opts ...grpc.CallOption) (*UpdateBudgetResponse, error)
 }
 
 type coverClient struct {
@@ -2031,6 +2043,42 @@ func (c *coverClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequ
 	return out, nil
 }
 
+func (c *coverClient) GetBudget(ctx context.Context, in *GetBudgetRequest, opts ...grpc.CallOption) (*GetBudgetResponse, error) {
+	out := new(GetBudgetResponse)
+	err := c.cc.Invoke(ctx, Cover_GetBudget_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateBudget(ctx context.Context, in *CreateBudgetRequest, opts ...grpc.CallOption) (*CreateBudgetResponse, error) {
+	out := new(CreateBudgetResponse)
+	err := c.cc.Invoke(ctx, Cover_CreateBudget_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteBudget(ctx context.Context, in *DeleteBudgetRequest, opts ...grpc.CallOption) (*DeleteBudgetResponse, error) {
+	out := new(DeleteBudgetResponse)
+	err := c.cc.Invoke(ctx, Cover_DeleteBudget_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateBudget(ctx context.Context, in *UpdateBudgetRequest, opts ...grpc.CallOption) (*UpdateBudgetResponse, error) {
+	out := new(UpdateBudgetResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateBudget_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2230,15 +2278,15 @@ type CoverServer interface {
 	AddMpnSetting(context.Context, *AddMpnSettingRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get Cost Group by Attribute Type
 	GetCostGroupAttribute(context.Context, *GetCostGroupAttributeRequest) (*GetCostGroupAttributeResponse, error)
-	// WORK-IN-PROGRESS: Get Alerts under organization
+	// Get Alerts under organization
 	GetAlerts(*GetAlertsRequest, Cover_GetAlertsServer) error
-	// WORK-IN-PROGRESS: Create Alerts under organization
+	// Create Alerts under organization
 	CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error)
-	// WORK-IN-PROGRESS: Get Specific Alert under organization
+	// Get Specific Alert under organization
 	GetAlertDetails(context.Context, *GetAlertDetailsRequest) (*GetAlertDetailsResponse, error)
-	// WORK-IN-PROGRESS: Delete Specific Alert under organization
+	// Delete Specific Alert under organization
 	DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertResponse, error)
-	// WORK-IN-PROGRESS: Update Specific Alert under organization
+	// Update Specific Alert under organization
 	UpdateAlertDetails(context.Context, *UpdateAlertDetailsRequest) (*UpdateAlertDetailsResponse, error)
 	// WORK-IN-PROGRESS: Get Channels under organization
 	GetChannels(*GetChannelsRequest, Cover_GetChannelsServer) error
@@ -2278,6 +2326,14 @@ type CoverServer interface {
 	RegisterNewUser(context.Context, *RegisterNewUserRequest) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	// Get Budget data for specific cost group in an organization
+	GetBudget(context.Context, *GetBudgetRequest) (*GetBudgetResponse, error)
+	// Create Budget for specific cost group in an organization
+	CreateBudget(context.Context, *CreateBudgetRequest) (*CreateBudgetResponse, error)
+	// Delete Budget for specific cost group in an organization
+	DeleteBudget(context.Context, *DeleteBudgetRequest) (*DeleteBudgetResponse, error)
+	// Update Budget for specific cost group in an organization
+	UpdateBudget(context.Context, *UpdateBudgetRequest) (*UpdateBudgetResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2650,6 +2706,18 @@ func (UnimplementedCoverServer) RegisterNewUser(context.Context, *RegisterNewUse
 }
 func (UnimplementedCoverServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
+}
+func (UnimplementedCoverServer) GetBudget(context.Context, *GetBudgetRequest) (*GetBudgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBudget not implemented")
+}
+func (UnimplementedCoverServer) CreateBudget(context.Context, *CreateBudgetRequest) (*CreateBudgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBudget not implemented")
+}
+func (UnimplementedCoverServer) DeleteBudget(context.Context, *DeleteBudgetRequest) (*DeleteBudgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteBudget not implemented")
+}
+func (UnimplementedCoverServer) UpdateBudget(context.Context, *UpdateBudgetRequest) (*UpdateBudgetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBudget not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -4934,6 +5002,78 @@ func _Cover_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetBudget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetBudget(ctx, req.(*GetBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateBudget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateBudget(ctx, req.(*CreateBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteBudget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteBudget(ctx, req.(*DeleteBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBudgetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateBudget(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateBudget_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateBudget(ctx, req.(*UpdateBudgetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5336,6 +5476,22 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserProfile",
 			Handler:    _Cover_GetUserProfile_Handler,
+		},
+		{
+			MethodName: "GetBudget",
+			Handler:    _Cover_GetBudget_Handler,
+		},
+		{
+			MethodName: "CreateBudget",
+			Handler:    _Cover_CreateBudget_Handler,
+		},
+		{
+			MethodName: "DeleteBudget",
+			Handler:    _Cover_DeleteBudget_Handler,
+		},
+		{
+			MethodName: "UpdateBudget",
+			Handler:    _Cover_UpdateBudget_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
