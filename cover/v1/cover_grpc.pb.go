@@ -143,6 +143,7 @@ const (
 	Cover_UpdateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateAnomalyAlert"
 	Cover_RegisterNewUser_FullMethodName               = "/blueapi.cover.v1.Cover/RegisterNewUser"
 	Cover_GetUserProfile_FullMethodName                = "/blueapi.cover.v1.Cover/GetUserProfile"
+	Cover_ListBudgets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListBudgets"
 	Cover_GetBudget_FullMethodName                     = "/blueapi.cover.v1.Cover/GetBudget"
 	Cover_CreateBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/CreateBudget"
 	Cover_DeleteBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/DeleteBudget"
@@ -396,6 +397,8 @@ type CoverClient interface {
 	RegisterNewUser(ctx context.Context, in *RegisterNewUserRequest, opts ...grpc.CallOption) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
+	// List all Budgets in an organization
+	ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error)
 	// Get Budget data for specific cost group in an organization
 	GetBudget(ctx context.Context, in *GetBudgetRequest, opts ...grpc.CallOption) (*GetBudgetResponse, error)
 	// Create Budget for specific cost group in an organization
@@ -2043,6 +2046,38 @@ func (c *coverClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequ
 	return out, nil
 }
 
+func (c *coverClient) ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[23], Cover_ListBudgets_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListBudgetsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListBudgetsClient interface {
+	Recv() (*ListBudgetsResponse, error)
+	grpc.ClientStream
+}
+
+type coverListBudgetsClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListBudgetsClient) Recv() (*ListBudgetsResponse, error) {
+	m := new(ListBudgetsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *coverClient) GetBudget(ctx context.Context, in *GetBudgetRequest, opts ...grpc.CallOption) (*GetBudgetResponse, error) {
 	out := new(GetBudgetResponse)
 	err := c.cc.Invoke(ctx, Cover_GetBudget_FullMethodName, in, out, opts...)
@@ -2326,6 +2361,8 @@ type CoverServer interface {
 	RegisterNewUser(context.Context, *RegisterNewUserRequest) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	// List all Budgets in an organization
+	ListBudgets(*ListBudgetsRequest, Cover_ListBudgetsServer) error
 	// Get Budget data for specific cost group in an organization
 	GetBudget(context.Context, *GetBudgetRequest) (*GetBudgetResponse, error)
 	// Create Budget for specific cost group in an organization
@@ -2706,6 +2743,9 @@ func (UnimplementedCoverServer) RegisterNewUser(context.Context, *RegisterNewUse
 }
 func (UnimplementedCoverServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
+}
+func (UnimplementedCoverServer) ListBudgets(*ListBudgetsRequest, Cover_ListBudgetsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListBudgets not implemented")
 }
 func (UnimplementedCoverServer) GetBudget(context.Context, *GetBudgetRequest) (*GetBudgetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBudget not implemented")
@@ -5002,6 +5042,27 @@ func _Cover_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListBudgets_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListBudgetsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListBudgets(m, &coverListBudgetsServer{stream})
+}
+
+type Cover_ListBudgetsServer interface {
+	Send(*ListBudgetsResponse) error
+	grpc.ServerStream
+}
+
+type coverListBudgetsServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListBudgetsServer) Send(m *ListBudgetsResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Cover_GetBudget_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBudgetRequest)
 	if err := dec(in); err != nil {
@@ -5608,6 +5669,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAnomalyAlert",
 			Handler:       _Cover_ListAnomalyAlert_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListBudgets",
+			Handler:       _Cover_ListBudgets_Handler,
 			ServerStreams: true,
 		},
 	},
