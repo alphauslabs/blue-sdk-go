@@ -190,13 +190,13 @@ type CostClient interface {
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(ctx context.Context, in *GetCostReductionRequest, opts ...grpc.CallOption) (*GetCostReductionResponse, error)
-	// WORK-IN-PROGRESS: Get the utilization details for an organization (or MSP).
+	// Get the utilization details for an organization (or MSP).
 	GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error)
-	// WORK-IN-PROGRESS: Get coverage options details for an organization (or MSP).
+	// Get coverage options details for an organization (or MSP).
 	GetCoverageOptions(ctx context.Context, in *GetCoverageOptionsRequest, opts ...grpc.CallOption) (*GetCoverageOptionsResponse, error)
-	// WORK-IN-PROGRESS: Get ondemand cost details for an organization (or MSP).
+	// Get ondemand cost details for an organization (or MSP).
 	GetCoverageOndemand(ctx context.Context, in *GetCoverageOndemandRequest, opts ...grpc.CallOption) (*GetCoverageOndemandResponse, error)
-	// WORK-IN-PROGRESS: Get the breakeven point details for the RI or SP.
+	// Get the breakeven point details for the RI or SP.
 	GetBreakevenPoint(ctx context.Context, in *GetBreakevenPointRequest, opts ...grpc.CallOption) (*GetBreakevenPointResponse, error)
 }
 
@@ -1096,13 +1096,13 @@ type CostServer interface {
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error)
-	// WORK-IN-PROGRESS: Get the utilization details for an organization (or MSP).
+	// Get the utilization details for an organization (or MSP).
 	GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error)
-	// WORK-IN-PROGRESS: Get coverage options details for an organization (or MSP).
+	// Get coverage options details for an organization (or MSP).
 	GetCoverageOptions(context.Context, *GetCoverageOptionsRequest) (*GetCoverageOptionsResponse, error)
-	// WORK-IN-PROGRESS: Get ondemand cost details for an organization (or MSP).
+	// Get ondemand cost details for an organization (or MSP).
 	GetCoverageOndemand(context.Context, *GetCoverageOndemandRequest) (*GetCoverageOndemandResponse, error)
-	// WORK-IN-PROGRESS: Get the breakeven point details for the RI or SP.
+	// Get the breakeven point details for the RI or SP.
 	GetBreakevenPoint(context.Context, *GetBreakevenPointRequest) (*GetBreakevenPointResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
