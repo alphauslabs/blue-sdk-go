@@ -74,7 +74,9 @@ type AuditExportData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Encoded value
+	// Base64 encoded value
+	// For example, content :`dGltZSx1c2VySWQsc3ViVXNlcklkLHVzZXJOYW1lLGlzQWRtaW4sZXZlbnROYW1lLHBhdGgsdXNlclBhc3MsY2F0ZU5hbWUNCg==“
+	// Decoding this value, get `time,userId,subUserId,userName,isAdmin,eventName,path,userPass,cateName`.
 	Content string `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
 	// Downloaded content lines.
 	DownloadedRows int64 `protobuf:"varint,2,opt,name=downloadedRows,proto3" json:"downloadedRows,omitempty"`
