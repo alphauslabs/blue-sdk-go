@@ -3922,7 +3922,7 @@ type ReadInvoiceAdjustmentsRequest struct {
 	AccountId string `protobuf:"bytes,2,opt,name=accountId,proto3" json:"accountId,omitempty"`
 	// Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`.
 	Month string `protobuf:"bytes,3,opt,name=month,proto3" json:"month,omitempty"`
-	// Optional. If empty, defaults to all fee type. At the moment, only `Fee`,`Refund`,`Credit`,`SppDiscount` is supported.
+	// Optional. If empty, defaults to all fee type. At the moment, only `Fee`,`Refund`,`Credit`,`SppDiscount`,`EdpDiscount` is supported.
 	FeeType string `protobuf:"bytes,4,opt,name=feeType,proto3" json:"feeType,omitempty"`
 }
 
