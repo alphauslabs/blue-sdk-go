@@ -16490,7 +16490,7 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td>fixedAmount</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>At least one in either fixedAmount or percentage </p></td>
+                  <td><p>At least one in either fixedAmount or percentage.  Not required for budget alerts. </p></td>
                 </tr>
               
                 <tr>
@@ -16504,14 +16504,14 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td>granularity</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. daily or monthly. Only &#39;daily&#39; is supported for now. </p></td>
+                  <td><p>Optional. daily or monthly. Only &#39;daily&#39; is supported for now. Not required for budget alerts. </p></td>
                 </tr>
               
                 <tr>
                   <td>costGroups</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Required. Cost group IDs. </p></td>
+                  <td><p>Required. Cost group IDs. Only one ID for budget alerts. </p></td>
                 </tr>
               
                 <tr>
@@ -16519,6 +16519,13 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>Required. Channel IDs. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>budget</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Budget ID. </p></td>
                 </tr>
               
             </tbody>
@@ -21361,14 +21368,14 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>If optional fields are not supplied, no changes occur.
-Optional. Actual email or channel name of slack/msteams </p></td>
+Optional. </p></td>
                 </tr>
               
                 <tr>
                   <td>fixedAmount</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p>Both are optional </p></td>
+                  <td><p>Both are optional. Not required for budget alerts. </p></td>
                 </tr>
               
                 <tr>
@@ -21382,14 +21389,14 @@ Optional. Actual email or channel name of slack/msteams </p></td>
                   <td>granularity</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. daily or monthly. Only &#39;daily&#39; is supported for now. </p></td>
+                  <td><p>Optional. daily or monthly. Only &#39;daily&#39; is supported for now. Not required for budget alerts. </p></td>
                 </tr>
               
                 <tr>
                   <td>costGroups</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. Cost group IDs. </p></td>
+                  <td><p>Optional. Cost group IDs. Not required for budget alerts. </p></td>
                 </tr>
               
                 <tr>
@@ -23910,35 +23917,35 @@ file in bytes </p></td>
                 <td>ListBudgets</td>
                 <td><a href="#blueapi.cover.v1.ListBudgetsRequest">ListBudgetsRequest</a></td>
                 <td><a href="#blueapi.cover.v1.ListBudgetsResponse">ListBudgetsResponse</a> stream</td>
-                <td><p>List all Budgets in an organization</p></td>
+                <td><p>WORK-IN-PROGRESS: List all Budgets in an organization</p></td>
               </tr>
             
               <tr>
                 <td>GetBudget</td>
                 <td><a href="#blueapi.cover.v1.GetBudgetRequest">GetBudgetRequest</a></td>
                 <td><a href="#blueapi.cover.v1.GetBudgetResponse">GetBudgetResponse</a></td>
-                <td><p>Get Budget data for specific cost group in an organization</p></td>
+                <td><p>WORK-IN-PROGRESS: Get Budget data for specific cost group in an organization</p></td>
               </tr>
             
               <tr>
                 <td>CreateBudget</td>
                 <td><a href="#blueapi.cover.v1.CreateBudgetRequest">CreateBudgetRequest</a></td>
                 <td><a href="#blueapi.cover.v1.CreateBudgetResponse">CreateBudgetResponse</a></td>
-                <td><p>Create Budget for specific cost group in an organization</p></td>
+                <td><p>WORK-IN-PROGRESS: Create Budget for specific cost group in an organization</p></td>
               </tr>
             
               <tr>
                 <td>DeleteBudget</td>
                 <td><a href="#blueapi.cover.v1.DeleteBudgetRequest">DeleteBudgetRequest</a></td>
                 <td><a href="#blueapi.cover.v1.DeleteBudgetResponse">DeleteBudgetResponse</a></td>
-                <td><p>Delete Budget for specific cost group in an organization</p></td>
+                <td><p>WORK-IN-PROGRESS: Delete Budget for specific cost group in an organization</p></td>
               </tr>
             
               <tr>
                 <td>UpdateBudget</td>
                 <td><a href="#blueapi.cover.v1.UpdateBudgetRequest">UpdateBudgetRequest</a></td>
                 <td><a href="#blueapi.cover.v1.UpdateBudgetResponse">UpdateBudgetResponse</a></td>
-                <td><p>Update Budget for specific cost group in an organization</p></td>
+                <td><p>WORK-IN-PROGRESS: Update Budget for specific cost group in an organization</p></td>
               </tr>
             
           </tbody>

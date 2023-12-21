@@ -397,15 +397,15 @@ type CoverClient interface {
 	RegisterNewUser(ctx context.Context, in *RegisterNewUserRequest, opts ...grpc.CallOption) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
-	// List all Budgets in an organization
+	// WORK-IN-PROGRESS: List all Budgets in an organization
 	ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error)
-	// Get Budget data for specific cost group in an organization
+	// WORK-IN-PROGRESS: Get Budget data for specific cost group in an organization
 	GetBudget(ctx context.Context, in *GetBudgetRequest, opts ...grpc.CallOption) (*GetBudgetResponse, error)
-	// Create Budget for specific cost group in an organization
+	// WORK-IN-PROGRESS: Create Budget for specific cost group in an organization
 	CreateBudget(ctx context.Context, in *CreateBudgetRequest, opts ...grpc.CallOption) (*CreateBudgetResponse, error)
-	// Delete Budget for specific cost group in an organization
+	// WORK-IN-PROGRESS: Delete Budget for specific cost group in an organization
 	DeleteBudget(ctx context.Context, in *DeleteBudgetRequest, opts ...grpc.CallOption) (*DeleteBudgetResponse, error)
-	// Update Budget for specific cost group in an organization
+	// WORK-IN-PROGRESS: Update Budget for specific cost group in an organization
 	UpdateBudget(ctx context.Context, in *UpdateBudgetRequest, opts ...grpc.CallOption) (*UpdateBudgetResponse, error)
 }
 
@@ -2361,15 +2361,15 @@ type CoverServer interface {
 	RegisterNewUser(context.Context, *RegisterNewUserRequest) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
-	// List all Budgets in an organization
+	// WORK-IN-PROGRESS: List all Budgets in an organization
 	ListBudgets(*ListBudgetsRequest, Cover_ListBudgetsServer) error
-	// Get Budget data for specific cost group in an organization
+	// WORK-IN-PROGRESS: Get Budget data for specific cost group in an organization
 	GetBudget(context.Context, *GetBudgetRequest) (*GetBudgetResponse, error)
-	// Create Budget for specific cost group in an organization
+	// WORK-IN-PROGRESS: Create Budget for specific cost group in an organization
 	CreateBudget(context.Context, *CreateBudgetRequest) (*CreateBudgetResponse, error)
-	// Delete Budget for specific cost group in an organization
+	// WORK-IN-PROGRESS: Delete Budget for specific cost group in an organization
 	DeleteBudget(context.Context, *DeleteBudgetRequest) (*DeleteBudgetResponse, error)
-	// Update Budget for specific cost group in an organization
+	// WORK-IN-PROGRESS: Update Budget for specific cost group in an organization
 	UpdateBudget(context.Context, *UpdateBudgetRequest) (*UpdateBudgetResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
