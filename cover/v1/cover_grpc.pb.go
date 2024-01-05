@@ -21,133 +21,134 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Cover_OnboardOrg_FullMethodName                    = "/blueapi.cover.v1.Cover/OnboardOrg"
-	Cover_InviteMember_FullMethodName                  = "/blueapi.cover.v1.Cover/InviteMember"
-	Cover_ActivateUser_FullMethodName                  = "/blueapi.cover.v1.Cover/ActivateUser"
-	Cover_CreateMember_FullMethodName                  = "/blueapi.cover.v1.Cover/CreateMember"
-	Cover_GetMembers_FullMethodName                    = "/blueapi.cover.v1.Cover/GetMembers"
-	Cover_GetMemberDetails_FullMethodName              = "/blueapi.cover.v1.Cover/GetMemberDetails"
-	Cover_GetMemberCostGroup_FullMethodName            = "/blueapi.cover.v1.Cover/GetMemberCostGroup"
-	Cover_UpdateMemberPermission_FullMethodName        = "/blueapi.cover.v1.Cover/UpdateMemberPermission"
-	Cover_GetUserDetails_FullMethodName                = "/blueapi.cover.v1.Cover/GetUserDetails"
-	Cover_UpdateUserAvatar_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserAvatar"
-	Cover_UpdateUserIcon_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateUserIcon"
-	Cover_UpdateUserColorTheme_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateUserColorTheme"
-	Cover_UpdateUserName_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateUserName"
-	Cover_UpdateUserEmail_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateUserEmail"
-	Cover_UpdateUserMainView_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserMainView"
-	Cover_ResetUserPassword_FullMethodName             = "/blueapi.cover.v1.Cover/ResetUserPassword"
-	Cover_UpdateUserLocale_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserLocale"
-	Cover_UpdateUserAppTheme_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserAppTheme"
-	Cover_UpdateUserTimezone_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserTimezone"
-	Cover_UpdateUserAttributes_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateUserAttributes"
-	Cover_DeleteMember_FullMethodName                  = "/blueapi.cover.v1.Cover/DeleteMember"
-	Cover_ResetPassword_FullMethodName                 = "/blueapi.cover.v1.Cover/ResetPassword"
-	Cover_CreateView_FullMethodName                    = "/blueapi.cover.v1.Cover/CreateView"
-	Cover_GetViews_FullMethodName                      = "/blueapi.cover.v1.Cover/GetViews"
-	Cover_GetCurrentView_FullMethodName                = "/blueapi.cover.v1.Cover/GetCurrentView"
-	Cover_GetFavoriteViews_FullMethodName              = "/blueapi.cover.v1.Cover/GetFavoriteViews"
-	Cover_PublishView_FullMethodName                   = "/blueapi.cover.v1.Cover/PublishView"
-	Cover_AddFavorite_FullMethodName                   = "/blueapi.cover.v1.Cover/AddFavorite"
-	Cover_RemoveFavorite_FullMethodName                = "/blueapi.cover.v1.Cover/RemoveFavorite"
-	Cover_UpdateView_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateView"
-	Cover_UpdateViewLayout_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateViewLayout"
-	Cover_UpdateViewWidget_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateViewWidget"
-	Cover_UpdateViewColorTheme_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
-	Cover_DeleteView_FullMethodName                    = "/blueapi.cover.v1.Cover/DeleteView"
-	Cover_UpdateSideMenuState_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
-	Cover_AddSideMenuFavorite_FullMethodName           = "/blueapi.cover.v1.Cover/AddSideMenuFavorite"
-	Cover_RemoveSideMenuFavorite_FullMethodName        = "/blueapi.cover.v1.Cover/RemoveSideMenuFavorite"
-	Cover_CreateCostGroup_FullMethodName               = "/blueapi.cover.v1.Cover/CreateCostGroup"
-	Cover_GetCostGroups_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCostGroups"
-	Cover_GetCategories_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCategories"
-	Cover_GetCostGroupDetails_FullMethodName           = "/blueapi.cover.v1.Cover/GetCostGroupDetails"
-	Cover_UpdateCostGroupName_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateCostGroupName"
-	Cover_UpdateCostGroupDescription_FullMethodName    = "/blueapi.cover.v1.Cover/UpdateCostGroupDescription"
-	Cover_UpdateCostGroupImage_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateCostGroupImage"
-	Cover_UpdateCostGroupIcon_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateCostGroupIcon"
-	Cover_UpdateCostGroupColorTheme_FullMethodName     = "/blueapi.cover.v1.Cover/UpdateCostGroupColorTheme"
-	Cover_UpdateCostGroupCombinations_FullMethodName   = "/blueapi.cover.v1.Cover/UpdateCostGroupCombinations"
-	Cover_ResolveCostGroupCombinations_FullMethodName  = "/blueapi.cover.v1.Cover/ResolveCostGroupCombinations"
-	Cover_AssignCostGroupMember_FullMethodName         = "/blueapi.cover.v1.Cover/AssignCostGroupMember"
-	Cover_RemoveCostGroupMember_FullMethodName         = "/blueapi.cover.v1.Cover/RemoveCostGroupMember"
-	Cover_DeleteCostGroup_FullMethodName               = "/blueapi.cover.v1.Cover/DeleteCostGroup"
-	Cover_GetAccountAccessTemplateUrl_FullMethodName   = "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl"
-	Cover_ListAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/ListAccountAccess"
-	Cover_GetAccountAccess_FullMethodName              = "/blueapi.cover.v1.Cover/GetAccountAccess"
-	Cover_GetDataAccess_FullMethodName                 = "/blueapi.cover.v1.Cover/GetDataAccess"
-	Cover_DeleteDataAccess_FullMethodName              = "/blueapi.cover.v1.Cover/DeleteDataAccess"
-	Cover_CreateAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/CreateAccountAccess"
-	Cover_CreateAccountAccessCur_FullMethodName        = "/blueapi.cover.v1.Cover/CreateAccountAccessCur"
-	Cover_UpdateAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
-	Cover_DeleteAccountAccess_FullMethodName           = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
-	Cover_RegisterAccount_FullMethodName               = "/blueapi.cover.v1.Cover/RegisterAccount"
-	Cover_RegisterDataAccess_FullMethodName            = "/blueapi.cover.v1.Cover/RegisterDataAccess"
-	Cover_AddBillingAccount_FullMethodName             = "/blueapi.cover.v1.Cover/AddBillingAccount"
-	Cover_ListDataAccess_FullMethodName                = "/blueapi.cover.v1.Cover/ListDataAccess"
-	Cover_UpdateDataAccess_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateDataAccess"
-	Cover_ListAssets_FullMethodName                    = "/blueapi.cover.v1.Cover/ListAssets"
-	Cover_GetAssetsSummary_FullMethodName              = "/blueapi.cover.v1.Cover/GetAssetsSummary"
-	Cover_GetCostUsage_FullMethodName                  = "/blueapi.cover.v1.Cover/GetCostUsage"
-	Cover_GetRightSizingRecommendation_FullMethodName  = "/blueapi.cover.v1.Cover/GetRightSizingRecommendation"
-	Cover_ModifyResourceType_FullMethodName            = "/blueapi.cover.v1.Cover/ModifyResourceType"
-	Cover_TerminateResource_FullMethodName             = "/blueapi.cover.v1.Cover/TerminateResource"
-	Cover_UploadChargeCode_FullMethodName              = "/blueapi.cover.v1.Cover/UploadChargeCode"
-	Cover_AssignPayer_FullMethodName                   = "/blueapi.cover.v1.Cover/AssignPayer"
-	Cover_GetPayers_FullMethodName                     = "/blueapi.cover.v1.Cover/GetPayers"
-	Cover_GetAccounts_FullMethodName                   = "/blueapi.cover.v1.Cover/GetAccounts"
-	Cover_GetServices_FullMethodName                   = "/blueapi.cover.v1.Cover/GetServices"
-	Cover_GetRegions_FullMethodName                    = "/blueapi.cover.v1.Cover/GetRegions"
-	Cover_GetTags_FullMethodName                       = "/blueapi.cover.v1.Cover/GetTags"
-	Cover_ListFees_FullMethodName                      = "/blueapi.cover.v1.Cover/ListFees"
-	Cover_RestoreFee_FullMethodName                    = "/blueapi.cover.v1.Cover/RestoreFee"
-	Cover_GetCostGroupFee_FullMethodName               = "/blueapi.cover.v1.Cover/GetCostGroupFee"
-	Cover_ListAllocators_FullMethodName                = "/blueapi.cover.v1.Cover/ListAllocators"
-	Cover_CreateAllocator_FullMethodName               = "/blueapi.cover.v1.Cover/CreateAllocator"
-	Cover_UpdateAllocator_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateAllocator"
-	Cover_DeleteAllocator_FullMethodName               = "/blueapi.cover.v1.Cover/DeleteAllocator"
-	Cover_ProxyCreateCompletion_FullMethodName         = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
-	Cover_SimulateFeeAllocator_FullMethodName          = "/blueapi.cover.v1.Cover/SimulateFeeAllocator"
-	Cover_ListAccountUsage_FullMethodName              = "/blueapi.cover.v1.Cover/ListAccountUsage"
-	Cover_RestoreAccountUsage_FullMethodName           = "/blueapi.cover.v1.Cover/RestoreAccountUsage"
-	Cover_SimulateAccountUsage_FullMethodName          = "/blueapi.cover.v1.Cover/SimulateAccountUsage"
-	Cover_ListSavings_FullMethodName                   = "/blueapi.cover.v1.Cover/ListSavings"
-	Cover_RestoreSavings_FullMethodName                = "/blueapi.cover.v1.Cover/RestoreSavings"
-	Cover_SimulateSavings_FullMethodName               = "/blueapi.cover.v1.Cover/SimulateSavings"
-	Cover_GetCostGroupAllocation_FullMethodName        = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
-	Cover_ProcessAuth0User_FullMethodName              = "/blueapi.cover.v1.Cover/ProcessAuth0User"
-	Cover_AddPartnerCenterCredentials_FullMethodName   = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
-	Cover_AddMpnSetting_FullMethodName                 = "/blueapi.cover.v1.Cover/AddMpnSetting"
-	Cover_GetCostGroupAttribute_FullMethodName         = "/blueapi.cover.v1.Cover/GetCostGroupAttribute"
-	Cover_GetAlerts_FullMethodName                     = "/blueapi.cover.v1.Cover/GetAlerts"
-	Cover_CreateAlert_FullMethodName                   = "/blueapi.cover.v1.Cover/CreateAlert"
-	Cover_GetAlertDetails_FullMethodName               = "/blueapi.cover.v1.Cover/GetAlertDetails"
-	Cover_DeleteAlert_FullMethodName                   = "/blueapi.cover.v1.Cover/DeleteAlert"
-	Cover_UpdateAlertDetails_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateAlertDetails"
-	Cover_GetChannels_FullMethodName                   = "/blueapi.cover.v1.Cover/GetChannels"
-	Cover_CreateChannel_FullMethodName                 = "/blueapi.cover.v1.Cover/CreateChannel"
-	Cover_GetChannelDetails_FullMethodName             = "/blueapi.cover.v1.Cover/GetChannelDetails"
-	Cover_DeleteChannel_FullMethodName                 = "/blueapi.cover.v1.Cover/DeleteChannel"
-	Cover_UpdateChannelDetails_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
-	Cover_GetDiscountRecommendations_FullMethodName    = "/blueapi.cover.v1.Cover/GetDiscountRecommendations"
-	Cover_GetAnomalyinCostGroup_FullMethodName         = "/blueapi.cover.v1.Cover/GetAnomalyinCostGroup"
-	Cover_CreateDiscountExpirationAlert_FullMethodName = "/blueapi.cover.v1.Cover/CreateDiscountExpirationAlert"
-	Cover_UpdateDiscountExpirationAlert_FullMethodName = "/blueapi.cover.v1.Cover/UpdateDiscountExpirationAlert"
-	Cover_GetDiscountExpirationAlert_FullMethodName    = "/blueapi.cover.v1.Cover/GetDiscountExpirationAlert"
-	Cover_ListDiscountExpirationAlert_FullMethodName   = "/blueapi.cover.v1.Cover/ListDiscountExpirationAlert"
-	Cover_DeleteDiscountExpirationAlert_FullMethodName = "/blueapi.cover.v1.Cover/DeleteDiscountExpirationAlert"
-	Cover_CreateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/CreateAnomalyAlert"
-	Cover_DeleteAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/DeleteAnomalyAlert"
-	Cover_ListAnomalyAlert_FullMethodName              = "/blueapi.cover.v1.Cover/ListAnomalyAlert"
-	Cover_GetAnomalyAlert_FullMethodName               = "/blueapi.cover.v1.Cover/GetAnomalyAlert"
-	Cover_UpdateAnomalyAlert_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateAnomalyAlert"
-	Cover_RegisterNewUser_FullMethodName               = "/blueapi.cover.v1.Cover/RegisterNewUser"
-	Cover_GetUserProfile_FullMethodName                = "/blueapi.cover.v1.Cover/GetUserProfile"
-	Cover_ListBudgets_FullMethodName                   = "/blueapi.cover.v1.Cover/ListBudgets"
-	Cover_GetBudget_FullMethodName                     = "/blueapi.cover.v1.Cover/GetBudget"
-	Cover_CreateBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/CreateBudget"
-	Cover_DeleteBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/DeleteBudget"
-	Cover_UpdateBudget_FullMethodName                  = "/blueapi.cover.v1.Cover/UpdateBudget"
+	Cover_OnboardOrg_FullMethodName                      = "/blueapi.cover.v1.Cover/OnboardOrg"
+	Cover_InviteMember_FullMethodName                    = "/blueapi.cover.v1.Cover/InviteMember"
+	Cover_ActivateUser_FullMethodName                    = "/blueapi.cover.v1.Cover/ActivateUser"
+	Cover_CreateMember_FullMethodName                    = "/blueapi.cover.v1.Cover/CreateMember"
+	Cover_GetMembers_FullMethodName                      = "/blueapi.cover.v1.Cover/GetMembers"
+	Cover_GetMemberDetails_FullMethodName                = "/blueapi.cover.v1.Cover/GetMemberDetails"
+	Cover_GetMemberCostGroup_FullMethodName              = "/blueapi.cover.v1.Cover/GetMemberCostGroup"
+	Cover_UpdateMemberPermission_FullMethodName          = "/blueapi.cover.v1.Cover/UpdateMemberPermission"
+	Cover_GetUserDetails_FullMethodName                  = "/blueapi.cover.v1.Cover/GetUserDetails"
+	Cover_UpdateUserAvatar_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateUserAvatar"
+	Cover_UpdateUserIcon_FullMethodName                  = "/blueapi.cover.v1.Cover/UpdateUserIcon"
+	Cover_UpdateUserColorTheme_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserColorTheme"
+	Cover_UpdateUserName_FullMethodName                  = "/blueapi.cover.v1.Cover/UpdateUserName"
+	Cover_UpdateUserEmail_FullMethodName                 = "/blueapi.cover.v1.Cover/UpdateUserEmail"
+	Cover_UpdateUserMainView_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserMainView"
+	Cover_ResetUserPassword_FullMethodName               = "/blueapi.cover.v1.Cover/ResetUserPassword"
+	Cover_UpdateUserLocale_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateUserLocale"
+	Cover_UpdateUserAppTheme_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserAppTheme"
+	Cover_UpdateUserTimezone_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateUserTimezone"
+	Cover_UpdateUserAttributes_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateUserAttributes"
+	Cover_DeleteMember_FullMethodName                    = "/blueapi.cover.v1.Cover/DeleteMember"
+	Cover_ResetPassword_FullMethodName                   = "/blueapi.cover.v1.Cover/ResetPassword"
+	Cover_CreateView_FullMethodName                      = "/blueapi.cover.v1.Cover/CreateView"
+	Cover_GetViews_FullMethodName                        = "/blueapi.cover.v1.Cover/GetViews"
+	Cover_GetCurrentView_FullMethodName                  = "/blueapi.cover.v1.Cover/GetCurrentView"
+	Cover_GetFavoriteViews_FullMethodName                = "/blueapi.cover.v1.Cover/GetFavoriteViews"
+	Cover_PublishView_FullMethodName                     = "/blueapi.cover.v1.Cover/PublishView"
+	Cover_AddFavorite_FullMethodName                     = "/blueapi.cover.v1.Cover/AddFavorite"
+	Cover_RemoveFavorite_FullMethodName                  = "/blueapi.cover.v1.Cover/RemoveFavorite"
+	Cover_UpdateView_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateView"
+	Cover_UpdateViewLayout_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateViewLayout"
+	Cover_UpdateViewWidget_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateViewWidget"
+	Cover_UpdateViewColorTheme_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
+	Cover_DeleteView_FullMethodName                      = "/blueapi.cover.v1.Cover/DeleteView"
+	Cover_UpdateSideMenuState_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
+	Cover_AddSideMenuFavorite_FullMethodName             = "/blueapi.cover.v1.Cover/AddSideMenuFavorite"
+	Cover_RemoveSideMenuFavorite_FullMethodName          = "/blueapi.cover.v1.Cover/RemoveSideMenuFavorite"
+	Cover_CreateCostGroup_FullMethodName                 = "/blueapi.cover.v1.Cover/CreateCostGroup"
+	Cover_GetCostGroups_FullMethodName                   = "/blueapi.cover.v1.Cover/GetCostGroups"
+	Cover_GetCategories_FullMethodName                   = "/blueapi.cover.v1.Cover/GetCategories"
+	Cover_GetCostGroupDetails_FullMethodName             = "/blueapi.cover.v1.Cover/GetCostGroupDetails"
+	Cover_UpdateCostGroupName_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateCostGroupName"
+	Cover_UpdateCostGroupDescription_FullMethodName      = "/blueapi.cover.v1.Cover/UpdateCostGroupDescription"
+	Cover_UpdateCostGroupImage_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateCostGroupImage"
+	Cover_UpdateCostGroupIcon_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateCostGroupIcon"
+	Cover_UpdateCostGroupColorTheme_FullMethodName       = "/blueapi.cover.v1.Cover/UpdateCostGroupColorTheme"
+	Cover_UpdateCostGroupCombinations_FullMethodName     = "/blueapi.cover.v1.Cover/UpdateCostGroupCombinations"
+	Cover_ResolveCostGroupCombinations_FullMethodName    = "/blueapi.cover.v1.Cover/ResolveCostGroupCombinations"
+	Cover_AssignCostGroupMember_FullMethodName           = "/blueapi.cover.v1.Cover/AssignCostGroupMember"
+	Cover_RemoveCostGroupMember_FullMethodName           = "/blueapi.cover.v1.Cover/RemoveCostGroupMember"
+	Cover_DeleteCostGroup_FullMethodName                 = "/blueapi.cover.v1.Cover/DeleteCostGroup"
+	Cover_GetAccountAccessTemplateUrl_FullMethodName     = "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl"
+	Cover_ListAccountAccess_FullMethodName               = "/blueapi.cover.v1.Cover/ListAccountAccess"
+	Cover_GetAccountAccess_FullMethodName                = "/blueapi.cover.v1.Cover/GetAccountAccess"
+	Cover_GetDataAccess_FullMethodName                   = "/blueapi.cover.v1.Cover/GetDataAccess"
+	Cover_DeleteDataAccess_FullMethodName                = "/blueapi.cover.v1.Cover/DeleteDataAccess"
+	Cover_CreateAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/CreateAccountAccess"
+	Cover_CreateAccountAccessCur_FullMethodName          = "/blueapi.cover.v1.Cover/CreateAccountAccessCur"
+	Cover_UpdateAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
+	Cover_DeleteAccountAccess_FullMethodName             = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
+	Cover_RegisterAccount_FullMethodName                 = "/blueapi.cover.v1.Cover/RegisterAccount"
+	Cover_RegisterDataAccess_FullMethodName              = "/blueapi.cover.v1.Cover/RegisterDataAccess"
+	Cover_AddBillingAccount_FullMethodName               = "/blueapi.cover.v1.Cover/AddBillingAccount"
+	Cover_ListDataAccess_FullMethodName                  = "/blueapi.cover.v1.Cover/ListDataAccess"
+	Cover_UpdateDataAccess_FullMethodName                = "/blueapi.cover.v1.Cover/UpdateDataAccess"
+	Cover_ListAssets_FullMethodName                      = "/blueapi.cover.v1.Cover/ListAssets"
+	Cover_GetAssetsSummary_FullMethodName                = "/blueapi.cover.v1.Cover/GetAssetsSummary"
+	Cover_GetCostUsage_FullMethodName                    = "/blueapi.cover.v1.Cover/GetCostUsage"
+	Cover_GetRightSizingRecommendation_FullMethodName    = "/blueapi.cover.v1.Cover/GetRightSizingRecommendation"
+	Cover_ModifyResourceType_FullMethodName              = "/blueapi.cover.v1.Cover/ModifyResourceType"
+	Cover_TerminateResource_FullMethodName               = "/blueapi.cover.v1.Cover/TerminateResource"
+	Cover_UploadChargeCode_FullMethodName                = "/blueapi.cover.v1.Cover/UploadChargeCode"
+	Cover_AssignPayer_FullMethodName                     = "/blueapi.cover.v1.Cover/AssignPayer"
+	Cover_GetPayers_FullMethodName                       = "/blueapi.cover.v1.Cover/GetPayers"
+	Cover_GetAccounts_FullMethodName                     = "/blueapi.cover.v1.Cover/GetAccounts"
+	Cover_GetServices_FullMethodName                     = "/blueapi.cover.v1.Cover/GetServices"
+	Cover_GetRegions_FullMethodName                      = "/blueapi.cover.v1.Cover/GetRegions"
+	Cover_GetTags_FullMethodName                         = "/blueapi.cover.v1.Cover/GetTags"
+	Cover_ListFees_FullMethodName                        = "/blueapi.cover.v1.Cover/ListFees"
+	Cover_RestoreFee_FullMethodName                      = "/blueapi.cover.v1.Cover/RestoreFee"
+	Cover_GetCostGroupFee_FullMethodName                 = "/blueapi.cover.v1.Cover/GetCostGroupFee"
+	Cover_ListAllocators_FullMethodName                  = "/blueapi.cover.v1.Cover/ListAllocators"
+	Cover_CreateAllocator_FullMethodName                 = "/blueapi.cover.v1.Cover/CreateAllocator"
+	Cover_UpdateAllocator_FullMethodName                 = "/blueapi.cover.v1.Cover/UpdateAllocator"
+	Cover_DeleteAllocator_FullMethodName                 = "/blueapi.cover.v1.Cover/DeleteAllocator"
+	Cover_ProxyCreateCompletion_FullMethodName           = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
+	Cover_SimulateFeeAllocator_FullMethodName            = "/blueapi.cover.v1.Cover/SimulateFeeAllocator"
+	Cover_ListAccountUsage_FullMethodName                = "/blueapi.cover.v1.Cover/ListAccountUsage"
+	Cover_RestoreAccountUsage_FullMethodName             = "/blueapi.cover.v1.Cover/RestoreAccountUsage"
+	Cover_SimulateAccountUsage_FullMethodName            = "/blueapi.cover.v1.Cover/SimulateAccountUsage"
+	Cover_ListSavings_FullMethodName                     = "/blueapi.cover.v1.Cover/ListSavings"
+	Cover_RestoreSavings_FullMethodName                  = "/blueapi.cover.v1.Cover/RestoreSavings"
+	Cover_SimulateSavings_FullMethodName                 = "/blueapi.cover.v1.Cover/SimulateSavings"
+	Cover_GetCostGroupAllocation_FullMethodName          = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
+	Cover_ProcessAuth0User_FullMethodName                = "/blueapi.cover.v1.Cover/ProcessAuth0User"
+	Cover_AddPartnerCenterCredentials_FullMethodName     = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
+	Cover_AddMpnSetting_FullMethodName                   = "/blueapi.cover.v1.Cover/AddMpnSetting"
+	Cover_GetCostGroupAttribute_FullMethodName           = "/blueapi.cover.v1.Cover/GetCostGroupAttribute"
+	Cover_GetAlerts_FullMethodName                       = "/blueapi.cover.v1.Cover/GetAlerts"
+	Cover_CreateAlert_FullMethodName                     = "/blueapi.cover.v1.Cover/CreateAlert"
+	Cover_GetAlertDetails_FullMethodName                 = "/blueapi.cover.v1.Cover/GetAlertDetails"
+	Cover_DeleteAlert_FullMethodName                     = "/blueapi.cover.v1.Cover/DeleteAlert"
+	Cover_UpdateAlertDetails_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateAlertDetails"
+	Cover_GetChannels_FullMethodName                     = "/blueapi.cover.v1.Cover/GetChannels"
+	Cover_CreateChannel_FullMethodName                   = "/blueapi.cover.v1.Cover/CreateChannel"
+	Cover_GetChannelDetails_FullMethodName               = "/blueapi.cover.v1.Cover/GetChannelDetails"
+	Cover_DeleteChannel_FullMethodName                   = "/blueapi.cover.v1.Cover/DeleteChannel"
+	Cover_UpdateChannelDetails_FullMethodName            = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
+	Cover_GetDiscountRecommendations_FullMethodName      = "/blueapi.cover.v1.Cover/GetDiscountRecommendations"
+	Cover_GetAnomalyinCostGroup_FullMethodName           = "/blueapi.cover.v1.Cover/GetAnomalyinCostGroup"
+	Cover_CreateDiscountExpirationAlert_FullMethodName   = "/blueapi.cover.v1.Cover/CreateDiscountExpirationAlert"
+	Cover_UpdateDiscountExpirationAlert_FullMethodName   = "/blueapi.cover.v1.Cover/UpdateDiscountExpirationAlert"
+	Cover_GetDiscountExpirationAlert_FullMethodName      = "/blueapi.cover.v1.Cover/GetDiscountExpirationAlert"
+	Cover_ListDiscountExpirationAlert_FullMethodName     = "/blueapi.cover.v1.Cover/ListDiscountExpirationAlert"
+	Cover_DeleteDiscountExpirationAlert_FullMethodName   = "/blueapi.cover.v1.Cover/DeleteDiscountExpirationAlert"
+	Cover_CreateAnomalyAlert_FullMethodName              = "/blueapi.cover.v1.Cover/CreateAnomalyAlert"
+	Cover_DeleteAnomalyAlert_FullMethodName              = "/blueapi.cover.v1.Cover/DeleteAnomalyAlert"
+	Cover_ListAnomalyAlert_FullMethodName                = "/blueapi.cover.v1.Cover/ListAnomalyAlert"
+	Cover_GetAnomalyAlert_FullMethodName                 = "/blueapi.cover.v1.Cover/GetAnomalyAlert"
+	Cover_UpdateAnomalyAlert_FullMethodName              = "/blueapi.cover.v1.Cover/UpdateAnomalyAlert"
+	Cover_RegisterNewUser_FullMethodName                 = "/blueapi.cover.v1.Cover/RegisterNewUser"
+	Cover_GetUserProfile_FullMethodName                  = "/blueapi.cover.v1.Cover/GetUserProfile"
+	Cover_ListBudgets_FullMethodName                     = "/blueapi.cover.v1.Cover/ListBudgets"
+	Cover_GetBudget_FullMethodName                       = "/blueapi.cover.v1.Cover/GetBudget"
+	Cover_CreateBudget_FullMethodName                    = "/blueapi.cover.v1.Cover/CreateBudget"
+	Cover_DeleteBudget_FullMethodName                    = "/blueapi.cover.v1.Cover/DeleteBudget"
+	Cover_UpdateBudget_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateBudget"
+	Cover_ResolveAWSCustomerForOnboarding_FullMethodName = "/blueapi.cover.v1.Cover/ResolveAWSCustomerForOnboarding"
 )
 
 // CoverClient is the client API for Cover service.
@@ -407,6 +408,8 @@ type CoverClient interface {
 	DeleteBudget(ctx context.Context, in *DeleteBudgetRequest, opts ...grpc.CallOption) (*DeleteBudgetResponse, error)
 	// WORK-IN-PROGRESS: Update Budget for specific cost group in an organization
 	UpdateBudget(ctx context.Context, in *UpdateBudgetRequest, opts ...grpc.CallOption) (*UpdateBudgetResponse, error)
+	// WORK-IN-PROGRESS:Resolve user for aws marketplace subscription integration
+	ResolveAWSCustomerForOnboarding(ctx context.Context, in *ResolveAWSCustomerForOnboardingRequest, opts ...grpc.CallOption) (*ResolveAWSCustomerForOnboardingResponse, error)
 }
 
 type coverClient struct {
@@ -2114,6 +2117,15 @@ func (c *coverClient) UpdateBudget(ctx context.Context, in *UpdateBudgetRequest,
 	return out, nil
 }
 
+func (c *coverClient) ResolveAWSCustomerForOnboarding(ctx context.Context, in *ResolveAWSCustomerForOnboardingRequest, opts ...grpc.CallOption) (*ResolveAWSCustomerForOnboardingResponse, error) {
+	out := new(ResolveAWSCustomerForOnboardingResponse)
+	err := c.cc.Invoke(ctx, Cover_ResolveAWSCustomerForOnboarding_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2371,6 +2383,8 @@ type CoverServer interface {
 	DeleteBudget(context.Context, *DeleteBudgetRequest) (*DeleteBudgetResponse, error)
 	// WORK-IN-PROGRESS: Update Budget for specific cost group in an organization
 	UpdateBudget(context.Context, *UpdateBudgetRequest) (*UpdateBudgetResponse, error)
+	// WORK-IN-PROGRESS:Resolve user for aws marketplace subscription integration
+	ResolveAWSCustomerForOnboarding(context.Context, *ResolveAWSCustomerForOnboardingRequest) (*ResolveAWSCustomerForOnboardingResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2758,6 +2772,9 @@ func (UnimplementedCoverServer) DeleteBudget(context.Context, *DeleteBudgetReque
 }
 func (UnimplementedCoverServer) UpdateBudget(context.Context, *UpdateBudgetRequest) (*UpdateBudgetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBudget not implemented")
+}
+func (UnimplementedCoverServer) ResolveAWSCustomerForOnboarding(context.Context, *ResolveAWSCustomerForOnboardingRequest) (*ResolveAWSCustomerForOnboardingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResolveAWSCustomerForOnboarding not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5135,6 +5152,24 @@ func _Cover_UpdateBudget_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ResolveAWSCustomerForOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResolveAWSCustomerForOnboardingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ResolveAWSCustomerForOnboarding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ResolveAWSCustomerForOnboarding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ResolveAWSCustomerForOnboarding(ctx, req.(*ResolveAWSCustomerForOnboardingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5553,6 +5588,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBudget",
 			Handler:    _Cover_UpdateBudget_Handler,
+		},
+		{
+			MethodName: "ResolveAWSCustomerForOnboarding",
+			Handler:    _Cover_ResolveAWSCustomerForOnboarding_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
