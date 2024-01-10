@@ -19951,6 +19951,23 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
         <p></p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>includeSpendAndForecast</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>set to true to include monthly spending and forecast within the budget period </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -25247,9 +25264,9 @@ file in bytes </p></td>
               
               <tr>
                 <td>ListBudgets</td>
-                <td>GET</td>
-                <td>/v1/budget</td>
-                <td></td>
+                <td>POST</td>
+                <td>/v1/budget:read</td>
+                <td>*</td>
               </tr>
               
             
@@ -25257,9 +25274,9 @@ file in bytes </p></td>
               
               <tr>
                 <td>GetBudget</td>
-                <td>POST</td>
-                <td>/v1/budget:read</td>
-                <td>*</td>
+                <td>GET</td>
+                <td>/v1/budget/{id}</td>
+                <td></td>
               </tr>
               
             
