@@ -840,6 +840,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.GetPayerProformaReportsRequest"><span class="badge">M</span>GetPayerProformaReportsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.GetPayerProformaReportsResponse"><span class="badge">M</span>GetPayerProformaReportsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.GetRecommendationsRequest"><span class="badge">M</span>GetRecommendationsRequest</a>
                 </li>
               
@@ -921,6 +929,10 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.ListTagsRequest"><span class="badge">M</span>ListTagsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.ProformaReports"><span class="badge">M</span>ProformaReports</a>
                 </li>
               
                 <li>
@@ -8846,6 +8858,61 @@ Default value is `daily`. </p></td>
 
         
       
+        <h3 id="blueapi.cost.v1.GetPayerProformaReportsRequest">GetPayerProformaReportsRequest</h3>
+        <p>Request message for Cost.GetPayerProformaReports rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The account id to query. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.GetPayerProformaReportsResponse">GetPayerProformaReportsResponse</h3>
+        <p>Response message for Cost.GetPayerProformaReports rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>reports</td>
+                  <td><a href="#blueapi.cost.v1.ProformaReports">ProformaReports</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.GetRecommendationsRequest">GetRecommendationsRequest</h3>
         <p>Request message for GetRecommendations</p>
 
@@ -9619,6 +9686,72 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ProformaReports">ProformaReports</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>payer account id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>billing group internal id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>billing group name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bucketName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>s3 bucket name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>s3 report prefix </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reportName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>report name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleArn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>role arn </p></td>
                 </tr>
               
             </tbody>
@@ -10849,6 +10982,13 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
               </tr>
             
               <tr>
+                <td>GetPayerProformaReports</td>
+                <td><a href="#blueapi.cost.v1.GetPayerProformaReportsRequest">GetPayerProformaReportsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.GetPayerProformaReportsResponse">GetPayerProformaReportsResponse</a></td>
+                <td><p>Gets a payer account&#39;s proforma reports. Applicable for AWS payer accounts only.</p></td>
+              </tr>
+            
+              <tr>
                 <td>CreatePayerAccount</td>
                 <td><a href="#blueapi.cost.v1.CreatePayerAccountRequest">CreatePayerAccountRequest</a></td>
                 <td><a href="#blueapi.api.Account">.blueapi.api.Account</a></td>
@@ -11263,6 +11403,16 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td>GetPayerAccountImportHistory</td>
                 <td>GET</td>
                 <td>/v1/{vendor}/payers/{id}/importhistory</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetPayerProformaReports</td>
+                <td>GET</td>
+                <td>/v1/{vendor}/payers/{id}/proforma</td>
                 <td></td>
               </tr>
               

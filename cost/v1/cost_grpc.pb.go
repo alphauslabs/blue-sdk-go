@@ -27,6 +27,7 @@ const (
 	Cost_ListPayerAccounts_FullMethodName             = "/blueapi.cost.v1.Cost/ListPayerAccounts"
 	Cost_GetPayerAccount_FullMethodName               = "/blueapi.cost.v1.Cost/GetPayerAccount"
 	Cost_GetPayerAccountImportHistory_FullMethodName  = "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory"
+	Cost_GetPayerProformaReports_FullMethodName       = "/blueapi.cost.v1.Cost/GetPayerProformaReports"
 	Cost_CreatePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/CreatePayerAccount"
 	Cost_DeletePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/DeletePayerAccount"
 	Cost_ListAccounts_FullMethodName                  = "/blueapi.cost.v1.Cost/ListAccounts"
@@ -92,6 +93,8 @@ type CostClient interface {
 	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*ripple.Payer, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set {id} to `*` to return all payers' information under the organization.
 	GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (Cost_GetPayerAccountImportHistoryClient, error)
+	// Gets a payer account's proforma reports. Applicable for AWS payer accounts only.
+	GetPayerProformaReports(ctx context.Context, in *GetPayerProformaReportsRequest, opts ...grpc.CallOption) (*GetPayerProformaReportsResponse, error)
 	// DEPRECATED: Registers a vendor payer account. This is now deprecated for AWS payer accounts. To register an AWS payer account, check out the 'CreateDefaultCostAccess' API.
 	CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// Deletes a vendor payer account.
@@ -279,6 +282,15 @@ func (x *costGetPayerAccountImportHistoryClient) Recv() (*GetPayerAccountImportH
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *costClient) GetPayerProformaReports(ctx context.Context, in *GetPayerProformaReportsRequest, opts ...grpc.CallOption) (*GetPayerProformaReportsResponse, error) {
+	out := new(GetPayerProformaReportsResponse)
+	err := c.cc.Invoke(ctx, Cost_GetPayerProformaReports_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *costClient) CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error) {
@@ -998,6 +1010,8 @@ type CostServer interface {
 	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*ripple.Payer, error)
 	// Gets a payer account's import history, which is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set {id} to `*` to return all payers' information under the organization.
 	GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error
+	// Gets a payer account's proforma reports. Applicable for AWS payer accounts only.
+	GetPayerProformaReports(context.Context, *GetPayerProformaReportsRequest) (*GetPayerProformaReportsResponse, error)
 	// DEPRECATED: Registers a vendor payer account. This is now deprecated for AWS payer accounts. To register an AWS payer account, check out the 'CreateDefaultCostAccess' API.
 	CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error)
 	// Deletes a vendor payer account.
@@ -1119,6 +1133,9 @@ func (UnimplementedCostServer) GetPayerAccount(context.Context, *GetPayerAccount
 }
 func (UnimplementedCostServer) GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPayerAccountImportHistory not implemented")
+}
+func (UnimplementedCostServer) GetPayerProformaReports(context.Context, *GetPayerProformaReportsRequest) (*GetPayerProformaReportsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayerProformaReports not implemented")
 }
 func (UnimplementedCostServer) CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePayerAccount not implemented")
@@ -1350,6 +1367,24 @@ type costGetPayerAccountImportHistoryServer struct {
 
 func (x *costGetPayerAccountImportHistoryServer) Send(m *GetPayerAccountImportHistoryResponse) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Cost_GetPayerProformaReports_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPayerProformaReportsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetPayerProformaReports(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_GetPayerProformaReports_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetPayerProformaReports(ctx, req.(*GetPayerProformaReportsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Cost_CreatePayerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -2346,6 +2381,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPayerAccount",
 			Handler:    _Cost_GetPayerAccount_Handler,
+		},
+		{
+			MethodName: "GetPayerProformaReports",
+			Handler:    _Cost_GetPayerProformaReports_Handler,
 		},
 		{
 			MethodName: "CreatePayerAccount",
