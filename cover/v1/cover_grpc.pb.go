@@ -398,7 +398,7 @@ type CoverClient interface {
 	RegisterNewUser(ctx context.Context, in *RegisterNewUserRequest, opts ...grpc.CallOption) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
-	// WORK-IN-PROGRESS: List all Budgets in an organization
+	// WORK-IN-PROGRESS: List all Budgets in an organization or Budgets under specific cost group
 	ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error)
 	// WORK-IN-PROGRESS: Get Budget data for specific cost group in an organization
 	GetBudget(ctx context.Context, in *GetBudgetRequest, opts ...grpc.CallOption) (*GetBudgetResponse, error)
@@ -2373,7 +2373,7 @@ type CoverServer interface {
 	RegisterNewUser(context.Context, *RegisterNewUserRequest) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
-	// WORK-IN-PROGRESS: List all Budgets in an organization
+	// WORK-IN-PROGRESS: List all Budgets in an organization or Budgets under specific cost group
 	ListBudgets(*ListBudgetsRequest, Cover_ListBudgetsServer) error
 	// WORK-IN-PROGRESS: Get Budget data for specific cost group in an organization
 	GetBudget(context.Context, *GetBudgetRequest) (*GetBudgetResponse, error)

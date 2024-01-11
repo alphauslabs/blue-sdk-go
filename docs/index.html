@@ -18282,7 +18282,7 @@ Supported values are the following:
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Cost group ID. </p></td>
+                  <td><p>Required. Budget ID. </p></td>
                 </tr>
               
             </tbody>
@@ -19961,7 +19961,14 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>includeSpendAndForecast</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>set to true to include monthly spending and forecast within the budget period </p></td>
+                  <td><p>Optional. Set to true to include monthly spending and forecast within the budget period </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Cost group ID. Return budgets under this specific cost group. </p></td>
                 </tr>
               
             </tbody>
@@ -23984,7 +23991,7 @@ file in bytes </p></td>
                 <td>ListBudgets</td>
                 <td><a href="#blueapi.cover.v1.ListBudgetsRequest">ListBudgetsRequest</a></td>
                 <td><a href="#blueapi.cover.v1.ListBudgetsResponse">ListBudgetsResponse</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: List all Budgets in an organization</p></td>
+                <td><p>WORK-IN-PROGRESS: List all Budgets in an organization or Budgets under specific cost group</p></td>
               </tr>
             
               <tr>
