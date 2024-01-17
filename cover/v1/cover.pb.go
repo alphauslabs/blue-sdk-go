@@ -13855,6 +13855,7 @@ type UpdateBudgetRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// Required. Budget ID.
 	Id         string            `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	BudgetData *cover.BudgetData `protobuf:"bytes,2,opt,name=budgetData,proto3" json:"budgetData,omitempty"`
 }

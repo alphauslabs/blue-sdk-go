@@ -33,8 +33,8 @@ type BudgetData struct {
 	GranularBudget []*GranularBudgetData   `protobuf:"bytes,6,rep,name=granularBudget,proto3" json:"granularBudget,omitempty"` // budget per month
 	CostGroup      *AlertCostGroup         `protobuf:"bytes,7,opt,name=costGroup,proto3" json:"costGroup,omitempty"`
 	Alerts         []*BudgetAlert          `protobuf:"bytes,8,rep,name=alerts,proto3" json:"alerts,omitempty"`                 // threshold(s) and its respective channel(s) to alert
-	ForecastedData []*GranularForecastData `protobuf:"bytes,9,rep,name=forecastedData,proto3" json:"forecastedData,omitempty"` // forecast data record of an expired budget
-	SpendingData   []*GranularSpendingData `protobuf:"bytes,10,rep,name=spendingData,proto3" json:"spendingData,omitempty"`    // spending data record of an expired budget
+	ForecastedData []*GranularForecastData `protobuf:"bytes,9,rep,name=forecastedData,proto3" json:"forecastedData,omitempty"` // forecast for ongoing months of an active budget; if expired, archived forecast record
+	SpendingData   []*GranularSpendingData `protobuf:"bytes,10,rep,name=spendingData,proto3" json:"spendingData,omitempty"`    // spending data
 	Expired        bool                    `protobuf:"varint,11,opt,name=expired,proto3" json:"expired,omitempty"`             // true if budget has expired
 	Draft          bool                    `protobuf:"varint,12,opt,name=draft,proto3" json:"draft,omitempty"`                 // true if the current budget set is still a draft
 	CreatedBy      string                  `protobuf:"bytes,13,opt,name=createdBy,proto3" json:"createdBy,omitempty"`          // not required for creating budget
@@ -200,7 +200,7 @@ type GranularBudgetData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Date   string  `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"` // use yyyymmdd format
+	Date   string  `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"` // use yyyymm format
 	Budget float32 `protobuf:"fixed32,2,opt,name=budget,proto3" json:"budget,omitempty"`
 }
 
@@ -255,7 +255,7 @@ type GranularForecastData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Date       string  `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"` // use yyyymmdd format
+	Date       string  `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"` // use yyyymm format
 	Mid        float32 `protobuf:"fixed32,2,opt,name=mid,proto3" json:"mid,omitempty"`
 	UpperBound float32 `protobuf:"fixed32,3,opt,name=upperBound,proto3" json:"upperBound,omitempty"`
 	LowerBound float32 `protobuf:"fixed32,4,opt,name=lowerBound,proto3" json:"lowerBound,omitempty"`
@@ -326,7 +326,7 @@ type GranularSpendingData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Date  string  `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`     // use yyyymmdd format
+	Date  string  `protobuf:"bytes,1,opt,name=date,proto3" json:"date,omitempty"`     // use yyyymm format
 	Value float32 `protobuf:"fixed32,2,opt,name=value,proto3" json:"value,omitempty"` // actual cost for the month
 }
 

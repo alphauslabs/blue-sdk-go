@@ -400,7 +400,7 @@ type CoverClient interface {
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
 	// WORK-IN-PROGRESS: List all Budgets in an organization or Budgets under specific cost group
 	ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error)
-	// WORK-IN-PROGRESS: Get Budget data for specific cost group in an organization
+	// WORK-IN-PROGRESS: Get specific Budget data for a cost group in an organization
 	GetBudget(ctx context.Context, in *GetBudgetRequest, opts ...grpc.CallOption) (*GetBudgetResponse, error)
 	// WORK-IN-PROGRESS: Create Budget for specific cost group in an organization
 	CreateBudget(ctx context.Context, in *CreateBudgetRequest, opts ...grpc.CallOption) (*CreateBudgetResponse, error)
@@ -2375,7 +2375,7 @@ type CoverServer interface {
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
 	// WORK-IN-PROGRESS: List all Budgets in an organization or Budgets under specific cost group
 	ListBudgets(*ListBudgetsRequest, Cover_ListBudgetsServer) error
-	// WORK-IN-PROGRESS: Get Budget data for specific cost group in an organization
+	// WORK-IN-PROGRESS: Get specific Budget data for a cost group in an organization
 	GetBudget(context.Context, *GetBudgetRequest) (*GetBudgetResponse, error)
 	// WORK-IN-PROGRESS: Create Budget for specific cost group in an organization
 	CreateBudget(context.Context, *CreateBudgetRequest) (*CreateBudgetResponse, error)
