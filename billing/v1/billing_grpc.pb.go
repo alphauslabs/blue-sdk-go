@@ -56,6 +56,10 @@ const (
 	Billing_ListAbcBillingGroupAccounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
 	Billing_ReadInvoiceAdjustments_FullMethodName               = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
 	Billing_ListAccountResources_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAccountResources"
+	Billing_GetAdjustmentConfig_FullMethodName                  = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
+	Billing_CreateAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
+	Billing_UpdateAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
+	Billing_DeleteAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
 )
 
 // BillingClient is the client API for Billing service.
@@ -128,6 +132,14 @@ type BillingClient interface {
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
+	// WORK-IN-PROGRESS: Gets adjustment config
+	GetAdjustmentConfig(ctx context.Context, in *GetAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
+	// WORK-IN-PROGRESS: Creates adjustment config
+	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
+	// WORK-IN-PROGRESS: Updates adjustment config
+	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
+	// WORK-IN-PROGRESS: Deletes adjustment config
+	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -711,6 +723,42 @@ func (x *billingListAccountResourcesClient) Recv() (*ResourceAccount, error) {
 	return m, nil
 }
 
+func (c *billingClient) GetAdjustmentConfig(ctx context.Context, in *GetAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error) {
+	out := new(api.AdjustmentConfig)
+	err := c.cc.Invoke(ctx, Billing_GetAdjustmentConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error) {
+	out := new(api.AdjustmentConfig)
+	err := c.cc.Invoke(ctx, Billing_CreateAdjustmentConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error) {
+	out := new(api.AdjustmentConfig)
+	err := c.cc.Invoke(ctx, Billing_UpdateAdjustmentConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteAdjustmentConfig_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -781,6 +829,14 @@ type BillingServer interface {
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
+	// WORK-IN-PROGRESS: Gets adjustment config
+	GetAdjustmentConfig(context.Context, *GetAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
+	// WORK-IN-PROGRESS: Creates adjustment config
+	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
+	// WORK-IN-PROGRESS: Updates adjustment config
+	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
+	// WORK-IN-PROGRESS: Deletes adjustment config
+	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -886,6 +942,18 @@ func (UnimplementedBillingServer) ReadInvoiceAdjustments(*ReadInvoiceAdjustments
 }
 func (UnimplementedBillingServer) ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccountResources not implemented")
+}
+func (UnimplementedBillingServer) GetAdjustmentConfig(context.Context, *GetAdjustmentConfigRequest) (*api.AdjustmentConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAdjustmentConfig not implemented")
+}
+func (UnimplementedBillingServer) CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*api.AdjustmentConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAdjustmentConfig not implemented")
+}
+func (UnimplementedBillingServer) UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*api.AdjustmentConfig, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAdjustmentConfig not implemented")
+}
+func (UnimplementedBillingServer) DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdjustmentConfig not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1530,6 +1598,78 @@ func (x *billingListAccountResourcesServer) Send(m *ResourceAccount) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_GetAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAdjustmentConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetAdjustmentConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetAdjustmentConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetAdjustmentConfig(ctx, req.(*GetAdjustmentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_CreateAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAdjustmentConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateAdjustmentConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateAdjustmentConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateAdjustmentConfig(ctx, req.(*CreateAdjustmentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAdjustmentConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateAdjustmentConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateAdjustmentConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateAdjustmentConfig(ctx, req.(*UpdateAdjustmentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteAdjustmentConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAdjustmentConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteAdjustmentConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteAdjustmentConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteAdjustmentConfig(ctx, req.(*DeleteAdjustmentConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1620,6 +1760,22 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccessGroup",
 			Handler:    _Billing_DeleteAccessGroup_Handler,
+		},
+		{
+			MethodName: "GetAdjustmentConfig",
+			Handler:    _Billing_GetAdjustmentConfig_Handler,
+		},
+		{
+			MethodName: "CreateAdjustmentConfig",
+			Handler:    _Billing_CreateAdjustmentConfig_Handler,
+		},
+		{
+			MethodName: "UpdateAdjustmentConfig",
+			Handler:    _Billing_UpdateAdjustmentConfig_Handler,
+		},
+		{
+			MethodName: "DeleteAdjustmentConfig",
+			Handler:    _Billing_DeleteAdjustmentConfig_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

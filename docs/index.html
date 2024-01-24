@@ -1119,6 +1119,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateAdjustmentConfigRequest"><span class="badge">M</span>CreateAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateBillingGroupRequest"><span class="badge">M</span>CreateBillingGroupRequest</a>
                 </li>
               
@@ -1147,6 +1151,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.DeleteAdjustmentConfigRequest"><span class="badge">M</span>DeleteAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteResellerRequest"><span class="badge">M</span>DeleteResellerRequest</a>
                 </li>
               
@@ -1164,6 +1172,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.GetAccessGroupResponse"><span class="badge">M</span>GetAccessGroupResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetAdjustmentConfigRequest"><span class="badge">M</span>GetAdjustmentConfigRequest</a>
                 </li>
               
                 <li>
@@ -1280,6 +1292,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateAccountInvoiceServiceDiscountsResponse"><span class="badge">M</span>UpdateAccountInvoiceServiceDiscountsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest"><span class="badge">M</span>UpdateAdjustmentConfigRequest</a>
                 </li>
               
                 <li>
@@ -12704,6 +12720,44 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.CreateAdjustmentConfigRequest">CreateAdjustmentConfigRequest</h3>
+        <p>Request message for the Billing.CreateAdjustmentConfig rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>config</td>
+                  <td><a href="#blueapi.api.ConfigFilters">blueapi.api.ConfigFilters</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.api.ManagementAccount">blueapi.api.ManagementAccount</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateBillingGroupRequest">CreateBillingGroupRequest</h3>
         <p>Request message for the Billing.CreateBillingGroup rpc.</p>
 
@@ -13167,6 +13221,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.DeleteAdjustmentConfigRequest">DeleteAdjustmentConfigRequest</h3>
+        <p>Request message for the Billing.DeleteAdjustmentConfig rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteResellerRequest">DeleteResellerRequest</h3>
         <p>Request message for the DeleteReseller rpc.</p>
 
@@ -13300,6 +13378,30 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#blueapi.billing.v1.AccessGroup">AccessGroup</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetAdjustmentConfigRequest">GetAdjustmentConfigRequest</h3>
+        <p>Request message for the Billing.GetAdjustmentConfig rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
                 </tr>
               
             </tbody>
@@ -14274,6 +14376,44 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateAdjustmentConfigRequest">UpdateAdjustmentConfigRequest</h3>
+        <p>Request message for the Billing.UpdateAdjustmentConfig rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>config</td>
+                  <td><a href="#blueapi.api.ConfigFilters">blueapi.api.ConfigFilters</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.api.ManagementAccount">blueapi.api.ManagementAccount</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateInvoicePreviewsRequest">UpdateInvoicePreviewsRequest</h3>
         <p>Request message for the UpdateInvoicePreviews rpc.</p>
 
@@ -14697,6 +14837,34 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><p>WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only</p></td>
               </tr>
             
+              <tr>
+                <td>GetAdjustmentConfig</td>
+                <td><a href="#blueapi.billing.v1.GetAdjustmentConfigRequest">GetAdjustmentConfigRequest</a></td>
+                <td><a href="#blueapi.api.AdjustmentConfig">.blueapi.api.AdjustmentConfig</a></td>
+                <td><p>WORK-IN-PROGRESS: Gets adjustment config</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateAdjustmentConfig</td>
+                <td><a href="#blueapi.billing.v1.CreateAdjustmentConfigRequest">CreateAdjustmentConfigRequest</a></td>
+                <td><a href="#blueapi.api.AdjustmentConfig">.blueapi.api.AdjustmentConfig</a></td>
+                <td><p>WORK-IN-PROGRESS: Creates adjustment config</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAdjustmentConfig</td>
+                <td><a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest">UpdateAdjustmentConfigRequest</a></td>
+                <td><a href="#blueapi.api.AdjustmentConfig">.blueapi.api.AdjustmentConfig</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates adjustment config</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteAdjustmentConfig</td>
+                <td><a href="#blueapi.billing.v1.DeleteAdjustmentConfigRequest">DeleteAdjustmentConfigRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Deletes adjustment config</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -15041,6 +15209,46 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>ListAccountResources</td>
                 <td>GET</td>
                 <td>/v1/resources/accounts/{vendor}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAdjustmentConfig</td>
+                <td>GET</td>
+                <td>/v1/adjustmentconfig/{vendor}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateAdjustmentConfig</td>
+                <td>POST</td>
+                <td>/v1/adjustmentconfig/{vendor}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAdjustmentConfig</td>
+                <td>PUT</td>
+                <td>/v1/adjustmentconfig/{vendor}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteAdjustmentConfig</td>
+                <td>DELETE</td>
+                <td>/v1/adjustmentconfig/{vendor}</td>
                 <td></td>
               </tr>
               
