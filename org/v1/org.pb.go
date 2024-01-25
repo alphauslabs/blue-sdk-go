@@ -36,6 +36,8 @@ type CreateOrgRequest struct {
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// Optional. User can decide to let the system generates the password.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
+	// To be used for onboarding profile
+	Profile *OnboardingProfile `protobuf:"bytes,4,opt,name=profile,proto3" json:"profile,omitempty"`
 }
 
 func (x *CreateOrgRequest) Reset() {
@@ -91,6 +93,101 @@ func (x *CreateOrgRequest) GetPassword() string {
 	return ""
 }
 
+func (x *CreateOrgRequest) GetProfile() *OnboardingProfile {
+	if x != nil {
+		return x.Profile
+	}
+	return nil
+}
+
+// Onboarding profile
+type OnboardingProfile struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Name          string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Company       string `protobuf:"bytes,2,opt,name=company,proto3" json:"company,omitempty"`
+	Role          string `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
+	Usage         string `protobuf:"bytes,4,opt,name=usage,proto3" json:"usage,omitempty"`
+	Intention     string `protobuf:"bytes,5,opt,name=intention,proto3" json:"intention,omitempty"`
+	IsAuth0Signup string `protobuf:"bytes,6,opt,name=isAuth0Signup,proto3" json:"isAuth0Signup,omitempty"`
+}
+
+func (x *OnboardingProfile) Reset() {
+	*x = OnboardingProfile{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_org_v1_org_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *OnboardingProfile) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OnboardingProfile) ProtoMessage() {}
+
+func (x *OnboardingProfile) ProtoReflect() protoreflect.Message {
+	mi := &file_org_v1_org_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OnboardingProfile.ProtoReflect.Descriptor instead.
+func (*OnboardingProfile) Descriptor() ([]byte, []int) {
+	return file_org_v1_org_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *OnboardingProfile) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+func (x *OnboardingProfile) GetCompany() string {
+	if x != nil {
+		return x.Company
+	}
+	return ""
+}
+
+func (x *OnboardingProfile) GetRole() string {
+	if x != nil {
+		return x.Role
+	}
+	return ""
+}
+
+func (x *OnboardingProfile) GetUsage() string {
+	if x != nil {
+		return x.Usage
+	}
+	return ""
+}
+
+func (x *OnboardingProfile) GetIntention() string {
+	if x != nil {
+		return x.Intention
+	}
+	return ""
+}
+
+func (x *OnboardingProfile) GetIsAuth0Signup() string {
+	if x != nil {
+		return x.IsAuth0Signup
+	}
+	return ""
+}
+
 // Response message for the Organization.CreateOrg rpc.
 type CreateOrgResponse struct {
 	state         protoimpl.MessageState
@@ -104,7 +201,7 @@ type CreateOrgResponse struct {
 func (x *CreateOrgResponse) Reset() {
 	*x = CreateOrgResponse{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_org_v1_org_proto_msgTypes[1]
+		mi := &file_org_v1_org_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -117,7 +214,7 @@ func (x *CreateOrgResponse) String() string {
 func (*CreateOrgResponse) ProtoMessage() {}
 
 func (x *CreateOrgResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_org_v1_org_proto_msgTypes[1]
+	mi := &file_org_v1_org_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -130,7 +227,7 @@ func (x *CreateOrgResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateOrgResponse.ProtoReflect.Descriptor instead.
 func (*CreateOrgResponse) Descriptor() ([]byte, []int) {
-	return file_org_v1_org_proto_rawDescGZIP(), []int{1}
+	return file_org_v1_org_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CreateOrgResponse) GetOrg() *ripple.Org {
@@ -157,7 +254,7 @@ type SendVerificationRequest struct {
 func (x *SendVerificationRequest) Reset() {
 	*x = SendVerificationRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_org_v1_org_proto_msgTypes[2]
+		mi := &file_org_v1_org_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -170,7 +267,7 @@ func (x *SendVerificationRequest) String() string {
 func (*SendVerificationRequest) ProtoMessage() {}
 
 func (x *SendVerificationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_org_v1_org_proto_msgTypes[2]
+	mi := &file_org_v1_org_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -183,7 +280,7 @@ func (x *SendVerificationRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SendVerificationRequest.ProtoReflect.Descriptor instead.
 func (*SendVerificationRequest) Descriptor() ([]byte, []int) {
-	return file_org_v1_org_proto_rawDescGZIP(), []int{2}
+	return file_org_v1_org_proto_rawDescGZIP(), []int{3}
 }
 
 // Request message for the Organization.VerifyOrg rpc.
@@ -198,7 +295,7 @@ type VerifyOrgRequest struct {
 func (x *VerifyOrgRequest) Reset() {
 	*x = VerifyOrgRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_org_v1_org_proto_msgTypes[3]
+		mi := &file_org_v1_org_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -211,7 +308,7 @@ func (x *VerifyOrgRequest) String() string {
 func (*VerifyOrgRequest) ProtoMessage() {}
 
 func (x *VerifyOrgRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_org_v1_org_proto_msgTypes[3]
+	mi := &file_org_v1_org_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -224,7 +321,7 @@ func (x *VerifyOrgRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifyOrgRequest.ProtoReflect.Descriptor instead.
 func (*VerifyOrgRequest) Descriptor() ([]byte, []int) {
-	return file_org_v1_org_proto_rawDescGZIP(), []int{3}
+	return file_org_v1_org_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *VerifyOrgRequest) GetKey() string {
@@ -244,7 +341,7 @@ type GetOrgRequest struct {
 func (x *GetOrgRequest) Reset() {
 	*x = GetOrgRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_org_v1_org_proto_msgTypes[4]
+		mi := &file_org_v1_org_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -257,7 +354,7 @@ func (x *GetOrgRequest) String() string {
 func (*GetOrgRequest) ProtoMessage() {}
 
 func (x *GetOrgRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_org_v1_org_proto_msgTypes[4]
+	mi := &file_org_v1_org_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -270,7 +367,7 @@ func (x *GetOrgRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetOrgRequest.ProtoReflect.Descriptor instead.
 func (*GetOrgRequest) Descriptor() ([]byte, []int) {
-	return file_org_v1_org_proto_rawDescGZIP(), []int{4}
+	return file_org_v1_org_proto_rawDescGZIP(), []int{5}
 }
 
 // Request message for the Organization.UpdateMetadata rpc.
@@ -286,7 +383,7 @@ type UpdateMetadataRequest struct {
 func (x *UpdateMetadataRequest) Reset() {
 	*x = UpdateMetadataRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_org_v1_org_proto_msgTypes[5]
+		mi := &file_org_v1_org_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -299,7 +396,7 @@ func (x *UpdateMetadataRequest) String() string {
 func (*UpdateMetadataRequest) ProtoMessage() {}
 
 func (x *UpdateMetadataRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_org_v1_org_proto_msgTypes[5]
+	mi := &file_org_v1_org_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -312,7 +409,7 @@ func (x *UpdateMetadataRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateMetadataRequest.ProtoReflect.Descriptor instead.
 func (*UpdateMetadataRequest) Descriptor() ([]byte, []int) {
-	return file_org_v1_org_proto_rawDescGZIP(), []int{5}
+	return file_org_v1_org_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *UpdateMetadataRequest) GetKey() string {
@@ -342,7 +439,7 @@ type UpdatePasswordRequest struct {
 func (x *UpdatePasswordRequest) Reset() {
 	*x = UpdatePasswordRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_org_v1_org_proto_msgTypes[6]
+		mi := &file_org_v1_org_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -355,7 +452,7 @@ func (x *UpdatePasswordRequest) String() string {
 func (*UpdatePasswordRequest) ProtoMessage() {}
 
 func (x *UpdatePasswordRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_org_v1_org_proto_msgTypes[6]
+	mi := &file_org_v1_org_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -368,7 +465,7 @@ func (x *UpdatePasswordRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePasswordRequest.ProtoReflect.Descriptor instead.
 func (*UpdatePasswordRequest) Descriptor() ([]byte, []int) {
-	return file_org_v1_org_proto_rawDescGZIP(), []int{6}
+	return file_org_v1_org_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *UpdatePasswordRequest) GetOldPassword() string {
@@ -395,7 +492,7 @@ type DeleteOrgRequest struct {
 func (x *DeleteOrgRequest) Reset() {
 	*x = DeleteOrgRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_org_v1_org_proto_msgTypes[7]
+		mi := &file_org_v1_org_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -408,7 +505,7 @@ func (x *DeleteOrgRequest) String() string {
 func (*DeleteOrgRequest) ProtoMessage() {}
 
 func (x *DeleteOrgRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_org_v1_org_proto_msgTypes[7]
+	mi := &file_org_v1_org_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -421,7 +518,7 @@ func (x *DeleteOrgRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteOrgRequest.ProtoReflect.Descriptor instead.
 func (*DeleteOrgRequest) Descriptor() ([]byte, []int) {
-	return file_org_v1_org_proto_rawDescGZIP(), []int{7}
+	return file_org_v1_org_proto_rawDescGZIP(), []int{8}
 }
 
 var File_org_v1_org_proto protoreflect.FileDescriptor
@@ -437,13 +534,28 @@ var file_org_v1_org_proto_rawDesc = []byte{
 	0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x61, 0x6e, 0x6e, 0x6f, 0x74, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1b, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70,
 	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2f, 0x65, 0x6d, 0x70, 0x74, 0x79, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x22, 0x66, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x67,
-	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c,
-	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x20, 0x0a,
-	0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12,
-	0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x5a, 0x0a, 0x11, 0x43,
+	0x6f, 0x74, 0x6f, 0x22, 0xa3, 0x01, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72,
+	0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x65, 0x6d, 0x61, 0x69,
+	0x6c, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65, 0x6d, 0x61, 0x69, 0x6c, 0x12, 0x20,
+	0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0b, 0x64, 0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x1a, 0x0a, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x18, 0x03, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x12, 0x3b, 0x0a, 0x07,
+	0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e,
+	0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x6f, 0x72, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x4f,
+	0x6e, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65,
+	0x52, 0x07, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x22, 0xaf, 0x01, 0x0a, 0x11, 0x4f, 0x6e,
+	0x62, 0x6f, 0x61, 0x72, 0x64, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x66, 0x69, 0x6c, 0x65, 0x12,
+	0x12, 0x0a, 0x04, 0x6e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e,
+	0x61, 0x6d, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x18, 0x02,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x63, 0x6f, 0x6d, 0x70, 0x61, 0x6e, 0x79, 0x12, 0x12, 0x0a,
+	0x04, 0x72, 0x6f, 0x6c, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x72, 0x6f, 0x6c,
+	0x65, 0x12, 0x14, 0x0a, 0x05, 0x75, 0x73, 0x61, 0x67, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x05, 0x75, 0x73, 0x61, 0x67, 0x65, 0x12, 0x1c, 0x0a, 0x09, 0x69, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x69, 0x6f, 0x6e, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x69, 0x6e, 0x74, 0x65,
+	0x6e, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x24, 0x0a, 0x0d, 0x69, 0x73, 0x41, 0x75, 0x74, 0x68, 0x30,
+	0x53, 0x69, 0x67, 0x6e, 0x75, 0x70, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x69, 0x73,
+	0x41, 0x75, 0x74, 0x68, 0x30, 0x53, 0x69, 0x67, 0x6e, 0x75, 0x70, 0x22, 0x5a, 0x0a, 0x11, 0x43,
 	0x72, 0x65, 0x61, 0x74, 0x65, 0x4f, 0x72, 0x67, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
 	0x12, 0x29, 0x0a, 0x03, 0x6f, 0x72, 0x67, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17, 0x2e,
 	0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x69, 0x70, 0x70,
@@ -614,40 +726,42 @@ func file_org_v1_org_proto_rawDescGZIP() []byte {
 	return file_org_v1_org_proto_rawDescData
 }
 
-var file_org_v1_org_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_org_v1_org_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_org_v1_org_proto_goTypes = []interface{}{
 	(*CreateOrgRequest)(nil),        // 0: blueapi.org.v1.CreateOrgRequest
-	(*CreateOrgResponse)(nil),       // 1: blueapi.org.v1.CreateOrgResponse
-	(*SendVerificationRequest)(nil), // 2: blueapi.org.v1.SendVerificationRequest
-	(*VerifyOrgRequest)(nil),        // 3: blueapi.org.v1.VerifyOrgRequest
-	(*GetOrgRequest)(nil),           // 4: blueapi.org.v1.GetOrgRequest
-	(*UpdateMetadataRequest)(nil),   // 5: blueapi.org.v1.UpdateMetadataRequest
-	(*UpdatePasswordRequest)(nil),   // 6: blueapi.org.v1.UpdatePasswordRequest
-	(*DeleteOrgRequest)(nil),        // 7: blueapi.org.v1.DeleteOrgRequest
-	(*ripple.Org)(nil),              // 8: blueapi.api.ripple.Org
-	(*emptypb.Empty)(nil),           // 9: google.protobuf.Empty
+	(*OnboardingProfile)(nil),       // 1: blueapi.org.v1.OnboardingProfile
+	(*CreateOrgResponse)(nil),       // 2: blueapi.org.v1.CreateOrgResponse
+	(*SendVerificationRequest)(nil), // 3: blueapi.org.v1.SendVerificationRequest
+	(*VerifyOrgRequest)(nil),        // 4: blueapi.org.v1.VerifyOrgRequest
+	(*GetOrgRequest)(nil),           // 5: blueapi.org.v1.GetOrgRequest
+	(*UpdateMetadataRequest)(nil),   // 6: blueapi.org.v1.UpdateMetadataRequest
+	(*UpdatePasswordRequest)(nil),   // 7: blueapi.org.v1.UpdatePasswordRequest
+	(*DeleteOrgRequest)(nil),        // 8: blueapi.org.v1.DeleteOrgRequest
+	(*ripple.Org)(nil),              // 9: blueapi.api.ripple.Org
+	(*emptypb.Empty)(nil),           // 10: google.protobuf.Empty
 }
 var file_org_v1_org_proto_depIdxs = []int32{
-	8, // 0: blueapi.org.v1.CreateOrgResponse.org:type_name -> blueapi.api.ripple.Org
-	0, // 1: blueapi.org.v1.Organization.CreateOrg:input_type -> blueapi.org.v1.CreateOrgRequest
-	2, // 2: blueapi.org.v1.Organization.SendVerification:input_type -> blueapi.org.v1.SendVerificationRequest
-	3, // 3: blueapi.org.v1.Organization.VerifyOrg:input_type -> blueapi.org.v1.VerifyOrgRequest
-	4, // 4: blueapi.org.v1.Organization.GetOrg:input_type -> blueapi.org.v1.GetOrgRequest
-	5, // 5: blueapi.org.v1.Organization.UpdateMetadata:input_type -> blueapi.org.v1.UpdateMetadataRequest
-	6, // 6: blueapi.org.v1.Organization.UpdatePassword:input_type -> blueapi.org.v1.UpdatePasswordRequest
-	7, // 7: blueapi.org.v1.Organization.DeleteOrg:input_type -> blueapi.org.v1.DeleteOrgRequest
-	1, // 8: blueapi.org.v1.Organization.CreateOrg:output_type -> blueapi.org.v1.CreateOrgResponse
-	9, // 9: blueapi.org.v1.Organization.SendVerification:output_type -> google.protobuf.Empty
-	9, // 10: blueapi.org.v1.Organization.VerifyOrg:output_type -> google.protobuf.Empty
-	8, // 11: blueapi.org.v1.Organization.GetOrg:output_type -> blueapi.api.ripple.Org
-	9, // 12: blueapi.org.v1.Organization.UpdateMetadata:output_type -> google.protobuf.Empty
-	9, // 13: blueapi.org.v1.Organization.UpdatePassword:output_type -> google.protobuf.Empty
-	9, // 14: blueapi.org.v1.Organization.DeleteOrg:output_type -> google.protobuf.Empty
-	8, // [8:15] is the sub-list for method output_type
-	1, // [1:8] is the sub-list for method input_type
-	1, // [1:1] is the sub-list for extension type_name
-	1, // [1:1] is the sub-list for extension extendee
-	0, // [0:1] is the sub-list for field type_name
+	1,  // 0: blueapi.org.v1.CreateOrgRequest.profile:type_name -> blueapi.org.v1.OnboardingProfile
+	9,  // 1: blueapi.org.v1.CreateOrgResponse.org:type_name -> blueapi.api.ripple.Org
+	0,  // 2: blueapi.org.v1.Organization.CreateOrg:input_type -> blueapi.org.v1.CreateOrgRequest
+	3,  // 3: blueapi.org.v1.Organization.SendVerification:input_type -> blueapi.org.v1.SendVerificationRequest
+	4,  // 4: blueapi.org.v1.Organization.VerifyOrg:input_type -> blueapi.org.v1.VerifyOrgRequest
+	5,  // 5: blueapi.org.v1.Organization.GetOrg:input_type -> blueapi.org.v1.GetOrgRequest
+	6,  // 6: blueapi.org.v1.Organization.UpdateMetadata:input_type -> blueapi.org.v1.UpdateMetadataRequest
+	7,  // 7: blueapi.org.v1.Organization.UpdatePassword:input_type -> blueapi.org.v1.UpdatePasswordRequest
+	8,  // 8: blueapi.org.v1.Organization.DeleteOrg:input_type -> blueapi.org.v1.DeleteOrgRequest
+	2,  // 9: blueapi.org.v1.Organization.CreateOrg:output_type -> blueapi.org.v1.CreateOrgResponse
+	10, // 10: blueapi.org.v1.Organization.SendVerification:output_type -> google.protobuf.Empty
+	10, // 11: blueapi.org.v1.Organization.VerifyOrg:output_type -> google.protobuf.Empty
+	9,  // 12: blueapi.org.v1.Organization.GetOrg:output_type -> blueapi.api.ripple.Org
+	10, // 13: blueapi.org.v1.Organization.UpdateMetadata:output_type -> google.protobuf.Empty
+	10, // 14: blueapi.org.v1.Organization.UpdatePassword:output_type -> google.protobuf.Empty
+	10, // 15: blueapi.org.v1.Organization.DeleteOrg:output_type -> google.protobuf.Empty
+	9,  // [9:16] is the sub-list for method output_type
+	2,  // [2:9] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_org_v1_org_proto_init() }
@@ -669,7 +783,7 @@ func file_org_v1_org_proto_init() {
 			}
 		}
 		file_org_v1_org_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateOrgResponse); i {
+			switch v := v.(*OnboardingProfile); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -681,7 +795,7 @@ func file_org_v1_org_proto_init() {
 			}
 		}
 		file_org_v1_org_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*SendVerificationRequest); i {
+			switch v := v.(*CreateOrgResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -693,7 +807,7 @@ func file_org_v1_org_proto_init() {
 			}
 		}
 		file_org_v1_org_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*VerifyOrgRequest); i {
+			switch v := v.(*SendVerificationRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -705,7 +819,7 @@ func file_org_v1_org_proto_init() {
 			}
 		}
 		file_org_v1_org_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetOrgRequest); i {
+			switch v := v.(*VerifyOrgRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -717,7 +831,7 @@ func file_org_v1_org_proto_init() {
 			}
 		}
 		file_org_v1_org_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdateMetadataRequest); i {
+			switch v := v.(*GetOrgRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -729,7 +843,7 @@ func file_org_v1_org_proto_init() {
 			}
 		}
 		file_org_v1_org_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*UpdatePasswordRequest); i {
+			switch v := v.(*UpdateMetadataRequest); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -741,6 +855,18 @@ func file_org_v1_org_proto_init() {
 			}
 		}
 		file_org_v1_org_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePasswordRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_org_v1_org_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteOrgRequest); i {
 			case 0:
 				return &v.state
@@ -759,7 +885,7 @@ func file_org_v1_org_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_org_v1_org_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
