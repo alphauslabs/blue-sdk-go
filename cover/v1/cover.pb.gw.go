@@ -5702,8 +5702,8 @@ func local_request_Cover_UpdateBudget_0(ctx context.Context, marshaler runtime.M
 
 }
 
-func request_Cover_ResolveAWSCustomerForOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ResolveAWSCustomerForOnboardingRequest
+func request_Cover_ResolveAWSMarketplaceTokenForOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ResolveAWSMarketplaceTokenForOnboardingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -5714,13 +5714,13 @@ func request_Cover_ResolveAWSCustomerForOnboarding_0(ctx context.Context, marsha
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.ResolveAWSCustomerForOnboarding(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.ResolveAWSMarketplaceTokenForOnboarding(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
 }
 
-func local_request_Cover_ResolveAWSCustomerForOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq ResolveAWSCustomerForOnboardingRequest
+func local_request_Cover_ResolveAWSMarketplaceTokenForOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var protoReq ResolveAWSMarketplaceTokenForOnboardingRequest
 	var metadata runtime.ServerMetadata
 
 	newReader, berr := utilities.IOReaderFactory(req.Body)
@@ -5731,7 +5731,7 @@ func local_request_Cover_ResolveAWSCustomerForOnboarding_0(ctx context.Context, 
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := server.ResolveAWSCustomerForOnboarding(ctx, &protoReq)
+	msg, err := server.ResolveAWSMarketplaceTokenForOnboarding(ctx, &protoReq)
 	return msg, metadata, err
 
 }
@@ -8485,7 +8485,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 
 	})
 
-	mux.Handle("POST", pattern_Cover_ResolveAWSCustomerForOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cover_ResolveAWSMarketplaceTokenForOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
@@ -8493,12 +8493,12 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ResolveAWSCustomerForOnboarding", runtime.WithHTTPPathPattern("/v1/members/aws/subscription"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ResolveAWSMarketplaceTokenForOnboarding", runtime.WithHTTPPathPattern("/v1/members/aws/subscription"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Cover_ResolveAWSCustomerForOnboarding_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Cover_ResolveAWSMarketplaceTokenForOnboarding_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
@@ -8506,7 +8506,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 
-		forward_Cover_ResolveAWSCustomerForOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_ResolveAWSMarketplaceTokenForOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -11345,25 +11345,25 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 
 	})
 
-	mux.Handle("POST", pattern_Cover_ResolveAWSCustomerForOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cover_ResolveAWSMarketplaceTokenForOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ResolveAWSCustomerForOnboarding", runtime.WithHTTPPathPattern("/v1/members/aws/subscription"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ResolveAWSMarketplaceTokenForOnboarding", runtime.WithHTTPPathPattern("/v1/members/aws/subscription"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cover_ResolveAWSCustomerForOnboarding_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cover_ResolveAWSMarketplaceTokenForOnboarding_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cover_ResolveAWSCustomerForOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cover_ResolveAWSMarketplaceTokenForOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -11625,7 +11625,7 @@ var (
 
 	pattern_Cover_UpdateBudget_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "budget", "id"}, ""))
 
-	pattern_Cover_ResolveAWSCustomerForOnboarding_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "members", "aws", "subscription"}, ""))
+	pattern_Cover_ResolveAWSMarketplaceTokenForOnboarding_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "members", "aws", "subscription"}, ""))
 )
 
 var (
@@ -11883,5 +11883,5 @@ var (
 
 	forward_Cover_UpdateBudget_0 = runtime.ForwardResponseMessage
 
-	forward_Cover_ResolveAWSCustomerForOnboarding_0 = runtime.ForwardResponseMessage
+	forward_Cover_ResolveAWSMarketplaceTokenForOnboarding_0 = runtime.ForwardResponseMessage
 )
