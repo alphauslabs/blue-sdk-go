@@ -1765,6 +1765,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetFreeTrialExpiryRequest"><span class="badge">M</span>GetFreeTrialExpiryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetFreeTrialExpiryResponse"><span class="badge">M</span>GetFreeTrialExpiryResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetMemberCostGroupRequest"><span class="badge">M</span>GetMemberCostGroupRequest</a>
                 </li>
               
@@ -12785,7 +12793,8 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td>config</td>
                   <td><a href="#blueapi.api.ConfigFilters">blueapi.api.ConfigFilters</a></td>
                   <td>repeated</td>
-                  <td><p>Required. </p></td>
+                  <td><p>Required. 
+A list of filtering options. See [api.ConfigFilters] for more information on each filter item. Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 || filter2 || filter3, etc. </p></td>
                 </tr>
               
                 <tr>
@@ -14780,35 +14789,35 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>CreateReseller</td>
                 <td><a href="#blueapi.billing.v1.CreateResellerRequest">CreateResellerRequest</a></td>
                 <td><a href="#blueapi.api.ripple.Reseller">.blueapi.api.ripple.Reseller</a></td>
-                <td><p>WORK-IN-PROGRESS: Registers the reseller account. Only available in Ripple.</p></td>
+                <td><p>Registers the reseller account. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
                 <td>ListResellers</td>
                 <td><a href="#blueapi.billing.v1.ListResellersRequest">ListResellersRequest</a></td>
                 <td><a href="#blueapi.api.ripple.Reseller">.blueapi.api.ripple.Reseller</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Lists all the reseller accounts. Only available in Ripple.</p></td>
+                <td><p>Lists all the reseller accounts. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
                 <td>GetReseller</td>
                 <td><a href="#blueapi.billing.v1.GetResellerRequest">GetResellerRequest</a></td>
                 <td><a href="#blueapi.api.ripple.Reseller">.blueapi.api.ripple.Reseller</a></td>
-                <td><p>WORK-IN-PROGRESS: Gets the reseller account. Only available in Ripple.</p></td>
+                <td><p>Gets the reseller account. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
                 <td>UpdateReseller</td>
                 <td><a href="#blueapi.billing.v1.UpdateResellerRequest">UpdateResellerRequest</a></td>
                 <td><a href="#blueapi.api.ripple.Reseller">.blueapi.api.ripple.Reseller</a></td>
-                <td><p>WORK-IN-PROGRESS: Updates the reseller account. Only available in Ripple.</p></td>
+                <td><p>Updates the reseller account. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
                 <td>DeleteReseller</td>
                 <td><a href="#blueapi.billing.v1.DeleteResellerRequest">DeleteResellerRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>WORK-IN-PROGRESS: Deletes the reseller account. Only available in Ripple.</p></td>
+                <td><p>Deletes the reseller account. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -19637,6 +19646,51 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetFreeTrialExpiryRequest">GetFreeTrialExpiryRequest</h3>
+        <p>Request message for GetFreeTrialExpiry</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetFreeTrialExpiryResponse">GetFreeTrialExpiryResponse</h3>
+        <p>Response message for GetFreeTrialExpiry</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>dateRegistered</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>freeTrialExpiry</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>daysLeft</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetMemberCostGroupRequest">GetMemberCostGroupRequest</h3>
         <p>Request message for GetMemberCostGroup</p>
 
@@ -24445,6 +24499,13 @@ file in bytes </p></td>
                 <td><p>WORK-IN-PROGRESS:Resolve user for aws marketplace subscription integration</p></td>
               </tr>
             
+              <tr>
+                <td>GetFreeTrialExpiry</td>
+                <td><a href="#blueapi.cover.v1.GetFreeTrialExpiryRequest">GetFreeTrialExpiryRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetFreeTrialExpiryResponse">GetFreeTrialExpiryResponse</a></td>
+                <td><p>Get the free trial expiry for newly onboard organization.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -25740,6 +25801,16 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/members/aws/subscription</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetFreeTrialExpiry</td>
+                <td>GET</td>
+                <td>/v1/billing/free</td>
+                <td></td>
               </tr>
               
             

@@ -93,8 +93,10 @@ type ManagementAccount struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	ManagementAccountId string           `protobuf:"bytes,1,opt,name=managementAccountId,proto3" json:"managementAccountId,omitempty"`
-	Config              []*ConfigFilters `protobuf:"bytes,2,rep,name=config,proto3" json:"config,omitempty"`
+	// Vendor-managed organization account Id
+	ManagementAccountId string `protobuf:"bytes,1,opt,name=managementAccountId,proto3" json:"managementAccountId,omitempty"`
+	// A list of filtering options. See [ConfigFilters] for more information on each filter item. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
+	Config []*ConfigFilters `protobuf:"bytes,2,rep,name=config,proto3" json:"config,omitempty"`
 }
 
 func (x *ManagementAccount) Reset() {
@@ -144,7 +146,12 @@ func (x *ManagementAccount) GetConfig() []*ConfigFilters {
 }
 
 // ConfigFilters resource definition.
-// regex: https://github.com/google/re2
+// A map of "key:value" config filters. The key indicates the adjustment key while the value is the filter adjustment value which can be prefixed by either "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.
+//
+// For example, if you want to query lineitems with the adjustment `productCode:AmazonEC2`, set to `{"productCode":"AmazonEC2"}`. You can also use regular expressions for adjustment values, such as `{"description":"re:[A-Za-z0-9]*"}`.
+// List of available adjustment keys: productCode, type, description
+// For example value on productCode: AmazonEC2, AmazonRDS, AWSLambda, etc.
+// For example value on type: Fee, Refund, SppDiscount, etc.
 type ConfigFilters struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

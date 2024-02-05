@@ -149,6 +149,7 @@ const (
 	Cover_DeleteBudget_FullMethodName                            = "/blueapi.cover.v1.Cover/DeleteBudget"
 	Cover_UpdateBudget_FullMethodName                            = "/blueapi.cover.v1.Cover/UpdateBudget"
 	Cover_ResolveAWSMarketplaceTokenForOnboarding_FullMethodName = "/blueapi.cover.v1.Cover/ResolveAWSMarketplaceTokenForOnboarding"
+	Cover_GetFreeTrialExpiry_FullMethodName                      = "/blueapi.cover.v1.Cover/GetFreeTrialExpiry"
 )
 
 // CoverClient is the client API for Cover service.
@@ -410,6 +411,8 @@ type CoverClient interface {
 	UpdateBudget(ctx context.Context, in *UpdateBudgetRequest, opts ...grpc.CallOption) (*UpdateBudgetResponse, error)
 	// WORK-IN-PROGRESS:Resolve user for aws marketplace subscription integration
 	ResolveAWSMarketplaceTokenForOnboarding(ctx context.Context, in *ResolveAWSMarketplaceTokenForOnboardingRequest, opts ...grpc.CallOption) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error)
+	// Get the free trial expiry for newly onboard organization.
+	GetFreeTrialExpiry(ctx context.Context, in *GetFreeTrialExpiryRequest, opts ...grpc.CallOption) (*GetFreeTrialExpiryResponse, error)
 }
 
 type coverClient struct {
@@ -2126,6 +2129,15 @@ func (c *coverClient) ResolveAWSMarketplaceTokenForOnboarding(ctx context.Contex
 	return out, nil
 }
 
+func (c *coverClient) GetFreeTrialExpiry(ctx context.Context, in *GetFreeTrialExpiryRequest, opts ...grpc.CallOption) (*GetFreeTrialExpiryResponse, error) {
+	out := new(GetFreeTrialExpiryResponse)
+	err := c.cc.Invoke(ctx, Cover_GetFreeTrialExpiry_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2385,6 +2397,8 @@ type CoverServer interface {
 	UpdateBudget(context.Context, *UpdateBudgetRequest) (*UpdateBudgetResponse, error)
 	// WORK-IN-PROGRESS:Resolve user for aws marketplace subscription integration
 	ResolveAWSMarketplaceTokenForOnboarding(context.Context, *ResolveAWSMarketplaceTokenForOnboardingRequest) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error)
+	// Get the free trial expiry for newly onboard organization.
+	GetFreeTrialExpiry(context.Context, *GetFreeTrialExpiryRequest) (*GetFreeTrialExpiryResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2775,6 +2789,9 @@ func (UnimplementedCoverServer) UpdateBudget(context.Context, *UpdateBudgetReque
 }
 func (UnimplementedCoverServer) ResolveAWSMarketplaceTokenForOnboarding(context.Context, *ResolveAWSMarketplaceTokenForOnboardingRequest) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResolveAWSMarketplaceTokenForOnboarding not implemented")
+}
+func (UnimplementedCoverServer) GetFreeTrialExpiry(context.Context, *GetFreeTrialExpiryRequest) (*GetFreeTrialExpiryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFreeTrialExpiry not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5170,6 +5187,24 @@ func _Cover_ResolveAWSMarketplaceTokenForOnboarding_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetFreeTrialExpiry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFreeTrialExpiryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetFreeTrialExpiry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetFreeTrialExpiry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetFreeTrialExpiry(ctx, req.(*GetFreeTrialExpiryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5592,6 +5627,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResolveAWSMarketplaceTokenForOnboarding",
 			Handler:    _Cover_ResolveAWSMarketplaceTokenForOnboarding_Handler,
+		},
+		{
+			MethodName: "GetFreeTrialExpiry",
+			Handler:    _Cover_GetFreeTrialExpiry_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

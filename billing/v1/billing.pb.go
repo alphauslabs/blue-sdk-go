@@ -4165,6 +4165,7 @@ type CreateAdjustmentConfigRequest struct {
 	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required.
+	// A list of filtering options. See [api.ConfigFilters] for more information on each filter item. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
 	Config []*api.ConfigFilters `protobuf:"bytes,2,rep,name=config,proto3" json:"config,omitempty"`
 	// Optional.
 	Accounts []*api.ManagementAccount `protobuf:"bytes,3,rep,name=accounts,proto3" json:"accounts,omitempty"`

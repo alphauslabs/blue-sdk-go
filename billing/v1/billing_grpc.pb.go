@@ -102,15 +102,15 @@ type BillingClient interface {
 	RemoveAccountInvoiceServiceDiscounts(ctx context.Context, in *RemoveAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(ctx context.Context, in *DeleteAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Registers the reseller account. Only available in Ripple.
+	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(ctx context.Context, in *CreateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
-	// WORK-IN-PROGRESS: Lists all the reseller accounts. Only available in Ripple.
+	// Lists all the reseller accounts. Only available in Ripple.
 	ListResellers(ctx context.Context, in *ListResellersRequest, opts ...grpc.CallOption) (Billing_ListResellersClient, error)
-	// WORK-IN-PROGRESS: Gets the reseller account. Only available in Ripple.
+	// Gets the reseller account. Only available in Ripple.
 	GetReseller(ctx context.Context, in *GetResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
-	// WORK-IN-PROGRESS: Updates the reseller account. Only available in Ripple.
+	// Updates the reseller account. Only available in Ripple.
 	UpdateReseller(ctx context.Context, in *UpdateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
-	// WORK-IN-PROGRESS: Deletes the reseller account. Only available in Ripple.
+	// Deletes the reseller account. Only available in Ripple.
 	DeleteReseller(ctx context.Context, in *DeleteResellerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets all billing settings.
 	GetBillingSetting(ctx context.Context, in *GetBillingSettingRequest, opts ...grpc.CallOption) (*GetBillingSettingResponse, error)
@@ -799,15 +799,15 @@ type BillingServer interface {
 	RemoveAccountInvoiceServiceDiscounts(context.Context, *RemoveAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(context.Context, *DeleteAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Registers the reseller account. Only available in Ripple.
+	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(context.Context, *CreateResellerRequest) (*ripple.Reseller, error)
-	// WORK-IN-PROGRESS: Lists all the reseller accounts. Only available in Ripple.
+	// Lists all the reseller accounts. Only available in Ripple.
 	ListResellers(*ListResellersRequest, Billing_ListResellersServer) error
-	// WORK-IN-PROGRESS: Gets the reseller account. Only available in Ripple.
+	// Gets the reseller account. Only available in Ripple.
 	GetReseller(context.Context, *GetResellerRequest) (*ripple.Reseller, error)
-	// WORK-IN-PROGRESS: Updates the reseller account. Only available in Ripple.
+	// Updates the reseller account. Only available in Ripple.
 	UpdateReseller(context.Context, *UpdateResellerRequest) (*ripple.Reseller, error)
-	// WORK-IN-PROGRESS: Deletes the reseller account. Only available in Ripple.
+	// Deletes the reseller account. Only available in Ripple.
 	DeleteReseller(context.Context, *DeleteResellerRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets all billing settings.
 	GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error)
