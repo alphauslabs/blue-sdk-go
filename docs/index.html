@@ -1259,6 +1259,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceStatusRequest"><span class="badge">M</span>ListInvoiceStatusRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListResellersRequest"><span class="badge">M</span>ListResellersRequest</a>
                 </li>
               
@@ -14099,6 +14103,30 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ListInvoiceStatusRequest">ListInvoiceStatusRequest</h3>
+        <p>Request message for the ListInvoiceStatus rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Month to get invoice status. Format: `yyyymm`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListResellersRequest">ListResellersRequest</h3>
         <p>Request message for the ListResellers rpc.</p>
 
@@ -14716,6 +14744,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>ListInvoiceStatus</td>
+                <td><a href="#blueapi.billing.v1.ListInvoiceStatusRequest">ListInvoiceStatusRequest</a></td>
+                <td><a href="#blueapi.api.InvoiceMessage">.blueapi.api.InvoiceMessage</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Reads an invoice status. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetInvoice</td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceRequest">GetInvoiceRequest</a></td>
                 <td><a href="#blueapi.api.Invoice">.blueapi.api.Invoice</a></td>
@@ -15013,6 +15048,16 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>GET</td>
                 <td>/v1/invoice/status/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListInvoiceStatus</td>
+                <td>POST</td>
+                <td>/v1/invoice/status/{date}:read</td>
+                <td>*</td>
               </tr>
               
             

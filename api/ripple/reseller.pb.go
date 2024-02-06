@@ -182,6 +182,7 @@ type ResellerConfig struct {
 	// `invoiceDownloadCsvMerged`: Enable merged CSV download
 	// `aquaLink`: Aqua link
 	// `waveproReportFilters`: WavePro Report Filters
+	// `budgetalerts`: WavePro Budget Alerts
 	//
 	// For Aqua
 	// The available values are shown below.
