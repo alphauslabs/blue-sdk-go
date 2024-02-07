@@ -1765,6 +1765,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetCustomerSubscriptionStatusRequest"><span class="badge">M</span>GetCustomerSubscriptionStatusRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCustomerSubscriptionStatusResponse"><span class="badge">M</span>GetCustomerSubscriptionStatusResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetDiscountRecommendationsRequest"><span class="badge">M</span>GetDiscountRecommendationsRequest</a>
                 </li>
               
@@ -19713,6 +19721,61 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetCustomerSubscriptionStatusRequest">GetCustomerSubscriptionStatusRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCustomerSubscriptionStatusResponse">GetCustomerSubscriptionStatusResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>isSubscribed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isExpired</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetDiscountRecommendationsRequest">GetDiscountRecommendationsRequest</h3>
         <p>Request message for GetDiscountRecomemendations</p>
 
@@ -24687,6 +24750,13 @@ file in bytes </p></td>
                 <td><p>Get the free trial expiry for newly onboard organization.</p></td>
               </tr>
             
+              <tr>
+                <td>GetCustomerSubscriptionStatus</td>
+                <td><a href="#blueapi.cover.v1.GetCustomerSubscriptionStatusRequest">GetCustomerSubscriptionStatusRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetCustomerSubscriptionStatusResponse">GetCustomerSubscriptionStatusResponse</a></td>
+                <td><p>Get the Customer Subscription status from marketplace</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -25991,6 +26061,16 @@ file in bytes </p></td>
                 <td>GetFreeTrialExpiry</td>
                 <td>GET</td>
                 <td>/v1/billing/free</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCustomerSubscriptionStatus</td>
+                <td>GET</td>
+                <td>/v1/billing/status</td>
                 <td></td>
               </tr>
               

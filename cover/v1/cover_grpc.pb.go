@@ -150,6 +150,7 @@ const (
 	Cover_UpdateBudget_FullMethodName                            = "/blueapi.cover.v1.Cover/UpdateBudget"
 	Cover_ResolveAWSMarketplaceTokenForOnboarding_FullMethodName = "/blueapi.cover.v1.Cover/ResolveAWSMarketplaceTokenForOnboarding"
 	Cover_GetFreeTrialExpiry_FullMethodName                      = "/blueapi.cover.v1.Cover/GetFreeTrialExpiry"
+	Cover_GetCustomerSubscriptionStatus_FullMethodName           = "/blueapi.cover.v1.Cover/GetCustomerSubscriptionStatus"
 )
 
 // CoverClient is the client API for Cover service.
@@ -413,6 +414,8 @@ type CoverClient interface {
 	ResolveAWSMarketplaceTokenForOnboarding(ctx context.Context, in *ResolveAWSMarketplaceTokenForOnboardingRequest, opts ...grpc.CallOption) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error)
 	// Get the free trial expiry for newly onboard organization.
 	GetFreeTrialExpiry(ctx context.Context, in *GetFreeTrialExpiryRequest, opts ...grpc.CallOption) (*GetFreeTrialExpiryResponse, error)
+	// Get the Customer Subscription status from marketplace
+	GetCustomerSubscriptionStatus(ctx context.Context, in *GetCustomerSubscriptionStatusRequest, opts ...grpc.CallOption) (*GetCustomerSubscriptionStatusResponse, error)
 }
 
 type coverClient struct {
@@ -2138,6 +2141,15 @@ func (c *coverClient) GetFreeTrialExpiry(ctx context.Context, in *GetFreeTrialEx
 	return out, nil
 }
 
+func (c *coverClient) GetCustomerSubscriptionStatus(ctx context.Context, in *GetCustomerSubscriptionStatusRequest, opts ...grpc.CallOption) (*GetCustomerSubscriptionStatusResponse, error) {
+	out := new(GetCustomerSubscriptionStatusResponse)
+	err := c.cc.Invoke(ctx, Cover_GetCustomerSubscriptionStatus_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2399,6 +2411,8 @@ type CoverServer interface {
 	ResolveAWSMarketplaceTokenForOnboarding(context.Context, *ResolveAWSMarketplaceTokenForOnboardingRequest) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error)
 	// Get the free trial expiry for newly onboard organization.
 	GetFreeTrialExpiry(context.Context, *GetFreeTrialExpiryRequest) (*GetFreeTrialExpiryResponse, error)
+	// Get the Customer Subscription status from marketplace
+	GetCustomerSubscriptionStatus(context.Context, *GetCustomerSubscriptionStatusRequest) (*GetCustomerSubscriptionStatusResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2792,6 +2806,9 @@ func (UnimplementedCoverServer) ResolveAWSMarketplaceTokenForOnboarding(context.
 }
 func (UnimplementedCoverServer) GetFreeTrialExpiry(context.Context, *GetFreeTrialExpiryRequest) (*GetFreeTrialExpiryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetFreeTrialExpiry not implemented")
+}
+func (UnimplementedCoverServer) GetCustomerSubscriptionStatus(context.Context, *GetCustomerSubscriptionStatusRequest) (*GetCustomerSubscriptionStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCustomerSubscriptionStatus not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5205,6 +5222,24 @@ func _Cover_GetFreeTrialExpiry_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetCustomerSubscriptionStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCustomerSubscriptionStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetCustomerSubscriptionStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetCustomerSubscriptionStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetCustomerSubscriptionStatus(ctx, req.(*GetCustomerSubscriptionStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5631,6 +5666,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetFreeTrialExpiry",
 			Handler:    _Cover_GetFreeTrialExpiry_Handler,
+		},
+		{
+			MethodName: "GetCustomerSubscriptionStatus",
+			Handler:    _Cover_GetCustomerSubscriptionStatus_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
