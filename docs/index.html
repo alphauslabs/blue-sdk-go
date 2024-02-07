@@ -358,6 +358,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.iam.v1.MFAUser"><span class="badge">M</span>MFAUser</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.iam.v1.MFAUsersInfoRequest"><span class="badge">M</span>MFAUsersInfoRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.iam.v1.MFAUsersInfoResponse"><span class="badge">M</span>MFAUsersInfoResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.iam.v1.MapRole"><span class="badge">M</span>MapRole</a>
                 </li>
               
@@ -497,14 +509,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.admin.v1.GetMFAUsersInfoRequest"><span class="badge">M</span>GetMFAUsersInfoRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.admin.v1.GetMFAUsersInfoResponse"><span class="badge">M</span>GetMFAUsersInfoResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.admin.v1.GetNotificationChannelRequest"><span class="badge">M</span>GetNotificationChannelRequest</a>
                 </li>
               
@@ -542,10 +546,6 @@
               
                 <li>
                   <a href="#blueapi.admin.v1.ListNotificationsResponse"><span class="badge">M</span>ListNotificationsResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.admin.v1.MFAUser"><span class="badge">M</span>MFAUser</a>
                 </li>
               
                 <li>
@@ -3664,6 +3664,106 @@ for the list of supported attributes.</p></td>
 
         
       
+        <h3 id="blueapi.iam.v1.MFAUser">MFAUser</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.iam.v1.MFAUsersInfoRequest">MFAUsersInfoRequest</h3>
+        <p>Request message for the Iam.MFAUsersInfoRequest rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. If non empty: list users by status. Otherwise will list all MFA users. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.iam.v1.MFAUsersInfoResponse">MFAUsersInfoResponse</h3>
+        <p>Response message for the MFAUsersInfoResponse rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>users</td>
+                  <td><a href="#blueapi.iam.v1.MFAUser">MFAUser</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.iam.v1.MapRole">MapRole</h3>
         <p></p>
 
@@ -4261,6 +4361,13 @@ is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.</p></td>
                 <td><p>WORK-IN-PROGRESS: Validate reset password link and proceed to update password</p></td>
               </tr>
             
+              <tr>
+                <td>GetMFAUsers</td>
+                <td><a href="#blueapi.iam.v1.MFAUsersInfoRequest">MFAUsersInfoRequest</a></td>
+                <td><a href="#blueapi.iam.v1.MFAUsersInfoResponse">MFAUsersInfoResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: List MFA users info for login user&#39;s organization based on status.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -4596,6 +4703,16 @@ is equivalent to `WhoAmI()` or `GET:/iam/v*/whoami`.</p></td>
                 <td>POST</td>
                 <td>/iam/v1/password:reset</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetMFAUsers</td>
+                <td>GET</td>
+                <td>/iam/v1/mfausers</td>
+                <td></td>
               </tr>
               
             
@@ -5303,54 +5420,6 @@ All templates are publicly available from the reponse link (`templateUrl`) if yo
 
         
       
-        <h3 id="blueapi.admin.v1.GetMFAUsersInfoRequest">GetMFAUsersInfoRequest</h3>
-        <p>Request message for the Admin.GetMFAUsersInfoRequest rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. If non empty: list users by status. Otherwise will list all MFA users. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.admin.v1.GetMFAUsersInfoResponse">GetMFAUsersInfoResponse</h3>
-        <p>Response message for the GetMFAUsersInfoResponse rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>users</td>
-                  <td><a href="#blueapi.admin.v1.MFAUser">MFAUser</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.admin.v1.GetNotificationChannelRequest">GetNotificationChannelRequest</h3>
         <p>Request message for the Admin.GetNotificationChannel rpc.</p>
 
@@ -5515,58 +5584,6 @@ Valid values:
                   <td>notifications</td>
                   <td><a href="#blueapi.api.Notification">blueapi.api.Notification</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.admin.v1.MFAUser">MFAUser</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>createdAt</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -6041,13 +6058,6 @@ Valid values:
                 <td><p>WORK-IN-PROGRESS: Exports audit logs for login user&#39;s organization.</p></td>
               </tr>
             
-              <tr>
-                <td>GetMFAUsersInfo</td>
-                <td><a href="#blueapi.admin.v1.GetMFAUsersInfoRequest">GetMFAUsersInfoRequest</a></td>
-                <td><a href="#blueapi.admin.v1.GetMFAUsersInfoResponse">GetMFAUsersInfoResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: List MFA users info for login user&#39;s organization based on status.</p></td>
-              </tr>
-            
           </tbody>
         </table>
 
@@ -6313,16 +6323,6 @@ Valid values:
                 <td>POST</td>
                 <td>/admin/v1/auditlogs:export</td>
                 <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetMFAUsersInfo</td>
-                <td>GET</td>
-                <td>/admin/v1/mfausersinfo</td>
-                <td></td>
               </tr>
               
             

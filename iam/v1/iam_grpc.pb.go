@@ -53,6 +53,7 @@ const (
 	Iam_RefreshPartnerToken_FullMethodName                        = "/blueapi.iam.v1.Iam/RefreshPartnerToken"
 	Iam_VerifyUserForResetPassword_FullMethodName                 = "/blueapi.iam.v1.Iam/VerifyUserForResetPassword"
 	Iam_ValidateResetPasswordLinkAndChangePassword_FullMethodName = "/blueapi.iam.v1.Iam/ValidateResetPasswordLinkAndChangePassword"
+	Iam_GetMFAUsers_FullMethodName                                = "/blueapi.iam.v1.Iam/GetMFAUsers"
 )
 
 // IamClient is the client API for Iam service.
@@ -127,6 +128,8 @@ type IamClient interface {
 	VerifyUserForResetPassword(ctx context.Context, in *VerifyUserForResetPasswordRequest, opts ...grpc.CallOption) (*VerifyUserForResetPasswordResponse, error)
 	// WORK-IN-PROGRESS: Validate reset password link and proceed to update password
 	ValidateResetPasswordLinkAndChangePassword(ctx context.Context, in *ValidateResetPasswordLinkAndChangePasswordRequest, opts ...grpc.CallOption) (*ValidateResetPasswordLinkAndChangePasswordResponse, error)
+	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
+	GetMFAUsers(ctx context.Context, in *MFAUsersInfoRequest, opts ...grpc.CallOption) (*MFAUsersInfoResponse, error)
 }
 
 type iamClient struct {
@@ -517,6 +520,15 @@ func (c *iamClient) ValidateResetPasswordLinkAndChangePassword(ctx context.Conte
 	return out, nil
 }
 
+func (c *iamClient) GetMFAUsers(ctx context.Context, in *MFAUsersInfoRequest, opts ...grpc.CallOption) (*MFAUsersInfoResponse, error) {
+	out := new(MFAUsersInfoResponse)
+	err := c.cc.Invoke(ctx, Iam_GetMFAUsers_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IamServer is the server API for Iam service.
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
@@ -589,6 +601,8 @@ type IamServer interface {
 	VerifyUserForResetPassword(context.Context, *VerifyUserForResetPasswordRequest) (*VerifyUserForResetPasswordResponse, error)
 	// WORK-IN-PROGRESS: Validate reset password link and proceed to update password
 	ValidateResetPasswordLinkAndChangePassword(context.Context, *ValidateResetPasswordLinkAndChangePasswordRequest) (*ValidateResetPasswordLinkAndChangePasswordResponse, error)
+	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
+	GetMFAUsers(context.Context, *MFAUsersInfoRequest) (*MFAUsersInfoResponse, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -691,6 +705,9 @@ func (UnimplementedIamServer) VerifyUserForResetPassword(context.Context, *Verif
 }
 func (UnimplementedIamServer) ValidateResetPasswordLinkAndChangePassword(context.Context, *ValidateResetPasswordLinkAndChangePasswordRequest) (*ValidateResetPasswordLinkAndChangePasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateResetPasswordLinkAndChangePassword not implemented")
+}
+func (UnimplementedIamServer) GetMFAUsers(context.Context, *MFAUsersInfoRequest) (*MFAUsersInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMFAUsers not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -1293,6 +1310,24 @@ func _Iam_ValidateResetPasswordLinkAndChangePassword_Handler(srv interface{}, ct
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_GetMFAUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MFAUsersInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).GetMFAUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_GetMFAUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).GetMFAUsers(ctx, req.(*MFAUsersInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Iam_ServiceDesc is the grpc.ServiceDesc for Iam service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1411,6 +1446,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateResetPasswordLinkAndChangePassword",
 			Handler:    _Iam_ValidateResetPasswordLinkAndChangePassword_Handler,
+		},
+		{
+			MethodName: "GetMFAUsers",
+			Handler:    _Iam_GetMFAUsers_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
