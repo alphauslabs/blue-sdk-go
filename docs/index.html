@@ -1525,6 +1525,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CreateProfilingRequest"><span class="badge">M</span>CreateProfilingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateProfilingResponse"><span class="badge">M</span>CreateProfilingResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateViewRequest"><span class="badge">M</span>CreateViewRequest</a>
                 </li>
               
@@ -17594,6 +17602,72 @@ Supported values are the following:
 
         
       
+        <h3 id="blueapi.cover.v1.CreateProfilingRequest">CreateProfilingRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intention</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>emailAddress</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateProfilingResponse">CreateProfilingResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.CreateViewRequest">CreateViewRequest</h3>
         <p>Request message for CreateView</p>
 
@@ -24757,6 +24831,13 @@ file in bytes </p></td>
                 <td><p>Get the Customer Subscription status from marketplace</p></td>
               </tr>
             
+              <tr>
+                <td>CreateProfiling</td>
+                <td><a href="#blueapi.cover.v1.CreateProfilingRequest">CreateProfilingRequest</a></td>
+                <td><a href="#blueapi.cover.v1.CreateProfilingResponse">CreateProfilingResponse</a></td>
+                <td><p>Profiling for new users.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -26072,6 +26153,16 @@ file in bytes </p></td>
                 <td>GET</td>
                 <td>/v1/billing/status</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateProfiling</td>
+                <td>POST</td>
+                <td>/v1/members/profile</td>
+                <td>*</td>
               </tr>
               
             
