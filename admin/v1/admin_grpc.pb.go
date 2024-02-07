@@ -47,6 +47,7 @@ const (
 	Admin_UpdateNotification_FullMethodName                    = "/blueapi.admin.v1.Admin/UpdateNotification"
 	Admin_DeleteNotification_FullMethodName                    = "/blueapi.admin.v1.Admin/DeleteNotification"
 	Admin_ExportAuditLogs_FullMethodName                       = "/blueapi.admin.v1.Admin/ExportAuditLogs"
+	Admin_GetMFAUsersInfo_FullMethodName                       = "/blueapi.admin.v1.Admin/GetMFAUsersInfo"
 )
 
 // AdminClient is the client API for Admin service.
@@ -103,6 +104,8 @@ type AdminClient interface {
 	DeleteNotification(ctx context.Context, in *DeleteNotificationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Exports audit logs for login user's organization.
 	ExportAuditLogs(ctx context.Context, in *ExportAuditLogsRequest, opts ...grpc.CallOption) (*api.AuditExport, error)
+	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
+	GetMFAUsersInfo(ctx context.Context, in *GetMFAUsersInfoRequest, opts ...grpc.CallOption) (*GetMFAUsersInfoResponse, error)
 }
 
 type adminClient struct {
@@ -384,6 +387,15 @@ func (c *adminClient) ExportAuditLogs(ctx context.Context, in *ExportAuditLogsRe
 	return out, nil
 }
 
+func (c *adminClient) GetMFAUsersInfo(ctx context.Context, in *GetMFAUsersInfoRequest, opts ...grpc.CallOption) (*GetMFAUsersInfoResponse, error) {
+	out := new(GetMFAUsersInfoResponse)
+	err := c.cc.Invoke(ctx, Admin_GetMFAUsersInfo_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -438,6 +450,8 @@ type AdminServer interface {
 	DeleteNotification(context.Context, *DeleteNotificationRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Exports audit logs for login user's organization.
 	ExportAuditLogs(context.Context, *ExportAuditLogsRequest) (*api.AuditExport, error)
+	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
+	GetMFAUsersInfo(context.Context, *GetMFAUsersInfoRequest) (*GetMFAUsersInfoResponse, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -519,6 +533,9 @@ func (UnimplementedAdminServer) DeleteNotification(context.Context, *DeleteNotif
 }
 func (UnimplementedAdminServer) ExportAuditLogs(context.Context, *ExportAuditLogsRequest) (*api.AuditExport, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportAuditLogs not implemented")
+}
+func (UnimplementedAdminServer) GetMFAUsersInfo(context.Context, *GetMFAUsersInfoRequest) (*GetMFAUsersInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMFAUsersInfo not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -989,6 +1006,24 @@ func _Admin_ExportAuditLogs_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_GetMFAUsersInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMFAUsersInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).GetMFAUsersInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Admin_GetMFAUsersInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).GetMFAUsersInfo(ctx, req.(*GetMFAUsersInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1087,6 +1122,10 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportAuditLogs",
 			Handler:    _Admin_ExportAuditLogs_Handler,
+		},
+		{
+			MethodName: "GetMFAUsersInfo",
+			Handler:    _Admin_GetMFAUsersInfo_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
