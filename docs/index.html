@@ -1797,14 +1797,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.cover.v1.GetFreeTrialExpiryRequest"><span class="badge">M</span>GetFreeTrialExpiryRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.GetFreeTrialExpiryResponse"><span class="badge">M</span>GetFreeTrialExpiryResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.cover.v1.GetMemberCostGroupRequest"><span class="badge">M</span>GetMemberCostGroupRequest</a>
                 </li>
               
@@ -19799,23 +19791,6 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
         <p></p>
 
         
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>orgId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
 
         
       
@@ -19830,6 +19805,27 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
             <tbody>
               
                 <tr>
+                  <td>dateRegistered</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionExpiry</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>daysLeft</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>isSubscribed</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
@@ -19839,6 +19835,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>isExpired</td>
                   <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>plan</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -19954,51 +19957,6 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>favorites</td>
                   <td><a href="#blueapi.api.cover.Favorites">blueapi.api.cover.Favorites</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.GetFreeTrialExpiryRequest">GetFreeTrialExpiryRequest</h3>
-        <p>Request message for GetFreeTrialExpiry</p>
-
-        
-
-        
-      
-        <h3 id="blueapi.cover.v1.GetFreeTrialExpiryResponse">GetFreeTrialExpiryResponse</h3>
-        <p>Response message for GetFreeTrialExpiry</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>dateRegistered</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>freeTrialExpiry</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>daysLeft</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -24818,13 +24776,6 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>GetFreeTrialExpiry</td>
-                <td><a href="#blueapi.cover.v1.GetFreeTrialExpiryRequest">GetFreeTrialExpiryRequest</a></td>
-                <td><a href="#blueapi.cover.v1.GetFreeTrialExpiryResponse">GetFreeTrialExpiryResponse</a></td>
-                <td><p>Get the free trial expiry for newly onboard organization.</p></td>
-              </tr>
-            
-              <tr>
                 <td>GetCustomerSubscriptionStatus</td>
                 <td><a href="#blueapi.cover.v1.GetCustomerSubscriptionStatusRequest">GetCustomerSubscriptionStatusRequest</a></td>
                 <td><a href="#blueapi.cover.v1.GetCustomerSubscriptionStatusResponse">GetCustomerSubscriptionStatusResponse</a></td>
@@ -26133,16 +26084,6 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/members/aws/subscription</td>
                 <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetFreeTrialExpiry</td>
-                <td>GET</td>
-                <td>/v1/billing/free</td>
-                <td></td>
               </tr>
               
             

@@ -149,7 +149,6 @@ const (
 	Cover_DeleteBudget_FullMethodName                            = "/blueapi.cover.v1.Cover/DeleteBudget"
 	Cover_UpdateBudget_FullMethodName                            = "/blueapi.cover.v1.Cover/UpdateBudget"
 	Cover_ResolveAWSMarketplaceTokenForOnboarding_FullMethodName = "/blueapi.cover.v1.Cover/ResolveAWSMarketplaceTokenForOnboarding"
-	Cover_GetFreeTrialExpiry_FullMethodName                      = "/blueapi.cover.v1.Cover/GetFreeTrialExpiry"
 	Cover_GetCustomerSubscriptionStatus_FullMethodName           = "/blueapi.cover.v1.Cover/GetCustomerSubscriptionStatus"
 	Cover_CreateProfiling_FullMethodName                         = "/blueapi.cover.v1.Cover/CreateProfiling"
 )
@@ -413,8 +412,6 @@ type CoverClient interface {
 	UpdateBudget(ctx context.Context, in *UpdateBudgetRequest, opts ...grpc.CallOption) (*UpdateBudgetResponse, error)
 	// WORK-IN-PROGRESS:Resolve user for aws marketplace subscription integration
 	ResolveAWSMarketplaceTokenForOnboarding(ctx context.Context, in *ResolveAWSMarketplaceTokenForOnboardingRequest, opts ...grpc.CallOption) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error)
-	// Get the free trial expiry for newly onboard organization.
-	GetFreeTrialExpiry(ctx context.Context, in *GetFreeTrialExpiryRequest, opts ...grpc.CallOption) (*GetFreeTrialExpiryResponse, error)
 	// Get the Customer Subscription status from marketplace
 	GetCustomerSubscriptionStatus(ctx context.Context, in *GetCustomerSubscriptionStatusRequest, opts ...grpc.CallOption) (*GetCustomerSubscriptionStatusResponse, error)
 	// Profiling for new users.
@@ -2135,15 +2132,6 @@ func (c *coverClient) ResolveAWSMarketplaceTokenForOnboarding(ctx context.Contex
 	return out, nil
 }
 
-func (c *coverClient) GetFreeTrialExpiry(ctx context.Context, in *GetFreeTrialExpiryRequest, opts ...grpc.CallOption) (*GetFreeTrialExpiryResponse, error) {
-	out := new(GetFreeTrialExpiryResponse)
-	err := c.cc.Invoke(ctx, Cover_GetFreeTrialExpiry_FullMethodName, in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *coverClient) GetCustomerSubscriptionStatus(ctx context.Context, in *GetCustomerSubscriptionStatusRequest, opts ...grpc.CallOption) (*GetCustomerSubscriptionStatusResponse, error) {
 	out := new(GetCustomerSubscriptionStatusResponse)
 	err := c.cc.Invoke(ctx, Cover_GetCustomerSubscriptionStatus_FullMethodName, in, out, opts...)
@@ -2421,8 +2409,6 @@ type CoverServer interface {
 	UpdateBudget(context.Context, *UpdateBudgetRequest) (*UpdateBudgetResponse, error)
 	// WORK-IN-PROGRESS:Resolve user for aws marketplace subscription integration
 	ResolveAWSMarketplaceTokenForOnboarding(context.Context, *ResolveAWSMarketplaceTokenForOnboardingRequest) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error)
-	// Get the free trial expiry for newly onboard organization.
-	GetFreeTrialExpiry(context.Context, *GetFreeTrialExpiryRequest) (*GetFreeTrialExpiryResponse, error)
 	// Get the Customer Subscription status from marketplace
 	GetCustomerSubscriptionStatus(context.Context, *GetCustomerSubscriptionStatusRequest) (*GetCustomerSubscriptionStatusResponse, error)
 	// Profiling for new users.
@@ -2817,9 +2803,6 @@ func (UnimplementedCoverServer) UpdateBudget(context.Context, *UpdateBudgetReque
 }
 func (UnimplementedCoverServer) ResolveAWSMarketplaceTokenForOnboarding(context.Context, *ResolveAWSMarketplaceTokenForOnboardingRequest) (*ResolveAWSMarketplaceTokenForOnboardingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResolveAWSMarketplaceTokenForOnboarding not implemented")
-}
-func (UnimplementedCoverServer) GetFreeTrialExpiry(context.Context, *GetFreeTrialExpiryRequest) (*GetFreeTrialExpiryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetFreeTrialExpiry not implemented")
 }
 func (UnimplementedCoverServer) GetCustomerSubscriptionStatus(context.Context, *GetCustomerSubscriptionStatusRequest) (*GetCustomerSubscriptionStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCustomerSubscriptionStatus not implemented")
@@ -5221,24 +5204,6 @@ func _Cover_ResolveAWSMarketplaceTokenForOnboarding_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_GetFreeTrialExpiry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetFreeTrialExpiryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetFreeTrialExpiry(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetFreeTrialExpiry_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetFreeTrialExpiry(ctx, req.(*GetFreeTrialExpiryRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Cover_GetCustomerSubscriptionStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetCustomerSubscriptionStatusRequest)
 	if err := dec(in); err != nil {
@@ -5697,10 +5662,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResolveAWSMarketplaceTokenForOnboarding",
 			Handler:    _Cover_ResolveAWSMarketplaceTokenForOnboarding_Handler,
-		},
-		{
-			MethodName: "GetFreeTrialExpiry",
-			Handler:    _Cover_GetFreeTrialExpiry_Handler,
 		},
 		{
 			MethodName: "GetCustomerSubscriptionStatus",
