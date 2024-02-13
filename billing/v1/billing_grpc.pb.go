@@ -138,6 +138,13 @@ type BillingClient interface {
 	// WORK-IN-PROGRESS: Gets adjustment config
 	GetAdjustmentConfig(ctx context.Context, in *GetAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
 	// WORK-IN-PROGRESS: Creates adjustment config
+	//
+	// [ERRORS]
+	// - InvalidArgument:
+	//   - the AdjustmentConfig is already exists.
+	//
+	// - NotFound:
+	//   - the AdjustmentConfig is not found.
 	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
 	// WORK-IN-PROGRESS: Updates adjustment config
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
@@ -869,6 +876,13 @@ type BillingServer interface {
 	// WORK-IN-PROGRESS: Gets adjustment config
 	GetAdjustmentConfig(context.Context, *GetAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
 	// WORK-IN-PROGRESS: Creates adjustment config
+	//
+	// [ERRORS]
+	// - InvalidArgument:
+	//   - the AdjustmentConfig is already exists.
+	//
+	// - NotFound:
+	//   - the AdjustmentConfig is not found.
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
 	// WORK-IN-PROGRESS: Updates adjustment config
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)

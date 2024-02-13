@@ -4157,13 +4157,6 @@ func (x *ResourceAccount) GetRegistered() bool {
 }
 
 // Request message for the Billing.GetAdjustmentConfig rpc.
-//
-// [ERRORS]
-// - InvalidArgument:
-//   - the AdjustmentConfig is already exists.
-//
-// - NotFound:
-//   - the AdjustmentConfig is not found.
 type GetAdjustmentConfigRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
