@@ -179,7 +179,15 @@ type CostClient interface {
 	UpdateAccountBudgetAlerts(ctx context.Context, in *UpdateAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*wave.BudgetAlert, error)
 	// Delete the budget alerts for the account id. Only available in Wave(Pro).
 	DeleteAccountBudgetAlerts(ctx context.Context, in *DeleteAccountBudgetAlertsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Reads the budget alerts. Only available in Wave(Pro).
+	// Reads the budget alerts.
+	//
+	// Only available in Wave(Pro).
+	// [ERRORS]
+	// - Unimplemented:
+	//   - not implemented
+	//
+	// - InvalidArgument:
+	//   - parse error
 	ReadBudgetAlerts(ctx context.Context, in *ReadBudgetAlertsRequest, opts ...grpc.CallOption) (Cost_ReadBudgetAlertsClient, error)
 	// WORK-IN-PROGRESS: Gets the budget alerts. Only available in Wave(Pro).
 	GetBudgetAlerts(ctx context.Context, in *GetBudgetAlertsRequest, opts ...grpc.CallOption) (*BudgetAlerts, error)
@@ -1096,7 +1104,15 @@ type CostServer interface {
 	UpdateAccountBudgetAlerts(context.Context, *UpdateAccountBudgetAlertsRequest) (*wave.BudgetAlert, error)
 	// Delete the budget alerts for the account id. Only available in Wave(Pro).
 	DeleteAccountBudgetAlerts(context.Context, *DeleteAccountBudgetAlertsRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Reads the budget alerts. Only available in Wave(Pro).
+	// Reads the budget alerts.
+	//
+	// Only available in Wave(Pro).
+	// [ERRORS]
+	// - Unimplemented:
+	//   - not implemented
+	//
+	// - InvalidArgument:
+	//   - parse error
 	ReadBudgetAlerts(*ReadBudgetAlertsRequest, Cost_ReadBudgetAlertsServer) error
 	// WORK-IN-PROGRESS: Gets the budget alerts. Only available in Wave(Pro).
 	GetBudgetAlerts(context.Context, *GetBudgetAlertsRequest) (*BudgetAlerts, error)
