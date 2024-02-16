@@ -1401,15 +1401,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.AddInfotoMarketplaceRequest"><span class="badge">M</span>AddInfotoMarketplaceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.AddInfotoMarketplaceResponse"><span class="badge">M</span>AddInfotoMarketplaceResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.AddMpnSettingRequest"><span class="badge">M</span>AddMpnSettingRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.AddOrgIdtoMarketplaceRequest"><span class="badge">M</span>AddOrgIdtoMarketplaceRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.AddOrgIdtoMarketplaceResponse"><span class="badge">M</span>AddOrgIdtoMarketplaceResponse</a>
                 </li>
               
                 <li>
@@ -16281,31 +16281,7 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
-        <h3 id="blueapi.cover.v1.AddMpnSettingRequest">AddMpnSettingRequest</h3>
-        <p>Request message for AddMpnSetting</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>mpnId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Partner Id / MPN Id </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.AddOrgIdtoMarketplaceRequest">AddOrgIdtoMarketplaceRequest</h3>
+        <h3 id="blueapi.cover.v1.AddInfotoMarketplaceRequest">AddInfotoMarketplaceRequest</h3>
         <p></p>
 
         
@@ -16329,10 +16305,34 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
-        <h3 id="blueapi.cover.v1.AddOrgIdtoMarketplaceResponse">AddOrgIdtoMarketplaceResponse</h3>
+        <h3 id="blueapi.cover.v1.AddInfotoMarketplaceResponse">AddInfotoMarketplaceResponse</h3>
         <p></p>
 
         
+
+        
+      
+        <h3 id="blueapi.cover.v1.AddMpnSettingRequest">AddMpnSettingRequest</h3>
+        <p>Request message for AddMpnSetting</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mpnId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Partner Id / MPN Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -19907,6 +19907,27 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
               
                 <tr>
                   <td>plan</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentMethod</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -24856,9 +24877,9 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>AddOrgIdtoMarketplace</td>
-                <td><a href="#blueapi.cover.v1.AddOrgIdtoMarketplaceRequest">AddOrgIdtoMarketplaceRequest</a></td>
-                <td><a href="#blueapi.cover.v1.AddOrgIdtoMarketplaceResponse">AddOrgIdtoMarketplaceResponse</a></td>
+                <td>AddInfotoMarketplace</td>
+                <td><a href="#blueapi.cover.v1.AddInfotoMarketplaceRequest">AddInfotoMarketplaceRequest</a></td>
+                <td><a href="#blueapi.cover.v1.AddInfotoMarketplaceResponse">AddInfotoMarketplaceResponse</a></td>
                 <td><p>Adding orgId to marketplace customers</p></td>
               </tr>
             
@@ -26183,9 +26204,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>AddOrgIdtoMarketplace</td>
+                <td>AddInfotoMarketplace</td>
                 <td>POST</td>
-                <td>/v1/marketplace/addorgId</td>
+                <td>/v1/marketplace/info</td>
                 <td>*</td>
               </tr>
               

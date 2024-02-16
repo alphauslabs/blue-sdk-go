@@ -151,7 +151,7 @@ const (
 	Cover_ResolveAWSMarketplaceTokenForOnboarding_FullMethodName = "/blueapi.cover.v1.Cover/ResolveAWSMarketplaceTokenForOnboarding"
 	Cover_GetCustomerSubscriptionStatus_FullMethodName           = "/blueapi.cover.v1.Cover/GetCustomerSubscriptionStatus"
 	Cover_CreateProfiling_FullMethodName                         = "/blueapi.cover.v1.Cover/CreateProfiling"
-	Cover_AddOrgIdtoMarketplace_FullMethodName                   = "/blueapi.cover.v1.Cover/AddOrgIdtoMarketplace"
+	Cover_AddInfotoMarketplace_FullMethodName                    = "/blueapi.cover.v1.Cover/AddInfotoMarketplace"
 )
 
 // CoverClient is the client API for Cover service.
@@ -418,7 +418,7 @@ type CoverClient interface {
 	// Profiling for new users.
 	CreateProfiling(ctx context.Context, in *CreateProfilingRequest, opts ...grpc.CallOption) (*CreateProfilingResponse, error)
 	// Adding orgId to marketplace customers
-	AddOrgIdtoMarketplace(ctx context.Context, in *AddOrgIdtoMarketplaceRequest, opts ...grpc.CallOption) (*AddOrgIdtoMarketplaceResponse, error)
+	AddInfotoMarketplace(ctx context.Context, in *AddInfotoMarketplaceRequest, opts ...grpc.CallOption) (*AddInfotoMarketplaceResponse, error)
 }
 
 type coverClient struct {
@@ -2153,9 +2153,9 @@ func (c *coverClient) CreateProfiling(ctx context.Context, in *CreateProfilingRe
 	return out, nil
 }
 
-func (c *coverClient) AddOrgIdtoMarketplace(ctx context.Context, in *AddOrgIdtoMarketplaceRequest, opts ...grpc.CallOption) (*AddOrgIdtoMarketplaceResponse, error) {
-	out := new(AddOrgIdtoMarketplaceResponse)
-	err := c.cc.Invoke(ctx, Cover_AddOrgIdtoMarketplace_FullMethodName, in, out, opts...)
+func (c *coverClient) AddInfotoMarketplace(ctx context.Context, in *AddInfotoMarketplaceRequest, opts ...grpc.CallOption) (*AddInfotoMarketplaceResponse, error) {
+	out := new(AddInfotoMarketplaceResponse)
+	err := c.cc.Invoke(ctx, Cover_AddInfotoMarketplace_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2426,7 +2426,7 @@ type CoverServer interface {
 	// Profiling for new users.
 	CreateProfiling(context.Context, *CreateProfilingRequest) (*CreateProfilingResponse, error)
 	// Adding orgId to marketplace customers
-	AddOrgIdtoMarketplace(context.Context, *AddOrgIdtoMarketplaceRequest) (*AddOrgIdtoMarketplaceResponse, error)
+	AddInfotoMarketplace(context.Context, *AddInfotoMarketplaceRequest) (*AddInfotoMarketplaceResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2824,8 +2824,8 @@ func (UnimplementedCoverServer) GetCustomerSubscriptionStatus(context.Context, *
 func (UnimplementedCoverServer) CreateProfiling(context.Context, *CreateProfilingRequest) (*CreateProfilingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProfiling not implemented")
 }
-func (UnimplementedCoverServer) AddOrgIdtoMarketplace(context.Context, *AddOrgIdtoMarketplaceRequest) (*AddOrgIdtoMarketplaceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AddOrgIdtoMarketplace not implemented")
+func (UnimplementedCoverServer) AddInfotoMarketplace(context.Context, *AddInfotoMarketplaceRequest) (*AddInfotoMarketplaceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddInfotoMarketplace not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5257,20 +5257,20 @@ func _Cover_CreateProfiling_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_AddOrgIdtoMarketplace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AddOrgIdtoMarketplaceRequest)
+func _Cover_AddInfotoMarketplace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddInfotoMarketplaceRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).AddOrgIdtoMarketplace(ctx, in)
+		return srv.(CoverServer).AddInfotoMarketplace(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_AddOrgIdtoMarketplace_FullMethodName,
+		FullMethod: Cover_AddInfotoMarketplace_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).AddOrgIdtoMarketplace(ctx, req.(*AddOrgIdtoMarketplaceRequest))
+		return srv.(CoverServer).AddInfotoMarketplace(ctx, req.(*AddInfotoMarketplaceRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5707,8 +5707,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_CreateProfiling_Handler,
 		},
 		{
-			MethodName: "AddOrgIdtoMarketplace",
-			Handler:    _Cover_AddOrgIdtoMarketplace_Handler,
+			MethodName: "AddInfotoMarketplace",
+			Handler:    _Cover_AddInfotoMarketplace_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
