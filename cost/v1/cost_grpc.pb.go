@@ -189,13 +189,13 @@ type CostClient interface {
 	// - InvalidArgument:
 	//   - parse error
 	ReadBudgetAlerts(ctx context.Context, in *ReadBudgetAlertsRequest, opts ...grpc.CallOption) (Cost_ReadBudgetAlertsClient, error)
-	// WORK-IN-PROGRESS: Gets the budget alerts. Only available in Wave(Pro).
+	// Gets the budget alerts. Only available in Wave(Pro).
 	GetBudgetAlerts(ctx context.Context, in *GetBudgetAlertsRequest, opts ...grpc.CallOption) (*BudgetAlerts, error)
-	// WORK-IN-PROGRESS: Create the budget alerts. Only available in Wave(Pro).
+	// Create the budget alerts. Only available in Wave(Pro).
 	CreateBudgetAlerts(ctx context.Context, in *CreateBudgetAlertsRequest, opts ...grpc.CallOption) (*BudgetAlerts, error)
-	// WORK-IN-PROGRESS: Updates the budget alerts. Only available in Wave(Pro).
+	// Updates the budget alerts. Only available in Wave(Pro).
 	UpdateBudgetAlerts(ctx context.Context, in *UpdateBudgetAlertsRequest, opts ...grpc.CallOption) (*BudgetAlerts, error)
-	// WORK-IN-PROGRESS: Deletes the budget alerts. Only available in Wave(Pro).
+	// Deletes the budget alerts. Only available in Wave(Pro).
 	DeleteBudgetAlerts(ctx context.Context, in *DeleteBudgetAlertsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
@@ -1114,13 +1114,13 @@ type CostServer interface {
 	// - InvalidArgument:
 	//   - parse error
 	ReadBudgetAlerts(*ReadBudgetAlertsRequest, Cost_ReadBudgetAlertsServer) error
-	// WORK-IN-PROGRESS: Gets the budget alerts. Only available in Wave(Pro).
+	// Gets the budget alerts. Only available in Wave(Pro).
 	GetBudgetAlerts(context.Context, *GetBudgetAlertsRequest) (*BudgetAlerts, error)
-	// WORK-IN-PROGRESS: Create the budget alerts. Only available in Wave(Pro).
+	// Create the budget alerts. Only available in Wave(Pro).
 	CreateBudgetAlerts(context.Context, *CreateBudgetAlertsRequest) (*BudgetAlerts, error)
-	// WORK-IN-PROGRESS: Updates the budget alerts. Only available in Wave(Pro).
+	// Updates the budget alerts. Only available in Wave(Pro).
 	UpdateBudgetAlerts(context.Context, *UpdateBudgetAlertsRequest) (*BudgetAlerts, error)
-	// WORK-IN-PROGRESS: Deletes the budget alerts. Only available in Wave(Pro).
+	// Deletes the budget alerts. Only available in Wave(Pro).
 	DeleteBudgetAlerts(context.Context, *DeleteBudgetAlertsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Get cost opmtimization recommendations for an organization (or MSP).
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
