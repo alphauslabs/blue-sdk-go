@@ -107,7 +107,10 @@ type BillingClient interface {
 	DeleteAccountInvoiceServiceDiscounts(ctx context.Context, in *DeleteAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(ctx context.Context, in *CreateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
-	// Lists all the reseller accounts. Only available in Ripple.
+	// ListResellers
+	//
+	// Lists all the reseller accounts.
+	// Only available in Ripple.
 	ListResellers(ctx context.Context, in *ListResellersRequest, opts ...grpc.CallOption) (Billing_ListResellersClient, error)
 	// Gets the reseller account. Only available in Ripple.
 	GetReseller(ctx context.Context, in *GetResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
@@ -845,7 +848,10 @@ type BillingServer interface {
 	DeleteAccountInvoiceServiceDiscounts(context.Context, *DeleteAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(context.Context, *CreateResellerRequest) (*ripple.Reseller, error)
-	// Lists all the reseller accounts. Only available in Ripple.
+	// ListResellers
+	//
+	// Lists all the reseller accounts.
+	// Only available in Ripple.
 	ListResellers(*ListResellersRequest, Billing_ListResellersServer) error
 	// Gets the reseller account. Only available in Ripple.
 	GetReseller(context.Context, *GetResellerRequest) (*ripple.Reseller, error)
