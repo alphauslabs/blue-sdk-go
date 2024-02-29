@@ -109,8 +109,8 @@ type BillingClient interface {
 	CreateReseller(ctx context.Context, in *CreateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
 	// ListResellers
 	//
-	// Lists all the reseller accounts.
-	// Only available in Ripple.
+	// **Lists all the reseller accounts.**
+	// > **Only available in Ripple.**
 	ListResellers(ctx context.Context, in *ListResellersRequest, opts ...grpc.CallOption) (Billing_ListResellersClient, error)
 	// Gets the reseller account. Only available in Ripple.
 	GetReseller(ctx context.Context, in *GetResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
@@ -850,8 +850,8 @@ type BillingServer interface {
 	CreateReseller(context.Context, *CreateResellerRequest) (*ripple.Reseller, error)
 	// ListResellers
 	//
-	// Lists all the reseller accounts.
-	// Only available in Ripple.
+	// **Lists all the reseller accounts.**
+	// > **Only available in Ripple.**
 	ListResellers(*ListResellersRequest, Billing_ListResellersServer) error
 	// Gets the reseller account. Only available in Ripple.
 	GetReseller(context.Context, *GetResellerRequest) (*ripple.Reseller, error)
