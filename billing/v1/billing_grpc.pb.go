@@ -120,7 +120,10 @@ type BillingClient interface {
 	DeleteReseller(ctx context.Context, in *DeleteResellerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets all billing settings.
 	GetBillingSetting(ctx context.Context, in *GetBillingSettingRequest, opts ...grpc.CallOption) (*GetBillingSettingResponse, error)
-	// Lists all exchange rate. Only available in Ripple.
+	// ListExchangeRates
+	//
+	// Lists all exchange rate.
+	// > Only available in Ripple.
 	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
 	// Lists access group. Only available in Ripple.
 	ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (Billing_ListAccessGroupsClient, error)
@@ -861,7 +864,10 @@ type BillingServer interface {
 	DeleteReseller(context.Context, *DeleteResellerRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets all billing settings.
 	GetBillingSetting(context.Context, *GetBillingSettingRequest) (*GetBillingSettingResponse, error)
-	// Lists all exchange rate. Only available in Ripple.
+	// ListExchangeRates
+	//
+	// Lists all exchange rate.
+	// > Only available in Ripple.
 	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
 	// Lists access group. Only available in Ripple.
 	ListAccessGroups(*ListAccessGroupsRequest, Billing_ListAccessGroupsServer) error

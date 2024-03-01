@@ -3202,7 +3202,7 @@ type ListExchangeRatesRequest struct {
 
 	// Required. vendor.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. month. Format: `yyyymmdd`.
+	// Required. month. Format: `yyyymm`.
 	Month string `protobuf:"bytes,2,opt,name=month,proto3" json:"month,omitempty"`
 }
 
