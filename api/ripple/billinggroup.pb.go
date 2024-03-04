@@ -20,9 +20,7 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-// BillingGroupInfo resource definition.
-//
-// Only available in Ripple.
+// BillingGroupInfo resource definition. Only available in Ripple.
 type BillingGroupInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
