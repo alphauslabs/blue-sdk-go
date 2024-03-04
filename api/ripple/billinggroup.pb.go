@@ -21,6 +21,8 @@ const (
 )
 
 // BillingGroupInfo resource definition.
+//
+// Only available in Ripple.
 type BillingGroupInfo struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
