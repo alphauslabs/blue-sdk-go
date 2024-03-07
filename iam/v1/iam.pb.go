@@ -295,7 +295,7 @@ type CreateGroupRootUserRequest struct {
 	Plan string `protobuf:"bytes,6,opt,name=plan,proto3" json:"plan,omitempty"`
 	// Whether or not a notification should be sent to the provided email after the user has been created.
 	EmailNotification bool `protobuf:"varint,7,opt,name=emailNotification,proto3" json:"emailNotification,omitempty"`
-	// A collection of feature flags and whether or not they should be enabled. For a full list of such flags, see https://alphauslabs.github.io/blueapi/apis/iam.html.
+	// A collection of feature flags and whether or not they should be enabled. For a full list of such flags, see https://labs.alphaus.cloud/docs/blueapi/apis/iam/.
 	Meta *api.FeatureFlags `protobuf:"bytes,8,opt,name=meta,proto3" json:"meta,omitempty"`
 }
 
