@@ -1625,6 +1625,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ExecuteOptimizationRequest"><span class="badge">M</span>ExecuteOptimizationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ExecuteOptimizationResponse"><span class="badge">M</span>ExecuteOptimizationResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.FeeDetails"><span class="badge">M</span>FeeDetails</a>
                 </li>
               
@@ -1837,6 +1845,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetRecommendationRequest"><span class="badge">M</span>GetRecommendationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetRecommendationResponse"><span class="badge">M</span>GetRecommendationResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetRegionsRequest"><span class="badge">M</span>GetRegionsRequest</a>
                 </li>
               
@@ -1954,6 +1970,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListFeesRequest"><span class="badge">M</span>ListFeesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListRecommendationRequest"><span class="badge">M</span>ListRecommendationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListRecommendationResponse"><span class="badge">M</span>ListRecommendationResponse</a>
                 </li>
               
                 <li>
@@ -18457,6 +18481,37 @@ Supported values are the following:
 
         
       
+        <h3 id="blueapi.cover.v1.ExecuteOptimizationRequest">ExecuteOptimizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ExecuteOptimizationResponse">ExecuteOptimizationResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.FeeDetails">FeeDetails</h3>
         <p>Response message for GetFeeDetails, CreateFeeReallocation rpc.</p>
 
@@ -20295,6 +20350,54 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetRecommendationRequest">GetRecommendationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetRecommendationResponse">GetRecommendationResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>recommendationData</td>
+                  <td><a href="#blueapi.api.cover.RecommendationData">blueapi.api.cover.RecommendationData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetRegionsRequest">GetRegionsRequest</h3>
         <p>Request message for GetRegions</p>
 
@@ -20969,6 +21072,75 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>month</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListRecommendationRequest">ListRecommendationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>costgroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Cost Group Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;aws&#34;, &#34;gcp&#34;, and  &#34;azure&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;trusted-advisor&#34;, &#34;cost-explorer&#34;, and  &#34;cost-optimization-hub&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>optimizationType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;rate&#34;, and  &#34;usage&#34;. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListRecommendationResponse">ListRecommendationResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>recommendationData</td>
+                  <td><a href="#blueapi.api.cover.RecommendationData">blueapi.api.cover.RecommendationData</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -25018,6 +25190,27 @@ file in bytes </p></td>
                 <td><p>Get data for insights reports summary</p></td>
               </tr>
             
+              <tr>
+                <td>ListRecommendations</td>
+                <td><a href="#blueapi.cover.v1.ListRecommendationRequest">ListRecommendationRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListRecommendationResponse">ListRecommendationResponse</a> stream</td>
+                <td><p>Lists recommendations based on specified criteria.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetRecommendation</td>
+                <td><a href="#blueapi.cover.v1.GetRecommendationRequest">GetRecommendationRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetRecommendationResponse">GetRecommendationResponse</a></td>
+                <td><p>Retrieves a specific recommendation by its ID.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ExecuteOptimization</td>
+                <td><a href="#blueapi.cover.v1.ExecuteOptimizationRequest">ExecuteOptimizationRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ExecuteOptimizationResponse">ExecuteOptimizationResponse</a></td>
+                <td><p>Executes optimization based on a recommendation.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -26353,6 +26546,36 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/report/summary</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListRecommendations</td>
+                <td>GET</td>
+                <td>/v1/recommendations</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetRecommendation</td>
+                <td>GET</td>
+                <td>/v1/recommendations/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExecuteOptimization</td>
+                <td>POST</td>
+                <td>/v1/recommendations/{id}</td>
+                <td></td>
               </tr>
               
             

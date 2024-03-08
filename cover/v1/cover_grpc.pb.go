@@ -153,6 +153,9 @@ const (
 	Cover_CreateProfiling_FullMethodName                         = "/blueapi.cover.v1.Cover/CreateProfiling"
 	Cover_AddInfotoMarketplace_FullMethodName                    = "/blueapi.cover.v1.Cover/AddInfotoMarketplace"
 	Cover_GetReportSummary_FullMethodName                        = "/blueapi.cover.v1.Cover/GetReportSummary"
+	Cover_ListRecommendations_FullMethodName                     = "/blueapi.cover.v1.Cover/ListRecommendations"
+	Cover_GetRecommendation_FullMethodName                       = "/blueapi.cover.v1.Cover/GetRecommendation"
+	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
 )
 
 // CoverClient is the client API for Cover service.
@@ -422,6 +425,12 @@ type CoverClient interface {
 	AddInfotoMarketplace(ctx context.Context, in *AddInfotoMarketplaceRequest, opts ...grpc.CallOption) (*AddInfotoMarketplaceResponse, error)
 	// Get data for insights reports summary
 	GetReportSummary(ctx context.Context, in *GetReportSummaryRequest, opts ...grpc.CallOption) (*GetReportSummaryResponse, error)
+	// Lists recommendations based on specified criteria.
+	ListRecommendations(ctx context.Context, in *ListRecommendationRequest, opts ...grpc.CallOption) (Cover_ListRecommendationsClient, error)
+	// Retrieves a specific recommendation by its ID.
+	GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error)
+	// Executes optimization based on a recommendation.
+	ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error)
 }
 
 type coverClient struct {
@@ -2174,6 +2183,56 @@ func (c *coverClient) GetReportSummary(ctx context.Context, in *GetReportSummary
 	return out, nil
 }
 
+func (c *coverClient) ListRecommendations(ctx context.Context, in *ListRecommendationRequest, opts ...grpc.CallOption) (Cover_ListRecommendationsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[24], Cover_ListRecommendations_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListRecommendationsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListRecommendationsClient interface {
+	Recv() (*ListRecommendationResponse, error)
+	grpc.ClientStream
+}
+
+type coverListRecommendationsClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverListRecommendationsClient) Recv() (*ListRecommendationResponse, error) {
+	m := new(ListRecommendationResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *coverClient) GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error) {
+	out := new(GetRecommendationResponse)
+	err := c.cc.Invoke(ctx, Cover_GetRecommendation_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error) {
+	out := new(ExecuteOptimizationResponse)
+	err := c.cc.Invoke(ctx, Cover_ExecuteOptimization_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2441,6 +2500,12 @@ type CoverServer interface {
 	AddInfotoMarketplace(context.Context, *AddInfotoMarketplaceRequest) (*AddInfotoMarketplaceResponse, error)
 	// Get data for insights reports summary
 	GetReportSummary(context.Context, *GetReportSummaryRequest) (*GetReportSummaryResponse, error)
+	// Lists recommendations based on specified criteria.
+	ListRecommendations(*ListRecommendationRequest, Cover_ListRecommendationsServer) error
+	// Retrieves a specific recommendation by its ID.
+	GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error)
+	// Executes optimization based on a recommendation.
+	ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2843,6 +2908,15 @@ func (UnimplementedCoverServer) AddInfotoMarketplace(context.Context, *AddInfoto
 }
 func (UnimplementedCoverServer) GetReportSummary(context.Context, *GetReportSummaryRequest) (*GetReportSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReportSummary not implemented")
+}
+func (UnimplementedCoverServer) ListRecommendations(*ListRecommendationRequest, Cover_ListRecommendationsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListRecommendations not implemented")
+}
+func (UnimplementedCoverServer) GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendation not implemented")
+}
+func (UnimplementedCoverServer) ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecuteOptimization not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5310,6 +5384,63 @@ func _Cover_GetReportSummary_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListRecommendations_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListRecommendationRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListRecommendations(m, &coverListRecommendationsServer{stream})
+}
+
+type Cover_ListRecommendationsServer interface {
+	Send(*ListRecommendationResponse) error
+	grpc.ServerStream
+}
+
+type coverListRecommendationsServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverListRecommendationsServer) Send(m *ListRecommendationResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_GetRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecommendationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetRecommendation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetRecommendation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetRecommendation(ctx, req.(*GetRecommendationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ExecuteOptimization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecuteOptimizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ExecuteOptimization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ExecuteOptimization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ExecuteOptimization(ctx, req.(*ExecuteOptimizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5749,6 +5880,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetReportSummary",
 			Handler:    _Cover_GetReportSummary_Handler,
 		},
+		{
+			MethodName: "GetRecommendation",
+			Handler:    _Cover_GetRecommendation_Handler,
+		},
+		{
+			MethodName: "ExecuteOptimization",
+			Handler:    _Cover_ExecuteOptimization_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -5869,6 +6008,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListBudgets",
 			Handler:       _Cover_ListBudgets_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListRecommendations",
+			Handler:       _Cover_ListRecommendations_Handler,
 			ServerStreams: true,
 		},
 	},
