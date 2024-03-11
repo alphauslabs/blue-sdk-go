@@ -82,7 +82,9 @@ type IamClient interface {
 	GetGroupRootUser(ctx context.Context, in *GetGroupRootRequest, opts ...grpc.CallOption) (*api.GroupRootUser, error)
 	// WORK-IN-PROGRESS: Deletes an existing group root user.
 	DeleteGroupRootUser(ctx context.Context, in *DeleteGroupRootUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Retrieves the features available to a user on an Alphaus product. For a list of valid feature flags, see our [documentation](https://labs.alphaus.cloud/docs/blueapi/apis/iam/).
+	// WORK-IN-PROGRESS: Retrieves the features available to a user on an Alphaus product.
+	//
+	// For a list of valid feature flags, see our documentation at https://labs.alphaus.cloud/docs/blueapi/apis/iam/.
 	GetFeatureFlags(ctx context.Context, in *GetFeatureFlagsRequest, opts ...grpc.CallOption) (*api.FeatureFlags, error)
 	// WORK-IN-PROGRESS: Updates the features available to a user on an Alphaus product.
 	//
@@ -557,7 +559,9 @@ type IamServer interface {
 	GetGroupRootUser(context.Context, *GetGroupRootRequest) (*api.GroupRootUser, error)
 	// WORK-IN-PROGRESS: Deletes an existing group root user.
 	DeleteGroupRootUser(context.Context, *DeleteGroupRootUserRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Retrieves the features available to a user on an Alphaus product. For a list of valid feature flags, see our [documentation](https://labs.alphaus.cloud/docs/blueapi/apis/iam/).
+	// WORK-IN-PROGRESS: Retrieves the features available to a user on an Alphaus product.
+	//
+	// For a list of valid feature flags, see our documentation at https://labs.alphaus.cloud/docs/blueapi/apis/iam/.
 	GetFeatureFlags(context.Context, *GetFeatureFlagsRequest) (*api.FeatureFlags, error)
 	// WORK-IN-PROGRESS: Updates the features available to a user on an Alphaus product.
 	//
