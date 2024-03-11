@@ -1107,6 +1107,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BackupUpdateResellerRequest"><span class="badge">M</span>BackupUpdateResellerRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BillingGroup"><span class="badge">M</span>BillingGroup</a>
                 </li>
               
@@ -1328,10 +1332,6 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UsageCostsDrift"><span class="badge">M</span>UsageCostsDrift</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1._UpdateResellerRequest"><span class="badge">M</span>_UpdateResellerRequest</a>
                 </li>
               
               
@@ -12648,6 +12648,76 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.BackupUpdateResellerRequest">BackupUpdateResellerRequest</h3>
+        <p>Request message for the UpdateReseller rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. reseller id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>password</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional.
+
+We recommend a password length of 8~32 characters. If you send 0 characters, a password will be generated automatically. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>waveConfig</td>
+                  <td><a href="#blueapi.api.ripple.ResellerConfig">blueapi.api.ripple.ResellerConfig</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. wave feature config
+
+Set only the config to be changed.
+For example, If you want to change only dashboardGraph, set `{&#34;waveConfig&#34;: [{&#34;key&#34;: &#34;dashboardGraph&#34;,&#34;value&#34;: true}]}` as a parameter </p></td>
+                </tr>
+              
+                <tr>
+                  <td>aquaConfig</td>
+                  <td><a href="#blueapi.api.ripple.ResellerConfig">blueapi.api.ripple.ResellerConfig</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. aqua feature config
+
+Set only the config to be changed.
+For example, If you want to change only aqRiManagement, set `{&#34;waveConfig&#34;: [{&#34;key&#34;: &#34;aqRiManagement&#34;,&#34;value&#34;: true}]}` as a parameter </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notification</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional.
+
+If valid when email or password is updated, you will be notified via email address.
+If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BillingGroup">BillingGroup</h3>
         <p></p>
 
@@ -14962,76 +15032,6 @@ by clients that do not know about them. </p></td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1._UpdateResellerRequest">_UpdateResellerRequest</h3>
-        <p>Request message for the UpdateReseller rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. reseller id. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>email</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>password</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional.
-
-We recommend a password length of 8~32 characters. If you send 0 characters, a password will be generated automatically. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>waveConfig</td>
-                  <td><a href="#blueapi.api.ripple.ResellerConfig">blueapi.api.ripple.ResellerConfig</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. wave feature config
-
-Set only the config to be changed.
-For example, If you want to change only dashboardGraph, set `{&#34;waveConfig&#34;: [{&#34;key&#34;: &#34;dashboardGraph&#34;,&#34;value&#34;: true}]}` as a parameter </p></td>
-                </tr>
-              
-                <tr>
-                  <td>aquaConfig</td>
-                  <td><a href="#blueapi.api.ripple.ResellerConfig">blueapi.api.ripple.ResellerConfig</a></td>
-                  <td>repeated</td>
-                  <td><p>Optional. aqua feature config
-
-Set only the config to be changed.
-For example, If you want to change only aqRiManagement, set `{&#34;waveConfig&#34;: [{&#34;key&#34;: &#34;aqRiManagement&#34;,&#34;value&#34;: true}]}` as a parameter </p></td>
-                </tr>
-              
-                <tr>
-                  <td>notification</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional.
-
-If valid when email or password is updated, you will be notified via email address.
-If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 </tr>
               
             </tbody>
