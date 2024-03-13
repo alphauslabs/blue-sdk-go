@@ -5940,6 +5940,14 @@ func request_Cover_ExecuteOptimization_0(ctx context.Context, marshaler runtime.
 	var protoReq ExecuteOptimizationRequest
 	var metadata runtime.ServerMetadata
 
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
 	var (
 		val string
 		ok  bool
@@ -5965,6 +5973,14 @@ func request_Cover_ExecuteOptimization_0(ctx context.Context, marshaler runtime.
 func local_request_Cover_ExecuteOptimization_0(ctx context.Context, marshaler runtime.Marshaler, server CoverServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var protoReq ExecuteOptimizationRequest
 	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 
 	var (
 		val string
@@ -8342,7 +8358,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetDiscountRecommendations", runtime.WithHTTPPathPattern("/v1/recommendations/discount"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetDiscountRecommendations", runtime.WithHTTPPathPattern("/v1/discount"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -8877,7 +8893,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetRecommendation", runtime.WithHTTPPathPattern("/v1/recommendations/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetRecommendation", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -8902,7 +8918,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/discounts/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -11342,7 +11358,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetDiscountRecommendations", runtime.WithHTTPPathPattern("/v1/recommendations/discount"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetDiscountRecommendations", runtime.WithHTTPPathPattern("/v1/discount"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -11870,7 +11886,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ListRecommendations", runtime.WithHTTPPathPattern("/v1/recommendations"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ListRecommendations", runtime.WithHTTPPathPattern("/v1/recommendations/optimization"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -11892,7 +11908,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetRecommendation", runtime.WithHTTPPathPattern("/v1/recommendations/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetRecommendation", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -11914,7 +11930,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/discounts/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -12150,7 +12166,7 @@ var (
 
 	pattern_Cover_UpdateChannelDetails_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "channels", "id"}, ""))
 
-	pattern_Cover_GetDiscountRecommendations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "recommendations", "discount"}, ""))
+	pattern_Cover_GetDiscountRecommendations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "discount"}, ""))
 
 	pattern_Cover_GetAnomalyinCostGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "anomaly"}, ""))
 
@@ -12198,11 +12214,11 @@ var (
 
 	pattern_Cover_GetReportSummary_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "report", "summary"}, ""))
 
-	pattern_Cover_ListRecommendations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "recommendations"}, ""))
+	pattern_Cover_ListRecommendations_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "recommendations", "optimization"}, ""))
 
-	pattern_Cover_GetRecommendation_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "recommendations", "id"}, ""))
+	pattern_Cover_GetRecommendation_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "optimization", "id"}, ""))
 
-	pattern_Cover_ExecuteOptimization_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "discounts", "id"}, ""))
+	pattern_Cover_ExecuteOptimization_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "optimization", "id"}, ""))
 )
 
 var (

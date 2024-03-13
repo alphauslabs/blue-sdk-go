@@ -21115,6 +21115,20 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 </tr>
               
                 <tr>
+                  <td>dateRangeStart</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Start date of retrieved data. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dateRangeEnd</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. End date of retrieved data. </p></td>
+                </tr>
+              
+                <tr>
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -21125,14 +21139,14 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>source</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;trusted-advisor&#34;, &#34;cost-explorer&#34;, and  &#34;cost-optimization-hub&#34;. </p></td>
+                  <td><p>Valid inputs are: &#34;all&#34;, &#34;trusted-advisor&#34;, &#34;cost-explorer&#34;, and  &#34;cost-optimization-hub&#34;. Default is &#34;All&#34;. </p></td>
                 </tr>
               
                 <tr>
                   <td>optimizationType</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;rate&#34;, and  &#34;usage&#34;. </p></td>
+                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;rate&#34;, and  &#34;usage&#34;. Default is &#34;All&#34; </p></td>
                 </tr>
               
             </tbody>
@@ -26328,7 +26342,7 @@ file in bytes </p></td>
               <tr>
                 <td>GetDiscountRecommendations</td>
                 <td>POST</td>
-                <td>/v1/recommendations/discount</td>
+                <td>/v1/discount</td>
                 <td>*</td>
               </tr>
               
@@ -26568,7 +26582,7 @@ file in bytes </p></td>
               <tr>
                 <td>ListRecommendations</td>
                 <td>GET</td>
-                <td>/v1/recommendations</td>
+                <td>/v1/recommendations/optimization</td>
                 <td></td>
               </tr>
               
@@ -26578,7 +26592,7 @@ file in bytes </p></td>
               <tr>
                 <td>GetRecommendation</td>
                 <td>GET</td>
-                <td>/v1/recommendations/{id}</td>
+                <td>/v1/recommendations/optimization/{id}</td>
                 <td></td>
               </tr>
               
@@ -26588,8 +26602,8 @@ file in bytes </p></td>
               <tr>
                 <td>ExecuteOptimization</td>
                 <td>POST</td>
-                <td>/v1/discounts/{id}</td>
-                <td></td>
+                <td>/v1/recommendations/optimization/{id}</td>
+                <td>*</td>
               </tr>
               
             
