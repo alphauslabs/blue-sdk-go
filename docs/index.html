@@ -1111,6 +1111,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BillingGroupAdditionalItems"><span class="badge">M</span>BillingGroupAdditionalItems</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BillingGroupInvoiceSettings"><span class="badge">M</span>BillingGroupInvoiceSettings</a>
                 </li>
               
@@ -12714,10 +12718,55 @@ Only available in Wave(Pro).</p></td>
                 </tr>
               
                 <tr>
+                  <td>additionalItems</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupAdditionalItems">BillingGroupAdditionalItems</a></td>
+                  <td></td>
+                  <td><p>List of all additionalItems </p></td>
+                </tr>
+              
+                <tr>
                   <td>awsOptions</td>
                   <td><a href="#blueapi.billing.v1.AwsOptions">AwsOptions</a></td>
                   <td></td>
                   <td><p>AWS-specific options </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BillingGroupAdditionalItems">BillingGroupAdditionalItems</h3>
+        <p>Additional items for a billing group.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>aws</td>
+                  <td><a href="#blueapi.api.AdditionalItems">blueapi.api.AdditionalItems</a></td>
+                  <td>repeated</td>
+                  <td><p>AWS additional items </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azure</td>
+                  <td><a href="#blueapi.api.AdditionalItems">blueapi.api.AdditionalItems</a></td>
+                  <td>repeated</td>
+                  <td><p>Azure additional items </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcp</td>
+                  <td><a href="#blueapi.api.AdditionalItems">blueapi.api.AdditionalItems</a></td>
+                  <td>repeated</td>
+                  <td><p>GCP additional items </p></td>
                 </tr>
               
             </tbody>
