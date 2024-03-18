@@ -20527,10 +20527,24 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 </tr>
               
                 <tr>
-                  <td>period</td>
+                  <td>startDate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Valid inputs are Quarters: &#34;Q1-{YEAR}&#34;, &#34;Q2-{YEAR}&#34;, &#34;Q3-{YEAR}&#34;, &#34;Q4-{YEAR}&#34; and Year: &#34;{YEAR}&#34; </p></td>
+                  <td><p>Required. Start date Format: &#34;YYYYMMDD&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. End date Format: &#34;YYYYMMDD&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reportType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Report Type. Valid inputs are: &#34;quarterly&#34;, &#34;yearly&#34; </p></td>
                 </tr>
               
             </tbody>
@@ -20551,6 +20565,27 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
             <tbody>
               
                 <tr>
+                  <td>costGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>executiveSummary</td>
                   <td><a href="#blueapi.api.cover.ExecutiveSummary">blueapi.api.cover.ExecutiveSummary</a></td>
                   <td></td>
@@ -20560,6 +20595,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>optimizationRecommendationSummary</td>
                   <td><a href="#blueapi.api.cover.OptimizationRecommendationSummary">blueapi.api.cover.OptimizationRecommendationSummary</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savingsSummary</td>
+                  <td><a href="#blueapi.api.cover.SavingsSummary">blueapi.api.cover.SavingsSummary</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -26620,9 +26662,9 @@ file in bytes </p></td>
               
               <tr>
                 <td>GetReportSummary</td>
-                <td>POST</td>
-                <td>/v1/report/summary</td>
-                <td>*</td>
+                <td>GET</td>
+                <td>/v1/reports/insight/summary/{costGroupId}</td>
+                <td></td>
               </tr>
               
             
