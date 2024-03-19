@@ -156,6 +156,8 @@ const (
 	Cover_ListRecommendations_FullMethodName                     = "/blueapi.cover.v1.Cover/ListRecommendations"
 	Cover_GetRecommendation_FullMethodName                       = "/blueapi.cover.v1.Cover/GetRecommendation"
 	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
+	Cover_MarkAsExecuted_FullMethodName                          = "/blueapi.cover.v1.Cover/MarkAsExecuted"
+	Cover_OptimizationHistory_FullMethodName                     = "/blueapi.cover.v1.Cover/OptimizationHistory"
 )
 
 // CoverClient is the client API for Cover service.
@@ -431,6 +433,10 @@ type CoverClient interface {
 	GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error)
 	// Executes optimization based on a recommendation.
 	ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error)
+	// Mark a recommendation executed.
+	MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error)
+	// Lists recommendations based on specified criteria.
+	OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error)
 }
 
 type coverClient struct {
@@ -2233,6 +2239,24 @@ func (c *coverClient) ExecuteOptimization(ctx context.Context, in *ExecuteOptimi
 	return out, nil
 }
 
+func (c *coverClient) MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error) {
+	out := new(MarkAsExecutedResponse)
+	err := c.cc.Invoke(ctx, Cover_MarkAsExecuted_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error) {
+	out := new(OptimizationHistoryResponse)
+	err := c.cc.Invoke(ctx, Cover_OptimizationHistory_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2506,6 +2530,10 @@ type CoverServer interface {
 	GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error)
 	// Executes optimization based on a recommendation.
 	ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error)
+	// Mark a recommendation executed.
+	MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error)
+	// Lists recommendations based on specified criteria.
+	OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2917,6 +2945,12 @@ func (UnimplementedCoverServer) GetRecommendation(context.Context, *GetRecommend
 }
 func (UnimplementedCoverServer) ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecuteOptimization not implemented")
+}
+func (UnimplementedCoverServer) MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MarkAsExecuted not implemented")
+}
+func (UnimplementedCoverServer) OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method OptimizationHistory not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5441,6 +5475,42 @@ func _Cover_ExecuteOptimization_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_MarkAsExecuted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MarkAsExecutedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).MarkAsExecuted(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_MarkAsExecuted_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).MarkAsExecuted(ctx, req.(*MarkAsExecutedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_OptimizationHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OptimizationHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).OptimizationHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_OptimizationHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).OptimizationHistory(ctx, req.(*OptimizationHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5887,6 +5957,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExecuteOptimization",
 			Handler:    _Cover_ExecuteOptimization_Handler,
+		},
+		{
+			MethodName: "MarkAsExecuted",
+			Handler:    _Cover_MarkAsExecuted_Handler,
+		},
+		{
+			MethodName: "OptimizationHistory",
+			Handler:    _Cover_OptimizationHistory_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
