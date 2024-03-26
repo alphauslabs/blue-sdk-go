@@ -486,7 +486,8 @@ type ListBillingGroupsRequest struct {
 	// see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto
 	FieldMask *fieldmaskpb.FieldMask `protobuf:"bytes,1,opt,name=field_mask,json=fieldMask,proto3" json:"field_mask,omitempty"`
 	// Optional. Filter vendor accounts included in BillingGroup. Format: vendors=vendor1,vendor2,vendor3.
-	// For example, If you want to get all vendors, vendors=aws,azure,gcp
+	// For example, When Aws and Gcp to be filtered vendors=aws,gcp
+	// If you want to get all vendors, not set parameter.
 	Vendors string `protobuf:"bytes,2,opt,name=vendors,proto3" json:"vendors,omitempty"`
 }
 
