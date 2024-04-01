@@ -158,6 +158,7 @@ const (
 	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
 	Cover_MarkAsExecuted_FullMethodName                          = "/blueapi.cover.v1.Cover/MarkAsExecuted"
 	Cover_OptimizationHistory_FullMethodName                     = "/blueapi.cover.v1.Cover/OptimizationHistory"
+	Cover_SetCostGroupEventIndicator_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupEventIndicator"
 )
 
 // CoverClient is the client API for Cover service.
@@ -437,6 +438,8 @@ type CoverClient interface {
 	MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error)
 	// Lists recommendations based on specified criteria.
 	OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error)
+	// Sets Cost group event indicator
+	SetCostGroupEventIndicator(ctx context.Context, in *SetCostGroupEventIndicatorRequest, opts ...grpc.CallOption) (*SetCostGroupEventIndicatorResponse, error)
 }
 
 type coverClient struct {
@@ -2257,6 +2260,15 @@ func (c *coverClient) OptimizationHistory(ctx context.Context, in *OptimizationH
 	return out, nil
 }
 
+func (c *coverClient) SetCostGroupEventIndicator(ctx context.Context, in *SetCostGroupEventIndicatorRequest, opts ...grpc.CallOption) (*SetCostGroupEventIndicatorResponse, error) {
+	out := new(SetCostGroupEventIndicatorResponse)
+	err := c.cc.Invoke(ctx, Cover_SetCostGroupEventIndicator_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2534,6 +2546,8 @@ type CoverServer interface {
 	MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error)
 	// Lists recommendations based on specified criteria.
 	OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error)
+	// Sets Cost group event indicator
+	SetCostGroupEventIndicator(context.Context, *SetCostGroupEventIndicatorRequest) (*SetCostGroupEventIndicatorResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2951,6 +2965,9 @@ func (UnimplementedCoverServer) MarkAsExecuted(context.Context, *MarkAsExecutedR
 }
 func (UnimplementedCoverServer) OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OptimizationHistory not implemented")
+}
+func (UnimplementedCoverServer) SetCostGroupEventIndicator(context.Context, *SetCostGroupEventIndicatorRequest) (*SetCostGroupEventIndicatorResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetCostGroupEventIndicator not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5511,6 +5528,24 @@ func _Cover_OptimizationHistory_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_SetCostGroupEventIndicator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCostGroupEventIndicatorRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).SetCostGroupEventIndicator(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_SetCostGroupEventIndicator_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).SetCostGroupEventIndicator(ctx, req.(*SetCostGroupEventIndicatorRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5965,6 +6000,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "OptimizationHistory",
 			Handler:    _Cover_OptimizationHistory_Handler,
+		},
+		{
+			MethodName: "SetCostGroupEventIndicator",
+			Handler:    _Cover_SetCostGroupEventIndicator_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
