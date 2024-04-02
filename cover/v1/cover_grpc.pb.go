@@ -159,6 +159,7 @@ const (
 	Cover_MarkAsExecuted_FullMethodName                          = "/blueapi.cover.v1.Cover/MarkAsExecuted"
 	Cover_OptimizationHistory_FullMethodName                     = "/blueapi.cover.v1.Cover/OptimizationHistory"
 	Cover_SetCostGroupEventIndicator_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupEventIndicator"
+	Cover_SetCostGroupAnomalyOptions_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupAnomalyOptions"
 )
 
 // CoverClient is the client API for Cover service.
@@ -438,8 +439,10 @@ type CoverClient interface {
 	MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error)
 	// Lists recommendations based on specified criteria.
 	OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error)
-	// Sets Cost group event indicator
+	// Sets Cost group's event indicator
 	SetCostGroupEventIndicator(ctx context.Context, in *SetCostGroupEventIndicatorRequest, opts ...grpc.CallOption) (*SetCostGroupEventIndicatorResponse, error)
+	// Sets Cost group's anomaly options
+	SetCostGroupAnomalyOptions(ctx context.Context, in *SetCostGroupAnomalyOptionsRequest, opts ...grpc.CallOption) (*SetCostGroupAnomalyOptionsResponse, error)
 }
 
 type coverClient struct {
@@ -2269,6 +2272,15 @@ func (c *coverClient) SetCostGroupEventIndicator(ctx context.Context, in *SetCos
 	return out, nil
 }
 
+func (c *coverClient) SetCostGroupAnomalyOptions(ctx context.Context, in *SetCostGroupAnomalyOptionsRequest, opts ...grpc.CallOption) (*SetCostGroupAnomalyOptionsResponse, error) {
+	out := new(SetCostGroupAnomalyOptionsResponse)
+	err := c.cc.Invoke(ctx, Cover_SetCostGroupAnomalyOptions_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2546,8 +2558,10 @@ type CoverServer interface {
 	MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error)
 	// Lists recommendations based on specified criteria.
 	OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error)
-	// Sets Cost group event indicator
+	// Sets Cost group's event indicator
 	SetCostGroupEventIndicator(context.Context, *SetCostGroupEventIndicatorRequest) (*SetCostGroupEventIndicatorResponse, error)
+	// Sets Cost group's anomaly options
+	SetCostGroupAnomalyOptions(context.Context, *SetCostGroupAnomalyOptionsRequest) (*SetCostGroupAnomalyOptionsResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2968,6 +2982,9 @@ func (UnimplementedCoverServer) OptimizationHistory(context.Context, *Optimizati
 }
 func (UnimplementedCoverServer) SetCostGroupEventIndicator(context.Context, *SetCostGroupEventIndicatorRequest) (*SetCostGroupEventIndicatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCostGroupEventIndicator not implemented")
+}
+func (UnimplementedCoverServer) SetCostGroupAnomalyOptions(context.Context, *SetCostGroupAnomalyOptionsRequest) (*SetCostGroupAnomalyOptionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetCostGroupAnomalyOptions not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5546,6 +5563,24 @@ func _Cover_SetCostGroupEventIndicator_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_SetCostGroupAnomalyOptions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCostGroupAnomalyOptionsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).SetCostGroupAnomalyOptions(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_SetCostGroupAnomalyOptions_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).SetCostGroupAnomalyOptions(ctx, req.(*SetCostGroupAnomalyOptionsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6004,6 +6039,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetCostGroupEventIndicator",
 			Handler:    _Cover_SetCostGroupEventIndicator_Handler,
+		},
+		{
+			MethodName: "SetCostGroupAnomalyOptions",
+			Handler:    _Cover_SetCostGroupAnomalyOptions_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
