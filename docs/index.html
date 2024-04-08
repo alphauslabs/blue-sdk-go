@@ -20478,6 +20478,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>PeriodOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Valid inputs are: &#34;30days&#34;, &#34;60days&#34;. and &#34;90days&#34;. Default is &#34;30days&#34;. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -21278,42 +21285,35 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>dateRangeStart</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Start date of retrieved data. </p></td>
+                  <td><p>Required. Start date of retrieved data. If not set, the default would be today. </p></td>
                 </tr>
               
                 <tr>
                   <td>dateRangeEnd</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. End date of retrieved data. </p></td>
+                  <td><p>Required. End date of retrieved data. If not set, the default would be today. </p></td>
                 </tr>
               
                 <tr>
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;aws&#34;, &#34;gcp&#34;, and  &#34;azure&#34;. </p></td>
+                  <td><p>Valid inputs are: &#34;all&#34;, &#34;aws&#34;, &#34;gcp&#34;, and  &#34;azure&#34;. Default is &#34;all&#34;. </p></td>
                 </tr>
               
                 <tr>
                   <td>source</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Valid inputs are: &#34;all&#34;, &#34;trusted-advisor&#34;, &#34;cost-explorer&#34;, and  &#34;cost-optimization-hub&#34;. Default is &#34;All&#34;. </p></td>
+                  <td><p>Valid inputs are: &#34;all&#34;, &#34;trustedadvisor&#34;, &#34;costexplorer&#34;, and  &#34;costoptimizationhub&#34;. Default is &#34;all&#34;. </p></td>
                 </tr>
               
                 <tr>
-                  <td>optimizationType</td>
+                  <td>optimizationStatus</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;rate&#34;, and  &#34;usage&#34;. Default is &#34;All&#34; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>isExecuted</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>Valid inputs are: &#34;in-progress&#34;, &#34;error&#34;, &#34;open&#34; and &#34;all&#34; </p></td>
                 </tr>
               
             </tbody>
@@ -21383,7 +21383,14 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 </tr>
               
                 <tr>
-                  <td>optimizationType</td>
+                  <td>optimizationStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errorMessage</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -21662,7 +21669,7 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>dateRangeStart</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Start date of retrieved data. </p></td>
+                  <td><p>Required. Start date of retrieved data. If not set, default is three months past. </p></td>
                 </tr>
               
                 <tr>
@@ -21687,17 +21694,10 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 </tr>
               
                 <tr>
-                  <td>optimizationType</td>
+                  <td>periodOption</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Valid inputs are: &#34;all&#34;, &#34;rate&#34;, and  &#34;usage&#34;. Default is &#34;All&#34; </p></td>
-                </tr>
-              
-                <tr>
-                  <td>isExecuted</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>Valid inputs are: &#34;daily&#34;, &#34;monthly&#34;. and &#34;yearly&#34;. Default is &#34;monthly&#34;. </p></td>
                 </tr>
               
             </tbody>
@@ -21725,8 +21725,8 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 </tr>
               
                 <tr>
-                  <td>noOfExecutedRecommendationPerMonth</td>
-                  <td><a href="#blueapi.api.cover.NoOfExecutedRecommendationPerMonth">blueapi.api.cover.NoOfExecutedRecommendationPerMonth</a></td>
+                  <td>noOfExecutedRecommendation</td>
+                  <td><a href="#blueapi.api.cover.NoOfExecutedRecommendation">blueapi.api.cover.NoOfExecutedRecommendation</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
