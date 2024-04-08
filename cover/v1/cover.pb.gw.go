@@ -6009,14 +6009,14 @@ func request_Cover_ExecuteOptimization_0(ctx context.Context, marshaler runtime.
 		_   = err
 	)
 
-	val, ok = pathParams["id"]
+	val, ok = pathParams["recommendationId"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "recommendationId")
 	}
 
-	protoReq.Id, err = runtime.String(val)
+	protoReq.RecommendationId, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "recommendationId", err)
 	}
 
 	msg, err := client.ExecuteOptimization(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -6043,14 +6043,14 @@ func local_request_Cover_ExecuteOptimization_0(ctx context.Context, marshaler ru
 		_   = err
 	)
 
-	val, ok = pathParams["id"]
+	val, ok = pathParams["recommendationId"]
 	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "recommendationId")
 	}
 
-	protoReq.Id, err = runtime.String(val)
+	protoReq.RecommendationId, err = runtime.String(val)
 	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "recommendationId", err)
 	}
 
 	msg, err := server.ExecuteOptimization(ctx, &protoReq)
@@ -9212,7 +9212,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{id}"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{recommendationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -12324,7 +12324,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{id}"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{recommendationId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -12700,7 +12700,7 @@ var (
 
 	pattern_Cover_GetRecommendation_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "optimization", "id"}, ""))
 
-	pattern_Cover_ExecuteOptimization_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "optimization", "id"}, ""))
+	pattern_Cover_ExecuteOptimization_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "optimization", "recommendationId"}, ""))
 
 	pattern_Cover_MarkAsExecuted_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "recommendations", "optimization", "executed", "id"}, ""))
 
