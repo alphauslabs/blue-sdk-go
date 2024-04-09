@@ -1841,6 +1841,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetOrgFiscalMonthRequest"><span class="badge">M</span>GetOrgFiscalMonthRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetOrgFiscalMonthResponse"><span class="badge">M</span>GetOrgFiscalMonthResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetPayersRequest"><span class="badge">M</span>GetPayersRequest</a>
                 </li>
               
@@ -2162,6 +2170,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.SetCostGroupEventIndicatorResponse"><span class="badge">M</span>SetCostGroupEventIndicatorResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.SetOrgFiscalMonthRequest"><span class="badge">M</span>SetOrgFiscalMonthRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.SetOrgFiscalMonthResponse"><span class="badge">M</span>SetOrgFiscalMonthResponse</a>
                 </li>
               
                 <li>
@@ -20469,6 +20485,37 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetOrgFiscalMonthRequest">GetOrgFiscalMonthRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetOrgFiscalMonthResponse">GetOrgFiscalMonthResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>fiscalMonth</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetPayersRequest">GetPayersRequest</h3>
         <p>Request message for GetPayers</p>
 
@@ -23008,6 +23055,54 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>eventIndicator</td>
                   <td><a href="#blueapi.api.cover.EventIndicator">blueapi.api.cover.EventIndicator</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.SetOrgFiscalMonthRequest">SetOrgFiscalMonthRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>fiscalMonth</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Fiscal month. Valid inputs are: &#34;01 - 12&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.SetOrgFiscalMonthResponse">SetOrgFiscalMonthResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>fiscalMonth</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -25812,6 +25907,20 @@ file in bytes </p></td>
                 <td><p>Sets Cost group&#39;s anomaly options</p></td>
               </tr>
             
+              <tr>
+                <td>SetOrgFiscalMonth</td>
+                <td><a href="#blueapi.cover.v1.SetOrgFiscalMonthRequest">SetOrgFiscalMonthRequest</a></td>
+                <td><a href="#blueapi.cover.v1.SetOrgFiscalMonthResponse">SetOrgFiscalMonthResponse</a></td>
+                <td><p>Sets Org&#39;s starting month/ fiscal month</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetOrgFiscalMonth</td>
+                <td><a href="#blueapi.cover.v1.GetOrgFiscalMonthRequest">GetOrgFiscalMonthRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetOrgFiscalMonthResponse">GetOrgFiscalMonthResponse</a></td>
+                <td><p>Get Org&#39;s starting month/ fiscal month</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -27217,6 +27326,26 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/costgroups/{costGroupId}/anomaly</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetOrgFiscalMonth</td>
+                <td>POST</td>
+                <td>/v1/reports/fiscalmonth</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetOrgFiscalMonth</td>
+                <td>GET</td>
+                <td>/v1/reports/fiscalmonth</td>
+                <td></td>
               </tr>
               
             

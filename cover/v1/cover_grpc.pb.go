@@ -160,6 +160,8 @@ const (
 	Cover_OptimizationHistory_FullMethodName                     = "/blueapi.cover.v1.Cover/OptimizationHistory"
 	Cover_SetCostGroupEventIndicator_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupEventIndicator"
 	Cover_SetCostGroupAnomalyOptions_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupAnomalyOptions"
+	Cover_SetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/SetOrgFiscalMonth"
+	Cover_GetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/GetOrgFiscalMonth"
 )
 
 // CoverClient is the client API for Cover service.
@@ -443,6 +445,10 @@ type CoverClient interface {
 	SetCostGroupEventIndicator(ctx context.Context, in *SetCostGroupEventIndicatorRequest, opts ...grpc.CallOption) (*SetCostGroupEventIndicatorResponse, error)
 	// Sets Cost group's anomaly options
 	SetCostGroupAnomalyOptions(ctx context.Context, in *SetCostGroupAnomalyOptionsRequest, opts ...grpc.CallOption) (*SetCostGroupAnomalyOptionsResponse, error)
+	// Sets Org's starting month/ fiscal month
+	SetOrgFiscalMonth(ctx context.Context, in *SetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*SetOrgFiscalMonthResponse, error)
+	// Get Org's starting month/ fiscal month
+	GetOrgFiscalMonth(ctx context.Context, in *GetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*GetOrgFiscalMonthResponse, error)
 }
 
 type coverClient struct {
@@ -2281,6 +2287,24 @@ func (c *coverClient) SetCostGroupAnomalyOptions(ctx context.Context, in *SetCos
 	return out, nil
 }
 
+func (c *coverClient) SetOrgFiscalMonth(ctx context.Context, in *SetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*SetOrgFiscalMonthResponse, error) {
+	out := new(SetOrgFiscalMonthResponse)
+	err := c.cc.Invoke(ctx, Cover_SetOrgFiscalMonth_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetOrgFiscalMonth(ctx context.Context, in *GetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*GetOrgFiscalMonthResponse, error) {
+	out := new(GetOrgFiscalMonthResponse)
+	err := c.cc.Invoke(ctx, Cover_GetOrgFiscalMonth_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2562,6 +2586,10 @@ type CoverServer interface {
 	SetCostGroupEventIndicator(context.Context, *SetCostGroupEventIndicatorRequest) (*SetCostGroupEventIndicatorResponse, error)
 	// Sets Cost group's anomaly options
 	SetCostGroupAnomalyOptions(context.Context, *SetCostGroupAnomalyOptionsRequest) (*SetCostGroupAnomalyOptionsResponse, error)
+	// Sets Org's starting month/ fiscal month
+	SetOrgFiscalMonth(context.Context, *SetOrgFiscalMonthRequest) (*SetOrgFiscalMonthResponse, error)
+	// Get Org's starting month/ fiscal month
+	GetOrgFiscalMonth(context.Context, *GetOrgFiscalMonthRequest) (*GetOrgFiscalMonthResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -2985,6 +3013,12 @@ func (UnimplementedCoverServer) SetCostGroupEventIndicator(context.Context, *Set
 }
 func (UnimplementedCoverServer) SetCostGroupAnomalyOptions(context.Context, *SetCostGroupAnomalyOptionsRequest) (*SetCostGroupAnomalyOptionsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCostGroupAnomalyOptions not implemented")
+}
+func (UnimplementedCoverServer) SetOrgFiscalMonth(context.Context, *SetOrgFiscalMonthRequest) (*SetOrgFiscalMonthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOrgFiscalMonth not implemented")
+}
+func (UnimplementedCoverServer) GetOrgFiscalMonth(context.Context, *GetOrgFiscalMonthRequest) (*GetOrgFiscalMonthResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrgFiscalMonth not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5581,6 +5615,42 @@ func _Cover_SetCostGroupAnomalyOptions_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_SetOrgFiscalMonth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOrgFiscalMonthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).SetOrgFiscalMonth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_SetOrgFiscalMonth_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).SetOrgFiscalMonth(ctx, req.(*SetOrgFiscalMonthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetOrgFiscalMonth_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrgFiscalMonthRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetOrgFiscalMonth(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetOrgFiscalMonth_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetOrgFiscalMonth(ctx, req.(*GetOrgFiscalMonthRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6043,6 +6113,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetCostGroupAnomalyOptions",
 			Handler:    _Cover_SetCostGroupAnomalyOptions_Handler,
+		},
+		{
+			MethodName: "SetOrgFiscalMonth",
+			Handler:    _Cover_SetOrgFiscalMonth_Handler,
+		},
+		{
+			MethodName: "GetOrgFiscalMonth",
+			Handler:    _Cover_GetOrgFiscalMonth_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
