@@ -700,6 +700,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.Customer"><span class="badge">M</span>Customer</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.DeleteAccountBudgetAlertsRequest"><span class="badge">M</span>DeleteAccountBudgetAlertsRequest</a>
                 </li>
               
@@ -805,6 +809,10 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.GetCoverageOptionsResponse"><span class="badge">M</span>GetCoverageOptionsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.GetCustomerByAccountIdsRequest"><span class="badge">M</span>GetCustomerByAccountIdsRequest</a>
                 </li>
               
                 <li>
@@ -7644,6 +7652,72 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
 
         
       
+        <h3 id="blueapi.cost.v1.Customer">Customer</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The vendor </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the customer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The name of the customer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The payerId of the customer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The mspId of the customer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The companyId of the customer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The lastUpdate timestamp of the customer. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.DeleteAccountBudgetAlertsRequest">DeleteAccountBudgetAlertsRequest</h3>
         <p>Request message for DeleteAccountBudgetAlerts</p>
 
@@ -8712,6 +8786,37 @@ For example, if you only want the services and region data, you can set this fie
                   <td><a href="#blueapi.api.OptionsData">blueapi.api.OptionsData</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.GetCustomerByAccountIdsRequest">GetCustomerByAccountIdsRequest</h3>
+        <p>Request message for the Cost.GetCustomersByAccountIds rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Ids of the account/customer. </p></td>
                 </tr>
               
             </tbody>
@@ -11705,6 +11810,13 @@ Only available in Wave(Pro).</p></td>
                 <td><p>Get the breakeven point details for the RI or SP.</p></td>
               </tr>
             
+              <tr>
+                <td>GetCustomersByAccountIds</td>
+                <td><a href="#blueapi.cost.v1.GetCustomerByAccountIdsRequest">GetCustomerByAccountIdsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.Customer">Customer</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Find customers by customer/account ids.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -12304,6 +12416,16 @@ Only available in Wave(Pro).</p></td>
                 <td>GET</td>
                 <td>/v1/{vendor}/bep/{orgId}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCustomersByAccountIds</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/accounts/customers</td>
+                <td>*</td>
               </tr>
               
             

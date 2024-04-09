@@ -81,6 +81,7 @@ const (
 	Cost_GetCoverageOptions_FullMethodName            = "/blueapi.cost.v1.Cost/GetCoverageOptions"
 	Cost_GetCoverageOndemand_FullMethodName           = "/blueapi.cost.v1.Cost/GetCoverageOndemand"
 	Cost_GetBreakevenPoint_FullMethodName             = "/blueapi.cost.v1.Cost/GetBreakevenPoint"
+	Cost_GetCustomersByAccountIds_FullMethodName      = "/blueapi.cost.v1.Cost/GetCustomersByAccountIds"
 )
 
 // CostClient is the client API for Cost service.
@@ -222,6 +223,8 @@ type CostClient interface {
 	GetCoverageOndemand(ctx context.Context, in *GetCoverageOndemandRequest, opts ...grpc.CallOption) (*GetCoverageOndemandResponse, error)
 	// Get the breakeven point details for the RI or SP.
 	GetBreakevenPoint(ctx context.Context, in *GetBreakevenPointRequest, opts ...grpc.CallOption) (*GetBreakevenPointResponse, error)
+	// WORK-IN-PROGRESS: Find customers by customer/account ids.
+	GetCustomersByAccountIds(ctx context.Context, in *GetCustomerByAccountIdsRequest, opts ...grpc.CallOption) (Cost_GetCustomersByAccountIdsClient, error)
 }
 
 type costClient struct {
@@ -1021,6 +1024,38 @@ func (c *costClient) GetBreakevenPoint(ctx context.Context, in *GetBreakevenPoin
 	return out, nil
 }
 
+func (c *costClient) GetCustomersByAccountIds(ctx context.Context, in *GetCustomerByAccountIdsRequest, opts ...grpc.CallOption) (Cost_GetCustomersByAccountIdsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[12], Cost_GetCustomersByAccountIds_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costGetCustomersByAccountIdsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_GetCustomersByAccountIdsClient interface {
+	Recv() (*Customer, error)
+	grpc.ClientStream
+}
+
+type costGetCustomersByAccountIdsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costGetCustomersByAccountIdsClient) Recv() (*Customer, error) {
+	m := new(Customer)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -1160,6 +1195,8 @@ type CostServer interface {
 	GetCoverageOndemand(context.Context, *GetCoverageOndemandRequest) (*GetCoverageOndemandResponse, error)
 	// Get the breakeven point details for the RI or SP.
 	GetBreakevenPoint(context.Context, *GetBreakevenPointRequest) (*GetBreakevenPointResponse, error)
+	// WORK-IN-PROGRESS: Find customers by customer/account ids.
+	GetCustomersByAccountIds(*GetCustomerByAccountIdsRequest, Cost_GetCustomersByAccountIdsServer) error
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -1337,6 +1374,9 @@ func (UnimplementedCostServer) GetCoverageOndemand(context.Context, *GetCoverage
 }
 func (UnimplementedCostServer) GetBreakevenPoint(context.Context, *GetBreakevenPointRequest) (*GetBreakevenPointResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBreakevenPoint not implemented")
+}
+func (UnimplementedCostServer) GetCustomersByAccountIds(*GetCustomerByAccountIdsRequest, Cost_GetCustomersByAccountIdsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCustomersByAccountIds not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -2413,6 +2453,27 @@ func _Cost_GetBreakevenPoint_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetCustomersByAccountIds_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCustomerByAccountIdsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).GetCustomersByAccountIds(m, &costGetCustomersByAccountIdsServer{stream})
+}
+
+type Cost_GetCustomersByAccountIdsServer interface {
+	Send(*Customer) error
+	grpc.ServerStream
+}
+
+type costGetCustomersByAccountIdsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costGetCustomersByAccountIdsServer) Send(m *Customer) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2660,6 +2721,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadBudgetAlerts",
 			Handler:       _Cost_ReadBudgetAlerts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCustomersByAccountIds",
+			Handler:       _Cost_GetCustomersByAccountIds_Handler,
 			ServerStreams: true,
 		},
 	},

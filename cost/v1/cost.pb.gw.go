@@ -4074,6 +4074,48 @@ func local_request_Cost_GetBreakevenPoint_0(ctx context.Context, marshaler runti
 
 }
 
+func request_Cost_GetCustomersByAccountIds_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_GetCustomersByAccountIdsClient, runtime.ServerMetadata, error) {
+	var protoReq GetCustomerByAccountIdsRequest
+	var metadata runtime.ServerMetadata
+
+	newReader, berr := utilities.IOReaderFactory(req.Body)
+	if berr != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
+	}
+	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+
+	stream, err := client.GetCustomersByAccountIds(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 // RegisterCostHandlerServer registers the http handlers for service Cost to "mux".
 // UnaryRPC     :call CostServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -5301,6 +5343,13 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 
 		forward_Cost_GetBreakevenPoint_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("POST", pattern_Cost_GetCustomersByAccountIds_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -6642,6 +6691,28 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 
 	})
 
+	mux.Handle("POST", pattern_Cost_GetCustomersByAccountIds_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetCustomersByAccountIds", runtime.WithHTTPPathPattern("/v1/{vendor}/accounts/customers"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Cost_GetCustomersByAccountIds_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Cost_GetCustomersByAccountIds_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	return nil
 }
 
@@ -6763,6 +6834,8 @@ var (
 	pattern_Cost_GetCoverageOndemand_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "vendor", "coverage", "ondemand", "orgId"}, "read"))
 
 	pattern_Cost_GetBreakevenPoint_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "bep", "orgId"}, ""))
+
+	pattern_Cost_GetCustomersByAccountIds_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3}, []string{"v1", "vendor", "accounts", "customers"}, ""))
 )
 
 var (
@@ -6883,4 +6956,6 @@ var (
 	forward_Cost_GetCoverageOndemand_0 = runtime.ForwardResponseMessage
 
 	forward_Cost_GetBreakevenPoint_0 = runtime.ForwardResponseMessage
+
+	forward_Cost_GetCustomersByAccountIds_0 = runtime.ForwardResponseStream
 )
