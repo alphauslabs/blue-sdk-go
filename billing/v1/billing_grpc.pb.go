@@ -61,6 +61,7 @@ const (
 	Billing_CreateAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
 	Billing_UpdateAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
 	Billing_DeleteAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
+	Billing_ReadUntaggedGroups_FullMethodName                   = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
 )
 
 // BillingClient is the client API for Billing service.
@@ -137,7 +138,7 @@ type BillingClient interface {
 	ListAbcBillingGroups(ctx context.Context, in *ListAbcBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupsClient, error)
 	// WORK-IN-PROGRESS: Gets all accounts associated to AWS Billing Conductor(ABC) Billing group
 	ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error)
-	// WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).
+	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
@@ -156,6 +157,8 @@ type BillingClient interface {
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
 	// WORK-IN-PROGRESS: Deletes adjustment config
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
+	ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error)
 }
 
 type billingClient struct {
@@ -807,6 +810,38 @@ func (c *billingClient) DeleteAdjustmentConfig(ctx context.Context, in *DeleteAd
 	return out, nil
 }
 
+func (c *billingClient) ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error) {
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[13], Billing_ReadUntaggedGroups_FullMethodName, opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingReadUntaggedGroupsClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ReadUntaggedGroupsClient interface {
+	Recv() (*ripple.UntaggedGroup, error)
+	grpc.ClientStream
+}
+
+type billingReadUntaggedGroupsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingReadUntaggedGroupsClient) Recv() (*ripple.UntaggedGroup, error) {
+	m := new(ripple.UntaggedGroup)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -881,7 +916,7 @@ type BillingServer interface {
 	ListAbcBillingGroups(*ListAbcBillingGroupsRequest, Billing_ListAbcBillingGroupsServer) error
 	// WORK-IN-PROGRESS: Gets all accounts associated to AWS Billing Conductor(ABC) Billing group
 	ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error
-	// WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).
+	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
@@ -900,6 +935,8 @@ type BillingServer interface {
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
 	// WORK-IN-PROGRESS: Deletes adjustment config
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
+	ReadUntaggedGroups(*ReadUntaggedGroupsRequest, Billing_ReadUntaggedGroupsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1020,6 +1057,9 @@ func (UnimplementedBillingServer) UpdateAdjustmentConfig(context.Context, *Updat
 }
 func (UnimplementedBillingServer) DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAdjustmentConfig not implemented")
+}
+func (UnimplementedBillingServer) ReadUntaggedGroups(*ReadUntaggedGroupsRequest, Billing_ReadUntaggedGroupsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadUntaggedGroups not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1757,6 +1797,27 @@ func _Billing_DeleteAdjustmentConfig_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ReadUntaggedGroups_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadUntaggedGroupsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ReadUntaggedGroups(m, &billingReadUntaggedGroupsServer{stream})
+}
+
+type Billing_ReadUntaggedGroupsServer interface {
+	Send(*ripple.UntaggedGroup) error
+	grpc.ServerStream
+}
+
+type billingReadUntaggedGroupsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingReadUntaggedGroupsServer) Send(m *ripple.UntaggedGroup) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1929,6 +1990,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccountResources",
 			Handler:       _Billing_ListAccountResources_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadUntaggedGroups",
+			Handler:       _Billing_ReadUntaggedGroups_Handler,
 			ServerStreams: true,
 		},
 	},

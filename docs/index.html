@@ -1299,6 +1299,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ReadUntaggedGroupsRequest"><span class="badge">M</span>ReadUntaggedGroupsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.RegisterAccounts"><span class="badge">M</span>RegisterAccounts</a>
                 </li>
               
@@ -14700,6 +14704,39 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ReadUntaggedGroupsRequest">ReadUntaggedGroupsRequest</h3>
+        <p>Request message for the Billing.ReadUntaggedGroups rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. Get only the value that set fieldMask.
+
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.RegisterAccounts">RegisterAccounts</h3>
         <p>Register Accounts definition</p>
 
@@ -15392,7 +15429,7 @@ Lists all exchange rate.
                 <td>ReadInvoiceAdjustments</td>
                 <td><a href="#blueapi.billing.v1.ReadInvoiceAdjustmentsRequest">ReadInvoiceAdjustmentsRequest</a></td>
                 <td><a href="#blueapi.api.wave.Adjustment">.blueapi.api.wave.Adjustment</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Reads the adjustment details involved in invoicing of an organization billing group (Wave).</p></td>
+                <td><p>Reads the adjustment details involved in invoicing of an organization billing group (Wave).</p></td>
               </tr>
             
               <tr>
@@ -15434,6 +15471,13 @@ Lists all exchange rate.
                 <td><a href="#blueapi.billing.v1.DeleteAdjustmentConfigRequest">DeleteAdjustmentConfigRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>WORK-IN-PROGRESS: Deletes adjustment config</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadUntaggedGroups</td>
+                <td><a href="#blueapi.billing.v1.ReadUntaggedGroupsRequest">ReadUntaggedGroupsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.UntaggedGroup">.blueapi.api.ripple.UntaggedGroup</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.</p></td>
               </tr>
             
           </tbody>
@@ -15831,6 +15875,16 @@ Lists all exchange rate.
                 <td>DELETE</td>
                 <td>/v1/adjustmentconfig/{vendor}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadUntaggedGroups</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/untaggedgroups:read</td>
+                <td>*</td>
               </tr>
               
             
