@@ -23149,6 +23149,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><p>Required. When set to true, the threshold is a percentage to the actual cost. Otherwise, it is a fixed amount. </p></td>
                 </tr>
               
+                <tr>
+                  <td>pastDataInMonths</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Optional. The number of past months to be used in training the model. Note: This will affect the results of anomaly detection. Default and max is 9 while min is 1. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
