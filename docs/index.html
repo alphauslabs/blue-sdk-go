@@ -632,6 +632,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.CheckAccountsRequest"><span class="badge">M</span>CheckAccountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.CheckAccountsResponse"><span class="badge">M</span>CheckAccountsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.CheckAccountsResponse.ExistsEntry"><span class="badge">M</span>CheckAccountsResponse.ExistsEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.CostAttribute"><span class="badge">M</span>CostAttribute</a>
                 </li>
               
@@ -697,10 +709,6 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.CreatePayerAccountRequestAwsOptions"><span class="badge">M</span>CreatePayerAccountRequestAwsOptions</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cost.v1.Customer"><span class="badge">M</span>Customer</a>
                 </li>
               
                 <li>
@@ -809,10 +817,6 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.GetCoverageOptionsResponse"><span class="badge">M</span>GetCoverageOptionsResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cost.v1.GetCustomerByAccountIdsRequest"><span class="badge">M</span>GetCustomerByAccountIdsRequest</a>
                 </li>
               
                 <li>
@@ -6969,6 +6973,92 @@ You can use the `{{ondemandrate}}` variable in the replacement value part to ref
 
         
       
+        <h3 id="blueapi.cost.v1.CheckAccountsRequest">CheckAccountsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. A comma-separated list of account ids. For example, you set to [&#34;accountId1&#34;,&#34;accountId2&#34;,&#34;accountId3&#34;]. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CheckAccountsResponse">CheckAccountsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>exists</td>
+                  <td><a href="#blueapi.cost.v1.CheckAccountsResponse.ExistsEntry">CheckAccountsResponse.ExistsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Map of accountIds to boolean values indicating if the account exists. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CheckAccountsResponse.ExistsEntry">CheckAccountsResponse.ExistsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.CostAttribute">CostAttribute</h3>
         <p></p>
 
@@ -7647,72 +7737,6 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Role ARN for Alphaus to assume for access. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cost.v1.Customer">Customer</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>vendor</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The vendor </p></td>
-                </tr>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The id of the customer. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The name of the customer. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>payerId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The payerId of the customer. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>mspId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The mspId of the customer. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>companyId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The companyId of the customer. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>lastUpdate</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The lastUpdate timestamp of the customer. </p></td>
                 </tr>
               
             </tbody>
@@ -8790,37 +8814,6 @@ For example, if you only want the services and region data, you can set this fie
                   <td><a href="#blueapi.api.OptionsData">blueapi.api.OptionsData</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cost.v1.GetCustomerByAccountIdsRequest">GetCustomerByAccountIdsRequest</h3>
-        <p>Request message for the Cost.GetCustomersByAccountIds rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>vendor</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>ids</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>Required. Ids of the account/customer. </p></td>
                 </tr>
               
             </tbody>
@@ -11815,10 +11808,10 @@ Only available in Wave(Pro).</p></td>
               </tr>
             
               <tr>
-                <td>GetCustomersByAccountIds</td>
-                <td><a href="#blueapi.cost.v1.GetCustomerByAccountIdsRequest">GetCustomerByAccountIdsRequest</a></td>
-                <td><a href="#blueapi.cost.v1.Customer">Customer</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Find customers by customer/account ids.</p></td>
+                <td>CheckAccountsBelongToMsp</td>
+                <td><a href="#blueapi.cost.v1.CheckAccountsRequest">CheckAccountsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.CheckAccountsResponse">CheckAccountsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Check inputed accountIds belong to current MSP or not</p></td>
               </tr>
             
           </tbody>
@@ -12426,9 +12419,9 @@ Only available in Wave(Pro).</p></td>
               
               
               <tr>
-                <td>GetCustomersByAccountIds</td>
+                <td>CheckAccountsBelongToMsp</td>
                 <td>POST</td>
-                <td>/v1/{vendor}/accounts/customers</td>
+                <td>/v1/{vendor}/accounts/customers/accounts:check</td>
                 <td>*</td>
               </tr>
               
