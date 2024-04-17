@@ -78,6 +78,7 @@ const (
 	Cover_GetDataAccess_FullMethodName                           = "/blueapi.cover.v1.Cover/GetDataAccess"
 	Cover_DeleteDataAccess_FullMethodName                        = "/blueapi.cover.v1.Cover/DeleteDataAccess"
 	Cover_CreateAccountAccess_FullMethodName                     = "/blueapi.cover.v1.Cover/CreateAccountAccess"
+	Cover_CreateAccountAccessStackset_FullMethodName             = "/blueapi.cover.v1.Cover/CreateAccountAccessStackset"
 	Cover_CreateAccountAccessCur_FullMethodName                  = "/blueapi.cover.v1.Cover/CreateAccountAccessCur"
 	Cover_UpdateAccountAccess_FullMethodName                     = "/blueapi.cover.v1.Cover/UpdateAccountAccess"
 	Cover_DeleteAccountAccess_FullMethodName                     = "/blueapi.cover.v1.Cover/DeleteAccountAccess"
@@ -281,6 +282,8 @@ type CoverClient interface {
 	DeleteDataAccess(ctx context.Context, in *GetAndDeleteDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
+	// Starts validation of the account access stackset deployment. If successful, the IAM role created from the CloudFormation stackset will be registered to the linked accounts.
+	CreateAccountAccessStackset(ctx context.Context, in *CreateAccountAccessStacksetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Starts validation of the account access cur stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccessCur(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -989,6 +992,15 @@ func (c *coverClient) DeleteDataAccess(ctx context.Context, in *GetAndDeleteData
 func (c *coverClient) CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
 	out := new(AccountAccess)
 	err := c.cc.Invoke(ctx, Cover_CreateAccountAccess_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateAccountAccessStackset(ctx context.Context, in *CreateAccountAccessStacksetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cover_CreateAccountAccessStackset_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2422,6 +2434,8 @@ type CoverServer interface {
 	DeleteDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*emptypb.Empty, error)
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
+	// Starts validation of the account access stackset deployment. If successful, the IAM role created from the CloudFormation stackset will be registered to the linked accounts.
+	CreateAccountAccessStackset(context.Context, *CreateAccountAccessStacksetRequest) (*emptypb.Empty, error)
 	// Starts validation of the account access cur stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccessCur(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -2767,6 +2781,9 @@ func (UnimplementedCoverServer) DeleteDataAccess(context.Context, *GetAndDeleteD
 }
 func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccess not implemented")
+}
+func (UnimplementedCoverServer) CreateAccountAccessStackset(context.Context, *CreateAccountAccessStacksetRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccessStackset not implemented")
 }
 func (UnimplementedCoverServer) CreateAccountAccessCur(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccessCur not implemented")
@@ -4058,6 +4075,24 @@ func _Cover_CreateAccountAccess_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).CreateAccountAccess(ctx, req.(*CreateAccountAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateAccountAccessStackset_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountAccessStacksetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateAccountAccessStackset(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateAccountAccessStackset_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateAccountAccessStackset(ctx, req.(*CreateAccountAccessStacksetRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5881,6 +5916,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAccountAccess",
 			Handler:    _Cover_CreateAccountAccess_Handler,
+		},
+		{
+			MethodName: "CreateAccountAccessStackset",
+			Handler:    _Cover_CreateAccountAccessStackset_Handler,
 		},
 		{
 			MethodName: "CreateAccountAccessCur",
