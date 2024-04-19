@@ -11396,21 +11396,27 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td>ListPayerAccounts</td>
                 <td><a href="#blueapi.cost.v1.ListPayerAccountsRequest">ListPayerAccountsRequest</a></td>
                 <td><a href="#blueapi.api.Account">.blueapi.api.Account</a> stream</td>
-                <td><p>Lists vendor payer accounts. For AWS, these are management accounts (formerly known as master or payer accounts); for Azure, these are subscriptions, for GCP, these are projects.</p></td>
+                <td><p>Lists vendor payer accounts.
+
+For AWS, these are management accounts (formerly known as master or payer accounts); for Azure, these are subscriptions, for GCP, these are projects.</p></td>
               </tr>
             
               <tr>
                 <td>GetPayerAccount</td>
                 <td><a href="#blueapi.cost.v1.GetPayerAccountRequest">GetPayerAccountRequest</a></td>
                 <td><a href="#blueapi.api.ripple.Payer">.blueapi.api.ripple.Payer</a></td>
-                <td><p>Gets a vendor payer account. This API includes all of the account&#39;s metadata. See https://alphauslabs.github.io/blueapi/ for the list of supported attributes. For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.</p></td>
+                <td><p>Gets a vendor payer account.
+
+This API includes all of the account&#39;s metadata. See (https://alphauslabs.github.io/blueapi/)[https://alphauslabs.github.io/blueapi/] for the list of supported attributes. For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.</p></td>
               </tr>
             
               <tr>
                 <td>GetPayerAccountImportHistory</td>
                 <td><a href="#blueapi.cost.v1.GetPayerAccountImportHistoryRequest">GetPayerAccountImportHistoryRequest</a></td>
                 <td><a href="#blueapi.cost.v1.GetPayerAccountImportHistoryResponse">GetPayerAccountImportHistoryResponse</a> stream</td>
-                <td><p>Gets a payer account&#39;s import history, which is a list of timestamps our system tracks when the account&#39;s data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set {id} to `*` to return all payers&#39; information under the organization.</p></td>
+                <td><p>Gets a payer account&#39;s import history.
+
+Import history is a list of timestamps our system tracks when the account&#39;s data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set `{id}` to `*` to return all payers&#39; information under the organization.</p></td>
               </tr>
             
               <tr>
@@ -11480,7 +11486,9 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                 <td>ListCalculatorRunningAccounts</td>
                 <td><a href="#blueapi.cost.v1.ListCalculatorRunningAccountsRequest">ListCalculatorRunningAccountsRequest</a></td>
                 <td><a href="#blueapi.cost.v1.ListCalculatorRunningAccountsResponse">ListCalculatorRunningAccountsResponse</a> stream</td>
-                <td><p>Lists the vendor calculator&#39;s queued accounts for calculation. If result is non-empty, it means calculation is still in progress for the returned accounts. Only available in Ripple.</p></td>
+                <td><p>Lists the vendor calculator&#39;s queued accounts for calculation.
+
+If result is non-empty, it means calculation is still in progress for the returned accounts. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -11517,14 +11525,18 @@ A cost modifier allows you to modify the cost per lineitem. At the moment, the s
                 <td>ImportCurFiles</td>
                 <td><a href="#blueapi.cost.v1.ImportCurFilesRequest">ImportCurFilesRequest</a></td>
                 <td><a href="#protos.Operation">.protos.Operation</a></td>
-                <td><p>Initiates an ondemand import of all registered CUR files. See [https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.</p></td>
+                <td><p>Initiates an ondemand import of all registered CUR files.
+
+See (https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting)[https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.</p></td>
               </tr>
             
               <tr>
                 <td>CalculateCosts</td>
                 <td><a href="#blueapi.cost.v1.CalculateCostsRequest">CalculateCostsRequest</a></td>
                 <td><a href="#protos.Operation">.protos.Operation</a></td>
-                <td><p>Triggers monthly calculations for costs and invoices at either organization or billing group level. For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.</p></td>
+                <td><p>Triggers monthly calculations for costs and invoices at either organization or billing group level.
+
+For the AWS calculator, aggregation is done at daily and monthly level. Also, all occurrences of the character `|` (pipe) in the CUR descriptions and tag key/values are replaced with the `/` (forward-slash) character. This is due to the `|` character having a special designation in the data processing workflows.</p></td>
               </tr>
             
               <tr>
@@ -11566,7 +11578,9 @@ A cost modifier allows you to modify the cost per lineitem. At the moment, the s
                 <td>CreateCostFilters</td>
                 <td><a href="#blueapi.cost.v1.CreateCostFiltersRequest">CreateCostFiltersRequest</a></td>
                 <td><a href="#blueapi.cost.v1.CreateCostFiltersResponse">CreateCostFiltersResponse</a></td>
-                <td><p>Creates the usage-based cost filter condition. You can consider cost filters as predefined/prefiltered queries using the &#39;v1/{vendor}/costs:read&#39; or &#39;ReadCosts&#39; API. Only available in Wave(Pro).</p></td>
+                <td><p>Creates the usage-based cost filter condition.
+
+You can consider cost filters as predefined/prefiltered queries using the `v1/{vendor}/costs:read` or `ReadCosts` API. Only available in Wave(Pro).</p></td>
               </tr>
             
               <tr>
@@ -11594,7 +11608,9 @@ A cost modifier allows you to modify the cost per lineitem. At the moment, the s
                 <td>ReadCostAttributes</td>
                 <td><a href="#blueapi.cost.v1.ReadCostAttributesRequest">ReadCostAttributesRequest</a></td>
                 <td><a href="#blueapi.cost.v1.CostAttributeItem">CostAttributeItem</a> stream</td>
-                <td><p>Reads the available cost attributes of an organization (Ripple) or billing group (Wave). Similar to the &#39;ReadCosts&#39; API but without the aggregated usages and costs. At the moment, the supported {vendor} is &#39;aws&#39;. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
+                <td><p>Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
+
+Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported `{vendor}` is `aws`. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
               </tr>
             
               <tr>
@@ -11608,28 +11624,36 @@ A cost modifier allows you to modify the cost per lineitem. At the moment, the s
                 <td>ReadCosts</td>
                 <td><a href="#blueapi.cost.v1.ReadCostsRequest">ReadCostsRequest</a></td>
                 <td><a href="#blueapi.cost.v1.CostItem">CostItem</a> stream</td>
-                <td><p>Reads the usage-based cost details of an organization (Ripple) or billing group (Wave). At the moment, the supported {vendor} are &#39;aws&#39; and &#39;gcp&#39;. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
+                <td><p>Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
+
+At the moment, the supported `{vendor}` are `aws` and `gcp`. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
               </tr>
             
               <tr>
                 <td>ReadAdjustments</td>
                 <td><a href="#blueapi.cost.v1.ReadAdjustmentsRequest">ReadAdjustmentsRequest</a></td>
                 <td><a href="#blueapi.cost.v1.CostItem">CostItem</a> stream</td>
-                <td><p>Reads the non-usage-based details of an organization (Ripple) or billing group (Wave). This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported {vendor} is &#39;aws&#39; or &#39;azure&#39;. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
+                <td><p>Reads the non-usage-based details of an organization (Ripple) or billing group (Wave[Pro]).
+
+This API covers non-usage-based adjustments, such as Fees, Credits, Discounts, Tax, Upfront Fees, etc. At the moment, the supported `{vendor}` is `aws` or `azure`. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
               </tr>
             
               <tr>
                 <td>ReadTagCosts</td>
                 <td><a href="#blueapi.cost.v1.ReadTagCostsRequest">ReadTagCostsRequest</a></td>
                 <td><a href="#blueapi.cost.v1.CostItem">CostItem</a> stream</td>
-                <td><p>Reads the usage-based tag costs of a billing group. At the moment, the supported {vendor} is &#39;aws&#39;. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
+                <td><p>Reads the usage-based tag costs of a billing group.
+
+At the moment, the supported `{vendor}` is `aws`. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
               </tr>
             
               <tr>
                 <td>ReadNonTagCosts</td>
                 <td><a href="#blueapi.cost.v1.ReadNonTagCostsRequest">ReadNonTagCostsRequest</a></td>
                 <td><a href="#blueapi.cost.v1.CostItem">CostItem</a> stream</td>
-                <td><p>Reads the usage-based non tag costs of a billing group. At the moment, the supported {vendor} is &#39;aws&#39;. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
+                <td><p>Reads the usage-based non tag costs of a billing group.
+
+At the moment, the supported `{vendor}` is `aws`. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
               </tr>
             
               <tr>
