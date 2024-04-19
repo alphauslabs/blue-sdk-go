@@ -134,7 +134,7 @@ type CostClient interface {
 	DeleteCalculatorCostModifier(ctx context.Context, in *DeleteCalculatorCostModifierRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	//
-	// See (https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting)[https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
+	// See https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting for more information.
 	ImportCurFiles(ctx context.Context, in *ImportCurFilesRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	//
@@ -1109,7 +1109,7 @@ type CostServer interface {
 	DeleteCalculatorCostModifier(context.Context, *DeleteCalculatorCostModifierRequest) (*emptypb.Empty, error)
 	// Initiates an ondemand import of all registered CUR files.
 	//
-	// See (https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting)[https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting] for more information.
+	// See https://help.alphaus.cloud/en/articles/3612555-ripple-aws-things-you-need-to-prepare-before-starting for more information.
 	ImportCurFiles(context.Context, *ImportCurFilesRequest) (*protos.Operation, error)
 	// Triggers monthly calculations for costs and invoices at either organization or billing group level.
 	//
