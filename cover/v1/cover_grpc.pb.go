@@ -283,7 +283,7 @@ type CoverClient interface {
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts validation of the account access stackset deployment. If successful, the IAM role created from the CloudFormation stackset will be registered to the linked accounts.
-	CreateAccountAccessStackset(ctx context.Context, in *CreateAccountAccessStacksetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CreateAccountAccessStackset(ctx context.Context, in *CreateAccountAccessStacksetRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts validation of the account access cur stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccessCur(ctx context.Context, in *CreateAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -998,8 +998,8 @@ func (c *coverClient) CreateAccountAccess(ctx context.Context, in *CreateAccount
 	return out, nil
 }
 
-func (c *coverClient) CreateAccountAccessStackset(ctx context.Context, in *CreateAccountAccessStacksetRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
-	out := new(emptypb.Empty)
+func (c *coverClient) CreateAccountAccessStackset(ctx context.Context, in *CreateAccountAccessStacksetRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
+	out := new(AccountAccess)
 	err := c.cc.Invoke(ctx, Cover_CreateAccountAccessStackset_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
@@ -2435,7 +2435,7 @@ type CoverServer interface {
 	// Starts validation of the account access stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
 	// Starts validation of the account access stackset deployment. If successful, the IAM role created from the CloudFormation stackset will be registered to the linked accounts.
-	CreateAccountAccessStackset(context.Context, *CreateAccountAccessStacksetRequest) (*emptypb.Empty, error)
+	CreateAccountAccessStackset(context.Context, *CreateAccountAccessStacksetRequest) (*AccountAccess, error)
 	// Starts validation of the account access cur stack deployment. If successful, the IAM role created from the CloudFormation stack will be registered to the target.
 	CreateAccountAccessCur(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error)
 	// Starts an update to an existing account access CloudFormation stack for template changes, if any. Only call this API if the status of your account access is 'outdated'.
@@ -2782,7 +2782,7 @@ func (UnimplementedCoverServer) DeleteDataAccess(context.Context, *GetAndDeleteD
 func (UnimplementedCoverServer) CreateAccountAccess(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccess not implemented")
 }
-func (UnimplementedCoverServer) CreateAccountAccessStackset(context.Context, *CreateAccountAccessStacksetRequest) (*emptypb.Empty, error) {
+func (UnimplementedCoverServer) CreateAccountAccessStackset(context.Context, *CreateAccountAccessStacksetRequest) (*AccountAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountAccessStackset not implemented")
 }
 func (UnimplementedCoverServer) CreateAccountAccessCur(context.Context, *CreateAccountAccessRequest) (*AccountAccess, error) {
