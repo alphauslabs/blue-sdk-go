@@ -10705,6 +10705,13 @@ For example, if you only want the services and region data, you can set this fie
                   <td><p>If true, force API to not use cached data. </p></td>
                 </tr>
               
+                <tr>
+                  <td>toCurrency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Set to US dollars (USD) by default (AWS CUR&#39;s default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency&#39;s three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD). </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
