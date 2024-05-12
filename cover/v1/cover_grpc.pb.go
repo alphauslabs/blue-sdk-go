@@ -163,6 +163,7 @@ const (
 	Cover_SetCostGroupAnomalyOptions_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupAnomalyOptions"
 	Cover_SetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/SetOrgFiscalMonth"
 	Cover_GetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/GetOrgFiscalMonth"
+	Cover_LeaveOrganization_FullMethodName                       = "/blueapi.cover.v1.Cover/LeaveOrganization"
 )
 
 // CoverClient is the client API for Cover service.
@@ -452,6 +453,8 @@ type CoverClient interface {
 	SetOrgFiscalMonth(ctx context.Context, in *SetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*SetOrgFiscalMonthResponse, error)
 	// Get Org's starting month/ fiscal month
 	GetOrgFiscalMonth(ctx context.Context, in *GetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*GetOrgFiscalMonthResponse, error)
+	// WORK-IN-PROGRESS: Leaves the existing organization where the account is linked and process all the other setup also.
+	LeaveOrganization(ctx context.Context, in *LeaveOrganizationRequest, opts ...grpc.CallOption) (*LeaveOrganizationResponse, error)
 }
 
 type coverClient struct {
@@ -2317,6 +2320,15 @@ func (c *coverClient) GetOrgFiscalMonth(ctx context.Context, in *GetOrgFiscalMon
 	return out, nil
 }
 
+func (c *coverClient) LeaveOrganization(ctx context.Context, in *LeaveOrganizationRequest, opts ...grpc.CallOption) (*LeaveOrganizationResponse, error) {
+	out := new(LeaveOrganizationResponse)
+	err := c.cc.Invoke(ctx, Cover_LeaveOrganization_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2604,6 +2616,8 @@ type CoverServer interface {
 	SetOrgFiscalMonth(context.Context, *SetOrgFiscalMonthRequest) (*SetOrgFiscalMonthResponse, error)
 	// Get Org's starting month/ fiscal month
 	GetOrgFiscalMonth(context.Context, *GetOrgFiscalMonthRequest) (*GetOrgFiscalMonthResponse, error)
+	// WORK-IN-PROGRESS: Leaves the existing organization where the account is linked and process all the other setup also.
+	LeaveOrganization(context.Context, *LeaveOrganizationRequest) (*LeaveOrganizationResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3036,6 +3050,9 @@ func (UnimplementedCoverServer) SetOrgFiscalMonth(context.Context, *SetOrgFiscal
 }
 func (UnimplementedCoverServer) GetOrgFiscalMonth(context.Context, *GetOrgFiscalMonthRequest) (*GetOrgFiscalMonthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrgFiscalMonth not implemented")
+}
+func (UnimplementedCoverServer) LeaveOrganization(context.Context, *LeaveOrganizationRequest) (*LeaveOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method LeaveOrganization not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5686,6 +5703,24 @@ func _Cover_GetOrgFiscalMonth_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_LeaveOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(LeaveOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).LeaveOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_LeaveOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).LeaveOrganization(ctx, req.(*LeaveOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6160,6 +6195,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOrgFiscalMonth",
 			Handler:    _Cover_GetOrgFiscalMonth_Handler,
+		},
+		{
+			MethodName: "LeaveOrganization",
+			Handler:    _Cover_LeaveOrganization_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
