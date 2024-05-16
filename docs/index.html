@@ -1957,14 +1957,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.cover.v1.LeaveOrganizationRequest"><span class="badge">M</span>LeaveOrganizationRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.LeaveOrganizationResponse"><span class="badge">M</span>LeaveOrganizationResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.cover.v1.ListAccountAccessRequest"><span class="badge">M</span>ListAccountAccessRequest</a>
                 </li>
               
@@ -2214,6 +2206,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.TerminateResourceResponse"><span class="badge">M</span>TerminateResourceResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.TransferOrganizationRequest"><span class="badge">M</span>TransferOrganizationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.TransferOrganizationResponse"><span class="badge">M</span>TransferOrganizationResponse</a>
                 </li>
               
                 <li>
@@ -21311,54 +21311,6 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
-        <h3 id="blueapi.cover.v1.LeaveOrganizationRequest">LeaveOrganizationRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>target</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.LeaveOrganizationResponse">LeaveOrganizationResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>target</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.cover.v1.ListAccountAccessRequest">ListAccountAccessRequest</h3>
         <p>Request message for the ListAccountAccess rpc.</p>
 
@@ -23499,6 +23451,75 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
               
                 <tr>
                   <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.TransferOrganizationRequest">TransferOrganizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The target account to be transferred. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The region of the target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payer</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Alphaus payer account to be used for the transfer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The org id of the payer account. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.TransferOrganizationResponse">TransferOrganizationResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -26243,10 +26264,10 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>LeaveOrganization</td>
-                <td><a href="#blueapi.cover.v1.LeaveOrganizationRequest">LeaveOrganizationRequest</a></td>
-                <td><a href="#blueapi.cover.v1.LeaveOrganizationResponse">LeaveOrganizationResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Leaves the existing organization where the account is linked and process all the other setup also.</p></td>
+                <td>TransferOrganization</td>
+                <td><a href="#blueapi.cover.v1.TransferOrganizationRequest">TransferOrganizationRequest</a></td>
+                <td><a href="#blueapi.cover.v1.TransferOrganizationResponse">TransferOrganizationResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Transfer the account from the original organization to Alphaus payer account</p></td>
               </tr>
             
           </tbody>
@@ -27690,9 +27711,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>LeaveOrganization</td>
+                <td>TransferOrganization</td>
                 <td>GET</td>
-                <td>/v1/organizations/leave/{target}</td>
+                <td>/v1/organizations/transfer/{target}</td>
                 <td></td>
               </tr>
               

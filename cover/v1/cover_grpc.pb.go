@@ -163,7 +163,7 @@ const (
 	Cover_SetCostGroupAnomalyOptions_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupAnomalyOptions"
 	Cover_SetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/SetOrgFiscalMonth"
 	Cover_GetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/GetOrgFiscalMonth"
-	Cover_LeaveOrganization_FullMethodName                       = "/blueapi.cover.v1.Cover/LeaveOrganization"
+	Cover_TransferOrganization_FullMethodName                    = "/blueapi.cover.v1.Cover/TransferOrganization"
 )
 
 // CoverClient is the client API for Cover service.
@@ -453,8 +453,8 @@ type CoverClient interface {
 	SetOrgFiscalMonth(ctx context.Context, in *SetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*SetOrgFiscalMonthResponse, error)
 	// Get Org's starting month/ fiscal month
 	GetOrgFiscalMonth(ctx context.Context, in *GetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*GetOrgFiscalMonthResponse, error)
-	// WORK-IN-PROGRESS: Leaves the existing organization where the account is linked and process all the other setup also.
-	LeaveOrganization(ctx context.Context, in *LeaveOrganizationRequest, opts ...grpc.CallOption) (*LeaveOrganizationResponse, error)
+	// WORK-IN-PROGRESS: Transfer the account from the original organization to Alphaus payer account
+	TransferOrganization(ctx context.Context, in *TransferOrganizationRequest, opts ...grpc.CallOption) (*TransferOrganizationResponse, error)
 }
 
 type coverClient struct {
@@ -2320,9 +2320,9 @@ func (c *coverClient) GetOrgFiscalMonth(ctx context.Context, in *GetOrgFiscalMon
 	return out, nil
 }
 
-func (c *coverClient) LeaveOrganization(ctx context.Context, in *LeaveOrganizationRequest, opts ...grpc.CallOption) (*LeaveOrganizationResponse, error) {
-	out := new(LeaveOrganizationResponse)
-	err := c.cc.Invoke(ctx, Cover_LeaveOrganization_FullMethodName, in, out, opts...)
+func (c *coverClient) TransferOrganization(ctx context.Context, in *TransferOrganizationRequest, opts ...grpc.CallOption) (*TransferOrganizationResponse, error) {
+	out := new(TransferOrganizationResponse)
+	err := c.cc.Invoke(ctx, Cover_TransferOrganization_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2616,8 +2616,8 @@ type CoverServer interface {
 	SetOrgFiscalMonth(context.Context, *SetOrgFiscalMonthRequest) (*SetOrgFiscalMonthResponse, error)
 	// Get Org's starting month/ fiscal month
 	GetOrgFiscalMonth(context.Context, *GetOrgFiscalMonthRequest) (*GetOrgFiscalMonthResponse, error)
-	// WORK-IN-PROGRESS: Leaves the existing organization where the account is linked and process all the other setup also.
-	LeaveOrganization(context.Context, *LeaveOrganizationRequest) (*LeaveOrganizationResponse, error)
+	// WORK-IN-PROGRESS: Transfer the account from the original organization to Alphaus payer account
+	TransferOrganization(context.Context, *TransferOrganizationRequest) (*TransferOrganizationResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3051,8 +3051,8 @@ func (UnimplementedCoverServer) SetOrgFiscalMonth(context.Context, *SetOrgFiscal
 func (UnimplementedCoverServer) GetOrgFiscalMonth(context.Context, *GetOrgFiscalMonthRequest) (*GetOrgFiscalMonthResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrgFiscalMonth not implemented")
 }
-func (UnimplementedCoverServer) LeaveOrganization(context.Context, *LeaveOrganizationRequest) (*LeaveOrganizationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method LeaveOrganization not implemented")
+func (UnimplementedCoverServer) TransferOrganization(context.Context, *TransferOrganizationRequest) (*TransferOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TransferOrganization not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5703,20 +5703,20 @@ func _Cover_GetOrgFiscalMonth_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_LeaveOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(LeaveOrganizationRequest)
+func _Cover_TransferOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TransferOrganizationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CoverServer).LeaveOrganization(ctx, in)
+		return srv.(CoverServer).TransferOrganization(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cover_LeaveOrganization_FullMethodName,
+		FullMethod: Cover_TransferOrganization_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).LeaveOrganization(ctx, req.(*LeaveOrganizationRequest))
+		return srv.(CoverServer).TransferOrganization(ctx, req.(*TransferOrganizationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6197,8 +6197,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetOrgFiscalMonth_Handler,
 		},
 		{
-			MethodName: "LeaveOrganization",
-			Handler:    _Cover_LeaveOrganization_Handler,
+			MethodName: "TransferOrganization",
+			Handler:    _Cover_TransferOrganization_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
