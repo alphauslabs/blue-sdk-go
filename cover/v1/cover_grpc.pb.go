@@ -158,6 +158,7 @@ const (
 	Cover_GetRecommendation_FullMethodName                       = "/blueapi.cover.v1.Cover/GetRecommendation"
 	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
 	Cover_MarkAsExecuted_FullMethodName                          = "/blueapi.cover.v1.Cover/MarkAsExecuted"
+	Cover_UndoExecutedRecommendation_FullMethodName              = "/blueapi.cover.v1.Cover/UndoExecutedRecommendation"
 	Cover_OptimizationHistory_FullMethodName                     = "/blueapi.cover.v1.Cover/OptimizationHistory"
 	Cover_SetCostGroupEventIndicator_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupEventIndicator"
 	Cover_SetCostGroupAnomalyOptions_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupAnomalyOptions"
@@ -443,6 +444,8 @@ type CoverClient interface {
 	ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error)
 	// Mark a recommendation executed.
 	MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error)
+	// Undo a executed recommendation (For recommendation).
+	UndoExecutedRecommendation(ctx context.Context, in *UndoExecutedRecommendationRequest, opts ...grpc.CallOption) (*UndoExecutedRecommendationResponse, error)
 	// Lists recommendations based on specified criteria.
 	OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error)
 	// Sets Cost group's event indicator
@@ -2275,6 +2278,15 @@ func (c *coverClient) MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequ
 	return out, nil
 }
 
+func (c *coverClient) UndoExecutedRecommendation(ctx context.Context, in *UndoExecutedRecommendationRequest, opts ...grpc.CallOption) (*UndoExecutedRecommendationResponse, error) {
+	out := new(UndoExecutedRecommendationResponse)
+	err := c.cc.Invoke(ctx, Cover_UndoExecutedRecommendation_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error) {
 	out := new(OptimizationHistoryResponse)
 	err := c.cc.Invoke(ctx, Cover_OptimizationHistory_FullMethodName, in, out, opts...)
@@ -2606,6 +2618,8 @@ type CoverServer interface {
 	ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error)
 	// Mark a recommendation executed.
 	MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error)
+	// Undo a executed recommendation (For recommendation).
+	UndoExecutedRecommendation(context.Context, *UndoExecutedRecommendationRequest) (*UndoExecutedRecommendationResponse, error)
 	// Lists recommendations based on specified criteria.
 	OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error)
 	// Sets Cost group's event indicator
@@ -3035,6 +3049,9 @@ func (UnimplementedCoverServer) ExecuteOptimization(context.Context, *ExecuteOpt
 }
 func (UnimplementedCoverServer) MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MarkAsExecuted not implemented")
+}
+func (UnimplementedCoverServer) UndoExecutedRecommendation(context.Context, *UndoExecutedRecommendationRequest) (*UndoExecutedRecommendationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UndoExecutedRecommendation not implemented")
 }
 func (UnimplementedCoverServer) OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OptimizationHistory not implemented")
@@ -5613,6 +5630,24 @@ func _Cover_MarkAsExecuted_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_UndoExecutedRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UndoExecutedRecommendationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UndoExecutedRecommendation(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UndoExecutedRecommendation_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UndoExecutedRecommendation(ctx, req.(*UndoExecutedRecommendationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_OptimizationHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(OptimizationHistoryRequest)
 	if err := dec(in); err != nil {
@@ -6175,6 +6210,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "MarkAsExecuted",
 			Handler:    _Cover_MarkAsExecuted_Handler,
+		},
+		{
+			MethodName: "UndoExecutedRecommendation",
+			Handler:    _Cover_UndoExecutedRecommendation_Handler,
 		},
 		{
 			MethodName: "OptimizationHistory",

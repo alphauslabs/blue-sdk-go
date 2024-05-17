@@ -2217,6 +2217,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.UndoExecutedRecommendationRequest"><span class="badge">M</span>UndoExecutedRecommendationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UndoExecutedRecommendationResponse"><span class="badge">M</span>UndoExecutedRecommendationResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.UpdateAccountAccessRequest"><span class="badge">M</span>UpdateAccountAccessRequest</a>
                 </li>
               
@@ -23532,6 +23540,37 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.UndoExecutedRecommendationRequest">UndoExecutedRecommendationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UndoExecutedRecommendationResponse">UndoExecutedRecommendationResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateAccountAccessRequest">UpdateAccountAccessRequest</h3>
         <p>Request message for the UpdateAccountAccess rpc.</p>
 
@@ -26229,6 +26268,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>UndoExecutedRecommendation</td>
+                <td><a href="#blueapi.cover.v1.UndoExecutedRecommendationRequest">UndoExecutedRecommendationRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UndoExecutedRecommendationResponse">UndoExecutedRecommendationResponse</a></td>
+                <td><p>Undo a executed recommendation (For recommendation).</p></td>
+              </tr>
+            
+              <tr>
                 <td>OptimizationHistory</td>
                 <td><a href="#blueapi.cover.v1.OptimizationHistoryRequest">OptimizationHistoryRequest</a></td>
                 <td><a href="#blueapi.cover.v1.OptimizationHistoryResponse">OptimizationHistoryResponse</a></td>
@@ -27654,6 +27700,16 @@ file in bytes </p></td>
                 <td>MarkAsExecuted</td>
                 <td>POST</td>
                 <td>/v1/recommendations/optimization/executed</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UndoExecutedRecommendation</td>
+                <td>POST</td>
+                <td>/v1/recommendations/optimization/undo</td>
                 <td>*</td>
               </tr>
               
