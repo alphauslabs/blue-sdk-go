@@ -632,6 +632,26 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions"><span class="badge">M</span>CalculatorCostModifierAzureOptions</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Modifier"><span class="badge">M</span>CalculatorCostModifierAzureOptions.Modifier</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Modifier.DescriptionModifier"><span class="badge">M</span>CalculatorCostModifierAzureOptions.Modifier.DescriptionModifier</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Qualifier"><span class="badge">M</span>CalculatorCostModifierAzureOptions.Qualifier</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Qualifier.AndEntry"><span class="badge">M</span>CalculatorCostModifierAzureOptions.Qualifier.AndEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.CheckAccountsRequest"><span class="badge">M</span>CheckAccountsRequest</a>
                 </li>
               
@@ -6745,6 +6765,13 @@ At the moment, for AWS, this is only valid for account type billing groups, not 
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions">CalculatorCostModifierAzureOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -6963,6 +6990,219 @@ You can use the `{{ondemandrate}}` variable in the replacement value part to ref
         
       
         <h3 id="blueapi.cost.v1.CalculatorCostModifierAwsOptions.Qualifier.AndEntry">CalculatorCostModifierAwsOptions.Qualifier.AndEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CalculatorCostModifierAzureOptions">CalculatorCostModifierAzureOptions</h3>
+        <p>Azure-specific options definition.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The group to which the modifier is applied. Accepts billing internal ids. A comma-separated list of billing internal ids is also valid. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The payer id (a.k.a Azure billing id) to which the modifier is applied. A comma-separated list of payer ids is also valid. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The Azure customer id to which the modifier is applied. A comma-separated list of customers is also valid. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The Azure subscription id to which the modifier is applied. A comma-separated list of subscriptions is also valid. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entitlementId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The Azure entitlement id to which the modifier is applied. A comma-separated list of entitlements is also valid. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>qualifiers</td>
+                  <td><a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Qualifier">CalculatorCostModifierAzureOptions.Qualifier</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Conditional qualifiers to further filter the modifier targets. Multiple qualifiers use the logical `or` operator; `qualifiers[0] || qualifiers[1] || qualifiers[n]`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>modifier</td>
+                  <td><a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Modifier">CalculatorCostModifierAzureOptions.Modifier</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>after</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Specifies the modifier id in which this modifier will be applied after. For example, if you have another modifier `mod1` and you create a new modifier with `after` set to `mod1`, the calculator will apply `mod1` first, then this modifier. If `after` is not set, the application sequence for multiple overlapping modifiers will be by update timestamp, newest to oldest. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CalculatorCostModifierAzureOptions.Modifier">CalculatorCostModifierAzureOptions.Modifier</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>formula</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Our modifier formula. The final result should be a number. Integers are converted to floating points.
+
+Supported operators are `*`, `/`, `&#43;`, `-`, and `%`. You can use parenthesis `()` to control precedence. Additional supported operators include `==`, `!=`, `!`, `&gt;`, `&lt;`, `&gt;=`, `&lt;=`, and the ternary operator `? :`, or `cond ? expr1 : expr2`.
+Examples:
+ `1 &#43; 2 * 3` = 7
+ `(1 &#43; 2) * 3` = 9
+ `7.8 % 5` = 2.8
+ `true ? 1.1 : 2.2` = 1.1
+ `1 &gt; 2 ? 1.1 : 2.2` = 2.2
+
+You can use the `cost` variable to reference the original lineitem cost. For example, if you want to add $10 to the cost, you can use the formula: `cost &#43; 10`. For trueunblended-type billing groups, `cost` refers to the calculated trueunblended cost.
+
+The `billableQuantity` variable refers to the billable quantity amount of a lineitem. For example, if you want to use a different rate of $1.5, you can use the formula: `billableQuantity * 1.5`.
+
+The `effectiveUnitPrice` variable refers to the lineitem&#39;s effective unit price as indicated in the Azure invoice.
+
+You can check out this [guide](https://alphauslabs.github.io/docs/guides/aws-cost-mods/) for more examples. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>descriptionModifier</td>
+                  <td><a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Modifier.DescriptionModifier">CalculatorCostModifierAzureOptions.Modifier.DescriptionModifier</a></td>
+                  <td></td>
+                  <td><p>Optional. A simple description modifier. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CalculatorCostModifierAzureOptions.Modifier.DescriptionModifier">CalculatorCostModifierAzureOptions.Modifier.DescriptionModifier</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Add a prefix to the description. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>suffix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Add a suffix to the description. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>replace</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Replace the description with the input. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CalculatorCostModifierAzureOptions.Qualifier">CalculatorCostModifierAzureOptions.Qualifier</h3>
+        <p>A map of "key:value" attribute filters. The key indicates the column name while the value is the filter value prefixed by either "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.</p><p>For example, if you like your modifiers to apply to `productId:CFQ7TTC0LFLX` (Microsoft 365 E3), set to `{"productId":"eq:CFQ7TTC0LFLX"}` or `{"productId":"CFQ7TTC0LFLX"}`. You can also use a regular expression like `{"productId":"re:CFQ7TTC0LFLX|DZH318Z0BQ4L"}`, which means apply to all `Microsoft 365 E3` or `Virtual Machines Ev3 Series` lineitems. Or reverse regexp, such as `{"productId":"!re:^CFQ7TTC0LFLX$"}`, which means apply to all items except `Microsoft 365 E3`. Valid keys are `productId`, `productName`, `skuId`, `skuName`, `subscriptionDescription`, `meterDescription`, and `domainName`.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>and</td>
+                  <td><a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions.Qualifier.AndEntry">CalculatorCostModifierAzureOptions.Qualifier.AndEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CalculatorCostModifierAzureOptions.Qualifier.AndEntry">CalculatorCostModifierAzureOptions.Qualifier.AndEntry</h3>
         <p></p>
 
         
