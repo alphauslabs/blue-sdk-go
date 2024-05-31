@@ -3295,7 +3295,7 @@ type ReadCostsRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. At the moment, `aws`,`azure` and `gcp` are supported.
+	// Required. Supported vendors are `aws`,`azure` and `gcp`.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Optional. If set, reads the usage-based cost details of this group. Only valid for Ripple users. Implied as the parent billing group for Wave(Pro) users.
 	//

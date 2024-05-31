@@ -10657,7 +10657,7 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. At the moment, `aws`,`azure` and `gcp` are supported. </p></td>
+                  <td><p>Required. Supported vendors are `aws`,`azure` and `gcp`. </p></td>
                 </tr>
               
                 <tr>
@@ -11889,7 +11889,9 @@ Similar to the `ReadCosts` API but without the aggregated usages and costs. At t
                 <td><a href="#blueapi.cost.v1.CostItem">CostItem</a> stream</td>
                 <td><p>Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 
-At the moment, the supported `{vendor}` are `aws` and `gcp`. If datetime range parameters are not set, month-to-date (current month) will be returned.</p></td>
+If datetime range parameters are not set, month-to-date (current month) will be returned.
+
+You can refer to this [guide](https://labs.alphaus.cloud/docs/guides/aws-query-costs/) for more examples on how to use this API. Although the guide uses `bluectl`, the parameters are still the same.</p></td>
               </tr>
             
               <tr>
