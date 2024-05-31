@@ -168,9 +168,7 @@ type CostClient interface {
 	GetCostAttributes(ctx context.Context, in *GetCostAttributesRequest, opts ...grpc.CallOption) (*GetCostAttributesResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	//
-	// If datetime range parameters are not set, month-to-date (current month) will be returned.
-	//
-	// You can refer to this [guide](https://labs.alphaus.cloud/docs/guides/aws-query-costs/) for more examples on how to use this API. Although the guide uses `bluectl`, the parameters are still the same.
+	// You can refer to this [guide](https://labs.alphaus.cloud/docs/guides/aws-query-costs/) for more examples on how to use this API. Although the guide uses `bluectl`, the parameters are the same.
 	ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error)
 	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave[Pro]).
 	//
@@ -1145,9 +1143,7 @@ type CostServer interface {
 	GetCostAttributes(context.Context, *GetCostAttributesRequest) (*GetCostAttributesResponse, error)
 	// Reads the usage-based cost details of an organization (Ripple) or billing group (Wave).
 	//
-	// If datetime range parameters are not set, month-to-date (current month) will be returned.
-	//
-	// You can refer to this [guide](https://labs.alphaus.cloud/docs/guides/aws-query-costs/) for more examples on how to use this API. Although the guide uses `bluectl`, the parameters are still the same.
+	// You can refer to this [guide](https://labs.alphaus.cloud/docs/guides/aws-query-costs/) for more examples on how to use this API. Although the guide uses `bluectl`, the parameters are the same.
 	ReadCosts(*ReadCostsRequest, Cost_ReadCostsServer) error
 	// Reads the non-usage-based details of an organization (Ripple) or billing group (Wave[Pro]).
 	//
