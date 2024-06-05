@@ -32,7 +32,7 @@ var _ = utilities.NewDoubleArray
 var _ = metadata.Join
 
 var (
-	filter_Cost_ListPayerAccounts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_Cost_ListPayerAccounts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_ListPayerAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ListPayerAccountsClient, runtime.ServerMetadata, error) {
@@ -149,7 +149,7 @@ func local_request_Cost_GetPayerAccount_0(ctx context.Context, marshaler runtime
 }
 
 var (
-	filter_Cost_GetPayerAccountImportHistory_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "id": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+	filter_Cost_GetPayerAccountImportHistory_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "id": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
 func request_Cost_GetPayerAccountImportHistory_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_GetPayerAccountImportHistoryClient, runtime.ServerMetadata, error) {
@@ -279,11 +279,7 @@ func request_Cost_CreatePayerAccount_0(ctx context.Context, marshaler runtime.Ma
 	var protoReq CreatePayerAccountRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -313,11 +309,7 @@ func local_request_Cost_CreatePayerAccount_0(ctx context.Context, marshaler runt
 	var protoReq CreatePayerAccountRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -416,7 +408,7 @@ func local_request_Cost_DeletePayerAccount_0(ctx context.Context, marshaler runt
 }
 
 var (
-	filter_Cost_ListAccounts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_Cost_ListAccounts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_ListAccounts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ListAccountsClient, runtime.ServerMetadata, error) {
@@ -461,7 +453,7 @@ func request_Cost_ListAccounts_0(ctx context.Context, marshaler runtime.Marshale
 }
 
 var (
-	filter_Cost_ListAccounts_1 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "groupId": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+	filter_Cost_ListAccounts_1 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "groupId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
 func request_Cost_ListAccounts_1(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ListAccountsClient, runtime.ServerMetadata, error) {
@@ -516,7 +508,7 @@ func request_Cost_ListAccounts_1(ctx context.Context, marshaler runtime.Marshale
 }
 
 var (
-	filter_Cost_GetAccount_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "id": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+	filter_Cost_GetAccount_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "id": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
 func request_Cost_GetAccount_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -609,11 +601,7 @@ func request_Cost_CreateAccount_0(ctx context.Context, marshaler runtime.Marshal
 	var protoReq CreateAccountRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -643,11 +631,7 @@ func local_request_Cost_CreateAccount_0(ctx context.Context, marshaler runtime.M
 	var protoReq CreateAccountRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -677,11 +661,7 @@ func request_Cost_UpdateAccount_0(ctx context.Context, marshaler runtime.Marshal
 	var protoReq UpdateAccountRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -721,11 +701,7 @@ func local_request_Cost_UpdateAccount_0(ctx context.Context, marshaler runtime.M
 	var protoReq UpdateAccountRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -834,7 +810,7 @@ func local_request_Cost_DeleteAccount_0(ctx context.Context, marshaler runtime.M
 }
 
 var (
-	filter_Cost_ListTags_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_Cost_ListTags_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_ListTags_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ListTagsClient, runtime.ServerMetadata, error) {
@@ -879,7 +855,7 @@ func request_Cost_ListTags_0(ctx context.Context, marshaler runtime.Marshaler, c
 }
 
 var (
-	filter_Cost_ListTags_1 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "groupId": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+	filter_Cost_ListTags_1 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "groupId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
 func request_Cost_ListTags_1(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ListTagsClient, runtime.ServerMetadata, error) {
@@ -937,11 +913,7 @@ func request_Cost_ListCalculatorRunningAccounts_0(ctx context.Context, marshaler
 	var protoReq ListCalculatorRunningAccountsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1065,11 +1037,7 @@ func request_Cost_CreateCalculatorCostModifier_0(ctx context.Context, marshaler 
 	var protoReq CreateCalculatorCostModifierRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1099,11 +1067,7 @@ func local_request_Cost_CreateCalculatorCostModifier_0(ctx context.Context, mars
 	var protoReq CreateCalculatorCostModifierRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1205,11 +1169,7 @@ func request_Cost_ImportCurFiles_0(ctx context.Context, marshaler runtime.Marsha
 	var protoReq ImportCurFilesRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1222,11 +1182,7 @@ func local_request_Cost_ImportCurFiles_0(ctx context.Context, marshaler runtime.
 	var protoReq ImportCurFilesRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1239,11 +1195,7 @@ func request_Cost_CalculateCosts_0(ctx context.Context, marshaler runtime.Marsha
 	var protoReq CalculateCostsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1273,11 +1225,7 @@ func local_request_Cost_CalculateCosts_0(ctx context.Context, marshaler runtime.
 	var protoReq CalculateCostsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1304,7 +1252,7 @@ func local_request_Cost_CalculateCosts_0(ctx context.Context, marshaler runtime.
 }
 
 var (
-	filter_Cost_ListCalculationsHistory_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_Cost_ListCalculationsHistory_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_ListCalculationsHistory_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -1429,11 +1377,7 @@ func request_Cost_CreateCalculationsSchedule_0(ctx context.Context, marshaler ru
 	var protoReq CreateCalculationsScheduleRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1463,11 +1407,7 @@ func local_request_Cost_CreateCalculationsSchedule_0(ctx context.Context, marsha
 	var protoReq CreateCalculationsScheduleRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1621,11 +1561,7 @@ func request_Cost_CreateCostFilters_0(ctx context.Context, marshaler runtime.Mar
 	var protoReq CreateCostFiltersRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1655,11 +1591,7 @@ func local_request_Cost_CreateCostFilters_0(ctx context.Context, marshaler runti
 	var protoReq CreateCostFiltersRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1689,11 +1621,7 @@ func request_Cost_UpdateCostFilters_0(ctx context.Context, marshaler runtime.Mar
 	var protoReq UpdateCostFiltersRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1733,11 +1661,7 @@ func local_request_Cost_UpdateCostFilters_0(ctx context.Context, marshaler runti
 	var protoReq UpdateCostFiltersRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1849,11 +1773,7 @@ func request_Cost_ExportCostFiltersFile_0(ctx context.Context, marshaler runtime
 	var protoReq ExportCostFiltersFileRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1893,11 +1813,7 @@ func local_request_Cost_ExportCostFiltersFile_0(ctx context.Context, marshaler r
 	var protoReq ExportCostFiltersFileRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1937,11 +1853,7 @@ func request_Cost_ReadCostAttributes_0(ctx context.Context, marshaler runtime.Ma
 	var protoReq ReadCostAttributesRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -1976,7 +1888,7 @@ func request_Cost_ReadCostAttributes_0(ctx context.Context, marshaler runtime.Ma
 }
 
 var (
-	filter_Cost_GetCostAttributes_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_Cost_GetCostAttributes_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_GetCostAttributes_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -2049,11 +1961,7 @@ func request_Cost_ReadCosts_0(ctx context.Context, marshaler runtime.Marshaler, 
 	var protoReq ReadCostsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -2091,11 +1999,7 @@ func request_Cost_ReadAdjustments_0(ctx context.Context, marshaler runtime.Marsh
 	var protoReq ReadAdjustmentsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -2133,11 +2037,7 @@ func request_Cost_ReadTagCosts_0(ctx context.Context, marshaler runtime.Marshale
 	var protoReq ReadTagCostsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -2175,11 +2075,7 @@ func request_Cost_ReadNonTagCosts_0(ctx context.Context, marshaler runtime.Marsh
 	var protoReq ReadNonTagCostsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -2214,7 +2110,7 @@ func request_Cost_ReadNonTagCosts_0(ctx context.Context, marshaler runtime.Marsh
 }
 
 var (
-	filter_Cost_GetForecasts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 2, 0, 0}, Check: []int{0, 1, 2, 2}}
+	filter_Cost_GetForecasts_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 )
 
 func request_Cost_GetForecasts_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -2284,7 +2180,7 @@ func local_request_Cost_GetForecasts_0(ctx context.Context, marshaler runtime.Ma
 }
 
 var (
-	filter_Cost_GetMonthlyCostForecast_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 2, 4, 6, 0, 0, 0, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 2, 3, 3, 4, 4}}
+	filter_Cost_GetMonthlyCostForecast_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 1, 2, 3, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 3, 4}}
 )
 
 func request_Cost_GetMonthlyCostForecast_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -2394,7 +2290,7 @@ func local_request_Cost_GetMonthlyCostForecast_0(ctx context.Context, marshaler 
 }
 
 var (
-	filter_Cost_GetMonthOnMonthCostForecast_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 2, 4, 6, 0, 0, 0, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 2, 3, 3, 4, 4}}
+	filter_Cost_GetMonthOnMonthCostForecast_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 1, 2, 3, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 3, 4}}
 )
 
 func request_Cost_GetMonthOnMonthCostForecast_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -2504,7 +2400,7 @@ func local_request_Cost_GetMonthOnMonthCostForecast_0(ctx context.Context, marsh
 }
 
 var (
-	filter_Cost_GetMonthToDateCostForecast_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 2, 4, 6, 0, 0, 0, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 2, 3, 3, 4, 4}}
+	filter_Cost_GetMonthToDateCostForecast_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 1, 2, 3, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 3, 4}}
 )
 
 func request_Cost_GetMonthToDateCostForecast_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -2614,7 +2510,7 @@ func local_request_Cost_GetMonthToDateCostForecast_0(ctx context.Context, marsha
 }
 
 var (
-	filter_Cost_GetAccountBudget_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 2, 4, 6, 0, 0, 0, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 2, 3, 3, 4, 4}}
+	filter_Cost_GetAccountBudget_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "level": 1, "id": 2}, Base: []int{1, 1, 2, 3, 0, 0, 0}, Check: []int{0, 1, 1, 1, 2, 3, 4}}
 )
 
 func request_Cost_GetAccountBudget_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -2727,11 +2623,7 @@ func request_Cost_CreateAccountBudget_0(ctx context.Context, marshaler runtime.M
 	var protoReq CreateAccountBudgetRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -2781,11 +2673,7 @@ func local_request_Cost_CreateAccountBudget_0(ctx context.Context, marshaler run
 	var protoReq CreateAccountBudgetRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -2835,11 +2723,7 @@ func request_Cost_UpdateAccountBudget_0(ctx context.Context, marshaler runtime.M
 	var protoReq UpdateAccountBudgetRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -2879,11 +2763,7 @@ func local_request_Cost_UpdateAccountBudget_0(ctx context.Context, marshaler run
 	var protoReq UpdateAccountBudgetRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3067,11 +2947,7 @@ func request_Cost_CreateAccountBudgetAlerts_0(ctx context.Context, marshaler run
 	var protoReq CreateAccountBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3111,11 +2987,7 @@ func local_request_Cost_CreateAccountBudgetAlerts_0(ctx context.Context, marshal
 	var protoReq CreateAccountBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3155,11 +3027,7 @@ func request_Cost_UpdateAccountBudgetAlerts_0(ctx context.Context, marshaler run
 	var protoReq UpdateAccountBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3199,11 +3067,7 @@ func local_request_Cost_UpdateAccountBudgetAlerts_0(ctx context.Context, marshal
 	var protoReq UpdateAccountBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3315,11 +3179,7 @@ func request_Cost_ReadBudgetAlerts_0(ctx context.Context, marshaler runtime.Mars
 	var protoReq ReadBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3392,11 +3252,7 @@ func request_Cost_CreateBudgetAlerts_0(ctx context.Context, marshaler runtime.Ma
 	var protoReq CreateBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3409,11 +3265,7 @@ func local_request_Cost_CreateBudgetAlerts_0(ctx context.Context, marshaler runt
 	var protoReq CreateBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3426,11 +3278,7 @@ func request_Cost_UpdateBudgetAlerts_0(ctx context.Context, marshaler runtime.Ma
 	var protoReq UpdateBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3460,11 +3308,7 @@ func local_request_Cost_UpdateBudgetAlerts_0(ctx context.Context, marshaler runt
 	var protoReq UpdateBudgetAlertsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3546,11 +3390,7 @@ func request_Cost_GetRecommendations_0(ctx context.Context, marshaler runtime.Ma
 	var protoReq GetRecommendationsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3590,11 +3430,7 @@ func local_request_Cost_GetRecommendations_0(ctx context.Context, marshaler runt
 	var protoReq GetRecommendationsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3634,11 +3470,7 @@ func request_Cost_GetCostReduction_0(ctx context.Context, marshaler runtime.Mars
 	var protoReq GetCostReductionRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3678,11 +3510,7 @@ func local_request_Cost_GetCostReduction_0(ctx context.Context, marshaler runtim
 	var protoReq GetCostReductionRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3719,7 +3547,7 @@ func local_request_Cost_GetCostReduction_0(ctx context.Context, marshaler runtim
 }
 
 var (
-	filter_Cost_GetUtilization_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "orgId": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+	filter_Cost_GetUtilization_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "orgId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
 func request_Cost_GetUtilization_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -3812,11 +3640,7 @@ func request_Cost_GetCoverageOptions_0(ctx context.Context, marshaler runtime.Ma
 	var protoReq GetCoverageOptionsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3856,11 +3680,7 @@ func local_request_Cost_GetCoverageOptions_0(ctx context.Context, marshaler runt
 	var protoReq GetCoverageOptionsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3900,11 +3720,7 @@ func request_Cost_GetCoverageOndemand_0(ctx context.Context, marshaler runtime.M
 	var protoReq GetCoverageOndemandRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3944,11 +3760,7 @@ func local_request_Cost_GetCoverageOndemand_0(ctx context.Context, marshaler run
 	var protoReq GetCoverageOndemandRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -3985,7 +3797,7 @@ func local_request_Cost_GetCoverageOndemand_0(ctx context.Context, marshaler run
 }
 
 var (
-	filter_Cost_GetBreakevenPoint_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "orgId": 1}, Base: []int{1, 2, 4, 0, 0, 0, 0}, Check: []int{0, 1, 1, 2, 2, 3, 3}}
+	filter_Cost_GetBreakevenPoint_0 = &utilities.DoubleArray{Encoding: map[string]int{"vendor": 0, "orgId": 1}, Base: []int{1, 1, 2, 0, 0}, Check: []int{0, 1, 1, 2, 3}}
 )
 
 func request_Cost_GetBreakevenPoint_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -4078,11 +3890,7 @@ func request_Cost_CheckAccountsBelongToMsp_0(ctx context.Context, marshaler runt
 	var protoReq CheckAccountsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -4112,11 +3920,7 @@ func local_request_Cost_CheckAccountsBelongToMsp_0(ctx context.Context, marshale
 	var protoReq CheckAccountsRequest
 	var metadata runtime.ServerMetadata
 
-	newReader, berr := utilities.IOReaderFactory(req.Body)
-	if berr != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", berr)
-	}
-	if err := marshaler.NewDecoder(newReader()).Decode(&protoReq); err != nil && err != io.EOF {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
@@ -5402,21 +5206,21 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 // RegisterCostHandlerFromEndpoint is same as RegisterCostHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
 func RegisterCostHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
-	conn, err := grpc.DialContext(ctx, endpoint, opts...)
+	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
 	}
 	defer func() {
 		if err != nil {
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 			return
 		}
 		go func() {
 			<-ctx.Done()
 			if cerr := conn.Close(); cerr != nil {
-				grpclog.Infof("Failed to close conn to %s: %v", endpoint, cerr)
+				grpclog.Errorf("Failed to close conn to %s: %v", endpoint, cerr)
 			}
 		}()
 	}()
