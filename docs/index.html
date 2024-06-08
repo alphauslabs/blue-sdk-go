@@ -7805,6 +7805,13 @@ Special characters:
                   <td><p>Required if `{vendor}` is `aws`. AWS-specific options. </p></td>
                 </tr>
               
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.cost.v1.CalculatorCostModifierAzureOptions">CalculatorCostModifierAzureOptions</a></td>
+                  <td></td>
+                  <td><p>Required if `{vendor}` is `azure`. Azure-specific options. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -7824,6 +7831,13 @@ Special characters:
               
                 <tr>
                   <td>aws</td>
+                  <td><a href="#blueapi.cost.v1.CalculatorCostModifier">CalculatorCostModifier</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azure</td>
                   <td><a href="#blueapi.cost.v1.CalculatorCostModifier">CalculatorCostModifier</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
@@ -8168,7 +8182,7 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                  <td><p>Required. At the moment, only `aws` and `azure` are supported. </p></td>
                 </tr>
               
                 <tr>
@@ -10091,7 +10105,7 @@ Default: &#39;combined&#39; </p></td>
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                  <td><p>Required. At the moment, only `aws` and `azure` are supported. </p></td>
                 </tr>
               
             </tbody>
