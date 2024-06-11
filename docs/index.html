@@ -2484,6 +2484,29 @@
         
           
           <li>
+            <a href="#pricing%2fv1%2fpricing.proto">pricing/v1/pricing.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#blueapi.pricing.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.pricing.v1.GetInfoResponse"><span class="badge">M</span>GetInfoResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#blueapi.pricing.v1.Pricing"><span class="badge">S</span>Pricing</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#preferences%2fv1%2fpreferences.proto">preferences/v1/preferences.proto</a>
             <ul>
               
@@ -28031,6 +28054,98 @@ file in bytes </p></td>
                 <td>TransferOrganization</td>
                 <td>GET</td>
                 <td>/v1/organizations/transfer/{target}</td>
+                <td></td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="pricing/v1/pricing.proto">pricing/v1/pricing.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="blueapi.pricing.v1.GetInfoRequest">GetInfoRequest</h3>
+        <p>Request message for the Pricing.GetInfo rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.pricing.v1.GetInfoResponse">GetInfoResponse</h3>
+        <p>Response message for the Pricing.GetInfo rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="blueapi.pricing.v1.Pricing">Pricing</h3>
+        <p>Pricing service definition.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GetInfo</td>
+                <td><a href="#blueapi.pricing.v1.GetInfoRequest">GetInfoRequest</a></td>
+                <td><a href="#blueapi.pricing.v1.GetInfoResponse">GetInfoResponse</a></td>
+                <td><p>Test endpoint only.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>GetInfo</td>
+                <td>GET</td>
+                <td>/v0/info</td>
                 <td></td>
               </tr>
               
