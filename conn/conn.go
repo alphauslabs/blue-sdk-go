@@ -92,7 +92,6 @@ func New(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
 		var gopts []grpc.DialOption
 		creds := credentials.NewTLS(&tls.Config{})
 		gopts = append(gopts, grpc.WithTransportCredentials(creds))
-		gopts = append(gopts, grpc.WithBlock())
 		gopts = append(gopts, grpc.WithPerRPCCredentials(
 			session.NewRpcCredentials(session.RpcCredentialsInput{
 				LoginUrl:     co.sess.LoginUrl(),
@@ -121,7 +120,7 @@ func New(ctx context.Context, opts ...ClientOption) (*GrpcClientConn, error) {
 			}))
 		}
 
-		co.conn, err = grpc.DialContext(ctx, co.target, gopts...)
+		co.conn, err = grpc.NewClient(co.target, gopts...)
 		if err != nil {
 			return nil, err
 		}
