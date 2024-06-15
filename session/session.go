@@ -3,7 +3,7 @@ package session
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -112,7 +112,7 @@ func (s *Session) AccessToken() (string, error) {
 	}
 
 	defer resp.Body.Close()
-	body, err = ioutil.ReadAll(resp.Body)
+	body, err = io.ReadAll(resp.Body)
 	if (resp.StatusCode / 100) != 2 {
 		return token, fmt.Errorf(resp.Status)
 	}
