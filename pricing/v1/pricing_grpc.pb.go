@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Pricing_GetInfo_FullMethodName = "/blueapi.pricing.v1.Pricing/GetInfo"
+	Pricing_GetInfo_FullMethodName    = "/blueapi.pricing.v1.Pricing/GetInfo"
+	Pricing_GetEC2Info_FullMethodName = "/blueapi.pricing.v1.Pricing/GetEC2Info"
 )
 
 // PricingClient is the client API for Pricing service.
@@ -30,6 +31,8 @@ const (
 type PricingClient interface {
 	// Test endpoint only.
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
+	// EC2 service pricing endpoint
+	GetEC2Info(ctx context.Context, in *GetEC2InfoRequest, opts ...grpc.CallOption) (*GetEC2InfoResponse, error)
 }
 
 type pricingClient struct {
@@ -50,6 +53,16 @@ func (c *pricingClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ..
 	return out, nil
 }
 
+func (c *pricingClient) GetEC2Info(ctx context.Context, in *GetEC2InfoRequest, opts ...grpc.CallOption) (*GetEC2InfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetEC2InfoResponse)
+	err := c.cc.Invoke(ctx, Pricing_GetEC2Info_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PricingServer is the server API for Pricing service.
 // All implementations must embed UnimplementedPricingServer
 // for forward compatibility
@@ -58,6 +71,8 @@ func (c *pricingClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ..
 type PricingServer interface {
 	// Test endpoint only.
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
+	// EC2 service pricing endpoint
+	GetEC2Info(context.Context, *GetEC2InfoRequest) (*GetEC2InfoResponse, error)
 	mustEmbedUnimplementedPricingServer()
 }
 
@@ -67,6 +82,9 @@ type UnimplementedPricingServer struct {
 
 func (UnimplementedPricingServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
+}
+func (UnimplementedPricingServer) GetEC2Info(context.Context, *GetEC2InfoRequest) (*GetEC2InfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetEC2Info not implemented")
 }
 func (UnimplementedPricingServer) mustEmbedUnimplementedPricingServer() {}
 
@@ -99,6 +117,24 @@ func _Pricing_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Pricing_GetEC2Info_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetEC2InfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PricingServer).GetEC2Info(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Pricing_GetEC2Info_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PricingServer).GetEC2Info(ctx, req.(*GetEC2InfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Pricing_ServiceDesc is the grpc.ServiceDesc for Pricing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -109,6 +145,10 @@ var Pricing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInfo",
 			Handler:    _Pricing_GetInfo_Handler,
+		},
+		{
+			MethodName: "GetEC2Info",
+			Handler:    _Pricing_GetEC2Info_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
