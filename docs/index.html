@@ -17857,6 +17857,13 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><p>AWS payer acount, GCP billing account, Azure Payer account </p></td>
                 </tr>
               
+                <tr>
+                  <td>tagValue</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Tag Value. Contains tag value of the input tag key. Only used if groupBy is set to tag </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -20398,6 +20405,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 || filter2 || filter3, etc. Discarded when `groupByColumns` field is set or if `groupByMonth` is true. </p></td>
                 </tr>
               
+                <tr>
+                  <td>tagKey</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Tag key, only used when groupBy is set to `tag`. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -20446,6 +20460,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>repeated</td>
                   <td><p>Optional. A list of filtering options specific for tags. 
 Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 || filter2 || filter3, etc. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tagKey</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Tag key, only used when groupBy is set to `tag`. </p></td>
                 </tr>
               
             </tbody>
@@ -20603,6 +20624,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><a href="#blueapi.cover.v1.ReadCostsRequestOptionsFilters">ReadCostsRequestOptionsFilters</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tagKey</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Tag key, only used when groupBy is set to `tag`. </p></td>
                 </tr>
               
             </tbody>
