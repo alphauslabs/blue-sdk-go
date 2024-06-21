@@ -165,6 +165,7 @@ const (
 	Cover_SetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/SetOrgFiscalMonth"
 	Cover_GetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/GetOrgFiscalMonth"
 	Cover_TransferOrganization_FullMethodName                    = "/blueapi.cover.v1.Cover/TransferOrganization"
+	Cover_UpdateCostGroupCreationUI_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateCostGroupCreationUI"
 )
 
 // CoverClient is the client API for Cover service.
@@ -460,6 +461,8 @@ type CoverClient interface {
 	GetOrgFiscalMonth(ctx context.Context, in *GetOrgFiscalMonthRequest, opts ...grpc.CallOption) (*GetOrgFiscalMonthResponse, error)
 	// WORK-IN-PROGRESS: Transfer the account from the original organization to Alphaus payer account
 	TransferOrganization(ctx context.Context, in *TransferOrganizationRequest, opts ...grpc.CallOption) (*TransferOrganizationResponse, error)
+	// WORK-IN-PROGRESS: Set user preference in cost group creation UI
+	UpdateCostGroupCreationUI(ctx context.Context, in *UpdateCostGroupCreationUIRequest, opts ...grpc.CallOption) (*UpdateCostGroupCreationUIResponse, error)
 }
 
 type coverClient struct {
@@ -2487,6 +2490,16 @@ func (c *coverClient) TransferOrganization(ctx context.Context, in *TransferOrga
 	return out, nil
 }
 
+func (c *coverClient) UpdateCostGroupCreationUI(ctx context.Context, in *UpdateCostGroupCreationUIRequest, opts ...grpc.CallOption) (*UpdateCostGroupCreationUIResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateCostGroupCreationUIResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateCostGroupCreationUI_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2780,6 +2793,8 @@ type CoverServer interface {
 	GetOrgFiscalMonth(context.Context, *GetOrgFiscalMonthRequest) (*GetOrgFiscalMonthResponse, error)
 	// WORK-IN-PROGRESS: Transfer the account from the original organization to Alphaus payer account
 	TransferOrganization(context.Context, *TransferOrganizationRequest) (*TransferOrganizationResponse, error)
+	// WORK-IN-PROGRESS: Set user preference in cost group creation UI
+	UpdateCostGroupCreationUI(context.Context, *UpdateCostGroupCreationUIRequest) (*UpdateCostGroupCreationUIResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3218,6 +3233,9 @@ func (UnimplementedCoverServer) GetOrgFiscalMonth(context.Context, *GetOrgFiscal
 }
 func (UnimplementedCoverServer) TransferOrganization(context.Context, *TransferOrganizationRequest) (*TransferOrganizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TransferOrganization not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostGroupCreationUI(context.Context, *UpdateCostGroupCreationUIRequest) (*UpdateCostGroupCreationUIResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupCreationUI not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5904,6 +5922,24 @@ func _Cover_TransferOrganization_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_UpdateCostGroupCreationUI_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostGroupCreationUIRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostGroupCreationUI(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateCostGroupCreationUI_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostGroupCreationUI(ctx, req.(*UpdateCostGroupCreationUIRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6386,6 +6422,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TransferOrganization",
 			Handler:    _Cover_TransferOrganization_Handler,
+		},
+		{
+			MethodName: "UpdateCostGroupCreationUI",
+			Handler:    _Cover_UpdateCostGroupCreationUI_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

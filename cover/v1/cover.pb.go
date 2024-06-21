@@ -16154,6 +16154,100 @@ func (x *TransferOrganizationResponse) GetTarget() string {
 	return ""
 }
 
+type UpdateCostGroupCreationUIRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UseNewCostGroupCreationUI bool `protobuf:"varint,1,opt,name=useNewCostGroupCreationUI,proto3" json:"useNewCostGroupCreationUI,omitempty"`
+}
+
+func (x *UpdateCostGroupCreationUIRequest) Reset() {
+	*x = UpdateCostGroupCreationUIRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cover_v1_cover_proto_msgTypes[260]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateCostGroupCreationUIRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCostGroupCreationUIRequest) ProtoMessage() {}
+
+func (x *UpdateCostGroupCreationUIRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cover_v1_cover_proto_msgTypes[260]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCostGroupCreationUIRequest.ProtoReflect.Descriptor instead.
+func (*UpdateCostGroupCreationUIRequest) Descriptor() ([]byte, []int) {
+	return file_cover_v1_cover_proto_rawDescGZIP(), []int{260}
+}
+
+func (x *UpdateCostGroupCreationUIRequest) GetUseNewCostGroupCreationUI() bool {
+	if x != nil {
+		return x.UseNewCostGroupCreationUI
+	}
+	return false
+}
+
+type UpdateCostGroupCreationUIResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserData *cover.UserData `protobuf:"bytes,1,opt,name=userData,proto3" json:"userData,omitempty"`
+}
+
+func (x *UpdateCostGroupCreationUIResponse) Reset() {
+	*x = UpdateCostGroupCreationUIResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_cover_v1_cover_proto_msgTypes[261]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateCostGroupCreationUIResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCostGroupCreationUIResponse) ProtoMessage() {}
+
+func (x *UpdateCostGroupCreationUIResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_cover_v1_cover_proto_msgTypes[261]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCostGroupCreationUIResponse.ProtoReflect.Descriptor instead.
+func (*UpdateCostGroupCreationUIResponse) Descriptor() ([]byte, []int) {
+	return file_cover_v1_cover_proto_rawDescGZIP(), []int{261}
+}
+
+func (x *UpdateCostGroupCreationUIResponse) GetUserData() *cover.UserData {
+	if x != nil {
+		return x.UserData
+	}
+	return nil
+}
+
 var File_cover_v1_cover_proto protoreflect.FileDescriptor
 
 var file_cover_v1_cover_proto_rawDesc = []byte{
@@ -18158,11 +18252,23 @@ var file_cover_v1_cover_proto_rawDesc = []byte{
 	0x6e, 0x73, 0x66, 0x65, 0x72, 0x4f, 0x72, 0x67, 0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f,
 	0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x74, 0x61, 0x72,
 	0x67, 0x65, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x74, 0x61, 0x72, 0x67, 0x65,
-	0x74, 0x2a, 0x3f, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x0b, 0x0a, 0x07, 0x50,
+	0x74, 0x22, 0x60, 0x0a, 0x20, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x73, 0x74, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x43, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x55, 0x49, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x3c, 0x0a, 0x19, 0x75, 0x73, 0x65, 0x4e, 0x65, 0x77, 0x43,
+	0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x55, 0x49, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x19, 0x75, 0x73, 0x65, 0x4e, 0x65, 0x77,
+	0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x55, 0x49, 0x22, 0x5c, 0x0a, 0x21, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x73,
+	0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x55, 0x49,
+	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x37, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x44, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x62, 0x6c, 0x75,
+	0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x44, 0x61, 0x74, 0x61, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x44, 0x61, 0x74,
+	0x61, 0x2a, 0x3f, 0x0a, 0x06, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x0b, 0x0a, 0x07, 0x50,
 	0x45, 0x4e, 0x44, 0x49, 0x4e, 0x47, 0x10, 0x00, 0x12, 0x0f, 0x0a, 0x0b, 0x49, 0x4e, 0x5f, 0x50,
 	0x52, 0x4f, 0x47, 0x52, 0x45, 0x53, 0x53, 0x10, 0x01, 0x12, 0x0b, 0x0a, 0x07, 0x53, 0x55, 0x43,
 	0x43, 0x45, 0x53, 0x53, 0x10, 0x02, 0x12, 0x0a, 0x0a, 0x06, 0x46, 0x41, 0x49, 0x4c, 0x45, 0x44,
-	0x10, 0x03, 0x32, 0xa1, 0xa1, 0x01, 0x0a, 0x05, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x12, 0x77, 0x0a,
+	0x10, 0x03, 0x32, 0xcd, 0xa2, 0x01, 0x0a, 0x05, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x12, 0x77, 0x0a,
 	0x0a, 0x4f, 0x6e, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x4f, 0x72, 0x67, 0x12, 0x23, 0x2e, 0x62, 0x6c,
 	0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x4f,
 	0x6e, 0x62, 0x6f, 0x61, 0x72, 0x64, 0x4f, 0x72, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
@@ -19442,22 +19548,33 @@ var file_cover_v1_cover_proto_rawDesc = []byte{
 	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22,
 	0x2b, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x25, 0x12, 0x23, 0x2f, 0x76, 0x31, 0x2f, 0x6f, 0x72, 0x67,
 	0x61, 0x6e, 0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2f, 0x74, 0x72, 0x61, 0x6e, 0x73,
-	0x66, 0x65, 0x72, 0x2f, 0x7b, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x7d, 0x1a, 0x98, 0x01, 0x92,
-	0x41, 0x94, 0x01, 0x12, 0x43, 0x28, 0x41, 0x4c, 0x50, 0x48, 0x41, 0x29, 0x20, 0x43, 0x6f, 0x76,
-	0x65, 0x72, 0x20, 0x41, 0x50, 0x49, 0x2e, 0x20, 0x42, 0x61, 0x73, 0x65, 0x20, 0x55, 0x52, 0x4c,
-	0x3a, 0x20, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x6c,
-	0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x2f, 0x62, 0x6c,
-	0x75, 0x65, 0x2f, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x1a, 0x4d, 0x0a, 0x12, 0x53, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x20, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x37,
-	0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63,
-	0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62,
-	0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2f, 0x74, 0x72, 0x65, 0x65, 0x2f, 0x6d, 0x61, 0x69, 0x6e,
-	0x2f, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2f, 0x42, 0x4b, 0x0a, 0x17, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76,
-	0x65, 0x72, 0x42, 0x0a, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x24,
-	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61,
-	0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2f, 0x63,
-	0x6f, 0x76, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x66, 0x65, 0x72, 0x2f, 0x7b, 0x74, 0x61, 0x72, 0x67, 0x65, 0x74, 0x7d, 0x12, 0xa9, 0x01, 0x0a,
+	0x19, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70,
+	0x43, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x55, 0x49, 0x12, 0x32, 0x2e, 0x62, 0x6c, 0x75,
+	0x65, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x72, 0x65,
+	0x61, 0x74, 0x69, 0x6f, 0x6e, 0x55, 0x49, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x33,
+	0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x76,
+	0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75,
+	0x70, 0x43, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x55, 0x49, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x3a, 0x01, 0x2a, 0x1a, 0x18,
+	0x2f, 0x76, 0x31, 0x2f, 0x6d, 0x65, 0x2f, 0x63, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x6f, 0x75, 0x70,
+	0x63, 0x72, 0x65, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x1a, 0x98, 0x01, 0x92, 0x41, 0x94, 0x01, 0x12,
+	0x43, 0x28, 0x41, 0x4c, 0x50, 0x48, 0x41, 0x29, 0x20, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x20, 0x41,
+	0x50, 0x49, 0x2e, 0x20, 0x42, 0x61, 0x73, 0x65, 0x20, 0x55, 0x52, 0x4c, 0x3a, 0x20, 0x68, 0x74,
+	0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75,
+	0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2f, 0x63,
+	0x6f, 0x76, 0x65, 0x72, 0x1a, 0x4d, 0x0a, 0x12, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x20,
+	0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x37, 0x68, 0x74, 0x74, 0x70,
+	0x73, 0x3a, 0x2f, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61,
+	0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x61,
+	0x70, 0x69, 0x2f, 0x74, 0x72, 0x65, 0x65, 0x2f, 0x6d, 0x61, 0x69, 0x6e, 0x2f, 0x63, 0x6f, 0x76,
+	0x65, 0x72, 0x2f, 0x42, 0x4b, 0x0a, 0x17, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70,
+	0x68, 0x61, 0x75, 0x73, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x42, 0x0a,
+	0x43, 0x6f, 0x76, 0x65, 0x72, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x24, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61,
+	0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x76, 0x65, 0x72,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -19473,7 +19590,7 @@ func file_cover_v1_cover_proto_rawDescGZIP() []byte {
 }
 
 var file_cover_v1_cover_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_cover_v1_cover_proto_msgTypes = make([]protoimpl.MessageInfo, 263)
+var file_cover_v1_cover_proto_msgTypes = make([]protoimpl.MessageInfo, 265)
 var file_cover_v1_cover_proto_goTypes = []any{
 	(Status)(0),                                             // 0: blueapi.cover.v1.Status
 	(*OnboardOrgRequest)(nil),                               // 1: blueapi.cover.v1.OnboardOrgRequest
@@ -19736,97 +19853,99 @@ var file_cover_v1_cover_proto_goTypes = []any{
 	(*GetOrgFiscalMonthResponse)(nil),                       // 258: blueapi.cover.v1.GetOrgFiscalMonthResponse
 	(*TransferOrganizationRequest)(nil),                     // 259: blueapi.cover.v1.TransferOrganizationRequest
 	(*TransferOrganizationResponse)(nil),                    // 260: blueapi.cover.v1.TransferOrganizationResponse
-	nil,                                                     // 261: blueapi.cover.v1.ListAssetsFilters.AndFiltersEntry
-	nil,                                                     // 262: blueapi.cover.v1.ReadCostsRequestOptionsFilters.AndFiltersEntry
-	nil,                                                     // 263: blueapi.cover.v1.Criteria.AndEntry
-	(*cover.UserData)(nil),                                  // 264: blueapi.api.cover.UserData
-	(*cover.MemberCostGroup)(nil),                           // 265: blueapi.api.cover.MemberCostGroup
-	(*cover.ViewData)(nil),                                  // 266: blueapi.api.cover.ViewData
-	(*cover.ViewList)(nil),                                  // 267: blueapi.api.cover.ViewList
-	(*cover.Favorites)(nil),                                 // 268: blueapi.api.cover.Favorites
-	(*cover.WidgetData)(nil),                                // 269: blueapi.api.cover.WidgetData
-	(*cover.ViewLayout)(nil),                                // 270: blueapi.api.cover.ViewLayout
-	(*structpb.Struct)(nil),                                 // 271: google.protobuf.Struct
-	(*cover.LayoutRequests)(nil),                            // 272: blueapi.api.cover.LayoutRequests
-	(*cover.SideMenuState)(nil),                             // 273: blueapi.api.cover.SideMenuState
-	(*cover.Combinations)(nil),                              // 274: blueapi.api.cover.Combinations
-	(*cover.CostGroupData)(nil),                             // 275: blueapi.api.cover.CostGroupData
-	(*cover.RegistrationStatus)(nil),                        // 276: blueapi.api.cover.RegistrationStatus
-	(*cover.Account)(nil),                                   // 277: blueapi.api.cover.Account
-	(*cover.AwsCostForecast)(nil),                           // 278: blueapi.api.cover.AwsCostForecast
-	(*cover.ResourceData)(nil),                              // 279: blueapi.api.cover.ResourceData
-	(*cover.TagData)(nil),                                   // 280: blueapi.api.cover.TagData
-	(*cover.GcpOptions)(nil),                                // 281: blueapi.api.cover.GcpOptions
-	(*cover.AzureOptions)(nil),                              // 282: blueapi.api.cover.AzureOptions
-	(*cover.AwsOptions)(nil),                                // 283: blueapi.api.cover.AwsOptions
-	(*cover.Result)(nil),                                    // 284: blueapi.api.cover.Result
-	(*cover.Category)(nil),                                  // 285: blueapi.api.cover.Category
-	(*cover.AlertData)(nil),                                 // 286: blueapi.api.cover.AlertData
-	(*cover.ChannelData)(nil),                               // 287: blueapi.api.cover.ChannelData
-	(*cover.AwsInputs)(nil),                                 // 288: blueapi.api.cover.AwsInputs
-	(*cover.AzureInputs)(nil),                               // 289: blueapi.api.cover.AzureInputs
-	(*cover.GcpInputs)(nil),                                 // 290: blueapi.api.cover.GcpInputs
-	(*cover.AwsDiscountRecommendations)(nil),                // 291: blueapi.api.cover.AwsDiscountRecommendations
-	(*cover.AzureDiscountRecommendations)(nil),              // 292: blueapi.api.cover.AzureDiscountRecommendations
-	(*cover.GcpDiscountRecommendations)(nil),                // 293: blueapi.api.cover.GcpDiscountRecommendations
-	(*cover.AlertCostGroup)(nil),                            // 294: blueapi.api.cover.AlertCostGroup
-	(*cover.AlertChannels)(nil),                             // 295: blueapi.api.cover.AlertChannels
-	(*cover.BudgetData)(nil),                                // 296: blueapi.api.cover.BudgetData
-	(*cover.ExecutiveSummary)(nil),                          // 297: blueapi.api.cover.ExecutiveSummary
-	(*cover.OptimizationRecommendationSummary)(nil),         // 298: blueapi.api.cover.OptimizationRecommendationSummary
-	(*cover.SavingsSummary)(nil),                            // 299: blueapi.api.cover.SavingsSummary
-	(*cover.AWSRecommendations)(nil),                        // 300: blueapi.api.cover.AWSRecommendations
-	(*cover.ExecutedRecommendationDetails)(nil),             // 301: blueapi.api.cover.ExecutedRecommendationDetails
-	(*cover.EventIndicator)(nil),                            // 302: blueapi.api.cover.EventIndicator
-	(*cover.AnomalyOptions)(nil),                            // 303: blueapi.api.cover.AnomalyOptions
-	(*emptypb.Empty)(nil),                                   // 304: google.protobuf.Empty
-	(*protos.Operation)(nil),                                // 305: protos.Operation
+	(*UpdateCostGroupCreationUIRequest)(nil),                // 261: blueapi.cover.v1.UpdateCostGroupCreationUIRequest
+	(*UpdateCostGroupCreationUIResponse)(nil),               // 262: blueapi.cover.v1.UpdateCostGroupCreationUIResponse
+	nil,                                             // 263: blueapi.cover.v1.ListAssetsFilters.AndFiltersEntry
+	nil,                                             // 264: blueapi.cover.v1.ReadCostsRequestOptionsFilters.AndFiltersEntry
+	nil,                                             // 265: blueapi.cover.v1.Criteria.AndEntry
+	(*cover.UserData)(nil),                          // 266: blueapi.api.cover.UserData
+	(*cover.MemberCostGroup)(nil),                   // 267: blueapi.api.cover.MemberCostGroup
+	(*cover.ViewData)(nil),                          // 268: blueapi.api.cover.ViewData
+	(*cover.ViewList)(nil),                          // 269: blueapi.api.cover.ViewList
+	(*cover.Favorites)(nil),                         // 270: blueapi.api.cover.Favorites
+	(*cover.WidgetData)(nil),                        // 271: blueapi.api.cover.WidgetData
+	(*cover.ViewLayout)(nil),                        // 272: blueapi.api.cover.ViewLayout
+	(*structpb.Struct)(nil),                         // 273: google.protobuf.Struct
+	(*cover.LayoutRequests)(nil),                    // 274: blueapi.api.cover.LayoutRequests
+	(*cover.SideMenuState)(nil),                     // 275: blueapi.api.cover.SideMenuState
+	(*cover.Combinations)(nil),                      // 276: blueapi.api.cover.Combinations
+	(*cover.CostGroupData)(nil),                     // 277: blueapi.api.cover.CostGroupData
+	(*cover.RegistrationStatus)(nil),                // 278: blueapi.api.cover.RegistrationStatus
+	(*cover.Account)(nil),                           // 279: blueapi.api.cover.Account
+	(*cover.AwsCostForecast)(nil),                   // 280: blueapi.api.cover.AwsCostForecast
+	(*cover.ResourceData)(nil),                      // 281: blueapi.api.cover.ResourceData
+	(*cover.TagData)(nil),                           // 282: blueapi.api.cover.TagData
+	(*cover.GcpOptions)(nil),                        // 283: blueapi.api.cover.GcpOptions
+	(*cover.AzureOptions)(nil),                      // 284: blueapi.api.cover.AzureOptions
+	(*cover.AwsOptions)(nil),                        // 285: blueapi.api.cover.AwsOptions
+	(*cover.Result)(nil),                            // 286: blueapi.api.cover.Result
+	(*cover.Category)(nil),                          // 287: blueapi.api.cover.Category
+	(*cover.AlertData)(nil),                         // 288: blueapi.api.cover.AlertData
+	(*cover.ChannelData)(nil),                       // 289: blueapi.api.cover.ChannelData
+	(*cover.AwsInputs)(nil),                         // 290: blueapi.api.cover.AwsInputs
+	(*cover.AzureInputs)(nil),                       // 291: blueapi.api.cover.AzureInputs
+	(*cover.GcpInputs)(nil),                         // 292: blueapi.api.cover.GcpInputs
+	(*cover.AwsDiscountRecommendations)(nil),        // 293: blueapi.api.cover.AwsDiscountRecommendations
+	(*cover.AzureDiscountRecommendations)(nil),      // 294: blueapi.api.cover.AzureDiscountRecommendations
+	(*cover.GcpDiscountRecommendations)(nil),        // 295: blueapi.api.cover.GcpDiscountRecommendations
+	(*cover.AlertCostGroup)(nil),                    // 296: blueapi.api.cover.AlertCostGroup
+	(*cover.AlertChannels)(nil),                     // 297: blueapi.api.cover.AlertChannels
+	(*cover.BudgetData)(nil),                        // 298: blueapi.api.cover.BudgetData
+	(*cover.ExecutiveSummary)(nil),                  // 299: blueapi.api.cover.ExecutiveSummary
+	(*cover.OptimizationRecommendationSummary)(nil), // 300: blueapi.api.cover.OptimizationRecommendationSummary
+	(*cover.SavingsSummary)(nil),                    // 301: blueapi.api.cover.SavingsSummary
+	(*cover.AWSRecommendations)(nil),                // 302: blueapi.api.cover.AWSRecommendations
+	(*cover.ExecutedRecommendationDetails)(nil),     // 303: blueapi.api.cover.ExecutedRecommendationDetails
+	(*cover.EventIndicator)(nil),                    // 304: blueapi.api.cover.EventIndicator
+	(*cover.AnomalyOptions)(nil),                    // 305: blueapi.api.cover.AnomalyOptions
+	(*emptypb.Empty)(nil),                           // 306: google.protobuf.Empty
+	(*protos.Operation)(nil),                        // 307: protos.Operation
 }
 var file_cover_v1_cover_proto_depIdxs = []int32{
-	264, // 0: blueapi.cover.v1.OnboardOrgResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 1: blueapi.cover.v1.ActivateUserResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 2: blueapi.cover.v1.CreateMemberResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 3: blueapi.cover.v1.GetMembersResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 4: blueapi.cover.v1.GetMemberDetailsResponse.userData:type_name -> blueapi.api.cover.UserData
-	265, // 5: blueapi.cover.v1.GetMemberCostGroupResponse.costGroups:type_name -> blueapi.api.cover.MemberCostGroup
-	264, // 6: blueapi.cover.v1.UpdateMemberPermissionResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 7: blueapi.cover.v1.GetUserDetailsResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 8: blueapi.cover.v1.UpdateUserAvatarResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 9: blueapi.cover.v1.UpdateUserIconResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 10: blueapi.cover.v1.UpdateUserColorThemeResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 11: blueapi.cover.v1.UpdateUserNameResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 12: blueapi.cover.v1.UpdateUserEmailResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 13: blueapi.cover.v1.UpdateUserMainViewResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 14: blueapi.cover.v1.ResetUserPasswordResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 15: blueapi.cover.v1.UpdateUserLocaleResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 16: blueapi.cover.v1.UpdateUserAppThemeResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 17: blueapi.cover.v1.UpdateUserTimezoneResponse.userData:type_name -> blueapi.api.cover.UserData
-	264, // 18: blueapi.cover.v1.UpdateUserAttributesResponse.userData:type_name -> blueapi.api.cover.UserData
-	266, // 19: blueapi.cover.v1.CreateViewResponse.viewData:type_name -> blueapi.api.cover.ViewData
-	267, // 20: blueapi.cover.v1.GetViewsResponse.viewList:type_name -> blueapi.api.cover.ViewList
-	266, // 21: blueapi.cover.v1.GetCurrentViewResponse.viewData:type_name -> blueapi.api.cover.ViewData
-	268, // 22: blueapi.cover.v1.GetFavoriteViewsResponse.favorites:type_name -> blueapi.api.cover.Favorites
-	269, // 23: blueapi.cover.v1.UpdateViewLayoutRequest.layout:type_name -> blueapi.api.cover.WidgetData
-	270, // 24: blueapi.cover.v1.UpdateViewLayoutResponse.layout:type_name -> blueapi.api.cover.ViewLayout
-	271, // 25: blueapi.cover.v1.UpdateViewWidgetRequest.options:type_name -> google.protobuf.Struct
-	272, // 26: blueapi.cover.v1.UpdateViewWidgetRequest.requests:type_name -> blueapi.api.cover.LayoutRequests
-	269, // 27: blueapi.cover.v1.UpdateViewWidgetResponse.widgetData:type_name -> blueapi.api.cover.WidgetData
-	266, // 28: blueapi.cover.v1.UpdateViewColorThemeResponse.viewData:type_name -> blueapi.api.cover.ViewData
-	273, // 29: blueapi.cover.v1.UpdateSideMenuStateRequest.sidemenustate:type_name -> blueapi.api.cover.SideMenuState
-	274, // 30: blueapi.cover.v1.CreateCostGroupRequest.combinations:type_name -> blueapi.api.cover.Combinations
-	275, // 31: blueapi.cover.v1.CreateCostGroupResponse.costGroupData:type_name -> blueapi.api.cover.CostGroupData
-	275, // 32: blueapi.cover.v1.GetCostGroupsResponse.costGroupData:type_name -> blueapi.api.cover.CostGroupData
-	275, // 33: blueapi.cover.v1.GetCostGroupDetailsResponse.costGroupData:type_name -> blueapi.api.cover.CostGroupData
-	274, // 34: blueapi.cover.v1.UpdateCostGroupCombinationsRequest.combinations:type_name -> blueapi.api.cover.Combinations
-	274, // 35: blueapi.cover.v1.UpdateCostGroupCombinationsResponse.combinations:type_name -> blueapi.api.cover.Combinations
-	276, // 36: blueapi.cover.v1.AccountAccess.registrationStatus:type_name -> blueapi.api.cover.RegistrationStatus
+	266, // 0: blueapi.cover.v1.OnboardOrgResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 1: blueapi.cover.v1.ActivateUserResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 2: blueapi.cover.v1.CreateMemberResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 3: blueapi.cover.v1.GetMembersResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 4: blueapi.cover.v1.GetMemberDetailsResponse.userData:type_name -> blueapi.api.cover.UserData
+	267, // 5: blueapi.cover.v1.GetMemberCostGroupResponse.costGroups:type_name -> blueapi.api.cover.MemberCostGroup
+	266, // 6: blueapi.cover.v1.UpdateMemberPermissionResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 7: blueapi.cover.v1.GetUserDetailsResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 8: blueapi.cover.v1.UpdateUserAvatarResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 9: blueapi.cover.v1.UpdateUserIconResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 10: blueapi.cover.v1.UpdateUserColorThemeResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 11: blueapi.cover.v1.UpdateUserNameResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 12: blueapi.cover.v1.UpdateUserEmailResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 13: blueapi.cover.v1.UpdateUserMainViewResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 14: blueapi.cover.v1.ResetUserPasswordResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 15: blueapi.cover.v1.UpdateUserLocaleResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 16: blueapi.cover.v1.UpdateUserAppThemeResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 17: blueapi.cover.v1.UpdateUserTimezoneResponse.userData:type_name -> blueapi.api.cover.UserData
+	266, // 18: blueapi.cover.v1.UpdateUserAttributesResponse.userData:type_name -> blueapi.api.cover.UserData
+	268, // 19: blueapi.cover.v1.CreateViewResponse.viewData:type_name -> blueapi.api.cover.ViewData
+	269, // 20: blueapi.cover.v1.GetViewsResponse.viewList:type_name -> blueapi.api.cover.ViewList
+	268, // 21: blueapi.cover.v1.GetCurrentViewResponse.viewData:type_name -> blueapi.api.cover.ViewData
+	270, // 22: blueapi.cover.v1.GetFavoriteViewsResponse.favorites:type_name -> blueapi.api.cover.Favorites
+	271, // 23: blueapi.cover.v1.UpdateViewLayoutRequest.layout:type_name -> blueapi.api.cover.WidgetData
+	272, // 24: blueapi.cover.v1.UpdateViewLayoutResponse.layout:type_name -> blueapi.api.cover.ViewLayout
+	273, // 25: blueapi.cover.v1.UpdateViewWidgetRequest.options:type_name -> google.protobuf.Struct
+	274, // 26: blueapi.cover.v1.UpdateViewWidgetRequest.requests:type_name -> blueapi.api.cover.LayoutRequests
+	271, // 27: blueapi.cover.v1.UpdateViewWidgetResponse.widgetData:type_name -> blueapi.api.cover.WidgetData
+	268, // 28: blueapi.cover.v1.UpdateViewColorThemeResponse.viewData:type_name -> blueapi.api.cover.ViewData
+	275, // 29: blueapi.cover.v1.UpdateSideMenuStateRequest.sidemenustate:type_name -> blueapi.api.cover.SideMenuState
+	276, // 30: blueapi.cover.v1.CreateCostGroupRequest.combinations:type_name -> blueapi.api.cover.Combinations
+	277, // 31: blueapi.cover.v1.CreateCostGroupResponse.costGroupData:type_name -> blueapi.api.cover.CostGroupData
+	277, // 32: blueapi.cover.v1.GetCostGroupsResponse.costGroupData:type_name -> blueapi.api.cover.CostGroupData
+	277, // 33: blueapi.cover.v1.GetCostGroupDetailsResponse.costGroupData:type_name -> blueapi.api.cover.CostGroupData
+	276, // 34: blueapi.cover.v1.UpdateCostGroupCombinationsRequest.combinations:type_name -> blueapi.api.cover.Combinations
+	276, // 35: blueapi.cover.v1.UpdateCostGroupCombinationsResponse.combinations:type_name -> blueapi.api.cover.Combinations
+	278, // 36: blueapi.cover.v1.AccountAccess.registrationStatus:type_name -> blueapi.api.cover.RegistrationStatus
 	111, // 37: blueapi.cover.v1.ListAssetsRequest.awsOptions:type_name -> blueapi.cover.v1.ListAssetsFilters
 	111, // 38: blueapi.cover.v1.ListAssetsRequest.awsPropertiesOptions:type_name -> blueapi.cover.v1.ListAssetsFilters
-	261, // 39: blueapi.cover.v1.ListAssetsFilters.andFilters:type_name -> blueapi.cover.v1.ListAssetsFilters.AndFiltersEntry
+	263, // 39: blueapi.cover.v1.ListAssetsFilters.andFilters:type_name -> blueapi.cover.v1.ListAssetsFilters.AndFiltersEntry
 	111, // 40: blueapi.cover.v1.GetAssetsSummaryRequest.awsOptions:type_name -> blueapi.cover.v1.ListAssetsFilters
 	111, // 41: blueapi.cover.v1.GetAssetsSummaryRequest.awsPropertiesOptions:type_name -> blueapi.cover.v1.ListAssetsFilters
 	115, // 42: blueapi.cover.v1.GetAssetsSummaryResponse.summary:type_name -> blueapi.cover.v1.AssetsSummary
-	277, // 43: blueapi.cover.v1.ResolveCostGroupCombinationsResponse.accounts:type_name -> blueapi.api.cover.Account
+	279, // 43: blueapi.cover.v1.ResolveCostGroupCombinationsResponse.accounts:type_name -> blueapi.api.cover.Account
 	119, // 44: blueapi.cover.v1.GetCostUsageRequest.awsOptions:type_name -> blueapi.cover.v1.GetCostUsageRequestAwsOptions
 	120, // 45: blueapi.cover.v1.GetCostUsageRequest.azureOptions:type_name -> blueapi.cover.v1.GetCostUsageRequestAzureOptions
 	121, // 46: blueapi.cover.v1.GetCostUsageRequest.gcpOptions:type_name -> blueapi.cover.v1.GetCostUsageRequestGcpOptions
@@ -19843,355 +19962,358 @@ var file_cover_v1_cover_proto_depIdxs = []int32{
 	124, // 57: blueapi.cover.v1.GetCostUsageRequestAzureCspOptions.filters:type_name -> blueapi.cover.v1.ReadCostsRequestOptionsFilters
 	124, // 58: blueapi.cover.v1.GetCostUsageRequestAzureCspOptions.tagFilters:type_name -> blueapi.cover.v1.ReadCostsRequestOptionsFilters
 	124, // 59: blueapi.cover.v1.GetCostUsageRequestCustomOptions.filters:type_name -> blueapi.cover.v1.ReadCostsRequestOptionsFilters
-	262, // 60: blueapi.cover.v1.ReadCostsRequestOptionsFilters.andFilters:type_name -> blueapi.cover.v1.ReadCostsRequestOptionsFilters.AndFiltersEntry
-	278, // 61: blueapi.cover.v1.CostItem.forecast:type_name -> blueapi.api.cover.AwsCostForecast
-	279, // 62: blueapi.cover.v1.GetRightSizingRecommendationResponse.resource:type_name -> blueapi.api.cover.ResourceData
+	264, // 60: blueapi.cover.v1.ReadCostsRequestOptionsFilters.andFilters:type_name -> blueapi.cover.v1.ReadCostsRequestOptionsFilters.AndFiltersEntry
+	280, // 61: blueapi.cover.v1.CostItem.forecast:type_name -> blueapi.api.cover.AwsCostForecast
+	281, // 62: blueapi.cover.v1.GetRightSizingRecommendationResponse.resource:type_name -> blueapi.api.cover.ResourceData
 	0,   // 63: blueapi.cover.v1.UploadChargeCodeResponse.status:type_name -> blueapi.cover.v1.Status
-	280, // 64: blueapi.cover.v1.GetTagsResponse.tagData:type_name -> blueapi.api.cover.TagData
-	263, // 65: blueapi.cover.v1.Criteria.and:type_name -> blueapi.cover.v1.Criteria.AndEntry
+	282, // 64: blueapi.cover.v1.GetTagsResponse.tagData:type_name -> blueapi.api.cover.TagData
+	265, // 65: blueapi.cover.v1.Criteria.and:type_name -> blueapi.cover.v1.Criteria.AndEntry
 	152, // 66: blueapi.cover.v1.CostAllocatorDetails.criteria:type_name -> blueapi.cover.v1.Criteria
 	151, // 67: blueapi.cover.v1.CostAllocatorDetails.allocator:type_name -> blueapi.cover.v1.Allocator
 	152, // 68: blueapi.cover.v1.CostAllocatorRequest.criteria:type_name -> blueapi.cover.v1.Criteria
 	151, // 69: blueapi.cover.v1.CostAllocatorRequest.allocator:type_name -> blueapi.cover.v1.Allocator
 	152, // 70: blueapi.cover.v1.CreateAllocatorRequest.criteria:type_name -> blueapi.cover.v1.Criteria
 	151, // 71: blueapi.cover.v1.CreateAllocatorRequest.allocator:type_name -> blueapi.cover.v1.Allocator
-	271, // 72: blueapi.cover.v1.ProxyCreateCompletionRequest.params:type_name -> google.protobuf.Struct
-	281, // 73: blueapi.cover.v1.DataAccess.gcpOptions:type_name -> blueapi.api.cover.GcpOptions
-	282, // 74: blueapi.cover.v1.DataAccess.azureOptions:type_name -> blueapi.api.cover.AzureOptions
-	283, // 75: blueapi.cover.v1.DataAccess.awsOptions:type_name -> blueapi.api.cover.AwsOptions
-	281, // 76: blueapi.cover.v1.RegisterDataAccessRequest.gcpOptions:type_name -> blueapi.api.cover.GcpOptions
-	282, // 77: blueapi.cover.v1.RegisterDataAccessRequest.azureOptions:type_name -> blueapi.api.cover.AzureOptions
-	283, // 78: blueapi.cover.v1.RegisterDataAccessRequest.awsOptions:type_name -> blueapi.api.cover.AwsOptions
-	281, // 79: blueapi.cover.v1.UpdateDataAccessRequest.gcpOptions:type_name -> blueapi.api.cover.GcpOptions
-	282, // 80: blueapi.cover.v1.UpdateDataAccessRequest.azureOptions:type_name -> blueapi.api.cover.AzureOptions
-	283, // 81: blueapi.cover.v1.UpdateDataAccessRequest.awsOptions:type_name -> blueapi.api.cover.AwsOptions
-	284, // 82: blueapi.cover.v1.GetCostGroupAttributeResponse.result:type_name -> blueapi.api.cover.Result
-	280, // 83: blueapi.cover.v1.GetCostGroupAttributeResponse.tagData:type_name -> blueapi.api.cover.TagData
-	285, // 84: blueapi.cover.v1.GetCategoriesResponse.category:type_name -> blueapi.api.cover.Category
-	286, // 85: blueapi.cover.v1.GetAlertsResponse.alertData:type_name -> blueapi.api.cover.AlertData
-	286, // 86: blueapi.cover.v1.CreateAlertResponse.alertData:type_name -> blueapi.api.cover.AlertData
-	286, // 87: blueapi.cover.v1.GetAlertDetailsResponse.alertData:type_name -> blueapi.api.cover.AlertData
-	286, // 88: blueapi.cover.v1.UpdateAlertDetailsResponse.alertData:type_name -> blueapi.api.cover.AlertData
-	287, // 89: blueapi.cover.v1.GetChannelsResponse.channelData:type_name -> blueapi.api.cover.ChannelData
-	287, // 90: blueapi.cover.v1.CreateChannelResponse.channelData:type_name -> blueapi.api.cover.ChannelData
-	287, // 91: blueapi.cover.v1.GetChannelDetailsResponse.channelData:type_name -> blueapi.api.cover.ChannelData
-	287, // 92: blueapi.cover.v1.UpdateChannelDetailsResponse.channelData:type_name -> blueapi.api.cover.ChannelData
-	288, // 93: blueapi.cover.v1.GetDiscountRecommendationsRequest.awsInputs:type_name -> blueapi.api.cover.AwsInputs
-	289, // 94: blueapi.cover.v1.GetDiscountRecommendationsRequest.azureInputs:type_name -> blueapi.api.cover.AzureInputs
-	290, // 95: blueapi.cover.v1.GetDiscountRecommendationsRequest.gcpInputs:type_name -> blueapi.api.cover.GcpInputs
-	291, // 96: blueapi.cover.v1.GetDiscountRecommendationsResponse.awsRecommendations:type_name -> blueapi.api.cover.AwsDiscountRecommendations
-	292, // 97: blueapi.cover.v1.GetDiscountRecommendationsResponse.azureRecommendations:type_name -> blueapi.api.cover.AzureDiscountRecommendations
-	293, // 98: blueapi.cover.v1.GetDiscountRecommendationsResponse.gcpRecommendations:type_name -> blueapi.api.cover.GcpDiscountRecommendations
-	294, // 99: blueapi.cover.v1.DiscountExpiryAlertData.costGroups:type_name -> blueapi.api.cover.AlertCostGroup
-	295, // 100: blueapi.cover.v1.DiscountExpiryAlertData.channels:type_name -> blueapi.api.cover.AlertChannels
-	294, // 101: blueapi.cover.v1.AnomalyAlertData.costGroupId:type_name -> blueapi.api.cover.AlertCostGroup
-	295, // 102: blueapi.cover.v1.AnomalyAlertData.channels:type_name -> blueapi.api.cover.AlertChannels
-	296, // 103: blueapi.cover.v1.ListBudgetsResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
-	296, // 104: blueapi.cover.v1.GetBudgetResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
-	296, // 105: blueapi.cover.v1.CreateBudgetRequest.budgetData:type_name -> blueapi.api.cover.BudgetData
-	296, // 106: blueapi.cover.v1.CreateBudgetResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
-	296, // 107: blueapi.cover.v1.UpdateBudgetRequest.budgetData:type_name -> blueapi.api.cover.BudgetData
-	296, // 108: blueapi.cover.v1.UpdateBudgetResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
-	297, // 109: blueapi.cover.v1.GetReportSummaryResponse.executiveSummary:type_name -> blueapi.api.cover.ExecutiveSummary
-	298, // 110: blueapi.cover.v1.GetReportSummaryResponse.optimizationRecommendationSummary:type_name -> blueapi.api.cover.OptimizationRecommendationSummary
-	299, // 111: blueapi.cover.v1.GetReportSummaryResponse.savingsSummary:type_name -> blueapi.api.cover.SavingsSummary
-	300, // 112: blueapi.cover.v1.GetRecommendationResponse.recommendationData:type_name -> blueapi.api.cover.AWSRecommendations
-	301, // 113: blueapi.cover.v1.OptimizationHistoryResponse.executedRecommendationDetails:type_name -> blueapi.api.cover.ExecutedRecommendationDetails
-	302, // 114: blueapi.cover.v1.SetCostGroupEventIndicatorResponse.eventIndicator:type_name -> blueapi.api.cover.EventIndicator
-	303, // 115: blueapi.cover.v1.SetCostGroupAnomalyOptionsResponse.anomalyOptions:type_name -> blueapi.api.cover.AnomalyOptions
-	1,   // 116: blueapi.cover.v1.Cover.OnboardOrg:input_type -> blueapi.cover.v1.OnboardOrgRequest
-	3,   // 117: blueapi.cover.v1.Cover.InviteMember:input_type -> blueapi.cover.v1.InviteMemberRequest
-	5,   // 118: blueapi.cover.v1.Cover.ActivateUser:input_type -> blueapi.cover.v1.ActivateUserRequest
-	7,   // 119: blueapi.cover.v1.Cover.CreateMember:input_type -> blueapi.cover.v1.CreateMemberRequest
-	9,   // 120: blueapi.cover.v1.Cover.GetMembers:input_type -> blueapi.cover.v1.GetMembersRequest
-	11,  // 121: blueapi.cover.v1.Cover.GetMemberDetails:input_type -> blueapi.cover.v1.GetMemberDetailsRequest
-	13,  // 122: blueapi.cover.v1.Cover.GetMemberCostGroup:input_type -> blueapi.cover.v1.GetMemberCostGroupRequest
-	15,  // 123: blueapi.cover.v1.Cover.UpdateMemberPermission:input_type -> blueapi.cover.v1.UpdateMemberPermissionRequest
-	17,  // 124: blueapi.cover.v1.Cover.GetUserDetails:input_type -> blueapi.cover.v1.GetUserDetailsRequest
-	19,  // 125: blueapi.cover.v1.Cover.UpdateUserAvatar:input_type -> blueapi.cover.v1.UpdateUserAvatarRequest
-	21,  // 126: blueapi.cover.v1.Cover.UpdateUserIcon:input_type -> blueapi.cover.v1.UpdateUserIconRequest
-	23,  // 127: blueapi.cover.v1.Cover.UpdateUserColorTheme:input_type -> blueapi.cover.v1.UpdateUserColorThemeRequest
-	25,  // 128: blueapi.cover.v1.Cover.UpdateUserName:input_type -> blueapi.cover.v1.UpdateUserNameRequest
-	27,  // 129: blueapi.cover.v1.Cover.UpdateUserEmail:input_type -> blueapi.cover.v1.UpdateUserEmailRequest
-	29,  // 130: blueapi.cover.v1.Cover.UpdateUserMainView:input_type -> blueapi.cover.v1.UpdateUserMainViewRequest
-	31,  // 131: blueapi.cover.v1.Cover.ResetUserPassword:input_type -> blueapi.cover.v1.ResetUserPasswordRequest
-	33,  // 132: blueapi.cover.v1.Cover.UpdateUserLocale:input_type -> blueapi.cover.v1.UpdateUserLocaleRequest
-	35,  // 133: blueapi.cover.v1.Cover.UpdateUserAppTheme:input_type -> blueapi.cover.v1.UpdateUserAppThemeRequest
-	37,  // 134: blueapi.cover.v1.Cover.UpdateUserTimezone:input_type -> blueapi.cover.v1.UpdateUserTimezoneRequest
-	39,  // 135: blueapi.cover.v1.Cover.UpdateUserAttributes:input_type -> blueapi.cover.v1.UpdateUserAttributesRequest
-	41,  // 136: blueapi.cover.v1.Cover.DeleteMember:input_type -> blueapi.cover.v1.DeleteMemberRequest
-	43,  // 137: blueapi.cover.v1.Cover.ResetPassword:input_type -> blueapi.cover.v1.ResetPasswordRequest
-	45,  // 138: blueapi.cover.v1.Cover.CreateView:input_type -> blueapi.cover.v1.CreateViewRequest
-	47,  // 139: blueapi.cover.v1.Cover.GetViews:input_type -> blueapi.cover.v1.GetViewsRequest
-	49,  // 140: blueapi.cover.v1.Cover.GetCurrentView:input_type -> blueapi.cover.v1.GetCurrentViewRequest
-	51,  // 141: blueapi.cover.v1.Cover.GetFavoriteViews:input_type -> blueapi.cover.v1.GetFavoriteViewsRequest
-	53,  // 142: blueapi.cover.v1.Cover.PublishView:input_type -> blueapi.cover.v1.PublishViewRequest
-	55,  // 143: blueapi.cover.v1.Cover.AddFavorite:input_type -> blueapi.cover.v1.AddFavoriteRequest
-	57,  // 144: blueapi.cover.v1.Cover.RemoveFavorite:input_type -> blueapi.cover.v1.RemoveFavoriteRequest
-	59,  // 145: blueapi.cover.v1.Cover.UpdateView:input_type -> blueapi.cover.v1.UpdateViewRequest
-	61,  // 146: blueapi.cover.v1.Cover.UpdateViewLayout:input_type -> blueapi.cover.v1.UpdateViewLayoutRequest
-	63,  // 147: blueapi.cover.v1.Cover.UpdateViewWidget:input_type -> blueapi.cover.v1.UpdateViewWidgetRequest
-	65,  // 148: blueapi.cover.v1.Cover.UpdateViewColorTheme:input_type -> blueapi.cover.v1.UpdateViewColorThemeRequest
-	67,  // 149: blueapi.cover.v1.Cover.DeleteView:input_type -> blueapi.cover.v1.DeleteViewRequest
-	69,  // 150: blueapi.cover.v1.Cover.UpdateSideMenuState:input_type -> blueapi.cover.v1.UpdateSideMenuStateRequest
-	71,  // 151: blueapi.cover.v1.Cover.AddSideMenuFavorite:input_type -> blueapi.cover.v1.AddSideMenuFavoriteRequest
-	73,  // 152: blueapi.cover.v1.Cover.RemoveSideMenuFavorite:input_type -> blueapi.cover.v1.RemoveSideMenuFavoriteRequest
-	75,  // 153: blueapi.cover.v1.Cover.CreateCostGroup:input_type -> blueapi.cover.v1.CreateCostGroupRequest
-	77,  // 154: blueapi.cover.v1.Cover.GetCostGroups:input_type -> blueapi.cover.v1.GetCostGroupsRequest
-	179, // 155: blueapi.cover.v1.Cover.GetCategories:input_type -> blueapi.cover.v1.GetCategoriesRequest
-	79,  // 156: blueapi.cover.v1.Cover.GetCostGroupDetails:input_type -> blueapi.cover.v1.GetCostGroupDetailsRequest
-	81,  // 157: blueapi.cover.v1.Cover.UpdateCostGroupName:input_type -> blueapi.cover.v1.UpdateCostGroupNameRequest
-	83,  // 158: blueapi.cover.v1.Cover.UpdateCostGroupDescription:input_type -> blueapi.cover.v1.UpdateCostGroupDescriptionRequest
-	85,  // 159: blueapi.cover.v1.Cover.UpdateCostGroupImage:input_type -> blueapi.cover.v1.UpdateCostGroupImageRequest
-	87,  // 160: blueapi.cover.v1.Cover.UpdateCostGroupIcon:input_type -> blueapi.cover.v1.UpdateCostGroupIconRequest
-	89,  // 161: blueapi.cover.v1.Cover.UpdateCostGroupColorTheme:input_type -> blueapi.cover.v1.UpdateCostGroupColorThemeRequest
-	91,  // 162: blueapi.cover.v1.Cover.UpdateCostGroupCombinations:input_type -> blueapi.cover.v1.UpdateCostGroupCombinationsRequest
-	116, // 163: blueapi.cover.v1.Cover.ResolveCostGroupCombinations:input_type -> blueapi.cover.v1.ResolveCostGroupCombinationsRequest
-	93,  // 164: blueapi.cover.v1.Cover.AssignCostGroupMember:input_type -> blueapi.cover.v1.AssignCostGroupMemberRequest
-	95,  // 165: blueapi.cover.v1.Cover.RemoveCostGroupMember:input_type -> blueapi.cover.v1.RemoveCostGroupMemberRequest
-	97,  // 166: blueapi.cover.v1.Cover.DeleteCostGroup:input_type -> blueapi.cover.v1.DeleteCostGroupRequest
-	99,  // 167: blueapi.cover.v1.Cover.GetAccountAccessTemplateUrl:input_type -> blueapi.cover.v1.GetAccountAccessTemplateUrlRequest
-	101, // 168: blueapi.cover.v1.Cover.ListAccountAccess:input_type -> blueapi.cover.v1.ListAccountAccessRequest
-	102, // 169: blueapi.cover.v1.Cover.GetAccountAccess:input_type -> blueapi.cover.v1.GetAccountAccessRequest
-	174, // 170: blueapi.cover.v1.Cover.GetDataAccess:input_type -> blueapi.cover.v1.GetAndDeleteDataAccessRequest
-	174, // 171: blueapi.cover.v1.Cover.DeleteDataAccess:input_type -> blueapi.cover.v1.GetAndDeleteDataAccessRequest
-	104, // 172: blueapi.cover.v1.Cover.CreateAccountAccess:input_type -> blueapi.cover.v1.CreateAccountAccessRequest
-	105, // 173: blueapi.cover.v1.Cover.CreateAccountAccessStackset:input_type -> blueapi.cover.v1.CreateAccountAccessStacksetRequest
-	104, // 174: blueapi.cover.v1.Cover.CreateAccountAccessCur:input_type -> blueapi.cover.v1.CreateAccountAccessRequest
-	106, // 175: blueapi.cover.v1.Cover.UpdateAccountAccess:input_type -> blueapi.cover.v1.UpdateAccountAccessRequest
-	107, // 176: blueapi.cover.v1.Cover.DeleteAccountAccess:input_type -> blueapi.cover.v1.DeleteAccountAccessRequest
-	109, // 177: blueapi.cover.v1.Cover.RegisterAccount:input_type -> blueapi.cover.v1.RegisterAccountRequest
-	170, // 178: blueapi.cover.v1.Cover.RegisterDataAccess:input_type -> blueapi.cover.v1.RegisterDataAccessRequest
-	173, // 179: blueapi.cover.v1.Cover.AddBillingAccount:input_type -> blueapi.cover.v1.BillingAccountRequest
-	172, // 180: blueapi.cover.v1.Cover.ListDataAccess:input_type -> blueapi.cover.v1.ListDataAccessRequest
-	171, // 181: blueapi.cover.v1.Cover.UpdateDataAccess:input_type -> blueapi.cover.v1.UpdateDataAccessRequest
-	110, // 182: blueapi.cover.v1.Cover.ListAssets:input_type -> blueapi.cover.v1.ListAssetsRequest
-	113, // 183: blueapi.cover.v1.Cover.GetAssetsSummary:input_type -> blueapi.cover.v1.GetAssetsSummaryRequest
-	118, // 184: blueapi.cover.v1.Cover.GetCostUsage:input_type -> blueapi.cover.v1.GetCostUsageRequest
-	126, // 185: blueapi.cover.v1.Cover.GetRightSizingRecommendation:input_type -> blueapi.cover.v1.GetRightSizingRecommendationRequest
-	128, // 186: blueapi.cover.v1.Cover.ModifyResourceType:input_type -> blueapi.cover.v1.ModifyResourceTypeRequest
-	130, // 187: blueapi.cover.v1.Cover.TerminateResource:input_type -> blueapi.cover.v1.TerminateResourceRequest
-	132, // 188: blueapi.cover.v1.Cover.UploadChargeCode:input_type -> blueapi.cover.v1.UploadChargeCodeRequest
-	134, // 189: blueapi.cover.v1.Cover.AssignPayer:input_type -> blueapi.cover.v1.AssignPayerRequest
-	136, // 190: blueapi.cover.v1.Cover.GetPayers:input_type -> blueapi.cover.v1.GetPayersRequest
-	138, // 191: blueapi.cover.v1.Cover.GetAccounts:input_type -> blueapi.cover.v1.GetAccountsRequest
-	140, // 192: blueapi.cover.v1.Cover.GetServices:input_type -> blueapi.cover.v1.GetServicesRequest
-	142, // 193: blueapi.cover.v1.Cover.GetRegions:input_type -> blueapi.cover.v1.GetRegionsRequest
-	144, // 194: blueapi.cover.v1.Cover.GetTags:input_type -> blueapi.cover.v1.GetTagsRequest
-	146, // 195: blueapi.cover.v1.Cover.ListFees:input_type -> blueapi.cover.v1.ListFeesRequest
-	148, // 196: blueapi.cover.v1.Cover.RestoreFee:input_type -> blueapi.cover.v1.RestoreFeeRequest
-	149, // 197: blueapi.cover.v1.Cover.GetCostGroupFee:input_type -> blueapi.cover.v1.GetCostGroupFeeRequest
-	155, // 198: blueapi.cover.v1.Cover.ListAllocators:input_type -> blueapi.cover.v1.ListAllocatorsRequest
-	156, // 199: blueapi.cover.v1.Cover.CreateAllocator:input_type -> blueapi.cover.v1.CreateAllocatorRequest
-	154, // 200: blueapi.cover.v1.Cover.UpdateAllocator:input_type -> blueapi.cover.v1.CostAllocatorRequest
-	157, // 201: blueapi.cover.v1.Cover.DeleteAllocator:input_type -> blueapi.cover.v1.DeleteAllocatorRequest
-	158, // 202: blueapi.cover.v1.Cover.ProxyCreateCompletion:input_type -> blueapi.cover.v1.ProxyCreateCompletionRequest
-	156, // 203: blueapi.cover.v1.Cover.SimulateFeeAllocator:input_type -> blueapi.cover.v1.CreateAllocatorRequest
-	161, // 204: blueapi.cover.v1.Cover.ListAccountUsage:input_type -> blueapi.cover.v1.ListAccountUsageRequest
-	162, // 205: blueapi.cover.v1.Cover.RestoreAccountUsage:input_type -> blueapi.cover.v1.RestoreAccountUsageRequest
-	156, // 206: blueapi.cover.v1.Cover.SimulateAccountUsage:input_type -> blueapi.cover.v1.CreateAllocatorRequest
-	146, // 207: blueapi.cover.v1.Cover.ListSavings:input_type -> blueapi.cover.v1.ListFeesRequest
-	163, // 208: blueapi.cover.v1.Cover.RestoreSavings:input_type -> blueapi.cover.v1.RestoreSavingsRequest
-	156, // 209: blueapi.cover.v1.Cover.SimulateSavings:input_type -> blueapi.cover.v1.CreateAllocatorRequest
-	165, // 210: blueapi.cover.v1.Cover.GetCostGroupAllocation:input_type -> blueapi.cover.v1.GetCostGroupAllocationRequest
-	167, // 211: blueapi.cover.v1.Cover.ProcessAuth0User:input_type -> blueapi.cover.v1.ProcessAuth0UserRequest
-	175, // 212: blueapi.cover.v1.Cover.AddPartnerCenterCredentials:input_type -> blueapi.cover.v1.AddPartnerCenterCredentialsRequest
-	176, // 213: blueapi.cover.v1.Cover.AddMpnSetting:input_type -> blueapi.cover.v1.AddMpnSettingRequest
-	177, // 214: blueapi.cover.v1.Cover.GetCostGroupAttribute:input_type -> blueapi.cover.v1.GetCostGroupAttributeRequest
-	181, // 215: blueapi.cover.v1.Cover.GetAlerts:input_type -> blueapi.cover.v1.GetAlertsRequest
-	183, // 216: blueapi.cover.v1.Cover.CreateAlert:input_type -> blueapi.cover.v1.CreateAlertRequest
-	185, // 217: blueapi.cover.v1.Cover.GetAlertDetails:input_type -> blueapi.cover.v1.GetAlertDetailsRequest
-	187, // 218: blueapi.cover.v1.Cover.DeleteAlert:input_type -> blueapi.cover.v1.DeleteAlertRequest
-	189, // 219: blueapi.cover.v1.Cover.UpdateAlertDetails:input_type -> blueapi.cover.v1.UpdateAlertDetailsRequest
-	191, // 220: blueapi.cover.v1.Cover.GetChannels:input_type -> blueapi.cover.v1.GetChannelsRequest
-	193, // 221: blueapi.cover.v1.Cover.CreateChannel:input_type -> blueapi.cover.v1.CreateChannelRequest
-	195, // 222: blueapi.cover.v1.Cover.GetChannelDetails:input_type -> blueapi.cover.v1.GetChannelDetailsRequest
-	197, // 223: blueapi.cover.v1.Cover.DeleteChannel:input_type -> blueapi.cover.v1.DeleteChannelRequest
-	199, // 224: blueapi.cover.v1.Cover.UpdateChannelDetails:input_type -> blueapi.cover.v1.UpdateChannelDetailsRequest
-	201, // 225: blueapi.cover.v1.Cover.GetDiscountRecommendations:input_type -> blueapi.cover.v1.GetDiscountRecommendationsRequest
-	203, // 226: blueapi.cover.v1.Cover.GetAnomalyinCostGroup:input_type -> blueapi.cover.v1.GetAnomalyinCostGroupRequest
-	205, // 227: blueapi.cover.v1.Cover.CreateDiscountExpirationAlert:input_type -> blueapi.cover.v1.CreateDiscountExpirationAlertRequest
-	207, // 228: blueapi.cover.v1.Cover.UpdateDiscountExpirationAlert:input_type -> blueapi.cover.v1.UpdateDiscountExpirationAlertRequest
-	206, // 229: blueapi.cover.v1.Cover.GetDiscountExpirationAlert:input_type -> blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest
-	209, // 230: blueapi.cover.v1.Cover.ListDiscountExpirationAlert:input_type -> blueapi.cover.v1.ListDiscountExpirationAlertRequest
-	206, // 231: blueapi.cover.v1.Cover.DeleteDiscountExpirationAlert:input_type -> blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest
-	210, // 232: blueapi.cover.v1.Cover.CreateAnomalyAlert:input_type -> blueapi.cover.v1.CreateAnomalyAlertRequest
-	211, // 233: blueapi.cover.v1.Cover.DeleteAnomalyAlert:input_type -> blueapi.cover.v1.ManipulateAnomalyAlertRequest
-	213, // 234: blueapi.cover.v1.Cover.ListAnomalyAlert:input_type -> blueapi.cover.v1.ListAnomalyAlertRequest
-	211, // 235: blueapi.cover.v1.Cover.GetAnomalyAlert:input_type -> blueapi.cover.v1.ManipulateAnomalyAlertRequest
-	214, // 236: blueapi.cover.v1.Cover.UpdateAnomalyAlert:input_type -> blueapi.cover.v1.UpdateAnomalyAlertRequest
-	215, // 237: blueapi.cover.v1.Cover.RegisterNewUser:input_type -> blueapi.cover.v1.RegisterNewUserRequest
-	217, // 238: blueapi.cover.v1.Cover.GetUserProfile:input_type -> blueapi.cover.v1.GetUserProfileRequest
-	219, // 239: blueapi.cover.v1.Cover.ListBudgets:input_type -> blueapi.cover.v1.ListBudgetsRequest
-	221, // 240: blueapi.cover.v1.Cover.GetBudget:input_type -> blueapi.cover.v1.GetBudgetRequest
-	223, // 241: blueapi.cover.v1.Cover.CreateBudget:input_type -> blueapi.cover.v1.CreateBudgetRequest
-	225, // 242: blueapi.cover.v1.Cover.DeleteBudget:input_type -> blueapi.cover.v1.DeleteBudgetRequest
-	227, // 243: blueapi.cover.v1.Cover.UpdateBudget:input_type -> blueapi.cover.v1.UpdateBudgetRequest
-	229, // 244: blueapi.cover.v1.Cover.ResolveAWSMarketplaceTokenForOnboarding:input_type -> blueapi.cover.v1.ResolveAWSMarketplaceTokenForOnboardingRequest
-	231, // 245: blueapi.cover.v1.Cover.GetCustomerSubscriptionStatus:input_type -> blueapi.cover.v1.GetCustomerSubscriptionStatusRequest
-	233, // 246: blueapi.cover.v1.Cover.CreateProfiling:input_type -> blueapi.cover.v1.CreateProfilingRequest
-	235, // 247: blueapi.cover.v1.Cover.AddInfotoMarketplace:input_type -> blueapi.cover.v1.AddInfotoMarketplaceRequest
-	237, // 248: blueapi.cover.v1.Cover.GetReportSummary:input_type -> blueapi.cover.v1.GetReportSummaryRequest
-	239, // 249: blueapi.cover.v1.Cover.ListRecommendations:input_type -> blueapi.cover.v1.ListRecommendationRequest
-	241, // 250: blueapi.cover.v1.Cover.GetRecommendation:input_type -> blueapi.cover.v1.GetRecommendationRequest
-	243, // 251: blueapi.cover.v1.Cover.ExecuteOptimization:input_type -> blueapi.cover.v1.ExecuteOptimizationRequest
-	245, // 252: blueapi.cover.v1.Cover.MarkAsExecuted:input_type -> blueapi.cover.v1.MarkAsExecutedRequest
-	247, // 253: blueapi.cover.v1.Cover.UndoExecutedRecommendation:input_type -> blueapi.cover.v1.UndoExecutedRecommendationRequest
-	249, // 254: blueapi.cover.v1.Cover.OptimizationHistory:input_type -> blueapi.cover.v1.OptimizationHistoryRequest
-	251, // 255: blueapi.cover.v1.Cover.SetCostGroupEventIndicator:input_type -> blueapi.cover.v1.SetCostGroupEventIndicatorRequest
-	253, // 256: blueapi.cover.v1.Cover.SetCostGroupAnomalyOptions:input_type -> blueapi.cover.v1.SetCostGroupAnomalyOptionsRequest
-	255, // 257: blueapi.cover.v1.Cover.SetOrgFiscalMonth:input_type -> blueapi.cover.v1.SetOrgFiscalMonthRequest
-	257, // 258: blueapi.cover.v1.Cover.GetOrgFiscalMonth:input_type -> blueapi.cover.v1.GetOrgFiscalMonthRequest
-	259, // 259: blueapi.cover.v1.Cover.TransferOrganization:input_type -> blueapi.cover.v1.TransferOrganizationRequest
-	2,   // 260: blueapi.cover.v1.Cover.OnboardOrg:output_type -> blueapi.cover.v1.OnboardOrgResponse
-	4,   // 261: blueapi.cover.v1.Cover.InviteMember:output_type -> blueapi.cover.v1.InviteMemberResponse
-	6,   // 262: blueapi.cover.v1.Cover.ActivateUser:output_type -> blueapi.cover.v1.ActivateUserResponse
-	8,   // 263: blueapi.cover.v1.Cover.CreateMember:output_type -> blueapi.cover.v1.CreateMemberResponse
-	10,  // 264: blueapi.cover.v1.Cover.GetMembers:output_type -> blueapi.cover.v1.GetMembersResponse
-	12,  // 265: blueapi.cover.v1.Cover.GetMemberDetails:output_type -> blueapi.cover.v1.GetMemberDetailsResponse
-	14,  // 266: blueapi.cover.v1.Cover.GetMemberCostGroup:output_type -> blueapi.cover.v1.GetMemberCostGroupResponse
-	16,  // 267: blueapi.cover.v1.Cover.UpdateMemberPermission:output_type -> blueapi.cover.v1.UpdateMemberPermissionResponse
-	18,  // 268: blueapi.cover.v1.Cover.GetUserDetails:output_type -> blueapi.cover.v1.GetUserDetailsResponse
-	20,  // 269: blueapi.cover.v1.Cover.UpdateUserAvatar:output_type -> blueapi.cover.v1.UpdateUserAvatarResponse
-	22,  // 270: blueapi.cover.v1.Cover.UpdateUserIcon:output_type -> blueapi.cover.v1.UpdateUserIconResponse
-	24,  // 271: blueapi.cover.v1.Cover.UpdateUserColorTheme:output_type -> blueapi.cover.v1.UpdateUserColorThemeResponse
-	26,  // 272: blueapi.cover.v1.Cover.UpdateUserName:output_type -> blueapi.cover.v1.UpdateUserNameResponse
-	28,  // 273: blueapi.cover.v1.Cover.UpdateUserEmail:output_type -> blueapi.cover.v1.UpdateUserEmailResponse
-	30,  // 274: blueapi.cover.v1.Cover.UpdateUserMainView:output_type -> blueapi.cover.v1.UpdateUserMainViewResponse
-	32,  // 275: blueapi.cover.v1.Cover.ResetUserPassword:output_type -> blueapi.cover.v1.ResetUserPasswordResponse
-	34,  // 276: blueapi.cover.v1.Cover.UpdateUserLocale:output_type -> blueapi.cover.v1.UpdateUserLocaleResponse
-	36,  // 277: blueapi.cover.v1.Cover.UpdateUserAppTheme:output_type -> blueapi.cover.v1.UpdateUserAppThemeResponse
-	38,  // 278: blueapi.cover.v1.Cover.UpdateUserTimezone:output_type -> blueapi.cover.v1.UpdateUserTimezoneResponse
-	40,  // 279: blueapi.cover.v1.Cover.UpdateUserAttributes:output_type -> blueapi.cover.v1.UpdateUserAttributesResponse
-	42,  // 280: blueapi.cover.v1.Cover.DeleteMember:output_type -> blueapi.cover.v1.DeleteMemberResponse
-	44,  // 281: blueapi.cover.v1.Cover.ResetPassword:output_type -> blueapi.cover.v1.ResetPasswordResponse
-	46,  // 282: blueapi.cover.v1.Cover.CreateView:output_type -> blueapi.cover.v1.CreateViewResponse
-	48,  // 283: blueapi.cover.v1.Cover.GetViews:output_type -> blueapi.cover.v1.GetViewsResponse
-	50,  // 284: blueapi.cover.v1.Cover.GetCurrentView:output_type -> blueapi.cover.v1.GetCurrentViewResponse
-	52,  // 285: blueapi.cover.v1.Cover.GetFavoriteViews:output_type -> blueapi.cover.v1.GetFavoriteViewsResponse
-	54,  // 286: blueapi.cover.v1.Cover.PublishView:output_type -> blueapi.cover.v1.PublishViewResponse
-	56,  // 287: blueapi.cover.v1.Cover.AddFavorite:output_type -> blueapi.cover.v1.AddFavoriteResponse
-	58,  // 288: blueapi.cover.v1.Cover.RemoveFavorite:output_type -> blueapi.cover.v1.RemoveFavoriteResponse
-	60,  // 289: blueapi.cover.v1.Cover.UpdateView:output_type -> blueapi.cover.v1.UpdateViewResponse
-	62,  // 290: blueapi.cover.v1.Cover.UpdateViewLayout:output_type -> blueapi.cover.v1.UpdateViewLayoutResponse
-	64,  // 291: blueapi.cover.v1.Cover.UpdateViewWidget:output_type -> blueapi.cover.v1.UpdateViewWidgetResponse
-	66,  // 292: blueapi.cover.v1.Cover.UpdateViewColorTheme:output_type -> blueapi.cover.v1.UpdateViewColorThemeResponse
-	68,  // 293: blueapi.cover.v1.Cover.DeleteView:output_type -> blueapi.cover.v1.DeleteViewResponse
-	70,  // 294: blueapi.cover.v1.Cover.UpdateSideMenuState:output_type -> blueapi.cover.v1.UpdateSideMenuStateResponse
-	72,  // 295: blueapi.cover.v1.Cover.AddSideMenuFavorite:output_type -> blueapi.cover.v1.AddSideMenuFavoriteResponse
-	74,  // 296: blueapi.cover.v1.Cover.RemoveSideMenuFavorite:output_type -> blueapi.cover.v1.RemoveSideMenuFavoriteResponse
-	76,  // 297: blueapi.cover.v1.Cover.CreateCostGroup:output_type -> blueapi.cover.v1.CreateCostGroupResponse
-	78,  // 298: blueapi.cover.v1.Cover.GetCostGroups:output_type -> blueapi.cover.v1.GetCostGroupsResponse
-	180, // 299: blueapi.cover.v1.Cover.GetCategories:output_type -> blueapi.cover.v1.GetCategoriesResponse
-	80,  // 300: blueapi.cover.v1.Cover.GetCostGroupDetails:output_type -> blueapi.cover.v1.GetCostGroupDetailsResponse
-	82,  // 301: blueapi.cover.v1.Cover.UpdateCostGroupName:output_type -> blueapi.cover.v1.UpdateCostGroupNameResponse
-	84,  // 302: blueapi.cover.v1.Cover.UpdateCostGroupDescription:output_type -> blueapi.cover.v1.UpdateCostGroupDescriptionResponse
-	86,  // 303: blueapi.cover.v1.Cover.UpdateCostGroupImage:output_type -> blueapi.cover.v1.UpdateCostGroupImageResponse
-	88,  // 304: blueapi.cover.v1.Cover.UpdateCostGroupIcon:output_type -> blueapi.cover.v1.UpdateCostGroupIconResponse
-	90,  // 305: blueapi.cover.v1.Cover.UpdateCostGroupColorTheme:output_type -> blueapi.cover.v1.UpdateCostGroupColorThemeResponse
-	92,  // 306: blueapi.cover.v1.Cover.UpdateCostGroupCombinations:output_type -> blueapi.cover.v1.UpdateCostGroupCombinationsResponse
-	117, // 307: blueapi.cover.v1.Cover.ResolveCostGroupCombinations:output_type -> blueapi.cover.v1.ResolveCostGroupCombinationsResponse
-	94,  // 308: blueapi.cover.v1.Cover.AssignCostGroupMember:output_type -> blueapi.cover.v1.AssignCostGroupMemberResponse
-	96,  // 309: blueapi.cover.v1.Cover.RemoveCostGroupMember:output_type -> blueapi.cover.v1.RemoveCostGroupMemberResponse
-	98,  // 310: blueapi.cover.v1.Cover.DeleteCostGroup:output_type -> blueapi.cover.v1.DeleteCostGroupResponse
-	100, // 311: blueapi.cover.v1.Cover.GetAccountAccessTemplateUrl:output_type -> blueapi.cover.v1.GetAccountAccessTemplateUrlResponse
-	103, // 312: blueapi.cover.v1.Cover.ListAccountAccess:output_type -> blueapi.cover.v1.AccountAccess
-	103, // 313: blueapi.cover.v1.Cover.GetAccountAccess:output_type -> blueapi.cover.v1.AccountAccess
-	169, // 314: blueapi.cover.v1.Cover.GetDataAccess:output_type -> blueapi.cover.v1.DataAccess
-	304, // 315: blueapi.cover.v1.Cover.DeleteDataAccess:output_type -> google.protobuf.Empty
-	103, // 316: blueapi.cover.v1.Cover.CreateAccountAccess:output_type -> blueapi.cover.v1.AccountAccess
-	103, // 317: blueapi.cover.v1.Cover.CreateAccountAccessStackset:output_type -> blueapi.cover.v1.AccountAccess
-	103, // 318: blueapi.cover.v1.Cover.CreateAccountAccessCur:output_type -> blueapi.cover.v1.AccountAccess
-	305, // 319: blueapi.cover.v1.Cover.UpdateAccountAccess:output_type -> protos.Operation
-	108, // 320: blueapi.cover.v1.Cover.DeleteAccountAccess:output_type -> blueapi.cover.v1.DeleteAccountAccessResponse
-	304, // 321: blueapi.cover.v1.Cover.RegisterAccount:output_type -> google.protobuf.Empty
-	304, // 322: blueapi.cover.v1.Cover.RegisterDataAccess:output_type -> google.protobuf.Empty
-	304, // 323: blueapi.cover.v1.Cover.AddBillingAccount:output_type -> google.protobuf.Empty
-	169, // 324: blueapi.cover.v1.Cover.ListDataAccess:output_type -> blueapi.cover.v1.DataAccess
-	304, // 325: blueapi.cover.v1.Cover.UpdateDataAccess:output_type -> google.protobuf.Empty
-	112, // 326: blueapi.cover.v1.Cover.ListAssets:output_type -> blueapi.cover.v1.Resource
-	114, // 327: blueapi.cover.v1.Cover.GetAssetsSummary:output_type -> blueapi.cover.v1.GetAssetsSummaryResponse
-	125, // 328: blueapi.cover.v1.Cover.GetCostUsage:output_type -> blueapi.cover.v1.CostItem
-	127, // 329: blueapi.cover.v1.Cover.GetRightSizingRecommendation:output_type -> blueapi.cover.v1.GetRightSizingRecommendationResponse
-	129, // 330: blueapi.cover.v1.Cover.ModifyResourceType:output_type -> blueapi.cover.v1.ModifyResourceTypeResponse
-	131, // 331: blueapi.cover.v1.Cover.TerminateResource:output_type -> blueapi.cover.v1.TerminateResourceResponse
-	133, // 332: blueapi.cover.v1.Cover.UploadChargeCode:output_type -> blueapi.cover.v1.UploadChargeCodeResponse
-	135, // 333: blueapi.cover.v1.Cover.AssignPayer:output_type -> blueapi.cover.v1.AssignPayerResponse
-	137, // 334: blueapi.cover.v1.Cover.GetPayers:output_type -> blueapi.cover.v1.GetPayersResponse
-	139, // 335: blueapi.cover.v1.Cover.GetAccounts:output_type -> blueapi.cover.v1.GetAccountsResponse
-	141, // 336: blueapi.cover.v1.Cover.GetServices:output_type -> blueapi.cover.v1.GetServicesResponse
-	143, // 337: blueapi.cover.v1.Cover.GetRegions:output_type -> blueapi.cover.v1.GetRegionsResponse
-	145, // 338: blueapi.cover.v1.Cover.GetTags:output_type -> blueapi.cover.v1.GetTagsResponse
-	147, // 339: blueapi.cover.v1.Cover.ListFees:output_type -> blueapi.cover.v1.FeeDetails
-	147, // 340: blueapi.cover.v1.Cover.RestoreFee:output_type -> blueapi.cover.v1.FeeDetails
-	150, // 341: blueapi.cover.v1.Cover.GetCostGroupFee:output_type -> blueapi.cover.v1.FeeItem
-	153, // 342: blueapi.cover.v1.Cover.ListAllocators:output_type -> blueapi.cover.v1.CostAllocatorDetails
-	153, // 343: blueapi.cover.v1.Cover.CreateAllocator:output_type -> blueapi.cover.v1.CostAllocatorDetails
-	153, // 344: blueapi.cover.v1.Cover.UpdateAllocator:output_type -> blueapi.cover.v1.CostAllocatorDetails
-	304, // 345: blueapi.cover.v1.Cover.DeleteAllocator:output_type -> google.protobuf.Empty
-	159, // 346: blueapi.cover.v1.Cover.ProxyCreateCompletion:output_type -> blueapi.cover.v1.ProxyCreateCompletionResponse
-	147, // 347: blueapi.cover.v1.Cover.SimulateFeeAllocator:output_type -> blueapi.cover.v1.FeeDetails
-	160, // 348: blueapi.cover.v1.Cover.ListAccountUsage:output_type -> blueapi.cover.v1.AccountUsageDetails
-	160, // 349: blueapi.cover.v1.Cover.RestoreAccountUsage:output_type -> blueapi.cover.v1.AccountUsageDetails
-	160, // 350: blueapi.cover.v1.Cover.SimulateAccountUsage:output_type -> blueapi.cover.v1.AccountUsageDetails
-	164, // 351: blueapi.cover.v1.Cover.ListSavings:output_type -> blueapi.cover.v1.SavingsDetails
-	164, // 352: blueapi.cover.v1.Cover.RestoreSavings:output_type -> blueapi.cover.v1.SavingsDetails
-	164, // 353: blueapi.cover.v1.Cover.SimulateSavings:output_type -> blueapi.cover.v1.SavingsDetails
-	166, // 354: blueapi.cover.v1.Cover.GetCostGroupAllocation:output_type -> blueapi.cover.v1.AllocationItem
-	168, // 355: blueapi.cover.v1.Cover.ProcessAuth0User:output_type -> blueapi.cover.v1.ProcessAuth0UserResponse
-	304, // 356: blueapi.cover.v1.Cover.AddPartnerCenterCredentials:output_type -> google.protobuf.Empty
-	304, // 357: blueapi.cover.v1.Cover.AddMpnSetting:output_type -> google.protobuf.Empty
-	178, // 358: blueapi.cover.v1.Cover.GetCostGroupAttribute:output_type -> blueapi.cover.v1.GetCostGroupAttributeResponse
-	182, // 359: blueapi.cover.v1.Cover.GetAlerts:output_type -> blueapi.cover.v1.GetAlertsResponse
-	184, // 360: blueapi.cover.v1.Cover.CreateAlert:output_type -> blueapi.cover.v1.CreateAlertResponse
-	186, // 361: blueapi.cover.v1.Cover.GetAlertDetails:output_type -> blueapi.cover.v1.GetAlertDetailsResponse
-	188, // 362: blueapi.cover.v1.Cover.DeleteAlert:output_type -> blueapi.cover.v1.DeleteAlertResponse
-	190, // 363: blueapi.cover.v1.Cover.UpdateAlertDetails:output_type -> blueapi.cover.v1.UpdateAlertDetailsResponse
-	192, // 364: blueapi.cover.v1.Cover.GetChannels:output_type -> blueapi.cover.v1.GetChannelsResponse
-	194, // 365: blueapi.cover.v1.Cover.CreateChannel:output_type -> blueapi.cover.v1.CreateChannelResponse
-	196, // 366: blueapi.cover.v1.Cover.GetChannelDetails:output_type -> blueapi.cover.v1.GetChannelDetailsResponse
-	198, // 367: blueapi.cover.v1.Cover.DeleteChannel:output_type -> blueapi.cover.v1.DeleteChannelResponse
-	200, // 368: blueapi.cover.v1.Cover.UpdateChannelDetails:output_type -> blueapi.cover.v1.UpdateChannelDetailsResponse
-	202, // 369: blueapi.cover.v1.Cover.GetDiscountRecommendations:output_type -> blueapi.cover.v1.GetDiscountRecommendationsResponse
-	204, // 370: blueapi.cover.v1.Cover.GetAnomalyinCostGroup:output_type -> blueapi.cover.v1.AnomalyData
-	304, // 371: blueapi.cover.v1.Cover.CreateDiscountExpirationAlert:output_type -> google.protobuf.Empty
-	304, // 372: blueapi.cover.v1.Cover.UpdateDiscountExpirationAlert:output_type -> google.protobuf.Empty
-	208, // 373: blueapi.cover.v1.Cover.GetDiscountExpirationAlert:output_type -> blueapi.cover.v1.DiscountExpiryAlertData
-	208, // 374: blueapi.cover.v1.Cover.ListDiscountExpirationAlert:output_type -> blueapi.cover.v1.DiscountExpiryAlertData
-	304, // 375: blueapi.cover.v1.Cover.DeleteDiscountExpirationAlert:output_type -> google.protobuf.Empty
-	304, // 376: blueapi.cover.v1.Cover.CreateAnomalyAlert:output_type -> google.protobuf.Empty
-	304, // 377: blueapi.cover.v1.Cover.DeleteAnomalyAlert:output_type -> google.protobuf.Empty
-	212, // 378: blueapi.cover.v1.Cover.ListAnomalyAlert:output_type -> blueapi.cover.v1.AnomalyAlertData
-	212, // 379: blueapi.cover.v1.Cover.GetAnomalyAlert:output_type -> blueapi.cover.v1.AnomalyAlertData
-	304, // 380: blueapi.cover.v1.Cover.UpdateAnomalyAlert:output_type -> google.protobuf.Empty
-	216, // 381: blueapi.cover.v1.Cover.RegisterNewUser:output_type -> blueapi.cover.v1.RegisterNewUserResponse
-	218, // 382: blueapi.cover.v1.Cover.GetUserProfile:output_type -> blueapi.cover.v1.GetUserProfileResponse
-	220, // 383: blueapi.cover.v1.Cover.ListBudgets:output_type -> blueapi.cover.v1.ListBudgetsResponse
-	222, // 384: blueapi.cover.v1.Cover.GetBudget:output_type -> blueapi.cover.v1.GetBudgetResponse
-	224, // 385: blueapi.cover.v1.Cover.CreateBudget:output_type -> blueapi.cover.v1.CreateBudgetResponse
-	226, // 386: blueapi.cover.v1.Cover.DeleteBudget:output_type -> blueapi.cover.v1.DeleteBudgetResponse
-	228, // 387: blueapi.cover.v1.Cover.UpdateBudget:output_type -> blueapi.cover.v1.UpdateBudgetResponse
-	230, // 388: blueapi.cover.v1.Cover.ResolveAWSMarketplaceTokenForOnboarding:output_type -> blueapi.cover.v1.ResolveAWSMarketplaceTokenForOnboardingResponse
-	232, // 389: blueapi.cover.v1.Cover.GetCustomerSubscriptionStatus:output_type -> blueapi.cover.v1.GetCustomerSubscriptionStatusResponse
-	234, // 390: blueapi.cover.v1.Cover.CreateProfiling:output_type -> blueapi.cover.v1.CreateProfilingResponse
-	236, // 391: blueapi.cover.v1.Cover.AddInfotoMarketplace:output_type -> blueapi.cover.v1.AddInfotoMarketplaceResponse
-	238, // 392: blueapi.cover.v1.Cover.GetReportSummary:output_type -> blueapi.cover.v1.GetReportSummaryResponse
-	240, // 393: blueapi.cover.v1.Cover.ListRecommendations:output_type -> blueapi.cover.v1.ListRecommendationResponse
-	242, // 394: blueapi.cover.v1.Cover.GetRecommendation:output_type -> blueapi.cover.v1.GetRecommendationResponse
-	244, // 395: blueapi.cover.v1.Cover.ExecuteOptimization:output_type -> blueapi.cover.v1.ExecuteOptimizationResponse
-	246, // 396: blueapi.cover.v1.Cover.MarkAsExecuted:output_type -> blueapi.cover.v1.MarkAsExecutedResponse
-	248, // 397: blueapi.cover.v1.Cover.UndoExecutedRecommendation:output_type -> blueapi.cover.v1.UndoExecutedRecommendationResponse
-	250, // 398: blueapi.cover.v1.Cover.OptimizationHistory:output_type -> blueapi.cover.v1.OptimizationHistoryResponse
-	252, // 399: blueapi.cover.v1.Cover.SetCostGroupEventIndicator:output_type -> blueapi.cover.v1.SetCostGroupEventIndicatorResponse
-	254, // 400: blueapi.cover.v1.Cover.SetCostGroupAnomalyOptions:output_type -> blueapi.cover.v1.SetCostGroupAnomalyOptionsResponse
-	256, // 401: blueapi.cover.v1.Cover.SetOrgFiscalMonth:output_type -> blueapi.cover.v1.SetOrgFiscalMonthResponse
-	258, // 402: blueapi.cover.v1.Cover.GetOrgFiscalMonth:output_type -> blueapi.cover.v1.GetOrgFiscalMonthResponse
-	260, // 403: blueapi.cover.v1.Cover.TransferOrganization:output_type -> blueapi.cover.v1.TransferOrganizationResponse
-	260, // [260:404] is the sub-list for method output_type
-	116, // [116:260] is the sub-list for method input_type
-	116, // [116:116] is the sub-list for extension type_name
-	116, // [116:116] is the sub-list for extension extendee
-	0,   // [0:116] is the sub-list for field type_name
+	273, // 72: blueapi.cover.v1.ProxyCreateCompletionRequest.params:type_name -> google.protobuf.Struct
+	283, // 73: blueapi.cover.v1.DataAccess.gcpOptions:type_name -> blueapi.api.cover.GcpOptions
+	284, // 74: blueapi.cover.v1.DataAccess.azureOptions:type_name -> blueapi.api.cover.AzureOptions
+	285, // 75: blueapi.cover.v1.DataAccess.awsOptions:type_name -> blueapi.api.cover.AwsOptions
+	283, // 76: blueapi.cover.v1.RegisterDataAccessRequest.gcpOptions:type_name -> blueapi.api.cover.GcpOptions
+	284, // 77: blueapi.cover.v1.RegisterDataAccessRequest.azureOptions:type_name -> blueapi.api.cover.AzureOptions
+	285, // 78: blueapi.cover.v1.RegisterDataAccessRequest.awsOptions:type_name -> blueapi.api.cover.AwsOptions
+	283, // 79: blueapi.cover.v1.UpdateDataAccessRequest.gcpOptions:type_name -> blueapi.api.cover.GcpOptions
+	284, // 80: blueapi.cover.v1.UpdateDataAccessRequest.azureOptions:type_name -> blueapi.api.cover.AzureOptions
+	285, // 81: blueapi.cover.v1.UpdateDataAccessRequest.awsOptions:type_name -> blueapi.api.cover.AwsOptions
+	286, // 82: blueapi.cover.v1.GetCostGroupAttributeResponse.result:type_name -> blueapi.api.cover.Result
+	282, // 83: blueapi.cover.v1.GetCostGroupAttributeResponse.tagData:type_name -> blueapi.api.cover.TagData
+	287, // 84: blueapi.cover.v1.GetCategoriesResponse.category:type_name -> blueapi.api.cover.Category
+	288, // 85: blueapi.cover.v1.GetAlertsResponse.alertData:type_name -> blueapi.api.cover.AlertData
+	288, // 86: blueapi.cover.v1.CreateAlertResponse.alertData:type_name -> blueapi.api.cover.AlertData
+	288, // 87: blueapi.cover.v1.GetAlertDetailsResponse.alertData:type_name -> blueapi.api.cover.AlertData
+	288, // 88: blueapi.cover.v1.UpdateAlertDetailsResponse.alertData:type_name -> blueapi.api.cover.AlertData
+	289, // 89: blueapi.cover.v1.GetChannelsResponse.channelData:type_name -> blueapi.api.cover.ChannelData
+	289, // 90: blueapi.cover.v1.CreateChannelResponse.channelData:type_name -> blueapi.api.cover.ChannelData
+	289, // 91: blueapi.cover.v1.GetChannelDetailsResponse.channelData:type_name -> blueapi.api.cover.ChannelData
+	289, // 92: blueapi.cover.v1.UpdateChannelDetailsResponse.channelData:type_name -> blueapi.api.cover.ChannelData
+	290, // 93: blueapi.cover.v1.GetDiscountRecommendationsRequest.awsInputs:type_name -> blueapi.api.cover.AwsInputs
+	291, // 94: blueapi.cover.v1.GetDiscountRecommendationsRequest.azureInputs:type_name -> blueapi.api.cover.AzureInputs
+	292, // 95: blueapi.cover.v1.GetDiscountRecommendationsRequest.gcpInputs:type_name -> blueapi.api.cover.GcpInputs
+	293, // 96: blueapi.cover.v1.GetDiscountRecommendationsResponse.awsRecommendations:type_name -> blueapi.api.cover.AwsDiscountRecommendations
+	294, // 97: blueapi.cover.v1.GetDiscountRecommendationsResponse.azureRecommendations:type_name -> blueapi.api.cover.AzureDiscountRecommendations
+	295, // 98: blueapi.cover.v1.GetDiscountRecommendationsResponse.gcpRecommendations:type_name -> blueapi.api.cover.GcpDiscountRecommendations
+	296, // 99: blueapi.cover.v1.DiscountExpiryAlertData.costGroups:type_name -> blueapi.api.cover.AlertCostGroup
+	297, // 100: blueapi.cover.v1.DiscountExpiryAlertData.channels:type_name -> blueapi.api.cover.AlertChannels
+	296, // 101: blueapi.cover.v1.AnomalyAlertData.costGroupId:type_name -> blueapi.api.cover.AlertCostGroup
+	297, // 102: blueapi.cover.v1.AnomalyAlertData.channels:type_name -> blueapi.api.cover.AlertChannels
+	298, // 103: blueapi.cover.v1.ListBudgetsResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
+	298, // 104: blueapi.cover.v1.GetBudgetResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
+	298, // 105: blueapi.cover.v1.CreateBudgetRequest.budgetData:type_name -> blueapi.api.cover.BudgetData
+	298, // 106: blueapi.cover.v1.CreateBudgetResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
+	298, // 107: blueapi.cover.v1.UpdateBudgetRequest.budgetData:type_name -> blueapi.api.cover.BudgetData
+	298, // 108: blueapi.cover.v1.UpdateBudgetResponse.budgetData:type_name -> blueapi.api.cover.BudgetData
+	299, // 109: blueapi.cover.v1.GetReportSummaryResponse.executiveSummary:type_name -> blueapi.api.cover.ExecutiveSummary
+	300, // 110: blueapi.cover.v1.GetReportSummaryResponse.optimizationRecommendationSummary:type_name -> blueapi.api.cover.OptimizationRecommendationSummary
+	301, // 111: blueapi.cover.v1.GetReportSummaryResponse.savingsSummary:type_name -> blueapi.api.cover.SavingsSummary
+	302, // 112: blueapi.cover.v1.GetRecommendationResponse.recommendationData:type_name -> blueapi.api.cover.AWSRecommendations
+	303, // 113: blueapi.cover.v1.OptimizationHistoryResponse.executedRecommendationDetails:type_name -> blueapi.api.cover.ExecutedRecommendationDetails
+	304, // 114: blueapi.cover.v1.SetCostGroupEventIndicatorResponse.eventIndicator:type_name -> blueapi.api.cover.EventIndicator
+	305, // 115: blueapi.cover.v1.SetCostGroupAnomalyOptionsResponse.anomalyOptions:type_name -> blueapi.api.cover.AnomalyOptions
+	266, // 116: blueapi.cover.v1.UpdateCostGroupCreationUIResponse.userData:type_name -> blueapi.api.cover.UserData
+	1,   // 117: blueapi.cover.v1.Cover.OnboardOrg:input_type -> blueapi.cover.v1.OnboardOrgRequest
+	3,   // 118: blueapi.cover.v1.Cover.InviteMember:input_type -> blueapi.cover.v1.InviteMemberRequest
+	5,   // 119: blueapi.cover.v1.Cover.ActivateUser:input_type -> blueapi.cover.v1.ActivateUserRequest
+	7,   // 120: blueapi.cover.v1.Cover.CreateMember:input_type -> blueapi.cover.v1.CreateMemberRequest
+	9,   // 121: blueapi.cover.v1.Cover.GetMembers:input_type -> blueapi.cover.v1.GetMembersRequest
+	11,  // 122: blueapi.cover.v1.Cover.GetMemberDetails:input_type -> blueapi.cover.v1.GetMemberDetailsRequest
+	13,  // 123: blueapi.cover.v1.Cover.GetMemberCostGroup:input_type -> blueapi.cover.v1.GetMemberCostGroupRequest
+	15,  // 124: blueapi.cover.v1.Cover.UpdateMemberPermission:input_type -> blueapi.cover.v1.UpdateMemberPermissionRequest
+	17,  // 125: blueapi.cover.v1.Cover.GetUserDetails:input_type -> blueapi.cover.v1.GetUserDetailsRequest
+	19,  // 126: blueapi.cover.v1.Cover.UpdateUserAvatar:input_type -> blueapi.cover.v1.UpdateUserAvatarRequest
+	21,  // 127: blueapi.cover.v1.Cover.UpdateUserIcon:input_type -> blueapi.cover.v1.UpdateUserIconRequest
+	23,  // 128: blueapi.cover.v1.Cover.UpdateUserColorTheme:input_type -> blueapi.cover.v1.UpdateUserColorThemeRequest
+	25,  // 129: blueapi.cover.v1.Cover.UpdateUserName:input_type -> blueapi.cover.v1.UpdateUserNameRequest
+	27,  // 130: blueapi.cover.v1.Cover.UpdateUserEmail:input_type -> blueapi.cover.v1.UpdateUserEmailRequest
+	29,  // 131: blueapi.cover.v1.Cover.UpdateUserMainView:input_type -> blueapi.cover.v1.UpdateUserMainViewRequest
+	31,  // 132: blueapi.cover.v1.Cover.ResetUserPassword:input_type -> blueapi.cover.v1.ResetUserPasswordRequest
+	33,  // 133: blueapi.cover.v1.Cover.UpdateUserLocale:input_type -> blueapi.cover.v1.UpdateUserLocaleRequest
+	35,  // 134: blueapi.cover.v1.Cover.UpdateUserAppTheme:input_type -> blueapi.cover.v1.UpdateUserAppThemeRequest
+	37,  // 135: blueapi.cover.v1.Cover.UpdateUserTimezone:input_type -> blueapi.cover.v1.UpdateUserTimezoneRequest
+	39,  // 136: blueapi.cover.v1.Cover.UpdateUserAttributes:input_type -> blueapi.cover.v1.UpdateUserAttributesRequest
+	41,  // 137: blueapi.cover.v1.Cover.DeleteMember:input_type -> blueapi.cover.v1.DeleteMemberRequest
+	43,  // 138: blueapi.cover.v1.Cover.ResetPassword:input_type -> blueapi.cover.v1.ResetPasswordRequest
+	45,  // 139: blueapi.cover.v1.Cover.CreateView:input_type -> blueapi.cover.v1.CreateViewRequest
+	47,  // 140: blueapi.cover.v1.Cover.GetViews:input_type -> blueapi.cover.v1.GetViewsRequest
+	49,  // 141: blueapi.cover.v1.Cover.GetCurrentView:input_type -> blueapi.cover.v1.GetCurrentViewRequest
+	51,  // 142: blueapi.cover.v1.Cover.GetFavoriteViews:input_type -> blueapi.cover.v1.GetFavoriteViewsRequest
+	53,  // 143: blueapi.cover.v1.Cover.PublishView:input_type -> blueapi.cover.v1.PublishViewRequest
+	55,  // 144: blueapi.cover.v1.Cover.AddFavorite:input_type -> blueapi.cover.v1.AddFavoriteRequest
+	57,  // 145: blueapi.cover.v1.Cover.RemoveFavorite:input_type -> blueapi.cover.v1.RemoveFavoriteRequest
+	59,  // 146: blueapi.cover.v1.Cover.UpdateView:input_type -> blueapi.cover.v1.UpdateViewRequest
+	61,  // 147: blueapi.cover.v1.Cover.UpdateViewLayout:input_type -> blueapi.cover.v1.UpdateViewLayoutRequest
+	63,  // 148: blueapi.cover.v1.Cover.UpdateViewWidget:input_type -> blueapi.cover.v1.UpdateViewWidgetRequest
+	65,  // 149: blueapi.cover.v1.Cover.UpdateViewColorTheme:input_type -> blueapi.cover.v1.UpdateViewColorThemeRequest
+	67,  // 150: blueapi.cover.v1.Cover.DeleteView:input_type -> blueapi.cover.v1.DeleteViewRequest
+	69,  // 151: blueapi.cover.v1.Cover.UpdateSideMenuState:input_type -> blueapi.cover.v1.UpdateSideMenuStateRequest
+	71,  // 152: blueapi.cover.v1.Cover.AddSideMenuFavorite:input_type -> blueapi.cover.v1.AddSideMenuFavoriteRequest
+	73,  // 153: blueapi.cover.v1.Cover.RemoveSideMenuFavorite:input_type -> blueapi.cover.v1.RemoveSideMenuFavoriteRequest
+	75,  // 154: blueapi.cover.v1.Cover.CreateCostGroup:input_type -> blueapi.cover.v1.CreateCostGroupRequest
+	77,  // 155: blueapi.cover.v1.Cover.GetCostGroups:input_type -> blueapi.cover.v1.GetCostGroupsRequest
+	179, // 156: blueapi.cover.v1.Cover.GetCategories:input_type -> blueapi.cover.v1.GetCategoriesRequest
+	79,  // 157: blueapi.cover.v1.Cover.GetCostGroupDetails:input_type -> blueapi.cover.v1.GetCostGroupDetailsRequest
+	81,  // 158: blueapi.cover.v1.Cover.UpdateCostGroupName:input_type -> blueapi.cover.v1.UpdateCostGroupNameRequest
+	83,  // 159: blueapi.cover.v1.Cover.UpdateCostGroupDescription:input_type -> blueapi.cover.v1.UpdateCostGroupDescriptionRequest
+	85,  // 160: blueapi.cover.v1.Cover.UpdateCostGroupImage:input_type -> blueapi.cover.v1.UpdateCostGroupImageRequest
+	87,  // 161: blueapi.cover.v1.Cover.UpdateCostGroupIcon:input_type -> blueapi.cover.v1.UpdateCostGroupIconRequest
+	89,  // 162: blueapi.cover.v1.Cover.UpdateCostGroupColorTheme:input_type -> blueapi.cover.v1.UpdateCostGroupColorThemeRequest
+	91,  // 163: blueapi.cover.v1.Cover.UpdateCostGroupCombinations:input_type -> blueapi.cover.v1.UpdateCostGroupCombinationsRequest
+	116, // 164: blueapi.cover.v1.Cover.ResolveCostGroupCombinations:input_type -> blueapi.cover.v1.ResolveCostGroupCombinationsRequest
+	93,  // 165: blueapi.cover.v1.Cover.AssignCostGroupMember:input_type -> blueapi.cover.v1.AssignCostGroupMemberRequest
+	95,  // 166: blueapi.cover.v1.Cover.RemoveCostGroupMember:input_type -> blueapi.cover.v1.RemoveCostGroupMemberRequest
+	97,  // 167: blueapi.cover.v1.Cover.DeleteCostGroup:input_type -> blueapi.cover.v1.DeleteCostGroupRequest
+	99,  // 168: blueapi.cover.v1.Cover.GetAccountAccessTemplateUrl:input_type -> blueapi.cover.v1.GetAccountAccessTemplateUrlRequest
+	101, // 169: blueapi.cover.v1.Cover.ListAccountAccess:input_type -> blueapi.cover.v1.ListAccountAccessRequest
+	102, // 170: blueapi.cover.v1.Cover.GetAccountAccess:input_type -> blueapi.cover.v1.GetAccountAccessRequest
+	174, // 171: blueapi.cover.v1.Cover.GetDataAccess:input_type -> blueapi.cover.v1.GetAndDeleteDataAccessRequest
+	174, // 172: blueapi.cover.v1.Cover.DeleteDataAccess:input_type -> blueapi.cover.v1.GetAndDeleteDataAccessRequest
+	104, // 173: blueapi.cover.v1.Cover.CreateAccountAccess:input_type -> blueapi.cover.v1.CreateAccountAccessRequest
+	105, // 174: blueapi.cover.v1.Cover.CreateAccountAccessStackset:input_type -> blueapi.cover.v1.CreateAccountAccessStacksetRequest
+	104, // 175: blueapi.cover.v1.Cover.CreateAccountAccessCur:input_type -> blueapi.cover.v1.CreateAccountAccessRequest
+	106, // 176: blueapi.cover.v1.Cover.UpdateAccountAccess:input_type -> blueapi.cover.v1.UpdateAccountAccessRequest
+	107, // 177: blueapi.cover.v1.Cover.DeleteAccountAccess:input_type -> blueapi.cover.v1.DeleteAccountAccessRequest
+	109, // 178: blueapi.cover.v1.Cover.RegisterAccount:input_type -> blueapi.cover.v1.RegisterAccountRequest
+	170, // 179: blueapi.cover.v1.Cover.RegisterDataAccess:input_type -> blueapi.cover.v1.RegisterDataAccessRequest
+	173, // 180: blueapi.cover.v1.Cover.AddBillingAccount:input_type -> blueapi.cover.v1.BillingAccountRequest
+	172, // 181: blueapi.cover.v1.Cover.ListDataAccess:input_type -> blueapi.cover.v1.ListDataAccessRequest
+	171, // 182: blueapi.cover.v1.Cover.UpdateDataAccess:input_type -> blueapi.cover.v1.UpdateDataAccessRequest
+	110, // 183: blueapi.cover.v1.Cover.ListAssets:input_type -> blueapi.cover.v1.ListAssetsRequest
+	113, // 184: blueapi.cover.v1.Cover.GetAssetsSummary:input_type -> blueapi.cover.v1.GetAssetsSummaryRequest
+	118, // 185: blueapi.cover.v1.Cover.GetCostUsage:input_type -> blueapi.cover.v1.GetCostUsageRequest
+	126, // 186: blueapi.cover.v1.Cover.GetRightSizingRecommendation:input_type -> blueapi.cover.v1.GetRightSizingRecommendationRequest
+	128, // 187: blueapi.cover.v1.Cover.ModifyResourceType:input_type -> blueapi.cover.v1.ModifyResourceTypeRequest
+	130, // 188: blueapi.cover.v1.Cover.TerminateResource:input_type -> blueapi.cover.v1.TerminateResourceRequest
+	132, // 189: blueapi.cover.v1.Cover.UploadChargeCode:input_type -> blueapi.cover.v1.UploadChargeCodeRequest
+	134, // 190: blueapi.cover.v1.Cover.AssignPayer:input_type -> blueapi.cover.v1.AssignPayerRequest
+	136, // 191: blueapi.cover.v1.Cover.GetPayers:input_type -> blueapi.cover.v1.GetPayersRequest
+	138, // 192: blueapi.cover.v1.Cover.GetAccounts:input_type -> blueapi.cover.v1.GetAccountsRequest
+	140, // 193: blueapi.cover.v1.Cover.GetServices:input_type -> blueapi.cover.v1.GetServicesRequest
+	142, // 194: blueapi.cover.v1.Cover.GetRegions:input_type -> blueapi.cover.v1.GetRegionsRequest
+	144, // 195: blueapi.cover.v1.Cover.GetTags:input_type -> blueapi.cover.v1.GetTagsRequest
+	146, // 196: blueapi.cover.v1.Cover.ListFees:input_type -> blueapi.cover.v1.ListFeesRequest
+	148, // 197: blueapi.cover.v1.Cover.RestoreFee:input_type -> blueapi.cover.v1.RestoreFeeRequest
+	149, // 198: blueapi.cover.v1.Cover.GetCostGroupFee:input_type -> blueapi.cover.v1.GetCostGroupFeeRequest
+	155, // 199: blueapi.cover.v1.Cover.ListAllocators:input_type -> blueapi.cover.v1.ListAllocatorsRequest
+	156, // 200: blueapi.cover.v1.Cover.CreateAllocator:input_type -> blueapi.cover.v1.CreateAllocatorRequest
+	154, // 201: blueapi.cover.v1.Cover.UpdateAllocator:input_type -> blueapi.cover.v1.CostAllocatorRequest
+	157, // 202: blueapi.cover.v1.Cover.DeleteAllocator:input_type -> blueapi.cover.v1.DeleteAllocatorRequest
+	158, // 203: blueapi.cover.v1.Cover.ProxyCreateCompletion:input_type -> blueapi.cover.v1.ProxyCreateCompletionRequest
+	156, // 204: blueapi.cover.v1.Cover.SimulateFeeAllocator:input_type -> blueapi.cover.v1.CreateAllocatorRequest
+	161, // 205: blueapi.cover.v1.Cover.ListAccountUsage:input_type -> blueapi.cover.v1.ListAccountUsageRequest
+	162, // 206: blueapi.cover.v1.Cover.RestoreAccountUsage:input_type -> blueapi.cover.v1.RestoreAccountUsageRequest
+	156, // 207: blueapi.cover.v1.Cover.SimulateAccountUsage:input_type -> blueapi.cover.v1.CreateAllocatorRequest
+	146, // 208: blueapi.cover.v1.Cover.ListSavings:input_type -> blueapi.cover.v1.ListFeesRequest
+	163, // 209: blueapi.cover.v1.Cover.RestoreSavings:input_type -> blueapi.cover.v1.RestoreSavingsRequest
+	156, // 210: blueapi.cover.v1.Cover.SimulateSavings:input_type -> blueapi.cover.v1.CreateAllocatorRequest
+	165, // 211: blueapi.cover.v1.Cover.GetCostGroupAllocation:input_type -> blueapi.cover.v1.GetCostGroupAllocationRequest
+	167, // 212: blueapi.cover.v1.Cover.ProcessAuth0User:input_type -> blueapi.cover.v1.ProcessAuth0UserRequest
+	175, // 213: blueapi.cover.v1.Cover.AddPartnerCenterCredentials:input_type -> blueapi.cover.v1.AddPartnerCenterCredentialsRequest
+	176, // 214: blueapi.cover.v1.Cover.AddMpnSetting:input_type -> blueapi.cover.v1.AddMpnSettingRequest
+	177, // 215: blueapi.cover.v1.Cover.GetCostGroupAttribute:input_type -> blueapi.cover.v1.GetCostGroupAttributeRequest
+	181, // 216: blueapi.cover.v1.Cover.GetAlerts:input_type -> blueapi.cover.v1.GetAlertsRequest
+	183, // 217: blueapi.cover.v1.Cover.CreateAlert:input_type -> blueapi.cover.v1.CreateAlertRequest
+	185, // 218: blueapi.cover.v1.Cover.GetAlertDetails:input_type -> blueapi.cover.v1.GetAlertDetailsRequest
+	187, // 219: blueapi.cover.v1.Cover.DeleteAlert:input_type -> blueapi.cover.v1.DeleteAlertRequest
+	189, // 220: blueapi.cover.v1.Cover.UpdateAlertDetails:input_type -> blueapi.cover.v1.UpdateAlertDetailsRequest
+	191, // 221: blueapi.cover.v1.Cover.GetChannels:input_type -> blueapi.cover.v1.GetChannelsRequest
+	193, // 222: blueapi.cover.v1.Cover.CreateChannel:input_type -> blueapi.cover.v1.CreateChannelRequest
+	195, // 223: blueapi.cover.v1.Cover.GetChannelDetails:input_type -> blueapi.cover.v1.GetChannelDetailsRequest
+	197, // 224: blueapi.cover.v1.Cover.DeleteChannel:input_type -> blueapi.cover.v1.DeleteChannelRequest
+	199, // 225: blueapi.cover.v1.Cover.UpdateChannelDetails:input_type -> blueapi.cover.v1.UpdateChannelDetailsRequest
+	201, // 226: blueapi.cover.v1.Cover.GetDiscountRecommendations:input_type -> blueapi.cover.v1.GetDiscountRecommendationsRequest
+	203, // 227: blueapi.cover.v1.Cover.GetAnomalyinCostGroup:input_type -> blueapi.cover.v1.GetAnomalyinCostGroupRequest
+	205, // 228: blueapi.cover.v1.Cover.CreateDiscountExpirationAlert:input_type -> blueapi.cover.v1.CreateDiscountExpirationAlertRequest
+	207, // 229: blueapi.cover.v1.Cover.UpdateDiscountExpirationAlert:input_type -> blueapi.cover.v1.UpdateDiscountExpirationAlertRequest
+	206, // 230: blueapi.cover.v1.Cover.GetDiscountExpirationAlert:input_type -> blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest
+	209, // 231: blueapi.cover.v1.Cover.ListDiscountExpirationAlert:input_type -> blueapi.cover.v1.ListDiscountExpirationAlertRequest
+	206, // 232: blueapi.cover.v1.Cover.DeleteDiscountExpirationAlert:input_type -> blueapi.cover.v1.ManipulateDiscountExpirationAlertRequest
+	210, // 233: blueapi.cover.v1.Cover.CreateAnomalyAlert:input_type -> blueapi.cover.v1.CreateAnomalyAlertRequest
+	211, // 234: blueapi.cover.v1.Cover.DeleteAnomalyAlert:input_type -> blueapi.cover.v1.ManipulateAnomalyAlertRequest
+	213, // 235: blueapi.cover.v1.Cover.ListAnomalyAlert:input_type -> blueapi.cover.v1.ListAnomalyAlertRequest
+	211, // 236: blueapi.cover.v1.Cover.GetAnomalyAlert:input_type -> blueapi.cover.v1.ManipulateAnomalyAlertRequest
+	214, // 237: blueapi.cover.v1.Cover.UpdateAnomalyAlert:input_type -> blueapi.cover.v1.UpdateAnomalyAlertRequest
+	215, // 238: blueapi.cover.v1.Cover.RegisterNewUser:input_type -> blueapi.cover.v1.RegisterNewUserRequest
+	217, // 239: blueapi.cover.v1.Cover.GetUserProfile:input_type -> blueapi.cover.v1.GetUserProfileRequest
+	219, // 240: blueapi.cover.v1.Cover.ListBudgets:input_type -> blueapi.cover.v1.ListBudgetsRequest
+	221, // 241: blueapi.cover.v1.Cover.GetBudget:input_type -> blueapi.cover.v1.GetBudgetRequest
+	223, // 242: blueapi.cover.v1.Cover.CreateBudget:input_type -> blueapi.cover.v1.CreateBudgetRequest
+	225, // 243: blueapi.cover.v1.Cover.DeleteBudget:input_type -> blueapi.cover.v1.DeleteBudgetRequest
+	227, // 244: blueapi.cover.v1.Cover.UpdateBudget:input_type -> blueapi.cover.v1.UpdateBudgetRequest
+	229, // 245: blueapi.cover.v1.Cover.ResolveAWSMarketplaceTokenForOnboarding:input_type -> blueapi.cover.v1.ResolveAWSMarketplaceTokenForOnboardingRequest
+	231, // 246: blueapi.cover.v1.Cover.GetCustomerSubscriptionStatus:input_type -> blueapi.cover.v1.GetCustomerSubscriptionStatusRequest
+	233, // 247: blueapi.cover.v1.Cover.CreateProfiling:input_type -> blueapi.cover.v1.CreateProfilingRequest
+	235, // 248: blueapi.cover.v1.Cover.AddInfotoMarketplace:input_type -> blueapi.cover.v1.AddInfotoMarketplaceRequest
+	237, // 249: blueapi.cover.v1.Cover.GetReportSummary:input_type -> blueapi.cover.v1.GetReportSummaryRequest
+	239, // 250: blueapi.cover.v1.Cover.ListRecommendations:input_type -> blueapi.cover.v1.ListRecommendationRequest
+	241, // 251: blueapi.cover.v1.Cover.GetRecommendation:input_type -> blueapi.cover.v1.GetRecommendationRequest
+	243, // 252: blueapi.cover.v1.Cover.ExecuteOptimization:input_type -> blueapi.cover.v1.ExecuteOptimizationRequest
+	245, // 253: blueapi.cover.v1.Cover.MarkAsExecuted:input_type -> blueapi.cover.v1.MarkAsExecutedRequest
+	247, // 254: blueapi.cover.v1.Cover.UndoExecutedRecommendation:input_type -> blueapi.cover.v1.UndoExecutedRecommendationRequest
+	249, // 255: blueapi.cover.v1.Cover.OptimizationHistory:input_type -> blueapi.cover.v1.OptimizationHistoryRequest
+	251, // 256: blueapi.cover.v1.Cover.SetCostGroupEventIndicator:input_type -> blueapi.cover.v1.SetCostGroupEventIndicatorRequest
+	253, // 257: blueapi.cover.v1.Cover.SetCostGroupAnomalyOptions:input_type -> blueapi.cover.v1.SetCostGroupAnomalyOptionsRequest
+	255, // 258: blueapi.cover.v1.Cover.SetOrgFiscalMonth:input_type -> blueapi.cover.v1.SetOrgFiscalMonthRequest
+	257, // 259: blueapi.cover.v1.Cover.GetOrgFiscalMonth:input_type -> blueapi.cover.v1.GetOrgFiscalMonthRequest
+	259, // 260: blueapi.cover.v1.Cover.TransferOrganization:input_type -> blueapi.cover.v1.TransferOrganizationRequest
+	261, // 261: blueapi.cover.v1.Cover.UpdateCostGroupCreationUI:input_type -> blueapi.cover.v1.UpdateCostGroupCreationUIRequest
+	2,   // 262: blueapi.cover.v1.Cover.OnboardOrg:output_type -> blueapi.cover.v1.OnboardOrgResponse
+	4,   // 263: blueapi.cover.v1.Cover.InviteMember:output_type -> blueapi.cover.v1.InviteMemberResponse
+	6,   // 264: blueapi.cover.v1.Cover.ActivateUser:output_type -> blueapi.cover.v1.ActivateUserResponse
+	8,   // 265: blueapi.cover.v1.Cover.CreateMember:output_type -> blueapi.cover.v1.CreateMemberResponse
+	10,  // 266: blueapi.cover.v1.Cover.GetMembers:output_type -> blueapi.cover.v1.GetMembersResponse
+	12,  // 267: blueapi.cover.v1.Cover.GetMemberDetails:output_type -> blueapi.cover.v1.GetMemberDetailsResponse
+	14,  // 268: blueapi.cover.v1.Cover.GetMemberCostGroup:output_type -> blueapi.cover.v1.GetMemberCostGroupResponse
+	16,  // 269: blueapi.cover.v1.Cover.UpdateMemberPermission:output_type -> blueapi.cover.v1.UpdateMemberPermissionResponse
+	18,  // 270: blueapi.cover.v1.Cover.GetUserDetails:output_type -> blueapi.cover.v1.GetUserDetailsResponse
+	20,  // 271: blueapi.cover.v1.Cover.UpdateUserAvatar:output_type -> blueapi.cover.v1.UpdateUserAvatarResponse
+	22,  // 272: blueapi.cover.v1.Cover.UpdateUserIcon:output_type -> blueapi.cover.v1.UpdateUserIconResponse
+	24,  // 273: blueapi.cover.v1.Cover.UpdateUserColorTheme:output_type -> blueapi.cover.v1.UpdateUserColorThemeResponse
+	26,  // 274: blueapi.cover.v1.Cover.UpdateUserName:output_type -> blueapi.cover.v1.UpdateUserNameResponse
+	28,  // 275: blueapi.cover.v1.Cover.UpdateUserEmail:output_type -> blueapi.cover.v1.UpdateUserEmailResponse
+	30,  // 276: blueapi.cover.v1.Cover.UpdateUserMainView:output_type -> blueapi.cover.v1.UpdateUserMainViewResponse
+	32,  // 277: blueapi.cover.v1.Cover.ResetUserPassword:output_type -> blueapi.cover.v1.ResetUserPasswordResponse
+	34,  // 278: blueapi.cover.v1.Cover.UpdateUserLocale:output_type -> blueapi.cover.v1.UpdateUserLocaleResponse
+	36,  // 279: blueapi.cover.v1.Cover.UpdateUserAppTheme:output_type -> blueapi.cover.v1.UpdateUserAppThemeResponse
+	38,  // 280: blueapi.cover.v1.Cover.UpdateUserTimezone:output_type -> blueapi.cover.v1.UpdateUserTimezoneResponse
+	40,  // 281: blueapi.cover.v1.Cover.UpdateUserAttributes:output_type -> blueapi.cover.v1.UpdateUserAttributesResponse
+	42,  // 282: blueapi.cover.v1.Cover.DeleteMember:output_type -> blueapi.cover.v1.DeleteMemberResponse
+	44,  // 283: blueapi.cover.v1.Cover.ResetPassword:output_type -> blueapi.cover.v1.ResetPasswordResponse
+	46,  // 284: blueapi.cover.v1.Cover.CreateView:output_type -> blueapi.cover.v1.CreateViewResponse
+	48,  // 285: blueapi.cover.v1.Cover.GetViews:output_type -> blueapi.cover.v1.GetViewsResponse
+	50,  // 286: blueapi.cover.v1.Cover.GetCurrentView:output_type -> blueapi.cover.v1.GetCurrentViewResponse
+	52,  // 287: blueapi.cover.v1.Cover.GetFavoriteViews:output_type -> blueapi.cover.v1.GetFavoriteViewsResponse
+	54,  // 288: blueapi.cover.v1.Cover.PublishView:output_type -> blueapi.cover.v1.PublishViewResponse
+	56,  // 289: blueapi.cover.v1.Cover.AddFavorite:output_type -> blueapi.cover.v1.AddFavoriteResponse
+	58,  // 290: blueapi.cover.v1.Cover.RemoveFavorite:output_type -> blueapi.cover.v1.RemoveFavoriteResponse
+	60,  // 291: blueapi.cover.v1.Cover.UpdateView:output_type -> blueapi.cover.v1.UpdateViewResponse
+	62,  // 292: blueapi.cover.v1.Cover.UpdateViewLayout:output_type -> blueapi.cover.v1.UpdateViewLayoutResponse
+	64,  // 293: blueapi.cover.v1.Cover.UpdateViewWidget:output_type -> blueapi.cover.v1.UpdateViewWidgetResponse
+	66,  // 294: blueapi.cover.v1.Cover.UpdateViewColorTheme:output_type -> blueapi.cover.v1.UpdateViewColorThemeResponse
+	68,  // 295: blueapi.cover.v1.Cover.DeleteView:output_type -> blueapi.cover.v1.DeleteViewResponse
+	70,  // 296: blueapi.cover.v1.Cover.UpdateSideMenuState:output_type -> blueapi.cover.v1.UpdateSideMenuStateResponse
+	72,  // 297: blueapi.cover.v1.Cover.AddSideMenuFavorite:output_type -> blueapi.cover.v1.AddSideMenuFavoriteResponse
+	74,  // 298: blueapi.cover.v1.Cover.RemoveSideMenuFavorite:output_type -> blueapi.cover.v1.RemoveSideMenuFavoriteResponse
+	76,  // 299: blueapi.cover.v1.Cover.CreateCostGroup:output_type -> blueapi.cover.v1.CreateCostGroupResponse
+	78,  // 300: blueapi.cover.v1.Cover.GetCostGroups:output_type -> blueapi.cover.v1.GetCostGroupsResponse
+	180, // 301: blueapi.cover.v1.Cover.GetCategories:output_type -> blueapi.cover.v1.GetCategoriesResponse
+	80,  // 302: blueapi.cover.v1.Cover.GetCostGroupDetails:output_type -> blueapi.cover.v1.GetCostGroupDetailsResponse
+	82,  // 303: blueapi.cover.v1.Cover.UpdateCostGroupName:output_type -> blueapi.cover.v1.UpdateCostGroupNameResponse
+	84,  // 304: blueapi.cover.v1.Cover.UpdateCostGroupDescription:output_type -> blueapi.cover.v1.UpdateCostGroupDescriptionResponse
+	86,  // 305: blueapi.cover.v1.Cover.UpdateCostGroupImage:output_type -> blueapi.cover.v1.UpdateCostGroupImageResponse
+	88,  // 306: blueapi.cover.v1.Cover.UpdateCostGroupIcon:output_type -> blueapi.cover.v1.UpdateCostGroupIconResponse
+	90,  // 307: blueapi.cover.v1.Cover.UpdateCostGroupColorTheme:output_type -> blueapi.cover.v1.UpdateCostGroupColorThemeResponse
+	92,  // 308: blueapi.cover.v1.Cover.UpdateCostGroupCombinations:output_type -> blueapi.cover.v1.UpdateCostGroupCombinationsResponse
+	117, // 309: blueapi.cover.v1.Cover.ResolveCostGroupCombinations:output_type -> blueapi.cover.v1.ResolveCostGroupCombinationsResponse
+	94,  // 310: blueapi.cover.v1.Cover.AssignCostGroupMember:output_type -> blueapi.cover.v1.AssignCostGroupMemberResponse
+	96,  // 311: blueapi.cover.v1.Cover.RemoveCostGroupMember:output_type -> blueapi.cover.v1.RemoveCostGroupMemberResponse
+	98,  // 312: blueapi.cover.v1.Cover.DeleteCostGroup:output_type -> blueapi.cover.v1.DeleteCostGroupResponse
+	100, // 313: blueapi.cover.v1.Cover.GetAccountAccessTemplateUrl:output_type -> blueapi.cover.v1.GetAccountAccessTemplateUrlResponse
+	103, // 314: blueapi.cover.v1.Cover.ListAccountAccess:output_type -> blueapi.cover.v1.AccountAccess
+	103, // 315: blueapi.cover.v1.Cover.GetAccountAccess:output_type -> blueapi.cover.v1.AccountAccess
+	169, // 316: blueapi.cover.v1.Cover.GetDataAccess:output_type -> blueapi.cover.v1.DataAccess
+	306, // 317: blueapi.cover.v1.Cover.DeleteDataAccess:output_type -> google.protobuf.Empty
+	103, // 318: blueapi.cover.v1.Cover.CreateAccountAccess:output_type -> blueapi.cover.v1.AccountAccess
+	103, // 319: blueapi.cover.v1.Cover.CreateAccountAccessStackset:output_type -> blueapi.cover.v1.AccountAccess
+	103, // 320: blueapi.cover.v1.Cover.CreateAccountAccessCur:output_type -> blueapi.cover.v1.AccountAccess
+	307, // 321: blueapi.cover.v1.Cover.UpdateAccountAccess:output_type -> protos.Operation
+	108, // 322: blueapi.cover.v1.Cover.DeleteAccountAccess:output_type -> blueapi.cover.v1.DeleteAccountAccessResponse
+	306, // 323: blueapi.cover.v1.Cover.RegisterAccount:output_type -> google.protobuf.Empty
+	306, // 324: blueapi.cover.v1.Cover.RegisterDataAccess:output_type -> google.protobuf.Empty
+	306, // 325: blueapi.cover.v1.Cover.AddBillingAccount:output_type -> google.protobuf.Empty
+	169, // 326: blueapi.cover.v1.Cover.ListDataAccess:output_type -> blueapi.cover.v1.DataAccess
+	306, // 327: blueapi.cover.v1.Cover.UpdateDataAccess:output_type -> google.protobuf.Empty
+	112, // 328: blueapi.cover.v1.Cover.ListAssets:output_type -> blueapi.cover.v1.Resource
+	114, // 329: blueapi.cover.v1.Cover.GetAssetsSummary:output_type -> blueapi.cover.v1.GetAssetsSummaryResponse
+	125, // 330: blueapi.cover.v1.Cover.GetCostUsage:output_type -> blueapi.cover.v1.CostItem
+	127, // 331: blueapi.cover.v1.Cover.GetRightSizingRecommendation:output_type -> blueapi.cover.v1.GetRightSizingRecommendationResponse
+	129, // 332: blueapi.cover.v1.Cover.ModifyResourceType:output_type -> blueapi.cover.v1.ModifyResourceTypeResponse
+	131, // 333: blueapi.cover.v1.Cover.TerminateResource:output_type -> blueapi.cover.v1.TerminateResourceResponse
+	133, // 334: blueapi.cover.v1.Cover.UploadChargeCode:output_type -> blueapi.cover.v1.UploadChargeCodeResponse
+	135, // 335: blueapi.cover.v1.Cover.AssignPayer:output_type -> blueapi.cover.v1.AssignPayerResponse
+	137, // 336: blueapi.cover.v1.Cover.GetPayers:output_type -> blueapi.cover.v1.GetPayersResponse
+	139, // 337: blueapi.cover.v1.Cover.GetAccounts:output_type -> blueapi.cover.v1.GetAccountsResponse
+	141, // 338: blueapi.cover.v1.Cover.GetServices:output_type -> blueapi.cover.v1.GetServicesResponse
+	143, // 339: blueapi.cover.v1.Cover.GetRegions:output_type -> blueapi.cover.v1.GetRegionsResponse
+	145, // 340: blueapi.cover.v1.Cover.GetTags:output_type -> blueapi.cover.v1.GetTagsResponse
+	147, // 341: blueapi.cover.v1.Cover.ListFees:output_type -> blueapi.cover.v1.FeeDetails
+	147, // 342: blueapi.cover.v1.Cover.RestoreFee:output_type -> blueapi.cover.v1.FeeDetails
+	150, // 343: blueapi.cover.v1.Cover.GetCostGroupFee:output_type -> blueapi.cover.v1.FeeItem
+	153, // 344: blueapi.cover.v1.Cover.ListAllocators:output_type -> blueapi.cover.v1.CostAllocatorDetails
+	153, // 345: blueapi.cover.v1.Cover.CreateAllocator:output_type -> blueapi.cover.v1.CostAllocatorDetails
+	153, // 346: blueapi.cover.v1.Cover.UpdateAllocator:output_type -> blueapi.cover.v1.CostAllocatorDetails
+	306, // 347: blueapi.cover.v1.Cover.DeleteAllocator:output_type -> google.protobuf.Empty
+	159, // 348: blueapi.cover.v1.Cover.ProxyCreateCompletion:output_type -> blueapi.cover.v1.ProxyCreateCompletionResponse
+	147, // 349: blueapi.cover.v1.Cover.SimulateFeeAllocator:output_type -> blueapi.cover.v1.FeeDetails
+	160, // 350: blueapi.cover.v1.Cover.ListAccountUsage:output_type -> blueapi.cover.v1.AccountUsageDetails
+	160, // 351: blueapi.cover.v1.Cover.RestoreAccountUsage:output_type -> blueapi.cover.v1.AccountUsageDetails
+	160, // 352: blueapi.cover.v1.Cover.SimulateAccountUsage:output_type -> blueapi.cover.v1.AccountUsageDetails
+	164, // 353: blueapi.cover.v1.Cover.ListSavings:output_type -> blueapi.cover.v1.SavingsDetails
+	164, // 354: blueapi.cover.v1.Cover.RestoreSavings:output_type -> blueapi.cover.v1.SavingsDetails
+	164, // 355: blueapi.cover.v1.Cover.SimulateSavings:output_type -> blueapi.cover.v1.SavingsDetails
+	166, // 356: blueapi.cover.v1.Cover.GetCostGroupAllocation:output_type -> blueapi.cover.v1.AllocationItem
+	168, // 357: blueapi.cover.v1.Cover.ProcessAuth0User:output_type -> blueapi.cover.v1.ProcessAuth0UserResponse
+	306, // 358: blueapi.cover.v1.Cover.AddPartnerCenterCredentials:output_type -> google.protobuf.Empty
+	306, // 359: blueapi.cover.v1.Cover.AddMpnSetting:output_type -> google.protobuf.Empty
+	178, // 360: blueapi.cover.v1.Cover.GetCostGroupAttribute:output_type -> blueapi.cover.v1.GetCostGroupAttributeResponse
+	182, // 361: blueapi.cover.v1.Cover.GetAlerts:output_type -> blueapi.cover.v1.GetAlertsResponse
+	184, // 362: blueapi.cover.v1.Cover.CreateAlert:output_type -> blueapi.cover.v1.CreateAlertResponse
+	186, // 363: blueapi.cover.v1.Cover.GetAlertDetails:output_type -> blueapi.cover.v1.GetAlertDetailsResponse
+	188, // 364: blueapi.cover.v1.Cover.DeleteAlert:output_type -> blueapi.cover.v1.DeleteAlertResponse
+	190, // 365: blueapi.cover.v1.Cover.UpdateAlertDetails:output_type -> blueapi.cover.v1.UpdateAlertDetailsResponse
+	192, // 366: blueapi.cover.v1.Cover.GetChannels:output_type -> blueapi.cover.v1.GetChannelsResponse
+	194, // 367: blueapi.cover.v1.Cover.CreateChannel:output_type -> blueapi.cover.v1.CreateChannelResponse
+	196, // 368: blueapi.cover.v1.Cover.GetChannelDetails:output_type -> blueapi.cover.v1.GetChannelDetailsResponse
+	198, // 369: blueapi.cover.v1.Cover.DeleteChannel:output_type -> blueapi.cover.v1.DeleteChannelResponse
+	200, // 370: blueapi.cover.v1.Cover.UpdateChannelDetails:output_type -> blueapi.cover.v1.UpdateChannelDetailsResponse
+	202, // 371: blueapi.cover.v1.Cover.GetDiscountRecommendations:output_type -> blueapi.cover.v1.GetDiscountRecommendationsResponse
+	204, // 372: blueapi.cover.v1.Cover.GetAnomalyinCostGroup:output_type -> blueapi.cover.v1.AnomalyData
+	306, // 373: blueapi.cover.v1.Cover.CreateDiscountExpirationAlert:output_type -> google.protobuf.Empty
+	306, // 374: blueapi.cover.v1.Cover.UpdateDiscountExpirationAlert:output_type -> google.protobuf.Empty
+	208, // 375: blueapi.cover.v1.Cover.GetDiscountExpirationAlert:output_type -> blueapi.cover.v1.DiscountExpiryAlertData
+	208, // 376: blueapi.cover.v1.Cover.ListDiscountExpirationAlert:output_type -> blueapi.cover.v1.DiscountExpiryAlertData
+	306, // 377: blueapi.cover.v1.Cover.DeleteDiscountExpirationAlert:output_type -> google.protobuf.Empty
+	306, // 378: blueapi.cover.v1.Cover.CreateAnomalyAlert:output_type -> google.protobuf.Empty
+	306, // 379: blueapi.cover.v1.Cover.DeleteAnomalyAlert:output_type -> google.protobuf.Empty
+	212, // 380: blueapi.cover.v1.Cover.ListAnomalyAlert:output_type -> blueapi.cover.v1.AnomalyAlertData
+	212, // 381: blueapi.cover.v1.Cover.GetAnomalyAlert:output_type -> blueapi.cover.v1.AnomalyAlertData
+	306, // 382: blueapi.cover.v1.Cover.UpdateAnomalyAlert:output_type -> google.protobuf.Empty
+	216, // 383: blueapi.cover.v1.Cover.RegisterNewUser:output_type -> blueapi.cover.v1.RegisterNewUserResponse
+	218, // 384: blueapi.cover.v1.Cover.GetUserProfile:output_type -> blueapi.cover.v1.GetUserProfileResponse
+	220, // 385: blueapi.cover.v1.Cover.ListBudgets:output_type -> blueapi.cover.v1.ListBudgetsResponse
+	222, // 386: blueapi.cover.v1.Cover.GetBudget:output_type -> blueapi.cover.v1.GetBudgetResponse
+	224, // 387: blueapi.cover.v1.Cover.CreateBudget:output_type -> blueapi.cover.v1.CreateBudgetResponse
+	226, // 388: blueapi.cover.v1.Cover.DeleteBudget:output_type -> blueapi.cover.v1.DeleteBudgetResponse
+	228, // 389: blueapi.cover.v1.Cover.UpdateBudget:output_type -> blueapi.cover.v1.UpdateBudgetResponse
+	230, // 390: blueapi.cover.v1.Cover.ResolveAWSMarketplaceTokenForOnboarding:output_type -> blueapi.cover.v1.ResolveAWSMarketplaceTokenForOnboardingResponse
+	232, // 391: blueapi.cover.v1.Cover.GetCustomerSubscriptionStatus:output_type -> blueapi.cover.v1.GetCustomerSubscriptionStatusResponse
+	234, // 392: blueapi.cover.v1.Cover.CreateProfiling:output_type -> blueapi.cover.v1.CreateProfilingResponse
+	236, // 393: blueapi.cover.v1.Cover.AddInfotoMarketplace:output_type -> blueapi.cover.v1.AddInfotoMarketplaceResponse
+	238, // 394: blueapi.cover.v1.Cover.GetReportSummary:output_type -> blueapi.cover.v1.GetReportSummaryResponse
+	240, // 395: blueapi.cover.v1.Cover.ListRecommendations:output_type -> blueapi.cover.v1.ListRecommendationResponse
+	242, // 396: blueapi.cover.v1.Cover.GetRecommendation:output_type -> blueapi.cover.v1.GetRecommendationResponse
+	244, // 397: blueapi.cover.v1.Cover.ExecuteOptimization:output_type -> blueapi.cover.v1.ExecuteOptimizationResponse
+	246, // 398: blueapi.cover.v1.Cover.MarkAsExecuted:output_type -> blueapi.cover.v1.MarkAsExecutedResponse
+	248, // 399: blueapi.cover.v1.Cover.UndoExecutedRecommendation:output_type -> blueapi.cover.v1.UndoExecutedRecommendationResponse
+	250, // 400: blueapi.cover.v1.Cover.OptimizationHistory:output_type -> blueapi.cover.v1.OptimizationHistoryResponse
+	252, // 401: blueapi.cover.v1.Cover.SetCostGroupEventIndicator:output_type -> blueapi.cover.v1.SetCostGroupEventIndicatorResponse
+	254, // 402: blueapi.cover.v1.Cover.SetCostGroupAnomalyOptions:output_type -> blueapi.cover.v1.SetCostGroupAnomalyOptionsResponse
+	256, // 403: blueapi.cover.v1.Cover.SetOrgFiscalMonth:output_type -> blueapi.cover.v1.SetOrgFiscalMonthResponse
+	258, // 404: blueapi.cover.v1.Cover.GetOrgFiscalMonth:output_type -> blueapi.cover.v1.GetOrgFiscalMonthResponse
+	260, // 405: blueapi.cover.v1.Cover.TransferOrganization:output_type -> blueapi.cover.v1.TransferOrganizationResponse
+	262, // 406: blueapi.cover.v1.Cover.UpdateCostGroupCreationUI:output_type -> blueapi.cover.v1.UpdateCostGroupCreationUIResponse
+	262, // [262:407] is the sub-list for method output_type
+	117, // [117:262] is the sub-list for method input_type
+	117, // [117:117] is the sub-list for extension type_name
+	117, // [117:117] is the sub-list for extension extendee
+	0,   // [0:117] is the sub-list for field type_name
 }
 
 func init() { file_cover_v1_cover_proto_init() }
@@ -23320,6 +23442,30 @@ func file_cover_v1_cover_proto_init() {
 				return nil
 			}
 		}
+		file_cover_v1_cover_proto_msgTypes[260].Exporter = func(v any, i int) any {
+			switch v := v.(*UpdateCostGroupCreationUIRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_cover_v1_cover_proto_msgTypes[261].Exporter = func(v any, i int) any {
+			switch v := v.(*UpdateCostGroupCreationUIResponse); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -23327,7 +23473,7 @@ func file_cover_v1_cover_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_cover_v1_cover_proto_rawDesc,
 			NumEnums:      1,
-			NumMessages:   263,
+			NumMessages:   265,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

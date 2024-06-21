@@ -2293,6 +2293,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.UpdateCostGroupCreationUIRequest"><span class="badge">M</span>UpdateCostGroupCreationUIRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateCostGroupCreationUIResponse"><span class="badge">M</span>UpdateCostGroupCreationUIResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.UpdateCostGroupDescriptionRequest"><span class="badge">M</span>UpdateCostGroupDescriptionRequest</a>
                 </li>
               
@@ -24342,6 +24350,54 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.UpdateCostGroupCreationUIRequest">UpdateCostGroupCreationUIRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>useNewCostGroupCreationUI</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateCostGroupCreationUIResponse">UpdateCostGroupCreationUIResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>userData</td>
+                  <td><a href="#blueapi.api.cover.UserData">blueapi.api.cover.UserData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateCostGroupDescriptionRequest">UpdateCostGroupDescriptionRequest</h3>
         <p>Request message for UpdateCostGroupDescription</p>
 
@@ -26678,6 +26734,13 @@ file in bytes </p></td>
                 <td><p>WORK-IN-PROGRESS: Transfer the account from the original organization to Alphaus payer account</p></td>
               </tr>
             
+              <tr>
+                <td>UpdateCostGroupCreationUI</td>
+                <td><a href="#blueapi.cover.v1.UpdateCostGroupCreationUIRequest">UpdateCostGroupCreationUIRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateCostGroupCreationUIResponse">UpdateCostGroupCreationUIResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Set user preference in cost group creation UI</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -28133,6 +28196,16 @@ file in bytes </p></td>
                 <td>GET</td>
                 <td>/v1/organizations/transfer/{target}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateCostGroupCreationUI</td>
+                <td>PUT</td>
+                <td>/v1/me/costgroupcreation</td>
+                <td>*</td>
               </tr>
               
             
