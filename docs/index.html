@@ -2488,22 +2488,6 @@
             <ul>
               
                 <li>
-                  <a href="#blueapi.pricing.v1.Compute"><span class="badge">M</span>Compute</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.pricing.v1.ComputeDetails"><span class="badge">M</span>ComputeDetails</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.pricing.v1.GetEC2InfoRequest"><span class="badge">M</span>GetEC2InfoRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.pricing.v1.GetEC2InfoResponse"><span class="badge">M</span>GetEC2InfoResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.pricing.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
                 </li>
               
@@ -2512,11 +2496,11 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.pricing.v1.ServiceDetails"><span class="badge">M</span>ServiceDetails</a>
+                  <a href="#blueapi.pricing.v1.GetPricingInfoRequest"><span class="badge">M</span>GetPricingInfoRequest</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.pricing.v1.UnitCost"><span class="badge">M</span>UnitCost</a>
+                  <a href="#blueapi.pricing.v1.GetPricingInfoResponse"><span class="badge">M</span>GetPricingInfoResponse</a>
                 </li>
               
               
@@ -28136,179 +28120,6 @@ file in bytes </p></td>
       <p></p>
 
       
-        <h3 id="blueapi.pricing.v1.Compute">Compute</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>sku</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>tenancy</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>os</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.pricing.v1.ComputeDetails">ComputeDetails</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>instance_type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>vcpu</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>memory_gb</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>os</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>tenancy</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>region</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.pricing.v1.GetEC2InfoRequest">GetEC2InfoRequest</h3>
-        <p>Request message for the Pricing.GetEC2Info rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>cloud</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>service</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>region</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>compute</td>
-                  <td><a href="#blueapi.pricing.v1.Compute">Compute</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.pricing.v1.GetEC2InfoResponse">GetEC2InfoResponse</h3>
-        <p>Response message for the Pricing.GetEC2Info rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>unit_cost_matrix</td>
-                  <td><a href="#blueapi.pricing.v1.UnitCost">UnitCost</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>service_details</td>
-                  <td><a href="#blueapi.pricing.v1.ServiceDetails">ServiceDetails</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.pricing.v1.GetInfoRequest">GetInfoRequest</h3>
         <p>Request message for the Pricing.GetInfo rpc.</p>
 
@@ -28340,8 +28151,8 @@ file in bytes </p></td>
 
         
       
-        <h3 id="blueapi.pricing.v1.ServiceDetails">ServiceDetails</h3>
-        <p></p>
+        <h3 id="blueapi.pricing.v1.GetPricingInfoRequest">GetPricingInfoRequest</h3>
+        <p>Request message for GetPricingInfo</p>
 
         
           <table class="field-table">
@@ -28351,8 +28162,29 @@ file in bytes </p></td>
             <tbody>
               
                 <tr>
-                  <td>compute</td>
-                  <td><a href="#blueapi.pricing.v1.ComputeDetails">ComputeDetails</a></td>
+                  <td>cloud</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>token</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -28364,8 +28196,8 @@ file in bytes </p></td>
 
         
       
-        <h3 id="blueapi.pricing.v1.UnitCost">UnitCost</h3>
-        <p></p>
+        <h3 id="blueapi.pricing.v1.GetPricingInfoResponse">GetPricingInfoResponse</h3>
+        <p>Response message for GetPricingInfo</p>
 
         
           <table class="field-table">
@@ -28375,6 +28207,41 @@ file in bytes </p></td>
             <tbody>
               
                 <tr>
+                  <td>cloud</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region_code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sku</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>unit</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -28382,15 +28249,15 @@ file in bytes </p></td>
                 </tr>
               
                 <tr>
-                  <td>unit_cost</td>
+                  <td>priceperunit</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>currency</td>
-                  <td><a href="#string">string</a></td>
+                  <td>serviceDetails</td>
+                  <td><a href="#blueapi.api.pricing.ServiceDetails">blueapi.api.pricing.ServiceDetails</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -28424,10 +28291,10 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>GetEC2Info</td>
-                <td><a href="#blueapi.pricing.v1.GetEC2InfoRequest">GetEC2InfoRequest</a></td>
-                <td><a href="#blueapi.pricing.v1.GetEC2InfoResponse">GetEC2InfoResponse</a></td>
-                <td><p>EC2 service pricing endpoint</p></td>
+                <td>GetPricingInfo</td>
+                <td><a href="#blueapi.pricing.v1.GetPricingInfoRequest">GetPricingInfoRequest</a></td>
+                <td><a href="#blueapi.pricing.v1.GetPricingInfoResponse">GetPricingInfoResponse</a> stream</td>
+                <td><p>Get pricing info</p></td>
               </tr>
             
           </tbody>
@@ -28461,9 +28328,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>GetEC2Info</td>
+                <td>GetPricingInfo</td>
                 <td>POST</td>
-                <td>/v0/ec2</td>
+                <td>/v0/pricingInfo</td>
                 <td>*</td>
               </tr>
               

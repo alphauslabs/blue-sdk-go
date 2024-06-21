@@ -49,29 +49,24 @@ func local_request_Pricing_GetInfo_0(ctx context.Context, marshaler runtime.Mars
 
 }
 
-func request_Pricing_GetEC2Info_0(ctx context.Context, marshaler runtime.Marshaler, client PricingClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetEC2InfoRequest
+func request_Pricing_GetPricingInfo_0(ctx context.Context, marshaler runtime.Marshaler, client PricingClient, req *http.Request, pathParams map[string]string) (Pricing_GetPricingInfoClient, runtime.ServerMetadata, error) {
+	var protoReq GetPricingInfoRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
-	msg, err := client.GetEC2Info(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-
-}
-
-func local_request_Pricing_GetEC2Info_0(ctx context.Context, marshaler runtime.Marshaler, server PricingServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var protoReq GetEC2InfoRequest
-	var metadata runtime.ServerMetadata
-
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	stream, err := client.GetPricingInfo(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
 	}
-
-	msg, err := server.GetEC2Info(ctx, &protoReq)
-	return msg, metadata, err
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 
 }
 
@@ -106,29 +101,11 @@ func RegisterPricingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 
 	})
 
-	mux.Handle("POST", pattern_Pricing_GetEC2Info_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		var err error
-		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.pricing.v1.Pricing/GetEC2Info", runtime.WithHTTPPathPattern("/v0/ec2"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_Pricing_GetEC2Info_0(annotatedContext, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-
-		forward_Pricing_GetEC2Info_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
-
+	mux.Handle("POST", pattern_Pricing_GetPricingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -194,25 +171,25 @@ func RegisterPricingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 
 	})
 
-	mux.Handle("POST", pattern_Pricing_GetEC2Info_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Pricing_GetPricingInfo_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.pricing.v1.Pricing/GetEC2Info", runtime.WithHTTPPathPattern("/v0/ec2"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.pricing.v1.Pricing/GetPricingInfo", runtime.WithHTTPPathPattern("/v0/pricingInfo"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Pricing_GetEC2Info_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Pricing_GetPricingInfo_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Pricing_GetEC2Info_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Pricing_GetPricingInfo_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -222,11 +199,11 @@ func RegisterPricingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 var (
 	pattern_Pricing_GetInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v0", "info"}, ""))
 
-	pattern_Pricing_GetEC2Info_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v0", "ec2"}, ""))
+	pattern_Pricing_GetPricingInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v0", "pricingInfo"}, ""))
 )
 
 var (
 	forward_Pricing_GetInfo_0 = runtime.ForwardResponseMessage
 
-	forward_Pricing_GetEC2Info_0 = runtime.ForwardResponseMessage
+	forward_Pricing_GetPricingInfo_0 = runtime.ForwardResponseStream
 )
