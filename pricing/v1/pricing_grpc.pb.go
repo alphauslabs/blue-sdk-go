@@ -32,7 +32,7 @@ type PricingClient interface {
 	// Test endpoint only.
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
 	// Get pricing info
-	GetPricingInfo(ctx context.Context, in *GetPricingInfoRequest, opts ...grpc.CallOption) (Pricing_GetPricingInfoClient, error)
+	GetPricingInfo(ctx context.Context, in *GetPricingInfoRequest, opts ...grpc.CallOption) (*GetPricingInfoResponse, error)
 }
 
 type pricingClient struct {
@@ -53,37 +53,14 @@ func (c *pricingClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ..
 	return out, nil
 }
 
-func (c *pricingClient) GetPricingInfo(ctx context.Context, in *GetPricingInfoRequest, opts ...grpc.CallOption) (Pricing_GetPricingInfoClient, error) {
+func (c *pricingClient) GetPricingInfo(ctx context.Context, in *GetPricingInfoRequest, opts ...grpc.CallOption) (*GetPricingInfoResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Pricing_ServiceDesc.Streams[0], Pricing_GetPricingInfo_FullMethodName, cOpts...)
+	out := new(GetPricingInfoResponse)
+	err := c.cc.Invoke(ctx, Pricing_GetPricingInfo_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &pricingGetPricingInfoClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Pricing_GetPricingInfoClient interface {
-	Recv() (*GetPricingInfoResponse, error)
-	grpc.ClientStream
-}
-
-type pricingGetPricingInfoClient struct {
-	grpc.ClientStream
-}
-
-func (x *pricingGetPricingInfoClient) Recv() (*GetPricingInfoResponse, error) {
-	m := new(GetPricingInfoResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 // PricingServer is the server API for Pricing service.
@@ -95,7 +72,7 @@ type PricingServer interface {
 	// Test endpoint only.
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
 	// Get pricing info
-	GetPricingInfo(*GetPricingInfoRequest, Pricing_GetPricingInfoServer) error
+	GetPricingInfo(context.Context, *GetPricingInfoRequest) (*GetPricingInfoResponse, error)
 	mustEmbedUnimplementedPricingServer()
 }
 
@@ -106,8 +83,8 @@ type UnimplementedPricingServer struct {
 func (UnimplementedPricingServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
 }
-func (UnimplementedPricingServer) GetPricingInfo(*GetPricingInfoRequest, Pricing_GetPricingInfoServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetPricingInfo not implemented")
+func (UnimplementedPricingServer) GetPricingInfo(context.Context, *GetPricingInfoRequest) (*GetPricingInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPricingInfo not implemented")
 }
 func (UnimplementedPricingServer) mustEmbedUnimplementedPricingServer() {}
 
@@ -140,25 +117,22 @@ func _Pricing_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pricing_GetPricingInfo_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetPricingInfoRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _Pricing_GetPricingInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPricingInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(PricingServer).GetPricingInfo(m, &pricingGetPricingInfoServer{ServerStream: stream})
-}
-
-type Pricing_GetPricingInfoServer interface {
-	Send(*GetPricingInfoResponse) error
-	grpc.ServerStream
-}
-
-type pricingGetPricingInfoServer struct {
-	grpc.ServerStream
-}
-
-func (x *pricingGetPricingInfoServer) Send(m *GetPricingInfoResponse) error {
-	return x.ServerStream.SendMsg(m)
+	if interceptor == nil {
+		return srv.(PricingServer).GetPricingInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Pricing_GetPricingInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PricingServer).GetPricingInfo(ctx, req.(*GetPricingInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 // Pricing_ServiceDesc is the grpc.ServiceDesc for Pricing service.
@@ -172,13 +146,11 @@ var Pricing_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetInfo",
 			Handler:    _Pricing_GetInfo_Handler,
 		},
-	},
-	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GetPricingInfo",
-			Handler:       _Pricing_GetPricingInfo_Handler,
-			ServerStreams: true,
+			MethodName: "GetPricingInfo",
+			Handler:    _Pricing_GetPricingInfo_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "pricing/v1/pricing.proto",
 }
