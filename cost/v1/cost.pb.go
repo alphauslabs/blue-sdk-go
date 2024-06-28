@@ -8048,7 +8048,7 @@ func (x *CalculatorCostModifierAwsOptions_Modifier_DescriptionModifier) GetRepla
 
 // A map of "key:value" attribute filters. The key indicates the column name while the value is the filter value prefixed by either "eq:" (equal), "re:" (regular expressions based on https://github.com/google/re2), or "!re:" (reverse "re:"). No prefix is the same as "eq:". Multiple map items will use the logical 'and' operator, e.g. mapfilter1 && mapfilter2 && mapfilter3, etc.
 //
-// For example, if you like your modifiers to apply to `productId:CFQ7TTC0LFLX` (Microsoft 365 E3), set to `{"productId":"eq:CFQ7TTC0LFLX"}` or `{"productId":"CFQ7TTC0LFLX"}`. You can also use a regular expression like `{"productId":"re:CFQ7TTC0LFLX|DZH318Z0BQ4L"}`, which means apply to all `Microsoft 365 E3` or `Virtual Machines Ev3 Series` lineitems. Or reverse regexp, such as `{"productId":"!re:^CFQ7TTC0LFLX$"}`, which means apply to all items except `Microsoft 365 E3`. Valid keys are `productId`, `productName`, `skuId`, `skuName`, `descriptiom`, `category` and `domainName`.
+// For example, if you like your modifiers to apply to `productId:CFQ7TTC0LFLX` (Microsoft 365 E3), set to `{"productId":"eq:CFQ7TTC0LFLX"}` or `{"productId":"CFQ7TTC0LFLX"}`. You can also use a regular expression like `{"productId":"re:CFQ7TTC0LFLX|DZH318Z0BQ4L"}`, which means apply to all `Microsoft 365 E3` or `Virtual Machines Ev3 Series` lineitems. Or reverse regexp, such as `{"productId":"!re:^CFQ7TTC0LFLX$"}`, which means apply to all items except `Microsoft 365 E3`. Valid keys are `productId`, `productName`, `skuId`, `skuName`, `description`, `category` and `domainName`.
 type CalculatorCostModifierAzureOptions_Qualifier struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
