@@ -19,8 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Pricing_GetInfo_FullMethodName        = "/blueapi.pricing.v1.Pricing/GetInfo"
-	Pricing_GetPricingInfo_FullMethodName = "/blueapi.pricing.v1.Pricing/GetPricingInfo"
+	Pricing_GetInfo_FullMethodName    = "/blueapi.pricing.v1.Pricing/GetInfo"
+	Pricing_GetPricing_FullMethodName = "/blueapi.pricing.v1.Pricing/GetPricing"
 )
 
 // PricingClient is the client API for Pricing service.
@@ -31,8 +31,8 @@ const (
 type PricingClient interface {
 	// Test endpoint only.
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
-	// Get pricing info
-	GetPricingInfo(ctx context.Context, in *GetPricingInfoRequest, opts ...grpc.CallOption) (*GetPricingInfoResponse, error)
+	// WORK-IN-PROGRESS: Get cloud pricing information
+	GetPricing(ctx context.Context, in *GetPricingRequest, opts ...grpc.CallOption) (*GetPricingResponse, error)
 }
 
 type pricingClient struct {
@@ -53,10 +53,10 @@ func (c *pricingClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ..
 	return out, nil
 }
 
-func (c *pricingClient) GetPricingInfo(ctx context.Context, in *GetPricingInfoRequest, opts ...grpc.CallOption) (*GetPricingInfoResponse, error) {
+func (c *pricingClient) GetPricing(ctx context.Context, in *GetPricingRequest, opts ...grpc.CallOption) (*GetPricingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPricingInfoResponse)
-	err := c.cc.Invoke(ctx, Pricing_GetPricingInfo_FullMethodName, in, out, cOpts...)
+	out := new(GetPricingResponse)
+	err := c.cc.Invoke(ctx, Pricing_GetPricing_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -71,8 +71,8 @@ func (c *pricingClient) GetPricingInfo(ctx context.Context, in *GetPricingInfoRe
 type PricingServer interface {
 	// Test endpoint only.
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
-	// Get pricing info
-	GetPricingInfo(context.Context, *GetPricingInfoRequest) (*GetPricingInfoResponse, error)
+	// WORK-IN-PROGRESS: Get cloud pricing information
+	GetPricing(context.Context, *GetPricingRequest) (*GetPricingResponse, error)
 	mustEmbedUnimplementedPricingServer()
 }
 
@@ -83,8 +83,8 @@ type UnimplementedPricingServer struct {
 func (UnimplementedPricingServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
 }
-func (UnimplementedPricingServer) GetPricingInfo(context.Context, *GetPricingInfoRequest) (*GetPricingInfoResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPricingInfo not implemented")
+func (UnimplementedPricingServer) GetPricing(context.Context, *GetPricingRequest) (*GetPricingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPricing not implemented")
 }
 func (UnimplementedPricingServer) mustEmbedUnimplementedPricingServer() {}
 
@@ -117,20 +117,20 @@ func _Pricing_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Pricing_GetPricingInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPricingInfoRequest)
+func _Pricing_GetPricing_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPricingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(PricingServer).GetPricingInfo(ctx, in)
+		return srv.(PricingServer).GetPricing(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Pricing_GetPricingInfo_FullMethodName,
+		FullMethod: Pricing_GetPricing_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(PricingServer).GetPricingInfo(ctx, req.(*GetPricingInfoRequest))
+		return srv.(PricingServer).GetPricing(ctx, req.(*GetPricingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -147,8 +147,8 @@ var Pricing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Pricing_GetInfo_Handler,
 		},
 		{
-			MethodName: "GetPricingInfo",
-			Handler:    _Pricing_GetPricingInfo_Handler,
+			MethodName: "GetPricing",
+			Handler:    _Pricing_GetPricing_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -2508,11 +2508,11 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.pricing.v1.GetPricingInfoRequest"><span class="badge">M</span>GetPricingInfoRequest</a>
+                  <a href="#blueapi.pricing.v1.GetPricingRequest"><span class="badge">M</span>GetPricingRequest</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.pricing.v1.GetPricingInfoResponse"><span class="badge">M</span>GetPricingInfoResponse</a>
+                  <a href="#blueapi.pricing.v1.GetPricingResponse"><span class="badge">M</span>GetPricingResponse</a>
                 </li>
               
               
@@ -28315,8 +28315,8 @@ file in bytes </p></td>
 
         
       
-        <h3 id="blueapi.pricing.v1.GetPricingInfoRequest">GetPricingInfoRequest</h3>
-        <p>Request message for GetPricingInfo</p>
+        <h3 id="blueapi.pricing.v1.GetPricingRequest">GetPricingRequest</h3>
+        <p>Request message for GetPricing</p>
 
         
           <table class="field-table">
@@ -28329,35 +28329,39 @@ file in bytes </p></td>
                   <td>cloud</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Cloud vendor (aws/azure). Supports aws and azure for now. </p></td>
                 </tr>
               
                 <tr>
                   <td>service</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Cloud vendor service. 
+ec2, lambda, s3, elasticBlockStorage, dataTransfer, rds, dynamoDb, and cloudWatch services for aws cloud vendor.
+virualMachine, functions, blobStorage, storageAccount, dataTransfer, sqlDatabase,cosmosDb, and monitor services for  azure cloud vendor. </p></td>
                 </tr>
               
                 <tr>
                   <td>region</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Region. </p></td>
                 </tr>
               
                 <tr>
                   <td>token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Token for continuing request. </p></td>
                 </tr>
               
                 <tr>
                   <td>columns</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Optional. This string represent valid columns which will serve as basis as to what columns will be returned by the API.
+All columns will be returned if this array is empty.
+This is not yet implemented. </p></td>
                 </tr>
               
             </tbody>
@@ -28367,8 +28371,8 @@ file in bytes </p></td>
 
         
       
-        <h3 id="blueapi.pricing.v1.GetPricingInfoResponse">GetPricingInfoResponse</h3>
-        <p>Response message for GetPricingInfo</p>
+        <h3 id="blueapi.pricing.v1.GetPricingResponse">GetPricingResponse</h3>
+        <p>Response message for GetPricing</p>
 
         
           <table class="field-table">
@@ -28392,7 +28396,7 @@ file in bytes </p></td>
                 </tr>
               
                 <tr>
-                  <td>region_code</td>
+                  <td>regionCode</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -28420,7 +28424,7 @@ file in bytes </p></td>
                 </tr>
               
                 <tr>
-                  <td>priceperunit</td>
+                  <td>pricePerUnit</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -28462,10 +28466,10 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>GetPricingInfo</td>
-                <td><a href="#blueapi.pricing.v1.GetPricingInfoRequest">GetPricingInfoRequest</a></td>
-                <td><a href="#blueapi.pricing.v1.GetPricingInfoResponse">GetPricingInfoResponse</a></td>
-                <td><p>Get pricing info</p></td>
+                <td>GetPricing</td>
+                <td><a href="#blueapi.pricing.v1.GetPricingRequest">GetPricingRequest</a></td>
+                <td><a href="#blueapi.pricing.v1.GetPricingResponse">GetPricingResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get cloud pricing information</p></td>
               </tr>
             
           </tbody>
@@ -28499,9 +28503,9 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>GetPricingInfo</td>
+                <td>GetPricing</td>
                 <td>POST</td>
-                <td>/v0/pricingInfo</td>
+                <td>/v0/pricing</td>
                 <td>*</td>
               </tr>
               
