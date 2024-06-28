@@ -1000,6 +1000,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.ReadCostAttributesRequest.AzureOptions"><span class="badge">M</span>ReadCostAttributesRequest.AzureOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.ReadCostsRequest"><span class="badge">M</span>ReadCostsRequest</a>
                 </li>
               
@@ -7413,6 +7417,13 @@ You can check out this [guide](https://alphauslabs.github.io/docs/guides/aws-cos
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>azure</td>
+                  <td><a href="#blueapi.api.azure.CostAttribute">blueapi.api.azure.CostAttribute</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -10665,6 +10676,13 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><p>Optional. Valid only for the `aws` vendor. AWS-specific options. </p></td>
                 </tr>
               
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.cost.v1.ReadCostAttributesRequest.AzureOptions">ReadCostAttributesRequest.AzureOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -10687,6 +10705,44 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. A comma-separated list of dimensions to query. Valid values are `productCode`, `serviceCode`, `region`, `zone`, `usageType`, `instanceType`, `operation`, `invoiceId`, `description`, `resourceId`, `tags`, and `costCategories`. Sequence doesn&#39;t matter. An empty value implies all attributes will be returned. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ReadCostAttributesRequest.AzureOptions">ReadCostAttributesRequest.AzureOptions</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The Azure customer id to which the modifier is applied. A comma-separated list of customers is also valid. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The Azure subscription id to which the modifier is applied. A comma-separated list of subscriptions is also valid. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entitlementId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The Azure entitlement id to which the modifier is applied. A comma-separated list of entitlements is also valid. </p></td>
                 </tr>
               
             </tbody>
