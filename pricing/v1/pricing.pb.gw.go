@@ -57,6 +57,23 @@ func request_Pricing_GetPricing_0(ctx context.Context, marshaler runtime.Marshal
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+
 	msg, err := client.GetPricing(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 
@@ -68,6 +85,23 @@ func local_request_Pricing_GetPricing_0(ctx context.Context, marshaler runtime.M
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
 	msg, err := server.GetPricing(ctx, &protoReq)
@@ -114,7 +148,7 @@ func RegisterPricingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.pricing.v1.Pricing/GetPricing", runtime.WithHTTPPathPattern("/v0/pricing"))
+		annotatedContext, err = runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.pricing.v1.Pricing/GetPricing", runtime.WithHTTPPathPattern("/v0/{vendor}/pricing"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -200,7 +234,7 @@ func RegisterPricingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.pricing.v1.Pricing/GetPricing", runtime.WithHTTPPathPattern("/v0/pricing"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.pricing.v1.Pricing/GetPricing", runtime.WithHTTPPathPattern("/v0/{vendor}/pricing"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -222,7 +256,7 @@ func RegisterPricingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 var (
 	pattern_Pricing_GetInfo_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v0", "info"}, ""))
 
-	pattern_Pricing_GetPricing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v0", "pricing"}, ""))
+	pattern_Pricing_GetPricing_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v0", "vendor", "pricing"}, ""))
 )
 
 var (

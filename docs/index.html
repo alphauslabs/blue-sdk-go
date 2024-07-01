@@ -28326,10 +28326,10 @@ file in bytes </p></td>
             <tbody>
               
                 <tr>
-                  <td>cloud</td>
+                  <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Cloud vendor (aws/azure). Supports aws and azure for now. </p></td>
+                  <td><p>Required. Cloud vendor, only `aws` and `azure` are supported for now. </p></td>
                 </tr>
               
                 <tr>
@@ -28337,8 +28337,8 @@ file in bytes </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Cloud vendor service. 
-ec2, lambda, s3, elasticBlockStorage, dataTransfer, rds, dynamoDb, and cloudWatch services for aws cloud vendor.
-virualMachine, functions, blobStorage, storageAccount, dataTransfer, sqlDatabase,cosmosDb, and monitor services for  azure cloud vendor. </p></td>
+Valid values are `ec2`, `lambda`, `s3`, `ebs`, `dataTransfer`, `rds`, `dynamoDb`, and `cloudWatch` for AWS.
+Valid values are `vm`, `functions`, `blobStorage`, `storageAccount`, `dataTransfer`, `sqlDb`,`cosmosDb`, and `monitor` for Azure. </p></td>
                 </tr>
               
                 <tr>
@@ -28382,27 +28382,6 @@ This is not yet implemented. </p></td>
             <tbody>
               
                 <tr>
-                  <td>cloud</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>service</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>regionCode</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -28410,30 +28389,9 @@ This is not yet implemented. </p></td>
                 </tr>
               
                 <tr>
-                  <td>sku</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>unit</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>pricePerUnit</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>serviceDetails</td>
-                  <td><a href="#blueapi.api.pricing.ServiceDetails">blueapi.api.pricing.ServiceDetails</a></td>
-                  <td></td>
+                  <td>pricingData</td>
+                  <td><a href="#blueapi.api.pricing.PricingData">blueapi.api.pricing.PricingData</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -28505,7 +28463,7 @@ This is not yet implemented. </p></td>
               <tr>
                 <td>GetPricing</td>
                 <td>POST</td>
-                <td>/v0/pricing</td>
+                <td>/v0/{vendor}/pricing</td>
                 <td>*</td>
               </tr>
               
