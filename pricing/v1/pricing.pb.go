@@ -124,7 +124,7 @@ type GetPricingRequest struct {
 	Service string `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"`
 	// Required. Region.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
-	// Required. Token for continuing request.
+	// Optional. Supply token that was included in the latest response to continue fetching the remaining chunks of data. All data has been returned once token is null.
 	Token string `protobuf:"bytes,4,opt,name=token,proto3" json:"token,omitempty"`
 	// Optional. This string represent valid columns which will serve as basis as to what columns will be returned by the API.
 	// All columns will be returned if this array is empty.
