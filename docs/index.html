@@ -195,14 +195,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.org.v1.GetWaveFeaturesRequest"><span class="badge">M</span>GetWaveFeaturesRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.org.v1.GetWaveFeaturesResponse"><span class="badge">M</span>GetWaveFeaturesResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.org.v1.SendVerificationRequest"><span class="badge">M</span>SendVerificationRequest</a>
                 </li>
               
@@ -529,6 +521,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.admin.v1.GetWaveFeaturesRequest"><span class="badge">M</span>GetWaveFeaturesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.GetWaveFeaturesResponse"><span class="badge">M</span>GetWaveFeaturesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.admin.v1.ListAccountGroupsRequest"><span class="badge">M</span>ListAccountGroupsRequest</a>
                 </li>
               
@@ -578,6 +578,10 @@
               
                 <li>
                   <a href="#blueapi.admin.v1.UpdateNotificationRequest"><span class="badge">M</span>UpdateNotificationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.WaveFeature"><span class="badge">M</span>WaveFeature</a>
                 </li>
               
               
@@ -2707,37 +2711,6 @@
 
         
       
-        <h3 id="blueapi.org.v1.GetWaveFeaturesRequest">GetWaveFeaturesRequest</h3>
-        <p></p>
-
-        
-
-        
-      
-        <h3 id="blueapi.org.v1.GetWaveFeaturesResponse">GetWaveFeaturesResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>settings</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.org.v1.SendVerificationRequest">SendVerificationRequest</h3>
         <p>Request message for the Organization.SendVerification rpc.</p>
 
@@ -2897,13 +2870,6 @@ for the list of supported attributes.</p></td>
                 <td><p>WORK-IN-PROGRESS: Deletes the organization.</p></td>
               </tr>
             
-              <tr>
-                <td>GetWaveFeatures</td>
-                <td><a href="#blueapi.org.v1.GetWaveFeaturesRequest">GetWaveFeaturesRequest</a></td>
-                <td><a href="#blueapi.org.v1.GetWaveFeaturesResponse">GetWaveFeaturesResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Deletes the organization.</p></td>
-              </tr>
-            
           </tbody>
         </table>
 
@@ -2988,16 +2954,6 @@ for the list of supported attributes.</p></td>
                 <td>DeleteOrg</td>
                 <td>DELETE</td>
                 <td>/org/v1</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetWaveFeatures</td>
-                <td>GET</td>
-                <td>/org/v1/wavefeatures:get</td>
                 <td></td>
               </tr>
               
@@ -5751,6 +5707,37 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.GetWaveFeaturesRequest">GetWaveFeaturesRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.admin.v1.GetWaveFeaturesResponse">GetWaveFeaturesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>settings</td>
+                  <td><a href="#blueapi.admin.v1.WaveFeature">WaveFeature</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.ListAccountGroupsRequest">ListAccountGroupsRequest</h3>
         <p>Request message for the Admin.ListAccountGroups rpc.</p>
 
@@ -6126,6 +6113,58 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.WaveFeature">WaveFeature</h3>
+        <p>for wave features settings data maping</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>label</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>children</td>
+                  <td><a href="#blueapi.admin.v1.WaveFeature">WaveFeature</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -6313,6 +6352,13 @@ Valid values:
                 <td><a href="#blueapi.admin.v1.ExportAuditLogsRequest">ExportAuditLogsRequest</a></td>
                 <td><a href="#blueapi.api.AuditExport">.blueapi.api.AuditExport</a></td>
                 <td><p>WORK-IN-PROGRESS: Exports audit logs for login user&#39;s organization.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetWaveFeatures</td>
+                <td><a href="#blueapi.admin.v1.GetWaveFeaturesRequest">GetWaveFeaturesRequest</a></td>
+                <td><a href="#blueapi.admin.v1.GetWaveFeaturesResponse">GetWaveFeaturesResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get settings value for wave features management per organization</p></td>
               </tr>
             
           </tbody>
@@ -6580,6 +6626,16 @@ Valid values:
                 <td>POST</td>
                 <td>/admin/v1/auditlogs:export</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetWaveFeatures</td>
+                <td>GET</td>
+                <td>/admin/v1/wavefeatures</td>
+                <td></td>
               </tr>
               
             
