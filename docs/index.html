@@ -1056,6 +1056,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.ReadInvoiceIdRequest"><span class="badge">M</span>ReadInvoiceIdRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.ReadInvoiceIdResponse"><span class="badge">M</span>ReadInvoiceIdResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.ReadNonTagCostsRequest"><span class="badge">M</span>ReadNonTagCostsRequest</a>
                 </li>
               
@@ -11327,6 +11335,61 @@ For example, (Assumption: Last usage start time 2022-02-01 01:00:00 UTC) If you 
 
         
       
+        <h3 id="blueapi.cost.v1.ReadInvoiceIdRequest">ReadInvoiceIdRequest</h3>
+        <p>Request message for the ReadInvoiceId rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, July 2024 will be `202407`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ReadInvoiceIdResponse">ReadInvoiceIdResponse</h3>
+        <p>Response message for the ReadInvoiceId rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The invoice id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.ReadNonTagCostsRequest">ReadNonTagCostsRequest</h3>
         <p>Request message for the Cost.ReadNonTagCosts rpc.</p>
 
@@ -12328,6 +12391,13 @@ Only available in Wave(Pro).</p></td>
                 <td><p>WORK-IN-PROGRESS: Check inputed accountIds belong to current MSP or not</p></td>
               </tr>
             
+              <tr>
+                <td>ReadInvoiceId</td>
+                <td><a href="#blueapi.cost.v1.ReadInvoiceIdRequest">ReadInvoiceIdRequest</a></td>
+                <td><a href="#blueapi.cost.v1.ReadInvoiceIdResponse">ReadInvoiceIdResponse</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Read the invoice ids. Only available in Ripple.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -12936,6 +13006,16 @@ Only available in Wave(Pro).</p></td>
                 <td>CheckAccountsBelongToMsp</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/accounts/customers/accounts:check</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadInvoiceId</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/invoiceid:read</td>
                 <td>*</td>
               </tr>
               
