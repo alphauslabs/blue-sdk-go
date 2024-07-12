@@ -82,7 +82,7 @@ const (
 	Cost_GetCoverageOndemand_FullMethodName           = "/blueapi.cost.v1.Cost/GetCoverageOndemand"
 	Cost_GetBreakevenPoint_FullMethodName             = "/blueapi.cost.v1.Cost/GetBreakevenPoint"
 	Cost_CheckAccountsBelongToMsp_FullMethodName      = "/blueapi.cost.v1.Cost/CheckAccountsBelongToMsp"
-	Cost_ReadInvoiceId_FullMethodName                 = "/blueapi.cost.v1.Cost/ReadInvoiceId"
+	Cost_ReadInvoiceIds_FullMethodName                = "/blueapi.cost.v1.Cost/ReadInvoiceIds"
 )
 
 // CostClient is the client API for Cost service.
@@ -255,7 +255,7 @@ type CostClient interface {
 	// WORK-IN-PROGRESS: Check inputed accountIds belong to current MSP or not
 	CheckAccountsBelongToMsp(ctx context.Context, in *CheckAccountsRequest, opts ...grpc.CallOption) (*CheckAccountsResponse, error)
 	// WORK-IN-PROGRESS: Read the invoice ids. Only available in Ripple.
-	ReadInvoiceId(ctx context.Context, in *ReadInvoiceIdRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdClient, error)
+	ReadInvoiceIds(ctx context.Context, in *ReadInvoiceIdsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdsClient, error)
 }
 
 type costClient struct {
@@ -1122,13 +1122,13 @@ func (c *costClient) CheckAccountsBelongToMsp(ctx context.Context, in *CheckAcco
 	return out, nil
 }
 
-func (c *costClient) ReadInvoiceId(ctx context.Context, in *ReadInvoiceIdRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdClient, error) {
+func (c *costClient) ReadInvoiceIds(ctx context.Context, in *ReadInvoiceIdsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[12], Cost_ReadInvoiceId_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[12], Cost_ReadInvoiceIds_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &costReadInvoiceIdClient{ClientStream: stream}
+	x := &costReadInvoiceIdsClient{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -1138,17 +1138,17 @@ func (c *costClient) ReadInvoiceId(ctx context.Context, in *ReadInvoiceIdRequest
 	return x, nil
 }
 
-type Cost_ReadInvoiceIdClient interface {
-	Recv() (*ReadInvoiceIdResponse, error)
+type Cost_ReadInvoiceIdsClient interface {
+	Recv() (*ReadInvoiceIdsResponse, error)
 	grpc.ClientStream
 }
 
-type costReadInvoiceIdClient struct {
+type costReadInvoiceIdsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costReadInvoiceIdClient) Recv() (*ReadInvoiceIdResponse, error) {
-	m := new(ReadInvoiceIdResponse)
+func (x *costReadInvoiceIdsClient) Recv() (*ReadInvoiceIdsResponse, error) {
+	m := new(ReadInvoiceIdsResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1325,7 +1325,7 @@ type CostServer interface {
 	// WORK-IN-PROGRESS: Check inputed accountIds belong to current MSP or not
 	CheckAccountsBelongToMsp(context.Context, *CheckAccountsRequest) (*CheckAccountsResponse, error)
 	// WORK-IN-PROGRESS: Read the invoice ids. Only available in Ripple.
-	ReadInvoiceId(*ReadInvoiceIdRequest, Cost_ReadInvoiceIdServer) error
+	ReadInvoiceIds(*ReadInvoiceIdsRequest, Cost_ReadInvoiceIdsServer) error
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -1507,8 +1507,8 @@ func (UnimplementedCostServer) GetBreakevenPoint(context.Context, *GetBreakevenP
 func (UnimplementedCostServer) CheckAccountsBelongToMsp(context.Context, *CheckAccountsRequest) (*CheckAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CheckAccountsBelongToMsp not implemented")
 }
-func (UnimplementedCostServer) ReadInvoiceId(*ReadInvoiceIdRequest, Cost_ReadInvoiceIdServer) error {
-	return status.Errorf(codes.Unimplemented, "method ReadInvoiceId not implemented")
+func (UnimplementedCostServer) ReadInvoiceIds(*ReadInvoiceIdsRequest, Cost_ReadInvoiceIdsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadInvoiceIds not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -2603,24 +2603,24 @@ func _Cost_CheckAccountsBelongToMsp_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cost_ReadInvoiceId_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ReadInvoiceIdRequest)
+func _Cost_ReadInvoiceIds_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadInvoiceIdsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(CostServer).ReadInvoiceId(m, &costReadInvoiceIdServer{ServerStream: stream})
+	return srv.(CostServer).ReadInvoiceIds(m, &costReadInvoiceIdsServer{ServerStream: stream})
 }
 
-type Cost_ReadInvoiceIdServer interface {
-	Send(*ReadInvoiceIdResponse) error
+type Cost_ReadInvoiceIdsServer interface {
+	Send(*ReadInvoiceIdsResponse) error
 	grpc.ServerStream
 }
 
-type costReadInvoiceIdServer struct {
+type costReadInvoiceIdsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costReadInvoiceIdServer) Send(m *ReadInvoiceIdResponse) error {
+func (x *costReadInvoiceIdsServer) Send(m *ReadInvoiceIdsResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -2878,8 +2878,8 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ReadInvoiceId",
-			Handler:       _Cost_ReadInvoiceId_Handler,
+			StreamName:    "ReadInvoiceIds",
+			Handler:       _Cost_ReadInvoiceIds_Handler,
 			ServerStreams: true,
 		},
 	},

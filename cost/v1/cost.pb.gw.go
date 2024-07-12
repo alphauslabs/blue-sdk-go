@@ -3946,8 +3946,8 @@ func local_request_Cost_CheckAccountsBelongToMsp_0(ctx context.Context, marshale
 
 }
 
-func request_Cost_ReadInvoiceId_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ReadInvoiceIdClient, runtime.ServerMetadata, error) {
-	var protoReq ReadInvoiceIdRequest
+func request_Cost_ReadInvoiceIds_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (Cost_ReadInvoiceIdsClient, runtime.ServerMetadata, error) {
+	var protoReq ReadInvoiceIdsRequest
 	var metadata runtime.ServerMetadata
 
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && err != io.EOF {
@@ -3971,7 +3971,7 @@ func request_Cost_ReadInvoiceId_0(ctx context.Context, marshaler runtime.Marshal
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
 	}
 
-	stream, err := client.ReadInvoiceId(ctx, &protoReq)
+	stream, err := client.ReadInvoiceIds(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
 	}
@@ -5238,7 +5238,7 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 
 	})
 
-	mux.Handle("POST", pattern_Cost_ReadInvoiceId_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cost_ReadInvoiceIds_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -6606,25 +6606,25 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 
 	})
 
-	mux.Handle("POST", pattern_Cost_ReadInvoiceId_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle("POST", pattern_Cost_ReadInvoiceIds_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		var err error
 		var annotatedContext context.Context
-		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadInvoiceId", runtime.WithHTTPPathPattern("/v1/{vendor}/invoiceid:read"))
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ReadInvoiceIds", runtime.WithHTTPPathPattern("/v1/{vendor}/invoiceids:read"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cost_ReadInvoiceId_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cost_ReadInvoiceIds_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
 
-		forward_Cost_ReadInvoiceId_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_Cost_ReadInvoiceIds_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 
 	})
 
@@ -6752,7 +6752,7 @@ var (
 
 	pattern_Cost_CheckAccountsBelongToMsp_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 2, 2}, []string{"v1", "vendor", "accounts", "customers"}, "check"))
 
-	pattern_Cost_ReadInvoiceId_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "invoiceid"}, "read"))
+	pattern_Cost_ReadInvoiceIds_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "invoiceids"}, "read"))
 )
 
 var (
@@ -6876,5 +6876,5 @@ var (
 
 	forward_Cost_CheckAccountsBelongToMsp_0 = runtime.ForwardResponseMessage
 
-	forward_Cost_ReadInvoiceId_0 = runtime.ForwardResponseStream
+	forward_Cost_ReadInvoiceIds_0 = runtime.ForwardResponseStream
 )
