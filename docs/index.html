@@ -7011,6 +7011,13 @@ At the moment, for AWS, this is only valid for account type billing groups, not 
                   <td><p>Optional. Specifies the modifier id in which this modifier will be applied after. For example, if you have another modifier `mod1` and you create a new modifier with `after` set to `mod1`, the calculator will apply `mod1` first, then this modifier. If `after` is not set, the application sequence for multiple overlapping modifiers will be by update timestamp, newest to oldest. </p></td>
                 </tr>
               
+                <tr>
+                  <td>createNewRow</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Default to false. If set to true, the modifier will create a new row in the table with similar data that satisfies the qualifier the only differences is it contains the amount to be subtracted or to be added. If set to false, the modifier will update the cost directly. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
