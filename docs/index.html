@@ -5144,9 +5144,9 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required
-Valid values: 
-`InvoiceCalculationStarted`, 
-`InvoiceCalculationFinished`, 
+Valid values:
+`InvoiceCalculationStarted`,
+`InvoiceCalculationFinished`,
 `CurUpdatedAfterInvoice`.
 `AccountBudgetAlert`. </p></td>
                 </tr>
@@ -5381,9 +5381,9 @@ Valid values:
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required
-Valid values: 
-`InvoiceCalculationStarted`, 
-`InvoiceCalculationFinished`, 
+Valid values:
+`InvoiceCalculationStarted`,
+`InvoiceCalculationFinished`,
 `CurUpdatedAfterInvoice`.
 `AccountBudgetAlert`. </p></td>
                 </tr>
@@ -5694,9 +5694,9 @@ All templates are publicly available from the reponse link (`templateUrl`) if yo
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required
-Valid values: 
-`InvoiceCalculationStarted`, 
-`InvoiceCalculationFinished`, 
+Valid values:
+`InvoiceCalculationStarted`,
+`InvoiceCalculationFinished`,
 `CurUpdatedAfterInvoice`.
 `AccountBudgetAlert`. </p></td>
                 </tr>
@@ -5719,23 +5719,6 @@ Valid values:
         <p></p>
 
         
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
 
         
       
@@ -6117,9 +6100,9 @@ Valid values:
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required
-Valid values: 
-`InvoiceCalculationStarted`, 
-`InvoiceCalculationFinished`, 
+Valid values:
+`InvoiceCalculationStarted`,
+`InvoiceCalculationFinished`,
 `CurUpdatedAfterInvoice`.
 `AccountBudgetAlert`. </p></td>
                 </tr>
@@ -6149,20 +6132,6 @@ Valid values:
             <tbody>
               
                 <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>label</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -6170,8 +6139,29 @@ Valid values:
                 </tr>
               
                 <tr>
-                  <td>description</td>
+                  <td>value</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>default_setting</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tickStrategy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isDisabled</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -6659,7 +6649,7 @@ Valid values:
               <tr>
                 <td>GetWaveFeatures</td>
                 <td>GET</td>
-                <td>/admin/v1/wavefeatures/{id}</td>
+                <td>/admin/v1/wavefeatures</td>
                 <td></td>
               </tr>
               
