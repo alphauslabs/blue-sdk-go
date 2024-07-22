@@ -48,6 +48,7 @@ const (
 	Admin_DeleteNotification_FullMethodName                    = "/blueapi.admin.v1.Admin/DeleteNotification"
 	Admin_ExportAuditLogs_FullMethodName                       = "/blueapi.admin.v1.Admin/ExportAuditLogs"
 	Admin_GetWaveFeatures_FullMethodName                       = "/blueapi.admin.v1.Admin/GetWaveFeatures"
+	Admin_UpdateWaveFeatureSetting_FullMethodName              = "/blueapi.admin.v1.Admin/UpdateWaveFeatureSetting"
 )
 
 // AdminClient is the client API for Admin service.
@@ -108,6 +109,8 @@ type AdminClient interface {
 	ExportAuditLogs(ctx context.Context, in *ExportAuditLogsRequest, opts ...grpc.CallOption) (*api.AuditExport, error)
 	// WORK-IN-PROGRESS: Get settings value for wave features management per organization
 	GetWaveFeatures(ctx context.Context, in *GetWaveFeaturesRequest, opts ...grpc.CallOption) (*GetWaveFeaturesResponse, error)
+	// WORK-IN-PROGRESS: Updates the wave feature management default value per organization
+	UpdateWaveFeatureSetting(ctx context.Context, in *UpdateWaveFeatureSettingRequest, opts ...grpc.CallOption) (*GetWaveFeaturesResponse, error)
 }
 
 type adminClient struct {
@@ -424,6 +427,16 @@ func (c *adminClient) GetWaveFeatures(ctx context.Context, in *GetWaveFeaturesRe
 	return out, nil
 }
 
+func (c *adminClient) UpdateWaveFeatureSetting(ctx context.Context, in *UpdateWaveFeatureSettingRequest, opts ...grpc.CallOption) (*GetWaveFeaturesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetWaveFeaturesResponse)
+	err := c.cc.Invoke(ctx, Admin_UpdateWaveFeatureSetting_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -482,6 +495,8 @@ type AdminServer interface {
 	ExportAuditLogs(context.Context, *ExportAuditLogsRequest) (*api.AuditExport, error)
 	// WORK-IN-PROGRESS: Get settings value for wave features management per organization
 	GetWaveFeatures(context.Context, *GetWaveFeaturesRequest) (*GetWaveFeaturesResponse, error)
+	// WORK-IN-PROGRESS: Updates the wave feature management default value per organization
+	UpdateWaveFeatureSetting(context.Context, *UpdateWaveFeatureSettingRequest) (*GetWaveFeaturesResponse, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -566,6 +581,9 @@ func (UnimplementedAdminServer) ExportAuditLogs(context.Context, *ExportAuditLog
 }
 func (UnimplementedAdminServer) GetWaveFeatures(context.Context, *GetWaveFeaturesRequest) (*GetWaveFeaturesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetWaveFeatures not implemented")
+}
+func (UnimplementedAdminServer) UpdateWaveFeatureSetting(context.Context, *UpdateWaveFeatureSettingRequest) (*GetWaveFeaturesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWaveFeatureSetting not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -1054,6 +1072,24 @@ func _Admin_GetWaveFeatures_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_UpdateWaveFeatureSetting_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWaveFeatureSettingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateWaveFeatureSetting(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Admin_UpdateWaveFeatureSetting_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateWaveFeatureSetting(ctx, req.(*UpdateWaveFeatureSettingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1156,6 +1192,10 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetWaveFeatures",
 			Handler:    _Admin_GetWaveFeatures_Handler,
+		},
+		{
+			MethodName: "UpdateWaveFeatureSetting",
+			Handler:    _Admin_UpdateWaveFeatureSetting_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

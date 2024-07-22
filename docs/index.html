@@ -481,6 +481,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.admin.v1.FeatureSetting"><span class="badge">M</span>FeatureSetting</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.admin.v1.GetAccountGroupRequest"><span class="badge">M</span>GetAccountGroupRequest</a>
                 </li>
               
@@ -578,6 +582,10 @@
               
                 <li>
                   <a href="#blueapi.admin.v1.UpdateNotificationRequest"><span class="badge">M</span>UpdateNotificationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.UpdateWaveFeatureSettingRequest"><span class="badge">M</span>UpdateWaveFeatureSettingRequest</a>
                 </li>
               
                 <li>
@@ -5433,6 +5441,37 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.FeatureSetting">FeatureSetting</h3>
+        <p>For rpc UpdateWaveFeature</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>featureId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.GetAccountGroupRequest">GetAccountGroupRequest</h3>
         <p>Request message for the Admin.GetAccountGroup rpc.</p>
 
@@ -6121,6 +6160,30 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.UpdateWaveFeatureSettingRequest">UpdateWaveFeatureSettingRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>featureSetting</td>
+                  <td><a href="#blueapi.admin.v1.FeatureSetting">FeatureSetting</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.WaveFeature">WaveFeature</h3>
         <p>for wave features settings data maping</p>
 
@@ -6139,8 +6202,15 @@ Valid values:
                 </tr>
               
                 <tr>
-                  <td>value</td>
+                  <td>featureId</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isEnabled</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -6153,15 +6223,8 @@ Valid values:
                 </tr>
               
                 <tr>
-                  <td>isDisabled</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>defaultSetting</td>
-                  <td><a href="#bool">bool</a></td>
+                  <td>condition</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -6381,6 +6444,13 @@ Valid values:
                 <td><a href="#blueapi.admin.v1.GetWaveFeaturesRequest">GetWaveFeaturesRequest</a></td>
                 <td><a href="#blueapi.admin.v1.GetWaveFeaturesResponse">GetWaveFeaturesResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Get settings value for wave features management per organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateWaveFeatureSetting</td>
+                <td><a href="#blueapi.admin.v1.UpdateWaveFeatureSettingRequest">UpdateWaveFeatureSettingRequest</a></td>
+                <td><a href="#blueapi.admin.v1.GetWaveFeaturesResponse">GetWaveFeaturesResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates the wave feature management default value per organization</p></td>
               </tr>
             
           </tbody>
@@ -6658,6 +6728,16 @@ Valid values:
                 <td>GET</td>
                 <td>/admin/v1/wavefeatures</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateWaveFeatureSetting</td>
+                <td>PUT</td>
+                <td>/admin/v1/wavefeatures</td>
+                <td>*</td>
               </tr>
               
             
