@@ -12489,9 +12489,9 @@ type GetAnomalyinCostGroupRequest struct {
 	unknownFields protoimpl.UnknownFields
 
 	CostGroupId string `protobuf:"bytes,1,opt,name=costGroupId,proto3" json:"costGroupId,omitempty"`
-	// Start date for detecting anomalies
+	// Start date for detecting anomalies. Valid format: YYYYMMDD
 	StartDate string `protobuf:"bytes,2,opt,name=startDate,proto3" json:"startDate,omitempty"`
-	// End date for detection anomalies
+	// End date for detection anomalies. Valid format: YYYYMMDD
 	EndDate string `protobuf:"bytes,3,opt,name=endDate,proto3" json:"endDate,omitempty"`
 }
 
