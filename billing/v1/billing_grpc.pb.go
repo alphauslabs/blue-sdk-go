@@ -62,6 +62,7 @@ const (
 	Billing_UpdateAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
 	Billing_DeleteAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
 	Billing_ReadUntaggedGroups_FullMethodName                   = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
+	Billing_ReadCustomizeBillingServices_FullMethodName         = "/blueapi.billing.v1.Billing/ReadCustomizeBillingServices"
 )
 
 // BillingClient is the client API for Billing service.
@@ -161,6 +162,8 @@ type BillingClient interface {
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error)
+	// WORK-IN-PROGRESS: Reads the customize billing service. Only available in Ripple.
+	ReadCustomizeBillingServices(ctx context.Context, in *ReadCustomizeBillingServicesRequest, opts ...grpc.CallOption) (Billing_ReadCustomizeBillingServicesClient, error)
 }
 
 type billingClient struct {
@@ -883,6 +886,39 @@ func (x *billingReadUntaggedGroupsClient) Recv() (*ripple.UntaggedGroup, error) 
 	return m, nil
 }
 
+func (c *billingClient) ReadCustomizeBillingServices(ctx context.Context, in *ReadCustomizeBillingServicesRequest, opts ...grpc.CallOption) (Billing_ReadCustomizeBillingServicesClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[14], Billing_ReadCustomizeBillingServices_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingReadCustomizeBillingServicesClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ReadCustomizeBillingServicesClient interface {
+	Recv() (*ripple.CustomizeBillingService, error)
+	grpc.ClientStream
+}
+
+type billingReadCustomizeBillingServicesClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingReadCustomizeBillingServicesClient) Recv() (*ripple.CustomizeBillingService, error) {
+	m := new(ripple.CustomizeBillingService)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -980,6 +1016,8 @@ type BillingServer interface {
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(*ReadUntaggedGroupsRequest, Billing_ReadUntaggedGroupsServer) error
+	// WORK-IN-PROGRESS: Reads the customize billing service. Only available in Ripple.
+	ReadCustomizeBillingServices(*ReadCustomizeBillingServicesRequest, Billing_ReadCustomizeBillingServicesServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1103,6 +1141,9 @@ func (UnimplementedBillingServer) DeleteAdjustmentConfig(context.Context, *Delet
 }
 func (UnimplementedBillingServer) ReadUntaggedGroups(*ReadUntaggedGroupsRequest, Billing_ReadUntaggedGroupsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadUntaggedGroups not implemented")
+}
+func (UnimplementedBillingServer) ReadCustomizeBillingServices(*ReadCustomizeBillingServicesRequest, Billing_ReadCustomizeBillingServicesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadCustomizeBillingServices not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1861,6 +1902,27 @@ func (x *billingReadUntaggedGroupsServer) Send(m *ripple.UntaggedGroup) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_ReadCustomizeBillingServices_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadCustomizeBillingServicesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ReadCustomizeBillingServices(m, &billingReadCustomizeBillingServicesServer{ServerStream: stream})
+}
+
+type Billing_ReadCustomizeBillingServicesServer interface {
+	Send(*ripple.CustomizeBillingService) error
+	grpc.ServerStream
+}
+
+type billingReadCustomizeBillingServicesServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingReadCustomizeBillingServicesServer) Send(m *ripple.CustomizeBillingService) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2038,6 +2100,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadUntaggedGroups",
 			Handler:       _Billing_ReadUntaggedGroups_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadCustomizeBillingServices",
+			Handler:       _Billing_ReadCustomizeBillingServices_Handler,
 			ServerStreams: true,
 		},
 	},
