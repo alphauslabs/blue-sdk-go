@@ -254,7 +254,7 @@ type CostClient interface {
 	GetBreakevenPoint(ctx context.Context, in *GetBreakevenPointRequest, opts ...grpc.CallOption) (*GetBreakevenPointResponse, error)
 	// WORK-IN-PROGRESS: Check inputed accountIds belong to current MSP or not
 	CheckAccountsBelongToMsp(ctx context.Context, in *CheckAccountsRequest, opts ...grpc.CallOption) (*CheckAccountsResponse, error)
-	// WORK-IN-PROGRESS: Read the invoice ids. Only available in Ripple.
+	// Read the invoice ids. Only available in Ripple.
 	ReadInvoiceIds(ctx context.Context, in *ReadInvoiceIdsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdsClient, error)
 }
 
@@ -1324,7 +1324,7 @@ type CostServer interface {
 	GetBreakevenPoint(context.Context, *GetBreakevenPointRequest) (*GetBreakevenPointResponse, error)
 	// WORK-IN-PROGRESS: Check inputed accountIds belong to current MSP or not
 	CheckAccountsBelongToMsp(context.Context, *CheckAccountsRequest) (*CheckAccountsResponse, error)
-	// WORK-IN-PROGRESS: Read the invoice ids. Only available in Ripple.
+	// Read the invoice ids. Only available in Ripple.
 	ReadInvoiceIds(*ReadInvoiceIdsRequest, Cost_ReadInvoiceIdsServer) error
 	mustEmbedUnimplementedCostServer()
 }
