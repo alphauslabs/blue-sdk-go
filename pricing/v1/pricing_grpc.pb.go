@@ -34,7 +34,7 @@ type PricingClient interface {
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
 	// WORK-IN-PROGRESS: Get cloud pricing information
 	GetPricing(ctx context.Context, in *GetPricingRequest, opts ...grpc.CallOption) (*GetPricingResponse, error)
-	// WORK-IN-PROGRESS: Get list of supported services, regions, and attribute keys for filtering
+	// WORK-IN-PROGRESS: Get list of supported services, regions, attributes, and columns for filtering
 	GetSupportedServices(ctx context.Context, in *GetSupportedServicesRequest, opts ...grpc.CallOption) (*GetSupportedServicesResponse, error)
 }
 
@@ -86,7 +86,7 @@ type PricingServer interface {
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
 	// WORK-IN-PROGRESS: Get cloud pricing information
 	GetPricing(context.Context, *GetPricingRequest) (*GetPricingResponse, error)
-	// WORK-IN-PROGRESS: Get list of supported services, regions, and attribute keys for filtering
+	// WORK-IN-PROGRESS: Get list of supported services, regions, attributes, and columns for filtering
 	GetSupportedServices(context.Context, *GetSupportedServicesRequest) (*GetSupportedServicesResponse, error)
 	mustEmbedUnimplementedPricingServer()
 }

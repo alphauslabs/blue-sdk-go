@@ -2536,6 +2536,10 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.pricing.v1.Attribute"><span class="badge">M</span>Attribute</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.pricing.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
                 </li>
               
@@ -28711,6 +28715,37 @@ file in bytes </p></td>
       <p></p>
 
       
+        <h3 id="blueapi.pricing.v1.Attribute">Attribute</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>values</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.pricing.v1.GetInfoRequest">GetInfoRequest</h3>
         <p>Request message for the Pricing.GetInfo rpc.</p>
 
@@ -28871,7 +28906,7 @@ This is not yet implemented. </p></td>
                   <td>supportedServices</td>
                   <td><a href="#blueapi.pricing.v1.SupportedService">SupportedService</a></td>
                   <td>repeated</td>
-                  <td><p>Suported services, regions, and attributes keys that can be used to fetch pricing data </p></td>
+                  <td><p>Suported services, regions, and attributes that can be used to fetch pricing data </p></td>
                 </tr>
               
             </tbody>
@@ -28907,9 +28942,9 @@ This is not yet implemented. </p></td>
               
                 <tr>
                   <td>attributes</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#blueapi.pricing.v1.Attribute">Attribute</a></td>
                   <td>repeated</td>
-                  <td><p>Attributes that can be used as keys for filtering </p></td>
+                  <td><p>Attributes that can be used as key-value pairs for filtering </p></td>
                 </tr>
               
                 <tr>
@@ -28958,7 +28993,7 @@ This is not yet implemented. </p></td>
                 <td>GetSupportedServices</td>
                 <td><a href="#blueapi.pricing.v1.GetSupportedServicesRequest">GetSupportedServicesRequest</a></td>
                 <td><a href="#blueapi.pricing.v1.GetSupportedServicesResponse">GetSupportedServicesResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Get list of supported services, regions, and attribute keys for filtering</p></td>
+                <td><p>WORK-IN-PROGRESS: Get list of supported services, regions, attributes, and columns for filtering</p></td>
               </tr>
             
           </tbody>
