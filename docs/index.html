@@ -1275,6 +1275,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetCustomizeBillingServiceRequest"><span class="badge">M</span>GetCustomizeBillingServiceRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetInvoiceRequest"><span class="badge">M</span>GetInvoiceRequest</a>
                 </li>
               
@@ -14768,6 +14772,39 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetCustomizeBillingServiceRequest">GetCustomizeBillingServiceRequest</h3>
+        <p>Request message for the Billing.GetCustomizeBillingService rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. api.ripple.CustomizeBillingService.id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. Get only the value that set fieldMask.
+
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetInvoiceRequest">GetInvoiceRequest</h3>
         <p>Request message for the Cost.GetInvoiceRequest rpc.</p>
 
@@ -16212,6 +16249,13 @@ Lists all exchange rate.
                 <td><p>WORK-IN-PROGRESS: Reads the customize billing service. Only available in Ripple.</p></td>
               </tr>
             
+              <tr>
+                <td>GetCustomizeBillingService</td>
+                <td><a href="#blueapi.billing.v1.GetCustomizeBillingServiceRequest">GetCustomizeBillingServiceRequest</a></td>
+                <td><a href="#blueapi.api.ripple.CustomizeBillingService">.blueapi.api.ripple.CustomizeBillingService</a></td>
+                <td><p>WORK-IN-PROGRESS: Gets the customize billing service. Only available in Ripple.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -16627,6 +16671,16 @@ Lists all exchange rate.
                 <td>POST</td>
                 <td>/v1/customizebillingservices:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCustomizeBillingService</td>
+                <td>GET</td>
+                <td>/v1/customizebillingservices/{id}</td>
+                <td></td>
               </tr>
               
             
