@@ -19,8 +19,9 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Pricing_GetInfo_FullMethodName    = "/blueapi.pricing.v1.Pricing/GetInfo"
-	Pricing_GetPricing_FullMethodName = "/blueapi.pricing.v1.Pricing/GetPricing"
+	Pricing_GetInfo_FullMethodName              = "/blueapi.pricing.v1.Pricing/GetInfo"
+	Pricing_GetPricing_FullMethodName           = "/blueapi.pricing.v1.Pricing/GetPricing"
+	Pricing_GetSupportedServices_FullMethodName = "/blueapi.pricing.v1.Pricing/GetSupportedServices"
 )
 
 // PricingClient is the client API for Pricing service.
@@ -33,6 +34,8 @@ type PricingClient interface {
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
 	// WORK-IN-PROGRESS: Get cloud pricing information
 	GetPricing(ctx context.Context, in *GetPricingRequest, opts ...grpc.CallOption) (*GetPricingResponse, error)
+	// WORK-IN-PROGRESS: Get list of supported services, regions, and attribute keys for filtering
+	GetSupportedServices(ctx context.Context, in *GetSupportedServicesRequest, opts ...grpc.CallOption) (*GetSupportedServicesResponse, error)
 }
 
 type pricingClient struct {
@@ -63,6 +66,16 @@ func (c *pricingClient) GetPricing(ctx context.Context, in *GetPricingRequest, o
 	return out, nil
 }
 
+func (c *pricingClient) GetSupportedServices(ctx context.Context, in *GetSupportedServicesRequest, opts ...grpc.CallOption) (*GetSupportedServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSupportedServicesResponse)
+	err := c.cc.Invoke(ctx, Pricing_GetSupportedServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PricingServer is the server API for Pricing service.
 // All implementations must embed UnimplementedPricingServer
 // for forward compatibility
@@ -73,6 +86,8 @@ type PricingServer interface {
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
 	// WORK-IN-PROGRESS: Get cloud pricing information
 	GetPricing(context.Context, *GetPricingRequest) (*GetPricingResponse, error)
+	// WORK-IN-PROGRESS: Get list of supported services, regions, and attribute keys for filtering
+	GetSupportedServices(context.Context, *GetSupportedServicesRequest) (*GetSupportedServicesResponse, error)
 	mustEmbedUnimplementedPricingServer()
 }
 
@@ -85,6 +100,9 @@ func (UnimplementedPricingServer) GetInfo(context.Context, *GetInfoRequest) (*Ge
 }
 func (UnimplementedPricingServer) GetPricing(context.Context, *GetPricingRequest) (*GetPricingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPricing not implemented")
+}
+func (UnimplementedPricingServer) GetSupportedServices(context.Context, *GetSupportedServicesRequest) (*GetSupportedServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSupportedServices not implemented")
 }
 func (UnimplementedPricingServer) mustEmbedUnimplementedPricingServer() {}
 
@@ -135,6 +153,24 @@ func _Pricing_GetPricing_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Pricing_GetSupportedServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSupportedServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PricingServer).GetSupportedServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Pricing_GetSupportedServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PricingServer).GetSupportedServices(ctx, req.(*GetSupportedServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Pricing_ServiceDesc is the grpc.ServiceDesc for Pricing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -149,6 +185,10 @@ var Pricing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPricing",
 			Handler:    _Pricing_GetPricing_Handler,
+		},
+		{
+			MethodName: "GetSupportedServices",
+			Handler:    _Pricing_GetSupportedServices_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
