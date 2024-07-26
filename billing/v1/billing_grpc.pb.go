@@ -64,6 +64,9 @@ const (
 	Billing_ReadUntaggedGroups_FullMethodName                   = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
 	Billing_ReadCustomizedBillingServices_FullMethodName        = "/blueapi.billing.v1.Billing/ReadCustomizedBillingServices"
 	Billing_GetCustomizedBillingService_FullMethodName          = "/blueapi.billing.v1.Billing/GetCustomizedBillingService"
+	Billing_CreateCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
+	Billing_UpdateCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
+	Billing_DeleteCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
 )
 
 // BillingClient is the client API for Billing service.
@@ -167,6 +170,12 @@ type BillingClient interface {
 	ReadCustomizedBillingServices(ctx context.Context, in *ReadCustomizedBillingServicesRequest, opts ...grpc.CallOption) (Billing_ReadCustomizedBillingServicesClient, error)
 	// WORK-IN-PROGRESS: Gets the customized billing service. Only available in Ripple.
 	GetCustomizedBillingService(ctx context.Context, in *GetCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
+	// WORK-IN-PROGRESS: Creates the customized billing service. Only available in Ripple.
+	CreateCustomizedBillingService(ctx context.Context, in *CreateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
+	// WORK-IN-PROGRESS: Updates the customized billing service by updating the fields specified in the update mask. Only available in Ripple.
+	UpdateCustomizedBillingService(ctx context.Context, in *UpdateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
+	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
+	DeleteCustomizedBillingService(ctx context.Context, in *DeleteCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -932,6 +941,36 @@ func (c *billingClient) GetCustomizedBillingService(ctx context.Context, in *Get
 	return out, nil
 }
 
+func (c *billingClient) CreateCustomizedBillingService(ctx context.Context, in *CreateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ripple.CustomizedBillingService)
+	err := c.cc.Invoke(ctx, Billing_CreateCustomizedBillingService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateCustomizedBillingService(ctx context.Context, in *UpdateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ripple.CustomizedBillingService)
+	err := c.cc.Invoke(ctx, Billing_UpdateCustomizedBillingService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteCustomizedBillingService(ctx context.Context, in *DeleteCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteCustomizedBillingService_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1033,6 +1072,12 @@ type BillingServer interface {
 	ReadCustomizedBillingServices(*ReadCustomizedBillingServicesRequest, Billing_ReadCustomizedBillingServicesServer) error
 	// WORK-IN-PROGRESS: Gets the customized billing service. Only available in Ripple.
 	GetCustomizedBillingService(context.Context, *GetCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
+	// WORK-IN-PROGRESS: Creates the customized billing service. Only available in Ripple.
+	CreateCustomizedBillingService(context.Context, *CreateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
+	// WORK-IN-PROGRESS: Updates the customized billing service by updating the fields specified in the update mask. Only available in Ripple.
+	UpdateCustomizedBillingService(context.Context, *UpdateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
+	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
+	DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1162,6 +1207,15 @@ func (UnimplementedBillingServer) ReadCustomizedBillingServices(*ReadCustomizedB
 }
 func (UnimplementedBillingServer) GetCustomizedBillingService(context.Context, *GetCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCustomizedBillingService not implemented")
+}
+func (UnimplementedBillingServer) CreateCustomizedBillingService(context.Context, *CreateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCustomizedBillingService not implemented")
+}
+func (UnimplementedBillingServer) UpdateCustomizedBillingService(context.Context, *UpdateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCustomizedBillingService not implemented")
+}
+func (UnimplementedBillingServer) DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomizedBillingService not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -1959,6 +2013,60 @@ func _Billing_GetCustomizedBillingService_Handler(srv interface{}, ctx context.C
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_CreateCustomizedBillingService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCustomizedBillingServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateCustomizedBillingService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateCustomizedBillingService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateCustomizedBillingService(ctx, req.(*CreateCustomizedBillingServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateCustomizedBillingService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCustomizedBillingServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateCustomizedBillingService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateCustomizedBillingService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateCustomizedBillingService(ctx, req.(*UpdateCustomizedBillingServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteCustomizedBillingService_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCustomizedBillingServiceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteCustomizedBillingService(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteCustomizedBillingService_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteCustomizedBillingService(ctx, req.(*DeleteCustomizedBillingServiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2069,6 +2177,18 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCustomizedBillingService",
 			Handler:    _Billing_GetCustomizedBillingService_Handler,
+		},
+		{
+			MethodName: "CreateCustomizedBillingService",
+			Handler:    _Billing_CreateCustomizedBillingService_Handler,
+		},
+		{
+			MethodName: "UpdateCustomizedBillingService",
+			Handler:    _Billing_UpdateCustomizedBillingService_Handler,
+		},
+		{
+			MethodName: "DeleteCustomizedBillingService",
+			Handler:    _Billing_DeleteCustomizedBillingService_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

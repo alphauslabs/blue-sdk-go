@@ -1215,6 +1215,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateCustomizedBillingServiceRequest"><span class="badge">M</span>CreateCustomizedBillingServiceRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateInvoiceRequest"><span class="badge">M</span>CreateInvoiceRequest</a>
                 </li>
               
@@ -1232,6 +1236,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteAdjustmentConfigRequest"><span class="badge">M</span>DeleteAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteCustomizedBillingServiceRequest"><span class="badge">M</span>DeleteCustomizedBillingServiceRequest</a>
                 </li>
               
                 <li>
@@ -1392,6 +1400,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest"><span class="badge">M</span>UpdateAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateCustomizedBillingServiceRequest"><span class="badge">M</span>UpdateCustomizedBillingServiceRequest</a>
                 </li>
               
                 <li>
@@ -14300,6 +14312,44 @@ A list of filtering options. See [api.ConfigFilters] for more information on eac
 
         
       
+        <h3 id="blueapi.billing.v1.CreateCustomizedBillingServiceRequest">CreateCustomizedBillingServiceRequest</h3>
+        <p>Request message for the Billing.CreateCustomizedBillingService rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.name] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. [blueapi.api.ripple.CustomizedBillingService.description] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>config</td>
+                  <td><a href="#blueapi.api.ripple.MethodConfig">blueapi.api.ripple.MethodConfig</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.MethodConfig] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateInvoiceRequest">CreateInvoiceRequest</h3>
         <p>Request message for the CreateInvoice rpc.</p>
 
@@ -14475,6 +14525,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteCustomizedBillingServiceRequest">DeleteCustomizedBillingServiceRequest</h3>
+        <p>Request message for the Billing.DeleteCustomizedBillingService rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
                 </tr>
               
             </tbody>
@@ -15778,6 +15852,45 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateCustomizedBillingServiceRequest">UpdateCustomizedBillingServiceRequest</h3>
+        <p>Request message for the Billing.UpdateCustomizedBillingService rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>CustomizedBillingService</td>
+                  <td><a href="#blueapi.api.ripple.CustomizedBillingService">blueapi.api.ripple.CustomizedBillingService</a></td>
+                  <td></td>
+                  <td><p>Required. The updated customized billing service object. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Required. Indicates which fields in the provided CustomizedBillingService to update. Must be
+specified and non-empty. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateInvoicePreviewsRequest">UpdateInvoicePreviewsRequest</h3>
         <p>Request message for the UpdateInvoicePreviews rpc.</p>
 
@@ -16276,6 +16389,27 @@ Lists all exchange rate.
                 <td><p>WORK-IN-PROGRESS: Gets the customized billing service. Only available in Ripple.</p></td>
               </tr>
             
+              <tr>
+                <td>CreateCustomizedBillingService</td>
+                <td><a href="#blueapi.billing.v1.CreateCustomizedBillingServiceRequest">CreateCustomizedBillingServiceRequest</a></td>
+                <td><a href="#blueapi.api.ripple.CustomizedBillingService">.blueapi.api.ripple.CustomizedBillingService</a></td>
+                <td><p>WORK-IN-PROGRESS: Creates the customized billing service. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateCustomizedBillingService</td>
+                <td><a href="#blueapi.billing.v1.UpdateCustomizedBillingServiceRequest">UpdateCustomizedBillingServiceRequest</a></td>
+                <td><a href="#blueapi.api.ripple.CustomizedBillingService">.blueapi.api.ripple.CustomizedBillingService</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates the customized billing service by updating the fields specified in the update mask. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteCustomizedBillingService</td>
+                <td><a href="#blueapi.billing.v1.DeleteCustomizedBillingServiceRequest">DeleteCustomizedBillingServiceRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -16699,6 +16833,36 @@ Lists all exchange rate.
               <tr>
                 <td>GetCustomizedBillingService</td>
                 <td>GET</td>
+                <td>/v1/customizedbillingservices/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateCustomizedBillingService</td>
+                <td>POST</td>
+                <td>/v1/customizedbillingservices</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateCustomizedBillingService</td>
+                <td>PUT</td>
+                <td>/v1/customizedbillingservices/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteCustomizedBillingService</td>
+                <td>DELETE</td>
                 <td>/v1/customizedbillingservices/{id}</td>
                 <td></td>
               </tr>
