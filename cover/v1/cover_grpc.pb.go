@@ -166,6 +166,11 @@ const (
 	Cover_GetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/GetOrgFiscalMonth"
 	Cover_TransferOrganization_FullMethodName                    = "/blueapi.cover.v1.Cover/TransferOrganization"
 	Cover_UpdateCostGroupCreationUI_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateCostGroupCreationUI"
+	Cover_ListUnitTypes_FullMethodName                           = "/blueapi.cover.v1.Cover/ListUnitTypes"
+	Cover_CreateUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/CreateUnitType"
+	Cover_GetUnitType_FullMethodName                             = "/blueapi.cover.v1.Cover/GetUnitType"
+	Cover_UpdateUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/UpdateUnitType"
+	Cover_DeleteUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/DeleteUnitType"
 )
 
 // CoverClient is the client API for Cover service.
@@ -463,6 +468,16 @@ type CoverClient interface {
 	TransferOrganization(ctx context.Context, in *TransferOrganizationRequest, opts ...grpc.CallOption) (*TransferOrganizationResponse, error)
 	// WORK-IN-PROGRESS: Set user preference in cost group creation UI
 	UpdateCostGroupCreationUI(ctx context.Context, in *UpdateCostGroupCreationUIRequest, opts ...grpc.CallOption) (*UpdateCostGroupCreationUIResponse, error)
+	// Lists Unit Types
+	ListUnitTypes(ctx context.Context, in *ListUnitTypesRequest, opts ...grpc.CallOption) (*ListUnitTypesResponse, error)
+	// Create Unit Type
+	CreateUnitType(ctx context.Context, in *CreateUnitTypeRequest, opts ...grpc.CallOption) (*CreateUnitTypeResponse, error)
+	// Get Specific Unit Type
+	GetUnitType(ctx context.Context, in *GetUnitTypeRequest, opts ...grpc.CallOption) (*GetUnitTypeResponse, error)
+	// Update Specific Unit Type
+	UpdateUnitType(ctx context.Context, in *UpdateUnitTypeRequest, opts ...grpc.CallOption) (*UpdateUnitTypeResponse, error)
+	// Delete Specific Unit Type
+	DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequest, opts ...grpc.CallOption) (*DeleteUnitTypeResponse, error)
 }
 
 type coverClient struct {
@@ -2500,6 +2515,56 @@ func (c *coverClient) UpdateCostGroupCreationUI(ctx context.Context, in *UpdateC
 	return out, nil
 }
 
+func (c *coverClient) ListUnitTypes(ctx context.Context, in *ListUnitTypesRequest, opts ...grpc.CallOption) (*ListUnitTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUnitTypesResponse)
+	err := c.cc.Invoke(ctx, Cover_ListUnitTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateUnitType(ctx context.Context, in *CreateUnitTypeRequest, opts ...grpc.CallOption) (*CreateUnitTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUnitTypeResponse)
+	err := c.cc.Invoke(ctx, Cover_CreateUnitType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetUnitType(ctx context.Context, in *GetUnitTypeRequest, opts ...grpc.CallOption) (*GetUnitTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUnitTypeResponse)
+	err := c.cc.Invoke(ctx, Cover_GetUnitType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUnitType(ctx context.Context, in *UpdateUnitTypeRequest, opts ...grpc.CallOption) (*UpdateUnitTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUnitTypeResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateUnitType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequest, opts ...grpc.CallOption) (*DeleteUnitTypeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUnitTypeResponse)
+	err := c.cc.Invoke(ctx, Cover_DeleteUnitType_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -2795,6 +2860,16 @@ type CoverServer interface {
 	TransferOrganization(context.Context, *TransferOrganizationRequest) (*TransferOrganizationResponse, error)
 	// WORK-IN-PROGRESS: Set user preference in cost group creation UI
 	UpdateCostGroupCreationUI(context.Context, *UpdateCostGroupCreationUIRequest) (*UpdateCostGroupCreationUIResponse, error)
+	// Lists Unit Types
+	ListUnitTypes(context.Context, *ListUnitTypesRequest) (*ListUnitTypesResponse, error)
+	// Create Unit Type
+	CreateUnitType(context.Context, *CreateUnitTypeRequest) (*CreateUnitTypeResponse, error)
+	// Get Specific Unit Type
+	GetUnitType(context.Context, *GetUnitTypeRequest) (*GetUnitTypeResponse, error)
+	// Update Specific Unit Type
+	UpdateUnitType(context.Context, *UpdateUnitTypeRequest) (*UpdateUnitTypeResponse, error)
+	// Delete Specific Unit Type
+	DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3236,6 +3311,21 @@ func (UnimplementedCoverServer) TransferOrganization(context.Context, *TransferO
 }
 func (UnimplementedCoverServer) UpdateCostGroupCreationUI(context.Context, *UpdateCostGroupCreationUIRequest) (*UpdateCostGroupCreationUIResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostGroupCreationUI not implemented")
+}
+func (UnimplementedCoverServer) ListUnitTypes(context.Context, *ListUnitTypesRequest) (*ListUnitTypesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnitTypes not implemented")
+}
+func (UnimplementedCoverServer) CreateUnitType(context.Context, *CreateUnitTypeRequest) (*CreateUnitTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUnitType not implemented")
+}
+func (UnimplementedCoverServer) GetUnitType(context.Context, *GetUnitTypeRequest) (*GetUnitTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUnitType not implemented")
+}
+func (UnimplementedCoverServer) UpdateUnitType(context.Context, *UpdateUnitTypeRequest) (*UpdateUnitTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUnitType not implemented")
+}
+func (UnimplementedCoverServer) DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUnitType not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -5940,6 +6030,96 @@ func _Cover_UpdateCostGroupCreationUI_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListUnitTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUnitTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListUnitTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListUnitTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListUnitTypes(ctx, req.(*ListUnitTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateUnitType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUnitTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateUnitType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateUnitType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateUnitType(ctx, req.(*CreateUnitTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetUnitType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUnitTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetUnitType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetUnitType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetUnitType(ctx, req.(*GetUnitTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUnitType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUnitTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUnitType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateUnitType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUnitType(ctx, req.(*UpdateUnitTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteUnitType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUnitTypeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteUnitType(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteUnitType_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteUnitType(ctx, req.(*DeleteUnitTypeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6426,6 +6606,26 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateCostGroupCreationUI",
 			Handler:    _Cover_UpdateCostGroupCreationUI_Handler,
+		},
+		{
+			MethodName: "ListUnitTypes",
+			Handler:    _Cover_ListUnitTypes_Handler,
+		},
+		{
+			MethodName: "CreateUnitType",
+			Handler:    _Cover_CreateUnitType_Handler,
+		},
+		{
+			MethodName: "GetUnitType",
+			Handler:    _Cover_GetUnitType_Handler,
+		},
+		{
+			MethodName: "UpdateUnitType",
+			Handler:    _Cover_UpdateUnitType_Handler,
+		},
+		{
+			MethodName: "DeleteUnitType",
+			Handler:    _Cover_DeleteUnitType_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

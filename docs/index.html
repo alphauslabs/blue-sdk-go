@@ -1637,6 +1637,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CreateUnitTypeRequest"><span class="badge">M</span>CreateUnitTypeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateUnitTypeRequest.UnitItemsEntry"><span class="badge">M</span>CreateUnitTypeRequest.UnitItemsEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateUnitTypeResponse"><span class="badge">M</span>CreateUnitTypeResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateViewRequest"><span class="badge">M</span>CreateViewRequest</a>
                 </li>
               
@@ -1706,6 +1718,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.DeleteMemberResponse"><span class="badge">M</span>DeleteMemberResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteUnitTypeRequest"><span class="badge">M</span>DeleteUnitTypeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteUnitTypeResponse"><span class="badge">M</span>DeleteUnitTypeResponse</a>
                 </li>
               
                 <li>
@@ -1997,6 +2017,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetUnitTypeRequest"><span class="badge">M</span>GetUnitTypeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetUnitTypeResponse"><span class="badge">M</span>GetUnitTypeResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetUserDetailsRequest"><span class="badge">M</span>GetUserDetailsRequest</a>
                 </li>
               
@@ -2082,6 +2110,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListRecommendationResponse"><span class="badge">M</span>ListRecommendationResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListUnitTypesRequest"><span class="badge">M</span>ListUnitTypesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListUnitTypesResponse"><span class="badge">M</span>ListUnitTypesResponse</a>
                 </li>
               
                 <li>
@@ -2406,6 +2442,18 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.UpdateSideMenuStateResponse"><span class="badge">M</span>UpdateSideMenuStateResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateUnitTypeRequest"><span class="badge">M</span>UpdateUnitTypeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateUnitTypeRequest.UnitItemsEntry"><span class="badge">M</span>UpdateUnitTypeRequest.UnitItemsEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateUnitTypeResponse"><span class="badge">M</span>UpdateUnitTypeResponse</a>
                 </li>
               
                 <li>
@@ -19158,6 +19206,99 @@ Supported values are the following:
 
         
       
+        <h3 id="blueapi.cover.v1.CreateUnitTypeRequest">CreateUnitTypeRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unitName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unitItems</td>
+                  <td><a href="#blueapi.cover.v1.CreateUnitTypeRequest.UnitItemsEntry">CreateUnitTypeRequest.UnitItemsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateUnitTypeRequest.UnitItemsEntry">CreateUnitTypeRequest.UnitItemsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateUnitTypeResponse">CreateUnitTypeResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unitCostData</td>
+                  <td><a href="#blueapi.api.cover.UnitCostData">blueapi.api.cover.UnitCostData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CreateViewRequest">CreateViewRequest</h3>
         <p>Request message for CreateView</p>
 
@@ -19690,6 +19831,54 @@ Supported values are the following:
               
                 <tr>
                   <td>userId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteUnitTypeRequest">DeleteUnitTypeRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Unit Type Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteUnitTypeResponse">DeleteUnitTypeResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -22137,6 +22326,54 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetUnitTypeRequest">GetUnitTypeRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Unit Type Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetUnitTypeResponse">GetUnitTypeResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unitCostData</td>
+                  <td><a href="#blueapi.api.cover.UnitCostData">blueapi.api.cover.UnitCostData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetUserDetailsRequest">GetUserDetailsRequest</h3>
         <p>Request message for GetUserDetails</p>
 
@@ -22809,6 +23046,37 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>recommendationGroup</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListUnitTypesRequest">ListUnitTypesRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListUnitTypesResponse">ListUnitTypesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unitCostData</td>
+                  <td><a href="#blueapi.api.cover.UnitCostData">blueapi.api.cover.UnitCostData</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -25508,6 +25776,106 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.UpdateUnitTypeRequest">UpdateUnitTypeRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Unit Type Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unitName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unitItems</td>
+                  <td><a href="#blueapi.cover.v1.UpdateUnitTypeRequest.UnitItemsEntry">UpdateUnitTypeRequest.UnitItemsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateUnitTypeRequest.UnitItemsEntry">UpdateUnitTypeRequest.UnitItemsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateUnitTypeResponse">UpdateUnitTypeResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unitCostData</td>
+                  <td><a href="#blueapi.api.cover.UnitCostData">blueapi.api.cover.UnitCostData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateUserAppThemeRequest">UpdateUserAppThemeRequest</h3>
         <p>Request message for UpdateUserAppTheme</p>
 
@@ -27403,6 +27771,41 @@ file in bytes </p></td>
                 <td><p>WORK-IN-PROGRESS: Set user preference in cost group creation UI</p></td>
               </tr>
             
+              <tr>
+                <td>ListUnitTypes</td>
+                <td><a href="#blueapi.cover.v1.ListUnitTypesRequest">ListUnitTypesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListUnitTypesResponse">ListUnitTypesResponse</a></td>
+                <td><p>Lists Unit Types</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateUnitType</td>
+                <td><a href="#blueapi.cover.v1.CreateUnitTypeRequest">CreateUnitTypeRequest</a></td>
+                <td><a href="#blueapi.cover.v1.CreateUnitTypeResponse">CreateUnitTypeResponse</a></td>
+                <td><p>Create Unit Type</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetUnitType</td>
+                <td><a href="#blueapi.cover.v1.GetUnitTypeRequest">GetUnitTypeRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetUnitTypeResponse">GetUnitTypeResponse</a></td>
+                <td><p>Get Specific Unit Type</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateUnitType</td>
+                <td><a href="#blueapi.cover.v1.UpdateUnitTypeRequest">UpdateUnitTypeRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateUnitTypeResponse">UpdateUnitTypeResponse</a></td>
+                <td><p>Update Specific Unit Type</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteUnitType</td>
+                <td><a href="#blueapi.cover.v1.DeleteUnitTypeRequest">DeleteUnitTypeRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DeleteUnitTypeResponse">DeleteUnitTypeResponse</a></td>
+                <td><p>Delete Specific Unit Type</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -28868,6 +29271,56 @@ file in bytes </p></td>
                 <td>PUT</td>
                 <td>/v1/me/costgroupcreation</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListUnitTypes</td>
+                <td>GET</td>
+                <td>/v1/unitcost</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateUnitType</td>
+                <td>POST</td>
+                <td>/v1/unitcost</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetUnitType</td>
+                <td>GET</td>
+                <td>/v1/unitcost/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateUnitType</td>
+                <td>PUT</td>
+                <td>/v1/unitcost/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteUnitType</td>
+                <td>DELETE</td>
+                <td>/v1/unitcost/{id}</td>
+                <td></td>
               </tr>
               
             
