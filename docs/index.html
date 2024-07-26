@@ -2552,6 +2552,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.pricing.v1.GetPricingRequest.FiltersEntry"><span class="badge">M</span>GetPricingRequest.FiltersEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.pricing.v1.GetPricingResponse"><span class="badge">M</span>GetPricingResponse</a>
                 </li>
               
@@ -28822,12 +28826,51 @@ Available Azure services by region can be accessed in https://azure.microsoft.co
                 </tr>
               
                 <tr>
+                  <td>filters</td>
+                  <td><a href="#blueapi.pricing.v1.GetPricingRequest.FiltersEntry">GetPricingRequest.FiltersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Filters to apply to the pricing data.
+This is a map of column names to filter values. Each key-value pair in the map represents a filter condition. </p></td>
+                </tr>
+              
+                <tr>
                   <td>columns</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>Optional. This string represent valid columns which will serve as basis as to what columns will be returned by the API.
 All columns will be returned if this array is empty.
 This is not yet implemented. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.pricing.v1.GetPricingRequest.FiltersEntry">GetPricingRequest.FiltersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>

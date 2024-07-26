@@ -53,6 +53,7 @@ func local_request_Preferences_GetPreferences_0(ctx context.Context, marshaler r
 // UnaryRPC     :call PreferencesServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterPreferencesHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterPreferencesHandlerServer(ctx context.Context, mux *runtime.ServeMux, server PreferencesServer) error {
 
 	mux.Handle("GET", pattern_Preferences_GetPreferences_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -118,7 +119,7 @@ func RegisterPreferencesHandler(ctx context.Context, mux *runtime.ServeMux, conn
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "PreferencesClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "PreferencesClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "PreferencesClient" to call the correct interceptors.
+// "PreferencesClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterPreferencesHandlerClient(ctx context.Context, mux *runtime.ServeMux, client PreferencesClient) error {
 
 	mux.Handle("GET", pattern_Preferences_GetPreferences_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {

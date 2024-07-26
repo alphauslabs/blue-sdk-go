@@ -5820,6 +5820,7 @@ func local_request_Cover_UpdateCostGroupCreationUI_0(ctx context.Context, marsha
 // UnaryRPC     :call CoverServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterCoverHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, server CoverServer) error {
 
 	mux.Handle("POST", pattern_Cover_OnboardOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -9035,7 +9036,7 @@ func RegisterCoverHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "CoverClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "CoverClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "CoverClient" to call the correct interceptors.
+// "CoverClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, client CoverClient) error {
 
 	mux.Handle("POST", pattern_Cover_OnboardOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {

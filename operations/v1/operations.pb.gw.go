@@ -227,6 +227,7 @@ func local_request_Operations_CancelOperation_0(ctx context.Context, marshaler r
 // UnaryRPC     :call OperationsServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterOperationsHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterOperationsHandlerServer(ctx context.Context, mux *runtime.ServeMux, server OperationsServer) error {
 
 	mux.Handle("GET", pattern_Operations_ListOperations_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -349,7 +350,7 @@ func RegisterOperationsHandler(ctx context.Context, mux *runtime.ServeMux, conn 
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "OperationsClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "OperationsClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "OperationsClient" to call the correct interceptors.
+// "OperationsClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterOperationsHandlerClient(ctx context.Context, mux *runtime.ServeMux, client OperationsClient) error {
 
 	mux.Handle("GET", pattern_Operations_ListOperations_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {

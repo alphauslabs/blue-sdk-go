@@ -1955,6 +1955,7 @@ func local_request_Billing_GetCustomizeBillingService_0(ctx context.Context, mar
 // UnaryRPC     :call BillingServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
 // Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterBillingHandlerFromEndpoint instead.
+// GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
 func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, server BillingServer) error {
 
 	mux.Handle("GET", pattern_Billing_ListBillingGroups_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -2750,7 +2751,7 @@ func RegisterBillingHandler(ctx context.Context, mux *runtime.ServeMux, conn *gr
 // to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "BillingClient".
 // Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "BillingClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "BillingClient" to call the correct interceptors.
+// "BillingClient" to call the correct interceptors. This client ignores the HTTP middlewares.
 func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, client BillingClient) error {
 
 	mux.Handle("GET", pattern_Billing_ListBillingGroups_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
