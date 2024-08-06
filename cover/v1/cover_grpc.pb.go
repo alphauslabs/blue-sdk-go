@@ -156,6 +156,7 @@ const (
 	Cover_GetReportSummary_FullMethodName                        = "/blueapi.cover.v1.Cover/GetReportSummary"
 	Cover_ListRecommendations_FullMethodName                     = "/blueapi.cover.v1.Cover/ListRecommendations"
 	Cover_GetRecommendation_FullMethodName                       = "/blueapi.cover.v1.Cover/GetRecommendation"
+	Cover_GetRecommendationV2_FullMethodName                     = "/blueapi.cover.v1.Cover/GetRecommendationV2"
 	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
 	Cover_MarkAsExecuted_FullMethodName                          = "/blueapi.cover.v1.Cover/MarkAsExecuted"
 	Cover_UndoExecutedRecommendation_FullMethodName              = "/blueapi.cover.v1.Cover/UndoExecutedRecommendation"
@@ -448,6 +449,8 @@ type CoverClient interface {
 	ListRecommendations(ctx context.Context, in *ListRecommendationRequest, opts ...grpc.CallOption) (Cover_ListRecommendationsClient, error)
 	// Retrieves a specific recommendation by its ID.
 	GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error)
+	// Retrieves a specific recommendation by its ID. (Version 2)
+	GetRecommendationV2(ctx context.Context, in *GetRecommendationV2Request, opts ...grpc.CallOption) (*GetRecommendationV2Response, error)
 	// Executes optimization based on a recommendation.
 	ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error)
 	// Mark a recommendation executed.
@@ -2415,6 +2418,16 @@ func (c *coverClient) GetRecommendation(ctx context.Context, in *GetRecommendati
 	return out, nil
 }
 
+func (c *coverClient) GetRecommendationV2(ctx context.Context, in *GetRecommendationV2Request, opts ...grpc.CallOption) (*GetRecommendationV2Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRecommendationV2Response)
+	err := c.cc.Invoke(ctx, Cover_GetRecommendationV2_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ExecuteOptimizationResponse)
@@ -2840,6 +2853,8 @@ type CoverServer interface {
 	ListRecommendations(*ListRecommendationRequest, Cover_ListRecommendationsServer) error
 	// Retrieves a specific recommendation by its ID.
 	GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error)
+	// Retrieves a specific recommendation by its ID. (Version 2)
+	GetRecommendationV2(context.Context, *GetRecommendationV2Request) (*GetRecommendationV2Response, error)
 	// Executes optimization based on a recommendation.
 	ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error)
 	// Mark a recommendation executed.
@@ -3281,6 +3296,9 @@ func (UnimplementedCoverServer) ListRecommendations(*ListRecommendationRequest, 
 }
 func (UnimplementedCoverServer) GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendation not implemented")
+}
+func (UnimplementedCoverServer) GetRecommendationV2(context.Context, *GetRecommendationV2Request) (*GetRecommendationV2Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendationV2 not implemented")
 }
 func (UnimplementedCoverServer) ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecuteOptimization not implemented")
@@ -5850,6 +5868,24 @@ func _Cover_GetRecommendation_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetRecommendationV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecommendationV2Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetRecommendationV2(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetRecommendationV2_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetRecommendationV2(ctx, req.(*GetRecommendationV2Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ExecuteOptimization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ExecuteOptimizationRequest)
 	if err := dec(in); err != nil {
@@ -6566,6 +6602,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRecommendation",
 			Handler:    _Cover_GetRecommendation_Handler,
+		},
+		{
+			MethodName: "GetRecommendationV2",
+			Handler:    _Cover_GetRecommendationV2_Handler,
 		},
 		{
 			MethodName: "ExecuteOptimization",
