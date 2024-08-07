@@ -119,12 +119,12 @@ type GetPricingRequest struct {
 	// Required. Cloud vendor, only `aws` and `azure` are supported for now.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Cloud vendor service.
-	// Supported services can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices
+	// Supported services can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
 	Service string `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"`
 	// Required. Region code.
-	// Supported regions can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices
-	// View all available AWS services by region at https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/
-	// View all available Azure services by region at https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/
+	// Supported regions can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
+	// View all available AWS services by region at https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/.
+	// View all available Azure services by region at https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
 	// Optional. Supply token that was included in the latest response to continue fetching the remaining chunks of data. All data has been returned once token is null.
 	Token string `protobuf:"bytes,4,opt,name=token,proto3" json:"token,omitempty"`
@@ -322,7 +322,7 @@ type GetSupportedServicesResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Suported services, regions, and attributes that can be used to fetch pricing data
+	// Suported services, regions, and attributes that can be used to fetch pricing data.
 	SupportedServices []*SupportedService `protobuf:"bytes,1,rep,name=supportedServices,proto3" json:"supportedServices,omitempty"`
 }
 
@@ -370,13 +370,13 @@ type SupportedService struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// AWS or Azure services only as of now
+	// AWS or Azure services only as of now.
 	Service string `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
-	// Regions supported for the specific service
+	// Regions supported for the specific service.
 	Regions []string `protobuf:"bytes,2,rep,name=regions,proto3" json:"regions,omitempty"`
-	// Attributes that can be used as key-value pairs for filtering
+	// Attributes that can be used as key-value pairs for filtering.
 	Attributes []*Attribute `protobuf:"bytes,3,rep,name=attributes,proto3" json:"attributes,omitempty"`
-	// Column names that can be used to specify what columns should GetPricing return
+	// Column names that can be used to specify what columns should GetPricing return.
 	Columns []string `protobuf:"bytes,4,rep,name=columns,proto3" json:"columns,omitempty"`
 }
 
