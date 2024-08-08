@@ -1371,6 +1371,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ReadServiceDiscountsServiceRequest"><span class="badge">M</span>ReadServiceDiscountsServiceRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ReadUntaggedGroupsRequest"><span class="badge">M</span>ReadUntaggedGroupsRequest</a>
                 </li>
               
@@ -15656,6 +15660,30 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ReadServiceDiscountsServiceRequest">ReadServiceDiscountsServiceRequest</h3>
+        <p>Request message for the ReadServiceDiscountsService rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ReadUntaggedGroupsRequest">ReadUntaggedGroupsRequest</h3>
         <p>Request message for the Billing.ReadUntaggedGroups rpc.</p>
 
@@ -16278,6 +16306,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>ReadServiceDiscountsService</td>
+                <td><a href="#blueapi.billing.v1.ReadServiceDiscountsServiceRequest">ReadServiceDiscountsServiceRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.Service">.blueapi.api.ripple.v1.Service</a> stream</td>
+                <td><p>Reads the service relate to the service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListInvoiceServiceDiscounts</td>
                 <td><a href="#blueapi.billing.v1.ListInvoiceServiceDiscountsRequest">ListInvoiceServiceDiscountsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.InvoiceServiceDiscounts">InvoiceServiceDiscounts</a> stream</td>
@@ -16650,6 +16685,16 @@ Lists all exchange rate.
                 <td>ExportInvoiceFile</td>
                 <td>POST</td>
                 <td>/v1/invoice/{date}:export</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadServiceDiscountsService</td>
+                <td>POST</td>
+                <td>/v1/servicediscounts/{vendor}/services:read</td>
                 <td>*</td>
               </tr>
               
