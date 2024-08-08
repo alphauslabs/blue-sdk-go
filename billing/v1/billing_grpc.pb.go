@@ -37,7 +37,7 @@ const (
 	Billing_ListInvoice_FullMethodName                          = "/blueapi.billing.v1.Billing/ListInvoice"
 	Billing_UpdateInvoicePreviews_FullMethodName                = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
 	Billing_ExportInvoiceFile_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
-	Billing_ReadServiceDiscountsService_FullMethodName          = "/blueapi.billing.v1.Billing/ReadServiceDiscountsService"
+	Billing_ReadServiceDiscountsServices_FullMethodName         = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
 	Billing_ListInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
 	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName   = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
 	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
@@ -104,7 +104,7 @@ type BillingClient interface {
 	// Exports an invoice.
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
 	// Reads the service relate to the service discounts. Only available in Ripple.
-	ReadServiceDiscountsService(ctx context.Context, in *ReadServiceDiscountsServiceRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServiceClient, error)
+	ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error)
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
 	// Reads the account invoice service discounts. Only available in Ripple.
@@ -435,13 +435,13 @@ func (c *billingClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoice
 	return out, nil
 }
 
-func (c *billingClient) ReadServiceDiscountsService(ctx context.Context, in *ReadServiceDiscountsServiceRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServiceClient, error) {
+func (c *billingClient) ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[5], Billing_ReadServiceDiscountsService_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[5], Billing_ReadServiceDiscountsServices_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &billingReadServiceDiscountsServiceClient{ClientStream: stream}
+	x := &billingReadServiceDiscountsServicesClient{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -451,16 +451,16 @@ func (c *billingClient) ReadServiceDiscountsService(ctx context.Context, in *Rea
 	return x, nil
 }
 
-type Billing_ReadServiceDiscountsServiceClient interface {
+type Billing_ReadServiceDiscountsServicesClient interface {
 	Recv() (*v1.Service, error)
 	grpc.ClientStream
 }
 
-type billingReadServiceDiscountsServiceClient struct {
+type billingReadServiceDiscountsServicesClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingReadServiceDiscountsServiceClient) Recv() (*v1.Service, error) {
+func (x *billingReadServiceDiscountsServicesClient) Recv() (*v1.Service, error) {
 	m := new(v1.Service)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -1041,7 +1041,7 @@ type BillingServer interface {
 	// Exports an invoice.
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
 	// Reads the service relate to the service discounts. Only available in Ripple.
-	ReadServiceDiscountsService(*ReadServiceDiscountsServiceRequest, Billing_ReadServiceDiscountsServiceServer) error
+	ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
 	// Reads the account invoice service discounts. Only available in Ripple.
@@ -1163,8 +1163,8 @@ func (UnimplementedBillingServer) UpdateInvoicePreviews(context.Context, *Update
 func (UnimplementedBillingServer) ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoiceFile not implemented")
 }
-func (UnimplementedBillingServer) ReadServiceDiscountsService(*ReadServiceDiscountsServiceRequest, Billing_ReadServiceDiscountsServiceServer) error {
-	return status.Errorf(codes.Unimplemented, "method ReadServiceDiscountsService not implemented")
+func (UnimplementedBillingServer) ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadServiceDiscountsServices not implemented")
 }
 func (UnimplementedBillingServer) ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListInvoiceServiceDiscounts not implemented")
@@ -1521,24 +1521,24 @@ func _Billing_ExportInvoiceFile_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Billing_ReadServiceDiscountsService_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ReadServiceDiscountsServiceRequest)
+func _Billing_ReadServiceDiscountsServices_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadServiceDiscountsServicesRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(BillingServer).ReadServiceDiscountsService(m, &billingReadServiceDiscountsServiceServer{ServerStream: stream})
+	return srv.(BillingServer).ReadServiceDiscountsServices(m, &billingReadServiceDiscountsServicesServer{ServerStream: stream})
 }
 
-type Billing_ReadServiceDiscountsServiceServer interface {
+type Billing_ReadServiceDiscountsServicesServer interface {
 	Send(*v1.Service) error
 	grpc.ServerStream
 }
 
-type billingReadServiceDiscountsServiceServer struct {
+type billingReadServiceDiscountsServicesServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingReadServiceDiscountsServiceServer) Send(m *v1.Service) error {
+func (x *billingReadServiceDiscountsServicesServer) Send(m *v1.Service) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -2281,8 +2281,8 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ReadServiceDiscountsService",
-			Handler:       _Billing_ReadServiceDiscountsService_Handler,
+			StreamName:    "ReadServiceDiscountsServices",
+			Handler:       _Billing_ReadServiceDiscountsServices_Handler,
 			ServerStreams: true,
 		},
 		{
