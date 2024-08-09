@@ -1223,6 +1223,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateInvoiceServiceDiscountsRequest"><span class="badge">M</span>CreateInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateResellerRequest"><span class="badge">M</span>CreateResellerRequest</a>
                 </li>
               
@@ -1240,6 +1244,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteCustomizedBillingServiceRequest"><span class="badge">M</span>DeleteCustomizedBillingServiceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteInvoiceServiceDiscountsRequest"><span class="badge">M</span>DeleteInvoiceServiceDiscountsRequest</a>
                 </li>
               
                 <li>
@@ -1412,6 +1420,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateInvoicePreviewsRequest"><span class="badge">M</span>UpdateInvoicePreviewsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest"><span class="badge">M</span>UpdateInvoiceServiceDiscountsRequest</a>
                 </li>
               
                 <li>
@@ -14481,6 +14493,44 @@ If this parameter is not set, The list set to `groups` is used. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.CreateInvoiceServiceDiscountsRequest">CreateInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the Billing.CreateInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.v1.InvoiceServiceDiscounts.name] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. [blueapi.api.ripple.v1.InvoiceServiceDiscounts.description] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.api.ripple.v1.InvoiceServiceDiscountsSetting">blueapi.api.ripple.v1.InvoiceServiceDiscountsSetting</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.v1.InvoiceServiceDiscounts.InvoiceServiceDiscountsSetting] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateResellerRequest">CreateResellerRequest</h3>
         <p>Request message for the CreateReseller rpc.</p>
 
@@ -14633,6 +14683,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteInvoiceServiceDiscountsRequest">DeleteInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the Billing.DeleteInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.v1.InvoiceServiceDiscounts.id] </p></td>
                 </tr>
               
             </tbody>
@@ -16064,6 +16138,45 @@ If true, Hiding Invoice. If false, Display Invoice. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest">UpdateInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the Billing.UpdateInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.v1.InvoiceServiceDiscounts.id] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceServiceDiscounts</td>
+                  <td><a href="#blueapi.api.ripple.v1.InvoiceServiceDiscounts">blueapi.api.ripple.v1.InvoiceServiceDiscounts</a></td>
+                  <td></td>
+                  <td><p>Required. The updated invoice service discounts object. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Required. Indicates which fields in the provided InvoiceServiceDiscounts to update. Must be
+specified and non-empty. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateResellerRequest">UpdateResellerRequest</h3>
         <p>Request message for the UpdateReseller rpc.</p>
 
@@ -16310,6 +16423,27 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.ReadServiceDiscountsServicesRequest">ReadServiceDiscountsServicesRequest</a></td>
                 <td><a href="#blueapi.api.ripple.v1.Service">.blueapi.api.ripple.v1.Service</a> stream</td>
                 <td><p>Reads the service relate to the service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.CreateInvoiceServiceDiscountsRequest">CreateInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.InvoiceServiceDiscounts">.blueapi.api.ripple.v1.InvoiceServiceDiscounts</a> stream</td>
+                <td><p>Creates the invoice service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest">UpdateInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.InvoiceServiceDiscounts">.blueapi.api.ripple.v1.InvoiceServiceDiscounts</a> stream</td>
+                <td><p>Updates the invoice service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.DeleteInvoiceServiceDiscountsRequest">DeleteInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Deletes the invoice service discounts. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -16696,6 +16830,36 @@ Lists all exchange rate.
                 <td>POST</td>
                 <td>/v1/servicediscounts/{vendor}/services:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateInvoiceServiceDiscounts</td>
+                <td>POST</td>
+                <td>/v1/servicediscounts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateInvoiceServiceDiscounts</td>
+                <td>PUT</td>
+                <td>/v1/servicediscounts/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteInvoiceServiceDiscounts</td>
+                <td>DELETE</td>
+                <td>/v1/servicediscounts/{id}</td>
+                <td></td>
               </tr>
               
             
