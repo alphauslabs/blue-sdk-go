@@ -30,8 +30,10 @@ type InvoiceServiceDiscounts struct {
 	// The invoice service discounts id.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The invoice service discount name.
+	// must be 1-60 characters long.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The invoice service discount description.
+	// Maximum 150 characters long.
 	Description string `protobuf:"bytes,3,opt,name=description,proto3" json:"description,omitempty"`
 	// The invoice service discount setting.
 	Setting *InvoiceServiceDiscountsSetting `protobuf:"bytes,4,opt,name=setting,proto3" json:"setting,omitempty"`
@@ -192,6 +194,9 @@ type InvoiceServiceDiscountsSettingDetails struct {
 	// aws: ProductCode
 	// azure: ServiceCode
 	// gcp: ServiceName
+	// `otherServices`: The code to specify other services as a whole, regardless of vendor.
+	// For exmaple: Other services set at 1%.
+	// {"code":"otherServices", "value":0.01}
 	Code string `protobuf:"bytes,1,opt,name=code,proto3" json:"code,omitempty"`
 	// The vendor service name.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
