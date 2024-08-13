@@ -106,13 +106,13 @@ type BillingClient interface {
 	UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Exports an invoice.
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
-	// Reads the service relate to the service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error)
-	// Creates the invoice service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
 	CreateInvoiceServiceDiscounts(ctx context.Context, in *CreateInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error)
-	// Updates the invoice service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Updates the invoice service discounts. Only available in Ripple.
 	UpdateInvoiceServiceDiscounts(ctx context.Context, in *UpdateInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error)
-	// Deletes the invoice service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Deletes the invoice service discounts. Only available in Ripple.
 	DeleteInvoiceServiceDiscounts(ctx context.Context, in *DeleteInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
@@ -1079,13 +1079,13 @@ type BillingServer interface {
 	UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error)
 	// Exports an invoice.
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
-	// Reads the service relate to the service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error
-	// Creates the invoice service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
 	CreateInvoiceServiceDiscounts(context.Context, *CreateInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error)
-	// Updates the invoice service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Updates the invoice service discounts. Only available in Ripple.
 	UpdateInvoiceServiceDiscounts(context.Context, *UpdateInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error)
-	// Deletes the invoice service discounts. Only available in Ripple.
+	// WORK-IN-PROGRESS: Deletes the invoice service discounts. Only available in Ripple.
 	DeleteInvoiceServiceDiscounts(context.Context, *DeleteInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
