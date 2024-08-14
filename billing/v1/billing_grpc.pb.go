@@ -72,6 +72,7 @@ const (
 	Billing_CreateCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
 	Billing_UpdateCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
 	Billing_DeleteCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
+	Billing_GetTags_FullMethodName                              = "/blueapi.billing.v1.Billing/GetTags"
 )
 
 // BillingClient is the client API for Billing service.
@@ -189,6 +190,9 @@ type BillingClient interface {
 	UpdateCustomizedBillingService(ctx context.Context, in *UpdateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
 	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(ctx context.Context, in *DeleteCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Returns the customer details and its tags.
+	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
+	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error)
 }
 
 type billingClient struct {
@@ -1047,6 +1051,39 @@ func (c *billingClient) DeleteCustomizedBillingService(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *billingClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[16], Billing_GetTags_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetTagsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetTagsClient interface {
+	Recv() (*Customer, error)
+	grpc.ClientStream
+}
+
+type billingGetTagsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetTagsClient) Recv() (*Customer, error) {
+	m := new(Customer)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1162,6 +1199,9 @@ type BillingServer interface {
 	UpdateCustomizedBillingService(context.Context, *UpdateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
 	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Returns the customer details and its tags.
+	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
+	GetTags(*GetTagsRequest, Billing_GetTagsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1312,6 +1352,9 @@ func (UnimplementedBillingServer) UpdateCustomizedBillingService(context.Context
 }
 func (UnimplementedBillingServer) DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomizedBillingService not implemented")
+}
+func (UnimplementedBillingServer) GetTags(*GetTagsRequest, Billing_GetTagsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetTags not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -2238,6 +2281,27 @@ func _Billing_DeleteCustomizedBillingService_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetTags_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetTagsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetTags(m, &billingGetTagsServer{ServerStream: stream})
+}
+
+type Billing_GetTagsServer interface {
+	Send(*Customer) error
+	grpc.ServerStream
+}
+
+type billingGetTagsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetTagsServer) Send(m *Customer) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2453,6 +2517,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadCustomizedBillingServices",
 			Handler:       _Billing_ReadCustomizedBillingServices_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetTags",
+			Handler:       _Billing_GetTags_Handler,
 			ServerStreams: true,
 		},
 	},
