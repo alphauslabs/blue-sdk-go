@@ -1231,10 +1231,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.Customer"><span class="badge">M</span>Customer</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.DeleteAccessGroupRequest"><span class="badge">M</span>DeleteAccessGroupRequest</a>
                 </li>
               
@@ -1404,6 +1400,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ResourceAccount"><span class="badge">M</span>ResourceAccount</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.TagData"><span class="badge">M</span>TagData</a>
                 </li>
               
                 <li>
@@ -14604,51 +14604,6 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
 
         
       
-        <h3 id="blueapi.billing.v1.Customer">Customer</h3>
-        <p>Response for tag request</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>tags</td>
-                  <td><a href="#blueapi.billing.v1.Tags">Tags</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.DeleteAccessGroupRequest">DeleteAccessGroupRequest</h3>
         <p>Request message for the DeleteAccessGroup rpc.</p>
 
@@ -15988,6 +15943,51 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.TagData">TagData</h3>
+        <p>Response for tag request</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tags</td>
+                  <td><a href="#blueapi.billing.v1.Tags">Tags</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.Tags">Tags</h3>
         <p></p>
 
@@ -16797,7 +16797,7 @@ Lists all exchange rate.
               <tr>
                 <td>GetTags</td>
                 <td><a href="#blueapi.billing.v1.GetTagsRequest">GetTagsRequest</a></td>
-                <td><a href="#blueapi.billing.v1.Customer">Customer</a> stream</td>
+                <td><a href="#blueapi.billing.v1.TagData">TagData</a> stream</td>
                 <td><p>WORK-IN-PROGRESS: Returns the customer details and its tags. 
 Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>

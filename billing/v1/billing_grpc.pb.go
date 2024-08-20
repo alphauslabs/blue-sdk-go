@@ -1068,7 +1068,7 @@ func (c *billingClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ..
 }
 
 type Billing_GetTagsClient interface {
-	Recv() (*Customer, error)
+	Recv() (*TagData, error)
 	grpc.ClientStream
 }
 
@@ -1076,8 +1076,8 @@ type billingGetTagsClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingGetTagsClient) Recv() (*Customer, error) {
-	m := new(Customer)
+func (x *billingGetTagsClient) Recv() (*TagData, error) {
+	m := new(TagData)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -2290,7 +2290,7 @@ func _Billing_GetTags_Handler(srv interface{}, stream grpc.ServerStream) error {
 }
 
 type Billing_GetTagsServer interface {
-	Send(*Customer) error
+	Send(*TagData) error
 	grpc.ServerStream
 }
 
@@ -2298,7 +2298,7 @@ type billingGetTagsServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingGetTagsServer) Send(m *Customer) error {
+func (x *billingGetTagsServer) Send(m *TagData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
