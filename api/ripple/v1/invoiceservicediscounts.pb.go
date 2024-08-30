@@ -203,7 +203,8 @@ type InvoiceServiceDiscountsSettingDetails struct {
 	// Value associated with the set premiums or discounts.
 	Value string `protobuf:"bytes,3,opt,name=value,proto3" json:"value,omitempty"`
 	// The calculation scope.
-	// If enabled, all Usage and Fee are included in the calculation.
+	// default is `disabled`.
+	// If enabled, Usage and any lineitem type including Fee are included in the calculation.
 	// If disabled, only the Usage is included in the calculation.
 	CalculationScope bool `protobuf:"varint,4,opt,name=calculationScope,proto3" json:"calculationScope,omitempty"`
 }
