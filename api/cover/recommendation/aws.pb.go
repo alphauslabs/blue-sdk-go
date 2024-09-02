@@ -474,6 +474,8 @@ type TrustedAdvisorRecommendations struct {
 	ComprehendUnderutilizedEndpoints *TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints `protobuf:"bytes,13,opt,name=comprehendUnderutilizedEndpoints,proto3" json:"comprehendUnderutilizedEndpoints,omitempty"`
 	UnderutilizedRedshiftCluster     *TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster     `protobuf:"bytes,14,opt,name=underutilizedRedshiftCluster,proto3" json:"underutilizedRedshiftCluster,omitempty"`
 	LambdaWithExcessiveTimeouts      *TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts      `protobuf:"bytes,15,opt,name=lambdaWithExcessiveTimeouts,proto3" json:"lambdaWithExcessiveTimeouts,omitempty"`
+	AwsWellArchitectedHighRiskIssues *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues `protobuf:"bytes,16,opt,name=awsWellArchitectedHighRiskIssues,proto3" json:"awsWellArchitectedHighRiskIssues,omitempty"`
+	CommonDetails                    *TrustedAdvisorRecommendations_CommonDetails                    `protobuf:"bytes,17,opt,name=commonDetails,proto3" json:"commonDetails,omitempty"`
 }
 
 func (x *TrustedAdvisorRecommendations) Reset() {
@@ -609,6 +611,20 @@ func (x *TrustedAdvisorRecommendations) GetUnderutilizedRedshiftCluster() *Trust
 func (x *TrustedAdvisorRecommendations) GetLambdaWithExcessiveTimeouts() *TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts {
 	if x != nil {
 		return x.LambdaWithExcessiveTimeouts
+	}
+	return nil
+}
+
+func (x *TrustedAdvisorRecommendations) GetAwsWellArchitectedHighRiskIssues() *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues {
+	if x != nil {
+		return x.AwsWellArchitectedHighRiskIssues
+	}
+	return nil
+}
+
+func (x *TrustedAdvisorRecommendations) GetCommonDetails() *TrustedAdvisorRecommendations_CommonDetails {
+	if x != nil {
+		return x.CommonDetails
 	}
 	return nil
 }
@@ -3937,6 +3953,188 @@ func (x *AWSResourceDetails_LambdaDetails_FunctionDetails) GetStatus() string {
 	return ""
 }
 
+type TrustedAdvisorRecommendations_CommonDetails struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AwsConfigRule   string `protobuf:"bytes,1,opt,name=awsConfigRule,proto3" json:"awsConfigRule,omitempty"`
+	InputParameters string `protobuf:"bytes,2,opt,name=inputParameters,proto3" json:"inputParameters,omitempty"`
+	Resource        string `protobuf:"bytes,3,opt,name=resource,proto3" json:"resource,omitempty"`
+}
+
+func (x *TrustedAdvisorRecommendations_CommonDetails) Reset() {
+	*x = TrustedAdvisorRecommendations_CommonDetails{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[57]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TrustedAdvisorRecommendations_CommonDetails) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrustedAdvisorRecommendations_CommonDetails) ProtoMessage() {}
+
+func (x *TrustedAdvisorRecommendations_CommonDetails) ProtoReflect() protoreflect.Message {
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[57]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrustedAdvisorRecommendations_CommonDetails.ProtoReflect.Descriptor instead.
+func (*TrustedAdvisorRecommendations_CommonDetails) Descriptor() ([]byte, []int) {
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 0}
+}
+
+func (x *TrustedAdvisorRecommendations_CommonDetails) GetAwsConfigRule() string {
+	if x != nil {
+		return x.AwsConfigRule
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_CommonDetails) GetInputParameters() string {
+	if x != nil {
+		return x.InputParameters
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_CommonDetails) GetResource() string {
+	if x != nil {
+		return x.Resource
+	}
+	return ""
+}
+
+type TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	WorkloadArn               string `protobuf:"bytes,1,opt,name=workloadArn,proto3" json:"workloadArn,omitempty"`
+	WorkloadName              string `protobuf:"bytes,2,opt,name=workloadName,proto3" json:"workloadName,omitempty"`
+	ReviewerName              string `protobuf:"bytes,3,opt,name=reviewerName,proto3" json:"reviewerName,omitempty"`
+	WorkloadType              string `protobuf:"bytes,4,opt,name=workloadType,proto3" json:"workloadType,omitempty"`
+	WorkloadStartedDate       string `protobuf:"bytes,5,opt,name=workloadStartedDate,proto3" json:"workloadStartedDate,omitempty"`
+	WorkloadLastModifiedDate  string `protobuf:"bytes,6,opt,name=workloadLastModifiedDate,proto3" json:"workloadLastModifiedDate,omitempty"`
+	NumberOfIDHRI             string `protobuf:"bytes,7,opt,name=numberOfIDHRI,proto3" json:"numberOfIDHRI,omitempty"`
+	NumberOfHRIResolved       string `protobuf:"bytes,8,opt,name=numberOfHRIResolved,proto3" json:"numberOfHRIResolved,omitempty"`
+	NumberOfQuestionsAnswered string `protobuf:"bytes,9,opt,name=numberOfQuestionsAnswered,proto3" json:"numberOfQuestionsAnswered,omitempty"`
+	TotalNumberOfQuestions    string `protobuf:"bytes,10,opt,name=totalNumberOfQuestions,proto3" json:"totalNumberOfQuestions,omitempty"`
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) Reset() {
+	*x = TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[58]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) ProtoMessage() {}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) ProtoReflect() protoreflect.Message {
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[58]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues.ProtoReflect.Descriptor instead.
+func (*TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) Descriptor() ([]byte, []int) {
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 1}
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetWorkloadArn() string {
+	if x != nil {
+		return x.WorkloadArn
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetWorkloadName() string {
+	if x != nil {
+		return x.WorkloadName
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetReviewerName() string {
+	if x != nil {
+		return x.ReviewerName
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetWorkloadType() string {
+	if x != nil {
+		return x.WorkloadType
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetWorkloadStartedDate() string {
+	if x != nil {
+		return x.WorkloadStartedDate
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetWorkloadLastModifiedDate() string {
+	if x != nil {
+		return x.WorkloadLastModifiedDate
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetNumberOfIDHRI() string {
+	if x != nil {
+		return x.NumberOfIDHRI
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetNumberOfHRIResolved() string {
+	if x != nil {
+		return x.NumberOfHRIResolved
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetNumberOfQuestionsAnswered() string {
+	if x != nil {
+		return x.NumberOfQuestionsAnswered
+	}
+	return ""
+}
+
+func (x *TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues) GetTotalNumberOfQuestions() string {
+	if x != nil {
+		return x.TotalNumberOfQuestions
+	}
+	return ""
+}
+
 type TrustedAdvisorRecommendations_LowUtilizationEC2Instances struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -3950,7 +4148,7 @@ type TrustedAdvisorRecommendations_LowUtilizationEC2Instances struct {
 func (x *TrustedAdvisorRecommendations_LowUtilizationEC2Instances) Reset() {
 	*x = TrustedAdvisorRecommendations_LowUtilizationEC2Instances{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[57]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3963,7 +4161,7 @@ func (x *TrustedAdvisorRecommendations_LowUtilizationEC2Instances) String() stri
 func (*TrustedAdvisorRecommendations_LowUtilizationEC2Instances) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_LowUtilizationEC2Instances) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[57]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3976,7 +4174,7 @@ func (x *TrustedAdvisorRecommendations_LowUtilizationEC2Instances) ProtoReflect(
 
 // Deprecated: Use TrustedAdvisorRecommendations_LowUtilizationEC2Instances.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_LowUtilizationEC2Instances) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 0}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 2}
 }
 
 func (x *TrustedAdvisorRecommendations_LowUtilizationEC2Instances) GetEc2Instance() *AWSResourceDetails_EC2Details {
@@ -4012,7 +4210,7 @@ type TrustedAdvisorRecommendations_RDSIdleDBInstances struct {
 func (x *TrustedAdvisorRecommendations_RDSIdleDBInstances) Reset() {
 	*x = TrustedAdvisorRecommendations_RDSIdleDBInstances{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[58]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4025,7 +4223,7 @@ func (x *TrustedAdvisorRecommendations_RDSIdleDBInstances) String() string {
 func (*TrustedAdvisorRecommendations_RDSIdleDBInstances) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_RDSIdleDBInstances) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[58]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4038,7 +4236,7 @@ func (x *TrustedAdvisorRecommendations_RDSIdleDBInstances) ProtoReflect() protor
 
 // Deprecated: Use TrustedAdvisorRecommendations_RDSIdleDBInstances.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_RDSIdleDBInstances) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 1}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 3}
 }
 
 func (x *TrustedAdvisorRecommendations_RDSIdleDBInstances) GetRdsDetails() *AWSResourceDetails_RDSDetails {
@@ -4068,7 +4266,7 @@ type TrustedAdvisorRecommendations_S3IncompleteMPU struct {
 func (x *TrustedAdvisorRecommendations_S3IncompleteMPU) Reset() {
 	*x = TrustedAdvisorRecommendations_S3IncompleteMPU{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[59]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4081,7 +4279,7 @@ func (x *TrustedAdvisorRecommendations_S3IncompleteMPU) String() string {
 func (*TrustedAdvisorRecommendations_S3IncompleteMPU) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_S3IncompleteMPU) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[59]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4094,7 +4292,7 @@ func (x *TrustedAdvisorRecommendations_S3IncompleteMPU) ProtoReflect() protorefl
 
 // Deprecated: Use TrustedAdvisorRecommendations_S3IncompleteMPU.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_S3IncompleteMPU) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 2}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 4}
 }
 
 func (x *TrustedAdvisorRecommendations_S3IncompleteMPU) GetS3Details() *AWSResourceDetails_S3Details {
@@ -4136,7 +4334,7 @@ type TrustedAdvisorRecommendations_LambdaHighErrorRates struct {
 func (x *TrustedAdvisorRecommendations_LambdaHighErrorRates) Reset() {
 	*x = TrustedAdvisorRecommendations_LambdaHighErrorRates{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[60]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4149,7 +4347,7 @@ func (x *TrustedAdvisorRecommendations_LambdaHighErrorRates) String() string {
 func (*TrustedAdvisorRecommendations_LambdaHighErrorRates) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_LambdaHighErrorRates) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[60]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4162,7 +4360,7 @@ func (x *TrustedAdvisorRecommendations_LambdaHighErrorRates) ProtoReflect() prot
 
 // Deprecated: Use TrustedAdvisorRecommendations_LambdaHighErrorRates.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_LambdaHighErrorRates) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 3}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 5}
 }
 
 func (x *TrustedAdvisorRecommendations_LambdaHighErrorRates) GetAvgDailyErrorRates() float64 {
@@ -4233,7 +4431,7 @@ type TrustedAdvisorRecommendations_UnderutilizedEBSVolume struct {
 func (x *TrustedAdvisorRecommendations_UnderutilizedEBSVolume) Reset() {
 	*x = TrustedAdvisorRecommendations_UnderutilizedEBSVolume{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[61]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4246,7 +4444,7 @@ func (x *TrustedAdvisorRecommendations_UnderutilizedEBSVolume) String() string {
 func (*TrustedAdvisorRecommendations_UnderutilizedEBSVolume) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_UnderutilizedEBSVolume) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[61]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4259,7 +4457,7 @@ func (x *TrustedAdvisorRecommendations_UnderutilizedEBSVolume) ProtoReflect() pr
 
 // Deprecated: Use TrustedAdvisorRecommendations_UnderutilizedEBSVolume.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_UnderutilizedEBSVolume) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 4}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 6}
 }
 
 func (x *TrustedAdvisorRecommendations_UnderutilizedEBSVolume) GetEbsDetails() *AWSResourceDetails_EBSDetails {
@@ -4287,7 +4485,7 @@ type TrustedAdvisorRecommendations_UnassociatedEIP struct {
 func (x *TrustedAdvisorRecommendations_UnassociatedEIP) Reset() {
 	*x = TrustedAdvisorRecommendations_UnassociatedEIP{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[62]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[64]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4300,7 +4498,7 @@ func (x *TrustedAdvisorRecommendations_UnassociatedEIP) String() string {
 func (*TrustedAdvisorRecommendations_UnassociatedEIP) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_UnassociatedEIP) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[62]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[64]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4313,7 +4511,7 @@ func (x *TrustedAdvisorRecommendations_UnassociatedEIP) ProtoReflect() protorefl
 
 // Deprecated: Use TrustedAdvisorRecommendations_UnassociatedEIP.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_UnassociatedEIP) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 5}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 7}
 }
 
 func (x *TrustedAdvisorRecommendations_UnassociatedEIP) GetEipDetails() *AWSResourceDetails_EC2Details_InstanceDetails_EIPDetails {
@@ -4335,7 +4533,7 @@ type TrustedAdvisorRecommendations_IdleLoadBalancer struct {
 func (x *TrustedAdvisorRecommendations_IdleLoadBalancer) Reset() {
 	*x = TrustedAdvisorRecommendations_IdleLoadBalancer{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[63]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[65]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4348,7 +4546,7 @@ func (x *TrustedAdvisorRecommendations_IdleLoadBalancer) String() string {
 func (*TrustedAdvisorRecommendations_IdleLoadBalancer) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_IdleLoadBalancer) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[63]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[65]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4361,7 +4559,7 @@ func (x *TrustedAdvisorRecommendations_IdleLoadBalancer) ProtoReflect() protoref
 
 // Deprecated: Use TrustedAdvisorRecommendations_IdleLoadBalancer.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_IdleLoadBalancer) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 6}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 8}
 }
 
 func (x *TrustedAdvisorRecommendations_IdleLoadBalancer) GetElbDetails() *AWSResourceDetails_ELBDetails {
@@ -4392,7 +4590,7 @@ type TrustedAdvisorRecommendations_AmazonEC2InstanceStopped struct {
 func (x *TrustedAdvisorRecommendations_AmazonEC2InstanceStopped) Reset() {
 	*x = TrustedAdvisorRecommendations_AmazonEC2InstanceStopped{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[64]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[66]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4405,7 +4603,7 @@ func (x *TrustedAdvisorRecommendations_AmazonEC2InstanceStopped) String() string
 func (*TrustedAdvisorRecommendations_AmazonEC2InstanceStopped) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_AmazonEC2InstanceStopped) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[64]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[66]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4418,7 +4616,7 @@ func (x *TrustedAdvisorRecommendations_AmazonEC2InstanceStopped) ProtoReflect() 
 
 // Deprecated: Use TrustedAdvisorRecommendations_AmazonEC2InstanceStopped.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_AmazonEC2InstanceStopped) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 7}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 9}
 }
 
 func (x *TrustedAdvisorRecommendations_AmazonEC2InstanceStopped) GetEc2Details() *AWSResourceDetails_EC2Details {
@@ -4463,7 +4661,7 @@ type TrustedAdvisorRecommendations_EC2RILeaseExpiration struct {
 func (x *TrustedAdvisorRecommendations_EC2RILeaseExpiration) Reset() {
 	*x = TrustedAdvisorRecommendations_EC2RILeaseExpiration{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[65]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[67]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4476,7 +4674,7 @@ func (x *TrustedAdvisorRecommendations_EC2RILeaseExpiration) String() string {
 func (*TrustedAdvisorRecommendations_EC2RILeaseExpiration) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_EC2RILeaseExpiration) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[65]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[67]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4489,7 +4687,7 @@ func (x *TrustedAdvisorRecommendations_EC2RILeaseExpiration) ProtoReflect() prot
 
 // Deprecated: Use TrustedAdvisorRecommendations_EC2RILeaseExpiration.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_EC2RILeaseExpiration) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 8}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 10}
 }
 
 func (x *TrustedAdvisorRecommendations_EC2RILeaseExpiration) GetCurrentMonthlyCost() float64 {
@@ -4532,7 +4730,7 @@ type TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints struct {
 func (x *TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints) Reset() {
 	*x = TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[66]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[68]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4545,7 +4743,7 @@ func (x *TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints) String(
 func (*TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[66]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[68]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4558,7 +4756,7 @@ func (x *TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints) ProtoRe
 
 // Deprecated: Use TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 9}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 11}
 }
 
 func (x *TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints) GetEndpoint() *AWSResourceDetails_ComprehendDetails_Endpoint {
@@ -4588,7 +4786,7 @@ type TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster struct {
 func (x *TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster) Reset() {
 	*x = TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[67]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[69]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4601,7 +4799,7 @@ func (x *TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster) String() st
 func (*TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[67]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[69]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4614,7 +4812,7 @@ func (x *TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster) ProtoReflec
 
 // Deprecated: Use TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 10}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 12}
 }
 
 func (x *TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster) GetCluster() *AWSResourceDetails_RedshiftDetails_ClusterDetails {
@@ -4657,7 +4855,7 @@ type TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts struct {
 func (x *TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts) Reset() {
 	*x = TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_api_cover_recommendation_aws_proto_msgTypes[68]
+		mi := &file_api_cover_recommendation_aws_proto_msgTypes[70]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -4670,7 +4868,7 @@ func (x *TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts) String() str
 func (*TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts) ProtoMessage() {}
 
 func (x *TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts) ProtoReflect() protoreflect.Message {
-	mi := &file_api_cover_recommendation_aws_proto_msgTypes[68]
+	mi := &file_api_cover_recommendation_aws_proto_msgTypes[70]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4683,7 +4881,7 @@ func (x *TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts) ProtoReflect
 
 // Deprecated: Use TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts.ProtoReflect.Descriptor instead.
 func (*TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts) Descriptor() ([]byte, []int) {
-	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 11}
+	return file_api_cover_recommendation_aws_proto_rawDescGZIP(), []int{5, 13}
 }
 
 func (x *TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts) GetMaxDailyTimeoutRate() float64 {
@@ -5559,7 +5757,7 @@ var file_api_cover_recommendation_aws_proto_rawDesc = []byte{
 	0x6d, 0x6f, 0x72, 0x79, 0x53, 0x69, 0x7a, 0x65, 0x49, 0x6e, 0x4d, 0x42, 0x12, 0x10, 0x0a, 0x03,
 	0x61, 0x72, 0x6e, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x61, 0x72, 0x6e, 0x12, 0x16,
 	0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06,
-	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x8e, 0x26, 0x0a, 0x1d, 0x54, 0x72, 0x75, 0x73, 0x74,
+	0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x22, 0x9e, 0x2d, 0x0a, 0x1d, 0x54, 0x72, 0x75, 0x73, 0x74,
 	0x65, 0x64, 0x41, 0x64, 0x76, 0x69, 0x73, 0x6f, 0x72, 0x52, 0x65, 0x63, 0x6f, 0x6d, 0x6d, 0x65,
 	0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x26, 0x0a, 0x0e, 0x73, 0x65, 0x76, 0x65,
 	0x72, 0x69, 0x74, 0x79, 0x53, 0x74, 0x61, 0x74, 0x75, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
@@ -5677,7 +5875,64 @@ var file_api_cover_recommendation_aws_proto_rawDesc = []byte{
 	0x64, 0x61, 0x57, 0x69, 0x74, 0x68, 0x45, 0x78, 0x63, 0x65, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54,
 	0x69, 0x6d, 0x65, 0x6f, 0x75, 0x74, 0x73, 0x52, 0x1b, 0x6c, 0x61, 0x6d, 0x62, 0x64, 0x61, 0x57,
 	0x69, 0x74, 0x68, 0x45, 0x78, 0x63, 0x65, 0x73, 0x73, 0x69, 0x76, 0x65, 0x54, 0x69, 0x6d, 0x65,
-	0x6f, 0x75, 0x74, 0x73, 0x1a, 0xed, 0x01, 0x0a, 0x1a, 0x4c, 0x6f, 0x77, 0x55, 0x74, 0x69, 0x6c,
+	0x6f, 0x75, 0x74, 0x73, 0x12, 0xac, 0x01, 0x0a, 0x20, 0x61, 0x77, 0x73, 0x57, 0x65, 0x6c, 0x6c,
+	0x41, 0x72, 0x63, 0x68, 0x69, 0x74, 0x65, 0x63, 0x74, 0x65, 0x64, 0x48, 0x69, 0x67, 0x68, 0x52,
+	0x69, 0x73, 0x6b, 0x49, 0x73, 0x73, 0x75, 0x65, 0x73, 0x18, 0x10, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x60, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f,
+	0x76, 0x65, 0x72, 0x2e, 0x72, 0x65, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x64, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x2e, 0x54, 0x72, 0x75, 0x73, 0x74, 0x65, 0x64, 0x41, 0x64, 0x76, 0x69, 0x73, 0x6f,
+	0x72, 0x52, 0x65, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73,
+	0x2e, 0x41, 0x57, 0x53, 0x57, 0x65, 0x6c, 0x6c, 0x41, 0x72, 0x63, 0x68, 0x69, 0x74, 0x65, 0x63,
+	0x74, 0x65, 0x64, 0x48, 0x69, 0x67, 0x68, 0x52, 0x69, 0x73, 0x6b, 0x49, 0x73, 0x73, 0x75, 0x65,
+	0x73, 0x52, 0x20, 0x61, 0x77, 0x73, 0x57, 0x65, 0x6c, 0x6c, 0x41, 0x72, 0x63, 0x68, 0x69, 0x74,
+	0x65, 0x63, 0x74, 0x65, 0x64, 0x48, 0x69, 0x67, 0x68, 0x52, 0x69, 0x73, 0x6b, 0x49, 0x73, 0x73,
+	0x75, 0x65, 0x73, 0x12, 0x73, 0x0a, 0x0d, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x44, 0x65, 0x74,
+	0x61, 0x69, 0x6c, 0x73, 0x18, 0x11, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x4d, 0x2e, 0x62, 0x6c, 0x75,
+	0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x72,
+	0x65, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x54, 0x72,
+	0x75, 0x73, 0x74, 0x65, 0x64, 0x41, 0x64, 0x76, 0x69, 0x73, 0x6f, 0x72, 0x52, 0x65, 0x63, 0x6f,
+	0x6d, 0x6d, 0x65, 0x6e, 0x64, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x2e, 0x43, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x52, 0x0d, 0x63, 0x6f, 0x6d, 0x6d, 0x6f,
+	0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x1a, 0x7b, 0x0a, 0x0d, 0x43, 0x6f, 0x6d, 0x6d,
+	0x6f, 0x6e, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x73, 0x12, 0x24, 0x0a, 0x0d, 0x61, 0x77, 0x73,
+	0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x75, 0x6c, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x0d, 0x61, 0x77, 0x73, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67, 0x52, 0x75, 0x6c, 0x65, 0x12,
+	0x28, 0x0a, 0x0f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x50, 0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65,
+	0x72, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x69, 0x6e, 0x70, 0x75, 0x74, 0x50,
+	0x61, 0x72, 0x61, 0x6d, 0x65, 0x74, 0x65, 0x72, 0x73, 0x12, 0x1a, 0x0a, 0x08, 0x72, 0x65, 0x73,
+	0x6f, 0x75, 0x72, 0x63, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x72, 0x65, 0x73,
+	0x6f, 0x75, 0x72, 0x63, 0x65, 0x1a, 0xec, 0x03, 0x0a, 0x20, 0x41, 0x57, 0x53, 0x57, 0x65, 0x6c,
+	0x6c, 0x41, 0x72, 0x63, 0x68, 0x69, 0x74, 0x65, 0x63, 0x74, 0x65, 0x64, 0x48, 0x69, 0x67, 0x68,
+	0x52, 0x69, 0x73, 0x6b, 0x49, 0x73, 0x73, 0x75, 0x65, 0x73, 0x12, 0x20, 0x0a, 0x0b, 0x77, 0x6f,
+	0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x41, 0x72, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x0b, 0x77, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x41, 0x72, 0x6e, 0x12, 0x22, 0x0a, 0x0c,
+	0x77, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x4e, 0x61, 0x6d, 0x65,
+	0x12, 0x22, 0x0a, 0x0c, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x65, 0x72,
+	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x77, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64,
+	0x54, 0x79, 0x70, 0x65, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x77, 0x6f, 0x72, 0x6b,
+	0x6c, 0x6f, 0x61, 0x64, 0x54, 0x79, 0x70, 0x65, 0x12, 0x30, 0x0a, 0x13, 0x77, 0x6f, 0x72, 0x6b,
+	0x6c, 0x6f, 0x61, 0x64, 0x53, 0x74, 0x61, 0x72, 0x74, 0x65, 0x64, 0x44, 0x61, 0x74, 0x65, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x13, 0x77, 0x6f, 0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x53,
+	0x74, 0x61, 0x72, 0x74, 0x65, 0x64, 0x44, 0x61, 0x74, 0x65, 0x12, 0x3a, 0x0a, 0x18, 0x77, 0x6f,
+	0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x4c, 0x61, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69,
+	0x65, 0x64, 0x44, 0x61, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x18, 0x77, 0x6f,
+	0x72, 0x6b, 0x6c, 0x6f, 0x61, 0x64, 0x4c, 0x61, 0x73, 0x74, 0x4d, 0x6f, 0x64, 0x69, 0x66, 0x69,
+	0x65, 0x64, 0x44, 0x61, 0x74, 0x65, 0x12, 0x24, 0x0a, 0x0d, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72,
+	0x4f, 0x66, 0x49, 0x44, 0x48, 0x52, 0x49, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6e,
+	0x75, 0x6d, 0x62, 0x65, 0x72, 0x4f, 0x66, 0x49, 0x44, 0x48, 0x52, 0x49, 0x12, 0x30, 0x0a, 0x13,
+	0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x4f, 0x66, 0x48, 0x52, 0x49, 0x52, 0x65, 0x73, 0x6f, 0x6c,
+	0x76, 0x65, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x13, 0x6e, 0x75, 0x6d, 0x62, 0x65,
+	0x72, 0x4f, 0x66, 0x48, 0x52, 0x49, 0x52, 0x65, 0x73, 0x6f, 0x6c, 0x76, 0x65, 0x64, 0x12, 0x3c,
+	0x0a, 0x19, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x4f, 0x66, 0x51, 0x75, 0x65, 0x73, 0x74, 0x69,
+	0x6f, 0x6e, 0x73, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x65, 0x64, 0x18, 0x09, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x19, 0x6e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x4f, 0x66, 0x51, 0x75, 0x65, 0x73, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x41, 0x6e, 0x73, 0x77, 0x65, 0x72, 0x65, 0x64, 0x12, 0x36, 0x0a, 0x16,
+	0x74, 0x6f, 0x74, 0x61, 0x6c, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x4f, 0x66, 0x51, 0x75, 0x65,
+	0x73, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x16, 0x74, 0x6f,
+	0x74, 0x61, 0x6c, 0x4e, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x4f, 0x66, 0x51, 0x75, 0x65, 0x73, 0x74,
+	0x69, 0x6f, 0x6e, 0x73, 0x1a, 0xed, 0x01, 0x0a, 0x1a, 0x4c, 0x6f, 0x77, 0x55, 0x74, 0x69, 0x6c,
 	0x69, 0x7a, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x45, 0x43, 0x32, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e,
 	0x63, 0x65, 0x73, 0x12, 0x61, 0x0a, 0x0b, 0x65, 0x63, 0x32, 0x49, 0x6e, 0x73, 0x74, 0x61, 0x6e,
 	0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x3f, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61,
@@ -5921,7 +6176,7 @@ func file_api_cover_recommendation_aws_proto_rawDescGZIP() []byte {
 	return file_api_cover_recommendation_aws_proto_rawDescData
 }
 
-var file_api_cover_recommendation_aws_proto_msgTypes = make([]protoimpl.MessageInfo, 69)
+var file_api_cover_recommendation_aws_proto_msgTypes = make([]protoimpl.MessageInfo, 71)
 var file_api_cover_recommendation_aws_proto_goTypes = []any{
 	(*MetricData)(nil),                                                                    // 0: blueapi.api.cover.recommendation.MetricData
 	(*RecommendationData)(nil),                                                            // 1: blueapi.api.cover.recommendation.RecommendationData
@@ -5980,18 +6235,20 @@ var file_api_cover_recommendation_aws_proto_goTypes = []any{
 	(*AWSResourceDetails_EC2AutoScalingGroupDetails_InstanceConfigurationDetails)(nil),    // 54: blueapi.api.cover.recommendation.AWSResourceDetails.EC2AutoScalingGroupDetails.InstanceConfigurationDetails
 	(*AWSResourceDetails_ECSDetails_ServiceDetails)(nil),                                  // 55: blueapi.api.cover.recommendation.AWSResourceDetails.ECSDetails.ServiceDetails
 	(*AWSResourceDetails_LambdaDetails_FunctionDetails)(nil),                              // 56: blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails.FunctionDetails
-	(*TrustedAdvisorRecommendations_LowUtilizationEC2Instances)(nil),                      // 57: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LowUtilizationEC2Instances
-	(*TrustedAdvisorRecommendations_RDSIdleDBInstances)(nil),                              // 58: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.RDSIdleDBInstances
-	(*TrustedAdvisorRecommendations_S3IncompleteMPU)(nil),                                 // 59: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.S3IncompleteMPU
-	(*TrustedAdvisorRecommendations_LambdaHighErrorRates)(nil),                            // 60: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaHighErrorRates
-	(*TrustedAdvisorRecommendations_UnderutilizedEBSVolume)(nil),                          // 61: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedEBSVolume
-	(*TrustedAdvisorRecommendations_UnassociatedEIP)(nil),                                 // 62: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnassociatedEIP
-	(*TrustedAdvisorRecommendations_IdleLoadBalancer)(nil),                                // 63: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.IdleLoadBalancer
-	(*TrustedAdvisorRecommendations_AmazonEC2InstanceStopped)(nil),                        // 64: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AmazonEC2InstanceStopped
-	(*TrustedAdvisorRecommendations_EC2RILeaseExpiration)(nil),                            // 65: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.EC2RILeaseExpiration
-	(*TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints)(nil),                // 66: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ComprehendUnderutilizedEndpoints
-	(*TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster)(nil),                    // 67: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedRedshiftCluster
-	(*TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts)(nil),                     // 68: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaWithExcessiveTimeouts
+	(*TrustedAdvisorRecommendations_CommonDetails)(nil),                                   // 57: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.CommonDetails
+	(*TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues)(nil),                // 58: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AWSWellArchitectedHighRiskIssues
+	(*TrustedAdvisorRecommendations_LowUtilizationEC2Instances)(nil),                      // 59: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LowUtilizationEC2Instances
+	(*TrustedAdvisorRecommendations_RDSIdleDBInstances)(nil),                              // 60: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.RDSIdleDBInstances
+	(*TrustedAdvisorRecommendations_S3IncompleteMPU)(nil),                                 // 61: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.S3IncompleteMPU
+	(*TrustedAdvisorRecommendations_LambdaHighErrorRates)(nil),                            // 62: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaHighErrorRates
+	(*TrustedAdvisorRecommendations_UnderutilizedEBSVolume)(nil),                          // 63: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedEBSVolume
+	(*TrustedAdvisorRecommendations_UnassociatedEIP)(nil),                                 // 64: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnassociatedEIP
+	(*TrustedAdvisorRecommendations_IdleLoadBalancer)(nil),                                // 65: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.IdleLoadBalancer
+	(*TrustedAdvisorRecommendations_AmazonEC2InstanceStopped)(nil),                        // 66: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AmazonEC2InstanceStopped
+	(*TrustedAdvisorRecommendations_EC2RILeaseExpiration)(nil),                            // 67: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.EC2RILeaseExpiration
+	(*TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints)(nil),                // 68: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ComprehendUnderutilizedEndpoints
+	(*TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster)(nil),                    // 69: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedRedshiftCluster
+	(*TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts)(nil),                     // 70: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaWithExcessiveTimeouts
 }
 var file_api_cover_recommendation_aws_proto_depIdxs = []int32{
 	9,  // 0: blueapi.api.cover.recommendation.MetricData.metrics:type_name -> blueapi.api.cover.recommendation.MetricData.Metrics
@@ -6003,88 +6260,90 @@ var file_api_cover_recommendation_aws_proto_depIdxs = []int32{
 	12, // 6: blueapi.api.cover.recommendation.CostExplorerRecommendations.terminateEc2:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.TerminateEC2
 	19, // 7: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.currentDetails:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details
 	19, // 8: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.recommendationDetails:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details
-	57, // 9: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.lowUtilizationEc2Instances:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LowUtilizationEC2Instances
-	58, // 10: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.rdsIdleDbInstances:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.RDSIdleDBInstances
-	59, // 11: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.s3IncompleteMPU:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.S3IncompleteMPU
-	60, // 12: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.lambdaHighErrorRates:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaHighErrorRates
-	61, // 13: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.underutilizedEBSVolume:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedEBSVolume
-	62, // 14: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.unassociatedEIP:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnassociatedEIP
-	63, // 15: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.idleLoadBalancer:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.IdleLoadBalancer
-	64, // 16: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ec2InstancesStopped:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AmazonEC2InstanceStopped
-	65, // 17: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ec2RILeaseExpiration:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.EC2RILeaseExpiration
-	66, // 18: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.comprehendUnderutilizedEndpoints:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ComprehendUnderutilizedEndpoints
-	67, // 19: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.underutilizedRedshiftCluster:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedRedshiftCluster
-	68, // 20: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.lambdaWithExcessiveTimeouts:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaWithExcessiveTimeouts
-	2,  // 21: blueapi.api.cover.recommendation.AWSRecommendations.costExplorerRecommendations:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations
-	3,  // 22: blueapi.api.cover.recommendation.AWSRecommendations.costOptimizationHubRecommendations:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations
-	5,  // 23: blueapi.api.cover.recommendation.AWSRecommendations.trustedAdvisorRecommendations:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations
-	13, // 24: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.riOption:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption
-	14, // 25: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.spOption:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption
-	18, // 26: blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.currentDetails:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.Details
-	18, // 27: blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.recommendationDetails:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.Details
-	31, // 28: blueapi.api.cover.recommendation.CostExplorerRecommendations.TerminateEC2.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
-	31, // 29: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
-	32, // 30: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.rdsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails
-	30, // 31: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.elasticacheDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ElastiCacheDetails
-	29, // 32: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.redshiftDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails
-	28, // 33: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.opensearchDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.OpensearchDetails
-	27, // 34: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.memoryDBDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.MemoryDBDetails
-	15, // 35: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.estOutcomeFromPurchaseRI:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.EstOutcomeFromPurchaseRI
-	16, // 36: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.currentUtilizationDetails:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.CurrentUtilizationDetails
-	17, // 37: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.estOutcomeFromPurchaseSP:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.EstOutcomeFromPurchaseSP
-	31, // 38: blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.Details.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
-	20, // 39: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.costCalculation:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation
-	31, // 40: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
-	32, // 41: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.rdsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails
-	33, // 42: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ebsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails
-	34, // 43: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ec2AutoScalingGroupDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2AutoScalingGroupDetails
-	35, // 44: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ecsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ECSDetails
-	36, // 45: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.lambdaDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails
-	21, // 46: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.estimatedDiscounts:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.EstimatedDiscounts
-	22, // 47: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.usageTypes:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.UsageTypes
-	37, // 48: blueapi.api.cover.recommendation.AWSResourceDetails.ComprehendDetails.endpoint:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ComprehendDetails.Endpoint
-	38, // 49: blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance.metrics:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance.RIMetrics
-	39, // 50: blueapi.api.cover.recommendation.AWSResourceDetails.ELBDetails.loadBalancer:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ELBDetails.LoadBalancer
-	40, // 51: blueapi.api.cover.recommendation.AWSResourceDetails.S3Details.bucket:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.S3Details.BucketDetails
-	41, // 52: blueapi.api.cover.recommendation.AWSResourceDetails.MemoryDBDetails.node:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.MemoryDBDetails.NodeDetails
-	42, // 53: blueapi.api.cover.recommendation.AWSResourceDetails.OpensearchDetails.instance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.OpensearchDetails.InstanceDetails
-	43, // 54: blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.cluster:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.ClusterDetails
-	44, // 55: blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.node:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.NodeDetails
-	45, // 56: blueapi.api.cover.recommendation.AWSResourceDetails.ElastiCacheDetails.node:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ElastiCacheDetails.NodeDetails
-	46, // 57: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.instance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails
-	47, // 58: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.riSpecsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.RISpecsDetails
-	50, // 59: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.dbInstance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails
-	53, // 60: blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails.volumeDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails.VolumeDetails
-	54, // 61: blueapi.api.cover.recommendation.AWSResourceDetails.EC2AutoScalingGroupDetails.instanceConfigurationDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2AutoScalingGroupDetails.InstanceConfigurationDetails
-	55, // 62: blueapi.api.cover.recommendation.AWSResourceDetails.ECSDetails.service:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ECSDetails.ServiceDetails
-	56, // 63: blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails.function:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails.FunctionDetails
-	9,  // 64: blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance.RIMetrics.utilization:type_name -> blueapi.api.cover.recommendation.MetricData.Metrics
-	48, // 65: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.metrics:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics
-	49, // 66: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.eip:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EIPDetails
-	0,  // 67: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.cpuUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
-	0,  // 68: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.diskUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
-	0,  // 69: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.networkUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
-	0,  // 70: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.memoryUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
-	51, // 71: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.storage:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.Storage
-	52, // 72: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.metrics:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.RDSMetrics
-	0,  // 73: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.RDSMetrics.cpuUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
-	31, // 74: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LowUtilizationEC2Instances.ec2Instance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
-	32, // 75: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.RDSIdleDBInstances.rdsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails
-	26, // 76: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.S3IncompleteMPU.s3Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.S3Details
-	36, // 77: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaHighErrorRates.lambdaDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails
-	33, // 78: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedEBSVolume.ebsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails
-	49, // 79: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnassociatedEIP.eipDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EIPDetails
-	25, // 80: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.IdleLoadBalancer.elbDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ELBDetails
-	31, // 81: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AmazonEC2InstanceStopped.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
-	24, // 82: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.EC2RILeaseExpiration.riDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance
-	37, // 83: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ComprehendUnderutilizedEndpoints.endpoint:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ComprehendDetails.Endpoint
-	43, // 84: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedRedshiftCluster.cluster:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.ClusterDetails
-	56, // 85: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaWithExcessiveTimeouts.function:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails.FunctionDetails
-	86, // [86:86] is the sub-list for method output_type
-	86, // [86:86] is the sub-list for method input_type
-	86, // [86:86] is the sub-list for extension type_name
-	86, // [86:86] is the sub-list for extension extendee
-	0,  // [0:86] is the sub-list for field type_name
+	59, // 9: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.lowUtilizationEc2Instances:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LowUtilizationEC2Instances
+	60, // 10: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.rdsIdleDbInstances:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.RDSIdleDBInstances
+	61, // 11: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.s3IncompleteMPU:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.S3IncompleteMPU
+	62, // 12: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.lambdaHighErrorRates:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaHighErrorRates
+	63, // 13: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.underutilizedEBSVolume:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedEBSVolume
+	64, // 14: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.unassociatedEIP:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnassociatedEIP
+	65, // 15: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.idleLoadBalancer:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.IdleLoadBalancer
+	66, // 16: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ec2InstancesStopped:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AmazonEC2InstanceStopped
+	67, // 17: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ec2RILeaseExpiration:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.EC2RILeaseExpiration
+	68, // 18: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.comprehendUnderutilizedEndpoints:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ComprehendUnderutilizedEndpoints
+	69, // 19: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.underutilizedRedshiftCluster:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedRedshiftCluster
+	70, // 20: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.lambdaWithExcessiveTimeouts:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaWithExcessiveTimeouts
+	58, // 21: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.awsWellArchitectedHighRiskIssues:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AWSWellArchitectedHighRiskIssues
+	57, // 22: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.commonDetails:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.CommonDetails
+	2,  // 23: blueapi.api.cover.recommendation.AWSRecommendations.costExplorerRecommendations:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations
+	3,  // 24: blueapi.api.cover.recommendation.AWSRecommendations.costOptimizationHubRecommendations:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations
+	5,  // 25: blueapi.api.cover.recommendation.AWSRecommendations.trustedAdvisorRecommendations:type_name -> blueapi.api.cover.recommendation.TrustedAdvisorRecommendations
+	13, // 26: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.riOption:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption
+	14, // 27: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.spOption:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption
+	18, // 28: blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.currentDetails:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.Details
+	18, // 29: blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.recommendationDetails:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.Details
+	31, // 30: blueapi.api.cover.recommendation.CostExplorerRecommendations.TerminateEC2.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
+	31, // 31: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
+	32, // 32: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.rdsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails
+	30, // 33: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.elasticacheDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ElastiCacheDetails
+	29, // 34: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.redshiftDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails
+	28, // 35: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.opensearchDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.OpensearchDetails
+	27, // 36: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.memoryDBDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.MemoryDBDetails
+	15, // 37: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.estOutcomeFromPurchaseRI:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.RIOption.EstOutcomeFromPurchaseRI
+	16, // 38: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.currentUtilizationDetails:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.CurrentUtilizationDetails
+	17, // 39: blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.estOutcomeFromPurchaseSP:type_name -> blueapi.api.cover.recommendation.CostExplorerRecommendations.DiscountPlans.SPOption.EstOutcomeFromPurchaseSP
+	31, // 40: blueapi.api.cover.recommendation.CostExplorerRecommendations.EC2Rightsize.Details.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
+	20, // 41: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.costCalculation:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation
+	31, // 42: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
+	32, // 43: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.rdsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails
+	33, // 44: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ebsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails
+	34, // 45: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ec2AutoScalingGroupDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2AutoScalingGroupDetails
+	35, // 46: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.ecsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ECSDetails
+	36, // 47: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.lambdaDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails
+	21, // 48: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.estimatedDiscounts:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.EstimatedDiscounts
+	22, // 49: blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.usageTypes:type_name -> blueapi.api.cover.recommendation.CostOptimizationHubRecommendations.Details.CostCalculation.UsageTypes
+	37, // 50: blueapi.api.cover.recommendation.AWSResourceDetails.ComprehendDetails.endpoint:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ComprehendDetails.Endpoint
+	38, // 51: blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance.metrics:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance.RIMetrics
+	39, // 52: blueapi.api.cover.recommendation.AWSResourceDetails.ELBDetails.loadBalancer:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ELBDetails.LoadBalancer
+	40, // 53: blueapi.api.cover.recommendation.AWSResourceDetails.S3Details.bucket:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.S3Details.BucketDetails
+	41, // 54: blueapi.api.cover.recommendation.AWSResourceDetails.MemoryDBDetails.node:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.MemoryDBDetails.NodeDetails
+	42, // 55: blueapi.api.cover.recommendation.AWSResourceDetails.OpensearchDetails.instance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.OpensearchDetails.InstanceDetails
+	43, // 56: blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.cluster:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.ClusterDetails
+	44, // 57: blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.node:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.NodeDetails
+	45, // 58: blueapi.api.cover.recommendation.AWSResourceDetails.ElastiCacheDetails.node:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ElastiCacheDetails.NodeDetails
+	46, // 59: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.instance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails
+	47, // 60: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.riSpecsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.RISpecsDetails
+	50, // 61: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.dbInstance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails
+	53, // 62: blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails.volumeDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails.VolumeDetails
+	54, // 63: blueapi.api.cover.recommendation.AWSResourceDetails.EC2AutoScalingGroupDetails.instanceConfigurationDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2AutoScalingGroupDetails.InstanceConfigurationDetails
+	55, // 64: blueapi.api.cover.recommendation.AWSResourceDetails.ECSDetails.service:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ECSDetails.ServiceDetails
+	56, // 65: blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails.function:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails.FunctionDetails
+	9,  // 66: blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance.RIMetrics.utilization:type_name -> blueapi.api.cover.recommendation.MetricData.Metrics
+	48, // 67: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.metrics:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics
+	49, // 68: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.eip:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EIPDetails
+	0,  // 69: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.cpuUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
+	0,  // 70: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.diskUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
+	0,  // 71: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.networkUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
+	0,  // 72: blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EC2Metrics.memoryUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
+	51, // 73: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.storage:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.Storage
+	52, // 74: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.metrics:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.RDSMetrics
+	0,  // 75: blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails.DBInstanceDetails.RDSMetrics.cpuUtilizationMetrics:type_name -> blueapi.api.cover.recommendation.MetricData
+	31, // 76: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LowUtilizationEC2Instances.ec2Instance:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
+	32, // 77: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.RDSIdleDBInstances.rdsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RDSDetails
+	26, // 78: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.S3IncompleteMPU.s3Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.S3Details
+	36, // 79: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaHighErrorRates.lambdaDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails
+	33, // 80: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedEBSVolume.ebsDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EBSDetails
+	49, // 81: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnassociatedEIP.eipDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details.InstanceDetails.EIPDetails
+	25, // 82: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.IdleLoadBalancer.elbDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ELBDetails
+	31, // 83: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.AmazonEC2InstanceStopped.ec2Details:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.EC2Details
+	24, // 84: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.EC2RILeaseExpiration.riDetails:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ReservedInstance
+	37, // 85: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.ComprehendUnderutilizedEndpoints.endpoint:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.ComprehendDetails.Endpoint
+	43, // 86: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.UnderutilizedRedshiftCluster.cluster:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.RedshiftDetails.ClusterDetails
+	56, // 87: blueapi.api.cover.recommendation.TrustedAdvisorRecommendations.LambdaWithExcessiveTimeouts.function:type_name -> blueapi.api.cover.recommendation.AWSResourceDetails.LambdaDetails.FunctionDetails
+	88, // [88:88] is the sub-list for method output_type
+	88, // [88:88] is the sub-list for method input_type
+	88, // [88:88] is the sub-list for extension type_name
+	88, // [88:88] is the sub-list for extension extendee
+	0,  // [0:88] is the sub-list for field type_name
 }
 
 func init() { file_api_cover_recommendation_aws_proto_init() }
@@ -6778,7 +7037,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[57].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_LowUtilizationEC2Instances); i {
+			switch v := v.(*TrustedAdvisorRecommendations_CommonDetails); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6790,7 +7049,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[58].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_RDSIdleDBInstances); i {
+			switch v := v.(*TrustedAdvisorRecommendations_AWSWellArchitectedHighRiskIssues); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6802,7 +7061,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[59].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_S3IncompleteMPU); i {
+			switch v := v.(*TrustedAdvisorRecommendations_LowUtilizationEC2Instances); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6814,7 +7073,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[60].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_LambdaHighErrorRates); i {
+			switch v := v.(*TrustedAdvisorRecommendations_RDSIdleDBInstances); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6826,7 +7085,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[61].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_UnderutilizedEBSVolume); i {
+			switch v := v.(*TrustedAdvisorRecommendations_S3IncompleteMPU); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6838,7 +7097,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[62].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_UnassociatedEIP); i {
+			switch v := v.(*TrustedAdvisorRecommendations_LambdaHighErrorRates); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6850,7 +7109,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[63].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_IdleLoadBalancer); i {
+			switch v := v.(*TrustedAdvisorRecommendations_UnderutilizedEBSVolume); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6862,7 +7121,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[64].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_AmazonEC2InstanceStopped); i {
+			switch v := v.(*TrustedAdvisorRecommendations_UnassociatedEIP); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6874,7 +7133,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[65].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_EC2RILeaseExpiration); i {
+			switch v := v.(*TrustedAdvisorRecommendations_IdleLoadBalancer); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6886,7 +7145,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[66].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints); i {
+			switch v := v.(*TrustedAdvisorRecommendations_AmazonEC2InstanceStopped); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6898,7 +7157,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[67].Exporter = func(v any, i int) any {
-			switch v := v.(*TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster); i {
+			switch v := v.(*TrustedAdvisorRecommendations_EC2RILeaseExpiration); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -6910,6 +7169,30 @@ func file_api_cover_recommendation_aws_proto_init() {
 			}
 		}
 		file_api_cover_recommendation_aws_proto_msgTypes[68].Exporter = func(v any, i int) any {
+			switch v := v.(*TrustedAdvisorRecommendations_ComprehendUnderutilizedEndpoints); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_cover_recommendation_aws_proto_msgTypes[69].Exporter = func(v any, i int) any {
+			switch v := v.(*TrustedAdvisorRecommendations_UnderutilizedRedshiftCluster); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_api_cover_recommendation_aws_proto_msgTypes[70].Exporter = func(v any, i int) any {
 			switch v := v.(*TrustedAdvisorRecommendations_LambdaWithExcessiveTimeouts); i {
 			case 0:
 				return &v.state
@@ -6928,7 +7211,7 @@ func file_api_cover_recommendation_aws_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_cover_recommendation_aws_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   69,
+			NumMessages:   71,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
