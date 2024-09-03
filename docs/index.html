@@ -513,6 +513,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.admin.v1.GetMSPDefaultMetaRequest"><span class="badge">M</span>GetMSPDefaultMetaRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.GetMSPDefaultMetaResponse"><span class="badge">M</span>GetMSPDefaultMetaResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.admin.v1.GetNotificationChannelRequest"><span class="badge">M</span>GetNotificationChannelRequest</a>
                 </li>
               
@@ -5808,6 +5816,54 @@ All templates are publicly available from the reponse link (`templateUrl`) if yo
 
         
       
+        <h3 id="blueapi.admin.v1.GetMSPDefaultMetaRequest">GetMSPDefaultMetaRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.admin.v1.GetMSPDefaultMetaResponse">GetMSPDefaultMetaResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>defaultMeta</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.GetNotificationChannelRequest">GetNotificationChannelRequest</h3>
         <p>Request message for the Admin.GetNotificationChannel rpc.</p>
 
@@ -6605,6 +6661,13 @@ Valid values:
                 <td><p>WORK-IN-PROGRESS: Updates the wave feature management default value per organization</p></td>
               </tr>
             
+              <tr>
+                <td>GetMSPDefaultMeta</td>
+                <td><a href="#blueapi.admin.v1.GetMSPDefaultMetaRequest">GetMSPDefaultMetaRequest</a></td>
+                <td><a href="#blueapi.admin.v1.GetMSPDefaultMetaResponse">GetMSPDefaultMetaResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Fetch the default meta saved per organization</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -6890,6 +6953,16 @@ Valid values:
                 <td>PUT</td>
                 <td>/admin/v1/wavefeatures</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetMSPDefaultMeta</td>
+                <td>GET</td>
+                <td>/admin/v1/defaultmeta/{mspId}</td>
+                <td></td>
               </tr>
               
             
