@@ -3202,13 +3202,13 @@ type ReadCostsRequestAwsOptions struct {
 	GroupByMonth bool `protobuf:"varint,2,opt,name=groupByMonth,proto3" json:"groupByMonth,omitempty"`
 	// Optional. If set to true, group all input accounts into one.
 	GroupAccounts bool `protobuf:"varint,8,opt,name=groupAccounts,proto3" json:"groupAccounts,omitempty"`
-	// Optional. Required if groupByColumn is set to tag
+	// Optional. Required if groupByColumn is set to tag.
 	GroupByTagKey string `protobuf:"bytes,12,opt,name=groupByTagKey,proto3" json:"groupByTagKey,omitempty"`
 	// Optional. A list of filtering options. See [ReadCostsRequestAwsOptionsFilters] for more information on each filter item. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc.
 	Filters []*ReadCostsRequestAwsOptionsFilters `protobuf:"bytes,3,rep,name=filters,proto3" json:"filters,omitempty"`
 	// Optional. A list of filtering options specific for tags. Multiple filter items will use the logical 'or' operator, e.g. filter1 || filter2 || filter3, etc. Discarded when `groupByColumns` field is set or if `groupByMonth` is true.
 	TagFilters []*ReadCostsRequestAwsOptions_TagFilters `protobuf:"bytes,9,rep,name=tagFilters,proto3" json:"tagFilters,omitempty"`
-	// Optional. If set to true, stream will include resource tags. Discarded when `groupByColumns` field is set to `none`.
+	// Optional. If set to true, stream will include resource tags. Discarded when `groupByColumns` field is set to `none`. `IncludeTags` is set to `false` if `groupByColumns` includes `tags` and `GroupByTagKey` has a value
 	IncludeTags bool `protobuf:"varint,4,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
 	// Optional. If set to true, stream will include resource cost category information. Discarded when `groupByColumns` field is set to `none`.
 	IncludeCostCategories bool `protobuf:"varint,5,opt,name=includeCostCategories,proto3" json:"includeCostCategories,omitempty"`
