@@ -50,6 +50,7 @@ const (
 	Admin_GetWaveFeatures_FullMethodName                       = "/blueapi.admin.v1.Admin/GetWaveFeatures"
 	Admin_UpdateWaveFeatureSetting_FullMethodName              = "/blueapi.admin.v1.Admin/UpdateWaveFeatureSetting"
 	Admin_GetMSPDefaultMeta_FullMethodName                     = "/blueapi.admin.v1.Admin/GetMSPDefaultMeta"
+	Admin_UpdateMSPDefaultMeta_FullMethodName                  = "/blueapi.admin.v1.Admin/UpdateMSPDefaultMeta"
 )
 
 // AdminClient is the client API for Admin service.
@@ -114,6 +115,8 @@ type AdminClient interface {
 	UpdateWaveFeatureSetting(ctx context.Context, in *UpdateWaveFeatureSettingRequest, opts ...grpc.CallOption) (*GetWaveFeaturesResponse, error)
 	// WORK-IN-PROGRESS: Fetch the default meta saved per organization
 	GetMSPDefaultMeta(ctx context.Context, in *GetMSPDefaultMetaRequest, opts ...grpc.CallOption) (*GetMSPDefaultMetaResponse, error)
+	// WORK-IN-PROGRESS: Set the default meta saved per organization
+	UpdateMSPDefaultMeta(ctx context.Context, in *UpdateMSPDefaultMetaRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type adminClient struct {
@@ -450,6 +453,16 @@ func (c *adminClient) GetMSPDefaultMeta(ctx context.Context, in *GetMSPDefaultMe
 	return out, nil
 }
 
+func (c *adminClient) UpdateMSPDefaultMeta(ctx context.Context, in *UpdateMSPDefaultMetaRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Admin_UpdateMSPDefaultMeta_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AdminServer is the server API for Admin service.
 // All implementations must embed UnimplementedAdminServer
 // for forward compatibility
@@ -512,6 +525,8 @@ type AdminServer interface {
 	UpdateWaveFeatureSetting(context.Context, *UpdateWaveFeatureSettingRequest) (*GetWaveFeaturesResponse, error)
 	// WORK-IN-PROGRESS: Fetch the default meta saved per organization
 	GetMSPDefaultMeta(context.Context, *GetMSPDefaultMetaRequest) (*GetMSPDefaultMetaResponse, error)
+	// WORK-IN-PROGRESS: Set the default meta saved per organization
+	UpdateMSPDefaultMeta(context.Context, *UpdateMSPDefaultMetaRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedAdminServer()
 }
 
@@ -602,6 +617,9 @@ func (UnimplementedAdminServer) UpdateWaveFeatureSetting(context.Context, *Updat
 }
 func (UnimplementedAdminServer) GetMSPDefaultMeta(context.Context, *GetMSPDefaultMetaRequest) (*GetMSPDefaultMetaResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMSPDefaultMeta not implemented")
+}
+func (UnimplementedAdminServer) UpdateMSPDefaultMeta(context.Context, *UpdateMSPDefaultMetaRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateMSPDefaultMeta not implemented")
 }
 func (UnimplementedAdminServer) mustEmbedUnimplementedAdminServer() {}
 
@@ -1126,6 +1144,24 @@ func _Admin_GetMSPDefaultMeta_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Admin_UpdateMSPDefaultMeta_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateMSPDefaultMetaRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateMSPDefaultMeta(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Admin_UpdateMSPDefaultMeta_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateMSPDefaultMeta(ctx, req.(*UpdateMSPDefaultMetaRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Admin_ServiceDesc is the grpc.ServiceDesc for Admin service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1236,6 +1272,10 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMSPDefaultMeta",
 			Handler:    _Admin_GetMSPDefaultMeta_Handler,
+		},
+		{
+			MethodName: "UpdateMSPDefaultMeta",
+			Handler:    _Admin_UpdateMSPDefaultMeta_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

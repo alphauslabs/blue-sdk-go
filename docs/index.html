@@ -585,6 +585,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.admin.v1.UpdateMSPDefaultMetaRequest"><span class="badge">M</span>UpdateMSPDefaultMetaRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.admin.v1.UpdateNotificationChannelRequest"><span class="badge">M</span>UpdateNotificationChannelRequest</a>
                 </li>
               
@@ -6238,6 +6242,37 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.UpdateMSPDefaultMetaRequest">UpdateMSPDefaultMetaRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>defaultMeta</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.UpdateNotificationChannelRequest">UpdateNotificationChannelRequest</h3>
         <p>Request message for the Admin.UpdateNotificationChannel rpc.</p>
 
@@ -6668,6 +6703,13 @@ Valid values:
                 <td><p>WORK-IN-PROGRESS: Fetch the default meta saved per organization</p></td>
               </tr>
             
+              <tr>
+                <td>UpdateMSPDefaultMeta</td>
+                <td><a href="#blueapi.admin.v1.UpdateMSPDefaultMetaRequest">UpdateMSPDefaultMetaRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Set the default meta saved per organization</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -6963,6 +7005,16 @@ Valid values:
                 <td>GET</td>
                 <td>/admin/v1/defaultmeta/{mspId}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateMSPDefaultMeta</td>
+                <td>PUT</td>
+                <td>/admin/v1/defaultmeta</td>
+                <td>*</td>
               </tr>
               
             
