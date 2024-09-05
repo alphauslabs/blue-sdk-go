@@ -1227,6 +1227,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateCustomFieldRequest"><span class="badge">M</span>CreateCustomFieldRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateCustomizedBillingServiceRequest"><span class="badge">M</span>CreateCustomizedBillingServiceRequest</a>
                 </li>
               
@@ -1243,6 +1247,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CustomField"><span class="badge">M</span>CustomField</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CustomFieldList"><span class="badge">M</span>CustomFieldList</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteAccessGroupRequest"><span class="badge">M</span>DeleteAccessGroupRequest</a>
                 </li>
               
@@ -1252,6 +1264,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteAdjustmentConfigRequest"><span class="badge">M</span>DeleteAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteCustomFieldRequest"><span class="badge">M</span>DeleteCustomFieldRequest</a>
                 </li>
               
                 <li>
@@ -1436,6 +1452,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest"><span class="badge">M</span>UpdateAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateCustomFieldRequest"><span class="badge">M</span>UpdateCustomFieldRequest</a>
                 </li>
               
                 <li>
@@ -14556,6 +14576,37 @@ A list of filtering options. See [api.ConfigFilters] for more information on eac
 
         
       
+        <h3 id="blueapi.billing.v1.CreateCustomFieldRequest">CreateCustomFieldRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateCustomizedBillingServiceRequest">CreateCustomizedBillingServiceRequest</h3>
         <p>Request message for the Billing.CreateCustomizedBillingService rpc.</p>
 
@@ -14740,6 +14791,68 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
 
         
       
+        <h3 id="blueapi.billing.v1.CustomField">CustomField</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Unique identifier for the custom field, automatically generated and immutable. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Descriptive name of the custom field </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Detailed description of the custom field </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CustomFieldList">CustomFieldList</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>customField</td>
+                  <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteAccessGroupRequest">DeleteAccessGroupRequest</h3>
         <p>Request message for the DeleteAccessGroup rpc.</p>
 
@@ -14807,6 +14920,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteCustomFieldRequest">DeleteCustomFieldRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -16313,6 +16450,44 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateCustomizedBillingServiceRequest">UpdateCustomizedBillingServiceRequest</h3>
         <p>Request message for the Billing.UpdateCustomizedBillingService rpc.</p>
 
@@ -16946,6 +17121,36 @@ Lists all exchange rate.
 Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
+              <tr>
+                <td>CreateCustomField</td>
+                <td><a href="#blueapi.billing.v1.CreateCustomFieldRequest">CreateCustomFieldRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
+                <td><p>WORK-IN-PROGRESS: Creates new customfield</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListCustomField</td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><a href="#blueapi.billing.v1.CustomFieldList">CustomFieldList</a></td>
+                <td><p>WORK-IN-PROGRESS: Returns all registered customfields</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateCustomField</td>
+                <td><a href="#blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates an existing CustomField. You can provide new values for the `key` and/or `description` fields.
+If you only need to update one field, set the other field to null. 
+The `id` in the URL path identifies the CustomField to be updated.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteCustomField</td>
+                <td><a href="#blueapi.billing.v1.DeleteCustomFieldRequest">DeleteCustomFieldRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Deletes the customfield</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -17450,6 +17655,46 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>GetTags</td>
                 <td>GET</td>
                 <td>/v1/tags</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateCustomField</td>
+                <td>POST</td>
+                <td>/v1/customfield</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListCustomField</td>
+                <td>GET</td>
+                <td>/v1/customfieldlist</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateCustomField</td>
+                <td>PATCH</td>
+                <td>/v1/customfield/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteCustomField</td>
+                <td>DELETE</td>
+                <td>/v1/customfield/{id}</td>
                 <td></td>
               </tr>
               

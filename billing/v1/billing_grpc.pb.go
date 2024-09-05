@@ -73,6 +73,10 @@ const (
 	Billing_UpdateCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
 	Billing_DeleteCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
 	Billing_GetTags_FullMethodName                              = "/blueapi.billing.v1.Billing/GetTags"
+	Billing_CreateCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateCustomField"
+	Billing_ListCustomField_FullMethodName                      = "/blueapi.billing.v1.Billing/ListCustomField"
+	Billing_UpdateCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateCustomField"
+	Billing_DeleteCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteCustomField"
 )
 
 // BillingClient is the client API for Billing service.
@@ -193,6 +197,16 @@ type BillingClient interface {
 	// WORK-IN-PROGRESS: Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error)
+	// WORK-IN-PROGRESS: Creates new customfield
+	CreateCustomField(ctx context.Context, in *CreateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
+	// WORK-IN-PROGRESS: Returns all registered customfields
+	ListCustomField(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CustomFieldList, error)
+	// WORK-IN-PROGRESS: Updates an existing CustomField. You can provide new values for the `key` and/or `description` fields.
+	// If you only need to update one field, set the other field to null.
+	// The `id` in the URL path identifies the CustomField to be updated.
+	UpdateCustomField(ctx context.Context, in *UpdateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
+	// WORK-IN-PROGRESS: Deletes the customfield
+	DeleteCustomField(ctx context.Context, in *DeleteCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -1084,6 +1098,46 @@ func (x *billingGetTagsClient) Recv() (*TagData, error) {
 	return m, nil
 }
 
+func (c *billingClient) CreateCustomField(ctx context.Context, in *CreateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomField)
+	err := c.cc.Invoke(ctx, Billing_CreateCustomField_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ListCustomField(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*CustomFieldList, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomFieldList)
+	err := c.cc.Invoke(ctx, Billing_ListCustomField_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateCustomField(ctx context.Context, in *UpdateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CustomField)
+	err := c.cc.Invoke(ctx, Billing_UpdateCustomField_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteCustomField(ctx context.Context, in *DeleteCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteCustomField_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1202,6 +1256,16 @@ type BillingServer interface {
 	// WORK-IN-PROGRESS: Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(*GetTagsRequest, Billing_GetTagsServer) error
+	// WORK-IN-PROGRESS: Creates new customfield
+	CreateCustomField(context.Context, *CreateCustomFieldRequest) (*CustomField, error)
+	// WORK-IN-PROGRESS: Returns all registered customfields
+	ListCustomField(context.Context, *emptypb.Empty) (*CustomFieldList, error)
+	// WORK-IN-PROGRESS: Updates an existing CustomField. You can provide new values for the `key` and/or `description` fields.
+	// If you only need to update one field, set the other field to null.
+	// The `id` in the URL path identifies the CustomField to be updated.
+	UpdateCustomField(context.Context, *UpdateCustomFieldRequest) (*CustomField, error)
+	// WORK-IN-PROGRESS: Deletes the customfield
+	DeleteCustomField(context.Context, *DeleteCustomFieldRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1355,6 +1419,18 @@ func (UnimplementedBillingServer) DeleteCustomizedBillingService(context.Context
 }
 func (UnimplementedBillingServer) GetTags(*GetTagsRequest, Billing_GetTagsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTags not implemented")
+}
+func (UnimplementedBillingServer) CreateCustomField(context.Context, *CreateCustomFieldRequest) (*CustomField, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCustomField not implemented")
+}
+func (UnimplementedBillingServer) ListCustomField(context.Context, *emptypb.Empty) (*CustomFieldList, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCustomField not implemented")
+}
+func (UnimplementedBillingServer) UpdateCustomField(context.Context, *UpdateCustomFieldRequest) (*CustomField, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCustomField not implemented")
+}
+func (UnimplementedBillingServer) DeleteCustomField(context.Context, *DeleteCustomFieldRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomField not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -2302,6 +2378,78 @@ func (x *billingGetTagsServer) Send(m *TagData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_CreateCustomField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCustomFieldRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateCustomField(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateCustomField_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateCustomField(ctx, req.(*CreateCustomFieldRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ListCustomField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ListCustomField(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ListCustomField_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ListCustomField(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateCustomField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCustomFieldRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateCustomField(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateCustomField_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateCustomField(ctx, req.(*UpdateCustomFieldRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteCustomField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCustomFieldRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteCustomField(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteCustomField_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteCustomField(ctx, req.(*DeleteCustomFieldRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2436,6 +2584,22 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCustomizedBillingService",
 			Handler:    _Billing_DeleteCustomizedBillingService_Handler,
+		},
+		{
+			MethodName: "CreateCustomField",
+			Handler:    _Billing_CreateCustomField_Handler,
+		},
+		{
+			MethodName: "ListCustomField",
+			Handler:    _Billing_ListCustomField_Handler,
+		},
+		{
+			MethodName: "UpdateCustomField",
+			Handler:    _Billing_UpdateCustomField_Handler,
+		},
+		{
+			MethodName: "DeleteCustomField",
+			Handler:    _Billing_DeleteCustomField_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
