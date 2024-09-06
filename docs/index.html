@@ -1251,10 +1251,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.CustomFieldList"><span class="badge">M</span>CustomFieldList</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.DeleteAccessGroupRequest"><span class="badge">M</span>DeleteAccessGroupRequest</a>
                 </li>
               
@@ -1368,6 +1364,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListBillingGroupsRequest"><span class="badge">M</span>ListBillingGroupsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListCustomFieldRequest"><span class="badge">M</span>ListCustomFieldRequest</a>
                 </li>
               
                 <li>
@@ -14821,30 +14821,6 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
 
         
       
-        <h3 id="blueapi.billing.v1.CustomFieldList">CustomFieldList</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>customField</td>
-                  <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.DeleteAccessGroupRequest">DeleteAccessGroupRequest</h3>
         <p>Request message for the DeleteAccessGroup rpc.</p>
 
@@ -15736,6 +15712,13 @@ Valid values: default, imported </p></td>
           </table>
 
           
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListCustomFieldRequest">ListCustomFieldRequest</h3>
+        <p></p>
+
+        
 
         
       
@@ -17122,8 +17105,8 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
             
               <tr>
                 <td>ListCustomField</td>
-                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><a href="#blueapi.billing.v1.CustomFieldList">CustomFieldList</a></td>
+                <td><a href="#blueapi.billing.v1.ListCustomFieldRequest">ListCustomFieldRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CustomField">CustomField</a> stream</td>
                 <td><p>WORK-IN-PROGRESS: Returns all registered customfields</p></td>
               </tr>
             
@@ -17131,9 +17114,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateCustomField</td>
                 <td><a href="#blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
-                <td><p>WORK-IN-PROGRESS: Updates an existing CustomField. You can provide new values for the `key` and/or `description` fields.
-If you only need to update one field, set the other field to null. 
-The `id` in the URL path identifies the CustomField to be updated.</p></td>
+                <td><p>WORK-IN-PROGRESS: Update the `customField` specified id, modifying its key and description</p></td>
               </tr>
             
               <tr>
@@ -17665,8 +17646,8 @@ The `id` in the URL path identifies the CustomField to be updated.</p></td>
               
               <tr>
                 <td>ListCustomField</td>
-                <td>GET</td>
-                <td>/v1/customfieldlist</td>
+                <td>POST</td>
+                <td>/v1/customfield:read</td>
                 <td></td>
               </tr>
               
@@ -17675,7 +17656,7 @@ The `id` in the URL path identifies the CustomField to be updated.</p></td>
               
               <tr>
                 <td>UpdateCustomField</td>
-                <td>PATCH</td>
+                <td>PUT</td>
                 <td>/v1/customfield/{id}</td>
                 <td>*</td>
               </tr>
