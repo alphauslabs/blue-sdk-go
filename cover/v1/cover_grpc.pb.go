@@ -40,6 +40,7 @@ const (
 	Cover_UpdateUserLocale_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateUserLocale"
 	Cover_UpdateUserAppTheme_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserAppTheme"
 	Cover_UpdateUserTimezone_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserTimezone"
+	Cover_UpdateUserCurrency_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserCurrency"
 	Cover_UpdateUserAttributes_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateUserAttributes"
 	Cover_DeleteMember_FullMethodName                            = "/blueapi.cover.v1.Cover/DeleteMember"
 	Cover_ResetPassword_FullMethodName                           = "/blueapi.cover.v1.Cover/ResetPassword"
@@ -218,6 +219,8 @@ type CoverClient interface {
 	UpdateUserAppTheme(ctx context.Context, in *UpdateUserAppThemeRequest, opts ...grpc.CallOption) (*UpdateUserAppThemeResponse, error)
 	// Modify user's timezone
 	UpdateUserTimezone(ctx context.Context, in *UpdateUserTimezoneRequest, opts ...grpc.CallOption) (*UpdateUserTimezoneResponse, error)
+	// Modify user's currency
+	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
 	// Modify attributes
 	UpdateUserAttributes(ctx context.Context, in *UpdateUserAttributesRequest, opts ...grpc.CallOption) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
@@ -675,6 +678,16 @@ func (c *coverClient) UpdateUserTimezone(ctx context.Context, in *UpdateUserTime
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserTimezoneResponse)
 	err := c.cc.Invoke(ctx, Cover_UpdateUserTimezone_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserCurrencyResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateUserCurrency_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2622,6 +2635,8 @@ type CoverServer interface {
 	UpdateUserAppTheme(context.Context, *UpdateUserAppThemeRequest) (*UpdateUserAppThemeResponse, error)
 	// Modify user's timezone
 	UpdateUserTimezone(context.Context, *UpdateUserTimezoneRequest) (*UpdateUserTimezoneResponse, error)
+	// Modify user's currency
+	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
 	// Modify attributes
 	UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
@@ -2948,6 +2963,9 @@ func (UnimplementedCoverServer) UpdateUserAppTheme(context.Context, *UpdateUserA
 }
 func (UnimplementedCoverServer) UpdateUserTimezone(context.Context, *UpdateUserTimezoneRequest) (*UpdateUserTimezoneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserTimezone not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserCurrency not implemented")
 }
 func (UnimplementedCoverServer) UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAttributes not implemented")
@@ -3696,6 +3714,24 @@ func _Cover_UpdateUserTimezone_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateUserTimezone(ctx, req.(*UpdateUserTimezoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUserCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateUserCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserCurrency(ctx, req.(*UpdateUserCurrencyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6238,6 +6274,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserTimezone",
 			Handler:    _Cover_UpdateUserTimezone_Handler,
+		},
+		{
+			MethodName: "UpdateUserCurrency",
+			Handler:    _Cover_UpdateUserCurrency_Handler,
 		},
 		{
 			MethodName: "UpdateUserAttributes",
