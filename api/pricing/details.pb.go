@@ -41,6 +41,7 @@ type PricingData struct {
 	// Price per unit.
 	PricePerUnit float64 `protobuf:"fixed64,6,opt,name=pricePerUnit,proto3" json:"pricePerUnit,omitempty"`
 	// Service details. A protobuf struct which translates to a map for HTTP. Keys are of type string and values can be of type string, float, or bool, depending on the detail.
+	//
 	// The following is an example of a serviceDetails field of a response,
 	// ```
 	//
