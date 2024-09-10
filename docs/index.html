@@ -30333,14 +30333,14 @@ file in bytes </p></td>
                   <td>key</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Filter key. </p></td>
                 </tr>
               
                 <tr>
                   <td>values</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Array of filter values. </p></td>
                 </tr>
               
             </tbody>
@@ -30382,7 +30382,7 @@ file in bytes </p></td>
         
       
         <h3 id="blueapi.pricing.v1.GetPricingRequest">GetPricingRequest</h3>
-        <p>Request message for GetPricing</p>
+        <p>Request message for Pricing.GetPricing rpc.</p>
 
         
           <table class="field-table">
@@ -30395,7 +30395,7 @@ file in bytes </p></td>
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Cloud vendor, only `aws` and `azure` are supported for now. </p></td>
+                  <td><p>Required. Cloud vendor, only `aws` and `azure` are currently supported. </p></td>
                 </tr>
               
                 <tr>
@@ -30403,7 +30403,7 @@ file in bytes </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Cloud vendor service. 
-Supported services can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices. </p></td>
+Supported services can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices. </p></td>
                 </tr>
               
                 <tr>
@@ -30411,7 +30411,7 @@ Supported services can be listed using /v0/{vendor}/services endpoint. For usage
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Region code.
-Supported regions can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
+Supported regions can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
 View all available AWS services by region at https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/.
 View all available Azure services by region at https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/. </p></td>
                 </tr>
@@ -30420,7 +30420,7 @@ View all available Azure services by region at https://azure.microsoft.com/en-us
                   <td>token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Supply token that was included in the latest response to continue fetching the remaining chunks of data. All data has been returned once token is null. </p></td>
+                  <td><p>Optional. Supply token that is included in the latest response to continue fetching the remaining chunks of data. No further data can be retrieved once the token returned is empty. </p></td>
                 </tr>
               
                 <tr>
@@ -30428,16 +30428,35 @@ View all available Azure services by region at https://azure.microsoft.com/en-us
                   <td><a href="#blueapi.pricing.v1.GetPricingRequest.FiltersEntry">GetPricingRequest.FiltersEntry</a></td>
                   <td>repeated</td>
                   <td><p>Optional. Filters to apply to the pricing data.
-This is a map of column names to filter values. Each key-value pair in the map represents a filter condition. </p></td>
+This is a map of column names and values to filter pricing items. Each key-value pair in the map represents a filter condition.
+Supported filter key-value pairs can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
+
+For example, if you want to return AWS EC2 items that has All Upfront purchase option, add `&#34;purchaseOption&#34;: &#34;All Upfront&#34;` to the filters.
+
+Multiple key-value pairs are supported but keys should not be duplicated.
+For example, for AWS EC2, the following is valid,
+```
+&#34;filters&#34;: {
+  &#34;purchaseOption&#34;: &#34;All Upfront&#34;,
+  &#34;operatingSystem&#34;: &#34;Windows&#34;
+}
+```
+but not the following,
+```
+&#34;filters&#34;: {
+  &#34;purchaseOption&#34;: &#34;All Upfront&#34;,
+  &#34;purchaseOption&#34;: &#34;Partial Upfront&#34;
+}
+``` </p></td>
                 </tr>
               
                 <tr>
                   <td>columns</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Optional. This string array represent valid columns which will serve as basis as to what items in the serviceDetails will be returned by the API.
+                  <td><p>Optional. Only specified columns will be returned, if provided.
 All columns will be returned if this array is empty.
-This is not yet implemented. </p></td>
+Supported columns can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices. </p></td>
                 </tr>
               
             </tbody>
@@ -30479,7 +30498,7 @@ This is not yet implemented. </p></td>
         
       
         <h3 id="blueapi.pricing.v1.GetPricingResponse">GetPricingResponse</h3>
-        <p>Response message for GetPricing</p>
+        <p>Response message for Pricing.GetPricing rpc.</p>
 
         
           <table class="field-table">
@@ -30492,14 +30511,14 @@ This is not yet implemented. </p></td>
                   <td>token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Use token to retrieve next set of pricing items. An empty string means there are no more items to retrieve. </p></td>
                 </tr>
               
                 <tr>
                   <td>pricingData</td>
                   <td><a href="#blueapi.api.pricing.PricingData">blueapi.api.pricing.PricingData</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Array of pricing items details. Maximum number of items returned per call is 1000. </p></td>
                 </tr>
               
             </tbody>
@@ -30510,7 +30529,7 @@ This is not yet implemented. </p></td>
         
       
         <h3 id="blueapi.pricing.v1.GetSupportedServicesRequest">GetSupportedServicesRequest</h3>
-        <p>Request message for GetSupportedServices</p>
+        <p>Request message for Pricing.GetSupportedServices rpc.</p>
 
         
           <table class="field-table">
@@ -30523,7 +30542,7 @@ This is not yet implemented. </p></td>
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Cloud vendor, only `aws` and `azure` are supported for now. </p></td>
+                  <td><p>Required. Cloud vendor, only `aws` and `azure` are currently supported. </p></td>
                 </tr>
               
             </tbody>
@@ -30534,7 +30553,7 @@ This is not yet implemented. </p></td>
         
       
         <h3 id="blueapi.pricing.v1.GetSupportedServicesResponse">GetSupportedServicesResponse</h3>
-        <p>Response message for GetSupportedServices</p>
+        <p>Response message for Pricing.GetSupportedServices rpc.</p>
 
         
           <table class="field-table">
@@ -30547,7 +30566,8 @@ This is not yet implemented. </p></td>
                   <td>supportedServices</td>
                   <td><a href="#blueapi.pricing.v1.SupportedService">SupportedService</a></td>
                   <td>repeated</td>
-                  <td><p>Suported services, regions, and attributes that can be used to fetch pricing data. </p></td>
+                  <td><p>Suported services, regions, and attributes that can be used to specify which pricing data to retrieve from `/{vendor}/pricing`.
+For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetPricing. </p></td>
                 </tr>
               
             </tbody>
@@ -30578,21 +30598,22 @@ This is not yet implemented. </p></td>
                   <td>regions</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Regions supported for the specific service. </p></td>
+                  <td><p>Array of regions supported for the specific service. </p></td>
                 </tr>
               
                 <tr>
                   <td>attributes</td>
                   <td><a href="#blueapi.pricing.v1.Attribute">Attribute</a></td>
                   <td>repeated</td>
-                  <td><p>Attributes that can be used as key-value pairs for filtering. </p></td>
+                  <td><p>Array of attributes that can be used as key-value pairs for filtering. </p></td>
                 </tr>
               
                 <tr>
                   <td>columns</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Column names that can be used to specify what columns should GetPricing return. </p></td>
+                  <td><p>Array of column names that can be used to specify what columns should `/{vendor}/pricing` return.
+For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetPricing. </p></td>
                 </tr>
               
             </tbody>

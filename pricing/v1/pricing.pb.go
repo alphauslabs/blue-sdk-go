@@ -110,30 +110,53 @@ func (x *GetInfoResponse) GetResponse() string {
 	return ""
 }
 
-// Request message for GetPricing
+// Request message for Pricing.GetPricing rpc.
 type GetPricingRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Cloud vendor, only `aws` and `azure` are supported for now.
+	// Required. Cloud vendor, only `aws` and `azure` are currently supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Cloud vendor service.
-	// Supported services can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
+	// Supported services can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
 	Service string `protobuf:"bytes,2,opt,name=service,proto3" json:"service,omitempty"`
 	// Required. Region code.
-	// Supported regions can be listed using /v0/{vendor}/services endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
+	// Supported regions can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
 	// View all available AWS services by region at https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/.
 	// View all available Azure services by region at https://azure.microsoft.com/en-us/explore/global-infrastructure/products-by-region/.
 	Region string `protobuf:"bytes,3,opt,name=region,proto3" json:"region,omitempty"`
-	// Optional. Supply token that was included in the latest response to continue fetching the remaining chunks of data. All data has been returned once token is null.
+	// Optional. Supply token that is included in the latest response to continue fetching the remaining chunks of data. No further data can be retrieved once the token returned is empty.
 	Token string `protobuf:"bytes,4,opt,name=token,proto3" json:"token,omitempty"`
 	// Optional. Filters to apply to the pricing data.
-	// This is a map of column names to filter values. Each key-value pair in the map represents a filter condition.
+	// This is a map of column names and values to filter pricing items. Each key-value pair in the map represents a filter condition.
+	// Supported filter key-value pairs can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
+	//
+	// For example, if you want to return AWS EC2 items that has All Upfront purchase option, add `"purchaseOption": "All Upfront"` to the filters.
+	//
+	// Multiple key-value pairs are supported but keys should not be duplicated.
+	// For example, for AWS EC2, the following is valid,
+	// ```
+	//
+	//	"filters": {
+	//	  "purchaseOption": "All Upfront",
+	//	  "operatingSystem": "Windows"
+	//	}
+	//
+	// ```
+	// but not the following,
+	// ```
+	//
+	//	"filters": {
+	//	  "purchaseOption": "All Upfront",
+	//	  "purchaseOption": "Partial Upfront"
+	//	}
+	//
+	// ```
 	Filters map[string]string `protobuf:"bytes,6,rep,name=filters,proto3" json:"filters,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	// Optional. This string array represent valid columns which will serve as basis as to what items in the serviceDetails will be returned by the API.
+	// Optional. Only specified columns will be returned, if provided.
 	// All columns will be returned if this array is empty.
-	// This is not yet implemented.
+	// Supported columns can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
 	Columns []string `protobuf:"bytes,5,rep,name=columns,proto3" json:"columns,omitempty"`
 }
 
@@ -211,13 +234,15 @@ func (x *GetPricingRequest) GetColumns() []string {
 	return nil
 }
 
-// Response message for GetPricing
+// Response message for Pricing.GetPricing rpc.
 type GetPricingResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Token       string                 `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	// Use token to retrieve next set of pricing items. An empty string means there are no more items to retrieve.
+	Token string `protobuf:"bytes,1,opt,name=token,proto3" json:"token,omitempty"`
+	// Array of pricing items details. Maximum number of items returned per call is 1000.
 	PricingData []*pricing.PricingData `protobuf:"bytes,2,rep,name=pricingData,proto3" json:"pricingData,omitempty"`
 }
 
@@ -267,13 +292,13 @@ func (x *GetPricingResponse) GetPricingData() []*pricing.PricingData {
 	return nil
 }
 
-// Request message for GetSupportedServices
+// Request message for Pricing.GetSupportedServices rpc.
 type GetSupportedServicesRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Required. Cloud vendor, only `aws` and `azure` are supported for now.
+	// Required. Cloud vendor, only `aws` and `azure` are currently supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 }
 
@@ -316,13 +341,14 @@ func (x *GetSupportedServicesRequest) GetVendor() string {
 	return ""
 }
 
-// Response message for GetSupportedServices
+// Response message for Pricing.GetSupportedServices rpc.
 type GetSupportedServicesResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// Suported services, regions, and attributes that can be used to fetch pricing data.
+	// Suported services, regions, and attributes that can be used to specify which pricing data to retrieve from `/{vendor}/pricing`.
+	// For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetPricing.
 	SupportedServices []*SupportedService `protobuf:"bytes,1,rep,name=supportedServices,proto3" json:"supportedServices,omitempty"`
 }
 
@@ -372,11 +398,12 @@ type SupportedService struct {
 
 	// AWS or Azure services only as of now.
 	Service string `protobuf:"bytes,1,opt,name=service,proto3" json:"service,omitempty"`
-	// Regions supported for the specific service.
+	// Array of regions supported for the specific service.
 	Regions []string `protobuf:"bytes,2,rep,name=regions,proto3" json:"regions,omitempty"`
-	// Attributes that can be used as key-value pairs for filtering.
+	// Array of attributes that can be used as key-value pairs for filtering.
 	Attributes []*Attribute `protobuf:"bytes,3,rep,name=attributes,proto3" json:"attributes,omitempty"`
-	// Column names that can be used to specify what columns should GetPricing return.
+	// Array of column names that can be used to specify what columns should `/{vendor}/pricing` return.
+	// For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetPricing.
 	Columns []string `protobuf:"bytes,4,rep,name=columns,proto3" json:"columns,omitempty"`
 }
 
@@ -445,7 +472,9 @@ type Attribute struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Key    string   `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Filter key.
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Array of filter values.
 	Values []string `protobuf:"bytes,2,rep,name=values,proto3" json:"values,omitempty"`
 }
 
