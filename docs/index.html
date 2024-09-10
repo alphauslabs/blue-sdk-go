@@ -1235,6 +1235,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateFreeFormatRequest"><span class="badge">M</span>CreateFreeFormatRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateInvoiceRequest"><span class="badge">M</span>CreateInvoiceRequest</a>
                 </li>
               
@@ -1268,6 +1272,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteCustomizedBillingServiceRequest"><span class="badge">M</span>DeleteCustomizedBillingServiceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteFreeFormatRequest"><span class="badge">M</span>DeleteFreeFormatRequest</a>
                 </li>
               
                 <li>
@@ -14645,6 +14653,44 @@ A list of filtering options. See [api.ConfigFilters] for more information on eac
 
         
       
+        <h3 id="blueapi.billing.v1.CreateFreeFormatRequest">CreateFreeFormatRequest</h3>
+        <p>BillingGroup FreeFormat: Also known as miscellaneous</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>items</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateInvoiceRequest">CreateInvoiceRequest</h3>
         <p>Request message for the CreateInvoice rpc.</p>
 
@@ -14944,6 +14990,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteFreeFormatRequest">DeleteFreeFormatRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -17132,6 +17209,20 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>WORK-IN-PROGRESS: Deletes the customfield</p></td>
               </tr>
             
+              <tr>
+                <td>CreateFreeFormat</td>
+                <td><a href="#blueapi.billing.v1.CreateFreeFormatRequest">CreateFreeFormatRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Creates new billing group free format item (miscellaneous)</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteFreeFormat</td>
+                <td><a href="#blueapi.billing.v1.DeleteFreeFormatRequest">DeleteFreeFormatRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Delete billing group free format item (miscellaneous)</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -17676,6 +17767,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>DeleteCustomField</td>
                 <td>DELETE</td>
                 <td>/v1/customfield/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateFreeFormat</td>
+                <td>POST</td>
+                <td>/v1/freeformat</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteFreeFormat</td>
+                <td>DELETE</td>
+                <td>/v1/freeformat/{id}</td>
                 <td></td>
               </tr>
               

@@ -77,6 +77,8 @@ const (
 	Billing_ListCustomField_FullMethodName                      = "/blueapi.billing.v1.Billing/ListCustomField"
 	Billing_UpdateCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateCustomField"
 	Billing_DeleteCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteCustomField"
+	Billing_CreateFreeFormat_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateFreeFormat"
+	Billing_DeleteFreeFormat_FullMethodName                     = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
 )
 
 // BillingClient is the client API for Billing service.
@@ -205,6 +207,10 @@ type BillingClient interface {
 	UpdateCustomField(ctx context.Context, in *UpdateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
 	// WORK-IN-PROGRESS: Deletes the customfield
 	DeleteCustomField(ctx context.Context, in *DeleteCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Creates new billing group free format item (miscellaneous)
+	CreateFreeFormat(ctx context.Context, in *CreateFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Delete billing group free format item (miscellaneous)
+	DeleteFreeFormat(ctx context.Context, in *DeleteFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -1159,6 +1165,26 @@ func (c *billingClient) DeleteCustomField(ctx context.Context, in *DeleteCustomF
 	return out, nil
 }
 
+func (c *billingClient) CreateFreeFormat(ctx context.Context, in *CreateFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_CreateFreeFormat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteFreeFormat(ctx context.Context, in *DeleteFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteFreeFormat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1285,6 +1311,10 @@ type BillingServer interface {
 	UpdateCustomField(context.Context, *UpdateCustomFieldRequest) (*CustomField, error)
 	// WORK-IN-PROGRESS: Deletes the customfield
 	DeleteCustomField(context.Context, *DeleteCustomFieldRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Creates new billing group free format item (miscellaneous)
+	CreateFreeFormat(context.Context, *CreateFreeFormatRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Delete billing group free format item (miscellaneous)
+	DeleteFreeFormat(context.Context, *DeleteFreeFormatRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1450,6 +1480,12 @@ func (UnimplementedBillingServer) UpdateCustomField(context.Context, *UpdateCust
 }
 func (UnimplementedBillingServer) DeleteCustomField(context.Context, *DeleteCustomFieldRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomField not implemented")
+}
+func (UnimplementedBillingServer) CreateFreeFormat(context.Context, *CreateFreeFormatRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateFreeFormat not implemented")
+}
+func (UnimplementedBillingServer) DeleteFreeFormat(context.Context, *DeleteFreeFormatRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteFreeFormat not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -2472,6 +2508,42 @@ func _Billing_DeleteCustomField_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_CreateFreeFormat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateFreeFormatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateFreeFormat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateFreeFormat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateFreeFormat(ctx, req.(*CreateFreeFormatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteFreeFormat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteFreeFormatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteFreeFormat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteFreeFormat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteFreeFormat(ctx, req.(*DeleteFreeFormatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2618,6 +2690,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCustomField",
 			Handler:    _Billing_DeleteCustomField_Handler,
+		},
+		{
+			MethodName: "CreateFreeFormat",
+			Handler:    _Billing_CreateFreeFormat_Handler,
+		},
+		{
+			MethodName: "DeleteFreeFormat",
+			Handler:    _Billing_DeleteFreeFormat_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
