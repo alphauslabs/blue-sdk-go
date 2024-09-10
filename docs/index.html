@@ -1295,6 +1295,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.FreeFormItem"><span class="badge">M</span>FreeFormItem</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetAccessGroupRequest"><span class="badge">M</span>GetAccessGroupRequest</a>
                 </li>
               
@@ -14679,7 +14683,7 @@ A list of filtering options. See [api.ConfigFilters] for more information on eac
               
                 <tr>
                   <td>items</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#blueapi.billing.v1.FreeFormItem">FreeFormItem</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -15130,6 +15134,51 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><p>Required. URL of exported file.
 
 csv columns set `group vendor resourceId resourceName type serviceName currency cost` </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.FreeFormItem">FreeFormItem</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>label</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unitCost</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>quantity</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
