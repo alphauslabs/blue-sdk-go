@@ -2629,6 +2629,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.UpdateViewCurrencyRequest"><span class="badge">M</span>UpdateViewCurrencyRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateViewCurrencyResponse"><span class="badge">M</span>UpdateViewCurrencyResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.UpdateViewLayoutRequest"><span class="badge">M</span>UpdateViewLayoutRequest</a>
                 </li>
               
@@ -27139,6 +27147,13 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>exchangeRateDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -27421,7 +27436,7 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
             <tbody>
               
                 <tr>
-                  <td>timezone</td>
+                  <td>timeZone</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -27498,6 +27513,61 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
       
         <h3 id="blueapi.cover.v1.UpdateViewColorThemeResponse">UpdateViewColorThemeResponse</h3>
         <p>Response message for UpdateViewColorTheme</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>viewData</td>
+                  <td><a href="#blueapi.api.cover.ViewData">blueapi.api.cover.ViewData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateViewCurrencyRequest">UpdateViewCurrencyRequest</h3>
+        <p>Request message for UpdateViewCurrency</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>viewId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateViewCurrencyResponse">UpdateViewCurrencyResponse</h3>
+        <p>Response message for UpdateViewCurrency</p>
 
         
           <table class="field-table">
@@ -28101,6 +28171,13 @@ file in bytes </p></td>
                 <td><a href="#blueapi.cover.v1.UpdateViewColorThemeRequest">UpdateViewColorThemeRequest</a></td>
                 <td><a href="#blueapi.cover.v1.UpdateViewColorThemeResponse">UpdateViewColorThemeResponse</a></td>
                 <td><p>Update view&#39;s color theme</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateViewCurrency</td>
+                <td><a href="#blueapi.cover.v1.UpdateViewCurrencyRequest">UpdateViewCurrencyRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateViewCurrencyResponse">UpdateViewCurrencyResponse</a></td>
+                <td><p>Update report&#39;s currency settings</p></td>
               </tr>
             
               <tr>
@@ -29283,6 +29360,16 @@ file in bytes </p></td>
                 <td>UpdateViewColorTheme</td>
                 <td>PUT</td>
                 <td>/v1/views/{viewId}/colortheme</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateViewCurrency</td>
+                <td>PUT</td>
+                <td>/v1/views/{viewId}/currency</td>
                 <td>*</td>
               </tr>
               

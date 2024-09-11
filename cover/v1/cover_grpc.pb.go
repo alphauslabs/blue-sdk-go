@@ -55,6 +55,7 @@ const (
 	Cover_UpdateViewLayout_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateViewLayout"
 	Cover_UpdateViewWidget_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateViewWidget"
 	Cover_UpdateViewColorTheme_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
+	Cover_UpdateViewCurrency_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateViewCurrency"
 	Cover_DeleteView_FullMethodName                              = "/blueapi.cover.v1.Cover/DeleteView"
 	Cover_UpdateSideMenuState_FullMethodName                     = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
 	Cover_AddSideMenuFavorite_FullMethodName                     = "/blueapi.cover.v1.Cover/AddSideMenuFavorite"
@@ -249,6 +250,8 @@ type CoverClient interface {
 	UpdateViewWidget(ctx context.Context, in *UpdateViewWidgetRequest, opts ...grpc.CallOption) (*UpdateViewWidgetResponse, error)
 	// Update view's color theme
 	UpdateViewColorTheme(ctx context.Context, in *UpdateViewColorThemeRequest, opts ...grpc.CallOption) (*UpdateViewColorThemeResponse, error)
+	// Update report's currency settings
+	UpdateViewCurrency(ctx context.Context, in *UpdateViewCurrencyRequest, opts ...grpc.CallOption) (*UpdateViewCurrencyResponse, error)
 	// Deletes a view
 	DeleteView(ctx context.Context, in *DeleteViewRequest, opts ...grpc.CallOption) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -828,6 +831,16 @@ func (c *coverClient) UpdateViewColorTheme(ctx context.Context, in *UpdateViewCo
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateViewColorThemeResponse)
 	err := c.cc.Invoke(ctx, Cover_UpdateViewColorTheme_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateViewCurrency(ctx context.Context, in *UpdateViewCurrencyRequest, opts ...grpc.CallOption) (*UpdateViewCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateViewCurrencyResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateViewCurrency_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2665,6 +2678,8 @@ type CoverServer interface {
 	UpdateViewWidget(context.Context, *UpdateViewWidgetRequest) (*UpdateViewWidgetResponse, error)
 	// Update view's color theme
 	UpdateViewColorTheme(context.Context, *UpdateViewColorThemeRequest) (*UpdateViewColorThemeResponse, error)
+	// Update report's currency settings
+	UpdateViewCurrency(context.Context, *UpdateViewCurrencyRequest) (*UpdateViewCurrencyResponse, error)
 	// Deletes a view
 	DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -3008,6 +3023,9 @@ func (UnimplementedCoverServer) UpdateViewWidget(context.Context, *UpdateViewWid
 }
 func (UnimplementedCoverServer) UpdateViewColorTheme(context.Context, *UpdateViewColorThemeRequest) (*UpdateViewColorThemeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewColorTheme not implemented")
+}
+func (UnimplementedCoverServer) UpdateViewCurrency(context.Context, *UpdateViewCurrencyRequest) (*UpdateViewCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewCurrency not implemented")
 }
 func (UnimplementedCoverServer) DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteView not implemented")
@@ -3984,6 +4002,24 @@ func _Cover_UpdateViewColorTheme_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateViewColorTheme(ctx, req.(*UpdateViewColorThemeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateViewCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateViewCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateViewCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateViewCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateViewCurrency(ctx, req.(*UpdateViewCurrencyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6334,6 +6370,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateViewColorTheme",
 			Handler:    _Cover_UpdateViewColorTheme_Handler,
+		},
+		{
+			MethodName: "UpdateViewCurrency",
+			Handler:    _Cover_UpdateViewCurrency_Handler,
 		},
 		{
 			MethodName: "DeleteView",
