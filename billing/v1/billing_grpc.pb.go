@@ -42,6 +42,7 @@ const (
 	Billing_UpdateInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
 	Billing_DeleteInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/DeleteInvoiceServiceDiscounts"
 	Billing_ListInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
+	Billing_GetInvoiceServiceDiscounts_FullMethodName           = "/blueapi.billing.v1.Billing/GetInvoiceServiceDiscounts"
 	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName   = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
 	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
 	Billing_UpdateAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/UpdateAccountInvoiceServiceDiscounts"
@@ -123,6 +124,8 @@ type BillingClient interface {
 	DeleteInvoiceServiceDiscounts(ctx context.Context, in *DeleteInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
+	// WORK-IN-PROGRESS: Gets the invoice service discounts. Only available in Ripple.
+	GetInvoiceServiceDiscounts(ctx context.Context, in *GetInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error)
 	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error)
 	// Registers the account invoice service discounts. Only available in Ripple.
@@ -560,6 +563,16 @@ func (x *billingListInvoiceServiceDiscountsClient) Recv() (*InvoiceServiceDiscou
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *billingClient) GetInvoiceServiceDiscounts(ctx context.Context, in *GetInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.InvoiceServiceDiscounts)
+	err := c.cc.Invoke(ctx, Billing_GetInvoiceServiceDiscounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *billingClient) ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error) {
@@ -1227,6 +1240,8 @@ type BillingServer interface {
 	DeleteInvoiceServiceDiscounts(context.Context, *DeleteInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
+	// WORK-IN-PROGRESS: Gets the invoice service discounts. Only available in Ripple.
+	GetInvoiceServiceDiscounts(context.Context, *GetInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error)
 	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(*ListAccountInvoiceServiceDiscountsRequest, Billing_ListAccountInvoiceServiceDiscountsServer) error
 	// Registers the account invoice service discounts. Only available in Ripple.
@@ -1375,6 +1390,9 @@ func (UnimplementedBillingServer) DeleteInvoiceServiceDiscounts(context.Context,
 }
 func (UnimplementedBillingServer) ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListInvoiceServiceDiscounts not implemented")
+}
+func (UnimplementedBillingServer) GetInvoiceServiceDiscounts(context.Context, *GetInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceServiceDiscounts not implemented")
 }
 func (UnimplementedBillingServer) ListAccountInvoiceServiceDiscounts(*ListAccountInvoiceServiceDiscountsRequest, Billing_ListAccountInvoiceServiceDiscountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccountInvoiceServiceDiscounts not implemented")
@@ -1843,6 +1861,24 @@ type billingListInvoiceServiceDiscountsServer struct {
 
 func (x *billingListInvoiceServiceDiscountsServer) Send(m *InvoiceServiceDiscounts) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_GetInvoiceServiceDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceServiceDiscountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetInvoiceServiceDiscounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetInvoiceServiceDiscounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetInvoiceServiceDiscounts(ctx, req.(*GetInvoiceServiceDiscountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Billing_ListAccountInvoiceServiceDiscounts_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -2594,6 +2630,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteInvoiceServiceDiscounts",
 			Handler:    _Billing_DeleteInvoiceServiceDiscounts_Handler,
+		},
+		{
+			MethodName: "GetInvoiceServiceDiscounts",
+			Handler:    _Billing_GetInvoiceServiceDiscounts_Handler,
 		},
 		{
 			MethodName: "CreateAccountInvoiceServiceDiscounts",
