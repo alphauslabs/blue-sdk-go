@@ -1813,6 +1813,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ExchangeRates"><span class="badge">M</span>ExchangeRates</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ExecuteOptimizationRequest"><span class="badge">M</span>ExecuteOptimizationRequest</a>
                 </li>
               
@@ -2178,6 +2182,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListDiscountExpirationAlertRequest"><span class="badge">M</span>ListDiscountExpirationAlertRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListExchangeRatesRequest"><span class="badge">M</span>ListExchangeRatesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListExchangeRatesResponse"><span class="badge">M</span>ListExchangeRatesResponse</a>
                 </li>
               
                 <li>
@@ -20989,6 +21001,37 @@ Supported values are the following:
 
         
       
+        <h3 id="blueapi.cover.v1.ExchangeRates">ExchangeRates</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.ExecuteOptimizationRequest">ExecuteOptimizationRequest</h3>
         <p></p>
 
@@ -23846,6 +23889,68 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
         <p>Request message for ListDiscountExpirationAlert</p>
 
         
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListExchangeRatesRequest">ListExchangeRatesRequest</h3>
+        <p>Request message for ListExchangeRates</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>viewId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. View Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Start date Format: &#34;YYYYMMDD&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. End date Format: &#34;YYYYMMDD&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListExchangeRatesResponse">ListExchangeRatesResponse</h3>
+        <p>Response message for ListExchangeRates</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>exchangeRates</td>
+                  <td><a href="#blueapi.cover.v1.ExchangeRates">ExchangeRates</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -27210,15 +27315,8 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
             <tbody>
               
                 <tr>
-                  <td>currency</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>exchangeRateDate</td>
-                  <td><a href="#string">string</a></td>
+                  <td>updateCurrency</td>
+                  <td><a href="#int64">int64</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -28247,6 +28345,13 @@ file in bytes </p></td>
                 <td><a href="#blueapi.cover.v1.UpdateViewCurrencyRequest">UpdateViewCurrencyRequest</a></td>
                 <td><a href="#blueapi.cover.v1.UpdateViewCurrencyResponse">UpdateViewCurrencyResponse</a></td>
                 <td><p>Update report&#39;s currency settings</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListExchangeRates</td>
+                <td><a href="#blueapi.cover.v1.ListExchangeRatesRequest">ListExchangeRatesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListExchangeRatesResponse">ListExchangeRatesResponse</a></td>
+                <td><p>Get list of exchange rates for a fixed report</p></td>
               </tr>
             
               <tr>
@@ -29440,6 +29545,16 @@ file in bytes </p></td>
                 <td>PUT</td>
                 <td>/v1/views/{viewId}/currency</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListExchangeRates</td>
+                <td>GET</td>
+                <td>/v1/views/{viewId}/exchangerates</td>
+                <td></td>
               </tr>
               
             

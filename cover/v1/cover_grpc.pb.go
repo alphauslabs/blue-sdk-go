@@ -56,6 +56,7 @@ const (
 	Cover_UpdateViewWidget_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateViewWidget"
 	Cover_UpdateViewColorTheme_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
 	Cover_UpdateViewCurrency_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateViewCurrency"
+	Cover_ListExchangeRates_FullMethodName                       = "/blueapi.cover.v1.Cover/ListExchangeRates"
 	Cover_DeleteView_FullMethodName                              = "/blueapi.cover.v1.Cover/DeleteView"
 	Cover_UpdateSideMenuState_FullMethodName                     = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
 	Cover_AddSideMenuFavorite_FullMethodName                     = "/blueapi.cover.v1.Cover/AddSideMenuFavorite"
@@ -252,6 +253,8 @@ type CoverClient interface {
 	UpdateViewColorTheme(ctx context.Context, in *UpdateViewColorThemeRequest, opts ...grpc.CallOption) (*UpdateViewColorThemeResponse, error)
 	// Update report's currency settings
 	UpdateViewCurrency(ctx context.Context, in *UpdateViewCurrencyRequest, opts ...grpc.CallOption) (*UpdateViewCurrencyResponse, error)
+	// Get list of exchange rates for a fixed report
+	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
 	// Deletes a view
 	DeleteView(ctx context.Context, in *DeleteViewRequest, opts ...grpc.CallOption) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -841,6 +844,16 @@ func (c *coverClient) UpdateViewCurrency(ctx context.Context, in *UpdateViewCurr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateViewCurrencyResponse)
 	err := c.cc.Invoke(ctx, Cover_UpdateViewCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListExchangeRatesResponse)
+	err := c.cc.Invoke(ctx, Cover_ListExchangeRates_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2680,6 +2693,8 @@ type CoverServer interface {
 	UpdateViewColorTheme(context.Context, *UpdateViewColorThemeRequest) (*UpdateViewColorThemeResponse, error)
 	// Update report's currency settings
 	UpdateViewCurrency(context.Context, *UpdateViewCurrencyRequest) (*UpdateViewCurrencyResponse, error)
+	// Get list of exchange rates for a fixed report
+	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
 	// Deletes a view
 	DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error)
 	// Updates the side menu state
@@ -3026,6 +3041,9 @@ func (UnimplementedCoverServer) UpdateViewColorTheme(context.Context, *UpdateVie
 }
 func (UnimplementedCoverServer) UpdateViewCurrency(context.Context, *UpdateViewCurrencyRequest) (*UpdateViewCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewCurrency not implemented")
+}
+func (UnimplementedCoverServer) ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
 }
 func (UnimplementedCoverServer) DeleteView(context.Context, *DeleteViewRequest) (*DeleteViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteView not implemented")
@@ -4020,6 +4038,24 @@ func _Cover_UpdateViewCurrency_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateViewCurrency(ctx, req.(*UpdateViewCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ListExchangeRates_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExchangeRatesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListExchangeRates(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListExchangeRates_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListExchangeRates(ctx, req.(*ListExchangeRatesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6374,6 +6410,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateViewCurrency",
 			Handler:    _Cover_UpdateViewCurrency_Handler,
+		},
+		{
+			MethodName: "ListExchangeRates",
+			Handler:    _Cover_ListExchangeRates_Handler,
 		},
 		{
 			MethodName: "DeleteView",
