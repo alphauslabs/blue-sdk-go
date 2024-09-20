@@ -40,7 +40,6 @@ const (
 	Cover_UpdateUserLocale_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateUserLocale"
 	Cover_UpdateUserAppTheme_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserAppTheme"
 	Cover_UpdateUserTimezone_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserTimezone"
-	Cover_UpdateUserCurrency_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserCurrency"
 	Cover_UpdateUserAttributes_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateUserAttributes"
 	Cover_DeleteMember_FullMethodName                            = "/blueapi.cover.v1.Cover/DeleteMember"
 	Cover_ResetPassword_FullMethodName                           = "/blueapi.cover.v1.Cover/ResetPassword"
@@ -56,6 +55,8 @@ const (
 	Cover_UpdateViewWidget_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateViewWidget"
 	Cover_UpdateViewColorTheme_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateViewColorTheme"
 	Cover_UpdateViewCurrency_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateViewCurrency"
+	Cover_SetOrgUpdateCurrency_FullMethodName                    = "/blueapi.cover.v1.Cover/SetOrgUpdateCurrency"
+	Cover_GetOrgUpdateCurrency_FullMethodName                    = "/blueapi.cover.v1.Cover/GetOrgUpdateCurrency"
 	Cover_ListExchangeRates_FullMethodName                       = "/blueapi.cover.v1.Cover/ListExchangeRates"
 	Cover_DeleteView_FullMethodName                              = "/blueapi.cover.v1.Cover/DeleteView"
 	Cover_UpdateSideMenuState_FullMethodName                     = "/blueapi.cover.v1.Cover/UpdateSideMenuState"
@@ -221,8 +222,6 @@ type CoverClient interface {
 	UpdateUserAppTheme(ctx context.Context, in *UpdateUserAppThemeRequest, opts ...grpc.CallOption) (*UpdateUserAppThemeResponse, error)
 	// Modify user's timezone
 	UpdateUserTimezone(ctx context.Context, in *UpdateUserTimezoneRequest, opts ...grpc.CallOption) (*UpdateUserTimezoneResponse, error)
-	// Modify user's currency
-	UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error)
 	// Modify attributes
 	UpdateUserAttributes(ctx context.Context, in *UpdateUserAttributesRequest, opts ...grpc.CallOption) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
@@ -253,6 +252,10 @@ type CoverClient interface {
 	UpdateViewColorTheme(ctx context.Context, in *UpdateViewColorThemeRequest, opts ...grpc.CallOption) (*UpdateViewColorThemeResponse, error)
 	// Update report's currency settings
 	UpdateViewCurrency(ctx context.Context, in *UpdateViewCurrencyRequest, opts ...grpc.CallOption) (*UpdateViewCurrencyResponse, error)
+	// Sets Org's reference of currency exchange rate
+	SetOrgUpdateCurrency(ctx context.Context, in *SetOrgUpdateCurrencyRequest, opts ...grpc.CallOption) (*SetOrgUpdateCurrencyResponse, error)
+	// Get Org's reference of currency exchange rate
+	GetOrgUpdateCurrency(ctx context.Context, in *GetOrgUpdateCurrencyRequest, opts ...grpc.CallOption) (*GetOrgUpdateCurrencyResponse, error)
 	// Get list of exchange rates for a fixed report
 	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
 	// Deletes a view
@@ -690,16 +693,6 @@ func (c *coverClient) UpdateUserTimezone(ctx context.Context, in *UpdateUserTime
 	return out, nil
 }
 
-func (c *coverClient) UpdateUserCurrency(ctx context.Context, in *UpdateUserCurrencyRequest, opts ...grpc.CallOption) (*UpdateUserCurrencyResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateUserCurrencyResponse)
-	err := c.cc.Invoke(ctx, Cover_UpdateUserCurrency_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *coverClient) UpdateUserAttributes(ctx context.Context, in *UpdateUserAttributesRequest, opts ...grpc.CallOption) (*UpdateUserAttributesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserAttributesResponse)
@@ -844,6 +837,26 @@ func (c *coverClient) UpdateViewCurrency(ctx context.Context, in *UpdateViewCurr
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateViewCurrencyResponse)
 	err := c.cc.Invoke(ctx, Cover_UpdateViewCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) SetOrgUpdateCurrency(ctx context.Context, in *SetOrgUpdateCurrencyRequest, opts ...grpc.CallOption) (*SetOrgUpdateCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetOrgUpdateCurrencyResponse)
+	err := c.cc.Invoke(ctx, Cover_SetOrgUpdateCurrency_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetOrgUpdateCurrency(ctx context.Context, in *GetOrgUpdateCurrencyRequest, opts ...grpc.CallOption) (*GetOrgUpdateCurrencyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOrgUpdateCurrencyResponse)
+	err := c.cc.Invoke(ctx, Cover_GetOrgUpdateCurrency_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2661,8 +2674,6 @@ type CoverServer interface {
 	UpdateUserAppTheme(context.Context, *UpdateUserAppThemeRequest) (*UpdateUserAppThemeResponse, error)
 	// Modify user's timezone
 	UpdateUserTimezone(context.Context, *UpdateUserTimezoneRequest) (*UpdateUserTimezoneResponse, error)
-	// Modify user's currency
-	UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error)
 	// Modify attributes
 	UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error)
 	// Deletes a user
@@ -2693,6 +2704,10 @@ type CoverServer interface {
 	UpdateViewColorTheme(context.Context, *UpdateViewColorThemeRequest) (*UpdateViewColorThemeResponse, error)
 	// Update report's currency settings
 	UpdateViewCurrency(context.Context, *UpdateViewCurrencyRequest) (*UpdateViewCurrencyResponse, error)
+	// Sets Org's reference of currency exchange rate
+	SetOrgUpdateCurrency(context.Context, *SetOrgUpdateCurrencyRequest) (*SetOrgUpdateCurrencyResponse, error)
+	// Get Org's reference of currency exchange rate
+	GetOrgUpdateCurrency(context.Context, *GetOrgUpdateCurrencyRequest) (*GetOrgUpdateCurrencyResponse, error)
 	// Get list of exchange rates for a fixed report
 	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
 	// Deletes a view
@@ -2994,9 +3009,6 @@ func (UnimplementedCoverServer) UpdateUserAppTheme(context.Context, *UpdateUserA
 func (UnimplementedCoverServer) UpdateUserTimezone(context.Context, *UpdateUserTimezoneRequest) (*UpdateUserTimezoneResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserTimezone not implemented")
 }
-func (UnimplementedCoverServer) UpdateUserCurrency(context.Context, *UpdateUserCurrencyRequest) (*UpdateUserCurrencyResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserCurrency not implemented")
-}
 func (UnimplementedCoverServer) UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAttributes not implemented")
 }
@@ -3041,6 +3053,12 @@ func (UnimplementedCoverServer) UpdateViewColorTheme(context.Context, *UpdateVie
 }
 func (UnimplementedCoverServer) UpdateViewCurrency(context.Context, *UpdateViewCurrencyRequest) (*UpdateViewCurrencyResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateViewCurrency not implemented")
+}
+func (UnimplementedCoverServer) SetOrgUpdateCurrency(context.Context, *SetOrgUpdateCurrencyRequest) (*SetOrgUpdateCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetOrgUpdateCurrency not implemented")
+}
+func (UnimplementedCoverServer) GetOrgUpdateCurrency(context.Context, *GetOrgUpdateCurrencyRequest) (*GetOrgUpdateCurrencyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrgUpdateCurrency not implemented")
 }
 func (UnimplementedCoverServer) ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListExchangeRates not implemented")
@@ -3754,24 +3772,6 @@ func _Cover_UpdateUserTimezone_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_UpdateUserCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateUserCurrencyRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).UpdateUserCurrency(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_UpdateUserCurrency_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateUserCurrency(ctx, req.(*UpdateUserCurrencyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Cover_UpdateUserAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateUserAttributesRequest)
 	if err := dec(in); err != nil {
@@ -4038,6 +4038,42 @@ func _Cover_UpdateViewCurrency_Handler(srv interface{}, ctx context.Context, dec
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateViewCurrency(ctx, req.(*UpdateViewCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_SetOrgUpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetOrgUpdateCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).SetOrgUpdateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_SetOrgUpdateCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).SetOrgUpdateCurrency(ctx, req.(*SetOrgUpdateCurrencyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetOrgUpdateCurrency_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrgUpdateCurrencyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetOrgUpdateCurrency(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetOrgUpdateCurrency_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetOrgUpdateCurrency(ctx, req.(*GetOrgUpdateCurrencyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6348,10 +6384,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_UpdateUserTimezone_Handler,
 		},
 		{
-			MethodName: "UpdateUserCurrency",
-			Handler:    _Cover_UpdateUserCurrency_Handler,
-		},
-		{
 			MethodName: "UpdateUserAttributes",
 			Handler:    _Cover_UpdateUserAttributes_Handler,
 		},
@@ -6410,6 +6442,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateViewCurrency",
 			Handler:    _Cover_UpdateViewCurrency_Handler,
+		},
+		{
+			MethodName: "SetOrgUpdateCurrency",
+			Handler:    _Cover_SetOrgUpdateCurrency_Handler,
+		},
+		{
+			MethodName: "GetOrgUpdateCurrency",
+			Handler:    _Cover_GetOrgUpdateCurrency_Handler,
 		},
 		{
 			MethodName: "ListExchangeRates",

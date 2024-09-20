@@ -2037,6 +2037,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetOrgUpdateCurrencyRequest"><span class="badge">M</span>GetOrgUpdateCurrencyRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetOrgUpdateCurrencyResponse"><span class="badge">M</span>GetOrgUpdateCurrencyResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetPayersRequest"><span class="badge">M</span>GetPayersRequest</a>
                 </li>
               
@@ -2405,6 +2413,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.SetOrgUpdateCurrencyRequest"><span class="badge">M</span>SetOrgUpdateCurrencyRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.SetOrgUpdateCurrencyResponse"><span class="badge">M</span>SetOrgUpdateCurrencyResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.TerminateResourceRequest"><span class="badge">M</span>TerminateResourceRequest</a>
                 </li>
               
@@ -2578,14 +2594,6 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.UpdateUserColorThemeResponse"><span class="badge">M</span>UpdateUserColorThemeResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.UpdateUserCurrencyRequest"><span class="badge">M</span>UpdateUserCurrencyRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.cover.v1.UpdateUserCurrencyResponse"><span class="badge">M</span>UpdateUserCurrencyResponse</a>
                 </li>
               
                 <li>
@@ -22948,6 +22956,44 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetOrgUpdateCurrencyRequest">GetOrgUpdateCurrencyRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetOrgUpdateCurrencyResponse">GetOrgUpdateCurrencyResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>updateCurrency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dateRegistered</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetPayersRequest">GetPayersRequest</h3>
         <p>Request message for GetPayers</p>
 
@@ -25955,6 +26001,54 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.SetOrgUpdateCurrencyRequest">SetOrgUpdateCurrencyRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>updateCurrency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Required. Day of the month. Valid inputs are: &#34;1 - 31&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.SetOrgUpdateCurrencyResponse">SetOrgUpdateCurrencyResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>updateCurrency</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.TerminateResourceRequest">TerminateResourceRequest</h3>
         <p>Request message for TerminateResource</p>
 
@@ -27304,54 +27398,6 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
-        <h3 id="blueapi.cover.v1.UpdateUserCurrencyRequest">UpdateUserCurrencyRequest</h3>
-        <p>Request message for UpdateUserCurrency</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>updateCurrency</td>
-                  <td><a href="#int64">int64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.cover.v1.UpdateUserCurrencyResponse">UpdateUserCurrencyResponse</h3>
-        <p>Response message for UpdateUserCurrency</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>userData</td>
-                  <td><a href="#blueapi.api.cover.UserData">blueapi.api.cover.UserData</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.cover.v1.UpdateUserEmailRequest">UpdateUserEmailRequest</h3>
         <p>Request message for UpdateUserEmail</p>
 
@@ -28236,13 +28282,6 @@ file in bytes </p></td>
               </tr>
             
               <tr>
-                <td>UpdateUserCurrency</td>
-                <td><a href="#blueapi.cover.v1.UpdateUserCurrencyRequest">UpdateUserCurrencyRequest</a></td>
-                <td><a href="#blueapi.cover.v1.UpdateUserCurrencyResponse">UpdateUserCurrencyResponse</a></td>
-                <td><p>Modify user&#39;s currency</p></td>
-              </tr>
-            
-              <tr>
                 <td>UpdateUserAttributes</td>
                 <td><a href="#blueapi.cover.v1.UpdateUserAttributesRequest">UpdateUserAttributesRequest</a></td>
                 <td><a href="#blueapi.cover.v1.UpdateUserAttributesResponse">UpdateUserAttributesResponse</a></td>
@@ -28345,6 +28384,20 @@ file in bytes </p></td>
                 <td><a href="#blueapi.cover.v1.UpdateViewCurrencyRequest">UpdateViewCurrencyRequest</a></td>
                 <td><a href="#blueapi.cover.v1.UpdateViewCurrencyResponse">UpdateViewCurrencyResponse</a></td>
                 <td><p>Update report&#39;s currency settings</p></td>
+              </tr>
+            
+              <tr>
+                <td>SetOrgUpdateCurrency</td>
+                <td><a href="#blueapi.cover.v1.SetOrgUpdateCurrencyRequest">SetOrgUpdateCurrencyRequest</a></td>
+                <td><a href="#blueapi.cover.v1.SetOrgUpdateCurrencyResponse">SetOrgUpdateCurrencyResponse</a></td>
+                <td><p>Sets Org&#39;s reference of currency exchange rate</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetOrgUpdateCurrency</td>
+                <td><a href="#blueapi.cover.v1.GetOrgUpdateCurrencyRequest">GetOrgUpdateCurrencyRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetOrgUpdateCurrencyResponse">GetOrgUpdateCurrencyResponse</a></td>
+                <td><p>Get Org&#39;s reference of currency exchange rate</p></td>
               </tr>
             
               <tr>
@@ -29391,16 +29444,6 @@ file in bytes </p></td>
               
               
               <tr>
-                <td>UpdateUserCurrency</td>
-                <td>PUT</td>
-                <td>/v1/me/currency</td>
-                <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
                 <td>UpdateUserAttributes</td>
                 <td>PUT</td>
                 <td>/v1/me/attributes</td>
@@ -29545,6 +29588,26 @@ file in bytes </p></td>
                 <td>PUT</td>
                 <td>/v1/views/{viewId}/currency</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetOrgUpdateCurrency</td>
+                <td>POST</td>
+                <td>/v1/organizations/currency</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetOrgUpdateCurrency</td>
+                <td>GET</td>
+                <td>/v1/organizations/currency</td>
+                <td></td>
               </tr>
               
             
