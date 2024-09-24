@@ -159,6 +159,7 @@ const (
 	Cover_AddInfotoMarketplace_FullMethodName                    = "/blueapi.cover.v1.Cover/AddInfotoMarketplace"
 	Cover_GetReportSummary_FullMethodName                        = "/blueapi.cover.v1.Cover/GetReportSummary"
 	Cover_ListRecommendations_FullMethodName                     = "/blueapi.cover.v1.Cover/ListRecommendations"
+	Cover_ListRecommendationsV2_FullMethodName                   = "/blueapi.cover.v1.Cover/ListRecommendationsV2"
 	Cover_GetRecommendation_FullMethodName                       = "/blueapi.cover.v1.Cover/GetRecommendation"
 	Cover_GetRecommendationV2_FullMethodName                     = "/blueapi.cover.v1.Cover/GetRecommendationV2"
 	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
@@ -459,6 +460,8 @@ type CoverClient interface {
 	GetReportSummary(ctx context.Context, in *GetReportSummaryRequest, opts ...grpc.CallOption) (*GetReportSummaryResponse, error)
 	// Lists recommendations based on specified criteria.
 	ListRecommendations(ctx context.Context, in *ListRecommendationRequest, opts ...grpc.CallOption) (Cover_ListRecommendationsClient, error)
+	// Lists recommendations based on specified criteria.
+	ListRecommendationsV2(ctx context.Context, in *ListRecommendationV2Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV2Client, error)
 	// Retrieves a specific recommendation by its ID.
 	GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error)
 	// Retrieves a specific recommendation by its ID. (Version 2)
@@ -2460,6 +2463,39 @@ func (x *coverListRecommendationsClient) Recv() (*ListRecommendationResponse, er
 	return m, nil
 }
 
+func (c *coverClient) ListRecommendationsV2(ctx context.Context, in *ListRecommendationV2Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV2Client, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[25], Cover_ListRecommendationsV2_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverListRecommendationsV2Client{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_ListRecommendationsV2Client interface {
+	Recv() (*ListRecommendationResponse, error)
+	grpc.ClientStream
+}
+
+type coverListRecommendationsV2Client struct {
+	grpc.ClientStream
+}
+
+func (x *coverListRecommendationsV2Client) Recv() (*ListRecommendationResponse, error) {
+	m := new(ListRecommendationResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *coverClient) GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetRecommendationResponse)
@@ -2911,6 +2947,8 @@ type CoverServer interface {
 	GetReportSummary(context.Context, *GetReportSummaryRequest) (*GetReportSummaryResponse, error)
 	// Lists recommendations based on specified criteria.
 	ListRecommendations(*ListRecommendationRequest, Cover_ListRecommendationsServer) error
+	// Lists recommendations based on specified criteria.
+	ListRecommendationsV2(*ListRecommendationV2Request, Cover_ListRecommendationsV2Server) error
 	// Retrieves a specific recommendation by its ID.
 	GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error)
 	// Retrieves a specific recommendation by its ID. (Version 2)
@@ -3365,6 +3403,9 @@ func (UnimplementedCoverServer) GetReportSummary(context.Context, *GetReportSumm
 }
 func (UnimplementedCoverServer) ListRecommendations(*ListRecommendationRequest, Cover_ListRecommendationsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListRecommendations not implemented")
+}
+func (UnimplementedCoverServer) ListRecommendationsV2(*ListRecommendationV2Request, Cover_ListRecommendationsV2Server) error {
+	return status.Errorf(codes.Unimplemented, "method ListRecommendationsV2 not implemented")
 }
 func (UnimplementedCoverServer) GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendation not implemented")
@@ -5994,6 +6035,27 @@ func (x *coverListRecommendationsServer) Send(m *ListRecommendationResponse) err
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cover_ListRecommendationsV2_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListRecommendationV2Request)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).ListRecommendationsV2(m, &coverListRecommendationsV2Server{ServerStream: stream})
+}
+
+type Cover_ListRecommendationsV2Server interface {
+	Send(*ListRecommendationResponse) error
+	grpc.ServerStream
+}
+
+type coverListRecommendationsV2Server struct {
+	grpc.ServerStream
+}
+
+func (x *coverListRecommendationsV2Server) Send(m *ListRecommendationResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Cover_GetRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRecommendationRequest)
 	if err := dec(in); err != nil {
@@ -6952,6 +7014,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListRecommendations",
 			Handler:       _Cover_ListRecommendations_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListRecommendationsV2",
+			Handler:       _Cover_ListRecommendationsV2_Handler,
 			ServerStreams: true,
 		},
 	},
