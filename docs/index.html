@@ -22227,6 +22227,13 @@ This field allows custom options for specifying criteria for cost group creation
                   <td><p>Optional. If set to true, include cost forecast </p></td>
                 </tr>
               
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. If not set, default value is `USD`. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22982,6 +22989,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
             <tbody>
               
                 <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>updateCurrency</td>
                   <td><a href="#int64">int64</a></td>
                   <td></td>
@@ -22989,7 +23003,7 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 </tr>
               
                 <tr>
-                  <td>dateRegistered</td>
+                  <td>lastUpdate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -23957,13 +23971,6 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
             <tbody>
               
                 <tr>
-                  <td>viewId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. View Id. </p></td>
-                </tr>
-              
-                <tr>
                   <td>startDate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -23993,6 +24000,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
               
                 <tr>
                   <td>exchangeRates</td>
@@ -29784,7 +29798,7 @@ file in bytes </p></td>
               <tr>
                 <td>ListExchangeRates</td>
                 <td>GET</td>
-                <td>/v1/views/{viewId}/exchangerates</td>
+                <td>/v1/organizations/rates</td>
                 <td></td>
               </tr>
               
