@@ -7,12 +7,6 @@
 package recommendation
 
 import (
-	awsrec "github.com/alphauslabs/blue-sdk-go/api/cover/recommendation/awsrec"
-	azurecsprec "github.com/alphauslabs/blue-sdk-go/api/cover/recommendation/azurecsprec"
-	gcprec "github.com/alphauslabs/blue-sdk-go/api/cover/recommendation/gcprec"
-	octoawsrec "github.com/alphauslabs/blue-sdk-go/api/cover/recommendation/octoawsrec"
-	octoazurecsprec "github.com/alphauslabs/blue-sdk-go/api/cover/recommendation/octoazurecsprec"
-	octogcprec "github.com/alphauslabs/blue-sdk-go/api/cover/recommendation/octogcprec"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -31,29 +25,29 @@ type RecommendationData struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AwsRecommendations           *awsrec.AWSRecommendations           `protobuf:"bytes,1,opt,name=awsRecommendations,proto3" json:"awsRecommendations,omitempty"`
-	GcpRecommendations           *gcprec.GCPRecommendations           `protobuf:"bytes,2,opt,name=gcpRecommendations,proto3" json:"gcpRecommendations,omitempty"`
-	AzureCspRecommendations      *azurecsprec.AzureCSPRecommendations `protobuf:"bytes,3,opt,name=azureCspRecommendations,proto3" json:"azureCspRecommendations,omitempty"`
-	OctoGeneratedRecommendations *OCTOGeneratedRecommendations        `protobuf:"bytes,23,opt,name=octoGeneratedRecommendations,proto3" json:"octoGeneratedRecommendations,omitempty"`
-	Target                       string                               `protobuf:"bytes,18,opt,name=target,proto3" json:"target,omitempty"`
-	TargetName                   string                               `protobuf:"bytes,19,opt,name=targetName,proto3" json:"targetName,omitempty"`
-	ResourceId                   string                               `protobuf:"bytes,4,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
-	Service                      string                               `protobuf:"bytes,5,opt,name=service,proto3" json:"service,omitempty"`
-	CostGroup                    string                               `protobuf:"bytes,6,opt,name=costGroup,proto3" json:"costGroup,omitempty"`
-	RecommendationGroup          string                               `protobuf:"bytes,7,opt,name=recommendationGroup,proto3" json:"recommendationGroup,omitempty"`
-	Category                     string                               `protobuf:"bytes,8,opt,name=category,proto3" json:"category,omitempty"`
-	Source                       string                               `protobuf:"bytes,9,opt,name=source,proto3" json:"source,omitempty"`
-	Id                           string                               `protobuf:"bytes,10,opt,name=id,proto3" json:"id,omitempty"`
-	LastUpdatedAt                string                               `protobuf:"bytes,11,opt,name=lastUpdatedAt,proto3" json:"lastUpdatedAt,omitempty"`
-	Region                       string                               `protobuf:"bytes,12,opt,name=region,proto3" json:"region,omitempty"`
-	Recommendation               string                               `protobuf:"bytes,13,opt,name=recommendation,proto3" json:"recommendation,omitempty"`
-	EstimatedMonthlyCost         float64                              `protobuf:"fixed64,14,opt,name=estimatedMonthlyCost,proto3" json:"estimatedMonthlyCost,omitempty"`
-	EstimatedMonthlySavings      float64                              `protobuf:"fixed64,15,opt,name=estimatedMonthlySavings,proto3" json:"estimatedMonthlySavings,omitempty"`
-	EstimatedSavingsPercentage   float64                              `protobuf:"fixed64,16,opt,name=estimatedSavingsPercentage,proto3" json:"estimatedSavingsPercentage,omitempty"`
-	ResourceName                 string                               `protobuf:"bytes,17,opt,name=resourceName,proto3" json:"resourceName,omitempty"`
-	RestartNeeded                bool                                 `protobuf:"varint,20,opt,name=restartNeeded,proto3" json:"restartNeeded,omitempty"`
-	RollbackPossible             bool                                 `protobuf:"varint,21,opt,name=rollbackPossible,proto3" json:"rollbackPossible,omitempty"`
-	LaunchUrl                    string                               `protobuf:"bytes,22,opt,name=launchUrl,proto3" json:"launchUrl,omitempty"`
+	AwsRecommendations           *AWSRecommendations           `protobuf:"bytes,1,opt,name=awsRecommendations,proto3" json:"awsRecommendations,omitempty"`
+	GcpRecommendations           *GCPRecommendations           `protobuf:"bytes,2,opt,name=gcpRecommendations,proto3" json:"gcpRecommendations,omitempty"`
+	AzureCspRecommendations      *AzureCSPRecommendations      `protobuf:"bytes,3,opt,name=azureCspRecommendations,proto3" json:"azureCspRecommendations,omitempty"`
+	OctoGeneratedRecommendations *OCTOGeneratedRecommendations `protobuf:"bytes,23,opt,name=octoGeneratedRecommendations,proto3" json:"octoGeneratedRecommendations,omitempty"`
+	Target                       string                        `protobuf:"bytes,18,opt,name=target,proto3" json:"target,omitempty"`
+	TargetName                   string                        `protobuf:"bytes,19,opt,name=targetName,proto3" json:"targetName,omitempty"`
+	ResourceId                   string                        `protobuf:"bytes,4,opt,name=resourceId,proto3" json:"resourceId,omitempty"`
+	Service                      string                        `protobuf:"bytes,5,opt,name=service,proto3" json:"service,omitempty"`
+	CostGroup                    string                        `protobuf:"bytes,6,opt,name=costGroup,proto3" json:"costGroup,omitempty"`
+	RecommendationGroup          string                        `protobuf:"bytes,7,opt,name=recommendationGroup,proto3" json:"recommendationGroup,omitempty"`
+	Category                     string                        `protobuf:"bytes,8,opt,name=category,proto3" json:"category,omitempty"`
+	Source                       string                        `protobuf:"bytes,9,opt,name=source,proto3" json:"source,omitempty"`
+	Id                           string                        `protobuf:"bytes,10,opt,name=id,proto3" json:"id,omitempty"`
+	LastUpdatedAt                string                        `protobuf:"bytes,11,opt,name=lastUpdatedAt,proto3" json:"lastUpdatedAt,omitempty"`
+	Region                       string                        `protobuf:"bytes,12,opt,name=region,proto3" json:"region,omitempty"`
+	Recommendation               string                        `protobuf:"bytes,13,opt,name=recommendation,proto3" json:"recommendation,omitempty"`
+	EstimatedMonthlyCost         float64                       `protobuf:"fixed64,14,opt,name=estimatedMonthlyCost,proto3" json:"estimatedMonthlyCost,omitempty"`
+	EstimatedMonthlySavings      float64                       `protobuf:"fixed64,15,opt,name=estimatedMonthlySavings,proto3" json:"estimatedMonthlySavings,omitempty"`
+	EstimatedSavingsPercentage   float64                       `protobuf:"fixed64,16,opt,name=estimatedSavingsPercentage,proto3" json:"estimatedSavingsPercentage,omitempty"`
+	ResourceName                 string                        `protobuf:"bytes,17,opt,name=resourceName,proto3" json:"resourceName,omitempty"`
+	RestartNeeded                bool                          `protobuf:"varint,20,opt,name=restartNeeded,proto3" json:"restartNeeded,omitempty"`
+	RollbackPossible             bool                          `protobuf:"varint,21,opt,name=rollbackPossible,proto3" json:"rollbackPossible,omitempty"`
+	LaunchUrl                    string                        `protobuf:"bytes,22,opt,name=launchUrl,proto3" json:"launchUrl,omitempty"`
 }
 
 func (x *RecommendationData) Reset() {
@@ -88,21 +82,21 @@ func (*RecommendationData) Descriptor() ([]byte, []int) {
 	return file_api_cover_recommendation_recommendation_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *RecommendationData) GetAwsRecommendations() *awsrec.AWSRecommendations {
+func (x *RecommendationData) GetAwsRecommendations() *AWSRecommendations {
 	if x != nil {
 		return x.AwsRecommendations
 	}
 	return nil
 }
 
-func (x *RecommendationData) GetGcpRecommendations() *gcprec.GCPRecommendations {
+func (x *RecommendationData) GetGcpRecommendations() *GCPRecommendations {
 	if x != nil {
 		return x.GcpRecommendations
 	}
 	return nil
 }
 
-func (x *RecommendationData) GetAzureCspRecommendations() *azurecsprec.AzureCSPRecommendations {
+func (x *RecommendationData) GetAzureCspRecommendations() *AzureCSPRecommendations {
 	if x != nil {
 		return x.AzureCspRecommendations
 	}
@@ -254,9 +248,9 @@ type OCTOGeneratedRecommendations struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Aws      *octoawsrec.AWSRecommendations           `protobuf:"bytes,1,opt,name=aws,proto3" json:"aws,omitempty"`
-	Gcp      *octogcprec.GCPRecommendations           `protobuf:"bytes,2,opt,name=gcp,proto3" json:"gcp,omitempty"`
-	Azurecsp *octoazurecsprec.AzureCSPRecommendations `protobuf:"bytes,3,opt,name=azurecsp,proto3" json:"azurecsp,omitempty"`
+	Aws      *AWSRecommendations      `protobuf:"bytes,1,opt,name=aws,proto3" json:"aws,omitempty"`
+	Gcp      *GCPRecommendations      `protobuf:"bytes,2,opt,name=gcp,proto3" json:"gcp,omitempty"`
+	Azurecsp *AzureCSPRecommendations `protobuf:"bytes,3,opt,name=azurecsp,proto3" json:"azurecsp,omitempty"`
 }
 
 func (x *OCTOGeneratedRecommendations) Reset() {
@@ -291,21 +285,21 @@ func (*OCTOGeneratedRecommendations) Descriptor() ([]byte, []int) {
 	return file_api_cover_recommendation_recommendation_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *OCTOGeneratedRecommendations) GetAws() *octoawsrec.AWSRecommendations {
+func (x *OCTOGeneratedRecommendations) GetAws() *AWSRecommendations {
 	if x != nil {
 		return x.Aws
 	}
 	return nil
 }
 
-func (x *OCTOGeneratedRecommendations) GetGcp() *octogcprec.GCPRecommendations {
+func (x *OCTOGeneratedRecommendations) GetGcp() *GCPRecommendations {
 	if x != nil {
 		return x.Gcp
 	}
 	return nil
 }
 
-func (x *OCTOGeneratedRecommendations) GetAzurecsp() *octoazurecsprec.AzureCSPRecommendations {
+func (x *OCTOGeneratedRecommendations) GetAzurecsp() *AzureCSPRecommendations {
 	if x != nil {
 		return x.Azurecsp
 	}
@@ -453,14 +447,14 @@ func file_api_cover_recommendation_recommendation_proto_rawDescGZIP() []byte {
 
 var file_api_cover_recommendation_recommendation_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_api_cover_recommendation_recommendation_proto_goTypes = []any{
-	(*RecommendationData)(nil),                      // 0: blueapi.api.cover.recommendation.RecommendationData
-	(*OCTOGeneratedRecommendations)(nil),            // 1: blueapi.api.cover.recommendation.OCTOGeneratedRecommendations
-	(*awsrec.AWSRecommendations)(nil),               // 2: blueapi.api.cover.recommendation.aws.AWSRecommendations
-	(*gcprec.GCPRecommendations)(nil),               // 3: blueapi.api.cover.recommendation.gcp.GCPRecommendations
-	(*azurecsprec.AzureCSPRecommendations)(nil),     // 4: blueapi.api.cover.recommendation.azurecsp.AzureCSPRecommendations
-	(*octoawsrec.AWSRecommendations)(nil),           // 5: blueapi.api.cover.recommendation.octoaws.AWSRecommendations
-	(*octogcprec.GCPRecommendations)(nil),           // 6: blueapi.api.cover.recommendation.octogcp.GCPRecommendations
-	(*octoazurecsprec.AzureCSPRecommendations)(nil), // 7: blueapi.api.cover.recommendation.octoazurecsp.AzureCSPRecommendations
+	(*RecommendationData)(nil),           // 0: blueapi.api.cover.recommendation.RecommendationData
+	(*OCTOGeneratedRecommendations)(nil), // 1: blueapi.api.cover.recommendation.OCTOGeneratedRecommendations
+	(*AWSRecommendations)(nil),           // 2: blueapi.api.cover.recommendation.aws.AWSRecommendations
+	(*GCPRecommendations)(nil),           // 3: blueapi.api.cover.recommendation.gcp.GCPRecommendations
+	(*AzureCSPRecommendations)(nil),      // 4: blueapi.api.cover.recommendation.azurecsp.AzureCSPRecommendations
+	(*AWSRecommendations)(nil),           // 5: blueapi.api.cover.recommendation.octoaws.AWSRecommendations
+	(*GCPRecommendations)(nil),           // 6: blueapi.api.cover.recommendation.octogcp.GCPRecommendations
+	(*AzureCSPRecommendations)(nil),      // 7: blueapi.api.cover.recommendation.octoazurecsp.AzureCSPRecommendations
 }
 var file_api_cover_recommendation_recommendation_proto_depIdxs = []int32{
 	2, // 0: blueapi.api.cover.recommendation.RecommendationData.awsRecommendations:type_name -> blueapi.api.cover.recommendation.aws.AWSRecommendations
@@ -482,6 +476,12 @@ func file_api_cover_recommendation_recommendation_proto_init() {
 	if File_api_cover_recommendation_recommendation_proto != nil {
 		return
 	}
+	file_api_cover_recommendation_octoaws_proto_init()
+	file_api_cover_recommendation_octogcp_proto_init()
+	file_api_cover_recommendation_octoazurecsp_proto_init()
+	file_api_cover_recommendation_gcp_proto_init()
+	file_api_cover_recommendation_azurecsp_proto_init()
+	file_api_cover_recommendation_aws_proto_init()
 	if !protoimpl.UnsafeEnabled {
 		file_api_cover_recommendation_recommendation_proto_msgTypes[0].Exporter = func(v any, i int) any {
 			switch v := v.(*RecommendationData); i {
