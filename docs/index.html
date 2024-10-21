@@ -2645,6 +2645,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.UpdateUserProfileRequest"><span class="badge">M</span>UpdateUserProfileRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateUserProfileResponse"><span class="badge">M</span>UpdateUserProfileResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.UpdateUserTimezoneRequest"><span class="badge">M</span>UpdateUserTimezoneRequest</a>
                 </li>
               
@@ -20242,6 +20250,20 @@ Supported values are the following:
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>linkSource</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasSubscribedUpdates</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -23655,6 +23677,62 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
               
                 <tr>
                   <td>hasCreatedProfile</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intention</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>emailAddress</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkSource</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasSubscribedUpdates</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -27869,6 +27947,152 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.UpdateUserProfileRequest">UpdateUserProfileRequest</h3>
+        <p>Request message for UpdateUserProfile</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required email </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intention</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkSource</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasSubscribedUpdates</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateUserProfileResponse">UpdateUserProfileResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intention</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkSource</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasSubscribedUpdates</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateUserTimezoneRequest">UpdateUserTimezoneRequest</h3>
         <p>Request message for UpdateUserTimezone</p>
 
@@ -29266,6 +29490,13 @@ file in bytes </p></td>
                 <td><a href="#blueapi.cover.v1.GetUserProfileRequest">GetUserProfileRequest</a></td>
                 <td><a href="#blueapi.cover.v1.GetUserProfileResponse">GetUserProfileResponse</a></td>
                 <td><p>Octo getting user profile</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateUserProfile</td>
+                <td><a href="#blueapi.cover.v1.UpdateUserProfileRequest">UpdateUserProfileRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateUserProfileResponse">UpdateUserProfileResponse</a></td>
+                <td><p>Update user profile</p></td>
               </tr>
             
               <tr>
@@ -30756,6 +30987,16 @@ file in bytes </p></td>
                 <td>GET</td>
                 <td>/v1/members/profile/{email}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateUserProfile</td>
+                <td>PUT</td>
+                <td>/v1/members/profile/{email}</td>
+                <td>*</td>
               </tr>
               
             

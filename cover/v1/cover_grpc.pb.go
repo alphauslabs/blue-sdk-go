@@ -148,6 +148,7 @@ const (
 	Cover_UpdateAnomalyAlert_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateAnomalyAlert"
 	Cover_RegisterNewUser_FullMethodName                         = "/blueapi.cover.v1.Cover/RegisterNewUser"
 	Cover_GetUserProfile_FullMethodName                          = "/blueapi.cover.v1.Cover/GetUserProfile"
+	Cover_UpdateUserProfile_FullMethodName                       = "/blueapi.cover.v1.Cover/UpdateUserProfile"
 	Cover_ListBudgets_FullMethodName                             = "/blueapi.cover.v1.Cover/ListBudgets"
 	Cover_GetBudget_FullMethodName                               = "/blueapi.cover.v1.Cover/GetBudget"
 	Cover_CreateBudget_FullMethodName                            = "/blueapi.cover.v1.Cover/CreateBudget"
@@ -438,6 +439,8 @@ type CoverClient interface {
 	RegisterNewUser(ctx context.Context, in *RegisterNewUserRequest, opts ...grpc.CallOption) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(ctx context.Context, in *GetUserProfileRequest, opts ...grpc.CallOption) (*GetUserProfileResponse, error)
+	// Update user profile
+	UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UpdateUserProfileResponse, error)
 	// WORK-IN-PROGRESS: List all Budgets in an organization or Budgets under specific cost group
 	ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error)
 	// WORK-IN-PROGRESS: Get specific Budget data for a cost group in an organization
@@ -2307,6 +2310,16 @@ func (c *coverClient) GetUserProfile(ctx context.Context, in *GetUserProfileRequ
 	return out, nil
 }
 
+func (c *coverClient) UpdateUserProfile(ctx context.Context, in *UpdateUserProfileRequest, opts ...grpc.CallOption) (*UpdateUserProfileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserProfileResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateUserProfile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[23], Cover_ListBudgets_FullMethodName, cOpts...)
@@ -2925,6 +2938,8 @@ type CoverServer interface {
 	RegisterNewUser(context.Context, *RegisterNewUserRequest) (*RegisterNewUserResponse, error)
 	// Octo getting user profile
 	GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error)
+	// Update user profile
+	UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UpdateUserProfileResponse, error)
 	// WORK-IN-PROGRESS: List all Budgets in an organization or Budgets under specific cost group
 	ListBudgets(*ListBudgetsRequest, Cover_ListBudgetsServer) error
 	// WORK-IN-PROGRESS: Get specific Budget data for a cost group in an organization
@@ -3370,6 +3385,9 @@ func (UnimplementedCoverServer) RegisterNewUser(context.Context, *RegisterNewUse
 }
 func (UnimplementedCoverServer) GetUserProfile(context.Context, *GetUserProfileRequest) (*GetUserProfileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserProfile not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserProfile(context.Context, *UpdateUserProfileRequest) (*UpdateUserProfileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserProfile not implemented")
 }
 func (UnimplementedCoverServer) ListBudgets(*ListBudgetsRequest, Cover_ListBudgetsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListBudgets not implemented")
@@ -5831,6 +5849,24 @@ func _Cover_GetUserProfile_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_UpdateUserProfile_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserProfileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserProfile(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateUserProfile_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserProfile(ctx, req.(*UpdateUserProfileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ListBudgets_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListBudgetsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -6784,6 +6820,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserProfile",
 			Handler:    _Cover_GetUserProfile_Handler,
+		},
+		{
+			MethodName: "UpdateUserProfile",
+			Handler:    _Cover_UpdateUserProfile_Handler,
 		},
 		{
 			MethodName: "GetBudget",
