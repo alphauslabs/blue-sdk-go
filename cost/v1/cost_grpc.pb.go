@@ -83,6 +83,9 @@ const (
 	Cost_GetBreakevenPoint_FullMethodName             = "/blueapi.cost.v1.Cost/GetBreakevenPoint"
 	Cost_CheckAccountsBelongToMsp_FullMethodName      = "/blueapi.cost.v1.Cost/CheckAccountsBelongToMsp"
 	Cost_ReadInvoiceIds_FullMethodName                = "/blueapi.cost.v1.Cost/ReadInvoiceIds"
+	Cost_ReadInvoiceOverViews_FullMethodName          = "/blueapi.cost.v1.Cost/ReadInvoiceOverViews"
+	Cost_ReadInvoiceCosts_FullMethodName              = "/blueapi.cost.v1.Cost/ReadInvoiceCosts"
+	Cost_ReadInvoiceGroupCosts_FullMethodName         = "/blueapi.cost.v1.Cost/ReadInvoiceGroupCosts"
 )
 
 // CostClient is the client API for Cost service.
@@ -256,6 +259,12 @@ type CostClient interface {
 	CheckAccountsBelongToMsp(ctx context.Context, in *CheckAccountsRequest, opts ...grpc.CallOption) (*CheckAccountsResponse, error)
 	// Read the invoice ids. Only available in Ripple.
 	ReadInvoiceIds(ctx context.Context, in *ReadInvoiceIdsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdsClient, error)
+	// WORK-IN-PROGRESS: Read the invoice overviews. Only available in Ripple.
+	ReadInvoiceOverViews(ctx context.Context, in *ReadInvoiceOverviewsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceOverViewsClient, error)
+	// WORK-IN-PROGRESS: Read the invoice costs. Only available in Ripple.
+	ReadInvoiceCosts(ctx context.Context, in *ReadInvoiceCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceCostsClient, error)
+	// WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.
+	ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceGroupCostsClient, error)
 }
 
 type costClient struct {
@@ -1155,6 +1164,105 @@ func (x *costReadInvoiceIdsClient) Recv() (*ReadInvoiceIdsResponse, error) {
 	return m, nil
 }
 
+func (c *costClient) ReadInvoiceOverViews(ctx context.Context, in *ReadInvoiceOverviewsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceOverViewsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[13], Cost_ReadInvoiceOverViews_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadInvoiceOverViewsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadInvoiceOverViewsClient interface {
+	Recv() (*ripple.OverViewSection, error)
+	grpc.ClientStream
+}
+
+type costReadInvoiceOverViewsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadInvoiceOverViewsClient) Recv() (*ripple.OverViewSection, error) {
+	m := new(ripple.OverViewSection)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *costClient) ReadInvoiceCosts(ctx context.Context, in *ReadInvoiceCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceCostsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[14], Cost_ReadInvoiceCosts_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadInvoiceCostsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadInvoiceCostsClient interface {
+	Recv() (*ripple.TotalSection, error)
+	grpc.ClientStream
+}
+
+type costReadInvoiceCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadInvoiceCostsClient) Recv() (*ripple.TotalSection, error) {
+	m := new(ripple.TotalSection)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *costClient) ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceGroupCostsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[15], Cost_ReadInvoiceGroupCosts_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadInvoiceGroupCostsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadInvoiceGroupCostsClient interface {
+	Recv() (*ripple.BillingGroupSection, error)
+	grpc.ClientStream
+}
+
+type costReadInvoiceGroupCostsClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadInvoiceGroupCostsClient) Recv() (*ripple.BillingGroupSection, error) {
+	m := new(ripple.BillingGroupSection)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -1326,6 +1434,12 @@ type CostServer interface {
 	CheckAccountsBelongToMsp(context.Context, *CheckAccountsRequest) (*CheckAccountsResponse, error)
 	// Read the invoice ids. Only available in Ripple.
 	ReadInvoiceIds(*ReadInvoiceIdsRequest, Cost_ReadInvoiceIdsServer) error
+	// WORK-IN-PROGRESS: Read the invoice overviews. Only available in Ripple.
+	ReadInvoiceOverViews(*ReadInvoiceOverviewsRequest, Cost_ReadInvoiceOverViewsServer) error
+	// WORK-IN-PROGRESS: Read the invoice costs. Only available in Ripple.
+	ReadInvoiceCosts(*ReadInvoiceCostsRequest, Cost_ReadInvoiceCostsServer) error
+	// WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.
+	ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsRequest, Cost_ReadInvoiceGroupCostsServer) error
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -1509,6 +1623,15 @@ func (UnimplementedCostServer) CheckAccountsBelongToMsp(context.Context, *CheckA
 }
 func (UnimplementedCostServer) ReadInvoiceIds(*ReadInvoiceIdsRequest, Cost_ReadInvoiceIdsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadInvoiceIds not implemented")
+}
+func (UnimplementedCostServer) ReadInvoiceOverViews(*ReadInvoiceOverviewsRequest, Cost_ReadInvoiceOverViewsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadInvoiceOverViews not implemented")
+}
+func (UnimplementedCostServer) ReadInvoiceCosts(*ReadInvoiceCostsRequest, Cost_ReadInvoiceCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadInvoiceCosts not implemented")
+}
+func (UnimplementedCostServer) ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsRequest, Cost_ReadInvoiceGroupCostsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadInvoiceGroupCosts not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -2624,6 +2747,69 @@ func (x *costReadInvoiceIdsServer) Send(m *ReadInvoiceIdsResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cost_ReadInvoiceOverViews_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadInvoiceOverviewsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadInvoiceOverViews(m, &costReadInvoiceOverViewsServer{ServerStream: stream})
+}
+
+type Cost_ReadInvoiceOverViewsServer interface {
+	Send(*ripple.OverViewSection) error
+	grpc.ServerStream
+}
+
+type costReadInvoiceOverViewsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadInvoiceOverViewsServer) Send(m *ripple.OverViewSection) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cost_ReadInvoiceCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadInvoiceCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadInvoiceCosts(m, &costReadInvoiceCostsServer{ServerStream: stream})
+}
+
+type Cost_ReadInvoiceCostsServer interface {
+	Send(*ripple.TotalSection) error
+	grpc.ServerStream
+}
+
+type costReadInvoiceCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadInvoiceCostsServer) Send(m *ripple.TotalSection) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cost_ReadInvoiceGroupCosts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadInvoiceGroupCostsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadInvoiceGroupCosts(m, &costReadInvoiceGroupCostsServer{ServerStream: stream})
+}
+
+type Cost_ReadInvoiceGroupCostsServer interface {
+	Send(*ripple.BillingGroupSection) error
+	grpc.ServerStream
+}
+
+type costReadInvoiceGroupCostsServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadInvoiceGroupCostsServer) Send(m *ripple.BillingGroupSection) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2880,6 +3066,21 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadInvoiceIds",
 			Handler:       _Cost_ReadInvoiceIds_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadInvoiceOverViews",
+			Handler:       _Cost_ReadInvoiceOverViews_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadInvoiceCosts",
+			Handler:       _Cost_ReadInvoiceCosts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadInvoiceGroupCosts",
+			Handler:       _Cost_ReadInvoiceGroupCosts_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -1076,11 +1076,23 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.ReadInvoiceCostsRequest"><span class="badge">M</span>ReadInvoiceCostsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.ReadInvoiceGroupCostsRequest"><span class="badge">M</span>ReadInvoiceGroupCostsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.ReadInvoiceIdsRequest"><span class="badge">M</span>ReadInvoiceIdsRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.cost.v1.ReadInvoiceIdsResponse"><span class="badge">M</span>ReadInvoiceIdsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.ReadInvoiceOverviewsRequest"><span class="badge">M</span>ReadInvoiceOverviewsRequest</a>
                 </li>
               
                 <li>
@@ -11807,6 +11819,89 @@ For example, (Assumption: Last usage start time 2022-02-01 01:00:00 UTC) If you 
 
         
       
+        <h3 id="blueapi.cost.v1.ReadInvoiceCostsRequest">ReadInvoiceCostsRequest</h3>
+        <p>Request message for the ReadInvoiceCosts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`. The oldest supported date is `20240101`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC date to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>toCurrency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Set to US dollars (USD) by default (AWS CUR&#39;s default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency&#39;s three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ReadInvoiceGroupCostsRequest">ReadInvoiceGroupCostsRequest</h3>
+        <p>Request message for the ReadInvoiceGroupCosts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`. The oldest supported date is `20240101`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC date to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>toCurrency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Set to US dollars (USD) by default (AWS CUR&#39;s default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency&#39;s three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>limit</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Number of acquisitions. default:10. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.ReadInvoiceIdsRequest">ReadInvoiceIdsRequest</h3>
         <p>Request message for the ReadInvoiceIds rpc.</p>
 
@@ -11853,6 +11948,44 @@ For example, (Assumption: Last usage start time 2022-02-01 01:00:00 UTC) If you 
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The invoice id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ReadInvoiceOverviewsRequest">ReadInvoiceOverviewsRequest</h3>
+        <p>Request message for the ReadInvoiceOverviews rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC date to start streaming data from. If not set, the first day of the current month will be used. Format: `yyyymmdd`. The oldest supported date is `20240101`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC date to end the streaming data. If not set, current date will be used. Format: `yyyymmdd`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>toCurrency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Set to US dollars (USD) by default (AWS CUR&#39;s default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency&#39;s three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD). </p></td>
                 </tr>
               
             </tbody>
@@ -12870,6 +13003,27 @@ Only available in Wave(Pro).</p></td>
                 <td><p>Read the invoice ids. Only available in Ripple.</p></td>
               </tr>
             
+              <tr>
+                <td>ReadInvoiceOverViews</td>
+                <td><a href="#blueapi.cost.v1.ReadInvoiceOverviewsRequest">ReadInvoiceOverviewsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.OverViewSection">.blueapi.api.ripple.v1.OverViewSection</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Read the invoice overviews. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadInvoiceCosts</td>
+                <td><a href="#blueapi.cost.v1.ReadInvoiceCostsRequest">ReadInvoiceCostsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.TotalSection">.blueapi.api.ripple.v1.TotalSection</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Read the invoice costs. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadInvoiceGroupCosts</td>
+                <td><a href="#blueapi.cost.v1.ReadInvoiceGroupCostsRequest">ReadInvoiceGroupCostsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.BillingGroupSection">.blueapi.api.ripple.v1.BillingGroupSection</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -13488,6 +13642,36 @@ Only available in Wave(Pro).</p></td>
                 <td>ReadInvoiceIds</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/invoiceids:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadInvoiceOverViews</td>
+                <td>POST</td>
+                <td>/v1/invoiceoverviews:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadInvoiceCosts</td>
+                <td>POST</td>
+                <td>/v1/invoicecosts:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadInvoiceGroupCosts</td>
+                <td>POST</td>
+                <td>/v1/invoicegroupcosts:read</td>
                 <td>*</td>
               </tr>
               
