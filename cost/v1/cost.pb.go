@@ -12,6 +12,7 @@ import (
 	azure "github.com/alphauslabs/blue-sdk-go/api/azure"
 	gcp "github.com/alphauslabs/blue-sdk-go/api/gcp"
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
+	v1 "github.com/alphauslabs/blue-sdk-go/api/ripple/v1"
 	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
 	protos "github.com/alphauslabs/blue-sdk-go/protos"
 	_ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/options"
@@ -10601,9 +10602,9 @@ var file_cost_v1_cost_proto_goTypes = []any{
 	(*ripple.Payer)(nil),                      // 156: blueapi.api.ripple.Payer
 	(*emptypb.Empty)(nil),                     // 157: google.protobuf.Empty
 	(*api.CostTag)(nil),                       // 158: blueapi.api.CostTag
-	(*ripple.OverViewSection)(nil),            // 159: blueapi.api.ripple.v1.OverViewSection
-	(*ripple.TotalSection)(nil),               // 160: blueapi.api.ripple.v1.TotalSection
-	(*ripple.BillingGroupSection)(nil),        // 161: blueapi.api.ripple.v1.BillingGroupSection
+	(*v1.OverViewSection)(nil),                // 159: blueapi.api.ripple.v1.OverViewSection
+	(*v1.TotalSection)(nil),                   // 160: blueapi.api.ripple.v1.TotalSection
+	(*v1.BillingGroupSection)(nil),            // 161: blueapi.api.ripple.v1.BillingGroupSection
 }
 var file_cost_v1_cost_proto_depIdxs = []int32{
 	130, // 0: blueapi.cost.v1.ListPayerAccountsRequest.field_mask:type_name -> google.protobuf.FieldMask

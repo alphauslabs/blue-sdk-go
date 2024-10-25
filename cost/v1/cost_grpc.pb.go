@@ -10,6 +10,7 @@ import (
 	context "context"
 	api "github.com/alphauslabs/blue-sdk-go/api"
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
+	v1 "github.com/alphauslabs/blue-sdk-go/api/ripple/v1"
 	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
 	protos "github.com/alphauslabs/blue-sdk-go/protos"
 	grpc "google.golang.org/grpc"
@@ -1181,7 +1182,7 @@ func (c *costClient) ReadInvoiceOverViews(ctx context.Context, in *ReadInvoiceOv
 }
 
 type Cost_ReadInvoiceOverViewsClient interface {
-	Recv() (*ripple.OverViewSection, error)
+	Recv() (*v1.OverViewSection, error)
 	grpc.ClientStream
 }
 
@@ -1189,8 +1190,8 @@ type costReadInvoiceOverViewsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costReadInvoiceOverViewsClient) Recv() (*ripple.OverViewSection, error) {
-	m := new(ripple.OverViewSection)
+func (x *costReadInvoiceOverViewsClient) Recv() (*v1.OverViewSection, error) {
+	m := new(v1.OverViewSection)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1214,7 +1215,7 @@ func (c *costClient) ReadInvoiceCosts(ctx context.Context, in *ReadInvoiceCostsR
 }
 
 type Cost_ReadInvoiceCostsClient interface {
-	Recv() (*ripple.TotalSection, error)
+	Recv() (*v1.TotalSection, error)
 	grpc.ClientStream
 }
 
@@ -1222,8 +1223,8 @@ type costReadInvoiceCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costReadInvoiceCostsClient) Recv() (*ripple.TotalSection, error) {
-	m := new(ripple.TotalSection)
+func (x *costReadInvoiceCostsClient) Recv() (*v1.TotalSection, error) {
+	m := new(v1.TotalSection)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -1247,7 +1248,7 @@ func (c *costClient) ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceG
 }
 
 type Cost_ReadInvoiceGroupCostsClient interface {
-	Recv() (*ripple.BillingGroupSection, error)
+	Recv() (*v1.BillingGroupSection, error)
 	grpc.ClientStream
 }
 
@@ -1255,8 +1256,8 @@ type costReadInvoiceGroupCostsClient struct {
 	grpc.ClientStream
 }
 
-func (x *costReadInvoiceGroupCostsClient) Recv() (*ripple.BillingGroupSection, error) {
-	m := new(ripple.BillingGroupSection)
+func (x *costReadInvoiceGroupCostsClient) Recv() (*v1.BillingGroupSection, error) {
+	m := new(v1.BillingGroupSection)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -2756,7 +2757,7 @@ func _Cost_ReadInvoiceOverViews_Handler(srv interface{}, stream grpc.ServerStrea
 }
 
 type Cost_ReadInvoiceOverViewsServer interface {
-	Send(*ripple.OverViewSection) error
+	Send(*v1.OverViewSection) error
 	grpc.ServerStream
 }
 
@@ -2764,7 +2765,7 @@ type costReadInvoiceOverViewsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costReadInvoiceOverViewsServer) Send(m *ripple.OverViewSection) error {
+func (x *costReadInvoiceOverViewsServer) Send(m *v1.OverViewSection) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -2777,7 +2778,7 @@ func _Cost_ReadInvoiceCosts_Handler(srv interface{}, stream grpc.ServerStream) e
 }
 
 type Cost_ReadInvoiceCostsServer interface {
-	Send(*ripple.TotalSection) error
+	Send(*v1.TotalSection) error
 	grpc.ServerStream
 }
 
@@ -2785,7 +2786,7 @@ type costReadInvoiceCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costReadInvoiceCostsServer) Send(m *ripple.TotalSection) error {
+func (x *costReadInvoiceCostsServer) Send(m *v1.TotalSection) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -2798,7 +2799,7 @@ func _Cost_ReadInvoiceGroupCosts_Handler(srv interface{}, stream grpc.ServerStre
 }
 
 type Cost_ReadInvoiceGroupCostsServer interface {
-	Send(*ripple.BillingGroupSection) error
+	Send(*v1.BillingGroupSection) error
 	grpc.ServerStream
 }
 
@@ -2806,7 +2807,7 @@ type costReadInvoiceGroupCostsServer struct {
 	grpc.ServerStream
 }
 
-func (x *costReadInvoiceGroupCostsServer) Send(m *ripple.BillingGroupSection) error {
+func (x *costReadInvoiceGroupCostsServer) Send(m *v1.BillingGroupSection) error {
 	return x.ServerStream.SendMsg(m)
 }
 
