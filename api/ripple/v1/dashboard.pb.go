@@ -20,22 +20,34 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// OverViewSection resource definition.
 type OverViewSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name             string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Currency         string                   `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	InvoiceCost      float64                  `protobuf:"fixed64,4,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
-	ProcurementCost  float64                  `protobuf:"fixed64,5,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
-	ProfitCost       float64                  `protobuf:"fixed64,6,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
-	Options          *OverViewOptionSection   `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
+	// The id. id:OverViewSection.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The name. name:OverViewSection.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The currency.
+	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The invoice cost.
+	InvoiceCost float64 `protobuf:"fixed64,4,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
+	// The procurement cost.
+	ProcurementCost float64 `protobuf:"fixed64,5,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
+	// The profit cost.
+	ProfitCost float64 `protobuf:"fixed64,6,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
+	// The options.
+	Options *OverViewOptionSection `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
+	// The period over period.
 	PeriodOverPeriod *PeriodOverPeriodSection `protobuf:"bytes,8,opt,name=periodOverPeriod,proto3" json:"periodOverPeriod,omitempty"`
-	AwsSection       *VendorOverViewSection   `protobuf:"bytes,9,opt,name=awsSection,proto3" json:"awsSection,omitempty"`
-	AzureSection     *VendorOverViewSection   `protobuf:"bytes,10,opt,name=azureSection,proto3" json:"azureSection,omitempty"`
-	GcpSection       *VendorOverViewSection   `protobuf:"bytes,11,opt,name=gcpSection,proto3" json:"gcpSection,omitempty"`
+	// The aws section.
+	AwsSection *VendorOverViewSection `protobuf:"bytes,9,opt,name=awsSection,proto3" json:"awsSection,omitempty"`
+	// The azure section.
+	AzureSection *VendorOverViewSection `protobuf:"bytes,10,opt,name=azureSection,proto3" json:"azureSection,omitempty"`
+	// The gcp section.
+	GcpSection *VendorOverViewSection `protobuf:"bytes,11,opt,name=gcpSection,proto3" json:"gcpSection,omitempty"`
 }
 
 func (x *OverViewSection) Reset() {
@@ -145,18 +157,32 @@ func (x *OverViewSection) GetGcpSection() *VendorOverViewSection {
 	return nil
 }
 
+// PeriodOverPeriodSection resource definition.
 type PeriodOverPeriodSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	InvoiceCost        float64                        `protobuf:"fixed64,1,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
-	ProcurementCost    float64                        `protobuf:"fixed64,2,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
-	ProfitCost         float64                        `protobuf:"fixed64,3,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
-	InvoiceCostPoP     float64                        `protobuf:"fixed64,4,opt,name=invoiceCostPoP,proto3" json:"invoiceCostPoP,omitempty"`
-	ProcurementCostPoP float64                        `protobuf:"fixed64,5,opt,name=procurementCostPoP,proto3" json:"procurementCostPoP,omitempty"`
-	ProfitCostPoP      float64                        `protobuf:"fixed64,6,opt,name=profitCostPoP,proto3" json:"profitCostPoP,omitempty"`
-	Options            *PeriodOverPeriodOptionSection `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
+	// The invoice cost
+	InvoiceCost float64 `protobuf:"fixed64,1,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
+	// The procurement cost
+	ProcurementCost float64 `protobuf:"fixed64,2,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
+	// The profit cost
+	ProfitCost float64 `protobuf:"fixed64,3,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
+	// The invoice cost Period-over-Period.
+	// Represents a comparison of costs over a specified period of time.
+	// currently, supported `Month-over-Month`
+	InvoiceCostPoP float64 `protobuf:"fixed64,4,opt,name=invoiceCostPoP,proto3" json:"invoiceCostPoP,omitempty"`
+	// The procurement cost Period-over-Period.
+	// Represents a comparison of costs over a specified period of time.
+	// currently, supported `Month-over-Month`
+	ProcurementCostPoP float64 `protobuf:"fixed64,5,opt,name=procurementCostPoP,proto3" json:"procurementCostPoP,omitempty"`
+	// The profit cost Period-over-Period.
+	// Represents a comparison of costs over a specified period of time.
+	// currently, supported `Month-over-Month`
+	ProfitCostPoP float64 `protobuf:"fixed64,6,opt,name=profitCostPoP,proto3" json:"profitCostPoP,omitempty"`
+	// The options cost Period-over-Period.
+	Options *PeriodOverPeriodOptionSection `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
 }
 
 func (x *PeriodOverPeriodSection) Reset() {
@@ -238,11 +264,13 @@ func (x *PeriodOverPeriodSection) GetOptions() *PeriodOverPeriodOptionSection {
 	return nil
 }
 
+// OverViewOptionSection resource definition.
 type OverViewOptionSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
+	// The spp discount cost.
 	SppDiscountCost float64 `protobuf:"fixed64,1,opt,name=sppDiscountCost,proto3" json:"sppDiscountCost,omitempty"`
 }
 
@@ -283,12 +311,17 @@ func (x *OverViewOptionSection) GetSppDiscountCost() float64 {
 	return 0
 }
 
+// PeriodOverPeriodOptionSection resource definition.
 type PeriodOverPeriodOptionSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	SppDiscountCost    float64 `protobuf:"fixed64,1,opt,name=sppDiscountCost,proto3" json:"sppDiscountCost,omitempty"`
+	// The spp discount cost.
+	SppDiscountCost float64 `protobuf:"fixed64,1,opt,name=sppDiscountCost,proto3" json:"sppDiscountCost,omitempty"`
+	// The spp discount cost Period-over-Period.
+	// Represents a comparison of costs over a specified period of time.
+	// currently, supported `Month-over-Month`
 	SppDiscountCostPoP float64 `protobuf:"fixed64,2,opt,name=sppDiscountCostPoP,proto3" json:"sppDiscountCostPoP,omitempty"`
 }
 
@@ -336,18 +369,27 @@ func (x *PeriodOverPeriodOptionSection) GetSppDiscountCostPoP() float64 {
 	return 0
 }
 
+// VendorOverViewSection resource definition.
 type VendorOverViewSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id               string                   `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name             string                   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Currency         string                   `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	InvoiceCost      float64                  `protobuf:"fixed64,4,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
-	ProcurementCost  float64                  `protobuf:"fixed64,5,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
-	ProfitCost       float64                  `protobuf:"fixed64,6,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
-	Options          *OverViewOptionSection   `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
+	// The id. id:VendorOverViewSection.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The name. name:VendorOverViewSection.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The currency.
+	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The invoice cost.
+	InvoiceCost float64 `protobuf:"fixed64,4,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
+	// The procurement cost.
+	ProcurementCost float64 `protobuf:"fixed64,5,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
+	// The profit cost.
+	ProfitCost float64 `protobuf:"fixed64,6,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
+	// The options.
+	Options *OverViewOptionSection `protobuf:"bytes,7,opt,name=options,proto3" json:"options,omitempty"`
+	// The period over period.
 	PeriodOverPeriod *PeriodOverPeriodSection `protobuf:"bytes,8,opt,name=periodOverPeriod,proto3" json:"periodOverPeriod,omitempty"`
 }
 
@@ -437,23 +479,36 @@ func (x *VendorOverViewSection) GetPeriodOverPeriod() *PeriodOverPeriodSection {
 	return nil
 }
 
+// TotalSection resource definition.
 type TotalSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              string                    `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name            string                    `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Currency        string                    `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	YearMonth       string                    `protobuf:"bytes,4,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
-	InvoiceCost     float64                   `protobuf:"fixed64,5,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
-	ProcurementCost float64                   `protobuf:"fixed64,6,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
-	ProfitCost      float64                   `protobuf:"fixed64,7,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
-	TotalDeital     *TotalDetailSection       `protobuf:"bytes,8,opt,name=totalDeital,proto3" json:"totalDeital,omitempty"`
+	// The id. id:TotalSection.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The name. name:TotalSection.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The currency.
+	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The year-month. format: yyyymm
+	YearMonth string `protobuf:"bytes,4,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
+	// The invoice cost.
+	InvoiceCost float64 `protobuf:"fixed64,5,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
+	// The procurement cost.
+	ProcurementCost float64 `protobuf:"fixed64,6,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
+	// The profit cost.
+	ProfitCost float64 `protobuf:"fixed64,7,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
+	// The total detail.
+	TotalDeital *TotalDetailSection `protobuf:"bytes,8,opt,name=totalDeital,proto3" json:"totalDeital,omitempty"`
+	// The third profit item.
 	ThirdProfitItem []*ThirdProfitItemSection `protobuf:"bytes,9,rep,name=thirdProfitItem,proto3" json:"thirdProfitItem,omitempty"`
-	AwsSection      *VendorTotalSection       `protobuf:"bytes,10,opt,name=awsSection,proto3" json:"awsSection,omitempty"`
-	AzureSection    *VendorTotalSection       `protobuf:"bytes,11,opt,name=azureSection,proto3" json:"azureSection,omitempty"`
-	GcpSection      *VendorTotalSection       `protobuf:"bytes,12,opt,name=gcpSection,proto3" json:"gcpSection,omitempty"`
+	// The aws section.
+	AwsSection *VendorTotalSection `protobuf:"bytes,10,opt,name=awsSection,proto3" json:"awsSection,omitempty"`
+	// The azure section.
+	AzureSection *VendorTotalSection `protobuf:"bytes,11,opt,name=azureSection,proto3" json:"azureSection,omitempty"`
+	// The gcp section.
+	GcpSection *VendorTotalSection `protobuf:"bytes,12,opt,name=gcpSection,proto3" json:"gcpSection,omitempty"`
 }
 
 func (x *TotalSection) Reset() {
@@ -570,19 +625,29 @@ func (x *TotalSection) GetGcpSection() *VendorTotalSection {
 	return nil
 }
 
+// VendorTotalSection resource definition.
 type VendorTotalSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              string                    `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name            string                    `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Currency        string                    `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
-	YearMonth       string                    `protobuf:"bytes,4,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
-	InvoiceCost     float64                   `protobuf:"fixed64,5,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
-	ProcurementCost float64                   `protobuf:"fixed64,6,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
-	ProfitCost      float64                   `protobuf:"fixed64,7,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
-	TotalDeital     *TotalDetailSection       `protobuf:"bytes,8,opt,name=totalDeital,proto3" json:"totalDeital,omitempty"`
+	// The id. id:VendorTotalSection.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The name. name:VendorTotalSection.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The currency.
+	Currency string `protobuf:"bytes,3,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The year-month. format: yyyymm
+	YearMonth string `protobuf:"bytes,4,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
+	// The invoice cost.
+	InvoiceCost float64 `protobuf:"fixed64,5,opt,name=invoiceCost,proto3" json:"invoiceCost,omitempty"`
+	// The procurement cost.
+	ProcurementCost float64 `protobuf:"fixed64,6,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
+	// The profit cost.
+	ProfitCost float64 `protobuf:"fixed64,7,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
+	// The total detail.
+	TotalDeital *TotalDetailSection `protobuf:"bytes,8,opt,name=totalDeital,proto3" json:"totalDeital,omitempty"`
+	// The yhird profit item.
 	ThirdProfitItem []*ThirdProfitItemSection `protobuf:"bytes,9,rep,name=thirdProfitItem,proto3" json:"thirdProfitItem,omitempty"`
 }
 
@@ -679,13 +744,17 @@ func (x *VendorTotalSection) GetThirdProfitItem() []*ThirdProfitItemSection {
 	return nil
 }
 
+// TotalDetailSection resource definition.
 type TotalDetailSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	TrueUnblended   float64 `protobuf:"fixed64,1,opt,name=TrueUnblended,proto3" json:"TrueUnblended,omitempty"`
-	SppDiscount     float64 `protobuf:"fixed64,2,opt,name=sppDiscount,proto3" json:"sppDiscount,omitempty"`
+	// The true unblended cost.
+	TrueUnblended float64 `protobuf:"fixed64,1,opt,name=TrueUnblended,proto3" json:"TrueUnblended,omitempty"`
+	// The spp discount cost.
+	SppDiscount float64 `protobuf:"fixed64,2,opt,name=sppDiscount,proto3" json:"sppDiscount,omitempty"`
+	// The third profit item cost.
 	ThirdProfitItem float64 `protobuf:"fixed64,3,opt,name=thirdProfitItem,proto3" json:"thirdProfitItem,omitempty"`
 }
 
@@ -740,13 +809,17 @@ func (x *TotalDetailSection) GetThirdProfitItem() float64 {
 	return 0
 }
 
+// ThirdProfitItemSection resource definition.
 type ThirdProfitItemSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id     string  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name   string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The id.
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The name.
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The profit cost.
 	Profit float64 `protobuf:"fixed64,3,opt,name=profit,proto3" json:"profit,omitempty"`
 }
 
@@ -801,18 +874,26 @@ func (x *ThirdProfitItemSection) GetProfit() float64 {
 	return 0
 }
 
+// BillingGroupSection resource definition.
 type BillingGroupSection struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Id              string  `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name            string  `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	YearMonth       string  `protobuf:"bytes,3,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
-	Currency        string  `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
-	InvocieCost     float64 `protobuf:"fixed64,5,opt,name=invocieCost,proto3" json:"invocieCost,omitempty"`
+	// The id. id:billing internald id
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	// The id. name:billing name
+	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	// The year-month. format: yyyymm
+	YearMonth string `protobuf:"bytes,3,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
+	// The currency.
+	Currency string `protobuf:"bytes,4,opt,name=currency,proto3" json:"currency,omitempty"`
+	// The invoice cost.
+	InvocieCost float64 `protobuf:"fixed64,5,opt,name=invocieCost,proto3" json:"invocieCost,omitempty"`
+	// The procurement cost.
 	ProcurementCost float64 `protobuf:"fixed64,6,opt,name=procurementCost,proto3" json:"procurementCost,omitempty"`
-	ProfitCost      float64 `protobuf:"fixed64,7,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
+	// The profit cost.
+	ProfitCost float64 `protobuf:"fixed64,7,opt,name=profitCost,proto3" json:"profitCost,omitempty"`
 }
 
 func (x *BillingGroupSection) Reset() {
@@ -920,7 +1001,7 @@ var file_api_ripple_v1_dashboard_proto_rawDesc = []byte{
 	0x0a, 0x10, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50, 0x65, 0x72, 0x69,
 	0x6f, 0x64, 0x18, 0x08, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61,
 	0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x69, 0x70, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31,
-	0x2e, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50, 0x65, 0x72, 0x69, 0x6f,
+	0x2e, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50, 0x65, 0x72, 0x69, 0x6f,
 	0x64, 0x53, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x10, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64,
 	0x4f, 0x76, 0x65, 0x72, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x12, 0x4c, 0x0a, 0x0a, 0x61, 0x77,
 	0x73, 0x53, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x09, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x2c,
@@ -937,7 +1018,7 @@ var file_api_ripple_v1_dashboard_proto_rawDesc = []byte{
 	0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x69, 0x70,
 	0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x56, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x4f, 0x76, 0x65,
 	0x72, 0x56, 0x69, 0x65, 0x77, 0x53, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x0a, 0x67, 0x63,
-	0x70, 0x53, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xd3, 0x02, 0x0a, 0x17, 0x70, 0x65, 0x72,
+	0x70, 0x53, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0xd3, 0x02, 0x0a, 0x17, 0x50, 0x65, 0x72,
 	0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x53, 0x65, 0x63,
 	0x74, 0x69, 0x6f, 0x6e, 0x12, 0x20, 0x0a, 0x0b, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x43,
 	0x6f, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0b, 0x69, 0x6e, 0x76, 0x6f, 0x69,
@@ -956,14 +1037,14 @@ var file_api_ripple_v1_dashboard_proto_rawDesc = []byte{
 	0x0d, 0x70, 0x72, 0x6f, 0x66, 0x69, 0x74, 0x43, 0x6f, 0x73, 0x74, 0x50, 0x6f, 0x50, 0x12, 0x4e,
 	0x0a, 0x07, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x34, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x69,
-	0x70, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76,
+	0x70, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76,
 	0x65, 0x72, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65,
 	0x63, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x07, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x41,
 	0x0a, 0x15, 0x4f, 0x76, 0x65, 0x72, 0x56, 0x69, 0x65, 0x77, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e,
 	0x53, 0x65, 0x63, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x28, 0x0a, 0x0f, 0x73, 0x70, 0x70, 0x44, 0x69,
 	0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x6f, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01,
 	0x52, 0x0f, 0x73, 0x70, 0x70, 0x44, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x6f, 0x73,
-	0x74, 0x22, 0x79, 0x0a, 0x1d, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50,
+	0x74, 0x22, 0x79, 0x0a, 0x1d, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50,
 	0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x53, 0x65, 0x63, 0x74, 0x69,
 	0x6f, 0x6e, 0x12, 0x28, 0x0a, 0x0f, 0x73, 0x70, 0x70, 0x44, 0x69, 0x73, 0x63, 0x6f, 0x75, 0x6e,
 	0x74, 0x43, 0x6f, 0x73, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x01, 0x52, 0x0f, 0x73, 0x70, 0x70,
@@ -990,7 +1071,7 @@ var file_api_ripple_v1_dashboard_proto_rawDesc = []byte{
 	0x6e, 0x52, 0x07, 0x6f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x5a, 0x0a, 0x10, 0x70, 0x65,
 	0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x18, 0x08,
 	0x20, 0x01, 0x28, 0x0b, 0x32, 0x2e, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61,
-	0x70, 0x69, 0x2e, 0x72, 0x69, 0x70, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x70, 0x65, 0x72,
+	0x70, 0x69, 0x2e, 0x72, 0x69, 0x70, 0x70, 0x6c, 0x65, 0x2e, 0x76, 0x31, 0x2e, 0x50, 0x65, 0x72,
 	0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72, 0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x53, 0x65, 0x63,
 	0x74, 0x69, 0x6f, 0x6e, 0x52, 0x10, 0x70, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x4f, 0x76, 0x65, 0x72,
 	0x50, 0x65, 0x72, 0x69, 0x6f, 0x64, 0x22, 0xe3, 0x04, 0x0a, 0x0c, 0x54, 0x6f, 0x74, 0x61, 0x6c,
@@ -1109,9 +1190,9 @@ func file_api_ripple_v1_dashboard_proto_rawDescGZIP() []byte {
 var file_api_ripple_v1_dashboard_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_ripple_v1_dashboard_proto_goTypes = []any{
 	(*OverViewSection)(nil),               // 0: blueapi.api.ripple.v1.OverViewSection
-	(*PeriodOverPeriodSection)(nil),       // 1: blueapi.api.ripple.v1.periodOverPeriodSection
+	(*PeriodOverPeriodSection)(nil),       // 1: blueapi.api.ripple.v1.PeriodOverPeriodSection
 	(*OverViewOptionSection)(nil),         // 2: blueapi.api.ripple.v1.OverViewOptionSection
-	(*PeriodOverPeriodOptionSection)(nil), // 3: blueapi.api.ripple.v1.periodOverPeriodOptionSection
+	(*PeriodOverPeriodOptionSection)(nil), // 3: blueapi.api.ripple.v1.PeriodOverPeriodOptionSection
 	(*VendorOverViewSection)(nil),         // 4: blueapi.api.ripple.v1.VendorOverViewSection
 	(*TotalSection)(nil),                  // 5: blueapi.api.ripple.v1.TotalSection
 	(*VendorTotalSection)(nil),            // 6: blueapi.api.ripple.v1.VendorTotalSection
@@ -1121,13 +1202,13 @@ var file_api_ripple_v1_dashboard_proto_goTypes = []any{
 }
 var file_api_ripple_v1_dashboard_proto_depIdxs = []int32{
 	2,  // 0: blueapi.api.ripple.v1.OverViewSection.options:type_name -> blueapi.api.ripple.v1.OverViewOptionSection
-	1,  // 1: blueapi.api.ripple.v1.OverViewSection.periodOverPeriod:type_name -> blueapi.api.ripple.v1.periodOverPeriodSection
+	1,  // 1: blueapi.api.ripple.v1.OverViewSection.periodOverPeriod:type_name -> blueapi.api.ripple.v1.PeriodOverPeriodSection
 	4,  // 2: blueapi.api.ripple.v1.OverViewSection.awsSection:type_name -> blueapi.api.ripple.v1.VendorOverViewSection
 	4,  // 3: blueapi.api.ripple.v1.OverViewSection.azureSection:type_name -> blueapi.api.ripple.v1.VendorOverViewSection
 	4,  // 4: blueapi.api.ripple.v1.OverViewSection.gcpSection:type_name -> blueapi.api.ripple.v1.VendorOverViewSection
-	3,  // 5: blueapi.api.ripple.v1.periodOverPeriodSection.options:type_name -> blueapi.api.ripple.v1.periodOverPeriodOptionSection
+	3,  // 5: blueapi.api.ripple.v1.PeriodOverPeriodSection.options:type_name -> blueapi.api.ripple.v1.PeriodOverPeriodOptionSection
 	2,  // 6: blueapi.api.ripple.v1.VendorOverViewSection.options:type_name -> blueapi.api.ripple.v1.OverViewOptionSection
-	1,  // 7: blueapi.api.ripple.v1.VendorOverViewSection.periodOverPeriod:type_name -> blueapi.api.ripple.v1.periodOverPeriodSection
+	1,  // 7: blueapi.api.ripple.v1.VendorOverViewSection.periodOverPeriod:type_name -> blueapi.api.ripple.v1.PeriodOverPeriodSection
 	7,  // 8: blueapi.api.ripple.v1.TotalSection.totalDeital:type_name -> blueapi.api.ripple.v1.TotalDetailSection
 	8,  // 9: blueapi.api.ripple.v1.TotalSection.thirdProfitItem:type_name -> blueapi.api.ripple.v1.ThirdProfitItemSection
 	6,  // 10: blueapi.api.ripple.v1.TotalSection.awsSection:type_name -> blueapi.api.ripple.v1.VendorTotalSection
