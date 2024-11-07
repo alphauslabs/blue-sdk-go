@@ -1012,6 +1012,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.ReadAccountOriginalResourcesRequest"><span class="badge">M</span>ReadAccountOriginalResourcesRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.ReadAdjustmentsRequest"><span class="badge">M</span>ReadAdjustmentsRequest</a>
                 </li>
               
@@ -11122,6 +11126,30 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.cost.v1.ReadAccountOriginalResourcesRequest">ReadAccountOriginalResourcesRequest</h3>
+        <p>Request message for the ReadAccountOriginalResources rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`.`gcp`,`azure` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.ReadAdjustmentsRequest">ReadAdjustmentsRequest</h3>
         <p>Request message for the Cost.ReadAdjustments rpc.</p>
 
@@ -12640,6 +12668,13 @@ Import history is a list of timestamps our system tracks when the account&#39;s 
               </tr>
             
               <tr>
+                <td>ReadAccountOriginalResources</td>
+                <td><a href="#blueapi.cost.v1.ReadAccountOriginalResourcesRequest">ReadAccountOriginalResourcesRequest</a></td>
+                <td><a href="#blueapi.api.AccountOriginalResource">.blueapi.api.AccountOriginalResource</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Reads all vendor account-original-resources.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListTags</td>
                 <td><a href="#blueapi.cost.v1.ListTagsRequest">ListTagsRequest</a></td>
                 <td><a href="#blueapi.api.CostTag">.blueapi.api.CostTag</a> stream</td>
@@ -13168,6 +13203,16 @@ Only available in Wave(Pro).</p></td>
                 <td>DELETE</td>
                 <td>/v1/{vendor}/accounts/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadAccountOriginalResources</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/aors:read</td>
+                <td>*</td>
               </tr>
               
             

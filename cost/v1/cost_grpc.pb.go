@@ -36,6 +36,7 @@ const (
 	Cost_CreateAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/CreateAccount"
 	Cost_UpdateAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/UpdateAccount"
 	Cost_DeleteAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/DeleteAccount"
+	Cost_ReadAccountOriginalResources_FullMethodName  = "/blueapi.cost.v1.Cost/ReadAccountOriginalResources"
 	Cost_ListTags_FullMethodName                      = "/blueapi.cost.v1.Cost/ListTags"
 	Cost_ListCalculatorRunningAccounts_FullMethodName = "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts"
 	Cost_GetCalculatorConfig_FullMethodName           = "/blueapi.cost.v1.Cost/GetCalculatorConfig"
@@ -123,6 +124,8 @@ type CostClient interface {
 	UpdateAccount(ctx context.Context, in *UpdateAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reads all vendor account-original-resources.
+	ReadAccountOriginalResources(ctx context.Context, in *ReadAccountOriginalResourcesRequest, opts ...grpc.CallOption) (Cost_ReadAccountOriginalResourcesClient, error)
 	// Lists all vendor tags.
 	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (Cost_ListTagsClient, error)
 	// Lists the vendor calculator's queued accounts for calculation.
@@ -455,9 +458,42 @@ func (c *costClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest
 	return out, nil
 }
 
+func (c *costClient) ReadAccountOriginalResources(ctx context.Context, in *ReadAccountOriginalResourcesRequest, opts ...grpc.CallOption) (Cost_ReadAccountOriginalResourcesClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], Cost_ReadAccountOriginalResources_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costReadAccountOriginalResourcesClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ReadAccountOriginalResourcesClient interface {
+	Recv() (*api.AccountOriginalResource, error)
+	grpc.ClientStream
+}
+
+type costReadAccountOriginalResourcesClient struct {
+	grpc.ClientStream
+}
+
+func (x *costReadAccountOriginalResourcesClient) Recv() (*api.AccountOriginalResource, error) {
+	m := new(api.AccountOriginalResource)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *costClient) ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (Cost_ListTagsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], Cost_ListTags_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], Cost_ListTags_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -490,7 +526,7 @@ func (x *costListTagsClient) Recv() (*api.CostTag, error) {
 
 func (c *costClient) ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], Cost_ListCalculatorRunningAccounts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], Cost_ListCalculatorRunningAccounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -533,7 +569,7 @@ func (c *costClient) GetCalculatorConfig(ctx context.Context, in *GetCalculatorC
 
 func (c *costClient) ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (Cost_ListCalculatorCostModifiersClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], Cost_ListCalculatorCostModifiers_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], Cost_ListCalculatorCostModifiers_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -696,7 +732,7 @@ func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFi
 
 func (c *costClient) ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], Cost_ReadCostAttributes_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], Cost_ReadCostAttributes_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -739,7 +775,7 @@ func (c *costClient) GetCostAttributes(ctx context.Context, in *GetCostAttribute
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], Cost_ReadCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], Cost_ReadCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -772,7 +808,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], Cost_ReadAdjustments_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], Cost_ReadAdjustments_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -805,7 +841,7 @@ func (x *costReadAdjustmentsClient) Recv() (*CostItem, error) {
 
 func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], Cost_ReadTagCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[10], Cost_ReadTagCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -838,7 +874,7 @@ func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
 
 func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[10], Cost_ReadNonTagCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[11], Cost_ReadNonTagCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -991,7 +1027,7 @@ func (c *costClient) DeleteAccountBudgetAlerts(ctx context.Context, in *DeleteAc
 
 func (c *costClient) ReadBudgetAlerts(ctx context.Context, in *ReadBudgetAlertsRequest, opts ...grpc.CallOption) (Cost_ReadBudgetAlertsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[11], Cost_ReadBudgetAlerts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[12], Cost_ReadBudgetAlerts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1134,7 +1170,7 @@ func (c *costClient) CheckAccountsBelongToMsp(ctx context.Context, in *CheckAcco
 
 func (c *costClient) ReadInvoiceIds(ctx context.Context, in *ReadInvoiceIdsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[12], Cost_ReadInvoiceIds_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[13], Cost_ReadInvoiceIds_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1167,7 +1203,7 @@ func (x *costReadInvoiceIdsClient) Recv() (*ReadInvoiceIdsResponse, error) {
 
 func (c *costClient) ReadInvoiceOverViews(ctx context.Context, in *ReadInvoiceOverviewsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceOverViewsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[13], Cost_ReadInvoiceOverViews_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[14], Cost_ReadInvoiceOverViews_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1200,7 +1236,7 @@ func (x *costReadInvoiceOverViewsClient) Recv() (*v1.OverViewSection, error) {
 
 func (c *costClient) ReadInvoiceCosts(ctx context.Context, in *ReadInvoiceCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[14], Cost_ReadInvoiceCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[15], Cost_ReadInvoiceCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1233,7 +1269,7 @@ func (x *costReadInvoiceCostsClient) Recv() (*v1.TotalSection, error) {
 
 func (c *costClient) ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceGroupCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[15], Cost_ReadInvoiceGroupCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[16], Cost_ReadInvoiceGroupCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1298,6 +1334,8 @@ type CostServer interface {
 	UpdateAccount(context.Context, *UpdateAccountRequest) (*api.Account, error)
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reads all vendor account-original-resources.
+	ReadAccountOriginalResources(*ReadAccountOriginalResourcesRequest, Cost_ReadAccountOriginalResourcesServer) error
 	// Lists all vendor tags.
 	ListTags(*ListTagsRequest, Cost_ListTagsServer) error
 	// Lists the vendor calculator's queued accounts for calculation.
@@ -1480,6 +1518,9 @@ func (UnimplementedCostServer) UpdateAccount(context.Context, *UpdateAccountRequ
 }
 func (UnimplementedCostServer) DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccount not implemented")
+}
+func (UnimplementedCostServer) ReadAccountOriginalResources(*ReadAccountOriginalResourcesRequest, Cost_ReadAccountOriginalResourcesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadAccountOriginalResources not implemented")
 }
 func (UnimplementedCostServer) ListTags(*ListTagsRequest, Cost_ListTagsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListTags not implemented")
@@ -1852,6 +1893,27 @@ func _Cost_DeleteAccount_Handler(srv interface{}, ctx context.Context, dec func(
 		return srv.(CostServer).DeleteAccount(ctx, req.(*DeleteAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ReadAccountOriginalResources_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadAccountOriginalResourcesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ReadAccountOriginalResources(m, &costReadAccountOriginalResourcesServer{ServerStream: stream})
+}
+
+type Cost_ReadAccountOriginalResourcesServer interface {
+	Send(*api.AccountOriginalResource) error
+	grpc.ServerStream
+}
+
+type costReadAccountOriginalResourcesServer struct {
+	grpc.ServerStream
+}
+
+func (x *costReadAccountOriginalResourcesServer) Send(m *api.AccountOriginalResource) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Cost_ListTags_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -3017,6 +3079,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListAccounts",
 			Handler:       _Cost_ListAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadAccountOriginalResources",
+			Handler:       _Cost_ReadAccountOriginalResources_Handler,
 			ServerStreams: true,
 		},
 		{
