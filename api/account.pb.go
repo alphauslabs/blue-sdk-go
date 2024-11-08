@@ -121,7 +121,7 @@ type AccountOriginalResource struct {
 	// Vendor positioning is
 	// AWS: `lineItem/UsageAccountId`
 	// GoogleCloud: `projectId`
-	// Azure: `???`
+	// Azure: `azure customer id`
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The name is associated with CostUsage or BillingReport.
 	// Basically the same as id.
