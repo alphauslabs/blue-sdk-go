@@ -125,6 +125,7 @@ type CostClient interface {
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(ctx context.Context, in *DeleteAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads all vendor account-original-resources.
+	// Account that have not been used for one month will no longer be retrieved.
 	ReadAccountOriginalResources(ctx context.Context, in *ReadAccountOriginalResourcesRequest, opts ...grpc.CallOption) (Cost_ReadAccountOriginalResourcesClient, error)
 	// Lists all vendor tags.
 	ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (Cost_ListTagsClient, error)
@@ -1335,6 +1336,7 @@ type CostServer interface {
 	// WORK-IN-PROGRESS: Deletes a vendor account.
 	DeleteAccount(context.Context, *DeleteAccountRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads all vendor account-original-resources.
+	// Account that have not been used for one month will no longer be retrieved.
 	ReadAccountOriginalResources(*ReadAccountOriginalResourcesRequest, Cost_ReadAccountOriginalResourcesServer) error
 	// Lists all vendor tags.
 	ListTags(*ListTagsRequest, Cost_ListTagsServer) error
