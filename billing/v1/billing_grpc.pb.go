@@ -24,65 +24,68 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Billing_ListBillingGroups_FullMethodName                    = "/blueapi.billing.v1.Billing/ListBillingGroups"
-	Billing_CreateBillingGroup_FullMethodName                   = "/blueapi.billing.v1.Billing/CreateBillingGroup"
-	Billing_GetBillingGroup_FullMethodName                      = "/blueapi.billing.v1.Billing/GetBillingGroup"
-	Billing_GetAccessGroup_FullMethodName                       = "/blueapi.billing.v1.Billing/GetAccessGroup"
-	Billing_ListAwsDailyRunHistory_FullMethodName               = "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory"
-	Billing_ListUsageCostsDrift_FullMethodName                  = "/blueapi.billing.v1.Billing/ListUsageCostsDrift"
-	Billing_CreateInvoice_FullMethodName                        = "/blueapi.billing.v1.Billing/CreateInvoice"
-	Billing_GetInvoiceStatus_FullMethodName                     = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
-	Billing_ListInvoiceStatus_FullMethodName                    = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
-	Billing_GetInvoice_FullMethodName                           = "/blueapi.billing.v1.Billing/GetInvoice"
-	Billing_ListInvoice_FullMethodName                          = "/blueapi.billing.v1.Billing/ListInvoice"
-	Billing_UpdateInvoicePreviews_FullMethodName                = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
-	Billing_ExportInvoiceFile_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
-	Billing_ReadServiceDiscountsServices_FullMethodName         = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
-	Billing_CreateInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
-	Billing_UpdateInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
-	Billing_DeleteInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/DeleteInvoiceServiceDiscounts"
-	Billing_ListInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
-	Billing_GetInvoiceServiceDiscounts_FullMethodName           = "/blueapi.billing.v1.Billing/GetInvoiceServiceDiscounts"
-	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName   = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
-	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
-	Billing_UpdateAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/UpdateAccountInvoiceServiceDiscounts"
-	Billing_RemoveAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/RemoveAccountInvoiceServiceDiscounts"
-	Billing_DeleteAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/DeleteAccountInvoiceServiceDiscounts"
-	Billing_CreateReseller_FullMethodName                       = "/blueapi.billing.v1.Billing/CreateReseller"
-	Billing_ListResellers_FullMethodName                        = "/blueapi.billing.v1.Billing/ListResellers"
-	Billing_GetReseller_FullMethodName                          = "/blueapi.billing.v1.Billing/GetReseller"
-	Billing_UpdateReseller_FullMethodName                       = "/blueapi.billing.v1.Billing/UpdateReseller"
-	Billing_DeleteReseller_FullMethodName                       = "/blueapi.billing.v1.Billing/DeleteReseller"
-	Billing_GetBillingSetting_FullMethodName                    = "/blueapi.billing.v1.Billing/GetBillingSetting"
-	Billing_ListExchangeRates_FullMethodName                    = "/blueapi.billing.v1.Billing/ListExchangeRates"
-	Billing_ListAccessGroups_FullMethodName                     = "/blueapi.billing.v1.Billing/ListAccessGroups"
-	Billing_CreateAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateAccessGroup"
-	Billing_UpdateAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
-	Billing_DeleteAccessGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
-	Billing_ListAbcBillingGroups_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
-	Billing_ListAbcBillingGroupAccounts_FullMethodName          = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
-	Billing_ReadInvoiceAdjustments_FullMethodName               = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
-	Billing_ListAccountResources_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAccountResources"
-	Billing_GetAdjustmentConfig_FullMethodName                  = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
-	Billing_CreateAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
-	Billing_UpdateAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
-	Billing_DeleteAdjustmentConfig_FullMethodName               = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
-	Billing_ReadUntaggedGroups_FullMethodName                   = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
-	Billing_ReadCustomizedBillingServices_FullMethodName        = "/blueapi.billing.v1.Billing/ReadCustomizedBillingServices"
-	Billing_GetCustomizedBillingService_FullMethodName          = "/blueapi.billing.v1.Billing/GetCustomizedBillingService"
-	Billing_CreateCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
-	Billing_UpdateCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
-	Billing_DeleteCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
-	Billing_GetTags_FullMethodName                              = "/blueapi.billing.v1.Billing/GetTags"
-	Billing_CreateCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateCustomField"
-	Billing_ListCustomField_FullMethodName                      = "/blueapi.billing.v1.Billing/ListCustomField"
-	Billing_UpdateCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateCustomField"
-	Billing_DeleteCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteCustomField"
-	Billing_CreateFreeFormat_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateFreeFormat"
-	Billing_DeleteFreeFormat_FullMethodName                     = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
-	Billing_GetFreeFormat_FullMethodName                        = "/blueapi.billing.v1.Billing/GetFreeFormat"
-	Billing_GetTagsAddingSetting_FullMethodName                 = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
-	Billing_UpdateTagsAddingSetting_FullMethodName              = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
+	Billing_ListBillingGroups_FullMethodName                         = "/blueapi.billing.v1.Billing/ListBillingGroups"
+	Billing_CreateBillingGroup_FullMethodName                        = "/blueapi.billing.v1.Billing/CreateBillingGroup"
+	Billing_GetBillingGroup_FullMethodName                           = "/blueapi.billing.v1.Billing/GetBillingGroup"
+	Billing_GetAccessGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/GetAccessGroup"
+	Billing_ListAwsDailyRunHistory_FullMethodName                    = "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory"
+	Billing_ListUsageCostsDrift_FullMethodName                       = "/blueapi.billing.v1.Billing/ListUsageCostsDrift"
+	Billing_CreateInvoice_FullMethodName                             = "/blueapi.billing.v1.Billing/CreateInvoice"
+	Billing_GetInvoiceStatus_FullMethodName                          = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
+	Billing_ListInvoiceStatus_FullMethodName                         = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
+	Billing_GetInvoice_FullMethodName                                = "/blueapi.billing.v1.Billing/GetInvoice"
+	Billing_ListInvoice_FullMethodName                               = "/blueapi.billing.v1.Billing/ListInvoice"
+	Billing_UpdateInvoicePreviews_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
+	Billing_ExportInvoiceFile_FullMethodName                         = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
+	Billing_ReadServiceDiscountsServices_FullMethodName              = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
+	Billing_CreateInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
+	Billing_UpdateInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
+	Billing_DeleteInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/DeleteInvoiceServiceDiscounts"
+	Billing_ListInvoiceServiceDiscounts_FullMethodName               = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
+	Billing_GetInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/GetInvoiceServiceDiscounts"
+	Billing_ExportServiceDiscounts_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportServiceDiscounts"
+	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
+	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
+	Billing_UpdateAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/UpdateAccountInvoiceServiceDiscounts"
+	Billing_RemoveAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/RemoveAccountInvoiceServiceDiscounts"
+	Billing_DeleteAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/DeleteAccountInvoiceServiceDiscounts"
+	Billing_ExportAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/ExportAccountInvoiceServiceDiscounts"
+	Billing_ExportBillingGroupInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ExportBillingGroupInvoiceServiceDiscounts"
+	Billing_CreateReseller_FullMethodName                            = "/blueapi.billing.v1.Billing/CreateReseller"
+	Billing_ListResellers_FullMethodName                             = "/blueapi.billing.v1.Billing/ListResellers"
+	Billing_GetReseller_FullMethodName                               = "/blueapi.billing.v1.Billing/GetReseller"
+	Billing_UpdateReseller_FullMethodName                            = "/blueapi.billing.v1.Billing/UpdateReseller"
+	Billing_DeleteReseller_FullMethodName                            = "/blueapi.billing.v1.Billing/DeleteReseller"
+	Billing_GetBillingSetting_FullMethodName                         = "/blueapi.billing.v1.Billing/GetBillingSetting"
+	Billing_ListExchangeRates_FullMethodName                         = "/blueapi.billing.v1.Billing/ListExchangeRates"
+	Billing_ListAccessGroups_FullMethodName                          = "/blueapi.billing.v1.Billing/ListAccessGroups"
+	Billing_CreateAccessGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateAccessGroup"
+	Billing_UpdateAccessGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
+	Billing_DeleteAccessGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
+	Billing_ListAbcBillingGroups_FullMethodName                      = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
+	Billing_ListAbcBillingGroupAccounts_FullMethodName               = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
+	Billing_ReadInvoiceAdjustments_FullMethodName                    = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
+	Billing_ListAccountResources_FullMethodName                      = "/blueapi.billing.v1.Billing/ListAccountResources"
+	Billing_GetAdjustmentConfig_FullMethodName                       = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
+	Billing_CreateAdjustmentConfig_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
+	Billing_UpdateAdjustmentConfig_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
+	Billing_DeleteAdjustmentConfig_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
+	Billing_ReadUntaggedGroups_FullMethodName                        = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
+	Billing_ReadCustomizedBillingServices_FullMethodName             = "/blueapi.billing.v1.Billing/ReadCustomizedBillingServices"
+	Billing_GetCustomizedBillingService_FullMethodName               = "/blueapi.billing.v1.Billing/GetCustomizedBillingService"
+	Billing_CreateCustomizedBillingService_FullMethodName            = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
+	Billing_UpdateCustomizedBillingService_FullMethodName            = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
+	Billing_DeleteCustomizedBillingService_FullMethodName            = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
+	Billing_GetTags_FullMethodName                                   = "/blueapi.billing.v1.Billing/GetTags"
+	Billing_CreateCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateCustomField"
+	Billing_ListCustomField_FullMethodName                           = "/blueapi.billing.v1.Billing/ListCustomField"
+	Billing_UpdateCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/UpdateCustomField"
+	Billing_DeleteCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/DeleteCustomField"
+	Billing_CreateFreeFormat_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateFreeFormat"
+	Billing_DeleteFreeFormat_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
+	Billing_GetFreeFormat_FullMethodName                             = "/blueapi.billing.v1.Billing/GetFreeFormat"
+	Billing_GetTagsAddingSetting_FullMethodName                      = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
+	Billing_UpdateTagsAddingSetting_FullMethodName                   = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
 )
 
 // BillingClient is the client API for Billing service.
@@ -129,6 +132,8 @@ type BillingClient interface {
 	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
 	// WORK-IN-PROGRESS: Gets the invoice service discounts. Only available in Ripple.
 	GetInvoiceServiceDiscounts(ctx context.Context, in *GetInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error)
+	// WORK-IN-PROGRESS: Exports service discounts. Only available in Ripple.
+	ExportServiceDiscounts(ctx context.Context, in *ExportServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.ServiceDiscountsExport, error)
 	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error)
 	// Registers the account invoice service discounts. Only available in Ripple.
@@ -139,6 +144,10 @@ type BillingClient interface {
 	RemoveAccountInvoiceServiceDiscounts(ctx context.Context, in *RemoveAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(ctx context.Context, in *DeleteAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Exports service discounts for account in billing group. Only available in Ripple.
+	ExportAccountInvoiceServiceDiscounts(ctx context.Context, in *ExportAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.AccountServiceDiscountsExport, error)
+	// WORK-IN-PROGRESS: Exports service discounts for billing group. Only available in Ripple.
+	ExportBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *ExportBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.GroupServiceDiscountsExport, error)
 	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(ctx context.Context, in *CreateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
 	// ListResellers
@@ -582,6 +591,16 @@ func (c *billingClient) GetInvoiceServiceDiscounts(ctx context.Context, in *GetI
 	return out, nil
 }
 
+func (c *billingClient) ExportServiceDiscounts(ctx context.Context, in *ExportServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.ServiceDiscountsExport, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.ServiceDiscountsExport)
+	err := c.cc.Invoke(ctx, Billing_ExportServiceDiscounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[7], Billing_ListAccountInvoiceServiceDiscounts_FullMethodName, cOpts...)
@@ -649,6 +668,26 @@ func (c *billingClient) DeleteAccountInvoiceServiceDiscounts(ctx context.Context
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Billing_DeleteAccountInvoiceServiceDiscounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ExportAccountInvoiceServiceDiscounts(ctx context.Context, in *ExportAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.AccountServiceDiscountsExport, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AccountServiceDiscountsExport)
+	err := c.cc.Invoke(ctx, Billing_ExportAccountInvoiceServiceDiscounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ExportBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *ExportBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.GroupServiceDiscountsExport, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.GroupServiceDiscountsExport)
+	err := c.cc.Invoke(ctx, Billing_ExportBillingGroupInvoiceServiceDiscounts_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1325,6 +1364,8 @@ type BillingServer interface {
 	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
 	// WORK-IN-PROGRESS: Gets the invoice service discounts. Only available in Ripple.
 	GetInvoiceServiceDiscounts(context.Context, *GetInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error)
+	// WORK-IN-PROGRESS: Exports service discounts. Only available in Ripple.
+	ExportServiceDiscounts(context.Context, *ExportServiceDiscountsRequest) (*v1.ServiceDiscountsExport, error)
 	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(*ListAccountInvoiceServiceDiscountsRequest, Billing_ListAccountInvoiceServiceDiscountsServer) error
 	// Registers the account invoice service discounts. Only available in Ripple.
@@ -1335,6 +1376,10 @@ type BillingServer interface {
 	RemoveAccountInvoiceServiceDiscounts(context.Context, *RemoveAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(context.Context, *DeleteAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Exports service discounts for account in billing group. Only available in Ripple.
+	ExportAccountInvoiceServiceDiscounts(context.Context, *ExportAccountInvoiceServiceDiscountsRequest) (*v1.AccountServiceDiscountsExport, error)
+	// WORK-IN-PROGRESS: Exports service discounts for billing group. Only available in Ripple.
+	ExportBillingGroupInvoiceServiceDiscounts(context.Context, *ExportBillingGroupInvoiceServiceDiscountsRequest) (*v1.GroupServiceDiscountsExport, error)
 	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(context.Context, *CreateResellerRequest) (*ripple.Reseller, error)
 	// ListResellers
@@ -1481,6 +1526,9 @@ func (UnimplementedBillingServer) ListInvoiceServiceDiscounts(*ListInvoiceServic
 func (UnimplementedBillingServer) GetInvoiceServiceDiscounts(context.Context, *GetInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceServiceDiscounts not implemented")
 }
+func (UnimplementedBillingServer) ExportServiceDiscounts(context.Context, *ExportServiceDiscountsRequest) (*v1.ServiceDiscountsExport, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportServiceDiscounts not implemented")
+}
 func (UnimplementedBillingServer) ListAccountInvoiceServiceDiscounts(*ListAccountInvoiceServiceDiscountsRequest, Billing_ListAccountInvoiceServiceDiscountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccountInvoiceServiceDiscounts not implemented")
 }
@@ -1495,6 +1543,12 @@ func (UnimplementedBillingServer) RemoveAccountInvoiceServiceDiscounts(context.C
 }
 func (UnimplementedBillingServer) DeleteAccountInvoiceServiceDiscounts(context.Context, *DeleteAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountInvoiceServiceDiscounts not implemented")
+}
+func (UnimplementedBillingServer) ExportAccountInvoiceServiceDiscounts(context.Context, *ExportAccountInvoiceServiceDiscountsRequest) (*v1.AccountServiceDiscountsExport, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportAccountInvoiceServiceDiscounts not implemented")
+}
+func (UnimplementedBillingServer) ExportBillingGroupInvoiceServiceDiscounts(context.Context, *ExportBillingGroupInvoiceServiceDiscountsRequest) (*v1.GroupServiceDiscountsExport, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportBillingGroupInvoiceServiceDiscounts not implemented")
 }
 func (UnimplementedBillingServer) CreateReseller(context.Context, *CreateResellerRequest) (*ripple.Reseller, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateReseller not implemented")
@@ -1977,6 +2031,24 @@ func _Billing_GetInvoiceServiceDiscounts_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ExportServiceDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportServiceDiscountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ExportServiceDiscounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ExportServiceDiscounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ExportServiceDiscounts(ctx, req.(*ExportServiceDiscountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_ListAccountInvoiceServiceDiscounts_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListAccountInvoiceServiceDiscountsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2066,6 +2138,42 @@ func _Billing_DeleteAccountInvoiceServiceDiscounts_Handler(srv interface{}, ctx 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServer).DeleteAccountInvoiceServiceDiscounts(ctx, req.(*DeleteAccountInvoiceServiceDiscountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ExportAccountInvoiceServiceDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportAccountInvoiceServiceDiscountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ExportAccountInvoiceServiceDiscounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ExportAccountInvoiceServiceDiscounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ExportAccountInvoiceServiceDiscounts(ctx, req.(*ExportAccountInvoiceServiceDiscountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ExportBillingGroupInvoiceServiceDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportBillingGroupInvoiceServiceDiscountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ExportBillingGroupInvoiceServiceDiscounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ExportBillingGroupInvoiceServiceDiscounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ExportBillingGroupInvoiceServiceDiscounts(ctx, req.(*ExportBillingGroupInvoiceServiceDiscountsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2792,6 +2900,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Billing_GetInvoiceServiceDiscounts_Handler,
 		},
 		{
+			MethodName: "ExportServiceDiscounts",
+			Handler:    _Billing_ExportServiceDiscounts_Handler,
+		},
+		{
 			MethodName: "CreateAccountInvoiceServiceDiscounts",
 			Handler:    _Billing_CreateAccountInvoiceServiceDiscounts_Handler,
 		},
@@ -2806,6 +2918,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccountInvoiceServiceDiscounts",
 			Handler:    _Billing_DeleteAccountInvoiceServiceDiscounts_Handler,
+		},
+		{
+			MethodName: "ExportAccountInvoiceServiceDiscounts",
+			Handler:    _Billing_ExportAccountInvoiceServiceDiscounts_Handler,
+		},
+		{
+			MethodName: "ExportBillingGroupInvoiceServiceDiscounts",
+			Handler:    _Billing_ExportBillingGroupInvoiceServiceDiscounts_Handler,
 		},
 		{
 			MethodName: "CreateReseller",

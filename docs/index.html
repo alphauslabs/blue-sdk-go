@@ -1303,11 +1303,23 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ExportAccountInvoiceServiceDiscountsRequest"><span class="badge">M</span>ExportAccountInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ExportBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>ExportBillingGroupInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ExportInvoiceFileRequest"><span class="badge">M</span>ExportInvoiceFileRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.billing.v1.ExportInvoiceFileResponse"><span class="badge">M</span>ExportInvoiceFileResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ExportServiceDiscountsRequest"><span class="badge">M</span>ExportServiceDiscountsRequest</a>
                 </li>
               
                 <li>
@@ -15423,6 +15435,54 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ExportAccountInvoiceServiceDiscountsRequest">ExportAccountInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the ExportAccountInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>format</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `CSV` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ExportBillingGroupInvoiceServiceDiscountsRequest">ExportBillingGroupInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the ExportBillingGroupInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>format</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `CSV` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ExportInvoiceFileRequest">ExportInvoiceFileRequest</h3>
         <p>Request message for the ExportCostFiltersFile rpc.</p>
 
@@ -15475,6 +15535,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><p>Required. URL of exported file.
 
 csv columns set `group vendor resourceId resourceName type serviceName currency cost` </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ExportServiceDiscountsRequest">ExportServiceDiscountsRequest</h3>
+        <p>Request message for the ExportServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>format</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `CSV` is supported. </p></td>
                 </tr>
               
             </tbody>
@@ -17544,6 +17628,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>ExportServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.ExportServiceDiscountsRequest">ExportServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.ServiceDiscountsExport">.blueapi.api.ripple.v1.ServiceDiscountsExport</a></td>
+                <td><p>WORK-IN-PROGRESS: Exports service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListAccountInvoiceServiceDiscounts</td>
                 <td><a href="#blueapi.billing.v1.ListAccountInvoiceServiceDiscountsRequest">ListAccountInvoiceServiceDiscountsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.AccountInvoiceServiceDiscounts">AccountInvoiceServiceDiscounts</a> stream</td>
@@ -17576,6 +17667,20 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.DeleteAccountInvoiceServiceDiscountsRequest">DeleteAccountInvoiceServiceDiscountsRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>Deletes the account invoice service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ExportAccountInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.ExportAccountInvoiceServiceDiscountsRequest">ExportAccountInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.AccountServiceDiscountsExport">.blueapi.api.ripple.v1.AccountServiceDiscountsExport</a></td>
+                <td><p>WORK-IN-PROGRESS: Exports service discounts for account in billing group. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ExportBillingGroupInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.ExportBillingGroupInvoiceServiceDiscountsRequest">ExportBillingGroupInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.GroupServiceDiscountsExport">.blueapi.api.ripple.v1.GroupServiceDiscountsExport</a></td>
+                <td><p>WORK-IN-PROGRESS: Exports service discounts for billing group. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -18047,6 +18152,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               
               
               <tr>
+                <td>ExportServiceDiscounts</td>
+                <td>POST</td>
+                <td>/v1/servicediscounts:export</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
                 <td>ListAccountInvoiceServiceDiscounts</td>
                 <td>POST</td>
                 <td>/v1/servicediscounts/{groupId}/account:read</td>
@@ -18091,6 +18206,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>DELETE</td>
                 <td>/v1/servicediscounts/{groupId}/account</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportAccountInvoiceServiceDiscounts</td>
+                <td>POST</td>
+                <td>/v1/servicediscounts/account:export</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportBillingGroupInvoiceServiceDiscounts</td>
+                <td>POST</td>
+                <td>/v1/servicediscounts/billinggroup:export</td>
+                <td>*</td>
               </tr>
               
             
