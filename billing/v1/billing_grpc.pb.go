@@ -80,6 +80,7 @@ const (
 	Billing_DeleteCustomField_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteCustomField"
 	Billing_CreateFreeFormat_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateFreeFormat"
 	Billing_DeleteFreeFormat_FullMethodName                     = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
+	Billing_GetFreeFormat_FullMethodName                        = "/blueapi.billing.v1.Billing/GetFreeFormat"
 	Billing_GetTagsAddingSetting_FullMethodName                 = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
 	Billing_UpdateTagsAddingSetting_FullMethodName              = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
 )
@@ -201,21 +202,23 @@ type BillingClient interface {
 	UpdateCustomizedBillingService(ctx context.Context, in *UpdateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
 	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(ctx context.Context, in *DeleteCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Returns the customer details and its tags.
+	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error)
-	// WORK-IN-PROGRESS: Creates new customfield
+	// Creates new customfield
 	CreateCustomField(ctx context.Context, in *CreateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
-	// WORK-IN-PROGRESS: Returns all registered customfields
+	// Returns all registered customfields
 	ListCustomField(ctx context.Context, in *ListCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListCustomFieldClient, error)
-	// WORK-IN-PROGRESS: Update the `customField` specified id, modifying its key and description
+	// Update the `customField` specified id, modifying its key and description
 	UpdateCustomField(ctx context.Context, in *UpdateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
-	// WORK-IN-PROGRESS: Deletes the customfield
+	// Deletes the customfield
 	DeleteCustomField(ctx context.Context, in *DeleteCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Creates new billing group free format item (miscellaneous)
+	// Creates new billing group free format item (miscellaneous)
 	CreateFreeFormat(ctx context.Context, in *CreateFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Delete billing group free format item (miscellaneous)
+	// Delete billing group free format item (miscellaneous)
 	DeleteFreeFormat(ctx context.Context, in *DeleteFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Get billing group free format item (miscellaneous)
+	GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error)
 	GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error)
 	UpdateTagsAddingSetting(ctx context.Context, in *UpdateTagsAddingSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -1202,9 +1205,42 @@ func (c *billingClient) DeleteFreeFormat(ctx context.Context, in *DeleteFreeForm
 	return out, nil
 }
 
+func (c *billingClient) GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_GetFreeFormat_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetFreeFormatClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetFreeFormatClient interface {
+	Recv() (*GetFreeFormatResponse, error)
+	grpc.ClientStream
+}
+
+type billingGetFreeFormatClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetFreeFormatClient) Recv() (*GetFreeFormatResponse, error) {
+	m := new(GetFreeFormatResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *billingClient) GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[19], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1362,21 +1398,23 @@ type BillingServer interface {
 	UpdateCustomizedBillingService(context.Context, *UpdateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
 	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Returns the customer details and its tags.
+	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(*GetTagsRequest, Billing_GetTagsServer) error
-	// WORK-IN-PROGRESS: Creates new customfield
+	// Creates new customfield
 	CreateCustomField(context.Context, *CreateCustomFieldRequest) (*CustomField, error)
-	// WORK-IN-PROGRESS: Returns all registered customfields
+	// Returns all registered customfields
 	ListCustomField(*ListCustomFieldRequest, Billing_ListCustomFieldServer) error
-	// WORK-IN-PROGRESS: Update the `customField` specified id, modifying its key and description
+	// Update the `customField` specified id, modifying its key and description
 	UpdateCustomField(context.Context, *UpdateCustomFieldRequest) (*CustomField, error)
-	// WORK-IN-PROGRESS: Deletes the customfield
+	// Deletes the customfield
 	DeleteCustomField(context.Context, *DeleteCustomFieldRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Creates new billing group free format item (miscellaneous)
+	// Creates new billing group free format item (miscellaneous)
 	CreateFreeFormat(context.Context, *CreateFreeFormatRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Delete billing group free format item (miscellaneous)
+	// Delete billing group free format item (miscellaneous)
 	DeleteFreeFormat(context.Context, *DeleteFreeFormatRequest) (*emptypb.Empty, error)
+	// Get billing group free format item (miscellaneous)
+	GetFreeFormat(*GetFreeFormatRequest, Billing_GetFreeFormatServer) error
 	GetTagsAddingSetting(*GetTagsAddingSettingRequest, Billing_GetTagsAddingSettingServer) error
 	UpdateTagsAddingSetting(context.Context, *UpdateTagsAddingSettingRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
@@ -1553,6 +1591,9 @@ func (UnimplementedBillingServer) CreateFreeFormat(context.Context, *CreateFreeF
 }
 func (UnimplementedBillingServer) DeleteFreeFormat(context.Context, *DeleteFreeFormatRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteFreeFormat not implemented")
+}
+func (UnimplementedBillingServer) GetFreeFormat(*GetFreeFormatRequest, Billing_GetFreeFormatServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetFreeFormat not implemented")
 }
 func (UnimplementedBillingServer) GetTagsAddingSetting(*GetTagsAddingSettingRequest, Billing_GetTagsAddingSettingServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTagsAddingSetting not implemented")
@@ -2635,6 +2676,27 @@ func _Billing_DeleteFreeFormat_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetFreeFormat_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetFreeFormatRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetFreeFormat(m, &billingGetFreeFormatServer{ServerStream: stream})
+}
+
+type Billing_GetFreeFormatServer interface {
+	Send(*GetFreeFormatResponse) error
+	grpc.ServerStream
+}
+
+type billingGetFreeFormatServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetFreeFormatServer) Send(m *GetFreeFormatResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Billing_GetTagsAddingSetting_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetTagsAddingSettingRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -2927,6 +2989,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListCustomField",
 			Handler:       _Billing_ListCustomField_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetFreeFormat",
+			Handler:       _Billing_GetFreeFormat_Handler,
 			ServerStreams: true,
 		},
 		{

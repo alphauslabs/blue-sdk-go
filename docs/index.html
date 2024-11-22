@@ -1347,6 +1347,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetFreeFormatRequest"><span class="badge">M</span>GetFreeFormatRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetFreeFormatResponse"><span class="badge">M</span>GetFreeFormatResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetInvoiceRequest"><span class="badge">M</span>GetInvoiceRequest</a>
                 </li>
               
@@ -15777,6 +15785,61 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetFreeFormatRequest">GetFreeFormatRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetFreeFormatResponse">GetFreeFormatResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>freeFormat</td>
+                  <td><a href="#blueapi.billing.v1.FreeFormItem">FreeFormItem</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetInvoiceRequest">GetInvoiceRequest</h3>
         <p>Request message for the Cost.GetInvoiceRequest rpc.</p>
 
@@ -17706,7 +17769,7 @@ Lists all exchange rate.
                 <td>GetTags</td>
                 <td><a href="#blueapi.billing.v1.GetTagsRequest">GetTagsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.TagData">TagData</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Returns the customer details and its tags. 
+                <td><p>Returns the customer details and its tags. 
 Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
@@ -17714,42 +17777,49 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>CreateCustomField</td>
                 <td><a href="#blueapi.billing.v1.CreateCustomFieldRequest">CreateCustomFieldRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
-                <td><p>WORK-IN-PROGRESS: Creates new customfield</p></td>
+                <td><p>Creates new customfield</p></td>
               </tr>
             
               <tr>
                 <td>ListCustomField</td>
                 <td><a href="#blueapi.billing.v1.ListCustomFieldRequest">ListCustomFieldRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CustomField">CustomField</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Returns all registered customfields</p></td>
+                <td><p>Returns all registered customfields</p></td>
               </tr>
             
               <tr>
                 <td>UpdateCustomField</td>
                 <td><a href="#blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
-                <td><p>WORK-IN-PROGRESS: Update the `customField` specified id, modifying its key and description</p></td>
+                <td><p>Update the `customField` specified id, modifying its key and description</p></td>
               </tr>
             
               <tr>
                 <td>DeleteCustomField</td>
                 <td><a href="#blueapi.billing.v1.DeleteCustomFieldRequest">DeleteCustomFieldRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>WORK-IN-PROGRESS: Deletes the customfield</p></td>
+                <td><p>Deletes the customfield</p></td>
               </tr>
             
               <tr>
                 <td>CreateFreeFormat</td>
                 <td><a href="#blueapi.billing.v1.CreateFreeFormatRequest">CreateFreeFormatRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>WORK-IN-PROGRESS: Creates new billing group free format item (miscellaneous)</p></td>
+                <td><p>Creates new billing group free format item (miscellaneous)</p></td>
               </tr>
             
               <tr>
                 <td>DeleteFreeFormat</td>
                 <td><a href="#blueapi.billing.v1.DeleteFreeFormatRequest">DeleteFreeFormatRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>WORK-IN-PROGRESS: Delete billing group free format item (miscellaneous)</p></td>
+                <td><p>Delete billing group free format item (miscellaneous)</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetFreeFormat</td>
+                <td><a href="#blueapi.billing.v1.GetFreeFormatRequest">GetFreeFormatRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetFreeFormatResponse">GetFreeFormatResponse</a> stream</td>
+                <td><p>Get billing group free format item (miscellaneous)</p></td>
               </tr>
             
               <tr>
@@ -18339,6 +18409,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>DeleteFreeFormat</td>
                 <td>DELETE</td>
+                <td>/v1/freeformat/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetFreeFormat</td>
+                <td>GET</td>
                 <td>/v1/freeformat/{id}</td>
                 <td></td>
               </tr>

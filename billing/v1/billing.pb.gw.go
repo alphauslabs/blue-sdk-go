@@ -2624,6 +2624,40 @@ func local_request_Billing_DeleteFreeFormat_0(ctx context.Context, marshaler run
 
 }
 
+func request_Billing_GetFreeFormat_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_GetFreeFormatClient, runtime.ServerMetadata, error) {
+	var protoReq GetFreeFormatRequest
+	var metadata runtime.ServerMetadata
+
+	var (
+		val string
+		ok  bool
+		err error
+		_   = err
+	)
+
+	val, ok = pathParams["id"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
+	}
+
+	protoReq.Id, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
+	}
+
+	stream, err := client.GetFreeFormat(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 func request_Billing_GetTagsAddingSetting_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_GetTagsAddingSettingClient, runtime.ServerMetadata, error) {
 	var protoReq GetTagsAddingSettingRequest
 	var metadata runtime.ServerMetadata
@@ -3829,6 +3863,13 @@ func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 
 		forward_Billing_DeleteFreeFormat_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 
+	})
+
+	mux.Handle("GET", pattern_Billing_GetFreeFormat_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	mux.Handle("GET", pattern_Billing_GetTagsAddingSetting_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -5136,6 +5177,28 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 
 	})
 
+	mux.Handle("GET", pattern_Billing_GetFreeFormat_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetFreeFormat", runtime.WithHTTPPathPattern("/v1/freeformat/{id}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_GetFreeFormat_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Billing_GetFreeFormat_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("GET", pattern_Billing_GetTagsAddingSetting_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -5296,6 +5359,8 @@ var (
 
 	pattern_Billing_DeleteFreeFormat_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "freeformat", "id"}, ""))
 
+	pattern_Billing_GetFreeFormat_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "freeformat", "id"}, ""))
+
 	pattern_Billing_GetTagsAddingSetting_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tagsaddingsetting", "groupId"}, ""))
 
 	pattern_Billing_UpdateTagsAddingSetting_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tagsaddingsetting", "groupId"}, ""))
@@ -5413,6 +5478,8 @@ var (
 	forward_Billing_CreateFreeFormat_0 = runtime.ForwardResponseMessage
 
 	forward_Billing_DeleteFreeFormat_0 = runtime.ForwardResponseMessage
+
+	forward_Billing_GetFreeFormat_0 = runtime.ForwardResponseStream
 
 	forward_Billing_GetTagsAddingSetting_0 = runtime.ForwardResponseStream
 
