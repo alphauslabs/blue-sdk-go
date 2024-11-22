@@ -1391,6 +1391,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.InvoiceConnectedBillingGroups"><span class="badge">M</span>InvoiceConnectedBillingGroups</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.InvoiceServiceDiscounts"><span class="badge">M</span>InvoiceServiceDiscounts</a>
                 </li>
               
@@ -1448,6 +1452,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListInvoiceStatusRequest"><span class="badge">M</span>ListInvoiceStatusRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceTemplateRequest"><span class="badge">M</span>ListInvoiceTemplateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceTemplateResponse"><span class="badge">M</span>ListInvoiceTemplateResponse</a>
                 </li>
               
                 <li>
@@ -16111,6 +16123,44 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.InvoiceConnectedBillingGroups">InvoiceConnectedBillingGroups</h3>
+        <p>Response message to be used for ListInvoiceTemplateResponse</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.InvoiceServiceDiscounts">InvoiceServiceDiscounts</h3>
         <p>Streaming response message for the InvoiceServiceDiscounts rpc.</p>
 
@@ -16567,6 +16617,86 @@ Valid values: default, imported </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Month to get invoice status. Format: `yyyymm`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceTemplateRequest">ListInvoiceTemplateRequest</h3>
+        <p>Request message for ListInvoiceTemplate rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceTemplateResponse">ListInvoiceTemplateResponse</h3>
+        <p>Response message for ListInvoiceTemplate rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>numberOfConnected</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>connectedBillingGroup</td>
+                  <td><a href="#blueapi.billing.v1.InvoiceConnectedBillingGroups">InvoiceConnectedBillingGroups</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoices</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupVendoredInvoiceSetting">BillingGroupVendoredInvoiceSetting</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -17586,6 +17716,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>ListInvoiceTemplate</td>
+                <td><a href="#blueapi.billing.v1.ListInvoiceTemplateRequest">ListInvoiceTemplateRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListInvoiceTemplateResponse">ListInvoiceTemplateResponse</a> stream</td>
+                <td><p>Lists Invoice Template. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ReadServiceDiscountsServices</td>
                 <td><a href="#blueapi.billing.v1.ReadServiceDiscountsServicesRequest">ReadServiceDiscountsServicesRequest</a></td>
                 <td><a href="#blueapi.api.ripple.v1.Service">.blueapi.api.ripple.v1.Service</a> stream</td>
@@ -18086,6 +18223,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/invoice/{date}:export</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListInvoiceTemplate</td>
+                <td>GET</td>
+                <td>/v1/invoice/template</td>
+                <td></td>
               </tr>
               
             

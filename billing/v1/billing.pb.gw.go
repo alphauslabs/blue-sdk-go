@@ -635,6 +635,23 @@ func local_request_Billing_ExportInvoiceFile_0(ctx context.Context, marshaler ru
 
 }
 
+func request_Billing_ListInvoiceTemplate_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ListInvoiceTemplateClient, runtime.ServerMetadata, error) {
+	var protoReq ListInvoiceTemplateRequest
+	var metadata runtime.ServerMetadata
+
+	stream, err := client.ListInvoiceTemplate(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+
+}
+
 func request_Billing_ReadServiceDiscountsServices_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ReadServiceDiscountsServicesClient, runtime.ServerMetadata, error) {
 	var protoReq ReadServiceDiscountsServicesRequest
 	var metadata runtime.ServerMetadata
@@ -3102,6 +3119,13 @@ func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 
 	})
 
+	mux.Handle("GET", pattern_Billing_ListInvoiceTemplate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	mux.Handle("POST", pattern_Billing_ReadServiceDiscountsServices_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -4384,6 +4408,28 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 
 	})
 
+	mux.Handle("GET", pattern_Billing_ListInvoiceTemplate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		var err error
+		var annotatedContext context.Context
+		annotatedContext, err = runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/ListInvoiceTemplate", runtime.WithHTTPPathPattern("/v1/invoice/template"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_ListInvoiceTemplate_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+
+		forward_Billing_ListInvoiceTemplate_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+
+	})
+
 	mux.Handle("POST", pattern_Billing_ReadServiceDiscountsServices_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -5492,6 +5538,8 @@ var (
 
 	pattern_Billing_ExportInvoiceFile_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "export"))
 
+	pattern_Billing_ListInvoiceTemplate_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "invoice", "template"}, ""))
+
 	pattern_Billing_ReadServiceDiscountsServices_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "vendor", "services"}, "read"))
 
 	pattern_Billing_CreateInvoiceServiceDiscounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, ""))
@@ -5617,6 +5665,8 @@ var (
 	forward_Billing_UpdateInvoicePreviews_0 = runtime.ForwardResponseMessage
 
 	forward_Billing_ExportInvoiceFile_0 = runtime.ForwardResponseMessage
+
+	forward_Billing_ListInvoiceTemplate_0 = runtime.ForwardResponseStream
 
 	forward_Billing_ReadServiceDiscountsServices_0 = runtime.ForwardResponseStream
 

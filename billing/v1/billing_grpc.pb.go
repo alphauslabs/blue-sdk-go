@@ -37,6 +37,7 @@ const (
 	Billing_ListInvoice_FullMethodName                               = "/blueapi.billing.v1.Billing/ListInvoice"
 	Billing_UpdateInvoicePreviews_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
 	Billing_ExportInvoiceFile_FullMethodName                         = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
+	Billing_ListInvoiceTemplate_FullMethodName                       = "/blueapi.billing.v1.Billing/ListInvoiceTemplate"
 	Billing_ReadServiceDiscountsServices_FullMethodName              = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
 	Billing_CreateInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
 	Billing_UpdateInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
@@ -120,6 +121,8 @@ type BillingClient interface {
 	UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Exports an invoice.
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
+	// Lists Invoice Template. Only available in Ripple.
+	ListInvoiceTemplate(ctx context.Context, in *ListInvoiceTemplateRequest, opts ...grpc.CallOption) (Billing_ListInvoiceTemplateClient, error)
 	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error)
 	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
@@ -485,9 +488,42 @@ func (c *billingClient) ExportInvoiceFile(ctx context.Context, in *ExportInvoice
 	return out, nil
 }
 
+func (c *billingClient) ListInvoiceTemplate(ctx context.Context, in *ListInvoiceTemplateRequest, opts ...grpc.CallOption) (Billing_ListInvoiceTemplateClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[5], Billing_ListInvoiceTemplate_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListInvoiceTemplateClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListInvoiceTemplateClient interface {
+	Recv() (*ListInvoiceTemplateResponse, error)
+	grpc.ClientStream
+}
+
+type billingListInvoiceTemplateClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListInvoiceTemplateClient) Recv() (*ListInvoiceTemplateResponse, error) {
+	m := new(ListInvoiceTemplateResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *billingClient) ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[5], Billing_ReadServiceDiscountsServices_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[6], Billing_ReadServiceDiscountsServices_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -550,7 +586,7 @@ func (c *billingClient) DeleteInvoiceServiceDiscounts(ctx context.Context, in *D
 
 func (c *billingClient) ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[6], Billing_ListInvoiceServiceDiscounts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[7], Billing_ListInvoiceServiceDiscounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -603,7 +639,7 @@ func (c *billingClient) ExportServiceDiscounts(ctx context.Context, in *ExportSe
 
 func (c *billingClient) ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[7], Billing_ListAccountInvoiceServiceDiscounts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[8], Billing_ListAccountInvoiceServiceDiscounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -706,7 +742,7 @@ func (c *billingClient) CreateReseller(ctx context.Context, in *CreateResellerRe
 
 func (c *billingClient) ListResellers(ctx context.Context, in *ListResellersRequest, opts ...grpc.CallOption) (Billing_ListResellersClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[8], Billing_ListResellers_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[9], Billing_ListResellers_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -789,7 +825,7 @@ func (c *billingClient) ListExchangeRates(ctx context.Context, in *ListExchangeR
 
 func (c *billingClient) ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (Billing_ListAccessGroupsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[9], Billing_ListAccessGroups_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[10], Billing_ListAccessGroups_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -852,7 +888,7 @@ func (c *billingClient) DeleteAccessGroup(ctx context.Context, in *DeleteAccessG
 
 func (c *billingClient) ListAbcBillingGroups(ctx context.Context, in *ListAbcBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[10], Billing_ListAbcBillingGroups_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[11], Billing_ListAbcBillingGroups_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -885,7 +921,7 @@ func (x *billingListAbcBillingGroupsClient) Recv() (*AbcBillingGroup, error) {
 
 func (c *billingClient) ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[11], Billing_ListAbcBillingGroupAccounts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[12], Billing_ListAbcBillingGroupAccounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -918,7 +954,7 @@ func (x *billingListAbcBillingGroupAccountsClient) Recv() (*AbcAccount, error) {
 
 func (c *billingClient) ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[12], Billing_ReadInvoiceAdjustments_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[13], Billing_ReadInvoiceAdjustments_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -951,7 +987,7 @@ func (x *billingReadInvoiceAdjustmentsClient) Recv() (*wave.Adjustment, error) {
 
 func (c *billingClient) ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[13], Billing_ListAccountResources_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[14], Billing_ListAccountResources_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1024,7 +1060,7 @@ func (c *billingClient) DeleteAdjustmentConfig(ctx context.Context, in *DeleteAd
 
 func (c *billingClient) ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[14], Billing_ReadUntaggedGroups_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[15], Billing_ReadUntaggedGroups_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1057,7 +1093,7 @@ func (x *billingReadUntaggedGroupsClient) Recv() (*ripple.UntaggedGroup, error) 
 
 func (c *billingClient) ReadCustomizedBillingServices(ctx context.Context, in *ReadCustomizedBillingServicesRequest, opts ...grpc.CallOption) (Billing_ReadCustomizedBillingServicesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[15], Billing_ReadCustomizedBillingServices_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[16], Billing_ReadCustomizedBillingServices_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1130,7 +1166,7 @@ func (c *billingClient) DeleteCustomizedBillingService(ctx context.Context, in *
 
 func (c *billingClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[16], Billing_GetTags_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[17], Billing_GetTags_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1173,7 +1209,7 @@ func (c *billingClient) CreateCustomField(ctx context.Context, in *CreateCustomF
 
 func (c *billingClient) ListCustomField(ctx context.Context, in *ListCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListCustomFieldClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[17], Billing_ListCustomField_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_ListCustomField_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1246,7 +1282,7 @@ func (c *billingClient) DeleteFreeFormat(ctx context.Context, in *DeleteFreeForm
 
 func (c *billingClient) GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_GetFreeFormat_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[19], Billing_GetFreeFormat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1279,7 +1315,7 @@ func (x *billingGetFreeFormatClient) Recv() (*GetFreeFormatResponse, error) {
 
 func (c *billingClient) GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[19], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[20], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1352,6 +1388,8 @@ type BillingServer interface {
 	UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error)
 	// Exports an invoice.
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
+	// Lists Invoice Template. Only available in Ripple.
+	ListInvoiceTemplate(*ListInvoiceTemplateRequest, Billing_ListInvoiceTemplateServer) error
 	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error
 	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
@@ -1507,6 +1545,9 @@ func (UnimplementedBillingServer) UpdateInvoicePreviews(context.Context, *Update
 }
 func (UnimplementedBillingServer) ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportInvoiceFile not implemented")
+}
+func (UnimplementedBillingServer) ListInvoiceTemplate(*ListInvoiceTemplateRequest, Billing_ListInvoiceTemplateServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListInvoiceTemplate not implemented")
 }
 func (UnimplementedBillingServer) ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadServiceDiscountsServices not implemented")
@@ -1915,6 +1956,27 @@ func _Billing_ExportInvoiceFile_Handler(srv interface{}, ctx context.Context, de
 		return srv.(BillingServer).ExportInvoiceFile(ctx, req.(*ExportInvoiceFileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ListInvoiceTemplate_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListInvoiceTemplateRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListInvoiceTemplate(m, &billingListInvoiceTemplateServer{ServerStream: stream})
+}
+
+type Billing_ListInvoiceTemplateServer interface {
+	Send(*ListInvoiceTemplateResponse) error
+	grpc.ServerStream
+}
+
+type billingListInvoiceTemplateServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListInvoiceTemplateServer) Send(m *ListInvoiceTemplateResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _Billing_ReadServiceDiscountsServices_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -3044,6 +3106,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListInvoice",
 			Handler:       _Billing_ListInvoice_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListInvoiceTemplate",
+			Handler:       _Billing_ListInvoiceTemplate_Handler,
 			ServerStreams: true,
 		},
 		{
