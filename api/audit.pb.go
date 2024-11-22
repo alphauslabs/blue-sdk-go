@@ -73,7 +73,7 @@ type AuditExportData struct {
 	unknownFields protoimpl.UnknownFields
 
 	// Base64 encoded value
-	// For example, content :`dGltZSx1c2VySWQsc3ViVXNlcklkLHVzZXJOYW1lLGlzQWRtaW4sZXZlbnROYW1lLHBhdGgsdXNlclBhc3MsY2F0ZU5hbWUNCg==“
+	// For example, content :`dGltZSx1c2VySWQsc3ViVXNlcklkLHVzZXJOYW1lLGlzQWRtaW4sZXZlbnROYW1lLHBhdGgsdXNlclBhc3MsY2F0ZU5hbWUNCg==`
 	// Decoding this value, get `time,userId,subUserId,userName,isAdmin,eventName,path,userPass,cateName`.
 	Content string `protobuf:"bytes,1,opt,name=content,proto3" json:"content,omitempty"`
 	// Downloaded content lines.
