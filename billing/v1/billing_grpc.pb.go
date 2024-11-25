@@ -147,9 +147,9 @@ type BillingClient interface {
 	RemoveAccountInvoiceServiceDiscounts(ctx context.Context, in *RemoveAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(ctx context.Context, in *DeleteAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Exports service discounts for account in billing group. Only available in Ripple.
+	// Exports service discounts for account in billing group. Only available in Ripple.
 	ExportAccountInvoiceServiceDiscounts(ctx context.Context, in *ExportAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.AccountServiceDiscountsExport, error)
-	// WORK-IN-PROGRESS: Exports service discounts for billing group. Only available in Ripple.
+	// Exports service discounts for billing group. Only available in Ripple.
 	ExportBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *ExportBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.GroupServiceDiscountsExport, error)
 	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(ctx context.Context, in *CreateResellerRequest, opts ...grpc.CallOption) (*ripple.Reseller, error)
@@ -1414,9 +1414,9 @@ type BillingServer interface {
 	RemoveAccountInvoiceServiceDiscounts(context.Context, *RemoveAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Deletes the account invoice service discounts. Only available in Ripple.
 	DeleteAccountInvoiceServiceDiscounts(context.Context, *DeleteAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Exports service discounts for account in billing group. Only available in Ripple.
+	// Exports service discounts for account in billing group. Only available in Ripple.
 	ExportAccountInvoiceServiceDiscounts(context.Context, *ExportAccountInvoiceServiceDiscountsRequest) (*v1.AccountServiceDiscountsExport, error)
-	// WORK-IN-PROGRESS: Exports service discounts for billing group. Only available in Ripple.
+	// Exports service discounts for billing group. Only available in Ripple.
 	ExportBillingGroupInvoiceServiceDiscounts(context.Context, *ExportBillingGroupInvoiceServiceDiscountsRequest) (*v1.GroupServiceDiscountsExport, error)
 	// Registers the reseller account. Only available in Ripple.
 	CreateReseller(context.Context, *CreateResellerRequest) (*ripple.Reseller, error)
