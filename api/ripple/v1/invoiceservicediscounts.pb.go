@@ -376,23 +376,24 @@ func (x *ServiceDiscountsExport) GetData() *ExportData {
 }
 
 // AccountServiceDiscountsExport resource definition.
+//
+// data is [blueapi.api.ripple.v1.ExportData]
+//
+// content. Base64 encoded value.
+// For example,
+// content :`YmlsbGluZ0dyb3VwSWQsYmlsbGluZ0dyb3VwTmFtZSxWZW5kb3IsQWNjb3VudElkLEFjY291bnROYW1lLFNlcnZpY2UgUHJlbWl1bXMmRGlzY291bnRzDQo=`
+// Decoding this value by en, get `billingGroupId,billingGroupName,Vendor,AccountId,AccountName,Service Premiums&Discounts`.
+// content :`6KuL5rGC44Kw44Or44O844OXSUQs6KuL5rGC44Kw44Or44O844OX5ZCNLOODmeODs+ODgOODvCzjgqLjgqvjgqbjg7Pjg4hJRCzjgqLjgqvjgqbjg7Pjg4jlkI0s44K144O844OT44K55Ymy5byV44O75Ymy5aKX6Kit5a6aDQo=`
+// Decoding this value by en, get `請求グループID,請求グループ名,ベンダー,アカウントID,アカウント名,サービス割引・割増設定`.
+//
+// downloadedRows. Downloaded content lines.
+//
+// totalRows.Total of content lines.
 type AccountServiceDiscountsExport struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// data is [blueapi.api.ripple.v1.ExportData]
-	//
-	// content. Base64 encoded value.
-	// For example,
-	// content :`YmlsbGluZ0dyb3VwSWQsYmlsbGluZ0dyb3VwTmFtZSxWZW5kb3IsQWNjb3VudElkLEFjY291bnROYW1lLFNlcnZpY2UgUHJlbWl1bXMmRGlzY291bnRzDQo=`
-	// Decoding this value by en, get `billingGroupId,billingGroupName,Vendor,AccountId,AccountName,Service Premiums&Discounts`.
-	// content :`6KuL5rGC44Kw44Or44O844OXSUQs6KuL5rGC44Kw44Or44O844OX5ZCNLOODmeODs+ODgOODvCzjgqLjgqvjgqbjg7Pjg4hJRCzjgqLjgqvjgqbjg7Pjg4jlkI0s44K144O844OT44K55Ymy5byV44O75Ymy5aKX6Kit5a6aDQo=`
-	// Decoding this value by en, get `請求グループID,請求グループ名,ベンダー,アカウントID,アカウント名,サービス割引・割増設定`.
-	//
-	// downloadedRows. Downloaded content lines.
-	//
-	// totalRows.Total of content lines.
 	Data *ExportData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 }
 
@@ -435,23 +436,24 @@ func (x *AccountServiceDiscountsExport) GetData() *ExportData {
 
 // GroupServiceDiscountsExport resource definition.
 // `Group` refer to `BillingGroup`.
+//
+// data is [blueapi.api.ripple.v1.ExportData]
+//
+// content. Base64 encoded value.
+// For example,
+// content :`YmlsbGluZ0dyb3VwSWQsYmlsbGluZ0dyb3VwTmFtZSxTZXJ2aWNlIFByZW1pdW1zJkRpc2NvdW50cw0K`
+// Decoding this value by en, get `billingGroupId,billingGroupName,Service Premiums&Discounts`.
+// content :`6KuL5rGC44Kw44Or44O844OXSUQs6KuL5rGC44Kw44Or44O844OX5ZCNLOOCteODvOODk+OCueWJsuW8leODu+WJsuWil+ioreWumg0K`
+// Decoding this value by ja, get `請求グループID,請求グループ名,サービス割引・割増設定`.
+//
+// downloadedRows. Downloaded content lines.
+//
+// totalRows.Total of content lines.
 type GroupServiceDiscountsExport struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	// data is [blueapi.api.ripple.v1.ExportData]
-	//
-	// content. Base64 encoded value.
-	// For example,
-	// content :`YmlsbGluZ0dyb3VwSWQsYmlsbGluZ0dyb3VwTmFtZSxTZXJ2aWNlIFByZW1pdW1zJkRpc2NvdW50cw0K`
-	// Decoding this value by en, get `billingGroupId,billingGroupName,Service Premiums&Discounts`.
-	// content :`6KuL5rGC44Kw44Or44O844OXSUQs6KuL5rGC44Kw44Or44O844OX5ZCNLOOCteODvOODk+OCueWJsuW8leODu+WJsuWil+ioreWumg0K`
-	// Decoding this value by ja, get `請求グループID,請求グループ名,サービス割引・割増設定`.
-	//
-	// downloadedRows. Downloaded content lines.
-	//
-	// totalRows.Total of content lines.
 	Data *ExportData `protobuf:"bytes,1,opt,name=data,proto3" json:"data,omitempty"`
 }
 
