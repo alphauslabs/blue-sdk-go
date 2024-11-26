@@ -1547,6 +1547,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest"><span class="badge">M</span>UpdateBillingGroupInvoiceTemplateRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateCustomFieldRequest"><span class="badge">M</span>UpdateCustomFieldRequest</a>
                 </li>
               
@@ -17508,6 +17512,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest">UpdateBillingGroupInvoiceTemplateRequest</h3>
+        <p>Request a message to update/create a billing group's invoice template</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing internal ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceTemplateId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The invoice template ID to associate with the billing group </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</h3>
         <p></p>
 
@@ -17957,6 +17992,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.ListInvoiceTemplateRequest">ListInvoiceTemplateRequest</a></td>
                 <td><a href="#blueapi.billing.v1.ListInvoiceTemplateResponse">ListInvoiceTemplateResponse</a> stream</td>
                 <td><p>Lists Invoice Template. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupInvoiceTemplate</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest">UpdateBillingGroupInvoiceTemplateRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Creates/Updates a billing group&#39;s invoice template. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -18491,6 +18533,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>GET</td>
                 <td>/v1/invoice/template</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupInvoiceTemplate</td>
+                <td>POST</td>
+                <td>/v1/billinggroups/{id}/invoicetemplate</td>
+                <td>*</td>
               </tr>
               
             

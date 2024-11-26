@@ -38,6 +38,7 @@ const (
 	Billing_UpdateInvoicePreviews_FullMethodName                      = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
 	Billing_ExportInvoiceFile_FullMethodName                          = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
 	Billing_ListInvoiceTemplate_FullMethodName                        = "/blueapi.billing.v1.Billing/ListInvoiceTemplate"
+	Billing_UpdateBillingGroupInvoiceTemplate_FullMethodName          = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceTemplate"
 	Billing_ReadServiceDiscountsServices_FullMethodName               = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
 	Billing_CreateInvoiceServiceDiscounts_FullMethodName              = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
 	Billing_UpdateInvoiceServiceDiscounts_FullMethodName              = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
@@ -126,6 +127,8 @@ type BillingClient interface {
 	ExportInvoiceFile(ctx context.Context, in *ExportInvoiceFileRequest, opts ...grpc.CallOption) (*ExportInvoiceFileResponse, error)
 	// Lists Invoice Template. Only available in Ripple.
 	ListInvoiceTemplate(ctx context.Context, in *ListInvoiceTemplateRequest, opts ...grpc.CallOption) (Billing_ListInvoiceTemplateClient, error)
+	// Creates/Updates a billing group's invoice template. Only available in Ripple.
+	UpdateBillingGroupInvoiceTemplate(ctx context.Context, in *UpdateBillingGroupInvoiceTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error)
 	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
@@ -528,6 +531,16 @@ func (x *billingListInvoiceTemplateClient) Recv() (*ListInvoiceTemplateResponse,
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *billingClient) UpdateBillingGroupInvoiceTemplate(ctx context.Context, in *UpdateBillingGroupInvoiceTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateBillingGroupInvoiceTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *billingClient) ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error) {
@@ -1452,6 +1465,8 @@ type BillingServer interface {
 	ExportInvoiceFile(context.Context, *ExportInvoiceFileRequest) (*ExportInvoiceFileResponse, error)
 	// Lists Invoice Template. Only available in Ripple.
 	ListInvoiceTemplate(*ListInvoiceTemplateRequest, Billing_ListInvoiceTemplateServer) error
+	// Creates/Updates a billing group's invoice template. Only available in Ripple.
+	UpdateBillingGroupInvoiceTemplate(context.Context, *UpdateBillingGroupInvoiceTemplateRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error
 	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
@@ -1616,6 +1631,9 @@ func (UnimplementedBillingServer) ExportInvoiceFile(context.Context, *ExportInvo
 }
 func (UnimplementedBillingServer) ListInvoiceTemplate(*ListInvoiceTemplateRequest, Billing_ListInvoiceTemplateServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListInvoiceTemplate not implemented")
+}
+func (UnimplementedBillingServer) UpdateBillingGroupInvoiceTemplate(context.Context, *UpdateBillingGroupInvoiceTemplateRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupInvoiceTemplate not implemented")
 }
 func (UnimplementedBillingServer) ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadServiceDiscountsServices not implemented")
@@ -2054,6 +2072,24 @@ type billingListInvoiceTemplateServer struct {
 
 func (x *billingListInvoiceTemplateServer) Send(m *ListInvoiceTemplateResponse) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_UpdateBillingGroupInvoiceTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBillingGroupInvoiceTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateBillingGroupInvoiceTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateBillingGroupInvoiceTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateBillingGroupInvoiceTemplate(ctx, req.(*UpdateBillingGroupInvoiceTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Billing_ReadServiceDiscountsServices_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -3078,6 +3114,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportInvoiceFile",
 			Handler:    _Billing_ExportInvoiceFile_Handler,
+		},
+		{
+			MethodName: "UpdateBillingGroupInvoiceTemplate",
+			Handler:    _Billing_UpdateBillingGroupInvoiceTemplate_Handler,
 		},
 		{
 			MethodName: "CreateInvoiceServiceDiscounts",
