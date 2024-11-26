@@ -1287,6 +1287,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.DeleteCustomizedBillingServiceBillingGroupRequest"><span class="badge">M</span>DeleteCustomizedBillingServiceBillingGroupRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteCustomizedBillingServiceRequest"><span class="badge">M</span>DeleteCustomizedBillingServiceRequest</a>
                 </li>
               
@@ -1352,6 +1356,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.GetBillingSettingResponse"><span class="badge">M</span>GetBillingSettingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupRequest"><span class="badge">M</span>GetCustomizedBillingServiceBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse"><span class="badge">M</span>GetCustomizedBillingServiceBillingGroupResponse</a>
                 </li>
               
                 <li>
@@ -1496,6 +1508,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ResourceAccount"><span class="badge">M</span>ResourceAccount</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest"><span class="badge">M</span>SetCustomizedBillingServiceBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting"><span class="badge">M</span>SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting</a>
                 </li>
               
                 <li>
@@ -15344,6 +15364,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.DeleteCustomizedBillingServiceBillingGroupRequest">DeleteCustomizedBillingServiceBillingGroupRequest</h3>
+        <p>Request message for the Billing.DeleteCustomizedBillingServiceBillingGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. billing internal id in billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteCustomizedBillingServiceRequest">DeleteCustomizedBillingServiceRequest</h3>
         <p>Request message for the Billing.DeleteCustomizedBillingService rpc.</p>
 
@@ -15872,6 +15923,82 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>List of available currency. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupRequest">GetCustomizedBillingServiceBillingGroupRequest</h3>
+        <p>Request message for the Billing.GetCustomizedBillingServiceBillingGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. billing internal id in billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse">GetCustomizedBillingServiceBillingGroupResponse</h3>
+        <p>Response message for the Billing.GetCustomizedBillingServiceBillingGroup rpc.</p><p>If there is no account information, it indicates that it is applied to BillingGroup.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. vendor that applied to the CustomizedBillingService　config. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>chargingTarget</td>
+                  <td><a href="#blueapi.api.ripple.ChargingTarget">blueapi.api.ripple.ChargingTarget</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.ChargingTarget] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.api.Account">blueapi.api.Account</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. accounts that applied to the CustomizedBillingService　config. </p></td>
                 </tr>
               
             </tbody>
@@ -17040,6 +17167,83 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest">SetCustomizedBillingServiceBillingGroupRequest</h3>
+        <p>Request message for the Billing.SetCustomizedBillingServiceBillingGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. billing internal id in billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting">SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. [CustomizedBillingServiceBillingSetting] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting">SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting</h3>
+        <p>CustomizedBillingServiceBillingSetting</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>chargingTarget</td>
+                  <td><a href="#blueapi.api.ripple.ChargingTarget">blueapi.api.ripple.ChargingTarget</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.ChargingTarget] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. if chargingTarget is BILLINGGROUP, `accounts` is set emptty.
+Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.TagData">TagData</h3>
         <p>Response for tag request</p>
 
@@ -18041,6 +18245,27 @@ Lists all exchange rate.
               </tr>
             
               <tr>
+                <td>GetCustomizedBillingServiceBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupRequest">GetCustomizedBillingServiceBillingGroupRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse">GetCustomizedBillingServiceBillingGroupResponse</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Gets the customized billing service in billing group. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SetCustomizedBillingServiceBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest">SetCustomizedBillingServiceBillingGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Sets the customized billing service in billing group. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteCustomizedBillingServiceBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.DeleteCustomizedBillingServiceBillingGroupRequest">DeleteCustomizedBillingServiceBillingGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Deletes the customized billing service in billing group. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetTags</td>
                 <td><a href="#blueapi.billing.v1.GetTagsRequest">GetTagsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.TagData">TagData</a> stream</td>
@@ -18655,6 +18880,36 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>DeleteCustomizedBillingService</td>
                 <td>DELETE</td>
                 <td>/v1/customizedbillingservices/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCustomizedBillingServiceBillingGroup</td>
+                <td>GET</td>
+                <td>/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetCustomizedBillingServiceBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteCustomizedBillingServiceBillingGroup</td>
+                <td>DELETE</td>
+                <td>/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}</td>
                 <td></td>
               </tr>
               

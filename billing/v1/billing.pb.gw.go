@@ -1835,6 +1835,150 @@ func local_request_Billing_DeleteCustomizedBillingService_0(ctx context.Context,
 	return msg, metadata, err
 }
 
+func request_Billing_GetCustomizedBillingServiceBillingGroup_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_GetCustomizedBillingServiceBillingGroupClient, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetCustomizedBillingServiceBillingGroupRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	stream, err := client.GetCustomizedBillingServiceBillingGroup(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+}
+
+func request_Billing_SetCustomizedBillingServiceBillingGroup_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq SetCustomizedBillingServiceBillingGroupRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	msg, err := client.SetCustomizedBillingServiceBillingGroup(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Billing_SetCustomizedBillingServiceBillingGroup_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq SetCustomizedBillingServiceBillingGroupRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	msg, err := server.SetCustomizedBillingServiceBillingGroup(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_Billing_DeleteCustomizedBillingServiceBillingGroup_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeleteCustomizedBillingServiceBillingGroupRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	msg, err := client.DeleteCustomizedBillingServiceBillingGroup(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Billing_DeleteCustomizedBillingServiceBillingGroup_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeleteCustomizedBillingServiceBillingGroupRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	msg, err := server.DeleteCustomizedBillingServiceBillingGroup(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 var filter_Billing_GetTags_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
 func request_Billing_GetTags_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_GetTagsClient, runtime.ServerMetadata, error) {
@@ -3024,6 +3168,53 @@ func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		forward_Billing_DeleteCustomizedBillingService_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
+	mux.Handle(http.MethodGet, pattern_Billing_GetCustomizedBillingServiceBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+	mux.Handle(http.MethodPost, pattern_Billing_SetCustomizedBillingServiceBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/SetCustomizedBillingServiceBillingGroup", runtime.WithHTTPPathPattern("/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Billing_SetCustomizedBillingServiceBillingGroup_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_SetCustomizedBillingServiceBillingGroup_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodDelete, pattern_Billing_DeleteCustomizedBillingServiceBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/DeleteCustomizedBillingServiceBillingGroup", runtime.WithHTTPPathPattern("/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Billing_DeleteCustomizedBillingServiceBillingGroup_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_DeleteCustomizedBillingServiceBillingGroup_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+
 	mux.Handle(http.MethodGet, pattern_Billing_GetTags_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -4112,6 +4303,57 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		}
 		forward_Billing_DeleteCustomizedBillingService_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_Billing_GetCustomizedBillingServiceBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetCustomizedBillingServiceBillingGroup", runtime.WithHTTPPathPattern("/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_GetCustomizedBillingServiceBillingGroup_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_GetCustomizedBillingServiceBillingGroup_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPost, pattern_Billing_SetCustomizedBillingServiceBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/SetCustomizedBillingServiceBillingGroup", runtime.WithHTTPPathPattern("/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_SetCustomizedBillingServiceBillingGroup_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_SetCustomizedBillingServiceBillingGroup_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodDelete, pattern_Billing_DeleteCustomizedBillingServiceBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/DeleteCustomizedBillingServiceBillingGroup", runtime.WithHTTPPathPattern("/v1/customizedbillingservices/billinggroup/{groupId}/{vendor}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_DeleteCustomizedBillingServiceBillingGroup_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_DeleteCustomizedBillingServiceBillingGroup_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodGet, pattern_Billing_GetTags_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -4286,133 +4528,139 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 }
 
 var (
-	pattern_Billing_ListBillingGroups_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "billinggroups"}, ""))
-	pattern_Billing_CreateBillingGroup_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "billinggroups"}, ""))
-	pattern_Billing_GetBillingGroup_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "billinggroups", "billingInternalId"}, ""))
-	pattern_Billing_GetAccessGroup_0                            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "accessgroups", "accessGroupId"}, ""))
-	pattern_Billing_ListAwsDailyRunHistory_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aws", "dailyrunhistory"}, "read"))
-	pattern_Billing_ListUsageCostsDrift_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "usagecostsdrift"}, "read"))
-	pattern_Billing_CreateInvoice_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "create"))
-	pattern_Billing_GetInvoiceStatus_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "invoice", "status", "id"}, ""))
-	pattern_Billing_ListInvoiceStatus_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "invoice", "status", "date"}, "read"))
-	pattern_Billing_GetInvoice_0                                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "read"))
-	pattern_Billing_ListInvoice_0                               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "invoice"}, "read"))
-	pattern_Billing_UpdateInvoicePreviews_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "preview"))
-	pattern_Billing_ExportInvoiceFile_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "export"))
-	pattern_Billing_ListInvoiceTemplate_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "invoice", "template"}, ""))
-	pattern_Billing_ReadServiceDiscountsServices_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "vendor", "services"}, "read"))
-	pattern_Billing_CreateInvoiceServiceDiscounts_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, ""))
-	pattern_Billing_UpdateInvoiceServiceDiscounts_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "id"}, ""))
-	pattern_Billing_DeleteInvoiceServiceDiscounts_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "id"}, ""))
-	pattern_Billing_ListInvoiceServiceDiscounts_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, "read"))
-	pattern_Billing_GetInvoiceServiceDiscounts_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "id"}, ""))
-	pattern_Billing_ExportServiceDiscounts_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, "export"))
-	pattern_Billing_ListAccountInvoiceServiceDiscounts_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, "read"))
-	pattern_Billing_CreateAccountInvoiceServiceDiscounts_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
-	pattern_Billing_UpdateAccountInvoiceServiceDiscounts_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
-	pattern_Billing_RemoveAccountInvoiceServiceDiscounts_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, "remove"))
-	pattern_Billing_DeleteAccountInvoiceServiceDiscounts_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
-	pattern_Billing_ExportAccountInvoiceServiceDiscounts_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "servicediscounts", "account"}, "export"))
-	pattern_Billing_ExportBillingGroupInvoiceServiceDiscounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "servicediscounts", "billinggroup"}, "export"))
-	pattern_Billing_CreateReseller_0                            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resellers"}, ""))
-	pattern_Billing_ListResellers_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resellers"}, ""))
-	pattern_Billing_GetReseller_0                               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "resellers", "id"}, ""))
-	pattern_Billing_UpdateReseller_0                            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "resellers", "id"}, ""))
-	pattern_Billing_DeleteReseller_0                            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "resellers", "id"}, ""))
-	pattern_Billing_GetBillingSetting_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "settings"}, ""))
-	pattern_Billing_ListExchangeRates_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "exchangerate", "month"}, ""))
-	pattern_Billing_ListAccessGroups_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "accessgroups"}, ""))
-	pattern_Billing_CreateAccessGroup_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "accessgroups"}, ""))
-	pattern_Billing_UpdateAccessGroup_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "accessgroups", "id"}, ""))
-	pattern_Billing_DeleteAccessGroup_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "accessgroups", "id"}, ""))
-	pattern_Billing_ListAbcBillingGroups_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "billinggroups", "billingconductor", "id"}, ""))
-	pattern_Billing_ListAbcBillingGroupAccounts_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "billinggroups", "billingconductor", "payerId", "accounts"}, ""))
-	pattern_Billing_ReadInvoiceAdjustments_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "invoiceadjustments"}, "read"))
-	pattern_Billing_ListAccountResources_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "resources", "accounts", "vendor"}, ""))
-	pattern_Billing_GetAdjustmentConfig_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
-	pattern_Billing_CreateAdjustmentConfig_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
-	pattern_Billing_UpdateAdjustmentConfig_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
-	pattern_Billing_DeleteAdjustmentConfig_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
-	pattern_Billing_ReadUntaggedGroups_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "untaggedgroups"}, "read"))
-	pattern_Billing_ReadCustomizedBillingServices_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customizedbillingservices"}, "read"))
-	pattern_Billing_GetCustomizedBillingService_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customizedbillingservices", "id"}, ""))
-	pattern_Billing_CreateCustomizedBillingService_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customizedbillingservices"}, ""))
-	pattern_Billing_UpdateCustomizedBillingService_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customizedbillingservices", "id"}, ""))
-	pattern_Billing_DeleteCustomizedBillingService_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customizedbillingservices", "id"}, ""))
-	pattern_Billing_GetTags_0                                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "tags"}, ""))
-	pattern_Billing_CreateCustomField_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customfield"}, ""))
-	pattern_Billing_ListCustomField_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customfield"}, "read"))
-	pattern_Billing_UpdateCustomField_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customfield", "id"}, ""))
-	pattern_Billing_DeleteCustomField_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customfield", "id"}, ""))
-	pattern_Billing_CreateFreeFormat_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "freeformat"}, ""))
-	pattern_Billing_DeleteFreeFormat_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "freeformat", "groupId"}, ""))
-	pattern_Billing_GetFreeFormat_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "freeformat", "groupId"}, ""))
-	pattern_Billing_GetTagsAddingSetting_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tagsaddingsetting", "groupId"}, ""))
-	pattern_Billing_UpdateTagsAddingSetting_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tagsaddingsetting", "groupId"}, ""))
+	pattern_Billing_ListBillingGroups_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "billinggroups"}, ""))
+	pattern_Billing_CreateBillingGroup_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "billinggroups"}, ""))
+	pattern_Billing_GetBillingGroup_0                            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "billinggroups", "billingInternalId"}, ""))
+	pattern_Billing_GetAccessGroup_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "accessgroups", "accessGroupId"}, ""))
+	pattern_Billing_ListAwsDailyRunHistory_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aws", "dailyrunhistory"}, "read"))
+	pattern_Billing_ListUsageCostsDrift_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "usagecostsdrift"}, "read"))
+	pattern_Billing_CreateInvoice_0                              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "create"))
+	pattern_Billing_GetInvoiceStatus_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "invoice", "status", "id"}, ""))
+	pattern_Billing_ListInvoiceStatus_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "invoice", "status", "date"}, "read"))
+	pattern_Billing_GetInvoice_0                                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "read"))
+	pattern_Billing_ListInvoice_0                                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "invoice"}, "read"))
+	pattern_Billing_UpdateInvoicePreviews_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "preview"))
+	pattern_Billing_ExportInvoiceFile_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "invoice", "date"}, "export"))
+	pattern_Billing_ListInvoiceTemplate_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "invoice", "template"}, ""))
+	pattern_Billing_ReadServiceDiscountsServices_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "vendor", "services"}, "read"))
+	pattern_Billing_CreateInvoiceServiceDiscounts_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, ""))
+	pattern_Billing_UpdateInvoiceServiceDiscounts_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "id"}, ""))
+	pattern_Billing_DeleteInvoiceServiceDiscounts_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "id"}, ""))
+	pattern_Billing_ListInvoiceServiceDiscounts_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, "read"))
+	pattern_Billing_GetInvoiceServiceDiscounts_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "id"}, ""))
+	pattern_Billing_ExportServiceDiscounts_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, "export"))
+	pattern_Billing_ListAccountInvoiceServiceDiscounts_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, "read"))
+	pattern_Billing_CreateAccountInvoiceServiceDiscounts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
+	pattern_Billing_UpdateAccountInvoiceServiceDiscounts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
+	pattern_Billing_RemoveAccountInvoiceServiceDiscounts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, "remove"))
+	pattern_Billing_DeleteAccountInvoiceServiceDiscounts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
+	pattern_Billing_ExportAccountInvoiceServiceDiscounts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "servicediscounts", "account"}, "export"))
+	pattern_Billing_ExportBillingGroupInvoiceServiceDiscounts_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "servicediscounts", "billinggroup"}, "export"))
+	pattern_Billing_CreateReseller_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resellers"}, ""))
+	pattern_Billing_ListResellers_0                              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resellers"}, ""))
+	pattern_Billing_GetReseller_0                                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "resellers", "id"}, ""))
+	pattern_Billing_UpdateReseller_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "resellers", "id"}, ""))
+	pattern_Billing_DeleteReseller_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "resellers", "id"}, ""))
+	pattern_Billing_GetBillingSetting_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "settings"}, ""))
+	pattern_Billing_ListExchangeRates_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "exchangerate", "month"}, ""))
+	pattern_Billing_ListAccessGroups_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "accessgroups"}, ""))
+	pattern_Billing_CreateAccessGroup_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "accessgroups"}, ""))
+	pattern_Billing_UpdateAccessGroup_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "accessgroups", "id"}, ""))
+	pattern_Billing_DeleteAccessGroup_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "accessgroups", "id"}, ""))
+	pattern_Billing_ListAbcBillingGroups_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "billinggroups", "billingconductor", "id"}, ""))
+	pattern_Billing_ListAbcBillingGroupAccounts_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "billinggroups", "billingconductor", "payerId", "accounts"}, ""))
+	pattern_Billing_ReadInvoiceAdjustments_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "invoiceadjustments"}, "read"))
+	pattern_Billing_ListAccountResources_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "resources", "accounts", "vendor"}, ""))
+	pattern_Billing_GetAdjustmentConfig_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
+	pattern_Billing_CreateAdjustmentConfig_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
+	pattern_Billing_UpdateAdjustmentConfig_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
+	pattern_Billing_DeleteAdjustmentConfig_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "adjustmentconfig", "vendor"}, ""))
+	pattern_Billing_ReadUntaggedGroups_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "untaggedgroups"}, "read"))
+	pattern_Billing_ReadCustomizedBillingServices_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customizedbillingservices"}, "read"))
+	pattern_Billing_GetCustomizedBillingService_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customizedbillingservices", "id"}, ""))
+	pattern_Billing_CreateCustomizedBillingService_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customizedbillingservices"}, ""))
+	pattern_Billing_UpdateCustomizedBillingService_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customizedbillingservices", "id"}, ""))
+	pattern_Billing_DeleteCustomizedBillingService_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customizedbillingservices", "id"}, ""))
+	pattern_Billing_GetCustomizedBillingServiceBillingGroup_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "customizedbillingservices", "billinggroup", "groupId", "vendor"}, ""))
+	pattern_Billing_SetCustomizedBillingServiceBillingGroup_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "customizedbillingservices", "billinggroup", "groupId", "vendor"}, ""))
+	pattern_Billing_DeleteCustomizedBillingServiceBillingGroup_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "customizedbillingservices", "billinggroup", "groupId", "vendor"}, ""))
+	pattern_Billing_GetTags_0                                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "tags"}, ""))
+	pattern_Billing_CreateCustomField_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customfield"}, ""))
+	pattern_Billing_ListCustomField_0                            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "customfield"}, "read"))
+	pattern_Billing_UpdateCustomField_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customfield", "id"}, ""))
+	pattern_Billing_DeleteCustomField_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "customfield", "id"}, ""))
+	pattern_Billing_CreateFreeFormat_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "freeformat"}, ""))
+	pattern_Billing_DeleteFreeFormat_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "freeformat", "groupId"}, ""))
+	pattern_Billing_GetFreeFormat_0                              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "freeformat", "groupId"}, ""))
+	pattern_Billing_GetTagsAddingSetting_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tagsaddingsetting", "groupId"}, ""))
+	pattern_Billing_UpdateTagsAddingSetting_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "tagsaddingsetting", "groupId"}, ""))
 )
 
 var (
-	forward_Billing_ListBillingGroups_0                         = runtime.ForwardResponseStream
-	forward_Billing_CreateBillingGroup_0                        = runtime.ForwardResponseMessage
-	forward_Billing_GetBillingGroup_0                           = runtime.ForwardResponseMessage
-	forward_Billing_GetAccessGroup_0                            = runtime.ForwardResponseMessage
-	forward_Billing_ListAwsDailyRunHistory_0                    = runtime.ForwardResponseStream
-	forward_Billing_ListUsageCostsDrift_0                       = runtime.ForwardResponseStream
-	forward_Billing_CreateInvoice_0                             = runtime.ForwardResponseMessage
-	forward_Billing_GetInvoiceStatus_0                          = runtime.ForwardResponseMessage
-	forward_Billing_ListInvoiceStatus_0                         = runtime.ForwardResponseStream
-	forward_Billing_GetInvoice_0                                = runtime.ForwardResponseMessage
-	forward_Billing_ListInvoice_0                               = runtime.ForwardResponseStream
-	forward_Billing_UpdateInvoicePreviews_0                     = runtime.ForwardResponseMessage
-	forward_Billing_ExportInvoiceFile_0                         = runtime.ForwardResponseMessage
-	forward_Billing_ListInvoiceTemplate_0                       = runtime.ForwardResponseStream
-	forward_Billing_ReadServiceDiscountsServices_0              = runtime.ForwardResponseStream
-	forward_Billing_CreateInvoiceServiceDiscounts_0             = runtime.ForwardResponseMessage
-	forward_Billing_UpdateInvoiceServiceDiscounts_0             = runtime.ForwardResponseMessage
-	forward_Billing_DeleteInvoiceServiceDiscounts_0             = runtime.ForwardResponseMessage
-	forward_Billing_ListInvoiceServiceDiscounts_0               = runtime.ForwardResponseStream
-	forward_Billing_GetInvoiceServiceDiscounts_0                = runtime.ForwardResponseMessage
-	forward_Billing_ExportServiceDiscounts_0                    = runtime.ForwardResponseMessage
-	forward_Billing_ListAccountInvoiceServiceDiscounts_0        = runtime.ForwardResponseStream
-	forward_Billing_CreateAccountInvoiceServiceDiscounts_0      = runtime.ForwardResponseMessage
-	forward_Billing_UpdateAccountInvoiceServiceDiscounts_0      = runtime.ForwardResponseMessage
-	forward_Billing_RemoveAccountInvoiceServiceDiscounts_0      = runtime.ForwardResponseMessage
-	forward_Billing_DeleteAccountInvoiceServiceDiscounts_0      = runtime.ForwardResponseMessage
-	forward_Billing_ExportAccountInvoiceServiceDiscounts_0      = runtime.ForwardResponseMessage
-	forward_Billing_ExportBillingGroupInvoiceServiceDiscounts_0 = runtime.ForwardResponseMessage
-	forward_Billing_CreateReseller_0                            = runtime.ForwardResponseMessage
-	forward_Billing_ListResellers_0                             = runtime.ForwardResponseStream
-	forward_Billing_GetReseller_0                               = runtime.ForwardResponseMessage
-	forward_Billing_UpdateReseller_0                            = runtime.ForwardResponseMessage
-	forward_Billing_DeleteReseller_0                            = runtime.ForwardResponseMessage
-	forward_Billing_GetBillingSetting_0                         = runtime.ForwardResponseMessage
-	forward_Billing_ListExchangeRates_0                         = runtime.ForwardResponseMessage
-	forward_Billing_ListAccessGroups_0                          = runtime.ForwardResponseStream
-	forward_Billing_CreateAccessGroup_0                         = runtime.ForwardResponseMessage
-	forward_Billing_UpdateAccessGroup_0                         = runtime.ForwardResponseMessage
-	forward_Billing_DeleteAccessGroup_0                         = runtime.ForwardResponseMessage
-	forward_Billing_ListAbcBillingGroups_0                      = runtime.ForwardResponseStream
-	forward_Billing_ListAbcBillingGroupAccounts_0               = runtime.ForwardResponseStream
-	forward_Billing_ReadInvoiceAdjustments_0                    = runtime.ForwardResponseStream
-	forward_Billing_ListAccountResources_0                      = runtime.ForwardResponseStream
-	forward_Billing_GetAdjustmentConfig_0                       = runtime.ForwardResponseMessage
-	forward_Billing_CreateAdjustmentConfig_0                    = runtime.ForwardResponseMessage
-	forward_Billing_UpdateAdjustmentConfig_0                    = runtime.ForwardResponseMessage
-	forward_Billing_DeleteAdjustmentConfig_0                    = runtime.ForwardResponseMessage
-	forward_Billing_ReadUntaggedGroups_0                        = runtime.ForwardResponseStream
-	forward_Billing_ReadCustomizedBillingServices_0             = runtime.ForwardResponseStream
-	forward_Billing_GetCustomizedBillingService_0               = runtime.ForwardResponseMessage
-	forward_Billing_CreateCustomizedBillingService_0            = runtime.ForwardResponseMessage
-	forward_Billing_UpdateCustomizedBillingService_0            = runtime.ForwardResponseMessage
-	forward_Billing_DeleteCustomizedBillingService_0            = runtime.ForwardResponseMessage
-	forward_Billing_GetTags_0                                   = runtime.ForwardResponseStream
-	forward_Billing_CreateCustomField_0                         = runtime.ForwardResponseMessage
-	forward_Billing_ListCustomField_0                           = runtime.ForwardResponseStream
-	forward_Billing_UpdateCustomField_0                         = runtime.ForwardResponseMessage
-	forward_Billing_DeleteCustomField_0                         = runtime.ForwardResponseMessage
-	forward_Billing_CreateFreeFormat_0                          = runtime.ForwardResponseMessage
-	forward_Billing_DeleteFreeFormat_0                          = runtime.ForwardResponseMessage
-	forward_Billing_GetFreeFormat_0                             = runtime.ForwardResponseStream
-	forward_Billing_GetTagsAddingSetting_0                      = runtime.ForwardResponseStream
-	forward_Billing_UpdateTagsAddingSetting_0                   = runtime.ForwardResponseMessage
+	forward_Billing_ListBillingGroups_0                          = runtime.ForwardResponseStream
+	forward_Billing_CreateBillingGroup_0                         = runtime.ForwardResponseMessage
+	forward_Billing_GetBillingGroup_0                            = runtime.ForwardResponseMessage
+	forward_Billing_GetAccessGroup_0                             = runtime.ForwardResponseMessage
+	forward_Billing_ListAwsDailyRunHistory_0                     = runtime.ForwardResponseStream
+	forward_Billing_ListUsageCostsDrift_0                        = runtime.ForwardResponseStream
+	forward_Billing_CreateInvoice_0                              = runtime.ForwardResponseMessage
+	forward_Billing_GetInvoiceStatus_0                           = runtime.ForwardResponseMessage
+	forward_Billing_ListInvoiceStatus_0                          = runtime.ForwardResponseStream
+	forward_Billing_GetInvoice_0                                 = runtime.ForwardResponseMessage
+	forward_Billing_ListInvoice_0                                = runtime.ForwardResponseStream
+	forward_Billing_UpdateInvoicePreviews_0                      = runtime.ForwardResponseMessage
+	forward_Billing_ExportInvoiceFile_0                          = runtime.ForwardResponseMessage
+	forward_Billing_ListInvoiceTemplate_0                        = runtime.ForwardResponseStream
+	forward_Billing_ReadServiceDiscountsServices_0               = runtime.ForwardResponseStream
+	forward_Billing_CreateInvoiceServiceDiscounts_0              = runtime.ForwardResponseMessage
+	forward_Billing_UpdateInvoiceServiceDiscounts_0              = runtime.ForwardResponseMessage
+	forward_Billing_DeleteInvoiceServiceDiscounts_0              = runtime.ForwardResponseMessage
+	forward_Billing_ListInvoiceServiceDiscounts_0                = runtime.ForwardResponseStream
+	forward_Billing_GetInvoiceServiceDiscounts_0                 = runtime.ForwardResponseMessage
+	forward_Billing_ExportServiceDiscounts_0                     = runtime.ForwardResponseMessage
+	forward_Billing_ListAccountInvoiceServiceDiscounts_0         = runtime.ForwardResponseStream
+	forward_Billing_CreateAccountInvoiceServiceDiscounts_0       = runtime.ForwardResponseMessage
+	forward_Billing_UpdateAccountInvoiceServiceDiscounts_0       = runtime.ForwardResponseMessage
+	forward_Billing_RemoveAccountInvoiceServiceDiscounts_0       = runtime.ForwardResponseMessage
+	forward_Billing_DeleteAccountInvoiceServiceDiscounts_0       = runtime.ForwardResponseMessage
+	forward_Billing_ExportAccountInvoiceServiceDiscounts_0       = runtime.ForwardResponseMessage
+	forward_Billing_ExportBillingGroupInvoiceServiceDiscounts_0  = runtime.ForwardResponseMessage
+	forward_Billing_CreateReseller_0                             = runtime.ForwardResponseMessage
+	forward_Billing_ListResellers_0                              = runtime.ForwardResponseStream
+	forward_Billing_GetReseller_0                                = runtime.ForwardResponseMessage
+	forward_Billing_UpdateReseller_0                             = runtime.ForwardResponseMessage
+	forward_Billing_DeleteReseller_0                             = runtime.ForwardResponseMessage
+	forward_Billing_GetBillingSetting_0                          = runtime.ForwardResponseMessage
+	forward_Billing_ListExchangeRates_0                          = runtime.ForwardResponseMessage
+	forward_Billing_ListAccessGroups_0                           = runtime.ForwardResponseStream
+	forward_Billing_CreateAccessGroup_0                          = runtime.ForwardResponseMessage
+	forward_Billing_UpdateAccessGroup_0                          = runtime.ForwardResponseMessage
+	forward_Billing_DeleteAccessGroup_0                          = runtime.ForwardResponseMessage
+	forward_Billing_ListAbcBillingGroups_0                       = runtime.ForwardResponseStream
+	forward_Billing_ListAbcBillingGroupAccounts_0                = runtime.ForwardResponseStream
+	forward_Billing_ReadInvoiceAdjustments_0                     = runtime.ForwardResponseStream
+	forward_Billing_ListAccountResources_0                       = runtime.ForwardResponseStream
+	forward_Billing_GetAdjustmentConfig_0                        = runtime.ForwardResponseMessage
+	forward_Billing_CreateAdjustmentConfig_0                     = runtime.ForwardResponseMessage
+	forward_Billing_UpdateAdjustmentConfig_0                     = runtime.ForwardResponseMessage
+	forward_Billing_DeleteAdjustmentConfig_0                     = runtime.ForwardResponseMessage
+	forward_Billing_ReadUntaggedGroups_0                         = runtime.ForwardResponseStream
+	forward_Billing_ReadCustomizedBillingServices_0              = runtime.ForwardResponseStream
+	forward_Billing_GetCustomizedBillingService_0                = runtime.ForwardResponseMessage
+	forward_Billing_CreateCustomizedBillingService_0             = runtime.ForwardResponseMessage
+	forward_Billing_UpdateCustomizedBillingService_0             = runtime.ForwardResponseMessage
+	forward_Billing_DeleteCustomizedBillingService_0             = runtime.ForwardResponseMessage
+	forward_Billing_GetCustomizedBillingServiceBillingGroup_0    = runtime.ForwardResponseStream
+	forward_Billing_SetCustomizedBillingServiceBillingGroup_0    = runtime.ForwardResponseMessage
+	forward_Billing_DeleteCustomizedBillingServiceBillingGroup_0 = runtime.ForwardResponseMessage
+	forward_Billing_GetTags_0                                    = runtime.ForwardResponseStream
+	forward_Billing_CreateCustomField_0                          = runtime.ForwardResponseMessage
+	forward_Billing_ListCustomField_0                            = runtime.ForwardResponseStream
+	forward_Billing_UpdateCustomField_0                          = runtime.ForwardResponseMessage
+	forward_Billing_DeleteCustomField_0                          = runtime.ForwardResponseMessage
+	forward_Billing_CreateFreeFormat_0                           = runtime.ForwardResponseMessage
+	forward_Billing_DeleteFreeFormat_0                           = runtime.ForwardResponseMessage
+	forward_Billing_GetFreeFormat_0                              = runtime.ForwardResponseStream
+	forward_Billing_GetTagsAddingSetting_0                       = runtime.ForwardResponseStream
+	forward_Billing_UpdateTagsAddingSetting_0                    = runtime.ForwardResponseMessage
 )

@@ -109,6 +109,56 @@ func (TargetUsageConfig) EnumDescriptor() ([]byte, []int) {
 	return file_api_ripple_customizedbillingservice_proto_rawDescGZIP(), []int{1}
 }
 
+// Charging target
+// Indicates that `ChargingTarget` in the setting applies to either BillingGroup or Account.
+type ChargingTarget int32
+
+const (
+	// billing group
+	ChargingTarget_BILLINGGROUP ChargingTarget = 0
+	// account
+	ChargingTarget_ACCOUNT ChargingTarget = 1
+)
+
+// Enum value maps for ChargingTarget.
+var (
+	ChargingTarget_name = map[int32]string{
+		0: "BILLINGGROUP",
+		1: "ACCOUNT",
+	}
+	ChargingTarget_value = map[string]int32{
+		"BILLINGGROUP": 0,
+		"ACCOUNT":      1,
+	}
+)
+
+func (x ChargingTarget) Enum() *ChargingTarget {
+	p := new(ChargingTarget)
+	*p = x
+	return p
+}
+
+func (x ChargingTarget) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ChargingTarget) Descriptor() protoreflect.EnumDescriptor {
+	return file_api_ripple_customizedbillingservice_proto_enumTypes[2].Descriptor()
+}
+
+func (ChargingTarget) Type() protoreflect.EnumType {
+	return &file_api_ripple_customizedbillingservice_proto_enumTypes[2]
+}
+
+func (x ChargingTarget) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ChargingTarget.Descriptor instead.
+func (ChargingTarget) EnumDescriptor() ([]byte, []int) {
+	return file_api_ripple_customizedbillingservice_proto_rawDescGZIP(), []int{2}
+}
+
 // supported currency.
 type MethodConfig_Currency int32
 
@@ -152,11 +202,11 @@ func (x MethodConfig_Currency) String() string {
 }
 
 func (MethodConfig_Currency) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_ripple_customizedbillingservice_proto_enumTypes[2].Descriptor()
+	return file_api_ripple_customizedbillingservice_proto_enumTypes[3].Descriptor()
 }
 
 func (MethodConfig_Currency) Type() protoreflect.EnumType {
-	return &file_api_ripple_customizedbillingservice_proto_enumTypes[2]
+	return &file_api_ripple_customizedbillingservice_proto_enumTypes[3]
 }
 
 func (x MethodConfig_Currency) Number() protoreflect.EnumNumber {
@@ -207,11 +257,11 @@ func (x MethodConfig_ChargingMethod) String() string {
 }
 
 func (MethodConfig_ChargingMethod) Descriptor() protoreflect.EnumDescriptor {
-	return file_api_ripple_customizedbillingservice_proto_enumTypes[3].Descriptor()
+	return file_api_ripple_customizedbillingservice_proto_enumTypes[4].Descriptor()
 }
 
 func (MethodConfig_ChargingMethod) Type() protoreflect.EnumType {
-	return &file_api_ripple_customizedbillingservice_proto_enumTypes[3]
+	return &file_api_ripple_customizedbillingservice_proto_enumTypes[4]
 }
 
 func (x MethodConfig_ChargingMethod) Number() protoreflect.EnumNumber {
@@ -993,16 +1043,19 @@ var file_api_ripple_customizedbillingservice_proto_rawDesc = []byte{
 	0x0a, 0x13, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x43,
 	0x6f, 0x6e, 0x66, 0x69, 0x67, 0x12, 0x07, 0x0a, 0x03, 0x41, 0x4c, 0x4c, 0x10, 0x00, 0x2a, 0x1e,
 	0x0a, 0x11, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74, 0x55, 0x73, 0x61, 0x67, 0x65, 0x43, 0x6f, 0x6e,
-	0x66, 0x69, 0x67, 0x12, 0x09, 0x0a, 0x05, 0x55, 0x53, 0x41, 0x47, 0x45, 0x10, 0x00, 0x42, 0x79,
-	0x0a, 0x20, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e,
-	0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x69, 0x70, 0x70,
-	0x6c, 0x65, 0x42, 0x26, 0x41, 0x70, 0x69, 0x52, 0x69, 0x70, 0x70, 0x6c, 0x65, 0x43, 0x75, 0x73,
-	0x74, 0x6f, 0x6d, 0x69, 0x7a, 0x65, 0x64, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x53, 0x65,
-	0x72, 0x76, 0x69, 0x63, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x2d, 0x67, 0x69, 0x74, 0x68,
-	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61,
-	0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67, 0x6f, 0x2f, 0x61,
-	0x70, 0x69, 0x2f, 0x72, 0x69, 0x70, 0x70, 0x6c, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x66, 0x69, 0x67, 0x12, 0x09, 0x0a, 0x05, 0x55, 0x53, 0x41, 0x47, 0x45, 0x10, 0x00, 0x2a, 0x2f,
+	0x0a, 0x0e, 0x43, 0x68, 0x61, 0x72, 0x67, 0x69, 0x6e, 0x67, 0x54, 0x61, 0x72, 0x67, 0x65, 0x74,
+	0x12, 0x10, 0x0a, 0x0c, 0x42, 0x49, 0x4c, 0x4c, 0x49, 0x4e, 0x47, 0x47, 0x52, 0x4f, 0x55, 0x50,
+	0x10, 0x00, 0x12, 0x0b, 0x0a, 0x07, 0x41, 0x43, 0x43, 0x4f, 0x55, 0x4e, 0x54, 0x10, 0x01, 0x42,
+	0x79, 0x0a, 0x20, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73,
+	0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x72, 0x69, 0x70,
+	0x70, 0x6c, 0x65, 0x42, 0x26, 0x41, 0x70, 0x69, 0x52, 0x69, 0x70, 0x70, 0x6c, 0x65, 0x43, 0x75,
+	0x73, 0x74, 0x6f, 0x6d, 0x69, 0x7a, 0x65, 0x64, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x53,
+	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x2d, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c,
+	0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67, 0x6f, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x72, 0x69, 0x70, 0x70, 0x6c, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -1017,39 +1070,40 @@ func file_api_ripple_customizedbillingservice_proto_rawDescGZIP() []byte {
 	return file_api_ripple_customizedbillingservice_proto_rawDescData
 }
 
-var file_api_ripple_customizedbillingservice_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
+var file_api_ripple_customizedbillingservice_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
 var file_api_ripple_customizedbillingservice_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_api_ripple_customizedbillingservice_proto_goTypes = []any{
 	(TargetServiceConfig)(0),         // 0: blueapi.api.ripple.TargetServiceConfig
 	(TargetUsageConfig)(0),           // 1: blueapi.api.ripple.TargetUsageConfig
-	(MethodConfig_Currency)(0),       // 2: blueapi.api.ripple.MethodConfig.Currency
-	(MethodConfig_ChargingMethod)(0), // 3: blueapi.api.ripple.MethodConfig.ChargingMethod
-	(*CustomizedBillingService)(nil), // 4: blueapi.api.ripple.CustomizedBillingService
-	(*MethodConfig)(nil),             // 5: blueapi.api.ripple.MethodConfig
-	(*FixedFee)(nil),                 // 6: blueapi.api.ripple.FixedFee
-	(*Percentage)(nil),               // 7: blueapi.api.ripple.Percentage
-	(*FixedFeeOrPercentage)(nil),     // 8: blueapi.api.ripple.FixedFeeOrPercentage
-	(*TieredPrice)(nil),              // 9: blueapi.api.ripple.TieredPrice
-	(*TieredPercentage)(nil),         // 10: blueapi.api.ripple.TieredPercentage
-	(*TierdConfig)(nil),              // 11: blueapi.api.ripple.TierdConfig
+	(ChargingTarget)(0),              // 2: blueapi.api.ripple.ChargingTarget
+	(MethodConfig_Currency)(0),       // 3: blueapi.api.ripple.MethodConfig.Currency
+	(MethodConfig_ChargingMethod)(0), // 4: blueapi.api.ripple.MethodConfig.ChargingMethod
+	(*CustomizedBillingService)(nil), // 5: blueapi.api.ripple.CustomizedBillingService
+	(*MethodConfig)(nil),             // 6: blueapi.api.ripple.MethodConfig
+	(*FixedFee)(nil),                 // 7: blueapi.api.ripple.FixedFee
+	(*Percentage)(nil),               // 8: blueapi.api.ripple.Percentage
+	(*FixedFeeOrPercentage)(nil),     // 9: blueapi.api.ripple.FixedFeeOrPercentage
+	(*TieredPrice)(nil),              // 10: blueapi.api.ripple.TieredPrice
+	(*TieredPercentage)(nil),         // 11: blueapi.api.ripple.TieredPercentage
+	(*TierdConfig)(nil),              // 12: blueapi.api.ripple.TierdConfig
 }
 var file_api_ripple_customizedbillingservice_proto_depIdxs = []int32{
-	5,  // 0: blueapi.api.ripple.CustomizedBillingService.methodConfig:type_name -> blueapi.api.ripple.MethodConfig
-	2,  // 1: blueapi.api.ripple.MethodConfig.currency:type_name -> blueapi.api.ripple.MethodConfig.Currency
-	3,  // 2: blueapi.api.ripple.MethodConfig.chargingMethod:type_name -> blueapi.api.ripple.MethodConfig.ChargingMethod
-	6,  // 3: blueapi.api.ripple.MethodConfig.fixedFee:type_name -> blueapi.api.ripple.FixedFee
-	7,  // 4: blueapi.api.ripple.MethodConfig.percentage:type_name -> blueapi.api.ripple.Percentage
-	8,  // 5: blueapi.api.ripple.MethodConfig.fixedFeeOrPercentage:type_name -> blueapi.api.ripple.FixedFeeOrPercentage
-	9,  // 6: blueapi.api.ripple.MethodConfig.TieredPrice:type_name -> blueapi.api.ripple.TieredPrice
-	10, // 7: blueapi.api.ripple.MethodConfig.TieredPercentage:type_name -> blueapi.api.ripple.TieredPercentage
+	6,  // 0: blueapi.api.ripple.CustomizedBillingService.methodConfig:type_name -> blueapi.api.ripple.MethodConfig
+	3,  // 1: blueapi.api.ripple.MethodConfig.currency:type_name -> blueapi.api.ripple.MethodConfig.Currency
+	4,  // 2: blueapi.api.ripple.MethodConfig.chargingMethod:type_name -> blueapi.api.ripple.MethodConfig.ChargingMethod
+	7,  // 3: blueapi.api.ripple.MethodConfig.fixedFee:type_name -> blueapi.api.ripple.FixedFee
+	8,  // 4: blueapi.api.ripple.MethodConfig.percentage:type_name -> blueapi.api.ripple.Percentage
+	9,  // 5: blueapi.api.ripple.MethodConfig.fixedFeeOrPercentage:type_name -> blueapi.api.ripple.FixedFeeOrPercentage
+	10, // 6: blueapi.api.ripple.MethodConfig.TieredPrice:type_name -> blueapi.api.ripple.TieredPrice
+	11, // 7: blueapi.api.ripple.MethodConfig.TieredPercentage:type_name -> blueapi.api.ripple.TieredPercentage
 	0,  // 8: blueapi.api.ripple.Percentage.service:type_name -> blueapi.api.ripple.TargetServiceConfig
 	1,  // 9: blueapi.api.ripple.Percentage.usage:type_name -> blueapi.api.ripple.TargetUsageConfig
 	0,  // 10: blueapi.api.ripple.FixedFeeOrPercentage.service:type_name -> blueapi.api.ripple.TargetServiceConfig
 	1,  // 11: blueapi.api.ripple.FixedFeeOrPercentage.usage:type_name -> blueapi.api.ripple.TargetUsageConfig
-	11, // 12: blueapi.api.ripple.TieredPrice.tiredConfig:type_name -> blueapi.api.ripple.TierdConfig
+	12, // 12: blueapi.api.ripple.TieredPrice.tiredConfig:type_name -> blueapi.api.ripple.TierdConfig
 	0,  // 13: blueapi.api.ripple.TieredPrice.service:type_name -> blueapi.api.ripple.TargetServiceConfig
 	1,  // 14: blueapi.api.ripple.TieredPrice.usage:type_name -> blueapi.api.ripple.TargetUsageConfig
-	11, // 15: blueapi.api.ripple.TieredPercentage.tiredConfig:type_name -> blueapi.api.ripple.TierdConfig
+	12, // 15: blueapi.api.ripple.TieredPercentage.tiredConfig:type_name -> blueapi.api.ripple.TierdConfig
 	0,  // 16: blueapi.api.ripple.TieredPercentage.service:type_name -> blueapi.api.ripple.TargetServiceConfig
 	1,  // 17: blueapi.api.ripple.TieredPercentage.usage:type_name -> blueapi.api.ripple.TargetUsageConfig
 	18, // [18:18] is the sub-list for method output_type
@@ -1076,7 +1130,7 @@ func file_api_ripple_customizedbillingservice_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_api_ripple_customizedbillingservice_proto_rawDesc,
-			NumEnums:      4,
+			NumEnums:      5,
 			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   0,

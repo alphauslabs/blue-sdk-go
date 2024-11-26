@@ -24,69 +24,72 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Billing_ListBillingGroups_FullMethodName                         = "/blueapi.billing.v1.Billing/ListBillingGroups"
-	Billing_CreateBillingGroup_FullMethodName                        = "/blueapi.billing.v1.Billing/CreateBillingGroup"
-	Billing_GetBillingGroup_FullMethodName                           = "/blueapi.billing.v1.Billing/GetBillingGroup"
-	Billing_GetAccessGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/GetAccessGroup"
-	Billing_ListAwsDailyRunHistory_FullMethodName                    = "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory"
-	Billing_ListUsageCostsDrift_FullMethodName                       = "/blueapi.billing.v1.Billing/ListUsageCostsDrift"
-	Billing_CreateInvoice_FullMethodName                             = "/blueapi.billing.v1.Billing/CreateInvoice"
-	Billing_GetInvoiceStatus_FullMethodName                          = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
-	Billing_ListInvoiceStatus_FullMethodName                         = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
-	Billing_GetInvoice_FullMethodName                                = "/blueapi.billing.v1.Billing/GetInvoice"
-	Billing_ListInvoice_FullMethodName                               = "/blueapi.billing.v1.Billing/ListInvoice"
-	Billing_UpdateInvoicePreviews_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
-	Billing_ExportInvoiceFile_FullMethodName                         = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
-	Billing_ListInvoiceTemplate_FullMethodName                       = "/blueapi.billing.v1.Billing/ListInvoiceTemplate"
-	Billing_ReadServiceDiscountsServices_FullMethodName              = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
-	Billing_CreateInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
-	Billing_UpdateInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
-	Billing_DeleteInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/DeleteInvoiceServiceDiscounts"
-	Billing_ListInvoiceServiceDiscounts_FullMethodName               = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
-	Billing_GetInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/GetInvoiceServiceDiscounts"
-	Billing_ExportServiceDiscounts_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportServiceDiscounts"
-	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
-	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
-	Billing_UpdateAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/UpdateAccountInvoiceServiceDiscounts"
-	Billing_RemoveAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/RemoveAccountInvoiceServiceDiscounts"
-	Billing_DeleteAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/DeleteAccountInvoiceServiceDiscounts"
-	Billing_ExportAccountInvoiceServiceDiscounts_FullMethodName      = "/blueapi.billing.v1.Billing/ExportAccountInvoiceServiceDiscounts"
-	Billing_ExportBillingGroupInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ExportBillingGroupInvoiceServiceDiscounts"
-	Billing_CreateReseller_FullMethodName                            = "/blueapi.billing.v1.Billing/CreateReseller"
-	Billing_ListResellers_FullMethodName                             = "/blueapi.billing.v1.Billing/ListResellers"
-	Billing_GetReseller_FullMethodName                               = "/blueapi.billing.v1.Billing/GetReseller"
-	Billing_UpdateReseller_FullMethodName                            = "/blueapi.billing.v1.Billing/UpdateReseller"
-	Billing_DeleteReseller_FullMethodName                            = "/blueapi.billing.v1.Billing/DeleteReseller"
-	Billing_GetBillingSetting_FullMethodName                         = "/blueapi.billing.v1.Billing/GetBillingSetting"
-	Billing_ListExchangeRates_FullMethodName                         = "/blueapi.billing.v1.Billing/ListExchangeRates"
-	Billing_ListAccessGroups_FullMethodName                          = "/blueapi.billing.v1.Billing/ListAccessGroups"
-	Billing_CreateAccessGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateAccessGroup"
-	Billing_UpdateAccessGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
-	Billing_DeleteAccessGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
-	Billing_ListAbcBillingGroups_FullMethodName                      = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
-	Billing_ListAbcBillingGroupAccounts_FullMethodName               = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
-	Billing_ReadInvoiceAdjustments_FullMethodName                    = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
-	Billing_ListAccountResources_FullMethodName                      = "/blueapi.billing.v1.Billing/ListAccountResources"
-	Billing_GetAdjustmentConfig_FullMethodName                       = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
-	Billing_CreateAdjustmentConfig_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
-	Billing_UpdateAdjustmentConfig_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
-	Billing_DeleteAdjustmentConfig_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
-	Billing_ReadUntaggedGroups_FullMethodName                        = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
-	Billing_ReadCustomizedBillingServices_FullMethodName             = "/blueapi.billing.v1.Billing/ReadCustomizedBillingServices"
-	Billing_GetCustomizedBillingService_FullMethodName               = "/blueapi.billing.v1.Billing/GetCustomizedBillingService"
-	Billing_CreateCustomizedBillingService_FullMethodName            = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
-	Billing_UpdateCustomizedBillingService_FullMethodName            = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
-	Billing_DeleteCustomizedBillingService_FullMethodName            = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
-	Billing_GetTags_FullMethodName                                   = "/blueapi.billing.v1.Billing/GetTags"
-	Billing_CreateCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateCustomField"
-	Billing_ListCustomField_FullMethodName                           = "/blueapi.billing.v1.Billing/ListCustomField"
-	Billing_UpdateCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/UpdateCustomField"
-	Billing_DeleteCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/DeleteCustomField"
-	Billing_CreateFreeFormat_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateFreeFormat"
-	Billing_DeleteFreeFormat_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
-	Billing_GetFreeFormat_FullMethodName                             = "/blueapi.billing.v1.Billing/GetFreeFormat"
-	Billing_GetTagsAddingSetting_FullMethodName                      = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
-	Billing_UpdateTagsAddingSetting_FullMethodName                   = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
+	Billing_ListBillingGroups_FullMethodName                          = "/blueapi.billing.v1.Billing/ListBillingGroups"
+	Billing_CreateBillingGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateBillingGroup"
+	Billing_GetBillingGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/GetBillingGroup"
+	Billing_GetAccessGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/GetAccessGroup"
+	Billing_ListAwsDailyRunHistory_FullMethodName                     = "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory"
+	Billing_ListUsageCostsDrift_FullMethodName                        = "/blueapi.billing.v1.Billing/ListUsageCostsDrift"
+	Billing_CreateInvoice_FullMethodName                              = "/blueapi.billing.v1.Billing/CreateInvoice"
+	Billing_GetInvoiceStatus_FullMethodName                           = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
+	Billing_ListInvoiceStatus_FullMethodName                          = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
+	Billing_GetInvoice_FullMethodName                                 = "/blueapi.billing.v1.Billing/GetInvoice"
+	Billing_ListInvoice_FullMethodName                                = "/blueapi.billing.v1.Billing/ListInvoice"
+	Billing_UpdateInvoicePreviews_FullMethodName                      = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
+	Billing_ExportInvoiceFile_FullMethodName                          = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
+	Billing_ListInvoiceTemplate_FullMethodName                        = "/blueapi.billing.v1.Billing/ListInvoiceTemplate"
+	Billing_ReadServiceDiscountsServices_FullMethodName               = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
+	Billing_CreateInvoiceServiceDiscounts_FullMethodName              = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
+	Billing_UpdateInvoiceServiceDiscounts_FullMethodName              = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
+	Billing_DeleteInvoiceServiceDiscounts_FullMethodName              = "/blueapi.billing.v1.Billing/DeleteInvoiceServiceDiscounts"
+	Billing_ListInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
+	Billing_GetInvoiceServiceDiscounts_FullMethodName                 = "/blueapi.billing.v1.Billing/GetInvoiceServiceDiscounts"
+	Billing_ExportServiceDiscounts_FullMethodName                     = "/blueapi.billing.v1.Billing/ExportServiceDiscounts"
+	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName         = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
+	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName       = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
+	Billing_UpdateAccountInvoiceServiceDiscounts_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateAccountInvoiceServiceDiscounts"
+	Billing_RemoveAccountInvoiceServiceDiscounts_FullMethodName       = "/blueapi.billing.v1.Billing/RemoveAccountInvoiceServiceDiscounts"
+	Billing_DeleteAccountInvoiceServiceDiscounts_FullMethodName       = "/blueapi.billing.v1.Billing/DeleteAccountInvoiceServiceDiscounts"
+	Billing_ExportAccountInvoiceServiceDiscounts_FullMethodName       = "/blueapi.billing.v1.Billing/ExportAccountInvoiceServiceDiscounts"
+	Billing_ExportBillingGroupInvoiceServiceDiscounts_FullMethodName  = "/blueapi.billing.v1.Billing/ExportBillingGroupInvoiceServiceDiscounts"
+	Billing_CreateReseller_FullMethodName                             = "/blueapi.billing.v1.Billing/CreateReseller"
+	Billing_ListResellers_FullMethodName                              = "/blueapi.billing.v1.Billing/ListResellers"
+	Billing_GetReseller_FullMethodName                                = "/blueapi.billing.v1.Billing/GetReseller"
+	Billing_UpdateReseller_FullMethodName                             = "/blueapi.billing.v1.Billing/UpdateReseller"
+	Billing_DeleteReseller_FullMethodName                             = "/blueapi.billing.v1.Billing/DeleteReseller"
+	Billing_GetBillingSetting_FullMethodName                          = "/blueapi.billing.v1.Billing/GetBillingSetting"
+	Billing_ListExchangeRates_FullMethodName                          = "/blueapi.billing.v1.Billing/ListExchangeRates"
+	Billing_ListAccessGroups_FullMethodName                           = "/blueapi.billing.v1.Billing/ListAccessGroups"
+	Billing_CreateAccessGroup_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateAccessGroup"
+	Billing_UpdateAccessGroup_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
+	Billing_DeleteAccessGroup_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
+	Billing_ListAbcBillingGroups_FullMethodName                       = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
+	Billing_ListAbcBillingGroupAccounts_FullMethodName                = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
+	Billing_ReadInvoiceAdjustments_FullMethodName                     = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
+	Billing_ListAccountResources_FullMethodName                       = "/blueapi.billing.v1.Billing/ListAccountResources"
+	Billing_GetAdjustmentConfig_FullMethodName                        = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
+	Billing_CreateAdjustmentConfig_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
+	Billing_UpdateAdjustmentConfig_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
+	Billing_DeleteAdjustmentConfig_FullMethodName                     = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
+	Billing_ReadUntaggedGroups_FullMethodName                         = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
+	Billing_ReadCustomizedBillingServices_FullMethodName              = "/blueapi.billing.v1.Billing/ReadCustomizedBillingServices"
+	Billing_GetCustomizedBillingService_FullMethodName                = "/blueapi.billing.v1.Billing/GetCustomizedBillingService"
+	Billing_CreateCustomizedBillingService_FullMethodName             = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
+	Billing_UpdateCustomizedBillingService_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
+	Billing_DeleteCustomizedBillingService_FullMethodName             = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
+	Billing_GetCustomizedBillingServiceBillingGroup_FullMethodName    = "/blueapi.billing.v1.Billing/GetCustomizedBillingServiceBillingGroup"
+	Billing_SetCustomizedBillingServiceBillingGroup_FullMethodName    = "/blueapi.billing.v1.Billing/SetCustomizedBillingServiceBillingGroup"
+	Billing_DeleteCustomizedBillingServiceBillingGroup_FullMethodName = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingServiceBillingGroup"
+	Billing_GetTags_FullMethodName                                    = "/blueapi.billing.v1.Billing/GetTags"
+	Billing_CreateCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateCustomField"
+	Billing_ListCustomField_FullMethodName                            = "/blueapi.billing.v1.Billing/ListCustomField"
+	Billing_UpdateCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateCustomField"
+	Billing_DeleteCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteCustomField"
+	Billing_CreateFreeFormat_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateFreeFormat"
+	Billing_DeleteFreeFormat_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
+	Billing_GetFreeFormat_FullMethodName                              = "/blueapi.billing.v1.Billing/GetFreeFormat"
+	Billing_GetTagsAddingSetting_FullMethodName                       = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
+	Billing_UpdateTagsAddingSetting_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
 )
 
 // BillingClient is the client API for Billing service.
@@ -214,6 +217,12 @@ type BillingClient interface {
 	UpdateCustomizedBillingService(ctx context.Context, in *UpdateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
 	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(ctx context.Context, in *DeleteCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets the customized billing service in billing group. Only available in Ripple.
+	GetCustomizedBillingServiceBillingGroup(ctx context.Context, in *GetCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (Billing_GetCustomizedBillingServiceBillingGroupClient, error)
+	// WORK-IN-PROGRESS: Sets the customized billing service in billing group. Only available in Ripple.
+	SetCustomizedBillingServiceBillingGroup(ctx context.Context, in *SetCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Deletes the customized billing service in billing group. Only available in Ripple.
+	DeleteCustomizedBillingServiceBillingGroup(ctx context.Context, in *DeleteCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error)
@@ -1164,9 +1173,62 @@ func (c *billingClient) DeleteCustomizedBillingService(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *billingClient) GetCustomizedBillingServiceBillingGroup(ctx context.Context, in *GetCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (Billing_GetCustomizedBillingServiceBillingGroupClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[17], Billing_GetCustomizedBillingServiceBillingGroup_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetCustomizedBillingServiceBillingGroupClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetCustomizedBillingServiceBillingGroupClient interface {
+	Recv() (*GetCustomizedBillingServiceBillingGroupResponse, error)
+	grpc.ClientStream
+}
+
+type billingGetCustomizedBillingServiceBillingGroupClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetCustomizedBillingServiceBillingGroupClient) Recv() (*GetCustomizedBillingServiceBillingGroupResponse, error) {
+	m := new(GetCustomizedBillingServiceBillingGroupResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *billingClient) SetCustomizedBillingServiceBillingGroup(ctx context.Context, in *SetCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_SetCustomizedBillingServiceBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteCustomizedBillingServiceBillingGroup(ctx context.Context, in *DeleteCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteCustomizedBillingServiceBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[17], Billing_GetTags_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_GetTags_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1209,7 +1271,7 @@ func (c *billingClient) CreateCustomField(ctx context.Context, in *CreateCustomF
 
 func (c *billingClient) ListCustomField(ctx context.Context, in *ListCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListCustomFieldClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_ListCustomField_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[19], Billing_ListCustomField_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1282,7 +1344,7 @@ func (c *billingClient) DeleteFreeFormat(ctx context.Context, in *DeleteFreeForm
 
 func (c *billingClient) GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[19], Billing_GetFreeFormat_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[20], Billing_GetFreeFormat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1315,7 +1377,7 @@ func (x *billingGetFreeFormatClient) Recv() (*GetFreeFormatResponse, error) {
 
 func (c *billingClient) GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[20], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[21], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1481,6 +1543,12 @@ type BillingServer interface {
 	UpdateCustomizedBillingService(context.Context, *UpdateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
 	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets the customized billing service in billing group. Only available in Ripple.
+	GetCustomizedBillingServiceBillingGroup(*GetCustomizedBillingServiceBillingGroupRequest, Billing_GetCustomizedBillingServiceBillingGroupServer) error
+	// WORK-IN-PROGRESS: Sets the customized billing service in billing group. Only available in Ripple.
+	SetCustomizedBillingServiceBillingGroup(context.Context, *SetCustomizedBillingServiceBillingGroupRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Deletes the customized billing service in billing group. Only available in Ripple.
+	DeleteCustomizedBillingServiceBillingGroup(context.Context, *DeleteCustomizedBillingServiceBillingGroupRequest) (*emptypb.Empty, error)
 	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(*GetTagsRequest, Billing_GetTagsServer) error
@@ -1665,6 +1733,15 @@ func (UnimplementedBillingServer) UpdateCustomizedBillingService(context.Context
 }
 func (UnimplementedBillingServer) DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomizedBillingService not implemented")
+}
+func (UnimplementedBillingServer) GetCustomizedBillingServiceBillingGroup(*GetCustomizedBillingServiceBillingGroupRequest, Billing_GetCustomizedBillingServiceBillingGroupServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCustomizedBillingServiceBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) SetCustomizedBillingServiceBillingGroup(context.Context, *SetCustomizedBillingServiceBillingGroupRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetCustomizedBillingServiceBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) DeleteCustomizedBillingServiceBillingGroup(context.Context, *DeleteCustomizedBillingServiceBillingGroupRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomizedBillingServiceBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) GetTags(*GetTagsRequest, Billing_GetTagsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTags not implemented")
@@ -2714,6 +2791,63 @@ func _Billing_DeleteCustomizedBillingService_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetCustomizedBillingServiceBillingGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCustomizedBillingServiceBillingGroupRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetCustomizedBillingServiceBillingGroup(m, &billingGetCustomizedBillingServiceBillingGroupServer{ServerStream: stream})
+}
+
+type Billing_GetCustomizedBillingServiceBillingGroupServer interface {
+	Send(*GetCustomizedBillingServiceBillingGroupResponse) error
+	grpc.ServerStream
+}
+
+type billingGetCustomizedBillingServiceBillingGroupServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetCustomizedBillingServiceBillingGroupServer) Send(m *GetCustomizedBillingServiceBillingGroupResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_SetCustomizedBillingServiceBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetCustomizedBillingServiceBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).SetCustomizedBillingServiceBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_SetCustomizedBillingServiceBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).SetCustomizedBillingServiceBillingGroup(ctx, req.(*SetCustomizedBillingServiceBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteCustomizedBillingServiceBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCustomizedBillingServiceBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteCustomizedBillingServiceBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteCustomizedBillingServiceBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteCustomizedBillingServiceBillingGroup(ctx, req.(*DeleteCustomizedBillingServiceBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_GetTags_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetTagsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -3058,6 +3192,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Billing_DeleteCustomizedBillingService_Handler,
 		},
 		{
+			MethodName: "SetCustomizedBillingServiceBillingGroup",
+			Handler:    _Billing_SetCustomizedBillingServiceBillingGroup_Handler,
+		},
+		{
+			MethodName: "DeleteCustomizedBillingServiceBillingGroup",
+			Handler:    _Billing_DeleteCustomizedBillingServiceBillingGroup_Handler,
+		},
+		{
 			MethodName: "CreateCustomField",
 			Handler:    _Billing_CreateCustomField_Handler,
 		},
@@ -3166,6 +3308,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadCustomizedBillingServices",
 			Handler:       _Billing_ReadCustomizedBillingServices_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCustomizedBillingServiceBillingGroup",
+			Handler:       _Billing_GetCustomizedBillingServiceBillingGroup_Handler,
 			ServerStreams: true,
 		},
 		{
