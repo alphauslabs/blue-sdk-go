@@ -5298,7 +5298,7 @@ type SetCustomizedBillingServiceBillingGroupRequest struct {
 	GroupId string `protobuf:"bytes,1,opt,name=groupId,proto3" json:"groupId,omitempty"`
 	// Required. At the moment, `aws`,`azure`,`gcp` is supported.
 	Vendor string `protobuf:"bytes,2,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Required. [CustomizedBillingServiceBillingSetting]
+	// Required. customized billing service setting.
 	Setting []*SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBillingSetting `protobuf:"bytes,3,rep,name=setting,proto3" json:"setting,omitempty"`
 }
 
@@ -6779,6 +6779,7 @@ type SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBill
 	// Required. [blueapi.api.ripple.ChargingTarget]
 	ChargingTarget ripple.ChargingTarget `protobuf:"varint,2,opt,name=chargingTarget,proto3,enum=blueapi.api.ripple.ChargingTarget" json:"chargingTarget,omitempty"`
 	// Optional. if chargingTarget is BILLINGGROUP, `accounts` is set emptty.
+	//
 	// Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`]
 	Accounts []string `protobuf:"bytes,3,rep,name=accounts,proto3" json:"accounts,omitempty"`
 }
