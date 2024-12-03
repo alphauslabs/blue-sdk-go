@@ -23155,7 +23155,17 @@ Otherwise, it returns all channels </p></td>
                   <td>existingCombinations</td>
                   <td><a href="#blueapi.api.cover.Combinations">blueapi.api.cover.Combinations</a></td>
                   <td>repeated</td>
-                  <td><p>When present, the api will return all attributes except the combination in this item. </p></td>
+                  <td><p>Optional, This is for Unit Cost. When present, the api will return all attributes except the combination in this item. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currentCombination</td>
+                  <td><a href="#blueapi.api.cover.Combinations">blueapi.api.cover.Combinations</a></td>
+                  <td></td>
+                  <td><p>Optional, This is for Unit Cost. 
+When present, the currentCombination field represents a combination that is not yet finalized. 
+This field is used to compare with existingCombinations to analyze both sets 
+and determine the appropriate attributes to return. </p></td>
                 </tr>
               
             </tbody>
