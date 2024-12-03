@@ -2247,6 +2247,8 @@ func local_request_Billing_DeleteFreeFormat_0(ctx context.Context, marshaler run
 	return msg, metadata, err
 }
 
+var filter_Billing_GetFreeFormat_0 = &utilities.DoubleArray{Encoding: map[string]int{"groupId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+
 func request_Billing_GetFreeFormat_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_GetFreeFormatClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetFreeFormatRequest
@@ -2260,6 +2262,12 @@ func request_Billing_GetFreeFormat_0(ctx context.Context, marshaler runtime.Mars
 	protoReq.GroupId, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Billing_GetFreeFormat_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	stream, err := client.GetFreeFormat(ctx, &protoReq)
 	if err != nil {
