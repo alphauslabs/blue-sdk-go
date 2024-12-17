@@ -1311,6 +1311,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ExportBillingGroupCsvRequest"><span class="badge">M</span>ExportBillingGroupCsvRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ExportBillingGroupCsvResponse"><span class="badge">M</span>ExportBillingGroupCsvResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ExportBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>ExportBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -15537,6 +15545,37 @@ In that case, you can use this option to change the language of CSV. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ExportBillingGroupCsvRequest">ExportBillingGroupCsvRequest</h3>
+        <p>Request message for the ExportBillingGroupCsv rpc.</p><p>port from m/ripple/exportcsv/billing-group</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.billing.v1.ExportBillingGroupCsvResponse">ExportBillingGroupCsvResponse</h3>
+        <p>Response message for the ExportBillingGroupCsv rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>row</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ExportBillingGroupInvoiceServiceDiscountsRequest">ExportBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the ExportBillingGroupInvoiceServiceDiscounts rpc.</p>
 
@@ -18401,6 +18440,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ExportBillingGroupCsv</td>
+                <td><a href="#blueapi.billing.v1.ExportBillingGroupCsvRequest">ExportBillingGroupCsvRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ExportBillingGroupCsvResponse">ExportBillingGroupCsvResponse</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -19086,6 +19132,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>PUT</td>
                 <td>/v1/{vendor}/tagsaddingsetting/{groupId}</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportBillingGroupCsv</td>
+                <td>GET</td>
+                <td>/v1/exportcsv/billing-group</td>
+                <td></td>
               </tr>
               
             
