@@ -109,6 +109,7 @@ const (
 	Cover_GetCostGroupFee_FullMethodName                         = "/blueapi.cover.v1.Cover/GetCostGroupFee"
 	Cover_ListAllocators_FullMethodName                          = "/blueapi.cover.v1.Cover/ListAllocators"
 	Cover_CreateAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/CreateAllocator"
+	Cover_GetAllocationAttributes_FullMethodName                 = "/blueapi.cover.v1.Cover/GetAllocationAttributes"
 	Cover_UpdateAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/UpdateAllocator"
 	Cover_DeleteAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/DeleteAllocator"
 	Cover_ProxyCreateCompletion_FullMethodName                   = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
@@ -362,6 +363,8 @@ type CoverClient interface {
 	ListAllocators(ctx context.Context, in *ListAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListAllocatorsClient, error)
 	// WORK-IN-PROGRESS: Creates cost allocator item
 	CreateAllocator(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (*CostAllocatorDetails, error)
+	// Get all available attributes for the charges
+	GetAllocationAttributes(ctx context.Context, in *GetAllocationAttributesRequest, opts ...grpc.CallOption) (*GetAllocationAttributesResponse, error)
 	// WORK-IN-PROGRESS: Updates a cost allocator item
 	UpdateAllocator(ctx context.Context, in *CostAllocatorRequest, opts ...grpc.CallOption) (*CostAllocatorDetails, error)
 	// WORK-IN-PROGRESS: Deletes a cost allocator
@@ -1594,6 +1597,16 @@ func (c *coverClient) CreateAllocator(ctx context.Context, in *CreateAllocatorRe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CostAllocatorDetails)
 	err := c.cc.Invoke(ctx, Cover_CreateAllocator_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetAllocationAttributes(ctx context.Context, in *GetAllocationAttributesRequest, opts ...grpc.CallOption) (*GetAllocationAttributesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllocationAttributesResponse)
+	err := c.cc.Invoke(ctx, Cover_GetAllocationAttributes_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2872,6 +2885,8 @@ type CoverServer interface {
 	ListAllocators(*ListAllocatorsRequest, Cover_ListAllocatorsServer) error
 	// WORK-IN-PROGRESS: Creates cost allocator item
 	CreateAllocator(context.Context, *CreateAllocatorRequest) (*CostAllocatorDetails, error)
+	// Get all available attributes for the charges
+	GetAllocationAttributes(context.Context, *GetAllocationAttributesRequest) (*GetAllocationAttributesResponse, error)
 	// WORK-IN-PROGRESS: Updates a cost allocator item
 	UpdateAllocator(context.Context, *CostAllocatorRequest) (*CostAllocatorDetails, error)
 	// WORK-IN-PROGRESS: Deletes a cost allocator
@@ -3281,6 +3296,9 @@ func (UnimplementedCoverServer) ListAllocators(*ListAllocatorsRequest, Cover_Lis
 }
 func (UnimplementedCoverServer) CreateAllocator(context.Context, *CreateAllocatorRequest) (*CostAllocatorDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAllocator not implemented")
+}
+func (UnimplementedCoverServer) GetAllocationAttributes(context.Context, *GetAllocationAttributesRequest) (*GetAllocationAttributesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllocationAttributes not implemented")
 }
 func (UnimplementedCoverServer) UpdateAllocator(context.Context, *CostAllocatorRequest) (*CostAllocatorDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAllocator not implemented")
@@ -5121,6 +5139,24 @@ func _Cover_CreateAllocator_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetAllocationAttributes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllocationAttributesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAllocationAttributes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetAllocationAttributes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAllocationAttributes(ctx, req.(*GetAllocationAttributesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_UpdateAllocator_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CostAllocatorRequest)
 	if err := dec(in); err != nil {
@@ -6754,6 +6790,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateAllocator",
 			Handler:    _Cover_CreateAllocator_Handler,
+		},
+		{
+			MethodName: "GetAllocationAttributes",
+			Handler:    _Cover_GetAllocationAttributes_Handler,
 		},
 		{
 			MethodName: "UpdateAllocator",

@@ -1965,6 +1965,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetAllocationAttributesRequest"><span class="badge">M</span>GetAllocationAttributesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetAllocationAttributesResponse"><span class="badge">M</span>GetAllocationAttributesResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetAllocationAttributesResponse.AllocationAttribute"><span class="badge">M</span>GetAllocationAttributesResponse.AllocationAttribute</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetAndDeleteDataAccessRequest"><span class="badge">M</span>GetAndDeleteDataAccessRequest</a>
                 </li>
               
@@ -20704,6 +20716,20 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -21087,6 +21113,20 @@ Example: If groupBy is set to &#34;Environment&#34;, this field might include va
                   <td>allocator</td>
                   <td><a href="#blueapi.cover.v1.Allocator">Allocator</a></td>
                   <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -22829,6 +22869,68 @@ Supported values are the following:
                   <td>alertData</td>
                   <td><a href="#blueapi.api.cover.AlertData">blueapi.api.cover.AlertData</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAllocationAttributesRequest">GetAllocationAttributesRequest</h3>
+        <p>Request message for the GetAllocationAttributes rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAllocationAttributesResponse">GetAllocationAttributesResponse</h3>
+        <p>Response message for the GetAllocationAttributes rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>attribute</td>
+                  <td><a href="#blueapi.cover.v1.GetAllocationAttributesResponse.AllocationAttribute">GetAllocationAttributesResponse.AllocationAttribute</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAllocationAttributesResponse.AllocationAttribute">GetAllocationAttributesResponse.AllocationAttribute</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -30566,6 +30668,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>GetAllocationAttributes</td>
+                <td><a href="#blueapi.cover.v1.GetAllocationAttributesRequest">GetAllocationAttributesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetAllocationAttributesResponse">GetAllocationAttributesResponse</a></td>
+                <td><p>Get all available attributes for the charges</p></td>
+              </tr>
+            
+              <tr>
                 <td>UpdateAllocator</td>
                 <td><a href="#blueapi.cover.v1.CostAllocatorRequest">CostAllocatorRequest</a></td>
                 <td><a href="#blueapi.cover.v1.CostAllocatorDetails">CostAllocatorDetails</a></td>
@@ -31950,6 +32059,16 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/allocators</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAllocationAttributes</td>
+                <td>GET</td>
+                <td>/v1/allocators/attribute</td>
+                <td></td>
               </tr>
               
             
