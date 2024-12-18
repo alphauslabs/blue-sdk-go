@@ -1120,6 +1120,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.RegisterPayerAccountRequest"><span class="badge">M</span>RegisterPayerAccountRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.UpdateAccountBudgetAlertsRequest"><span class="badge">M</span>UpdateAccountBudgetAlertsRequest</a>
                 </li>
               
@@ -12371,6 +12375,52 @@ This field is discarded for Wave(Pro) users. You will always get the latest data
 
         
       
+        <h3 id="blueapi.cost.v1.RegisterPayerAccountRequest">RegisterPayerAccountRequest</h3>
+        <p>Request message for the RegisterPayerAccountRequest rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`, `gcp`, `azure` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The Payer/Management account Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Preferred account name, defaults to id if not provided. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>curType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Valid values are `legacy` and `2.0` for now. Defaults to `legacy` if not provided.
+Only applicable if vendor is set to `aws`. Do not provide if `gcp` or `azure`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.UpdateAccountBudgetAlertsRequest">UpdateAccountBudgetAlertsRequest</h3>
         <p>Request message for UpdateAccountBudgetAlerts</p>
 
@@ -12695,6 +12745,13 @@ Import history is a list of timestamps our system tracks when the account&#39;s 
                 <td><a href="#blueapi.cost.v1.CreatePayerAccountRequest">CreatePayerAccountRequest</a></td>
                 <td><a href="#blueapi.api.Account">.blueapi.api.Account</a></td>
                 <td><p>DEPRECATED: Registers a vendor payer account. This is now deprecated for AWS payer accounts. To register an AWS payer account, check out the &#39;CreateDefaultCostAccess&#39; API.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RegisterPayerAccount</td>
+                <td><a href="#blueapi.cost.v1.RegisterPayerAccountRequest">RegisterPayerAccountRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRES: Registers a vendor payer account with their basics details such as accountId and accountName.</p></td>
               </tr>
             
               <tr>
@@ -13208,6 +13265,16 @@ Only available in Wave(Pro).</p></td>
                 <td>CreatePayerAccount</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/payers</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RegisterPayerAccount</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/payers/basicdetails</td>
                 <td>*</td>
               </tr>
               

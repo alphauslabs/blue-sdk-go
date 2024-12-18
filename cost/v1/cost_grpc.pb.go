@@ -30,6 +30,7 @@ const (
 	Cost_GetPayerAccountImportHistory_FullMethodName  = "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory"
 	Cost_GetPayerProformaReports_FullMethodName       = "/blueapi.cost.v1.Cost/GetPayerProformaReports"
 	Cost_CreatePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/CreatePayerAccount"
+	Cost_RegisterPayerAccount_FullMethodName          = "/blueapi.cost.v1.Cost/RegisterPayerAccount"
 	Cost_DeletePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/DeletePayerAccount"
 	Cost_ListAccounts_FullMethodName                  = "/blueapi.cost.v1.Cost/ListAccounts"
 	Cost_GetAccount_FullMethodName                    = "/blueapi.cost.v1.Cost/GetAccount"
@@ -112,6 +113,8 @@ type CostClient interface {
 	GetPayerProformaReports(ctx context.Context, in *GetPayerProformaReportsRequest, opts ...grpc.CallOption) (*GetPayerProformaReportsResponse, error)
 	// DEPRECATED: Registers a vendor payer account. This is now deprecated for AWS payer accounts. To register an AWS payer account, check out the 'CreateDefaultCostAccess' API.
 	CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
+	// WORK-IN-PROGRES: Registers a vendor payer account with their basics details such as accountId and accountName.
+	RegisterPayerAccount(ctx context.Context, in *RegisterPayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Deletes a vendor payer account.
 	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
@@ -370,6 +373,16 @@ func (c *costClient) CreatePayerAccount(ctx context.Context, in *CreatePayerAcco
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(api.Account)
 	err := c.cc.Invoke(ctx, Cost_CreatePayerAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) RegisterPayerAccount(ctx context.Context, in *RegisterPayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cost_RegisterPayerAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1323,6 +1336,8 @@ type CostServer interface {
 	GetPayerProformaReports(context.Context, *GetPayerProformaReportsRequest) (*GetPayerProformaReportsResponse, error)
 	// DEPRECATED: Registers a vendor payer account. This is now deprecated for AWS payer accounts. To register an AWS payer account, check out the 'CreateDefaultCostAccess' API.
 	CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error)
+	// WORK-IN-PROGRES: Registers a vendor payer account with their basics details such as accountId and accountName.
+	RegisterPayerAccount(context.Context, *RegisterPayerAccountRequest) (*emptypb.Empty, error)
 	// Deletes a vendor payer account.
 	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
@@ -1502,6 +1517,9 @@ func (UnimplementedCostServer) GetPayerProformaReports(context.Context, *GetPaye
 }
 func (UnimplementedCostServer) CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreatePayerAccount not implemented")
+}
+func (UnimplementedCostServer) RegisterPayerAccount(context.Context, *RegisterPayerAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterPayerAccount not implemented")
 }
 func (UnimplementedCostServer) DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePayerAccount not implemented")
@@ -1782,6 +1800,24 @@ func _Cost_CreatePayerAccount_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).CreatePayerAccount(ctx, req.(*CreatePayerAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_RegisterPayerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterPayerAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).RegisterPayerAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_RegisterPayerAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).RegisterPayerAccount(ctx, req.(*RegisterPayerAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2893,6 +2929,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreatePayerAccount",
 			Handler:    _Cost_CreatePayerAccount_Handler,
+		},
+		{
+			MethodName: "RegisterPayerAccount",
+			Handler:    _Cost_RegisterPayerAccount_Handler,
 		},
 		{
 			MethodName: "DeletePayerAccount",
