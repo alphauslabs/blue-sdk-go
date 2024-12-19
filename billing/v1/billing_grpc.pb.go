@@ -92,6 +92,7 @@ const (
 	Billing_GetTagsAddingSetting_FullMethodName                       = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
 	Billing_UpdateTagsAddingSetting_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
 	Billing_ExportBillingGroupCsv_FullMethodName                      = "/blueapi.billing.v1.Billing/ExportBillingGroupCsv"
+	Billing_ExportInvoiceSettingCsv_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
 )
 
 // BillingClient is the client API for Billing service.
@@ -247,6 +248,7 @@ type BillingClient interface {
 	GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error)
 	UpdateTagsAddingSetting(ctx context.Context, in *UpdateTagsAddingSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ExportBillingGroupCsv(ctx context.Context, in *ExportBillingGroupCsvRequest, opts ...grpc.CallOption) (Billing_ExportBillingGroupCsvClient, error)
+	ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (Billing_ExportInvoiceSettingCsvClient, error)
 }
 
 type billingClient struct {
@@ -1466,6 +1468,39 @@ func (x *billingExportBillingGroupCsvClient) Recv() (*ExportBillingGroupCsvRespo
 	return m, nil
 }
 
+func (c *billingClient) ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (Billing_ExportInvoiceSettingCsvClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[23], Billing_ExportInvoiceSettingCsv_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingExportInvoiceSettingCsvClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ExportInvoiceSettingCsvClient interface {
+	Recv() (*FileChunk, error)
+	grpc.ClientStream
+}
+
+type billingExportInvoiceSettingCsvClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingExportInvoiceSettingCsvClient) Recv() (*FileChunk, error) {
+	m := new(FileChunk)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1619,6 +1654,7 @@ type BillingServer interface {
 	GetTagsAddingSetting(*GetTagsAddingSettingRequest, Billing_GetTagsAddingSettingServer) error
 	UpdateTagsAddingSetting(context.Context, *UpdateTagsAddingSettingRequest) (*emptypb.Empty, error)
 	ExportBillingGroupCsv(*ExportBillingGroupCsvRequest, Billing_ExportBillingGroupCsvServer) error
+	ExportInvoiceSettingCsv(*ExportInvoiceSettingCsvRequest, Billing_ExportInvoiceSettingCsvServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1829,6 +1865,9 @@ func (UnimplementedBillingServer) UpdateTagsAddingSetting(context.Context, *Upda
 }
 func (UnimplementedBillingServer) ExportBillingGroupCsv(*ExportBillingGroupCsvRequest, Billing_ExportBillingGroupCsvServer) error {
 	return status.Errorf(codes.Unimplemented, "method ExportBillingGroupCsv not implemented")
+}
+func (UnimplementedBillingServer) ExportInvoiceSettingCsv(*ExportInvoiceSettingCsvRequest, Billing_ExportInvoiceSettingCsvServer) error {
+	return status.Errorf(codes.Unimplemented, "method ExportInvoiceSettingCsv not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -3136,6 +3175,27 @@ func (x *billingExportBillingGroupCsvServer) Send(m *ExportBillingGroupCsvRespon
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_ExportInvoiceSettingCsv_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ExportInvoiceSettingCsvRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ExportInvoiceSettingCsv(m, &billingExportInvoiceSettingCsvServer{ServerStream: stream})
+}
+
+type Billing_ExportInvoiceSettingCsvServer interface {
+	Send(*FileChunk) error
+	grpc.ServerStream
+}
+
+type billingExportInvoiceSettingCsvServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingExportInvoiceSettingCsvServer) Send(m *FileChunk) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3438,6 +3498,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ExportBillingGroupCsv",
 			Handler:       _Billing_ExportBillingGroupCsv_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ExportInvoiceSettingCsv",
+			Handler:       _Billing_ExportInvoiceSettingCsv_Handler,
 			ServerStreams: true,
 		},
 	},

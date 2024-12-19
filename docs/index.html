@@ -1335,7 +1335,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ExportInvoiceSettingCsvRequest"><span class="badge">M</span>ExportInvoiceSettingCsvRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ExportServiceDiscountsRequest"><span class="badge">M</span>ExportServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.FileChunk"><span class="badge">M</span>FileChunk</a>
                 </li>
               
                 <li>
@@ -15751,6 +15759,13 @@ csv columns set `group vendor resourceId resourceName type serviceName currency 
 
         
       
+        <h3 id="blueapi.billing.v1.ExportInvoiceSettingCsvRequest">ExportInvoiceSettingCsvRequest</h3>
+        <p>port from m/ripple/exportcsv/billing-group-setting</p>
+
+        
+
+        
+      
         <h3 id="blueapi.billing.v1.ExportServiceDiscountsRequest">ExportServiceDiscountsRequest</h3>
         <p>Request message for the ExportServiceDiscounts rpc.</p>
 
@@ -15777,6 +15792,30 @@ csv columns set `group vendor resourceId resourceName type serviceName currency 
 Usually the language of the user information is used, 
 but it may be a different language due to cahce.
 In that case, you can use this option to change the language of CSV. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.FileChunk">FileChunk</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -18526,6 +18565,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ExportInvoiceSettingCsv</td>
+                <td><a href="#blueapi.billing.v1.ExportInvoiceSettingCsvRequest">ExportInvoiceSettingCsvRequest</a></td>
+                <td><a href="#blueapi.billing.v1.FileChunk">FileChunk</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -19220,6 +19266,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ExportBillingGroupCsv</td>
                 <td>GET</td>
                 <td>/v1/exportcsv/billing-group</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportInvoiceSettingCsv</td>
+                <td>GET</td>
+                <td>/v1/exportcsv/invoice-setting</td>
                 <td></td>
               </tr>
               
