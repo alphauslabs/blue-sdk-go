@@ -7829,7 +7829,7 @@ func (x *ReadAccountOriginalResourcesRequest) GetVendor() string {
 // Request message for the RegisterPayerAccountRequest rpc.
 type RegisterPayerAccountRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. At the moment, only `aws`, `gcp`, `azure` is supported.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. The Payer/Management account Id.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`

@@ -209,6 +209,10 @@ type GetDefaultCostAccessTemplateUrlRequest struct {
 	//
 	// `s3only` - A helper template for creating an S3 bucket to be used for CUR export.
 	//
+	// `default-2.0`- For default cur 2.0 templates.
+	//
+	// `s3only-2.0` - For s3only cur 2.0 templates.
+	//
 	// All templates are publicly available from the reponse link (`templateUrl`) if you want to audit the included permissions.
 	Type          string `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
 	unknownFields protoimpl.UnknownFields
