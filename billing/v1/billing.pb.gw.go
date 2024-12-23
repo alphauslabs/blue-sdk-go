@@ -2373,11 +2373,19 @@ func local_request_Billing_UpdateTagsAddingSetting_0(ctx context.Context, marsha
 	return msg, metadata, err
 }
 
+var filter_Billing_ExportBillingGroupCsv_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+
 func request_Billing_ExportBillingGroupCsv_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ExportBillingGroupCsvClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq ExportBillingGroupCsvRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Billing_ExportBillingGroupCsv_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	stream, err := client.ExportBillingGroupCsv(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -2390,11 +2398,19 @@ func request_Billing_ExportBillingGroupCsv_0(ctx context.Context, marshaler runt
 	return stream, metadata, nil
 }
 
+var filter_Billing_ExportInvoiceSettingCsv_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+
 func request_Billing_ExportInvoiceSettingCsv_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ExportInvoiceSettingCsvClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq ExportInvoiceSettingCsvRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Billing_ExportInvoiceSettingCsv_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	stream, err := client.ExportInvoiceSettingCsv(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
