@@ -165,6 +165,7 @@ const (
 	Cover_GetRecommendation_FullMethodName                       = "/blueapi.cover.v1.Cover/GetRecommendation"
 	Cover_GetRecommendationV2_FullMethodName                     = "/blueapi.cover.v1.Cover/GetRecommendationV2"
 	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
+	Cover_GetExecutionStatus_FullMethodName                      = "/blueapi.cover.v1.Cover/GetExecutionStatus"
 	Cover_MarkAsExecuted_FullMethodName                          = "/blueapi.cover.v1.Cover/MarkAsExecuted"
 	Cover_UndoExecutedRecommendation_FullMethodName              = "/blueapi.cover.v1.Cover/UndoExecutedRecommendation"
 	Cover_OptimizationHistory_FullMethodName                     = "/blueapi.cover.v1.Cover/OptimizationHistory"
@@ -475,6 +476,8 @@ type CoverClient interface {
 	GetRecommendationV2(ctx context.Context, in *GetRecommendationV2Request, opts ...grpc.CallOption) (*GetRecommendationV2Response, error)
 	// Executes optimization based on a recommendation.
 	ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error)
+	// Get Execution status of a recommendation.
+	GetExecutionStatus(ctx context.Context, in *GetExecutionStatusRequest, opts ...grpc.CallOption) (Cover_GetExecutionStatusClient, error)
 	// Mark a recommendation executed.
 	MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error)
 	// Undo a executed recommendation (For recommendation).
@@ -2554,6 +2557,39 @@ func (c *coverClient) ExecuteOptimization(ctx context.Context, in *ExecuteOptimi
 	return out, nil
 }
 
+func (c *coverClient) GetExecutionStatus(ctx context.Context, in *GetExecutionStatusRequest, opts ...grpc.CallOption) (Cover_GetExecutionStatusClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[26], Cover_GetExecutionStatus_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverGetExecutionStatusClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetExecutionStatusClient interface {
+	Recv() (*GetExecutionStatusResponse, error)
+	grpc.ClientStream
+}
+
+type coverGetExecutionStatusClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetExecutionStatusClient) Recv() (*GetExecutionStatusResponse, error) {
+	m := new(GetExecutionStatusResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *coverClient) MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MarkAsExecutedResponse)
@@ -2997,6 +3033,8 @@ type CoverServer interface {
 	GetRecommendationV2(context.Context, *GetRecommendationV2Request) (*GetRecommendationV2Response, error)
 	// Executes optimization based on a recommendation.
 	ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error)
+	// Get Execution status of a recommendation.
+	GetExecutionStatus(*GetExecutionStatusRequest, Cover_GetExecutionStatusServer) error
 	// Mark a recommendation executed.
 	MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error)
 	// Undo a executed recommendation (For recommendation).
@@ -3464,6 +3502,9 @@ func (UnimplementedCoverServer) GetRecommendationV2(context.Context, *GetRecomme
 }
 func (UnimplementedCoverServer) ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecuteOptimization not implemented")
+}
+func (UnimplementedCoverServer) GetExecutionStatus(*GetExecutionStatusRequest, Cover_GetExecutionStatusServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetExecutionStatus not implemented")
 }
 func (UnimplementedCoverServer) MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method MarkAsExecuted not implemented")
@@ -6198,6 +6239,27 @@ func _Cover_ExecuteOptimization_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetExecutionStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetExecutionStatusRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).GetExecutionStatus(m, &coverGetExecutionStatusServer{ServerStream: stream})
+}
+
+type Cover_GetExecutionStatusServer interface {
+	Send(*GetExecutionStatusResponse) error
+	grpc.ServerStream
+}
+
+type coverGetExecutionStatusServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetExecutionStatusServer) Send(m *GetExecutionStatusResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Cover_MarkAsExecuted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(MarkAsExecutedRequest)
 	if err := dec(in); err != nil {
@@ -7137,6 +7199,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListRecommendationsV2",
 			Handler:       _Cover_ListRecommendationsV2_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetExecutionStatus",
+			Handler:       _Cover_GetExecutionStatus_Handler,
 			ServerStreams: true,
 		},
 	},

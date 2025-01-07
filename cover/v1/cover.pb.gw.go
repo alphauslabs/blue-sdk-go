@@ -4474,18 +4474,9 @@ func request_Cover_ExecuteOptimization_0(ctx context.Context, marshaler runtime.
 	var (
 		protoReq ExecuteOptimizationRequest
 		metadata runtime.ServerMetadata
-		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	val, ok := pathParams["recommendationId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "recommendationId")
-	}
-	protoReq.RecommendationId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "recommendationId", err)
 	}
 	msg, err := client.ExecuteOptimization(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -4495,21 +4486,29 @@ func local_request_Cover_ExecuteOptimization_0(ctx context.Context, marshaler ru
 	var (
 		protoReq ExecuteOptimizationRequest
 		metadata runtime.ServerMetadata
-		err      error
 	)
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["recommendationId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "recommendationId")
-	}
-	protoReq.RecommendationId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "recommendationId", err)
-	}
 	msg, err := server.ExecuteOptimization(ctx, &protoReq)
 	return msg, metadata, err
+}
+
+func request_Cover_GetExecutionStatus_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (Cover_GetExecutionStatusClient, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetExecutionStatusRequest
+		metadata runtime.ServerMetadata
+	)
+	stream, err := client.GetExecutionStatus(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 }
 
 func request_Cover_MarkAsExecuted_0(ctx context.Context, marshaler runtime.Marshaler, client CoverClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
@@ -7514,7 +7513,7 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{recommendationId}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/execute"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -7527,6 +7526,13 @@ func RegisterCoverHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 		forward_Cover_ExecuteOptimization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+
+	mux.Handle(http.MethodGet, pattern_Cover_GetExecutionStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 	mux.Handle(http.MethodPost, pattern_Cover_MarkAsExecuted_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -10303,7 +10309,7 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/optimization/{recommendationId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/ExecuteOptimization", runtime.WithHTTPPathPattern("/v1/recommendations/execute"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -10315,6 +10321,23 @@ func RegisterCoverHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 			return
 		}
 		forward_Cover_ExecuteOptimization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_Cover_GetExecutionStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cover.v1.Cover/GetExecutionStatus", runtime.WithHTTPPathPattern("/v1/recommendations/execute/status"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Cover_GetExecutionStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Cover_GetExecutionStatus_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_Cover_MarkAsExecuted_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -10718,7 +10741,8 @@ var (
 	pattern_Cover_ListRecommendationsV2_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "recommendations", "all"}, "read"))
 	pattern_Cover_GetRecommendation_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "optimization", "id"}, ""))
 	pattern_Cover_GetRecommendationV2_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "details", "id"}, ""))
-	pattern_Cover_ExecuteOptimization_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "recommendations", "optimization", "recommendationId"}, ""))
+	pattern_Cover_ExecuteOptimization_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "recommendations", "execute"}, ""))
+	pattern_Cover_GetExecutionStatus_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "recommendations", "execute", "status"}, ""))
 	pattern_Cover_MarkAsExecuted_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "recommendations", "optimization", "executed"}, ""))
 	pattern_Cover_UndoExecutedRecommendation_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "recommendations", "optimization", "undo"}, ""))
 	pattern_Cover_OptimizationHistory_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "recommendations", "optimization", "history"}, ""))
@@ -10881,6 +10905,7 @@ var (
 	forward_Cover_GetRecommendation_0                       = runtime.ForwardResponseMessage
 	forward_Cover_GetRecommendationV2_0                     = runtime.ForwardResponseMessage
 	forward_Cover_ExecuteOptimization_0                     = runtime.ForwardResponseMessage
+	forward_Cover_GetExecutionStatus_0                      = runtime.ForwardResponseStream
 	forward_Cover_MarkAsExecuted_0                          = runtime.ForwardResponseMessage
 	forward_Cover_UndoExecutedRecommendation_0              = runtime.ForwardResponseMessage
 	forward_Cover_OptimizationHistory_0                     = runtime.ForwardResponseMessage

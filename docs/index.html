@@ -1929,6 +1929,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ExecuteOptimizationResponse.AWSOption"><span class="badge">M</span>ExecuteOptimizationResponse.AWSOption</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ExecuteOptimizationResponse.AzureCSPOption"><span class="badge">M</span>ExecuteOptimizationResponse.AzureCSPOption</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ExecuteOptimizationResponse.GCPOption"><span class="badge">M</span>ExecuteOptimizationResponse.GCPOption</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.FeeDetails"><span class="badge">M</span>FeeDetails</a>
                 </li>
               
@@ -2110,6 +2122,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.GetDiscountRecommendationsResponse"><span class="badge">M</span>GetDiscountRecommendationsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetExecutionStatusRequest"><span class="badge">M</span>GetExecutionStatusRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetExecutionStatusResponse"><span class="badge">M</span>GetExecutionStatusResponse</a>
                 </li>
               
                 <li>
@@ -22534,6 +22554,13 @@ Supported values are the following:
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -22542,6 +22569,89 @@ Supported values are the following:
         
       
         <h3 id="blueapi.cover.v1.ExecuteOptimizationResponse">ExecuteOptimizationResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>awsOption</td>
+                  <td><a href="#blueapi.cover.v1.ExecuteOptimizationResponse.AWSOption">ExecuteOptimizationResponse.AWSOption</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpOption</td>
+                  <td><a href="#blueapi.cover.v1.ExecuteOptimizationResponse.GCPOption">ExecuteOptimizationResponse.GCPOption</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureCspOption</td>
+                  <td><a href="#blueapi.cover.v1.ExecuteOptimizationResponse.AzureCSPOption">ExecuteOptimizationResponse.AzureCSPOption</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ExecuteOptimizationResponse.AWSOption">ExecuteOptimizationResponse.AWSOption</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>approveTemplateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currentStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ExecuteOptimizationResponse.AzureCSPOption">ExecuteOptimizationResponse.AzureCSPOption</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.ExecuteOptimizationResponse.GCPOption">ExecuteOptimizationResponse.GCPOption</h3>
         <p></p>
 
         
@@ -24312,6 +24422,51 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>gcpRecommendations</td>
                   <td><a href="#blueapi.api.cover.GcpDiscountRecommendations">blueapi.api.cover.GcpDiscountRecommendations</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetExecutionStatusRequest">GetExecutionStatusRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetExecutionStatusResponse">GetExecutionStatusResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>recommendationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -31172,6 +31327,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>GetExecutionStatus</td>
+                <td><a href="#blueapi.cover.v1.GetExecutionStatusRequest">GetExecutionStatusRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetExecutionStatusResponse">GetExecutionStatusResponse</a> stream</td>
+                <td><p>Get Execution status of a recommendation.</p></td>
+              </tr>
+            
+              <tr>
                 <td>MarkAsExecuted</td>
                 <td><a href="#blueapi.cover.v1.MarkAsExecutedRequest">MarkAsExecutedRequest</a></td>
                 <td><a href="#blueapi.cover.v1.MarkAsExecutedResponse">MarkAsExecutedResponse</a></td>
@@ -32729,8 +32891,18 @@ file in bytes </p></td>
               <tr>
                 <td>ExecuteOptimization</td>
                 <td>POST</td>
-                <td>/v1/recommendations/optimization/{recommendationId}</td>
+                <td>/v1/recommendations/execute</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetExecutionStatus</td>
+                <td>GET</td>
+                <td>/v1/recommendations/execute/status</td>
+                <td></td>
               </tr>
               
             
