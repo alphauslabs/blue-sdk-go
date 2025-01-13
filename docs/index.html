@@ -294,6 +294,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.iam.v1.GetSubUserRequest"><span class="badge">M</span>GetSubUserRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.iam.v1.GetUserRequest"><span class="badge">M</span>GetUserRequest</a>
                 </li>
               
@@ -3905,6 +3909,37 @@ for the list of supported attributes.</p></td>
 
         
       
+        <h3 id="blueapi.iam.v1.GetSubUserRequest">GetSubUserRequest</h3>
+        <p>Request message for the Iam.GetSubUserMetadata rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The parent ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The sub-user ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.iam.v1.GetUserRequest">GetUserRequest</h3>
         <p>Request message for the Iam.GetUser rpc.</p>
 
@@ -4948,6 +4983,13 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
               </tr>
             
               <tr>
+                <td>GetSubUserMetadata</td>
+                <td><a href="#blueapi.iam.v1.GetSubUserRequest">GetSubUserRequest</a></td>
+                <td><a href="#blueapi.api.SubUser">.blueapi.api.SubUser</a></td>
+                <td><p>WORK-IN-PROGRESS: Get Sub User Metadata for login user&#39;s organization based on user identity</p></td>
+              </tr>
+            
+              <tr>
                 <td>ValidateResetPasswordLinkAndChangePassword</td>
                 <td><a href="#blueapi.iam.v1.ValidateResetPasswordLinkAndChangePasswordRequest">ValidateResetPasswordLinkAndChangePasswordRequest</a></td>
                 <td><a href="#blueapi.iam.v1.ValidateResetPasswordLinkAndChangePasswordResponse">ValidateResetPasswordLinkAndChangePasswordResponse</a></td>
@@ -5285,6 +5327,16 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                 <td>VerifyUserForResetPassword</td>
                 <td>POST</td>
                 <td>/iam/v1/{user}/password:verify</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSubUserMetadata</td>
+                <td>GET</td>
+                <td>/iam/v1/metadata/{id}</td>
                 <td></td>
               </tr>
               

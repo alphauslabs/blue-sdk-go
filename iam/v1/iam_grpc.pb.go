@@ -52,6 +52,7 @@ const (
 	Iam_CreatePartnerToken_FullMethodName                         = "/blueapi.iam.v1.Iam/CreatePartnerToken"
 	Iam_RefreshPartnerToken_FullMethodName                        = "/blueapi.iam.v1.Iam/RefreshPartnerToken"
 	Iam_VerifyUserForResetPassword_FullMethodName                 = "/blueapi.iam.v1.Iam/VerifyUserForResetPassword"
+	Iam_GetSubUserMetadata_FullMethodName                         = "/blueapi.iam.v1.Iam/GetSubUserMetadata"
 	Iam_ValidateResetPasswordLinkAndChangePassword_FullMethodName = "/blueapi.iam.v1.Iam/ValidateResetPasswordLinkAndChangePassword"
 	Iam_GetMFAUsers_FullMethodName                                = "/blueapi.iam.v1.Iam/GetMFAUsers"
 )
@@ -132,6 +133,8 @@ type IamClient interface {
 	RefreshPartnerToken(ctx context.Context, in *RefreshPartnerTokenRequest, opts ...grpc.CallOption) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Verify User Input For Reset Password
 	VerifyUserForResetPassword(ctx context.Context, in *VerifyUserForResetPasswordRequest, opts ...grpc.CallOption) (*VerifyUserForResetPasswordResponse, error)
+	// WORK-IN-PROGRESS: Get Sub User Metadata for login user's organization based on user identity
+	GetSubUserMetadata(ctx context.Context, in *GetSubUserRequest, opts ...grpc.CallOption) (*api.SubUser, error)
 	// WORK-IN-PROGRESS: Validate reset password link and proceed to update password
 	ValidateResetPasswordLinkAndChangePassword(ctx context.Context, in *ValidateResetPasswordLinkAndChangePasswordRequest, opts ...grpc.CallOption) (*ValidateResetPasswordLinkAndChangePasswordResponse, error)
 	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
@@ -548,6 +551,16 @@ func (c *iamClient) VerifyUserForResetPassword(ctx context.Context, in *VerifyUs
 	return out, nil
 }
 
+func (c *iamClient) GetSubUserMetadata(ctx context.Context, in *GetSubUserRequest, opts ...grpc.CallOption) (*api.SubUser, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(api.SubUser)
+	err := c.cc.Invoke(ctx, Iam_GetSubUserMetadata_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ValidateResetPasswordLinkAndChangePassword(ctx context.Context, in *ValidateResetPasswordLinkAndChangePasswordRequest, opts ...grpc.CallOption) (*ValidateResetPasswordLinkAndChangePasswordResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ValidateResetPasswordLinkAndChangePasswordResponse)
@@ -644,6 +657,8 @@ type IamServer interface {
 	RefreshPartnerToken(context.Context, *RefreshPartnerTokenRequest) (*PartnerToken, error)
 	// WORK-IN-PROGRESS: Verify User Input For Reset Password
 	VerifyUserForResetPassword(context.Context, *VerifyUserForResetPasswordRequest) (*VerifyUserForResetPasswordResponse, error)
+	// WORK-IN-PROGRESS: Get Sub User Metadata for login user's organization based on user identity
+	GetSubUserMetadata(context.Context, *GetSubUserRequest) (*api.SubUser, error)
 	// WORK-IN-PROGRESS: Validate reset password link and proceed to update password
 	ValidateResetPasswordLinkAndChangePassword(context.Context, *ValidateResetPasswordLinkAndChangePasswordRequest) (*ValidateResetPasswordLinkAndChangePasswordResponse, error)
 	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
@@ -747,6 +762,9 @@ func (UnimplementedIamServer) RefreshPartnerToken(context.Context, *RefreshPartn
 }
 func (UnimplementedIamServer) VerifyUserForResetPassword(context.Context, *VerifyUserForResetPasswordRequest) (*VerifyUserForResetPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyUserForResetPassword not implemented")
+}
+func (UnimplementedIamServer) GetSubUserMetadata(context.Context, *GetSubUserRequest) (*api.SubUser, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSubUserMetadata not implemented")
 }
 func (UnimplementedIamServer) ValidateResetPasswordLinkAndChangePassword(context.Context, *ValidateResetPasswordLinkAndChangePasswordRequest) (*ValidateResetPasswordLinkAndChangePasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateResetPasswordLinkAndChangePassword not implemented")
@@ -1337,6 +1355,24 @@ func _Iam_VerifyUserForResetPassword_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_GetSubUserMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSubUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).GetSubUserMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_GetSubUserMetadata_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).GetSubUserMetadata(ctx, req.(*GetSubUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ValidateResetPasswordLinkAndChangePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidateResetPasswordLinkAndChangePasswordRequest)
 	if err := dec(in); err != nil {
@@ -1487,6 +1523,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyUserForResetPassword",
 			Handler:    _Iam_VerifyUserForResetPassword_Handler,
+		},
+		{
+			MethodName: "GetSubUserMetadata",
+			Handler:    _Iam_GetSubUserMetadata_Handler,
 		},
 		{
 			MethodName: "ValidateResetPasswordLinkAndChangePassword",
