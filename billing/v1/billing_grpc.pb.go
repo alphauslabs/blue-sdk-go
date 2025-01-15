@@ -93,6 +93,7 @@ const (
 	Billing_UpdateTagsAddingSetting_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
 	Billing_ExportBillingGroupCsv_FullMethodName                      = "/blueapi.billing.v1.Billing/ExportBillingGroupCsv"
 	Billing_ExportInvoiceSettingCsv_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
+	Billing_RippleV2InvoiceListing_FullMethodName                     = "/blueapi.billing.v1.Billing/RippleV2InvoiceListing"
 )
 
 // BillingClient is the client API for Billing service.
@@ -249,6 +250,7 @@ type BillingClient interface {
 	UpdateTagsAddingSetting(ctx context.Context, in *UpdateTagsAddingSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ExportBillingGroupCsv(ctx context.Context, in *ExportBillingGroupCsvRequest, opts ...grpc.CallOption) (Billing_ExportBillingGroupCsvClient, error)
 	ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (Billing_ExportInvoiceSettingCsvClient, error)
+	RippleV2InvoiceListing(ctx context.Context, in *RippleV2InvoiceListingRequest, opts ...grpc.CallOption) (Billing_RippleV2InvoiceListingClient, error)
 }
 
 type billingClient struct {
@@ -1501,6 +1503,39 @@ func (x *billingExportInvoiceSettingCsvClient) Recv() (*FileChunk, error) {
 	return m, nil
 }
 
+func (c *billingClient) RippleV2InvoiceListing(ctx context.Context, in *RippleV2InvoiceListingRequest, opts ...grpc.CallOption) (Billing_RippleV2InvoiceListingClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[24], Billing_RippleV2InvoiceListing_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingRippleV2InvoiceListingClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_RippleV2InvoiceListingClient interface {
+	Recv() (*RippleV2InvoiceListingResponse, error)
+	grpc.ClientStream
+}
+
+type billingRippleV2InvoiceListingClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingRippleV2InvoiceListingClient) Recv() (*RippleV2InvoiceListingResponse, error) {
+	m := new(RippleV2InvoiceListingResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1655,6 +1690,7 @@ type BillingServer interface {
 	UpdateTagsAddingSetting(context.Context, *UpdateTagsAddingSettingRequest) (*emptypb.Empty, error)
 	ExportBillingGroupCsv(*ExportBillingGroupCsvRequest, Billing_ExportBillingGroupCsvServer) error
 	ExportInvoiceSettingCsv(*ExportInvoiceSettingCsvRequest, Billing_ExportInvoiceSettingCsvServer) error
+	RippleV2InvoiceListing(*RippleV2InvoiceListingRequest, Billing_RippleV2InvoiceListingServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -1868,6 +1904,9 @@ func (UnimplementedBillingServer) ExportBillingGroupCsv(*ExportBillingGroupCsvRe
 }
 func (UnimplementedBillingServer) ExportInvoiceSettingCsv(*ExportInvoiceSettingCsvRequest, Billing_ExportInvoiceSettingCsvServer) error {
 	return status.Errorf(codes.Unimplemented, "method ExportInvoiceSettingCsv not implemented")
+}
+func (UnimplementedBillingServer) RippleV2InvoiceListing(*RippleV2InvoiceListingRequest, Billing_RippleV2InvoiceListingServer) error {
+	return status.Errorf(codes.Unimplemented, "method RippleV2InvoiceListing not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -3196,6 +3235,27 @@ func (x *billingExportInvoiceSettingCsvServer) Send(m *FileChunk) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_RippleV2InvoiceListing_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(RippleV2InvoiceListingRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).RippleV2InvoiceListing(m, &billingRippleV2InvoiceListingServer{ServerStream: stream})
+}
+
+type Billing_RippleV2InvoiceListingServer interface {
+	Send(*RippleV2InvoiceListingResponse) error
+	grpc.ServerStream
+}
+
+type billingRippleV2InvoiceListingServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingRippleV2InvoiceListingServer) Send(m *RippleV2InvoiceListingResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3503,6 +3563,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ExportInvoiceSettingCsv",
 			Handler:       _Billing_ExportInvoiceSettingCsv_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "RippleV2InvoiceListing",
+			Handler:       _Billing_RippleV2InvoiceListing_Handler,
 			ServerStreams: true,
 		},
 	},
