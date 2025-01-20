@@ -17050,10 +17050,10 @@ Valid values: default, imported </p></td>
             <tbody>
               
                 <tr>
-                  <td>groupId</td>
+                  <td>date</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. billing internal id. If empty will list all the invoice status </p></td>
+                  <td><p>YYYYMM format (e.g 202412, 202501) </p></td>
                 </tr>
               
             </tbody>
@@ -17095,10 +17095,17 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
-                  <td>date</td>
+                  <td>companyName</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The date. </p></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>currency for the billing amount </p></td>
                 </tr>
               
                 <tr>
@@ -17120,6 +17127,34 @@ Valid values: default, imported </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Published || Not published </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingAmountAws</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Formated in $8,000.12 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingAmountAzure</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingAmountGcp</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingAmountTotal</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
