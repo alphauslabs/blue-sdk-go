@@ -1367,6 +1367,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>GetBillingGroupInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsResponse"><span class="badge">M</span>GetBillingGroupInvoiceServiceDiscountsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetBillingGroupRequest"><span class="badge">M</span>GetBillingGroupRequest</a>
                 </li>
               
@@ -16080,6 +16088,54 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest">GetBillingGroupInvoiceServiceDiscountsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsResponse">GetBillingGroupInvoiceServiceDiscountsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Service discount id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetBillingGroupRequest">GetBillingGroupRequest</h3>
         <p>Request message for the Billing.GetBillingGroup rpc.</p>
 
@@ -18499,6 +18555,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>GetBillingGroupInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest">GetBillingGroupInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsResponse">GetBillingGroupInvoiceServiceDiscountsResponse</a></td>
+                <td><p>Returns the service discount associated with the billing group id</p></td>
+              </tr>
+            
+              <tr>
                 <td>CreateReseller</td>
                 <td><a href="#blueapi.billing.v1.CreateResellerRequest">CreateResellerRequest</a></td>
                 <td><a href="#blueapi.api.ripple.Reseller">.blueapi.api.ripple.Reseller</a></td>
@@ -19103,6 +19166,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/servicediscounts/billinggroup:export</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBillingGroupInvoiceServiceDiscounts</td>
+                <td>GET</td>
+                <td>/v1/servicediscounts/{groupId}/billinggroup</td>
+                <td></td>
               </tr>
               
             
