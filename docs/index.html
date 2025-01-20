@@ -1543,14 +1543,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.RippleV2InvoiceListingRequest"><span class="badge">M</span>RippleV2InvoiceListingRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.RippleV2InvoiceListingResponse"><span class="badge">M</span>RippleV2InvoiceListingResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest"><span class="badge">M</span>SetCustomizedBillingServiceBillingGroupRequest</a>
                 </li>
               
@@ -17061,7 +17053,7 @@ Valid values: default, imported </p></td>
                   <td>groupId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. billing internal id. </p></td>
+                  <td><p>Optional. billing internal id. If empty will list all the invoice status </p></td>
                 </tr>
               
             </tbody>
@@ -17089,17 +17081,17 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
-                  <td>BillingGroupId</td>
+                  <td>billingGroupId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The billing group id. </p></td>
                 </tr>
               
                 <tr>
-                  <td>BillingGroupName</td>
+                  <td>billingGroupName</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The billing group name. </p></td>
+                  <td><p>The billing group name. Used as invoice name on ripple v2 </p></td>
                 </tr>
               
                 <tr>
@@ -17107,6 +17099,27 @@ Valid values: default, imported </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Created || Not Created </p></td>
+                </tr>
+              
+                <tr>
+                  <td>finalizationStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>In progress || Done </p></td>
+                </tr>
+              
+                <tr>
+                  <td>waveStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Published || Not published </p></td>
                 </tr>
               
             </tbody>
@@ -17517,103 +17530,6 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                 <tr>
                   <td>registered</td>
                   <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.RippleV2InvoiceListingRequest">RippleV2InvoiceListingRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>yymmDate</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.RippleV2InvoiceListingResponse">RippleV2InvoiceListingResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>invoiceName</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>invoiceId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>company</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>waveStatus</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billingAmountAws</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billingAmmountAzure</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billingAmountGcp</td>
-                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -18854,13 +18770,6 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p></p></td>
               </tr>
             
-              <tr>
-                <td>RippleV2InvoiceListing</td>
-                <td><a href="#blueapi.billing.v1.RippleV2InvoiceListingRequest">RippleV2InvoiceListingRequest</a></td>
-                <td><a href="#blueapi.billing.v1.RippleV2InvoiceListingResponse">RippleV2InvoiceListingResponse</a> stream</td>
-                <td><p></p></td>
-              </tr>
-            
           </tbody>
         </table>
 
@@ -19575,16 +19484,6 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ExportInvoiceSettingCsv</td>
                 <td>GET</td>
                 <td>/v1/exportcsv/invoice-setting</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>RippleV2InvoiceListing</td>
-                <td>GET</td>
-                <td>/v1/ripplev2/invoicing/invoice-listing</td>
                 <td></td>
               </tr>
               
