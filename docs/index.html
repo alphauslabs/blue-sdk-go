@@ -1487,6 +1487,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceRequest.FiltersEntry"><span class="badge">M</span>ListInvoiceRequest.FiltersEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListInvoiceResponse"><span class="badge">M</span>ListInvoiceResponse</a>
                 </li>
               
@@ -17056,6 +17060,46 @@ Valid values: default, imported </p></td>
                   <td><p>YYYYMM format (e.g 202412, 202501) </p></td>
                 </tr>
               
+                <tr>
+                  <td>filters</td>
+                  <td><a href="#blueapi.billing.v1.ListInvoiceRequest.FiltersEntry">ListInvoiceRequest.FiltersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>OPTIONAL: refer to the ListInvoiceRequest for the key
+e.g {&#34;filter&#34;: {&#34;vendor&#34;: &#34;aws&#34;, &#34;billingInternalId&#34;:&#34;asdf&#34;}}
+invalid key will be ignored </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceRequest.FiltersEntry">ListInvoiceRequest.FiltersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -17127,6 +17171,13 @@ Valid values: default, imported </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Published || Not published </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>aws, azure, gcp </p></td>
                 </tr>
               
                 <tr>
