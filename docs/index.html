@@ -1215,6 +1215,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BillingGroupCustomField"><span class="badge">M</span>BillingGroupCustomField</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BillingGroupInvoiceSettings"><span class="badge">M</span>BillingGroupInvoiceSettings</a>
                 </li>
               
@@ -1464,6 +1468,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListAwsDailyRunHistoryRequest"><span class="badge">M</span>ListAwsDailyRunHistoryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListBillingGroupCustomFieldRequest"><span class="badge">M</span>ListBillingGroupCustomFieldRequest</a>
                 </li>
               
                 <li>
@@ -14519,6 +14527,44 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.BillingGroupCustomField">BillingGroupCustomField</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customFieldName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customField</td>
+                  <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BillingGroupInvoiceSettings">BillingGroupInvoiceSettings</h3>
         <p>Invoice settings for a billing group.</p>
 
@@ -16901,6 +16947,31 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ListBillingGroupCustomFieldRequest">ListBillingGroupCustomFieldRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>billing group InternalID
+leave empty to get all group id custom field </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListBillingGroupsRequest">ListBillingGroupsRequest</h3>
         <p>Request message for the Billing.ListBillingGroups rpc.</p>
 
@@ -18794,6 +18865,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>ListBillingGroupCustomField</td>
+                <td><a href="#blueapi.billing.v1.ListBillingGroupCustomFieldRequest">ListBillingGroupCustomFieldRequest</a></td>
+                <td><a href="#blueapi.billing.v1.BillingGroupCustomField">BillingGroupCustomField</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>UpdateCustomField</td>
                 <td><a href="#blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
@@ -19480,6 +19558,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListCustomField</td>
                 <td>POST</td>
                 <td>/v1/customfield:read</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListBillingGroupCustomField</td>
+                <td>POST</td>
+                <td>/v1/billinggroup/customfield:read</td>
                 <td></td>
               </tr>
               

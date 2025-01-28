@@ -85,6 +85,7 @@ const (
 	Billing_GetTags_FullMethodName                                    = "/blueapi.billing.v1.Billing/GetTags"
 	Billing_CreateCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateCustomField"
 	Billing_ListCustomField_FullMethodName                            = "/blueapi.billing.v1.Billing/ListCustomField"
+	Billing_ListBillingGroupCustomField_FullMethodName                = "/blueapi.billing.v1.Billing/ListBillingGroupCustomField"
 	Billing_UpdateCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateCustomField"
 	Billing_DeleteCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteCustomField"
 	Billing_CreateFreeFormat_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateFreeFormat"
@@ -238,6 +239,7 @@ type BillingClient interface {
 	CreateCustomField(ctx context.Context, in *CreateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
 	// Returns all registered customfields
 	ListCustomField(ctx context.Context, in *ListCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListCustomFieldClient, error)
+	ListBillingGroupCustomField(ctx context.Context, in *ListBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupCustomFieldClient, error)
 	// Update the `customField` specified id, modifying its key and description
 	UpdateCustomField(ctx context.Context, in *UpdateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
 	// Deletes the customfield
@@ -1332,6 +1334,39 @@ func (x *billingListCustomFieldClient) Recv() (*CustomField, error) {
 	return m, nil
 }
 
+func (c *billingClient) ListBillingGroupCustomField(ctx context.Context, in *ListBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupCustomFieldClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[20], Billing_ListBillingGroupCustomField_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListBillingGroupCustomFieldClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListBillingGroupCustomFieldClient interface {
+	Recv() (*BillingGroupCustomField, error)
+	grpc.ClientStream
+}
+
+type billingListBillingGroupCustomFieldClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListBillingGroupCustomFieldClient) Recv() (*BillingGroupCustomField, error) {
+	m := new(BillingGroupCustomField)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *billingClient) UpdateCustomField(ctx context.Context, in *UpdateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CustomField)
@@ -1374,7 +1409,7 @@ func (c *billingClient) DeleteFreeFormat(ctx context.Context, in *DeleteFreeForm
 
 func (c *billingClient) GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[20], Billing_GetFreeFormat_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[21], Billing_GetFreeFormat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1407,7 +1442,7 @@ func (x *billingGetFreeFormatClient) Recv() (*GetFreeFormatResponse, error) {
 
 func (c *billingClient) GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[21], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[22], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1450,7 +1485,7 @@ func (c *billingClient) UpdateTagsAddingSetting(ctx context.Context, in *UpdateT
 
 func (c *billingClient) ExportBillingGroupCsv(ctx context.Context, in *ExportBillingGroupCsvRequest, opts ...grpc.CallOption) (Billing_ExportBillingGroupCsvClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[22], Billing_ExportBillingGroupCsv_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[23], Billing_ExportBillingGroupCsv_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1483,7 +1518,7 @@ func (x *billingExportBillingGroupCsvClient) Recv() (*ExportBillingGroupCsvRespo
 
 func (c *billingClient) ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (Billing_ExportInvoiceSettingCsvClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[23], Billing_ExportInvoiceSettingCsv_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[24], Billing_ExportInvoiceSettingCsv_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1656,6 +1691,7 @@ type BillingServer interface {
 	CreateCustomField(context.Context, *CreateCustomFieldRequest) (*CustomField, error)
 	// Returns all registered customfields
 	ListCustomField(*ListCustomFieldRequest, Billing_ListCustomFieldServer) error
+	ListBillingGroupCustomField(*ListBillingGroupCustomFieldRequest, Billing_ListBillingGroupCustomFieldServer) error
 	// Update the `customField` specified id, modifying its key and description
 	UpdateCustomField(context.Context, *UpdateCustomFieldRequest) (*CustomField, error)
 	// Deletes the customfield
@@ -1859,6 +1895,9 @@ func (UnimplementedBillingServer) CreateCustomField(context.Context, *CreateCust
 }
 func (UnimplementedBillingServer) ListCustomField(*ListCustomFieldRequest, Billing_ListCustomFieldServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListCustomField not implemented")
+}
+func (UnimplementedBillingServer) ListBillingGroupCustomField(*ListBillingGroupCustomFieldRequest, Billing_ListBillingGroupCustomFieldServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListBillingGroupCustomField not implemented")
 }
 func (UnimplementedBillingServer) UpdateCustomField(context.Context, *UpdateCustomFieldRequest) (*CustomField, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCustomField not implemented")
@@ -3058,6 +3097,27 @@ func (x *billingListCustomFieldServer) Send(m *CustomField) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_ListBillingGroupCustomField_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListBillingGroupCustomFieldRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListBillingGroupCustomField(m, &billingListBillingGroupCustomFieldServer{ServerStream: stream})
+}
+
+type Billing_ListBillingGroupCustomFieldServer interface {
+	Send(*BillingGroupCustomField) error
+	grpc.ServerStream
+}
+
+type billingListBillingGroupCustomFieldServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListBillingGroupCustomFieldServer) Send(m *BillingGroupCustomField) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Billing_UpdateCustomField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateCustomFieldRequest)
 	if err := dec(in); err != nil {
@@ -3523,6 +3583,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListCustomField",
 			Handler:       _Billing_ListCustomField_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListBillingGroupCustomField",
+			Handler:       _Billing_ListBillingGroupCustomField_Handler,
 			ServerStreams: true,
 		},
 		{
