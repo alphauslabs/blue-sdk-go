@@ -1,6 +1,6 @@
 module github.com/alphauslabs/blue-sdk-go
 
-go 1.18
+go 1.20
 
 require (
 	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0
