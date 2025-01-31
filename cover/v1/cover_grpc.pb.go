@@ -180,6 +180,7 @@ const (
 	Cover_GetUnitType_FullMethodName                             = "/blueapi.cover.v1.Cover/GetUnitType"
 	Cover_UpdateUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/UpdateUnitType"
 	Cover_DeleteUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/DeleteUnitType"
+	Cover_ListSuggestedUnits_FullMethodName                      = "/blueapi.cover.v1.Cover/ListSuggestedUnits"
 	Cover_VerifyAPIAccess_FullMethodName                         = "/blueapi.cover.v1.Cover/VerifyAPIAccess"
 )
 
@@ -506,6 +507,8 @@ type CoverClient interface {
 	UpdateUnitType(ctx context.Context, in *UpdateUnitTypeRequest, opts ...grpc.CallOption) (*UpdateUnitTypeResponse, error)
 	// Delete Specific Unit Type
 	DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequest, opts ...grpc.CallOption) (*DeleteUnitTypeResponse, error)
+	// List Suggested Unit Types
+	ListSuggestedUnits(ctx context.Context, in *ListSuggestedUnitsRequest, opts ...grpc.CallOption) (*ListSuggestedUnitsResponse, error)
 	VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error)
 }
 
@@ -2730,6 +2733,16 @@ func (c *coverClient) DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequ
 	return out, nil
 }
 
+func (c *coverClient) ListSuggestedUnits(ctx context.Context, in *ListSuggestedUnitsRequest, opts ...grpc.CallOption) (*ListSuggestedUnitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSuggestedUnitsResponse)
+	err := c.cc.Invoke(ctx, Cover_ListSuggestedUnits_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyAPIAccessResponse)
@@ -3063,6 +3076,8 @@ type CoverServer interface {
 	UpdateUnitType(context.Context, *UpdateUnitTypeRequest) (*UpdateUnitTypeResponse, error)
 	// Delete Specific Unit Type
 	DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error)
+	// List Suggested Unit Types
+	ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error)
 	VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
@@ -3547,6 +3562,9 @@ func (UnimplementedCoverServer) UpdateUnitType(context.Context, *UpdateUnitTypeR
 }
 func (UnimplementedCoverServer) DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUnitType not implemented")
+}
+func (UnimplementedCoverServer) ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSuggestedUnits not implemented")
 }
 func (UnimplementedCoverServer) VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAPIAccess not implemented")
@@ -6512,6 +6530,24 @@ func _Cover_DeleteUnitType_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListSuggestedUnits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSuggestedUnitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListSuggestedUnits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListSuggestedUnits_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListSuggestedUnits(ctx, req.(*ListSuggestedUnitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_VerifyAPIAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyAPIAccessRequest)
 	if err := dec(in); err != nil {
@@ -7064,6 +7100,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUnitType",
 			Handler:    _Cover_DeleteUnitType_Handler,
+		},
+		{
+			MethodName: "ListSuggestedUnits",
+			Handler:    _Cover_ListSuggestedUnits_Handler,
 		},
 		{
 			MethodName: "VerifyAPIAccess",
