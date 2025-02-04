@@ -1191,6 +1191,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AddBillingGroupCustomFieldRequest"><span class="badge">M</span>AddBillingGroupCustomFieldRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.AddBillingGroupCustomFieldRequest.KeyToIdEntry"><span class="badge">M</span>AddBillingGroupCustomFieldRequest.KeyToIdEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AwsDailyRunHistory"><span class="badge">M</span>AwsDailyRunHistory</a>
                 </li>
               
@@ -14258,6 +14266,68 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.AddBillingGroupCustomFieldRequest">AddBillingGroupCustomFieldRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>keyToId</td>
+                  <td><a href="#blueapi.billing.v1.AddBillingGroupCustomFieldRequest.KeyToIdEntry">AddBillingGroupCustomFieldRequest.KeyToIdEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map of customField key to custom field id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.AddBillingGroupCustomFieldRequest.KeyToIdEntry">AddBillingGroupCustomFieldRequest.KeyToIdEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.AwsDailyRunHistory">AwsDailyRunHistory</h3>
         <p>Streaming response message for the Billing.ListAwsDailyRunHistory rpc.</p>
 
@@ -18873,6 +18943,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>AddBillingGroupCustomField</td>
+                <td><a href="#blueapi.billing.v1.AddBillingGroupCustomFieldRequest">AddBillingGroupCustomFieldRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>ListBillingGroupCustomField</td>
                 <td><a href="#blueapi.billing.v1.ListBillingGroupCustomFieldRequest">ListBillingGroupCustomFieldRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BillingGroupCustomField">BillingGroupCustomField</a> stream</td>
@@ -19566,6 +19643,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListCustomField</td>
                 <td>POST</td>
                 <td>/v1/customfield:read</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AddBillingGroupCustomField</td>
+                <td>POST</td>
+                <td>/v1/billinggroup/customfield</td>
                 <td></td>
               </tr>
               
