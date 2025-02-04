@@ -2111,6 +2111,9 @@ func request_Billing_ListCustomField_0(ctx context.Context, marshaler runtime.Ma
 		protoReq ListCustomFieldRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	stream, err := client.ListCustomField(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -2123,17 +2126,12 @@ func request_Billing_ListCustomField_0(ctx context.Context, marshaler runtime.Ma
 	return stream, metadata, nil
 }
 
-var filter_Billing_AddBillingGroupCustomField_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-
 func request_Billing_AddBillingGroupCustomField_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq AddBillingGroupCustomFieldRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Billing_AddBillingGroupCustomField_0); err != nil {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.AddBillingGroupCustomField(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
@@ -2145,27 +2143,19 @@ func local_request_Billing_AddBillingGroupCustomField_0(ctx context.Context, mar
 		protoReq AddBillingGroupCustomFieldRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Billing_AddBillingGroupCustomField_0); err != nil {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.AddBillingGroupCustomField(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_Billing_ListBillingGroupCustomField_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-
 func request_Billing_ListBillingGroupCustomField_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ListBillingGroupCustomFieldClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListBillingGroupCustomFieldRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Billing_ListBillingGroupCustomField_0); err != nil {
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	stream, err := client.ListBillingGroupCustomField(ctx, &protoReq)
