@@ -1365,7 +1365,7 @@ func (c *billingClient) ListBillingGroupCustomField(ctx context.Context, in *Lis
 }
 
 type Billing_ListBillingGroupCustomFieldClient interface {
-	Recv() (*BillingGroupCustomField, error)
+	Recv() (*ListBillingGroupCustomFieldResponse, error)
 	grpc.ClientStream
 }
 
@@ -1373,8 +1373,8 @@ type billingListBillingGroupCustomFieldClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingListBillingGroupCustomFieldClient) Recv() (*BillingGroupCustomField, error) {
-	m := new(BillingGroupCustomField)
+func (x *billingListBillingGroupCustomFieldClient) Recv() (*ListBillingGroupCustomFieldResponse, error) {
+	m := new(ListBillingGroupCustomFieldResponse)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -3156,7 +3156,7 @@ func _Billing_ListBillingGroupCustomField_Handler(srv interface{}, stream grpc.S
 }
 
 type Billing_ListBillingGroupCustomFieldServer interface {
-	Send(*BillingGroupCustomField) error
+	Send(*ListBillingGroupCustomFieldResponse) error
 	grpc.ServerStream
 }
 
@@ -3164,7 +3164,7 @@ type billingListBillingGroupCustomFieldServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingListBillingGroupCustomFieldServer) Send(m *BillingGroupCustomField) error {
+func (x *billingListBillingGroupCustomFieldServer) Send(m *ListBillingGroupCustomFieldResponse) error {
 	return x.ServerStream.SendMsg(m)
 }
 

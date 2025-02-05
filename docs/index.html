@@ -1227,10 +1227,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.BillingGroupCustomField.CustomFieldEntry"><span class="badge">M</span>BillingGroupCustomField.CustomFieldEntry</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.BillingGroupInvoiceSettings"><span class="badge">M</span>BillingGroupInvoiceSettings</a>
                 </li>
               
@@ -1488,6 +1484,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListBillingGroupCustomFieldRequest"><span class="badge">M</span>ListBillingGroupCustomFieldRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListBillingGroupCustomFieldResponse"><span class="badge">M</span>ListBillingGroupCustomFieldResponse</a>
                 </li>
               
                 <li>
@@ -14624,7 +14624,7 @@ Only available in Wave(Pro).</p></td>
             <tbody>
               
                 <tr>
-                  <td>groupId</td>
+                  <td>value</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -14632,37 +14632,6 @@ Only available in Wave(Pro).</p></td>
               
                 <tr>
                   <td>customField</td>
-                  <td><a href="#blueapi.billing.v1.BillingGroupCustomField.CustomFieldEntry">BillingGroupCustomField.CustomFieldEntry</a></td>
-                  <td>repeated</td>
-                  <td><p>map of customfield name to customfield </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.BillingGroupCustomField.CustomFieldEntry">BillingGroupCustomField.CustomFieldEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
                   <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -17113,6 +17082,37 @@ leave empty to get all group id custom field </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ListBillingGroupCustomFieldResponse">ListBillingGroupCustomFieldResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupCustomFields</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupCustomField">BillingGroupCustomField</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListBillingGroupsRequest">ListBillingGroupsRequest</h3>
         <p>Request message for the Billing.ListBillingGroups rpc.</p>
 
@@ -19015,7 +19015,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>ListBillingGroupCustomField</td>
                 <td><a href="#blueapi.billing.v1.ListBillingGroupCustomFieldRequest">ListBillingGroupCustomFieldRequest</a></td>
-                <td><a href="#blueapi.billing.v1.BillingGroupCustomField">BillingGroupCustomField</a> stream</td>
+                <td><a href="#blueapi.billing.v1.ListBillingGroupCustomFieldResponse">ListBillingGroupCustomFieldResponse</a> stream</td>
                 <td><p></p></td>
               </tr>
             
