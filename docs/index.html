@@ -1227,6 +1227,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BillingGroupCustomField.CustomFieldEntry"><span class="badge">M</span>BillingGroupCustomField.CustomFieldEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BillingGroupInvoiceSettings"><span class="badge">M</span>BillingGroupInvoiceSettings</a>
                 </li>
               
@@ -1300,6 +1304,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteAdjustmentConfigRequest"><span class="badge">M</span>DeleteAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest"><span class="badge">M</span>DeleteBillingGroupCustomFieldRequest</a>
                 </li>
               
                 <li>
@@ -14623,16 +14631,40 @@ Only available in Wave(Pro).</p></td>
                 </tr>
               
                 <tr>
-                  <td>customFieldName</td>
+                  <td>customField</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupCustomField.CustomFieldEntry">BillingGroupCustomField.CustomFieldEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map of customfield name to customfield </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BillingGroupCustomField.CustomFieldEntry">BillingGroupCustomField.CustomFieldEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>customField</td>
+                  <td>value</td>
                   <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
-                  <td>repeated</td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -15642,6 +15674,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest">DeleteBillingGroupCustomFieldRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>REQUIRED. Billing group internal Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customFieldId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -18957,6 +19020,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>DeleteBillingGroupCustomField</td>
+                <td><a href="#blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest">DeleteBillingGroupCustomFieldRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>UpdateCustomField</td>
                 <td><a href="#blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CustomField">CustomField</a></td>
@@ -19664,6 +19734,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/billinggroup/customfield:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteBillingGroupCustomField</td>
+                <td>DELETE</td>
+                <td>/v1/billinggroup/customfield/{groupId}/{customFieldId}</td>
+                <td></td>
               </tr>
               
             
