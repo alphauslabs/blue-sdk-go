@@ -28,7 +28,7 @@ const (
 //
 // Flow service definition.
 type FlowClient interface {
-	// Test endpoint only.
+	// For Testing Purposes Only.
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
 }
 
@@ -56,7 +56,7 @@ func (c *flowClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...gr
 //
 // Flow service definition.
 type FlowServer interface {
-	// Test endpoint only.
+	// For Testing Purposes Only.
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
