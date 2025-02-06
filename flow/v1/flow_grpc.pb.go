@@ -7,7 +7,10 @@
 package flow
 
 import (
+	context "context"
 	grpc "google.golang.org/grpc"
+	codes "google.golang.org/grpc/codes"
+	status "google.golang.org/grpc/status"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -15,12 +18,18 @@ import (
 // Requires gRPC-Go v1.62.0 or later.
 const _ = grpc.SupportPackageIsVersion8
 
+const (
+	Flow_GetInfo_FullMethodName = "/blueapi.flow.v1.Flow/GetInfo"
+)
+
 // FlowClient is the client API for Flow service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
 // Flow service definition.
 type FlowClient interface {
+	// Test endpoint only.
+	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
 }
 
 type flowClient struct {
@@ -31,12 +40,24 @@ func NewFlowClient(cc grpc.ClientConnInterface) FlowClient {
 	return &flowClient{cc}
 }
 
+func (c *flowClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInfoResponse)
+	err := c.cc.Invoke(ctx, Flow_GetInfo_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
 //
 // Flow service definition.
 type FlowServer interface {
+	// Test endpoint only.
+	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -44,6 +65,9 @@ type FlowServer interface {
 type UnimplementedFlowServer struct {
 }
 
+func (UnimplementedFlowServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
+}
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
 // UnsafeFlowServer may be embedded to opt out of forward compatibility for this service.
@@ -57,13 +81,36 @@ func RegisterFlowServer(s grpc.ServiceRegistrar, srv FlowServer) {
 	s.RegisterService(&Flow_ServiceDesc, srv)
 }
 
+func _Flow_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInfoRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetInfo(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetInfo_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetInfo(ctx, req.(*GetInfoRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Flow_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.flow.v1.Flow",
 	HandlerType: (*FlowServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams:     []grpc.StreamDesc{},
-	Metadata:    "flow/v1/flow.proto",
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetInfo",
+			Handler:    _Flow_GetInfo_Handler,
+		},
+	},
+	Streams:  []grpc.StreamDesc{},
+	Metadata: "flow/v1/flow.proto",
 }
