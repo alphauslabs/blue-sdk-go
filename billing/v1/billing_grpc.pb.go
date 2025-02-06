@@ -218,21 +218,21 @@ type BillingClient interface {
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error)
-	// WORK-IN-PROGRESS: Reads the customized billing service. Only available in Ripple.
+	// Reads the customized billing service. Only available in Ripple.
 	ReadCustomizedBillingServices(ctx context.Context, in *ReadCustomizedBillingServicesRequest, opts ...grpc.CallOption) (Billing_ReadCustomizedBillingServicesClient, error)
-	// WORK-IN-PROGRESS: Gets the customized billing service. Only available in Ripple.
+	// Gets the customized billing service. Only available in Ripple.
 	GetCustomizedBillingService(ctx context.Context, in *GetCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
-	// WORK-IN-PROGRESS: Creates the customized billing service. Only available in Ripple.
+	// Creates the customized billing service. Only available in Ripple.
 	CreateCustomizedBillingService(ctx context.Context, in *CreateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
-	// WORK-IN-PROGRESS: Updates the customized billing service by updating the fields specified in the update mask. Only available in Ripple.
+	// Updates the customized billing service by updating the fields specified in the update mask. Only available in Ripple.
 	UpdateCustomizedBillingService(ctx context.Context, in *UpdateCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*ripple.CustomizedBillingService, error)
-	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
+	// Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(ctx context.Context, in *DeleteCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Gets the customized billing service in billing group. Only available in Ripple.
+	// Gets the customized billing service in billing group. Only available in Ripple.
 	GetCustomizedBillingServiceBillingGroup(ctx context.Context, in *GetCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (Billing_GetCustomizedBillingServiceBillingGroupClient, error)
-	// WORK-IN-PROGRESS: Sets the customized billing service in billing group. Only available in Ripple.
+	// Sets the customized billing service in billing group. Only available in Ripple.
 	SetCustomizedBillingServiceBillingGroup(ctx context.Context, in *SetCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Deletes the customized billing service in billing group. Only available in Ripple.
+	// Deletes the customized billing service in billing group. Only available in Ripple.
 	DeleteCustomizedBillingServiceBillingGroup(ctx context.Context, in *DeleteCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
@@ -1692,21 +1692,21 @@ type BillingServer interface {
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(*ReadUntaggedGroupsRequest, Billing_ReadUntaggedGroupsServer) error
-	// WORK-IN-PROGRESS: Reads the customized billing service. Only available in Ripple.
+	// Reads the customized billing service. Only available in Ripple.
 	ReadCustomizedBillingServices(*ReadCustomizedBillingServicesRequest, Billing_ReadCustomizedBillingServicesServer) error
-	// WORK-IN-PROGRESS: Gets the customized billing service. Only available in Ripple.
+	// Gets the customized billing service. Only available in Ripple.
 	GetCustomizedBillingService(context.Context, *GetCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
-	// WORK-IN-PROGRESS: Creates the customized billing service. Only available in Ripple.
+	// Creates the customized billing service. Only available in Ripple.
 	CreateCustomizedBillingService(context.Context, *CreateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
-	// WORK-IN-PROGRESS: Updates the customized billing service by updating the fields specified in the update mask. Only available in Ripple.
+	// Updates the customized billing service by updating the fields specified in the update mask. Only available in Ripple.
 	UpdateCustomizedBillingService(context.Context, *UpdateCustomizedBillingServiceRequest) (*ripple.CustomizedBillingService, error)
-	// WORK-IN-PROGRESS: Deletes the customized billing service. Only available in Ripple.
+	// Deletes the customized billing service. Only available in Ripple.
 	DeleteCustomizedBillingService(context.Context, *DeleteCustomizedBillingServiceRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Gets the customized billing service in billing group. Only available in Ripple.
+	// Gets the customized billing service in billing group. Only available in Ripple.
 	GetCustomizedBillingServiceBillingGroup(*GetCustomizedBillingServiceBillingGroupRequest, Billing_GetCustomizedBillingServiceBillingGroupServer) error
-	// WORK-IN-PROGRESS: Sets the customized billing service in billing group. Only available in Ripple.
+	// Sets the customized billing service in billing group. Only available in Ripple.
 	SetCustomizedBillingServiceBillingGroup(context.Context, *SetCustomizedBillingServiceBillingGroupRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Deletes the customized billing service in billing group. Only available in Ripple.
+	// Deletes the customized billing service in billing group. Only available in Ripple.
 	DeleteCustomizedBillingServiceBillingGroup(context.Context, *DeleteCustomizedBillingServiceBillingGroupRequest) (*emptypb.Empty, error)
 	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
