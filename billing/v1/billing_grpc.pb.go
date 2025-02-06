@@ -125,7 +125,7 @@ type BillingClient interface {
 	ListInvoiceStatus(ctx context.Context, in *ListInvoiceStatusRequest, opts ...grpc.CallOption) (Billing_ListInvoiceStatusClient, error)
 	// Gets an invoice.
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
-	// Reads list of the invoice.
+	// WORK-IN-PROGRESS: Reads list of the invoice.
 	ListInvoice(ctx context.Context, in *ListInvoiceRequest, opts ...grpc.CallOption) (Billing_ListInvoiceClient, error)
 	// Updates an invoice preview. Only available in Ripple.
 	UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -241,8 +241,11 @@ type BillingClient interface {
 	CreateCustomField(ctx context.Context, in *CreateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
 	// Returns all registered customfields
 	ListCustomField(ctx context.Context, in *ListCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListCustomFieldClient, error)
+	// Add  a custom field into a billing group
 	AddBillingGroupCustomField(ctx context.Context, in *AddBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Show all the billing groups custom fields
 	ListBillingGroupCustomField(ctx context.Context, in *ListBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupCustomFieldClient, error)
+	// Remove a custom field from a billing group
 	DeleteBillingGroupCustomField(ctx context.Context, in *DeleteBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Update the `customField` specified id, modifying its key and description
 	UpdateCustomField(ctx context.Context, in *UpdateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
@@ -256,7 +259,9 @@ type BillingClient interface {
 	GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error)
 	GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error)
 	UpdateTagsAddingSetting(ctx context.Context, in *UpdateTagsAddingSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Export the billing groups into csv format
 	ExportBillingGroupCsv(ctx context.Context, in *ExportBillingGroupCsvRequest, opts ...grpc.CallOption) (Billing_ExportBillingGroupCsvClient, error)
+	// Exports the invoice settings into csv format
 	ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (Billing_ExportInvoiceSettingCsvClient, error)
 }
 
@@ -1599,7 +1604,7 @@ type BillingServer interface {
 	ListInvoiceStatus(*ListInvoiceStatusRequest, Billing_ListInvoiceStatusServer) error
 	// Gets an invoice.
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
-	// Reads list of the invoice.
+	// WORK-IN-PROGRESS: Reads list of the invoice.
 	ListInvoice(*ListInvoiceRequest, Billing_ListInvoiceServer) error
 	// Updates an invoice preview. Only available in Ripple.
 	UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error)
@@ -1715,8 +1720,11 @@ type BillingServer interface {
 	CreateCustomField(context.Context, *CreateCustomFieldRequest) (*CustomField, error)
 	// Returns all registered customfields
 	ListCustomField(*ListCustomFieldRequest, Billing_ListCustomFieldServer) error
+	// Add  a custom field into a billing group
 	AddBillingGroupCustomField(context.Context, *AddBillingGroupCustomFieldRequest) (*emptypb.Empty, error)
+	// Show all the billing groups custom fields
 	ListBillingGroupCustomField(*ListBillingGroupCustomFieldRequest, Billing_ListBillingGroupCustomFieldServer) error
+	// Remove a custom field from a billing group
 	DeleteBillingGroupCustomField(context.Context, *DeleteBillingGroupCustomFieldRequest) (*emptypb.Empty, error)
 	// Update the `customField` specified id, modifying its key and description
 	UpdateCustomField(context.Context, *UpdateCustomFieldRequest) (*CustomField, error)
@@ -1730,7 +1738,9 @@ type BillingServer interface {
 	GetFreeFormat(*GetFreeFormatRequest, Billing_GetFreeFormatServer) error
 	GetTagsAddingSetting(*GetTagsAddingSettingRequest, Billing_GetTagsAddingSettingServer) error
 	UpdateTagsAddingSetting(context.Context, *UpdateTagsAddingSettingRequest) (*emptypb.Empty, error)
+	// Export the billing groups into csv format
 	ExportBillingGroupCsv(*ExportBillingGroupCsvRequest, Billing_ExportBillingGroupCsvServer) error
+	// Exports the invoice settings into csv format
 	ExportInvoiceSettingCsv(*ExportInvoiceSettingCsvRequest, Billing_ExportInvoiceSettingCsvServer) error
 	mustEmbedUnimplementedBillingServer()
 }
