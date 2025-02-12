@@ -1359,11 +1359,11 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ExportServiceDiscountsRequest"><span class="badge">M</span>ExportServiceDiscountsRequest</a>
+                  <a href="#blueapi.billing.v1.ExportInvoiceSettingCsvResponse"><span class="badge">M</span>ExportInvoiceSettingCsvResponse</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.FileChunk"><span class="badge">M</span>FileChunk</a>
+                  <a href="#blueapi.billing.v1.ExportServiceDiscountsRequest"><span class="badge">M</span>ExportServiceDiscountsRequest</a>
                 </li>
               
                 <li>
@@ -15936,10 +15936,11 @@ In that case, you can use this option to change the language of CSV. </p></td>
             <tbody>
               
                 <tr>
-                  <td>row</td>
+                  <td>downloadLink</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>csv direct download link
+expires in 10 minutes </p></td>
                 </tr>
               
             </tbody>
@@ -16071,6 +16072,31 @@ In that case, you can use this option to change the language of CSV. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ExportInvoiceSettingCsvResponse">ExportInvoiceSettingCsvResponse</h3>
+        <p>Response message for the ExportBillingGroupCsv rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>downloadLink</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>csv direct download link
+expires in 10 minutes </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ExportServiceDiscountsRequest">ExportServiceDiscountsRequest</h3>
         <p>Request message for the ExportServiceDiscounts rpc.</p>
 
@@ -16097,30 +16123,6 @@ In that case, you can use this option to change the language of CSV. </p></td>
 Usually the language of the user information is used, 
 but it may be a different language due to cahce.
 In that case, you can use this option to change the language of CSV. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.FileChunk">FileChunk</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>content</td>
-                  <td><a href="#bytes">bytes</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -19101,14 +19103,14 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>ExportBillingGroupCsv</td>
                 <td><a href="#blueapi.billing.v1.ExportBillingGroupCsvRequest">ExportBillingGroupCsvRequest</a></td>
-                <td><a href="#blueapi.billing.v1.ExportBillingGroupCsvResponse">ExportBillingGroupCsvResponse</a> stream</td>
+                <td><a href="#blueapi.billing.v1.ExportBillingGroupCsvResponse">ExportBillingGroupCsvResponse</a></td>
                 <td><p>Export the billing groups into csv format</p></td>
               </tr>
             
               <tr>
                 <td>ExportInvoiceSettingCsv</td>
                 <td><a href="#blueapi.billing.v1.ExportInvoiceSettingCsvRequest">ExportInvoiceSettingCsvRequest</a></td>
-                <td><a href="#blueapi.billing.v1.FileChunk">FileChunk</a> stream</td>
+                <td><a href="#blueapi.billing.v1.ExportInvoiceSettingCsvResponse">ExportInvoiceSettingCsvResponse</a></td>
                 <td><p>Exports the invoice settings into csv format</p></td>
               </tr>
             
