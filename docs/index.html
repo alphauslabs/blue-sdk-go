@@ -1191,6 +1191,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AddAccountToBillingGroupRequest"><span class="badge">M</span>AddAccountToBillingGroupRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AddBillingGroupCustomFieldRequest"><span class="badge">M</span>AddBillingGroupCustomFieldRequest</a>
                 </li>
               
@@ -14297,6 +14301,65 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.AddAccountToBillingGroupRequest">AddAccountToBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. BillingGroupInternalId </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. (aws, azure, gcp) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. account id of the customer </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Payer account id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Descriptive name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>note</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Addition description or notes </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.AddBillingGroupCustomFieldRequest">AddBillingGroupCustomFieldRequest</h3>
         <p></p>
 
@@ -14311,7 +14374,7 @@ Only available in Wave(Pro).</p></td>
                   <td>groupId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. BillingGroupInternalId </p></td>
                 </tr>
               
                 <tr>
@@ -15689,14 +15752,14 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td>groupId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>REQUIRED. Billing group internal Id </p></td>
+                  <td><p>Required. Billing group internal Id </p></td>
                 </tr>
               
                 <tr>
                   <td>customFieldId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The id of customfield from get customfield </p></td>
                 </tr>
               
             </tbody>
@@ -18605,6 +18668,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>AddAccountToBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.AddAccountToBillingGroupRequest">AddAccountToBillingGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Add a vendor account to a billing group.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.GetBillingGroupRequest">GetBillingGroupRequest</a></td>
                 <td><a href="#blueapi.billing.v1.GetBillingGroupResponse">GetBillingGroupResponse</a></td>
@@ -19148,6 +19218,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>CreateBillingGroup</td>
                 <td>POST</td>
                 <td>/v1/billinggroups</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AddAccountToBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/billinggroup/account</td>
                 <td>*</td>
               </tr>
               
