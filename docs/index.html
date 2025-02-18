@@ -1463,6 +1463,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.InvoiceSettings"><span class="badge">M</span>InvoiceSettings</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListAbcBillingGroupAccountsRequest"><span class="badge">M</span>ListAbcBillingGroupAccountsRequest</a>
                 </li>
               
@@ -1572,6 +1576,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ResourceAccount"><span class="badge">M</span>ResourceAccount</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest"><span class="badge">M</span>SaveInvoiceSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry"><span class="badge">M</span>SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry</a>
                 </li>
               
                 <li>
@@ -16974,6 +16986,177 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.InvoiceSettings">InvoiceSettings</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceNo</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discountRate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discountTargetUsage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discountCalcLogic</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>taxRate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportFee</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportRate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportFeeCalcTarget</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportFix</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFee</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionRate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFix</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFeeCalcTarget</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFeeTargetUsage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFeeCalcType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memo</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>calcType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>searchId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>additionalItems</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListAbcBillingGroupAccountsRequest">ListAbcBillingGroupAccountsRequest</h3>
         <p>request message for ListAbcBillingGroupAccounts</p>
 
@@ -17927,6 +18110,68 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.SaveInvoiceSettingsRequest">SaveInvoiceSettingsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Invoice date YYYYMM (e.g. 202412) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>grouIdToInvoiceSettings</td>
+                  <td><a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry">SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Map of billing group Id to InvoiceSettings </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry">SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#blueapi.billing.v1.InvoiceSettings">InvoiceSettings</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest">SetCustomizedBillingServiceBillingGroupRequest</h3>
         <p>Request message for the Billing.SetCustomizedBillingServiceBillingGroup rpc.</p>
 
@@ -18710,6 +18955,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>SaveInvoiceSettings</td>
+                <td><a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest">SaveInvoiceSettingsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Save invoice settings for the month</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetInvoiceStatus</td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceStatusRequest">GetInvoiceStatusRequest</a></td>
                 <td><a href="#blueapi.api.InvoiceMessage">.blueapi.api.InvoiceMessage</a></td>
@@ -19278,6 +19530,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>CreateInvoice</td>
                 <td>POST</td>
                 <td>/v1/invoice/{date}:create</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SaveInvoiceSettings</td>
+                <td>POST</td>
+                <td>/v1/invoice/{date}:savesettings</td>
                 <td>*</td>
               </tr>
               
