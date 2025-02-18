@@ -836,6 +836,126 @@ func local_request_Billing_ExportServiceDiscounts_0(ctx context.Context, marshal
 	return msg, metadata, err
 }
 
+func request_Billing_CreateBillingGroupInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq CreateBillingGroupInvoiceServiceDiscountsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	msg, err := client.CreateBillingGroupInvoiceServiceDiscounts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Billing_CreateBillingGroupInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq CreateBillingGroupInvoiceServiceDiscountsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	msg, err := server.CreateBillingGroupInvoiceServiceDiscounts(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq UpdateBillingGroupInvoiceServiceDiscountsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	msg, err := client.UpdateBillingGroupInvoiceServiceDiscounts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq UpdateBillingGroupInvoiceServiceDiscountsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	msg, err := server.UpdateBillingGroupInvoiceServiceDiscounts(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeleteBillingGroupInvoiceServiceDiscountsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	msg, err := client.DeleteBillingGroupInvoiceServiceDiscounts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, server BillingServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeleteBillingGroupInvoiceServiceDiscountsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["groupId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "groupId")
+	}
+	protoReq.GroupId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "groupId", err)
+	}
+	msg, err := server.DeleteBillingGroupInvoiceServiceDiscounts(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 func request_Billing_ListAccountInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ListAccountInvoiceServiceDiscountsClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListAccountInvoiceServiceDiscountsRequest
@@ -3035,6 +3155,66 @@ func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		}
 		forward_Billing_ExportServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPost, pattern_Billing_CreateBillingGroupInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/CreateBillingGroupInvoiceServiceDiscounts", runtime.WithHTTPPathPattern("/v1/servicediscounts/{groupId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Billing_CreateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_CreateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPut, pattern_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceServiceDiscounts", runtime.WithHTTPPathPattern("/v1/servicediscounts/{groupId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodDelete, pattern_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/DeleteBillingGroupInvoiceServiceDiscounts", runtime.WithHTTPPathPattern("/v1/servicediscounts/{groupId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 
 	mux.Handle(http.MethodPost, pattern_Billing_ListAccountInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
@@ -4328,6 +4508,57 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		}
 		forward_Billing_ExportServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPost, pattern_Billing_CreateBillingGroupInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/CreateBillingGroupInvoiceServiceDiscounts", runtime.WithHTTPPathPattern("/v1/servicediscounts/{groupId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_CreateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_CreateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPut, pattern_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceServiceDiscounts", runtime.WithHTTPPathPattern("/v1/servicediscounts/{groupId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodDelete, pattern_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/DeleteBillingGroupInvoiceServiceDiscounts", runtime.WithHTTPPathPattern("/v1/servicediscounts/{groupId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPost, pattern_Billing_ListAccountInvoiceServiceDiscounts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -5240,6 +5471,9 @@ var (
 	pattern_Billing_ListInvoiceServiceDiscounts_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, "read"))
 	pattern_Billing_GetInvoiceServiceDiscounts_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "id"}, ""))
 	pattern_Billing_ExportServiceDiscounts_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "servicediscounts"}, "export"))
+	pattern_Billing_CreateBillingGroupInvoiceServiceDiscounts_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "groupId"}, ""))
+	pattern_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "groupId"}, ""))
+	pattern_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "servicediscounts", "groupId"}, ""))
 	pattern_Billing_ListAccountInvoiceServiceDiscounts_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, "read"))
 	pattern_Billing_CreateAccountInvoiceServiceDiscounts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
 	pattern_Billing_UpdateAccountInvoiceServiceDiscounts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "servicediscounts", "groupId", "account"}, ""))
@@ -5319,6 +5553,9 @@ var (
 	forward_Billing_ListInvoiceServiceDiscounts_0                = runtime.ForwardResponseStream
 	forward_Billing_GetInvoiceServiceDiscounts_0                 = runtime.ForwardResponseMessage
 	forward_Billing_ExportServiceDiscounts_0                     = runtime.ForwardResponseMessage
+	forward_Billing_CreateBillingGroupInvoiceServiceDiscounts_0  = runtime.ForwardResponseMessage
+	forward_Billing_UpdateBillingGroupInvoiceServiceDiscounts_0  = runtime.ForwardResponseMessage
+	forward_Billing_DeleteBillingGroupInvoiceServiceDiscounts_0  = runtime.ForwardResponseMessage
 	forward_Billing_ListAccountInvoiceServiceDiscounts_0         = runtime.ForwardResponseStream
 	forward_Billing_CreateAccountInvoiceServiceDiscounts_0       = runtime.ForwardResponseMessage
 	forward_Billing_UpdateAccountInvoiceServiceDiscounts_0       = runtime.ForwardResponseMessage

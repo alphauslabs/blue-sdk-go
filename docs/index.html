@@ -1259,6 +1259,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>CreateBillingGroupInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsResponse"><span class="badge">M</span>CreateBillingGroupInvoiceServiceDiscountsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateBillingGroupRequest"><span class="badge">M</span>CreateBillingGroupRequest</a>
                 </li>
               
@@ -1312,6 +1320,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest"><span class="badge">M</span>DeleteBillingGroupCustomFieldRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>DeleteBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
                 <li>
@@ -1640,6 +1652,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest"><span class="badge">M</span>UpdateAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>UpdateBillingGroupInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsResponse"><span class="badge">M</span>UpdateBillingGroupInvoiceServiceDiscountsResponse</a>
                 </li>
               
                 <li>
@@ -15124,6 +15144,67 @@ A list of filtering options. See [api.ConfigFilters] for more information on eac
 
         
       
+        <h3 id="blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsRequest">CreateBillingGroupInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the CreateBillingGroupInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required.
+
+For Ripple, only billing internal ids are supported at the moment. You can set it to a single group
+
+Implied as the parent billing group for Wave(Pro) users. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required.
+
+Service discount id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsResponse">CreateBillingGroupInvoiceServiceDiscountsResponse</h3>
+        <p>Response message for the CreateBillingGroupInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Service discount id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateBillingGroupRequest">CreateBillingGroupRequest</h3>
         <p>Request message for the Billing.CreateBillingGroup rpc.</p>
 
@@ -15837,6 +15918,34 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The id of customfield from get customfield </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteBillingGroupInvoiceServiceDiscountsRequest">DeleteBillingGroupInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the DeleteBillingGroupInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required.
+
+For Ripple, only billing internal ids are supported at the moment. You can set it to a single group
+
+Implied as the parent billing group for Wave(Pro) users. </p></td>
                 </tr>
               
             </tbody>
@@ -18717,6 +18826,67 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest">UpdateBillingGroupInvoiceServiceDiscountsRequest</h3>
+        <p>Request message for the UpdateBillingGroupInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required.
+
+For Ripple, only billing internal ids are supported at the moment. You can set it to a single group
+
+Implied as the parent billing group for Wave(Pro) users. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required.
+
+Service discount id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsResponse">UpdateBillingGroupInvoiceServiceDiscountsResponse</h3>
+        <p>Response message for the UpdateBillingGroupInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Service discount id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest">UpdateBillingGroupInvoiceTemplateRequest</h3>
         <p>Request a message to update/create a billing group's invoice template</p>
 
@@ -19259,7 +19429,7 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>GetInvoiceServiceDiscounts</td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceServiceDiscountsRequest">GetInvoiceServiceDiscountsRequest</a></td>
                 <td><a href="#blueapi.api.ripple.v1.InvoiceServiceDiscounts">.blueapi.api.ripple.v1.InvoiceServiceDiscounts</a></td>
-                <td><p>WORK-IN-PROGRESS: Gets the invoice service discounts. Only available in Ripple.</p></td>
+                <td><p>Gets the invoice service discounts. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -19267,6 +19437,27 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.ExportServiceDiscountsRequest">ExportServiceDiscountsRequest</a></td>
                 <td><a href="#blueapi.api.ripple.v1.ServiceDiscountsExport">.blueapi.api.ripple.v1.ServiceDiscountsExport</a></td>
                 <td><p>WORK-IN-PROGRESS: Exports service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateBillingGroupInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsRequest">CreateBillingGroupInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsResponse">CreateBillingGroupInvoiceServiceDiscountsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Registers the billing group invoice service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest">UpdateBillingGroupInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsResponse">UpdateBillingGroupInvoiceServiceDiscountsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates the billing group invoice service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteBillingGroupInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.DeleteBillingGroupInvoiceServiceDiscountsRequest">DeleteBillingGroupInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Deletes the billing group invoice service discounts. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -19901,6 +20092,36 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/servicediscounts:export</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateBillingGroupInvoiceServiceDiscounts</td>
+                <td>POST</td>
+                <td>/v1/servicediscounts/{groupId}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupInvoiceServiceDiscounts</td>
+                <td>PUT</td>
+                <td>/v1/servicediscounts/{groupId}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteBillingGroupInvoiceServiceDiscounts</td>
+                <td>DELETE</td>
+                <td>/v1/servicediscounts/{groupId}</td>
+                <td></td>
               </tr>
               
             
