@@ -89,6 +89,7 @@ const (
 	Billing_ListCustomField_FullMethodName                            = "/blueapi.billing.v1.Billing/ListCustomField"
 	Billing_AddBillingGroupCustomField_FullMethodName                 = "/blueapi.billing.v1.Billing/AddBillingGroupCustomField"
 	Billing_ListBillingGroupCustomField_FullMethodName                = "/blueapi.billing.v1.Billing/ListBillingGroupCustomField"
+	Billing_AddTagsToBillingGroup_FullMethodName                      = "/blueapi.billing.v1.Billing/AddTagsToBillingGroup"
 	Billing_DeleteBillingGroupCustomField_FullMethodName              = "/blueapi.billing.v1.Billing/DeleteBillingGroupCustomField"
 	Billing_UpdateCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateCustomField"
 	Billing_DeleteCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteCustomField"
@@ -251,6 +252,8 @@ type BillingClient interface {
 	AddBillingGroupCustomField(ctx context.Context, in *AddBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Show all the billing groups custom fields
 	ListBillingGroupCustomField(ctx context.Context, in *ListBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupCustomFieldClient, error)
+	// Add Tags to the billing group
+	AddTagsToBillingGroup(ctx context.Context, in *AddTagsToBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Remove a custom field from a billing group
 	DeleteBillingGroupCustomField(ctx context.Context, in *DeleteBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Update the `customField` specified id, modifying its key and description
@@ -1412,6 +1415,16 @@ func (x *billingListBillingGroupCustomFieldClient) Recv() (*ListBillingGroupCust
 	return m, nil
 }
 
+func (c *billingClient) AddTagsToBillingGroup(ctx context.Context, in *AddTagsToBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_AddTagsToBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) DeleteBillingGroupCustomField(ctx context.Context, in *DeleteBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
@@ -1708,6 +1721,8 @@ type BillingServer interface {
 	AddBillingGroupCustomField(context.Context, *AddBillingGroupCustomFieldRequest) (*emptypb.Empty, error)
 	// Show all the billing groups custom fields
 	ListBillingGroupCustomField(*ListBillingGroupCustomFieldRequest, Billing_ListBillingGroupCustomFieldServer) error
+	// Add Tags to the billing group
+	AddTagsToBillingGroup(context.Context, *AddTagsToBillingGroupRequest) (*emptypb.Empty, error)
 	// Remove a custom field from a billing group
 	DeleteBillingGroupCustomField(context.Context, *DeleteBillingGroupCustomFieldRequest) (*emptypb.Empty, error)
 	// Update the `customField` specified id, modifying its key and description
@@ -1927,6 +1942,9 @@ func (UnimplementedBillingServer) AddBillingGroupCustomField(context.Context, *A
 }
 func (UnimplementedBillingServer) ListBillingGroupCustomField(*ListBillingGroupCustomFieldRequest, Billing_ListBillingGroupCustomFieldServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListBillingGroupCustomField not implemented")
+}
+func (UnimplementedBillingServer) AddTagsToBillingGroup(context.Context, *AddTagsToBillingGroupRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AddTagsToBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) DeleteBillingGroupCustomField(context.Context, *DeleteBillingGroupCustomFieldRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteBillingGroupCustomField not implemented")
@@ -3204,6 +3222,24 @@ func (x *billingListBillingGroupCustomFieldServer) Send(m *ListBillingGroupCusto
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_AddTagsToBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AddTagsToBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).AddTagsToBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_AddTagsToBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).AddTagsToBillingGroup(ctx, req.(*AddTagsToBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_DeleteBillingGroupCustomField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteBillingGroupCustomFieldRequest)
 	if err := dec(in); err != nil {
@@ -3572,6 +3608,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddBillingGroupCustomField",
 			Handler:    _Billing_AddBillingGroupCustomField_Handler,
+		},
+		{
+			MethodName: "AddTagsToBillingGroup",
+			Handler:    _Billing_AddTagsToBillingGroup_Handler,
 		},
 		{
 			MethodName: "DeleteBillingGroupCustomField",

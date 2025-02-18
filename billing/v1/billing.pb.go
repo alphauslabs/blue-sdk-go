@@ -7305,6 +7305,316 @@ func (x *AddAccountToBillingGroupRequest) GetNote() string {
 	return ""
 }
 
+type AddTagsToBillingGroupRequest struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Required. Billing group internal Id
+	GroupId string `protobuf:"bytes,1,opt,name=groupId,proto3" json:"groupId,omitempty"`
+	// Required. Vendor (aws, azure, gcp)
+	Vendor string `protobuf:"bytes,2,opt,name=vendor,proto3" json:"vendor,omitempty"`
+	// Tag settings for different customer accounts
+	Settings []*TagSetting `protobuf:"bytes,3,rep,name=settings,proto3" json:"settings,omitempty"`
+	// Non-tag settings for the billing group
+	NonTagSetting *NonTagSetting `protobuf:"bytes,4,opt,name=nonTagSetting,proto3" json:"nonTagSetting,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *AddTagsToBillingGroupRequest) Reset() {
+	*x = AddTagsToBillingGroupRequest{}
+	mi := &file_billing_v1_billing_proto_msgTypes[114]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *AddTagsToBillingGroupRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddTagsToBillingGroupRequest) ProtoMessage() {}
+
+func (x *AddTagsToBillingGroupRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_billing_v1_billing_proto_msgTypes[114]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddTagsToBillingGroupRequest.ProtoReflect.Descriptor instead.
+func (*AddTagsToBillingGroupRequest) Descriptor() ([]byte, []int) {
+	return file_billing_v1_billing_proto_rawDescGZIP(), []int{114}
+}
+
+func (x *AddTagsToBillingGroupRequest) GetGroupId() string {
+	if x != nil {
+		return x.GroupId
+	}
+	return ""
+}
+
+func (x *AddTagsToBillingGroupRequest) GetVendor() string {
+	if x != nil {
+		return x.Vendor
+	}
+	return ""
+}
+
+func (x *AddTagsToBillingGroupRequest) GetSettings() []*TagSetting {
+	if x != nil {
+		return x.Settings
+	}
+	return nil
+}
+
+func (x *AddTagsToBillingGroupRequest) GetNonTagSetting() *NonTagSetting {
+	if x != nil {
+		return x.NonTagSetting
+	}
+	return nil
+}
+
+// Settings for a specific customer account for AddTagsToBillingGroup
+type TagSetting struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Customer ID
+	CustomerId string `protobuf:"bytes,1,opt,name=customerId,proto3" json:"customerId,omitempty"`
+	// Tags associated with this customer
+	Tags          []*Tag `protobuf:"bytes,2,rep,name=tags,proto3" json:"tags,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TagSetting) Reset() {
+	*x = TagSetting{}
+	mi := &file_billing_v1_billing_proto_msgTypes[115]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TagSetting) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TagSetting) ProtoMessage() {}
+
+func (x *TagSetting) ProtoReflect() protoreflect.Message {
+	mi := &file_billing_v1_billing_proto_msgTypes[115]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TagSetting.ProtoReflect.Descriptor instead.
+func (*TagSetting) Descriptor() ([]byte, []int) {
+	return file_billing_v1_billing_proto_rawDescGZIP(), []int{115}
+}
+
+func (x *TagSetting) GetCustomerId() string {
+	if x != nil {
+		return x.CustomerId
+	}
+	return ""
+}
+
+func (x *TagSetting) GetTags() []*Tag {
+	if x != nil {
+		return x.Tags
+	}
+	return nil
+}
+
+// Individual tag definition for AddTagsToBillingGroup
+type Tag struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Tag key
+	Key string `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
+	// Tag value
+	Value string `protobuf:"bytes,2,opt,name=value,proto3" json:"value,omitempty"`
+	// Assignment percentage (only used for non-tag assignments)
+	Assign        int32 `protobuf:"varint,3,opt,name=assign,proto3" json:"assign,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Tag) Reset() {
+	*x = Tag{}
+	mi := &file_billing_v1_billing_proto_msgTypes[116]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Tag) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Tag) ProtoMessage() {}
+
+func (x *Tag) ProtoReflect() protoreflect.Message {
+	mi := &file_billing_v1_billing_proto_msgTypes[116]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Tag.ProtoReflect.Descriptor instead.
+func (*Tag) Descriptor() ([]byte, []int) {
+	return file_billing_v1_billing_proto_rawDescGZIP(), []int{116}
+}
+
+func (x *Tag) GetKey() string {
+	if x != nil {
+		return x.Key
+	}
+	return ""
+}
+
+func (x *Tag) GetValue() string {
+	if x != nil {
+		return x.Value
+	}
+	return ""
+}
+
+func (x *Tag) GetAssign() int32 {
+	if x != nil {
+		return x.Assign
+	}
+	return 0
+}
+
+// Non-tag settings for a billing group for AddTagsToBillingGroup
+type NonTagSetting struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Whether non-tag settings are included
+	Include bool `protobuf:"varint,1,opt,name=include,proto3" json:"include,omitempty"`
+	// Type of non-tag setting ("percentage" or "fixed")
+	Type string `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	// Amount value (percentage or fixed amount)
+	Amount        float64 `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *NonTagSetting) Reset() {
+	*x = NonTagSetting{}
+	mi := &file_billing_v1_billing_proto_msgTypes[117]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *NonTagSetting) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*NonTagSetting) ProtoMessage() {}
+
+func (x *NonTagSetting) ProtoReflect() protoreflect.Message {
+	mi := &file_billing_v1_billing_proto_msgTypes[117]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use NonTagSetting.ProtoReflect.Descriptor instead.
+func (*NonTagSetting) Descriptor() ([]byte, []int) {
+	return file_billing_v1_billing_proto_rawDescGZIP(), []int{117}
+}
+
+func (x *NonTagSetting) GetInclude() bool {
+	if x != nil {
+		return x.Include
+	}
+	return false
+}
+
+func (x *NonTagSetting) GetType() string {
+	if x != nil {
+		return x.Type
+	}
+	return ""
+}
+
+func (x *NonTagSetting) GetAmount() float64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+// Response message for tag invoice setting operation for AddTagsToBillingGroup
+type SaveTagInvoiceSettingResponse struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Status of the operation
+	Status string `protobuf:"bytes,1,opt,name=status,proto3" json:"status,omitempty"`
+	// Optional error message if operation failed
+	Error         string `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SaveTagInvoiceSettingResponse) Reset() {
+	*x = SaveTagInvoiceSettingResponse{}
+	mi := &file_billing_v1_billing_proto_msgTypes[118]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SaveTagInvoiceSettingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SaveTagInvoiceSettingResponse) ProtoMessage() {}
+
+func (x *SaveTagInvoiceSettingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_billing_v1_billing_proto_msgTypes[118]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SaveTagInvoiceSettingResponse.ProtoReflect.Descriptor instead.
+func (*SaveTagInvoiceSettingResponse) Descriptor() ([]byte, []int) {
+	return file_billing_v1_billing_proto_rawDescGZIP(), []int{118}
+}
+
+func (x *SaveTagInvoiceSettingResponse) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *SaveTagInvoiceSettingResponse) GetError() string {
+	if x != nil {
+		return x.Error
+	}
+	return ""
+}
+
 type SaveInvoiceSettingsRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. Invoice date YYYYMM (e.g. 202412)
@@ -7317,7 +7627,7 @@ type SaveInvoiceSettingsRequest struct {
 
 func (x *SaveInvoiceSettingsRequest) Reset() {
 	*x = SaveInvoiceSettingsRequest{}
-	mi := &file_billing_v1_billing_proto_msgTypes[114]
+	mi := &file_billing_v1_billing_proto_msgTypes[119]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7329,7 +7639,7 @@ func (x *SaveInvoiceSettingsRequest) String() string {
 func (*SaveInvoiceSettingsRequest) ProtoMessage() {}
 
 func (x *SaveInvoiceSettingsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_v1_billing_proto_msgTypes[114]
+	mi := &file_billing_v1_billing_proto_msgTypes[119]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7342,7 +7652,7 @@ func (x *SaveInvoiceSettingsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SaveInvoiceSettingsRequest.ProtoReflect.Descriptor instead.
 func (*SaveInvoiceSettingsRequest) Descriptor() ([]byte, []int) {
-	return file_billing_v1_billing_proto_rawDescGZIP(), []int{114}
+	return file_billing_v1_billing_proto_rawDescGZIP(), []int{119}
 }
 
 func (x *SaveInvoiceSettingsRequest) GetDate() string {
@@ -7389,7 +7699,7 @@ type InvoiceSettings struct {
 
 func (x *InvoiceSettings) Reset() {
 	*x = InvoiceSettings{}
-	mi := &file_billing_v1_billing_proto_msgTypes[115]
+	mi := &file_billing_v1_billing_proto_msgTypes[120]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7401,7 +7711,7 @@ func (x *InvoiceSettings) String() string {
 func (*InvoiceSettings) ProtoMessage() {}
 
 func (x *InvoiceSettings) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_v1_billing_proto_msgTypes[115]
+	mi := &file_billing_v1_billing_proto_msgTypes[120]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7414,7 +7724,7 @@ func (x *InvoiceSettings) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use InvoiceSettings.ProtoReflect.Descriptor instead.
 func (*InvoiceSettings) Descriptor() ([]byte, []int) {
-	return file_billing_v1_billing_proto_rawDescGZIP(), []int{115}
+	return file_billing_v1_billing_proto_rawDescGZIP(), []int{120}
 }
 
 func (x *InvoiceSettings) GetVendor() string {
@@ -7581,7 +7891,7 @@ type AwsDailyRunHistory_Account struct {
 
 func (x *AwsDailyRunHistory_Account) Reset() {
 	*x = AwsDailyRunHistory_Account{}
-	mi := &file_billing_v1_billing_proto_msgTypes[116]
+	mi := &file_billing_v1_billing_proto_msgTypes[121]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7593,7 +7903,7 @@ func (x *AwsDailyRunHistory_Account) String() string {
 func (*AwsDailyRunHistory_Account) ProtoMessage() {}
 
 func (x *AwsDailyRunHistory_Account) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_v1_billing_proto_msgTypes[116]
+	mi := &file_billing_v1_billing_proto_msgTypes[121]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7635,7 +7945,7 @@ type AwsDailyRunHistory_Account_History struct {
 
 func (x *AwsDailyRunHistory_Account_History) Reset() {
 	*x = AwsDailyRunHistory_Account_History{}
-	mi := &file_billing_v1_billing_proto_msgTypes[117]
+	mi := &file_billing_v1_billing_proto_msgTypes[122]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7647,7 +7957,7 @@ func (x *AwsDailyRunHistory_Account_History) String() string {
 func (*AwsDailyRunHistory_Account_History) ProtoMessage() {}
 
 func (x *AwsDailyRunHistory_Account_History) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_v1_billing_proto_msgTypes[117]
+	mi := &file_billing_v1_billing_proto_msgTypes[122]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -7694,7 +8004,7 @@ type SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBill
 
 func (x *SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBillingSetting) Reset() {
 	*x = SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBillingSetting{}
-	mi := &file_billing_v1_billing_proto_msgTypes[119]
+	mi := &file_billing_v1_billing_proto_msgTypes[124]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -7707,7 +8017,7 @@ func (*SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBi
 }
 
 func (x *SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBillingSetting) ProtoReflect() protoreflect.Message {
-	mi := &file_billing_v1_billing_proto_msgTypes[119]
+	mi := &file_billing_v1_billing_proto_msgTypes[124]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -8897,7 +9207,41 @@ var file_billing_v1_billing_proto_rawDesc = string([]byte{
 	0x09, 0x52, 0x09, 0x61, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04,
 	0x6e, 0x61, 0x6d, 0x65, 0x18, 0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x6e, 0x61, 0x6d, 0x65,
 	0x12, 0x12, 0x0a, 0x04, 0x6e, 0x6f, 0x74, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04,
-	0x6e, 0x6f, 0x74, 0x65, 0x22, 0xa9, 0x02, 0x0a, 0x1a, 0x53, 0x61, 0x76, 0x65, 0x49, 0x6e, 0x76,
+	0x6e, 0x6f, 0x74, 0x65, 0x22, 0xd5, 0x01, 0x0a, 0x1c, 0x41, 0x64, 0x64, 0x54, 0x61, 0x67, 0x73,
+	0x54, 0x6f, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x18, 0x0a, 0x07, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x12,
+	0x16, 0x0a, 0x06, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x12, 0x3a, 0x0a, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x18, 0x03, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x1e, 0x2e, 0x62, 0x6c, 0x75, 0x65,
+	0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54,
+	0x61, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x08, 0x73, 0x65, 0x74, 0x74, 0x69,
+	0x6e, 0x67, 0x73, 0x12, 0x47, 0x0a, 0x0d, 0x6e, 0x6f, 0x6e, 0x54, 0x61, 0x67, 0x53, 0x65, 0x74,
+	0x74, 0x69, 0x6e, 0x67, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x21, 0x2e, 0x62, 0x6c, 0x75,
+	0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e,
+	0x4e, 0x6f, 0x6e, 0x54, 0x61, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x0d, 0x6e,
+	0x6f, 0x6e, 0x54, 0x61, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x59, 0x0a, 0x0a,
+	0x54, 0x61, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x75,
+	0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a,
+	0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x04, 0x74, 0x61,
+	0x67, 0x73, 0x18, 0x02, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61,
+	0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x61,
+	0x67, 0x52, 0x04, 0x74, 0x61, 0x67, 0x73, 0x22, 0x45, 0x0a, 0x03, 0x54, 0x61, 0x67, 0x12, 0x10,
+	0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79,
+	0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e,
+	0x18, 0x03, 0x20, 0x01, 0x28, 0x05, 0x52, 0x06, 0x61, 0x73, 0x73, 0x69, 0x67, 0x6e, 0x22, 0x55,
+	0x0a, 0x0d, 0x4e, 0x6f, 0x6e, 0x54, 0x61, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12,
+	0x18, 0x0a, 0x07, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x07, 0x69, 0x6e, 0x63, 0x6c, 0x75, 0x64, 0x65, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x79, 0x70,
+	0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x04, 0x74, 0x79, 0x70, 0x65, 0x12, 0x16, 0x0a,
+	0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20, 0x01, 0x28, 0x01, 0x52, 0x06, 0x61,
+	0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x22, 0x4d, 0x0a, 0x1d, 0x53, 0x61, 0x76, 0x65, 0x54, 0x61, 0x67,
+	0x49, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73, 0x12, 0x14,
+	0x0a, 0x05, 0x65, 0x72, 0x72, 0x6f, 0x72, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x65,
+	0x72, 0x72, 0x6f, 0x72, 0x22, 0xa9, 0x02, 0x0a, 0x1a, 0x53, 0x61, 0x76, 0x65, 0x49, 0x6e, 0x76,
 	0x6f, 0x69, 0x63, 0x65, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x73, 0x52, 0x65, 0x71, 0x75,
 	0x65, 0x73, 0x74, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28,
 	0x09, 0x52, 0x04, 0x64, 0x61, 0x74, 0x65, 0x12, 0x85, 0x01, 0x0a, 0x17, 0x67, 0x72, 0x6f, 0x75,
@@ -8970,7 +9314,7 @@ var file_billing_v1_billing_proto_rawDesc = string([]byte{
 	0x49, 0x64, 0x18, 0x15, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68,
 	0x49, 0x64, 0x12, 0x28, 0x0a, 0x0f, 0x61, 0x64, 0x64, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c,
 	0x49, 0x74, 0x65, 0x6d, 0x73, 0x18, 0x16, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0f, 0x61, 0x64, 0x64,
-	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x32, 0xd8, 0x5d, 0x0a,
+	0x69, 0x74, 0x69, 0x6f, 0x6e, 0x61, 0x6c, 0x49, 0x74, 0x65, 0x6d, 0x73, 0x32, 0xde, 0x5e, 0x0a,
 	0x07, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x12, 0x80, 0x01, 0x0a, 0x11, 0x4c, 0x69, 0x73,
 	0x74, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x73, 0x12, 0x2c,
 	0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67,
@@ -9618,115 +9962,123 @@ var file_billing_v1_billing_proto_rawDesc = string([]byte{
 	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x2c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x26,
 	0x3a, 0x01, 0x2a, 0x22, 0x21, 0x2f, 0x76, 0x31, 0x2f, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67,
 	0x67, 0x72, 0x6f, 0x75, 0x70, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x66, 0x69, 0x65, 0x6c,
-	0x64, 0x3a, 0x72, 0x65, 0x61, 0x64, 0x30, 0x01, 0x12, 0xb1, 0x01, 0x0a, 0x1d, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43,
-	0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x12, 0x38, 0x2e, 0x62, 0x6c, 0x75,
-	0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e,
-	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f,
-	0x75, 0x70, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52, 0x65, 0x71,
+	0x64, 0x3a, 0x72, 0x65, 0x61, 0x64, 0x30, 0x01, 0x12, 0x83, 0x01, 0x0a, 0x15, 0x41, 0x64, 0x64,
+	0x54, 0x61, 0x67, 0x73, 0x54, 0x6f, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f,
+	0x75, 0x70, 0x12, 0x30, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c,
+	0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x41, 0x64, 0x64, 0x54, 0x61, 0x67, 0x73, 0x54,
+	0x6f, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x52, 0x65, 0x71,
 	0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x3e, 0x82, 0xd3,
-	0xe4, 0x93, 0x02, 0x38, 0x2a, 0x36, 0x2f, 0x76, 0x31, 0x2f, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
-	0x67, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x66, 0x69, 0x65,
-	0x6c, 0x64, 0x2f, 0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d, 0x2f, 0x7b, 0x63, 0x75,
-	0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x49, 0x64, 0x7d, 0x12, 0x83, 0x01, 0x0a,
-	0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65,
-	0x6c, 0x64, 0x12, 0x2c, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c,
-	0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x75,
-	0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x1f, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69,
-	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c,
-	0x64, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x3a, 0x01, 0x2a, 0x1a, 0x14, 0x2f, 0x76,
-	0x31, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x2f, 0x7b, 0x69,
-	0x64, 0x7d, 0x12, 0x77, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x75, 0x73, 0x74,
-	0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x12, 0x2c, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70,
-	0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c,
-	0x65, 0x74, 0x65, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x1c, 0x82,
-	0xd3, 0xe4, 0x93, 0x02, 0x16, 0x2a, 0x14, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f,
-	0x6d, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x72, 0x0a, 0x10, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x46, 0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12,
-	0x2b, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
-	0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x46, 0x72, 0x65, 0x65, 0x46,
-	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67,
-	0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45,
-	0x6d, 0x70, 0x74, 0x79, 0x22, 0x19, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x13, 0x3a, 0x01, 0x2a, 0x22,
-	0x0e, 0x2f, 0x76, 0x31, 0x2f, 0x66, 0x72, 0x65, 0x65, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12,
-	0x79, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x46, 0x72, 0x65, 0x65, 0x46, 0x6f, 0x72,
-	0x6d, 0x61, 0x74, 0x12, 0x2b, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69,
-	0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x46,
-	0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
-	0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a,
-	0x2a, 0x18, 0x2f, 0x76, 0x31, 0x2f, 0x66, 0x72, 0x65, 0x65, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74,
-	0x2f, 0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d, 0x12, 0x88, 0x01, 0x0a, 0x0d, 0x47,
-	0x65, 0x74, 0x46, 0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x28, 0x2e, 0x62,
+	0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x20, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x1a, 0x3a, 0x01, 0x2a, 0x22, 0x15, 0x2f, 0x76, 0x31, 0x2f, 0x62, 0x69, 0x6c,
+	0x6c, 0x69, 0x6e, 0x67, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2f, 0x74, 0x61, 0x67, 0x73, 0x12, 0xb1,
+	0x01, 0x0a, 0x1d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67,
+	0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64,
+	0x12, 0x38, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69,
+	0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c,
+	0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69,
+	0x65, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
+	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
+	0x74, 0x79, 0x22, 0x3e, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x38, 0x2a, 0x36, 0x2f, 0x76, 0x31, 0x2f,
+	0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x2f, 0x63, 0x75, 0x73,
+	0x74, 0x6f, 0x6d, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x2f, 0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49,
+	0x64, 0x7d, 0x2f, 0x7b, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x49,
+	0x64, 0x7d, 0x12, 0x83, 0x01, 0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x75, 0x73,
+	0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x12, 0x2c, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61,
+	0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69,
+	0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x75, 0x73, 0x74,
+	0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x22, 0x1f, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x19, 0x3a,
+	0x01, 0x2a, 0x1a, 0x14, 0x2f, 0x76, 0x31, 0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x66, 0x69,
+	0x65, 0x6c, 0x64, 0x2f, 0x7b, 0x69, 0x64, 0x7d, 0x12, 0x77, 0x0a, 0x11, 0x44, 0x65, 0x6c, 0x65,
+	0x74, 0x65, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46, 0x69, 0x65, 0x6c, 0x64, 0x12, 0x2c, 0x2e,
+	0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e,
+	0x76, 0x31, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x46,
+	0x69, 0x65, 0x6c, 0x64, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f,
+	0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d,
+	0x70, 0x74, 0x79, 0x22, 0x1c, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x16, 0x2a, 0x14, 0x2f, 0x76, 0x31,
+	0x2f, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x66, 0x69, 0x65, 0x6c, 0x64, 0x2f, 0x7b, 0x69, 0x64,
+	0x7d, 0x12, 0x72, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x46, 0x72, 0x65, 0x65, 0x46,
+	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x2b, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e,
+	0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x46, 0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x19, 0x82, 0xd3, 0xe4, 0x93,
+	0x02, 0x13, 0x3a, 0x01, 0x2a, 0x22, 0x0e, 0x2f, 0x76, 0x31, 0x2f, 0x66, 0x72, 0x65, 0x65, 0x66,
+	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x79, 0x0a, 0x10, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x46,
+	0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x12, 0x2b, 0x2e, 0x62, 0x6c, 0x75, 0x65,
+	0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x44,
+	0x65, 0x6c, 0x65, 0x74, 0x65, 0x46, 0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x20,
+	0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x2a, 0x18, 0x2f, 0x76, 0x31, 0x2f, 0x66, 0x72, 0x65, 0x65,
+	0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x2f, 0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d,
+	0x12, 0x88, 0x01, 0x0a, 0x0d, 0x47, 0x65, 0x74, 0x46, 0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d,
+	0x61, 0x74, 0x12, 0x28, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c,
+	0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x72, 0x65, 0x65, 0x46,
+	0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x62,
 	0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76,
 	0x31, 0x2e, 0x47, 0x65, 0x74, 0x46, 0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x29, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69,
-	0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x46,
-	0x72, 0x65, 0x65, 0x46, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73,
-	0x65, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x12, 0x18, 0x2f, 0x76, 0x31, 0x2f, 0x66,
-	0x72, 0x65, 0x65, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x2f, 0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70,
-	0x49, 0x64, 0x7d, 0x30, 0x01, 0x12, 0xa2, 0x01, 0x0a, 0x14, 0x47, 0x65, 0x74, 0x54, 0x61, 0x67,
-	0x73, 0x41, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x2f,
-	0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67,
-	0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x61, 0x67, 0x73, 0x41, 0x64, 0x64, 0x69, 0x6e,
-	0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a,
-	0x25, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e,
-	0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x61, 0x67, 0x73, 0x41, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x53,
-	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x30, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2a, 0x12, 0x28,
-	0x2f, 0x76, 0x31, 0x2f, 0x7b, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x7d, 0x2f, 0x74, 0x61, 0x67,
-	0x73, 0x61, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x2f, 0x7b,
-	0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d, 0x30, 0x01, 0x12, 0x9a, 0x01, 0x0a, 0x17, 0x55,
-	0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x61, 0x67, 0x73, 0x41, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x53,
-	0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x32, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69,
-	0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x55, 0x70, 0x64, 0x61,
-	0x74, 0x65, 0x54, 0x61, 0x67, 0x73, 0x41, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x74, 0x74,
-	0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f,
-	0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70,
-	0x74, 0x79, 0x22, 0x33, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2d, 0x3a, 0x01, 0x2a, 0x1a, 0x28, 0x2f,
-	0x76, 0x31, 0x2f, 0x7b, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72, 0x7d, 0x2f, 0x74, 0x61, 0x67, 0x73,
-	0x61, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x2f, 0x7b, 0x67,
-	0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d, 0x12, 0xa1, 0x01, 0x0a, 0x15, 0x45, 0x78, 0x70, 0x6f,
-	0x72, 0x74, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x73,
-	0x76, 0x12, 0x30, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c,
-	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x69, 0x6c,
-	0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x73, 0x76, 0x52, 0x65, 0x71, 0x75,
-	0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69,
-	0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x42,
-	0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43, 0x73, 0x76, 0x52, 0x65,
-	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x23, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1d, 0x12, 0x1b,
-	0x2f, 0x76, 0x31, 0x2f, 0x65, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x63, 0x73, 0x76, 0x2f, 0x62, 0x69,
-	0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2d, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x12, 0xa9, 0x01, 0x0a, 0x17,
-	0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x53, 0x65, 0x74,
-	0x74, 0x69, 0x6e, 0x67, 0x43, 0x73, 0x76, 0x12, 0x32, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x12,
+	0x18, 0x2f, 0x76, 0x31, 0x2f, 0x66, 0x72, 0x65, 0x65, 0x66, 0x6f, 0x72, 0x6d, 0x61, 0x74, 0x2f,
+	0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d, 0x30, 0x01, 0x12, 0xa2, 0x01, 0x0a, 0x14,
+	0x47, 0x65, 0x74, 0x54, 0x61, 0x67, 0x73, 0x41, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x74,
+	0x74, 0x69, 0x6e, 0x67, 0x12, 0x2f, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62,
+	0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x61, 0x67,
+	0x73, 0x41, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65,
+	0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x25, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e,
+	0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x54, 0x61, 0x67, 0x73, 0x41,
+	0x64, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x22, 0x30, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x2a, 0x12, 0x28, 0x2f, 0x76, 0x31, 0x2f, 0x7b, 0x76, 0x65, 0x6e, 0x64, 0x6f,
+	0x72, 0x7d, 0x2f, 0x74, 0x61, 0x67, 0x73, 0x61, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x73, 0x65, 0x74,
+	0x74, 0x69, 0x6e, 0x67, 0x2f, 0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d, 0x30, 0x01,
+	0x12, 0x9a, 0x01, 0x0a, 0x17, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x61, 0x67, 0x73, 0x41,
+	0x64, 0x64, 0x69, 0x6e, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x12, 0x32, 0x2e, 0x62,
+	0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76,
+	0x31, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x61, 0x67, 0x73, 0x41, 0x64, 0x64, 0x69,
+	0x6e, 0x67, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x16, 0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x45, 0x6d, 0x70, 0x74, 0x79, 0x22, 0x33, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x2d,
+	0x3a, 0x01, 0x2a, 0x1a, 0x28, 0x2f, 0x76, 0x31, 0x2f, 0x7b, 0x76, 0x65, 0x6e, 0x64, 0x6f, 0x72,
+	0x7d, 0x2f, 0x74, 0x61, 0x67, 0x73, 0x61, 0x64, 0x64, 0x69, 0x6e, 0x67, 0x73, 0x65, 0x74, 0x74,
+	0x69, 0x6e, 0x67, 0x2f, 0x7b, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x7d, 0x12, 0xa1, 0x01,
+	0x0a, 0x15, 0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47,
+	0x72, 0x6f, 0x75, 0x70, 0x43, 0x73, 0x76, 0x12, 0x30, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70,
 	0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x78, 0x70,
-	0x6f, 0x72, 0x74, 0x49, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e,
-	0x67, 0x43, 0x73, 0x76, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x33, 0x2e, 0x62, 0x6c,
-	0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31,
-	0x2e, 0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x53, 0x65,
-	0x74, 0x74, 0x69, 0x6e, 0x67, 0x43, 0x73, 0x76, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65,
-	0x22, 0x25, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1f, 0x12, 0x1d, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x78,
-	0x70, 0x6f, 0x72, 0x74, 0x63, 0x73, 0x76, 0x2f, 0x69, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65, 0x2d,
-	0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x1a, 0x9d, 0x01, 0x92, 0x41, 0x99, 0x01, 0x12, 0x46,
-	0x28, 0x42, 0x45, 0x54, 0x41, 0x29, 0x20, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x20, 0x41,
-	0x50, 0x49, 0x2e, 0x20, 0x42, 0x61, 0x73, 0x65, 0x20, 0x55, 0x52, 0x4c, 0x3a, 0x20, 0x68, 0x74,
-	0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75,
-	0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2f, 0x62,
-	0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x1a, 0x4f, 0x0a, 0x12, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x20, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x39, 0x68, 0x74,
-	0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75,
-	0x65, 0x61, 0x70, 0x69, 0x2f, 0x74, 0x72, 0x65, 0x65, 0x2f, 0x6d, 0x61, 0x69, 0x6e, 0x2f, 0x62,
-	0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2f, 0x42, 0x51, 0x0a, 0x19, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c,
-	0x6c, 0x69, 0x6e, 0x67, 0x42, 0x0c, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f,
-	0x74, 0x6f, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61,
-	0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x61,
-	0x70, 0x69, 0x2f, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x6f, 0x72, 0x74, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x43,
+	0x73, 0x76, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x31, 0x2e, 0x62, 0x6c, 0x75, 0x65,
+	0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x45,
+	0x78, 0x70, 0x6f, 0x72, 0x74, 0x42, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x47, 0x72, 0x6f, 0x75,
+	0x70, 0x43, 0x73, 0x76, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x23, 0x82, 0xd3,
+	0xe4, 0x93, 0x02, 0x1d, 0x12, 0x1b, 0x2f, 0x76, 0x31, 0x2f, 0x65, 0x78, 0x70, 0x6f, 0x72, 0x74,
+	0x63, 0x73, 0x76, 0x2f, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2d, 0x67, 0x72, 0x6f, 0x75,
+	0x70, 0x12, 0xa9, 0x01, 0x0a, 0x17, 0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x6e, 0x76, 0x6f,
+	0x69, 0x63, 0x65, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x43, 0x73, 0x76, 0x12, 0x32, 0x2e,
+	0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2e,
+	0x76, 0x31, 0x2e, 0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x6e, 0x76, 0x6f, 0x69, 0x63, 0x65,
+	0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x43, 0x73, 0x76, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73,
+	0x74, 0x1a, 0x33, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c,
+	0x69, 0x6e, 0x67, 0x2e, 0x76, 0x31, 0x2e, 0x45, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x49, 0x6e, 0x76,
+	0x6f, 0x69, 0x63, 0x65, 0x53, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x43, 0x73, 0x76, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x25, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1f, 0x12, 0x1d,
+	0x2f, 0x76, 0x31, 0x2f, 0x65, 0x78, 0x70, 0x6f, 0x72, 0x74, 0x63, 0x73, 0x76, 0x2f, 0x69, 0x6e,
+	0x76, 0x6f, 0x69, 0x63, 0x65, 0x2d, 0x73, 0x65, 0x74, 0x74, 0x69, 0x6e, 0x67, 0x1a, 0x9d, 0x01,
+	0x92, 0x41, 0x99, 0x01, 0x12, 0x46, 0x28, 0x42, 0x45, 0x54, 0x41, 0x29, 0x20, 0x42, 0x69, 0x6c,
+	0x6c, 0x69, 0x6e, 0x67, 0x20, 0x41, 0x50, 0x49, 0x2e, 0x20, 0x42, 0x61, 0x73, 0x65, 0x20, 0x55,
+	0x52, 0x4c, 0x3a, 0x20, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x61, 0x70, 0x69, 0x2e,
+	0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x6d, 0x2f,
+	0x62, 0x6c, 0x75, 0x65, 0x2f, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x1a, 0x4f, 0x0a, 0x12,
+	0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x20, 0x64, 0x65, 0x66, 0x69, 0x6e, 0x69, 0x74, 0x69,
+	0x6f, 0x6e, 0x12, 0x39, 0x68, 0x74, 0x74, 0x70, 0x73, 0x3a, 0x2f, 0x2f, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61,
+	0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2f, 0x74, 0x72, 0x65, 0x65, 0x2f,
+	0x6d, 0x61, 0x69, 0x6e, 0x2f, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x2f, 0x42, 0x51, 0x0a,
+	0x19, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67, 0x42, 0x0c, 0x42, 0x69, 0x6c, 0x6c,
+	0x69, 0x6e, 0x67, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x26, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
+	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73,
+	0x2f, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2f, 0x62, 0x69, 0x6c, 0x6c, 0x69, 0x6e, 0x67,
+	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -9741,7 +10093,7 @@ func file_billing_v1_billing_proto_rawDescGZIP() []byte {
 	return file_billing_v1_billing_proto_rawDescData
 }
 
-var file_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 122)
+var file_billing_v1_billing_proto_msgTypes = make([]protoimpl.MessageInfo, 127)
 var file_billing_v1_billing_proto_goTypes = []any{
 	(*BillingGroup)(nil),                                      // 0: blueapi.billing.v1.BillingGroup
 	(*BillingGroupAdditionalItems)(nil),                       // 1: blueapi.billing.v1.BillingGroupAdditionalItems
@@ -9857,62 +10209,67 @@ var file_billing_v1_billing_proto_goTypes = []any{
 	(*AddBillingGroupCustomFieldRequest)(nil),                 // 111: blueapi.billing.v1.AddBillingGroupCustomFieldRequest
 	(*DeleteBillingGroupCustomFieldRequest)(nil),              // 112: blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest
 	(*AddAccountToBillingGroupRequest)(nil),                   // 113: blueapi.billing.v1.AddAccountToBillingGroupRequest
-	(*SaveInvoiceSettingsRequest)(nil),                        // 114: blueapi.billing.v1.SaveInvoiceSettingsRequest
-	(*InvoiceSettings)(nil),                                   // 115: blueapi.billing.v1.InvoiceSettings
-	(*AwsDailyRunHistory_Account)(nil),                        // 116: blueapi.billing.v1.AwsDailyRunHistory.Account
-	(*AwsDailyRunHistory_Account_History)(nil),                // 117: blueapi.billing.v1.AwsDailyRunHistory.Account.History
-	nil, // 118: blueapi.billing.v1.ListInvoiceRequest.FiltersEntry
-	(*SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBillingSetting)(nil), // 119: blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting
-	nil,                                       // 120: blueapi.billing.v1.AddBillingGroupCustomFieldRequest.IdToKeyEntry
-	nil,                                       // 121: blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry
-	(*ripple.BillingGroupInfo)(nil),           // 122: blueapi.api.ripple.BillingGroupInfo
-	(*api.Account)(nil),                       // 123: blueapi.api.Account
-	(*api.CostTag)(nil),                       // 124: blueapi.api.CostTag
-	(*api.AdditionalItems)(nil),               // 125: blueapi.api.AdditionalItems
-	(*fieldmaskpb.FieldMask)(nil),             // 126: google.protobuf.FieldMask
-	(*v1.InvoiceServiceDiscounts)(nil),        // 127: blueapi.api.ripple.v1.InvoiceServiceDiscounts
-	(*ripple.ResellerConfig)(nil),             // 128: blueapi.api.ripple.ResellerConfig
-	(*ripple.YearMonth)(nil),                  // 129: blueapi.api.ripple.YearMonth
-	(*ripple.Rounding)(nil),                   // 130: blueapi.api.ripple.Rounding
-	(*ripple.InvoiceLayout)(nil),              // 131: blueapi.api.ripple.InvoiceLayout
-	(*ripple.DueDate)(nil),                    // 132: blueapi.api.ripple.DueDate
-	(*ripple.CommonExchangeRate)(nil),         // 133: blueapi.api.ripple.CommonExchangeRate
-	(*ripple.BillingGroupExchangeRate)(nil),   // 134: blueapi.api.ripple.BillingGroupExchangeRate
-	(*ripple.VendorPayerExchangeRate)(nil),    // 135: blueapi.api.ripple.VendorPayerExchangeRate
-	(*api.ConfigFilters)(nil),                 // 136: blueapi.api.ConfigFilters
-	(*api.ManagementAccount)(nil),             // 137: blueapi.api.ManagementAccount
-	(*ripple.MethodConfig)(nil),               // 138: blueapi.api.ripple.MethodConfig
-	(*ripple.CustomizedBillingService)(nil),   // 139: blueapi.api.ripple.CustomizedBillingService
-	(ripple.ChargingTarget)(0),                // 140: blueapi.api.ripple.ChargingTarget
-	(*v1.InvoiceServiceDiscountsSetting)(nil), // 141: blueapi.api.ripple.v1.InvoiceServiceDiscountsSetting
-	(*emptypb.Empty)(nil),                     // 142: google.protobuf.Empty
-	(*api.InvoiceMessage)(nil),                // 143: blueapi.api.InvoiceMessage
-	(*api.Invoice)(nil),                       // 144: blueapi.api.Invoice
-	(*v1.Service)(nil),                        // 145: blueapi.api.ripple.v1.Service
-	(*v1.ServiceDiscountsExport)(nil),         // 146: blueapi.api.ripple.v1.ServiceDiscountsExport
-	(*v1.AccountServiceDiscountsExport)(nil),  // 147: blueapi.api.ripple.v1.AccountServiceDiscountsExport
-	(*v1.GroupServiceDiscountsExport)(nil),    // 148: blueapi.api.ripple.v1.GroupServiceDiscountsExport
-	(*ripple.Reseller)(nil),                   // 149: blueapi.api.ripple.Reseller
-	(*ripple.AccessGroup)(nil),                // 150: blueapi.api.ripple.AccessGroup
-	(*wave.Adjustment)(nil),                   // 151: blueapi.api.wave.Adjustment
-	(*api.AdjustmentConfig)(nil),              // 152: blueapi.api.AdjustmentConfig
-	(*ripple.UntaggedGroup)(nil),              // 153: blueapi.api.ripple.UntaggedGroup
+	(*AddTagsToBillingGroupRequest)(nil),                      // 114: blueapi.billing.v1.AddTagsToBillingGroupRequest
+	(*TagSetting)(nil),                                        // 115: blueapi.billing.v1.TagSetting
+	(*Tag)(nil),                                               // 116: blueapi.billing.v1.Tag
+	(*NonTagSetting)(nil),                                     // 117: blueapi.billing.v1.NonTagSetting
+	(*SaveTagInvoiceSettingResponse)(nil),                     // 118: blueapi.billing.v1.SaveTagInvoiceSettingResponse
+	(*SaveInvoiceSettingsRequest)(nil),                        // 119: blueapi.billing.v1.SaveInvoiceSettingsRequest
+	(*InvoiceSettings)(nil),                                   // 120: blueapi.billing.v1.InvoiceSettings
+	(*AwsDailyRunHistory_Account)(nil),                        // 121: blueapi.billing.v1.AwsDailyRunHistory.Account
+	(*AwsDailyRunHistory_Account_History)(nil),                // 122: blueapi.billing.v1.AwsDailyRunHistory.Account.History
+	nil, // 123: blueapi.billing.v1.ListInvoiceRequest.FiltersEntry
+	(*SetCustomizedBillingServiceBillingGroupRequest_CustomizedBillingServiceBillingSetting)(nil), // 124: blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting
+	nil,                                       // 125: blueapi.billing.v1.AddBillingGroupCustomFieldRequest.IdToKeyEntry
+	nil,                                       // 126: blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry
+	(*ripple.BillingGroupInfo)(nil),           // 127: blueapi.api.ripple.BillingGroupInfo
+	(*api.Account)(nil),                       // 128: blueapi.api.Account
+	(*api.CostTag)(nil),                       // 129: blueapi.api.CostTag
+	(*api.AdditionalItems)(nil),               // 130: blueapi.api.AdditionalItems
+	(*fieldmaskpb.FieldMask)(nil),             // 131: google.protobuf.FieldMask
+	(*v1.InvoiceServiceDiscounts)(nil),        // 132: blueapi.api.ripple.v1.InvoiceServiceDiscounts
+	(*ripple.ResellerConfig)(nil),             // 133: blueapi.api.ripple.ResellerConfig
+	(*ripple.YearMonth)(nil),                  // 134: blueapi.api.ripple.YearMonth
+	(*ripple.Rounding)(nil),                   // 135: blueapi.api.ripple.Rounding
+	(*ripple.InvoiceLayout)(nil),              // 136: blueapi.api.ripple.InvoiceLayout
+	(*ripple.DueDate)(nil),                    // 137: blueapi.api.ripple.DueDate
+	(*ripple.CommonExchangeRate)(nil),         // 138: blueapi.api.ripple.CommonExchangeRate
+	(*ripple.BillingGroupExchangeRate)(nil),   // 139: blueapi.api.ripple.BillingGroupExchangeRate
+	(*ripple.VendorPayerExchangeRate)(nil),    // 140: blueapi.api.ripple.VendorPayerExchangeRate
+	(*api.ConfigFilters)(nil),                 // 141: blueapi.api.ConfigFilters
+	(*api.ManagementAccount)(nil),             // 142: blueapi.api.ManagementAccount
+	(*ripple.MethodConfig)(nil),               // 143: blueapi.api.ripple.MethodConfig
+	(*ripple.CustomizedBillingService)(nil),   // 144: blueapi.api.ripple.CustomizedBillingService
+	(ripple.ChargingTarget)(0),                // 145: blueapi.api.ripple.ChargingTarget
+	(*v1.InvoiceServiceDiscountsSetting)(nil), // 146: blueapi.api.ripple.v1.InvoiceServiceDiscountsSetting
+	(*emptypb.Empty)(nil),                     // 147: google.protobuf.Empty
+	(*api.InvoiceMessage)(nil),                // 148: blueapi.api.InvoiceMessage
+	(*api.Invoice)(nil),                       // 149: blueapi.api.Invoice
+	(*v1.Service)(nil),                        // 150: blueapi.api.ripple.v1.Service
+	(*v1.ServiceDiscountsExport)(nil),         // 151: blueapi.api.ripple.v1.ServiceDiscountsExport
+	(*v1.AccountServiceDiscountsExport)(nil),  // 152: blueapi.api.ripple.v1.AccountServiceDiscountsExport
+	(*v1.GroupServiceDiscountsExport)(nil),    // 153: blueapi.api.ripple.v1.GroupServiceDiscountsExport
+	(*ripple.Reseller)(nil),                   // 154: blueapi.api.ripple.Reseller
+	(*ripple.AccessGroup)(nil),                // 155: blueapi.api.ripple.AccessGroup
+	(*wave.Adjustment)(nil),                   // 156: blueapi.api.wave.Adjustment
+	(*api.AdjustmentConfig)(nil),              // 157: blueapi.api.AdjustmentConfig
+	(*ripple.UntaggedGroup)(nil),              // 158: blueapi.api.ripple.UntaggedGroup
 }
 var file_billing_v1_billing_proto_depIdxs = []int32{
-	122, // 0: blueapi.billing.v1.BillingGroup.billingGroupInfo:type_name -> blueapi.api.ripple.BillingGroupInfo
+	127, // 0: blueapi.billing.v1.BillingGroup.billingGroupInfo:type_name -> blueapi.api.ripple.BillingGroupInfo
 	7,   // 1: blueapi.billing.v1.BillingGroup.accountOptions:type_name -> blueapi.billing.v1.AccountOptions
-	123, // 2: blueapi.billing.v1.BillingGroup.accounts:type_name -> blueapi.api.Account
-	124, // 3: blueapi.billing.v1.BillingGroup.tags:type_name -> blueapi.api.CostTag
+	128, // 2: blueapi.billing.v1.BillingGroup.accounts:type_name -> blueapi.api.Account
+	129, // 3: blueapi.billing.v1.BillingGroup.tags:type_name -> blueapi.api.CostTag
 	2,   // 4: blueapi.billing.v1.BillingGroup.invoiceSettings:type_name -> blueapi.billing.v1.BillingGroupInvoiceSettings
 	1,   // 5: blueapi.billing.v1.BillingGroup.additionalItems:type_name -> blueapi.billing.v1.BillingGroupAdditionalItems
 	6,   // 6: blueapi.billing.v1.BillingGroup.awsOptions:type_name -> blueapi.billing.v1.AwsOptions
-	125, // 7: blueapi.billing.v1.BillingGroupAdditionalItems.aws:type_name -> blueapi.api.AdditionalItems
-	125, // 8: blueapi.billing.v1.BillingGroupAdditionalItems.azure:type_name -> blueapi.api.AdditionalItems
-	125, // 9: blueapi.billing.v1.BillingGroupAdditionalItems.gcp:type_name -> blueapi.api.AdditionalItems
+	130, // 7: blueapi.billing.v1.BillingGroupAdditionalItems.aws:type_name -> blueapi.api.AdditionalItems
+	130, // 8: blueapi.billing.v1.BillingGroupAdditionalItems.azure:type_name -> blueapi.api.AdditionalItems
+	130, // 9: blueapi.billing.v1.BillingGroupAdditionalItems.gcp:type_name -> blueapi.api.AdditionalItems
 	3,   // 10: blueapi.billing.v1.BillingGroupInvoiceSettings.aws:type_name -> blueapi.billing.v1.BillingGroupVendoredInvoiceSetting
 	3,   // 11: blueapi.billing.v1.BillingGroupInvoiceSettings.azure:type_name -> blueapi.billing.v1.BillingGroupVendoredInvoiceSetting
 	3,   // 12: blueapi.billing.v1.BillingGroupInvoiceSettings.gcp:type_name -> blueapi.billing.v1.BillingGroupVendoredInvoiceSetting
-	126, // 13: blueapi.billing.v1.ListBillingGroupsRequest.field_mask:type_name -> google.protobuf.FieldMask
+	131, // 13: blueapi.billing.v1.ListBillingGroupsRequest.field_mask:type_name -> google.protobuf.FieldMask
 	7,   // 14: blueapi.billing.v1.CreateBillingGroupRequest.accountOptions:type_name -> blueapi.billing.v1.AccountOptions
 	9,   // 15: blueapi.billing.v1.CreateBillingGroupRequest.invoices:type_name -> blueapi.billing.v1.CreateBillingGroupRequestInvoice
 	6,   // 16: blueapi.billing.v1.CreateBillingGroupRequest.awsOptions:type_name -> blueapi.billing.v1.AwsOptions
@@ -9922,221 +10279,226 @@ var file_billing_v1_billing_proto_depIdxs = []int32{
 	10,  // 20: blueapi.billing.v1.CreateBillingGroupRequestInvoice.aws:type_name -> blueapi.billing.v1.CreateBillingGroupRequestInvoiceVendor
 	10,  // 21: blueapi.billing.v1.CreateBillingGroupRequestInvoice.azure:type_name -> blueapi.billing.v1.CreateBillingGroupRequestInvoiceVendor
 	10,  // 22: blueapi.billing.v1.CreateBillingGroupRequestInvoice.gcp:type_name -> blueapi.billing.v1.CreateBillingGroupRequestInvoiceVendor
-	126, // 23: blueapi.billing.v1.GetBillingGroupRequest.field_mask:type_name -> google.protobuf.FieldMask
+	131, // 23: blueapi.billing.v1.GetBillingGroupRequest.field_mask:type_name -> google.protobuf.FieldMask
 	0,   // 24: blueapi.billing.v1.GetBillingGroupResponse.billingGroup:type_name -> blueapi.billing.v1.BillingGroup
 	0,   // 25: blueapi.billing.v1.AccessGroup.billingGroups:type_name -> blueapi.billing.v1.BillingGroup
-	126, // 26: blueapi.billing.v1.GetAccessGroupRequest.field_mask:type_name -> google.protobuf.FieldMask
+	131, // 26: blueapi.billing.v1.GetAccessGroupRequest.field_mask:type_name -> google.protobuf.FieldMask
 	13,  // 27: blueapi.billing.v1.GetAccessGroupResponse.accessGroup:type_name -> blueapi.billing.v1.AccessGroup
-	116, // 28: blueapi.billing.v1.AwsDailyRunHistory.accounts:type_name -> blueapi.billing.v1.AwsDailyRunHistory.Account
-	126, // 29: blueapi.billing.v1.GetInvoiceServiceDiscountsRequest.fieldMask:type_name -> google.protobuf.FieldMask
+	121, // 28: blueapi.billing.v1.AwsDailyRunHistory.accounts:type_name -> blueapi.billing.v1.AwsDailyRunHistory.Account
+	131, // 29: blueapi.billing.v1.GetInvoiceServiceDiscountsRequest.fieldMask:type_name -> google.protobuf.FieldMask
 	30,  // 30: blueapi.billing.v1.ListInvoiceTemplateResponse.connectedBillingGroup:type_name -> blueapi.billing.v1.InvoiceConnectedBillingGroups
 	2,   // 31: blueapi.billing.v1.ListInvoiceTemplateResponse.invoices:type_name -> blueapi.billing.v1.BillingGroupInvoiceSettings
-	127, // 32: blueapi.billing.v1.AccountInvoiceServiceDiscounts.serviceDiscounts:type_name -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
+	132, // 32: blueapi.billing.v1.AccountInvoiceServiceDiscounts.serviceDiscounts:type_name -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
 	33,  // 33: blueapi.billing.v1.CreateAccountInvoiceServiceDiscountsRequest.accounts:type_name -> blueapi.billing.v1.AccountServiceDiscounts
 	33,  // 34: blueapi.billing.v1.CreateAccountInvoiceServiceDiscountsResponse.accounts:type_name -> blueapi.billing.v1.AccountServiceDiscounts
 	33,  // 35: blueapi.billing.v1.UpdateAccountInvoiceServiceDiscountsRequest.accounts:type_name -> blueapi.billing.v1.AccountServiceDiscounts
 	33,  // 36: blueapi.billing.v1.UpdateAccountInvoiceServiceDiscountsResponse.accounts:type_name -> blueapi.billing.v1.AccountServiceDiscounts
 	33,  // 37: blueapi.billing.v1.RemoveAccountInvoiceServiceDiscountsRequest.accounts:type_name -> blueapi.billing.v1.AccountServiceDiscounts
-	128, // 38: blueapi.billing.v1.CreateResellerRequest.waveConfig:type_name -> blueapi.api.ripple.ResellerConfig
-	128, // 39: blueapi.billing.v1.CreateResellerRequest.aquaConfig:type_name -> blueapi.api.ripple.ResellerConfig
-	126, // 40: blueapi.billing.v1.ListResellersRequest.field_mask:type_name -> google.protobuf.FieldMask
-	126, // 41: blueapi.billing.v1.GetResellerRequest.field_mask:type_name -> google.protobuf.FieldMask
-	128, // 42: blueapi.billing.v1.UpdateResellerRequest.waveConfig:type_name -> blueapi.api.ripple.ResellerConfig
-	128, // 43: blueapi.billing.v1.UpdateResellerRequest.aquaConfig:type_name -> blueapi.api.ripple.ResellerConfig
-	126, // 44: blueapi.billing.v1.UpdateResellerRequest.updateMask:type_name -> google.protobuf.FieldMask
-	126, // 45: blueapi.billing.v1.GetBillingSettingRequest.field_mask:type_name -> google.protobuf.FieldMask
-	129, // 46: blueapi.billing.v1.GetBillingSettingResponse.yearMonth:type_name -> blueapi.api.ripple.YearMonth
-	130, // 47: blueapi.billing.v1.GetBillingSettingResponse.roundingMethod:type_name -> blueapi.api.ripple.Rounding
-	130, // 48: blueapi.billing.v1.GetBillingSettingResponse.exportRoundingMethod:type_name -> blueapi.api.ripple.Rounding
-	131, // 49: blueapi.billing.v1.GetBillingSettingResponse.invoiceLayout:type_name -> blueapi.api.ripple.InvoiceLayout
-	132, // 50: blueapi.billing.v1.GetBillingSettingResponse.invoiceDueDate:type_name -> blueapi.api.ripple.DueDate
-	133, // 51: blueapi.billing.v1.ListExchangeRatesResponse.common:type_name -> blueapi.api.ripple.CommonExchangeRate
-	134, // 52: blueapi.billing.v1.ListExchangeRatesResponse.billingGroup:type_name -> blueapi.api.ripple.BillingGroupExchangeRate
-	135, // 53: blueapi.billing.v1.ListExchangeRatesResponse.payer:type_name -> blueapi.api.ripple.VendorPayerExchangeRate
-	126, // 54: blueapi.billing.v1.ListAccessGroupsRequest.field_mask:type_name -> google.protobuf.FieldMask
-	118, // 55: blueapi.billing.v1.ListInvoiceRequest.filters:type_name -> blueapi.billing.v1.ListInvoiceRequest.FiltersEntry
-	136, // 56: blueapi.billing.v1.CreateAdjustmentConfigRequest.config:type_name -> blueapi.api.ConfigFilters
-	137, // 57: blueapi.billing.v1.CreateAdjustmentConfigRequest.accounts:type_name -> blueapi.api.ManagementAccount
-	136, // 58: blueapi.billing.v1.UpdateAdjustmentConfigRequest.config:type_name -> blueapi.api.ConfigFilters
-	137, // 59: blueapi.billing.v1.UpdateAdjustmentConfigRequest.accounts:type_name -> blueapi.api.ManagementAccount
-	126, // 60: blueapi.billing.v1.ReadUntaggedGroupsRequest.field_mask:type_name -> google.protobuf.FieldMask
-	126, // 61: blueapi.billing.v1.ReadCustomizedBillingServicesRequest.field_mask:type_name -> google.protobuf.FieldMask
-	126, // 62: blueapi.billing.v1.GetCustomizedBillingServiceRequest.field_mask:type_name -> google.protobuf.FieldMask
-	138, // 63: blueapi.billing.v1.CreateCustomizedBillingServiceRequest.config:type_name -> blueapi.api.ripple.MethodConfig
-	139, // 64: blueapi.billing.v1.UpdateCustomizedBillingServiceRequest.customizedBillingService:type_name -> blueapi.api.ripple.CustomizedBillingService
-	126, // 65: blueapi.billing.v1.UpdateCustomizedBillingServiceRequest.updateMask:type_name -> google.protobuf.FieldMask
-	140, // 66: blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse.chargingTarget:type_name -> blueapi.api.ripple.ChargingTarget
-	123, // 67: blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse.accounts:type_name -> blueapi.api.Account
-	119, // 68: blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.setting:type_name -> blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting
-	141, // 69: blueapi.billing.v1.CreateInvoiceServiceDiscountsRequest.setting:type_name -> blueapi.api.ripple.v1.InvoiceServiceDiscountsSetting
-	127, // 70: blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest.invoiceServiceDiscounts:type_name -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
-	126, // 71: blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest.updateMask:type_name -> google.protobuf.FieldMask
+	133, // 38: blueapi.billing.v1.CreateResellerRequest.waveConfig:type_name -> blueapi.api.ripple.ResellerConfig
+	133, // 39: blueapi.billing.v1.CreateResellerRequest.aquaConfig:type_name -> blueapi.api.ripple.ResellerConfig
+	131, // 40: blueapi.billing.v1.ListResellersRequest.field_mask:type_name -> google.protobuf.FieldMask
+	131, // 41: blueapi.billing.v1.GetResellerRequest.field_mask:type_name -> google.protobuf.FieldMask
+	133, // 42: blueapi.billing.v1.UpdateResellerRequest.waveConfig:type_name -> blueapi.api.ripple.ResellerConfig
+	133, // 43: blueapi.billing.v1.UpdateResellerRequest.aquaConfig:type_name -> blueapi.api.ripple.ResellerConfig
+	131, // 44: blueapi.billing.v1.UpdateResellerRequest.updateMask:type_name -> google.protobuf.FieldMask
+	131, // 45: blueapi.billing.v1.GetBillingSettingRequest.field_mask:type_name -> google.protobuf.FieldMask
+	134, // 46: blueapi.billing.v1.GetBillingSettingResponse.yearMonth:type_name -> blueapi.api.ripple.YearMonth
+	135, // 47: blueapi.billing.v1.GetBillingSettingResponse.roundingMethod:type_name -> blueapi.api.ripple.Rounding
+	135, // 48: blueapi.billing.v1.GetBillingSettingResponse.exportRoundingMethod:type_name -> blueapi.api.ripple.Rounding
+	136, // 49: blueapi.billing.v1.GetBillingSettingResponse.invoiceLayout:type_name -> blueapi.api.ripple.InvoiceLayout
+	137, // 50: blueapi.billing.v1.GetBillingSettingResponse.invoiceDueDate:type_name -> blueapi.api.ripple.DueDate
+	138, // 51: blueapi.billing.v1.ListExchangeRatesResponse.common:type_name -> blueapi.api.ripple.CommonExchangeRate
+	139, // 52: blueapi.billing.v1.ListExchangeRatesResponse.billingGroup:type_name -> blueapi.api.ripple.BillingGroupExchangeRate
+	140, // 53: blueapi.billing.v1.ListExchangeRatesResponse.payer:type_name -> blueapi.api.ripple.VendorPayerExchangeRate
+	131, // 54: blueapi.billing.v1.ListAccessGroupsRequest.field_mask:type_name -> google.protobuf.FieldMask
+	123, // 55: blueapi.billing.v1.ListInvoiceRequest.filters:type_name -> blueapi.billing.v1.ListInvoiceRequest.FiltersEntry
+	141, // 56: blueapi.billing.v1.CreateAdjustmentConfigRequest.config:type_name -> blueapi.api.ConfigFilters
+	142, // 57: blueapi.billing.v1.CreateAdjustmentConfigRequest.accounts:type_name -> blueapi.api.ManagementAccount
+	141, // 58: blueapi.billing.v1.UpdateAdjustmentConfigRequest.config:type_name -> blueapi.api.ConfigFilters
+	142, // 59: blueapi.billing.v1.UpdateAdjustmentConfigRequest.accounts:type_name -> blueapi.api.ManagementAccount
+	131, // 60: blueapi.billing.v1.ReadUntaggedGroupsRequest.field_mask:type_name -> google.protobuf.FieldMask
+	131, // 61: blueapi.billing.v1.ReadCustomizedBillingServicesRequest.field_mask:type_name -> google.protobuf.FieldMask
+	131, // 62: blueapi.billing.v1.GetCustomizedBillingServiceRequest.field_mask:type_name -> google.protobuf.FieldMask
+	143, // 63: blueapi.billing.v1.CreateCustomizedBillingServiceRequest.config:type_name -> blueapi.api.ripple.MethodConfig
+	144, // 64: blueapi.billing.v1.UpdateCustomizedBillingServiceRequest.customizedBillingService:type_name -> blueapi.api.ripple.CustomizedBillingService
+	131, // 65: blueapi.billing.v1.UpdateCustomizedBillingServiceRequest.updateMask:type_name -> google.protobuf.FieldMask
+	145, // 66: blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse.chargingTarget:type_name -> blueapi.api.ripple.ChargingTarget
+	128, // 67: blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse.accounts:type_name -> blueapi.api.Account
+	124, // 68: blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.setting:type_name -> blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting
+	146, // 69: blueapi.billing.v1.CreateInvoiceServiceDiscountsRequest.setting:type_name -> blueapi.api.ripple.v1.InvoiceServiceDiscountsSetting
+	132, // 70: blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest.invoiceServiceDiscounts:type_name -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
+	131, // 71: blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest.updateMask:type_name -> google.protobuf.FieldMask
 	84,  // 72: blueapi.billing.v1.TagData.tags:type_name -> blueapi.billing.v1.Tags
 	86,  // 73: blueapi.billing.v1.BillingGroupCustomField.customField:type_name -> blueapi.billing.v1.CustomField
 	87,  // 74: blueapi.billing.v1.ListBillingGroupCustomFieldResponse.billingGroupCustomFields:type_name -> blueapi.billing.v1.BillingGroupCustomField
 	95,  // 75: blueapi.billing.v1.CreateFreeFormatRequest.items:type_name -> blueapi.billing.v1.FreeFormItem
 	95,  // 76: blueapi.billing.v1.GetFreeFormatResponse.freeFormat:type_name -> blueapi.billing.v1.FreeFormItem
 	101, // 77: blueapi.billing.v1.UpdateTagsAddingSettingRequest.items:type_name -> blueapi.billing.v1.TagsAddingSetting
-	120, // 78: blueapi.billing.v1.AddBillingGroupCustomFieldRequest.idToKey:type_name -> blueapi.billing.v1.AddBillingGroupCustomFieldRequest.IdToKeyEntry
-	121, // 79: blueapi.billing.v1.SaveInvoiceSettingsRequest.grouIdToInvoiceSettings:type_name -> blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry
-	117, // 80: blueapi.billing.v1.AwsDailyRunHistory.Account.history:type_name -> blueapi.billing.v1.AwsDailyRunHistory.Account.History
-	140, // 81: blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting.chargingTarget:type_name -> blueapi.api.ripple.ChargingTarget
-	115, // 82: blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry.value:type_name -> blueapi.billing.v1.InvoiceSettings
-	4,   // 83: blueapi.billing.v1.Billing.ListBillingGroups:input_type -> blueapi.billing.v1.ListBillingGroupsRequest
-	5,   // 84: blueapi.billing.v1.Billing.CreateBillingGroup:input_type -> blueapi.billing.v1.CreateBillingGroupRequest
-	113, // 85: blueapi.billing.v1.Billing.AddAccountToBillingGroup:input_type -> blueapi.billing.v1.AddAccountToBillingGroupRequest
-	11,  // 86: blueapi.billing.v1.Billing.GetBillingGroup:input_type -> blueapi.billing.v1.GetBillingGroupRequest
-	14,  // 87: blueapi.billing.v1.Billing.GetAccessGroup:input_type -> blueapi.billing.v1.GetAccessGroupRequest
-	17,  // 88: blueapi.billing.v1.Billing.ListAwsDailyRunHistory:input_type -> blueapi.billing.v1.ListAwsDailyRunHistoryRequest
-	18,  // 89: blueapi.billing.v1.Billing.ListUsageCostsDrift:input_type -> blueapi.billing.v1.ListUsageCostsDriftRequest
-	40,  // 90: blueapi.billing.v1.Billing.CreateInvoice:input_type -> blueapi.billing.v1.CreateInvoiceRequest
-	114, // 91: blueapi.billing.v1.Billing.SaveInvoiceSettings:input_type -> blueapi.billing.v1.SaveInvoiceSettingsRequest
-	41,  // 92: blueapi.billing.v1.Billing.GetInvoiceStatus:input_type -> blueapi.billing.v1.GetInvoiceStatusRequest
-	42,  // 93: blueapi.billing.v1.Billing.ListInvoiceStatus:input_type -> blueapi.billing.v1.ListInvoiceStatusRequest
-	20,  // 94: blueapi.billing.v1.Billing.GetInvoice:input_type -> blueapi.billing.v1.GetInvoiceRequest
-	57,  // 95: blueapi.billing.v1.Billing.ListInvoice:input_type -> blueapi.billing.v1.ListInvoiceRequest
-	43,  // 96: blueapi.billing.v1.Billing.UpdateInvoicePreviews:input_type -> blueapi.billing.v1.UpdateInvoicePreviewsRequest
-	21,  // 97: blueapi.billing.v1.Billing.ExportInvoiceFile:input_type -> blueapi.billing.v1.ExportInvoiceFileRequest
-	27,  // 98: blueapi.billing.v1.Billing.ListInvoiceTemplate:input_type -> blueapi.billing.v1.ListInvoiceTemplateRequest
-	28,  // 99: blueapi.billing.v1.Billing.UpdateBillingGroupInvoiceTemplate:input_type -> blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest
-	23,  // 100: blueapi.billing.v1.Billing.ReadServiceDiscountsServices:input_type -> blueapi.billing.v1.ReadServiceDiscountsServicesRequest
-	80,  // 101: blueapi.billing.v1.Billing.CreateInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.CreateInvoiceServiceDiscountsRequest
-	81,  // 102: blueapi.billing.v1.Billing.UpdateInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest
-	82,  // 103: blueapi.billing.v1.Billing.DeleteInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.DeleteInvoiceServiceDiscountsRequest
-	24,  // 104: blueapi.billing.v1.Billing.ListInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ListInvoiceServiceDiscountsRequest
-	25,  // 105: blueapi.billing.v1.Billing.GetInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.GetInvoiceServiceDiscountsRequest
-	102, // 106: blueapi.billing.v1.Billing.ExportServiceDiscounts:input_type -> blueapi.billing.v1.ExportServiceDiscountsRequest
-	31,  // 107: blueapi.billing.v1.Billing.ListAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ListAccountInvoiceServiceDiscountsRequest
-	34,  // 108: blueapi.billing.v1.Billing.CreateAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.CreateAccountInvoiceServiceDiscountsRequest
-	36,  // 109: blueapi.billing.v1.Billing.UpdateAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.UpdateAccountInvoiceServiceDiscountsRequest
-	39,  // 110: blueapi.billing.v1.Billing.RemoveAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.RemoveAccountInvoiceServiceDiscountsRequest
-	38,  // 111: blueapi.billing.v1.Billing.DeleteAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.DeleteAccountInvoiceServiceDiscountsRequest
-	103, // 112: blueapi.billing.v1.Billing.ExportAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ExportAccountInvoiceServiceDiscountsRequest
-	104, // 113: blueapi.billing.v1.Billing.ExportBillingGroupInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ExportBillingGroupInvoiceServiceDiscountsRequest
-	109, // 114: blueapi.billing.v1.Billing.GetBillingGroupInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest
-	44,  // 115: blueapi.billing.v1.Billing.CreateReseller:input_type -> blueapi.billing.v1.CreateResellerRequest
-	45,  // 116: blueapi.billing.v1.Billing.ListResellers:input_type -> blueapi.billing.v1.ListResellersRequest
-	46,  // 117: blueapi.billing.v1.Billing.GetReseller:input_type -> blueapi.billing.v1.GetResellerRequest
-	47,  // 118: blueapi.billing.v1.Billing.UpdateReseller:input_type -> blueapi.billing.v1.UpdateResellerRequest
-	48,  // 119: blueapi.billing.v1.Billing.DeleteReseller:input_type -> blueapi.billing.v1.DeleteResellerRequest
-	49,  // 120: blueapi.billing.v1.Billing.GetBillingSetting:input_type -> blueapi.billing.v1.GetBillingSettingRequest
-	51,  // 121: blueapi.billing.v1.Billing.ListExchangeRates:input_type -> blueapi.billing.v1.ListExchangeRatesRequest
-	53,  // 122: blueapi.billing.v1.Billing.ListAccessGroups:input_type -> blueapi.billing.v1.ListAccessGroupsRequest
-	54,  // 123: blueapi.billing.v1.Billing.CreateAccessGroup:input_type -> blueapi.billing.v1.CreateAccessGroupRequest
-	55,  // 124: blueapi.billing.v1.Billing.UpdateAccessGroup:input_type -> blueapi.billing.v1.UpdateAccessGroupRequest
-	56,  // 125: blueapi.billing.v1.Billing.DeleteAccessGroup:input_type -> blueapi.billing.v1.DeleteAccessGroupRequest
-	59,  // 126: blueapi.billing.v1.Billing.ListAbcBillingGroups:input_type -> blueapi.billing.v1.ListAbcBillingGroupsRequest
-	60,  // 127: blueapi.billing.v1.Billing.ListAbcBillingGroupAccounts:input_type -> blueapi.billing.v1.ListAbcBillingGroupAccountsRequest
-	63,  // 128: blueapi.billing.v1.Billing.ReadInvoiceAdjustments:input_type -> blueapi.billing.v1.ReadInvoiceAdjustmentsRequest
-	64,  // 129: blueapi.billing.v1.Billing.ListAccountResources:input_type -> blueapi.billing.v1.ListAccountResourcesRequest
-	66,  // 130: blueapi.billing.v1.Billing.GetAdjustmentConfig:input_type -> blueapi.billing.v1.GetAdjustmentConfigRequest
-	67,  // 131: blueapi.billing.v1.Billing.CreateAdjustmentConfig:input_type -> blueapi.billing.v1.CreateAdjustmentConfigRequest
-	68,  // 132: blueapi.billing.v1.Billing.UpdateAdjustmentConfig:input_type -> blueapi.billing.v1.UpdateAdjustmentConfigRequest
-	69,  // 133: blueapi.billing.v1.Billing.DeleteAdjustmentConfig:input_type -> blueapi.billing.v1.DeleteAdjustmentConfigRequest
-	70,  // 134: blueapi.billing.v1.Billing.ReadUntaggedGroups:input_type -> blueapi.billing.v1.ReadUntaggedGroupsRequest
-	71,  // 135: blueapi.billing.v1.Billing.ReadCustomizedBillingServices:input_type -> blueapi.billing.v1.ReadCustomizedBillingServicesRequest
-	72,  // 136: blueapi.billing.v1.Billing.GetCustomizedBillingService:input_type -> blueapi.billing.v1.GetCustomizedBillingServiceRequest
-	73,  // 137: blueapi.billing.v1.Billing.CreateCustomizedBillingService:input_type -> blueapi.billing.v1.CreateCustomizedBillingServiceRequest
-	74,  // 138: blueapi.billing.v1.Billing.UpdateCustomizedBillingService:input_type -> blueapi.billing.v1.UpdateCustomizedBillingServiceRequest
-	75,  // 139: blueapi.billing.v1.Billing.DeleteCustomizedBillingService:input_type -> blueapi.billing.v1.DeleteCustomizedBillingServiceRequest
-	76,  // 140: blueapi.billing.v1.Billing.GetCustomizedBillingServiceBillingGroup:input_type -> blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupRequest
-	78,  // 141: blueapi.billing.v1.Billing.SetCustomizedBillingServiceBillingGroup:input_type -> blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest
-	79,  // 142: blueapi.billing.v1.Billing.DeleteCustomizedBillingServiceBillingGroup:input_type -> blueapi.billing.v1.DeleteCustomizedBillingServiceBillingGroupRequest
-	85,  // 143: blueapi.billing.v1.Billing.GetTags:input_type -> blueapi.billing.v1.GetTagsRequest
-	90,  // 144: blueapi.billing.v1.Billing.CreateCustomField:input_type -> blueapi.billing.v1.CreateCustomFieldRequest
-	93,  // 145: blueapi.billing.v1.Billing.ListCustomField:input_type -> blueapi.billing.v1.ListCustomFieldRequest
-	111, // 146: blueapi.billing.v1.Billing.AddBillingGroupCustomField:input_type -> blueapi.billing.v1.AddBillingGroupCustomFieldRequest
-	88,  // 147: blueapi.billing.v1.Billing.ListBillingGroupCustomField:input_type -> blueapi.billing.v1.ListBillingGroupCustomFieldRequest
-	112, // 148: blueapi.billing.v1.Billing.DeleteBillingGroupCustomField:input_type -> blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest
-	91,  // 149: blueapi.billing.v1.Billing.UpdateCustomField:input_type -> blueapi.billing.v1.UpdateCustomFieldRequest
-	92,  // 150: blueapi.billing.v1.Billing.DeleteCustomField:input_type -> blueapi.billing.v1.DeleteCustomFieldRequest
-	94,  // 151: blueapi.billing.v1.Billing.CreateFreeFormat:input_type -> blueapi.billing.v1.CreateFreeFormatRequest
-	96,  // 152: blueapi.billing.v1.Billing.DeleteFreeFormat:input_type -> blueapi.billing.v1.DeleteFreeFormatRequest
-	97,  // 153: blueapi.billing.v1.Billing.GetFreeFormat:input_type -> blueapi.billing.v1.GetFreeFormatRequest
-	100, // 154: blueapi.billing.v1.Billing.GetTagsAddingSetting:input_type -> blueapi.billing.v1.GetTagsAddingSettingRequest
-	99,  // 155: blueapi.billing.v1.Billing.UpdateTagsAddingSetting:input_type -> blueapi.billing.v1.UpdateTagsAddingSettingRequest
-	105, // 156: blueapi.billing.v1.Billing.ExportBillingGroupCsv:input_type -> blueapi.billing.v1.ExportBillingGroupCsvRequest
-	107, // 157: blueapi.billing.v1.Billing.ExportInvoiceSettingCsv:input_type -> blueapi.billing.v1.ExportInvoiceSettingCsvRequest
-	0,   // 158: blueapi.billing.v1.Billing.ListBillingGroups:output_type -> blueapi.billing.v1.BillingGroup
-	0,   // 159: blueapi.billing.v1.Billing.CreateBillingGroup:output_type -> blueapi.billing.v1.BillingGroup
-	142, // 160: blueapi.billing.v1.Billing.AddAccountToBillingGroup:output_type -> google.protobuf.Empty
-	12,  // 161: blueapi.billing.v1.Billing.GetBillingGroup:output_type -> blueapi.billing.v1.GetBillingGroupResponse
-	15,  // 162: blueapi.billing.v1.Billing.GetAccessGroup:output_type -> blueapi.billing.v1.GetAccessGroupResponse
-	16,  // 163: blueapi.billing.v1.Billing.ListAwsDailyRunHistory:output_type -> blueapi.billing.v1.AwsDailyRunHistory
-	19,  // 164: blueapi.billing.v1.Billing.ListUsageCostsDrift:output_type -> blueapi.billing.v1.UsageCostsDrift
-	143, // 165: blueapi.billing.v1.Billing.CreateInvoice:output_type -> blueapi.api.InvoiceMessage
-	142, // 166: blueapi.billing.v1.Billing.SaveInvoiceSettings:output_type -> google.protobuf.Empty
-	143, // 167: blueapi.billing.v1.Billing.GetInvoiceStatus:output_type -> blueapi.api.InvoiceMessage
-	143, // 168: blueapi.billing.v1.Billing.ListInvoiceStatus:output_type -> blueapi.api.InvoiceMessage
-	144, // 169: blueapi.billing.v1.Billing.GetInvoice:output_type -> blueapi.api.Invoice
-	58,  // 170: blueapi.billing.v1.Billing.ListInvoice:output_type -> blueapi.billing.v1.ListInvoiceResponse
-	142, // 171: blueapi.billing.v1.Billing.UpdateInvoicePreviews:output_type -> google.protobuf.Empty
-	22,  // 172: blueapi.billing.v1.Billing.ExportInvoiceFile:output_type -> blueapi.billing.v1.ExportInvoiceFileResponse
-	29,  // 173: blueapi.billing.v1.Billing.ListInvoiceTemplate:output_type -> blueapi.billing.v1.ListInvoiceTemplateResponse
-	142, // 174: blueapi.billing.v1.Billing.UpdateBillingGroupInvoiceTemplate:output_type -> google.protobuf.Empty
-	145, // 175: blueapi.billing.v1.Billing.ReadServiceDiscountsServices:output_type -> blueapi.api.ripple.v1.Service
-	127, // 176: blueapi.billing.v1.Billing.CreateInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
-	127, // 177: blueapi.billing.v1.Billing.UpdateInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
-	142, // 178: blueapi.billing.v1.Billing.DeleteInvoiceServiceDiscounts:output_type -> google.protobuf.Empty
-	26,  // 179: blueapi.billing.v1.Billing.ListInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.InvoiceServiceDiscounts
-	127, // 180: blueapi.billing.v1.Billing.GetInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
-	146, // 181: blueapi.billing.v1.Billing.ExportServiceDiscounts:output_type -> blueapi.api.ripple.v1.ServiceDiscountsExport
-	32,  // 182: blueapi.billing.v1.Billing.ListAccountInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.AccountInvoiceServiceDiscounts
-	35,  // 183: blueapi.billing.v1.Billing.CreateAccountInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.CreateAccountInvoiceServiceDiscountsResponse
-	37,  // 184: blueapi.billing.v1.Billing.UpdateAccountInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.UpdateAccountInvoiceServiceDiscountsResponse
-	142, // 185: blueapi.billing.v1.Billing.RemoveAccountInvoiceServiceDiscounts:output_type -> google.protobuf.Empty
-	142, // 186: blueapi.billing.v1.Billing.DeleteAccountInvoiceServiceDiscounts:output_type -> google.protobuf.Empty
-	147, // 187: blueapi.billing.v1.Billing.ExportAccountInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.AccountServiceDiscountsExport
-	148, // 188: blueapi.billing.v1.Billing.ExportBillingGroupInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.GroupServiceDiscountsExport
-	110, // 189: blueapi.billing.v1.Billing.GetBillingGroupInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsResponse
-	149, // 190: blueapi.billing.v1.Billing.CreateReseller:output_type -> blueapi.api.ripple.Reseller
-	149, // 191: blueapi.billing.v1.Billing.ListResellers:output_type -> blueapi.api.ripple.Reseller
-	149, // 192: blueapi.billing.v1.Billing.GetReseller:output_type -> blueapi.api.ripple.Reseller
-	149, // 193: blueapi.billing.v1.Billing.UpdateReseller:output_type -> blueapi.api.ripple.Reseller
-	142, // 194: blueapi.billing.v1.Billing.DeleteReseller:output_type -> google.protobuf.Empty
-	50,  // 195: blueapi.billing.v1.Billing.GetBillingSetting:output_type -> blueapi.billing.v1.GetBillingSettingResponse
-	52,  // 196: blueapi.billing.v1.Billing.ListExchangeRates:output_type -> blueapi.billing.v1.ListExchangeRatesResponse
-	150, // 197: blueapi.billing.v1.Billing.ListAccessGroups:output_type -> blueapi.api.ripple.AccessGroup
-	150, // 198: blueapi.billing.v1.Billing.CreateAccessGroup:output_type -> blueapi.api.ripple.AccessGroup
-	150, // 199: blueapi.billing.v1.Billing.UpdateAccessGroup:output_type -> blueapi.api.ripple.AccessGroup
-	142, // 200: blueapi.billing.v1.Billing.DeleteAccessGroup:output_type -> google.protobuf.Empty
-	61,  // 201: blueapi.billing.v1.Billing.ListAbcBillingGroups:output_type -> blueapi.billing.v1.AbcBillingGroup
-	62,  // 202: blueapi.billing.v1.Billing.ListAbcBillingGroupAccounts:output_type -> blueapi.billing.v1.AbcAccount
-	151, // 203: blueapi.billing.v1.Billing.ReadInvoiceAdjustments:output_type -> blueapi.api.wave.Adjustment
-	65,  // 204: blueapi.billing.v1.Billing.ListAccountResources:output_type -> blueapi.billing.v1.ResourceAccount
-	152, // 205: blueapi.billing.v1.Billing.GetAdjustmentConfig:output_type -> blueapi.api.AdjustmentConfig
-	152, // 206: blueapi.billing.v1.Billing.CreateAdjustmentConfig:output_type -> blueapi.api.AdjustmentConfig
-	152, // 207: blueapi.billing.v1.Billing.UpdateAdjustmentConfig:output_type -> blueapi.api.AdjustmentConfig
-	142, // 208: blueapi.billing.v1.Billing.DeleteAdjustmentConfig:output_type -> google.protobuf.Empty
-	153, // 209: blueapi.billing.v1.Billing.ReadUntaggedGroups:output_type -> blueapi.api.ripple.UntaggedGroup
-	139, // 210: blueapi.billing.v1.Billing.ReadCustomizedBillingServices:output_type -> blueapi.api.ripple.CustomizedBillingService
-	139, // 211: blueapi.billing.v1.Billing.GetCustomizedBillingService:output_type -> blueapi.api.ripple.CustomizedBillingService
-	139, // 212: blueapi.billing.v1.Billing.CreateCustomizedBillingService:output_type -> blueapi.api.ripple.CustomizedBillingService
-	139, // 213: blueapi.billing.v1.Billing.UpdateCustomizedBillingService:output_type -> blueapi.api.ripple.CustomizedBillingService
-	142, // 214: blueapi.billing.v1.Billing.DeleteCustomizedBillingService:output_type -> google.protobuf.Empty
-	77,  // 215: blueapi.billing.v1.Billing.GetCustomizedBillingServiceBillingGroup:output_type -> blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse
-	142, // 216: blueapi.billing.v1.Billing.SetCustomizedBillingServiceBillingGroup:output_type -> google.protobuf.Empty
-	142, // 217: blueapi.billing.v1.Billing.DeleteCustomizedBillingServiceBillingGroup:output_type -> google.protobuf.Empty
-	83,  // 218: blueapi.billing.v1.Billing.GetTags:output_type -> blueapi.billing.v1.TagData
-	86,  // 219: blueapi.billing.v1.Billing.CreateCustomField:output_type -> blueapi.billing.v1.CustomField
-	86,  // 220: blueapi.billing.v1.Billing.ListCustomField:output_type -> blueapi.billing.v1.CustomField
-	142, // 221: blueapi.billing.v1.Billing.AddBillingGroupCustomField:output_type -> google.protobuf.Empty
-	89,  // 222: blueapi.billing.v1.Billing.ListBillingGroupCustomField:output_type -> blueapi.billing.v1.ListBillingGroupCustomFieldResponse
-	142, // 223: blueapi.billing.v1.Billing.DeleteBillingGroupCustomField:output_type -> google.protobuf.Empty
-	86,  // 224: blueapi.billing.v1.Billing.UpdateCustomField:output_type -> blueapi.billing.v1.CustomField
-	142, // 225: blueapi.billing.v1.Billing.DeleteCustomField:output_type -> google.protobuf.Empty
-	142, // 226: blueapi.billing.v1.Billing.CreateFreeFormat:output_type -> google.protobuf.Empty
-	142, // 227: blueapi.billing.v1.Billing.DeleteFreeFormat:output_type -> google.protobuf.Empty
-	98,  // 228: blueapi.billing.v1.Billing.GetFreeFormat:output_type -> blueapi.billing.v1.GetFreeFormatResponse
-	101, // 229: blueapi.billing.v1.Billing.GetTagsAddingSetting:output_type -> blueapi.billing.v1.TagsAddingSetting
-	142, // 230: blueapi.billing.v1.Billing.UpdateTagsAddingSetting:output_type -> google.protobuf.Empty
-	106, // 231: blueapi.billing.v1.Billing.ExportBillingGroupCsv:output_type -> blueapi.billing.v1.ExportBillingGroupCsvResponse
-	108, // 232: blueapi.billing.v1.Billing.ExportInvoiceSettingCsv:output_type -> blueapi.billing.v1.ExportInvoiceSettingCsvResponse
-	158, // [158:233] is the sub-list for method output_type
-	83,  // [83:158] is the sub-list for method input_type
-	83,  // [83:83] is the sub-list for extension type_name
-	83,  // [83:83] is the sub-list for extension extendee
-	0,   // [0:83] is the sub-list for field type_name
+	125, // 78: blueapi.billing.v1.AddBillingGroupCustomFieldRequest.idToKey:type_name -> blueapi.billing.v1.AddBillingGroupCustomFieldRequest.IdToKeyEntry
+	115, // 79: blueapi.billing.v1.AddTagsToBillingGroupRequest.settings:type_name -> blueapi.billing.v1.TagSetting
+	117, // 80: blueapi.billing.v1.AddTagsToBillingGroupRequest.nonTagSetting:type_name -> blueapi.billing.v1.NonTagSetting
+	116, // 81: blueapi.billing.v1.TagSetting.tags:type_name -> blueapi.billing.v1.Tag
+	126, // 82: blueapi.billing.v1.SaveInvoiceSettingsRequest.grouIdToInvoiceSettings:type_name -> blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry
+	122, // 83: blueapi.billing.v1.AwsDailyRunHistory.Account.history:type_name -> blueapi.billing.v1.AwsDailyRunHistory.Account.History
+	145, // 84: blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting.chargingTarget:type_name -> blueapi.api.ripple.ChargingTarget
+	120, // 85: blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry.value:type_name -> blueapi.billing.v1.InvoiceSettings
+	4,   // 86: blueapi.billing.v1.Billing.ListBillingGroups:input_type -> blueapi.billing.v1.ListBillingGroupsRequest
+	5,   // 87: blueapi.billing.v1.Billing.CreateBillingGroup:input_type -> blueapi.billing.v1.CreateBillingGroupRequest
+	113, // 88: blueapi.billing.v1.Billing.AddAccountToBillingGroup:input_type -> blueapi.billing.v1.AddAccountToBillingGroupRequest
+	11,  // 89: blueapi.billing.v1.Billing.GetBillingGroup:input_type -> blueapi.billing.v1.GetBillingGroupRequest
+	14,  // 90: blueapi.billing.v1.Billing.GetAccessGroup:input_type -> blueapi.billing.v1.GetAccessGroupRequest
+	17,  // 91: blueapi.billing.v1.Billing.ListAwsDailyRunHistory:input_type -> blueapi.billing.v1.ListAwsDailyRunHistoryRequest
+	18,  // 92: blueapi.billing.v1.Billing.ListUsageCostsDrift:input_type -> blueapi.billing.v1.ListUsageCostsDriftRequest
+	40,  // 93: blueapi.billing.v1.Billing.CreateInvoice:input_type -> blueapi.billing.v1.CreateInvoiceRequest
+	119, // 94: blueapi.billing.v1.Billing.SaveInvoiceSettings:input_type -> blueapi.billing.v1.SaveInvoiceSettingsRequest
+	41,  // 95: blueapi.billing.v1.Billing.GetInvoiceStatus:input_type -> blueapi.billing.v1.GetInvoiceStatusRequest
+	42,  // 96: blueapi.billing.v1.Billing.ListInvoiceStatus:input_type -> blueapi.billing.v1.ListInvoiceStatusRequest
+	20,  // 97: blueapi.billing.v1.Billing.GetInvoice:input_type -> blueapi.billing.v1.GetInvoiceRequest
+	57,  // 98: blueapi.billing.v1.Billing.ListInvoice:input_type -> blueapi.billing.v1.ListInvoiceRequest
+	43,  // 99: blueapi.billing.v1.Billing.UpdateInvoicePreviews:input_type -> blueapi.billing.v1.UpdateInvoicePreviewsRequest
+	21,  // 100: blueapi.billing.v1.Billing.ExportInvoiceFile:input_type -> blueapi.billing.v1.ExportInvoiceFileRequest
+	27,  // 101: blueapi.billing.v1.Billing.ListInvoiceTemplate:input_type -> blueapi.billing.v1.ListInvoiceTemplateRequest
+	28,  // 102: blueapi.billing.v1.Billing.UpdateBillingGroupInvoiceTemplate:input_type -> blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest
+	23,  // 103: blueapi.billing.v1.Billing.ReadServiceDiscountsServices:input_type -> blueapi.billing.v1.ReadServiceDiscountsServicesRequest
+	80,  // 104: blueapi.billing.v1.Billing.CreateInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.CreateInvoiceServiceDiscountsRequest
+	81,  // 105: blueapi.billing.v1.Billing.UpdateInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest
+	82,  // 106: blueapi.billing.v1.Billing.DeleteInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.DeleteInvoiceServiceDiscountsRequest
+	24,  // 107: blueapi.billing.v1.Billing.ListInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ListInvoiceServiceDiscountsRequest
+	25,  // 108: blueapi.billing.v1.Billing.GetInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.GetInvoiceServiceDiscountsRequest
+	102, // 109: blueapi.billing.v1.Billing.ExportServiceDiscounts:input_type -> blueapi.billing.v1.ExportServiceDiscountsRequest
+	31,  // 110: blueapi.billing.v1.Billing.ListAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ListAccountInvoiceServiceDiscountsRequest
+	34,  // 111: blueapi.billing.v1.Billing.CreateAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.CreateAccountInvoiceServiceDiscountsRequest
+	36,  // 112: blueapi.billing.v1.Billing.UpdateAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.UpdateAccountInvoiceServiceDiscountsRequest
+	39,  // 113: blueapi.billing.v1.Billing.RemoveAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.RemoveAccountInvoiceServiceDiscountsRequest
+	38,  // 114: blueapi.billing.v1.Billing.DeleteAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.DeleteAccountInvoiceServiceDiscountsRequest
+	103, // 115: blueapi.billing.v1.Billing.ExportAccountInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ExportAccountInvoiceServiceDiscountsRequest
+	104, // 116: blueapi.billing.v1.Billing.ExportBillingGroupInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.ExportBillingGroupInvoiceServiceDiscountsRequest
+	109, // 117: blueapi.billing.v1.Billing.GetBillingGroupInvoiceServiceDiscounts:input_type -> blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest
+	44,  // 118: blueapi.billing.v1.Billing.CreateReseller:input_type -> blueapi.billing.v1.CreateResellerRequest
+	45,  // 119: blueapi.billing.v1.Billing.ListResellers:input_type -> blueapi.billing.v1.ListResellersRequest
+	46,  // 120: blueapi.billing.v1.Billing.GetReseller:input_type -> blueapi.billing.v1.GetResellerRequest
+	47,  // 121: blueapi.billing.v1.Billing.UpdateReseller:input_type -> blueapi.billing.v1.UpdateResellerRequest
+	48,  // 122: blueapi.billing.v1.Billing.DeleteReseller:input_type -> blueapi.billing.v1.DeleteResellerRequest
+	49,  // 123: blueapi.billing.v1.Billing.GetBillingSetting:input_type -> blueapi.billing.v1.GetBillingSettingRequest
+	51,  // 124: blueapi.billing.v1.Billing.ListExchangeRates:input_type -> blueapi.billing.v1.ListExchangeRatesRequest
+	53,  // 125: blueapi.billing.v1.Billing.ListAccessGroups:input_type -> blueapi.billing.v1.ListAccessGroupsRequest
+	54,  // 126: blueapi.billing.v1.Billing.CreateAccessGroup:input_type -> blueapi.billing.v1.CreateAccessGroupRequest
+	55,  // 127: blueapi.billing.v1.Billing.UpdateAccessGroup:input_type -> blueapi.billing.v1.UpdateAccessGroupRequest
+	56,  // 128: blueapi.billing.v1.Billing.DeleteAccessGroup:input_type -> blueapi.billing.v1.DeleteAccessGroupRequest
+	59,  // 129: blueapi.billing.v1.Billing.ListAbcBillingGroups:input_type -> blueapi.billing.v1.ListAbcBillingGroupsRequest
+	60,  // 130: blueapi.billing.v1.Billing.ListAbcBillingGroupAccounts:input_type -> blueapi.billing.v1.ListAbcBillingGroupAccountsRequest
+	63,  // 131: blueapi.billing.v1.Billing.ReadInvoiceAdjustments:input_type -> blueapi.billing.v1.ReadInvoiceAdjustmentsRequest
+	64,  // 132: blueapi.billing.v1.Billing.ListAccountResources:input_type -> blueapi.billing.v1.ListAccountResourcesRequest
+	66,  // 133: blueapi.billing.v1.Billing.GetAdjustmentConfig:input_type -> blueapi.billing.v1.GetAdjustmentConfigRequest
+	67,  // 134: blueapi.billing.v1.Billing.CreateAdjustmentConfig:input_type -> blueapi.billing.v1.CreateAdjustmentConfigRequest
+	68,  // 135: blueapi.billing.v1.Billing.UpdateAdjustmentConfig:input_type -> blueapi.billing.v1.UpdateAdjustmentConfigRequest
+	69,  // 136: blueapi.billing.v1.Billing.DeleteAdjustmentConfig:input_type -> blueapi.billing.v1.DeleteAdjustmentConfigRequest
+	70,  // 137: blueapi.billing.v1.Billing.ReadUntaggedGroups:input_type -> blueapi.billing.v1.ReadUntaggedGroupsRequest
+	71,  // 138: blueapi.billing.v1.Billing.ReadCustomizedBillingServices:input_type -> blueapi.billing.v1.ReadCustomizedBillingServicesRequest
+	72,  // 139: blueapi.billing.v1.Billing.GetCustomizedBillingService:input_type -> blueapi.billing.v1.GetCustomizedBillingServiceRequest
+	73,  // 140: blueapi.billing.v1.Billing.CreateCustomizedBillingService:input_type -> blueapi.billing.v1.CreateCustomizedBillingServiceRequest
+	74,  // 141: blueapi.billing.v1.Billing.UpdateCustomizedBillingService:input_type -> blueapi.billing.v1.UpdateCustomizedBillingServiceRequest
+	75,  // 142: blueapi.billing.v1.Billing.DeleteCustomizedBillingService:input_type -> blueapi.billing.v1.DeleteCustomizedBillingServiceRequest
+	76,  // 143: blueapi.billing.v1.Billing.GetCustomizedBillingServiceBillingGroup:input_type -> blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupRequest
+	78,  // 144: blueapi.billing.v1.Billing.SetCustomizedBillingServiceBillingGroup:input_type -> blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest
+	79,  // 145: blueapi.billing.v1.Billing.DeleteCustomizedBillingServiceBillingGroup:input_type -> blueapi.billing.v1.DeleteCustomizedBillingServiceBillingGroupRequest
+	85,  // 146: blueapi.billing.v1.Billing.GetTags:input_type -> blueapi.billing.v1.GetTagsRequest
+	90,  // 147: blueapi.billing.v1.Billing.CreateCustomField:input_type -> blueapi.billing.v1.CreateCustomFieldRequest
+	93,  // 148: blueapi.billing.v1.Billing.ListCustomField:input_type -> blueapi.billing.v1.ListCustomFieldRequest
+	111, // 149: blueapi.billing.v1.Billing.AddBillingGroupCustomField:input_type -> blueapi.billing.v1.AddBillingGroupCustomFieldRequest
+	88,  // 150: blueapi.billing.v1.Billing.ListBillingGroupCustomField:input_type -> blueapi.billing.v1.ListBillingGroupCustomFieldRequest
+	114, // 151: blueapi.billing.v1.Billing.AddTagsToBillingGroup:input_type -> blueapi.billing.v1.AddTagsToBillingGroupRequest
+	112, // 152: blueapi.billing.v1.Billing.DeleteBillingGroupCustomField:input_type -> blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest
+	91,  // 153: blueapi.billing.v1.Billing.UpdateCustomField:input_type -> blueapi.billing.v1.UpdateCustomFieldRequest
+	92,  // 154: blueapi.billing.v1.Billing.DeleteCustomField:input_type -> blueapi.billing.v1.DeleteCustomFieldRequest
+	94,  // 155: blueapi.billing.v1.Billing.CreateFreeFormat:input_type -> blueapi.billing.v1.CreateFreeFormatRequest
+	96,  // 156: blueapi.billing.v1.Billing.DeleteFreeFormat:input_type -> blueapi.billing.v1.DeleteFreeFormatRequest
+	97,  // 157: blueapi.billing.v1.Billing.GetFreeFormat:input_type -> blueapi.billing.v1.GetFreeFormatRequest
+	100, // 158: blueapi.billing.v1.Billing.GetTagsAddingSetting:input_type -> blueapi.billing.v1.GetTagsAddingSettingRequest
+	99,  // 159: blueapi.billing.v1.Billing.UpdateTagsAddingSetting:input_type -> blueapi.billing.v1.UpdateTagsAddingSettingRequest
+	105, // 160: blueapi.billing.v1.Billing.ExportBillingGroupCsv:input_type -> blueapi.billing.v1.ExportBillingGroupCsvRequest
+	107, // 161: blueapi.billing.v1.Billing.ExportInvoiceSettingCsv:input_type -> blueapi.billing.v1.ExportInvoiceSettingCsvRequest
+	0,   // 162: blueapi.billing.v1.Billing.ListBillingGroups:output_type -> blueapi.billing.v1.BillingGroup
+	0,   // 163: blueapi.billing.v1.Billing.CreateBillingGroup:output_type -> blueapi.billing.v1.BillingGroup
+	147, // 164: blueapi.billing.v1.Billing.AddAccountToBillingGroup:output_type -> google.protobuf.Empty
+	12,  // 165: blueapi.billing.v1.Billing.GetBillingGroup:output_type -> blueapi.billing.v1.GetBillingGroupResponse
+	15,  // 166: blueapi.billing.v1.Billing.GetAccessGroup:output_type -> blueapi.billing.v1.GetAccessGroupResponse
+	16,  // 167: blueapi.billing.v1.Billing.ListAwsDailyRunHistory:output_type -> blueapi.billing.v1.AwsDailyRunHistory
+	19,  // 168: blueapi.billing.v1.Billing.ListUsageCostsDrift:output_type -> blueapi.billing.v1.UsageCostsDrift
+	148, // 169: blueapi.billing.v1.Billing.CreateInvoice:output_type -> blueapi.api.InvoiceMessage
+	147, // 170: blueapi.billing.v1.Billing.SaveInvoiceSettings:output_type -> google.protobuf.Empty
+	148, // 171: blueapi.billing.v1.Billing.GetInvoiceStatus:output_type -> blueapi.api.InvoiceMessage
+	148, // 172: blueapi.billing.v1.Billing.ListInvoiceStatus:output_type -> blueapi.api.InvoiceMessage
+	149, // 173: blueapi.billing.v1.Billing.GetInvoice:output_type -> blueapi.api.Invoice
+	58,  // 174: blueapi.billing.v1.Billing.ListInvoice:output_type -> blueapi.billing.v1.ListInvoiceResponse
+	147, // 175: blueapi.billing.v1.Billing.UpdateInvoicePreviews:output_type -> google.protobuf.Empty
+	22,  // 176: blueapi.billing.v1.Billing.ExportInvoiceFile:output_type -> blueapi.billing.v1.ExportInvoiceFileResponse
+	29,  // 177: blueapi.billing.v1.Billing.ListInvoiceTemplate:output_type -> blueapi.billing.v1.ListInvoiceTemplateResponse
+	147, // 178: blueapi.billing.v1.Billing.UpdateBillingGroupInvoiceTemplate:output_type -> google.protobuf.Empty
+	150, // 179: blueapi.billing.v1.Billing.ReadServiceDiscountsServices:output_type -> blueapi.api.ripple.v1.Service
+	132, // 180: blueapi.billing.v1.Billing.CreateInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
+	132, // 181: blueapi.billing.v1.Billing.UpdateInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
+	147, // 182: blueapi.billing.v1.Billing.DeleteInvoiceServiceDiscounts:output_type -> google.protobuf.Empty
+	26,  // 183: blueapi.billing.v1.Billing.ListInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.InvoiceServiceDiscounts
+	132, // 184: blueapi.billing.v1.Billing.GetInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.InvoiceServiceDiscounts
+	151, // 185: blueapi.billing.v1.Billing.ExportServiceDiscounts:output_type -> blueapi.api.ripple.v1.ServiceDiscountsExport
+	32,  // 186: blueapi.billing.v1.Billing.ListAccountInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.AccountInvoiceServiceDiscounts
+	35,  // 187: blueapi.billing.v1.Billing.CreateAccountInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.CreateAccountInvoiceServiceDiscountsResponse
+	37,  // 188: blueapi.billing.v1.Billing.UpdateAccountInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.UpdateAccountInvoiceServiceDiscountsResponse
+	147, // 189: blueapi.billing.v1.Billing.RemoveAccountInvoiceServiceDiscounts:output_type -> google.protobuf.Empty
+	147, // 190: blueapi.billing.v1.Billing.DeleteAccountInvoiceServiceDiscounts:output_type -> google.protobuf.Empty
+	152, // 191: blueapi.billing.v1.Billing.ExportAccountInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.AccountServiceDiscountsExport
+	153, // 192: blueapi.billing.v1.Billing.ExportBillingGroupInvoiceServiceDiscounts:output_type -> blueapi.api.ripple.v1.GroupServiceDiscountsExport
+	110, // 193: blueapi.billing.v1.Billing.GetBillingGroupInvoiceServiceDiscounts:output_type -> blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsResponse
+	154, // 194: blueapi.billing.v1.Billing.CreateReseller:output_type -> blueapi.api.ripple.Reseller
+	154, // 195: blueapi.billing.v1.Billing.ListResellers:output_type -> blueapi.api.ripple.Reseller
+	154, // 196: blueapi.billing.v1.Billing.GetReseller:output_type -> blueapi.api.ripple.Reseller
+	154, // 197: blueapi.billing.v1.Billing.UpdateReseller:output_type -> blueapi.api.ripple.Reseller
+	147, // 198: blueapi.billing.v1.Billing.DeleteReseller:output_type -> google.protobuf.Empty
+	50,  // 199: blueapi.billing.v1.Billing.GetBillingSetting:output_type -> blueapi.billing.v1.GetBillingSettingResponse
+	52,  // 200: blueapi.billing.v1.Billing.ListExchangeRates:output_type -> blueapi.billing.v1.ListExchangeRatesResponse
+	155, // 201: blueapi.billing.v1.Billing.ListAccessGroups:output_type -> blueapi.api.ripple.AccessGroup
+	155, // 202: blueapi.billing.v1.Billing.CreateAccessGroup:output_type -> blueapi.api.ripple.AccessGroup
+	155, // 203: blueapi.billing.v1.Billing.UpdateAccessGroup:output_type -> blueapi.api.ripple.AccessGroup
+	147, // 204: blueapi.billing.v1.Billing.DeleteAccessGroup:output_type -> google.protobuf.Empty
+	61,  // 205: blueapi.billing.v1.Billing.ListAbcBillingGroups:output_type -> blueapi.billing.v1.AbcBillingGroup
+	62,  // 206: blueapi.billing.v1.Billing.ListAbcBillingGroupAccounts:output_type -> blueapi.billing.v1.AbcAccount
+	156, // 207: blueapi.billing.v1.Billing.ReadInvoiceAdjustments:output_type -> blueapi.api.wave.Adjustment
+	65,  // 208: blueapi.billing.v1.Billing.ListAccountResources:output_type -> blueapi.billing.v1.ResourceAccount
+	157, // 209: blueapi.billing.v1.Billing.GetAdjustmentConfig:output_type -> blueapi.api.AdjustmentConfig
+	157, // 210: blueapi.billing.v1.Billing.CreateAdjustmentConfig:output_type -> blueapi.api.AdjustmentConfig
+	157, // 211: blueapi.billing.v1.Billing.UpdateAdjustmentConfig:output_type -> blueapi.api.AdjustmentConfig
+	147, // 212: blueapi.billing.v1.Billing.DeleteAdjustmentConfig:output_type -> google.protobuf.Empty
+	158, // 213: blueapi.billing.v1.Billing.ReadUntaggedGroups:output_type -> blueapi.api.ripple.UntaggedGroup
+	144, // 214: blueapi.billing.v1.Billing.ReadCustomizedBillingServices:output_type -> blueapi.api.ripple.CustomizedBillingService
+	144, // 215: blueapi.billing.v1.Billing.GetCustomizedBillingService:output_type -> blueapi.api.ripple.CustomizedBillingService
+	144, // 216: blueapi.billing.v1.Billing.CreateCustomizedBillingService:output_type -> blueapi.api.ripple.CustomizedBillingService
+	144, // 217: blueapi.billing.v1.Billing.UpdateCustomizedBillingService:output_type -> blueapi.api.ripple.CustomizedBillingService
+	147, // 218: blueapi.billing.v1.Billing.DeleteCustomizedBillingService:output_type -> google.protobuf.Empty
+	77,  // 219: blueapi.billing.v1.Billing.GetCustomizedBillingServiceBillingGroup:output_type -> blueapi.billing.v1.GetCustomizedBillingServiceBillingGroupResponse
+	147, // 220: blueapi.billing.v1.Billing.SetCustomizedBillingServiceBillingGroup:output_type -> google.protobuf.Empty
+	147, // 221: blueapi.billing.v1.Billing.DeleteCustomizedBillingServiceBillingGroup:output_type -> google.protobuf.Empty
+	83,  // 222: blueapi.billing.v1.Billing.GetTags:output_type -> blueapi.billing.v1.TagData
+	86,  // 223: blueapi.billing.v1.Billing.CreateCustomField:output_type -> blueapi.billing.v1.CustomField
+	86,  // 224: blueapi.billing.v1.Billing.ListCustomField:output_type -> blueapi.billing.v1.CustomField
+	147, // 225: blueapi.billing.v1.Billing.AddBillingGroupCustomField:output_type -> google.protobuf.Empty
+	89,  // 226: blueapi.billing.v1.Billing.ListBillingGroupCustomField:output_type -> blueapi.billing.v1.ListBillingGroupCustomFieldResponse
+	147, // 227: blueapi.billing.v1.Billing.AddTagsToBillingGroup:output_type -> google.protobuf.Empty
+	147, // 228: blueapi.billing.v1.Billing.DeleteBillingGroupCustomField:output_type -> google.protobuf.Empty
+	86,  // 229: blueapi.billing.v1.Billing.UpdateCustomField:output_type -> blueapi.billing.v1.CustomField
+	147, // 230: blueapi.billing.v1.Billing.DeleteCustomField:output_type -> google.protobuf.Empty
+	147, // 231: blueapi.billing.v1.Billing.CreateFreeFormat:output_type -> google.protobuf.Empty
+	147, // 232: blueapi.billing.v1.Billing.DeleteFreeFormat:output_type -> google.protobuf.Empty
+	98,  // 233: blueapi.billing.v1.Billing.GetFreeFormat:output_type -> blueapi.billing.v1.GetFreeFormatResponse
+	101, // 234: blueapi.billing.v1.Billing.GetTagsAddingSetting:output_type -> blueapi.billing.v1.TagsAddingSetting
+	147, // 235: blueapi.billing.v1.Billing.UpdateTagsAddingSetting:output_type -> google.protobuf.Empty
+	106, // 236: blueapi.billing.v1.Billing.ExportBillingGroupCsv:output_type -> blueapi.billing.v1.ExportBillingGroupCsvResponse
+	108, // 237: blueapi.billing.v1.Billing.ExportInvoiceSettingCsv:output_type -> blueapi.billing.v1.ExportInvoiceSettingCsvResponse
+	162, // [162:238] is the sub-list for method output_type
+	86,  // [86:162] is the sub-list for method input_type
+	86,  // [86:86] is the sub-list for extension type_name
+	86,  // [86:86] is the sub-list for extension extendee
+	0,   // [0:86] is the sub-list for field type_name
 }
 
 func init() { file_billing_v1_billing_proto_init() }
@@ -10150,7 +10512,7 @@ func file_billing_v1_billing_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_billing_v1_billing_proto_rawDesc), len(file_billing_v1_billing_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   122,
+			NumMessages:   127,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

@@ -1203,6 +1203,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AddTagsToBillingGroupRequest"><span class="badge">M</span>AddTagsToBillingGroupRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AwsDailyRunHistory"><span class="badge">M</span>AwsDailyRunHistory</a>
                 </li>
               
@@ -1551,6 +1555,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.NonTagSetting"><span class="badge">M</span>NonTagSetting</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ReadCustomizedBillingServicesRequest"><span class="badge">M</span>ReadCustomizedBillingServicesRequest</a>
                 </li>
               
@@ -1587,6 +1595,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.SaveTagInvoiceSettingResponse"><span class="badge">M</span>SaveTagInvoiceSettingResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest"><span class="badge">M</span>SetCustomizedBillingServiceBillingGroupRequest</a>
                 </li>
               
@@ -1595,7 +1607,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.Tag"><span class="badge">M</span>Tag</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.TagData"><span class="badge">M</span>TagData</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.TagSetting"><span class="badge">M</span>TagSetting</a>
                 </li>
               
                 <li>
@@ -14434,6 +14454,51 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.AddTagsToBillingGroupRequest">AddTagsToBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Billing group internal Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Vendor (aws, azure, gcp) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>settings</td>
+                  <td><a href="#blueapi.billing.v1.TagSetting">TagSetting</a></td>
+                  <td>repeated</td>
+                  <td><p>Tag settings for different customer accounts </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nonTagSetting</td>
+                  <td><a href="#blueapi.billing.v1.NonTagSetting">NonTagSetting</a></td>
+                  <td></td>
+                  <td><p>Non-tag settings for the billing group </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.AwsDailyRunHistory">AwsDailyRunHistory</h3>
         <p>Streaming response message for the Billing.ListAwsDailyRunHistory rpc.</p>
 
@@ -17873,6 +17938,44 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.NonTagSetting">NonTagSetting</h3>
+        <p>Non-tag settings for a billing group for AddTagsToBillingGroup</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>include</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether non-tag settings are included </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Type of non-tag setting (&#34;percentage&#34; or &#34;fixed&#34;) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Amount value (percentage or fixed amount) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ReadCustomizedBillingServicesRequest">ReadCustomizedBillingServicesRequest</h3>
         <p>Request message for the Billing.ReadCustomizedBillingServices rpc.</p>
 
@@ -18172,6 +18275,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.SaveTagInvoiceSettingResponse">SaveTagInvoiceSettingResponse</h3>
+        <p>Response message for tag invoice setting operation for AddTagsToBillingGroup</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Status of the operation </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional error message if operation failed </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest">SetCustomizedBillingServiceBillingGroupRequest</h3>
         <p>Request message for the Billing.SetCustomizedBillingServiceBillingGroup rpc.</p>
 
@@ -18250,6 +18384,44 @@ Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`] </
 
         
       
+        <h3 id="blueapi.billing.v1.Tag">Tag</h3>
+        <p>Individual tag definition for AddTagsToBillingGroup</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Tag key </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Tag value </p></td>
+                </tr>
+              
+                <tr>
+                  <td>assign</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Assignment percentage (only used for non-tag assignments) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.TagData">TagData</h3>
         <p>Response for tag request</p>
 
@@ -18286,6 +18458,37 @@ Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`] </
                   <td><a href="#blueapi.billing.v1.Tags">Tags</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.TagSetting">TagSetting</h3>
+        <p>Settings for a specific customer account for AddTagsToBillingGroup</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Customer ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tags</td>
+                  <td><a href="#blueapi.billing.v1.Tag">Tag</a></td>
+                  <td>repeated</td>
+                  <td><p>Tags associated with this customer </p></td>
                 </tr>
               
             </tbody>
@@ -19367,6 +19570,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>AddTagsToBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.AddTagsToBillingGroupRequest">AddTagsToBillingGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Add Tags to the billing group</p></td>
+              </tr>
+            
+              <tr>
                 <td>DeleteBillingGroupCustomField</td>
                 <td><a href="#blueapi.billing.v1.DeleteBillingGroupCustomFieldRequest">DeleteBillingGroupCustomFieldRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
@@ -20100,6 +20310,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListBillingGroupCustomField</td>
                 <td>POST</td>
                 <td>/v1/billinggroup/customfield:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AddTagsToBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/billinggroup/tags</td>
                 <td>*</td>
               </tr>
               
