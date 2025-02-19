@@ -1223,6 +1223,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BasicInformation"><span class="badge">M</span>BasicInformation</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BillingGroup"><span class="badge">M</span>BillingGroup</a>
                 </li>
               
@@ -1304,6 +1308,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.CustomField"><span class="badge">M</span>CustomField</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CustomFields"><span class="badge">M</span>CustomFields</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CustomFields.IdToKeyEntry"><span class="badge">M</span>CustomFields.IdToKeyEntry</a>
                 </li>
               
                 <li>
@@ -1652,6 +1664,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest"><span class="badge">M</span>UpdateAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupBasicInformationRequest"><span class="badge">M</span>UpdateBillingGroupBasicInformationRequest</a>
                 </li>
               
                 <li>
@@ -14657,6 +14673,93 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.BasicInformation">BasicInformation</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>addressee</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>country</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>postalCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>city</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phoneNumber</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>addressLine1</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>addressLine2</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BillingGroup">BillingGroup</h3>
         <p></p>
 
@@ -15811,6 +15914,61 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Detailed description of the custom field </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CustomFields">CustomFields</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>idToKey</td>
+                  <td><a href="#blueapi.billing.v1.CustomFields.IdToKeyEntry">CustomFields.IdToKeyEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CustomFields.IdToKeyEntry">CustomFields.IdToKeyEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -18826,6 +18984,44 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupBasicInformationRequest">UpdateBillingGroupBasicInformationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>basicInformation</td>
+                  <td><a href="#blueapi.billing.v1.BasicInformation">BasicInformation</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customFields</td>
+                  <td><a href="#blueapi.billing.v1.CustomFields">CustomFields</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest">UpdateBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the UpdateBillingGroupInvoiceServiceDiscounts rpc.</p>
 
@@ -19837,6 +20033,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Exports the invoice settings into csv format</p></td>
               </tr>
             
+              <tr>
+                <td>UpdateBillingGroupBasicInformation</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupBasicInformationRequest">UpdateBillingGroupBasicInformationRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Update billing group basic information</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -20642,6 +20845,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>GET</td>
                 <td>/v1/exportcsv/invoice-setting</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupBasicInformation</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup</td>
+                <td>*</td>
               </tr>
               
             
