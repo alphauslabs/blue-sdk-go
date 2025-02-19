@@ -1311,14 +1311,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.CustomFields"><span class="badge">M</span>CustomFields</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.CustomFields.IdToKeyEntry"><span class="badge">M</span>CustomFields.IdToKeyEntry</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.DeleteAccessGroupRequest"><span class="badge">M</span>DeleteAccessGroupRequest</a>
                 </li>
               
@@ -14707,7 +14699,7 @@ Only available in Wave(Pro).</p></td>
                 <tr>
                   <td>addressee</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -14735,21 +14727,35 @@ Only available in Wave(Pro).</p></td>
                 <tr>
                   <td>phoneNumber</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>addressLine1</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>addressLine2</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>state</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prefecture</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -15914,61 +15920,6 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Detailed description of the custom field </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.CustomFields">CustomFields</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>idToKey</td>
-                  <td><a href="#blueapi.billing.v1.CustomFields.IdToKeyEntry">CustomFields.IdToKeyEntry</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.CustomFields.IdToKeyEntry">CustomFields.IdToKeyEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -18995,7 +18946,7 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
             <tbody>
               
                 <tr>
-                  <td>billingInternalId</td>
+                  <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -19004,14 +18955,7 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                 <tr>
                   <td>basicInformation</td>
                   <td><a href="#blueapi.billing.v1.BasicInformation">BasicInformation</a></td>
-                  <td>optional</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>customFields</td>
-                  <td><a href="#blueapi.billing.v1.CustomFields">CustomFields</a></td>
-                  <td>optional</td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -20853,7 +20797,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>UpdateBillingGroupBasicInformation</td>
                 <td>PUT</td>
-                <td>/v1/billinggroup</td>
+                <td>/v1/billinggroup/{id}:basinInfo</td>
                 <td>*</td>
               </tr>
               
