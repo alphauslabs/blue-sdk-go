@@ -145,13 +145,13 @@ type BillingClient interface {
 	ListInvoiceTemplate(ctx context.Context, in *ListInvoiceTemplateRequest, opts ...grpc.CallOption) (Billing_ListInvoiceTemplateClient, error)
 	// Creates/Updates a billing group's invoice template. Only available in Ripple.
 	UpdateBillingGroupInvoiceTemplate(ctx context.Context, in *UpdateBillingGroupInvoiceTemplateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
+	// Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(ctx context.Context, in *ReadServiceDiscountsServicesRequest, opts ...grpc.CallOption) (Billing_ReadServiceDiscountsServicesClient, error)
-	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
+	// Creates the invoice service discounts. Only available in Ripple.
 	CreateInvoiceServiceDiscounts(ctx context.Context, in *CreateInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error)
-	// WORK-IN-PROGRESS: Updates the invoice service discounts. Only available in Ripple.
+	// Updates the invoice service discounts. Only available in Ripple.
 	UpdateInvoiceServiceDiscounts(ctx context.Context, in *UpdateInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error)
-	// WORK-IN-PROGRESS: Deletes the invoice service discounts. Only available in Ripple.
+	// Deletes the invoice service discounts. Only available in Ripple.
 	DeleteInvoiceServiceDiscounts(ctx context.Context, in *DeleteInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
@@ -1650,13 +1650,13 @@ type BillingServer interface {
 	ListInvoiceTemplate(*ListInvoiceTemplateRequest, Billing_ListInvoiceTemplateServer) error
 	// Creates/Updates a billing group's invoice template. Only available in Ripple.
 	UpdateBillingGroupInvoiceTemplate(context.Context, *UpdateBillingGroupInvoiceTemplateRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Reads the service relate to the service discounts. Only available in Ripple.
+	// Reads the service relate to the service discounts. Only available in Ripple.
 	ReadServiceDiscountsServices(*ReadServiceDiscountsServicesRequest, Billing_ReadServiceDiscountsServicesServer) error
-	// WORK-IN-PROGRESS: Creates the invoice service discounts. Only available in Ripple.
+	// Creates the invoice service discounts. Only available in Ripple.
 	CreateInvoiceServiceDiscounts(context.Context, *CreateInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error)
-	// WORK-IN-PROGRESS: Updates the invoice service discounts. Only available in Ripple.
+	// Updates the invoice service discounts. Only available in Ripple.
 	UpdateInvoiceServiceDiscounts(context.Context, *UpdateInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error)
-	// WORK-IN-PROGRESS: Deletes the invoice service discounts. Only available in Ripple.
+	// Deletes the invoice service discounts. Only available in Ripple.
 	DeleteInvoiceServiceDiscounts(context.Context, *DeleteInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Reads the invoice service discounts. Only available in Ripple.
 	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
