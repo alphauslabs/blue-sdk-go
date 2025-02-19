@@ -7717,7 +7717,7 @@ type ReadInvoiceGroupCostsRequest struct {
 	EndTime string `protobuf:"bytes,2,opt,name=endTime,proto3" json:"endTime,omitempty"`
 	// Optional. Set to US dollars (USD) by default (AWS CUR's default currency). You can set it to the desired three-letter currency symbol (i.e. JPY, EUR, GBP), in which case, it will use the latest exchange rates provided by https://fixer.io. If you prefer a custom exchange rate, you can append the rate to the currency's three-letter symbol. For example, `JPY:110.622` for the Japanese Yen. Note that the exchange rate should be against the US dollar (USD).
 	ToCurrency string `protobuf:"bytes,3,opt,name=toCurrency,proto3" json:"toCurrency,omitempty"`
-	// Optional. Number of acquisitions. default:10.
+	// Optional. Number of acquisitions. default:10０.
 	Limit         int32 `protobuf:"varint,4,opt,name=limit,proto3" json:"limit,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
