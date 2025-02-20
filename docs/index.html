@@ -1575,6 +1575,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.NonTagGroupSetting"><span class="badge">M</span>NonTagGroupSetting</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.NonTagSetting"><span class="badge">M</span>NonTagSetting</a>
                 </li>
               
@@ -1692,6 +1696,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateInvoiceServiceDiscountsRequest"><span class="badge">M</span>UpdateInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateNonTagGroupToBillingGroupRequest"><span class="badge">M</span>UpdateNonTagGroupToBillingGroupRequest</a>
                 </li>
               
                 <li>
@@ -18184,6 +18192,44 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.NonTagGroupSetting">NonTagGroupSetting</h3>
+        <p>Individual non-tag group setting for UpdateNonTagGroupToBillingGroup</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The non-tag group ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The type of setting (percentage or fixed) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Required. The amount value for either percentage or fixed amount </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.NonTagSetting">NonTagSetting</h3>
         <p>Non-tag settings for a billing group for AddTagsToBillingGroup</p>
 
@@ -19251,6 +19297,44 @@ specified and non-empty. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateNonTagGroupToBillingGroupRequest">UpdateNonTagGroupToBillingGroupRequest</h3>
+        <p>Request message for updating non-tag group settings for a billing group for UpdateNonTagGroupToBillingGroup</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group&#39;s internal id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The vendor (aws, azure, etc) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>settings</td>
+                  <td><a href="#blueapi.billing.v1.NonTagGroupSetting">NonTagGroupSetting</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. The settings to update </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateResellerRequest">UpdateResellerRequest</h3>
         <p>Request message for the UpdateReseller rpc.</p>
 
@@ -19933,6 +20017,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><a href="#blueapi.billing.v1.AddTagsToBillingGroupRequest">AddTagsToBillingGroupRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>Add Tags to the billing group</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateNonTagGroupToBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.UpdateNonTagGroupToBillingGroupRequest">UpdateNonTagGroupToBillingGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Sets non-tag group settings for a billing group.</p></td>
               </tr>
             
               <tr>
@@ -20716,6 +20807,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>AddTagsToBillingGroup</td>
                 <td>POST</td>
                 <td>/v1/billinggroup/tags</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateNonTagGroupToBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/billinggroup/{id}/{vendor}/untaggedgroups</td>
                 <td>*</td>
               </tr>
               
