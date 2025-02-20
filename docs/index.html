@@ -1475,6 +1475,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.InvoiceAdditionalItems"><span class="badge">M</span>InvoiceAdditionalItems</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.InvoiceConnectedBillingGroups"><span class="badge">M</span>InvoiceConnectedBillingGroups</a>
                 </li>
               
@@ -17179,6 +17183,37 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.InvoiceAdditionalItems">InvoiceAdditionalItems</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>price</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.InvoiceConnectedBillingGroups">InvoiceConnectedBillingGroups</h3>
         <p>Response message to be used for ListInvoiceTemplateResponse</p>
 
@@ -17420,16 +17455,9 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                 </tr>
               
                 <tr>
-                  <td>searchId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>additionalItems</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
+                  <td><a href="#blueapi.billing.v1.InvoiceAdditionalItems">InvoiceAdditionalItems</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
