@@ -1671,6 +1671,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupCustomFieldsRequest"><span class="badge">M</span>UpdateBillingGroupCustomFieldsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupCustomFieldsRequest.IdToKeyEntry"><span class="badge">M</span>UpdateBillingGroupCustomFieldsRequest.IdToKeyEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>UpdateBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -19040,6 +19048,68 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupCustomFieldsRequest">UpdateBillingGroupCustomFieldsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>idToKey</td>
+                  <td><a href="#blueapi.billing.v1.UpdateBillingGroupCustomFieldsRequest.IdToKeyEntry">UpdateBillingGroupCustomFieldsRequest.IdToKeyEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupCustomFieldsRequest.IdToKeyEntry">UpdateBillingGroupCustomFieldsRequest.IdToKeyEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest">UpdateBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the UpdateBillingGroupInvoiceServiceDiscounts rpc.</p>
 
@@ -20103,6 +20173,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Update billing group basic information</p></td>
               </tr>
             
+              <tr>
+                <td>UpdateBillingGroupCustomFields</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupCustomFieldsRequest">UpdateBillingGroupCustomFieldsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Update billing group basic information</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -20927,6 +21004,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateBillingGroupBasicInformation</td>
                 <td>PUT</td>
                 <td>/v1/billinggroup/{id}:basinInfo</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupCustomFields</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup/{id}:customFields</td>
                 <td>*</td>
               </tr>
               

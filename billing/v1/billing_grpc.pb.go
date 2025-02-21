@@ -105,6 +105,7 @@ const (
 	Billing_ExportBillingGroupCsv_FullMethodName                      = "/blueapi.billing.v1.Billing/ExportBillingGroupCsv"
 	Billing_ExportInvoiceSettingCsv_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
 	Billing_UpdateBillingGroupBasicInformation_FullMethodName         = "/blueapi.billing.v1.Billing/UpdateBillingGroupBasicInformation"
+	Billing_UpdateBillingGroupCustomFields_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateBillingGroupCustomFields"
 )
 
 // BillingClient is the client API for Billing service.
@@ -287,6 +288,8 @@ type BillingClient interface {
 	ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (*ExportInvoiceSettingCsvResponse, error)
 	// Update billing group basic information
 	UpdateBillingGroupBasicInformation(ctx context.Context, in *UpdateBillingGroupBasicInformationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Update billing group basic information
+	UpdateBillingGroupCustomFields(ctx context.Context, in *UpdateBillingGroupCustomFieldsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -1636,6 +1639,16 @@ func (c *billingClient) UpdateBillingGroupBasicInformation(ctx context.Context, 
 	return out, nil
 }
 
+func (c *billingClient) UpdateBillingGroupCustomFields(ctx context.Context, in *UpdateBillingGroupCustomFieldsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateBillingGroupCustomFields_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1816,6 +1829,8 @@ type BillingServer interface {
 	ExportInvoiceSettingCsv(context.Context, *ExportInvoiceSettingCsvRequest) (*ExportInvoiceSettingCsvResponse, error)
 	// Update billing group basic information
 	UpdateBillingGroupBasicInformation(context.Context, *UpdateBillingGroupBasicInformationRequest) (*emptypb.Empty, error)
+	// Update billing group basic information
+	UpdateBillingGroupCustomFields(context.Context, *UpdateBillingGroupCustomFieldsRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2065,6 +2080,9 @@ func (UnimplementedBillingServer) ExportInvoiceSettingCsv(context.Context, *Expo
 }
 func (UnimplementedBillingServer) UpdateBillingGroupBasicInformation(context.Context, *UpdateBillingGroupBasicInformationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupBasicInformation not implemented")
+}
+func (UnimplementedBillingServer) UpdateBillingGroupCustomFields(context.Context, *UpdateBillingGroupCustomFieldsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupCustomFields not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -3606,6 +3624,24 @@ func _Billing_UpdateBillingGroupBasicInformation_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_UpdateBillingGroupCustomFields_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBillingGroupCustomFieldsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateBillingGroupCustomFields(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateBillingGroupCustomFields_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateBillingGroupCustomFields(ctx, req.(*UpdateBillingGroupCustomFieldsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3844,6 +3880,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBillingGroupBasicInformation",
 			Handler:    _Billing_UpdateBillingGroupBasicInformation_Handler,
+		},
+		{
+			MethodName: "UpdateBillingGroupCustomFields",
+			Handler:    _Billing_UpdateBillingGroupCustomFields_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
