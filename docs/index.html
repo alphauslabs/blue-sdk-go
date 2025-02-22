@@ -3055,6 +3055,14 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.flow.v1.CreateSettingsRequest"><span class="badge">M</span>CreateSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateSettingsResponse"><span class="badge">M</span>CreateSettingsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
                 </li>
               
@@ -35222,6 +35230,110 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
       <p></p>
 
       
+        <h3 id="blueapi.flow.v1.CreateSettingsRequest">CreateSettingsRequest</h3>
+        <p>Request message for the Flow.CreateSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the payer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customization</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Customization setting for SP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTerm</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Term of the SP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Payment option for the SP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookBackPeriod</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Lookback period for recommendation. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. If EC2 Instance SP is selected in Customization, request will include list/s of instance family </p></td>
+                </tr>
+              
+                <tr>
+                  <td>annualBudget</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Annual budget input for SP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyBudget</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Monthly budget is automatically generated from the annual budget. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approval</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Required. Purchase approval from the payer for the SP. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateSettingsResponse">CreateSettingsResponse</h3>
+        <p>Response message for the Flow.CreateSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.GetInfoRequest">GetInfoRequest</h3>
         <p>Request message for the Flow.GetInfo rpc.</p>
 
@@ -35274,6 +35386,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>For Testing Purposes Only.</p></td>
               </tr>
             
+              <tr>
+                <td>CreateSettings</td>
+                <td><a href="#blueapi.flow.v1.CreateSettingsRequest">CreateSettingsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.CreateSettingsResponse">CreateSettingsResponse</a></td>
+                <td><p>Creates a new settings configuration for the user.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -35299,6 +35418,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GET</td>
                 <td>/v1/info</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateSettings</td>
+                <td>POST</td>
+                <td>/v1/settings:create</td>
+                <td>*</td>
               </tr>
               
             

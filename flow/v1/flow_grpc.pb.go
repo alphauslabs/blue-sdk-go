@@ -19,7 +19,8 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Flow_GetInfo_FullMethodName = "/blueapi.flow.v1.Flow/GetInfo"
+	Flow_GetInfo_FullMethodName        = "/blueapi.flow.v1.Flow/GetInfo"
+	Flow_CreateSettings_FullMethodName = "/blueapi.flow.v1.Flow/CreateSettings"
 )
 
 // FlowClient is the client API for Flow service.
@@ -30,6 +31,8 @@ const (
 type FlowClient interface {
 	// For Testing Purposes Only.
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
+	// Creates a new settings configuration for the user.
+	CreateSettings(ctx context.Context, in *CreateSettingsRequest, opts ...grpc.CallOption) (*CreateSettingsResponse, error)
 }
 
 type flowClient struct {
@@ -50,6 +53,16 @@ func (c *flowClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...gr
 	return out, nil
 }
 
+func (c *flowClient) CreateSettings(ctx context.Context, in *CreateSettingsRequest, opts ...grpc.CallOption) (*CreateSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateSettingsResponse)
+	err := c.cc.Invoke(ctx, Flow_CreateSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -58,6 +71,8 @@ func (c *flowClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...gr
 type FlowServer interface {
 	// For Testing Purposes Only.
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
+	// Creates a new settings configuration for the user.
+	CreateSettings(context.Context, *CreateSettingsRequest) (*CreateSettingsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -67,6 +82,9 @@ type UnimplementedFlowServer struct {
 
 func (UnimplementedFlowServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
+}
+func (UnimplementedFlowServer) CreateSettings(context.Context, *CreateSettingsRequest) (*CreateSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSettings not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -99,6 +117,24 @@ func _Flow_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_CreateSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).CreateSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_CreateSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).CreateSettings(ctx, req.(*CreateSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -109,6 +145,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetInfo",
 			Handler:    _Flow_GetInfo_Handler,
+		},
+		{
+			MethodName: "CreateSettings",
+			Handler:    _Flow_CreateSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
