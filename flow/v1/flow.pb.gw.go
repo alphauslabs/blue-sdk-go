@@ -109,7 +109,7 @@ func RegisterFlowHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/CreateSettings", runtime.WithHTTPPathPattern("/v1/settings:create"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/CreateSettings", runtime.WithHTTPPathPattern("/v1/settings"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -184,7 +184,7 @@ func RegisterFlowHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/CreateSettings", runtime.WithHTTPPathPattern("/v1/settings:create"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/CreateSettings", runtime.WithHTTPPathPattern("/v1/settings"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -202,7 +202,7 @@ func RegisterFlowHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 
 var (
 	pattern_Flow_GetInfo_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "info"}, ""))
-	pattern_Flow_CreateSettings_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "settings"}, "create"))
+	pattern_Flow_CreateSettings_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "settings"}, ""))
 )
 
 var (
