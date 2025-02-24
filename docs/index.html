@@ -1191,6 +1191,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AccountToAdd"><span class="badge">M</span>AccountToAdd</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AddAccountToBillingGroupRequest"><span class="badge">M</span>AddAccountToBillingGroupRequest</a>
                 </li>
               
@@ -14389,8 +14393,8 @@ Only available in Wave(Pro).</p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.AddAccountToBillingGroupRequest">AddAccountToBillingGroupRequest</h3>
-        <p></p>
+        <h3 id="blueapi.billing.v1.AccountToAdd">AccountToAdd</h3>
+        <p>New message for account details</p>
 
         
           <table class="field-table">
@@ -14398,20 +14402,6 @@ Only available in Wave(Pro).</p></td>
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
-              
-                <tr>
-                  <td>groupId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. BillingGroupInternalId </p></td>
-                </tr>
-              
-                <tr>
-                  <td>vendor</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. (aws, azure, gcp) </p></td>
-                </tr>
               
                 <tr>
                   <td>customerId</td>
@@ -14439,6 +14429,44 @@ Only available in Wave(Pro).</p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. Addition description or notes </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.AddAccountToBillingGroupRequest">AddAccountToBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. BillingGroupInternalId </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. (aws, azure, gcp) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.billing.v1.AccountToAdd">AccountToAdd</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. List of accounts to be added to the billing group </p></td>
                 </tr>
               
             </tbody>
