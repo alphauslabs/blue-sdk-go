@@ -17370,18 +17370,11 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., aws, azure, gcp </p></td>
                 </tr>
               
                 <tr>
                   <td>invoiceNo</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>currency</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -17398,14 +17391,14 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>discountTargetUsage</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., cloudpaywithfee, ... </p></td>
                 </tr>
               
                 <tr>
                   <td>discountCalcLogic</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., usageamount, ... </p></td>
                 </tr>
               
                 <tr>
@@ -17419,7 +17412,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>supportFee</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., percent, fix, aws_developer, aws_business, aws_enterprise </p></td>
                 </tr>
               
                 <tr>
@@ -17433,7 +17426,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>supportFeeCalcTarget</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., nondiscount, ... </p></td>
                 </tr>
               
                 <tr>
@@ -17447,7 +17440,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>substitutionFee</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., percent, fix, automatic, usagetable </p></td>
                 </tr>
               
                 <tr>
@@ -17468,28 +17461,36 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>substitutionFeeCalcTarget</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., nondiscount, ... </p></td>
                 </tr>
               
                 <tr>
                   <td>substitutionFeeTargetUsage</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., cloudpayonly, cloudpaywithfee </p></td>
                 </tr>
               
                 <tr>
                   <td>substitutionFeeCalcType</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., allsum, account </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Currency used for the invoice (e.g., &#34;jpy&#34;, &#34;inr&#34;) </p></td>
                 </tr>
               
                 <tr>
                   <td>exchangeRate</td>
                   <td><a href="#float">float</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Exchange rate from USD to the invoice currency
+Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeRate = 150 </p></td>
                 </tr>
               
                 <tr>
@@ -17503,7 +17504,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>calcType</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>e.g., account, tag </p></td>
                 </tr>
               
                 <tr>
