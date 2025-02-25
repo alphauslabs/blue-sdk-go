@@ -1227,6 +1227,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AzureOptions"><span class="badge">M</span>AzureOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BasicInformation"><span class="badge">M</span>BasicInformation</a>
                 </li>
               
@@ -1272,6 +1276,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsResponse"><span class="badge">M</span>CreateBillingGroupInvoiceServiceDiscountsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CreateBillingGroupMergedRequest"><span class="badge">M</span>CreateBillingGroupMergedRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CreateBillingGroupMergedRequest.CustomFieldsEntry"><span class="badge">M</span>CreateBillingGroupMergedRequest.CustomFieldsEntry</a>
                 </li>
               
                 <li>
@@ -1728,6 +1740,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UsageCostsDrift"><span class="badge">M</span>UsageCostsDrift</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.VendorAccounts"><span class="badge">M</span>VendorAccounts</a>
                 </li>
               
               
@@ -14725,6 +14741,44 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.AzureOptions">AzureOptions</h3>
+        <p>Optional. Azure-specific options</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>resourceGroup</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether to use resource groups </p></td>
+                </tr>
+              
+                <tr>
+                  <td>applyPcEarnedCredit</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether to apply partner-earned credit </p></td>
+                </tr>
+              
+                <tr>
+                  <td>applyCampaignPricing</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether to apply campaign pricing </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BasicInformation">BasicInformation</h3>
         <p></p>
 
@@ -15365,6 +15419,229 @@ Service discount id. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Service discount id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CreateBillingGroupMergedRequest">CreateBillingGroupMergedRequest</h3>
+        <p>Request message for the CreateBillingGroupMerged rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group&#39;s id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group&#39;s name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Company&#39;s name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingTitle</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The title of the billing </p></td>
+                </tr>
+              
+                <tr>
+                  <td>phoneNumber</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Company&#39;s phone number </p></td>
+                </tr>
+              
+                <tr>
+                  <td>postalCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Company&#39;s postal code </p></td>
+                </tr>
+              
+                <tr>
+                  <td>address</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Company&#39;s address </p></td>
+                </tr>
+              
+                <tr>
+                  <td>personal</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Addressee </p></td>
+                </tr>
+              
+                <tr>
+                  <td>remarks</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Any remarks about the billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>projectId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Project code </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Invoice language </p></td>
+                </tr>
+              
+                <tr>
+                  <td>displayCost</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Calculation type, true unblended or unblended </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRateType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Exchange rate type, payer or billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountOptions</td>
+                  <td><a href="#blueapi.billing.v1.AccountOptions">AccountOptions</a></td>
+                  <td></td>
+                  <td><p>Optional. Account options. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoices</td>
+                  <td><a href="#blueapi.billing.v1.CreateBillingGroupRequestInvoice">CreateBillingGroupRequestInvoice</a></td>
+                  <td></td>
+                  <td><p>Invoice settings </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsOptions</td>
+                  <td><a href="#blueapi.billing.v1.AwsOptions">AwsOptions</a></td>
+                  <td></td>
+                  <td><p>Optional. AWS-specific options </p></td>
+                </tr>
+              
+                <tr>
+                  <td>city</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Company&#39;s city </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prefecture</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Company&#39;s prefecture </p></td>
+                </tr>
+              
+                <tr>
+                  <td>country</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Company&#39;s country </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceTemplateId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Invoice template ID to associate with the billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tagSettings</td>
+                  <td><a href="#blueapi.billing.v1.TagSetting">TagSetting</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Tag settings for the billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nonTagSetting</td>
+                  <td><a href="#blueapi.billing.v1.NonTagSetting">NonTagSetting</a></td>
+                  <td></td>
+                  <td><p>Optional. Non-tag setting for the billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendorAccounts</td>
+                  <td><a href="#blueapi.billing.v1.VendorAccounts">VendorAccounts</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customFields</td>
+                  <td><a href="#blueapi.billing.v1.CreateBillingGroupMergedRequest.CustomFieldsEntry">CreateBillingGroupMergedRequest.CustomFieldsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Custom fields to add to the billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.billing.v1.AzureOptions">AzureOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CreateBillingGroupMergedRequest.CustomFieldsEntry">CreateBillingGroupMergedRequest.CustomFieldsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -19644,6 +19921,37 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.VendorAccounts">VendorAccounts</h3>
+        <p>Optional. Vendor accounts to add to the billing group</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. (aws, azure, gcp) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.billing.v1.AccountToAdd">AccountToAdd</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. List of accounts to be added to the billing group </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -19670,6 +19978,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.CreateBillingGroupRequest">CreateBillingGroupRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BillingGroup">BillingGroup</a></td>
                 <td><p>Registers a billing group.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateBillingGroupMerged</td>
+                <td><a href="#blueapi.billing.v1.CreateBillingGroupMergedRequest">CreateBillingGroupMergedRequest</a></td>
+                <td><a href="#blueapi.billing.v1.BillingGroup">BillingGroup</a></td>
+                <td><p>Registers a billing group with Merged Endpoints. Only available in Ripple. WORK IN PROGRESS</p></td>
               </tr>
             
               <tr>
@@ -20286,6 +20601,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>CreateBillingGroup</td>
                 <td>POST</td>
                 <td>/v1/billinggroups</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateBillingGroupMerged</td>
+                <td>POST</td>
+                <td>/v1/billinggroups/merged</td>
                 <td>*</td>
               </tr>
               

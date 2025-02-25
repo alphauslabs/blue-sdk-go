@@ -26,6 +26,7 @@ const _ = grpc.SupportPackageIsVersion8
 const (
 	Billing_ListBillingGroups_FullMethodName                          = "/blueapi.billing.v1.Billing/ListBillingGroups"
 	Billing_CreateBillingGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateBillingGroup"
+	Billing_CreateBillingGroupMerged_FullMethodName                   = "/blueapi.billing.v1.Billing/CreateBillingGroupMerged"
 	Billing_DeleteBillinGroup_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteBillinGroup"
 	Billing_AddAccountToBillingGroup_FullMethodName                   = "/blueapi.billing.v1.Billing/AddAccountToBillingGroup"
 	Billing_GetBillingGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/GetBillingGroup"
@@ -119,6 +120,8 @@ type BillingClient interface {
 	ListBillingGroups(ctx context.Context, in *ListBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupsClient, error)
 	// Registers a billing group.
 	CreateBillingGroup(ctx context.Context, in *CreateBillingGroupRequest, opts ...grpc.CallOption) (*BillingGroup, error)
+	// Registers a billing group with Merged Endpoints. Only available in Ripple. WORK IN PROGRESS
+	CreateBillingGroupMerged(ctx context.Context, in *CreateBillingGroupMergedRequest, opts ...grpc.CallOption) (*BillingGroup, error)
 	// Delete a billing group.
 	DeleteBillinGroup(ctx context.Context, in *DeleteBillingGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Add a vendor account to a billing group.
@@ -340,6 +343,16 @@ func (c *billingClient) CreateBillingGroup(ctx context.Context, in *CreateBillin
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(BillingGroup)
 	err := c.cc.Invoke(ctx, Billing_CreateBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) CreateBillingGroupMerged(ctx context.Context, in *CreateBillingGroupMergedRequest, opts ...grpc.CallOption) (*BillingGroup, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BillingGroup)
+	err := c.cc.Invoke(ctx, Billing_CreateBillingGroupMerged_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1672,6 +1685,8 @@ type BillingServer interface {
 	ListBillingGroups(*ListBillingGroupsRequest, Billing_ListBillingGroupsServer) error
 	// Registers a billing group.
 	CreateBillingGroup(context.Context, *CreateBillingGroupRequest) (*BillingGroup, error)
+	// Registers a billing group with Merged Endpoints. Only available in Ripple. WORK IN PROGRESS
+	CreateBillingGroupMerged(context.Context, *CreateBillingGroupMergedRequest) (*BillingGroup, error)
 	// Delete a billing group.
 	DeleteBillinGroup(context.Context, *DeleteBillingGroupRequest) (*emptypb.Empty, error)
 	// Add a vendor account to a billing group.
@@ -1858,6 +1873,9 @@ func (UnimplementedBillingServer) ListBillingGroups(*ListBillingGroupsRequest, B
 }
 func (UnimplementedBillingServer) CreateBillingGroup(context.Context, *CreateBillingGroupRequest) (*BillingGroup, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) CreateBillingGroupMerged(context.Context, *CreateBillingGroupMergedRequest) (*BillingGroup, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateBillingGroupMerged not implemented")
 }
 func (UnimplementedBillingServer) DeleteBillinGroup(context.Context, *DeleteBillingGroupRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteBillinGroup not implemented")
@@ -2150,6 +2168,24 @@ func _Billing_CreateBillingGroup_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServer).CreateBillingGroup(ctx, req.(*CreateBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_CreateBillingGroupMerged_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateBillingGroupMergedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateBillingGroupMerged(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateBillingGroupMerged_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateBillingGroupMerged(ctx, req.(*CreateBillingGroupMergedRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3688,6 +3724,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateBillingGroup",
 			Handler:    _Billing_CreateBillingGroup_Handler,
+		},
+		{
+			MethodName: "CreateBillingGroupMerged",
+			Handler:    _Billing_CreateBillingGroupMerged_Handler,
 		},
 		{
 			MethodName: "DeleteBillinGroup",
