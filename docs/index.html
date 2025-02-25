@@ -1335,6 +1335,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.DeleteBillingGroupRequest"><span class="badge">M</span>DeleteBillingGroupRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteCustomFieldRequest"><span class="badge">M</span>DeleteCustomFieldRequest</a>
                 </li>
               
@@ -16120,6 +16124,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.DeleteBillingGroupRequest">DeleteBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteCustomFieldRequest">DeleteCustomFieldRequest</h3>
         <p></p>
 
@@ -19645,6 +19673,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>DeleteBillinGroup</td>
+                <td><a href="#blueapi.billing.v1.DeleteBillingGroupRequest">DeleteBillingGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Delete a billing group.</p></td>
+              </tr>
+            
+              <tr>
                 <td>AddAccountToBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.AddAccountToBillingGroupRequest">AddAccountToBillingGroupRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
@@ -20252,6 +20287,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/billinggroups</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteBillinGroup</td>
+                <td>DELETE</td>
+                <td>/v1/billinggroup/{id}</td>
+                <td></td>
               </tr>
               
             
