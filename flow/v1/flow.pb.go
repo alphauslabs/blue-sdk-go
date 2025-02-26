@@ -67,19 +67,19 @@ type CreateSettingsRequest struct {
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Required. Account scope determines if the account is payer or linked account. Valid values are `payer` or `linked`.
 	AccountScope string `protobuf:"bytes,2,opt,name=accountScope,proto3" json:"accountScope,omitempty"`
-	// Required. Customization setting for SP. Valid values are `compute sp` or `ec2 instance sp`.
+	// Required. Customization setting for SP. Valid values are `compute_sp` or `ec2_instance_sp`.
 	Customization string `protobuf:"bytes,3,opt,name=customization,proto3" json:"customization,omitempty"`
-	// Required. Term of the SP. Valid values are `1 year` or `3 years`.
+	// Required. Term of the SP. Valid values are `one_year` or `three_years`.
 	PlanTerm string `protobuf:"bytes,4,opt,name=planTerm,proto3" json:"planTerm,omitempty"`
-	// Required. Payment option for the SP. Valid values are `all upfront`, `partial upfront`, or `no upfront`.
+	// Required. Payment option for the SP. Valid values are `all_upfront`, `partial_upfront`, or `no_upfront`.
 	PaymentOption string `protobuf:"bytes,5,opt,name=paymentOption,proto3" json:"paymentOption,omitempty"`
-	// Required. Lookback period for recommendation. Valid values are `7 days`, `30 days`, or `60 days`.
+	// Required. Lookback period for recommendation. Valid values are `seven_days`, `thirty_days`, or `sixty_days`.
 	LookBackPeriod string `protobuf:"bytes,6,opt,name=lookBackPeriod,proto3" json:"lookBackPeriod,omitempty"`
 	// Optional. If EC2 Instance SP is selected in Customization, request will include list of instance family
 	InstanceFamily string `protobuf:"bytes,7,opt,name=instanceFamily,proto3" json:"instanceFamily,omitempty"`
 	// Optional. Annual budget input for SP.
 	AnnualBudget float64 `protobuf:"fixed64,8,opt,name=annualBudget,proto3" json:"annualBudget,omitempty"`
-	// Optional. Purchase approval from the payer for the SP.
+	// Optional. Purchase approval from the payer for the SP. Default value is `false`.
 	Approval      bool `protobuf:"varint,9,opt,name=approval,proto3" json:"approval,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
