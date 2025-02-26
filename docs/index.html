@@ -1635,10 +1635,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry"><span class="badge">M</span>SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.SaveTagInvoiceSettingResponse"><span class="badge">M</span>SaveTagInvoiceSettingResponse</a>
                 </li>
               
@@ -17672,13 +17668,6 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
             <tbody>
               
                 <tr>
-                  <td>vendor</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>e.g., aws, azure, gcp </p></td>
-                </tr>
-              
-                <tr>
                   <td>invoiceNo</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -18869,45 +18858,38 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td>date</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Invoice date YYYYMM (e.g. 202412) </p></td>
+                  <td><p>Required. Invoice month. Format: `yyyymm`. </p></td>
                 </tr>
               
                 <tr>
-                  <td>grouIdToInvoiceSettings</td>
-                  <td><a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry">SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry</a></td>
-                  <td>repeated</td>
-                  <td><p>Map of billing group Id to InvoiceSettings </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry">SaveInvoiceSettingsRequest.GrouIdToInvoiceSettingsEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
+                  <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
                 </tr>
               
                 <tr>
-                  <td>value</td>
+                  <td>allGroups</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. You can set all billing groups.
+
+If true the setting would be apply to all group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groups</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. groups to apply the invoices setting
+this is ignored if allGroups is true. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceSetting</td>
                   <td><a href="#blueapi.billing.v1.InvoiceSettings">InvoiceSettings</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Invoice setting. </p></td>
                 </tr>
               
             </tbody>
