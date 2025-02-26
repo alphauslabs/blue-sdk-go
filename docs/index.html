@@ -35636,59 +35636,59 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Account scope determines if the account is payer or linked account. Valid values are `payer` or `linked`. </p></td>
+                </tr>
+              
+                <tr>
                   <td>customization</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Customization setting for SP. </p></td>
+                  <td><p>Required. Customization setting for SP. Valid values are `compute sp` or `ec2 instance sp`. </p></td>
                 </tr>
               
                 <tr>
                   <td>planTerm</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Term of the SP. </p></td>
+                  <td><p>Required. Term of the SP. Valid values are `1 year` or `3 years`. </p></td>
                 </tr>
               
                 <tr>
                   <td>paymentOption</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Payment option for the SP. </p></td>
+                  <td><p>Required. Payment option for the SP. Valid values are `all upfront`, `partial upfront`, or `no upfront`. </p></td>
                 </tr>
               
                 <tr>
                   <td>lookBackPeriod</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Lookback period for recommendation. </p></td>
+                  <td><p>Required. Lookback period for recommendation. Valid values are `7 days`, `30 days`, or `60 days`. </p></td>
                 </tr>
               
                 <tr>
                   <td>instanceFamily</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. If EC2 Instance SP is selected in Customization, request will include list/s of instance family </p></td>
+                  <td><p>Optional. If EC2 Instance SP is selected in Customization, request will include list of instance family </p></td>
                 </tr>
               
                 <tr>
                   <td>annualBudget</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Required. Annual budget input for SP. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>monthlyBudget</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Monthly budget is automatically generated from the annual budget. </p></td>
+                  <td><p>Optional. Annual budget input for SP. </p></td>
                 </tr>
               
                 <tr>
                   <td>approval</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Required. Purchase approval from the payer for the SP. </p></td>
+                  <td><p>Optional. Purchase approval from the payer for the SP. </p></td>
                 </tr>
               
             </tbody>
