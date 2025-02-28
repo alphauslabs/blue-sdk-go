@@ -1961,6 +1961,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CreateSharedResourcesRequest"><span class="badge">M</span>CreateSharedResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateSharedResourcesRequest.DistributionEntry"><span class="badge">M</span>CreateSharedResourcesRequest.DistributionEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateSharedResourcesResponse"><span class="badge">M</span>CreateSharedResourcesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateUnitTypeRequest"><span class="badge">M</span>CreateUnitTypeRequest</a>
                 </li>
               
@@ -2038,6 +2050,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.DeleteMemberResponse"><span class="badge">M</span>DeleteMemberResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteSharedResourcesRequest"><span class="badge">M</span>DeleteSharedResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteSharedResourcesResponse"><span class="badge">M</span>DeleteSharedResourcesResponse</a>
                 </li>
               
                 <li>
@@ -2381,6 +2401,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetSharedResourcesRequest"><span class="badge">M</span>GetSharedResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetSharedResourcesResponse"><span class="badge">M</span>GetSharedResourcesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetTagsRequest"><span class="badge">M</span>GetTagsRequest</a>
                 </li>
               
@@ -2502,6 +2530,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListRecommendationV2Request.RateSettings"><span class="badge">M</span>ListRecommendationV2Request.RateSettings</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListSharedResourcesRequest"><span class="badge">M</span>ListSharedResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListSharedResourcesResponse"><span class="badge">M</span>ListSharedResourcesResponse</a>
                 </li>
               
                 <li>
@@ -2842,6 +2878,18 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.UpdateMemberPermissionResponse"><span class="badge">M</span>UpdateMemberPermissionResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateSharedResourcesRequest"><span class="badge">M</span>UpdateSharedResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateSharedResourcesRequest.DistributionEntry"><span class="badge">M</span>UpdateSharedResourcesRequest.DistributionEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateSharedResourcesResponse"><span class="badge">M</span>UpdateSharedResourcesResponse</a>
                 </li>
               
                 <li>
@@ -23796,6 +23844,120 @@ Supported values are the following:
 
         
       
+        <h3 id="blueapi.cover.v1.CreateSharedResourcesRequest">CreateSharedResourcesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>sharedResourceName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sharedResourcesCombinations</td>
+                  <td><a href="#blueapi.api.cover.ResourcesCombinations">blueapi.api.cover.ResourcesCombinations</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>distribution</td>
+                  <td><a href="#blueapi.cover.v1.CreateSharedResourcesRequest.DistributionEntry">CreateSharedResourcesRequest.DistributionEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>List the unit items and their corresponding percentages. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allocated</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unallocated</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateSharedResourcesRequest.DistributionEntry">CreateSharedResourcesRequest.DistributionEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateSharedResourcesResponse">CreateSharedResourcesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>sharedResources</td>
+                  <td><a href="#blueapi.api.cover.SharedResourcesCombination">blueapi.api.cover.SharedResourcesCombination</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CreateUnitTypeRequest">CreateUnitTypeRequest</h3>
         <p></p>
 
@@ -24411,6 +24573,54 @@ Supported values are the following:
               
                 <tr>
                   <td>userId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteSharedResourcesRequest">DeleteSharedResourcesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Shared Resource Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteSharedResourcesResponse">DeleteSharedResourcesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -27277,6 +27487,54 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetSharedResourcesRequest">GetSharedResourcesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Shared Resource Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetSharedResourcesResponse">GetSharedResourcesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>sharedResources</td>
+                  <td><a href="#blueapi.api.cover.SharedResourcesCombination">blueapi.api.cover.SharedResourcesCombination</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetTagsRequest">GetTagsRequest</h3>
         <p>Request message for GetTags</p>
 
@@ -28431,6 +28689,37 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListSharedResourcesRequest">ListSharedResourcesRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListSharedResourcesResponse">ListSharedResourcesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>sharedResources</td>
+                  <td><a href="#blueapi.api.cover.SharedResourcesCombination">blueapi.api.cover.SharedResourcesCombination</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -31192,6 +31481,127 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.UpdateSharedResourcesRequest">UpdateSharedResourcesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Shared Resource Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sharedResourceName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sharedResourcesCombinations</td>
+                  <td><a href="#blueapi.api.cover.ResourcesCombinations">blueapi.api.cover.ResourcesCombinations</a></td>
+                  <td></td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>distribution</td>
+                  <td><a href="#blueapi.cover.v1.UpdateSharedResourcesRequest.DistributionEntry">UpdateSharedResourcesRequest.DistributionEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allocated</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unallocated</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateSharedResourcesRequest.DistributionEntry">UpdateSharedResourcesRequest.DistributionEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateSharedResourcesResponse">UpdateSharedResourcesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>sharedResources</td>
+                  <td><a href="#blueapi.api.cover.SharedResourcesCombination">blueapi.api.cover.SharedResourcesCombination</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateSideMenuStateRequest">UpdateSideMenuStateRequest</h3>
         <p>Request message for UpdateSideMenuState</p>
 
@@ -33587,6 +33997,41 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>ListSharedResources</td>
+                <td><a href="#blueapi.cover.v1.ListSharedResourcesRequest">ListSharedResourcesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListSharedResourcesResponse">ListSharedResourcesResponse</a></td>
+                <td><p>List all Shared Resources</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateSharedResource</td>
+                <td><a href="#blueapi.cover.v1.CreateSharedResourcesRequest">CreateSharedResourcesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.CreateSharedResourcesResponse">CreateSharedResourcesResponse</a></td>
+                <td><p>Create Shared Resource</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetSharedResource</td>
+                <td><a href="#blueapi.cover.v1.GetSharedResourcesRequest">GetSharedResourcesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetSharedResourcesResponse">GetSharedResourcesResponse</a></td>
+                <td><p>Get Specific Shared Resource</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateSharedResource</td>
+                <td><a href="#blueapi.cover.v1.UpdateSharedResourcesRequest">UpdateSharedResourcesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateSharedResourcesResponse">UpdateSharedResourcesResponse</a></td>
+                <td><p>Update Specific Shared Resource</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteSharedResource</td>
+                <td><a href="#blueapi.cover.v1.DeleteSharedResourcesRequest">DeleteSharedResourcesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DeleteSharedResourcesResponse">DeleteSharedResourcesResponse</a></td>
+                <td><p>Delete Specific Shared Resource</p></td>
+              </tr>
+            
+              <tr>
                 <td>VerifyAPIAccess</td>
                 <td><a href="#blueapi.cover.v1.VerifyAPIAccessRequest">VerifyAPIAccessRequest</a></td>
                 <td><a href="#blueapi.cover.v1.VerifyAPIAccessResponse">VerifyAPIAccessResponse</a></td>
@@ -35207,6 +35652,56 @@ file in bytes </p></td>
                 <td>ListSuggestedUnits</td>
                 <td>GET</td>
                 <td>/v1/unitcost/autosuggest</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListSharedResources</td>
+                <td>GET</td>
+                <td>/v1/unitcost/sharedresources</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateSharedResource</td>
+                <td>POST</td>
+                <td>/v1/unitcost/sharedresources</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSharedResource</td>
+                <td>GET</td>
+                <td>/v1/unitcost/sharedresources/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateSharedResource</td>
+                <td>PUT</td>
+                <td>/v1/unitcost/sharedresources/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteSharedResource</td>
+                <td>DELETE</td>
+                <td>/v1/unitcost/sharedresources/{id}</td>
                 <td></td>
               </tr>
               

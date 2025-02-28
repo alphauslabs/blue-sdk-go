@@ -181,6 +181,11 @@ const (
 	Cover_UpdateUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/UpdateUnitType"
 	Cover_DeleteUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/DeleteUnitType"
 	Cover_ListSuggestedUnits_FullMethodName                      = "/blueapi.cover.v1.Cover/ListSuggestedUnits"
+	Cover_ListSharedResources_FullMethodName                     = "/blueapi.cover.v1.Cover/ListSharedResources"
+	Cover_CreateSharedResource_FullMethodName                    = "/blueapi.cover.v1.Cover/CreateSharedResource"
+	Cover_GetSharedResource_FullMethodName                       = "/blueapi.cover.v1.Cover/GetSharedResource"
+	Cover_UpdateSharedResource_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateSharedResource"
+	Cover_DeleteSharedResource_FullMethodName                    = "/blueapi.cover.v1.Cover/DeleteSharedResource"
 	Cover_VerifyAPIAccess_FullMethodName                         = "/blueapi.cover.v1.Cover/VerifyAPIAccess"
 )
 
@@ -509,6 +514,16 @@ type CoverClient interface {
 	DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequest, opts ...grpc.CallOption) (*DeleteUnitTypeResponse, error)
 	// List Suggested Unit Types
 	ListSuggestedUnits(ctx context.Context, in *ListSuggestedUnitsRequest, opts ...grpc.CallOption) (*ListSuggestedUnitsResponse, error)
+	// List all Shared Resources
+	ListSharedResources(ctx context.Context, in *ListSharedResourcesRequest, opts ...grpc.CallOption) (*ListSharedResourcesResponse, error)
+	// Create Shared Resource
+	CreateSharedResource(ctx context.Context, in *CreateSharedResourcesRequest, opts ...grpc.CallOption) (*CreateSharedResourcesResponse, error)
+	// Get Specific Shared Resource
+	GetSharedResource(ctx context.Context, in *GetSharedResourcesRequest, opts ...grpc.CallOption) (*GetSharedResourcesResponse, error)
+	// Update Specific Shared Resource
+	UpdateSharedResource(ctx context.Context, in *UpdateSharedResourcesRequest, opts ...grpc.CallOption) (*UpdateSharedResourcesResponse, error)
+	// Delete Specific Shared Resource
+	DeleteSharedResource(ctx context.Context, in *DeleteSharedResourcesRequest, opts ...grpc.CallOption) (*DeleteSharedResourcesResponse, error)
 	VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error)
 }
 
@@ -2743,6 +2758,56 @@ func (c *coverClient) ListSuggestedUnits(ctx context.Context, in *ListSuggestedU
 	return out, nil
 }
 
+func (c *coverClient) ListSharedResources(ctx context.Context, in *ListSharedResourcesRequest, opts ...grpc.CallOption) (*ListSharedResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSharedResourcesResponse)
+	err := c.cc.Invoke(ctx, Cover_ListSharedResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateSharedResource(ctx context.Context, in *CreateSharedResourcesRequest, opts ...grpc.CallOption) (*CreateSharedResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateSharedResourcesResponse)
+	err := c.cc.Invoke(ctx, Cover_CreateSharedResource_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetSharedResource(ctx context.Context, in *GetSharedResourcesRequest, opts ...grpc.CallOption) (*GetSharedResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSharedResourcesResponse)
+	err := c.cc.Invoke(ctx, Cover_GetSharedResource_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateSharedResource(ctx context.Context, in *UpdateSharedResourcesRequest, opts ...grpc.CallOption) (*UpdateSharedResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateSharedResourcesResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateSharedResource_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteSharedResource(ctx context.Context, in *DeleteSharedResourcesRequest, opts ...grpc.CallOption) (*DeleteSharedResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteSharedResourcesResponse)
+	err := c.cc.Invoke(ctx, Cover_DeleteSharedResource_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyAPIAccessResponse)
@@ -3078,6 +3143,16 @@ type CoverServer interface {
 	DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error)
 	// List Suggested Unit Types
 	ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error)
+	// List all Shared Resources
+	ListSharedResources(context.Context, *ListSharedResourcesRequest) (*ListSharedResourcesResponse, error)
+	// Create Shared Resource
+	CreateSharedResource(context.Context, *CreateSharedResourcesRequest) (*CreateSharedResourcesResponse, error)
+	// Get Specific Shared Resource
+	GetSharedResource(context.Context, *GetSharedResourcesRequest) (*GetSharedResourcesResponse, error)
+	// Update Specific Shared Resource
+	UpdateSharedResource(context.Context, *UpdateSharedResourcesRequest) (*UpdateSharedResourcesResponse, error)
+	// Delete Specific Shared Resource
+	DeleteSharedResource(context.Context, *DeleteSharedResourcesRequest) (*DeleteSharedResourcesResponse, error)
 	VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
@@ -3565,6 +3640,21 @@ func (UnimplementedCoverServer) DeleteUnitType(context.Context, *DeleteUnitTypeR
 }
 func (UnimplementedCoverServer) ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSuggestedUnits not implemented")
+}
+func (UnimplementedCoverServer) ListSharedResources(context.Context, *ListSharedResourcesRequest) (*ListSharedResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSharedResources not implemented")
+}
+func (UnimplementedCoverServer) CreateSharedResource(context.Context, *CreateSharedResourcesRequest) (*CreateSharedResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSharedResource not implemented")
+}
+func (UnimplementedCoverServer) GetSharedResource(context.Context, *GetSharedResourcesRequest) (*GetSharedResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSharedResource not implemented")
+}
+func (UnimplementedCoverServer) UpdateSharedResource(context.Context, *UpdateSharedResourcesRequest) (*UpdateSharedResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSharedResource not implemented")
+}
+func (UnimplementedCoverServer) DeleteSharedResource(context.Context, *DeleteSharedResourcesRequest) (*DeleteSharedResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSharedResource not implemented")
 }
 func (UnimplementedCoverServer) VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAPIAccess not implemented")
@@ -6548,6 +6638,96 @@ func _Cover_ListSuggestedUnits_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListSharedResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSharedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListSharedResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListSharedResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListSharedResources(ctx, req.(*ListSharedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateSharedResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSharedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateSharedResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateSharedResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateSharedResource(ctx, req.(*CreateSharedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetSharedResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSharedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetSharedResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetSharedResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetSharedResource(ctx, req.(*GetSharedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateSharedResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSharedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateSharedResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateSharedResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateSharedResource(ctx, req.(*UpdateSharedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteSharedResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSharedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteSharedResource(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteSharedResource_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteSharedResource(ctx, req.(*DeleteSharedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_VerifyAPIAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyAPIAccessRequest)
 	if err := dec(in); err != nil {
@@ -7104,6 +7284,26 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSuggestedUnits",
 			Handler:    _Cover_ListSuggestedUnits_Handler,
+		},
+		{
+			MethodName: "ListSharedResources",
+			Handler:    _Cover_ListSharedResources_Handler,
+		},
+		{
+			MethodName: "CreateSharedResource",
+			Handler:    _Cover_CreateSharedResource_Handler,
+		},
+		{
+			MethodName: "GetSharedResource",
+			Handler:    _Cover_GetSharedResource_Handler,
+		},
+		{
+			MethodName: "UpdateSharedResource",
+			Handler:    _Cover_UpdateSharedResource_Handler,
+		},
+		{
+			MethodName: "DeleteSharedResource",
+			Handler:    _Cover_DeleteSharedResource_Handler,
 		},
 		{
 			MethodName: "VerifyAPIAccess",
