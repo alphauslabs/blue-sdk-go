@@ -34,6 +34,7 @@ const (
 	Billing_ListAwsDailyRunHistory_FullMethodName                     = "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory"
 	Billing_ListUsageCostsDrift_FullMethodName                        = "/blueapi.billing.v1.Billing/ListUsageCostsDrift"
 	Billing_CreateInvoice_FullMethodName                              = "/blueapi.billing.v1.Billing/CreateInvoice"
+	Billing_CreateInvoiceWithSettings_FullMethodName                  = "/blueapi.billing.v1.Billing/CreateInvoiceWithSettings"
 	Billing_SaveInvoiceSettings_FullMethodName                        = "/blueapi.billing.v1.Billing/SaveInvoiceSettings"
 	Billing_GetInvoiceStatus_FullMethodName                           = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
 	Billing_ListInvoiceStatus_FullMethodName                          = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
@@ -137,6 +138,8 @@ type BillingClient interface {
 	ListUsageCostsDrift(ctx context.Context, in *ListUsageCostsDriftRequest, opts ...grpc.CallOption) (Billing_ListUsageCostsDriftClient, error)
 	// Creates an invoice. Only available in Ripple.
 	CreateInvoice(ctx context.Context, in *CreateInvoiceRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
+	// Creates an invoice and add settings. Only available in Ripple.
+	CreateInvoiceWithSettings(ctx context.Context, in *SaveInvoiceSettingsRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
 	// WORK-IN-PROGRESS: Save invoice settings for the month
 	SaveInvoiceSettings(ctx context.Context, in *SaveInvoiceSettingsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Gets an invoice. Only available in Ripple.
@@ -472,6 +475,16 @@ func (c *billingClient) CreateInvoice(ctx context.Context, in *CreateInvoiceRequ
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(api.InvoiceMessage)
 	err := c.cc.Invoke(ctx, Billing_CreateInvoice_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) CreateInvoiceWithSettings(ctx context.Context, in *SaveInvoiceSettingsRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(api.InvoiceMessage)
+	err := c.cc.Invoke(ctx, Billing_CreateInvoiceWithSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1714,6 +1727,8 @@ type BillingServer interface {
 	ListUsageCostsDrift(*ListUsageCostsDriftRequest, Billing_ListUsageCostsDriftServer) error
 	// Creates an invoice. Only available in Ripple.
 	CreateInvoice(context.Context, *CreateInvoiceRequest) (*api.InvoiceMessage, error)
+	// Creates an invoice and add settings. Only available in Ripple.
+	CreateInvoiceWithSettings(context.Context, *SaveInvoiceSettingsRequest) (*api.InvoiceMessage, error)
 	// WORK-IN-PROGRESS: Save invoice settings for the month
 	SaveInvoiceSettings(context.Context, *SaveInvoiceSettingsRequest) (*emptypb.Empty, error)
 	// Gets an invoice. Only available in Ripple.
@@ -1912,6 +1927,9 @@ func (UnimplementedBillingServer) ListUsageCostsDrift(*ListUsageCostsDriftReques
 }
 func (UnimplementedBillingServer) CreateInvoice(context.Context, *CreateInvoiceRequest) (*api.InvoiceMessage, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoice not implemented")
+}
+func (UnimplementedBillingServer) CreateInvoiceWithSettings(context.Context, *SaveInvoiceSettingsRequest) (*api.InvoiceMessage, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoiceWithSettings not implemented")
 }
 func (UnimplementedBillingServer) SaveInvoiceSettings(context.Context, *SaveInvoiceSettingsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveInvoiceSettings not implemented")
@@ -2336,6 +2354,24 @@ func _Billing_CreateInvoice_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServer).CreateInvoice(ctx, req.(*CreateInvoiceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_CreateInvoiceWithSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SaveInvoiceSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateInvoiceWithSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateInvoiceWithSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateInvoiceWithSettings(ctx, req.(*SaveInvoiceSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3784,6 +3820,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateInvoice",
 			Handler:    _Billing_CreateInvoice_Handler,
+		},
+		{
+			MethodName: "CreateInvoiceWithSettings",
+			Handler:    _Billing_CreateInvoiceWithSettings_Handler,
 		},
 		{
 			MethodName: "SaveInvoiceSettings",

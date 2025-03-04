@@ -20236,6 +20236,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>CreateInvoiceWithSettings</td>
+                <td><a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest">SaveInvoiceSettingsRequest</a></td>
+                <td><a href="#blueapi.api.InvoiceMessage">.blueapi.api.InvoiceMessage</a></td>
+                <td><p>Creates an invoice and add settings. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>SaveInvoiceSettings</td>
                 <td><a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest">SaveInvoiceSettingsRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
@@ -20887,6 +20894,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>CreateInvoice</td>
                 <td>POST</td>
                 <td>/v1/invoice/{date}:create</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateInvoiceWithSettings</td>
+                <td>POST</td>
+                <td>/v1/invoice/{date}:create&amp;savesettings</td>
                 <td>*</td>
               </tr>
               
