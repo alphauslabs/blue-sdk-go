@@ -1211,6 +1211,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest"><span class="badge">M</span>ApplyInvoiceAdjustmentsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentEntry"><span class="badge">M</span>ApplyInvoiceAdjustmentsRequest.AdjustmentEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting"><span class="badge">M</span>ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AwsDailyRunHistory"><span class="badge">M</span>AwsDailyRunHistory</a>
                 </li>
               
@@ -14647,6 +14659,121 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest">ApplyInvoiceAdjustmentsRequest</h3>
+        <p>Request message for the Billing.ApplyInvoiceAdjustments rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting">ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</a></td>
+                  <td></td>
+                  <td><p>AdjustmentSetting. root setting. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entries</td>
+                  <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentEntry">ApplyInvoiceAdjustmentsRequest.AdjustmentEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. AdjustmentEntry </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentEntry">ApplyInvoiceAdjustmentsRequest.AdjustmentEntry</h3>
+        <p>AdjustmentEntry. target ids</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. id. adjustment entry id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting">ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</a></td>
+                  <td></td>
+                  <td><p>Optional. AdjustmentSetting. If this setting is configured, it will take precedence. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting">ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</h3>
+        <p>AdjustmentSetting</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>apply</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Required. apply. if apply is true, the adjustment will be applied to the invoice.
+if apply is false, the adjustment will be removed from the invoice. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>apply to month. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>taxFree</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. tax free setting. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRate</td>
+                  <td><a href="#float">float</a></td>
+                  <td></td>
+                  <td><p>Optional. exchange rate. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. apply to billing internal id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.AwsDailyRunHistory">AwsDailyRunHistory</h3>
         <p>Streaming response message for the Billing.ListAwsDailyRunHistory rpc.</p>
 
@@ -20395,6 +20522,13 @@ Lists all exchange rate.
               </tr>
             
               <tr>
+                <td>ApplyInvoiceAdjustments</td>
+                <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest">ApplyInvoiceAdjustmentsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListAccountResources</td>
                 <td><a href="#blueapi.billing.v1.ListAccountResourcesRequest">ListAccountResourcesRequest</a></td>
                 <td><a href="#blueapi.billing.v1.ResourceAccount">ResourceAccount</a> stream</td>
@@ -21156,6 +21290,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ReadInvoiceAdjustments</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/invoiceadjustments:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ApplyInvoiceAdjustments</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/invoiceadjustments:apply</td>
                 <td>*</td>
               </tr>
               

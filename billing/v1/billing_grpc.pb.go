@@ -75,6 +75,7 @@ const (
 	Billing_ListAbcBillingGroups_FullMethodName                       = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
 	Billing_ListAbcBillingGroupAccounts_FullMethodName                = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
 	Billing_ReadInvoiceAdjustments_FullMethodName                     = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
+	Billing_ApplyInvoiceAdjustments_FullMethodName                    = "/blueapi.billing.v1.Billing/ApplyInvoiceAdjustments"
 	Billing_ListAccountResources_FullMethodName                       = "/blueapi.billing.v1.Billing/ListAccountResources"
 	Billing_GetAdjustmentConfig_FullMethodName                        = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
 	Billing_CreateAdjustmentConfig_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
@@ -224,6 +225,8 @@ type BillingClient interface {
 	ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error)
 	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
+	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
+	ApplyInvoiceAdjustments(ctx context.Context, in *ApplyInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
 	// WORK-IN-PROGRESS: Gets adjustment config
@@ -1138,6 +1141,16 @@ func (x *billingReadInvoiceAdjustmentsClient) Recv() (*wave.Adjustment, error) {
 	return m, nil
 }
 
+func (c *billingClient) ApplyInvoiceAdjustments(ctx context.Context, in *ApplyInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_ApplyInvoiceAdjustments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[14], Billing_ListAccountResources_FullMethodName, cOpts...)
@@ -1789,6 +1802,8 @@ type BillingServer interface {
 	ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error
 	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
+	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
+	ApplyInvoiceAdjustments(context.Context, *ApplyInvoiceAdjustmentsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
 	// WORK-IN-PROGRESS: Gets adjustment config
@@ -2020,6 +2035,9 @@ func (UnimplementedBillingServer) ListAbcBillingGroupAccounts(*ListAbcBillingGro
 }
 func (UnimplementedBillingServer) ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadInvoiceAdjustments not implemented")
+}
+func (UnimplementedBillingServer) ApplyInvoiceAdjustments(context.Context, *ApplyInvoiceAdjustmentsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApplyInvoiceAdjustments not implemented")
 }
 func (UnimplementedBillingServer) ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccountResources not implemented")
@@ -3093,6 +3111,24 @@ func (x *billingReadInvoiceAdjustmentsServer) Send(m *wave.Adjustment) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_ApplyInvoiceAdjustments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplyInvoiceAdjustmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ApplyInvoiceAdjustments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ApplyInvoiceAdjustments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ApplyInvoiceAdjustments(ctx, req.(*ApplyInvoiceAdjustmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_ListAccountResources_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListAccountResourcesRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -3868,6 +3904,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccessGroup",
 			Handler:    _Billing_DeleteAccessGroup_Handler,
+		},
+		{
+			MethodName: "ApplyInvoiceAdjustments",
+			Handler:    _Billing_ApplyInvoiceAdjustments_Handler,
 		},
 		{
 			MethodName: "GetAdjustmentConfig",
