@@ -64,6 +64,7 @@ func request_Organization_SendVerification_0(ctx context.Context, marshaler runt
 		protoReq SendVerificationRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.SendVerification(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -84,6 +85,7 @@ func request_Organization_VerifyOrg_0(ctx context.Context, marshaler runtime.Mar
 		protoReq VerifyOrgRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -114,6 +116,7 @@ func request_Organization_GetOrg_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq GetOrgRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetOrg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -180,6 +183,7 @@ func request_Organization_DeleteOrg_0(ctx context.Context, marshaler runtime.Mar
 		protoReq DeleteOrgRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.DeleteOrg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }

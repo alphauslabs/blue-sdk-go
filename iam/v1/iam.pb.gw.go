@@ -40,6 +40,7 @@ func request_Iam_WhoAmI_0(ctx context.Context, marshaler runtime.Marshaler, clie
 		protoReq WhoAmIRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.WhoAmI(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -58,6 +59,7 @@ func request_Iam_ListUsers_0(ctx context.Context, marshaler runtime.Marshaler, c
 		protoReq ListUsersRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListUsers(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -76,6 +78,7 @@ func request_Iam_GetUser_0(ctx context.Context, marshaler runtime.Marshaler, cli
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -136,6 +139,7 @@ func request_Iam_DeleteUser_0(ctx context.Context, marshaler runtime.Marshaler, 
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -195,6 +199,7 @@ func request_Iam_ListGroupRootUsers_0(ctx context.Context, marshaler runtime.Mar
 		protoReq ListGroupRootUsersRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListGroupRootUsers(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -213,6 +218,7 @@ func request_Iam_GetGroupRootUser_0(ctx context.Context, marshaler runtime.Marsh
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -249,6 +255,7 @@ func request_Iam_DeleteGroupRootUser_0(ctx context.Context, marshaler runtime.Ma
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -285,6 +292,7 @@ func request_Iam_GetFeatureFlags_0(ctx context.Context, marshaler runtime.Marsha
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -362,6 +370,7 @@ func request_Iam_ListApiClients_0(ctx context.Context, marshaler runtime.Marshal
 		protoReq ListApiClientsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListApiClients(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -404,6 +413,7 @@ func request_Iam_DeleteApiClient_0(ctx context.Context, marshaler runtime.Marsha
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -441,6 +451,7 @@ func request_Iam_ListPermissions_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq ListPermissionsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -473,6 +484,7 @@ func request_Iam_ListRoles_0(ctx context.Context, marshaler runtime.Marshaler, c
 		protoReq ListRolesRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -586,6 +598,7 @@ func request_Iam_DeleteRole_0(ctx context.Context, marshaler runtime.Marshaler, 
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["namespace"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "namespace")
@@ -639,6 +652,7 @@ func request_Iam_ListUserRoleMappings_0(ctx context.Context, marshaler runtime.M
 		protoReq ListUserRoleMappingsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -717,6 +731,7 @@ func request_Iam_ListIdentityProviders_0(ctx context.Context, marshaler runtime.
 		protoReq ListIdentityProvidersRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.ListIdentityProviders(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -760,6 +775,7 @@ func request_Iam_DeleteIdentityProvider_0(ctx context.Context, marshaler runtime
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -795,6 +811,7 @@ func request_Iam_ListIpFilters_0(ctx context.Context, marshaler runtime.Marshale
 		protoReq ListIpFiltersRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListIpFilters(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -837,6 +854,7 @@ func request_Iam_DeleteIpFilter_0(ctx context.Context, marshaler runtime.Marshal
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -957,6 +975,7 @@ func request_Iam_VerifyUserForResetPassword_0(ctx context.Context, marshaler run
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["user"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "user")
@@ -995,6 +1014,7 @@ func request_Iam_GetSubUserMetadata_0(ctx context.Context, marshaler runtime.Mar
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -1068,6 +1088,7 @@ func request_Iam_GetMFAUsers_0(ctx context.Context, marshaler runtime.Marshaler,
 		protoReq MFAUsersInfoRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}

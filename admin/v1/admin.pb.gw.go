@@ -40,6 +40,7 @@ func request_Admin_ListAccountGroups_0(ctx context.Context, marshaler runtime.Ma
 		protoReq ListAccountGroupsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListAccountGroups(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -58,6 +59,7 @@ func request_Admin_GetAccountGroup_0(ctx context.Context, marshaler runtime.Mars
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -95,6 +97,7 @@ func request_Admin_GetDefaultCostAccessTemplateUrl_0(ctx context.Context, marsha
 		protoReq GetDefaultCostAccessTemplateUrlRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -125,6 +128,7 @@ func request_Admin_ListDefaultCostAccess_0(ctx context.Context, marshaler runtim
 		protoReq ListDefaultCostAccessRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListDefaultCostAccess(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -143,6 +147,7 @@ func request_Admin_GetDefaultCostAccess_0(ctx context.Context, marshaler runtime
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -203,6 +208,7 @@ func request_Admin_UpdateDefaultCostAccess_0(ctx context.Context, marshaler runt
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -239,6 +245,7 @@ func request_Admin_DeleteDefaultCostAccess_0(ctx context.Context, marshaler runt
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -274,6 +281,7 @@ func request_Admin_GetCloudWatchMetricsStreamTemplateUrl_0(ctx context.Context, 
 		protoReq GetCloudWatchMetricsStreamTemplateUrlRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetCloudWatchMetricsStreamTemplateUrl(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -340,6 +348,7 @@ func request_Admin_GetNotificationSettings_0(ctx context.Context, marshaler runt
 		protoReq GetNotificationSettingsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetNotificationSettings(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -382,6 +391,7 @@ func request_Admin_ListNotificationChannels_0(ctx context.Context, marshaler run
 		protoReq ListNotificationChannelsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.ListNotificationChannels(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -403,6 +413,7 @@ func request_Admin_GetNotificationChannel_0(ctx context.Context, marshaler runti
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -541,6 +552,7 @@ func request_Admin_DeleteNotificationChannel_0(ctx context.Context, marshaler ru
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -576,6 +588,7 @@ func request_Admin_ListNotifications_0(ctx context.Context, marshaler runtime.Ma
 		protoReq ListNotificationsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.ListNotifications(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -597,6 +610,7 @@ func request_Admin_GetNotification_0(ctx context.Context, marshaler runtime.Mars
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -713,6 +727,7 @@ func request_Admin_DeleteNotification_0(ctx context.Context, marshaler runtime.M
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -786,6 +801,7 @@ func request_Admin_GetWaveFeatures_0(ctx context.Context, marshaler runtime.Mars
 		protoReq GetWaveFeaturesRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -841,6 +857,7 @@ func request_Admin_GetMSPDefaultMeta_0(ctx context.Context, marshaler runtime.Ma
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["mspId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "mspId")

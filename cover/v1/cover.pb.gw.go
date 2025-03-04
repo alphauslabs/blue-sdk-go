@@ -136,6 +136,7 @@ func request_Cover_GetMembers_0(ctx context.Context, marshaler runtime.Marshaler
 		protoReq GetMembersRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetMembers(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -155,6 +156,7 @@ func request_Cover_GetMemberDetails_0(ctx context.Context, marshaler runtime.Mar
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["userId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
@@ -191,6 +193,7 @@ func request_Cover_GetMemberCostGroup_0(ctx context.Context, marshaler runtime.M
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["userId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
@@ -268,6 +271,7 @@ func request_Cover_GetUserDetails_0(ctx context.Context, marshaler runtime.Marsh
 		protoReq GetUserDetailsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetUserDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -551,6 +555,7 @@ func request_Cover_DeleteMember_0(ctx context.Context, marshaler runtime.Marshal
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["userId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "userId")
@@ -634,6 +639,7 @@ func request_Cover_GetViews_0(ctx context.Context, marshaler runtime.Marshaler, 
 		protoReq GetViewsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetViews(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -653,6 +659,7 @@ func request_Cover_GetCurrentView_0(ctx context.Context, marshaler runtime.Marsh
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["viewId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "viewId")
@@ -688,6 +695,7 @@ func request_Cover_GetFavoriteViews_0(ctx context.Context, marshaler runtime.Mar
 		protoReq GetFavoriteViewsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetFavoriteViews(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -1028,6 +1036,7 @@ func request_Cover_GetOrgUpdateCurrency_0(ctx context.Context, marshaler runtime
 		protoReq GetOrgUpdateCurrencyRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetOrgUpdateCurrency(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -1048,6 +1057,7 @@ func request_Cover_ListExchangeRates_0(ctx context.Context, marshaler runtime.Ma
 		protoReq ListExchangeRatesRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -1079,6 +1089,7 @@ func request_Cover_DeleteView_0(ctx context.Context, marshaler runtime.Marshaler
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["viewId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "viewId")
@@ -1264,6 +1275,7 @@ func request_Cover_GetCostGroups_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq GetCostGroupsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetCostGroups(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -1284,6 +1296,7 @@ func request_Cover_GetCategories_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq GetCategoriesRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -1315,6 +1328,7 @@ func request_Cover_GetCostGroupDetails_0(ctx context.Context, marshaler runtime.
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["costGroupId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
@@ -1603,6 +1617,7 @@ func request_Cover_ResolveCostGroupCombinations_0(ctx context.Context, marshaler
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["costGroupId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
@@ -1723,6 +1738,7 @@ func request_Cover_DeleteCostGroup_0(ctx context.Context, marshaler runtime.Mars
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["costGroupId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
@@ -1760,6 +1776,7 @@ func request_Cover_GetAccountAccessTemplateUrl_0(ctx context.Context, marshaler 
 		protoReq GetAccountAccessTemplateUrlRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -1811,6 +1828,7 @@ func request_Cover_GetAccountAccess_0(ctx context.Context, marshaler runtime.Mar
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -1849,6 +1867,7 @@ func request_Cover_GetDataAccess_0(ctx context.Context, marshaler runtime.Marsha
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -1899,6 +1918,7 @@ func request_Cover_DeleteDataAccess_0(ctx context.Context, marshaler runtime.Mar
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -2019,6 +2039,7 @@ func request_Cover_UpdateAccountAccess_0(ctx context.Context, marshaler runtime.
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -2057,6 +2078,7 @@ func request_Cover_DeleteAccountAccess_0(ctx context.Context, marshaler runtime.
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -2194,6 +2216,7 @@ func request_Cover_ListDataAccess_0(ctx context.Context, marshaler runtime.Marsh
 		protoReq ListDataAccessRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListDataAccess(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -2276,6 +2299,7 @@ func request_Cover_GetAssetsSummary_0(ctx context.Context, marshaler runtime.Mar
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["costGroupId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
@@ -2344,6 +2368,7 @@ func request_Cover_GetRightSizingRecommendation_0(ctx context.Context, marshaler
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["costGroupId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
@@ -2547,6 +2572,7 @@ func request_Cover_GetPayers_0(ctx context.Context, marshaler runtime.Marshaler,
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
@@ -2583,6 +2609,7 @@ func request_Cover_GetAccounts_0(ctx context.Context, marshaler runtime.Marshale
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
@@ -2635,6 +2662,7 @@ func request_Cover_GetServices_0(ctx context.Context, marshaler runtime.Marshale
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
@@ -2687,6 +2715,7 @@ func request_Cover_GetRegions_0(ctx context.Context, marshaler runtime.Marshaler
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
@@ -2739,6 +2768,7 @@ func request_Cover_GetTags_0(ctx context.Context, marshaler runtime.Marshaler, c
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
@@ -2850,6 +2880,7 @@ func request_Cover_ListAllocators_0(ctx context.Context, marshaler runtime.Marsh
 		protoReq ListAllocatorsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListAllocators(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -2893,6 +2924,7 @@ func request_Cover_GetAllocationAttributes_0(ctx context.Context, marshaler runt
 		protoReq GetAllocationAttributesRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -2966,6 +2998,7 @@ func request_Cover_DeleteAllocator_0(ctx context.Context, marshaler runtime.Mars
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3277,6 +3310,7 @@ func request_Cover_GetAlerts_0(ctx context.Context, marshaler runtime.Marshaler,
 		protoReq GetAlertsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.GetAlerts(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -3319,6 +3353,7 @@ func request_Cover_GetAlertDetails_0(ctx context.Context, marshaler runtime.Mars
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3355,6 +3390,7 @@ func request_Cover_DeleteAlert_0(ctx context.Context, marshaler runtime.Marshale
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3477,6 +3513,7 @@ func request_Cover_GetChannelDetails_0(ctx context.Context, marshaler runtime.Ma
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3513,6 +3550,7 @@ func request_Cover_DeleteChannel_0(ctx context.Context, marshaler runtime.Marsha
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3701,6 +3739,7 @@ func request_Cover_GetDiscountExpirationAlert_0(ctx context.Context, marshaler r
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3736,6 +3775,7 @@ func request_Cover_ListDiscountExpirationAlert_0(ctx context.Context, marshaler 
 		protoReq ListDiscountExpirationAlertRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListDiscountExpirationAlert(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -3754,6 +3794,7 @@ func request_Cover_DeleteDiscountExpirationAlert_0(ctx context.Context, marshale
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3814,6 +3855,7 @@ func request_Cover_DeleteAnomalyAlert_0(ctx context.Context, marshaler runtime.M
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3849,6 +3891,7 @@ func request_Cover_ListAnomalyAlert_0(ctx context.Context, marshaler runtime.Mar
 		protoReq ListAnomalyAlertRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.ListAnomalyAlert(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -3867,6 +3910,7 @@ func request_Cover_GetAnomalyAlert_0(ctx context.Context, marshaler runtime.Mars
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -3969,6 +4013,7 @@ func request_Cover_GetUserProfile_0(ctx context.Context, marshaler runtime.Marsh
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["email"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "email")
@@ -4067,6 +4112,7 @@ func request_Cover_GetBudget_0(ctx context.Context, marshaler runtime.Marshaler,
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -4127,6 +4173,7 @@ func request_Cover_DeleteBudget_0(ctx context.Context, marshaler runtime.Marshal
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -4228,6 +4275,7 @@ func request_Cover_GetCustomerSubscriptionStatus_0(ctx context.Context, marshale
 		protoReq GetCustomerSubscriptionStatusRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetCustomerSubscriptionStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -4297,6 +4345,7 @@ func request_Cover_GetReportSummary_0(ctx context.Context, marshaler runtime.Mar
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["costGroupId"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "costGroupId")
@@ -4346,6 +4395,7 @@ func request_Cover_ListRecommendations_0(ctx context.Context, marshaler runtime.
 		protoReq ListRecommendationRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -4392,6 +4442,7 @@ func request_Cover_GetRecommendation_0(ctx context.Context, marshaler runtime.Ma
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -4442,6 +4493,7 @@ func request_Cover_GetRecommendationV2_0(ctx context.Context, marshaler runtime.
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -4513,6 +4565,7 @@ func request_Cover_GetExecutionStatus_0(ctx context.Context, marshaler runtime.M
 		protoReq GetExecutionStatusRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	stream, err := client.GetExecutionStatus(ctx, &protoReq)
 	if err != nil {
 		return nil, metadata, err
@@ -4580,6 +4633,7 @@ func request_Cover_OptimizationHistory_0(ctx context.Context, marshaler runtime.
 		protoReq OptimizationHistoryRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -4718,6 +4772,7 @@ func request_Cover_GetOrgFiscalMonth_0(ctx context.Context, marshaler runtime.Ma
 		protoReq GetOrgFiscalMonthRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.GetOrgFiscalMonth(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -4739,6 +4794,7 @@ func request_Cover_TransferOrganization_0(ctx context.Context, marshaler runtime
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["target"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "target")
@@ -4810,6 +4866,7 @@ func request_Cover_ListUnitTypes_0(ctx context.Context, marshaler runtime.Marsha
 		protoReq ListUnitTypesRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.ListUnitTypes(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -4853,6 +4910,7 @@ func request_Cover_GetUnitType_0(ctx context.Context, marshaler runtime.Marshale
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -4931,6 +4989,7 @@ func request_Cover_DeleteUnitType_0(ctx context.Context, marshaler runtime.Marsh
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -4966,6 +5025,7 @@ func request_Cover_ListSuggestedUnits_0(ctx context.Context, marshaler runtime.M
 		protoReq ListSuggestedUnitsRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.ListSuggestedUnits(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -4984,6 +5044,7 @@ func request_Cover_ListSharedResources_0(ctx context.Context, marshaler runtime.
 		protoReq ListSharedResourcesRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	msg, err := client.ListSharedResources(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -5027,6 +5088,7 @@ func request_Cover_GetSharedResource_0(ctx context.Context, marshaler runtime.Ma
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -5105,6 +5167,7 @@ func request_Cover_DeleteSharedResource_0(ctx context.Context, marshaler runtime
 		metadata runtime.ServerMetadata
 		err      error
 	)
+	io.Copy(io.Discard, req.Body)
 	val, ok := pathParams["id"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "id")
@@ -5142,6 +5205,7 @@ func request_Cover_VerifyAPIAccess_0(ctx context.Context, marshaler runtime.Mars
 		protoReq VerifyAPIAccessRequest
 		metadata runtime.ServerMetadata
 	)
+	io.Copy(io.Discard, req.Body)
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
