@@ -234,7 +234,7 @@ type BillingClient interface {
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
 	// WORK-IN-PROGRESS: Gets adjustment config
 	GetAdjustmentConfig(ctx context.Context, in *GetAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
-	// WORK-IN-PROGRESS: Creates adjustment config
+	// Creates adjustment config
 	//
 	// [ERRORS]
 	// - InvalidArgument:
@@ -243,9 +243,9 @@ type BillingClient interface {
 	// - NotFound:
 	//   - the AdjustmentConfig is not found.
 	CreateAdjustmentConfig(ctx context.Context, in *CreateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
-	// WORK-IN-PROGRESS: Updates adjustment config
+	// Updates adjustment config
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
-	// WORK-IN-PROGRESS: Deletes adjustment config
+	// Deletes adjustment config
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error)
@@ -1823,7 +1823,7 @@ type BillingServer interface {
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
 	// WORK-IN-PROGRESS: Gets adjustment config
 	GetAdjustmentConfig(context.Context, *GetAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
-	// WORK-IN-PROGRESS: Creates adjustment config
+	// Creates adjustment config
 	//
 	// [ERRORS]
 	// - InvalidArgument:
@@ -1832,9 +1832,9 @@ type BillingServer interface {
 	// - NotFound:
 	//   - the AdjustmentConfig is not found.
 	CreateAdjustmentConfig(context.Context, *CreateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
-	// WORK-IN-PROGRESS: Updates adjustment config
+	// Updates adjustment config
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
-	// WORK-IN-PROGRESS: Deletes adjustment config
+	// Deletes adjustment config
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(*ReadUntaggedGroupsRequest, Billing_ReadUntaggedGroupsServer) error
