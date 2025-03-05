@@ -144,7 +144,7 @@ type BillingClient interface {
 	SaveInvoiceSettings(ctx context.Context, in *SaveInvoiceSettingsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Gets an invoice. Only available in Ripple.
 	GetInvoiceStatus(ctx context.Context, in *GetInvoiceStatusRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
-	// WORK-IN-PROGRESS: Reads an invoice status. Only available in Ripple.
+	// Reads an invoice status. Only available in Ripple.
 	ListInvoiceStatus(ctx context.Context, in *ListInvoiceStatusRequest, opts ...grpc.CallOption) (Billing_ListInvoiceStatusClient, error)
 	// Gets an invoice.
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
@@ -232,7 +232,7 @@ type BillingClient interface {
 	ApplyInvoiceAdjustments(ctx context.Context, in *ApplyInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
-	// WORK-IN-PROGRESS: Gets adjustment config
+	// Gets adjustment config
 	GetAdjustmentConfig(ctx context.Context, in *GetAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
 	// Creates adjustment config
 	//
@@ -1733,7 +1733,7 @@ type BillingServer interface {
 	SaveInvoiceSettings(context.Context, *SaveInvoiceSettingsRequest) (*emptypb.Empty, error)
 	// Gets an invoice. Only available in Ripple.
 	GetInvoiceStatus(context.Context, *GetInvoiceStatusRequest) (*api.InvoiceMessage, error)
-	// WORK-IN-PROGRESS: Reads an invoice status. Only available in Ripple.
+	// Reads an invoice status. Only available in Ripple.
 	ListInvoiceStatus(*ListInvoiceStatusRequest, Billing_ListInvoiceStatusServer) error
 	// Gets an invoice.
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
@@ -1821,7 +1821,7 @@ type BillingServer interface {
 	ApplyInvoiceAdjustments(context.Context, *ApplyInvoiceAdjustmentsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
-	// WORK-IN-PROGRESS: Gets adjustment config
+	// Gets adjustment config
 	GetAdjustmentConfig(context.Context, *GetAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
 	// Creates adjustment config
 	//
