@@ -1439,6 +1439,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest"><span class="badge">M</span>GetBillingGroupAccountSupportPlanRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>GetBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -1692,6 +1696,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest"><span class="badge">M</span>UpdateAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupAccountSupportPlanRequest"><span class="badge">M</span>UpdateBillingGroupAccountSupportPlanRequest</a>
                 </li>
               
                 <li>
@@ -17176,6 +17184,37 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest">GetBillingGroupAccountSupportPlanRequest</h3>
+        <p>Request message for the GetBillingGroupAccountSupportPlan rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing internal id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest">GetBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p></p>
 
@@ -19558,6 +19597,59 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupAccountSupportPlanRequest">UpdateBillingGroupAccountSupportPlanRequest</h3>
+        <p>Request message for the UpdateBillingGroupAccountSupportPlan rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing internal id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. The enabled indicates whether the account support plan is enabled or disabled. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.api.ripple.v1.BillingGroupAccountSupportPlan">blueapi.api.ripple.v1.BillingGroupAccountSupportPlan</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. The support plan setting. [blueapi.api.ripple.v1.BillingGroupAccountSupportPlan]. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updateMask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Required.
+If the `enabled` is set, only the `enabled` will be updated. If you want to update all values, please set both `enabled` and `setting`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupBasicInformationRequest">UpdateBillingGroupBasicInformationRequest</h3>
         <p></p>
 
@@ -20780,6 +20872,20 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Update billing group basic information</p></td>
               </tr>
             
+              <tr>
+                <td>GetBillingGroupAccountSupportPlan</td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest">GetBillingGroupAccountSupportPlanRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.BillingGroupAccountSupportPlan">.blueapi.api.ripple.v1.BillingGroupAccountSupportPlan</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupAccountSupportPlan</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupAccountSupportPlanRequest">UpdateBillingGroupAccountSupportPlanRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -21654,6 +21760,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateBillingGroupCustomFields</td>
                 <td>PUT</td>
                 <td>/v1/billinggroup/{id}:customFields</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBillingGroupAccountSupportPlan</td>
+                <td>GET</td>
+                <td>/v1/billinggroup/{id}/{vendor}/supportplan</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupAccountSupportPlan</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup/{id}/{vendor}/supportplan</td>
                 <td>*</td>
               </tr>
               

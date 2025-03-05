@@ -110,6 +110,8 @@ const (
 	Billing_ExportInvoiceSettingCsv_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
 	Billing_UpdateBillingGroupBasicInformation_FullMethodName         = "/blueapi.billing.v1.Billing/UpdateBillingGroupBasicInformation"
 	Billing_UpdateBillingGroupCustomFields_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateBillingGroupCustomFields"
+	Billing_GetBillingGroupAccountSupportPlan_FullMethodName          = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
+	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
 )
 
 // BillingClient is the client API for Billing service.
@@ -302,6 +304,10 @@ type BillingClient interface {
 	UpdateBillingGroupBasicInformation(ctx context.Context, in *UpdateBillingGroupBasicInformationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Update billing group basic information
 	UpdateBillingGroupCustomFields(ctx context.Context, in *UpdateBillingGroupCustomFieldsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.
+	GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (Billing_GetBillingGroupAccountSupportPlanClient, error)
+	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
+	UpdateBillingGroupAccountSupportPlan(ctx context.Context, in *UpdateBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -1701,6 +1707,49 @@ func (c *billingClient) UpdateBillingGroupCustomFields(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *billingClient) GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (Billing_GetBillingGroupAccountSupportPlanClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[23], Billing_GetBillingGroupAccountSupportPlan_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetBillingGroupAccountSupportPlanClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetBillingGroupAccountSupportPlanClient interface {
+	Recv() (*v1.BillingGroupAccountSupportPlan, error)
+	grpc.ClientStream
+}
+
+type billingGetBillingGroupAccountSupportPlanClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetBillingGroupAccountSupportPlanClient) Recv() (*v1.BillingGroupAccountSupportPlan, error) {
+	m := new(v1.BillingGroupAccountSupportPlan)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *billingClient) UpdateBillingGroupAccountSupportPlan(ctx context.Context, in *UpdateBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -1891,6 +1940,10 @@ type BillingServer interface {
 	UpdateBillingGroupBasicInformation(context.Context, *UpdateBillingGroupBasicInformationRequest) (*emptypb.Empty, error)
 	// Update billing group basic information
 	UpdateBillingGroupCustomFields(context.Context, *UpdateBillingGroupCustomFieldsRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.
+	GetBillingGroupAccountSupportPlan(*GetBillingGroupAccountSupportPlanRequest, Billing_GetBillingGroupAccountSupportPlanServer) error
+	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
+	UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2155,6 +2208,12 @@ func (UnimplementedBillingServer) UpdateBillingGroupBasicInformation(context.Con
 }
 func (UnimplementedBillingServer) UpdateBillingGroupCustomFields(context.Context, *UpdateBillingGroupCustomFieldsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupCustomFields not implemented")
+}
+func (UnimplementedBillingServer) GetBillingGroupAccountSupportPlan(*GetBillingGroupAccountSupportPlanRequest, Billing_GetBillingGroupAccountSupportPlanServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetBillingGroupAccountSupportPlan not implemented")
+}
+func (UnimplementedBillingServer) UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupAccountSupportPlan not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -3786,6 +3845,45 @@ func _Billing_UpdateBillingGroupCustomFields_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetBillingGroupAccountSupportPlan_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetBillingGroupAccountSupportPlanRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetBillingGroupAccountSupportPlan(m, &billingGetBillingGroupAccountSupportPlanServer{ServerStream: stream})
+}
+
+type Billing_GetBillingGroupAccountSupportPlanServer interface {
+	Send(*v1.BillingGroupAccountSupportPlan) error
+	grpc.ServerStream
+}
+
+type billingGetBillingGroupAccountSupportPlanServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetBillingGroupAccountSupportPlanServer) Send(m *v1.BillingGroupAccountSupportPlan) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_UpdateBillingGroupAccountSupportPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBillingGroupAccountSupportPlanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateBillingGroupAccountSupportPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateBillingGroupAccountSupportPlan(ctx, req.(*UpdateBillingGroupAccountSupportPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4045,6 +4143,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UpdateBillingGroupCustomFields",
 			Handler:    _Billing_UpdateBillingGroupCustomFields_Handler,
 		},
+		{
+			MethodName: "UpdateBillingGroupAccountSupportPlan",
+			Handler:    _Billing_UpdateBillingGroupAccountSupportPlan_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -4160,6 +4262,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetTagsAddingSetting",
 			Handler:       _Billing_GetTagsAddingSetting_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetBillingGroupAccountSupportPlan",
+			Handler:       _Billing_GetBillingGroupAccountSupportPlan_Handler,
 			ServerStreams: true,
 		},
 	},
