@@ -1443,6 +1443,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanResponse"><span class="badge">M</span>GetBillingGroupAccountSupportPlanResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>GetBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -17211,6 +17215,51 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetBillingGroupAccountSupportPlanResponse">GetBillingGroupAccountSupportPlanResponse</h3>
+        <p>Response message for the GetBillingGroupAccountSupportPlan rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing internal id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>At the moment, `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>The enabled indicates whether the account support plan is enabled or disabled. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.api.ripple.v1.BillingGroupAccountSupportPlan">blueapi.api.ripple.v1.BillingGroupAccountSupportPlan</a></td>
+                  <td>repeated</td>
+                  <td><p>The support plan setting. [blueapi.api.ripple.v1.BillingGroupAccountSupportPlan]. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetBillingGroupInvoiceServiceDiscountsRequest">GetBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p></p>
 
@@ -20838,7 +20887,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetBillingGroupAccountSupportPlan</td>
                 <td><a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest">GetBillingGroupAccountSupportPlanRequest</a></td>
-                <td><a href="#blueapi.api.ripple.v1.BillingGroupAccountSupportPlan">.blueapi.api.ripple.v1.BillingGroupAccountSupportPlan</a> stream</td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanResponse">GetBillingGroupAccountSupportPlanResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.</p></td>
               </tr>
             
