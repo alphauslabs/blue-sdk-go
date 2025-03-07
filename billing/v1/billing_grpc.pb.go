@@ -76,7 +76,11 @@ const (
 	Billing_ListAbcBillingGroups_FullMethodName                       = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
 	Billing_ListAbcBillingGroupAccounts_FullMethodName                = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
 	Billing_ReadInvoiceAdjustments_FullMethodName                     = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
-	Billing_ApplyInvoiceAdjustments_FullMethodName                    = "/blueapi.billing.v1.Billing/ApplyInvoiceAdjustments"
+	Billing_ReadAdjustmentEntries_FullMethodName                      = "/blueapi.billing.v1.Billing/ReadAdjustmentEntries"
+	Billing_ApplyAdjustmentEntry_FullMethodName                       = "/blueapi.billing.v1.Billing/ApplyAdjustmentEntry"
+	Billing_RestoreAdjustmentEntry_FullMethodName                     = "/blueapi.billing.v1.Billing/RestoreAdjustmentEntry"
+	Billing_SplitAdjustmentEntry_FullMethodName                       = "/blueapi.billing.v1.Billing/SplitAdjustmentEntry"
+	Billing_AllocateAdjustmentEntry_FullMethodName                    = "/blueapi.billing.v1.Billing/AllocateAdjustmentEntry"
 	Billing_ListAccountResources_FullMethodName                       = "/blueapi.billing.v1.Billing/ListAccountResources"
 	Billing_GetAdjustmentConfig_FullMethodName                        = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
 	Billing_CreateAdjustmentConfig_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
@@ -230,8 +234,16 @@ type BillingClient interface {
 	ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error)
 	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
+	// WORK-IN-PROGRESS: Reads the adjustment entries. Only available in Ripple.
+	ReadAdjustmentEntries(ctx context.Context, in *ReadAdjustmentEntriesRequest, opts ...grpc.CallOption) (Billing_ReadAdjustmentEntriesClient, error)
 	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
-	ApplyInvoiceAdjustments(ctx context.Context, in *ApplyInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ApplyAdjustmentEntry(ctx context.Context, in *ApplyAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Restores the adjustment entry item. Only available in Ripple.
+	RestoreAdjustmentEntry(ctx context.Context, in *RestoreAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Splits the adjustment entry item. Only available in Ripple.
+	SplitAdjustmentEntry(ctx context.Context, in *SplitAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Allocates the adjustment entry item. Only available in Ripple.
+	AllocateAdjustmentEntry(ctx context.Context, in *AllocateAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
 	// Gets adjustment config
@@ -1160,10 +1172,73 @@ func (x *billingReadInvoiceAdjustmentsClient) Recv() (*wave.Adjustment, error) {
 	return m, nil
 }
 
-func (c *billingClient) ApplyInvoiceAdjustments(ctx context.Context, in *ApplyInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *billingClient) ReadAdjustmentEntries(ctx context.Context, in *ReadAdjustmentEntriesRequest, opts ...grpc.CallOption) (Billing_ReadAdjustmentEntriesClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[14], Billing_ReadAdjustmentEntries_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingReadAdjustmentEntriesClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ReadAdjustmentEntriesClient interface {
+	Recv() (*v1.AdjustmentEntry, error)
+	grpc.ClientStream
+}
+
+type billingReadAdjustmentEntriesClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingReadAdjustmentEntriesClient) Recv() (*v1.AdjustmentEntry, error) {
+	m := new(v1.AdjustmentEntry)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *billingClient) ApplyAdjustmentEntry(ctx context.Context, in *ApplyAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Billing_ApplyInvoiceAdjustments_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, Billing_ApplyAdjustmentEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) RestoreAdjustmentEntry(ctx context.Context, in *RestoreAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_RestoreAdjustmentEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) SplitAdjustmentEntry(ctx context.Context, in *SplitAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_SplitAdjustmentEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) AllocateAdjustmentEntry(ctx context.Context, in *AllocateAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_AllocateAdjustmentEntry_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1172,7 +1247,7 @@ func (c *billingClient) ApplyInvoiceAdjustments(ctx context.Context, in *ApplyIn
 
 func (c *billingClient) ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[14], Billing_ListAccountResources_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[15], Billing_ListAccountResources_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1245,7 +1320,7 @@ func (c *billingClient) DeleteAdjustmentConfig(ctx context.Context, in *DeleteAd
 
 func (c *billingClient) ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[15], Billing_ReadUntaggedGroups_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[16], Billing_ReadUntaggedGroups_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1278,7 +1353,7 @@ func (x *billingReadUntaggedGroupsClient) Recv() (*ripple.UntaggedGroup, error) 
 
 func (c *billingClient) ReadCustomizedBillingServices(ctx context.Context, in *ReadCustomizedBillingServicesRequest, opts ...grpc.CallOption) (Billing_ReadCustomizedBillingServicesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[16], Billing_ReadCustomizedBillingServices_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[17], Billing_ReadCustomizedBillingServices_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1351,7 +1426,7 @@ func (c *billingClient) DeleteCustomizedBillingService(ctx context.Context, in *
 
 func (c *billingClient) GetCustomizedBillingServiceBillingGroup(ctx context.Context, in *GetCustomizedBillingServiceBillingGroupRequest, opts ...grpc.CallOption) (Billing_GetCustomizedBillingServiceBillingGroupClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[17], Billing_GetCustomizedBillingServiceBillingGroup_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_GetCustomizedBillingServiceBillingGroup_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1404,7 +1479,7 @@ func (c *billingClient) DeleteCustomizedBillingServiceBillingGroup(ctx context.C
 
 func (c *billingClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[18], Billing_GetTags_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[19], Billing_GetTags_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1447,7 +1522,7 @@ func (c *billingClient) CreateCustomField(ctx context.Context, in *CreateCustomF
 
 func (c *billingClient) ListCustomField(ctx context.Context, in *ListCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListCustomFieldClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[19], Billing_ListCustomField_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[20], Billing_ListCustomField_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1490,7 +1565,7 @@ func (c *billingClient) AddBillingGroupCustomField(ctx context.Context, in *AddB
 
 func (c *billingClient) ListBillingGroupCustomField(ctx context.Context, in *ListBillingGroupCustomFieldRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupCustomFieldClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[20], Billing_ListBillingGroupCustomField_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[21], Billing_ListBillingGroupCustomField_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1593,7 +1668,7 @@ func (c *billingClient) DeleteFreeFormat(ctx context.Context, in *DeleteFreeForm
 
 func (c *billingClient) GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[21], Billing_GetFreeFormat_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[22], Billing_GetFreeFormat_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1626,7 +1701,7 @@ func (x *billingGetFreeFormatClient) Recv() (*GetFreeFormatResponse, error) {
 
 func (c *billingClient) GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[22], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[23], Billing_GetTagsAddingSetting_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1843,8 +1918,16 @@ type BillingServer interface {
 	ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error
 	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
+	// WORK-IN-PROGRESS: Reads the adjustment entries. Only available in Ripple.
+	ReadAdjustmentEntries(*ReadAdjustmentEntriesRequest, Billing_ReadAdjustmentEntriesServer) error
 	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
-	ApplyInvoiceAdjustments(context.Context, *ApplyInvoiceAdjustmentsRequest) (*emptypb.Empty, error)
+	ApplyAdjustmentEntry(context.Context, *ApplyAdjustmentEntryRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Restores the adjustment entry item. Only available in Ripple.
+	RestoreAdjustmentEntry(context.Context, *RestoreAdjustmentEntryRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Splits the adjustment entry item. Only available in Ripple.
+	SplitAdjustmentEntry(context.Context, *SplitAdjustmentEntryRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Allocates the adjustment entry item. Only available in Ripple.
+	AllocateAdjustmentEntry(context.Context, *AllocateAdjustmentEntryRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
 	// Gets adjustment config
@@ -2084,8 +2167,20 @@ func (UnimplementedBillingServer) ListAbcBillingGroupAccounts(*ListAbcBillingGro
 func (UnimplementedBillingServer) ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadInvoiceAdjustments not implemented")
 }
-func (UnimplementedBillingServer) ApplyInvoiceAdjustments(context.Context, *ApplyInvoiceAdjustmentsRequest) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApplyInvoiceAdjustments not implemented")
+func (UnimplementedBillingServer) ReadAdjustmentEntries(*ReadAdjustmentEntriesRequest, Billing_ReadAdjustmentEntriesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadAdjustmentEntries not implemented")
+}
+func (UnimplementedBillingServer) ApplyAdjustmentEntry(context.Context, *ApplyAdjustmentEntryRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ApplyAdjustmentEntry not implemented")
+}
+func (UnimplementedBillingServer) RestoreAdjustmentEntry(context.Context, *RestoreAdjustmentEntryRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RestoreAdjustmentEntry not implemented")
+}
+func (UnimplementedBillingServer) SplitAdjustmentEntry(context.Context, *SplitAdjustmentEntryRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SplitAdjustmentEntry not implemented")
+}
+func (UnimplementedBillingServer) AllocateAdjustmentEntry(context.Context, *AllocateAdjustmentEntryRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AllocateAdjustmentEntry not implemented")
 }
 func (UnimplementedBillingServer) ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccountResources not implemented")
@@ -3183,20 +3278,95 @@ func (x *billingReadInvoiceAdjustmentsServer) Send(m *wave.Adjustment) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Billing_ApplyInvoiceAdjustments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ApplyInvoiceAdjustmentsRequest)
+func _Billing_ReadAdjustmentEntries_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadAdjustmentEntriesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ReadAdjustmentEntries(m, &billingReadAdjustmentEntriesServer{ServerStream: stream})
+}
+
+type Billing_ReadAdjustmentEntriesServer interface {
+	Send(*v1.AdjustmentEntry) error
+	grpc.ServerStream
+}
+
+type billingReadAdjustmentEntriesServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingReadAdjustmentEntriesServer) Send(m *v1.AdjustmentEntry) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_ApplyAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ApplyAdjustmentEntryRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BillingServer).ApplyInvoiceAdjustments(ctx, in)
+		return srv.(BillingServer).ApplyAdjustmentEntry(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Billing_ApplyInvoiceAdjustments_FullMethodName,
+		FullMethod: Billing_ApplyAdjustmentEntry_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).ApplyInvoiceAdjustments(ctx, req.(*ApplyInvoiceAdjustmentsRequest))
+		return srv.(BillingServer).ApplyAdjustmentEntry(ctx, req.(*ApplyAdjustmentEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_RestoreAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreAdjustmentEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).RestoreAdjustmentEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_RestoreAdjustmentEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).RestoreAdjustmentEntry(ctx, req.(*RestoreAdjustmentEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_SplitAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SplitAdjustmentEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).SplitAdjustmentEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_SplitAdjustmentEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).SplitAdjustmentEntry(ctx, req.(*SplitAdjustmentEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_AllocateAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AllocateAdjustmentEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).AllocateAdjustmentEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_AllocateAdjustmentEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).AllocateAdjustmentEntry(ctx, req.(*AllocateAdjustmentEntryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4018,8 +4188,20 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Billing_DeleteAccessGroup_Handler,
 		},
 		{
-			MethodName: "ApplyInvoiceAdjustments",
-			Handler:    _Billing_ApplyInvoiceAdjustments_Handler,
+			MethodName: "ApplyAdjustmentEntry",
+			Handler:    _Billing_ApplyAdjustmentEntry_Handler,
+		},
+		{
+			MethodName: "RestoreAdjustmentEntry",
+			Handler:    _Billing_RestoreAdjustmentEntry_Handler,
+		},
+		{
+			MethodName: "SplitAdjustmentEntry",
+			Handler:    _Billing_SplitAdjustmentEntry_Handler,
+		},
+		{
+			MethodName: "AllocateAdjustmentEntry",
+			Handler:    _Billing_AllocateAdjustmentEntry_Handler,
 		},
 		{
 			MethodName: "GetAdjustmentConfig",
@@ -4195,6 +4377,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadInvoiceAdjustments",
 			Handler:       _Billing_ReadInvoiceAdjustments_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadAdjustmentEntries",
+			Handler:       _Billing_ReadAdjustmentEntries_Handler,
 			ServerStreams: true,
 		},
 		{

@@ -1211,15 +1211,19 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest"><span class="badge">M</span>ApplyInvoiceAdjustmentsRequest</a>
+                  <a href="#blueapi.billing.v1.AllocateAdjustmentEntryRequest"><span class="badge">M</span>AllocateAdjustmentEntryRequest</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentEntry"><span class="badge">M</span>ApplyInvoiceAdjustmentsRequest.AdjustmentEntry</a>
+                  <a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest"><span class="badge">M</span>ApplyAdjustmentEntryRequest</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting"><span class="badge">M</span>ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</a>
+                  <a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest.AdjustmentEntry"><span class="badge">M</span>ApplyAdjustmentEntryRequest.AdjustmentEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest.ApplySetting"><span class="badge">M</span>ApplyAdjustmentEntryRequest.ApplySetting</a>
                 </li>
               
                 <li>
@@ -1619,6 +1623,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ReadAdjustmentEntriesRequest"><span class="badge">M</span>ReadAdjustmentEntriesRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ReadCustomizedBillingServicesRequest"><span class="badge">M</span>ReadCustomizedBillingServicesRequest</a>
                 </li>
               
@@ -1647,6 +1655,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.RestoreAdjustmentEntryRequest"><span class="badge">M</span>RestoreAdjustmentEntryRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest"><span class="badge">M</span>SaveInvoiceSettingsRequest</a>
                 </li>
               
@@ -1660,6 +1672,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting"><span class="badge">M</span>SetCustomizedBillingServiceBillingGroupRequest.CustomizedBillingServiceBillingSetting</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.SplitAdjustmentEntryRequest"><span class="badge">M</span>SplitAdjustmentEntryRequest</a>
                 </li>
               
                 <li>
@@ -14667,8 +14683,8 @@ Only available in Wave(Pro).</p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest">ApplyInvoiceAdjustmentsRequest</h3>
-        <p>Request message for the Billing.ApplyInvoiceAdjustments rpc.</p>
+        <h3 id="blueapi.billing.v1.AllocateAdjustmentEntryRequest">AllocateAdjustmentEntryRequest</h3>
+        <p>Request message for the Billing.AllocateAdjustmentEntry rpc.</p>
 
         
           <table class="field-table">
@@ -14681,21 +14697,14 @@ Only available in Wave(Pro).</p></td>
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
                 </tr>
               
                 <tr>
-                  <td>setting</td>
-                  <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting">ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</a></td>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>AdjustmentSetting. root setting. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>entries</td>
-                  <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentEntry">ApplyInvoiceAdjustmentsRequest.AdjustmentEntry</a></td>
-                  <td>repeated</td>
-                  <td><p>Required. AdjustmentEntry </p></td>
+                  <td><p>Required. AdjustmentEntry ID. </p></td>
                 </tr>
               
             </tbody>
@@ -14705,8 +14714,46 @@ Only available in Wave(Pro).</p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentEntry">ApplyInvoiceAdjustmentsRequest.AdjustmentEntry</h3>
-        <p>AdjustmentEntry. target ids</p>
+        <h3 id="blueapi.billing.v1.ApplyAdjustmentEntryRequest">ApplyAdjustmentEntryRequest</h3>
+        <p>Request message for the Billing.ApplyAdjustmentEntry rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest.ApplySetting">ApplyAdjustmentEntryRequest.ApplySetting</a></td>
+                  <td></td>
+                  <td><p>Required. ApplySetting. root setting. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entries</td>
+                  <td><a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest.AdjustmentEntry">ApplyAdjustmentEntryRequest.AdjustmentEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. List of AdjustmentEntry. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ApplyAdjustmentEntryRequest.AdjustmentEntry">ApplyAdjustmentEntryRequest.AdjustmentEntry</h3>
+        <p>AdjustmentEntry. target IDs</p>
 
         
           <table class="field-table">
@@ -14719,14 +14766,14 @@ Only available in Wave(Pro).</p></td>
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. id. adjustment entry id </p></td>
+                  <td><p>Required. adjustment entry ID. </p></td>
                 </tr>
               
                 <tr>
                   <td>setting</td>
-                  <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting">ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</a></td>
+                  <td><a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest.ApplySetting">ApplyAdjustmentEntryRequest.ApplySetting</a></td>
                   <td></td>
-                  <td><p>Optional. AdjustmentSetting. If this setting is configured, it will take precedence. </p></td>
+                  <td><p>Optional. ApplySetting. If this setting is configured, it will take precedence. </p></td>
                 </tr>
               
             </tbody>
@@ -14736,7 +14783,7 @@ Only available in Wave(Pro).</p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest.AdjustmentSetting">ApplyInvoiceAdjustmentsRequest.AdjustmentSetting</h3>
+        <h3 id="blueapi.billing.v1.ApplyAdjustmentEntryRequest.ApplySetting">ApplyAdjustmentEntryRequest.ApplySetting</h3>
         <p>AdjustmentSetting</p>
 
         
@@ -14747,18 +14794,10 @@ Only available in Wave(Pro).</p></td>
             <tbody>
               
                 <tr>
-                  <td>apply</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Required. apply. if apply is true, the adjustment will be applied to the invoice.
-if apply is false, the adjustment will be removed from the invoice. </p></td>
-                </tr>
-              
-                <tr>
                   <td>month</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>apply to month. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`. </p></td>
+                  <td><p>Optional. apply to month. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`. </p></td>
                 </tr>
               
                 <tr>
@@ -14770,7 +14809,7 @@ if apply is false, the adjustment will be removed from the invoice. </p></td>
               
                 <tr>
                   <td>exchangeRate</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Optional. exchange rate. </p></td>
                 </tr>
@@ -14779,7 +14818,7 @@ if apply is false, the adjustment will be removed from the invoice. </p></td>
                   <td>billingInternalId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. apply to billing internal id. </p></td>
+                  <td><p>Optional. apply to billing internal ID. </p></td>
                 </tr>
               
             </tbody>
@@ -18882,6 +18921,37 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ReadAdjustmentEntriesRequest">ReadAdjustmentEntriesRequest</h3>
+        <p>Request message for the Billing.ReadAdjustmentEntries rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ReadCustomizedBillingServicesRequest">ReadCustomizedBillingServicesRequest</h3>
         <p>Request message for the Billing.ReadCustomizedBillingServices rpc.</p>
 
@@ -19119,6 +19189,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.RestoreAdjustmentEntryRequest">RestoreAdjustmentEntryRequest</h3>
+        <p>Request message for the Billing.RestoreAdjustmentEntry rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entries</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. List of AdjustmentEntry IDs. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.SaveInvoiceSettingsRequest">SaveInvoiceSettingsRequest</h3>
         <p></p>
 
@@ -19274,6 +19375,44 @@ this is ignored if allGroups is true. </p></td>
                   <td><p>Optional. if chargingTarget is BILLINGGROUP, `accounts` is set emptty.
 
 Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.SplitAdjustmentEntryRequest">SplitAdjustmentEntryRequest</h3>
+        <p>Request message for the Billing.SplitAdjustmentEntry rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws`,`azure`,`gcp` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. AdjustmentEntry ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startMonth</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`. </p></td>
                 </tr>
               
             </tbody>
@@ -20647,10 +20786,38 @@ Lists all exchange rate.
               </tr>
             
               <tr>
-                <td>ApplyInvoiceAdjustments</td>
-                <td><a href="#blueapi.billing.v1.ApplyInvoiceAdjustmentsRequest">ApplyInvoiceAdjustmentsRequest</a></td>
+                <td>ReadAdjustmentEntries</td>
+                <td><a href="#blueapi.billing.v1.ReadAdjustmentEntriesRequest">ReadAdjustmentEntriesRequest</a></td>
+                <td><a href="#blueapi.api.ripple.v1.AdjustmentEntry">.blueapi.api.ripple.v1.AdjustmentEntry</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Reads the adjustment entries. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ApplyAdjustmentEntry</td>
+                <td><a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest">ApplyAdjustmentEntryRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RestoreAdjustmentEntry</td>
+                <td><a href="#blueapi.billing.v1.RestoreAdjustmentEntryRequest">RestoreAdjustmentEntryRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Restores the adjustment entry item. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SplitAdjustmentEntry</td>
+                <td><a href="#blueapi.billing.v1.SplitAdjustmentEntryRequest">SplitAdjustmentEntryRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Splits the adjustment entry item. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>AllocateAdjustmentEntry</td>
+                <td><a href="#blueapi.billing.v1.AllocateAdjustmentEntryRequest">AllocateAdjustmentEntryRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Allocates the adjustment entry item. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -21446,9 +21613,49 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               
               
               <tr>
-                <td>ApplyInvoiceAdjustments</td>
+                <td>ReadAdjustmentEntries</td>
                 <td>POST</td>
-                <td>/v1/{vendor}/invoiceadjustments:apply</td>
+                <td>/v1/{vendor}/adjustmententries:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ApplyAdjustmentEntry</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententries:apply</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RestoreAdjustmentEntry</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententries:restore</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SplitAdjustmentEntry</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententries/{id}/split</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AllocateAdjustmentEntry</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententries/{id}/allocate</td>
                 <td>*</td>
               </tr>
               
