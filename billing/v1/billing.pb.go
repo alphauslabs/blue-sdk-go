@@ -9725,6 +9725,8 @@ type ApplyAdjustmentEntryRequest_ApplySetting struct {
 	// Optional. exchange rate.
 	ExchangeRate float64 `protobuf:"fixed64,3,opt,name=exchangeRate,proto3" json:"exchangeRate,omitempty"`
 	// Optional. apply to billing internal ID.
+	// When you specify billing internal ID, the invoicing will be applied to the target Billing Group.
+	// At the moment, only `aws` is supported.
 	BillingInternalId string `protobuf:"bytes,4,opt,name=billingInternalId,proto3" json:"billingInternalId,omitempty"`
 	unknownFields     protoimpl.UnknownFields
 	sizeCache         protoimpl.SizeCache
