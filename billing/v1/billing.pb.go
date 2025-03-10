@@ -5349,7 +5349,7 @@ func (x *RestoreAdjustmentEntryRequest) GetEntries() []string {
 // Request message for the Billing.SplitAdjustmentEntry rpc.
 type SplitAdjustmentEntryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. At the moment, only `aws`,`azure`,`gcp` is supported.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. AdjustmentEntry ID.
 	Id string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -5413,7 +5413,7 @@ func (x *SplitAdjustmentEntryRequest) GetStartMonth() string {
 // Request message for the Billing.AllocateAdjustmentEntry rpc.
 type AllocateAdjustmentEntryRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. At the moment, only `aws`,`azure`,`gcp` is supported.
+	// Required. At the moment, only `aws` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. AdjustmentEntry ID.
 	Id            string `protobuf:"bytes,2,opt,name=id,proto3" json:"id,omitempty"`
