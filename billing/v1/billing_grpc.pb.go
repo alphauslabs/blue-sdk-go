@@ -77,6 +77,7 @@ const (
 	Billing_ListAbcBillingGroupAccounts_FullMethodName                = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
 	Billing_ReadInvoiceAdjustments_FullMethodName                     = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
 	Billing_ReadAdjustmentEntries_FullMethodName                      = "/blueapi.billing.v1.Billing/ReadAdjustmentEntries"
+	Billing_GetAdjustmentEntry_FullMethodName                         = "/blueapi.billing.v1.Billing/GetAdjustmentEntry"
 	Billing_ApplyAdjustmentEntry_FullMethodName                       = "/blueapi.billing.v1.Billing/ApplyAdjustmentEntry"
 	Billing_RestoreAdjustmentEntry_FullMethodName                     = "/blueapi.billing.v1.Billing/RestoreAdjustmentEntry"
 	Billing_SplitAdjustmentEntry_FullMethodName                       = "/blueapi.billing.v1.Billing/SplitAdjustmentEntry"
@@ -236,6 +237,8 @@ type BillingClient interface {
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
 	// WORK-IN-PROGRESS: Reads the adjustment entries. Only available in Ripple.
 	ReadAdjustmentEntries(ctx context.Context, in *ReadAdjustmentEntriesRequest, opts ...grpc.CallOption) (Billing_ReadAdjustmentEntriesClient, error)
+	// WORK-IN-PROGRESS: Gets the adjustment entry. Only available in Ripple.
+	GetAdjustmentEntry(ctx context.Context, in *GetAdjustmentEntryRequest, opts ...grpc.CallOption) (*v1.AdjustmentEntry, error)
 	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
 	ApplyAdjustmentEntry(ctx context.Context, in *ApplyAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Restores the adjustment entry item. Only available in Ripple.
@@ -1205,6 +1208,16 @@ func (x *billingReadAdjustmentEntriesClient) Recv() (*v1.AdjustmentEntry, error)
 	return m, nil
 }
 
+func (c *billingClient) GetAdjustmentEntry(ctx context.Context, in *GetAdjustmentEntryRequest, opts ...grpc.CallOption) (*v1.AdjustmentEntry, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(v1.AdjustmentEntry)
+	err := c.cc.Invoke(ctx, Billing_GetAdjustmentEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) ApplyAdjustmentEntry(ctx context.Context, in *ApplyAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
@@ -1920,6 +1933,8 @@ type BillingServer interface {
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
 	// WORK-IN-PROGRESS: Reads the adjustment entries. Only available in Ripple.
 	ReadAdjustmentEntries(*ReadAdjustmentEntriesRequest, Billing_ReadAdjustmentEntriesServer) error
+	// WORK-IN-PROGRESS: Gets the adjustment entry. Only available in Ripple.
+	GetAdjustmentEntry(context.Context, *GetAdjustmentEntryRequest) (*v1.AdjustmentEntry, error)
 	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
 	ApplyAdjustmentEntry(context.Context, *ApplyAdjustmentEntryRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Restores the adjustment entry item. Only available in Ripple.
@@ -2169,6 +2184,9 @@ func (UnimplementedBillingServer) ReadInvoiceAdjustments(*ReadInvoiceAdjustments
 }
 func (UnimplementedBillingServer) ReadAdjustmentEntries(*ReadAdjustmentEntriesRequest, Billing_ReadAdjustmentEntriesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadAdjustmentEntries not implemented")
+}
+func (UnimplementedBillingServer) GetAdjustmentEntry(context.Context, *GetAdjustmentEntryRequest) (*v1.AdjustmentEntry, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAdjustmentEntry not implemented")
 }
 func (UnimplementedBillingServer) ApplyAdjustmentEntry(context.Context, *ApplyAdjustmentEntryRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ApplyAdjustmentEntry not implemented")
@@ -3299,6 +3317,24 @@ func (x *billingReadAdjustmentEntriesServer) Send(m *v1.AdjustmentEntry) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_GetAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAdjustmentEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetAdjustmentEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetAdjustmentEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetAdjustmentEntry(ctx, req.(*GetAdjustmentEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_ApplyAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ApplyAdjustmentEntryRequest)
 	if err := dec(in); err != nil {
@@ -4186,6 +4222,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAccessGroup",
 			Handler:    _Billing_DeleteAccessGroup_Handler,
+		},
+		{
+			MethodName: "GetAdjustmentEntry",
+			Handler:    _Billing_GetAdjustmentEntry_Handler,
 		},
 		{
 			MethodName: "ApplyAdjustmentEntry",
