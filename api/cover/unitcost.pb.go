@@ -506,6 +506,190 @@ func (x *PotentialUnitItem) GetTag() map[string]string {
 	return nil
 }
 
+type UnitMetric struct {
+	state             protoimpl.MessageState `protogen:"open.v1"`
+	Id                string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	OrgId             string                 `protobuf:"bytes,2,opt,name=orgId,proto3" json:"orgId,omitempty"`
+	MetricName        string                 `protobuf:"bytes,3,opt,name=metricName,proto3" json:"metricName,omitempty"`
+	Description       string                 `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
+	AggregationMethod string                 `protobuf:"bytes,5,opt,name=aggregationMethod,proto3" json:"aggregationMethod,omitempty"`
+	DataSource        string                 `protobuf:"bytes,6,opt,name=dataSource,proto3" json:"dataSource,omitempty"`
+	Status            string                 `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	CostgroupId       string                 `protobuf:"bytes,8,opt,name=costgroupId,proto3" json:"costgroupId,omitempty"`
+	CsvInfo           *CsvInfo               `protobuf:"bytes,9,opt,name=csvInfo,proto3" json:"csvInfo,omitempty"`
+	CreatedBy         string                 `protobuf:"bytes,10,opt,name=createdBy,proto3" json:"createdBy,omitempty"`
+	CreateTime        string                 `protobuf:"bytes,11,opt,name=createTime,proto3" json:"createTime,omitempty"`
+	LastUpdatedAt     string                 `protobuf:"bytes,12,opt,name=lastUpdatedAt,proto3" json:"lastUpdatedAt,omitempty"`
+	unknownFields     protoimpl.UnknownFields
+	sizeCache         protoimpl.SizeCache
+}
+
+func (x *UnitMetric) Reset() {
+	*x = UnitMetric{}
+	mi := &file_api_cover_unitcost_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *UnitMetric) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UnitMetric) ProtoMessage() {}
+
+func (x *UnitMetric) ProtoReflect() protoreflect.Message {
+	mi := &file_api_cover_unitcost_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UnitMetric.ProtoReflect.Descriptor instead.
+func (*UnitMetric) Descriptor() ([]byte, []int) {
+	return file_api_cover_unitcost_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *UnitMetric) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetOrgId() string {
+	if x != nil {
+		return x.OrgId
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetMetricName() string {
+	if x != nil {
+		return x.MetricName
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetDescription() string {
+	if x != nil {
+		return x.Description
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetAggregationMethod() string {
+	if x != nil {
+		return x.AggregationMethod
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetDataSource() string {
+	if x != nil {
+		return x.DataSource
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetStatus() string {
+	if x != nil {
+		return x.Status
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetCostgroupId() string {
+	if x != nil {
+		return x.CostgroupId
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetCsvInfo() *CsvInfo {
+	if x != nil {
+		return x.CsvInfo
+	}
+	return nil
+}
+
+func (x *UnitMetric) GetCreatedBy() string {
+	if x != nil {
+		return x.CreatedBy
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetCreateTime() string {
+	if x != nil {
+		return x.CreateTime
+	}
+	return ""
+}
+
+func (x *UnitMetric) GetLastUpdatedAt() string {
+	if x != nil {
+		return x.LastUpdatedAt
+	}
+	return ""
+}
+
+type CsvInfo struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	S3Key         string                 `protobuf:"bytes,1,opt,name=s3key,proto3" json:"s3key,omitempty"`
+	S3Url         string                 `protobuf:"bytes,2,opt,name=s3url,proto3" json:"s3url,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *CsvInfo) Reset() {
+	*x = CsvInfo{}
+	mi := &file_api_cover_unitcost_proto_msgTypes[7]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *CsvInfo) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CsvInfo) ProtoMessage() {}
+
+func (x *CsvInfo) ProtoReflect() protoreflect.Message {
+	mi := &file_api_cover_unitcost_proto_msgTypes[7]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CsvInfo.ProtoReflect.Descriptor instead.
+func (*CsvInfo) Descriptor() ([]byte, []int) {
+	return file_api_cover_unitcost_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *CsvInfo) GetS3Key() string {
+	if x != nil {
+		return x.S3Key
+	}
+	return ""
+}
+
+func (x *CsvInfo) GetS3Url() string {
+	if x != nil {
+		return x.S3Url
+	}
+	return ""
+}
+
 var File_api_cover_unitcost_proto protoreflect.FileDescriptor
 
 var file_api_cover_unitcost_proto_rawDesc = string([]byte{
@@ -627,7 +811,36 @@ var file_api_cover_unitcost_proto_rawDesc = string([]byte{
 	0x61, 0x67, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65, 0x79, 0x18, 0x01,
 	0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05, 0x76, 0x61, 0x6c,
 	0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c, 0x75, 0x65, 0x3a,
-	0x02, 0x38, 0x01, 0x42, 0x61, 0x0a, 0x1f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70,
+	0x02, 0x38, 0x01, 0x22, 0x96, 0x03, 0x0a, 0x0a, 0x55, 0x6e, 0x69, 0x74, 0x4d, 0x65, 0x74, 0x72,
+	0x69, 0x63, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x6f, 0x72, 0x67, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x05, 0x6f, 0x72, 0x67, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x6d, 0x65, 0x74, 0x72,
+	0x69, 0x63, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x6d, 0x65,
+	0x74, 0x72, 0x69, 0x63, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x20, 0x0a, 0x0b, 0x64, 0x65, 0x73, 0x63,
+	0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x04, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x64,
+	0x65, 0x73, 0x63, 0x72, 0x69, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x12, 0x2c, 0x0a, 0x11, 0x61, 0x67,
+	0x67, 0x72, 0x65, 0x67, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x18,
+	0x05, 0x20, 0x01, 0x28, 0x09, 0x52, 0x11, 0x61, 0x67, 0x67, 0x72, 0x65, 0x67, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x4d, 0x65, 0x74, 0x68, 0x6f, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x64, 0x61, 0x74, 0x61,
+	0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x18, 0x06, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x64, 0x61,
+	0x74, 0x61, 0x53, 0x6f, 0x75, 0x72, 0x63, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x73, 0x74, 0x61, 0x74,
+	0x75, 0x73, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x73, 0x74, 0x61, 0x74, 0x75, 0x73,
+	0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x6f, 0x75, 0x70, 0x49, 0x64, 0x18,
+	0x08, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6f, 0x73, 0x74, 0x67, 0x72, 0x6f, 0x75, 0x70,
+	0x49, 0x64, 0x12, 0x34, 0x0a, 0x07, 0x63, 0x73, 0x76, 0x49, 0x6e, 0x66, 0x6f, 0x18, 0x09, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x43, 0x73, 0x76, 0x49, 0x6e, 0x66, 0x6f, 0x52,
+	0x07, 0x63, 0x73, 0x76, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x1c, 0x0a, 0x09, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x64, 0x42, 0x79, 0x18, 0x0a, 0x20, 0x01, 0x28, 0x09, 0x52, 0x09, 0x63, 0x72, 0x65,
+	0x61, 0x74, 0x65, 0x64, 0x42, 0x79, 0x12, 0x1e, 0x0a, 0x0a, 0x63, 0x72, 0x65, 0x61, 0x74, 0x65,
+	0x54, 0x69, 0x6d, 0x65, 0x18, 0x0b, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x63, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x54, 0x69, 0x6d, 0x65, 0x12, 0x24, 0x0a, 0x0d, 0x6c, 0x61, 0x73, 0x74, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x18, 0x0c, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x6c,
+	0x61, 0x73, 0x74, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x64, 0x41, 0x74, 0x22, 0x35, 0x0a, 0x07,
+	0x43, 0x73, 0x76, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x14, 0x0a, 0x05, 0x73, 0x33, 0x6b, 0x65, 0x79,
+	0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x33, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a,
+	0x05, 0x73, 0x33, 0x75, 0x72, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x73, 0x33,
+	0x75, 0x72, 0x6c, 0x42, 0x61, 0x0a, 0x1f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70,
 	0x68, 0x61, 0x75, 0x73, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69,
 	0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x42, 0x10, 0x41, 0x70, 0x69, 0x55, 0x6e, 0x69, 0x74, 0x43,
 	0x6f, 0x73, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
@@ -648,7 +861,7 @@ func file_api_cover_unitcost_proto_rawDescGZIP() []byte {
 	return file_api_cover_unitcost_proto_rawDescData
 }
 
-var file_api_cover_unitcost_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_api_cover_unitcost_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_api_cover_unitcost_proto_goTypes = []any{
 	(*UnitCostData)(nil),               // 0: blueapi.api.cover.UnitCostData
 	(*UnitItem)(nil),                   // 1: blueapi.api.cover.UnitItem
@@ -656,30 +869,33 @@ var file_api_cover_unitcost_proto_goTypes = []any{
 	(*ResourcesCombinations)(nil),      // 3: blueapi.api.cover.ResourcesCombinations
 	(*SuggestedUnit)(nil),              // 4: blueapi.api.cover.SuggestedUnit
 	(*PotentialUnitItem)(nil),          // 5: blueapi.api.cover.PotentialUnitItem
-	nil,                                // 6: blueapi.api.cover.SharedResourcesCombination.DistributionEntry
-	nil,                                // 7: blueapi.api.cover.PotentialUnitItem.TagEntry
-	(*CostGroupAwsOptions)(nil),        // 8: blueapi.api.cover.CostGroupAwsOptions
-	(*CostGroupAzureOptions)(nil),      // 9: blueapi.api.cover.CostGroupAzureOptions
-	(*CostGroupGcpOptions)(nil),        // 10: blueapi.api.cover.CostGroupGcpOptions
-	(*CostGroupAzureCspOptions)(nil),   // 11: blueapi.api.cover.CostGroupAzureCspOptions
+	(*UnitMetric)(nil),                 // 6: blueapi.api.cover.UnitMetric
+	(*CsvInfo)(nil),                    // 7: blueapi.api.cover.CsvInfo
+	nil,                                // 8: blueapi.api.cover.SharedResourcesCombination.DistributionEntry
+	nil,                                // 9: blueapi.api.cover.PotentialUnitItem.TagEntry
+	(*CostGroupAwsOptions)(nil),        // 10: blueapi.api.cover.CostGroupAwsOptions
+	(*CostGroupAzureOptions)(nil),      // 11: blueapi.api.cover.CostGroupAzureOptions
+	(*CostGroupGcpOptions)(nil),        // 12: blueapi.api.cover.CostGroupGcpOptions
+	(*CostGroupAzureCspOptions)(nil),   // 13: blueapi.api.cover.CostGroupAzureCspOptions
 }
 var file_api_cover_unitcost_proto_depIdxs = []int32{
 	1,  // 0: blueapi.api.cover.UnitCostData.unitItems:type_name -> blueapi.api.cover.UnitItem
 	2,  // 1: blueapi.api.cover.UnitCostData.sharedResources:type_name -> blueapi.api.cover.SharedResourcesCombination
 	3,  // 2: blueapi.api.cover.UnitItem.dedicatedResourcesCombinations:type_name -> blueapi.api.cover.ResourcesCombinations
 	3,  // 3: blueapi.api.cover.SharedResourcesCombination.sharedResourcesCombinations:type_name -> blueapi.api.cover.ResourcesCombinations
-	6,  // 4: blueapi.api.cover.SharedResourcesCombination.distribution:type_name -> blueapi.api.cover.SharedResourcesCombination.DistributionEntry
-	8,  // 5: blueapi.api.cover.ResourcesCombinations.awsOptions:type_name -> blueapi.api.cover.CostGroupAwsOptions
-	9,  // 6: blueapi.api.cover.ResourcesCombinations.azureOptions:type_name -> blueapi.api.cover.CostGroupAzureOptions
-	10, // 7: blueapi.api.cover.ResourcesCombinations.gcpOptions:type_name -> blueapi.api.cover.CostGroupGcpOptions
-	11, // 8: blueapi.api.cover.ResourcesCombinations.azurecspOptions:type_name -> blueapi.api.cover.CostGroupAzureCspOptions
+	8,  // 4: blueapi.api.cover.SharedResourcesCombination.distribution:type_name -> blueapi.api.cover.SharedResourcesCombination.DistributionEntry
+	10, // 5: blueapi.api.cover.ResourcesCombinations.awsOptions:type_name -> blueapi.api.cover.CostGroupAwsOptions
+	11, // 6: blueapi.api.cover.ResourcesCombinations.azureOptions:type_name -> blueapi.api.cover.CostGroupAzureOptions
+	12, // 7: blueapi.api.cover.ResourcesCombinations.gcpOptions:type_name -> blueapi.api.cover.CostGroupGcpOptions
+	13, // 8: blueapi.api.cover.ResourcesCombinations.azurecspOptions:type_name -> blueapi.api.cover.CostGroupAzureCspOptions
 	5,  // 9: blueapi.api.cover.SuggestedUnit.potentialUnitItems:type_name -> blueapi.api.cover.PotentialUnitItem
-	7,  // 10: blueapi.api.cover.PotentialUnitItem.tag:type_name -> blueapi.api.cover.PotentialUnitItem.TagEntry
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	9,  // 10: blueapi.api.cover.PotentialUnitItem.tag:type_name -> blueapi.api.cover.PotentialUnitItem.TagEntry
+	7,  // 11: blueapi.api.cover.UnitMetric.csvInfo:type_name -> blueapi.api.cover.CsvInfo
+	12, // [12:12] is the sub-list for method output_type
+	12, // [12:12] is the sub-list for method input_type
+	12, // [12:12] is the sub-list for extension type_name
+	12, // [12:12] is the sub-list for extension extendee
+	0,  // [0:12] is the sub-list for field type_name
 }
 
 func init() { file_api_cover_unitcost_proto_init() }
@@ -694,7 +910,7 @@ func file_api_cover_unitcost_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_cover_unitcost_proto_rawDesc), len(file_api_cover_unitcost_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

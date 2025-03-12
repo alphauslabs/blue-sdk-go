@@ -186,6 +186,11 @@ const (
 	Cover_GetSharedResource_FullMethodName                       = "/blueapi.cover.v1.Cover/GetSharedResource"
 	Cover_UpdateSharedResource_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateSharedResource"
 	Cover_DeleteSharedResource_FullMethodName                    = "/blueapi.cover.v1.Cover/DeleteSharedResource"
+	Cover_ListUnitMetrics_FullMethodName                         = "/blueapi.cover.v1.Cover/ListUnitMetrics"
+	Cover_CreateUnitMetric_FullMethodName                        = "/blueapi.cover.v1.Cover/CreateUnitMetric"
+	Cover_GetUnitMetric_FullMethodName                           = "/blueapi.cover.v1.Cover/GetUnitMetric"
+	Cover_UpdateUnitMetric_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateUnitMetric"
+	Cover_DeleteUnitMetric_FullMethodName                        = "/blueapi.cover.v1.Cover/DeleteUnitMetric"
 	Cover_VerifyAPIAccess_FullMethodName                         = "/blueapi.cover.v1.Cover/VerifyAPIAccess"
 )
 
@@ -524,6 +529,16 @@ type CoverClient interface {
 	UpdateSharedResource(ctx context.Context, in *UpdateSharedResourcesRequest, opts ...grpc.CallOption) (*UpdateSharedResourcesResponse, error)
 	// Delete Specific Shared Resource
 	DeleteSharedResource(ctx context.Context, in *DeleteSharedResourcesRequest, opts ...grpc.CallOption) (*DeleteSharedResourcesResponse, error)
+	// List all Unit Metrics
+	ListUnitMetrics(ctx context.Context, in *ListUnitMetricsRequest, opts ...grpc.CallOption) (*ListUnitMetricsResponse, error)
+	// Create Unit Metric
+	CreateUnitMetric(ctx context.Context, in *CreateUnitMetricRequest, opts ...grpc.CallOption) (*CreateUnitMetricResponse, error)
+	// Get Specific Unit Metric
+	GetUnitMetric(ctx context.Context, in *GetUnitMetricRequest, opts ...grpc.CallOption) (*GetUnitMetricResponse, error)
+	// Update Specific Unit Metric
+	UpdateUnitMetric(ctx context.Context, in *UpdateUnitMetricRequest, opts ...grpc.CallOption) (*UpdateUnitMetricResponse, error)
+	// Delete Specific Unit Metric
+	DeleteUnitMetric(ctx context.Context, in *DeleteUnitMetricRequest, opts ...grpc.CallOption) (*DeleteUnitMetricResponse, error)
 	VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error)
 }
 
@@ -2808,6 +2823,56 @@ func (c *coverClient) DeleteSharedResource(ctx context.Context, in *DeleteShared
 	return out, nil
 }
 
+func (c *coverClient) ListUnitMetrics(ctx context.Context, in *ListUnitMetricsRequest, opts ...grpc.CallOption) (*ListUnitMetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUnitMetricsResponse)
+	err := c.cc.Invoke(ctx, Cover_ListUnitMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateUnitMetric(ctx context.Context, in *CreateUnitMetricRequest, opts ...grpc.CallOption) (*CreateUnitMetricResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUnitMetricResponse)
+	err := c.cc.Invoke(ctx, Cover_CreateUnitMetric_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetUnitMetric(ctx context.Context, in *GetUnitMetricRequest, opts ...grpc.CallOption) (*GetUnitMetricResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUnitMetricResponse)
+	err := c.cc.Invoke(ctx, Cover_GetUnitMetric_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUnitMetric(ctx context.Context, in *UpdateUnitMetricRequest, opts ...grpc.CallOption) (*UpdateUnitMetricResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUnitMetricResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateUnitMetric_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteUnitMetric(ctx context.Context, in *DeleteUnitMetricRequest, opts ...grpc.CallOption) (*DeleteUnitMetricResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUnitMetricResponse)
+	err := c.cc.Invoke(ctx, Cover_DeleteUnitMetric_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyAPIAccessResponse)
@@ -3153,6 +3218,16 @@ type CoverServer interface {
 	UpdateSharedResource(context.Context, *UpdateSharedResourcesRequest) (*UpdateSharedResourcesResponse, error)
 	// Delete Specific Shared Resource
 	DeleteSharedResource(context.Context, *DeleteSharedResourcesRequest) (*DeleteSharedResourcesResponse, error)
+	// List all Unit Metrics
+	ListUnitMetrics(context.Context, *ListUnitMetricsRequest) (*ListUnitMetricsResponse, error)
+	// Create Unit Metric
+	CreateUnitMetric(context.Context, *CreateUnitMetricRequest) (*CreateUnitMetricResponse, error)
+	// Get Specific Unit Metric
+	GetUnitMetric(context.Context, *GetUnitMetricRequest) (*GetUnitMetricResponse, error)
+	// Update Specific Unit Metric
+	UpdateUnitMetric(context.Context, *UpdateUnitMetricRequest) (*UpdateUnitMetricResponse, error)
+	// Delete Specific Unit Metric
+	DeleteUnitMetric(context.Context, *DeleteUnitMetricRequest) (*DeleteUnitMetricResponse, error)
 	VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
@@ -3655,6 +3730,21 @@ func (UnimplementedCoverServer) UpdateSharedResource(context.Context, *UpdateSha
 }
 func (UnimplementedCoverServer) DeleteSharedResource(context.Context, *DeleteSharedResourcesRequest) (*DeleteSharedResourcesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSharedResource not implemented")
+}
+func (UnimplementedCoverServer) ListUnitMetrics(context.Context, *ListUnitMetricsRequest) (*ListUnitMetricsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnitMetrics not implemented")
+}
+func (UnimplementedCoverServer) CreateUnitMetric(context.Context, *CreateUnitMetricRequest) (*CreateUnitMetricResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUnitMetric not implemented")
+}
+func (UnimplementedCoverServer) GetUnitMetric(context.Context, *GetUnitMetricRequest) (*GetUnitMetricResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUnitMetric not implemented")
+}
+func (UnimplementedCoverServer) UpdateUnitMetric(context.Context, *UpdateUnitMetricRequest) (*UpdateUnitMetricResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUnitMetric not implemented")
+}
+func (UnimplementedCoverServer) DeleteUnitMetric(context.Context, *DeleteUnitMetricRequest) (*DeleteUnitMetricResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUnitMetric not implemented")
 }
 func (UnimplementedCoverServer) VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAPIAccess not implemented")
@@ -6728,6 +6818,96 @@ func _Cover_DeleteSharedResource_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListUnitMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUnitMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListUnitMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListUnitMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListUnitMetrics(ctx, req.(*ListUnitMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateUnitMetric_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUnitMetricRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateUnitMetric(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateUnitMetric_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateUnitMetric(ctx, req.(*CreateUnitMetricRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetUnitMetric_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUnitMetricRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetUnitMetric(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetUnitMetric_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetUnitMetric(ctx, req.(*GetUnitMetricRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUnitMetric_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUnitMetricRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUnitMetric(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateUnitMetric_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUnitMetric(ctx, req.(*UpdateUnitMetricRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteUnitMetric_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUnitMetricRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteUnitMetric(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteUnitMetric_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteUnitMetric(ctx, req.(*DeleteUnitMetricRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_VerifyAPIAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyAPIAccessRequest)
 	if err := dec(in); err != nil {
@@ -7304,6 +7484,26 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteSharedResource",
 			Handler:    _Cover_DeleteSharedResource_Handler,
+		},
+		{
+			MethodName: "ListUnitMetrics",
+			Handler:    _Cover_ListUnitMetrics_Handler,
+		},
+		{
+			MethodName: "CreateUnitMetric",
+			Handler:    _Cover_CreateUnitMetric_Handler,
+		},
+		{
+			MethodName: "GetUnitMetric",
+			Handler:    _Cover_GetUnitMetric_Handler,
+		},
+		{
+			MethodName: "UpdateUnitMetric",
+			Handler:    _Cover_UpdateUnitMetric_Handler,
+		},
+		{
+			MethodName: "DeleteUnitMetric",
+			Handler:    _Cover_DeleteUnitMetric_Handler,
 		},
 		{
 			MethodName: "VerifyAPIAccess",
