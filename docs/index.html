@@ -1937,6 +1937,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CostItem.UnitcostmetricEntry"><span class="badge">M</span>CostItem.UnitcostmetricEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateAccountAccessRequest"><span class="badge">M</span>CreateAccountAccessRequest</a>
                 </li>
               
@@ -2014,6 +2018,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.CreateSharedResourcesResponse"><span class="badge">M</span>CreateSharedResourcesResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateUnitFromSuggestedRequest"><span class="badge">M</span>CreateUnitFromSuggestedRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateUnitFromSuggestedResponse"><span class="badge">M</span>CreateUnitFromSuggestedResponse</a>
                 </li>
               
                 <li>
@@ -2646,6 +2658,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.MarkAsExecutedResponse"><span class="badge">M</span>MarkAsExecutedResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.MergeSuggestedUnitsRequest"><span class="badge">M</span>MergeSuggestedUnitsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.MergeSuggestedUnitsResponse"><span class="badge">M</span>MergeSuggestedUnitsResponse</a>
                 </li>
               
                 <li>
@@ -23848,6 +23868,44 @@ Example: If groupBy is set to &#34;Environment&#34;, this field might include va
                   <td><p>Indicates whether the item is tagged (true) or not (false). </p></td>
                 </tr>
               
+                <tr>
+                  <td>unitcostmetric</td>
+                  <td><a href="#blueapi.cover.v1.CostItem.UnitcostmetricEntry">CostItem.UnitcostmetricEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Contains the unit cost metric. Only used when feature flag for unit cost metric is enabled. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CostItem.UnitcostmetricEntry">CostItem.UnitcostmetricEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -24624,6 +24682,54 @@ Supported values are the following:
                 <tr>
                   <td>sharedResources</td>
                   <td><a href="#blueapi.api.cover.SharedResourcesCombination">blueapi.api.cover.SharedResourcesCombination</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateUnitFromSuggestedRequest">CreateUnitFromSuggestedRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>suggestedUnitIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateUnitFromSuggestedResponse">CreateUnitFromSuggestedResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unitCostData</td>
+                  <td><a href="#blueapi.api.cover.UnitCostData">blueapi.api.cover.UnitCostData</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -29786,6 +29892,61 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
         <p></p>
 
         
+
+        
+      
+        <h3 id="blueapi.cover.v1.MergeSuggestedUnitsRequest">MergeSuggestedUnitsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>suggestedUnitIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unitItemIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.MergeSuggestedUnitsResponse">MergeSuggestedUnitsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mergedSuggestedUnits</td>
+                  <td><a href="#blueapi.api.cover.SuggestedUnit">blueapi.api.cover.SuggestedUnit</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -35005,6 +35166,20 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>MergeSuggestedUnits</td>
+                <td><a href="#blueapi.cover.v1.MergeSuggestedUnitsRequest">MergeSuggestedUnitsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.MergeSuggestedUnitsResponse">MergeSuggestedUnitsResponse</a></td>
+                <td><p>Merge Suggested Units</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateUnitFromSuggested</td>
+                <td><a href="#blueapi.cover.v1.CreateUnitFromSuggestedRequest">CreateUnitFromSuggestedRequest</a></td>
+                <td><a href="#blueapi.cover.v1.CreateUnitFromSuggestedResponse">CreateUnitFromSuggestedResponse</a></td>
+                <td><p>Create Unit from Suggested Units</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListSharedResources</td>
                 <td><a href="#blueapi.cover.v1.ListSharedResourcesRequest">ListSharedResourcesRequest</a></td>
                 <td><a href="#blueapi.cover.v1.ListSharedResourcesResponse">ListSharedResourcesResponse</a></td>
@@ -36696,6 +36871,26 @@ file in bytes </p></td>
                 <td>GET</td>
                 <td>/v1/unitcost/autosuggest</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>MergeSuggestedUnits</td>
+                <td>POST</td>
+                <td>/v1/unitcost/autosuggest/merge</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateUnitFromSuggested</td>
+                <td>POST</td>
+                <td>/v1/unitcost/autosuggest/create</td>
+                <td>*</td>
               </tr>
               
             

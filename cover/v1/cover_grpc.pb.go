@@ -181,6 +181,8 @@ const (
 	Cover_UpdateUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/UpdateUnitType"
 	Cover_DeleteUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/DeleteUnitType"
 	Cover_ListSuggestedUnits_FullMethodName                      = "/blueapi.cover.v1.Cover/ListSuggestedUnits"
+	Cover_MergeSuggestedUnits_FullMethodName                     = "/blueapi.cover.v1.Cover/MergeSuggestedUnits"
+	Cover_CreateUnitFromSuggested_FullMethodName                 = "/blueapi.cover.v1.Cover/CreateUnitFromSuggested"
 	Cover_ListSharedResources_FullMethodName                     = "/blueapi.cover.v1.Cover/ListSharedResources"
 	Cover_CreateSharedResource_FullMethodName                    = "/blueapi.cover.v1.Cover/CreateSharedResource"
 	Cover_GetSharedResource_FullMethodName                       = "/blueapi.cover.v1.Cover/GetSharedResource"
@@ -519,6 +521,10 @@ type CoverClient interface {
 	DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequest, opts ...grpc.CallOption) (*DeleteUnitTypeResponse, error)
 	// List Suggested Unit Types
 	ListSuggestedUnits(ctx context.Context, in *ListSuggestedUnitsRequest, opts ...grpc.CallOption) (*ListSuggestedUnitsResponse, error)
+	// Merge Suggested Units
+	MergeSuggestedUnits(ctx context.Context, in *MergeSuggestedUnitsRequest, opts ...grpc.CallOption) (*MergeSuggestedUnitsResponse, error)
+	// Create Unit from Suggested Units
+	CreateUnitFromSuggested(ctx context.Context, in *CreateUnitFromSuggestedRequest, opts ...grpc.CallOption) (*CreateUnitFromSuggestedResponse, error)
 	// List all Shared Resources
 	ListSharedResources(ctx context.Context, in *ListSharedResourcesRequest, opts ...grpc.CallOption) (*ListSharedResourcesResponse, error)
 	// Create Shared Resource
@@ -2773,6 +2779,26 @@ func (c *coverClient) ListSuggestedUnits(ctx context.Context, in *ListSuggestedU
 	return out, nil
 }
 
+func (c *coverClient) MergeSuggestedUnits(ctx context.Context, in *MergeSuggestedUnitsRequest, opts ...grpc.CallOption) (*MergeSuggestedUnitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MergeSuggestedUnitsResponse)
+	err := c.cc.Invoke(ctx, Cover_MergeSuggestedUnits_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateUnitFromSuggested(ctx context.Context, in *CreateUnitFromSuggestedRequest, opts ...grpc.CallOption) (*CreateUnitFromSuggestedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateUnitFromSuggestedResponse)
+	err := c.cc.Invoke(ctx, Cover_CreateUnitFromSuggested_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) ListSharedResources(ctx context.Context, in *ListSharedResourcesRequest, opts ...grpc.CallOption) (*ListSharedResourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListSharedResourcesResponse)
@@ -3208,6 +3234,10 @@ type CoverServer interface {
 	DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error)
 	// List Suggested Unit Types
 	ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error)
+	// Merge Suggested Units
+	MergeSuggestedUnits(context.Context, *MergeSuggestedUnitsRequest) (*MergeSuggestedUnitsResponse, error)
+	// Create Unit from Suggested Units
+	CreateUnitFromSuggested(context.Context, *CreateUnitFromSuggestedRequest) (*CreateUnitFromSuggestedResponse, error)
 	// List all Shared Resources
 	ListSharedResources(context.Context, *ListSharedResourcesRequest) (*ListSharedResourcesResponse, error)
 	// Create Shared Resource
@@ -3715,6 +3745,12 @@ func (UnimplementedCoverServer) DeleteUnitType(context.Context, *DeleteUnitTypeR
 }
 func (UnimplementedCoverServer) ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSuggestedUnits not implemented")
+}
+func (UnimplementedCoverServer) MergeSuggestedUnits(context.Context, *MergeSuggestedUnitsRequest) (*MergeSuggestedUnitsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MergeSuggestedUnits not implemented")
+}
+func (UnimplementedCoverServer) CreateUnitFromSuggested(context.Context, *CreateUnitFromSuggestedRequest) (*CreateUnitFromSuggestedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateUnitFromSuggested not implemented")
 }
 func (UnimplementedCoverServer) ListSharedResources(context.Context, *ListSharedResourcesRequest) (*ListSharedResourcesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSharedResources not implemented")
@@ -6728,6 +6764,42 @@ func _Cover_ListSuggestedUnits_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_MergeSuggestedUnits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MergeSuggestedUnitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).MergeSuggestedUnits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_MergeSuggestedUnits_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).MergeSuggestedUnits(ctx, req.(*MergeSuggestedUnitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateUnitFromSuggested_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateUnitFromSuggestedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateUnitFromSuggested(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateUnitFromSuggested_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateUnitFromSuggested(ctx, req.(*CreateUnitFromSuggestedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ListSharedResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListSharedResourcesRequest)
 	if err := dec(in); err != nil {
@@ -7464,6 +7536,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListSuggestedUnits",
 			Handler:    _Cover_ListSuggestedUnits_Handler,
+		},
+		{
+			MethodName: "MergeSuggestedUnits",
+			Handler:    _Cover_MergeSuggestedUnits_Handler,
+		},
+		{
+			MethodName: "CreateUnitFromSuggested",
+			Handler:    _Cover_CreateUnitFromSuggested_Handler,
 		},
 		{
 			MethodName: "ListSharedResources",
