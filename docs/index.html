@@ -2649,6 +2649,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListUnregisteredAccountsRequest"><span class="badge">M</span>ListUnregisteredAccountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListUnregisteredAccountsResponse"><span class="badge">M</span>ListUnregisteredAccountsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ManipulateAnomalyAlertRequest"><span class="badge">M</span>ManipulateAnomalyAlertRequest</a>
                 </li>
               
@@ -29883,6 +29891,65 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.ListUnregisteredAccountsRequest">ListUnregisteredAccountsRequest</h3>
+        <p>Request message for ListUnregisteredAccounts</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListUnregisteredAccountsResponse">ListUnregisteredAccountsResponse</h3>
+        <p>Response message for ListUnregisteredAccounts</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Id of the unregistered account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.ManipulateAnomalyAlertRequest">ManipulateAnomalyAlertRequest</h3>
         <p></p>
 
@@ -34610,6 +34677,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>ListUnregisteredAccounts</td>
+                <td><a href="#blueapi.cover.v1.ListUnregisteredAccountsRequest">ListUnregisteredAccountsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListUnregisteredAccountsResponse">ListUnregisteredAccountsResponse</a></td>
+                <td><p>Lists unregistered linked accounts</p></td>
+              </tr>
+            
+              <tr>
                 <td>UpdateDataAccess</td>
                 <td><a href="#blueapi.cover.v1.UpdateDataAccessRequest">UpdateDataAccessRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
@@ -36041,6 +36115,16 @@ file in bytes </p></td>
                 <td>ListDataAccess</td>
                 <td>POST</td>
                 <td>/v1/account/all:read</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListUnregisteredAccounts</td>
+                <td>POST</td>
+                <td>/v1/account/unregistered:read</td>
                 <td></td>
               </tr>
               

@@ -90,6 +90,7 @@ const (
 	Cover_RegisterDataAccess_FullMethodName                      = "/blueapi.cover.v1.Cover/RegisterDataAccess"
 	Cover_AddBillingAccount_FullMethodName                       = "/blueapi.cover.v1.Cover/AddBillingAccount"
 	Cover_ListDataAccess_FullMethodName                          = "/blueapi.cover.v1.Cover/ListDataAccess"
+	Cover_ListUnregisteredAccounts_FullMethodName                = "/blueapi.cover.v1.Cover/ListUnregisteredAccounts"
 	Cover_UpdateDataAccess_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateDataAccess"
 	Cover_ListAssets_FullMethodName                              = "/blueapi.cover.v1.Cover/ListAssets"
 	Cover_GetAssetsSummary_FullMethodName                        = "/blueapi.cover.v1.Cover/GetAssetsSummary"
@@ -339,6 +340,8 @@ type CoverClient interface {
 	AddBillingAccount(ctx context.Context, in *BillingAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists Azure and GCP accounts.
 	ListDataAccess(ctx context.Context, in *ListDataAccessRequest, opts ...grpc.CallOption) (Cover_ListDataAccessClient, error)
+	// Lists unregistered linked accounts
+	ListUnregisteredAccounts(ctx context.Context, in *ListUnregisteredAccountsRequest, opts ...grpc.CallOption) (*ListUnregisteredAccountsResponse, error)
 	// Update GCP/Azure account info
 	UpdateDataAccess(ctx context.Context, in *UpdateDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists assets for costgroup
@@ -1290,6 +1293,16 @@ func (x *coverListDataAccessClient) Recv() (*DataAccess, error) {
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *coverClient) ListUnregisteredAccounts(ctx context.Context, in *ListUnregisteredAccountsRequest, opts ...grpc.CallOption) (*ListUnregisteredAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUnregisteredAccountsResponse)
+	err := c.cc.Invoke(ctx, Cover_ListUnregisteredAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *coverClient) UpdateDataAccess(ctx context.Context, in *UpdateDataAccessRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
@@ -3052,6 +3065,8 @@ type CoverServer interface {
 	AddBillingAccount(context.Context, *BillingAccountRequest) (*emptypb.Empty, error)
 	// Lists Azure and GCP accounts.
 	ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error
+	// Lists unregistered linked accounts
+	ListUnregisteredAccounts(context.Context, *ListUnregisteredAccountsRequest) (*ListUnregisteredAccountsResponse, error)
 	// Update GCP/Azure account info
 	UpdateDataAccess(context.Context, *UpdateDataAccessRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Lists assets for costgroup
@@ -3472,6 +3487,9 @@ func (UnimplementedCoverServer) AddBillingAccount(context.Context, *BillingAccou
 }
 func (UnimplementedCoverServer) ListDataAccess(*ListDataAccessRequest, Cover_ListDataAccessServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListDataAccess not implemented")
+}
+func (UnimplementedCoverServer) ListUnregisteredAccounts(context.Context, *ListUnregisteredAccountsRequest) (*ListUnregisteredAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUnregisteredAccounts not implemented")
 }
 func (UnimplementedCoverServer) UpdateDataAccess(context.Context, *UpdateDataAccessRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateDataAccess not implemented")
@@ -5044,6 +5062,24 @@ type coverListDataAccessServer struct {
 
 func (x *coverListDataAccessServer) Send(m *DataAccess) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Cover_ListUnregisteredAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUnregisteredAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListUnregisteredAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListUnregisteredAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListUnregisteredAccounts(ctx, req.(*ListUnregisteredAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Cover_UpdateDataAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -7272,6 +7308,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AddBillingAccount",
 			Handler:    _Cover_AddBillingAccount_Handler,
+		},
+		{
+			MethodName: "ListUnregisteredAccounts",
+			Handler:    _Cover_ListUnregisteredAccounts_Handler,
 		},
 		{
 			MethodName: "UpdateDataAccess",
