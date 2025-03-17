@@ -1683,6 +1683,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.SetGlobalExchangeRateRequest"><span class="badge">M</span>SetGlobalExchangeRateRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.SplitAdjustmentEntryRequest"><span class="badge">M</span>SplitAdjustmentEntryRequest</a>
                 </li>
               
@@ -19523,6 +19527,52 @@ Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`] </
 
         
       
+        <h3 id="blueapi.billing.v1.SetGlobalExchangeRateRequest">SetGlobalExchangeRateRequest</h3>
+        <p>Request message for SetGlobalExchangeRate rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. vendor. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. month. Format: `yyyymm`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. currency. (e.g. usd, jpy, myr, idr) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRate</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Required. exchangerate. the value of 1 usd per currency above
+Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeRate = 150 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.SplitAdjustmentEntryRequest">SplitAdjustmentEntryRequest</h3>
         <p>Request message for the Billing.SplitAdjustmentEntry rpc.</p>
 
@@ -20876,6 +20926,13 @@ Lists all exchange rate.
               </tr>
             
               <tr>
+                <td>SetGlobalExchangeRate</td>
+                <td><a href="#blueapi.billing.v1.SetGlobalExchangeRateRequest">SetGlobalExchangeRateRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Set global exchangerate. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListAccessGroups</td>
                 <td><a href="#blueapi.billing.v1.ListAccessGroupsRequest">ListAccessGroupsRequest</a></td>
                 <td><a href="#blueapi.api.ripple.AccessGroup">.blueapi.api.ripple.AccessGroup</a> stream</td>
@@ -21683,6 +21740,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>GET</td>
                 <td>/v1/{vendor}/exchangerate/{month}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetGlobalExchangeRate</td>
+                <td>POST</td>
+                <td>/v1/exchangerate/global/{vendor}/{month}</td>
+                <td>*</td>
               </tr>
               
             
