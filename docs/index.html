@@ -1671,6 +1671,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.SetBillingGroupExchangeRateRequest"><span class="badge">M</span>SetBillingGroupExchangeRateRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest"><span class="badge">M</span>SetCustomizedBillingServiceBillingGroupRequest</a>
                 </li>
               
@@ -1680,6 +1684,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.SetGlobalExchangeRateRequest"><span class="badge">M</span>SetGlobalExchangeRateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.SetPayerExchangeRateRequest"><span class="badge">M</span>SetPayerExchangeRateRequest</a>
                 </li>
               
                 <li>
@@ -19434,6 +19442,52 @@ this is ignored if allGroups is true. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.SetBillingGroupExchangeRateRequest">SetBillingGroupExchangeRateRequest</h3>
+        <p>Request message for SetBillingGroupExchangeRate rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. account(payer) id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. month. Format: `yyyymm`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. currency. (e.g. usd, jpy, myr, idr) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRate</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Required. exchangerate. the value of 1 usd per currency above
+Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeRate = 150 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.SetCustomizedBillingServiceBillingGroupRequest">SetCustomizedBillingServiceBillingGroupRequest</h3>
         <p>Request message for the Billing.SetCustomizedBillingServiceBillingGroup rpc.</p>
 
@@ -19527,6 +19581,59 @@ Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`] </
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. vendor. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. month. Format: `yyyymm`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. currency. (e.g. usd, jpy, myr, idr) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRate</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Required. exchangerate. the value of 1 usd per currency above
+Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeRate = 150 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.SetPayerExchangeRateRequest">SetPayerExchangeRateRequest</h3>
+        <p>Request message for SetPayerExchangeRate rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. vendor. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. account(payer) id. </p></td>
                 </tr>
               
                 <tr>
@@ -20918,6 +21025,20 @@ Lists all exchange rate.
               </tr>
             
               <tr>
+                <td>SetPayerExchangeRate</td>
+                <td><a href="#blueapi.billing.v1.SetPayerExchangeRateRequest">SetPayerExchangeRateRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Set payer exchangerate. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SetBillingGroupExchangeRate</td>
+                <td><a href="#blueapi.billing.v1.SetBillingGroupExchangeRateRequest">SetBillingGroupExchangeRateRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Set billing group exchangerate. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListAccessGroups</td>
                 <td><a href="#blueapi.billing.v1.ListAccessGroupsRequest">ListAccessGroupsRequest</a></td>
                 <td><a href="#blueapi.api.ripple.AccessGroup">.blueapi.api.ripple.AccessGroup</a> stream</td>
@@ -21734,6 +21855,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>SetGlobalExchangeRate</td>
                 <td>POST</td>
                 <td>/v1/exchangerate/global/{vendor}/{month}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetPayerExchangeRate</td>
+                <td>POST</td>
+                <td>/v1/exchangerate/payer/{month}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetBillingGroupExchangeRate</td>
+                <td>POST</td>
+                <td>/v1/exchangerate/billinggroup/{month}</td>
                 <td>*</td>
               </tr>
               

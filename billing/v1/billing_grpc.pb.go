@@ -70,6 +70,8 @@ const (
 	Billing_GetBillingSetting_FullMethodName                          = "/blueapi.billing.v1.Billing/GetBillingSetting"
 	Billing_ListExchangeRates_FullMethodName                          = "/blueapi.billing.v1.Billing/ListExchangeRates"
 	Billing_SetGlobalExchangeRate_FullMethodName                      = "/blueapi.billing.v1.Billing/SetGlobalExchangeRate"
+	Billing_SetPayerExchangeRate_FullMethodName                       = "/blueapi.billing.v1.Billing/SetPayerExchangeRate"
+	Billing_SetBillingGroupExchangeRate_FullMethodName                = "/blueapi.billing.v1.Billing/SetBillingGroupExchangeRate"
 	Billing_ListAccessGroups_FullMethodName                           = "/blueapi.billing.v1.Billing/ListAccessGroups"
 	Billing_CreateAccessGroup_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateAccessGroup"
 	Billing_UpdateAccessGroup_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
@@ -224,6 +226,10 @@ type BillingClient interface {
 	ListExchangeRates(ctx context.Context, in *ListExchangeRatesRequest, opts ...grpc.CallOption) (*ListExchangeRatesResponse, error)
 	// Set global exchangerate. Only available in Ripple.
 	SetGlobalExchangeRate(ctx context.Context, in *SetGlobalExchangeRateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Set payer exchangerate. Only available in Ripple.
+	SetPayerExchangeRate(ctx context.Context, in *SetPayerExchangeRateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Set billing group exchangerate. Only available in Ripple.
+	SetBillingGroupExchangeRate(ctx context.Context, in *SetBillingGroupExchangeRateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists access group. Only available in Ripple.
 	ListAccessGroups(ctx context.Context, in *ListAccessGroupsRequest, opts ...grpc.CallOption) (Billing_ListAccessGroupsClient, error)
 	// Registers the access group. Only available in Ripple.
@@ -1020,6 +1026,26 @@ func (c *billingClient) SetGlobalExchangeRate(ctx context.Context, in *SetGlobal
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Billing_SetGlobalExchangeRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) SetPayerExchangeRate(ctx context.Context, in *SetPayerExchangeRateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_SetPayerExchangeRate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) SetBillingGroupExchangeRate(ctx context.Context, in *SetBillingGroupExchangeRateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_SetBillingGroupExchangeRate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1932,6 +1958,10 @@ type BillingServer interface {
 	ListExchangeRates(context.Context, *ListExchangeRatesRequest) (*ListExchangeRatesResponse, error)
 	// Set global exchangerate. Only available in Ripple.
 	SetGlobalExchangeRate(context.Context, *SetGlobalExchangeRateRequest) (*emptypb.Empty, error)
+	// Set payer exchangerate. Only available in Ripple.
+	SetPayerExchangeRate(context.Context, *SetPayerExchangeRateRequest) (*emptypb.Empty, error)
+	// Set billing group exchangerate. Only available in Ripple.
+	SetBillingGroupExchangeRate(context.Context, *SetBillingGroupExchangeRateRequest) (*emptypb.Empty, error)
 	// Lists access group. Only available in Ripple.
 	ListAccessGroups(*ListAccessGroupsRequest, Billing_ListAccessGroupsServer) error
 	// Registers the access group. Only available in Ripple.
@@ -2178,6 +2208,12 @@ func (UnimplementedBillingServer) ListExchangeRates(context.Context, *ListExchan
 }
 func (UnimplementedBillingServer) SetGlobalExchangeRate(context.Context, *SetGlobalExchangeRateRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetGlobalExchangeRate not implemented")
+}
+func (UnimplementedBillingServer) SetPayerExchangeRate(context.Context, *SetPayerExchangeRateRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetPayerExchangeRate not implemented")
+}
+func (UnimplementedBillingServer) SetBillingGroupExchangeRate(context.Context, *SetBillingGroupExchangeRateRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetBillingGroupExchangeRate not implemented")
 }
 func (UnimplementedBillingServer) ListAccessGroups(*ListAccessGroupsRequest, Billing_ListAccessGroupsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccessGroups not implemented")
@@ -3190,6 +3226,42 @@ func _Billing_SetGlobalExchangeRate_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServer).SetGlobalExchangeRate(ctx, req.(*SetGlobalExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_SetPayerExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetPayerExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).SetPayerExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_SetPayerExchangeRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).SetPayerExchangeRate(ctx, req.(*SetPayerExchangeRateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_SetBillingGroupExchangeRate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetBillingGroupExchangeRateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).SetBillingGroupExchangeRate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_SetBillingGroupExchangeRate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).SetBillingGroupExchangeRate(ctx, req.(*SetBillingGroupExchangeRateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4250,6 +4322,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetGlobalExchangeRate",
 			Handler:    _Billing_SetGlobalExchangeRate_Handler,
+		},
+		{
+			MethodName: "SetPayerExchangeRate",
+			Handler:    _Billing_SetPayerExchangeRate_Handler,
+		},
+		{
+			MethodName: "SetBillingGroupExchangeRate",
+			Handler:    _Billing_SetBillingGroupExchangeRate_Handler,
 		},
 		{
 			MethodName: "CreateAccessGroup",
