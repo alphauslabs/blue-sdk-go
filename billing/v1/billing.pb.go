@@ -5364,6 +5364,14 @@ type ApplyAdjustmentEntryRequest struct {
 	// Required. ApplySetting. root setting.
 	Setting *ApplyAdjustmentEntryRequest_ApplySetting `protobuf:"bytes,2,opt,name=setting,proto3" json:"setting,omitempty"`
 	// Required. List of id.
+	//
+	// Regarding entries that can be included.
+	// - Regular entry
+	// - Splitted entry
+	// - Allocated entry
+	// Regarding entries that cannot be included.
+	// - Original entry before being split
+	// - Original entry before being allocate
 	Entries       []string `protobuf:"bytes,3,rep,name=entries,proto3" json:"entries,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
