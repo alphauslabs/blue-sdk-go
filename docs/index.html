@@ -1223,6 +1223,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest.ApplySetting.ExchangeRateEntry"><span class="badge">M</span>ApplyAdjustmentEntryRequest.ApplySetting.ExchangeRateEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AwsDailyRunHistory"><span class="badge">M</span>AwsDailyRunHistory</a>
                 </li>
               
@@ -14881,9 +14885,11 @@ Regarding entries that cannot be included.
               
                 <tr>
                   <td>exchangeRate</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>Optional. exchange rate. </p></td>
+                  <td><a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest.ApplySetting.ExchangeRateEntry">ApplyAdjustmentEntryRequest.ApplySetting.ExchangeRateEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. exchange rate. At the moment, only `jpy`,`idr`,`myr`,`sgd`,`inr` is supported.
+It will be configured according to the currency type of the billing group associated with the account.
+For example: {&#34;jpy&#34;:150.01, &#34;idr&#34;:16580,&#34;myr&#34;:4.4,&#34;sgd&#34;:1.33,&#34;inr&#34;:85.3} </p></td>
                 </tr>
               
                 <tr>
@@ -14893,6 +14899,37 @@ Regarding entries that cannot be included.
                   <td><p>Optional. apply to billing internal ID.
 When you specify billing internal ID, the invoicing will be applied to the target Billing Group.
 At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ApplyAdjustmentEntryRequest.ApplySetting.ExchangeRateEntry">ApplyAdjustmentEntryRequest.ApplySetting.ExchangeRateEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
