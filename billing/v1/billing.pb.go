@@ -10069,7 +10069,9 @@ type ApplyAdjustmentEntryRequest_ApplySetting struct {
 	Month string `protobuf:"bytes,1,opt,name=month,proto3" json:"month,omitempty"`
 	// Optional. tax free setting.
 	TaxFree bool `protobuf:"varint,2,opt,name=taxFree,proto3" json:"taxFree,omitempty"`
-	// Optional. exchange rate. At the moment, only `jpy`,`idr`,`myr`,`sgd`,`inr` is supported.
+	// Optional. exchange rate.
+	//
+	// At the moment, only `jpy`,`idr`,`myr`,`sgd`,`inr` is supported.
 	// It will be configured according to the currency type of the billing group associated with the account.
 	// For example: {"jpy":150.01, "idr":16580,"myr":4.4,"sgd":1.33,"inr":85.3}
 	ExchangeRate map[string]float64 `protobuf:"bytes,3,rep,name=exchangeRate,proto3" json:"exchangeRate,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"fixed64,2,opt,name=value"`
