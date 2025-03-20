@@ -2689,6 +2689,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.MergeUnitsRequest"><span class="badge">M</span>MergeUnitsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.MergeUnitsResponse"><span class="badge">M</span>MergeUnitsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ModifyResourceTypeRequest"><span class="badge">M</span>ModifyResourceTypeRequest</a>
                 </li>
               
@@ -24960,9 +24968,9 @@ Supported values are the following:
             <tbody>
               
                 <tr>
-                  <td>unitCostData</td>
-                  <td><a href="#blueapi.api.cover.UnitCostData">blueapi.api.cover.UnitCostData</a></td>
-                  <td></td>
+                  <td>unitCostIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -25021,6 +25029,13 @@ Supported values are the following:
                 <tr>
                   <td>csvInfo</td>
                   <td><a href="#blueapi.api.cover.CsvInfo">blueapi.api.cover.CsvInfo</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>requiredColumns</td>
+                  <td><a href="#blueapi.api.cover.RequiredColumns">blueapi.api.cover.RequiredColumns</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -30223,6 +30238,68 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>mergedSuggestedUnits</td>
                   <td><a href="#blueapi.api.cover.SuggestedUnit">blueapi.api.cover.SuggestedUnit</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.MergeUnitsRequest">MergeUnitsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unitCostIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unitName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.MergeUnitsResponse">MergeUnitsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mergedUnitCost</td>
+                  <td><a href="#blueapi.api.cover.UnitCostData">blueapi.api.cover.UnitCostData</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -35495,6 +35572,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>MergeUnits</td>
+                <td><a href="#blueapi.cover.v1.MergeUnitsRequest">MergeUnitsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.MergeUnitsResponse">MergeUnitsResponse</a></td>
+                <td><p>Merge Existing Unit Types</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListSuggestedUnits</td>
                 <td><a href="#blueapi.cover.v1.ListSuggestedUnitsRequest">ListSuggestedUnitsRequest</a></td>
                 <td><a href="#blueapi.cover.v1.ListSuggestedUnitsResponse">ListSuggestedUnitsResponse</a></td>
@@ -37207,6 +37291,16 @@ file in bytes </p></td>
                 <td>DELETE</td>
                 <td>/v1/unitcost/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>MergeUnits</td>
+                <td>POST</td>
+                <td>/v1/unitcost/merge</td>
+                <td>*</td>
               </tr>
               
             

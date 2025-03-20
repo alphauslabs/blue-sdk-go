@@ -181,6 +181,7 @@ const (
 	Cover_GetUnitType_FullMethodName                             = "/blueapi.cover.v1.Cover/GetUnitType"
 	Cover_UpdateUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/UpdateUnitType"
 	Cover_DeleteUnitType_FullMethodName                          = "/blueapi.cover.v1.Cover/DeleteUnitType"
+	Cover_MergeUnits_FullMethodName                              = "/blueapi.cover.v1.Cover/MergeUnits"
 	Cover_ListSuggestedUnits_FullMethodName                      = "/blueapi.cover.v1.Cover/ListSuggestedUnits"
 	Cover_MergeSuggestedUnits_FullMethodName                     = "/blueapi.cover.v1.Cover/MergeSuggestedUnits"
 	Cover_CreateUnitFromSuggested_FullMethodName                 = "/blueapi.cover.v1.Cover/CreateUnitFromSuggested"
@@ -522,6 +523,8 @@ type CoverClient interface {
 	UpdateUnitType(ctx context.Context, in *UpdateUnitTypeRequest, opts ...grpc.CallOption) (*UpdateUnitTypeResponse, error)
 	// Delete Specific Unit Type
 	DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequest, opts ...grpc.CallOption) (*DeleteUnitTypeResponse, error)
+	// Merge Existing Unit Types
+	MergeUnits(ctx context.Context, in *MergeUnitsRequest, opts ...grpc.CallOption) (*MergeUnitsResponse, error)
 	// List Suggested Unit Types
 	ListSuggestedUnits(ctx context.Context, in *ListSuggestedUnitsRequest, opts ...grpc.CallOption) (*ListSuggestedUnitsResponse, error)
 	// Merge Suggested Units
@@ -2782,6 +2785,16 @@ func (c *coverClient) DeleteUnitType(ctx context.Context, in *DeleteUnitTypeRequ
 	return out, nil
 }
 
+func (c *coverClient) MergeUnits(ctx context.Context, in *MergeUnitsRequest, opts ...grpc.CallOption) (*MergeUnitsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MergeUnitsResponse)
+	err := c.cc.Invoke(ctx, Cover_MergeUnits_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) ListSuggestedUnits(ctx context.Context, in *ListSuggestedUnitsRequest, opts ...grpc.CallOption) (*ListSuggestedUnitsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListSuggestedUnitsResponse)
@@ -3247,6 +3260,8 @@ type CoverServer interface {
 	UpdateUnitType(context.Context, *UpdateUnitTypeRequest) (*UpdateUnitTypeResponse, error)
 	// Delete Specific Unit Type
 	DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error)
+	// Merge Existing Unit Types
+	MergeUnits(context.Context, *MergeUnitsRequest) (*MergeUnitsResponse, error)
 	// List Suggested Unit Types
 	ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error)
 	// Merge Suggested Units
@@ -3760,6 +3775,9 @@ func (UnimplementedCoverServer) UpdateUnitType(context.Context, *UpdateUnitTypeR
 }
 func (UnimplementedCoverServer) DeleteUnitType(context.Context, *DeleteUnitTypeRequest) (*DeleteUnitTypeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUnitType not implemented")
+}
+func (UnimplementedCoverServer) MergeUnits(context.Context, *MergeUnitsRequest) (*MergeUnitsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method MergeUnits not implemented")
 }
 func (UnimplementedCoverServer) ListSuggestedUnits(context.Context, *ListSuggestedUnitsRequest) (*ListSuggestedUnitsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSuggestedUnits not implemented")
@@ -6782,6 +6800,24 @@ func _Cover_DeleteUnitType_Handler(srv interface{}, ctx context.Context, dec fun
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_MergeUnits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(MergeUnitsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).MergeUnits(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_MergeUnits_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).MergeUnits(ctx, req.(*MergeUnitsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ListSuggestedUnits_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListSuggestedUnitsRequest)
 	if err := dec(in); err != nil {
@@ -7572,6 +7608,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUnitType",
 			Handler:    _Cover_DeleteUnitType_Handler,
+		},
+		{
+			MethodName: "MergeUnits",
+			Handler:    _Cover_MergeUnits_Handler,
 		},
 		{
 			MethodName: "ListSuggestedUnits",
