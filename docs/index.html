@@ -1499,6 +1499,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetInvoiceDisplaySettingsRequest"><span class="badge">M</span>GetInvoiceDisplaySettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetInvoiceDisplaySettingsResponse"><span class="badge">M</span>GetInvoiceDisplaySettingsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetInvoiceRequest"><span class="badge">M</span>GetInvoiceRequest</a>
                 </li>
               
@@ -17820,6 +17828,37 @@ set true to return only the free format associated to a BG </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.GetInvoiceDisplaySettingsRequest">GetInvoiceDisplaySettingsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetInvoiceDisplaySettingsResponse">GetInvoiceDisplaySettingsResponse</h3>
+        <p>Response message for GetInvoiceDisplaySettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>showRISPUpfrontTimeInterval</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetInvoiceRequest">GetInvoiceRequest</h3>
         <p>Request message for the Cost.GetInvoiceRequest rpc.</p>
 
@@ -20877,6 +20916,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>GetInvoiceDisplaySettings</td>
+                <td><a href="#blueapi.billing.v1.GetInvoiceDisplaySettingsRequest">GetInvoiceDisplaySettingsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetInvoiceDisplaySettingsResponse">GetInvoiceDisplaySettingsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Gets the invoice display settings for invoice-ui</p></td>
+              </tr>
+            
+              <tr>
                 <td>UpdateBillingGroupInvoiceTemplate</td>
                 <td><a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest">UpdateBillingGroupInvoiceTemplateRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
@@ -21632,6 +21678,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListInvoiceTemplate</td>
                 <td>GET</td>
                 <td>/v1/invoice/template</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetInvoiceDisplaySettings</td>
+                <td>GET</td>
+                <td>/v1/invoice/displaysettings</td>
                 <td></td>
               </tr>
               
