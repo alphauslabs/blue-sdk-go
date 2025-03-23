@@ -1215,6 +1215,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AllocateAdjustmentEntryRequest.AccountConfig"><span class="badge">M</span>AllocateAdjustmentEntryRequest.AccountConfig</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest"><span class="badge">M</span>ApplyAdjustmentEntryRequest</a>
                 </li>
               
@@ -14820,6 +14824,51 @@ Only available in Wave(Pro).</p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. AdjustmentEntry ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>config</td>
+                  <td><a href="#blueapi.billing.v1.AllocateAdjustmentEntryRequest.AccountConfig">AllocateAdjustmentEntryRequest.AccountConfig</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountForRemaining</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. accountId </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.AllocateAdjustmentEntryRequest.AccountConfig">AllocateAdjustmentEntryRequest.AccountConfig</h3>
+        <p>AccountConfig</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. accountId </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
                 </tr>
               
             </tbody>
