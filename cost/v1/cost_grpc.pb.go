@@ -89,6 +89,7 @@ const (
 	Cost_ReadInvoiceOverViews_FullMethodName          = "/blueapi.cost.v1.Cost/ReadInvoiceOverViews"
 	Cost_ReadInvoiceCosts_FullMethodName              = "/blueapi.cost.v1.Cost/ReadInvoiceCosts"
 	Cost_ReadInvoiceGroupCosts_FullMethodName         = "/blueapi.cost.v1.Cost/ReadInvoiceGroupCosts"
+	Cost_GetCalculationPrerequisites_FullMethodName   = "/blueapi.cost.v1.Cost/GetCalculationPrerequisites"
 )
 
 // CostClient is the client API for Cost service.
@@ -273,6 +274,8 @@ type CostClient interface {
 	ReadInvoiceCosts(ctx context.Context, in *ReadInvoiceCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceCostsClient, error)
 	// WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.
 	ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceGroupCostsClient, error)
+	// WORK-IN-PROGRESS: Get invoice id for a month
+	GetCalculationPrerequisites(ctx context.Context, in *GetCalculationPrerequisitesRequest, opts ...grpc.CallOption) (*GetCalculationPrerequisitesResponse, error)
 }
 
 type costClient struct {
@@ -1314,6 +1317,16 @@ func (x *costReadInvoiceGroupCostsClient) Recv() (*v1.BillingGroupSection, error
 	return m, nil
 }
 
+func (c *costClient) GetCalculationPrerequisites(ctx context.Context, in *GetCalculationPrerequisitesRequest, opts ...grpc.CallOption) (*GetCalculationPrerequisitesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCalculationPrerequisitesResponse)
+	err := c.cc.Invoke(ctx, Cost_GetCalculationPrerequisites_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -1496,6 +1509,8 @@ type CostServer interface {
 	ReadInvoiceCosts(*ReadInvoiceCostsRequest, Cost_ReadInvoiceCostsServer) error
 	// WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.
 	ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsRequest, Cost_ReadInvoiceGroupCostsServer) error
+	// WORK-IN-PROGRESS: Get invoice id for a month
+	GetCalculationPrerequisites(context.Context, *GetCalculationPrerequisitesRequest) (*GetCalculationPrerequisitesResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -1694,6 +1709,9 @@ func (UnimplementedCostServer) ReadInvoiceCosts(*ReadInvoiceCostsRequest, Cost_R
 }
 func (UnimplementedCostServer) ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsRequest, Cost_ReadInvoiceGroupCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadInvoiceGroupCosts not implemented")
+}
+func (UnimplementedCostServer) GetCalculationPrerequisites(context.Context, *GetCalculationPrerequisitesRequest) (*GetCalculationPrerequisitesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCalculationPrerequisites not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -2911,6 +2929,24 @@ func (x *costReadInvoiceGroupCostsServer) Send(m *v1.BillingGroupSection) error 
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cost_GetCalculationPrerequisites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCalculationPrerequisitesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetCalculationPrerequisites(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_GetCalculationPrerequisites_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetCalculationPrerequisites(ctx, req.(*GetCalculationPrerequisitesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3105,6 +3141,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CheckAccountsBelongToMsp",
 			Handler:    _Cost_CheckAccountsBelongToMsp_Handler,
+		},
+		{
+			MethodName: "GetCalculationPrerequisites",
+			Handler:    _Cost_GetCalculationPrerequisites_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

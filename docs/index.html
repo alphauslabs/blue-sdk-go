@@ -836,6 +836,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.GetCalculationPrerequisitesRequest"><span class="badge">M</span>GetCalculationPrerequisitesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.GetCalculationPrerequisitesResponse"><span class="badge">M</span>GetCalculationPrerequisitesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.GetCalculatorConfigRequest"><span class="badge">M</span>GetCalculatorConfigRequest</a>
                 </li>
               
@@ -9801,6 +9809,82 @@ For example, if you only want the services and region data, you can set this fie
 
         
       
+        <h3 id="blueapi.cost.v1.GetCalculationPrerequisitesRequest">GetCalculationPrerequisitesRequest</h3>
+        <p>WORK-IN-PROGRESS: Get CUR invoice id list</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Month in format yyyy-mm. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.GetCalculationPrerequisitesResponse">GetCalculationPrerequisitesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>invoice_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The invoice id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The payer account id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchange_rate</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The exchange rate. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unblended_cost_in_cur</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The unblended cost in CUR. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.GetCalculatorConfigRequest">GetCalculatorConfigRequest</h3>
         <p>Request message for the Cost.GetCalculatorConfig rpc.</p>
 
@@ -13679,6 +13763,13 @@ Only available in Wave(Pro).</p></td>
                 <td><p>WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.</p></td>
               </tr>
             
+              <tr>
+                <td>GetCalculationPrerequisites</td>
+                <td><a href="#blueapi.cost.v1.GetCalculationPrerequisitesRequest">GetCalculationPrerequisitesRequest</a></td>
+                <td><a href="#blueapi.cost.v1.GetCalculationPrerequisitesResponse">GetCalculationPrerequisitesResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get invoice id for a month</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -14348,6 +14439,16 @@ Only available in Wave(Pro).</p></td>
                 <td>POST</td>
                 <td>/v1/invoicegroupcosts:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCalculationPrerequisites</td>
+                <td>GET</td>
+                <td>/v1/{vendor}/calculation/prerequisites/{month}</td>
+                <td></td>
               </tr>
               
             
