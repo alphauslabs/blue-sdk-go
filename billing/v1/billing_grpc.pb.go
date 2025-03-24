@@ -86,6 +86,8 @@ const (
 	Billing_RestoreAdjustmentEntry_FullMethodName                     = "/blueapi.billing.v1.Billing/RestoreAdjustmentEntry"
 	Billing_SplitAdjustmentEntry_FullMethodName                       = "/blueapi.billing.v1.Billing/SplitAdjustmentEntry"
 	Billing_AllocateAdjustmentEntry_FullMethodName                    = "/blueapi.billing.v1.Billing/AllocateAdjustmentEntry"
+	Billing_RestoreSplitAdjustmentEntry_FullMethodName                = "/blueapi.billing.v1.Billing/RestoreSplitAdjustmentEntry"
+	Billing_RestoreAllocateAdjustmentEntry_FullMethodName             = "/blueapi.billing.v1.Billing/RestoreAllocateAdjustmentEntry"
 	Billing_ListAccountResources_FullMethodName                       = "/blueapi.billing.v1.Billing/ListAccountResources"
 	Billing_GetAdjustmentConfig_FullMethodName                        = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
 	Billing_CreateAdjustmentConfig_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
@@ -259,6 +261,10 @@ type BillingClient interface {
 	SplitAdjustmentEntry(ctx context.Context, in *SplitAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Allocates the adjustment entry item. Only available in Ripple.
 	AllocateAdjustmentEntry(ctx context.Context, in *AllocateAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Restores the splitted adjustment entry item. Only available in Ripple.
+	RestoreSplitAdjustmentEntry(ctx context.Context, in *RestoreSplitAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Restores the allocate adjustment entry item. Only available in Ripple.
+	RestoreAllocateAdjustmentEntry(ctx context.Context, in *RestoreAllocateAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
 	// Gets adjustment config
@@ -1310,6 +1316,26 @@ func (c *billingClient) AllocateAdjustmentEntry(ctx context.Context, in *Allocat
 	return out, nil
 }
 
+func (c *billingClient) RestoreSplitAdjustmentEntry(ctx context.Context, in *RestoreSplitAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_RestoreSplitAdjustmentEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) RestoreAllocateAdjustmentEntry(ctx context.Context, in *RestoreAllocateAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_RestoreAllocateAdjustmentEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[15], Billing_ListAccountResources_FullMethodName, cOpts...)
@@ -2003,6 +2029,10 @@ type BillingServer interface {
 	SplitAdjustmentEntry(context.Context, *SplitAdjustmentEntryRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Allocates the adjustment entry item. Only available in Ripple.
 	AllocateAdjustmentEntry(context.Context, *AllocateAdjustmentEntryRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Restores the splitted adjustment entry item. Only available in Ripple.
+	RestoreSplitAdjustmentEntry(context.Context, *RestoreSplitAdjustmentEntryRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Restores the allocate adjustment entry item. Only available in Ripple.
+	RestoreAllocateAdjustmentEntry(context.Context, *RestoreAllocateAdjustmentEntryRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
 	// Gets adjustment config
@@ -2271,6 +2301,12 @@ func (UnimplementedBillingServer) SplitAdjustmentEntry(context.Context, *SplitAd
 }
 func (UnimplementedBillingServer) AllocateAdjustmentEntry(context.Context, *AllocateAdjustmentEntryRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AllocateAdjustmentEntry not implemented")
+}
+func (UnimplementedBillingServer) RestoreSplitAdjustmentEntry(context.Context, *RestoreSplitAdjustmentEntryRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RestoreSplitAdjustmentEntry not implemented")
+}
+func (UnimplementedBillingServer) RestoreAllocateAdjustmentEntry(context.Context, *RestoreAllocateAdjustmentEntryRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RestoreAllocateAdjustmentEntry not implemented")
 }
 func (UnimplementedBillingServer) ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAccountResources not implemented")
@@ -3551,6 +3587,42 @@ func _Billing_AllocateAdjustmentEntry_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_RestoreSplitAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreSplitAdjustmentEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).RestoreSplitAdjustmentEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_RestoreSplitAdjustmentEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).RestoreSplitAdjustmentEntry(ctx, req.(*RestoreSplitAdjustmentEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_RestoreAllocateAdjustmentEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RestoreAllocateAdjustmentEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).RestoreAllocateAdjustmentEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_RestoreAllocateAdjustmentEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).RestoreAllocateAdjustmentEntry(ctx, req.(*RestoreAllocateAdjustmentEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_ListAccountResources_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListAccountResourcesRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -4402,6 +4474,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AllocateAdjustmentEntry",
 			Handler:    _Billing_AllocateAdjustmentEntry_Handler,
+		},
+		{
+			MethodName: "RestoreSplitAdjustmentEntry",
+			Handler:    _Billing_RestoreSplitAdjustmentEntry_Handler,
+		},
+		{
+			MethodName: "RestoreAllocateAdjustmentEntry",
+			Handler:    _Billing_RestoreAllocateAdjustmentEntry_Handler,
 		},
 		{
 			MethodName: "GetAdjustmentConfig",

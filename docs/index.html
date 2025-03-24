@@ -1687,6 +1687,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.RestoreAllocateAdjustmentEntryRequest"><span class="badge">M</span>RestoreAllocateAdjustmentEntryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.RestoreSplitAdjustmentEntryRequest"><span class="badge">M</span>RestoreSplitAdjustmentEntryRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.SaveInvoiceSettingsRequest"><span class="badge">M</span>SaveInvoiceSettingsRequest</a>
                 </li>
               
@@ -19592,6 +19600,68 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.RestoreAllocateAdjustmentEntryRequest">RestoreAllocateAdjustmentEntryRequest</h3>
+        <p>Request message for the Billing.RestoreAllocateAdjustmentEntry rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. AdjustmentEntry ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.RestoreSplitAdjustmentEntryRequest">RestoreSplitAdjustmentEntryRequest</h3>
+        <p>Request message for the Billing.RestoreSplitAdjustmentEntry rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. AdjustmentEntry ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.SaveInvoiceSettingsRequest">SaveInvoiceSettingsRequest</h3>
         <p></p>
 
@@ -19929,7 +19999,7 @@ Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeR
                   <td>startMonth</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. For example, June 2021 will be `202106`. </p></td>
+                  <td><p>Required. The UTC month to query. If empty, defaults to current month. Format is `yyyymmdd`. For example, June 2021 will be `20210601`. </p></td>
                 </tr>
               
             </tbody>
@@ -21373,6 +21443,20 @@ Lists all exchange rate.
               </tr>
             
               <tr>
+                <td>RestoreSplitAdjustmentEntry</td>
+                <td><a href="#blueapi.billing.v1.RestoreSplitAdjustmentEntryRequest">RestoreSplitAdjustmentEntryRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Restores the splitted adjustment entry item. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RestoreAllocateAdjustmentEntry</td>
+                <td><a href="#blueapi.billing.v1.RestoreAllocateAdjustmentEntryRequest">RestoreAllocateAdjustmentEntryRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Restores the allocate adjustment entry item. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListAccountResources</td>
                 <td><a href="#blueapi.billing.v1.ListAccountResourcesRequest">ListAccountResourcesRequest</a></td>
                 <td><a href="#blueapi.billing.v1.ResourceAccount">ResourceAccount</a> stream</td>
@@ -22258,6 +22342,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>AllocateAdjustmentEntry</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/adjustmententries/{id}/allocate</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RestoreSplitAdjustmentEntry</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententries/{id}/split:restore</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RestoreAllocateAdjustmentEntry</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententries/{id}/allocate:restore</td>
                 <td>*</td>
               </tr>
               
