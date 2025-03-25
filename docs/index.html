@@ -1799,6 +1799,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest"><span class="badge">M</span>UpdateInvoiceDisplaySettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest.SettingsEntry"><span class="badge">M</span>UpdateInvoiceDisplaySettingsRequest.SettingsEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateInvoicePreviewsRequest"><span class="badge">M</span>UpdateInvoicePreviewsRequest</a>
                 </li>
               
@@ -20657,6 +20665,61 @@ specified and non-empty. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest">UpdateInvoiceDisplaySettingsRequest</h3>
+        <p>Request message for UpdateInvoiceDisplaySettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>settings</td>
+                  <td><a href="#blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest.SettingsEntry">UpdateInvoiceDisplaySettingsRequest.SettingsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest.SettingsEntry">UpdateInvoiceDisplaySettingsRequest.SettingsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateInvoicePreviewsRequest">UpdateInvoicePreviewsRequest</h3>
         <p>Request message for the UpdateInvoicePreviews rpc.</p>
 
@@ -21140,6 +21203,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceDisplaySettingsRequest">GetInvoiceDisplaySettingsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceDisplaySettingsResponse">GetInvoiceDisplaySettingsResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Gets the invoice display settings for invoice-ui</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateInvoiceDisplaySettings</td>
+                <td><a href="#blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest">UpdateInvoiceDisplaySettingsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Creates/Updates an invoice display settings. Only available in Ripple.</p></td>
               </tr>
             
               <tr>
@@ -21923,6 +21993,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>GET</td>
                 <td>/v1/invoice/displaysettings</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateInvoiceDisplaySettings</td>
+                <td>POST</td>
+                <td>/v1/invoice/displaysettings</td>
+                <td>*</td>
               </tr>
               
             
