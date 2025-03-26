@@ -252,21 +252,21 @@ type BillingClient interface {
 	ListAbcBillingGroupAccounts(ctx context.Context, in *ListAbcBillingGroupAccountsRequest, opts ...grpc.CallOption) (Billing_ListAbcBillingGroupAccountsClient, error)
 	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
-	// WORK-IN-PROGRESS: Reads the adjustment entries. Only available in Ripple.
+	// Reads the adjustment entries. Only available in Ripple.
 	ReadAdjustmentEntries(ctx context.Context, in *ReadAdjustmentEntriesRequest, opts ...grpc.CallOption) (Billing_ReadAdjustmentEntriesClient, error)
 	// WORK-IN-PROGRESS: Gets the adjustment entry. Only available in Ripple.
 	GetAdjustmentEntry(ctx context.Context, in *GetAdjustmentEntryRequest, opts ...grpc.CallOption) (*v1.AdjustmentEntry, error)
-	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
+	// Applies the adjustment entry item. Only available in Ripple.
 	ApplyAdjustmentEntry(ctx context.Context, in *ApplyAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Restores the adjustment entry item. Only available in Ripple.
+	// Restores the adjustment entry item. Only available in Ripple.
 	RestoreAdjustmentEntry(ctx context.Context, in *RestoreAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Splits the adjustment entry item. Only available in Ripple.
+	// Splits the adjustment entry item. Only available in Ripple.
 	SplitAdjustmentEntry(ctx context.Context, in *SplitAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Allocates the adjustment entry item. Only available in Ripple.
+	// Allocates the adjustment entry item. Only available in Ripple.
 	AllocateAdjustmentEntry(ctx context.Context, in *AllocateAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Restores the splitted adjustment entry item. Only available in Ripple.
+	// Restores the splitted adjustment entry item. Only available in Ripple.
 	RestoreSplitAdjustmentEntry(ctx context.Context, in *RestoreSplitAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Restores the allocate adjustment entry item. Only available in Ripple.
+	// Restores the allocate adjustment entry item. Only available in Ripple.
 	RestoreAllocateAdjustmentEntry(ctx context.Context, in *RestoreAllocateAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(ctx context.Context, in *ListAccountResourcesRequest, opts ...grpc.CallOption) (Billing_ListAccountResourcesClient, error)
@@ -2032,21 +2032,21 @@ type BillingServer interface {
 	ListAbcBillingGroupAccounts(*ListAbcBillingGroupAccountsRequest, Billing_ListAbcBillingGroupAccountsServer) error
 	// Reads the adjustment details involved in invoicing of an organization billing group (Wave).
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
-	// WORK-IN-PROGRESS: Reads the adjustment entries. Only available in Ripple.
+	// Reads the adjustment entries. Only available in Ripple.
 	ReadAdjustmentEntries(*ReadAdjustmentEntriesRequest, Billing_ReadAdjustmentEntriesServer) error
 	// WORK-IN-PROGRESS: Gets the adjustment entry. Only available in Ripple.
 	GetAdjustmentEntry(context.Context, *GetAdjustmentEntryRequest) (*v1.AdjustmentEntry, error)
-	// WORK-IN-PROGRESS: Applies the adjustment entry item. Only available in Ripple.
+	// Applies the adjustment entry item. Only available in Ripple.
 	ApplyAdjustmentEntry(context.Context, *ApplyAdjustmentEntryRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Restores the adjustment entry item. Only available in Ripple.
+	// Restores the adjustment entry item. Only available in Ripple.
 	RestoreAdjustmentEntry(context.Context, *RestoreAdjustmentEntryRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Splits the adjustment entry item. Only available in Ripple.
+	// Splits the adjustment entry item. Only available in Ripple.
 	SplitAdjustmentEntry(context.Context, *SplitAdjustmentEntryRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Allocates the adjustment entry item. Only available in Ripple.
+	// Allocates the adjustment entry item. Only available in Ripple.
 	AllocateAdjustmentEntry(context.Context, *AllocateAdjustmentEntryRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Restores the splitted adjustment entry item. Only available in Ripple.
+	// Restores the splitted adjustment entry item. Only available in Ripple.
 	RestoreSplitAdjustmentEntry(context.Context, *RestoreSplitAdjustmentEntryRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Restores the allocate adjustment entry item. Only available in Ripple.
+	// Restores the allocate adjustment entry item. Only available in Ripple.
 	RestoreAllocateAdjustmentEntry(context.Context, *RestoreAllocateAdjustmentEntryRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Returns all registered accounts that are not associated to any billing groups and accounts found in CUR for the specified month. For Ripple only
 	ListAccountResources(*ListAccountResourcesRequest, Billing_ListAccountResourcesServer) error
