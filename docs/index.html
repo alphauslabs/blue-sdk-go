@@ -3310,6 +3310,22 @@
                   <a href="#blueapi.flow.v1.GetInfoResponse"><span class="badge">M</span>GetInfoResponse</a>
                 </li>
               
+                <li>
+                  <a href="#blueapi.flow.v1.GetSettingsRequest"><span class="badge">M</span>GetSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetSettingsResponse"><span class="badge">M</span>GetSettingsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.UpdateSettingsRequest"><span class="badge">M</span>UpdateSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.UpdateSettingsResponse"><span class="badge">M</span>UpdateSettingsResponse</a>
+                </li>
+              
               
               
               
@@ -38380,6 +38396,221 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.GetSettingsRequest">GetSettingsRequest</h3>
+        <p>Request message for fetching previous settings configuration of a user.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the payer to fetch settings for. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetSettingsResponse">GetSettingsResponse</h3>
+        <p>Response message for fetching previous settings configuration of a user.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customization</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTerm</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookBackPeriod</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>annualBudget</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approval</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.UpdateSettingsRequest">UpdateSettingsRequest</h3>
+        <p>Request message for the Flow.UpdateSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the payer to update. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update account scope (payer or linked). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customization</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update customization setting. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTerm</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update term of the SP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update payment option. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookBackPeriod</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update lookback period. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update list of instance families. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>annualBudget</td>
+                  <td><a href="#double">double</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update annual budget. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approval</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Update purchase approval. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.UpdateSettingsResponse">UpdateSettingsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -38406,6 +38637,20 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><a href="#blueapi.flow.v1.CreateSettingsRequest">CreateSettingsRequest</a></td>
                 <td><a href="#blueapi.flow.v1.CreateSettingsResponse">CreateSettingsResponse</a></td>
                 <td><p>Creates a new settings configuration for the user.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateSettings</td>
+                <td><a href="#blueapi.flow.v1.UpdateSettingsRequest">UpdateSettingsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.UpdateSettingsResponse">UpdateSettingsResponse</a></td>
+                <td><p>Update the settings configuration for a user.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetSettings</td>
+                <td><a href="#blueapi.flow.v1.GetSettingsRequest">GetSettingsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetSettingsResponse">GetSettingsResponse</a></td>
+                <td><p>Fetch previous settings for a user</p></td>
               </tr>
             
           </tbody>
@@ -38443,6 +38688,26 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>POST</td>
                 <td>/v1/settings</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateSettings</td>
+                <td>PUT</td>
+                <td>/v1/settings/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSettings</td>
+                <td>GET</td>
+                <td>/v1/settings/{id}</td>
+                <td></td>
               </tr>
               
             
