@@ -3089,9 +3089,9 @@ func request_Cost_ReadInvoiceGroupCosts_0(ctx context.Context, marshaler runtime
 	return stream, metadata, nil
 }
 
-func request_Cost_GetCalculationPrerequisites_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Cost_ListCalculationPrerequisites_0(ctx context.Context, marshaler runtime.Marshaler, client CostClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetCalculationPrerequisitesRequest
+		protoReq ListCalculationPrerequisitesRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -3112,13 +3112,13 @@ func request_Cost_GetCalculationPrerequisites_0(ctx context.Context, marshaler r
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "month", err)
 	}
-	msg, err := client.GetCalculationPrerequisites(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.ListCalculationPrerequisites(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_Cost_GetCalculationPrerequisites_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Cost_ListCalculationPrerequisites_0(ctx context.Context, marshaler runtime.Marshaler, server CostServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq GetCalculationPrerequisitesRequest
+		protoReq ListCalculationPrerequisitesRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -3138,7 +3138,7 @@ func local_request_Cost_GetCalculationPrerequisites_0(ctx context.Context, marsh
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "month", err)
 	}
-	msg, err := server.GetCalculationPrerequisites(ctx, &protoReq)
+	msg, err := server.ListCalculationPrerequisites(ctx, &protoReq)
 	return msg, metadata, err
 }
 
@@ -4220,25 +4220,25 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
-	mux.Handle(http.MethodGet, pattern_Cost_GetCalculationPrerequisites_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_Cost_ListCalculationPrerequisites_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetCalculationPrerequisites", runtime.WithHTTPPathPattern("/v1/{vendor}/calculation/prerequisites/{month}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListCalculationPrerequisites", runtime.WithHTTPPathPattern("/v1/{vendor}/calculation/prerequisites/{month}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Cost_GetCalculationPrerequisites_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Cost_ListCalculationPrerequisites_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Cost_GetCalculationPrerequisites_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cost_ListCalculationPrerequisites_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
 	return nil
@@ -5402,22 +5402,22 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		}
 		forward_Cost_ReadInvoiceGroupCosts_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_Cost_GetCalculationPrerequisites_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_Cost_ListCalculationPrerequisites_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetCalculationPrerequisites", runtime.WithHTTPPathPattern("/v1/{vendor}/calculation/prerequisites/{month}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListCalculationPrerequisites", runtime.WithHTTPPathPattern("/v1/{vendor}/calculation/prerequisites/{month}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Cost_GetCalculationPrerequisites_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Cost_ListCalculationPrerequisites_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Cost_GetCalculationPrerequisites_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Cost_ListCalculationPrerequisites_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	return nil
 }
@@ -5489,7 +5489,7 @@ var (
 	pattern_Cost_ReadInvoiceOverViews_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "invoiceoverviews"}, "read"))
 	pattern_Cost_ReadInvoiceCosts_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "invoicecosts"}, "read"))
 	pattern_Cost_ReadInvoiceGroupCosts_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "invoicegroupcosts"}, "read"))
-	pattern_Cost_GetCalculationPrerequisites_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "vendor", "calculation", "prerequisites", "month"}, ""))
+	pattern_Cost_ListCalculationPrerequisites_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "vendor", "calculation", "prerequisites", "month"}, ""))
 )
 
 var (
@@ -5559,5 +5559,5 @@ var (
 	forward_Cost_ReadInvoiceOverViews_0          = runtime.ForwardResponseStream
 	forward_Cost_ReadInvoiceCosts_0              = runtime.ForwardResponseStream
 	forward_Cost_ReadInvoiceGroupCosts_0         = runtime.ForwardResponseStream
-	forward_Cost_GetCalculationPrerequisites_0   = runtime.ForwardResponseMessage
+	forward_Cost_ListCalculationPrerequisites_0  = runtime.ForwardResponseMessage
 )

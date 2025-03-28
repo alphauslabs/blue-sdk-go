@@ -89,7 +89,7 @@ const (
 	Cost_ReadInvoiceOverViews_FullMethodName          = "/blueapi.cost.v1.Cost/ReadInvoiceOverViews"
 	Cost_ReadInvoiceCosts_FullMethodName              = "/blueapi.cost.v1.Cost/ReadInvoiceCosts"
 	Cost_ReadInvoiceGroupCosts_FullMethodName         = "/blueapi.cost.v1.Cost/ReadInvoiceGroupCosts"
-	Cost_GetCalculationPrerequisites_FullMethodName   = "/blueapi.cost.v1.Cost/GetCalculationPrerequisites"
+	Cost_ListCalculationPrerequisites_FullMethodName  = "/blueapi.cost.v1.Cost/ListCalculationPrerequisites"
 )
 
 // CostClient is the client API for Cost service.
@@ -274,8 +274,8 @@ type CostClient interface {
 	ReadInvoiceCosts(ctx context.Context, in *ReadInvoiceCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceCostsClient, error)
 	// WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.
 	ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceGroupCostsClient, error)
-	// WORK-IN-PROGRESS: Get invoice id for a month
-	GetCalculationPrerequisites(ctx context.Context, in *GetCalculationPrerequisitesRequest, opts ...grpc.CallOption) (*GetCalculationPrerequisitesResponse, error)
+	// WORK-IN-PROGRESS: List the prerequisites for cost calculations.
+	ListCalculationPrerequisites(ctx context.Context, in *ListCalculationPrerequisitesRequest, opts ...grpc.CallOption) (*ListCalculationPrerequisitesResponse, error)
 }
 
 type costClient struct {
@@ -1317,10 +1317,10 @@ func (x *costReadInvoiceGroupCostsClient) Recv() (*v1.BillingGroupSection, error
 	return m, nil
 }
 
-func (c *costClient) GetCalculationPrerequisites(ctx context.Context, in *GetCalculationPrerequisitesRequest, opts ...grpc.CallOption) (*GetCalculationPrerequisitesResponse, error) {
+func (c *costClient) ListCalculationPrerequisites(ctx context.Context, in *ListCalculationPrerequisitesRequest, opts ...grpc.CallOption) (*ListCalculationPrerequisitesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetCalculationPrerequisitesResponse)
-	err := c.cc.Invoke(ctx, Cost_GetCalculationPrerequisites_FullMethodName, in, out, cOpts...)
+	out := new(ListCalculationPrerequisitesResponse)
+	err := c.cc.Invoke(ctx, Cost_ListCalculationPrerequisites_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1509,8 +1509,8 @@ type CostServer interface {
 	ReadInvoiceCosts(*ReadInvoiceCostsRequest, Cost_ReadInvoiceCostsServer) error
 	// WORK-IN-PROGRESS: Read the invoice group costs. Only available in Ripple.
 	ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsRequest, Cost_ReadInvoiceGroupCostsServer) error
-	// WORK-IN-PROGRESS: Get invoice id for a month
-	GetCalculationPrerequisites(context.Context, *GetCalculationPrerequisitesRequest) (*GetCalculationPrerequisitesResponse, error)
+	// WORK-IN-PROGRESS: List the prerequisites for cost calculations.
+	ListCalculationPrerequisites(context.Context, *ListCalculationPrerequisitesRequest) (*ListCalculationPrerequisitesResponse, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -1710,8 +1710,8 @@ func (UnimplementedCostServer) ReadInvoiceCosts(*ReadInvoiceCostsRequest, Cost_R
 func (UnimplementedCostServer) ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsRequest, Cost_ReadInvoiceGroupCostsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadInvoiceGroupCosts not implemented")
 }
-func (UnimplementedCostServer) GetCalculationPrerequisites(context.Context, *GetCalculationPrerequisitesRequest) (*GetCalculationPrerequisitesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCalculationPrerequisites not implemented")
+func (UnimplementedCostServer) ListCalculationPrerequisites(context.Context, *ListCalculationPrerequisitesRequest) (*ListCalculationPrerequisitesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationPrerequisites not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -2929,20 +2929,20 @@ func (x *costReadInvoiceGroupCostsServer) Send(m *v1.BillingGroupSection) error 
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cost_GetCalculationPrerequisites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCalculationPrerequisitesRequest)
+func _Cost_ListCalculationPrerequisites_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCalculationPrerequisitesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(CostServer).GetCalculationPrerequisites(ctx, in)
+		return srv.(CostServer).ListCalculationPrerequisites(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Cost_GetCalculationPrerequisites_FullMethodName,
+		FullMethod: Cost_ListCalculationPrerequisites_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CostServer).GetCalculationPrerequisites(ctx, req.(*GetCalculationPrerequisitesRequest))
+		return srv.(CostServer).ListCalculationPrerequisites(ctx, req.(*ListCalculationPrerequisitesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3143,8 +3143,8 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_CheckAccountsBelongToMsp_Handler,
 		},
 		{
-			MethodName: "GetCalculationPrerequisites",
-			Handler:    _Cost_GetCalculationPrerequisites_Handler,
+			MethodName: "ListCalculationPrerequisites",
+			Handler:    _Cost_ListCalculationPrerequisites_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
