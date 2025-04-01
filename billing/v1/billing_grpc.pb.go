@@ -122,6 +122,7 @@ const (
 	Billing_ExportInvoiceSettingCsv_FullMethodName                    = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
 	Billing_UpdateBillingGroupBasicInformation_FullMethodName         = "/blueapi.billing.v1.Billing/UpdateBillingGroupBasicInformation"
 	Billing_UpdateBillingGroupCustomFields_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateBillingGroupCustomFields"
+	Billing_UpdateBillingGroupFreeFormat_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
 	Billing_GetBillingGroupAccountSupportPlan_FullMethodName          = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
 	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
 )
@@ -338,8 +339,10 @@ type BillingClient interface {
 	ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (*ExportInvoiceSettingCsvResponse, error)
 	// Update billing group basic information
 	UpdateBillingGroupBasicInformation(ctx context.Context, in *UpdateBillingGroupBasicInformationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Update billing group basic information
+	// WORK-IN-PROGRESS: Update billing group custom fields information
 	UpdateBillingGroupCustomFields(ctx context.Context, in *UpdateBillingGroupCustomFieldsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Update billing group custom fields information
+	UpdateBillingGroupFreeFormat(ctx context.Context, in *UpdateBillingGroupFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.
 	GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
@@ -1886,6 +1889,16 @@ func (c *billingClient) UpdateBillingGroupCustomFields(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *billingClient) UpdateBillingGroupFreeFormat(ctx context.Context, in *UpdateBillingGroupFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateBillingGroupFreeFormat_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*GetBillingGroupAccountSupportPlanResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBillingGroupAccountSupportPlanResponse)
@@ -2118,8 +2131,10 @@ type BillingServer interface {
 	ExportInvoiceSettingCsv(context.Context, *ExportInvoiceSettingCsvRequest) (*ExportInvoiceSettingCsvResponse, error)
 	// Update billing group basic information
 	UpdateBillingGroupBasicInformation(context.Context, *UpdateBillingGroupBasicInformationRequest) (*emptypb.Empty, error)
-	// Update billing group basic information
+	// WORK-IN-PROGRESS: Update billing group custom fields information
 	UpdateBillingGroupCustomFields(context.Context, *UpdateBillingGroupCustomFieldsRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Update billing group custom fields information
+	UpdateBillingGroupFreeFormat(context.Context, *UpdateBillingGroupFreeFormatRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.
 	GetBillingGroupAccountSupportPlan(context.Context, *GetBillingGroupAccountSupportPlanRequest) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
@@ -2424,6 +2439,9 @@ func (UnimplementedBillingServer) UpdateBillingGroupBasicInformation(context.Con
 }
 func (UnimplementedBillingServer) UpdateBillingGroupCustomFields(context.Context, *UpdateBillingGroupCustomFieldsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupCustomFields not implemented")
+}
+func (UnimplementedBillingServer) UpdateBillingGroupFreeFormat(context.Context, *UpdateBillingGroupFreeFormatRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupFreeFormat not implemented")
 }
 func (UnimplementedBillingServer) GetBillingGroupAccountSupportPlan(context.Context, *GetBillingGroupAccountSupportPlanRequest) (*GetBillingGroupAccountSupportPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroupAccountSupportPlan not implemented")
@@ -4280,6 +4298,24 @@ func _Billing_UpdateBillingGroupCustomFields_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_UpdateBillingGroupFreeFormat_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBillingGroupFreeFormatRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateBillingGroupFreeFormat(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateBillingGroupFreeFormat_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateBillingGroupFreeFormat(ctx, req.(*UpdateBillingGroupFreeFormatRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_GetBillingGroupAccountSupportPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBillingGroupAccountSupportPlanRequest)
 	if err := dec(in); err != nil {
@@ -4618,6 +4654,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBillingGroupCustomFields",
 			Handler:    _Billing_UpdateBillingGroupCustomFields_Handler,
+		},
+		{
+			MethodName: "UpdateBillingGroupFreeFormat",
+			Handler:    _Billing_UpdateBillingGroupFreeFormat_Handler,
 		},
 		{
 			MethodName: "GetBillingGroupAccountSupportPlan",

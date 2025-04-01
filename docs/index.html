@@ -1783,6 +1783,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupFreeFormatRequest"><span class="badge">M</span>UpdateBillingGroupFreeFormatRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>UpdateBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -20540,6 +20544,44 @@ If the `enabled` is set, only the `enabled` will be updated. If you want to upda
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupFreeFormatRequest">UpdateBillingGroupFreeFormatRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>items</td>
+                  <td><a href="#blueapi.billing.v1.FreeFormItem">FreeFormItem</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceServiceDiscountsRequest">UpdateBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the UpdateBillingGroupInvoiceServiceDiscounts rpc.</p>
 
@@ -21805,7 +21847,14 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateBillingGroupCustomFields</td>
                 <td><a href="#blueapi.billing.v1.UpdateBillingGroupCustomFieldsRequest">UpdateBillingGroupCustomFieldsRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>Update billing group basic information</p></td>
+                <td><p>WORK-IN-PROGRESS: Update billing group custom fields information</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupFreeFormat</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupFreeFormatRequest">UpdateBillingGroupFreeFormatRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Update billing group custom fields information</p></td>
               </tr>
             
               <tr>
@@ -22805,7 +22854,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>UpdateBillingGroupBasicInformation</td>
                 <td>PUT</td>
-                <td>/v1/billinggroup/{id}:basinInfo</td>
+                <td>/v1/billinggroup/{id}:basicInfo</td>
                 <td>*</td>
               </tr>
               
@@ -22816,6 +22865,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateBillingGroupCustomFields</td>
                 <td>PUT</td>
                 <td>/v1/billinggroup/{id}:customFields</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupFreeFormat</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup/{id}:freeFormat</td>
                 <td>*</td>
               </tr>
               
