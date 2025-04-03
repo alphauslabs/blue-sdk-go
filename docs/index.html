@@ -1463,6 +1463,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetAnnouncementRequest"><span class="badge">M</span>GetAnnouncementRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetAnnouncementResponse"><span class="badge">M</span>GetAnnouncementResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest"><span class="badge">M</span>GetBillingGroupAccountSupportPlanRequest</a>
                 </li>
               
@@ -17597,6 +17605,131 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetAnnouncementRequest">GetAnnouncementRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Announcement id. Empty returns all announcement </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetAnnouncementResponse">GetAnnouncementResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>label</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroups</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>start</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>end</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest">GetBillingGroupAccountSupportPlanRequest</h3>
         <p>Request message for the GetBillingGroupAccountSupportPlan rpc.</p>
 
@@ -21871,6 +22004,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.</p></td>
               </tr>
             
+              <tr>
+                <td>GetAnnouncement</td>
+                <td><a href="#blueapi.billing.v1.GetAnnouncementRequest">GetAnnouncementRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetAnnouncementResponse">GetAnnouncementResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Gets the announcement list.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -22896,6 +23036,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>PUT</td>
                 <td>/v1/billinggroup/{id}/{vendor}/supportplan</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAnnouncement</td>
+                <td>GET</td>
+                <td>/v1/reseller/announcements/{id}</td>
+                <td></td>
               </tr>
               
             

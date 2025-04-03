@@ -125,6 +125,7 @@ const (
 	Billing_UpdateBillingGroupFreeFormat_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
 	Billing_GetBillingGroupAccountSupportPlan_FullMethodName          = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
 	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
+	Billing_GetAnnouncement_FullMethodName                            = "/blueapi.billing.v1.Billing/GetAnnouncement"
 )
 
 // BillingClient is the client API for Billing service.
@@ -347,6 +348,8 @@ type BillingClient interface {
 	GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
 	UpdateBillingGroupAccountSupportPlan(ctx context.Context, in *UpdateBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets the announcement list.
+	GetAnnouncement(ctx context.Context, in *GetAnnouncementRequest, opts ...grpc.CallOption) (*GetAnnouncementResponse, error)
 }
 
 type billingClient struct {
@@ -1919,6 +1922,16 @@ func (c *billingClient) UpdateBillingGroupAccountSupportPlan(ctx context.Context
 	return out, nil
 }
 
+func (c *billingClient) GetAnnouncement(ctx context.Context, in *GetAnnouncementRequest, opts ...grpc.CallOption) (*GetAnnouncementResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAnnouncementResponse)
+	err := c.cc.Invoke(ctx, Billing_GetAnnouncement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -2139,6 +2152,8 @@ type BillingServer interface {
 	GetBillingGroupAccountSupportPlan(context.Context, *GetBillingGroupAccountSupportPlanRequest) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
 	UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Gets the announcement list.
+	GetAnnouncement(context.Context, *GetAnnouncementRequest) (*GetAnnouncementResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2448,6 +2463,9 @@ func (UnimplementedBillingServer) GetBillingGroupAccountSupportPlan(context.Cont
 }
 func (UnimplementedBillingServer) UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupAccountSupportPlan not implemented")
+}
+func (UnimplementedBillingServer) GetAnnouncement(context.Context, *GetAnnouncementRequest) (*GetAnnouncementResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAnnouncement not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -4352,6 +4370,24 @@ func _Billing_UpdateBillingGroupAccountSupportPlan_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetAnnouncement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAnnouncementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetAnnouncement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetAnnouncement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetAnnouncement(ctx, req.(*GetAnnouncementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -4666,6 +4702,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBillingGroupAccountSupportPlan",
 			Handler:    _Billing_UpdateBillingGroupAccountSupportPlan_Handler,
+		},
+		{
+			MethodName: "GetAnnouncement",
+			Handler:    _Billing_GetAnnouncement_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
