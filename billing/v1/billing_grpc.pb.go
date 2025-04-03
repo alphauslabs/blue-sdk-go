@@ -125,7 +125,7 @@ const (
 	Billing_UpdateBillingGroupFreeFormat_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
 	Billing_GetBillingGroupAccountSupportPlan_FullMethodName          = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
 	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
-	Billing_GetAnnouncement_FullMethodName                            = "/blueapi.billing.v1.Billing/GetAnnouncement"
+	Billing_GetAnnouncements_FullMethodName                           = "/blueapi.billing.v1.Billing/GetAnnouncements"
 )
 
 // BillingClient is the client API for Billing service.
@@ -349,7 +349,7 @@ type BillingClient interface {
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
 	UpdateBillingGroupAccountSupportPlan(ctx context.Context, in *UpdateBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the announcement list.
-	GetAnnouncement(ctx context.Context, in *GetAnnouncementRequest, opts ...grpc.CallOption) (*GetAnnouncementResponse, error)
+	GetAnnouncements(ctx context.Context, in *GetAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetAnnouncementsClient, error)
 }
 
 type billingClient struct {
@@ -1922,14 +1922,37 @@ func (c *billingClient) UpdateBillingGroupAccountSupportPlan(ctx context.Context
 	return out, nil
 }
 
-func (c *billingClient) GetAnnouncement(ctx context.Context, in *GetAnnouncementRequest, opts ...grpc.CallOption) (*GetAnnouncementResponse, error) {
+func (c *billingClient) GetAnnouncements(ctx context.Context, in *GetAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetAnnouncementsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAnnouncementResponse)
-	err := c.cc.Invoke(ctx, Billing_GetAnnouncement_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[24], Billing_GetAnnouncements_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &billingGetAnnouncementsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetAnnouncementsClient interface {
+	Recv() (*GetAnnouncementsResponse, error)
+	grpc.ClientStream
+}
+
+type billingGetAnnouncementsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetAnnouncementsClient) Recv() (*GetAnnouncementsResponse, error) {
+	m := new(GetAnnouncementsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // BillingServer is the server API for Billing service.
@@ -2153,7 +2176,7 @@ type BillingServer interface {
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
 	UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the announcement list.
-	GetAnnouncement(context.Context, *GetAnnouncementRequest) (*GetAnnouncementResponse, error)
+	GetAnnouncements(*GetAnnouncementsRequest, Billing_GetAnnouncementsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2464,8 +2487,8 @@ func (UnimplementedBillingServer) GetBillingGroupAccountSupportPlan(context.Cont
 func (UnimplementedBillingServer) UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupAccountSupportPlan not implemented")
 }
-func (UnimplementedBillingServer) GetAnnouncement(context.Context, *GetAnnouncementRequest) (*GetAnnouncementResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAnnouncement not implemented")
+func (UnimplementedBillingServer) GetAnnouncements(*GetAnnouncementsRequest, Billing_GetAnnouncementsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetAnnouncements not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -4370,22 +4393,25 @@ func _Billing_UpdateBillingGroupAccountSupportPlan_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Billing_GetAnnouncement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAnnouncementRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Billing_GetAnnouncements_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetAnnouncementsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(BillingServer).GetAnnouncement(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Billing_GetAnnouncement_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).GetAnnouncement(ctx, req.(*GetAnnouncementRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(BillingServer).GetAnnouncements(m, &billingGetAnnouncementsServer{ServerStream: stream})
+}
+
+type Billing_GetAnnouncementsServer interface {
+	Send(*GetAnnouncementsResponse) error
+	grpc.ServerStream
+}
+
+type billingGetAnnouncementsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetAnnouncementsServer) Send(m *GetAnnouncementsResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
@@ -4703,10 +4729,6 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UpdateBillingGroupAccountSupportPlan",
 			Handler:    _Billing_UpdateBillingGroupAccountSupportPlan_Handler,
 		},
-		{
-			MethodName: "GetAnnouncement",
-			Handler:    _Billing_GetAnnouncement_Handler,
-		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -4827,6 +4849,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetTagsAddingSetting",
 			Handler:       _Billing_GetTagsAddingSetting_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetAnnouncements",
+			Handler:       _Billing_GetAnnouncements_Handler,
 			ServerStreams: true,
 		},
 	},
