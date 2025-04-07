@@ -126,6 +126,9 @@ const (
 	Billing_GetBillingGroupAccountSupportPlan_FullMethodName          = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
 	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
 	Billing_GetAnnouncements_FullMethodName                           = "/blueapi.billing.v1.Billing/GetAnnouncements"
+	Billing_GetBillingGroupAnnouncements_FullMethodName               = "/blueapi.billing.v1.Billing/GetBillingGroupAnnouncements"
+	Billing_GetCredits_FullMethodName                                 = "/blueapi.billing.v1.Billing/GetCredits"
+	Billing_GetCsvSettings_FullMethodName                             = "/blueapi.billing.v1.Billing/GetCsvSettings"
 )
 
 // BillingClient is the client API for Billing service.
@@ -350,6 +353,12 @@ type BillingClient interface {
 	UpdateBillingGroupAccountSupportPlan(ctx context.Context, in *UpdateBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the announcement list.
 	GetAnnouncements(ctx context.Context, in *GetAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetAnnouncementsClient, error)
+	// WORK-IN-PROGRESS: Gets the announcement list for billing group
+	GetBillingGroupAnnouncements(ctx context.Context, in *GetBillingGroupAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetBillingGroupAnnouncementsClient, error)
+	// WORK-IN-PROGRESS: Gets the credits
+	GetCredits(ctx context.Context, in *GetCreditsRequest, opts ...grpc.CallOption) (Billing_GetCreditsClient, error)
+	// WORK-IN-PROGRESS: Gets the csv column settings
+	GetCsvSettings(ctx context.Context, in *GetCsvSettingsRequest, opts ...grpc.CallOption) (Billing_GetCsvSettingsClient, error)
 }
 
 type billingClient struct {
@@ -1939,7 +1948,7 @@ func (c *billingClient) GetAnnouncements(ctx context.Context, in *GetAnnouncemen
 }
 
 type Billing_GetAnnouncementsClient interface {
-	Recv() (*GetAnnouncementsResponse, error)
+	Recv() (*Announcement, error)
 	grpc.ClientStream
 }
 
@@ -1947,8 +1956,107 @@ type billingGetAnnouncementsClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingGetAnnouncementsClient) Recv() (*GetAnnouncementsResponse, error) {
-	m := new(GetAnnouncementsResponse)
+func (x *billingGetAnnouncementsClient) Recv() (*Announcement, error) {
+	m := new(Announcement)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *billingClient) GetBillingGroupAnnouncements(ctx context.Context, in *GetBillingGroupAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetBillingGroupAnnouncementsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[25], Billing_GetBillingGroupAnnouncements_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetBillingGroupAnnouncementsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetBillingGroupAnnouncementsClient interface {
+	Recv() (*GetBillingGroupAnnouncementsResponse, error)
+	grpc.ClientStream
+}
+
+type billingGetBillingGroupAnnouncementsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetBillingGroupAnnouncementsClient) Recv() (*GetBillingGroupAnnouncementsResponse, error) {
+	m := new(GetBillingGroupAnnouncementsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *billingClient) GetCredits(ctx context.Context, in *GetCreditsRequest, opts ...grpc.CallOption) (Billing_GetCreditsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[26], Billing_GetCredits_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetCreditsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetCreditsClient interface {
+	Recv() (*Credit, error)
+	grpc.ClientStream
+}
+
+type billingGetCreditsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetCreditsClient) Recv() (*Credit, error) {
+	m := new(Credit)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *billingClient) GetCsvSettings(ctx context.Context, in *GetCsvSettingsRequest, opts ...grpc.CallOption) (Billing_GetCsvSettingsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[27], Billing_GetCsvSettings_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetCsvSettingsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetCsvSettingsClient interface {
+	Recv() (*CsvSetting, error)
+	grpc.ClientStream
+}
+
+type billingGetCsvSettingsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetCsvSettingsClient) Recv() (*CsvSetting, error) {
+	m := new(CsvSetting)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -2177,6 +2285,12 @@ type BillingServer interface {
 	UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the announcement list.
 	GetAnnouncements(*GetAnnouncementsRequest, Billing_GetAnnouncementsServer) error
+	// WORK-IN-PROGRESS: Gets the announcement list for billing group
+	GetBillingGroupAnnouncements(*GetBillingGroupAnnouncementsRequest, Billing_GetBillingGroupAnnouncementsServer) error
+	// WORK-IN-PROGRESS: Gets the credits
+	GetCredits(*GetCreditsRequest, Billing_GetCreditsServer) error
+	// WORK-IN-PROGRESS: Gets the csv column settings
+	GetCsvSettings(*GetCsvSettingsRequest, Billing_GetCsvSettingsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2489,6 +2603,15 @@ func (UnimplementedBillingServer) UpdateBillingGroupAccountSupportPlan(context.C
 }
 func (UnimplementedBillingServer) GetAnnouncements(*GetAnnouncementsRequest, Billing_GetAnnouncementsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetAnnouncements not implemented")
+}
+func (UnimplementedBillingServer) GetBillingGroupAnnouncements(*GetBillingGroupAnnouncementsRequest, Billing_GetBillingGroupAnnouncementsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetBillingGroupAnnouncements not implemented")
+}
+func (UnimplementedBillingServer) GetCredits(*GetCreditsRequest, Billing_GetCreditsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCredits not implemented")
+}
+func (UnimplementedBillingServer) GetCsvSettings(*GetCsvSettingsRequest, Billing_GetCsvSettingsServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCsvSettings not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -4402,7 +4525,7 @@ func _Billing_GetAnnouncements_Handler(srv interface{}, stream grpc.ServerStream
 }
 
 type Billing_GetAnnouncementsServer interface {
-	Send(*GetAnnouncementsResponse) error
+	Send(*Announcement) error
 	grpc.ServerStream
 }
 
@@ -4410,7 +4533,70 @@ type billingGetAnnouncementsServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingGetAnnouncementsServer) Send(m *GetAnnouncementsResponse) error {
+func (x *billingGetAnnouncementsServer) Send(m *Announcement) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_GetBillingGroupAnnouncements_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetBillingGroupAnnouncementsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetBillingGroupAnnouncements(m, &billingGetBillingGroupAnnouncementsServer{ServerStream: stream})
+}
+
+type Billing_GetBillingGroupAnnouncementsServer interface {
+	Send(*GetBillingGroupAnnouncementsResponse) error
+	grpc.ServerStream
+}
+
+type billingGetBillingGroupAnnouncementsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetBillingGroupAnnouncementsServer) Send(m *GetBillingGroupAnnouncementsResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_GetCredits_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCreditsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetCredits(m, &billingGetCreditsServer{ServerStream: stream})
+}
+
+type Billing_GetCreditsServer interface {
+	Send(*Credit) error
+	grpc.ServerStream
+}
+
+type billingGetCreditsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetCreditsServer) Send(m *Credit) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_GetCsvSettings_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCsvSettingsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetCsvSettings(m, &billingGetCsvSettingsServer{ServerStream: stream})
+}
+
+type Billing_GetCsvSettingsServer interface {
+	Send(*CsvSetting) error
+	grpc.ServerStream
+}
+
+type billingGetCsvSettingsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetCsvSettingsServer) Send(m *CsvSetting) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -4854,6 +5040,21 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetAnnouncements",
 			Handler:       _Billing_GetAnnouncements_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetBillingGroupAnnouncements",
+			Handler:       _Billing_GetBillingGroupAnnouncements_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCredits",
+			Handler:       _Billing_GetCredits_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCsvSettings",
+			Handler:       _Billing_GetCsvSettings_Handler,
 			ServerStreams: true,
 		},
 	},

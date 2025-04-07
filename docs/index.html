@@ -1231,6 +1231,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.Announcement"><span class="badge">M</span>Announcement</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ApplyAdjustmentEntryRequest"><span class="badge">M</span>ApplyAdjustmentEntryRequest</a>
                 </li>
               
@@ -1355,6 +1359,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.Credit"><span class="badge">M</span>Credit</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CsvSetting"><span class="badge">M</span>CsvSetting</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CsvSetting.Column"><span class="badge">M</span>CsvSetting.Column</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CustomField"><span class="badge">M</span>CustomField</a>
                 </li>
               
@@ -1467,15 +1483,19 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.GetAnnouncementsResponse"><span class="badge">M</span>GetAnnouncementsResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest"><span class="badge">M</span>GetBillingGroupAccountSupportPlanRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanResponse"><span class="badge">M</span>GetBillingGroupAccountSupportPlanResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupAnnouncementsRequest"><span class="badge">M</span>GetBillingGroupAnnouncementsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupAnnouncementsResponse"><span class="badge">M</span>GetBillingGroupAnnouncementsResponse</a>
                 </li>
               
                 <li>
@@ -1500,6 +1520,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.GetBillingSettingResponse"><span class="badge">M</span>GetBillingSettingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetCreditsRequest"><span class="badge">M</span>GetCreditsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetCsvSettingsRequest"><span class="badge">M</span>GetCsvSettingsRequest</a>
                 </li>
               
                 <li>
@@ -15051,6 +15079,114 @@ Only available in Wave(Pro).</p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.Announcement">Announcement</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>label</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroups</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allBillingGroups</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>start</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>end</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ApplyAdjustmentEntryRequest">ApplyAdjustmentEntryRequest</h3>
         <p>Request message for the Billing.ApplyAdjustmentEntry rpc.</p>
 
@@ -16804,6 +16940,176 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
 
         
       
+        <h3 id="blueapi.billing.v1.Credit">Credit</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>creditAmount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>term</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>initialFee</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>creditBalance</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>applied</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CsvSetting">CsvSetting</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>col</td>
+                  <td><a href="#blueapi.billing.v1.CsvSetting.Column">CsvSetting.Column</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CsvSetting.Column">CsvSetting.Column</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CustomField">CustomField</h3>
         <p></p>
 
@@ -17616,111 +17922,10 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
             <tbody>
               
                 <tr>
-                  <td>id</td>
+                  <td>announcementId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Announcement id. Empty returns all announcement </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.GetAnnouncementsResponse">GetAnnouncementsResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>label</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>type</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>message</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billingGroups</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>start</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>end</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>date</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>userStatus</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>Set empty to return all </p></td>
                 </tr>
               
             </tbody>
@@ -17797,6 +18002,75 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#blueapi.api.ripple.v1.BillingGroupAccountSupportPlan">blueapi.api.ripple.v1.BillingGroupAccountSupportPlan</a></td>
                   <td>repeated</td>
                   <td><p>The support plan setting. [blueapi.api.ripple.v1.BillingGroupAccountSupportPlan]. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBillingGroupAnnouncementsRequest">GetBillingGroupAnnouncementsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Set empty to return all </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBillingGroupAnnouncementsResponse">GetBillingGroupAnnouncementsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>announcement</td>
+                  <td><a href="#blueapi.billing.v1.Announcement">Announcement</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -17993,6 +18267,20 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
           </table>
 
           
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetCreditsRequest">GetCreditsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetCsvSettingsRequest">GetCsvSettingsRequest</h3>
+        <p></p>
+
+        
 
         
       
@@ -22007,8 +22295,29 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetAnnouncements</td>
                 <td><a href="#blueapi.billing.v1.GetAnnouncementsRequest">GetAnnouncementsRequest</a></td>
-                <td><a href="#blueapi.billing.v1.GetAnnouncementsResponse">GetAnnouncementsResponse</a> stream</td>
+                <td><a href="#blueapi.billing.v1.Announcement">Announcement</a> stream</td>
                 <td><p>WORK-IN-PROGRESS: Gets the announcement list.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetBillingGroupAnnouncements</td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupAnnouncementsRequest">GetBillingGroupAnnouncementsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupAnnouncementsResponse">GetBillingGroupAnnouncementsResponse</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Gets the announcement list for billing group</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetCredits</td>
+                <td><a href="#blueapi.billing.v1.GetCreditsRequest">GetCreditsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.Credit">Credit</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Gets the credits</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetCsvSettings</td>
+                <td><a href="#blueapi.billing.v1.GetCsvSettingsRequest">GetCsvSettingsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CsvSetting">CsvSetting</a> stream</td>
+                <td><p>WORK-IN-PROGRESS: Gets the csv column settings</p></td>
               </tr>
             
           </tbody>
@@ -23044,7 +23353,37 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetAnnouncements</td>
                 <td>GET</td>
-                <td>/v1/reseller/announcements/{id}</td>
+                <td>/v1/reseller/announcements/{announcementId}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBillingGroupAnnouncements</td>
+                <td>GET</td>
+                <td>/v1/billinggroup/reseller/announcements/{groupId}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCredits</td>
+                <td>GET</td>
+                <td>/v1/credits</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCsvSettings</td>
+                <td>GET</td>
+                <td>/v1/csvsettings</td>
                 <td></td>
               </tr>
               
