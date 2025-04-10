@@ -125,6 +125,11 @@ const (
 	Billing_UpdateBillingGroupFreeFormat_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
 	Billing_GetBillingGroupAccountSupportPlan_FullMethodName          = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
 	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
+	Billing_CreateAnnouncement_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateAnnouncement"
+	Billing_UpdateAnnouncement_FullMethodName                         = "/blueapi.billing.v1.Billing/UpdateAnnouncement"
+	Billing_UpdateAnnouncementsStatus_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateAnnouncementsStatus"
+	Billing_UpdateAnnouncementDate_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateAnnouncementDate"
+	Billing_DeleteAnnouncement_FullMethodName                         = "/blueapi.billing.v1.Billing/DeleteAnnouncement"
 	Billing_GetAnnouncements_FullMethodName                           = "/blueapi.billing.v1.Billing/GetAnnouncements"
 	Billing_GetBillingGroupAnnouncements_FullMethodName               = "/blueapi.billing.v1.Billing/GetBillingGroupAnnouncements"
 	Billing_GetCredits_FullMethodName                                 = "/blueapi.billing.v1.Billing/GetCredits"
@@ -351,13 +356,22 @@ type BillingClient interface {
 	GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
 	UpdateBillingGroupAccountSupportPlan(ctx context.Context, in *UpdateBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Gets the announcement list.
+	// Creates new announcement for wave users
+	CreateAnnouncement(ctx context.Context, in *CreateAnnouncementRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Full update existing announcement
+	UpdateAnnouncement(ctx context.Context, in *UpdateAnnouncementRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Update multiple announcements status
+	UpdateAnnouncementsStatus(ctx context.Context, in *UpdateAnnouncementsStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Update announcement date
+	UpdateAnnouncementDate(ctx context.Context, in *UpdateAnnouncementDateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteAnnouncement(ctx context.Context, in *DeleteAnnouncementRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Gets the announcement list.
 	GetAnnouncements(ctx context.Context, in *GetAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetAnnouncementsClient, error)
-	// WORK-IN-PROGRESS: Gets the announcement list for billing group
+	// Gets the announcement list for billing group
 	GetBillingGroupAnnouncements(ctx context.Context, in *GetBillingGroupAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetBillingGroupAnnouncementsClient, error)
-	// WORK-IN-PROGRESS: Gets the credits
+	// Gets the credits
 	GetCredits(ctx context.Context, in *GetCreditsRequest, opts ...grpc.CallOption) (Billing_GetCreditsClient, error)
-	// WORK-IN-PROGRESS: Gets the csv column settings
+	// Gets the csv column settings
 	GetCsvSettings(ctx context.Context, in *GetCsvSettingsRequest, opts ...grpc.CallOption) (Billing_GetCsvSettingsClient, error)
 }
 
@@ -1931,6 +1945,56 @@ func (c *billingClient) UpdateBillingGroupAccountSupportPlan(ctx context.Context
 	return out, nil
 }
 
+func (c *billingClient) CreateAnnouncement(ctx context.Context, in *CreateAnnouncementRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_CreateAnnouncement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateAnnouncement(ctx context.Context, in *UpdateAnnouncementRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateAnnouncement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateAnnouncementsStatus(ctx context.Context, in *UpdateAnnouncementsStatusRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateAnnouncementsStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateAnnouncementDate(ctx context.Context, in *UpdateAnnouncementDateRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateAnnouncementDate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteAnnouncement(ctx context.Context, in *DeleteAnnouncementRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteAnnouncement_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) GetAnnouncements(ctx context.Context, in *GetAnnouncementsRequest, opts ...grpc.CallOption) (Billing_GetAnnouncementsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[24], Billing_GetAnnouncements_FullMethodName, cOpts...)
@@ -2283,13 +2347,22 @@ type BillingServer interface {
 	GetBillingGroupAccountSupportPlan(context.Context, *GetBillingGroupAccountSupportPlanRequest) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
 	UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Gets the announcement list.
+	// Creates new announcement for wave users
+	CreateAnnouncement(context.Context, *CreateAnnouncementRequest) (*emptypb.Empty, error)
+	// Full update existing announcement
+	UpdateAnnouncement(context.Context, *UpdateAnnouncementRequest) (*emptypb.Empty, error)
+	// Update multiple announcements status
+	UpdateAnnouncementsStatus(context.Context, *UpdateAnnouncementsStatusRequest) (*emptypb.Empty, error)
+	// Update announcement date
+	UpdateAnnouncementDate(context.Context, *UpdateAnnouncementDateRequest) (*emptypb.Empty, error)
+	DeleteAnnouncement(context.Context, *DeleteAnnouncementRequest) (*emptypb.Empty, error)
+	// Gets the announcement list.
 	GetAnnouncements(*GetAnnouncementsRequest, Billing_GetAnnouncementsServer) error
-	// WORK-IN-PROGRESS: Gets the announcement list for billing group
+	// Gets the announcement list for billing group
 	GetBillingGroupAnnouncements(*GetBillingGroupAnnouncementsRequest, Billing_GetBillingGroupAnnouncementsServer) error
-	// WORK-IN-PROGRESS: Gets the credits
+	// Gets the credits
 	GetCredits(*GetCreditsRequest, Billing_GetCreditsServer) error
-	// WORK-IN-PROGRESS: Gets the csv column settings
+	// Gets the csv column settings
 	GetCsvSettings(*GetCsvSettingsRequest, Billing_GetCsvSettingsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
@@ -2600,6 +2673,21 @@ func (UnimplementedBillingServer) GetBillingGroupAccountSupportPlan(context.Cont
 }
 func (UnimplementedBillingServer) UpdateBillingGroupAccountSupportPlan(context.Context, *UpdateBillingGroupAccountSupportPlanRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupAccountSupportPlan not implemented")
+}
+func (UnimplementedBillingServer) CreateAnnouncement(context.Context, *CreateAnnouncementRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAnnouncement not implemented")
+}
+func (UnimplementedBillingServer) UpdateAnnouncement(context.Context, *UpdateAnnouncementRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAnnouncement not implemented")
+}
+func (UnimplementedBillingServer) UpdateAnnouncementsStatus(context.Context, *UpdateAnnouncementsStatusRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAnnouncementsStatus not implemented")
+}
+func (UnimplementedBillingServer) UpdateAnnouncementDate(context.Context, *UpdateAnnouncementDateRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAnnouncementDate not implemented")
+}
+func (UnimplementedBillingServer) DeleteAnnouncement(context.Context, *DeleteAnnouncementRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAnnouncement not implemented")
 }
 func (UnimplementedBillingServer) GetAnnouncements(*GetAnnouncementsRequest, Billing_GetAnnouncementsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetAnnouncements not implemented")
@@ -4516,6 +4604,96 @@ func _Billing_UpdateBillingGroupAccountSupportPlan_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_CreateAnnouncement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAnnouncementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateAnnouncement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateAnnouncement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateAnnouncement(ctx, req.(*CreateAnnouncementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateAnnouncement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAnnouncementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateAnnouncement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateAnnouncement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateAnnouncement(ctx, req.(*UpdateAnnouncementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateAnnouncementsStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAnnouncementsStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateAnnouncementsStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateAnnouncementsStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateAnnouncementsStatus(ctx, req.(*UpdateAnnouncementsStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateAnnouncementDate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAnnouncementDateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateAnnouncementDate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateAnnouncementDate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateAnnouncementDate(ctx, req.(*UpdateAnnouncementDateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteAnnouncement_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAnnouncementRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteAnnouncement(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteAnnouncement_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteAnnouncement(ctx, req.(*DeleteAnnouncementRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_GetAnnouncements_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(GetAnnouncementsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -4914,6 +5092,26 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBillingGroupAccountSupportPlan",
 			Handler:    _Billing_UpdateBillingGroupAccountSupportPlan_Handler,
+		},
+		{
+			MethodName: "CreateAnnouncement",
+			Handler:    _Billing_CreateAnnouncement_Handler,
+		},
+		{
+			MethodName: "UpdateAnnouncement",
+			Handler:    _Billing_UpdateAnnouncement_Handler,
+		},
+		{
+			MethodName: "UpdateAnnouncementsStatus",
+			Handler:    _Billing_UpdateAnnouncementsStatus_Handler,
+		},
+		{
+			MethodName: "UpdateAnnouncementDate",
+			Handler:    _Billing_UpdateAnnouncementDate_Handler,
+		},
+		{
+			MethodName: "DeleteAnnouncement",
+			Handler:    _Billing_DeleteAnnouncement_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

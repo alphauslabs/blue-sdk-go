@@ -1307,6 +1307,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateAnnouncementRequest"><span class="badge">M</span>CreateAnnouncementRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>CreateBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -1384,6 +1388,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteAdjustmentConfigRequest"><span class="badge">M</span>DeleteAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteAnnouncementRequest"><span class="badge">M</span>DeleteAnnouncementRequest</a>
                 </li>
               
                 <li>
@@ -1800,6 +1808,18 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateAdjustmentConfigRequest"><span class="badge">M</span>UpdateAdjustmentConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateAnnouncementDateRequest"><span class="badge">M</span>UpdateAnnouncementDateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateAnnouncementRequest"><span class="badge">M</span>UpdateAnnouncementRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateAnnouncementsStatusRequest"><span class="badge">M</span>UpdateAnnouncementsStatusRequest</a>
                 </li>
               
                 <li>
@@ -16079,6 +16099,79 @@ A list of filtering options. See [api.ConfigFilters] for more information on eac
 
         
       
+        <h3 id="blueapi.billing.v1.CreateAnnouncementRequest">CreateAnnouncementRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>label</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Label description for the announcement </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Announcement type (eg. &#34;info&#34;, &#34;urgent&#34;) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>contents</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Announcement message (HTML format) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroups</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Group Id that the announcement will apply </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allBillingGroups</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Apply the announcement to all billing groups </p></td>
+                </tr>
+              
+                <tr>
+                  <td>start</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Required. Start time for the announcement (epoch time) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>end</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Required. End time for the announcement (epoch time) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Announcement status (&#34;enabled&#34;, &#34;disabled&#34;) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateBillingGroupInvoiceServiceDiscountsRequest">CreateBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the CreateBillingGroupInvoiceServiceDiscounts rpc.</p>
 
@@ -17215,6 +17308,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteAnnouncementRequest">DeleteAnnouncementRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>announcementId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required </p></td>
                 </tr>
               
             </tbody>
@@ -20819,6 +20936,99 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateAnnouncementDateRequest">UpdateAnnouncementDateRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>announcementId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Required. Announcement date (epoch time) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateAnnouncementRequest">UpdateAnnouncementRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>announcementId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required </p></td>
+                </tr>
+              
+                <tr>
+                  <td>announcement</td>
+                  <td><a href="#blueapi.billing.v1.CreateAnnouncementRequest">CreateAnnouncementRequest</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateAnnouncementsStatusRequest">UpdateAnnouncementsStatusRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>announcementId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupAccountSupportPlanRequest">UpdateBillingGroupAccountSupportPlanRequest</h3>
         <p>Request message for the UpdateBillingGroupAccountSupportPlan rpc.</p>
 
@@ -22293,31 +22503,66 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>CreateAnnouncement</td>
+                <td><a href="#blueapi.billing.v1.CreateAnnouncementRequest">CreateAnnouncementRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Creates new announcement for wave users</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAnnouncement</td>
+                <td><a href="#blueapi.billing.v1.UpdateAnnouncementRequest">UpdateAnnouncementRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Full update existing announcement</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAnnouncementsStatus</td>
+                <td><a href="#blueapi.billing.v1.UpdateAnnouncementsStatusRequest">UpdateAnnouncementsStatusRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Update multiple announcements status</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAnnouncementDate</td>
+                <td><a href="#blueapi.billing.v1.UpdateAnnouncementDateRequest">UpdateAnnouncementDateRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Update announcement date</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteAnnouncement</td>
+                <td><a href="#blueapi.billing.v1.DeleteAnnouncementRequest">DeleteAnnouncementRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>GetAnnouncements</td>
                 <td><a href="#blueapi.billing.v1.GetAnnouncementsRequest">GetAnnouncementsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.Announcement">Announcement</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Gets the announcement list.</p></td>
+                <td><p>Gets the announcement list.</p></td>
               </tr>
             
               <tr>
                 <td>GetBillingGroupAnnouncements</td>
                 <td><a href="#blueapi.billing.v1.GetBillingGroupAnnouncementsRequest">GetBillingGroupAnnouncementsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.GetBillingGroupAnnouncementsResponse">GetBillingGroupAnnouncementsResponse</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Gets the announcement list for billing group</p></td>
+                <td><p>Gets the announcement list for billing group</p></td>
               </tr>
             
               <tr>
                 <td>GetCredits</td>
                 <td><a href="#blueapi.billing.v1.GetCreditsRequest">GetCreditsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.Credit">Credit</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Gets the credits</p></td>
+                <td><p>Gets the credits</p></td>
               </tr>
             
               <tr>
                 <td>GetCsvSettings</td>
                 <td><a href="#blueapi.billing.v1.GetCsvSettingsRequest">GetCsvSettingsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CsvSetting">CsvSetting</a> stream</td>
-                <td><p>WORK-IN-PROGRESS: Gets the csv column settings</p></td>
+                <td><p>Gets the csv column settings</p></td>
               </tr>
             
           </tbody>
@@ -23345,6 +23590,56 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>PUT</td>
                 <td>/v1/billinggroup/{id}/{vendor}/supportplan</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateAnnouncement</td>
+                <td>POST</td>
+                <td>/v1/reseller/announcement</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAnnouncement</td>
+                <td>PUT</td>
+                <td>/v1/reseller/announcement/{announcementId}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAnnouncementsStatus</td>
+                <td>PATCH</td>
+                <td>/v1/reseller/announcements/bulk/status</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAnnouncementDate</td>
+                <td>PATCH</td>
+                <td>/v1/reseller/announcements/{announcementId}/date</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteAnnouncement</td>
+                <td>DELETE</td>
+                <td>/v1/reseller/announcement/{announcementId}</td>
+                <td></td>
               </tr>
               
             
