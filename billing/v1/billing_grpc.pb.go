@@ -123,6 +123,8 @@ const (
 	Billing_UpdateBillingGroupBasicInformation_FullMethodName         = "/blueapi.billing.v1.Billing/UpdateBillingGroupBasicInformation"
 	Billing_UpdateBillingGroupCustomFields_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateBillingGroupCustomFields"
 	Billing_UpdateBillingGroupFreeFormat_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
+	Billing_UpdateBillingGroupLinkedResources_FullMethodName          = "/blueapi.billing.v1.Billing/UpdateBillingGroupLinkedResources"
+	Billing_UpdateBillingGroupInvoiceSettings_FullMethodName          = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceSettings"
 	Billing_GetBillingGroupAccountSupportPlan_FullMethodName          = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
 	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName       = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
 	Billing_CreateAnnouncement_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateAnnouncement"
@@ -352,6 +354,10 @@ type BillingClient interface {
 	UpdateBillingGroupCustomFields(ctx context.Context, in *UpdateBillingGroupCustomFieldsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Update billing group custom fields information
 	UpdateBillingGroupFreeFormat(ctx context.Context, in *UpdateBillingGroupFreeFormatRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Update linked resources for a billing group
+	UpdateBillingGroupLinkedResources(ctx context.Context, in *UpdateBillingGroupLinkedResourcesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Update linked resources for a billing group
+	UpdateBillingGroupInvoiceSettings(ctx context.Context, in *UpdateBillingGroupInvoiceSettingsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.
 	GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
@@ -1925,6 +1931,26 @@ func (c *billingClient) UpdateBillingGroupFreeFormat(ctx context.Context, in *Up
 	return out, nil
 }
 
+func (c *billingClient) UpdateBillingGroupLinkedResources(ctx context.Context, in *UpdateBillingGroupLinkedResourcesRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateBillingGroupLinkedResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateBillingGroupInvoiceSettings(ctx context.Context, in *UpdateBillingGroupInvoiceSettingsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateBillingGroupInvoiceSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) GetBillingGroupAccountSupportPlan(ctx context.Context, in *GetBillingGroupAccountSupportPlanRequest, opts ...grpc.CallOption) (*GetBillingGroupAccountSupportPlanResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetBillingGroupAccountSupportPlanResponse)
@@ -2343,6 +2369,10 @@ type BillingServer interface {
 	UpdateBillingGroupCustomFields(context.Context, *UpdateBillingGroupCustomFieldsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Update billing group custom fields information
 	UpdateBillingGroupFreeFormat(context.Context, *UpdateBillingGroupFreeFormatRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Update linked resources for a billing group
+	UpdateBillingGroupLinkedResources(context.Context, *UpdateBillingGroupLinkedResourcesRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Update linked resources for a billing group
+	UpdateBillingGroupInvoiceSettings(context.Context, *UpdateBillingGroupInvoiceSettingsRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Gets the account support plan in billing group. Only available in Ripple.
 	GetBillingGroupAccountSupportPlan(context.Context, *GetBillingGroupAccountSupportPlanRequest) (*GetBillingGroupAccountSupportPlanResponse, error)
 	// WORK-IN-PROGRESS: Updates the account support plan in billing group. Only available in Ripple.
@@ -2667,6 +2697,12 @@ func (UnimplementedBillingServer) UpdateBillingGroupCustomFields(context.Context
 }
 func (UnimplementedBillingServer) UpdateBillingGroupFreeFormat(context.Context, *UpdateBillingGroupFreeFormatRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupFreeFormat not implemented")
+}
+func (UnimplementedBillingServer) UpdateBillingGroupLinkedResources(context.Context, *UpdateBillingGroupLinkedResourcesRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupLinkedResources not implemented")
+}
+func (UnimplementedBillingServer) UpdateBillingGroupInvoiceSettings(context.Context, *UpdateBillingGroupInvoiceSettingsRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupInvoiceSettings not implemented")
 }
 func (UnimplementedBillingServer) GetBillingGroupAccountSupportPlan(context.Context, *GetBillingGroupAccountSupportPlanRequest) (*GetBillingGroupAccountSupportPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroupAccountSupportPlan not implemented")
@@ -4568,6 +4604,42 @@ func _Billing_UpdateBillingGroupFreeFormat_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_UpdateBillingGroupLinkedResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBillingGroupLinkedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateBillingGroupLinkedResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateBillingGroupLinkedResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateBillingGroupLinkedResources(ctx, req.(*UpdateBillingGroupLinkedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateBillingGroupInvoiceSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBillingGroupInvoiceSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateBillingGroupInvoiceSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateBillingGroupInvoiceSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateBillingGroupInvoiceSettings(ctx, req.(*UpdateBillingGroupInvoiceSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_GetBillingGroupAccountSupportPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetBillingGroupAccountSupportPlanRequest)
 	if err := dec(in); err != nil {
@@ -5084,6 +5156,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateBillingGroupFreeFormat",
 			Handler:    _Billing_UpdateBillingGroupFreeFormat_Handler,
+		},
+		{
+			MethodName: "UpdateBillingGroupLinkedResources",
+			Handler:    _Billing_UpdateBillingGroupLinkedResources_Handler,
+		},
+		{
+			MethodName: "UpdateBillingGroupInvoiceSettings",
+			Handler:    _Billing_UpdateBillingGroupInvoiceSettings_Handler,
 		},
 		{
 			MethodName: "GetBillingGroupAccountSupportPlan",

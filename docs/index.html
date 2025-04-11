@@ -1851,7 +1851,15 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceSettingsRequest"><span class="badge">M</span>UpdateBillingGroupInvoiceSettingsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest"><span class="badge">M</span>UpdateBillingGroupInvoiceTemplateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupLinkedResourcesRequest"><span class="badge">M</span>UpdateBillingGroupLinkedResourcesRequest</a>
                 </li>
               
                 <li>
@@ -21274,6 +21282,58 @@ Service discount id. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceSettingsRequest">UpdateBillingGroupInvoiceSettingsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rateReference</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>diplayCost</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>calculationType</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupInvoiceTemplateRequest">UpdateBillingGroupInvoiceTemplateRequest</h3>
         <p>Request a message to update/create a billing group's invoice template</p>
 
@@ -21296,6 +21356,65 @@ Service discount id. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The invoice template ID to associate with the billing group </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupLinkedResourcesRequest">UpdateBillingGroupLinkedResourcesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>selectionMethod</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.billing.v1.AccountToAdd">AccountToAdd</a></td>
+                  <td>repeated</td>
+                  <td><p>Account settings </p></td>
+                </tr>
+              
+                <tr>
+                  <td>settings</td>
+                  <td><a href="#blueapi.billing.v1.TagSetting">TagSetting</a></td>
+                  <td>repeated</td>
+                  <td><p>Tag settings for different customer accounts </p></td>
+                </tr>
+              
+                <tr>
+                  <td>nonTagSetting</td>
+                  <td><a href="#blueapi.billing.v1.NonTagSetting">NonTagSetting</a></td>
+                  <td>optional</td>
+                  <td><p>Non-tag settings for the billing group </p></td>
                 </tr>
               
             </tbody>
@@ -22489,6 +22608,20 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>UpdateBillingGroupLinkedResources</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupLinkedResourcesRequest">UpdateBillingGroupLinkedResourcesRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Update linked resources for a billing group</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupInvoiceSettings</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceSettingsRequest">UpdateBillingGroupInvoiceSettingsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Update linked resources for a billing group</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetBillingGroupAccountSupportPlan</td>
                 <td><a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanRequest">GetBillingGroupAccountSupportPlanRequest</a></td>
                 <td><a href="#blueapi.billing.v1.GetBillingGroupAccountSupportPlanResponse">GetBillingGroupAccountSupportPlanResponse</a></td>
@@ -23569,6 +23702,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateBillingGroupFreeFormat</td>
                 <td>PUT</td>
                 <td>/v1/billinggroup/{id}:freeFormat</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupLinkedResources</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup/{id}:resources</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupInvoiceSettings</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup/{id}:invoiceSettings</td>
                 <td>*</td>
               </tr>
               
