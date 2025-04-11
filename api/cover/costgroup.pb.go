@@ -21,6 +21,55 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+type CostGroupType int32
+
+const (
+	CostGroupType_default   CostGroupType = 0
+	CostGroupType_ai        CostGroupType = 1
+	CostGroupType_container CostGroupType = 2
+)
+
+// Enum value maps for CostGroupType.
+var (
+	CostGroupType_name = map[int32]string{
+		0: "default",
+		1: "ai",
+		2: "container",
+	}
+	CostGroupType_value = map[string]int32{
+		"default":   0,
+		"ai":        1,
+		"container": 2,
+	}
+)
+
+func (x CostGroupType) Enum() *CostGroupType {
+	p := new(CostGroupType)
+	*p = x
+	return p
+}
+
+func (x CostGroupType) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (CostGroupType) Descriptor() protoreflect.EnumDescriptor {
+	return file_api_cover_costgroup_proto_enumTypes[0].Descriptor()
+}
+
+func (CostGroupType) Type() protoreflect.EnumType {
+	return &file_api_cover_costgroup_proto_enumTypes[0]
+}
+
+func (x CostGroupType) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use CostGroupType.Descriptor instead.
+func (CostGroupType) EnumDescriptor() ([]byte, []int) {
+	return file_api_cover_costgroup_proto_rawDescGZIP(), []int{0}
+}
+
 type CostGroupData struct {
 	state          protoimpl.MessageState `protogen:"open.v1"`
 	Id             string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -979,14 +1028,17 @@ var file_api_cover_costgroup_proto_rawDesc = string([]byte{
 	0x72, 0x63, 0x65, 0x6e, 0x74, 0x61, 0x67, 0x65, 0x12, 0x2a, 0x0a, 0x10, 0x70, 0x61, 0x73, 0x74,
 	0x44, 0x61, 0x74, 0x61, 0x49, 0x6e, 0x4d, 0x6f, 0x6e, 0x74, 0x68, 0x73, 0x18, 0x03, 0x20, 0x01,
 	0x28, 0x03, 0x52, 0x10, 0x70, 0x61, 0x73, 0x74, 0x44, 0x61, 0x74, 0x61, 0x49, 0x6e, 0x4d, 0x6f,
-	0x6e, 0x74, 0x68, 0x73, 0x42, 0x67, 0x0a, 0x1f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x61, 0x6c,
-	0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70,
-	0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x42, 0x16, 0x41, 0x70, 0x69, 0x43, 0x6f, 0x76, 0x65,
-	0x72, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a,
-	0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68,
-	0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2d, 0x73, 0x64, 0x6b,
-	0x2d, 0x67, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x62, 0x06, 0x70,
-	0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x74, 0x68, 0x73, 0x2a, 0x33, 0x0a, 0x0d, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75,
+	0x70, 0x54, 0x79, 0x70, 0x65, 0x12, 0x0b, 0x0a, 0x07, 0x64, 0x65, 0x66, 0x61, 0x75, 0x6c, 0x74,
+	0x10, 0x00, 0x12, 0x06, 0x0a, 0x02, 0x61, 0x69, 0x10, 0x01, 0x12, 0x0d, 0x0a, 0x09, 0x63, 0x6f,
+	0x6e, 0x74, 0x61, 0x69, 0x6e, 0x65, 0x72, 0x10, 0x02, 0x42, 0x67, 0x0a, 0x1f, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61,
+	0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x42, 0x16, 0x41, 0x70,
+	0x69, 0x43, 0x6f, 0x76, 0x65, 0x72, 0x43, 0x6f, 0x73, 0x74, 0x47, 0x72, 0x6f, 0x75, 0x70, 0x50,
+	0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x2c, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75,
+	0x65, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67, 0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x76,
+	0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 })
 
 var (
@@ -1001,48 +1053,50 @@ func file_api_cover_costgroup_proto_rawDescGZIP() []byte {
 	return file_api_cover_costgroup_proto_rawDescData
 }
 
+var file_api_cover_costgroup_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_api_cover_costgroup_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_api_cover_costgroup_proto_goTypes = []any{
-	(*CostGroupData)(nil),            // 0: blueapi.api.cover.CostGroupData
-	(*Combinations)(nil),             // 1: blueapi.api.cover.Combinations
-	(*CostGroupAwsOptions)(nil),      // 2: blueapi.api.cover.CostGroupAwsOptions
-	(*CostGroupAzureOptions)(nil),    // 3: blueapi.api.cover.CostGroupAzureOptions
-	(*CostGroupAzureCspOptions)(nil), // 4: blueapi.api.cover.CostGroupAzureCspOptions
-	(*CostGroupGcpOptions)(nil),      // 5: blueapi.api.cover.CostGroupGcpOptions
-	(*CostGroupCustomOptions)(nil),   // 6: blueapi.api.cover.CostGroupCustomOptions
-	(*CostGroupOptionsFilters)(nil),  // 7: blueapi.api.cover.CostGroupOptionsFilters
-	(*Account)(nil),                  // 8: blueapi.api.cover.Account
-	(*EventIndicator)(nil),           // 9: blueapi.api.cover.EventIndicator
-	(*AnomalyOptions)(nil),           // 10: blueapi.api.cover.AnomalyOptions
-	nil,                              // 11: blueapi.api.cover.CostGroupOptionsFilters.AndFiltersEntry
-	(*MemberUserData)(nil),           // 12: blueapi.api.cover.MemberUserData
+	(CostGroupType)(0),               // 0: blueapi.api.cover.CostGroupType
+	(*CostGroupData)(nil),            // 1: blueapi.api.cover.CostGroupData
+	(*Combinations)(nil),             // 2: blueapi.api.cover.Combinations
+	(*CostGroupAwsOptions)(nil),      // 3: blueapi.api.cover.CostGroupAwsOptions
+	(*CostGroupAzureOptions)(nil),    // 4: blueapi.api.cover.CostGroupAzureOptions
+	(*CostGroupAzureCspOptions)(nil), // 5: blueapi.api.cover.CostGroupAzureCspOptions
+	(*CostGroupGcpOptions)(nil),      // 6: blueapi.api.cover.CostGroupGcpOptions
+	(*CostGroupCustomOptions)(nil),   // 7: blueapi.api.cover.CostGroupCustomOptions
+	(*CostGroupOptionsFilters)(nil),  // 8: blueapi.api.cover.CostGroupOptionsFilters
+	(*Account)(nil),                  // 9: blueapi.api.cover.Account
+	(*EventIndicator)(nil),           // 10: blueapi.api.cover.EventIndicator
+	(*AnomalyOptions)(nil),           // 11: blueapi.api.cover.AnomalyOptions
+	nil,                              // 12: blueapi.api.cover.CostGroupOptionsFilters.AndFiltersEntry
+	(*MemberUserData)(nil),           // 13: blueapi.api.cover.MemberUserData
 }
 var file_api_cover_costgroup_proto_depIdxs = []int32{
-	12, // 0: blueapi.api.cover.CostGroupData.members:type_name -> blueapi.api.cover.MemberUserData
-	1,  // 1: blueapi.api.cover.CostGroupData.combinations:type_name -> blueapi.api.cover.Combinations
-	12, // 2: blueapi.api.cover.CostGroupData.createdBy:type_name -> blueapi.api.cover.MemberUserData
-	9,  // 3: blueapi.api.cover.CostGroupData.eventIndicator:type_name -> blueapi.api.cover.EventIndicator
-	10, // 4: blueapi.api.cover.CostGroupData.anomalyOptions:type_name -> blueapi.api.cover.AnomalyOptions
-	2,  // 5: blueapi.api.cover.Combinations.awsOptions:type_name -> blueapi.api.cover.CostGroupAwsOptions
-	3,  // 6: blueapi.api.cover.Combinations.azureOptions:type_name -> blueapi.api.cover.CostGroupAzureOptions
-	5,  // 7: blueapi.api.cover.Combinations.gcpOptions:type_name -> blueapi.api.cover.CostGroupGcpOptions
-	4,  // 8: blueapi.api.cover.Combinations.azurecspOptions:type_name -> blueapi.api.cover.CostGroupAzureCspOptions
-	6,  // 9: blueapi.api.cover.Combinations.customOptions:type_name -> blueapi.api.cover.CostGroupCustomOptions
-	7,  // 10: blueapi.api.cover.CostGroupAwsOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 11: blueapi.api.cover.CostGroupAwsOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 12: blueapi.api.cover.CostGroupAzureOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 13: blueapi.api.cover.CostGroupAzureOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 14: blueapi.api.cover.CostGroupAzureCspOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 15: blueapi.api.cover.CostGroupAzureCspOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 16: blueapi.api.cover.CostGroupGcpOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 17: blueapi.api.cover.CostGroupGcpOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 18: blueapi.api.cover.CostGroupGcpOptions.labelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 19: blueapi.api.cover.CostGroupGcpOptions.projectLabelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 20: blueapi.api.cover.CostGroupCustomOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 21: blueapi.api.cover.CostGroupCustomOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 22: blueapi.api.cover.CostGroupCustomOptions.labelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	7,  // 23: blueapi.api.cover.CostGroupCustomOptions.projectLabelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
-	11, // 24: blueapi.api.cover.CostGroupOptionsFilters.andFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters.AndFiltersEntry
+	13, // 0: blueapi.api.cover.CostGroupData.members:type_name -> blueapi.api.cover.MemberUserData
+	2,  // 1: blueapi.api.cover.CostGroupData.combinations:type_name -> blueapi.api.cover.Combinations
+	13, // 2: blueapi.api.cover.CostGroupData.createdBy:type_name -> blueapi.api.cover.MemberUserData
+	10, // 3: blueapi.api.cover.CostGroupData.eventIndicator:type_name -> blueapi.api.cover.EventIndicator
+	11, // 4: blueapi.api.cover.CostGroupData.anomalyOptions:type_name -> blueapi.api.cover.AnomalyOptions
+	3,  // 5: blueapi.api.cover.Combinations.awsOptions:type_name -> blueapi.api.cover.CostGroupAwsOptions
+	4,  // 6: blueapi.api.cover.Combinations.azureOptions:type_name -> blueapi.api.cover.CostGroupAzureOptions
+	6,  // 7: blueapi.api.cover.Combinations.gcpOptions:type_name -> blueapi.api.cover.CostGroupGcpOptions
+	5,  // 8: blueapi.api.cover.Combinations.azurecspOptions:type_name -> blueapi.api.cover.CostGroupAzureCspOptions
+	7,  // 9: blueapi.api.cover.Combinations.customOptions:type_name -> blueapi.api.cover.CostGroupCustomOptions
+	8,  // 10: blueapi.api.cover.CostGroupAwsOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 11: blueapi.api.cover.CostGroupAwsOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 12: blueapi.api.cover.CostGroupAzureOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 13: blueapi.api.cover.CostGroupAzureOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 14: blueapi.api.cover.CostGroupAzureCspOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 15: blueapi.api.cover.CostGroupAzureCspOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 16: blueapi.api.cover.CostGroupGcpOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 17: blueapi.api.cover.CostGroupGcpOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 18: blueapi.api.cover.CostGroupGcpOptions.labelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 19: blueapi.api.cover.CostGroupGcpOptions.projectLabelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 20: blueapi.api.cover.CostGroupCustomOptions.filters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 21: blueapi.api.cover.CostGroupCustomOptions.tagFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 22: blueapi.api.cover.CostGroupCustomOptions.labelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	8,  // 23: blueapi.api.cover.CostGroupCustomOptions.projectLabelFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters
+	12, // 24: blueapi.api.cover.CostGroupOptionsFilters.andFilters:type_name -> blueapi.api.cover.CostGroupOptionsFilters.AndFiltersEntry
 	25, // [25:25] is the sub-list for method output_type
 	25, // [25:25] is the sub-list for method input_type
 	25, // [25:25] is the sub-list for extension type_name
@@ -1061,13 +1115,14 @@ func file_api_cover_costgroup_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_cover_costgroup_proto_rawDesc), len(file_api_cover_costgroup_proto_rawDesc)),
-			NumEnums:      0,
+			NumEnums:      1,
 			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
 		GoTypes:           file_api_cover_costgroup_proto_goTypes,
 		DependencyIndexes: file_api_cover_costgroup_proto_depIdxs,
+		EnumInfos:         file_api_cover_costgroup_proto_enumTypes,
 		MessageInfos:      file_api_cover_costgroup_proto_msgTypes,
 	}.Build()
 	File_api_cover_costgroup_proto = out.File
