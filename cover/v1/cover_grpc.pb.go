@@ -195,6 +195,7 @@ const (
 	Cover_GetUnitMetric_FullMethodName                           = "/blueapi.cover.v1.Cover/GetUnitMetric"
 	Cover_UpdateUnitMetric_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateUnitMetric"
 	Cover_DeleteUnitMetric_FullMethodName                        = "/blueapi.cover.v1.Cover/DeleteUnitMetric"
+	Cover_PreviewGoogleSheet_FullMethodName                      = "/blueapi.cover.v1.Cover/PreviewGoogleSheet"
 	Cover_VerifyAPIAccess_FullMethodName                         = "/blueapi.cover.v1.Cover/VerifyAPIAccess"
 )
 
@@ -551,6 +552,8 @@ type CoverClient interface {
 	UpdateUnitMetric(ctx context.Context, in *UpdateUnitMetricRequest, opts ...grpc.CallOption) (*UpdateUnitMetricResponse, error)
 	// Delete Specific Unit Metric
 	DeleteUnitMetric(ctx context.Context, in *DeleteUnitMetricRequest, opts ...grpc.CallOption) (*DeleteUnitMetricResponse, error)
+	// Preview Google Sheet Data
+	PreviewGoogleSheet(ctx context.Context, in *PreviewGoogleSheetRequest, opts ...grpc.CallOption) (*PreviewGoogleSheetResponse, error)
 	VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error)
 }
 
@@ -2925,6 +2928,16 @@ func (c *coverClient) DeleteUnitMetric(ctx context.Context, in *DeleteUnitMetric
 	return out, nil
 }
 
+func (c *coverClient) PreviewGoogleSheet(ctx context.Context, in *PreviewGoogleSheetRequest, opts ...grpc.CallOption) (*PreviewGoogleSheetResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PreviewGoogleSheetResponse)
+	err := c.cc.Invoke(ctx, Cover_PreviewGoogleSheet_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyAPIAccessResponse)
@@ -3288,6 +3301,8 @@ type CoverServer interface {
 	UpdateUnitMetric(context.Context, *UpdateUnitMetricRequest) (*UpdateUnitMetricResponse, error)
 	// Delete Specific Unit Metric
 	DeleteUnitMetric(context.Context, *DeleteUnitMetricRequest) (*DeleteUnitMetricResponse, error)
+	// Preview Google Sheet Data
+	PreviewGoogleSheet(context.Context, *PreviewGoogleSheetRequest) (*PreviewGoogleSheetResponse, error)
 	VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
@@ -3817,6 +3832,9 @@ func (UnimplementedCoverServer) UpdateUnitMetric(context.Context, *UpdateUnitMet
 }
 func (UnimplementedCoverServer) DeleteUnitMetric(context.Context, *DeleteUnitMetricRequest) (*DeleteUnitMetricResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteUnitMetric not implemented")
+}
+func (UnimplementedCoverServer) PreviewGoogleSheet(context.Context, *PreviewGoogleSheetRequest) (*PreviewGoogleSheetResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreviewGoogleSheet not implemented")
 }
 func (UnimplementedCoverServer) VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAPIAccess not implemented")
@@ -7052,6 +7070,24 @@ func _Cover_DeleteUnitMetric_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_PreviewGoogleSheet_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreviewGoogleSheetRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).PreviewGoogleSheet(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_PreviewGoogleSheet_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).PreviewGoogleSheet(ctx, req.(*PreviewGoogleSheetRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_VerifyAPIAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyAPIAccessRequest)
 	if err := dec(in); err != nil {
@@ -7664,6 +7700,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteUnitMetric",
 			Handler:    _Cover_DeleteUnitMetric_Handler,
+		},
+		{
+			MethodName: "PreviewGoogleSheet",
+			Handler:    _Cover_PreviewGoogleSheet_Handler,
 		},
 		{
 			MethodName: "VerifyAPIAccess",

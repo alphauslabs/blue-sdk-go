@@ -1092,6 +1092,50 @@ func (x *RequiredColumns) GetAmountColumn() string {
 	return ""
 }
 
+type RowData struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Data          map[string]string      `protobuf:"bytes,1,rep,name=data,proto3" json:"data,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *RowData) Reset() {
+	*x = RowData{}
+	mi := &file_api_cover_unitcost_proto_msgTypes[13]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *RowData) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RowData) ProtoMessage() {}
+
+func (x *RowData) ProtoReflect() protoreflect.Message {
+	mi := &file_api_cover_unitcost_proto_msgTypes[13]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RowData.ProtoReflect.Descriptor instead.
+func (*RowData) Descriptor() ([]byte, []int) {
+	return file_api_cover_unitcost_proto_rawDescGZIP(), []int{13}
+}
+
+func (x *RowData) GetData() map[string]string {
+	if x != nil {
+		return x.Data
+	}
+	return nil
+}
+
 var File_api_cover_unitcost_proto protoreflect.FileDescriptor
 
 var file_api_cover_unitcost_proto_rawDesc = string([]byte{
@@ -1307,14 +1351,22 @@ var file_api_cover_unitcost_proto_rawDesc = string([]byte{
 	0x6d, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0a, 0x64, 0x61, 0x74, 0x65, 0x43, 0x6f,
 	0x6c, 0x75, 0x6d, 0x6e, 0x12, 0x22, 0x0a, 0x0c, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x43, 0x6f,
 	0x6c, 0x75, 0x6d, 0x6e, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x61, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x43, 0x6f, 0x6c, 0x75, 0x6d, 0x6e, 0x42, 0x61, 0x0a, 0x1f, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70,
-	0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x42, 0x10, 0x41, 0x70, 0x69,
-	0x55, 0x6e, 0x69, 0x74, 0x43, 0x6f, 0x73, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x2c, 0x67,
-	0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75,
-	0x73, 0x6c, 0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67,
-	0x6f, 0x2f, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
-	0x74, 0x6f, 0x33,
+	0x6e, 0x74, 0x43, 0x6f, 0x6c, 0x75, 0x6d, 0x6e, 0x22, 0x7c, 0x0a, 0x07, 0x52, 0x6f, 0x77, 0x44,
+	0x61, 0x74, 0x61, 0x12, 0x38, 0x0a, 0x04, 0x64, 0x61, 0x74, 0x61, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x0b, 0x32, 0x24, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e, 0x61, 0x70, 0x69, 0x2e,
+	0x63, 0x6f, 0x76, 0x65, 0x72, 0x2e, 0x52, 0x6f, 0x77, 0x44, 0x61, 0x74, 0x61, 0x2e, 0x44, 0x61,
+	0x74, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x52, 0x04, 0x64, 0x61, 0x74, 0x61, 0x1a, 0x37, 0x0a,
+	0x09, 0x44, 0x61, 0x74, 0x61, 0x45, 0x6e, 0x74, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x6b, 0x65,
+	0x79, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6b, 0x65, 0x79, 0x12, 0x14, 0x0a, 0x05,
+	0x76, 0x61, 0x6c, 0x75, 0x65, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x76, 0x61, 0x6c,
+	0x75, 0x65, 0x3a, 0x02, 0x38, 0x01, 0x42, 0x61, 0x0a, 0x1f, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x2e, 0x62, 0x6c, 0x75, 0x65, 0x61, 0x70, 0x69, 0x2e,
+	0x61, 0x70, 0x69, 0x2e, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x42, 0x10, 0x41, 0x70, 0x69, 0x55, 0x6e,
+	0x69, 0x74, 0x43, 0x6f, 0x73, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x5a, 0x2c, 0x67, 0x69, 0x74,
+	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x61, 0x6c, 0x70, 0x68, 0x61, 0x75, 0x73, 0x6c,
+	0x61, 0x62, 0x73, 0x2f, 0x62, 0x6c, 0x75, 0x65, 0x2d, 0x73, 0x64, 0x6b, 0x2d, 0x67, 0x6f, 0x2f,
+	0x61, 0x70, 0x69, 0x2f, 0x63, 0x6f, 0x76, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x33,
 })
 
 var (
@@ -1329,7 +1381,7 @@ func file_api_cover_unitcost_proto_rawDescGZIP() []byte {
 	return file_api_cover_unitcost_proto_rawDescData
 }
 
-var file_api_cover_unitcost_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_api_cover_unitcost_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_api_cover_unitcost_proto_goTypes = []any{
 	(*UnitCostData)(nil),               // 0: blueapi.api.cover.UnitCostData
 	(*UnitItem)(nil),                   // 1: blueapi.api.cover.UnitItem
@@ -1344,26 +1396,28 @@ var file_api_cover_unitcost_proto_goTypes = []any{
 	(*CloudWatchInfo)(nil),             // 10: blueapi.api.cover.CloudWatchInfo
 	(*TelemetryInfo)(nil),              // 11: blueapi.api.cover.TelemetryInfo
 	(*RequiredColumns)(nil),            // 12: blueapi.api.cover.RequiredColumns
-	nil,                                // 13: blueapi.api.cover.SharedResourcesCombination.DistributionEntry
-	nil,                                // 14: blueapi.api.cover.PotentialUnitItem.TagEntry
-	nil,                                // 15: blueapi.api.cover.CloudWatchInfo.DimensionsEntry
-	(*CostGroupAwsOptions)(nil),        // 16: blueapi.api.cover.CostGroupAwsOptions
-	(*CostGroupAzureOptions)(nil),      // 17: blueapi.api.cover.CostGroupAzureOptions
-	(*CostGroupGcpOptions)(nil),        // 18: blueapi.api.cover.CostGroupGcpOptions
-	(*CostGroupAzureCspOptions)(nil),   // 19: blueapi.api.cover.CostGroupAzureCspOptions
+	(*RowData)(nil),                    // 13: blueapi.api.cover.RowData
+	nil,                                // 14: blueapi.api.cover.SharedResourcesCombination.DistributionEntry
+	nil,                                // 15: blueapi.api.cover.PotentialUnitItem.TagEntry
+	nil,                                // 16: blueapi.api.cover.CloudWatchInfo.DimensionsEntry
+	nil,                                // 17: blueapi.api.cover.RowData.DataEntry
+	(*CostGroupAwsOptions)(nil),        // 18: blueapi.api.cover.CostGroupAwsOptions
+	(*CostGroupAzureOptions)(nil),      // 19: blueapi.api.cover.CostGroupAzureOptions
+	(*CostGroupGcpOptions)(nil),        // 20: blueapi.api.cover.CostGroupGcpOptions
+	(*CostGroupAzureCspOptions)(nil),   // 21: blueapi.api.cover.CostGroupAzureCspOptions
 }
 var file_api_cover_unitcost_proto_depIdxs = []int32{
 	1,  // 0: blueapi.api.cover.UnitCostData.unitItems:type_name -> blueapi.api.cover.UnitItem
 	2,  // 1: blueapi.api.cover.UnitCostData.sharedResources:type_name -> blueapi.api.cover.SharedResourcesCombination
 	3,  // 2: blueapi.api.cover.UnitItem.dedicatedResourcesCombinations:type_name -> blueapi.api.cover.ResourcesCombinations
 	3,  // 3: blueapi.api.cover.SharedResourcesCombination.sharedResourcesCombinations:type_name -> blueapi.api.cover.ResourcesCombinations
-	13, // 4: blueapi.api.cover.SharedResourcesCombination.distribution:type_name -> blueapi.api.cover.SharedResourcesCombination.DistributionEntry
-	16, // 5: blueapi.api.cover.ResourcesCombinations.awsOptions:type_name -> blueapi.api.cover.CostGroupAwsOptions
-	17, // 6: blueapi.api.cover.ResourcesCombinations.azureOptions:type_name -> blueapi.api.cover.CostGroupAzureOptions
-	18, // 7: blueapi.api.cover.ResourcesCombinations.gcpOptions:type_name -> blueapi.api.cover.CostGroupGcpOptions
-	19, // 8: blueapi.api.cover.ResourcesCombinations.azurecspOptions:type_name -> blueapi.api.cover.CostGroupAzureCspOptions
+	14, // 4: blueapi.api.cover.SharedResourcesCombination.distribution:type_name -> blueapi.api.cover.SharedResourcesCombination.DistributionEntry
+	18, // 5: blueapi.api.cover.ResourcesCombinations.awsOptions:type_name -> blueapi.api.cover.CostGroupAwsOptions
+	19, // 6: blueapi.api.cover.ResourcesCombinations.azureOptions:type_name -> blueapi.api.cover.CostGroupAzureOptions
+	20, // 7: blueapi.api.cover.ResourcesCombinations.gcpOptions:type_name -> blueapi.api.cover.CostGroupGcpOptions
+	21, // 8: blueapi.api.cover.ResourcesCombinations.azurecspOptions:type_name -> blueapi.api.cover.CostGroupAzureCspOptions
 	5,  // 9: blueapi.api.cover.SuggestedUnit.potentialUnitItems:type_name -> blueapi.api.cover.PotentialUnitItem
-	14, // 10: blueapi.api.cover.PotentialUnitItem.tag:type_name -> blueapi.api.cover.PotentialUnitItem.TagEntry
+	15, // 10: blueapi.api.cover.PotentialUnitItem.tag:type_name -> blueapi.api.cover.PotentialUnitItem.TagEntry
 	7,  // 11: blueapi.api.cover.UnitMetric.sourceInfo:type_name -> blueapi.api.cover.SourceInfo
 	8,  // 12: blueapi.api.cover.SourceInfo.csv:type_name -> blueapi.api.cover.CsvInfo
 	9,  // 13: blueapi.api.cover.SourceInfo.googleSheet:type_name -> blueapi.api.cover.GoogleSheetInfo
@@ -1371,12 +1425,13 @@ var file_api_cover_unitcost_proto_depIdxs = []int32{
 	11, // 15: blueapi.api.cover.SourceInfo.telemetry:type_name -> blueapi.api.cover.TelemetryInfo
 	12, // 16: blueapi.api.cover.CsvInfo.requiredColumns:type_name -> blueapi.api.cover.RequiredColumns
 	12, // 17: blueapi.api.cover.GoogleSheetInfo.requiredColumns:type_name -> blueapi.api.cover.RequiredColumns
-	15, // 18: blueapi.api.cover.CloudWatchInfo.dimensions:type_name -> blueapi.api.cover.CloudWatchInfo.DimensionsEntry
-	19, // [19:19] is the sub-list for method output_type
-	19, // [19:19] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	16, // 18: blueapi.api.cover.CloudWatchInfo.dimensions:type_name -> blueapi.api.cover.CloudWatchInfo.DimensionsEntry
+	17, // 19: blueapi.api.cover.RowData.data:type_name -> blueapi.api.cover.RowData.DataEntry
+	20, // [20:20] is the sub-list for method output_type
+	20, // [20:20] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_api_cover_unitcost_proto_init() }
@@ -1397,7 +1452,7 @@ func file_api_cover_unitcost_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_api_cover_unitcost_proto_rawDesc), len(file_api_cover_unitcost_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
