@@ -2053,6 +2053,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ConfirmGoogleSheetAccessRequest"><span class="badge">M</span>ConfirmGoogleSheetAccessRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ConfirmGoogleSheetAccessResponse"><span class="badge">M</span>ConfirmGoogleSheetAccessResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CostAllocatorDetails"><span class="badge">M</span>CostAllocatorDetails</a>
                 </li>
               
@@ -25339,6 +25347,64 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.ConfirmGoogleSheetAccessRequest">ConfirmGoogleSheetAccessRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>sheetUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The URL of the Google Sheet.
+Example: &#34;https://docs.google.com/spreadsheets/d/1A2B3C4D5E6F7G8H9I0J/edit&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ConfirmGoogleSheetAccessResponse">ConfirmGoogleSheetAccessResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>googleSheetId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The extracted id from the Google Sheet URL.
+Example: &#34;1A2B3C4D5E6F7G8H9I0J&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>sheetNames</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The name of the sheet within the Google Sheet.
+Example: &#34;Sheet1&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CostAllocatorDetails">CostAllocatorDetails</h3>
         <p></p>
 
@@ -32099,11 +32165,19 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
             <tbody>
               
                 <tr>
+                  <td>googleSheetId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the Google Sheet.
+Example: &#34;1A2B3C4D5E6F7G8H9I0J&#34; </p></td>
+                </tr>
+              
+                <tr>
                   <td>sheetUrl</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The URL of the Google Sheet.
-Example: &#34;https://docs.google.com/spreadsheets/d/1A2B3C4D5E6F7G8H9I0J/edit&#34; </p></td>
+                  <td><p>Example: &#34;https://docs.google.com/spreadsheets/d/1A2B3C4D5E6F7G8H9I0J/edit&#34;
+Optional. The URL of the Google Sheet. </p></td>
                 </tr>
               
                 <tr>
@@ -37263,6 +37337,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>ConfirmGoogleSheetAccess</td>
+                <td><a href="#blueapi.cover.v1.ConfirmGoogleSheetAccessRequest">ConfirmGoogleSheetAccessRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ConfirmGoogleSheetAccessResponse">ConfirmGoogleSheetAccessResponse</a></td>
+                <td><p>Confirm Google Sheet Access</p></td>
+              </tr>
+            
+              <tr>
                 <td>PreviewGoogleSheet</td>
                 <td><a href="#blueapi.cover.v1.PreviewGoogleSheetRequest">PreviewGoogleSheetRequest</a></td>
                 <td><a href="#blueapi.cover.v1.PreviewGoogleSheetResponse">PreviewGoogleSheetResponse</a></td>
@@ -39037,9 +39118,19 @@ file in bytes </p></td>
               
               
               <tr>
+                <td>ConfirmGoogleSheetAccess</td>
+                <td>POST</td>
+                <td>/v1/unitcost/metrics/googlesheet/confirm</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
                 <td>PreviewGoogleSheet</td>
                 <td>POST</td>
-                <td>/v1/unitcost/metrics/preview/googlesheet</td>
+                <td>/v1/unitcost/metrics/googlesheet/preview</td>
                 <td>*</td>
               </tr>
               
