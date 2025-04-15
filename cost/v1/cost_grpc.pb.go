@@ -80,6 +80,7 @@ const (
 	Cost_DeleteBudgetAlerts_FullMethodName            = "/blueapi.cost.v1.Cost/DeleteBudgetAlerts"
 	Cost_GetRecommendations_FullMethodName            = "/blueapi.cost.v1.Cost/GetRecommendations"
 	Cost_GetCostReduction_FullMethodName              = "/blueapi.cost.v1.Cost/GetCostReduction"
+	Cost_GetExportRISP_FullMethodName                 = "/blueapi.cost.v1.Cost/GetExportRISP"
 	Cost_GetUtilization_FullMethodName                = "/blueapi.cost.v1.Cost/GetUtilization"
 	Cost_GetCoverageOptions_FullMethodName            = "/blueapi.cost.v1.Cost/GetCoverageOptions"
 	Cost_GetCoverageOndemand_FullMethodName           = "/blueapi.cost.v1.Cost/GetCoverageOndemand"
@@ -256,6 +257,8 @@ type CostClient interface {
 	GetRecommendations(ctx context.Context, in *GetRecommendationsRequest, opts ...grpc.CallOption) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(ctx context.Context, in *GetCostReductionRequest, opts ...grpc.CallOption) (*GetCostReductionResponse, error)
+	// Exports RI and SP for all payers.
+	GetExportRISP(ctx context.Context, in *GetExportRISPRequest, opts ...grpc.CallOption) (*GetExportRISPResponse, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1135,6 +1138,16 @@ func (c *costClient) GetCostReduction(ctx context.Context, in *GetCostReductionR
 	return out, nil
 }
 
+func (c *costClient) GetExportRISP(ctx context.Context, in *GetExportRISPRequest, opts ...grpc.CallOption) (*GetExportRISPResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExportRISPResponse)
+	err := c.cc.Invoke(ctx, Cost_GetExportRISP_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *costClient) GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUtilizationResponse)
@@ -1491,6 +1504,8 @@ type CostServer interface {
 	GetRecommendations(context.Context, *GetRecommendationsRequest) (*GetRecommendationsResponse, error)
 	// Get cost reduction details for an organization (or MSP).
 	GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error)
+	// Exports RI and SP for all payers.
+	GetExportRISP(context.Context, *GetExportRISPRequest) (*GetExportRISPResponse, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1682,6 +1697,9 @@ func (UnimplementedCostServer) GetRecommendations(context.Context, *GetRecommend
 }
 func (UnimplementedCostServer) GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCostReduction not implemented")
+}
+func (UnimplementedCostServer) GetExportRISP(context.Context, *GetExportRISPRequest) (*GetExportRISPResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExportRISP not implemented")
 }
 func (UnimplementedCostServer) GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUtilization not implemented")
@@ -2755,6 +2773,24 @@ func _Cost_GetCostReduction_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetExportRISP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExportRISPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetExportRISP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_GetExportRISP_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetExportRISP(ctx, req.(*GetExportRISPRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cost_GetUtilization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUtilizationRequest)
 	if err := dec(in); err != nil {
@@ -3121,6 +3157,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCostReduction",
 			Handler:    _Cost_GetCostReduction_Handler,
+		},
+		{
+			MethodName: "GetExportRISP",
+			Handler:    _Cost_GetExportRISP_Handler,
 		},
 		{
 			MethodName: "GetUtilization",

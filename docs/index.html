@@ -880,6 +880,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.GetExportRISPRequest"><span class="badge">M</span>GetExportRISPRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.GetExportRISPResponse"><span class="badge">M</span>GetExportRISPResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.GetForecastsRequest"><span class="badge">M</span>GetForecastsRequest</a>
                 </li>
               
@@ -10479,6 +10487,57 @@ For example, if you only want the services and region data, you can set this fie
 
         
       
+        <h3 id="blueapi.cost.v1.GetExportRISPRequest">GetExportRISPRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Usually the language of the user information is used, 
+but it may be a different language due to cahce.
+In that case, you can use this option to change the language of CSV. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.GetExportRISPResponse">GetExportRISPResponse</h3>
+        <p>Request message for the ExportBillingGroupInvoiceServiceDiscounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>downloadLink</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>csv direct download link
+expires in 10 minutes </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.GetForecastsRequest">GetForecastsRequest</h3>
         <p>Request message for GetForecasts per billing group.</p>
 
@@ -13837,6 +13896,13 @@ Only available in Wave(Pro).</p></td>
               </tr>
             
               <tr>
+                <td>GetExportRISP</td>
+                <td><a href="#blueapi.cost.v1.GetExportRISPRequest">GetExportRISPRequest</a></td>
+                <td><a href="#blueapi.cost.v1.GetExportRISPResponse">GetExportRISPResponse</a></td>
+                <td><p>Exports RI and SP for all payers.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetUtilization</td>
                 <td><a href="#blueapi.cost.v1.GetUtilizationRequest">GetUtilizationRequest</a></td>
                 <td><a href="#blueapi.cost.v1.GetUtilizationResponse">GetUtilizationResponse</a></td>
@@ -14484,6 +14550,16 @@ Only available in Wave(Pro).</p></td>
                 <td>GetCostReduction</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/reduction/{orgId}:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetExportRISP</td>
+                <td>POST</td>
+                <td>/v1/exportcsv/payers:export</td>
                 <td>*</td>
               </tr>
               
