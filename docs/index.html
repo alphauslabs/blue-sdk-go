@@ -2061,6 +2061,46 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageRequest"><span class="badge">M</span>ContainerCostUsageRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageRequest.FilterCriteria"><span class="badge">M</span>ContainerCostUsageRequest.FilterCriteria</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse"><span class="badge">M</span>ContainerCostUsageResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse.CostMetric"><span class="badge">M</span>ContainerCostUsageResponse.CostMetric</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse.GroupedResult"><span class="badge">M</span>ContainerCostUsageResponse.GroupedResult</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse.GroupedResult.AttributesEntry"><span class="badge">M</span>ContainerCostUsageResponse.GroupedResult.AttributesEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse.MetricDataPoint"><span class="badge">M</span>ContainerCostUsageResponse.MetricDataPoint</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlight"><span class="badge">M</span>ContainerCostUsageResponse.ResourceHighlight</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlights"><span class="badge">M</span>ContainerCostUsageResponse.ResourceHighlights</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageResponse.UsageMetric"><span class="badge">M</span>ContainerCostUsageResponse.UsageMetric</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CostAllocatorDetails"><span class="badge">M</span>CostAllocatorDetails</a>
                 </li>
               
@@ -3352,6 +3392,22 @@
                   <a href="#blueapi.cover.v1.VerifyAPIAccessResponse"><span class="badge">M</span>VerifyAPIAccessResponse</a>
                 </li>
               
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageRequest.FilterCriteria.FilterOperator"><span class="badge">E</span>ContainerCostUsageRequest.FilterCriteria.FilterOperator</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageRequest.MetricType"><span class="badge">E</span>ContainerCostUsageRequest.MetricType</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageRequest.ServiceType"><span class="badge">E</span>ContainerCostUsageRequest.ServiceType</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ContainerCostUsageRequest.TimeGranularity"><span class="badge">E</span>ContainerCostUsageRequest.TimeGranularity</a>
+                </li>
               
                 <li>
                   <a href="#blueapi.cover.v1.GetAICostAndUsageRequest.Filter.Operator"><span class="badge">E</span>GetAICostAndUsageRequest.Filter.Operator</a>
@@ -25463,6 +25519,435 @@ Example: &#34;Sheet1&#34; </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.ContainerCostUsageRequest">ContainerCostUsageRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>metricType</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageRequest.MetricType">ContainerCostUsageRequest.MetricType</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>granularity</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageRequest.TimeGranularity">ContainerCostUsageRequest.TimeGranularity</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupBys</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>filters</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageRequest.FilterCriteria">ContainerCostUsageRequest.FilterCriteria</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>serviceType</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageRequest.ServiceType">ContainerCostUsageRequest.ServiceType</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageRequest.FilterCriteria">ContainerCostUsageRequest.FilterCriteria</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operator</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageRequest.FilterCriteria.FilterOperator">ContainerCostUsageRequest.FilterCriteria.FilterOperator</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse">ContainerCostUsageResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>results</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.GroupedResult">ContainerCostUsageResponse.GroupedResult</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>highlights</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlights">ContainerCostUsageResponse.ResourceHighlights</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>avgEfficiency</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse.CostMetric">ContainerCostUsageResponse.CostMetric</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unusedAmount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse.GroupedResult">ContainerCostUsageResponse.GroupedResult</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>attributes</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.GroupedResult.AttributesEntry">ContainerCostUsageResponse.GroupedResult.AttributesEntry</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>metricDataPoints</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.MetricDataPoint">ContainerCostUsageResponse.MetricDataPoint</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse.GroupedResult.AttributesEntry">ContainerCostUsageResponse.GroupedResult.AttributesEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse.MetricDataPoint">ContainerCostUsageResponse.MetricDataPoint</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cost</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.CostMetric">ContainerCostUsageResponse.CostMetric</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usage</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.UsageMetric">ContainerCostUsageResponse.UsageMetric</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlight">ContainerCostUsageResponse.ResourceHighlight</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>resourceId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlights">ContainerCostUsageResponse.ResourceHighlights</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>highestClusterCost</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlight">ContainerCostUsageResponse.ResourceHighlight</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>highestUnusedCost</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlight">ContainerCostUsageResponse.ResourceHighlight</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>highestWorkloadCost</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlight">ContainerCostUsageResponse.ResourceHighlight</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>highestComputeCost</td>
+                  <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse.ResourceHighlight">ContainerCostUsageResponse.ResourceHighlight</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageResponse.UsageMetric">ContainerCostUsageResponse.UsageMetric</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unit</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservedAmount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>actualAmount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>efficiency</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CostAllocatorDetails">CostAllocatorDetails</h3>
         <p></p>
 
@@ -36426,6 +36911,134 @@ file in bytes </p></td>
       
 
       
+        <h3 id="blueapi.cover.v1.ContainerCostUsageRequest.FilterCriteria.FilterOperator">ContainerCostUsageRequest.FilterCriteria.FilterOperator</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>OPERATOR_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>EQUAL</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>NOT_EQUAL</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageRequest.MetricType">ContainerCostUsageRequest.MetricType</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>METRIC_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COST</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>USAGE</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>EFFICIENCY</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UNUSED_COST</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageRequest.ServiceType">ContainerCostUsageRequest.ServiceType</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>SERVICE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ECS</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>EKS</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="blueapi.cover.v1.ContainerCostUsageRequest.TimeGranularity">ContainerCostUsageRequest.TimeGranularity</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GRANULARITY_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DAILY</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MONTHLY</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.cover.v1.GetAICostAndUsageRequest.Filter.Operator">GetAICostAndUsageRequest.Filter.Operator</h3>
         <p></p>
         <table class="enum-table">
@@ -37803,6 +38416,13 @@ file in bytes </p></td>
                 <td>GetAICostAndUsage</td>
                 <td><a href="#blueapi.cover.v1.GetAICostAndUsageRequest">GetAICostAndUsageRequest</a></td>
                 <td><a href="#blueapi.cover.v1.GetAICostAndUsageResponse">GetAICostAndUsageResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GetContainerCostUsage</td>
+                <td><a href="#blueapi.cover.v1.ContainerCostUsageRequest">ContainerCostUsageRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ContainerCostUsageResponse">ContainerCostUsageResponse</a></td>
                 <td><p></p></td>
               </tr>
             
@@ -39600,6 +40220,16 @@ file in bytes </p></td>
                 <td>GetAICostAndUsage</td>
                 <td>POST</td>
                 <td>/v1/ai/costusage</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetContainerCostUsage</td>
+                <td>POST</td>
+                <td>/v1/containers/costusage</td>
                 <td>*</td>
               </tr>
               

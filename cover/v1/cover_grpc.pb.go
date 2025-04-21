@@ -199,6 +199,7 @@ const (
 	Cover_PreviewGoogleSheet_FullMethodName                      = "/blueapi.cover.v1.Cover/PreviewGoogleSheet"
 	Cover_VerifyAPIAccess_FullMethodName                         = "/blueapi.cover.v1.Cover/VerifyAPIAccess"
 	Cover_GetAICostAndUsage_FullMethodName                       = "/blueapi.cover.v1.Cover/GetAICostAndUsage"
+	Cover_GetContainerCostUsage_FullMethodName                   = "/blueapi.cover.v1.Cover/GetContainerCostUsage"
 )
 
 // CoverClient is the client API for Cover service.
@@ -560,6 +561,7 @@ type CoverClient interface {
 	PreviewGoogleSheet(ctx context.Context, in *PreviewGoogleSheetRequest, opts ...grpc.CallOption) (*PreviewGoogleSheetResponse, error)
 	VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error)
 	GetAICostAndUsage(ctx context.Context, in *GetAICostAndUsageRequest, opts ...grpc.CallOption) (*GetAICostAndUsageResponse, error)
+	GetContainerCostUsage(ctx context.Context, in *ContainerCostUsageRequest, opts ...grpc.CallOption) (*ContainerCostUsageResponse, error)
 }
 
 type coverClient struct {
@@ -2973,6 +2975,16 @@ func (c *coverClient) GetAICostAndUsage(ctx context.Context, in *GetAICostAndUsa
 	return out, nil
 }
 
+func (c *coverClient) GetContainerCostUsage(ctx context.Context, in *ContainerCostUsageRequest, opts ...grpc.CallOption) (*ContainerCostUsageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ContainerCostUsageResponse)
+	err := c.cc.Invoke(ctx, Cover_GetContainerCostUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3332,6 +3344,7 @@ type CoverServer interface {
 	PreviewGoogleSheet(context.Context, *PreviewGoogleSheetRequest) (*PreviewGoogleSheetResponse, error)
 	VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error)
 	GetAICostAndUsage(context.Context, *GetAICostAndUsageRequest) (*GetAICostAndUsageResponse, error)
+	GetContainerCostUsage(context.Context, *ContainerCostUsageRequest) (*ContainerCostUsageResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3872,6 +3885,9 @@ func (UnimplementedCoverServer) VerifyAPIAccess(context.Context, *VerifyAPIAcces
 }
 func (UnimplementedCoverServer) GetAICostAndUsage(context.Context, *GetAICostAndUsageRequest) (*GetAICostAndUsageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAICostAndUsage not implemented")
+}
+func (UnimplementedCoverServer) GetContainerCostUsage(context.Context, *ContainerCostUsageRequest) (*ContainerCostUsageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetContainerCostUsage not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7176,6 +7192,24 @@ func _Cover_GetAICostAndUsage_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetContainerCostUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ContainerCostUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetContainerCostUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetContainerCostUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetContainerCostUsage(ctx, req.(*ContainerCostUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -7786,6 +7820,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAICostAndUsage",
 			Handler:    _Cover_GetAICostAndUsage_Handler,
+		},
+		{
+			MethodName: "GetContainerCostUsage",
+			Handler:    _Cover_GetContainerCostUsage_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
