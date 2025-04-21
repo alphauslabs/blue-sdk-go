@@ -10550,12 +10550,26 @@ For example, if you only want the services and region data, you can set this fie
             <tbody>
               
                 <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. For AWS, &#34;ri&#34; or &#34;sp&#34;. </p></td>
+                </tr>
+              
+                <tr>
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Usually the language of the user information is used, 
 but it may be a different language due to cahce.
 In that case, you can use this option to change the language of CSV. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>includeExpired</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Required. Include expired </p></td>
                 </tr>
               
             </tbody>
