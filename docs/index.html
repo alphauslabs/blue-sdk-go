@@ -3507,6 +3507,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.GetRecommendationDetailsRequest"><span class="badge">M</span>GetRecommendationDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetRecommendationDetailsResponse"><span class="badge">M</span>GetRecommendationDetailsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetSettingsRequest"><span class="badge">M</span>GetSettingsRequest</a>
                 </li>
               
@@ -40757,14 +40765,14 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
         
       
         <h3 id="blueapi.flow.v1.GetInfoRequest">GetInfoRequest</h3>
-        <p>Request message for the Flow.GetInfo rpc.</p>
+        <p>##################################### REQUESTS #####################################</p><p>Request message for the Flow.GetInfo rpc.</p>
 
         
 
         
       
         <h3 id="blueapi.flow.v1.GetInfoResponse">GetInfoResponse</h3>
-        <p>Response message for the Flow.GetInfo rpc.</p>
+        <p>##################################### RESPONSES #####################################</p><p>Response message for the Flow.GetInfo rpc.</p>
 
         
           <table class="field-table">
@@ -40778,6 +40786,159 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetRecommendationDetailsRequest">GetRecommendationDetailsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the payer to fetch recommendation details for. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetRecommendationDetailsResponse">GetRecommendationDetailsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Unique ID of the recommendation details entry </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hourlyCommitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Suggested hourly commitment to purchase in USD </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currentSPCommitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Current Savings Plan commitment applied </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedOnDemandCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Estimated daily on-demand cost without any Savings Plans </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalDailyCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total current daily cost from usage, before applying any SP recommendation </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlySavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Projected monthly savings from the recommended SP </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Percentage of potential savings from SP </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendationLevel</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Customization setting for SP </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Type of Savings Plan </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTerm</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>SP term duration in years </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Payment option for the SP </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookBackPeriod</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Historical lookback period used for analysis </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedROI</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Estimated Return on Investment for the SP </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedSPCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total projected SP cost over the term </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedTotalCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Estimated total cost including SP and on-demand </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Timestamp of the last update </p></td>
                 </tr>
               
             </tbody>
@@ -41058,6 +41219,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Fetch previous settings for a user</p></td>
               </tr>
             
+              <tr>
+                <td>GetRecommendationDetails</td>
+                <td><a href="#blueapi.flow.v1.GetRecommendationDetailsRequest">GetRecommendationDetailsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetRecommendationDetailsResponse">GetRecommendationDetailsResponse</a></td>
+                <td><p>Fetch user savings plan details</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -41112,6 +41280,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GetSettings</td>
                 <td>GET</td>
                 <td>/v1/settings/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetRecommendationDetails</td>
+                <td>GET</td>
+                <td>/v1/settings/recommendations/{id}</td>
                 <td></td>
               </tr>
               

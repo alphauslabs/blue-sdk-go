@@ -19,10 +19,11 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Flow_GetInfo_FullMethodName        = "/blueapi.flow.v1.Flow/GetInfo"
-	Flow_CreateSettings_FullMethodName = "/blueapi.flow.v1.Flow/CreateSettings"
-	Flow_UpdateSettings_FullMethodName = "/blueapi.flow.v1.Flow/UpdateSettings"
-	Flow_GetSettings_FullMethodName    = "/blueapi.flow.v1.Flow/GetSettings"
+	Flow_GetInfo_FullMethodName                  = "/blueapi.flow.v1.Flow/GetInfo"
+	Flow_CreateSettings_FullMethodName           = "/blueapi.flow.v1.Flow/CreateSettings"
+	Flow_UpdateSettings_FullMethodName           = "/blueapi.flow.v1.Flow/UpdateSettings"
+	Flow_GetSettings_FullMethodName              = "/blueapi.flow.v1.Flow/GetSettings"
+	Flow_GetRecommendationDetails_FullMethodName = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
 )
 
 // FlowClient is the client API for Flow service.
@@ -39,6 +40,8 @@ type FlowClient interface {
 	UpdateSettings(ctx context.Context, in *UpdateSettingsRequest, opts ...grpc.CallOption) (*UpdateSettingsResponse, error)
 	// Fetch previous settings for a user
 	GetSettings(ctx context.Context, in *GetSettingsRequest, opts ...grpc.CallOption) (*GetSettingsResponse, error)
+	// Fetch user savings plan details
+	GetRecommendationDetails(ctx context.Context, in *GetRecommendationDetailsRequest, opts ...grpc.CallOption) (*GetRecommendationDetailsResponse, error)
 }
 
 type flowClient struct {
@@ -89,6 +92,16 @@ func (c *flowClient) GetSettings(ctx context.Context, in *GetSettingsRequest, op
 	return out, nil
 }
 
+func (c *flowClient) GetRecommendationDetails(ctx context.Context, in *GetRecommendationDetailsRequest, opts ...grpc.CallOption) (*GetRecommendationDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetRecommendationDetailsResponse)
+	err := c.cc.Invoke(ctx, Flow_GetRecommendationDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -103,6 +116,8 @@ type FlowServer interface {
 	UpdateSettings(context.Context, *UpdateSettingsRequest) (*UpdateSettingsResponse, error)
 	// Fetch previous settings for a user
 	GetSettings(context.Context, *GetSettingsRequest) (*GetSettingsResponse, error)
+	// Fetch user savings plan details
+	GetRecommendationDetails(context.Context, *GetRecommendationDetailsRequest) (*GetRecommendationDetailsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -121,6 +136,9 @@ func (UnimplementedFlowServer) UpdateSettings(context.Context, *UpdateSettingsRe
 }
 func (UnimplementedFlowServer) GetSettings(context.Context, *GetSettingsRequest) (*GetSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSettings not implemented")
+}
+func (UnimplementedFlowServer) GetRecommendationDetails(context.Context, *GetRecommendationDetailsRequest) (*GetRecommendationDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendationDetails not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -207,6 +225,24 @@ func _Flow_GetSettings_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_GetRecommendationDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecommendationDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetRecommendationDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetRecommendationDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetRecommendationDetails(ctx, req.(*GetRecommendationDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -229,6 +265,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSettings",
 			Handler:    _Flow_GetSettings_Handler,
+		},
+		{
+			MethodName: "GetRecommendationDetails",
+			Handler:    _Flow_GetRecommendationDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
