@@ -1835,6 +1835,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest"><span class="badge">M</span>UpdateBillingGroupAdditionalChargesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting"><span class="badge">M</span>UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateBillingGroupBasicInformationRequest"><span class="badge">M</span>UpdateBillingGroupBasicInformationRequest</a>
                 </li>
               
@@ -1868,6 +1876,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateBillingGroupLinkedResourcesRequest"><span class="badge">M</span>UpdateBillingGroupLinkedResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateBillingGroupResellerChargesRequest"><span class="badge">M</span>UpdateBillingGroupResellerChargesRequest</a>
                 </li>
               
                 <li>
@@ -21304,6 +21316,91 @@ If the `enabled` is set, only the `enabled` will be updated. If you want to upda
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest">UpdateBillingGroupAdditionalChargesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>aws</td>
+                  <td><a href="#blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting">UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. customized billing service setting. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azure</td>
+                  <td><a href="#blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting">UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcp</td>
+                  <td><a href="#blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting">UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting">UpdateBillingGroupAdditionalChargesRequest.CustomizedBillingServiceBillingSetting</h3>
+        <p>CustomizedBillingServiceBillingSetting</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>chargingTarget</td>
+                  <td><a href="#blueapi.api.ripple.ChargingTarget">blueapi.api.ripple.ChargingTarget</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.ChargingTarget] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. if chargingTarget is BILLINGGROUP, `accounts` is set emptty.
+
+Specify the accountIds. For example: [`accountId1`,`accountId2`,`accountId3`] </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateBillingGroupBasicInformationRequest">UpdateBillingGroupBasicInformationRequest</h3>
         <p></p>
 
@@ -21514,21 +21611,7 @@ Service discount id. </p></td>
                 </tr>
               
                 <tr>
-                  <td>language</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>rateReference</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>diplayCost</td>
+                  <td>billingTitle</td>
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
                   <td><p> </p></td>
@@ -21629,6 +21712,44 @@ Service discount id. </p></td>
                   <td><a href="#blueapi.billing.v1.NonTagSetting">NonTagSetting</a></td>
                   <td>optional</td>
                   <td><p>Non-tag settings for the billing group </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateBillingGroupResellerChargesRequest">UpdateBillingGroupResellerChargesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceTemplate</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoice</td>
+                  <td><a href="#blueapi.billing.v1.CreateBillingGroupRequestInvoice">CreateBillingGroupRequestInvoice</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -22832,7 +22953,21 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateBillingGroupInvoiceSettings</td>
                 <td><a href="#blueapi.billing.v1.UpdateBillingGroupInvoiceSettingsRequest">UpdateBillingGroupInvoiceSettingsRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>WORK-IN-PROGRESS: Update linked resources for a billing group</p></td>
+                <td><p>WORK-IN-PROGRESS: Update invoice settings for a billing group</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupResellerCharges</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupResellerChargesRequest">UpdateBillingGroupResellerChargesRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Update reseller charges for a billing group</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupAdditionalCharges</td>
+                <td><a href="#blueapi.billing.v1.UpdateBillingGroupAdditionalChargesRequest">UpdateBillingGroupAdditionalChargesRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Update  additonal charges for a billing group</p></td>
               </tr>
             
               <tr>
@@ -23936,6 +24071,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateBillingGroupInvoiceSettings</td>
                 <td>PUT</td>
                 <td>/v1/billinggroup/{id}:invoiceSettings</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupResellerCharges</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup/{id}:resellerCharges</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupAdditionalCharges</td>
+                <td>PUT</td>
+                <td>/v1/billinggroup/{id}:additionalCharges</td>
                 <td>*</td>
               </tr>
               
