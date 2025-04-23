@@ -2501,6 +2501,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetCloudwatchMetadataRequest"><span class="badge">M</span>GetCloudwatchMetadataRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCloudwatchMetadataResponse"><span class="badge">M</span>GetCloudwatchMetadataResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCloudwatchMetadataResponse.Dimension"><span class="badge">M</span>GetCloudwatchMetadataResponse.Dimension</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetCostGroupAllocationRequest"><span class="badge">M</span>GetCostGroupAllocationRequest</a>
                 </li>
               
@@ -29593,6 +29605,132 @@ Otherwise, it returns all channels </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.GetCloudwatchMetadataRequest">GetCloudwatchMetadataRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The AWS account ID to assume when querying CloudWatch. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The AWS region where the metrics should be queried (e.g., &#34;us-east-1&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The type of metadata to retrieve.
+Valid values: &#34;namespace&#34;, &#34;metric&#34;, or &#34;dimension&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>namespace</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Conditionally required.
+Must be provided when `type` is &#34;metric&#34; or &#34;dimension&#34;.
+Example: &#34;AWS/EC2&#34;, &#34;AWS/Lambda&#34;, or a custom namespace like &#34;MyApp/BusinessMetrics&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>metricName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Conditionally required.
+Must be provided when `type` is &#34;dimension&#34;.
+Example: &#34;CPUUtilization&#34;, &#34;Invocations&#34;, etc. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCloudwatchMetadataResponse">GetCloudwatchMetadataResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>namespaces</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>metrics</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dimensions</td>
+                  <td><a href="#blueapi.cover.v1.GetCloudwatchMetadataResponse.Dimension">GetCloudwatchMetadataResponse.Dimension</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCloudwatchMetadataResponse.Dimension">GetCloudwatchMetadataResponse.Dimension</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>values</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetCostGroupAllocationRequest">GetCostGroupAllocationRequest</h3>
         <p>Request message for the GetCostGroupAllocation rpc.</p>
 
@@ -38569,6 +38707,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>GetCloudwatchMetadata</td>
+                <td><a href="#blueapi.cover.v1.GetCloudwatchMetadataRequest">GetCloudwatchMetadataRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetCloudwatchMetadataResponse">GetCloudwatchMetadataResponse</a></td>
+                <td><p>Get Cloudwatch Metadata</p></td>
+              </tr>
+            
+              <tr>
                 <td>VerifyAPIAccess</td>
                 <td><a href="#blueapi.cover.v1.VerifyAPIAccessRequest">VerifyAPIAccessRequest</a></td>
                 <td><a href="#blueapi.cover.v1.VerifyAPIAccessResponse">VerifyAPIAccessResponse</a></td>
@@ -40364,6 +40509,16 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/unitcost/metrics/googlesheet/preview</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCloudwatchMetadata</td>
+                <td>GET</td>
+                <td>/v1/unitcost/metrics/cloudwatch/metadata</td>
+                <td></td>
               </tr>
               
             

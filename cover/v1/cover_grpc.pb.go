@@ -197,6 +197,7 @@ const (
 	Cover_DeleteUnitMetric_FullMethodName                        = "/blueapi.cover.v1.Cover/DeleteUnitMetric"
 	Cover_ConfirmGoogleSheetAccess_FullMethodName                = "/blueapi.cover.v1.Cover/ConfirmGoogleSheetAccess"
 	Cover_PreviewGoogleSheet_FullMethodName                      = "/blueapi.cover.v1.Cover/PreviewGoogleSheet"
+	Cover_GetCloudwatchMetadata_FullMethodName                   = "/blueapi.cover.v1.Cover/GetCloudwatchMetadata"
 	Cover_VerifyAPIAccess_FullMethodName                         = "/blueapi.cover.v1.Cover/VerifyAPIAccess"
 	Cover_GetAICostAndUsage_FullMethodName                       = "/blueapi.cover.v1.Cover/GetAICostAndUsage"
 	Cover_GetContainerCostUsage_FullMethodName                   = "/blueapi.cover.v1.Cover/GetContainerCostUsage"
@@ -559,6 +560,8 @@ type CoverClient interface {
 	ConfirmGoogleSheetAccess(ctx context.Context, in *ConfirmGoogleSheetAccessRequest, opts ...grpc.CallOption) (*ConfirmGoogleSheetAccessResponse, error)
 	// Preview Google Sheet Data
 	PreviewGoogleSheet(ctx context.Context, in *PreviewGoogleSheetRequest, opts ...grpc.CallOption) (*PreviewGoogleSheetResponse, error)
+	// Get Cloudwatch Metadata
+	GetCloudwatchMetadata(ctx context.Context, in *GetCloudwatchMetadataRequest, opts ...grpc.CallOption) (*GetCloudwatchMetadataResponse, error)
 	VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error)
 	GetAICostAndUsage(ctx context.Context, in *GetAICostAndUsageRequest, opts ...grpc.CallOption) (*GetAICostAndUsageResponse, error)
 	GetContainerCostUsage(ctx context.Context, in *ContainerCostUsageRequest, opts ...grpc.CallOption) (*ContainerCostUsageResponse, error)
@@ -2955,6 +2958,16 @@ func (c *coverClient) PreviewGoogleSheet(ctx context.Context, in *PreviewGoogleS
 	return out, nil
 }
 
+func (c *coverClient) GetCloudwatchMetadata(ctx context.Context, in *GetCloudwatchMetadataRequest, opts ...grpc.CallOption) (*GetCloudwatchMetadataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCloudwatchMetadataResponse)
+	err := c.cc.Invoke(ctx, Cover_GetCloudwatchMetadata_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyAPIAccessResponse)
@@ -3342,6 +3355,8 @@ type CoverServer interface {
 	ConfirmGoogleSheetAccess(context.Context, *ConfirmGoogleSheetAccessRequest) (*ConfirmGoogleSheetAccessResponse, error)
 	// Preview Google Sheet Data
 	PreviewGoogleSheet(context.Context, *PreviewGoogleSheetRequest) (*PreviewGoogleSheetResponse, error)
+	// Get Cloudwatch Metadata
+	GetCloudwatchMetadata(context.Context, *GetCloudwatchMetadataRequest) (*GetCloudwatchMetadataResponse, error)
 	VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error)
 	GetAICostAndUsage(context.Context, *GetAICostAndUsageRequest) (*GetAICostAndUsageResponse, error)
 	GetContainerCostUsage(context.Context, *ContainerCostUsageRequest) (*ContainerCostUsageResponse, error)
@@ -3879,6 +3894,9 @@ func (UnimplementedCoverServer) ConfirmGoogleSheetAccess(context.Context, *Confi
 }
 func (UnimplementedCoverServer) PreviewGoogleSheet(context.Context, *PreviewGoogleSheetRequest) (*PreviewGoogleSheetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method PreviewGoogleSheet not implemented")
+}
+func (UnimplementedCoverServer) GetCloudwatchMetadata(context.Context, *GetCloudwatchMetadataRequest) (*GetCloudwatchMetadataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCloudwatchMetadata not implemented")
 }
 func (UnimplementedCoverServer) VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAPIAccess not implemented")
@@ -7156,6 +7174,24 @@ func _Cover_PreviewGoogleSheet_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetCloudwatchMetadata_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCloudwatchMetadataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetCloudwatchMetadata(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetCloudwatchMetadata_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetCloudwatchMetadata(ctx, req.(*GetCloudwatchMetadataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_VerifyAPIAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyAPIAccessRequest)
 	if err := dec(in); err != nil {
@@ -7812,6 +7848,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "PreviewGoogleSheet",
 			Handler:    _Cover_PreviewGoogleSheet_Handler,
+		},
+		{
+			MethodName: "GetCloudwatchMetadata",
+			Handler:    _Cover_GetCloudwatchMetadata_Handler,
 		},
 		{
 			MethodName: "VerifyAPIAccess",
