@@ -41147,10 +41147,31 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>hourlyCommitment</td>
+                  <td>currentMonthlyOnDemandSpend</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Suggested hourly commitment to purchase in USD </p></td>
+                  <td><p>Projected monthly on-demand spend without Savings Plans, normalized from lookback period </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlySpend</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Projected total monthly spend after applying the recommended Savings Plan, normalized </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlySavingsDerived</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Difference between on-demand and post-SP spend, computed from normalized values </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalDailyCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total current daily cost from usage, before applying any SP recommendation (Derived) </p></td>
                 </tr>
               
                 <tr>
@@ -41168,87 +41189,87 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>totalDailyCost</td>
+                  <td>hourlyCommitment</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Total current daily cost from usage, before applying any SP recommendation </p></td>
+                  <td><p>Suggested hourly commitment to purchase in USD </p></td>
                 </tr>
               
                 <tr>
                   <td>estimatedMonthlySavings</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Projected monthly savings from the recommended SP </p></td>
+                  <td><p>Projected monthly savings from the recommended savings plan </p></td>
                 </tr>
               
                 <tr>
                   <td>estimatedSavings</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Percentage of potential savings from SP </p></td>
+                  <td><p>Percentage of potential savings from savings plan </p></td>
                 </tr>
               
                 <tr>
                   <td>recommendationLevel</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Customization setting for SP </p></td>
+                  <td><p>Customization setting for savings plan </p></td>
                 </tr>
               
                 <tr>
                   <td>planType</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Type of Savings Plan </p></td>
+                  <td><p>Savings plan type. </p></td>
                 </tr>
               
                 <tr>
                   <td>planTerm</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>SP term duration in years </p></td>
+                  <td><p>Savings plan duration. </p></td>
                 </tr>
               
                 <tr>
                   <td>paymentOption</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Payment option for the SP </p></td>
+                  <td><p>Savings plan payment option. </p></td>
                 </tr>
               
                 <tr>
                   <td>lookBackPeriod</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Historical lookback period used for analysis </p></td>
+                  <td><p>Savings plan lookback period used for analysis. </p></td>
                 </tr>
               
                 <tr>
                   <td>estimatedROI</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Estimated Return on Investment for the SP </p></td>
+                  <td><p>Savings plan estimated return on investment. </p></td>
                 </tr>
               
                 <tr>
                   <td>estimatedSPCost</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Total projected SP cost over the term </p></td>
+                  <td><p>Savings plan total projected cost over the term. </p></td>
                 </tr>
               
                 <tr>
                   <td>estimatedTotalCost</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Estimated total cost including SP and on-demand </p></td>
+                  <td><p>Savings plan estimated total cost and including on-demand. </p></td>
                 </tr>
               
                 <tr>
                   <td>lastUpdated</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Timestamp of the last update </p></td>
+                  <td><p>Savings plan last updated </p></td>
                 </tr>
               
             </tbody>
