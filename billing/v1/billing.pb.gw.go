@@ -8051,7 +8051,7 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetAnnouncements", runtime.WithHTTPPathPattern("/v1/reseller/announcements/{announcementId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetAnnouncements", runtime.WithHTTPPathPattern("/billing/v1/reseller/announcements/{announcementId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -8229,7 +8229,7 @@ var (
 	pattern_Billing_UpdateAnnouncementsStatus_0                  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"v1", "reseller", "announcements", "bulk", "status"}, ""))
 	pattern_Billing_UpdateAnnouncementDate_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "reseller", "announcements", "announcementId", "date"}, ""))
 	pattern_Billing_DeleteAnnouncement_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "reseller", "announcement", "announcementId"}, ""))
-	pattern_Billing_GetAnnouncements_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "reseller", "announcements", "announcementId"}, ""))
+	pattern_Billing_GetAnnouncements_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"billing", "v1", "reseller", "announcements", "announcementId"}, ""))
 	pattern_Billing_GetBillingGroupAnnouncements_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "billinggroup", "reseller", "announcements", "groupId"}, ""))
 	pattern_Billing_GetCredits_0                                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "credits"}, ""))
 	pattern_Billing_GetCsvSettings_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "csvsettings"}, ""))
