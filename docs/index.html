@@ -1899,6 +1899,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateInvoiceExchangeRateRequest"><span class="badge">M</span>UpdateInvoiceExchangeRateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateInvoiceExchangeRateRequest.ExchangeRateEntry"><span class="badge">M</span>UpdateInvoiceExchangeRateRequest.ExchangeRateEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateInvoicePreviewsRequest"><span class="badge">M</span>UpdateInvoicePreviewsRequest</a>
                 </li>
               
@@ -21899,6 +21907,83 @@ specified and non-empty. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateInvoiceExchangeRateRequest">UpdateInvoiceExchangeRateRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Format: yyyymm. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. vendor (aws, gcp, or azure) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>exchangeRate</td>
+                  <td><a href="#blueapi.billing.v1.UpdateInvoiceExchangeRateRequest.ExchangeRateEntry">UpdateInvoiceExchangeRateRequest.ExchangeRateEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Map of currency code to exchange rate value per USD
+ex. jpy:100 </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Billing group id to apply </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateInvoiceExchangeRateRequest.ExchangeRateEntry">UpdateInvoiceExchangeRateRequest.ExchangeRateEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateInvoicePreviewsRequest">UpdateInvoicePreviewsRequest</h3>
         <p>Request message for the UpdateInvoicePreviews rpc.</p>
 
@@ -22389,6 +22474,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td><a href="#blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest">UpdateInvoiceDisplaySettingsRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>Creates/Updates an invoice display settings. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateInvoiceExchangeRate</td>
+                <td><a href="#blueapi.billing.v1.UpdateInvoiceExchangeRateRequest">UpdateInvoiceExchangeRateRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Update invoice exchangerate for the month</p></td>
               </tr>
             
               <tr>
@@ -23279,6 +23371,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>UpdateInvoiceDisplaySettings</td>
                 <td>POST</td>
                 <td>/v1/invoice/displaysettings</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateInvoiceExchangeRate</td>
+                <td>PUT</td>
+                <td>/v1/invoice/exchangerate/{month}</td>
                 <td>*</td>
               </tr>
               
