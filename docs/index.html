@@ -3551,11 +3551,23 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.GetSettingsHistoryRequest"><span class="badge">M</span>GetSettingsHistoryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetSettingsHistoryResponse"><span class="badge">M</span>GetSettingsHistoryResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetSettingsRequest"><span class="badge">M</span>GetSettingsRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.flow.v1.GetSettingsResponse"><span class="badge">M</span>GetSettingsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SettingsHistory"><span class="badge">M</span>SettingsHistory</a>
                 </li>
               
                 <li>
@@ -41422,6 +41434,54 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.GetSettingsHistoryRequest">GetSettingsHistoryRequest</h3>
+        <p>Request message for the Flow.GetSettingsHistory rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the payer to fetch settings history for. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetSettingsHistoryResponse">GetSettingsHistoryResponse</h3>
+        <p>Response message for the Flow.GetSettingsHistory rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>settingsHistory</td>
+                  <td><a href="#blueapi.flow.v1.SettingsHistory">SettingsHistory</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.GetSettingsRequest">GetSettingsRequest</h3>
         <p>Request message for fetching previous settings configuration of a user.</p>
 
@@ -41528,6 +41588,93 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
                 <tr>
                   <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.SettingsHistory">SettingsHistory</h3>
+        <p>Settings history message.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customization</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTerm</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookBackPeriod</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>annualBudget</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approval</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -41707,6 +41854,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Gets a CloudFormation launch URL for enabling read-only cross-account access to cost explorer information (API only).</p></td>
               </tr>
             
+              <tr>
+                <td>GetSettingsHistory</td>
+                <td><a href="#blueapi.flow.v1.GetSettingsHistoryRequest">GetSettingsHistoryRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetSettingsHistoryResponse">GetSettingsHistoryResponse</a></td>
+                <td><p>Gets the settings configuration history for a user.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -41781,6 +41935,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GetCostExplorerAccessTemplateUrl</td>
                 <td>GET</td>
                 <td>/v1/aws/xacct/cea</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSettingsHistory</td>
+                <td>GET</td>
+                <td>/v1/settings/history/{id}</td>
                 <td></td>
               </tr>
               

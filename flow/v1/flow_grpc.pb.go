@@ -25,6 +25,7 @@ const (
 	Flow_GetSettings_FullMethodName                      = "/blueapi.flow.v1.Flow/GetSettings"
 	Flow_GetRecommendationDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
 	Flow_GetCostExplorerAccessTemplateUrl_FullMethodName = "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl"
+	Flow_GetSettingsHistory_FullMethodName               = "/blueapi.flow.v1.Flow/GetSettingsHistory"
 )
 
 // FlowClient is the client API for Flow service.
@@ -45,6 +46,8 @@ type FlowClient interface {
 	GetRecommendationDetails(ctx context.Context, in *GetRecommendationDetailsRequest, opts ...grpc.CallOption) (*GetRecommendationDetailsResponse, error)
 	// Gets a CloudFormation launch URL for enabling read-only cross-account access to cost explorer information (API only).
 	GetCostExplorerAccessTemplateUrl(ctx context.Context, in *GetCostExplorerAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetCostExplorerAccessTemplateUrlResponse, error)
+	// Gets the settings configuration history for a user.
+	GetSettingsHistory(ctx context.Context, in *GetSettingsHistoryRequest, opts ...grpc.CallOption) (*GetSettingsHistoryResponse, error)
 }
 
 type flowClient struct {
@@ -115,6 +118,16 @@ func (c *flowClient) GetCostExplorerAccessTemplateUrl(ctx context.Context, in *G
 	return out, nil
 }
 
+func (c *flowClient) GetSettingsHistory(ctx context.Context, in *GetSettingsHistoryRequest, opts ...grpc.CallOption) (*GetSettingsHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSettingsHistoryResponse)
+	err := c.cc.Invoke(ctx, Flow_GetSettingsHistory_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -133,6 +146,8 @@ type FlowServer interface {
 	GetRecommendationDetails(context.Context, *GetRecommendationDetailsRequest) (*GetRecommendationDetailsResponse, error)
 	// Gets a CloudFormation launch URL for enabling read-only cross-account access to cost explorer information (API only).
 	GetCostExplorerAccessTemplateUrl(context.Context, *GetCostExplorerAccessTemplateUrlRequest) (*GetCostExplorerAccessTemplateUrlResponse, error)
+	// Gets the settings configuration history for a user.
+	GetSettingsHistory(context.Context, *GetSettingsHistoryRequest) (*GetSettingsHistoryResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -157,6 +172,9 @@ func (UnimplementedFlowServer) GetRecommendationDetails(context.Context, *GetRec
 }
 func (UnimplementedFlowServer) GetCostExplorerAccessTemplateUrl(context.Context, *GetCostExplorerAccessTemplateUrlRequest) (*GetCostExplorerAccessTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCostExplorerAccessTemplateUrl not implemented")
+}
+func (UnimplementedFlowServer) GetSettingsHistory(context.Context, *GetSettingsHistoryRequest) (*GetSettingsHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSettingsHistory not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -279,6 +297,24 @@ func _Flow_GetCostExplorerAccessTemplateUrl_Handler(srv interface{}, ctx context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_GetSettingsHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSettingsHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetSettingsHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetSettingsHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetSettingsHistory(ctx, req.(*GetSettingsHistoryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -309,6 +345,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCostExplorerAccessTemplateUrl",
 			Handler:    _Flow_GetCostExplorerAccessTemplateUrl_Handler,
+		},
+		{
+			MethodName: "GetSettingsHistory",
+			Handler:    _Flow_GetSettingsHistory_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
