@@ -325,7 +325,7 @@ func RegisterFlowHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl", runtime.WithHTTPPathPattern("/flow/v1/aws/xacct/cea"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl", runtime.WithHTTPPathPattern("/v1/aws/xacct/cea"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -468,7 +468,7 @@ func RegisterFlowHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl", runtime.WithHTTPPathPattern("/flow/v1/aws/xacct/cea"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl", runtime.WithHTTPPathPattern("/v1/aws/xacct/cea"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -490,7 +490,7 @@ var (
 	pattern_Flow_UpdateSettings_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "settings", "id"}, ""))
 	pattern_Flow_GetSettings_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "settings", "id"}, ""))
 	pattern_Flow_GetRecommendationDetails_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "settings", "recommendations", "id"}, ""))
-	pattern_Flow_GetCostExplorerAccessTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"flow", "v1", "aws", "xacct", "cea"}, ""))
+	pattern_Flow_GetCostExplorerAccessTemplateUrl_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "aws", "xacct", "cea"}, ""))
 )
 
 var (
