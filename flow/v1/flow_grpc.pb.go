@@ -19,11 +19,12 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Flow_GetInfo_FullMethodName                  = "/blueapi.flow.v1.Flow/GetInfo"
-	Flow_CreateSettings_FullMethodName           = "/blueapi.flow.v1.Flow/CreateSettings"
-	Flow_UpdateSettings_FullMethodName           = "/blueapi.flow.v1.Flow/UpdateSettings"
-	Flow_GetSettings_FullMethodName              = "/blueapi.flow.v1.Flow/GetSettings"
-	Flow_GetRecommendationDetails_FullMethodName = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
+	Flow_GetInfo_FullMethodName                          = "/blueapi.flow.v1.Flow/GetInfo"
+	Flow_CreateSettings_FullMethodName                   = "/blueapi.flow.v1.Flow/CreateSettings"
+	Flow_UpdateSettings_FullMethodName                   = "/blueapi.flow.v1.Flow/UpdateSettings"
+	Flow_GetSettings_FullMethodName                      = "/blueapi.flow.v1.Flow/GetSettings"
+	Flow_GetRecommendationDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
+	Flow_GetCostExplorerAccessTemplateUrl_FullMethodName = "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl"
 )
 
 // FlowClient is the client API for Flow service.
@@ -42,6 +43,8 @@ type FlowClient interface {
 	GetSettings(ctx context.Context, in *GetSettingsRequest, opts ...grpc.CallOption) (*GetSettingsResponse, error)
 	// Fetch user savings plan details
 	GetRecommendationDetails(ctx context.Context, in *GetRecommendationDetailsRequest, opts ...grpc.CallOption) (*GetRecommendationDetailsResponse, error)
+	// Gets a CloudFormation launch URL for enabling read-only cross-account access to cost explorer information (API only).
+	GetCostExplorerAccessTemplateUrl(ctx context.Context, in *GetCostExplorerAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetCostExplorerAccessTemplateUrlResponse, error)
 }
 
 type flowClient struct {
@@ -102,6 +105,16 @@ func (c *flowClient) GetRecommendationDetails(ctx context.Context, in *GetRecomm
 	return out, nil
 }
 
+func (c *flowClient) GetCostExplorerAccessTemplateUrl(ctx context.Context, in *GetCostExplorerAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetCostExplorerAccessTemplateUrlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCostExplorerAccessTemplateUrlResponse)
+	err := c.cc.Invoke(ctx, Flow_GetCostExplorerAccessTemplateUrl_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -118,6 +131,8 @@ type FlowServer interface {
 	GetSettings(context.Context, *GetSettingsRequest) (*GetSettingsResponse, error)
 	// Fetch user savings plan details
 	GetRecommendationDetails(context.Context, *GetRecommendationDetailsRequest) (*GetRecommendationDetailsResponse, error)
+	// Gets a CloudFormation launch URL for enabling read-only cross-account access to cost explorer information (API only).
+	GetCostExplorerAccessTemplateUrl(context.Context, *GetCostExplorerAccessTemplateUrlRequest) (*GetCostExplorerAccessTemplateUrlResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -139,6 +154,9 @@ func (UnimplementedFlowServer) GetSettings(context.Context, *GetSettingsRequest)
 }
 func (UnimplementedFlowServer) GetRecommendationDetails(context.Context, *GetRecommendationDetailsRequest) (*GetRecommendationDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendationDetails not implemented")
+}
+func (UnimplementedFlowServer) GetCostExplorerAccessTemplateUrl(context.Context, *GetCostExplorerAccessTemplateUrlRequest) (*GetCostExplorerAccessTemplateUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCostExplorerAccessTemplateUrl not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -243,6 +261,24 @@ func _Flow_GetRecommendationDetails_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_GetCostExplorerAccessTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCostExplorerAccessTemplateUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetCostExplorerAccessTemplateUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetCostExplorerAccessTemplateUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetCostExplorerAccessTemplateUrl(ctx, req.(*GetCostExplorerAccessTemplateUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -269,6 +305,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRecommendationDetails",
 			Handler:    _Flow_GetRecommendationDetails_Handler,
+		},
+		{
+			MethodName: "GetCostExplorerAccessTemplateUrl",
+			Handler:    _Flow_GetCostExplorerAccessTemplateUrl_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -3527,6 +3527,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.GetCostExplorerAccessTemplateUrlRequest"><span class="badge">M</span>GetCostExplorerAccessTemplateUrlRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetCostExplorerAccessTemplateUrlResponse"><span class="badge">M</span>GetCostExplorerAccessTemplateUrlResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
                 </li>
               
@@ -41150,15 +41158,74 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.GetCostExplorerAccessTemplateUrlRequest">GetCostExplorerAccessTemplateUrlRequest</h3>
+        <p>Request message for the Flow.GetCostExplorerAccessTemplateUrl rpc.</p><p>This endpoint only supports the 'apionly' template type.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetCostExplorerAccessTemplateUrlResponse">GetCostExplorerAccessTemplateUrlResponse</h3>
+        <p>Response message for the Flow.GetCostExplorerAccessTemplateUrl rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>launchUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The CloudFormation launch url. Open it in your browser. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>templateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The latest CloudFormation template. The version is included in the filename. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The default stack name used. Can be modified. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>principal</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The AWS account that will receive the access. Do not change. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The external id for this role. Do not change. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.GetInfoRequest">GetInfoRequest</h3>
-        <p>##################################### REQUESTS #####################################</p><p>Request message for the Flow.GetInfo rpc.</p>
+        <p>Request message for the Flow.GetInfo rpc.</p>
 
         
 
         
       
         <h3 id="blueapi.flow.v1.GetInfoResponse">GetInfoResponse</h3>
-        <p>##################################### RESPONSES #####################################</p><p>Response message for the Flow.GetInfo rpc.</p>
+        <p>Response message for the Flow.GetInfo rpc.</p>
 
         
           <table class="field-table">
@@ -41633,6 +41700,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Fetch user savings plan details</p></td>
               </tr>
             
+              <tr>
+                <td>GetCostExplorerAccessTemplateUrl</td>
+                <td><a href="#blueapi.flow.v1.GetCostExplorerAccessTemplateUrlRequest">GetCostExplorerAccessTemplateUrlRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetCostExplorerAccessTemplateUrlResponse">GetCostExplorerAccessTemplateUrlResponse</a></td>
+                <td><p>Gets a CloudFormation launch URL for enabling read-only cross-account access to cost explorer information (API only).</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -41697,6 +41771,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GetRecommendationDetails</td>
                 <td>GET</td>
                 <td>/v1/settings/recommendations/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCostExplorerAccessTemplateUrl</td>
+                <td>GET</td>
+                <td>/flow/v1/aws/xacct/cea</td>
                 <td></td>
               </tr>
               
