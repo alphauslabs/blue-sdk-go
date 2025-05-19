@@ -26,6 +26,7 @@ const (
 	Flow_GetRecommendationDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
 	Flow_GetCostExplorerAccessTemplateUrl_FullMethodName = "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl"
 	Flow_GetSettingsHistory_FullMethodName               = "/blueapi.flow.v1.Flow/GetSettingsHistory"
+	Flow_CreateCostExplorerAccess_FullMethodName         = "/blueapi.flow.v1.Flow/CreateCostExplorerAccess"
 )
 
 // FlowClient is the client API for Flow service.
@@ -48,6 +49,8 @@ type FlowClient interface {
 	GetCostExplorerAccessTemplateUrl(ctx context.Context, in *GetCostExplorerAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetCostExplorerAccessTemplateUrlResponse, error)
 	// Gets the settings configuration history for a user.
 	GetSettingsHistory(ctx context.Context, in *GetSettingsHistoryRequest, opts ...grpc.CallOption) (*GetSettingsHistoryResponse, error)
+	// Creates a default cross-account access role for cost explorer (API only).
+	CreateCostExplorerAccess(ctx context.Context, in *CreateCostExplorerAccessRequest, opts ...grpc.CallOption) (*CreateCostExplorerAccessResponse, error)
 }
 
 type flowClient struct {
@@ -128,6 +131,16 @@ func (c *flowClient) GetSettingsHistory(ctx context.Context, in *GetSettingsHist
 	return out, nil
 }
 
+func (c *flowClient) CreateCostExplorerAccess(ctx context.Context, in *CreateCostExplorerAccessRequest, opts ...grpc.CallOption) (*CreateCostExplorerAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateCostExplorerAccessResponse)
+	err := c.cc.Invoke(ctx, Flow_CreateCostExplorerAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -148,6 +161,8 @@ type FlowServer interface {
 	GetCostExplorerAccessTemplateUrl(context.Context, *GetCostExplorerAccessTemplateUrlRequest) (*GetCostExplorerAccessTemplateUrlResponse, error)
 	// Gets the settings configuration history for a user.
 	GetSettingsHistory(context.Context, *GetSettingsHistoryRequest) (*GetSettingsHistoryResponse, error)
+	// Creates a default cross-account access role for cost explorer (API only).
+	CreateCostExplorerAccess(context.Context, *CreateCostExplorerAccessRequest) (*CreateCostExplorerAccessResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -175,6 +190,9 @@ func (UnimplementedFlowServer) GetCostExplorerAccessTemplateUrl(context.Context,
 }
 func (UnimplementedFlowServer) GetSettingsHistory(context.Context, *GetSettingsHistoryRequest) (*GetSettingsHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSettingsHistory not implemented")
+}
+func (UnimplementedFlowServer) CreateCostExplorerAccess(context.Context, *CreateCostExplorerAccessRequest) (*CreateCostExplorerAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCostExplorerAccess not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -315,6 +333,24 @@ func _Flow_GetSettingsHistory_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_CreateCostExplorerAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCostExplorerAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).CreateCostExplorerAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_CreateCostExplorerAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).CreateCostExplorerAccess(ctx, req.(*CreateCostExplorerAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -349,6 +385,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetSettingsHistory",
 			Handler:    _Flow_GetSettingsHistory_Handler,
+		},
+		{
+			MethodName: "CreateCostExplorerAccess",
+			Handler:    _Flow_CreateCostExplorerAccess_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

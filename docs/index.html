@@ -3519,6 +3519,14 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.flow.v1.CreateCostExplorerAccessRequest"><span class="badge">M</span>CreateCostExplorerAccessRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateCostExplorerAccessResponse"><span class="badge">M</span>CreateCostExplorerAccessResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.CreateSettingsRequest"><span class="badge">M</span>CreateSettingsRequest</a>
                 </li>
               
@@ -41059,6 +41067,103 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
       <p></p>
 
       
+        <h3 id="blueapi.flow.v1.CreateCostExplorerAccessRequest">CreateCostExplorerAccessRequest</h3>
+        <p>Request message for the Flow.CreateCostExplorerAccess rpc.</p><p>This endpoint only supports the 'apionly' template type.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The target AWS account to validate. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateCostExplorerAccessResponse">CreateCostExplorerAccessResponse</h3>
+        <p>Response message for the Flow.CreateCostExplorerAccess rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The queried target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleArn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The role ARN that provides the cross-account access permissions. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The external id for this role. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the CloudFormation stack deployed in the target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackRegion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The region where the stack is deployed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>templateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The latest template used to deploy the stack. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>This can be `latest`, `outdated`, or some error information. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The last updated timestamp, RFC3339 UTC. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.CreateSettingsRequest">CreateSettingsRequest</h3>
         <p>Request message for the Flow.CreateSettings rpc.</p>
 
@@ -41861,6 +41966,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Gets the settings configuration history for a user.</p></td>
               </tr>
             
+              <tr>
+                <td>CreateCostExplorerAccess</td>
+                <td><a href="#blueapi.flow.v1.CreateCostExplorerAccessRequest">CreateCostExplorerAccessRequest</a></td>
+                <td><a href="#blueapi.flow.v1.CreateCostExplorerAccessResponse">CreateCostExplorerAccessResponse</a></td>
+                <td><p>Creates a default cross-account access role for cost explorer (API only).</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -41946,6 +42058,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GET</td>
                 <td>/v1/settings/history/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateCostExplorerAccess</td>
+                <td>POST</td>
+                <td>/v1/aws/xacct/cea</td>
+                <td>*</td>
               </tr>
               
             
