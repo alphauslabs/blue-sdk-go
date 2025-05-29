@@ -36,6 +36,7 @@ const (
 	Billing_CreateInvoice_FullMethodName                              = "/blueapi.billing.v1.Billing/CreateInvoice"
 	Billing_CreateInvoiceWithSettings_FullMethodName                  = "/blueapi.billing.v1.Billing/CreateInvoiceWithSettings"
 	Billing_SaveInvoiceSettings_FullMethodName                        = "/blueapi.billing.v1.Billing/SaveInvoiceSettings"
+	Billing_ConvertInvoiceToPdf_FullMethodName                        = "/blueapi.billing.v1.Billing/ConvertInvoiceToPdf"
 	Billing_GetInvoiceStatus_FullMethodName                           = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
 	Billing_ListInvoiceStatus_FullMethodName                          = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
 	Billing_GetInvoice_FullMethodName                                 = "/blueapi.billing.v1.Billing/GetInvoice"
@@ -171,6 +172,8 @@ type BillingClient interface {
 	CreateInvoiceWithSettings(ctx context.Context, in *SaveInvoiceSettingsRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
 	// WORK-IN-PROGRESS: Save invoice settings for the month
 	SaveInvoiceSettings(ctx context.Context, in *SaveInvoiceSettingsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Convert invoice to pdf
+	ConvertInvoiceToPdf(ctx context.Context, in *ConvertInvoiceToPdfRequest, opts ...grpc.CallOption) (*ConvertInvoiceToPdfResponse, error)
 	// Gets an invoice. Only available in Ripple.
 	GetInvoiceStatus(ctx context.Context, in *GetInvoiceStatusRequest, opts ...grpc.CallOption) (*api.InvoiceMessage, error)
 	// Reads an invoice status. Only available in Ripple.
@@ -581,6 +584,16 @@ func (c *billingClient) SaveInvoiceSettings(ctx context.Context, in *SaveInvoice
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Billing_SaveInvoiceSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ConvertInvoiceToPdf(ctx context.Context, in *ConvertInvoiceToPdfRequest, opts ...grpc.CallOption) (*ConvertInvoiceToPdfResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConvertInvoiceToPdfResponse)
+	err := c.cc.Invoke(ctx, Billing_ConvertInvoiceToPdf_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2222,6 +2235,8 @@ type BillingServer interface {
 	CreateInvoiceWithSettings(context.Context, *SaveInvoiceSettingsRequest) (*api.InvoiceMessage, error)
 	// WORK-IN-PROGRESS: Save invoice settings for the month
 	SaveInvoiceSettings(context.Context, *SaveInvoiceSettingsRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Convert invoice to pdf
+	ConvertInvoiceToPdf(context.Context, *ConvertInvoiceToPdfRequest) (*ConvertInvoiceToPdfResponse, error)
 	// Gets an invoice. Only available in Ripple.
 	GetInvoiceStatus(context.Context, *GetInvoiceStatusRequest) (*api.InvoiceMessage, error)
 	// Reads an invoice status. Only available in Ripple.
@@ -2481,6 +2496,9 @@ func (UnimplementedBillingServer) CreateInvoiceWithSettings(context.Context, *Sa
 }
 func (UnimplementedBillingServer) SaveInvoiceSettings(context.Context, *SaveInvoiceSettingsRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveInvoiceSettings not implemented")
+}
+func (UnimplementedBillingServer) ConvertInvoiceToPdf(context.Context, *ConvertInvoiceToPdfRequest) (*ConvertInvoiceToPdfResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConvertInvoiceToPdf not implemented")
 }
 func (UnimplementedBillingServer) GetInvoiceStatus(context.Context, *GetInvoiceStatusRequest) (*api.InvoiceMessage, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceStatus not implemented")
@@ -3025,6 +3043,24 @@ func _Billing_SaveInvoiceSettings_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServer).SaveInvoiceSettings(ctx, req.(*SaveInvoiceSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ConvertInvoiceToPdf_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConvertInvoiceToPdfRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ConvertInvoiceToPdf(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ConvertInvoiceToPdf_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ConvertInvoiceToPdf(ctx, req.(*ConvertInvoiceToPdfRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5000,6 +5036,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SaveInvoiceSettings",
 			Handler:    _Billing_SaveInvoiceSettings_Handler,
+		},
+		{
+			MethodName: "ConvertInvoiceToPdf",
+			Handler:    _Billing_ConvertInvoiceToPdf_Handler,
 		},
 		{
 			MethodName: "GetInvoiceStatus",

@@ -1299,6 +1299,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ConvertInvoiceToPdfRequest"><span class="badge">M</span>ConvertInvoiceToPdfRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ConvertInvoiceToPdfResponse"><span class="badge">M</span>ConvertInvoiceToPdfResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateAccessGroupRequest"><span class="badge">M</span>CreateAccessGroupRequest</a>
                 </li>
               
@@ -16234,6 +16242,77 @@ At the moment, only `aws` is supported. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ConvertInvoiceToPdfRequest">ConvertInvoiceToPdfRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Format: yyyymm. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billinggroups</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>billingInternalId of invoice to download
+ignored if allBillingGroups is set to true </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allBillingGroups</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>If true, download all created invoice </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ConvertInvoiceToPdfResponse">ConvertInvoiceToPdfResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>percentProgress</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>downloadUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>returns &#34;&#34; when not ready
+returns the direct download link </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateAccessGroupRequest">CreateAccessGroupRequest</h3>
         <p>Request message for the CreateAccessGroup rpc.</p>
 
@@ -22442,6 +22521,13 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
               </tr>
             
               <tr>
+                <td>ConvertInvoiceToPdf</td>
+                <td><a href="#blueapi.billing.v1.ConvertInvoiceToPdfRequest">ConvertInvoiceToPdfRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ConvertInvoiceToPdfResponse">ConvertInvoiceToPdfResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Convert invoice to pdf</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetInvoiceStatus</td>
                 <td><a href="#blueapi.billing.v1.GetInvoiceStatusRequest">GetInvoiceStatusRequest</a></td>
                 <td><a href="#blueapi.api.InvoiceMessage">.blueapi.api.InvoiceMessage</a></td>
@@ -23309,6 +23395,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>SaveInvoiceSettings</td>
                 <td>POST</td>
                 <td>/v1/invoice/{date}:savesettings</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ConvertInvoiceToPdf</td>
+                <td>POST</td>
+                <td>/v1/invoice/{date}:converttopdf</td>
                 <td>*</td>
               </tr>
               
