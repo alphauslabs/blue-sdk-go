@@ -386,6 +386,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.iam.v1.ResetRipplePasswordRequest"><span class="badge">M</span>ResetRipplePasswordRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.iam.v1.UpdateFeatureFlagsRequest"><span class="badge">M</span>UpdateFeatureFlagsRequest</a>
                 </li>
               
@@ -5157,6 +5161,30 @@ for the list of supported attributes.</p></td>
 
         
       
+        <h3 id="blueapi.iam.v1.ResetRipplePasswordRequest">ResetRipplePasswordRequest</h3>
+        <p>Request message for ripple account password recovery</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Ripple account email address </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.iam.v1.UpdateFeatureFlagsRequest">UpdateFeatureFlagsRequest</h3>
         <p>Request message for the Iam.UpdateFeatureFlags rpc.</p>
 
@@ -5686,6 +5714,13 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                 <td><p>WORK-IN-PROGRESS: List MFA users info for login user&#39;s organization based on status.</p></td>
               </tr>
             
+              <tr>
+                <td>ResetRipplePassword</td>
+                <td><a href="#blueapi.iam.v1.ResetRipplePasswordRequest">ResetRipplePasswordRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Reset ripple password account.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -6041,6 +6076,16 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                 <td>GET</td>
                 <td>/iam/v1/mfausers</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ResetRipplePassword</td>
+                <td>POST</td>
+                <td>/iam/v1/ripple/password:reset</td>
+                <td>*</td>
               </tr>
               
             
