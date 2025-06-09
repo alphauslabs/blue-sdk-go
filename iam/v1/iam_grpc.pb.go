@@ -55,6 +55,7 @@ const (
 	Iam_GetSubUserMetadata_FullMethodName                         = "/blueapi.iam.v1.Iam/GetSubUserMetadata"
 	Iam_ValidateResetPasswordLinkAndChangePassword_FullMethodName = "/blueapi.iam.v1.Iam/ValidateResetPasswordLinkAndChangePassword"
 	Iam_GetMFAUsers_FullMethodName                                = "/blueapi.iam.v1.Iam/GetMFAUsers"
+	Iam_SendRipplePasswordResetCode_FullMethodName                = "/blueapi.iam.v1.Iam/SendRipplePasswordResetCode"
 	Iam_ResetRipplePassword_FullMethodName                        = "/blueapi.iam.v1.Iam/ResetRipplePassword"
 )
 
@@ -140,7 +141,9 @@ type IamClient interface {
 	ValidateResetPasswordLinkAndChangePassword(ctx context.Context, in *ValidateResetPasswordLinkAndChangePasswordRequest, opts ...grpc.CallOption) (*ValidateResetPasswordLinkAndChangePasswordResponse, error)
 	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
 	GetMFAUsers(ctx context.Context, in *MFAUsersInfoRequest, opts ...grpc.CallOption) (*MFAUsersInfoResponse, error)
-	// WORK-IN-PROGRESS: Reset ripple password account.
+	// WORK-IN-PROGRESS: Send an email reset code
+	SendRipplePasswordResetCode(ctx context.Context, in *SendRipplePasswordResetCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reset ripple password using code from email
 	ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -584,6 +587,16 @@ func (c *iamClient) GetMFAUsers(ctx context.Context, in *MFAUsersInfoRequest, op
 	return out, nil
 }
 
+func (c *iamClient) SendRipplePasswordResetCode(ctx context.Context, in *SendRipplePasswordResetCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Iam_SendRipplePasswordResetCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
@@ -676,7 +689,9 @@ type IamServer interface {
 	ValidateResetPasswordLinkAndChangePassword(context.Context, *ValidateResetPasswordLinkAndChangePasswordRequest) (*ValidateResetPasswordLinkAndChangePasswordResponse, error)
 	// WORK-IN-PROGRESS: List MFA users info for login user's organization based on status.
 	GetMFAUsers(context.Context, *MFAUsersInfoRequest) (*MFAUsersInfoResponse, error)
-	// WORK-IN-PROGRESS: Reset ripple password account.
+	// WORK-IN-PROGRESS: Send an email reset code
+	SendRipplePasswordResetCode(context.Context, *SendRipplePasswordResetCodeRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS: Reset ripple password using code from email
 	ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIamServer()
 }
@@ -786,6 +801,9 @@ func (UnimplementedIamServer) ValidateResetPasswordLinkAndChangePassword(context
 }
 func (UnimplementedIamServer) GetMFAUsers(context.Context, *MFAUsersInfoRequest) (*MFAUsersInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMFAUsers not implemented")
+}
+func (UnimplementedIamServer) SendRipplePasswordResetCode(context.Context, *SendRipplePasswordResetCodeRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendRipplePasswordResetCode not implemented")
 }
 func (UnimplementedIamServer) ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetRipplePassword not implemented")
@@ -1427,6 +1445,24 @@ func _Iam_GetMFAUsers_Handler(srv interface{}, ctx context.Context, dec func(int
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_SendRipplePasswordResetCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendRipplePasswordResetCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).SendRipplePasswordResetCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_SendRipplePasswordResetCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).SendRipplePasswordResetCode(ctx, req.(*SendRipplePasswordResetCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_ResetRipplePassword_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ResetRipplePasswordRequest)
 	if err := dec(in); err != nil {
@@ -1571,6 +1607,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetMFAUsers",
 			Handler:    _Iam_GetMFAUsers_Handler,
+		},
+		{
+			MethodName: "SendRipplePasswordResetCode",
+			Handler:    _Iam_SendRipplePasswordResetCode_Handler,
 		},
 		{
 			MethodName: "ResetRipplePassword",

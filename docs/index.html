@@ -390,6 +390,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.iam.v1.SendRipplePasswordResetCodeRequest"><span class="badge">M</span>SendRipplePasswordResetCodeRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.iam.v1.UpdateFeatureFlagsRequest"><span class="badge">M</span>UpdateFeatureFlagsRequest</a>
                 </li>
               
@@ -5162,6 +5166,37 @@ for the list of supported attributes.</p></td>
         
       
         <h3 id="blueapi.iam.v1.ResetRipplePasswordRequest">ResetRipplePasswordRequest</h3>
+        <p>Request message for resetting ripple password</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>resetCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Reset code from email </p></td>
+                </tr>
+              
+                <tr>
+                  <td>newPassword</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Atleast 8 characters </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.iam.v1.SendRipplePasswordResetCodeRequest">SendRipplePasswordResetCodeRequest</h3>
         <p>Request message for ripple account password recovery</p>
 
         
@@ -5715,10 +5750,17 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
               </tr>
             
               <tr>
+                <td>SendRipplePasswordResetCode</td>
+                <td><a href="#blueapi.iam.v1.SendRipplePasswordResetCodeRequest">SendRipplePasswordResetCodeRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Send an email reset code</p></td>
+              </tr>
+            
+              <tr>
                 <td>ResetRipplePassword</td>
                 <td><a href="#blueapi.iam.v1.ResetRipplePasswordRequest">ResetRipplePasswordRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>WORK-IN-PROGRESS: Reset ripple password account.</p></td>
+                <td><p>WORK-IN-PROGRESS: Reset ripple password using code from email</p></td>
               </tr>
             
           </tbody>
@@ -6076,6 +6118,16 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                 <td>GET</td>
                 <td>/iam/v1/mfausers</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SendRipplePasswordResetCode</td>
+                <td>POST</td>
+                <td>/iam/v1/ripple/password:requestresetcode</td>
+                <td>*</td>
               </tr>
               
             
