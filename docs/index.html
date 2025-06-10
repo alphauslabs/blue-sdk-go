@@ -3614,6 +3614,29 @@
         
           
           <li>
+            <a href="#prism%2fv1%2fprism.proto">prism/v1/prism.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.TestRequest"><span class="badge">M</span>TestRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.TestResponse"><span class="badge">M</span>TestResponse</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#blueapi.prism.v1.Prism"><span class="badge">S</span>Prism</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#preferences%2fv1%2fpreferences.proto">preferences/v1/preferences.proto</a>
             <ul>
               
@@ -42276,6 +42299,98 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>POST</td>
                 <td>/v1/aws/xacct/cea</td>
                 <td>*</td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="prism/v1/prism.proto">prism/v1/prism.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="blueapi.prism.v1.TestRequest">TestRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.prism.v1.TestResponse">TestResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="blueapi.prism.v1.Prism">Prism</h3>
+        <p>Prism service definition.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>Test</td>
+                <td><a href="#blueapi.prism.v1.TestRequest">TestRequest</a></td>
+                <td><a href="#blueapi.prism.v1.TestResponse">TestResponse</a></td>
+                <td><p>Test endpoint only.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>Test</td>
+                <td>GET</td>
+                <td>/v1/test</td>
+                <td></td>
               </tr>
               
             
