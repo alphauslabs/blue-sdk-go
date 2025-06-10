@@ -11,6 +11,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -19,7 +20,11 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Prism_Test_FullMethodName = "/blueapi.prism.v1.Prism/Test"
+	Prism_Test_FullMethodName          = "/blueapi.prism.v1.Prism/Test"
+	Prism_CreateProject_FullMethodName = "/blueapi.prism.v1.Prism/CreateProject"
+	Prism_GetProject_FullMethodName    = "/blueapi.prism.v1.Prism/GetProject"
+	Prism_DeleteProject_FullMethodName = "/blueapi.prism.v1.Prism/DeleteProject"
+	Prism_ListProjects_FullMethodName  = "/blueapi.prism.v1.Prism/ListProjects"
 )
 
 // PrismClient is the client API for Prism service.
@@ -30,6 +35,14 @@ const (
 type PrismClient interface {
 	// Test endpoint only.
 	Test(ctx context.Context, in *TestRequest, opts ...grpc.CallOption) (*TestResponse, error)
+	// WIP: Creates a new project.
+	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WIP: Gets information about a project by ID.
+	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
+	// WIP: Deletes a project by ID.
+	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WIP: Lists all projects
+	ListProjects(ctx context.Context, in *ListProjectsRequest, opts ...grpc.CallOption) (Prism_ListProjectsClient, error)
 }
 
 type prismClient struct {
@@ -50,6 +63,69 @@ func (c *prismClient) Test(ctx context.Context, in *TestRequest, opts ...grpc.Ca
 	return out, nil
 }
 
+func (c *prismClient) CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_CreateProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetProjectResponse)
+	err := c.cc.Invoke(ctx, Prism_GetProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_DeleteProject_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) ListProjects(ctx context.Context, in *ListProjectsRequest, opts ...grpc.CallOption) (Prism_ListProjectsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[0], Prism_ListProjects_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListProjectsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListProjectsClient interface {
+	Recv() (*Project, error)
+	grpc.ClientStream
+}
+
+type prismListProjectsClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListProjectsClient) Recv() (*Project, error) {
+	m := new(Project)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -58,6 +134,14 @@ func (c *prismClient) Test(ctx context.Context, in *TestRequest, opts ...grpc.Ca
 type PrismServer interface {
 	// Test endpoint only.
 	Test(context.Context, *TestRequest) (*TestResponse, error)
+	// WIP: Creates a new project.
+	CreateProject(context.Context, *CreateProjectRequest) (*emptypb.Empty, error)
+	// WIP: Gets information about a project by ID.
+	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
+	// WIP: Deletes a project by ID.
+	DeleteProject(context.Context, *DeleteProjectRequest) (*emptypb.Empty, error)
+	// WIP: Lists all projects
+	ListProjects(*ListProjectsRequest, Prism_ListProjectsServer) error
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -67,6 +151,18 @@ type UnimplementedPrismServer struct {
 
 func (UnimplementedPrismServer) Test(context.Context, *TestRequest) (*TestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Test not implemented")
+}
+func (UnimplementedPrismServer) CreateProject(context.Context, *CreateProjectRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
+}
+func (UnimplementedPrismServer) GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProject not implemented")
+}
+func (UnimplementedPrismServer) DeleteProject(context.Context, *DeleteProjectRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProject not implemented")
+}
+func (UnimplementedPrismServer) ListProjects(*ListProjectsRequest, Prism_ListProjectsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListProjects not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -99,6 +195,81 @@ func _Prism_Test_Handler(srv interface{}, ctx context.Context, dec func(interfac
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_CreateProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).CreateProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_CreateProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).CreateProject(ctx, req.(*CreateProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_GetProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).GetProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_GetProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).GetProject(ctx, req.(*GetProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_DeleteProject_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProjectRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).DeleteProject(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_DeleteProject_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).DeleteProject(ctx, req.(*DeleteProjectRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_ListProjects_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListProjectsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListProjects(m, &prismListProjectsServer{ServerStream: stream})
+}
+
+type Prism_ListProjectsServer interface {
+	Send(*Project) error
+	grpc.ServerStream
+}
+
+type prismListProjectsServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListProjectsServer) Send(m *Project) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -110,7 +281,25 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "Test",
 			Handler:    _Prism_Test_Handler,
 		},
+		{
+			MethodName: "CreateProject",
+			Handler:    _Prism_CreateProject_Handler,
+		},
+		{
+			MethodName: "GetProject",
+			Handler:    _Prism_GetProject_Handler,
+		},
+		{
+			MethodName: "DeleteProject",
+			Handler:    _Prism_DeleteProject_Handler,
+		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "ListProjects",
+			Handler:       _Prism_ListProjects_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "prism/v1/prism.proto",
 }

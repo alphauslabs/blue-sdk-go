@@ -3618,6 +3618,34 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.prism.v1.CreateProjectRequest"><span class="badge">M</span>CreateProjectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.DeleteProjectRequest"><span class="badge">M</span>DeleteProjectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.GetProjectRequest"><span class="badge">M</span>GetProjectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.GetProjectResponse"><span class="badge">M</span>GetProjectResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.ListProjectsRequest"><span class="badge">M</span>ListProjectsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.Member"><span class="badge">M</span>Member</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.Project"><span class="badge">M</span>Project</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.TestRequest"><span class="badge">M</span>TestRequest</a>
                 </li>
               
@@ -42314,6 +42342,213 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
       <p></p>
 
       
+        <h3 id="blueapi.prism.v1.CreateProjectRequest">CreateProjectRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>project</td>
+                  <td><a href="#blueapi.prism.v1.Project">Project</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.DeleteProjectRequest">DeleteProjectRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required project ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.GetProjectRequest">GetProjectRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required project ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.GetProjectResponse">GetProjectResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>members</td>
+                  <td><a href="#blueapi.prism.v1.Member">Member</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.ListProjectsRequest">ListProjectsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.prism.v1.Member">Member</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.Project">Project</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>members</td>
+                  <td><a href="#blueapi.prism.v1.Member">Member</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.TestRequest">TestRequest</h3>
         <p></p>
 
@@ -42366,6 +42601,34 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Test endpoint only.</p></td>
               </tr>
             
+              <tr>
+                <td>CreateProject</td>
+                <td><a href="#blueapi.prism.v1.CreateProjectRequest">CreateProjectRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WIP: Creates a new project.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetProject</td>
+                <td><a href="#blueapi.prism.v1.GetProjectRequest">GetProjectRequest</a></td>
+                <td><a href="#blueapi.prism.v1.GetProjectResponse">GetProjectResponse</a></td>
+                <td><p>WIP: Gets information about a project by ID.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteProject</td>
+                <td><a href="#blueapi.prism.v1.DeleteProjectRequest">DeleteProjectRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WIP: Deletes a project by ID.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListProjects</td>
+                <td><a href="#blueapi.prism.v1.ListProjectsRequest">ListProjectsRequest</a></td>
+                <td><a href="#blueapi.prism.v1.Project">Project</a> stream</td>
+                <td><p>WIP: Lists all projects</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -42391,6 +42654,46 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GET</td>
                 <td>/v1/test</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateProject</td>
+                <td>POST</td>
+                <td>/v1/project</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetProject</td>
+                <td>GET</td>
+                <td>/v1/project/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteProject</td>
+                <td>DELETE</td>
+                <td>/v1/project/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListProjects</td>
+                <td>POST</td>
+                <td>/v1/project/all:read</td>
+                <td>*</td>
               </tr>
               
             
