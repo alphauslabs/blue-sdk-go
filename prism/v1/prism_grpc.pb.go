@@ -20,11 +20,15 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Prism_Test_FullMethodName          = "/blueapi.prism.v1.Prism/Test"
-	Prism_CreateProject_FullMethodName = "/blueapi.prism.v1.Prism/CreateProject"
-	Prism_GetProject_FullMethodName    = "/blueapi.prism.v1.Prism/GetProject"
-	Prism_DeleteProject_FullMethodName = "/blueapi.prism.v1.Prism/DeleteProject"
-	Prism_ListProjects_FullMethodName  = "/blueapi.prism.v1.Prism/ListProjects"
+	Prism_Test_FullMethodName               = "/blueapi.prism.v1.Prism/Test"
+	Prism_CreateProject_FullMethodName      = "/blueapi.prism.v1.Prism/CreateProject"
+	Prism_GetProject_FullMethodName         = "/blueapi.prism.v1.Prism/GetProject"
+	Prism_DeleteProject_FullMethodName      = "/blueapi.prism.v1.Prism/DeleteProject"
+	Prism_ListProjects_FullMethodName       = "/blueapi.prism.v1.Prism/ListProjects"
+	Prism_CreateOrganization_FullMethodName = "/blueapi.prism.v1.Prism/CreateOrganization"
+	Prism_GetOrg_FullMethodName             = "/blueapi.prism.v1.Prism/GetOrg"
+	Prism_UpdateOrg_FullMethodName          = "/blueapi.prism.v1.Prism/UpdateOrg"
+	Prism_DeleteOrg_FullMethodName          = "/blueapi.prism.v1.Prism/DeleteOrg"
 )
 
 // PrismClient is the client API for Prism service.
@@ -43,6 +47,10 @@ type PrismClient interface {
 	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WIP: Lists all projects
 	ListProjects(ctx context.Context, in *ListProjectsRequest, opts ...grpc.CallOption) (Prism_ListProjectsClient, error)
+	CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GetOrg(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error)
+	UpdateOrg(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteOrg(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type prismClient struct {
@@ -126,6 +134,46 @@ func (x *prismListProjectsClient) Recv() (*Project, error) {
 	return m, nil
 }
 
+func (c *prismClient) CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_CreateOrganization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) GetOrg(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOrganizationResponse)
+	err := c.cc.Invoke(ctx, Prism_GetOrg_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) UpdateOrg(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_UpdateOrg_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) DeleteOrg(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_DeleteOrg_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -142,6 +190,10 @@ type PrismServer interface {
 	DeleteProject(context.Context, *DeleteProjectRequest) (*emptypb.Empty, error)
 	// WIP: Lists all projects
 	ListProjects(*ListProjectsRequest, Prism_ListProjectsServer) error
+	CreateOrganization(context.Context, *CreateOrganizationRequest) (*emptypb.Empty, error)
+	GetOrg(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error)
+	UpdateOrg(context.Context, *UpdateOrganizationRequest) (*emptypb.Empty, error)
+	DeleteOrg(context.Context, *DeleteOrganizationRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -163,6 +215,18 @@ func (UnimplementedPrismServer) DeleteProject(context.Context, *DeleteProjectReq
 }
 func (UnimplementedPrismServer) ListProjects(*ListProjectsRequest, Prism_ListProjectsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListProjects not implemented")
+}
+func (UnimplementedPrismServer) CreateOrganization(context.Context, *CreateOrganizationRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateOrganization not implemented")
+}
+func (UnimplementedPrismServer) GetOrg(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOrg not implemented")
+}
+func (UnimplementedPrismServer) UpdateOrg(context.Context, *UpdateOrganizationRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrg not implemented")
+}
+func (UnimplementedPrismServer) DeleteOrg(context.Context, *DeleteOrganizationRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrg not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -270,6 +334,78 @@ func (x *prismListProjectsServer) Send(m *Project) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Prism_CreateOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).CreateOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_CreateOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).CreateOrganization(ctx, req.(*CreateOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_GetOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).GetOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_GetOrg_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).GetOrg(ctx, req.(*GetOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_UpdateOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).UpdateOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_UpdateOrg_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).UpdateOrg(ctx, req.(*UpdateOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_DeleteOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).DeleteOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_DeleteOrg_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).DeleteOrg(ctx, req.(*DeleteOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -292,6 +428,22 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteProject",
 			Handler:    _Prism_DeleteProject_Handler,
+		},
+		{
+			MethodName: "CreateOrganization",
+			Handler:    _Prism_CreateOrganization_Handler,
+		},
+		{
+			MethodName: "GetOrg",
+			Handler:    _Prism_GetOrg_Handler,
+		},
+		{
+			MethodName: "UpdateOrg",
+			Handler:    _Prism_UpdateOrg_Handler,
+		},
+		{
+			MethodName: "DeleteOrg",
+			Handler:    _Prism_DeleteOrg_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -3622,11 +3622,27 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.prism.v1.CreateOrganizationRequest"><span class="badge">M</span>CreateOrganizationRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.CreateProjectRequest"><span class="badge">M</span>CreateProjectRequest</a>
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.DeleteOrganizationRequest"><span class="badge">M</span>DeleteOrganizationRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.DeleteProjectRequest"><span class="badge">M</span>DeleteProjectRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.GetOrganizationRequest"><span class="badge">M</span>GetOrganizationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.GetOrganizationResponse"><span class="badge">M</span>GetOrganizationResponse</a>
                 </li>
               
                 <li>
@@ -3655,6 +3671,10 @@
               
                 <li>
                   <a href="#blueapi.prism.v1.TestResponse"><span class="badge">M</span>TestResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.UpdateOrganizationRequest"><span class="badge">M</span>UpdateOrganizationRequest</a>
                 </li>
               
               
@@ -42377,6 +42397,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
       <p></p>
 
       
+        <h3 id="blueapi.prism.v1.CreateOrganizationRequest">CreateOrganizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.CreateProjectRequest">CreateProjectRequest</h3>
         <p></p>
 
@@ -42401,6 +42452,30 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.DeleteOrganizationRequest">DeleteOrganizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required organization ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.DeleteProjectRequest">DeleteProjectRequest</h3>
         <p></p>
 
@@ -42416,6 +42491,68 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required project ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.GetOrganizationRequest">GetOrganizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required organization ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.GetOrganizationResponse">GetOrganizationResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -42615,6 +42752,44 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.UpdateOrganizationRequest">UpdateOrganizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required organization ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -42662,6 +42837,34 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><a href="#blueapi.prism.v1.ListProjectsRequest">ListProjectsRequest</a></td>
                 <td><a href="#blueapi.prism.v1.Project">Project</a> stream</td>
                 <td><p>WIP: Lists all projects</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateOrganization</td>
+                <td><a href="#blueapi.prism.v1.CreateOrganizationRequest">CreateOrganizationRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GetOrg</td>
+                <td><a href="#blueapi.prism.v1.GetOrganizationRequest">GetOrganizationRequest</a></td>
+                <td><a href="#blueapi.prism.v1.GetOrganizationResponse">GetOrganizationResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateOrg</td>
+                <td><a href="#blueapi.prism.v1.UpdateOrganizationRequest">UpdateOrganizationRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteOrg</td>
+                <td><a href="#blueapi.prism.v1.DeleteOrganizationRequest">DeleteOrganizationRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
               </tr>
             
           </tbody>
@@ -42729,6 +42932,46 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>POST</td>
                 <td>/v1/project/all:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateOrganization</td>
+                <td>POST</td>
+                <td>/v1/org</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetOrg</td>
+                <td>GET</td>
+                <td>/v1/org/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateOrg</td>
+                <td>PUT</td>
+                <td>/v1/org/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteOrg</td>
+                <td>DELETE</td>
+                <td>/v1/org/{id}</td>
+                <td></td>
               </tr>
               
             
