@@ -3658,10 +3658,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.prism.v1.Member"><span class="badge">M</span>Member</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.prism.v1.Project"><span class="badge">M</span>Project</a>
                 </li>
               
@@ -42447,8 +42443,8 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
             <tbody>
               
                 <tr>
-                  <td>project</td>
-                  <td><a href="#blueapi.prism.v1.Project">Project</a></td>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -42618,20 +42614,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><p> </p></td>
                 </tr>
               
-                <tr>
-                  <td>description</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>members</td>
-                  <td><a href="#blueapi.prism.v1.Member">Member</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
             </tbody>
           </table>
 
@@ -42643,44 +42625,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
         <p></p>
 
         
-
-        
-      
-        <h3 id="blueapi.prism.v1.Member">Member</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>email</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>role</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
 
         
       
@@ -42709,16 +42653,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>description</td>
+                  <td>created_at</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>members</td>
-                  <td><a href="#blueapi.prism.v1.Member">Member</a></td>
-                  <td>repeated</td>
+                  <td>last_update</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -42802,23 +42746,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
         <p></p>
 
         
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>email</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
 
         
       
@@ -42833,14 +42760,14 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
             <tbody>
               
                 <tr>
-                  <td>verified</td>
-                  <td><a href="#bool">bool</a></td>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>message</td>
+                  <td>org</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
