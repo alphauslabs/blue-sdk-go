@@ -806,8 +806,15 @@ func (x *TotalDetailSection) GetThirdProfitItem() float64 {
 type ThirdProfitItemSection struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// The id.
+	//
+	// The currently supported thirdProfit items are as follows:
+	// `Miscellaneous`
+	// `CustomizedService`
+	// `AgencyFee`
+	// `SupportFee`
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// The name.
+	// A value equivalent to the id will be set.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The profit cost.
 	Profit        float64 `protobuf:"fixed64,3,opt,name=profit,proto3" json:"profit,omitempty"`
