@@ -3677,6 +3677,14 @@
                   <a href="#blueapi.prism.v1.UpdateOrganizationRequest"><span class="badge">M</span>UpdateOrganizationRequest</a>
                 </li>
               
+                <li>
+                  <a href="#blueapi.prism.v1.VerifyUserRequest"><span class="badge">M</span>VerifyUserRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.VerifyUserResponse"><span class="badge">M</span>VerifyUserResponse</a>
+                </li>
+              
               
               
               
@@ -42790,6 +42798,61 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.VerifyUserRequest">VerifyUserRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.VerifyUserResponse">VerifyUserResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>verified</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -42864,6 +42927,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>DeleteOrg</td>
                 <td><a href="#blueapi.prism.v1.DeleteOrganizationRequest">DeleteOrganizationRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>VerifyUser</td>
+                <td><a href="#blueapi.prism.v1.VerifyUserRequest">VerifyUserRequest</a></td>
+                <td><a href="#blueapi.prism.v1.VerifyUserResponse">VerifyUserResponse</a></td>
                 <td><p></p></td>
               </tr>
             
@@ -42972,6 +43042,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>DELETE</td>
                 <td>/v1/org/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>VerifyUser</td>
+                <td>POST</td>
+                <td>/v1/verify</td>
+                <td>*</td>
               </tr>
               
             
