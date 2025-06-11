@@ -144,7 +144,7 @@ type IamClient interface {
 	// WORK-IN-PROGRESS: Send an email reset code
 	SendRipplePasswordResetCode(ctx context.Context, in *SendRipplePasswordResetCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reset ripple password using code from email
-	ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*ResetRipplePasswordResponse, error)
 }
 
 type iamClient struct {
@@ -597,9 +597,9 @@ func (c *iamClient) SendRipplePasswordResetCode(ctx context.Context, in *SendRip
 	return out, nil
 }
 
-func (c *iamClient) ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *iamClient) ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*ResetRipplePasswordResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(ResetRipplePasswordResponse)
 	err := c.cc.Invoke(ctx, Iam_ResetRipplePassword_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -692,7 +692,7 @@ type IamServer interface {
 	// WORK-IN-PROGRESS: Send an email reset code
 	SendRipplePasswordResetCode(context.Context, *SendRipplePasswordResetCodeRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reset ripple password using code from email
-	ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*emptypb.Empty, error)
+	ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*ResetRipplePasswordResponse, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -805,7 +805,7 @@ func (UnimplementedIamServer) GetMFAUsers(context.Context, *MFAUsersInfoRequest)
 func (UnimplementedIamServer) SendRipplePasswordResetCode(context.Context, *SendRipplePasswordResetCodeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendRipplePasswordResetCode not implemented")
 }
-func (UnimplementedIamServer) ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*emptypb.Empty, error) {
+func (UnimplementedIamServer) ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*ResetRipplePasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetRipplePassword not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
