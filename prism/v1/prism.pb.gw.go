@@ -196,7 +196,7 @@ func local_request_Prism_CreateOrganization_0(ctx context.Context, marshaler run
 	return msg, metadata, err
 }
 
-func request_Prism_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Prism_GetOrganization_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetOrganizationRequest
 		metadata runtime.ServerMetadata
@@ -211,11 +211,11 @@ func request_Prism_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, cl
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := client.GetOrg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetOrganization(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_Prism_GetOrg_0(ctx context.Context, marshaler runtime.Marshaler, server PrismServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Prism_GetOrganization_0(ctx context.Context, marshaler runtime.Marshaler, server PrismServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetOrganizationRequest
 		metadata runtime.ServerMetadata
@@ -229,11 +229,11 @@ func local_request_Prism_GetOrg_0(ctx context.Context, marshaler runtime.Marshal
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := server.GetOrg(ctx, &protoReq)
+	msg, err := server.GetOrganization(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_Prism_UpdateOrg_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Prism_UpdateOrganization_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq UpdateOrganizationRequest
 		metadata runtime.ServerMetadata
@@ -250,11 +250,11 @@ func request_Prism_UpdateOrg_0(ctx context.Context, marshaler runtime.Marshaler,
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := client.UpdateOrg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.UpdateOrganization(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_Prism_UpdateOrg_0(ctx context.Context, marshaler runtime.Marshaler, server PrismServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Prism_UpdateOrganization_0(ctx context.Context, marshaler runtime.Marshaler, server PrismServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq UpdateOrganizationRequest
 		metadata runtime.ServerMetadata
@@ -271,11 +271,11 @@ func local_request_Prism_UpdateOrg_0(ctx context.Context, marshaler runtime.Mars
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := server.UpdateOrg(ctx, &protoReq)
+	msg, err := server.UpdateOrganization(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_Prism_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Prism_DeleteOrganization_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq DeleteOrganizationRequest
 		metadata runtime.ServerMetadata
@@ -290,11 +290,11 @@ func request_Prism_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler,
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := client.DeleteOrg(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.DeleteOrganization(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_Prism_DeleteOrg_0(ctx context.Context, marshaler runtime.Marshaler, server PrismServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_Prism_DeleteOrganization_0(ctx context.Context, marshaler runtime.Marshaler, server PrismServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq DeleteOrganizationRequest
 		metadata runtime.ServerMetadata
@@ -308,7 +308,7 @@ func local_request_Prism_DeleteOrg_0(ctx context.Context, marshaler runtime.Mars
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "id", err)
 	}
-	msg, err := server.DeleteOrg(ctx, &protoReq)
+	msg, err := server.DeleteOrganization(ctx, &protoReq)
 	return msg, metadata, err
 }
 
@@ -526,65 +526,65 @@ func RegisterPrismHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 		}
 		forward_Prism_CreateOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_Prism_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_Prism_GetOrganization_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.prism.v1.Prism/GetOrg", runtime.WithHTTPPathPattern("/v1/org/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.prism.v1.Prism/GetOrganization", runtime.WithHTTPPathPattern("/v1/org/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Prism_GetOrg_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Prism_GetOrganization_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Prism_GetOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Prism_GetOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPut, pattern_Prism_UpdateOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPut, pattern_Prism_UpdateOrganization_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.prism.v1.Prism/UpdateOrg", runtime.WithHTTPPathPattern("/v1/org/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.prism.v1.Prism/UpdateOrganization", runtime.WithHTTPPathPattern("/v1/org/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Prism_UpdateOrg_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Prism_UpdateOrganization_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Prism_UpdateOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Prism_UpdateOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodDelete, pattern_Prism_DeleteOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodDelete, pattern_Prism_DeleteOrganization_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.prism.v1.Prism/DeleteOrg", runtime.WithHTTPPathPattern("/v1/org/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.prism.v1.Prism/DeleteOrganization", runtime.WithHTTPPathPattern("/v1/org/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_Prism_DeleteOrg_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_Prism_DeleteOrganization_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Prism_DeleteOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Prism_DeleteOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_Prism_VerifyUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -782,56 +782,56 @@ func RegisterPrismHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 		forward_Prism_CreateOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_Prism_GetOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_Prism_GetOrganization_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/GetOrg", runtime.WithHTTPPathPattern("/v1/org/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/GetOrganization", runtime.WithHTTPPathPattern("/v1/org/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Prism_GetOrg_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Prism_GetOrganization_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Prism_GetOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Prism_GetOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPut, pattern_Prism_UpdateOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPut, pattern_Prism_UpdateOrganization_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/UpdateOrg", runtime.WithHTTPPathPattern("/v1/org/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/UpdateOrganization", runtime.WithHTTPPathPattern("/v1/org/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Prism_UpdateOrg_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Prism_UpdateOrganization_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Prism_UpdateOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Prism_UpdateOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodDelete, pattern_Prism_DeleteOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodDelete, pattern_Prism_DeleteOrganization_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/DeleteOrg", runtime.WithHTTPPathPattern("/v1/org/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/DeleteOrganization", runtime.WithHTTPPathPattern("/v1/org/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_Prism_DeleteOrg_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_Prism_DeleteOrganization_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Prism_DeleteOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Prism_DeleteOrganization_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_Prism_VerifyUser_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -911,9 +911,9 @@ var (
 	pattern_Prism_DeleteProject_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "project", "id"}, ""))
 	pattern_Prism_ListProjects_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "project", "all"}, "read"))
 	pattern_Prism_CreateOrganization_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "org"}, ""))
-	pattern_Prism_GetOrg_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
-	pattern_Prism_UpdateOrg_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
-	pattern_Prism_DeleteOrg_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
+	pattern_Prism_GetOrganization_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
+	pattern_Prism_UpdateOrganization_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
+	pattern_Prism_DeleteOrganization_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
 	pattern_Prism_VerifyUser_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "verify"}, ""))
 	pattern_Prism_GetTeam_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "team", "id"}, ""))
 	pattern_Prism_ListTeams_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "team", "all"}, "read"))
@@ -927,9 +927,9 @@ var (
 	forward_Prism_DeleteProject_0      = runtime.ForwardResponseMessage
 	forward_Prism_ListProjects_0       = runtime.ForwardResponseStream
 	forward_Prism_CreateOrganization_0 = runtime.ForwardResponseMessage
-	forward_Prism_GetOrg_0             = runtime.ForwardResponseMessage
-	forward_Prism_UpdateOrg_0          = runtime.ForwardResponseMessage
-	forward_Prism_DeleteOrg_0          = runtime.ForwardResponseMessage
+	forward_Prism_GetOrganization_0    = runtime.ForwardResponseMessage
+	forward_Prism_UpdateOrganization_0 = runtime.ForwardResponseMessage
+	forward_Prism_DeleteOrganization_0 = runtime.ForwardResponseMessage
 	forward_Prism_VerifyUser_0         = runtime.ForwardResponseMessage
 	forward_Prism_GetTeam_0            = runtime.ForwardResponseMessage
 	forward_Prism_ListTeams_0          = runtime.ForwardResponseStream
