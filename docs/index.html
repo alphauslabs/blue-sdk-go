@@ -3654,11 +3654,35 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.GetTeamRequest"><span class="badge">M</span>GetTeamRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.GetTeamResponse"><span class="badge">M</span>GetTeamResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.ListProjectsRequest"><span class="badge">M</span>ListProjectsRequest</a>
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.ListTeamMembersRequest"><span class="badge">M</span>ListTeamMembersRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.ListTeamsRequest"><span class="badge">M</span>ListTeamsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.Member"><span class="badge">M</span>Member</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.Project"><span class="badge">M</span>Project</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.Team"><span class="badge">M</span>Team</a>
                 </li>
               
                 <li>
@@ -42621,10 +42645,145 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.GetTeamRequest">GetTeamRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required team ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.GetTeamResponse">GetTeamResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.ListProjectsRequest">ListProjectsRequest</h3>
         <p></p>
 
         
+
+        
+      
+        <h3 id="blueapi.prism.v1.ListTeamMembersRequest">ListTeamMembersRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.prism.v1.ListTeamsRequest">ListTeamsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.prism.v1.Member">Member</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>org</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>team</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last_update</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -42647,6 +42806,58 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
                 <tr>
                   <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last_update</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.Team">Team</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>org</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -42864,6 +43075,27 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>GetTeam</td>
+                <td><a href="#blueapi.prism.v1.GetTeamRequest">GetTeamRequest</a></td>
+                <td><a href="#blueapi.prism.v1.GetTeamResponse">GetTeamResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListTeams</td>
+                <td><a href="#blueapi.prism.v1.ListTeamsRequest">ListTeamsRequest</a></td>
+                <td><a href="#blueapi.prism.v1.Team">Team</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListTeamMembers</td>
+                <td><a href="#blueapi.prism.v1.ListTeamMembersRequest">ListTeamMembersRequest</a></td>
+                <td><a href="#blueapi.prism.v1.Member">Member</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -42978,6 +43210,36 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>VerifyUser</td>
                 <td>POST</td>
                 <td>/v1/verify</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetTeam</td>
+                <td>GET</td>
+                <td>/v1/team/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListTeams</td>
+                <td>POST</td>
+                <td>/v1/team/all:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListTeamMembers</td>
+                <td>POST</td>
+                <td>/v1/member/all:read</td>
                 <td>*</td>
               </tr>
               

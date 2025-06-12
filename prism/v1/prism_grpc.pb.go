@@ -30,6 +30,9 @@ const (
 	Prism_UpdateOrg_FullMethodName          = "/blueapi.prism.v1.Prism/UpdateOrg"
 	Prism_DeleteOrg_FullMethodName          = "/blueapi.prism.v1.Prism/DeleteOrg"
 	Prism_VerifyUser_FullMethodName         = "/blueapi.prism.v1.Prism/VerifyUser"
+	Prism_GetTeam_FullMethodName            = "/blueapi.prism.v1.Prism/GetTeam"
+	Prism_ListTeams_FullMethodName          = "/blueapi.prism.v1.Prism/ListTeams"
+	Prism_ListTeamMembers_FullMethodName    = "/blueapi.prism.v1.Prism/ListTeamMembers"
 )
 
 // PrismClient is the client API for Prism service.
@@ -53,6 +56,9 @@ type PrismClient interface {
 	UpdateOrg(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteOrg(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	VerifyUser(ctx context.Context, in *VerifyUserRequest, opts ...grpc.CallOption) (*VerifyUserResponse, error)
+	GetTeam(ctx context.Context, in *GetTeamRequest, opts ...grpc.CallOption) (*GetTeamResponse, error)
+	ListTeams(ctx context.Context, in *ListTeamsRequest, opts ...grpc.CallOption) (Prism_ListTeamsClient, error)
+	ListTeamMembers(ctx context.Context, in *ListTeamMembersRequest, opts ...grpc.CallOption) (Prism_ListTeamMembersClient, error)
 }
 
 type prismClient struct {
@@ -186,6 +192,82 @@ func (c *prismClient) VerifyUser(ctx context.Context, in *VerifyUserRequest, opt
 	return out, nil
 }
 
+func (c *prismClient) GetTeam(ctx context.Context, in *GetTeamRequest, opts ...grpc.CallOption) (*GetTeamResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTeamResponse)
+	err := c.cc.Invoke(ctx, Prism_GetTeam_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) ListTeams(ctx context.Context, in *ListTeamsRequest, opts ...grpc.CallOption) (Prism_ListTeamsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[1], Prism_ListTeams_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListTeamsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListTeamsClient interface {
+	Recv() (*Team, error)
+	grpc.ClientStream
+}
+
+type prismListTeamsClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListTeamsClient) Recv() (*Team, error) {
+	m := new(Team)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *prismClient) ListTeamMembers(ctx context.Context, in *ListTeamMembersRequest, opts ...grpc.CallOption) (Prism_ListTeamMembersClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[2], Prism_ListTeamMembers_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListTeamMembersClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListTeamMembersClient interface {
+	Recv() (*Member, error)
+	grpc.ClientStream
+}
+
+type prismListTeamMembersClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListTeamMembersClient) Recv() (*Member, error) {
+	m := new(Member)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -207,6 +289,9 @@ type PrismServer interface {
 	UpdateOrg(context.Context, *UpdateOrganizationRequest) (*emptypb.Empty, error)
 	DeleteOrg(context.Context, *DeleteOrganizationRequest) (*emptypb.Empty, error)
 	VerifyUser(context.Context, *VerifyUserRequest) (*VerifyUserResponse, error)
+	GetTeam(context.Context, *GetTeamRequest) (*GetTeamResponse, error)
+	ListTeams(*ListTeamsRequest, Prism_ListTeamsServer) error
+	ListTeamMembers(*ListTeamMembersRequest, Prism_ListTeamMembersServer) error
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -243,6 +328,15 @@ func (UnimplementedPrismServer) DeleteOrg(context.Context, *DeleteOrganizationRe
 }
 func (UnimplementedPrismServer) VerifyUser(context.Context, *VerifyUserRequest) (*VerifyUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyUser not implemented")
+}
+func (UnimplementedPrismServer) GetTeam(context.Context, *GetTeamRequest) (*GetTeamResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTeam not implemented")
+}
+func (UnimplementedPrismServer) ListTeams(*ListTeamsRequest, Prism_ListTeamsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListTeams not implemented")
+}
+func (UnimplementedPrismServer) ListTeamMembers(*ListTeamMembersRequest, Prism_ListTeamMembersServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListTeamMembers not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -440,6 +534,66 @@ func _Prism_VerifyUser_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_GetTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTeamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).GetTeam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_GetTeam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).GetTeam(ctx, req.(*GetTeamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_ListTeams_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListTeamsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListTeams(m, &prismListTeamsServer{ServerStream: stream})
+}
+
+type Prism_ListTeamsServer interface {
+	Send(*Team) error
+	grpc.ServerStream
+}
+
+type prismListTeamsServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListTeamsServer) Send(m *Team) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Prism_ListTeamMembers_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListTeamMembersRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListTeamMembers(m, &prismListTeamMembersServer{ServerStream: stream})
+}
+
+type Prism_ListTeamMembersServer interface {
+	Send(*Member) error
+	grpc.ServerStream
+}
+
+type prismListTeamMembersServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListTeamMembersServer) Send(m *Member) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -483,11 +637,25 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "VerifyUser",
 			Handler:    _Prism_VerifyUser_Handler,
 		},
+		{
+			MethodName: "GetTeam",
+			Handler:    _Prism_GetTeam_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ListProjects",
 			Handler:       _Prism_ListProjects_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListTeams",
+			Handler:       _Prism_ListTeams_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListTeamMembers",
+			Handler:       _Prism_ListTeamMembers_Handler,
 			ServerStreams: true,
 		},
 	},
