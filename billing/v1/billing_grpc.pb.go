@@ -208,13 +208,13 @@ type BillingClient interface {
 	ListInvoiceServiceDiscounts(ctx context.Context, in *ListInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListInvoiceServiceDiscountsClient, error)
 	// Gets the invoice service discounts. Only available in Ripple.
 	GetInvoiceServiceDiscounts(ctx context.Context, in *GetInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.InvoiceServiceDiscounts, error)
-	// WORK-IN-PROGRESS: Exports service discounts. Only available in Ripple.
+	// Exports service discounts. Only available in Ripple.
 	ExportServiceDiscounts(ctx context.Context, in *ExportServiceDiscountsRequest, opts ...grpc.CallOption) (*v1.ServiceDiscountsExport, error)
-	// WORK-IN-PROGRESS: Registers the billing group invoice service discounts. Only available in Ripple.
+	// Registers the billing group invoice service discounts. Only available in Ripple.
 	CreateBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *CreateBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*CreateBillingGroupInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Updates the billing group invoice service discounts. Only available in Ripple.
+	// Updates the billing group invoice service discounts. Only available in Ripple.
 	UpdateBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *UpdateBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*UpdateBillingGroupInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Deletes the billing group invoice service discounts. Only available in Ripple.
+	// Deletes the billing group invoice service discounts. Only available in Ripple.
 	DeleteBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *DeleteBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(ctx context.Context, in *ListAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListAccountInvoiceServiceDiscountsClient, error)
@@ -274,7 +274,7 @@ type BillingClient interface {
 	ReadInvoiceAdjustments(ctx context.Context, in *ReadInvoiceAdjustmentsRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceAdjustmentsClient, error)
 	// Reads the adjustment entries. Only available in Ripple.
 	ReadAdjustmentEntries(ctx context.Context, in *ReadAdjustmentEntriesRequest, opts ...grpc.CallOption) (Billing_ReadAdjustmentEntriesClient, error)
-	// WORK-IN-PROGRESS: Gets the adjustment entry. Only available in Ripple.
+	// Gets the adjustment entry. Only available in Ripple.
 	GetAdjustmentEntry(ctx context.Context, in *GetAdjustmentEntryRequest, opts ...grpc.CallOption) (*v1.AdjustmentEntry, error)
 	// Applies the adjustment entry item. Only available in Ripple.
 	ApplyAdjustmentEntry(ctx context.Context, in *ApplyAdjustmentEntryRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -305,7 +305,7 @@ type BillingClient interface {
 	UpdateAdjustmentConfig(ctx context.Context, in *UpdateAdjustmentConfigRequest, opts ...grpc.CallOption) (*api.AdjustmentConfig, error)
 	// Deletes adjustment config
 	DeleteAdjustmentConfig(ctx context.Context, in *DeleteAdjustmentConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
+	// Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(ctx context.Context, in *ReadUntaggedGroupsRequest, opts ...grpc.CallOption) (Billing_ReadUntaggedGroupsClient, error)
 	// Reads the customized billing service. Only available in Ripple.
 	ReadCustomizedBillingServices(ctx context.Context, in *ReadCustomizedBillingServicesRequest, opts ...grpc.CallOption) (Billing_ReadCustomizedBillingServicesClient, error)
@@ -2271,13 +2271,13 @@ type BillingServer interface {
 	ListInvoiceServiceDiscounts(*ListInvoiceServiceDiscountsRequest, Billing_ListInvoiceServiceDiscountsServer) error
 	// Gets the invoice service discounts. Only available in Ripple.
 	GetInvoiceServiceDiscounts(context.Context, *GetInvoiceServiceDiscountsRequest) (*v1.InvoiceServiceDiscounts, error)
-	// WORK-IN-PROGRESS: Exports service discounts. Only available in Ripple.
+	// Exports service discounts. Only available in Ripple.
 	ExportServiceDiscounts(context.Context, *ExportServiceDiscountsRequest) (*v1.ServiceDiscountsExport, error)
-	// WORK-IN-PROGRESS: Registers the billing group invoice service discounts. Only available in Ripple.
+	// Registers the billing group invoice service discounts. Only available in Ripple.
 	CreateBillingGroupInvoiceServiceDiscounts(context.Context, *CreateBillingGroupInvoiceServiceDiscountsRequest) (*CreateBillingGroupInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Updates the billing group invoice service discounts. Only available in Ripple.
+	// Updates the billing group invoice service discounts. Only available in Ripple.
 	UpdateBillingGroupInvoiceServiceDiscounts(context.Context, *UpdateBillingGroupInvoiceServiceDiscountsRequest) (*UpdateBillingGroupInvoiceServiceDiscountsResponse, error)
-	// WORK-IN-PROGRESS: Deletes the billing group invoice service discounts. Only available in Ripple.
+	// Deletes the billing group invoice service discounts. Only available in Ripple.
 	DeleteBillingGroupInvoiceServiceDiscounts(context.Context, *DeleteBillingGroupInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Reads the account invoice service discounts. Only available in Ripple.
 	ListAccountInvoiceServiceDiscounts(*ListAccountInvoiceServiceDiscountsRequest, Billing_ListAccountInvoiceServiceDiscountsServer) error
@@ -2337,7 +2337,7 @@ type BillingServer interface {
 	ReadInvoiceAdjustments(*ReadInvoiceAdjustmentsRequest, Billing_ReadInvoiceAdjustmentsServer) error
 	// Reads the adjustment entries. Only available in Ripple.
 	ReadAdjustmentEntries(*ReadAdjustmentEntriesRequest, Billing_ReadAdjustmentEntriesServer) error
-	// WORK-IN-PROGRESS: Gets the adjustment entry. Only available in Ripple.
+	// Gets the adjustment entry. Only available in Ripple.
 	GetAdjustmentEntry(context.Context, *GetAdjustmentEntryRequest) (*v1.AdjustmentEntry, error)
 	// Applies the adjustment entry item. Only available in Ripple.
 	ApplyAdjustmentEntry(context.Context, *ApplyAdjustmentEntryRequest) (*emptypb.Empty, error)
@@ -2368,7 +2368,7 @@ type BillingServer interface {
 	UpdateAdjustmentConfig(context.Context, *UpdateAdjustmentConfigRequest) (*api.AdjustmentConfig, error)
 	// Deletes adjustment config
 	DeleteAdjustmentConfig(context.Context, *DeleteAdjustmentConfigRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Reads the untagged group. Only available in Ripple.
+	// Reads the untagged group. Only available in Ripple.
 	ReadUntaggedGroups(*ReadUntaggedGroupsRequest, Billing_ReadUntaggedGroupsServer) error
 	// Reads the customized billing service. Only available in Ripple.
 	ReadCustomizedBillingServices(*ReadCustomizedBillingServicesRequest, Billing_ReadCustomizedBillingServicesServer) error
