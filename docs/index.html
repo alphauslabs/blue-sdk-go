@@ -3563,6 +3563,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.GetDailyUsageCostDetailsRequest"><span class="badge">M</span>GetDailyUsageCostDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponse"><span class="badge">M</span>GetDailyUsageCostDetailsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
                 </li>
               
@@ -3604,6 +3612,10 @@
               
                 <li>
                   <a href="#blueapi.flow.v1.UpdateSettingsResponse"><span class="badge">M</span>UpdateSettingsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.UsageCostDetails"><span class="badge">M</span>UsageCostDetails</a>
                 </li>
               
               
@@ -41684,6 +41696,103 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.GetDailyUsageCostDetailsRequest">GetDailyUsageCostDetailsRequest</h3>
+        <p>Request message for the Flow.GetDailyUsageCostDetailsRequest rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the payer to fetch savings plan details for. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The start date of the range for the savings plan details. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The end date of the range for the savings plan details. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetDailyUsageCostDetailsResponse">GetDailyUsageCostDetailsResponse</h3>
+        <p>Response message for the Flow.GetDailyUsageCostDetailsResponse rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The payer account ID for which the savings plan details are fetched. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyOnDemandCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Actual monthly on-demand cost for the payer account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyEffectiveCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Actual monthly effective cost after applying Savings Plans. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyTotalSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Actual total monthly savings from Savings Plan usage. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>spDetails</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Purchased Savings Plan details for the payer account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usageCostDetails</td>
+                  <td><a href="#blueapi.flow.v1.UsageCostDetails">UsageCostDetails</a></td>
+                  <td>repeated</td>
+                  <td><p>Daily Savings Plan usage and cost details </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.GetInfoRequest">GetInfoRequest</h3>
         <p>Request message for the Flow.GetInfo rpc.</p>
 
@@ -42253,6 +42362,86 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.UsageCostDetails">UsageCostDetails</h3>
+        <p>Usage and Cost Details to be used in the GetDailyUsageCostDetailsResponse.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>currentDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The specific date this entry represents, corresponding to one day within the requested date range. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ondemandUsage</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total On-Demand usage in hours for the date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ondemandCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total On-Demand cost in USD for the date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservedUsage</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total Reserved Instance usage in hours for the date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservedCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total Reserved Instance cost in USD for the date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savingsPlanUsage</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total Savings Plan usage in hours for the date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savingsPlanCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total Savings Plan cost in USD for the date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>spotUsage</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total Spot Instance usage in hours for the date. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>spotCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Total Spot Instance cost in USD for the date. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -42321,6 +42510,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><a href="#blueapi.flow.v1.CreateCostExplorerAccessRequest">CreateCostExplorerAccessRequest</a></td>
                 <td><a href="#blueapi.flow.v1.CreateCostExplorerAccessResponse">CreateCostExplorerAccessResponse</a></td>
                 <td><p>Creates a default cross-account access role for cost explorer (API only).</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetDailyUsageCostDetails</td>
+                <td><a href="#blueapi.flow.v1.GetDailyUsageCostDetailsRequest">GetDailyUsageCostDetailsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponse">GetDailyUsageCostDetailsResponse</a></td>
+                <td><p>Gets the daily cost and usage details.</p></td>
               </tr>
             
           </tbody>
@@ -42417,6 +42613,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>CreateCostExplorerAccess</td>
                 <td>POST</td>
                 <td>/v1/aws/xacct/cea</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetDailyUsageCostDetails</td>
+                <td>POST</td>
+                <td>/v1/usagecost</td>
                 <td>*</td>
               </tr>
               
