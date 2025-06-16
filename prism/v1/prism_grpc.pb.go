@@ -33,6 +33,7 @@ const (
 	Prism_GetTeam_FullMethodName            = "/blueapi.prism.v1.Prism/GetTeam"
 	Prism_ListTeams_FullMethodName          = "/blueapi.prism.v1.Prism/ListTeams"
 	Prism_ListTeamMembers_FullMethodName    = "/blueapi.prism.v1.Prism/ListTeamMembers"
+	Prism_ListProjectToTeam_FullMethodName  = "/blueapi.prism.v1.Prism/ListProjectToTeam"
 )
 
 // PrismClient is the client API for Prism service.
@@ -59,6 +60,7 @@ type PrismClient interface {
 	GetTeam(ctx context.Context, in *GetTeamRequest, opts ...grpc.CallOption) (*GetTeamResponse, error)
 	ListTeams(ctx context.Context, in *ListTeamsRequest, opts ...grpc.CallOption) (Prism_ListTeamsClient, error)
 	ListTeamMembers(ctx context.Context, in *ListTeamMembersRequest, opts ...grpc.CallOption) (Prism_ListTeamMembersClient, error)
+	ListProjectToTeam(ctx context.Context, in *ListProjectToTeamRequest, opts ...grpc.CallOption) (Prism_ListProjectToTeamClient, error)
 }
 
 type prismClient struct {
@@ -268,6 +270,39 @@ func (x *prismListTeamMembersClient) Recv() (*Member, error) {
 	return m, nil
 }
 
+func (c *prismClient) ListProjectToTeam(ctx context.Context, in *ListProjectToTeamRequest, opts ...grpc.CallOption) (Prism_ListProjectToTeamClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[3], Prism_ListProjectToTeam_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListProjectToTeamClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListProjectToTeamClient interface {
+	Recv() (*ListProjectToTeamResponse, error)
+	grpc.ClientStream
+}
+
+type prismListProjectToTeamClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListProjectToTeamClient) Recv() (*ListProjectToTeamResponse, error) {
+	m := new(ListProjectToTeamResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -292,6 +327,7 @@ type PrismServer interface {
 	GetTeam(context.Context, *GetTeamRequest) (*GetTeamResponse, error)
 	ListTeams(*ListTeamsRequest, Prism_ListTeamsServer) error
 	ListTeamMembers(*ListTeamMembersRequest, Prism_ListTeamMembersServer) error
+	ListProjectToTeam(*ListProjectToTeamRequest, Prism_ListProjectToTeamServer) error
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -337,6 +373,9 @@ func (UnimplementedPrismServer) ListTeams(*ListTeamsRequest, Prism_ListTeamsServ
 }
 func (UnimplementedPrismServer) ListTeamMembers(*ListTeamMembersRequest, Prism_ListTeamMembersServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListTeamMembers not implemented")
+}
+func (UnimplementedPrismServer) ListProjectToTeam(*ListProjectToTeamRequest, Prism_ListProjectToTeamServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListProjectToTeam not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -594,6 +633,27 @@ func (x *prismListTeamMembersServer) Send(m *Member) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Prism_ListProjectToTeam_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListProjectToTeamRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListProjectToTeam(m, &prismListProjectToTeamServer{ServerStream: stream})
+}
+
+type Prism_ListProjectToTeamServer interface {
+	Send(*ListProjectToTeamResponse) error
+	grpc.ServerStream
+}
+
+type prismListProjectToTeamServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListProjectToTeamServer) Send(m *ListProjectToTeamResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -656,6 +716,11 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListTeamMembers",
 			Handler:       _Prism_ListTeamMembers_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListProjectToTeam",
+			Handler:       _Prism_ListProjectToTeam_Handler,
 			ServerStreams: true,
 		},
 	},

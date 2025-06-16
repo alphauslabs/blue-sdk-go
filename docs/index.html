@@ -3662,6 +3662,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.ListProjectToTeamRequest"><span class="badge">M</span>ListProjectToTeamRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.ListProjectToTeamResponse"><span class="badge">M</span>ListProjectToTeamResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.ListProjectsRequest"><span class="badge">M</span>ListProjectsRequest</a>
                 </li>
               
@@ -42700,6 +42708,58 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.ListProjectToTeamRequest">ListProjectToTeamRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.prism.v1.ListProjectToTeamResponse">ListProjectToTeamResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>project_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>team_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>team_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.ListProjectsRequest">ListProjectsRequest</h3>
         <p></p>
 
@@ -43096,6 +43156,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ListProjectToTeam</td>
+                <td><a href="#blueapi.prism.v1.ListProjectToTeamRequest">ListProjectToTeamRequest</a></td>
+                <td><a href="#blueapi.prism.v1.ListProjectToTeamResponse">ListProjectToTeamResponse</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -43240,6 +43307,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>ListTeamMembers</td>
                 <td>POST</td>
                 <td>/v1/member/all:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListProjectToTeam</td>
+                <td>POST</td>
+                <td>/v1/projecttoteam/all:read</td>
                 <td>*</td>
               </tr>
               
