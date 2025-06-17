@@ -30,6 +30,7 @@ const (
 	Prism_UpdateOrganization_FullMethodName = "/blueapi.prism.v1.Prism/UpdateOrganization"
 	Prism_DeleteOrganization_FullMethodName = "/blueapi.prism.v1.Prism/DeleteOrganization"
 	Prism_VerifyUser_FullMethodName         = "/blueapi.prism.v1.Prism/VerifyUser"
+	Prism_CreateTeam_FullMethodName         = "/blueapi.prism.v1.Prism/CreateTeam"
 	Prism_GetTeam_FullMethodName            = "/blueapi.prism.v1.Prism/GetTeam"
 	Prism_ListTeams_FullMethodName          = "/blueapi.prism.v1.Prism/ListTeams"
 	Prism_ListTeamMembers_FullMethodName    = "/blueapi.prism.v1.Prism/ListTeamMembers"
@@ -59,6 +60,7 @@ type PrismClient interface {
 	UpdateOrganization(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteOrganization(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	VerifyUser(ctx context.Context, in *VerifyUserRequest, opts ...grpc.CallOption) (*VerifyUserResponse, error)
+	CreateTeam(ctx context.Context, in *CreateTeamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetTeam(ctx context.Context, in *GetTeamRequest, opts ...grpc.CallOption) (*GetTeamResponse, error)
 	ListTeams(ctx context.Context, in *ListTeamsRequest, opts ...grpc.CallOption) (Prism_ListTeamsClient, error)
 	ListTeamMembers(ctx context.Context, in *ListTeamMembersRequest, opts ...grpc.CallOption) (Prism_ListTeamMembersClient, error)
@@ -192,6 +194,16 @@ func (c *prismClient) VerifyUser(ctx context.Context, in *VerifyUserRequest, opt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyUserResponse)
 	err := c.cc.Invoke(ctx, Prism_VerifyUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) CreateTeam(ctx context.Context, in *CreateTeamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_CreateTeam_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -371,6 +383,7 @@ type PrismServer interface {
 	UpdateOrganization(context.Context, *UpdateOrganizationRequest) (*emptypb.Empty, error)
 	DeleteOrganization(context.Context, *DeleteOrganizationRequest) (*emptypb.Empty, error)
 	VerifyUser(context.Context, *VerifyUserRequest) (*VerifyUserResponse, error)
+	CreateTeam(context.Context, *CreateTeamRequest) (*emptypb.Empty, error)
 	GetTeam(context.Context, *GetTeamRequest) (*GetTeamResponse, error)
 	ListTeams(*ListTeamsRequest, Prism_ListTeamsServer) error
 	ListTeamMembers(*ListTeamMembersRequest, Prism_ListTeamMembersServer) error
@@ -413,6 +426,9 @@ func (UnimplementedPrismServer) DeleteOrganization(context.Context, *DeleteOrgan
 }
 func (UnimplementedPrismServer) VerifyUser(context.Context, *VerifyUserRequest) (*VerifyUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyUser not implemented")
+}
+func (UnimplementedPrismServer) CreateTeam(context.Context, *CreateTeamRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTeam not implemented")
 }
 func (UnimplementedPrismServer) GetTeam(context.Context, *GetTeamRequest) (*GetTeamResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTeam not implemented")
@@ -628,6 +644,24 @@ func _Prism_VerifyUser_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_CreateTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateTeamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).CreateTeam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_CreateTeam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).CreateTeam(ctx, req.(*CreateTeamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Prism_GetTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetTeamRequest)
 	if err := dec(in); err != nil {
@@ -790,6 +824,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyUser",
 			Handler:    _Prism_VerifyUser_Handler,
+		},
+		{
+			MethodName: "CreateTeam",
+			Handler:    _Prism_CreateTeam_Handler,
 		},
 		{
 			MethodName: "GetTeam",

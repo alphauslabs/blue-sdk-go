@@ -3646,6 +3646,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.CreateTeamRequest"><span class="badge">M</span>CreateTeamRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.DeleteOrganizationRequest"><span class="badge">M</span>DeleteOrganizationRequest</a>
                 </li>
               
@@ -42744,6 +42748,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.CreateTeamRequest">CreateTeamRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.DeleteOrganizationRequest">DeleteOrganizationRequest</h3>
         <p></p>
 
@@ -43458,6 +43493,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               </tr>
             
               <tr>
+                <td>CreateTeam</td>
+                <td><a href="#blueapi.prism.v1.CreateTeamRequest">CreateTeamRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>GetTeam</td>
                 <td><a href="#blueapi.prism.v1.GetTeamRequest">GetTeamRequest</a></td>
                 <td><a href="#blueapi.prism.v1.GetTeamResponse">GetTeamResponse</a></td>
@@ -43613,6 +43655,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>VerifyUser</td>
                 <td>POST</td>
                 <td>/v1/verify</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateTeam</td>
+                <td>POST</td>
+                <td>/v1/team</td>
                 <td>*</td>
               </tr>
               
