@@ -433,6 +433,26 @@ func request_Prism_ListProjectToTeam_0(ctx context.Context, marshaler runtime.Ma
 	return stream, metadata, nil
 }
 
+func request_Prism_ListProducts_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (Prism_ListProductsClient, runtime.ServerMetadata, error) {
+	var (
+		protoReq ListProductsRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	stream, err := client.ListProducts(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+}
+
 // RegisterPrismHandlerServer registers the http handlers for service Prism to "mux".
 // UnaryRPC     :call PrismServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -662,6 +682,13 @@ func RegisterPrismHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 	})
 
 	mux.Handle(http.MethodPost, pattern_Prism_ListProjectToTeam_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
+	mux.Handle(http.MethodPost, pattern_Prism_ListProducts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
@@ -945,6 +972,23 @@ func RegisterPrismHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 		forward_Prism_ListProjectToTeam_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPost, pattern_Prism_ListProducts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/ListProducts", runtime.WithHTTPPathPattern("/v1/product/all:read"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Prism_ListProducts_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Prism_ListProducts_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+	})
 	return nil
 }
 
@@ -963,6 +1007,7 @@ var (
 	pattern_Prism_ListTeams_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "team", "all"}, "read"))
 	pattern_Prism_ListTeamMembers_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "member", "all"}, "read"))
 	pattern_Prism_ListProjectToTeam_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "projecttoteam", "all"}, "read"))
+	pattern_Prism_ListProducts_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "product", "all"}, "read"))
 )
 
 var (
@@ -980,4 +1025,5 @@ var (
 	forward_Prism_ListTeams_0          = runtime.ForwardResponseStream
 	forward_Prism_ListTeamMembers_0    = runtime.ForwardResponseStream
 	forward_Prism_ListProjectToTeam_0  = runtime.ForwardResponseStream
+	forward_Prism_ListProducts_0       = runtime.ForwardResponseStream
 )

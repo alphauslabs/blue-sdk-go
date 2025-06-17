@@ -34,6 +34,7 @@ const (
 	Prism_ListTeams_FullMethodName          = "/blueapi.prism.v1.Prism/ListTeams"
 	Prism_ListTeamMembers_FullMethodName    = "/blueapi.prism.v1.Prism/ListTeamMembers"
 	Prism_ListProjectToTeam_FullMethodName  = "/blueapi.prism.v1.Prism/ListProjectToTeam"
+	Prism_ListProducts_FullMethodName       = "/blueapi.prism.v1.Prism/ListProducts"
 )
 
 // PrismClient is the client API for Prism service.
@@ -61,6 +62,7 @@ type PrismClient interface {
 	ListTeams(ctx context.Context, in *ListTeamsRequest, opts ...grpc.CallOption) (Prism_ListTeamsClient, error)
 	ListTeamMembers(ctx context.Context, in *ListTeamMembersRequest, opts ...grpc.CallOption) (Prism_ListTeamMembersClient, error)
 	ListProjectToTeam(ctx context.Context, in *ListProjectToTeamRequest, opts ...grpc.CallOption) (Prism_ListProjectToTeamClient, error)
+	ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (Prism_ListProductsClient, error)
 }
 
 type prismClient struct {
@@ -303,6 +305,39 @@ func (x *prismListProjectToTeamClient) Recv() (*ListProjectToTeamResponse, error
 	return m, nil
 }
 
+func (c *prismClient) ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (Prism_ListProductsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[4], Prism_ListProducts_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListProductsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListProductsClient interface {
+	Recv() (*Product, error)
+	grpc.ClientStream
+}
+
+type prismListProductsClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListProductsClient) Recv() (*Product, error) {
+	m := new(Product)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -328,6 +363,7 @@ type PrismServer interface {
 	ListTeams(*ListTeamsRequest, Prism_ListTeamsServer) error
 	ListTeamMembers(*ListTeamMembersRequest, Prism_ListTeamMembersServer) error
 	ListProjectToTeam(*ListProjectToTeamRequest, Prism_ListProjectToTeamServer) error
+	ListProducts(*ListProductsRequest, Prism_ListProductsServer) error
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -376,6 +412,9 @@ func (UnimplementedPrismServer) ListTeamMembers(*ListTeamMembersRequest, Prism_L
 }
 func (UnimplementedPrismServer) ListProjectToTeam(*ListProjectToTeamRequest, Prism_ListProjectToTeamServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListProjectToTeam not implemented")
+}
+func (UnimplementedPrismServer) ListProducts(*ListProductsRequest, Prism_ListProductsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListProducts not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -654,6 +693,27 @@ func (x *prismListProjectToTeamServer) Send(m *ListProjectToTeamResponse) error 
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Prism_ListProducts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListProductsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListProducts(m, &prismListProductsServer{ServerStream: stream})
+}
+
+type Prism_ListProductsServer interface {
+	Send(*Product) error
+	grpc.ServerStream
+}
+
+type prismListProductsServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListProductsServer) Send(m *Product) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -721,6 +781,11 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListProjectToTeam",
 			Handler:       _Prism_ListProjectToTeam_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListProducts",
+			Handler:       _Prism_ListProducts_Handler,
 			ServerStreams: true,
 		},
 	},
