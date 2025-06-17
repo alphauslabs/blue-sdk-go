@@ -3638,6 +3638,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.CreateProductRequest"><span class="badge">M</span>CreateProductRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.CreateProjectRequest"><span class="badge">M</span>CreateProjectRequest</a>
                 </li>
               
@@ -42678,6 +42682,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.CreateProductRequest">CreateProductRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.CreateProjectRequest">CreateProjectRequest</h3>
         <p></p>
 
@@ -42690,6 +42725,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
                 <tr>
                   <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -43450,6 +43492,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>CreateProduct</td>
+                <td><a href="#blueapi.prism.v1.CreateProductRequest">CreateProductRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -43614,6 +43663,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>ListProducts</td>
                 <td>POST</td>
                 <td>/v1/product/all:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateProduct</td>
+                <td>POST</td>
+                <td>/v1/product</td>
                 <td>*</td>
               </tr>
               

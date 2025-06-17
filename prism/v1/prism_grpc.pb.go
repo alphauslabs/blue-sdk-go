@@ -35,6 +35,7 @@ const (
 	Prism_ListTeamMembers_FullMethodName    = "/blueapi.prism.v1.Prism/ListTeamMembers"
 	Prism_ListProjectToTeam_FullMethodName  = "/blueapi.prism.v1.Prism/ListProjectToTeam"
 	Prism_ListProducts_FullMethodName       = "/blueapi.prism.v1.Prism/ListProducts"
+	Prism_CreateProduct_FullMethodName      = "/blueapi.prism.v1.Prism/CreateProduct"
 )
 
 // PrismClient is the client API for Prism service.
@@ -63,6 +64,7 @@ type PrismClient interface {
 	ListTeamMembers(ctx context.Context, in *ListTeamMembersRequest, opts ...grpc.CallOption) (Prism_ListTeamMembersClient, error)
 	ListProjectToTeam(ctx context.Context, in *ListProjectToTeamRequest, opts ...grpc.CallOption) (Prism_ListProjectToTeamClient, error)
 	ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (Prism_ListProductsClient, error)
+	CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type prismClient struct {
@@ -338,6 +340,16 @@ func (x *prismListProductsClient) Recv() (*Product, error) {
 	return m, nil
 }
 
+func (c *prismClient) CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_CreateProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -364,6 +376,7 @@ type PrismServer interface {
 	ListTeamMembers(*ListTeamMembersRequest, Prism_ListTeamMembersServer) error
 	ListProjectToTeam(*ListProjectToTeamRequest, Prism_ListProjectToTeamServer) error
 	ListProducts(*ListProductsRequest, Prism_ListProductsServer) error
+	CreateProduct(context.Context, *CreateProductRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -415,6 +428,9 @@ func (UnimplementedPrismServer) ListProjectToTeam(*ListProjectToTeamRequest, Pri
 }
 func (UnimplementedPrismServer) ListProducts(*ListProductsRequest, Prism_ListProductsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListProducts not implemented")
+}
+func (UnimplementedPrismServer) CreateProduct(context.Context, *CreateProductRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -714,6 +730,24 @@ func (x *prismListProductsServer) Send(m *Product) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Prism_CreateProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateProductRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).CreateProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_CreateProduct_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).CreateProduct(ctx, req.(*CreateProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -760,6 +794,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetTeam",
 			Handler:    _Prism_GetTeam_Handler,
+		},
+		{
+			MethodName: "CreateProduct",
+			Handler:    _Prism_CreateProduct_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
