@@ -3634,6 +3634,14 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.prism.v1.AssignProjectToTeamRequest"><span class="badge">M</span>AssignProjectToTeamRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.AssignProjectToTeamResponse"><span class="badge">M</span>AssignProjectToTeamResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.CreateOrganizationRequest"><span class="badge">M</span>CreateOrganizationRequest</a>
                 </li>
               
@@ -3651,6 +3659,10 @@
               
                 <li>
                   <a href="#blueapi.prism.v1.DeleteOrganizationRequest"><span class="badge">M</span>DeleteOrganizationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.DeleteProductRequest"><span class="badge">M</span>DeleteProductRequest</a>
                 </li>
               
                 <li>
@@ -42655,6 +42667,103 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
       <p></p>
 
       
+        <h3 id="blueapi.prism.v1.AssignProjectToTeamRequest">AssignProjectToTeamRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>team_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Comma-separated list of project IDs to assign to the team. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.AssignProjectToTeamResponse">AssignProjectToTeamResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>create_new</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Indicates whether a new project was created as part of the assignment. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Should not be empty if create_new is true. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Should not be empty if create_new is true. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>team_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>team_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Comma-separated list of project IDs that were assigned. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>project_names</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Comma-separated list of project names that were assigned. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.CreateOrganizationRequest">CreateOrganizationRequest</h3>
         <p></p>
 
@@ -42794,6 +42903,30 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required organization ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.DeleteProductRequest">DeleteProductRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required product ID. </p></td>
                 </tr>
               
             </tbody>
@@ -43294,6 +43427,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -43541,6 +43681,20 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>DeleteProduct</td>
+                <td><a href="#blueapi.prism.v1.DeleteProductRequest">DeleteProductRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AssignProjectToTeam</td>
+                <td><a href="#blueapi.prism.v1.AssignProjectToTeamRequest">AssignProjectToTeamRequest</a></td>
+                <td><a href="#blueapi.prism.v1.AssignProjectToTeamResponse">AssignProjectToTeamResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -43725,6 +43879,26 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>CreateProduct</td>
                 <td>POST</td>
                 <td>/v1/product</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteProduct</td>
+                <td>DELETE</td>
+                <td>/v1/product/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AssignProjectToTeam</td>
+                <td>POST</td>
+                <td>/v1/projecttoteam/assign</td>
                 <td>*</td>
               </tr>
               

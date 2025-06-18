@@ -20,23 +20,25 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Prism_Test_FullMethodName               = "/blueapi.prism.v1.Prism/Test"
-	Prism_CreateProject_FullMethodName      = "/blueapi.prism.v1.Prism/CreateProject"
-	Prism_GetProject_FullMethodName         = "/blueapi.prism.v1.Prism/GetProject"
-	Prism_DeleteProject_FullMethodName      = "/blueapi.prism.v1.Prism/DeleteProject"
-	Prism_ListProjects_FullMethodName       = "/blueapi.prism.v1.Prism/ListProjects"
-	Prism_CreateOrganization_FullMethodName = "/blueapi.prism.v1.Prism/CreateOrganization"
-	Prism_GetOrganization_FullMethodName    = "/blueapi.prism.v1.Prism/GetOrganization"
-	Prism_UpdateOrganization_FullMethodName = "/blueapi.prism.v1.Prism/UpdateOrganization"
-	Prism_DeleteOrganization_FullMethodName = "/blueapi.prism.v1.Prism/DeleteOrganization"
-	Prism_VerifyUser_FullMethodName         = "/blueapi.prism.v1.Prism/VerifyUser"
-	Prism_CreateTeam_FullMethodName         = "/blueapi.prism.v1.Prism/CreateTeam"
-	Prism_GetTeam_FullMethodName            = "/blueapi.prism.v1.Prism/GetTeam"
-	Prism_ListTeams_FullMethodName          = "/blueapi.prism.v1.Prism/ListTeams"
-	Prism_ListTeamMembers_FullMethodName    = "/blueapi.prism.v1.Prism/ListTeamMembers"
-	Prism_ListProjectToTeam_FullMethodName  = "/blueapi.prism.v1.Prism/ListProjectToTeam"
-	Prism_ListProducts_FullMethodName       = "/blueapi.prism.v1.Prism/ListProducts"
-	Prism_CreateProduct_FullMethodName      = "/blueapi.prism.v1.Prism/CreateProduct"
+	Prism_Test_FullMethodName                = "/blueapi.prism.v1.Prism/Test"
+	Prism_CreateProject_FullMethodName       = "/blueapi.prism.v1.Prism/CreateProject"
+	Prism_GetProject_FullMethodName          = "/blueapi.prism.v1.Prism/GetProject"
+	Prism_DeleteProject_FullMethodName       = "/blueapi.prism.v1.Prism/DeleteProject"
+	Prism_ListProjects_FullMethodName        = "/blueapi.prism.v1.Prism/ListProjects"
+	Prism_CreateOrganization_FullMethodName  = "/blueapi.prism.v1.Prism/CreateOrganization"
+	Prism_GetOrganization_FullMethodName     = "/blueapi.prism.v1.Prism/GetOrganization"
+	Prism_UpdateOrganization_FullMethodName  = "/blueapi.prism.v1.Prism/UpdateOrganization"
+	Prism_DeleteOrganization_FullMethodName  = "/blueapi.prism.v1.Prism/DeleteOrganization"
+	Prism_VerifyUser_FullMethodName          = "/blueapi.prism.v1.Prism/VerifyUser"
+	Prism_CreateTeam_FullMethodName          = "/blueapi.prism.v1.Prism/CreateTeam"
+	Prism_GetTeam_FullMethodName             = "/blueapi.prism.v1.Prism/GetTeam"
+	Prism_ListTeams_FullMethodName           = "/blueapi.prism.v1.Prism/ListTeams"
+	Prism_ListTeamMembers_FullMethodName     = "/blueapi.prism.v1.Prism/ListTeamMembers"
+	Prism_ListProjectToTeam_FullMethodName   = "/blueapi.prism.v1.Prism/ListProjectToTeam"
+	Prism_ListProducts_FullMethodName        = "/blueapi.prism.v1.Prism/ListProducts"
+	Prism_CreateProduct_FullMethodName       = "/blueapi.prism.v1.Prism/CreateProduct"
+	Prism_DeleteProduct_FullMethodName       = "/blueapi.prism.v1.Prism/DeleteProduct"
+	Prism_AssignProjectToTeam_FullMethodName = "/blueapi.prism.v1.Prism/AssignProjectToTeam"
 )
 
 // PrismClient is the client API for Prism service.
@@ -67,6 +69,8 @@ type PrismClient interface {
 	ListProjectToTeam(ctx context.Context, in *ListProjectToTeamRequest, opts ...grpc.CallOption) (Prism_ListProjectToTeamClient, error)
 	ListProducts(ctx context.Context, in *ListProductsRequest, opts ...grpc.CallOption) (Prism_ListProductsClient, error)
 	CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	AssignProjectToTeam(ctx context.Context, in *AssignProjectToTeamRequest, opts ...grpc.CallOption) (*AssignProjectToTeamResponse, error)
 }
 
 type prismClient struct {
@@ -362,6 +366,26 @@ func (c *prismClient) CreateProduct(ctx context.Context, in *CreateProductReques
 	return out, nil
 }
 
+func (c *prismClient) DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_DeleteProduct_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) AssignProjectToTeam(ctx context.Context, in *AssignProjectToTeamRequest, opts ...grpc.CallOption) (*AssignProjectToTeamResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AssignProjectToTeamResponse)
+	err := c.cc.Invoke(ctx, Prism_AssignProjectToTeam_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -390,6 +414,8 @@ type PrismServer interface {
 	ListProjectToTeam(*ListProjectToTeamRequest, Prism_ListProjectToTeamServer) error
 	ListProducts(*ListProductsRequest, Prism_ListProductsServer) error
 	CreateProduct(context.Context, *CreateProductRequest) (*emptypb.Empty, error)
+	DeleteProduct(context.Context, *DeleteProductRequest) (*emptypb.Empty, error)
+	AssignProjectToTeam(context.Context, *AssignProjectToTeamRequest) (*AssignProjectToTeamResponse, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -447,6 +473,12 @@ func (UnimplementedPrismServer) ListProducts(*ListProductsRequest, Prism_ListPro
 }
 func (UnimplementedPrismServer) CreateProduct(context.Context, *CreateProductRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProduct not implemented")
+}
+func (UnimplementedPrismServer) DeleteProduct(context.Context, *DeleteProductRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProduct not implemented")
+}
+func (UnimplementedPrismServer) AssignProjectToTeam(context.Context, *AssignProjectToTeamRequest) (*AssignProjectToTeamResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AssignProjectToTeam not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -782,6 +814,42 @@ func _Prism_CreateProduct_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_DeleteProduct_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteProductRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).DeleteProduct(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_DeleteProduct_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).DeleteProduct(ctx, req.(*DeleteProductRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_AssignProjectToTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AssignProjectToTeamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).AssignProjectToTeam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_AssignProjectToTeam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).AssignProjectToTeam(ctx, req.(*AssignProjectToTeamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -836,6 +904,14 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateProduct",
 			Handler:    _Prism_CreateProduct_Handler,
+		},
+		{
+			MethodName: "DeleteProduct",
+			Handler:    _Prism_DeleteProduct_Handler,
+		},
+		{
+			MethodName: "AssignProjectToTeam",
+			Handler:    _Prism_AssignProjectToTeam_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
