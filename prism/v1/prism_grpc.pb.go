@@ -39,6 +39,7 @@ const (
 	Prism_CreateProduct_FullMethodName       = "/blueapi.prism.v1.Prism/CreateProduct"
 	Prism_DeleteProduct_FullMethodName       = "/blueapi.prism.v1.Prism/DeleteProduct"
 	Prism_AssignProjectToTeam_FullMethodName = "/blueapi.prism.v1.Prism/AssignProjectToTeam"
+	Prism_DeleteTeam_FullMethodName          = "/blueapi.prism.v1.Prism/DeleteTeam"
 )
 
 // PrismClient is the client API for Prism service.
@@ -71,6 +72,7 @@ type PrismClient interface {
 	CreateProduct(ctx context.Context, in *CreateProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteProduct(ctx context.Context, in *DeleteProductRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	AssignProjectToTeam(ctx context.Context, in *AssignProjectToTeamRequest, opts ...grpc.CallOption) (*AssignProjectToTeamResponse, error)
+	DeleteTeam(ctx context.Context, in *DeleteTeamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type prismClient struct {
@@ -386,6 +388,16 @@ func (c *prismClient) AssignProjectToTeam(ctx context.Context, in *AssignProject
 	return out, nil
 }
 
+func (c *prismClient) DeleteTeam(ctx context.Context, in *DeleteTeamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_DeleteTeam_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -416,6 +428,7 @@ type PrismServer interface {
 	CreateProduct(context.Context, *CreateProductRequest) (*emptypb.Empty, error)
 	DeleteProduct(context.Context, *DeleteProductRequest) (*emptypb.Empty, error)
 	AssignProjectToTeam(context.Context, *AssignProjectToTeamRequest) (*AssignProjectToTeamResponse, error)
+	DeleteTeam(context.Context, *DeleteTeamRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -479,6 +492,9 @@ func (UnimplementedPrismServer) DeleteProduct(context.Context, *DeleteProductReq
 }
 func (UnimplementedPrismServer) AssignProjectToTeam(context.Context, *AssignProjectToTeamRequest) (*AssignProjectToTeamResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignProjectToTeam not implemented")
+}
+func (UnimplementedPrismServer) DeleteTeam(context.Context, *DeleteTeamRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTeam not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -850,6 +866,24 @@ func _Prism_AssignProjectToTeam_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_DeleteTeam_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteTeamRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).DeleteTeam(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_DeleteTeam_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).DeleteTeam(ctx, req.(*DeleteTeamRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -912,6 +946,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AssignProjectToTeam",
 			Handler:    _Prism_AssignProjectToTeam_Handler,
+		},
+		{
+			MethodName: "DeleteTeam",
+			Handler:    _Prism_DeleteTeam_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

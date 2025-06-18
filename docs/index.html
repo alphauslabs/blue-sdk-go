@@ -3670,6 +3670,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.DeleteTeamRequest"><span class="badge">M</span>DeleteTeamRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.GetOrganizationRequest"><span class="badge">M</span>GetOrganizationRequest</a>
                 </li>
               
@@ -42988,6 +42992,30 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.DeleteTeamRequest">DeleteTeamRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required team ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.GetOrganizationRequest">GetOrganizationRequest</h3>
         <p></p>
 
@@ -43723,6 +43751,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>DeleteTeam</td>
+                <td><a href="#blueapi.prism.v1.DeleteTeamRequest">DeleteTeamRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -43928,6 +43963,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>POST</td>
                 <td>/v1/projecttoteam/assign</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteTeam</td>
+                <td>DELETE</td>
+                <td>/v1/team/{id}</td>
+                <td></td>
               </tr>
               
             
