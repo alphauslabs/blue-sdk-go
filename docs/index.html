@@ -3607,6 +3607,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.SpDetails"><span class="badge">M</span>SpDetails</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.UpdateSettingsRequest"><span class="badge">M</span>UpdateSettingsRequest</a>
                 </li>
               
@@ -41813,7 +41817,7 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
                 <tr>
                   <td>spDetails</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#blueapi.flow.v1.SpDetails">SpDetails</a></td>
                   <td></td>
                   <td><p>Purchased Savings Plan details for the payer account. </p></td>
                 </tr>
@@ -42217,70 +42221,192 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Payer account ID. </p></td>
                 </tr>
               
                 <tr>
                   <td>accountScope</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Account scope determines if the account is payer or linked account. </p></td>
                 </tr>
               
                 <tr>
                   <td>customization</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Customization setting for SP. </p></td>
                 </tr>
               
                 <tr>
                   <td>planTerm</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Term of the SP. </p></td>
                 </tr>
               
                 <tr>
                   <td>paymentOption</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Payment option for the SP. </p></td>
                 </tr>
               
                 <tr>
                   <td>lookBackPeriod</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Lookback period for recommendation. </p></td>
                 </tr>
               
                 <tr>
                   <td>instanceFamily</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>If EC2 Instance SP is selected in Customization, request will include list of instance family </p></td>
                 </tr>
               
                 <tr>
                   <td>annualBudget</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Annual budget input for SP. </p></td>
                 </tr>
               
                 <tr>
                   <td>approval</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Purchase approval from the payer for the SP. </p></td>
                 </tr>
               
                 <tr>
                   <td>lastUpdated</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Last updated timestamp of the settings configuration. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.SpDetails">SpDetails</h3>
+        <p>Savings Plan Details to be used in the GetDailyUsageCostDetailsResponse.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The payer account ID for which the savings plan details are fetched. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savingsPlanType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The savings plan type, e.g., `Compute`, `Ec2`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>state</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current state of the savings plan, e.g., `ACTIVE`, `EXPIRED`, `PENDING`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The start time of the savings plan. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The end time of the savings plan. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>returnableUntil</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The date until which the savings plan is returnable, if applicable. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The currency in which the savings plan is priced, e.g., `USD`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>commitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The commitment amount per hour for the savings plan in USD. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>A description of the savings plan, including details like the instance family and payment option. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The payment option for the savings plan, e.g., `All Upfront`, `Partial Upfront`, `No Upfront`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>productTypes</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The product types covered by the savings plan, e.g., `EC2`, `Lambda`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ec2InstanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The EC2 instance families covered by the savings plan, e.g., `m5`, `c5`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recurringPaymentAmount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The periodic (usually monthly) charge to pay over the term of the plan. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>upfrontPaymentAmount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The total amount paid at the start of the Savings Plan, if applicable. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tags</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The tag that refers to the one who purchased the Savings Plan. </p></td>
                 </tr>
               
             </tbody>
