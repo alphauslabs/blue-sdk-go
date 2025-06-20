@@ -3678,6 +3678,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.GetIntegrationStatusResponse"><span class="badge">M</span>GetIntegrationStatusResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.GetOrganizationRequest"><span class="badge">M</span>GetOrganizationRequest</a>
                 </li>
               
@@ -3699,6 +3703,10 @@
               
                 <li>
                   <a href="#blueapi.prism.v1.GetTeamResponse"><span class="badge">M</span>GetTeamResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.IntegrationStatus"><span class="badge">M</span>IntegrationStatus</a>
                 </li>
               
                 <li>
@@ -43149,6 +43157,30 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.GetIntegrationStatusResponse">GetIntegrationStatusResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#blueapi.prism.v1.IntegrationStatus">IntegrationStatus</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.GetOrganizationRequest">GetOrganizationRequest</h3>
         <p></p>
 
@@ -43309,6 +43341,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
                 <tr>
                   <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.IntegrationStatus">IntegrationStatus</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -43891,6 +43954,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>GetIntegrationStatus</td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><a href="#blueapi.prism.v1.GetIntegrationStatusResponse">GetIntegrationStatusResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -44105,6 +44175,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>DeleteTeam</td>
                 <td>DELETE</td>
                 <td>/v1/team/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetIntegrationStatus</td>
+                <td>GET</td>
+                <td>/v1/integration/status</td>
                 <td></td>
               </tr>
               

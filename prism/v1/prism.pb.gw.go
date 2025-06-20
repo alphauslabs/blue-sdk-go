@@ -22,6 +22,7 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/proto"
+	"google.golang.org/protobuf/types/known/emptypb"
 )
 
 // Suppress "imported and not used" errors
@@ -651,6 +652,27 @@ func local_request_Prism_DeleteTeam_0(ctx context.Context, marshaler runtime.Mar
 	return msg, metadata, err
 }
 
+func request_Prism_GetIntegrationStatus_0(ctx context.Context, marshaler runtime.Marshaler, client PrismClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq emptypb.Empty
+		metadata runtime.ServerMetadata
+	)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	msg, err := client.GetIntegrationStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Prism_GetIntegrationStatus_0(ctx context.Context, marshaler runtime.Marshaler, server PrismServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq emptypb.Empty
+		metadata runtime.ServerMetadata
+	)
+	msg, err := server.GetIntegrationStatus(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 // RegisterPrismHandlerServer registers the http handlers for service Prism to "mux".
 // UnaryRPC     :call PrismServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -991,6 +1013,26 @@ func RegisterPrismHandlerServer(ctx context.Context, mux *runtime.ServeMux, serv
 			return
 		}
 		forward_Prism_DeleteTeam_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_Prism_GetIntegrationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.prism.v1.Prism/GetIntegrationStatus", runtime.WithHTTPPathPattern("/v1/integration/status"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Prism_GetIntegrationStatus_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Prism_GetIntegrationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
 	return nil
@@ -1372,51 +1414,70 @@ func RegisterPrismHandlerClient(ctx context.Context, mux *runtime.ServeMux, clie
 		}
 		forward_Prism_DeleteTeam_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_Prism_GetIntegrationStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.prism.v1.Prism/GetIntegrationStatus", runtime.WithHTTPPathPattern("/v1/integration/status"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Prism_GetIntegrationStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Prism_GetIntegrationStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	return nil
 }
 
 var (
-	pattern_Prism_Test_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "test"}, ""))
-	pattern_Prism_CreateProject_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "project"}, ""))
-	pattern_Prism_GetProject_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "project", "id"}, ""))
-	pattern_Prism_DeleteProject_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "project", "id"}, ""))
-	pattern_Prism_ListProjects_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "project", "all"}, "read"))
-	pattern_Prism_CreateOrganization_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "org"}, ""))
-	pattern_Prism_GetOrganization_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
-	pattern_Prism_UpdateOrganization_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
-	pattern_Prism_DeleteOrganization_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
-	pattern_Prism_VerifyUser_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "verify"}, ""))
-	pattern_Prism_CreateTeam_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "team"}, ""))
-	pattern_Prism_GetTeam_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "team", "id"}, ""))
-	pattern_Prism_ListTeams_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "team", "all"}, "read"))
-	pattern_Prism_ListTeamMembers_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "member", "all"}, "read"))
-	pattern_Prism_ListProjectToTeam_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "projecttoteam", "all"}, "read"))
-	pattern_Prism_ListProducts_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "product", "all"}, "read"))
-	pattern_Prism_CreateProduct_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "product"}, ""))
-	pattern_Prism_DeleteProduct_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "product", "id"}, ""))
-	pattern_Prism_AssignProjectToTeam_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "projecttoteam", "assign"}, ""))
-	pattern_Prism_DeleteTeam_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "team", "id"}, ""))
+	pattern_Prism_Test_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "test"}, ""))
+	pattern_Prism_CreateProject_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "project"}, ""))
+	pattern_Prism_GetProject_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "project", "id"}, ""))
+	pattern_Prism_DeleteProject_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "project", "id"}, ""))
+	pattern_Prism_ListProjects_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "project", "all"}, "read"))
+	pattern_Prism_CreateOrganization_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "org"}, ""))
+	pattern_Prism_GetOrganization_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
+	pattern_Prism_UpdateOrganization_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
+	pattern_Prism_DeleteOrganization_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "org", "id"}, ""))
+	pattern_Prism_VerifyUser_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "verify"}, ""))
+	pattern_Prism_CreateTeam_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "team"}, ""))
+	pattern_Prism_GetTeam_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "team", "id"}, ""))
+	pattern_Prism_ListTeams_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "team", "all"}, "read"))
+	pattern_Prism_ListTeamMembers_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "member", "all"}, "read"))
+	pattern_Prism_ListProjectToTeam_0    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "projecttoteam", "all"}, "read"))
+	pattern_Prism_ListProducts_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "product", "all"}, "read"))
+	pattern_Prism_CreateProduct_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "product"}, ""))
+	pattern_Prism_DeleteProduct_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "product", "id"}, ""))
+	pattern_Prism_AssignProjectToTeam_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "projecttoteam", "assign"}, ""))
+	pattern_Prism_DeleteTeam_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "team", "id"}, ""))
+	pattern_Prism_GetIntegrationStatus_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "integration", "status"}, ""))
 )
 
 var (
-	forward_Prism_Test_0                = runtime.ForwardResponseMessage
-	forward_Prism_CreateProject_0       = runtime.ForwardResponseMessage
-	forward_Prism_GetProject_0          = runtime.ForwardResponseMessage
-	forward_Prism_DeleteProject_0       = runtime.ForwardResponseMessage
-	forward_Prism_ListProjects_0        = runtime.ForwardResponseStream
-	forward_Prism_CreateOrganization_0  = runtime.ForwardResponseMessage
-	forward_Prism_GetOrganization_0     = runtime.ForwardResponseMessage
-	forward_Prism_UpdateOrganization_0  = runtime.ForwardResponseMessage
-	forward_Prism_DeleteOrganization_0  = runtime.ForwardResponseMessage
-	forward_Prism_VerifyUser_0          = runtime.ForwardResponseMessage
-	forward_Prism_CreateTeam_0          = runtime.ForwardResponseMessage
-	forward_Prism_GetTeam_0             = runtime.ForwardResponseMessage
-	forward_Prism_ListTeams_0           = runtime.ForwardResponseStream
-	forward_Prism_ListTeamMembers_0     = runtime.ForwardResponseStream
-	forward_Prism_ListProjectToTeam_0   = runtime.ForwardResponseStream
-	forward_Prism_ListProducts_0        = runtime.ForwardResponseStream
-	forward_Prism_CreateProduct_0       = runtime.ForwardResponseMessage
-	forward_Prism_DeleteProduct_0       = runtime.ForwardResponseMessage
-	forward_Prism_AssignProjectToTeam_0 = runtime.ForwardResponseMessage
-	forward_Prism_DeleteTeam_0          = runtime.ForwardResponseMessage
+	forward_Prism_Test_0                 = runtime.ForwardResponseMessage
+	forward_Prism_CreateProject_0        = runtime.ForwardResponseMessage
+	forward_Prism_GetProject_0           = runtime.ForwardResponseMessage
+	forward_Prism_DeleteProject_0        = runtime.ForwardResponseMessage
+	forward_Prism_ListProjects_0         = runtime.ForwardResponseStream
+	forward_Prism_CreateOrganization_0   = runtime.ForwardResponseMessage
+	forward_Prism_GetOrganization_0      = runtime.ForwardResponseMessage
+	forward_Prism_UpdateOrganization_0   = runtime.ForwardResponseMessage
+	forward_Prism_DeleteOrganization_0   = runtime.ForwardResponseMessage
+	forward_Prism_VerifyUser_0           = runtime.ForwardResponseMessage
+	forward_Prism_CreateTeam_0           = runtime.ForwardResponseMessage
+	forward_Prism_GetTeam_0              = runtime.ForwardResponseMessage
+	forward_Prism_ListTeams_0            = runtime.ForwardResponseStream
+	forward_Prism_ListTeamMembers_0      = runtime.ForwardResponseStream
+	forward_Prism_ListProjectToTeam_0    = runtime.ForwardResponseStream
+	forward_Prism_ListProducts_0         = runtime.ForwardResponseStream
+	forward_Prism_CreateProduct_0        = runtime.ForwardResponseMessage
+	forward_Prism_DeleteProduct_0        = runtime.ForwardResponseMessage
+	forward_Prism_AssignProjectToTeam_0  = runtime.ForwardResponseMessage
+	forward_Prism_DeleteTeam_0           = runtime.ForwardResponseMessage
+	forward_Prism_GetIntegrationStatus_0 = runtime.ForwardResponseMessage
 )
