@@ -42,6 +42,7 @@ const (
 	Prism_DeleteTeam_FullMethodName           = "/blueapi.prism.v1.Prism/DeleteTeam"
 	Prism_GetIntegrationStatus_FullMethodName = "/blueapi.prism.v1.Prism/GetIntegrationStatus"
 	Prism_ListReportSchedules_FullMethodName  = "/blueapi.prism.v1.Prism/ListReportSchedules"
+	Prism_UpdateReportSchedule_FullMethodName = "/blueapi.prism.v1.Prism/UpdateReportSchedule"
 )
 
 // PrismClient is the client API for Prism service.
@@ -77,6 +78,7 @@ type PrismClient interface {
 	DeleteTeam(ctx context.Context, in *DeleteTeamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetIntegrationStatus(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetIntegrationStatusResponse, error)
 	ListReportSchedules(ctx context.Context, in *ListReportSchedulesRequest, opts ...grpc.CallOption) (Prism_ListReportSchedulesClient, error)
+	UpdateReportSchedule(ctx context.Context, in *ReportSchedule, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type prismClient struct {
@@ -445,6 +447,16 @@ func (x *prismListReportSchedulesClient) Recv() (*ReportSchedule, error) {
 	return m, nil
 }
 
+func (c *prismClient) UpdateReportSchedule(ctx context.Context, in *ReportSchedule, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_UpdateReportSchedule_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -478,6 +490,7 @@ type PrismServer interface {
 	DeleteTeam(context.Context, *DeleteTeamRequest) (*emptypb.Empty, error)
 	GetIntegrationStatus(context.Context, *emptypb.Empty) (*GetIntegrationStatusResponse, error)
 	ListReportSchedules(*ListReportSchedulesRequest, Prism_ListReportSchedulesServer) error
+	UpdateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -550,6 +563,9 @@ func (UnimplementedPrismServer) GetIntegrationStatus(context.Context, *emptypb.E
 }
 func (UnimplementedPrismServer) ListReportSchedules(*ListReportSchedulesRequest, Prism_ListReportSchedulesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListReportSchedules not implemented")
+}
+func (UnimplementedPrismServer) UpdateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateReportSchedule not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -978,6 +994,24 @@ func (x *prismListReportSchedulesServer) Send(m *ReportSchedule) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Prism_UpdateReportSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReportSchedule)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).UpdateReportSchedule(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_UpdateReportSchedule_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).UpdateReportSchedule(ctx, req.(*ReportSchedule))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1048,6 +1082,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetIntegrationStatus",
 			Handler:    _Prism_GetIntegrationStatus_Handler,
+		},
+		{
+			MethodName: "UpdateReportSchedule",
+			Handler:    _Prism_UpdateReportSchedule_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
