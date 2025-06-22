@@ -3726,6 +3726,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.ListReportSchedulesRequest"><span class="badge">M</span>ListReportSchedulesRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.ListTeamMembersRequest"><span class="badge">M</span>ListTeamMembersRequest</a>
                 </li>
               
@@ -3743,6 +3747,10 @@
               
                 <li>
                   <a href="#blueapi.prism.v1.Project"><span class="badge">M</span>Project</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.ReportSchedule"><span class="badge">M</span>ReportSchedule</a>
                 </li>
               
                 <li>
@@ -43450,6 +43458,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.ListReportSchedulesRequest">ListReportSchedulesRequest</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.prism.v1.ListTeamMembersRequest">ListTeamMembersRequest</h3>
         <p></p>
 
@@ -43622,6 +43637,72 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
                 <tr>
                   <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.ReportSchedule">ReportSchedule</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>schedule</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Supported values: &#34;on&#34;, &#34;off&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>schedule_cron</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>created_at</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last_update</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -43961,6 +44042,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ListReportSchedules</td>
+                <td><a href="#blueapi.prism.v1.ListReportSchedulesRequest">ListReportSchedulesRequest</a></td>
+                <td><a href="#blueapi.prism.v1.ReportSchedule">ReportSchedule</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -44186,6 +44274,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GET</td>
                 <td>/v1/integration/status</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListReportSchedules</td>
+                <td>POST</td>
+                <td>/v1/reportschedule/all:read</td>
+                <td>*</td>
               </tr>
               
             

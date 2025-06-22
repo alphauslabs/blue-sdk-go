@@ -41,6 +41,7 @@ const (
 	Prism_AssignProjectToTeam_FullMethodName  = "/blueapi.prism.v1.Prism/AssignProjectToTeam"
 	Prism_DeleteTeam_FullMethodName           = "/blueapi.prism.v1.Prism/DeleteTeam"
 	Prism_GetIntegrationStatus_FullMethodName = "/blueapi.prism.v1.Prism/GetIntegrationStatus"
+	Prism_ListReportSchedules_FullMethodName  = "/blueapi.prism.v1.Prism/ListReportSchedules"
 )
 
 // PrismClient is the client API for Prism service.
@@ -75,6 +76,7 @@ type PrismClient interface {
 	AssignProjectToTeam(ctx context.Context, in *AssignProjectToTeamRequest, opts ...grpc.CallOption) (*AssignProjectToTeamResponse, error)
 	DeleteTeam(ctx context.Context, in *DeleteTeamRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetIntegrationStatus(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*GetIntegrationStatusResponse, error)
+	ListReportSchedules(ctx context.Context, in *ListReportSchedulesRequest, opts ...grpc.CallOption) (Prism_ListReportSchedulesClient, error)
 }
 
 type prismClient struct {
@@ -410,6 +412,39 @@ func (c *prismClient) GetIntegrationStatus(ctx context.Context, in *emptypb.Empt
 	return out, nil
 }
 
+func (c *prismClient) ListReportSchedules(ctx context.Context, in *ListReportSchedulesRequest, opts ...grpc.CallOption) (Prism_ListReportSchedulesClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[5], Prism_ListReportSchedules_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListReportSchedulesClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListReportSchedulesClient interface {
+	Recv() (*ReportSchedule, error)
+	grpc.ClientStream
+}
+
+type prismListReportSchedulesClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListReportSchedulesClient) Recv() (*ReportSchedule, error) {
+	m := new(ReportSchedule)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -442,6 +477,7 @@ type PrismServer interface {
 	AssignProjectToTeam(context.Context, *AssignProjectToTeamRequest) (*AssignProjectToTeamResponse, error)
 	DeleteTeam(context.Context, *DeleteTeamRequest) (*emptypb.Empty, error)
 	GetIntegrationStatus(context.Context, *emptypb.Empty) (*GetIntegrationStatusResponse, error)
+	ListReportSchedules(*ListReportSchedulesRequest, Prism_ListReportSchedulesServer) error
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -511,6 +547,9 @@ func (UnimplementedPrismServer) DeleteTeam(context.Context, *DeleteTeamRequest) 
 }
 func (UnimplementedPrismServer) GetIntegrationStatus(context.Context, *emptypb.Empty) (*GetIntegrationStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetIntegrationStatus not implemented")
+}
+func (UnimplementedPrismServer) ListReportSchedules(*ListReportSchedulesRequest, Prism_ListReportSchedulesServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListReportSchedules not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -918,6 +957,27 @@ func _Prism_GetIntegrationStatus_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_ListReportSchedules_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListReportSchedulesRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListReportSchedules(m, &prismListReportSchedulesServer{ServerStream: stream})
+}
+
+type Prism_ListReportSchedulesServer interface {
+	Send(*ReportSchedule) error
+	grpc.ServerStream
+}
+
+type prismListReportSchedulesServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListReportSchedulesServer) Send(m *ReportSchedule) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1014,6 +1074,11 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListProducts",
 			Handler:       _Prism_ListProducts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListReportSchedules",
+			Handler:       _Prism_ListReportSchedules_Handler,
 			ServerStreams: true,
 		},
 	},
