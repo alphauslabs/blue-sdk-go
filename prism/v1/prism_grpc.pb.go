@@ -44,6 +44,7 @@ const (
 	Prism_ListReportSchedules_FullMethodName  = "/blueapi.prism.v1.Prism/ListReportSchedules"
 	Prism_UpdateReportSchedule_FullMethodName = "/blueapi.prism.v1.Prism/UpdateReportSchedule"
 	Prism_CreateReportSchedule_FullMethodName = "/blueapi.prism.v1.Prism/CreateReportSchedule"
+	Prism_UpdateOrgTimezone_FullMethodName    = "/blueapi.prism.v1.Prism/UpdateOrgTimezone"
 )
 
 // PrismClient is the client API for Prism service.
@@ -81,6 +82,7 @@ type PrismClient interface {
 	ListReportSchedules(ctx context.Context, in *ListReportSchedulesRequest, opts ...grpc.CallOption) (Prism_ListReportSchedulesClient, error)
 	UpdateReportSchedule(ctx context.Context, in *ReportSchedule, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateReportSchedule(ctx context.Context, in *ReportSchedule, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	UpdateOrgTimezone(ctx context.Context, in *UpdateOrgTimezoneRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type prismClient struct {
@@ -469,6 +471,16 @@ func (c *prismClient) CreateReportSchedule(ctx context.Context, in *ReportSchedu
 	return out, nil
 }
 
+func (c *prismClient) UpdateOrgTimezone(ctx context.Context, in *UpdateOrgTimezoneRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_UpdateOrgTimezone_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -504,6 +516,7 @@ type PrismServer interface {
 	ListReportSchedules(*ListReportSchedulesRequest, Prism_ListReportSchedulesServer) error
 	UpdateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error)
 	CreateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error)
+	UpdateOrgTimezone(context.Context, *UpdateOrgTimezoneRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -582,6 +595,9 @@ func (UnimplementedPrismServer) UpdateReportSchedule(context.Context, *ReportSch
 }
 func (UnimplementedPrismServer) CreateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateReportSchedule not implemented")
+}
+func (UnimplementedPrismServer) UpdateOrgTimezone(context.Context, *UpdateOrgTimezoneRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrgTimezone not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -1046,6 +1062,24 @@ func _Prism_CreateReportSchedule_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_UpdateOrgTimezone_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateOrgTimezoneRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).UpdateOrgTimezone(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_UpdateOrgTimezone_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).UpdateOrgTimezone(ctx, req.(*UpdateOrgTimezoneRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1124,6 +1158,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateReportSchedule",
 			Handler:    _Prism_CreateReportSchedule_Handler,
+		},
+		{
+			MethodName: "UpdateOrgTimezone",
+			Handler:    _Prism_UpdateOrgTimezone_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

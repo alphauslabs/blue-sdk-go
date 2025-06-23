@@ -3766,6 +3766,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.UpdateOrgTimezoneRequest"><span class="badge">M</span>UpdateOrgTimezoneRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.UpdateOrganizationRequest"><span class="badge">M</span>UpdateOrganizationRequest</a>
                 </li>
               
@@ -43819,6 +43823,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.UpdateOrgTimezoneRequest">UpdateOrgTimezoneRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required organization ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timezone</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Timezone in IANA format, e.g., &#34;Asia/Kuala_Lumpur&#34;. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.UpdateOrganizationRequest">UpdateOrganizationRequest</h3>
         <p></p>
 
@@ -44077,6 +44112,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>UpdateOrgTimezone</td>
+                <td><a href="#blueapi.prism.v1.UpdateOrgTimezoneRequest">UpdateOrgTimezoneRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -44331,6 +44373,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>CreateReportSchedule</td>
                 <td>POST</td>
                 <td>/v1/reportschedule</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateOrgTimezone</td>
+                <td>PUT</td>
+                <td>/v1/org/{id}/timezone</td>
                 <td>*</td>
               </tr>
               
