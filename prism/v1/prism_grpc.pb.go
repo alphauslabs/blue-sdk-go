@@ -20,31 +20,32 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Prism_Test_FullMethodName                 = "/blueapi.prism.v1.Prism/Test"
-	Prism_CreateProject_FullMethodName        = "/blueapi.prism.v1.Prism/CreateProject"
-	Prism_GetProject_FullMethodName           = "/blueapi.prism.v1.Prism/GetProject"
-	Prism_DeleteProject_FullMethodName        = "/blueapi.prism.v1.Prism/DeleteProject"
-	Prism_ListProjects_FullMethodName         = "/blueapi.prism.v1.Prism/ListProjects"
-	Prism_CreateOrganization_FullMethodName   = "/blueapi.prism.v1.Prism/CreateOrganization"
-	Prism_GetOrganization_FullMethodName      = "/blueapi.prism.v1.Prism/GetOrganization"
-	Prism_UpdateOrganization_FullMethodName   = "/blueapi.prism.v1.Prism/UpdateOrganization"
-	Prism_DeleteOrganization_FullMethodName   = "/blueapi.prism.v1.Prism/DeleteOrganization"
-	Prism_VerifyUser_FullMethodName           = "/blueapi.prism.v1.Prism/VerifyUser"
-	Prism_CreateTeam_FullMethodName           = "/blueapi.prism.v1.Prism/CreateTeam"
-	Prism_GetTeam_FullMethodName              = "/blueapi.prism.v1.Prism/GetTeam"
-	Prism_ListTeams_FullMethodName            = "/blueapi.prism.v1.Prism/ListTeams"
-	Prism_ListTeamMembers_FullMethodName      = "/blueapi.prism.v1.Prism/ListTeamMembers"
-	Prism_ListProjectToTeam_FullMethodName    = "/blueapi.prism.v1.Prism/ListProjectToTeam"
-	Prism_ListProducts_FullMethodName         = "/blueapi.prism.v1.Prism/ListProducts"
-	Prism_CreateProduct_FullMethodName        = "/blueapi.prism.v1.Prism/CreateProduct"
-	Prism_DeleteProduct_FullMethodName        = "/blueapi.prism.v1.Prism/DeleteProduct"
-	Prism_AssignProjectToTeam_FullMethodName  = "/blueapi.prism.v1.Prism/AssignProjectToTeam"
-	Prism_DeleteTeam_FullMethodName           = "/blueapi.prism.v1.Prism/DeleteTeam"
-	Prism_GetIntegrationStatus_FullMethodName = "/blueapi.prism.v1.Prism/GetIntegrationStatus"
-	Prism_ListReportSchedules_FullMethodName  = "/blueapi.prism.v1.Prism/ListReportSchedules"
-	Prism_UpdateReportSchedule_FullMethodName = "/blueapi.prism.v1.Prism/UpdateReportSchedule"
-	Prism_CreateReportSchedule_FullMethodName = "/blueapi.prism.v1.Prism/CreateReportSchedule"
-	Prism_UpdateOrgTimezone_FullMethodName    = "/blueapi.prism.v1.Prism/UpdateOrgTimezone"
+	Prism_Test_FullMethodName                  = "/blueapi.prism.v1.Prism/Test"
+	Prism_CreateProject_FullMethodName         = "/blueapi.prism.v1.Prism/CreateProject"
+	Prism_GetProject_FullMethodName            = "/blueapi.prism.v1.Prism/GetProject"
+	Prism_DeleteProject_FullMethodName         = "/blueapi.prism.v1.Prism/DeleteProject"
+	Prism_ListProjects_FullMethodName          = "/blueapi.prism.v1.Prism/ListProjects"
+	Prism_CreateOrganization_FullMethodName    = "/blueapi.prism.v1.Prism/CreateOrganization"
+	Prism_GetOrganization_FullMethodName       = "/blueapi.prism.v1.Prism/GetOrganization"
+	Prism_UpdateOrganization_FullMethodName    = "/blueapi.prism.v1.Prism/UpdateOrganization"
+	Prism_DeleteOrganization_FullMethodName    = "/blueapi.prism.v1.Prism/DeleteOrganization"
+	Prism_VerifyUser_FullMethodName            = "/blueapi.prism.v1.Prism/VerifyUser"
+	Prism_CreateTeam_FullMethodName            = "/blueapi.prism.v1.Prism/CreateTeam"
+	Prism_GetTeam_FullMethodName               = "/blueapi.prism.v1.Prism/GetTeam"
+	Prism_ListTeams_FullMethodName             = "/blueapi.prism.v1.Prism/ListTeams"
+	Prism_ListTeamMembers_FullMethodName       = "/blueapi.prism.v1.Prism/ListTeamMembers"
+	Prism_ListProjectToTeam_FullMethodName     = "/blueapi.prism.v1.Prism/ListProjectToTeam"
+	Prism_ListProducts_FullMethodName          = "/blueapi.prism.v1.Prism/ListProducts"
+	Prism_CreateProduct_FullMethodName         = "/blueapi.prism.v1.Prism/CreateProduct"
+	Prism_DeleteProduct_FullMethodName         = "/blueapi.prism.v1.Prism/DeleteProduct"
+	Prism_AssignProjectToTeam_FullMethodName   = "/blueapi.prism.v1.Prism/AssignProjectToTeam"
+	Prism_DeleteTeam_FullMethodName            = "/blueapi.prism.v1.Prism/DeleteTeam"
+	Prism_GetIntegrationStatus_FullMethodName  = "/blueapi.prism.v1.Prism/GetIntegrationStatus"
+	Prism_ListReportSchedules_FullMethodName   = "/blueapi.prism.v1.Prism/ListReportSchedules"
+	Prism_UpdateReportSchedule_FullMethodName  = "/blueapi.prism.v1.Prism/UpdateReportSchedule"
+	Prism_CreateReportSchedule_FullMethodName  = "/blueapi.prism.v1.Prism/CreateReportSchedule"
+	Prism_UpdateOrgTimezone_FullMethodName     = "/blueapi.prism.v1.Prism/UpdateOrgTimezone"
+	Prism_ListIntegrationStatus_FullMethodName = "/blueapi.prism.v1.Prism/ListIntegrationStatus"
 )
 
 // PrismClient is the client API for Prism service.
@@ -83,6 +84,7 @@ type PrismClient interface {
 	UpdateReportSchedule(ctx context.Context, in *ReportSchedule, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	CreateReportSchedule(ctx context.Context, in *ReportSchedule, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateOrgTimezone(ctx context.Context, in *UpdateOrgTimezoneRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ListIntegrationStatus(ctx context.Context, in *ListIntegrationStatusRequest, opts ...grpc.CallOption) (Prism_ListIntegrationStatusClient, error)
 }
 
 type prismClient struct {
@@ -481,6 +483,39 @@ func (c *prismClient) UpdateOrgTimezone(ctx context.Context, in *UpdateOrgTimezo
 	return out, nil
 }
 
+func (c *prismClient) ListIntegrationStatus(ctx context.Context, in *ListIntegrationStatusRequest, opts ...grpc.CallOption) (Prism_ListIntegrationStatusClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[6], Prism_ListIntegrationStatus_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListIntegrationStatusClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListIntegrationStatusClient interface {
+	Recv() (*IntegrationStatus, error)
+	grpc.ClientStream
+}
+
+type prismListIntegrationStatusClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListIntegrationStatusClient) Recv() (*IntegrationStatus, error) {
+	m := new(IntegrationStatus)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -517,6 +552,7 @@ type PrismServer interface {
 	UpdateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error)
 	CreateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error)
 	UpdateOrgTimezone(context.Context, *UpdateOrgTimezoneRequest) (*emptypb.Empty, error)
+	ListIntegrationStatus(*ListIntegrationStatusRequest, Prism_ListIntegrationStatusServer) error
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -598,6 +634,9 @@ func (UnimplementedPrismServer) CreateReportSchedule(context.Context, *ReportSch
 }
 func (UnimplementedPrismServer) UpdateOrgTimezone(context.Context, *UpdateOrgTimezoneRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrgTimezone not implemented")
+}
+func (UnimplementedPrismServer) ListIntegrationStatus(*ListIntegrationStatusRequest, Prism_ListIntegrationStatusServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListIntegrationStatus not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -1080,6 +1119,27 @@ func _Prism_UpdateOrgTimezone_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_ListIntegrationStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListIntegrationStatusRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListIntegrationStatus(m, &prismListIntegrationStatusServer{ServerStream: stream})
+}
+
+type Prism_ListIntegrationStatusServer interface {
+	Send(*IntegrationStatus) error
+	grpc.ServerStream
+}
+
+type prismListIntegrationStatusServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListIntegrationStatusServer) Send(m *IntegrationStatus) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1193,6 +1253,11 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListReportSchedules",
 			Handler:       _Prism_ListReportSchedules_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListIntegrationStatus",
+			Handler:       _Prism_ListIntegrationStatus_Handler,
 			ServerStreams: true,
 		},
 	},

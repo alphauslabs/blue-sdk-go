@@ -3710,6 +3710,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.ListIntegrationStatusRequest"><span class="badge">M</span>ListIntegrationStatusRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.ListProductsRequest"><span class="badge">M</span>ListProductsRequest</a>
                 </li>
               
@@ -43407,11 +43411,32 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>&#34;github&#34;, &#34;slack&#34; </p></td>
                 </tr>
               
                 <tr>
                   <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;on&#34;, &#34;off&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>teamName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last_update</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -43421,6 +43446,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
           </table>
 
           
+
+        
+      
+        <h3 id="blueapi.prism.v1.ListIntegrationStatusRequest">ListIntegrationStatusRequest</h3>
+        <p></p>
+
+        
 
         
       
@@ -44133,6 +44165,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ListIntegrationStatus</td>
+                <td><a href="#blueapi.prism.v1.ListIntegrationStatusRequest">ListIntegrationStatusRequest</a></td>
+                <td><a href="#blueapi.prism.v1.IntegrationStatus">IntegrationStatus</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -44397,6 +44436,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>UpdateOrgTimezone</td>
                 <td>PUT</td>
                 <td>/v1/org/{id}/timezone</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListIntegrationStatus</td>
+                <td>POST</td>
+                <td>/v1/integration/status/all:read</td>
                 <td>*</td>
               </tr>
               
