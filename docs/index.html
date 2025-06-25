@@ -3742,6 +3742,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.ListWorkflowsRequest"><span class="badge">M</span>ListWorkflowsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.Member"><span class="badge">M</span>Member</a>
                 </li>
               
@@ -3778,11 +3782,19 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.UpdateWorkflowRequest"><span class="badge">M</span>UpdateWorkflowRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.VerifyUserRequest"><span class="badge">M</span>VerifyUserRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.prism.v1.VerifyUserResponse"><span class="badge">M</span>VerifyUserResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.prism.v1.Workflow"><span class="badge">M</span>Workflow</a>
                 </li>
               
               
@@ -43550,6 +43562,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.ListWorkflowsRequest">ListWorkflowsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.prism.v1.Member">Member</h3>
         <p></p>
 
@@ -43945,6 +43964,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.UpdateWorkflowRequest">UpdateWorkflowRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required workflow name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Allowed values are &#34;on&#34; and &#34;off&#34;. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.VerifyUserRequest">VerifyUserRequest</h3>
         <p></p>
 
@@ -43974,6 +44024,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.prism.v1.Workflow">Workflow</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Allowed values are &#34;on&#34; and &#34;off&#34;. </p></td>
                 </tr>
               
             </tbody>
@@ -44176,6 +44257,20 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>ListIntegrationStatus</td>
                 <td><a href="#blueapi.prism.v1.ListIntegrationStatusRequest">ListIntegrationStatusRequest</a></td>
                 <td><a href="#blueapi.prism.v1.IntegrationStatus">IntegrationStatus</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateWorkflow</td>
+                <td><a href="#blueapi.prism.v1.UpdateWorkflowRequest">UpdateWorkflowRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListWorkflows</td>
+                <td><a href="#blueapi.prism.v1.ListWorkflowsRequest">ListWorkflowsRequest</a></td>
+                <td><a href="#blueapi.prism.v1.Workflow">Workflow</a> stream</td>
                 <td><p></p></td>
               </tr>
             
@@ -44453,6 +44548,26 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>ListIntegrationStatus</td>
                 <td>POST</td>
                 <td>/v1/integration/status/all:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateWorkflow</td>
+                <td>PUT</td>
+                <td>/v1/workflow/{name}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListWorkflows</td>
+                <td>POST</td>
+                <td>/v1/workflow/all:read</td>
                 <td>*</td>
               </tr>
               

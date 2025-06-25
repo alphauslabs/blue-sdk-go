@@ -46,6 +46,8 @@ const (
 	Prism_CreateReportSchedule_FullMethodName  = "/blueapi.prism.v1.Prism/CreateReportSchedule"
 	Prism_UpdateOrgTimezone_FullMethodName     = "/blueapi.prism.v1.Prism/UpdateOrgTimezone"
 	Prism_ListIntegrationStatus_FullMethodName = "/blueapi.prism.v1.Prism/ListIntegrationStatus"
+	Prism_UpdateWorkflow_FullMethodName        = "/blueapi.prism.v1.Prism/UpdateWorkflow"
+	Prism_ListWorkflows_FullMethodName         = "/blueapi.prism.v1.Prism/ListWorkflows"
 )
 
 // PrismClient is the client API for Prism service.
@@ -85,6 +87,8 @@ type PrismClient interface {
 	CreateReportSchedule(ctx context.Context, in *ReportSchedule, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	UpdateOrgTimezone(ctx context.Context, in *UpdateOrgTimezoneRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListIntegrationStatus(ctx context.Context, in *ListIntegrationStatusRequest, opts ...grpc.CallOption) (Prism_ListIntegrationStatusClient, error)
+	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (Prism_ListWorkflowsClient, error)
 }
 
 type prismClient struct {
@@ -516,6 +520,49 @@ func (x *prismListIntegrationStatusClient) Recv() (*IntegrationStatus, error) {
 	return m, nil
 }
 
+func (c *prismClient) UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_UpdateWorkflow_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *prismClient) ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (Prism_ListWorkflowsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Prism_ServiceDesc.Streams[7], Prism_ListWorkflows_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &prismListWorkflowsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Prism_ListWorkflowsClient interface {
+	Recv() (*Workflow, error)
+	grpc.ClientStream
+}
+
+type prismListWorkflowsClient struct {
+	grpc.ClientStream
+}
+
+func (x *prismListWorkflowsClient) Recv() (*Workflow, error) {
+	m := new(Workflow)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -553,6 +600,8 @@ type PrismServer interface {
 	CreateReportSchedule(context.Context, *ReportSchedule) (*emptypb.Empty, error)
 	UpdateOrgTimezone(context.Context, *UpdateOrgTimezoneRequest) (*emptypb.Empty, error)
 	ListIntegrationStatus(*ListIntegrationStatusRequest, Prism_ListIntegrationStatusServer) error
+	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*emptypb.Empty, error)
+	ListWorkflows(*ListWorkflowsRequest, Prism_ListWorkflowsServer) error
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -637,6 +686,12 @@ func (UnimplementedPrismServer) UpdateOrgTimezone(context.Context, *UpdateOrgTim
 }
 func (UnimplementedPrismServer) ListIntegrationStatus(*ListIntegrationStatusRequest, Prism_ListIntegrationStatusServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListIntegrationStatus not implemented")
+}
+func (UnimplementedPrismServer) UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWorkflow not implemented")
+}
+func (UnimplementedPrismServer) ListWorkflows(*ListWorkflowsRequest, Prism_ListWorkflowsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListWorkflows not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -1140,6 +1195,45 @@ func (x *prismListIntegrationStatusServer) Send(m *IntegrationStatus) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Prism_UpdateWorkflow_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWorkflowRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).UpdateWorkflow(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_UpdateWorkflow_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).UpdateWorkflow(ctx, req.(*UpdateWorkflowRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Prism_ListWorkflows_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListWorkflowsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(PrismServer).ListWorkflows(m, &prismListWorkflowsServer{ServerStream: stream})
+}
+
+type Prism_ListWorkflowsServer interface {
+	Send(*Workflow) error
+	grpc.ServerStream
+}
+
+type prismListWorkflowsServer struct {
+	grpc.ServerStream
+}
+
+func (x *prismListWorkflowsServer) Send(m *Workflow) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1223,6 +1317,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "UpdateOrgTimezone",
 			Handler:    _Prism_UpdateOrgTimezone_Handler,
 		},
+		{
+			MethodName: "UpdateWorkflow",
+			Handler:    _Prism_UpdateWorkflow_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -1258,6 +1356,11 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListIntegrationStatus",
 			Handler:       _Prism_ListIntegrationStatus_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListWorkflows",
+			Handler:       _Prism_ListWorkflows_Handler,
 			ServerStreams: true,
 		},
 	},
