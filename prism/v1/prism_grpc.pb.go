@@ -49,6 +49,7 @@ const (
 	Prism_UpdateWorkflow_FullMethodName        = "/blueapi.prism.v1.Prism/UpdateWorkflow"
 	Prism_ListWorkflows_FullMethodName         = "/blueapi.prism.v1.Prism/ListWorkflows"
 	Prism_ListActivities_FullMethodName        = "/blueapi.prism.v1.Prism/ListActivities"
+	Prism_JoinOrganization_FullMethodName      = "/blueapi.prism.v1.Prism/JoinOrganization"
 )
 
 // PrismClient is the client API for Prism service.
@@ -91,6 +92,7 @@ type PrismClient interface {
 	UpdateWorkflow(ctx context.Context, in *UpdateWorkflowRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (Prism_ListWorkflowsClient, error)
 	ListActivities(ctx context.Context, in *ListActivitiesRequest, opts ...grpc.CallOption) (Prism_ListActivitiesClient, error)
+	JoinOrganization(ctx context.Context, in *JoinOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type prismClient struct {
@@ -598,6 +600,16 @@ func (x *prismListActivitiesClient) Recv() (*Activity, error) {
 	return m, nil
 }
 
+func (c *prismClient) JoinOrganization(ctx context.Context, in *JoinOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_JoinOrganization_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -638,6 +650,7 @@ type PrismServer interface {
 	UpdateWorkflow(context.Context, *UpdateWorkflowRequest) (*emptypb.Empty, error)
 	ListWorkflows(*ListWorkflowsRequest, Prism_ListWorkflowsServer) error
 	ListActivities(*ListActivitiesRequest, Prism_ListActivitiesServer) error
+	JoinOrganization(context.Context, *JoinOrganizationRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -731,6 +744,9 @@ func (UnimplementedPrismServer) ListWorkflows(*ListWorkflowsRequest, Prism_ListW
 }
 func (UnimplementedPrismServer) ListActivities(*ListActivitiesRequest, Prism_ListActivitiesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListActivities not implemented")
+}
+func (UnimplementedPrismServer) JoinOrganization(context.Context, *JoinOrganizationRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method JoinOrganization not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -1294,6 +1310,24 @@ func (x *prismListActivitiesServer) Send(m *Activity) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Prism_JoinOrganization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(JoinOrganizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).JoinOrganization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_JoinOrganization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).JoinOrganization(ctx, req.(*JoinOrganizationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1380,6 +1414,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateWorkflow",
 			Handler:    _Prism_UpdateWorkflow_Handler,
+		},
+		{
+			MethodName: "JoinOrganization",
+			Handler:    _Prism_JoinOrganization_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

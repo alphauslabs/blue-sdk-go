@@ -3714,6 +3714,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.prism.v1.JoinOrganizationRequest"><span class="badge">M</span>JoinOrganizationRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.prism.v1.ListActivitiesRequest"><span class="badge">M</span>ListActivitiesRequest</a>
                 </li>
               
@@ -43514,6 +43518,51 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.prism.v1.JoinOrganizationRequest">JoinOrganizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required user email. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional user name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>social</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional &#34;google&#34;, &#34;github&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.prism.v1.ListActivitiesRequest">ListActivitiesRequest</h3>
         <p></p>
 
@@ -44334,6 +44383,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>JoinOrganization</td>
+                <td><a href="#blueapi.prism.v1.JoinOrganizationRequest">JoinOrganizationRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -44638,6 +44694,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>ListActivities</td>
                 <td>POST</td>
                 <td>/v1/activity/all:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>JoinOrganization</td>
+                <td>POST</td>
+                <td>/v1/org/join</td>
                 <td>*</td>
               </tr>
               
