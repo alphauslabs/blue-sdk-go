@@ -20,36 +20,37 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Prism_Test_FullMethodName                  = "/blueapi.prism.v1.Prism/Test"
-	Prism_CreateProject_FullMethodName         = "/blueapi.prism.v1.Prism/CreateProject"
-	Prism_GetProject_FullMethodName            = "/blueapi.prism.v1.Prism/GetProject"
-	Prism_DeleteProject_FullMethodName         = "/blueapi.prism.v1.Prism/DeleteProject"
-	Prism_ListProjects_FullMethodName          = "/blueapi.prism.v1.Prism/ListProjects"
-	Prism_CreateOrganization_FullMethodName    = "/blueapi.prism.v1.Prism/CreateOrganization"
-	Prism_GetOrganization_FullMethodName       = "/blueapi.prism.v1.Prism/GetOrganization"
-	Prism_UpdateOrganization_FullMethodName    = "/blueapi.prism.v1.Prism/UpdateOrganization"
-	Prism_DeleteOrganization_FullMethodName    = "/blueapi.prism.v1.Prism/DeleteOrganization"
-	Prism_VerifyUser_FullMethodName            = "/blueapi.prism.v1.Prism/VerifyUser"
-	Prism_CreateTeam_FullMethodName            = "/blueapi.prism.v1.Prism/CreateTeam"
-	Prism_GetTeam_FullMethodName               = "/blueapi.prism.v1.Prism/GetTeam"
-	Prism_ListTeams_FullMethodName             = "/blueapi.prism.v1.Prism/ListTeams"
-	Prism_ListTeamMembers_FullMethodName       = "/blueapi.prism.v1.Prism/ListTeamMembers"
-	Prism_ListProjectToTeam_FullMethodName     = "/blueapi.prism.v1.Prism/ListProjectToTeam"
-	Prism_ListProducts_FullMethodName          = "/blueapi.prism.v1.Prism/ListProducts"
-	Prism_CreateProduct_FullMethodName         = "/blueapi.prism.v1.Prism/CreateProduct"
-	Prism_DeleteProduct_FullMethodName         = "/blueapi.prism.v1.Prism/DeleteProduct"
-	Prism_AssignProjectToTeam_FullMethodName   = "/blueapi.prism.v1.Prism/AssignProjectToTeam"
-	Prism_DeleteTeam_FullMethodName            = "/blueapi.prism.v1.Prism/DeleteTeam"
-	Prism_GetIntegrationStatus_FullMethodName  = "/blueapi.prism.v1.Prism/GetIntegrationStatus"
-	Prism_ListReportSchedules_FullMethodName   = "/blueapi.prism.v1.Prism/ListReportSchedules"
-	Prism_UpdateReportSchedule_FullMethodName  = "/blueapi.prism.v1.Prism/UpdateReportSchedule"
-	Prism_CreateReportSchedule_FullMethodName  = "/blueapi.prism.v1.Prism/CreateReportSchedule"
-	Prism_UpdateOrgTimezone_FullMethodName     = "/blueapi.prism.v1.Prism/UpdateOrgTimezone"
-	Prism_ListIntegrationStatus_FullMethodName = "/blueapi.prism.v1.Prism/ListIntegrationStatus"
-	Prism_UpdateWorkflow_FullMethodName        = "/blueapi.prism.v1.Prism/UpdateWorkflow"
-	Prism_ListWorkflows_FullMethodName         = "/blueapi.prism.v1.Prism/ListWorkflows"
-	Prism_ListActivities_FullMethodName        = "/blueapi.prism.v1.Prism/ListActivities"
-	Prism_JoinOrganization_FullMethodName      = "/blueapi.prism.v1.Prism/JoinOrganization"
+	Prism_Test_FullMethodName                     = "/blueapi.prism.v1.Prism/Test"
+	Prism_CreateProject_FullMethodName            = "/blueapi.prism.v1.Prism/CreateProject"
+	Prism_GetProject_FullMethodName               = "/blueapi.prism.v1.Prism/GetProject"
+	Prism_DeleteProject_FullMethodName            = "/blueapi.prism.v1.Prism/DeleteProject"
+	Prism_ListProjects_FullMethodName             = "/blueapi.prism.v1.Prism/ListProjects"
+	Prism_CreateOrganization_FullMethodName       = "/blueapi.prism.v1.Prism/CreateOrganization"
+	Prism_GetOrganization_FullMethodName          = "/blueapi.prism.v1.Prism/GetOrganization"
+	Prism_UpdateOrganization_FullMethodName       = "/blueapi.prism.v1.Prism/UpdateOrganization"
+	Prism_DeleteOrganization_FullMethodName       = "/blueapi.prism.v1.Prism/DeleteOrganization"
+	Prism_VerifyUser_FullMethodName               = "/blueapi.prism.v1.Prism/VerifyUser"
+	Prism_CreateTeam_FullMethodName               = "/blueapi.prism.v1.Prism/CreateTeam"
+	Prism_GetTeam_FullMethodName                  = "/blueapi.prism.v1.Prism/GetTeam"
+	Prism_ListTeams_FullMethodName                = "/blueapi.prism.v1.Prism/ListTeams"
+	Prism_ListTeamMembers_FullMethodName          = "/blueapi.prism.v1.Prism/ListTeamMembers"
+	Prism_ListProjectToTeam_FullMethodName        = "/blueapi.prism.v1.Prism/ListProjectToTeam"
+	Prism_ListProducts_FullMethodName             = "/blueapi.prism.v1.Prism/ListProducts"
+	Prism_CreateProduct_FullMethodName            = "/blueapi.prism.v1.Prism/CreateProduct"
+	Prism_DeleteProduct_FullMethodName            = "/blueapi.prism.v1.Prism/DeleteProduct"
+	Prism_AssignProjectToTeam_FullMethodName      = "/blueapi.prism.v1.Prism/AssignProjectToTeam"
+	Prism_DeleteTeam_FullMethodName               = "/blueapi.prism.v1.Prism/DeleteTeam"
+	Prism_GetIntegrationStatus_FullMethodName     = "/blueapi.prism.v1.Prism/GetIntegrationStatus"
+	Prism_ListReportSchedules_FullMethodName      = "/blueapi.prism.v1.Prism/ListReportSchedules"
+	Prism_UpdateReportSchedule_FullMethodName     = "/blueapi.prism.v1.Prism/UpdateReportSchedule"
+	Prism_CreateReportSchedule_FullMethodName     = "/blueapi.prism.v1.Prism/CreateReportSchedule"
+	Prism_UpdateOrgTimezone_FullMethodName        = "/blueapi.prism.v1.Prism/UpdateOrgTimezone"
+	Prism_ListIntegrationStatus_FullMethodName    = "/blueapi.prism.v1.Prism/ListIntegrationStatus"
+	Prism_UpdateWorkflow_FullMethodName           = "/blueapi.prism.v1.Prism/UpdateWorkflow"
+	Prism_ListWorkflows_FullMethodName            = "/blueapi.prism.v1.Prism/ListWorkflows"
+	Prism_ListActivities_FullMethodName           = "/blueapi.prism.v1.Prism/ListActivities"
+	Prism_JoinOrganization_FullMethodName         = "/blueapi.prism.v1.Prism/JoinOrganization"
+	Prism_GenerateOrganizationCode_FullMethodName = "/blueapi.prism.v1.Prism/GenerateOrganizationCode"
 )
 
 // PrismClient is the client API for Prism service.
@@ -93,6 +94,7 @@ type PrismClient interface {
 	ListWorkflows(ctx context.Context, in *ListWorkflowsRequest, opts ...grpc.CallOption) (Prism_ListWorkflowsClient, error)
 	ListActivities(ctx context.Context, in *ListActivitiesRequest, opts ...grpc.CallOption) (Prism_ListActivitiesClient, error)
 	JoinOrganization(ctx context.Context, in *JoinOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	GenerateOrganizationCode(ctx context.Context, in *GenerateOrganizationCodeRequest, opts ...grpc.CallOption) (*GenerateOrganizationCodeResponse, error)
 }
 
 type prismClient struct {
@@ -610,6 +612,16 @@ func (c *prismClient) JoinOrganization(ctx context.Context, in *JoinOrganization
 	return out, nil
 }
 
+func (c *prismClient) GenerateOrganizationCode(ctx context.Context, in *GenerateOrganizationCodeRequest, opts ...grpc.CallOption) (*GenerateOrganizationCodeResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GenerateOrganizationCodeResponse)
+	err := c.cc.Invoke(ctx, Prism_GenerateOrganizationCode_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -651,6 +663,7 @@ type PrismServer interface {
 	ListWorkflows(*ListWorkflowsRequest, Prism_ListWorkflowsServer) error
 	ListActivities(*ListActivitiesRequest, Prism_ListActivitiesServer) error
 	JoinOrganization(context.Context, *JoinOrganizationRequest) (*emptypb.Empty, error)
+	GenerateOrganizationCode(context.Context, *GenerateOrganizationCodeRequest) (*GenerateOrganizationCodeResponse, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -747,6 +760,9 @@ func (UnimplementedPrismServer) ListActivities(*ListActivitiesRequest, Prism_Lis
 }
 func (UnimplementedPrismServer) JoinOrganization(context.Context, *JoinOrganizationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method JoinOrganization not implemented")
+}
+func (UnimplementedPrismServer) GenerateOrganizationCode(context.Context, *GenerateOrganizationCodeRequest) (*GenerateOrganizationCodeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GenerateOrganizationCode not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -1328,6 +1344,24 @@ func _Prism_JoinOrganization_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_GenerateOrganizationCode_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GenerateOrganizationCodeRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).GenerateOrganizationCode(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_GenerateOrganizationCode_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).GenerateOrganizationCode(ctx, req.(*GenerateOrganizationCodeRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1418,6 +1452,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "JoinOrganization",
 			Handler:    _Prism_JoinOrganization_Handler,
+		},
+		{
+			MethodName: "GenerateOrganizationCode",
+			Handler:    _Prism_GenerateOrganizationCode_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
