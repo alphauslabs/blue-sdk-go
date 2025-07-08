@@ -51,6 +51,7 @@ const (
 	Prism_ListActivities_FullMethodName           = "/blueapi.prism.v1.Prism/ListActivities"
 	Prism_JoinOrganization_FullMethodName         = "/blueapi.prism.v1.Prism/JoinOrganization"
 	Prism_GenerateOrganizationCode_FullMethodName = "/blueapi.prism.v1.Prism/GenerateOrganizationCode"
+	Prism_ShareGDrive_FullMethodName              = "/blueapi.prism.v1.Prism/ShareGDrive"
 )
 
 // PrismClient is the client API for Prism service.
@@ -95,6 +96,7 @@ type PrismClient interface {
 	ListActivities(ctx context.Context, in *ListActivitiesRequest, opts ...grpc.CallOption) (Prism_ListActivitiesClient, error)
 	JoinOrganization(ctx context.Context, in *JoinOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GenerateOrganizationCode(ctx context.Context, in *GenerateOrganizationCodeRequest, opts ...grpc.CallOption) (*GenerateOrganizationCodeResponse, error)
+	ShareGDrive(ctx context.Context, in *ShareGDriveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type prismClient struct {
@@ -622,6 +624,16 @@ func (c *prismClient) GenerateOrganizationCode(ctx context.Context, in *Generate
 	return out, nil
 }
 
+func (c *prismClient) ShareGDrive(ctx context.Context, in *ShareGDriveRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Prism_ShareGDrive_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // PrismServer is the server API for Prism service.
 // All implementations must embed UnimplementedPrismServer
 // for forward compatibility
@@ -664,6 +676,7 @@ type PrismServer interface {
 	ListActivities(*ListActivitiesRequest, Prism_ListActivitiesServer) error
 	JoinOrganization(context.Context, *JoinOrganizationRequest) (*emptypb.Empty, error)
 	GenerateOrganizationCode(context.Context, *GenerateOrganizationCodeRequest) (*GenerateOrganizationCodeResponse, error)
+	ShareGDrive(context.Context, *ShareGDriveRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedPrismServer()
 }
 
@@ -763,6 +776,9 @@ func (UnimplementedPrismServer) JoinOrganization(context.Context, *JoinOrganizat
 }
 func (UnimplementedPrismServer) GenerateOrganizationCode(context.Context, *GenerateOrganizationCodeRequest) (*GenerateOrganizationCodeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GenerateOrganizationCode not implemented")
+}
+func (UnimplementedPrismServer) ShareGDrive(context.Context, *ShareGDriveRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ShareGDrive not implemented")
 }
 func (UnimplementedPrismServer) mustEmbedUnimplementedPrismServer() {}
 
@@ -1362,6 +1378,24 @@ func _Prism_GenerateOrganizationCode_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Prism_ShareGDrive_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ShareGDriveRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(PrismServer).ShareGDrive(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Prism_ShareGDrive_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(PrismServer).ShareGDrive(ctx, req.(*ShareGDriveRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Prism_ServiceDesc is the grpc.ServiceDesc for Prism service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1456,6 +1490,10 @@ var Prism_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GenerateOrganizationCode",
 			Handler:    _Prism_GenerateOrganizationCode_Handler,
+		},
+		{
+			MethodName: "ShareGDrive",
+			Handler:    _Prism_ShareGDrive_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
