@@ -180,7 +180,7 @@ type BillingClient interface {
 	ListInvoiceStatus(ctx context.Context, in *ListInvoiceStatusRequest, opts ...grpc.CallOption) (Billing_ListInvoiceStatusClient, error)
 	// Gets an invoice.
 	GetInvoice(ctx context.Context, in *GetInvoiceRequest, opts ...grpc.CallOption) (*api.Invoice, error)
-	// WORK-IN-PROGRESS: Reads list of the invoice.
+	// Reads list of the invoice.
 	ListInvoice(ctx context.Context, in *ListInvoiceRequest, opts ...grpc.CallOption) (Billing_ListInvoiceClient, error)
 	// Updates an invoice preview. Only available in Ripple.
 	UpdateInvoicePreviews(ctx context.Context, in *UpdateInvoicePreviewsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -2243,7 +2243,7 @@ type BillingServer interface {
 	ListInvoiceStatus(*ListInvoiceStatusRequest, Billing_ListInvoiceStatusServer) error
 	// Gets an invoice.
 	GetInvoice(context.Context, *GetInvoiceRequest) (*api.Invoice, error)
-	// WORK-IN-PROGRESS: Reads list of the invoice.
+	// Reads list of the invoice.
 	ListInvoice(*ListInvoiceRequest, Billing_ListInvoiceServer) error
 	// Updates an invoice preview. Only available in Ripple.
 	UpdateInvoicePreviews(context.Context, *UpdateInvoicePreviewsRequest) (*emptypb.Empty, error)
