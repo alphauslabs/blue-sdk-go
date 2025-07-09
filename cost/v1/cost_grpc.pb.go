@@ -12,7 +12,7 @@ import (
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	v1 "github.com/alphauslabs/blue-sdk-go/api/ripple/v1"
 	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
-	protos "github.com/alphauslabs/blue-sdk-go/protos"
+	protos "github.com/alphauslabs/blue-internal-go/protos"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
