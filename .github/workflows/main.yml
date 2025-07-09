@@ -18,8 +18,17 @@ jobs:
       with:
         go-version: '1.20'
 
-    - name: Test all
-      run: go test -v ./...
+    - name: Configure Git for private modules
+      run: |
+        git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf "https://github.com/"
+
+    - name: Download and test
+      env:
+        GOPRIVATE: github.com/alphauslabs/*
+      run: |
+        go get github.com/alphauslabs/blue-internal-go/protos@latest
+        go mod tidy
+        go test -v ./...
 
     - name: Generate functions
       env:
