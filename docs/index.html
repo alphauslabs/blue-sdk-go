@@ -3555,6 +3555,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.GetAwsAccountsRequest"><span class="badge">M</span>GetAwsAccountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetAwsAccountsResponse"><span class="badge">M</span>GetAwsAccountsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetAwsAccountsResponse.LinkedAccountToPayerIdEntry"><span class="badge">M</span>GetAwsAccountsResponse.LinkedAccountToPayerIdEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetCostExplorerAccessTemplateUrlRequest"><span class="badge">M</span>GetCostExplorerAccessTemplateUrlRequest</a>
                 </li>
               
@@ -41747,6 +41759,106 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.GetAwsAccountsRequest">GetAwsAccountsRequest</h3>
+        <p>Response message for the Flow.GetAwsAccounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetAwsAccountsResponse">GetAwsAccountsResponse</h3>
+        <p>Response message for the Flow.GetAwsAccounts rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerAccounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>all payers registered on billing group </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkedAccountToPayerId</td>
+                  <td><a href="#blueapi.flow.v1.GetAwsAccountsResponse.LinkedAccountToPayerIdEntry">GetAwsAccountsResponse.LinkedAccountToPayerIdEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map of aws accountid to its payer id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetAwsAccountsResponse.LinkedAccountToPayerIdEntry">GetAwsAccountsResponse.LinkedAccountToPayerIdEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.GetCostExplorerAccessTemplateUrlRequest">GetCostExplorerAccessTemplateUrlRequest</h3>
         <p>Request message for the Flow.GetCostExplorerAccessTemplateUrl rpc.</p><p>This endpoint only supports the 'apionly' template type.</p>
 
@@ -42751,6 +42863,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Gets the daily cost and usage details.</p></td>
               </tr>
             
+              <tr>
+                <td>GetAwsAccounts</td>
+                <td><a href="#blueapi.flow.v1.GetAwsAccountsRequest">GetAwsAccountsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetAwsAccountsResponse">GetAwsAccountsResponse</a></td>
+                <td><p>Returns all the aws accounts and its payer of the msp id</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -42855,6 +42974,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GetDailyUsageCostDetails</td>
                 <td>POST</td>
                 <td>/v1/usagecost</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAwsAccounts</td>
+                <td>POST</td>
+                <td>/v1/aws/{billingInternalId}/accounts</td>
                 <td>*</td>
               </tr>
               

@@ -28,6 +28,7 @@ const (
 	Flow_GetSettingsHistory_FullMethodName               = "/blueapi.flow.v1.Flow/GetSettingsHistory"
 	Flow_CreateCostExplorerAccess_FullMethodName         = "/blueapi.flow.v1.Flow/CreateCostExplorerAccess"
 	Flow_GetDailyUsageCostDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetDailyUsageCostDetails"
+	Flow_GetAwsAccounts_FullMethodName                   = "/blueapi.flow.v1.Flow/GetAwsAccounts"
 )
 
 // FlowClient is the client API for Flow service.
@@ -54,6 +55,8 @@ type FlowClient interface {
 	CreateCostExplorerAccess(ctx context.Context, in *CreateCostExplorerAccessRequest, opts ...grpc.CallOption) (*CreateCostExplorerAccessResponse, error)
 	// Gets the daily cost and usage details.
 	GetDailyUsageCostDetails(ctx context.Context, in *GetDailyUsageCostDetailsRequest, opts ...grpc.CallOption) (*GetDailyUsageCostDetailsResponse, error)
+	// Returns all the aws accounts and its payer of the msp id
+	GetAwsAccounts(ctx context.Context, in *GetAwsAccountsRequest, opts ...grpc.CallOption) (*GetAwsAccountsResponse, error)
 }
 
 type flowClient struct {
@@ -154,6 +157,16 @@ func (c *flowClient) GetDailyUsageCostDetails(ctx context.Context, in *GetDailyU
 	return out, nil
 }
 
+func (c *flowClient) GetAwsAccounts(ctx context.Context, in *GetAwsAccountsRequest, opts ...grpc.CallOption) (*GetAwsAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAwsAccountsResponse)
+	err := c.cc.Invoke(ctx, Flow_GetAwsAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -178,6 +191,8 @@ type FlowServer interface {
 	CreateCostExplorerAccess(context.Context, *CreateCostExplorerAccessRequest) (*CreateCostExplorerAccessResponse, error)
 	// Gets the daily cost and usage details.
 	GetDailyUsageCostDetails(context.Context, *GetDailyUsageCostDetailsRequest) (*GetDailyUsageCostDetailsResponse, error)
+	// Returns all the aws accounts and its payer of the msp id
+	GetAwsAccounts(context.Context, *GetAwsAccountsRequest) (*GetAwsAccountsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -211,6 +226,9 @@ func (UnimplementedFlowServer) CreateCostExplorerAccess(context.Context, *Create
 }
 func (UnimplementedFlowServer) GetDailyUsageCostDetails(context.Context, *GetDailyUsageCostDetailsRequest) (*GetDailyUsageCostDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDailyUsageCostDetails not implemented")
+}
+func (UnimplementedFlowServer) GetAwsAccounts(context.Context, *GetAwsAccountsRequest) (*GetAwsAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAwsAccounts not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -387,6 +405,24 @@ func _Flow_GetDailyUsageCostDetails_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_GetAwsAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAwsAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetAwsAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetAwsAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetAwsAccounts(ctx, req.(*GetAwsAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -429,6 +465,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetDailyUsageCostDetails",
 			Handler:    _Flow_GetDailyUsageCostDetails_Handler,
+		},
+		{
+			MethodName: "GetAwsAccounts",
+			Handler:    _Flow_GetAwsAccounts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
