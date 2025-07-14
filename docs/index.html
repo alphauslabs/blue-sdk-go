@@ -3583,6 +3583,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponses"><span class="badge">M</span>GetDailyUsageCostDetailsResponses</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
                 </li>
               
@@ -3612,6 +3616,10 @@
               
                 <li>
                   <a href="#blueapi.flow.v1.GetSettingsResponse"><span class="badge">M</span>GetSettingsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.MonthlyCosts"><span class="badge">M</span>MonthlyCosts</a>
                 </li>
               
                 <li>
@@ -41957,7 +41965,7 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
         
       
         <h3 id="blueapi.flow.v1.GetDailyUsageCostDetailsResponse">GetDailyUsageCostDetailsResponse</h3>
-        <p>Response message for the Flow.GetDailyUsageCostDetailsResponse rpc.</p>
+        <p>A single entry containing Savings Plan, monthly cost summary, and usage breakdown.</p>
 
         
           <table class="field-table">
@@ -41974,27 +41982,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>monthlyOnDemandCost</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>Actual monthly on-demand cost for the payer account. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>monthlyEffectiveCost</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>Actual monthly effective cost after applying Savings Plans. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>monthlyTotalSavings</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>Actual total monthly savings from Savings Plan usage. </p></td>
-                </tr>
-              
-                <tr>
                   <td>spDetails</td>
                   <td><a href="#blueapi.flow.v1.SpDetails">SpDetails</a></td>
                   <td></td>
@@ -42002,10 +41989,41 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
+                  <td>monthlyCosts</td>
+                  <td><a href="#blueapi.flow.v1.MonthlyCosts">MonthlyCosts</a></td>
+                  <td></td>
+                  <td><p>Monthly aggregated cost summary for the Savings Plan. </p></td>
+                </tr>
+              
+                <tr>
                   <td>usageCostDetails</td>
                   <td><a href="#blueapi.flow.v1.UsageCostDetails">UsageCostDetails</a></td>
                   <td>repeated</td>
-                  <td><p>Daily Savings Plan usage and cost details </p></td>
+                  <td><p>Daily Savings Plan usage and cost details. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetDailyUsageCostDetailsResponses">GetDailyUsageCostDetailsResponses</h3>
+        <p>Response message for the Flow.GetDailyUsageCostDetails rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>responses</td>
+                  <td><a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponse">GetDailyUsageCostDetailsResponse</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -42386,6 +42404,44 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.MonthlyCosts">MonthlyCosts</h3>
+        <p>Summary of monthly cost values associated with a single Savings Plan.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>monthlyOnDemandCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Actual monthly on-demand cost for the payer account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyEffectiveCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Actual monthly effective cost after applying Savings Plans. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyTotalSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Actual total monthly savings from Savings Plan usage. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.SettingsHistory">SettingsHistory</h3>
         <p>Settings history message.</p>
 
@@ -42484,13 +42540,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
             <tbody>
               
                 <tr>
-                  <td>payerId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The payer account ID for which the savings plan details are fetched. </p></td>
-                </tr>
-              
-                <tr>
                   <td>savingsPlanType</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -42526,13 +42575,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>currency</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The currency in which the savings plan is priced, e.g., `USD`. </p></td>
-                </tr>
-              
-                <tr>
                   <td>commitment</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
@@ -42540,10 +42582,17 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>description</td>
+                  <td>currency</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>A description of the savings plan, including details like the instance family and payment option. </p></td>
+                  <td><p>The currency in which the savings plan is priced, e.g., `USD`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTerm</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The duration of the plan term, e.g., `1 year`, `3 years`. </p></td>
                 </tr>
               
                 <tr>
@@ -42561,10 +42610,10 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>ec2InstanceFamily</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p>The EC2 instance families covered by the savings plan, e.g., `m5`, `c5`. </p></td>
+                  <td>upfrontPaymentAmount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The total amount paid at the start of the Savings Plan, if applicable. </p></td>
                 </tr>
               
                 <tr>
@@ -42575,10 +42624,10 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>upfrontPaymentAmount</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>The total amount paid at the start of the Savings Plan, if applicable. </p></td>
+                  <td>ec2InstanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The EC2 instance families covered by the savings plan, e.g., `m5`, `c5`. </p></td>
                 </tr>
               
                 <tr>
@@ -42586,6 +42635,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The tag that refers to the one who purchased the Savings Plan. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>purchasedBy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The user or Flow that purchased the Savings Plan. </p></td>
                 </tr>
               
             </tbody>
