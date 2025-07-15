@@ -29,6 +29,8 @@ const (
 	Flow_CreateCostExplorerAccess_FullMethodName         = "/blueapi.flow.v1.Flow/CreateCostExplorerAccess"
 	Flow_GetDailyUsageCostDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetDailyUsageCostDetails"
 	Flow_GetAwsAccounts_FullMethodName                   = "/blueapi.flow.v1.Flow/GetAwsAccounts"
+	Flow_GetSPPurchaseAccessTemplateUrl_FullMethodName   = "/blueapi.flow.v1.Flow/GetSPPurchaseAccessTemplateUrl"
+	Flow_CreateSPPurchaseAccess_FullMethodName           = "/blueapi.flow.v1.Flow/CreateSPPurchaseAccess"
 )
 
 // FlowClient is the client API for Flow service.
@@ -57,6 +59,9 @@ type FlowClient interface {
 	GetDailyUsageCostDetails(ctx context.Context, in *GetDailyUsageCostDetailsRequest, opts ...grpc.CallOption) (*GetDailyUsageCostDetailsResponse, error)
 	// Returns all the aws accounts and its payer of the msp id
 	GetAwsAccounts(ctx context.Context, in *GetAwsAccountsRequest, opts ...grpc.CallOption) (*GetAwsAccountsResponse, error)
+	// Gets a CloudFormation launch URL for Savings Plan purchase capabilities
+	GetSPPurchaseAccessTemplateUrl(ctx context.Context, in *GetSPPurchaseAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetSPPurchaseAccessTemplateUrlResponse, error)
+	CreateSPPurchaseAccess(ctx context.Context, in *CreateSPPurchaseAccessRequest, opts ...grpc.CallOption) (*CreateSPPurchaseAccessResponse, error)
 }
 
 type flowClient struct {
@@ -167,6 +172,26 @@ func (c *flowClient) GetAwsAccounts(ctx context.Context, in *GetAwsAccountsReque
 	return out, nil
 }
 
+func (c *flowClient) GetSPPurchaseAccessTemplateUrl(ctx context.Context, in *GetSPPurchaseAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetSPPurchaseAccessTemplateUrlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSPPurchaseAccessTemplateUrlResponse)
+	err := c.cc.Invoke(ctx, Flow_GetSPPurchaseAccessTemplateUrl_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flowClient) CreateSPPurchaseAccess(ctx context.Context, in *CreateSPPurchaseAccessRequest, opts ...grpc.CallOption) (*CreateSPPurchaseAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateSPPurchaseAccessResponse)
+	err := c.cc.Invoke(ctx, Flow_CreateSPPurchaseAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -193,6 +218,9 @@ type FlowServer interface {
 	GetDailyUsageCostDetails(context.Context, *GetDailyUsageCostDetailsRequest) (*GetDailyUsageCostDetailsResponse, error)
 	// Returns all the aws accounts and its payer of the msp id
 	GetAwsAccounts(context.Context, *GetAwsAccountsRequest) (*GetAwsAccountsResponse, error)
+	// Gets a CloudFormation launch URL for Savings Plan purchase capabilities
+	GetSPPurchaseAccessTemplateUrl(context.Context, *GetSPPurchaseAccessTemplateUrlRequest) (*GetSPPurchaseAccessTemplateUrlResponse, error)
+	CreateSPPurchaseAccess(context.Context, *CreateSPPurchaseAccessRequest) (*CreateSPPurchaseAccessResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -229,6 +257,12 @@ func (UnimplementedFlowServer) GetDailyUsageCostDetails(context.Context, *GetDai
 }
 func (UnimplementedFlowServer) GetAwsAccounts(context.Context, *GetAwsAccountsRequest) (*GetAwsAccountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAwsAccounts not implemented")
+}
+func (UnimplementedFlowServer) GetSPPurchaseAccessTemplateUrl(context.Context, *GetSPPurchaseAccessTemplateUrlRequest) (*GetSPPurchaseAccessTemplateUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSPPurchaseAccessTemplateUrl not implemented")
+}
+func (UnimplementedFlowServer) CreateSPPurchaseAccess(context.Context, *CreateSPPurchaseAccessRequest) (*CreateSPPurchaseAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSPPurchaseAccess not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -423,6 +457,42 @@ func _Flow_GetAwsAccounts_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_GetSPPurchaseAccessTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSPPurchaseAccessTemplateUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetSPPurchaseAccessTemplateUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetSPPurchaseAccessTemplateUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetSPPurchaseAccessTemplateUrl(ctx, req.(*GetSPPurchaseAccessTemplateUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Flow_CreateSPPurchaseAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSPPurchaseAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).CreateSPPurchaseAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_CreateSPPurchaseAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).CreateSPPurchaseAccess(ctx, req.(*CreateSPPurchaseAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -469,6 +539,14 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAwsAccounts",
 			Handler:    _Flow_GetAwsAccounts_Handler,
+		},
+		{
+			MethodName: "GetSPPurchaseAccessTemplateUrl",
+			Handler:    _Flow_GetSPPurchaseAccessTemplateUrl_Handler,
+		},
+		{
+			MethodName: "CreateSPPurchaseAccess",
+			Handler:    _Flow_CreateSPPurchaseAccess_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

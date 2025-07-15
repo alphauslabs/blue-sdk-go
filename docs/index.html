@@ -3547,6 +3547,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.CreateSPPurchaseAccessRequest"><span class="badge">M</span>CreateSPPurchaseAccessRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateSPPurchaseAccessResponse"><span class="badge">M</span>CreateSPPurchaseAccessResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.CreateSettingsRequest"><span class="badge">M</span>CreateSettingsRequest</a>
                 </li>
               
@@ -3600,6 +3608,14 @@
               
                 <li>
                   <a href="#blueapi.flow.v1.GetRecommendationDetailsResponse"><span class="badge">M</span>GetRecommendationDetailsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetSPPurchaseAccessTemplateUrlRequest"><span class="badge">M</span>GetSPPurchaseAccessTemplateUrlRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetSPPurchaseAccessTemplateUrlResponse"><span class="badge">M</span>GetSPPurchaseAccessTemplateUrlResponse</a>
                 </li>
               
                 <li>
@@ -41649,6 +41665,117 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><p>The last updated timestamp, RFC3339 UTC. </p></td>
                 </tr>
               
+                <tr>
+                  <td>access</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The access type- partial access to view simulation only: &#34;cloud_explorer_access&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateSPPurchaseAccessRequest">CreateSPPurchaseAccessRequest</h3>
+        <p>Request message for the Flow.CreateSPPurchaseAccess rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The target AWS account to validate. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateSPPurchaseAccessResponse">CreateSPPurchaseAccessResponse</h3>
+        <p>Response message for the Flow.CreateSPPurchaseAccess rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The queried target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleArn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The role ARN that provides the cross-account access permissions. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The external id for this role. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the CloudFormation stack deployed in the target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackRegion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The region where the stack is deployed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>templateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The latest template used to deploy the stack. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>This can be `latest`, `outdated`, or some error information. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The last updated timestamp, RFC3339 UTC. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>access</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The access type- full access to view simulation and purchase saving plan: &#34;savings_plan_access&#34; </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -42229,6 +42356,65 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Savings plan last updated </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetSPPurchaseAccessTemplateUrlRequest">GetSPPurchaseAccessTemplateUrlRequest</h3>
+        <p>Request message for the Flow.GetSPPurchaseAccessTemplateUrl rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetSPPurchaseAccessTemplateUrlResponse">GetSPPurchaseAccessTemplateUrlResponse</h3>
+        <p>Response message for the Flow.GetSPPurchaseAccessTemplateUrl rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>launchUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The CloudFormation launch url. Open it in your browser. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>templateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The latest CloudFormation template. The version is included in the filename. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The default stack name used. Can be modified. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>principal</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The AWS account that will receive the access. Do not change. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The external id for this role. Do not change. </p></td>
                 </tr>
               
             </tbody>
@@ -42926,6 +43112,20 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Returns all the aws accounts and its payer of the msp id</p></td>
               </tr>
             
+              <tr>
+                <td>GetSPPurchaseAccessTemplateUrl</td>
+                <td><a href="#blueapi.flow.v1.GetSPPurchaseAccessTemplateUrlRequest">GetSPPurchaseAccessTemplateUrlRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetSPPurchaseAccessTemplateUrlResponse">GetSPPurchaseAccessTemplateUrlResponse</a></td>
+                <td><p>Gets a CloudFormation launch URL for Savings Plan purchase capabilities</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateSPPurchaseAccess</td>
+                <td><a href="#blueapi.flow.v1.CreateSPPurchaseAccessRequest">CreateSPPurchaseAccessRequest</a></td>
+                <td><a href="#blueapi.flow.v1.CreateSPPurchaseAccessResponse">CreateSPPurchaseAccessResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -43040,6 +43240,26 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GetAwsAccounts</td>
                 <td>POST</td>
                 <td>/v1/aws/{billingInternalId}/accounts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSPPurchaseAccessTemplateUrl</td>
+                <td>GET</td>
+                <td>/v1/aws/xacct/spa</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateSPPurchaseAccess</td>
+                <td>POST</td>
+                <td>/v1/aws/xacct/spa</td>
                 <td>*</td>
               </tr>
               
