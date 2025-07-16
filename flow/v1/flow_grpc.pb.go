@@ -56,11 +56,12 @@ type FlowClient interface {
 	// Creates a default cross-account access role for cost explorer (API only).
 	CreateCostExplorerAccess(ctx context.Context, in *CreateCostExplorerAccessRequest, opts ...grpc.CallOption) (*CreateCostExplorerAccessResponse, error)
 	// Gets the daily cost and usage details.
-	GetDailyUsageCostDetails(ctx context.Context, in *GetDailyUsageCostDetailsRequest, opts ...grpc.CallOption) (*GetDailyUsageCostDetailsResponse, error)
+	GetDailyUsageCostDetails(ctx context.Context, in *GetDailyUsageCostDetailsRequest, opts ...grpc.CallOption) (*GetDailyUsageCostDetailsResponses, error)
 	// Returns all the aws accounts and its payer of the msp id
 	GetAwsAccounts(ctx context.Context, in *GetAwsAccountsRequest, opts ...grpc.CallOption) (*GetAwsAccountsResponse, error)
 	// Gets a CloudFormation launch URL for Savings Plan purchase capabilities
 	GetSPPurchaseAccessTemplateUrl(ctx context.Context, in *GetSPPurchaseAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetSPPurchaseAccessTemplateUrlResponse, error)
+	// Creates a default cross-account access role for Savings Plan (API only).
 	CreateSPPurchaseAccess(ctx context.Context, in *CreateSPPurchaseAccessRequest, opts ...grpc.CallOption) (*CreateSPPurchaseAccessResponse, error)
 }
 
@@ -152,9 +153,9 @@ func (c *flowClient) CreateCostExplorerAccess(ctx context.Context, in *CreateCos
 	return out, nil
 }
 
-func (c *flowClient) GetDailyUsageCostDetails(ctx context.Context, in *GetDailyUsageCostDetailsRequest, opts ...grpc.CallOption) (*GetDailyUsageCostDetailsResponse, error) {
+func (c *flowClient) GetDailyUsageCostDetails(ctx context.Context, in *GetDailyUsageCostDetailsRequest, opts ...grpc.CallOption) (*GetDailyUsageCostDetailsResponses, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDailyUsageCostDetailsResponse)
+	out := new(GetDailyUsageCostDetailsResponses)
 	err := c.cc.Invoke(ctx, Flow_GetDailyUsageCostDetails_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -215,11 +216,12 @@ type FlowServer interface {
 	// Creates a default cross-account access role for cost explorer (API only).
 	CreateCostExplorerAccess(context.Context, *CreateCostExplorerAccessRequest) (*CreateCostExplorerAccessResponse, error)
 	// Gets the daily cost and usage details.
-	GetDailyUsageCostDetails(context.Context, *GetDailyUsageCostDetailsRequest) (*GetDailyUsageCostDetailsResponse, error)
+	GetDailyUsageCostDetails(context.Context, *GetDailyUsageCostDetailsRequest) (*GetDailyUsageCostDetailsResponses, error)
 	// Returns all the aws accounts and its payer of the msp id
 	GetAwsAccounts(context.Context, *GetAwsAccountsRequest) (*GetAwsAccountsResponse, error)
 	// Gets a CloudFormation launch URL for Savings Plan purchase capabilities
 	GetSPPurchaseAccessTemplateUrl(context.Context, *GetSPPurchaseAccessTemplateUrlRequest) (*GetSPPurchaseAccessTemplateUrlResponse, error)
+	// Creates a default cross-account access role for Savings Plan (API only).
 	CreateSPPurchaseAccess(context.Context, *CreateSPPurchaseAccessRequest) (*CreateSPPurchaseAccessResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
@@ -252,7 +254,7 @@ func (UnimplementedFlowServer) GetSettingsHistory(context.Context, *GetSettingsH
 func (UnimplementedFlowServer) CreateCostExplorerAccess(context.Context, *CreateCostExplorerAccessRequest) (*CreateCostExplorerAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCostExplorerAccess not implemented")
 }
-func (UnimplementedFlowServer) GetDailyUsageCostDetails(context.Context, *GetDailyUsageCostDetailsRequest) (*GetDailyUsageCostDetailsResponse, error) {
+func (UnimplementedFlowServer) GetDailyUsageCostDetails(context.Context, *GetDailyUsageCostDetailsRequest) (*GetDailyUsageCostDetailsResponses, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDailyUsageCostDetails not implemented")
 }
 func (UnimplementedFlowServer) GetAwsAccounts(context.Context, *GetAwsAccountsRequest) (*GetAwsAccountsResponse, error) {
