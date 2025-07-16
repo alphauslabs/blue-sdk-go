@@ -3591,10 +3591,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponses"><span class="badge">M</span>GetDailyUsageCostDetailsResponses</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.flow.v1.GetInfoRequest"><span class="badge">M</span>GetInfoRequest</a>
                 </li>
               
@@ -42109,13 +42105,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
-                  <td>spDetails</td>
-                  <td><a href="#blueapi.flow.v1.SpDetails">SpDetails</a></td>
-                  <td></td>
-                  <td><p>Purchased Savings Plan details for the payer account. </p></td>
-                </tr>
-              
-                <tr>
                   <td>monthlyCosts</td>
                   <td><a href="#blueapi.flow.v1.MonthlyCosts">MonthlyCosts</a></td>
                   <td></td>
@@ -42123,34 +42112,17 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 </tr>
               
                 <tr>
+                  <td>spDetails</td>
+                  <td><a href="#blueapi.flow.v1.SpDetails">SpDetails</a></td>
+                  <td>repeated</td>
+                  <td><p>Purchased Savings Plan details for the payer account. </p></td>
+                </tr>
+              
+                <tr>
                   <td>usageCostDetails</td>
                   <td><a href="#blueapi.flow.v1.UsageCostDetails">UsageCostDetails</a></td>
                   <td>repeated</td>
                   <td><p>Daily Savings Plan usage and cost details. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flow.v1.GetDailyUsageCostDetailsResponses">GetDailyUsageCostDetailsResponses</h3>
-        <p>Response message for the Flow.GetDailyUsageCostDetails rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>responses</td>
-                  <td><a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponse">GetDailyUsageCostDetailsResponse</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -43101,7 +43073,7 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               <tr>
                 <td>GetDailyUsageCostDetails</td>
                 <td><a href="#blueapi.flow.v1.GetDailyUsageCostDetailsRequest">GetDailyUsageCostDetailsRequest</a></td>
-                <td><a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponses">GetDailyUsageCostDetailsResponses</a></td>
+                <td><a href="#blueapi.flow.v1.GetDailyUsageCostDetailsResponse">GetDailyUsageCostDetailsResponse</a></td>
                 <td><p>Gets the daily cost and usage details.</p></td>
               </tr>
             
