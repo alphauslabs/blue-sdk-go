@@ -201,6 +201,8 @@ const (
 	Cover_VerifyAPIAccess_FullMethodName                         = "/blueapi.cover.v1.Cover/VerifyAPIAccess"
 	Cover_GetAICostAndUsage_FullMethodName                       = "/blueapi.cover.v1.Cover/GetAICostAndUsage"
 	Cover_GetContainerCostUsage_FullMethodName                   = "/blueapi.cover.v1.Cover/GetContainerCostUsage"
+	Cover_PopulateDemoData_FullMethodName                        = "/blueapi.cover.v1.Cover/PopulateDemoData"
+	Cover_ResetDemoData_FullMethodName                           = "/blueapi.cover.v1.Cover/ResetDemoData"
 )
 
 // CoverClient is the client API for Cover service.
@@ -565,6 +567,10 @@ type CoverClient interface {
 	VerifyAPIAccess(ctx context.Context, in *VerifyAPIAccessRequest, opts ...grpc.CallOption) (*VerifyAPIAccessResponse, error)
 	GetAICostAndUsage(ctx context.Context, in *GetAICostAndUsageRequest, opts ...grpc.CallOption) (*GetAICostAndUsageResponse, error)
 	GetContainerCostUsage(ctx context.Context, in *ContainerCostUsageRequest, opts ...grpc.CallOption) (*ContainerCostUsageResponse, error)
+	// WORK-IN-PROGRESS: Populate demo data
+	PopulateDemoData(ctx context.Context, in *PopulateDemoDataRequest, opts ...grpc.CallOption) (*PopulateDemoDataResponse, error)
+	// WORK-IN-PROGRESS: Reset demo data
+	ResetDemoData(ctx context.Context, in *ResetDemoDataRequest, opts ...grpc.CallOption) (*ResetDemoDataResponse, error)
 }
 
 type coverClient struct {
@@ -2998,6 +3004,26 @@ func (c *coverClient) GetContainerCostUsage(ctx context.Context, in *ContainerCo
 	return out, nil
 }
 
+func (c *coverClient) PopulateDemoData(ctx context.Context, in *PopulateDemoDataRequest, opts ...grpc.CallOption) (*PopulateDemoDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PopulateDemoDataResponse)
+	err := c.cc.Invoke(ctx, Cover_PopulateDemoData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ResetDemoData(ctx context.Context, in *ResetDemoDataRequest, opts ...grpc.CallOption) (*ResetDemoDataResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ResetDemoDataResponse)
+	err := c.cc.Invoke(ctx, Cover_ResetDemoData_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3360,6 +3386,10 @@ type CoverServer interface {
 	VerifyAPIAccess(context.Context, *VerifyAPIAccessRequest) (*VerifyAPIAccessResponse, error)
 	GetAICostAndUsage(context.Context, *GetAICostAndUsageRequest) (*GetAICostAndUsageResponse, error)
 	GetContainerCostUsage(context.Context, *ContainerCostUsageRequest) (*ContainerCostUsageResponse, error)
+	// WORK-IN-PROGRESS: Populate demo data
+	PopulateDemoData(context.Context, *PopulateDemoDataRequest) (*PopulateDemoDataResponse, error)
+	// WORK-IN-PROGRESS: Reset demo data
+	ResetDemoData(context.Context, *ResetDemoDataRequest) (*ResetDemoDataResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3906,6 +3936,12 @@ func (UnimplementedCoverServer) GetAICostAndUsage(context.Context, *GetAICostAnd
 }
 func (UnimplementedCoverServer) GetContainerCostUsage(context.Context, *ContainerCostUsageRequest) (*ContainerCostUsageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetContainerCostUsage not implemented")
+}
+func (UnimplementedCoverServer) PopulateDemoData(context.Context, *PopulateDemoDataRequest) (*PopulateDemoDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PopulateDemoData not implemented")
+}
+func (UnimplementedCoverServer) ResetDemoData(context.Context, *ResetDemoDataRequest) (*ResetDemoDataResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ResetDemoData not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7246,6 +7282,42 @@ func _Cover_GetContainerCostUsage_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_PopulateDemoData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PopulateDemoDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).PopulateDemoData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_PopulateDemoData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).PopulateDemoData(ctx, req.(*PopulateDemoDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ResetDemoData_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ResetDemoDataRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ResetDemoData(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ResetDemoData_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ResetDemoData(ctx, req.(*ResetDemoDataRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -7864,6 +7936,14 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetContainerCostUsage",
 			Handler:    _Cover_GetContainerCostUsage_Handler,
+		},
+		{
+			MethodName: "PopulateDemoData",
+			Handler:    _Cover_PopulateDemoData_Handler,
+		},
+		{
+			MethodName: "ResetDemoData",
+			Handler:    _Cover_ResetDemoData_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
