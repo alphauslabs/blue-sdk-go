@@ -155,7 +155,7 @@ func (x *Notification) GetEnabled() bool {
 type Budget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// budget id
-	// `previousDay` / `daily` / `monthly`
+	// `previousDay` / `daily` / `monthly` / `customPeriod`
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// budget value
 	Value float64 `protobuf:"fixed64,2,opt,name=value,proto3" json:"value,omitempty"`
