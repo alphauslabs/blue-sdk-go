@@ -3670,6 +3670,10 @@
                   <a href="#blueapi.flow.v1.UsageCostDetails"><span class="badge">M</span>UsageCostDetails</a>
                 </li>
               
+                <li>
+                  <a href="#blueapi.flow.v1.UtilizationDetails"><span class="badge">M</span>UtilizationDetails</a>
+                </li>
+              
               
               
               
@@ -42224,6 +42228,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><p>Daily Savings Plan usage and cost details. </p></td>
                 </tr>
               
+                <tr>
+                  <td>utilizationDetails</td>
+                  <td><a href="#blueapi.flow.v1.UtilizationDetails">UtilizationDetails</a></td>
+                  <td>repeated</td>
+                  <td><p>Percentage of Savings Plan utilization per ARN. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -43085,11 +43096,35 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><p>Percentage of Savings Plan coverage for the date. </p></td>
                 </tr>
               
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.UtilizationDetails">UtilizationDetails</h3>
+        <p>Utilization details for Savings Plans, including ARN and utilization percentage.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>arn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The ARN of each of the Savings Plan for which utilization is reported. </p></td>
+                </tr>
+              
                 <tr>
                   <td>utilizationPercentage</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
-                  <td><p>Percentage of Savings Plan utilization for the date. </p></td>
+                  <td><p>The percentage of utilization for each of the Savings Plan </p></td>
                 </tr>
               
             </tbody>
