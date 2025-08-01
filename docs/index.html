@@ -1691,6 +1691,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceResponse.CreatedVendorInvoiceSettingEntry"><span class="badge">M</span>ListInvoiceResponse.CreatedVendorInvoiceSettingEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceResponse.DefaultVendorInvoiceSettingEntry"><span class="badge">M</span>ListInvoiceResponse.DefaultVendorInvoiceSettingEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceResponse.VendorBillingAmountEntry"><span class="badge">M</span>ListInvoiceResponse.VendorBillingAmountEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListInvoiceServiceDiscountsRequest"><span class="badge">M</span>ListInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -20293,59 +20305,59 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
-                  <td>invoiceStatus</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Created || Not Created </p></td>
-                </tr>
-              
-                <tr>
                   <td>finalizationStatus</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>In progress || Done </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>waveStatus</td>
-                  <td><a href="#string">string</a></td>
+                  <td>isCreated</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>Published || Not published </p></td>
+                  <td><p>invoice creation status </p></td>
                 </tr>
               
                 <tr>
-                  <td>vendor</td>
-                  <td><a href="#string">string</a></td>
+                  <td>isSettingModified</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>aws, azure, gcp </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>currency</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The currency of the invoice (usd, jpy, ...) </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billingAmountAws</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Formated in $8,000.12 </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billingAmountAzure</td>
+                  <td>createdDate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>billingAmountGcp</td>
+                  <td>updatedDate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdVendors</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isPublished</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>wave publish status </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendorBillingAmount</td>
+                  <td><a href="#blueapi.billing.v1.ListInvoiceResponse.VendorBillingAmountEntry">ListInvoiceResponse.VendorBillingAmountEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>map of vendor to billingAmount Formated in $8,000.12 </p></td>
                 </tr>
               
                 <tr>
@@ -20356,6 +20368,13 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The currency of the invoice (usd, jpy, ...) </p></td>
+                </tr>
+              
+                <tr>
                   <td>urlId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -20363,22 +20382,108 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
-                  <td>invoiceSettingsAws</td>
-                  <td><a href="#blueapi.billing.v1.InvoiceSettings">InvoiceSettings</a></td>
-                  <td></td>
-                  <td><p>returns null if no settings is saved for the month </p></td>
+                  <td>createdVendorInvoiceSetting</td>
+                  <td><a href="#blueapi.billing.v1.ListInvoiceResponse.CreatedVendorInvoiceSettingEntry">ListInvoiceResponse.CreatedVendorInvoiceSettingEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>setting used in invoice creation </p></td>
                 </tr>
               
                 <tr>
-                  <td>invoiceSettingsAzure</td>
-                  <td><a href="#blueapi.billing.v1.InvoiceSettings">InvoiceSettings</a></td>
+                  <td>defaultVendorInvoiceSetting</td>
+                  <td><a href="#blueapi.billing.v1.ListInvoiceResponse.DefaultVendorInvoiceSettingEntry">ListInvoiceResponse.DefaultVendorInvoiceSettingEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>default invoice setting </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceResponse.CreatedVendorInvoiceSettingEntry">ListInvoiceResponse.CreatedVendorInvoiceSettingEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>invoiceSettingsGcp</td>
+                  <td>value</td>
                   <td><a href="#blueapi.billing.v1.InvoiceSettings">InvoiceSettings</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceResponse.DefaultVendorInvoiceSettingEntry">ListInvoiceResponse.DefaultVendorInvoiceSettingEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#blueapi.billing.v1.InvoiceSettings">InvoiceSettings</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceResponse.VendorBillingAmountEntry">ListInvoiceResponse.VendorBillingAmountEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
