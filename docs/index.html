@@ -1619,10 +1619,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.InvoiceAdditionalItems"><span class="badge">M</span>InvoiceAdditionalItems</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.InvoiceConnectedBillingGroups"><span class="badge">M</span>InvoiceConnectedBillingGroups</a>
                 </li>
               
@@ -1696,6 +1692,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListInvoiceResponse.DefaultVendorInvoiceSettingEntry"><span class="badge">M</span>ListInvoiceResponse.DefaultVendorInvoiceSettingEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceResponse.SavedVendorInvoiceSettingEntry"><span class="badge">M</span>ListInvoiceResponse.SavedVendorInvoiceSettingEntry</a>
                 </li>
               
                 <li>
@@ -19587,37 +19587,6 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
-        <h3 id="blueapi.billing.v1.InvoiceAdditionalItems">InvoiceAdditionalItems</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>price</td>
-                  <td><a href="#float">float</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.InvoiceConnectedBillingGroups">InvoiceConnectedBillingGroups</h3>
         <p>Response message to be used for ListInvoiceTemplateResponse</p>
 
@@ -19727,7 +19696,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
               
                 <tr>
                   <td>discountRate</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -19748,7 +19717,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
               
                 <tr>
                   <td>taxRate</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -19762,7 +19731,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
               
                 <tr>
                   <td>supportRate</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -19776,7 +19745,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
               
                 <tr>
                   <td>supportFix</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -19790,14 +19759,14 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
               
                 <tr>
                   <td>substitutionRate</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>substitutionFix</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -19832,7 +19801,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
               
                 <tr>
                   <td>exchangeRate</td>
-                  <td><a href="#float">float</a></td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Exchange rate from USD to the invoice currency
 Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeRate = 150 </p></td>
@@ -19854,7 +19823,7 @@ Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeR
               
                 <tr>
                   <td>additionalItems</td>
-                  <td><a href="#blueapi.billing.v1.InvoiceAdditionalItems">InvoiceAdditionalItems</a></td>
+                  <td><a href="#blueapi.billing.v1.FreeFormItem">FreeFormItem</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -20389,10 +20358,17 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
+                  <td>savedVendorInvoiceSetting</td>
+                  <td><a href="#blueapi.billing.v1.ListInvoiceResponse.SavedVendorInvoiceSettingEntry">ListInvoiceResponse.SavedVendorInvoiceSettingEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>saved invoice setting for the month </p></td>
+                </tr>
+              
+                <tr>
                   <td>defaultVendorInvoiceSetting</td>
                   <td><a href="#blueapi.billing.v1.ListInvoiceResponse.DefaultVendorInvoiceSettingEntry">ListInvoiceResponse.DefaultVendorInvoiceSettingEntry</a></td>
                   <td>repeated</td>
-                  <td><p>default invoice setting </p></td>
+                  <td><p>billinggroup&#39;s default invoice setting </p></td>
                 </tr>
               
             </tbody>
@@ -20434,6 +20410,37 @@ Valid values: default, imported </p></td>
         
       
         <h3 id="blueapi.billing.v1.ListInvoiceResponse.DefaultVendorInvoiceSettingEntry">ListInvoiceResponse.DefaultVendorInvoiceSettingEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#blueapi.billing.v1.InvoiceSettings">InvoiceSettings</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceResponse.SavedVendorInvoiceSettingEntry">ListInvoiceResponse.SavedVendorInvoiceSettingEntry</h3>
         <p></p>
 
         
