@@ -1044,6 +1044,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.PeriodRange"><span class="badge">M</span>PeriodRange</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.ProformaReports"><span class="badge">M</span>ProformaReports</a>
                 </li>
               
@@ -1183,6 +1187,10 @@
                   <a href="#blueapi.cost.v1.UpdateCostFiltersResponse"><span class="badge">M</span>UpdateCostFiltersResponse</a>
                 </li>
               
+              
+                <li>
+                  <a href="#blueapi.cost.v1.PeriodRange.Unit"><span class="badge">E</span>PeriodRange.Unit</a>
+                </li>
               
               
               
@@ -12512,6 +12520,51 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.cost.v1.PeriodRange">PeriodRange</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>unit</td>
+                  <td><a href="#blueapi.cost.v1.PeriodRange.Unit">PeriodRange.Unit</a></td>
+                  <td></td>
+                  <td><p>Time unit of the range </p></td>
+                </tr>
+              
+                <tr>
+                  <td>year</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>Year (e.g., 2025) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>starting</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>Start month/quarter (1-based), ignored if YEAR </p></td>
+                </tr>
+              
+                <tr>
+                  <td>duration</td>
+                  <td><a href="#uint32">uint32</a></td>
+                  <td></td>
+                  <td><p>Length in units of unit </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.ProformaReports">ProformaReports</h3>
         <p></p>
 
@@ -13474,6 +13527,20 @@ For example, (Assumption: Last usage start time 2022-02-01 01:00:00 UTC) If you 
                 </tr>
               
                 <tr>
+                  <td>usePeriodRange</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Set true to use period range as date input, startTime and endTime would be ignored </p></td>
+                </tr>
+              
+                <tr>
+                  <td>periodRange</td>
+                  <td><a href="#blueapi.cost.v1.PeriodRange">PeriodRange</a></td>
+                  <td></td>
+                  <td><p>Use when usePeriodRange range is true </p></td>
+                </tr>
+              
+                <tr>
                   <td>toCurrency</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -14076,6 +14143,41 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
         
       
 
+      
+        <h3 id="blueapi.cost.v1.PeriodRange.Unit">PeriodRange.Unit</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>UNIT_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MONTH</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>QUARTER</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>YEAR</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
       
 
       
