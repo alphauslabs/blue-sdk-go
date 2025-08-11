@@ -33,7 +33,7 @@ type VortexClient interface {
 	// Test endpoint only
 	Test(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TestResponse, error)
 	// Create an org in Vortex
-	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
 }
 
 type vortexClient struct {
@@ -54,9 +54,9 @@ func (c *vortexClient) Test(ctx context.Context, in *emptypb.Empty, opts ...grpc
 	return out, nil
 }
 
-func (c *vortexClient) CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *vortexClient) CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(emptypb.Empty)
+	out := new(CreateOrgResponse)
 	err := c.cc.Invoke(ctx, Vortex_CreateOrg_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -73,7 +73,7 @@ type VortexServer interface {
 	// Test endpoint only
 	Test(context.Context, *emptypb.Empty) (*TestResponse, error)
 	// Create an org in Vortex
-	CreateOrg(context.Context, *CreateOrgRequest) (*emptypb.Empty, error)
+	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
 	mustEmbedUnimplementedVortexServer()
 }
 
@@ -84,7 +84,7 @@ type UnimplementedVortexServer struct {
 func (UnimplementedVortexServer) Test(context.Context, *emptypb.Empty) (*TestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Test not implemented")
 }
-func (UnimplementedVortexServer) CreateOrg(context.Context, *CreateOrgRequest) (*emptypb.Empty, error) {
+func (UnimplementedVortexServer) CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrg not implemented")
 }
 func (UnimplementedVortexServer) mustEmbedUnimplementedVortexServer() {}
