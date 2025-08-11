@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion8
 const (
 	Vortex_Test_FullMethodName      = "/blueapi.vortex.v1.Vortex/Test"
 	Vortex_CreateOrg_FullMethodName = "/blueapi.vortex.v1.Vortex/CreateOrg"
+	Vortex_GetUser_FullMethodName   = "/blueapi.vortex.v1.Vortex/GetUser"
 )
 
 // VortexClient is the client API for Vortex service.
@@ -34,6 +35,7 @@ type VortexClient interface {
 	Test(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TestResponse, error)
 	// Create an org in Vortex
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
+	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 }
 
 type vortexClient struct {
@@ -64,6 +66,16 @@ func (c *vortexClient) CreateOrg(ctx context.Context, in *CreateOrgRequest, opts
 	return out, nil
 }
 
+func (c *vortexClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserResponse)
+	err := c.cc.Invoke(ctx, Vortex_GetUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VortexServer is the server API for Vortex service.
 // All implementations must embed UnimplementedVortexServer
 // for forward compatibility
@@ -74,6 +86,7 @@ type VortexServer interface {
 	Test(context.Context, *emptypb.Empty) (*TestResponse, error)
 	// Create an org in Vortex
 	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
+	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	mustEmbedUnimplementedVortexServer()
 }
 
@@ -86,6 +99,9 @@ func (UnimplementedVortexServer) Test(context.Context, *emptypb.Empty) (*TestRes
 }
 func (UnimplementedVortexServer) CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrg not implemented")
+}
+func (UnimplementedVortexServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
 func (UnimplementedVortexServer) mustEmbedUnimplementedVortexServer() {}
 
@@ -136,6 +152,24 @@ func _Vortex_CreateOrg_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vortex_GetUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VortexServer).GetUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vortex_GetUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VortexServer).GetUser(ctx, req.(*GetUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vortex_ServiceDesc is the grpc.ServiceDesc for Vortex service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -150,6 +184,10 @@ var Vortex_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateOrg",
 			Handler:    _Vortex_CreateOrg_Handler,
+		},
+		{
+			MethodName: "GetUser",
+			Handler:    _Vortex_GetUser_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
