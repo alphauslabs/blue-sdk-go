@@ -111,6 +111,7 @@ const (
 	Cover_ListAllocators_FullMethodName                          = "/blueapi.cover.v1.Cover/ListAllocators"
 	Cover_CreateAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/CreateAllocator"
 	Cover_GetAllocationAttributes_FullMethodName                 = "/blueapi.cover.v1.Cover/GetAllocationAttributes"
+	Cover_GetAllocationSources_FullMethodName                    = "/blueapi.cover.v1.Cover/GetAllocationSources"
 	Cover_UpdateAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/UpdateAllocator"
 	Cover_DeleteAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/DeleteAllocator"
 	Cover_ProxyCreateCompletion_FullMethodName                   = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
@@ -390,6 +391,8 @@ type CoverClient interface {
 	CreateAllocator(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (*CostAllocatorDetails, error)
 	// Get all available attributes for the charges
 	GetAllocationAttributes(ctx context.Context, in *GetAllocationAttributesRequest, opts ...grpc.CallOption) (*GetAllocationAttributesResponse, error)
+	// Get all values of the allocation source
+	GetAllocationSources(ctx context.Context, in *GetAllocationSourcesRequest, opts ...grpc.CallOption) (*GetAllocationSourcesResponse, error)
 	// WORK-IN-PROGRESS: Updates a cost allocator item
 	UpdateAllocator(ctx context.Context, in *CostAllocatorRequest, opts ...grpc.CallOption) (*CostAllocatorDetails, error)
 	// WORK-IN-PROGRESS: Deletes a cost allocator
@@ -1684,6 +1687,16 @@ func (c *coverClient) GetAllocationAttributes(ctx context.Context, in *GetAlloca
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAllocationAttributesResponse)
 	err := c.cc.Invoke(ctx, Cover_GetAllocationAttributes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetAllocationSources(ctx context.Context, in *GetAllocationSourcesRequest, opts ...grpc.CallOption) (*GetAllocationSourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAllocationSourcesResponse)
+	err := c.cc.Invoke(ctx, Cover_GetAllocationSources_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3209,6 +3222,8 @@ type CoverServer interface {
 	CreateAllocator(context.Context, *CreateAllocatorRequest) (*CostAllocatorDetails, error)
 	// Get all available attributes for the charges
 	GetAllocationAttributes(context.Context, *GetAllocationAttributesRequest) (*GetAllocationAttributesResponse, error)
+	// Get all values of the allocation source
+	GetAllocationSources(context.Context, *GetAllocationSourcesRequest) (*GetAllocationSourcesResponse, error)
 	// WORK-IN-PROGRESS: Updates a cost allocator item
 	UpdateAllocator(context.Context, *CostAllocatorRequest) (*CostAllocatorDetails, error)
 	// WORK-IN-PROGRESS: Deletes a cost allocator
@@ -3666,6 +3681,9 @@ func (UnimplementedCoverServer) CreateAllocator(context.Context, *CreateAllocato
 }
 func (UnimplementedCoverServer) GetAllocationAttributes(context.Context, *GetAllocationAttributesRequest) (*GetAllocationAttributesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAllocationAttributes not implemented")
+}
+func (UnimplementedCoverServer) GetAllocationSources(context.Context, *GetAllocationSourcesRequest) (*GetAllocationSourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAllocationSources not implemented")
 }
 func (UnimplementedCoverServer) UpdateAllocator(context.Context, *CostAllocatorRequest) (*CostAllocatorDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAllocator not implemented")
@@ -5604,6 +5622,24 @@ func _Cover_GetAllocationAttributes_Handler(srv interface{}, ctx context.Context
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).GetAllocationAttributes(ctx, req.(*GetAllocationAttributesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetAllocationSources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAllocationSourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetAllocationSources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetAllocationSources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetAllocationSources(ctx, req.(*GetAllocationSourcesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -7648,6 +7684,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAllocationAttributes",
 			Handler:    _Cover_GetAllocationAttributes_Handler,
+		},
+		{
+			MethodName: "GetAllocationSources",
+			Handler:    _Cover_GetAllocationSources_Handler,
 		},
 		{
 			MethodName: "UpdateAllocator",

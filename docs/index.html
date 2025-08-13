@@ -2501,6 +2501,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetAllocationSourcesRequest"><span class="badge">M</span>GetAllocationSourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetAllocationSourcesResponse"><span class="badge">M</span>GetAllocationSourcesResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetAllocationSourcesResponse.AllocationSources"><span class="badge">M</span>GetAllocationSourcesResponse.AllocationSources</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetAndDeleteDataAccessRequest"><span class="badge">M</span>GetAndDeleteDataAccessRequest</a>
                 </li>
               
@@ -30173,6 +30185,106 @@ Will remove once the latest changes in UI is released. </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.GetAllocationSourcesRequest">GetAllocationSourcesRequest</h3>
+        <p>Request message for the GetAllocationSources rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAllocationSourcesResponse">GetAllocationSourcesResponse</h3>
+        <p>Response message for the GetAllocationSources rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#blueapi.cover.v1.GetAllocationSourcesResponse.AllocationSources">GetAllocationSourcesResponse.AllocationSources</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetAllocationSourcesResponse.AllocationSources">GetAllocationSourcesResponse.AllocationSources</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accountName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tagName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tagValue</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetAndDeleteDataAccessRequest">GetAndDeleteDataAccessRequest</h3>
         <p></p>
 
@@ -39031,6 +39143,13 @@ file in bytes </p></td>
               </tr>
             
               <tr>
+                <td>GetAllocationSources</td>
+                <td><a href="#blueapi.cover.v1.GetAllocationSourcesRequest">GetAllocationSourcesRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetAllocationSourcesResponse">GetAllocationSourcesResponse</a></td>
+                <td><p>Get all values of the allocation source</p></td>
+              </tr>
+            
+              <tr>
                 <td>UpdateAllocator</td>
                 <td><a href="#blueapi.cover.v1.CostAllocatorRequest">CostAllocatorRequest</a></td>
                 <td><a href="#blueapi.cover.v1.CostAllocatorDetails">CostAllocatorDetails</a></td>
@@ -40588,6 +40707,16 @@ file in bytes </p></td>
                 <td>GetAllocationAttributes</td>
                 <td>GET</td>
                 <td>/v1/allocators/attribute</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAllocationSources</td>
+                <td>GET</td>
+                <td>/v1/allocators/source</td>
                 <td></td>
               </tr>
               
