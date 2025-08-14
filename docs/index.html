@@ -3611,6 +3611,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.DailyUtilization"><span class="badge">M</span>DailyUtilization</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.GetAwsAccountsRequest"><span class="badge">M</span>GetAwsAccountsRequest</a>
                 </li>
               
@@ -42371,6 +42375,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.DailyUtilization">DailyUtilization</h3>
+        <p>Daily utilization data for a specific date range.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>currentDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current date for which the utilization is reported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>utilizationPercentage</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>The percentage of utilization for this specific date </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.GetAwsAccountsRequest">GetAwsAccountsRequest</h3>
         <p>Response message for the Flow.GetAwsAccounts rpc.</p>
 
@@ -43492,24 +43527,24 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
             <tbody>
               
                 <tr>
-                  <td>currentDate</td>
+                  <td>savingsPlanName</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The current date for which the utilization details are reported. </p></td>
+                  <td><p>Descriptive name of the Savings Plan </p></td>
                 </tr>
               
                 <tr>
-                  <td>arn</td>
+                  <td>savingsPlanArn</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The ARN of each of the Savings Plan for which utilization is reported. </p></td>
+                  <td><p>The ARN of the Savings Plan </p></td>
                 </tr>
               
                 <tr>
-                  <td>utilizationPercentage</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>The percentage of utilization for each of the Savings Plan </p></td>
+                  <td>perDayUtilization</td>
+                  <td><a href="#blueapi.flow.v1.DailyUtilization">DailyUtilization</a></td>
+                  <td>repeated</td>
+                  <td><p>Array of daily utilization data for this Savings Plan </p></td>
                 </tr>
               
             </tbody>
