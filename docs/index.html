@@ -3611,6 +3611,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.CrossAccountAccessDetail"><span class="badge">M</span>CrossAccountAccessDetail</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.DailyUtilization"><span class="badge">M</span>DailyUtilization</a>
                 </li>
               
@@ -3632,6 +3636,14 @@
               
                 <li>
                   <a href="#blueapi.flow.v1.GetCostExplorerAccessTemplateUrlResponse"><span class="badge">M</span>GetCostExplorerAccessTemplateUrlResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetCrossAccountAccessDetailsRequest"><span class="badge">M</span>GetCrossAccountAccessDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetCrossAccountAccessDetailsResponse"><span class="badge">M</span>GetCrossAccountAccessDetailsResponse</a>
                 </li>
               
                 <li>
@@ -42396,6 +42408,72 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.CrossAccountAccessDetail">CrossAccountAccessDetail</h3>
+        <p>Individual cross-access detail record.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>roleArn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The role ARN that provides the cross-account access permissions. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The external id for this role. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the CloudFormation stack deployed in the target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackRegion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The region where the stack is deployed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>templateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The latest template used to deploy the stack. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>This can be `latest`, `outdated`, or some error information. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>access</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The access type:  &#34;savings_plan_access&#34; or &#34;cost_explorer_access&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.DailyUtilization">DailyUtilization</h3>
         <p>Daily utilization data for a specific date range.</p>
 
@@ -42577,6 +42655,61 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>The external id for this role. Do not change. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetCrossAccountAccessDetailsRequest">GetCrossAccountAccessDetailsRequest</h3>
+        <p>Request message for the Flow.GetCrossAccountAccessDetails rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The target AWS account to be checked. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetCrossAccountAccessDetailsResponse">GetCrossAccountAccessDetailsResponse</h3>
+        <p>Response message for the Flow.GetCrossAccountAccessDetails rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The queried target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details</td>
+                  <td><a href="#blueapi.flow.v1.CrossAccountAccessDetail">CrossAccountAccessDetail</a></td>
+                  <td>repeated</td>
+                  <td><p>List of cross-access details for the target account. </p></td>
                 </tr>
               
             </tbody>
@@ -43673,6 +43806,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Creates a default cross-account access role for Savings Plan (API only).</p></td>
               </tr>
             
+              <tr>
+                <td>GetCrossAccountAccessDetails</td>
+                <td><a href="#blueapi.flow.v1.GetCrossAccountAccessDetailsRequest">GetCrossAccountAccessDetailsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetCrossAccountAccessDetailsResponse">GetCrossAccountAccessDetailsResponse</a></td>
+                <td><p>Returns the activated cross-account access role for Savings Plan (API only).</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -43808,6 +43948,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>POST</td>
                 <td>/v1/aws/xacct/spa</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCrossAccountAccessDetails</td>
+                <td>GET</td>
+                <td>/v1/aws/xacct</td>
+                <td></td>
               </tr>
               
             

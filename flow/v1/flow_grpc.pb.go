@@ -31,6 +31,7 @@ const (
 	Flow_GetAwsAccounts_FullMethodName                   = "/blueapi.flow.v1.Flow/GetAwsAccounts"
 	Flow_GetSPPurchaseAccessTemplateUrl_FullMethodName   = "/blueapi.flow.v1.Flow/GetSPPurchaseAccessTemplateUrl"
 	Flow_CreateSPPurchaseAccess_FullMethodName           = "/blueapi.flow.v1.Flow/CreateSPPurchaseAccess"
+	Flow_GetCrossAccountAccessDetails_FullMethodName     = "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails"
 )
 
 // FlowClient is the client API for Flow service.
@@ -63,6 +64,8 @@ type FlowClient interface {
 	GetSPPurchaseAccessTemplateUrl(ctx context.Context, in *GetSPPurchaseAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetSPPurchaseAccessTemplateUrlResponse, error)
 	// Creates a default cross-account access role for Savings Plan (API only).
 	CreateSPPurchaseAccess(ctx context.Context, in *CreateSPPurchaseAccessRequest, opts ...grpc.CallOption) (*CreateSPPurchaseAccessResponse, error)
+	// Returns the activated cross-account access role for Savings Plan (API only).
+	GetCrossAccountAccessDetails(ctx context.Context, in *GetCrossAccountAccessDetailsRequest, opts ...grpc.CallOption) (*GetCrossAccountAccessDetailsResponse, error)
 }
 
 type flowClient struct {
@@ -193,6 +196,16 @@ func (c *flowClient) CreateSPPurchaseAccess(ctx context.Context, in *CreateSPPur
 	return out, nil
 }
 
+func (c *flowClient) GetCrossAccountAccessDetails(ctx context.Context, in *GetCrossAccountAccessDetailsRequest, opts ...grpc.CallOption) (*GetCrossAccountAccessDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCrossAccountAccessDetailsResponse)
+	err := c.cc.Invoke(ctx, Flow_GetCrossAccountAccessDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -223,6 +236,8 @@ type FlowServer interface {
 	GetSPPurchaseAccessTemplateUrl(context.Context, *GetSPPurchaseAccessTemplateUrlRequest) (*GetSPPurchaseAccessTemplateUrlResponse, error)
 	// Creates a default cross-account access role for Savings Plan (API only).
 	CreateSPPurchaseAccess(context.Context, *CreateSPPurchaseAccessRequest) (*CreateSPPurchaseAccessResponse, error)
+	// Returns the activated cross-account access role for Savings Plan (API only).
+	GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -265,6 +280,9 @@ func (UnimplementedFlowServer) GetSPPurchaseAccessTemplateUrl(context.Context, *
 }
 func (UnimplementedFlowServer) CreateSPPurchaseAccess(context.Context, *CreateSPPurchaseAccessRequest) (*CreateSPPurchaseAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateSPPurchaseAccess not implemented")
+}
+func (UnimplementedFlowServer) GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCrossAccountAccessDetails not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -495,6 +513,24 @@ func _Flow_CreateSPPurchaseAccess_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_GetCrossAccountAccessDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCrossAccountAccessDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetCrossAccountAccessDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetCrossAccountAccessDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetCrossAccountAccessDetails(ctx, req.(*GetCrossAccountAccessDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -549,6 +585,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateSPPurchaseAccess",
 			Handler:    _Flow_CreateSPPurchaseAccess_Handler,
+		},
+		{
+			MethodName: "GetCrossAccountAccessDetails",
+			Handler:    _Flow_GetCrossAccountAccessDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
