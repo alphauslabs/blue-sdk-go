@@ -413,21 +413,22 @@ func local_request_Flow_CreateSPPurchaseAccess_0(ctx context.Context, marshaler 
 	return msg, metadata, err
 }
 
-var filter_Flow_GetCrossAccountAccessDetails_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-
 func request_Flow_GetCrossAccountAccessDetails_0(ctx context.Context, marshaler runtime.Marshaler, client FlowClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetCrossAccountAccessDetailsRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok := pathParams["payerId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "payerId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Flow_GetCrossAccountAccessDetails_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	protoReq.PayerId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "payerId", err)
 	}
 	msg, err := client.GetCrossAccountAccessDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -437,12 +438,15 @@ func local_request_Flow_GetCrossAccountAccessDetails_0(ctx context.Context, mars
 	var (
 		protoReq GetCrossAccountAccessDetailsRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok := pathParams["payerId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "payerId")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Flow_GetCrossAccountAccessDetails_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	protoReq.PayerId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "payerId", err)
 	}
 	msg, err := server.GetCrossAccountAccessDetails(ctx, &protoReq)
 	return msg, metadata, err
@@ -700,7 +704,7 @@ func RegisterFlowHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct/{payerId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -962,7 +966,7 @@ func RegisterFlowHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct/{payerId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -991,7 +995,7 @@ var (
 	pattern_Flow_GetAwsAccounts_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "aws", "billingInternalId", "accounts"}, ""))
 	pattern_Flow_GetSPPurchaseAccessTemplateUrl_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "aws", "xacct", "spa"}, ""))
 	pattern_Flow_CreateSPPurchaseAccess_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "aws", "xacct", "spa"}, ""))
-	pattern_Flow_GetCrossAccountAccessDetails_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "aws", "xacct"}, ""))
+	pattern_Flow_GetCrossAccountAccessDetails_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aws", "xacct", "payerId"}, ""))
 )
 
 var (
