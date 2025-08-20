@@ -64,7 +64,7 @@ type FlowClient interface {
 	GetSPPurchaseAccessTemplateUrl(ctx context.Context, in *GetSPPurchaseAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetSPPurchaseAccessTemplateUrlResponse, error)
 	// Creates a default cross-account access role for Savings Plan (API only).
 	CreateSPPurchaseAccess(ctx context.Context, in *CreateSPPurchaseAccessRequest, opts ...grpc.CallOption) (*CreateSPPurchaseAccessResponse, error)
-	// Returns the activated cross-account access role for Savings Plan (API only).
+	// Returns the activated cross-account access roles of the target payerId.
 	GetCrossAccountAccessDetails(ctx context.Context, in *GetCrossAccountAccessDetailsRequest, opts ...grpc.CallOption) (*GetCrossAccountAccessDetailsResponse, error)
 }
 
@@ -236,7 +236,7 @@ type FlowServer interface {
 	GetSPPurchaseAccessTemplateUrl(context.Context, *GetSPPurchaseAccessTemplateUrlRequest) (*GetSPPurchaseAccessTemplateUrlResponse, error)
 	// Creates a default cross-account access role for Savings Plan (API only).
 	CreateSPPurchaseAccess(context.Context, *CreateSPPurchaseAccessRequest) (*CreateSPPurchaseAccessResponse, error)
-	// Returns the activated cross-account access role for Savings Plan (API only).
+	// Returns the activated cross-account access roles of the target payerId.
 	GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }

@@ -704,7 +704,7 @@ func RegisterFlowHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct/{payerId}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct/{payerId}/access"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -966,7 +966,7 @@ func RegisterFlowHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct/{payerId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails", runtime.WithHTTPPathPattern("/v1/aws/xacct/{payerId}/access"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -995,7 +995,7 @@ var (
 	pattern_Flow_GetAwsAccounts_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "aws", "billingInternalId", "accounts"}, ""))
 	pattern_Flow_GetSPPurchaseAccessTemplateUrl_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "aws", "xacct", "spa"}, ""))
 	pattern_Flow_CreateSPPurchaseAccess_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "aws", "xacct", "spa"}, ""))
-	pattern_Flow_GetCrossAccountAccessDetails_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "aws", "xacct", "payerId"}, ""))
+	pattern_Flow_GetCrossAccountAccessDetails_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "aws", "xacct", "payerId", "access"}, ""))
 )
 
 var (
