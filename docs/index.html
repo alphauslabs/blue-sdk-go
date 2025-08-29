@@ -3603,14 +3603,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.flow.v1.CreateSettingsRequest"><span class="badge">M</span>CreateSettingsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.flow.v1.CreateSettingsResponse"><span class="badge">M</span>CreateSettingsResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.flow.v1.CrossAccountAccessDetail"><span class="badge">M</span>CrossAccountAccessDetail</a>
                 </li>
               
@@ -3699,19 +3691,19 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.SetSettingsRequest"><span class="badge">M</span>SetSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SetSettingsResponse"><span class="badge">M</span>SetSettingsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.SettingsHistory"><span class="badge">M</span>SettingsHistory</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.flow.v1.SpDetails"><span class="badge">M</span>SpDetails</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.flow.v1.UpdateSettingsRequest"><span class="badge">M</span>UpdateSettingsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.flow.v1.UpdateSettingsResponse"><span class="badge">M</span>UpdateSettingsResponse</a>
                 </li>
               
                 <li>
@@ -42297,117 +42289,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
-        <h3 id="blueapi.flow.v1.CreateSettingsRequest">CreateSettingsRequest</h3>
-        <p>Request message for the Flow.CreateSettings rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. The id of the payer. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountScope</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Account scope determines if the account is payer or linked account. Valid values are `payer` or `linked`. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>customization</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Customization setting for SP. Valid values are `COMPUTE_SP` or `EC2_INSTANCE_SP`. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>planTerm</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Term of the SP. Valid values are `ONE_YEAR` or `THREE_YEARS`. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>paymentOption</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Payment option for the SP. Valid values are `ALL_UPFRONT`, `PARTIAL_UPFRONT`, or `NO_UPFRONT`. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>lookBackPeriod</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Lookback period for recommendation. Valid values are `SEVEN_DAYS`, `THIRTY_DAYS`, or `SIXTY_DAYS`. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>instanceFamily</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. If EC2 Instance SP is selected in Customization, request will include list of instance family </p></td>
-                </tr>
-              
-                <tr>
-                  <td>annualBudget</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p>Optional. Annual budget input for SP. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>approval</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>Optional. Purchase approval from the payer for the SP. Default value is `false`. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>payerId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Payer account ID </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flow.v1.CreateSettingsResponse">CreateSettingsResponse</h3>
-        <p>Response message for the Flow.CreateSettings rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>response</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.flow.v1.CrossAccountAccessDetail">CrossAccountAccessDetail</h3>
         <p>Individual cross-access detail record.</p>
 
@@ -43277,6 +43158,117 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.SetSettingsRequest">SetSettingsRequest</h3>
+        <p>Request message for the Flow.CreateSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The id of the payer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Account scope determines if the account is payer or linked account. Valid values are `payer` or `linked`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customization</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Customization setting for SP. Valid values are `COMPUTE_SP` or `EC2_INSTANCE_SP`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTerm</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Term of the SP. Valid values are `ONE_YEAR` or `THREE_YEARS`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Payment option for the SP. Valid values are `ALL_UPFRONT`, `PARTIAL_UPFRONT`, or `NO_UPFRONT`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookBackPeriod</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Lookback period for recommendation. Valid values are `SEVEN_DAYS`, `THIRTY_DAYS`, or `SIXTY_DAYS`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. If EC2 Instance SP is selected in Customization, request will include list of instance family </p></td>
+                </tr>
+              
+                <tr>
+                  <td>annualBudget</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Optional. Annual budget input for SP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approval</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Purchase approval from the payer for the SP. Default value is `false`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Payer account ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.SetSettingsResponse">SetSettingsResponse</h3>
+        <p>Response message for the Flow.CreateSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.SettingsHistory">SettingsHistory</h3>
         <p>Settings history message.</p>
 
@@ -43486,117 +43478,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
-        <h3 id="blueapi.flow.v1.UpdateSettingsRequest">UpdateSettingsRequest</h3>
-        <p>Request message for the Flow.UpdateSettings rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. The id of the payer to update. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>accountScope</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update account scope (payer or linked). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>customization</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update customization setting. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>planTerm</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update term of the SP. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>paymentOption</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update payment option. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>lookBackPeriod</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update lookback period. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>instanceFamily</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update list of instance families. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>annualBudget</td>
-                  <td><a href="#double">double</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update annual budget. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>approval</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update purchase approval. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>payerId</td>
-                  <td><a href="#string">string</a></td>
-                  <td>optional</td>
-                  <td><p>Optional. Update used payerId. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flow.v1.UpdateSettingsResponse">UpdateSettingsResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>response</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.flow.v1.UsageCostDetails">UsageCostDetails</h3>
         <p>Usage and Cost Details to be used in the GetDailyUsageCostDetailsResponse.</p>
 
@@ -43730,17 +43611,10 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               </tr>
             
               <tr>
-                <td>CreateSettings</td>
-                <td><a href="#blueapi.flow.v1.CreateSettingsRequest">CreateSettingsRequest</a></td>
-                <td><a href="#blueapi.flow.v1.CreateSettingsResponse">CreateSettingsResponse</a></td>
-                <td><p>Creates a new settings configuration for the user.</p></td>
-              </tr>
-            
-              <tr>
-                <td>UpdateSettings</td>
-                <td><a href="#blueapi.flow.v1.UpdateSettingsRequest">UpdateSettingsRequest</a></td>
-                <td><a href="#blueapi.flow.v1.UpdateSettingsResponse">UpdateSettingsResponse</a></td>
-                <td><p>Update the settings configuration for a user.</p></td>
+                <td>SetSettings</td>
+                <td><a href="#blueapi.flow.v1.SetSettingsRequest">SetSettingsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.SetSettingsResponse">SetSettingsResponse</a></td>
+                <td><p>Creates or Updates the settings configuration for recommendation.</p></td>
               </tr>
             
               <tr>
@@ -43844,17 +43718,7 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
               
               <tr>
-                <td>CreateSettings</td>
-                <td>POST</td>
-                <td>/v1/settings</td>
-                <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>UpdateSettings</td>
+                <td>SetSettings</td>
                 <td>PUT</td>
                 <td>/v1/settings/{id}</td>
                 <td>*</td>

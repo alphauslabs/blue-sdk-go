@@ -20,8 +20,7 @@ const _ = grpc.SupportPackageIsVersion8
 
 const (
 	Flow_GetInfo_FullMethodName                          = "/blueapi.flow.v1.Flow/GetInfo"
-	Flow_CreateSettings_FullMethodName                   = "/blueapi.flow.v1.Flow/CreateSettings"
-	Flow_UpdateSettings_FullMethodName                   = "/blueapi.flow.v1.Flow/UpdateSettings"
+	Flow_SetSettings_FullMethodName                      = "/blueapi.flow.v1.Flow/SetSettings"
 	Flow_GetSettings_FullMethodName                      = "/blueapi.flow.v1.Flow/GetSettings"
 	Flow_GetRecommendationDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
 	Flow_GetCostExplorerAccessTemplateUrl_FullMethodName = "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl"
@@ -42,10 +41,8 @@ const (
 type FlowClient interface {
 	// For Testing Purposes Only.
 	GetInfo(ctx context.Context, in *GetInfoRequest, opts ...grpc.CallOption) (*GetInfoResponse, error)
-	// Creates a new settings configuration for the user.
-	CreateSettings(ctx context.Context, in *CreateSettingsRequest, opts ...grpc.CallOption) (*CreateSettingsResponse, error)
-	// Update the settings configuration for a user.
-	UpdateSettings(ctx context.Context, in *UpdateSettingsRequest, opts ...grpc.CallOption) (*UpdateSettingsResponse, error)
+	// Creates or Updates the settings configuration for recommendation.
+	SetSettings(ctx context.Context, in *SetSettingsRequest, opts ...grpc.CallOption) (*SetSettingsResponse, error)
 	// Fetch previous settings for a user
 	GetSettings(ctx context.Context, in *GetSettingsRequest, opts ...grpc.CallOption) (*GetSettingsResponse, error)
 	// Fetch user savings plan details
@@ -86,20 +83,10 @@ func (c *flowClient) GetInfo(ctx context.Context, in *GetInfoRequest, opts ...gr
 	return out, nil
 }
 
-func (c *flowClient) CreateSettings(ctx context.Context, in *CreateSettingsRequest, opts ...grpc.CallOption) (*CreateSettingsResponse, error) {
+func (c *flowClient) SetSettings(ctx context.Context, in *SetSettingsRequest, opts ...grpc.CallOption) (*SetSettingsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateSettingsResponse)
-	err := c.cc.Invoke(ctx, Flow_CreateSettings_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *flowClient) UpdateSettings(ctx context.Context, in *UpdateSettingsRequest, opts ...grpc.CallOption) (*UpdateSettingsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateSettingsResponse)
-	err := c.cc.Invoke(ctx, Flow_UpdateSettings_FullMethodName, in, out, cOpts...)
+	out := new(SetSettingsResponse)
+	err := c.cc.Invoke(ctx, Flow_SetSettings_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -214,10 +201,8 @@ func (c *flowClient) GetCrossAccountAccessDetails(ctx context.Context, in *GetCr
 type FlowServer interface {
 	// For Testing Purposes Only.
 	GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error)
-	// Creates a new settings configuration for the user.
-	CreateSettings(context.Context, *CreateSettingsRequest) (*CreateSettingsResponse, error)
-	// Update the settings configuration for a user.
-	UpdateSettings(context.Context, *UpdateSettingsRequest) (*UpdateSettingsResponse, error)
+	// Creates or Updates the settings configuration for recommendation.
+	SetSettings(context.Context, *SetSettingsRequest) (*SetSettingsResponse, error)
 	// Fetch previous settings for a user
 	GetSettings(context.Context, *GetSettingsRequest) (*GetSettingsResponse, error)
 	// Fetch user savings plan details
@@ -248,11 +233,8 @@ type UnimplementedFlowServer struct {
 func (UnimplementedFlowServer) GetInfo(context.Context, *GetInfoRequest) (*GetInfoResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetInfo not implemented")
 }
-func (UnimplementedFlowServer) CreateSettings(context.Context, *CreateSettingsRequest) (*CreateSettingsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateSettings not implemented")
-}
-func (UnimplementedFlowServer) UpdateSettings(context.Context, *UpdateSettingsRequest) (*UpdateSettingsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSettings not implemented")
+func (UnimplementedFlowServer) SetSettings(context.Context, *SetSettingsRequest) (*SetSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetSettings not implemented")
 }
 func (UnimplementedFlowServer) GetSettings(context.Context, *GetSettingsRequest) (*GetSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSettings not implemented")
@@ -315,38 +297,20 @@ func _Flow_GetInfo_Handler(srv interface{}, ctx context.Context, dec func(interf
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Flow_CreateSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateSettingsRequest)
+func _Flow_SetSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetSettingsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FlowServer).CreateSettings(ctx, in)
+		return srv.(FlowServer).SetSettings(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Flow_CreateSettings_FullMethodName,
+		FullMethod: Flow_SetSettings_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FlowServer).CreateSettings(ctx, req.(*CreateSettingsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Flow_UpdateSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateSettingsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(FlowServer).UpdateSettings(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Flow_UpdateSettings_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FlowServer).UpdateSettings(ctx, req.(*UpdateSettingsRequest))
+		return srv.(FlowServer).SetSettings(ctx, req.(*SetSettingsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -543,12 +507,8 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Flow_GetInfo_Handler,
 		},
 		{
-			MethodName: "CreateSettings",
-			Handler:    _Flow_CreateSettings_Handler,
-		},
-		{
-			MethodName: "UpdateSettings",
-			Handler:    _Flow_UpdateSettings_Handler,
+			MethodName: "SetSettings",
+			Handler:    _Flow_SetSettings_Handler,
 		},
 		{
 			MethodName: "GetSettings",
