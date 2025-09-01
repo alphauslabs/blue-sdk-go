@@ -204,6 +204,7 @@ const (
 	Cover_GetContainerCostUsage_FullMethodName                   = "/blueapi.cover.v1.Cover/GetContainerCostUsage"
 	Cover_PopulateDemoData_FullMethodName                        = "/blueapi.cover.v1.Cover/PopulateDemoData"
 	Cover_ResetDemoData_FullMethodName                           = "/blueapi.cover.v1.Cover/ResetDemoData"
+	Cover_GetDiscountPlan_FullMethodName                         = "/blueapi.cover.v1.Cover/GetDiscountPlan"
 )
 
 // CoverClient is the client API for Cover service.
@@ -574,6 +575,8 @@ type CoverClient interface {
 	PopulateDemoData(ctx context.Context, in *PopulateDemoDataRequest, opts ...grpc.CallOption) (*PopulateDemoDataResponse, error)
 	// WORK-IN-PROGRESS: Reset demo data
 	ResetDemoData(ctx context.Context, in *ResetDemoDataRequest, opts ...grpc.CallOption) (*ResetDemoDataResponse, error)
+	// Get discount plan details for an organization (or MSP).
+	GetDiscountPlan(ctx context.Context, in *GetDiscountPlanRequest, opts ...grpc.CallOption) (*GetDiscountPlanResponse, error)
 }
 
 type coverClient struct {
@@ -3037,6 +3040,16 @@ func (c *coverClient) ResetDemoData(ctx context.Context, in *ResetDemoDataReques
 	return out, nil
 }
 
+func (c *coverClient) GetDiscountPlan(ctx context.Context, in *GetDiscountPlanRequest, opts ...grpc.CallOption) (*GetDiscountPlanResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDiscountPlanResponse)
+	err := c.cc.Invoke(ctx, Cover_GetDiscountPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3405,6 +3418,8 @@ type CoverServer interface {
 	PopulateDemoData(context.Context, *PopulateDemoDataRequest) (*PopulateDemoDataResponse, error)
 	// WORK-IN-PROGRESS: Reset demo data
 	ResetDemoData(context.Context, *ResetDemoDataRequest) (*ResetDemoDataResponse, error)
+	// Get discount plan details for an organization (or MSP).
+	GetDiscountPlan(context.Context, *GetDiscountPlanRequest) (*GetDiscountPlanResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3960,6 +3975,9 @@ func (UnimplementedCoverServer) PopulateDemoData(context.Context, *PopulateDemoD
 }
 func (UnimplementedCoverServer) ResetDemoData(context.Context, *ResetDemoDataRequest) (*ResetDemoDataResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetDemoData not implemented")
+}
+func (UnimplementedCoverServer) GetDiscountPlan(context.Context, *GetDiscountPlanRequest) (*GetDiscountPlanResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDiscountPlan not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7354,6 +7372,24 @@ func _Cover_ResetDemoData_Handler(srv interface{}, ctx context.Context, dec func
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetDiscountPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDiscountPlanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetDiscountPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetDiscountPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetDiscountPlan(ctx, req.(*GetDiscountPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -7984,6 +8020,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetDemoData",
 			Handler:    _Cover_ResetDemoData_Handler,
+		},
+		{
+			MethodName: "GetDiscountPlan",
+			Handler:    _Cover_GetDiscountPlan_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

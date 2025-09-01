@@ -2645,6 +2645,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetDiscountPlanRequest"><span class="badge">M</span>GetDiscountPlanRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetDiscountPlanResponse"><span class="badge">M</span>GetDiscountPlanResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetDiscountRecommendationsRequest"><span class="badge">M</span>GetDiscountRecommendationsRequest</a>
                 </li>
               
@@ -26135,6 +26143,13 @@ At the moment, Blue&#39;s default RPC timeout is around one hour.</p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -27385,6 +27400,13 @@ Example: If groupBy is set to &#34;Environment&#34;, this field might include va
                   <td><a href="#blueapi.cover.v1.CostItem.UnitcostmetricEntry">CostItem.UnitcostmetricEntry</a></td>
                   <td>repeated</td>
                   <td><p>Contains the unit cost metric. Only used when feature flag for unit cost metric is enabled. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allocationCategory</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Indicates the allocation category. &#34;target&#34; or &#34;source&#34;. For target, allocated cost from other account while source is the cost allocated to other account. </p></td>
                 </tr>
               
             </tbody>
@@ -31616,6 +31638,138 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>credit</td>
                   <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetDiscountPlanRequest">GetDiscountPlanRequest</h3>
+        <p>Request message for GetDiscountPlan</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Organization Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reductionDisplay</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Valid values: &#39;all&#39;, &#39;reservation&#39;, &#39;savingsplan&#39; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>includeDetails</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If set to &#34;true&#34;, details of the RI or SP list is returned. Default: false. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fromDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The start date of the displayed data. If not set, the first day of the current month will be used. Format: yyyy-mm-dd. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>toDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The end date of the displayed data. If not set, current date will be used. Format: yyyy-mm-dd. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Payer Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Billing group Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Account group Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Cost Group Id used in octo. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. List of Account Ids. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>services</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. List of services. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetDiscountPlanResponse">GetDiscountPlanResponse</h3>
+        <p>Response message for GetDiscountPlan</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsDiscountPlans</td>
+                  <td><a href="#blueapi.api.cover.AwsDiscountPlans">blueapi.api.cover.AwsDiscountPlans</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -39822,6 +39976,13 @@ file in bytes </p></td>
                 <td><p>WORK-IN-PROGRESS: Reset demo data</p></td>
               </tr>
             
+              <tr>
+                <td>GetDiscountPlan</td>
+                <td><a href="#blueapi.cover.v1.GetDiscountPlanRequest">GetDiscountPlanRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetDiscountPlanResponse">GetDiscountPlanResponse</a></td>
+                <td><p>Get discount plan details for an organization (or MSP).</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -41666,6 +41827,16 @@ file in bytes </p></td>
                 <td>ResetDemoData</td>
                 <td>POST</td>
                 <td>/v1/demo/reset</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetDiscountPlan</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/discountplan/{orgId}:read</td>
                 <td>*</td>
               </tr>
               
