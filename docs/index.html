@@ -3968,6 +3968,10 @@
                   <a href="#blueapi.vortex.v1.TestResponse"><span class="badge">M</span>TestResponse</a>
                 </li>
               
+                <li>
+                  <a href="#blueapi.vortex.v1.VerifyInvitedUserRequest"><span class="badge">M</span>VerifyInvitedUserRequest</a>
+                </li>
+              
               
               
               
@@ -46180,6 +46184,37 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.vortex.v1.VerifyInvitedUserRequest">VerifyInvitedUserRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
 
@@ -46225,6 +46260,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               <tr>
                 <td>InviteUser</td>
                 <td><a href="#blueapi.vortex.v1.InviteUserRequest">InviteUserRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>VerifyInvitedUser</td>
+                <td><a href="#blueapi.vortex.v1.VerifyInvitedUserRequest">VerifyInvitedUserRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p></p></td>
               </tr>
@@ -46293,6 +46335,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>InviteUser</td>
                 <td>POST</td>
                 <td>/v1/invite</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>VerifyInvitedUser</td>
+                <td>POST</td>
+                <td>/v1/invite/verify</td>
                 <td>*</td>
               </tr>
               

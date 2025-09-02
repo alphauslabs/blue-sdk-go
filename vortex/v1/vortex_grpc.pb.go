@@ -20,11 +20,12 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Vortex_Test_FullMethodName        = "/blueapi.vortex.v1.Vortex/Test"
-	Vortex_CreateOrg_FullMethodName   = "/blueapi.vortex.v1.Vortex/CreateOrg"
-	Vortex_GetUser_FullMethodName     = "/blueapi.vortex.v1.Vortex/GetUser"
-	Vortex_ListPrompts_FullMethodName = "/blueapi.vortex.v1.Vortex/ListPrompts"
-	Vortex_InviteUser_FullMethodName  = "/blueapi.vortex.v1.Vortex/InviteUser"
+	Vortex_Test_FullMethodName              = "/blueapi.vortex.v1.Vortex/Test"
+	Vortex_CreateOrg_FullMethodName         = "/blueapi.vortex.v1.Vortex/CreateOrg"
+	Vortex_GetUser_FullMethodName           = "/blueapi.vortex.v1.Vortex/GetUser"
+	Vortex_ListPrompts_FullMethodName       = "/blueapi.vortex.v1.Vortex/ListPrompts"
+	Vortex_InviteUser_FullMethodName        = "/blueapi.vortex.v1.Vortex/InviteUser"
+	Vortex_VerifyInvitedUser_FullMethodName = "/blueapi.vortex.v1.Vortex/VerifyInvitedUser"
 )
 
 // VortexClient is the client API for Vortex service.
@@ -40,6 +41,7 @@ type VortexClient interface {
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (Vortex_ListPromptsClient, error)
 	InviteUser(ctx context.Context, in *InviteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	VerifyInvitedUser(ctx context.Context, in *VerifyInvitedUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type vortexClient struct {
@@ -123,6 +125,16 @@ func (c *vortexClient) InviteUser(ctx context.Context, in *InviteUserRequest, op
 	return out, nil
 }
 
+func (c *vortexClient) VerifyInvitedUser(ctx context.Context, in *VerifyInvitedUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Vortex_VerifyInvitedUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VortexServer is the server API for Vortex service.
 // All implementations must embed UnimplementedVortexServer
 // for forward compatibility
@@ -136,6 +148,7 @@ type VortexServer interface {
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	ListPrompts(*ListPromptsRequest, Vortex_ListPromptsServer) error
 	InviteUser(context.Context, *InviteUserRequest) (*emptypb.Empty, error)
+	VerifyInvitedUser(context.Context, *VerifyInvitedUserRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedVortexServer()
 }
 
@@ -157,6 +170,9 @@ func (UnimplementedVortexServer) ListPrompts(*ListPromptsRequest, Vortex_ListPro
 }
 func (UnimplementedVortexServer) InviteUser(context.Context, *InviteUserRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method InviteUser not implemented")
+}
+func (UnimplementedVortexServer) VerifyInvitedUser(context.Context, *VerifyInvitedUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyInvitedUser not implemented")
 }
 func (UnimplementedVortexServer) mustEmbedUnimplementedVortexServer() {}
 
@@ -264,6 +280,24 @@ func _Vortex_InviteUser_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vortex_VerifyInvitedUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyInvitedUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VortexServer).VerifyInvitedUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vortex_VerifyInvitedUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VortexServer).VerifyInvitedUser(ctx, req.(*VerifyInvitedUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vortex_ServiceDesc is the grpc.ServiceDesc for Vortex service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -286,6 +320,10 @@ var Vortex_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "InviteUser",
 			Handler:    _Vortex_InviteUser_Handler,
+		},
+		{
+			MethodName: "VerifyInvitedUser",
+			Handler:    _Vortex_VerifyInvitedUser_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
