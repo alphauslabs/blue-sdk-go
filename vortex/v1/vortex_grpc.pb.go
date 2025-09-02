@@ -95,7 +95,7 @@ func (c *vortexClient) ListPrompts(ctx context.Context, in *ListPromptsRequest, 
 }
 
 type Vortex_ListPromptsClient interface {
-	Recv() (*ListPromptsResponse, error)
+	Recv() (*Prompt, error)
 	grpc.ClientStream
 }
 
@@ -103,8 +103,8 @@ type vortexListPromptsClient struct {
 	grpc.ClientStream
 }
 
-func (x *vortexListPromptsClient) Recv() (*ListPromptsResponse, error) {
-	m := new(ListPromptsResponse)
+func (x *vortexListPromptsClient) Recv() (*Prompt, error) {
+	m := new(Prompt)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -218,7 +218,7 @@ func _Vortex_ListPrompts_Handler(srv interface{}, stream grpc.ServerStream) erro
 }
 
 type Vortex_ListPromptsServer interface {
-	Send(*ListPromptsResponse) error
+	Send(*Prompt) error
 	grpc.ServerStream
 }
 
@@ -226,7 +226,7 @@ type vortexListPromptsServer struct {
 	grpc.ServerStream
 }
 
-func (x *vortexListPromptsServer) Send(m *ListPromptsResponse) error {
+func (x *vortexListPromptsServer) Send(m *Prompt) error {
 	return x.ServerStream.SendMsg(m)
 }
 
