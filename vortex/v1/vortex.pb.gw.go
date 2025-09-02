@@ -123,7 +123,7 @@ func local_request_Vortex_GetUser_0(ctx context.Context, marshaler runtime.Marsh
 	return msg, metadata, err
 }
 
-func request_Vortex_ListPrompts_0(ctx context.Context, marshaler runtime.Marshaler, client VortexClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_Vortex_ListPrompts_0(ctx context.Context, marshaler runtime.Marshaler, client VortexClient, req *http.Request, pathParams map[string]string) (Vortex_ListPromptsClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListPromptsRequest
 		metadata runtime.ServerMetadata
@@ -134,20 +134,16 @@ func request_Vortex_ListPrompts_0(ctx context.Context, marshaler runtime.Marshal
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	msg, err := client.ListPrompts(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
-	return msg, metadata, err
-}
-
-func local_request_Vortex_ListPrompts_0(ctx context.Context, marshaler runtime.Marshaler, server VortexServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
-	var (
-		protoReq ListPromptsRequest
-		metadata runtime.ServerMetadata
-	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	stream, err := client.ListPrompts(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
 	}
-	msg, err := server.ListPrompts(ctx, &protoReq)
-	return msg, metadata, err
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
 }
 
 // RegisterVortexHandlerServer registers the http handlers for service Vortex to "mux".
@@ -216,25 +212,12 @@ func RegisterVortexHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 		}
 		forward_Vortex_GetUser_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+
 	mux.Handle(http.MethodPost, pattern_Vortex_ListPrompts_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
-		ctx, cancel := context.WithCancel(req.Context())
-		defer cancel()
-		var stream runtime.ServerTransportStream
-		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
-		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.vortex.v1.Vortex/ListPrompts", runtime.WithHTTPPathPattern("/v1/prompts:read"))
-		if err != nil {
-			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		resp, md, err := local_request_Vortex_ListPrompts_0(annotatedContext, inboundMarshaler, server, req, pathParams)
-		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
-		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
-		if err != nil {
-			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
-			return
-		}
-		forward_Vortex_ListPrompts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
 	})
 
 	return nil
@@ -342,7 +325,7 @@ func RegisterVortexHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_Vortex_ListPrompts_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_Vortex_ListPrompts_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 	})
 	return nil
 }
@@ -358,5 +341,5 @@ var (
 	forward_Vortex_Test_0        = runtime.ForwardResponseMessage
 	forward_Vortex_CreateOrg_0   = runtime.ForwardResponseMessage
 	forward_Vortex_GetUser_0     = runtime.ForwardResponseMessage
-	forward_Vortex_ListPrompts_0 = runtime.ForwardResponseMessage
+	forward_Vortex_ListPrompts_0 = runtime.ForwardResponseStream
 )

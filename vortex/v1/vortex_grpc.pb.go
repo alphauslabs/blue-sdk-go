@@ -37,7 +37,7 @@ type VortexClient interface {
 	// Create an org in Vortex
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
-	ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (*ListPromptsResponse, error)
+	ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (Vortex_ListPromptsClient, error)
 }
 
 type vortexClient struct {
@@ -78,14 +78,37 @@ func (c *vortexClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...
 	return out, nil
 }
 
-func (c *vortexClient) ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (*ListPromptsResponse, error) {
+func (c *vortexClient) ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (Vortex_ListPromptsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListPromptsResponse)
-	err := c.cc.Invoke(ctx, Vortex_ListPrompts_FullMethodName, in, out, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Vortex_ServiceDesc.Streams[0], Vortex_ListPrompts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	return out, nil
+	x := &vortexListPromptsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Vortex_ListPromptsClient interface {
+	Recv() (*ListPromptsResponse, error)
+	grpc.ClientStream
+}
+
+type vortexListPromptsClient struct {
+	grpc.ClientStream
+}
+
+func (x *vortexListPromptsClient) Recv() (*ListPromptsResponse, error) {
+	m := new(ListPromptsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 // VortexServer is the server API for Vortex service.
@@ -99,7 +122,7 @@ type VortexServer interface {
 	// Create an org in Vortex
 	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
-	ListPrompts(context.Context, *ListPromptsRequest) (*ListPromptsResponse, error)
+	ListPrompts(*ListPromptsRequest, Vortex_ListPromptsServer) error
 	mustEmbedUnimplementedVortexServer()
 }
 
@@ -116,8 +139,8 @@ func (UnimplementedVortexServer) CreateOrg(context.Context, *CreateOrgRequest) (
 func (UnimplementedVortexServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
 }
-func (UnimplementedVortexServer) ListPrompts(context.Context, *ListPromptsRequest) (*ListPromptsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListPrompts not implemented")
+func (UnimplementedVortexServer) ListPrompts(*ListPromptsRequest, Vortex_ListPromptsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListPrompts not implemented")
 }
 func (UnimplementedVortexServer) mustEmbedUnimplementedVortexServer() {}
 
@@ -186,22 +209,25 @@ func _Vortex_GetUser_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Vortex_ListPrompts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListPromptsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
+func _Vortex_ListPrompts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListPromptsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
 	}
-	if interceptor == nil {
-		return srv.(VortexServer).ListPrompts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Vortex_ListPrompts_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VortexServer).ListPrompts(ctx, req.(*ListPromptsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
+	return srv.(VortexServer).ListPrompts(m, &vortexListPromptsServer{ServerStream: stream})
+}
+
+type Vortex_ListPromptsServer interface {
+	Send(*ListPromptsResponse) error
+	grpc.ServerStream
+}
+
+type vortexListPromptsServer struct {
+	grpc.ServerStream
+}
+
+func (x *vortexListPromptsServer) Send(m *ListPromptsResponse) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 // Vortex_ServiceDesc is the grpc.ServiceDesc for Vortex service.
@@ -223,11 +249,13 @@ var Vortex_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "GetUser",
 			Handler:    _Vortex_GetUser_Handler,
 		},
+	},
+	Streams: []grpc.StreamDesc{
 		{
-			MethodName: "ListPrompts",
-			Handler:    _Vortex_ListPrompts_Handler,
+			StreamName:    "ListPrompts",
+			Handler:       _Vortex_ListPrompts_Handler,
+			ServerStreams: true,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
 	Metadata: "vortex/v1/vortex.proto",
 }
