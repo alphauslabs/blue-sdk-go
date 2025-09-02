@@ -3953,6 +3953,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.vortex.v1.ListPromptsRequest"><span class="badge">M</span>ListPromptsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.vortex.v1.ListPromptsResponse"><span class="badge">M</span>ListPromptsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.vortex.v1.Prompt"><span class="badge">M</span>Prompt</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.vortex.v1.TestResponse"><span class="badge">M</span>TestResponse</a>
                 </li>
               
@@ -46075,6 +46087,75 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.vortex.v1.ListPromptsRequest">ListPromptsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.vortex.v1.ListPromptsResponse">ListPromptsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>prompts</td>
+                  <td><a href="#blueapi.vortex.v1.Prompt">Prompt</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.vortex.v1.Prompt">Prompt</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fromContainerName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>riskLevel</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.vortex.v1.TestResponse">TestResponse</h3>
         <p></p>
 
@@ -46134,6 +46215,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ListPrompts</td>
+                <td><a href="#blueapi.vortex.v1.ListPromptsRequest">ListPromptsRequest</a></td>
+                <td><a href="#blueapi.vortex.v1.ListPromptsResponse">ListPromptsResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -46179,6 +46267,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GET</td>
                 <td>/v1/user/{email}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListPrompts</td>
+                <td>POST</td>
+                <td>/v1/prompts:read</td>
+                <td>*</td>
               </tr>
               
             

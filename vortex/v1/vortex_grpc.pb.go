@@ -20,9 +20,10 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Vortex_Test_FullMethodName      = "/blueapi.vortex.v1.Vortex/Test"
-	Vortex_CreateOrg_FullMethodName = "/blueapi.vortex.v1.Vortex/CreateOrg"
-	Vortex_GetUser_FullMethodName   = "/blueapi.vortex.v1.Vortex/GetUser"
+	Vortex_Test_FullMethodName        = "/blueapi.vortex.v1.Vortex/Test"
+	Vortex_CreateOrg_FullMethodName   = "/blueapi.vortex.v1.Vortex/CreateOrg"
+	Vortex_GetUser_FullMethodName     = "/blueapi.vortex.v1.Vortex/GetUser"
+	Vortex_ListPrompts_FullMethodName = "/blueapi.vortex.v1.Vortex/ListPrompts"
 )
 
 // VortexClient is the client API for Vortex service.
@@ -36,6 +37,7 @@ type VortexClient interface {
 	// Create an org in Vortex
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
+	ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (*ListPromptsResponse, error)
 }
 
 type vortexClient struct {
@@ -76,6 +78,16 @@ func (c *vortexClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...
 	return out, nil
 }
 
+func (c *vortexClient) ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (*ListPromptsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPromptsResponse)
+	err := c.cc.Invoke(ctx, Vortex_ListPrompts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VortexServer is the server API for Vortex service.
 // All implementations must embed UnimplementedVortexServer
 // for forward compatibility
@@ -87,6 +99,7 @@ type VortexServer interface {
 	// Create an org in Vortex
 	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
+	ListPrompts(context.Context, *ListPromptsRequest) (*ListPromptsResponse, error)
 	mustEmbedUnimplementedVortexServer()
 }
 
@@ -102,6 +115,9 @@ func (UnimplementedVortexServer) CreateOrg(context.Context, *CreateOrgRequest) (
 }
 func (UnimplementedVortexServer) GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUser not implemented")
+}
+func (UnimplementedVortexServer) ListPrompts(context.Context, *ListPromptsRequest) (*ListPromptsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPrompts not implemented")
 }
 func (UnimplementedVortexServer) mustEmbedUnimplementedVortexServer() {}
 
@@ -170,6 +186,24 @@ func _Vortex_GetUser_Handler(srv interface{}, ctx context.Context, dec func(inte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Vortex_ListPrompts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPromptsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VortexServer).ListPrompts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vortex_ListPrompts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VortexServer).ListPrompts(ctx, req.(*ListPromptsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vortex_ServiceDesc is the grpc.ServiceDesc for Vortex service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -188,6 +222,10 @@ var Vortex_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _Vortex_GetUser_Handler,
+		},
+		{
+			MethodName: "ListPrompts",
+			Handler:    _Vortex_ListPrompts_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
