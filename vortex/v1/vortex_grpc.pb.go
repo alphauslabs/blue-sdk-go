@@ -24,6 +24,7 @@ const (
 	Vortex_CreateOrg_FullMethodName   = "/blueapi.vortex.v1.Vortex/CreateOrg"
 	Vortex_GetUser_FullMethodName     = "/blueapi.vortex.v1.Vortex/GetUser"
 	Vortex_ListPrompts_FullMethodName = "/blueapi.vortex.v1.Vortex/ListPrompts"
+	Vortex_InviteUser_FullMethodName  = "/blueapi.vortex.v1.Vortex/InviteUser"
 )
 
 // VortexClient is the client API for Vortex service.
@@ -38,6 +39,7 @@ type VortexClient interface {
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	ListPrompts(ctx context.Context, in *ListPromptsRequest, opts ...grpc.CallOption) (Vortex_ListPromptsClient, error)
+	InviteUser(ctx context.Context, in *InviteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type vortexClient struct {
@@ -111,6 +113,16 @@ func (x *vortexListPromptsClient) Recv() (*Prompt, error) {
 	return m, nil
 }
 
+func (c *vortexClient) InviteUser(ctx context.Context, in *InviteUserRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Vortex_InviteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // VortexServer is the server API for Vortex service.
 // All implementations must embed UnimplementedVortexServer
 // for forward compatibility
@@ -123,6 +135,7 @@ type VortexServer interface {
 	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	ListPrompts(*ListPromptsRequest, Vortex_ListPromptsServer) error
+	InviteUser(context.Context, *InviteUserRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedVortexServer()
 }
 
@@ -141,6 +154,9 @@ func (UnimplementedVortexServer) GetUser(context.Context, *GetUserRequest) (*Get
 }
 func (UnimplementedVortexServer) ListPrompts(*ListPromptsRequest, Vortex_ListPromptsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListPrompts not implemented")
+}
+func (UnimplementedVortexServer) InviteUser(context.Context, *InviteUserRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InviteUser not implemented")
 }
 func (UnimplementedVortexServer) mustEmbedUnimplementedVortexServer() {}
 
@@ -230,6 +246,24 @@ func (x *vortexListPromptsServer) Send(m *Prompt) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Vortex_InviteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InviteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(VortexServer).InviteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Vortex_InviteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(VortexServer).InviteUser(ctx, req.(*InviteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Vortex_ServiceDesc is the grpc.ServiceDesc for Vortex service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -248,6 +282,10 @@ var Vortex_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUser",
 			Handler:    _Vortex_GetUser_Handler,
+		},
+		{
+			MethodName: "InviteUser",
+			Handler:    _Vortex_InviteUser_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

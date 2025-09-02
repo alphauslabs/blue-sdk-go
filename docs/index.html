@@ -3953,6 +3953,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.vortex.v1.InviteUserRequest"><span class="badge">M</span>InviteUserRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.vortex.v1.ListPromptsRequest"><span class="badge">M</span>ListPromptsRequest</a>
                 </li>
               
@@ -46083,6 +46087,30 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.vortex.v1.InviteUserRequest">InviteUserRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.vortex.v1.ListPromptsRequest">ListPromptsRequest</h3>
         <p></p>
 
@@ -46194,6 +46222,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>InviteUser</td>
+                <td><a href="#blueapi.vortex.v1.InviteUserRequest">InviteUserRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -46248,6 +46283,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>ListPrompts</td>
                 <td>POST</td>
                 <td>/v1/prompts:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>InviteUser</td>
+                <td>POST</td>
+                <td>/v1/invite</td>
                 <td>*</td>
               </tr>
               
