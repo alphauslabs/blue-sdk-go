@@ -1,7 +1,10 @@
 ![main](https://github.com/alphauslabs/blue-sdk-go/workflows/main/badge.svg)
 [![Go Reference](https://pkg.go.dev/badge/github.com/alphauslabs/blue-sdk-go.svg)](https://pkg.go.dev/github.com/alphauslabs/blue-sdk-go)
 
-The main branch can be broken. Make sure to use tagged releases.
+> [!IMPORTANT]
+> The main branch can be broken. Make sure to use tagged releases.
+
+This repo contains Blue's (mostly auto-generated) client library for the Go programming language.
 
 For authentication, check out this [document](https://alphauslabs.github.io/docs/blueapi/authentication/).
 
