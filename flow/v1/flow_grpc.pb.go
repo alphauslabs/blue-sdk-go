@@ -31,6 +31,7 @@ const (
 	Flow_GetSPPurchaseAccessTemplateUrl_FullMethodName   = "/blueapi.flow.v1.Flow/GetSPPurchaseAccessTemplateUrl"
 	Flow_CreateSPPurchaseAccess_FullMethodName           = "/blueapi.flow.v1.Flow/CreateSPPurchaseAccess"
 	Flow_GetCrossAccountAccessDetails_FullMethodName     = "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails"
+	Flow_CreateMessageToSlack_FullMethodName             = "/blueapi.flow.v1.Flow/CreateMessageToSlack"
 )
 
 // FlowClient is the client API for Flow service.
@@ -63,6 +64,8 @@ type FlowClient interface {
 	CreateSPPurchaseAccess(ctx context.Context, in *CreateSPPurchaseAccessRequest, opts ...grpc.CallOption) (*CreateSPPurchaseAccessResponse, error)
 	// Returns the activated cross-account access roles of the target payerId.
 	GetCrossAccountAccessDetails(ctx context.Context, in *GetCrossAccountAccessDetailsRequest, opts ...grpc.CallOption) (*GetCrossAccountAccessDetailsResponse, error)
+	// Sends configuration and recommendation to a Slack channel
+	CreateMessageToSlack(ctx context.Context, in *CreateMessageToSlackRequest, opts ...grpc.CallOption) (*CreateMessageToSlackResponse, error)
 }
 
 type flowClient struct {
@@ -193,6 +196,16 @@ func (c *flowClient) GetCrossAccountAccessDetails(ctx context.Context, in *GetCr
 	return out, nil
 }
 
+func (c *flowClient) CreateMessageToSlack(ctx context.Context, in *CreateMessageToSlackRequest, opts ...grpc.CallOption) (*CreateMessageToSlackResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateMessageToSlackResponse)
+	err := c.cc.Invoke(ctx, Flow_CreateMessageToSlack_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -223,6 +236,8 @@ type FlowServer interface {
 	CreateSPPurchaseAccess(context.Context, *CreateSPPurchaseAccessRequest) (*CreateSPPurchaseAccessResponse, error)
 	// Returns the activated cross-account access roles of the target payerId.
 	GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error)
+	// Sends configuration and recommendation to a Slack channel
+	CreateMessageToSlack(context.Context, *CreateMessageToSlackRequest) (*CreateMessageToSlackResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -265,6 +280,9 @@ func (UnimplementedFlowServer) CreateSPPurchaseAccess(context.Context, *CreateSP
 }
 func (UnimplementedFlowServer) GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCrossAccountAccessDetails not implemented")
+}
+func (UnimplementedFlowServer) CreateMessageToSlack(context.Context, *CreateMessageToSlackRequest) (*CreateMessageToSlackResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateMessageToSlack not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -495,6 +513,24 @@ func _Flow_GetCrossAccountAccessDetails_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_CreateMessageToSlack_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateMessageToSlackRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).CreateMessageToSlack(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_CreateMessageToSlack_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).CreateMessageToSlack(ctx, req.(*CreateMessageToSlackRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -549,6 +585,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCrossAccountAccessDetails",
 			Handler:    _Flow_GetCrossAccountAccessDetails_Handler,
+		},
+		{
+			MethodName: "CreateMessageToSlack",
+			Handler:    _Flow_CreateMessageToSlack_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

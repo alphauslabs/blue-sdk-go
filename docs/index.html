@@ -3603,6 +3603,22 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.CreateMessageToSlackRequest"><span class="badge">M</span>CreateMessageToSlackRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Configurations"><span class="badge">M</span>CreateMessageToSlackRequest.Configurations</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Recommendation"><span class="badge">M</span>CreateMessageToSlackRequest.Recommendation</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateMessageToSlackResponse"><span class="badge">M</span>CreateMessageToSlackResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.CreateSPPurchaseAccessRequest"><span class="badge">M</span>CreateSPPurchaseAccessRequest</a>
                 </li>
               
@@ -42372,6 +42388,298 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.CreateMessageToSlackRequest">CreateMessageToSlackRequest</h3>
+        <p>Configuration and recommendation details to send to Slack</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>configurations</td>
+                  <td><a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Configurations">CreateMessageToSlackRequest.Configurations</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendation</td>
+                  <td><a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Recommendation">CreateMessageToSlackRequest.Recommendation</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateMessageToSlackRequest.Configurations">CreateMessageToSlackRequest.Configurations</h3>
+        <p>Configurations for the Savings Plan</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>account_scope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customization</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>plan_term</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payment_option</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>look_back_period</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instance_family</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>annual_budget</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>approval</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateMessageToSlackRequest.Recommendation">CreateMessageToSlackRequest.Recommendation</h3>
+        <p>Recommendation details for the Savings Plan</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>current_monthly_on_demand_spend</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_monthly_spend</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_monthly_savings_derived</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>total_daily_cost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>current_sp_commitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_on_demand_cost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hourly_commitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_monthly_savings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_savings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendation_level</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>plan_type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>plan_term</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payment_option</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>look_back_period</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_roi</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_sp_cost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimated_total_cost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last_updated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateMessageToSlackResponse">CreateMessageToSlackResponse</h3>
+        <p>Response after sending to Slack</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>success</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.CreateSPPurchaseAccessRequest">CreateSPPurchaseAccessRequest</h3>
         <p>Request message for the Flow.CreateSPPurchaseAccess rpc.</p>
 
@@ -43874,6 +44182,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Returns the activated cross-account access roles of the target payerId.</p></td>
               </tr>
             
+              <tr>
+                <td>CreateMessageToSlack</td>
+                <td><a href="#blueapi.flow.v1.CreateMessageToSlackRequest">CreateMessageToSlackRequest</a></td>
+                <td><a href="#blueapi.flow.v1.CreateMessageToSlackResponse">CreateMessageToSlackResponse</a></td>
+                <td><p>Sends configuration and recommendation to a Slack channel</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -44009,6 +44324,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GET</td>
                 <td>/v1/aws/xacct/{payerId}/access</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateMessageToSlack</td>
+                <td>POST</td>
+                <td>/v1/notification/slack</td>
+                <td>*</td>
               </tr>
               
             
