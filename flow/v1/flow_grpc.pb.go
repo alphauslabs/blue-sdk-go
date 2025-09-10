@@ -32,6 +32,7 @@ const (
 	Flow_CreateSPPurchaseAccess_FullMethodName           = "/blueapi.flow.v1.Flow/CreateSPPurchaseAccess"
 	Flow_GetCrossAccountAccessDetails_FullMethodName     = "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails"
 	Flow_CreateMessageToSlack_FullMethodName             = "/blueapi.flow.v1.Flow/CreateMessageToSlack"
+	Flow_GetSPToPurchaseDetails_FullMethodName           = "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails"
 )
 
 // FlowClient is the client API for Flow service.
@@ -66,6 +67,8 @@ type FlowClient interface {
 	GetCrossAccountAccessDetails(ctx context.Context, in *GetCrossAccountAccessDetailsRequest, opts ...grpc.CallOption) (*GetCrossAccountAccessDetailsResponse, error)
 	// Sends configuration and recommendation to a Slack channel
 	CreateMessageToSlack(ctx context.Context, in *CreateMessageToSlackRequest, opts ...grpc.CallOption) (*CreateMessageToSlackResponse, error)
+	// Get savings plan details to be purchased .
+	GetSPToPurchaseDetails(ctx context.Context, in *GetSPToPurchaseDetailsRequest, opts ...grpc.CallOption) (*GetSPToPurchaseDetailsResponse, error)
 }
 
 type flowClient struct {
@@ -206,6 +209,16 @@ func (c *flowClient) CreateMessageToSlack(ctx context.Context, in *CreateMessage
 	return out, nil
 }
 
+func (c *flowClient) GetSPToPurchaseDetails(ctx context.Context, in *GetSPToPurchaseDetailsRequest, opts ...grpc.CallOption) (*GetSPToPurchaseDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSPToPurchaseDetailsResponse)
+	err := c.cc.Invoke(ctx, Flow_GetSPToPurchaseDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -238,6 +251,8 @@ type FlowServer interface {
 	GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error)
 	// Sends configuration and recommendation to a Slack channel
 	CreateMessageToSlack(context.Context, *CreateMessageToSlackRequest) (*CreateMessageToSlackResponse, error)
+	// Get savings plan details to be purchased .
+	GetSPToPurchaseDetails(context.Context, *GetSPToPurchaseDetailsRequest) (*GetSPToPurchaseDetailsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -283,6 +298,9 @@ func (UnimplementedFlowServer) GetCrossAccountAccessDetails(context.Context, *Ge
 }
 func (UnimplementedFlowServer) CreateMessageToSlack(context.Context, *CreateMessageToSlackRequest) (*CreateMessageToSlackResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateMessageToSlack not implemented")
+}
+func (UnimplementedFlowServer) GetSPToPurchaseDetails(context.Context, *GetSPToPurchaseDetailsRequest) (*GetSPToPurchaseDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSPToPurchaseDetails not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -531,6 +549,24 @@ func _Flow_CreateMessageToSlack_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_GetSPToPurchaseDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSPToPurchaseDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetSPToPurchaseDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetSPToPurchaseDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetSPToPurchaseDetails(ctx, req.(*GetSPToPurchaseDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -589,6 +625,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateMessageToSlack",
 			Handler:    _Flow_CreateMessageToSlack_Handler,
+		},
+		{
+			MethodName: "GetSPToPurchaseDetails",
+			Handler:    _Flow_GetSPToPurchaseDetails_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
