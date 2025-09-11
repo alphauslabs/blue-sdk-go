@@ -452,8 +452,6 @@ func local_request_Flow_CreateMessageToSlack_0(ctx context.Context, marshaler ru
 	return msg, metadata, err
 }
 
-var filter_Flow_GetSPToPurchaseDetails_0 = &utilities.DoubleArray{Encoding: map[string]int{"payerId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
-
 func request_Flow_GetSPToPurchaseDetails_0(ctx context.Context, marshaler runtime.Marshaler, client FlowClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetSPToPurchaseDetailsRequest
@@ -471,11 +469,13 @@ func request_Flow_GetSPToPurchaseDetails_0(ctx context.Context, marshaler runtim
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "payerId", err)
 	}
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok = pathParams["yearMonth"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "yearMonth")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Flow_GetSPToPurchaseDetails_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	protoReq.YearMonth, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "yearMonth", err)
 	}
 	msg, err := client.GetSPToPurchaseDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -495,11 +495,13 @@ func local_request_Flow_GetSPToPurchaseDetails_0(ctx context.Context, marshaler 
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "payerId", err)
 	}
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	val, ok = pathParams["yearMonth"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "yearMonth")
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Flow_GetSPToPurchaseDetails_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	protoReq.YearMonth, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "yearMonth", err)
 	}
 	msg, err := server.GetSPToPurchaseDetails(ctx, &protoReq)
 	return msg, metadata, err
@@ -777,7 +779,7 @@ func RegisterFlowHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails", runtime.WithHTTPPathPattern("/v1/sp/purchase/details/{payerId}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails", runtime.WithHTTPPathPattern("/v1/sp/purchaseDetails/{payerId}/{yearMonth}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1056,7 +1058,7 @@ func RegisterFlowHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails", runtime.WithHTTPPathPattern("/v1/sp/purchase/details/{payerId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails", runtime.WithHTTPPathPattern("/v1/sp/purchaseDetails/{payerId}/{yearMonth}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1086,7 +1088,7 @@ var (
 	pattern_Flow_CreateSPPurchaseAccess_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "aws", "xacct", "spa"}, ""))
 	pattern_Flow_GetCrossAccountAccessDetails_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "aws", "xacct", "payerId", "access"}, ""))
 	pattern_Flow_CreateMessageToSlack_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "notification", "slack"}, ""))
-	pattern_Flow_GetSPToPurchaseDetails_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "sp", "purchase", "details", "payerId"}, ""))
+	pattern_Flow_GetSPToPurchaseDetails_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "sp", "purchaseDetails", "payerId", "yearMonth"}, ""))
 )
 
 var (
