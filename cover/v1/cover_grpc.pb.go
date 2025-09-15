@@ -205,6 +205,7 @@ const (
 	Cover_PopulateDemoData_FullMethodName                        = "/blueapi.cover.v1.Cover/PopulateDemoData"
 	Cover_ResetDemoData_FullMethodName                           = "/blueapi.cover.v1.Cover/ResetDemoData"
 	Cover_GetDiscountPlan_FullMethodName                         = "/blueapi.cover.v1.Cover/GetDiscountPlan"
+	Cover_GetCostUsageV2_FullMethodName                          = "/blueapi.cover.v1.Cover/GetCostUsageV2"
 )
 
 // CoverClient is the client API for Cover service.
@@ -577,6 +578,7 @@ type CoverClient interface {
 	ResetDemoData(ctx context.Context, in *ResetDemoDataRequest, opts ...grpc.CallOption) (*ResetDemoDataResponse, error)
 	// Get discount plan details for an organization (or MSP).
 	GetDiscountPlan(ctx context.Context, in *GetDiscountPlanRequest, opts ...grpc.CallOption) (*GetDiscountPlanResponse, error)
+	GetCostUsageV2(ctx context.Context, in *GetCostUsageV2Request, opts ...grpc.CallOption) (Cover_GetCostUsageV2Client, error)
 }
 
 type coverClient struct {
@@ -3050,6 +3052,39 @@ func (c *coverClient) GetDiscountPlan(ctx context.Context, in *GetDiscountPlanRe
 	return out, nil
 }
 
+func (c *coverClient) GetCostUsageV2(ctx context.Context, in *GetCostUsageV2Request, opts ...grpc.CallOption) (Cover_GetCostUsageV2Client, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[27], Cover_GetCostUsageV2_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverGetCostUsageV2Client{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetCostUsageV2Client interface {
+	Recv() (*GetCostUsageV2Response, error)
+	grpc.ClientStream
+}
+
+type coverGetCostUsageV2Client struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetCostUsageV2Client) Recv() (*GetCostUsageV2Response, error) {
+	m := new(GetCostUsageV2Response)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3420,6 +3455,7 @@ type CoverServer interface {
 	ResetDemoData(context.Context, *ResetDemoDataRequest) (*ResetDemoDataResponse, error)
 	// Get discount plan details for an organization (or MSP).
 	GetDiscountPlan(context.Context, *GetDiscountPlanRequest) (*GetDiscountPlanResponse, error)
+	GetCostUsageV2(*GetCostUsageV2Request, Cover_GetCostUsageV2Server) error
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -3978,6 +4014,9 @@ func (UnimplementedCoverServer) ResetDemoData(context.Context, *ResetDemoDataReq
 }
 func (UnimplementedCoverServer) GetDiscountPlan(context.Context, *GetDiscountPlanRequest) (*GetDiscountPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDiscountPlan not implemented")
+}
+func (UnimplementedCoverServer) GetCostUsageV2(*GetCostUsageV2Request, Cover_GetCostUsageV2Server) error {
+	return status.Errorf(codes.Unimplemented, "method GetCostUsageV2 not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7390,6 +7429,27 @@ func _Cover_GetDiscountPlan_Handler(srv interface{}, ctx context.Context, dec fu
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetCostUsageV2_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCostUsageV2Request)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).GetCostUsageV2(m, &coverGetCostUsageV2Server{ServerStream: stream})
+}
+
+type Cover_GetCostUsageV2Server interface {
+	Send(*GetCostUsageV2Response) error
+	grpc.ServerStream
+}
+
+type coverGetCostUsageV2Server struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetCostUsageV2Server) Send(m *GetCostUsageV2Response) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -8160,6 +8220,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetExecutionStatus",
 			Handler:       _Cover_GetExecutionStatus_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCostUsageV2",
+			Handler:       _Cover_GetCostUsageV2_Handler,
 			ServerStreams: true,
 		},
 	},

@@ -2629,6 +2629,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetCostUsageV2Request"><span class="badge">M</span>GetCostUsageV2Request</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCostUsageV2Response"><span class="badge">M</span>GetCostUsageV2Response</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetCurrentViewRequest"><span class="badge">M</span>GetCurrentViewRequest</a>
                 </li>
               
@@ -3523,6 +3531,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.GetAICostAndUsageRequest.Granularity"><span class="badge">E</span>GetAICostAndUsageRequest.Granularity</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCostUsageV2Request.Category"><span class="badge">E</span>GetCostUsageV2Request.Category</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCostUsageV2Request.Granularity"><span class="badge">E</span>GetCostUsageV2Request.Granularity</a>
                 </li>
               
                 <li>
@@ -31569,6 +31585,138 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetCostUsageV2Request">GetCostUsageV2Request</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>granularity</td>
+                  <td><a href="#blueapi.cover.v1.GetCostUsageV2Request.Granularity">GetCostUsageV2Request.Granularity</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>groupBys</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>category</td>
+                  <td><a href="#blueapi.cover.v1.GetCostUsageV2Request.Category">GetCostUsageV2Request.Category</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsOptions</td>
+                  <td><a href="#blueapi.api.cover.CostGroupAwsOptions">blueapi.api.cover.CostGroupAwsOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azurecspOptions</td>
+                  <td><a href="#blueapi.api.cover.CostGroupAzureCspOptions">blueapi.api.cover.CostGroupAzureCspOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpOptions</td>
+                  <td><a href="#blueapi.api.cover.CostGroupGcpOptions">blueapi.api.cover.CostGroupGcpOptions</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCostUsageV2Response">GetCostUsageV2Response</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>date</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetCurrentViewRequest">GetCurrentViewRequest</h3>
         <p>Request message for GetCurrentView</p>
 
@@ -38710,6 +38858,64 @@ file in bytes </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.cover.v1.GetCostUsageV2Request.Category">GetCostUsageV2Request.Category</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>Category_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COST</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>USAGE</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
+        <h3 id="blueapi.cover.v1.GetCostUsageV2Request.Granularity">GetCostUsageV2Request.Granularity</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>GRANULARITY_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DAILY</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MONTHLY</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.cover.v1.Status">Status</h3>
         <p>Status of upload file</p>
         <table class="enum-table">
@@ -40043,6 +40249,13 @@ file in bytes </p></td>
                 <td><a href="#blueapi.cover.v1.GetDiscountPlanRequest">GetDiscountPlanRequest</a></td>
                 <td><a href="#blueapi.cover.v1.GetDiscountPlanResponse">GetDiscountPlanResponse</a></td>
                 <td><p>Get discount plan details for an organization (or MSP).</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetCostUsageV2</td>
+                <td><a href="#blueapi.cover.v1.GetCostUsageV2Request">GetCostUsageV2Request</a></td>
+                <td><a href="#blueapi.cover.v1.GetCostUsageV2Response">GetCostUsageV2Response</a> stream</td>
+                <td><p></p></td>
               </tr>
             
           </tbody>
@@ -41899,6 +42112,16 @@ file in bytes </p></td>
                 <td>GetDiscountPlan</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/discountplan/{orgId}:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCostUsageV2</td>
+                <td>POST</td>
+                <td>/v1/costusage</td>
                 <td>*</td>
               </tr>
               
