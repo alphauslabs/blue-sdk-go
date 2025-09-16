@@ -1187,6 +1187,10 @@
                   <a href="#blueapi.cost.v1.UpdateCostFiltersResponse"><span class="badge">M</span>UpdateCostFiltersResponse</a>
                 </li>
               
+                <li>
+                  <a href="#blueapi.cost.v1.UpdatePayerAccountRequest"><span class="badge">M</span>UpdatePayerAccountRequest</a>
+                </li>
+              
               
                 <li>
                   <a href="#blueapi.cost.v1.PeriodRange.Unit"><span class="badge">E</span>PeriodRange.Unit</a>
@@ -14012,6 +14016,13 @@ This field is discarded for Wave(Pro) users. You will always get the latest data
 Only applicable if vendor is set to `aws`. Do not provide if `gcp` or `azure`. </p></td>
                 </tr>
               
+                <tr>
+                  <td>calculateTUProfit</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If set to true, TU profit from this payer will be calculated. Default is false. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -14304,6 +14315,59 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
 
         
       
+        <h3 id="blueapi.cost.v1.UpdatePayerAccountRequest">UpdatePayerAccountRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The Payer/Management account Id to update. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Preferred account name, defaults to id if not provided. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>curType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Valid values are `legacy` and `2.0` for now. Defaults to `legacy` if not provided.
+Only applicable if vendor is set to `aws`. Do not provide if `gcp` or `azure`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>calculateTUProfit</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If set to true, TU profit from this payer will be calculated. Default is false. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
         <h3 id="blueapi.cost.v1.PeriodRange.Unit">PeriodRange.Unit</h3>
@@ -14399,6 +14463,13 @@ Import history is a list of timestamps our system tracks when the account&#39;s 
                 <td><a href="#blueapi.cost.v1.RegisterPayerAccountRequest">RegisterPayerAccountRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>WORK-IN-PROGRES: Registers a vendor payer account with their basics details such as accountId and accountName.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdatePayerAccount</td>
+                <td><a href="#blueapi.cost.v1.UpdatePayerAccountRequest">UpdatePayerAccountRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRES: Updates a vendor payer account&#39;s basics details.</p></td>
               </tr>
             
               <tr>
@@ -14936,6 +15007,16 @@ Only available in Wave(Pro).</p></td>
                 <td>RegisterPayerAccount</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/payers/basicdetails</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdatePayerAccount</td>
+                <td>PUT</td>
+                <td>/v1/{vendor}/payers/basicdetails/{id}</td>
                 <td>*</td>
               </tr>
               

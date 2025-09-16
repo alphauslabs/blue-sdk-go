@@ -31,6 +31,7 @@ const (
 	Cost_GetPayerProformaReports_FullMethodName       = "/blueapi.cost.v1.Cost/GetPayerProformaReports"
 	Cost_CreatePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/CreatePayerAccount"
 	Cost_RegisterPayerAccount_FullMethodName          = "/blueapi.cost.v1.Cost/RegisterPayerAccount"
+	Cost_UpdatePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/UpdatePayerAccount"
 	Cost_DeletePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/DeletePayerAccount"
 	Cost_ListAccounts_FullMethodName                  = "/blueapi.cost.v1.Cost/ListAccounts"
 	Cost_GetAccount_FullMethodName                    = "/blueapi.cost.v1.Cost/GetAccount"
@@ -117,6 +118,8 @@ type CostClient interface {
 	CreatePayerAccount(ctx context.Context, in *CreatePayerAccountRequest, opts ...grpc.CallOption) (*api.Account, error)
 	// WORK-IN-PROGRES: Registers a vendor payer account with their basics details such as accountId and accountName.
 	RegisterPayerAccount(ctx context.Context, in *RegisterPayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRES: Updates a vendor payer account's basics details.
+	UpdatePayerAccount(ctx context.Context, in *UpdatePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Deletes a vendor payer account.
 	DeletePayerAccount(ctx context.Context, in *DeletePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
@@ -389,6 +392,16 @@ func (c *costClient) RegisterPayerAccount(ctx context.Context, in *RegisterPayer
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
 	err := c.cc.Invoke(ctx, Cost_RegisterPayerAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) UpdatePayerAccount(ctx context.Context, in *UpdatePayerAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cost_UpdatePayerAccount_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1364,6 +1377,8 @@ type CostServer interface {
 	CreatePayerAccount(context.Context, *CreatePayerAccountRequest) (*api.Account, error)
 	// WORK-IN-PROGRES: Registers a vendor payer account with their basics details such as accountId and accountName.
 	RegisterPayerAccount(context.Context, *RegisterPayerAccountRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRES: Updates a vendor payer account's basics details.
+	UpdatePayerAccount(context.Context, *UpdatePayerAccountRequest) (*emptypb.Empty, error)
 	// Deletes a vendor payer account.
 	DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error)
 	// Lists all vendor accounts.
@@ -1550,6 +1565,9 @@ func (UnimplementedCostServer) CreatePayerAccount(context.Context, *CreatePayerA
 }
 func (UnimplementedCostServer) RegisterPayerAccount(context.Context, *RegisterPayerAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterPayerAccount not implemented")
+}
+func (UnimplementedCostServer) UpdatePayerAccount(context.Context, *UpdatePayerAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdatePayerAccount not implemented")
 }
 func (UnimplementedCostServer) DeletePayerAccount(context.Context, *DeletePayerAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeletePayerAccount not implemented")
@@ -1854,6 +1872,24 @@ func _Cost_RegisterPayerAccount_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).RegisterPayerAccount(ctx, req.(*RegisterPayerAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_UpdatePayerAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdatePayerAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).UpdatePayerAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_UpdatePayerAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).UpdatePayerAccount(ctx, req.(*UpdatePayerAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3005,6 +3041,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "RegisterPayerAccount",
 			Handler:    _Cost_RegisterPayerAccount_Handler,
+		},
+		{
+			MethodName: "UpdatePayerAccount",
+			Handler:    _Cost_UpdatePayerAccount_Handler,
 		},
 		{
 			MethodName: "DeletePayerAccount",
