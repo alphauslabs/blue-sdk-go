@@ -19,20 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Flow_GetInfo_FullMethodName                          = "/blueapi.flow.v1.Flow/GetInfo"
-	Flow_SetSettings_FullMethodName                      = "/blueapi.flow.v1.Flow/SetSettings"
-	Flow_GetSettings_FullMethodName                      = "/blueapi.flow.v1.Flow/GetSettings"
-	Flow_GetRecommendationDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
-	Flow_GetCostExplorerAccessTemplateUrl_FullMethodName = "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl"
-	Flow_GetSettingsHistory_FullMethodName               = "/blueapi.flow.v1.Flow/GetSettingsHistory"
-	Flow_CreateCostExplorerAccess_FullMethodName         = "/blueapi.flow.v1.Flow/CreateCostExplorerAccess"
-	Flow_GetDailyUsageCostDetails_FullMethodName         = "/blueapi.flow.v1.Flow/GetDailyUsageCostDetails"
-	Flow_GetAwsAccounts_FullMethodName                   = "/blueapi.flow.v1.Flow/GetAwsAccounts"
-	Flow_GetSPPurchaseAccessTemplateUrl_FullMethodName   = "/blueapi.flow.v1.Flow/GetSPPurchaseAccessTemplateUrl"
-	Flow_CreateSPPurchaseAccess_FullMethodName           = "/blueapi.flow.v1.Flow/CreateSPPurchaseAccess"
-	Flow_GetCrossAccountAccessDetails_FullMethodName     = "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails"
-	Flow_CreateMessageToSlack_FullMethodName             = "/blueapi.flow.v1.Flow/CreateMessageToSlack"
-	Flow_GetSPToPurchaseDetails_FullMethodName           = "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails"
+	Flow_GetInfo_FullMethodName                             = "/blueapi.flow.v1.Flow/GetInfo"
+	Flow_SetSettings_FullMethodName                         = "/blueapi.flow.v1.Flow/SetSettings"
+	Flow_GetSettings_FullMethodName                         = "/blueapi.flow.v1.Flow/GetSettings"
+	Flow_GetRecommendationDetails_FullMethodName            = "/blueapi.flow.v1.Flow/GetRecommendationDetails"
+	Flow_GetCostExplorerAccessTemplateUrl_FullMethodName    = "/blueapi.flow.v1.Flow/GetCostExplorerAccessTemplateUrl"
+	Flow_GetSettingsHistory_FullMethodName                  = "/blueapi.flow.v1.Flow/GetSettingsHistory"
+	Flow_CreateCostExplorerAccess_FullMethodName            = "/blueapi.flow.v1.Flow/CreateCostExplorerAccess"
+	Flow_GetDailyUsageCostDetails_FullMethodName            = "/blueapi.flow.v1.Flow/GetDailyUsageCostDetails"
+	Flow_GetAwsAccounts_FullMethodName                      = "/blueapi.flow.v1.Flow/GetAwsAccounts"
+	Flow_GetSPPurchaseAccessTemplateUrl_FullMethodName      = "/blueapi.flow.v1.Flow/GetSPPurchaseAccessTemplateUrl"
+	Flow_CreateSPPurchaseAccess_FullMethodName              = "/blueapi.flow.v1.Flow/CreateSPPurchaseAccess"
+	Flow_GetCrossAccountAccessDetails_FullMethodName        = "/blueapi.flow.v1.Flow/GetCrossAccountAccessDetails"
+	Flow_CreateSPRecommendationNotification_FullMethodName  = "/blueapi.flow.v1.Flow/CreateSPRecommendationNotification"
+	Flow_GetSPToPurchaseDetails_FullMethodName              = "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails"
+	Flow_SendSPToPurchaseDetailsNotification_FullMethodName = "/blueapi.flow.v1.Flow/SendSPToPurchaseDetailsNotification"
 )
 
 // FlowClient is the client API for Flow service.
@@ -66,9 +67,11 @@ type FlowClient interface {
 	// Returns the activated cross-account access roles of the target payerId.
 	GetCrossAccountAccessDetails(ctx context.Context, in *GetCrossAccountAccessDetailsRequest, opts ...grpc.CallOption) (*GetCrossAccountAccessDetailsResponse, error)
 	// Sends configuration and recommendation to a Slack channel
-	CreateMessageToSlack(ctx context.Context, in *CreateMessageToSlackRequest, opts ...grpc.CallOption) (*CreateMessageToSlackResponse, error)
+	CreateSPRecommendationNotification(ctx context.Context, in *CreateSPRecommendationNotificationRequest, opts ...grpc.CallOption) (*CreateSPRecommendationNotificationResponse, error)
 	// Get savings plan details to be purchased .
 	GetSPToPurchaseDetails(ctx context.Context, in *GetSPToPurchaseDetailsRequest, opts ...grpc.CallOption) (*GetSPToPurchaseDetailsResponse, error)
+	// Sends savings plan details to be purchased to a Slack channel
+	SendSPToPurchaseDetailsNotification(ctx context.Context, in *SendSPToPurchaseDetailsNotificationsRequest, opts ...grpc.CallOption) (*SendSPToPurchaseDetailsNotificationsResponse, error)
 }
 
 type flowClient struct {
@@ -199,10 +202,10 @@ func (c *flowClient) GetCrossAccountAccessDetails(ctx context.Context, in *GetCr
 	return out, nil
 }
 
-func (c *flowClient) CreateMessageToSlack(ctx context.Context, in *CreateMessageToSlackRequest, opts ...grpc.CallOption) (*CreateMessageToSlackResponse, error) {
+func (c *flowClient) CreateSPRecommendationNotification(ctx context.Context, in *CreateSPRecommendationNotificationRequest, opts ...grpc.CallOption) (*CreateSPRecommendationNotificationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateMessageToSlackResponse)
-	err := c.cc.Invoke(ctx, Flow_CreateMessageToSlack_FullMethodName, in, out, cOpts...)
+	out := new(CreateSPRecommendationNotificationResponse)
+	err := c.cc.Invoke(ctx, Flow_CreateSPRecommendationNotification_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -213,6 +216,16 @@ func (c *flowClient) GetSPToPurchaseDetails(ctx context.Context, in *GetSPToPurc
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetSPToPurchaseDetailsResponse)
 	err := c.cc.Invoke(ctx, Flow_GetSPToPurchaseDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flowClient) SendSPToPurchaseDetailsNotification(ctx context.Context, in *SendSPToPurchaseDetailsNotificationsRequest, opts ...grpc.CallOption) (*SendSPToPurchaseDetailsNotificationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SendSPToPurchaseDetailsNotificationsResponse)
+	err := c.cc.Invoke(ctx, Flow_SendSPToPurchaseDetailsNotification_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -250,9 +263,11 @@ type FlowServer interface {
 	// Returns the activated cross-account access roles of the target payerId.
 	GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error)
 	// Sends configuration and recommendation to a Slack channel
-	CreateMessageToSlack(context.Context, *CreateMessageToSlackRequest) (*CreateMessageToSlackResponse, error)
+	CreateSPRecommendationNotification(context.Context, *CreateSPRecommendationNotificationRequest) (*CreateSPRecommendationNotificationResponse, error)
 	// Get savings plan details to be purchased .
 	GetSPToPurchaseDetails(context.Context, *GetSPToPurchaseDetailsRequest) (*GetSPToPurchaseDetailsResponse, error)
+	// Sends savings plan details to be purchased to a Slack channel
+	SendSPToPurchaseDetailsNotification(context.Context, *SendSPToPurchaseDetailsNotificationsRequest) (*SendSPToPurchaseDetailsNotificationsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -296,11 +311,14 @@ func (UnimplementedFlowServer) CreateSPPurchaseAccess(context.Context, *CreateSP
 func (UnimplementedFlowServer) GetCrossAccountAccessDetails(context.Context, *GetCrossAccountAccessDetailsRequest) (*GetCrossAccountAccessDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCrossAccountAccessDetails not implemented")
 }
-func (UnimplementedFlowServer) CreateMessageToSlack(context.Context, *CreateMessageToSlackRequest) (*CreateMessageToSlackResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateMessageToSlack not implemented")
+func (UnimplementedFlowServer) CreateSPRecommendationNotification(context.Context, *CreateSPRecommendationNotificationRequest) (*CreateSPRecommendationNotificationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSPRecommendationNotification not implemented")
 }
 func (UnimplementedFlowServer) GetSPToPurchaseDetails(context.Context, *GetSPToPurchaseDetailsRequest) (*GetSPToPurchaseDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSPToPurchaseDetails not implemented")
+}
+func (UnimplementedFlowServer) SendSPToPurchaseDetailsNotification(context.Context, *SendSPToPurchaseDetailsNotificationsRequest) (*SendSPToPurchaseDetailsNotificationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SendSPToPurchaseDetailsNotification not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -531,20 +549,20 @@ func _Flow_GetCrossAccountAccessDetails_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Flow_CreateMessageToSlack_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMessageToSlackRequest)
+func _Flow_CreateSPRecommendationNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSPRecommendationNotificationRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FlowServer).CreateMessageToSlack(ctx, in)
+		return srv.(FlowServer).CreateSPRecommendationNotification(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Flow_CreateMessageToSlack_FullMethodName,
+		FullMethod: Flow_CreateSPRecommendationNotification_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FlowServer).CreateMessageToSlack(ctx, req.(*CreateMessageToSlackRequest))
+		return srv.(FlowServer).CreateSPRecommendationNotification(ctx, req.(*CreateSPRecommendationNotificationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -563,6 +581,24 @@ func _Flow_GetSPToPurchaseDetails_Handler(srv interface{}, ctx context.Context, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(FlowServer).GetSPToPurchaseDetails(ctx, req.(*GetSPToPurchaseDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Flow_SendSPToPurchaseDetailsNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SendSPToPurchaseDetailsNotificationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).SendSPToPurchaseDetailsNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_SendSPToPurchaseDetailsNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).SendSPToPurchaseDetailsNotification(ctx, req.(*SendSPToPurchaseDetailsNotificationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -623,12 +659,16 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Flow_GetCrossAccountAccessDetails_Handler,
 		},
 		{
-			MethodName: "CreateMessageToSlack",
-			Handler:    _Flow_CreateMessageToSlack_Handler,
+			MethodName: "CreateSPRecommendationNotification",
+			Handler:    _Flow_CreateSPRecommendationNotification_Handler,
 		},
 		{
 			MethodName: "GetSPToPurchaseDetails",
 			Handler:    _Flow_GetSPToPurchaseDetails_Handler,
+		},
+		{
+			MethodName: "SendSPToPurchaseDetailsNotification",
+			Handler:    _Flow_SendSPToPurchaseDetailsNotification_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

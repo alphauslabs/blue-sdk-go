@@ -3623,27 +3623,27 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.flow.v1.CreateMessageToSlackRequest"><span class="badge">M</span>CreateMessageToSlackRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Configurations"><span class="badge">M</span>CreateMessageToSlackRequest.Configurations</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Recommendation"><span class="badge">M</span>CreateMessageToSlackRequest.Recommendation</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.flow.v1.CreateMessageToSlackResponse"><span class="badge">M</span>CreateMessageToSlackResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.flow.v1.CreateSPPurchaseAccessRequest"><span class="badge">M</span>CreateSPPurchaseAccessRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.flow.v1.CreateSPPurchaseAccessResponse"><span class="badge">M</span>CreateSPPurchaseAccessResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateSPRecommendationNotificationRequest"><span class="badge">M</span>CreateSPRecommendationNotificationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateSPRecommendationNotificationRequest.Configurations"><span class="badge">M</span>CreateSPRecommendationNotificationRequest.Configurations</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateSPRecommendationNotificationRequest.Recommendation"><span class="badge">M</span>CreateSPRecommendationNotificationRequest.Recommendation</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.CreateSPRecommendationNotificationResponse"><span class="badge">M</span>CreateSPRecommendationNotificationResponse</a>
                 </li>
               
                 <li>
@@ -3748,6 +3748,22 @@
               
                 <li>
                   <a href="#blueapi.flow.v1.SavingsPlanRecommendation"><span class="badge">M</span>SavingsPlanRecommendation</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest"><span class="badge">M</span>SendSPToPurchaseDetailsNotificationsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanDetailsPurchase"><span class="badge">M</span>SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanDetailsPurchase</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanRecommendation"><span class="badge">M</span>SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanRecommendation</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsResponse"><span class="badge">M</span>SendSPToPurchaseDetailsNotificationsResponse</a>
                 </li>
               
                 <li>
@@ -42722,7 +42738,111 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
-        <h3 id="blueapi.flow.v1.CreateMessageToSlackRequest">CreateMessageToSlackRequest</h3>
+        <h3 id="blueapi.flow.v1.CreateSPPurchaseAccessRequest">CreateSPPurchaseAccessRequest</h3>
+        <p>Request message for the Flow.CreateSPPurchaseAccess rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The target AWS account to validate. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateSPPurchaseAccessResponse">CreateSPPurchaseAccessResponse</h3>
+        <p>Response message for the Flow.CreateSPPurchaseAccess rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The queried target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleArn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The role ARN that provides the cross-account access permissions. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The external id for this role. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id of the CloudFormation stack deployed in the target account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackRegion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The region where the stack is deployed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>templateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The latest template used to deploy the stack. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>This can be `latest`, `outdated`, or some error information. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The last updated timestamp, RFC3339 UTC. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>access</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The access type- full access to view simulation and purchase saving plan: &#34;savings_plan_access&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.CreateSPRecommendationNotificationRequest">CreateSPRecommendationNotificationRequest</h3>
         <p>Configuration and recommendation details to send to Slack</p>
 
         
@@ -42734,14 +42854,14 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
                 <tr>
                   <td>configurations</td>
-                  <td><a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Configurations">CreateMessageToSlackRequest.Configurations</a></td>
+                  <td><a href="#blueapi.flow.v1.CreateSPRecommendationNotificationRequest.Configurations">CreateSPRecommendationNotificationRequest.Configurations</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>recommendation</td>
-                  <td><a href="#blueapi.flow.v1.CreateMessageToSlackRequest.Recommendation">CreateMessageToSlackRequest.Recommendation</a></td>
+                  <td><a href="#blueapi.flow.v1.CreateSPRecommendationNotificationRequest.Recommendation">CreateSPRecommendationNotificationRequest.Recommendation</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -42753,7 +42873,7 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
-        <h3 id="blueapi.flow.v1.CreateMessageToSlackRequest.Configurations">CreateMessageToSlackRequest.Configurations</h3>
+        <h3 id="blueapi.flow.v1.CreateSPRecommendationNotificationRequest.Configurations">CreateSPRecommendationNotificationRequest.Configurations</h3>
         <p>Configurations for the Savings Plan</p>
 
         
@@ -42833,7 +42953,7 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
-        <h3 id="blueapi.flow.v1.CreateMessageToSlackRequest.Recommendation">CreateMessageToSlackRequest.Recommendation</h3>
+        <h3 id="blueapi.flow.v1.CreateSPRecommendationNotificationRequest.Recommendation">CreateSPRecommendationNotificationRequest.Recommendation</h3>
         <p>Recommendation details for the Savings Plan</p>
 
         
@@ -42983,7 +43103,7 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
-        <h3 id="blueapi.flow.v1.CreateMessageToSlackResponse">CreateMessageToSlackResponse</h3>
+        <h3 id="blueapi.flow.v1.CreateSPRecommendationNotificationResponse">CreateSPRecommendationNotificationResponse</h3>
         <p>Response after sending to Slack</p>
 
         
@@ -43005,110 +43125,6 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                   <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flow.v1.CreateSPPurchaseAccessRequest">CreateSPPurchaseAccessRequest</h3>
-        <p>Request message for the Flow.CreateSPPurchaseAccess rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>target</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. The target AWS account to validate. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flow.v1.CreateSPPurchaseAccessResponse">CreateSPPurchaseAccessResponse</h3>
-        <p>Response message for the Flow.CreateSPPurchaseAccess rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>target</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The queried target account. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>roleArn</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The role ARN that provides the cross-account access permissions. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>externalId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The external id for this role. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>stackId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The id of the CloudFormation stack deployed in the target account. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>stackRegion</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The region where the stack is deployed. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>templateUrl</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The latest template used to deploy the stack. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>This can be `latest`, `outdated`, or some error information. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>lastUpdated</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The last updated timestamp, RFC3339 UTC. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>access</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The access type- full access to view simulation and purchase saving plan: &#34;savings_plan_access&#34; </p></td>
                 </tr>
               
             </tbody>
@@ -44265,6 +44281,291 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest">SendSPToPurchaseDetailsNotificationsRequest</h3>
+        <p>Response message for the Flow.GetSPToPurchaseDetails rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>approval</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendation</td>
+                  <td><a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanRecommendation">SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanRecommendation</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>purchases</td>
+                  <td><a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanDetailsPurchase">SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanDetailsPurchase</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanDetailsPurchase">SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanDetailsPurchase</h3>
+        <p>Savings plan details to be purchased</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkedAccounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savingsPlanType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>term</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendedHourlyCommitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>upfrontCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expiryDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanRecommendation">SendSPToPurchaseDetailsNotificationsRequest.SavingsPlanRecommendation</h3>
+        <p>Savings plan recommendation details</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>linkedAccounts</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScope</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savingsPlanType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>term</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendedHourlyCommitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>upfrontCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expiryDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsResponse">SendSPToPurchaseDetailsNotificationsResponse</h3>
+        <p>Response after sending SendSPToPurchaseDetailsNotifications to Slack</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>success</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.SetSettingsRequest">SetSettingsRequest</h3>
         <p>Request message for the Flow.CreateSettings rpc.</p>
 
@@ -44795,9 +45096,9 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               </tr>
             
               <tr>
-                <td>CreateMessageToSlack</td>
-                <td><a href="#blueapi.flow.v1.CreateMessageToSlackRequest">CreateMessageToSlackRequest</a></td>
-                <td><a href="#blueapi.flow.v1.CreateMessageToSlackResponse">CreateMessageToSlackResponse</a></td>
+                <td>CreateSPRecommendationNotification</td>
+                <td><a href="#blueapi.flow.v1.CreateSPRecommendationNotificationRequest">CreateSPRecommendationNotificationRequest</a></td>
+                <td><a href="#blueapi.flow.v1.CreateSPRecommendationNotificationResponse">CreateSPRecommendationNotificationResponse</a></td>
                 <td><p>Sends configuration and recommendation to a Slack channel</p></td>
               </tr>
             
@@ -44806,6 +45107,13 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><a href="#blueapi.flow.v1.GetSPToPurchaseDetailsRequest">GetSPToPurchaseDetailsRequest</a></td>
                 <td><a href="#blueapi.flow.v1.GetSPToPurchaseDetailsResponse">GetSPToPurchaseDetailsResponse</a></td>
                 <td><p>Get savings plan details to be purchased .</p></td>
+              </tr>
+            
+              <tr>
+                <td>SendSPToPurchaseDetailsNotification</td>
+                <td><a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsRequest">SendSPToPurchaseDetailsNotificationsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.SendSPToPurchaseDetailsNotificationsResponse">SendSPToPurchaseDetailsNotificationsResponse</a></td>
+                <td><p>Sends savings plan details to be purchased to a Slack channel</p></td>
               </tr>
             
           </tbody>
@@ -44949,9 +45257,9 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
               
               
               <tr>
-                <td>CreateMessageToSlack</td>
+                <td>CreateSPRecommendationNotification</td>
                 <td>POST</td>
-                <td>/v1/notification/slack</td>
+                <td>/v1/sp/recommendation/notification</td>
                 <td>*</td>
               </tr>
               
@@ -44962,6 +45270,16 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>GetSPToPurchaseDetails</td>
                 <td>GET</td>
                 <td>/v1/sp/purchaseDetails/{payerId}/{yearMonth}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SendSPToPurchaseDetailsNotification</td>
+                <td>POST</td>
+                <td>/v1/sp/purchaseDetails/notification</td>
                 <td></td>
               </tr>
               
