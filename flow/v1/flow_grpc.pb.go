@@ -34,6 +34,8 @@ const (
 	Flow_CreateSPRecommendationNotification_FullMethodName  = "/blueapi.flow.v1.Flow/CreateSPRecommendationNotification"
 	Flow_GetSPToPurchaseDetails_FullMethodName              = "/blueapi.flow.v1.Flow/GetSPToPurchaseDetails"
 	Flow_SendSPToPurchaseDetailsNotification_FullMethodName = "/blueapi.flow.v1.Flow/SendSPToPurchaseDetailsNotification"
+	Flow_SetUserAccountSettings_FullMethodName              = "/blueapi.flow.v1.Flow/SetUserAccountSettings"
+	Flow_GetUserAccountSettings_FullMethodName              = "/blueapi.flow.v1.Flow/GetUserAccountSettings"
 )
 
 // FlowClient is the client API for Flow service.
@@ -72,6 +74,10 @@ type FlowClient interface {
 	GetSPToPurchaseDetails(ctx context.Context, in *GetSPToPurchaseDetailsRequest, opts ...grpc.CallOption) (*GetSPToPurchaseDetailsResponse, error)
 	// Sends savings plan details to be purchased to a Slack channel
 	SendSPToPurchaseDetailsNotification(ctx context.Context, in *SendSPToPurchaseDetailsNotificationsRequest, opts ...grpc.CallOption) (*SendSPToPurchaseDetailsNotificationsResponse, error)
+	// Create or Update the user account settings.
+	SetUserAccountSettings(ctx context.Context, in *SetUserAccountSettingsRequest, opts ...grpc.CallOption) (*SetUserAccountSettingsResponse, error)
+	// Gets the user account settings.
+	GetUserAccountSettings(ctx context.Context, in *GetUserAccountSettingsRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsResponse, error)
 }
 
 type flowClient struct {
@@ -232,6 +238,26 @@ func (c *flowClient) SendSPToPurchaseDetailsNotification(ctx context.Context, in
 	return out, nil
 }
 
+func (c *flowClient) SetUserAccountSettings(ctx context.Context, in *SetUserAccountSettingsRequest, opts ...grpc.CallOption) (*SetUserAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetUserAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, Flow_SetUserAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *flowClient) GetUserAccountSettings(ctx context.Context, in *GetUserAccountSettingsRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUserAccountSettingsResponse)
+	err := c.cc.Invoke(ctx, Flow_GetUserAccountSettings_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -268,6 +294,10 @@ type FlowServer interface {
 	GetSPToPurchaseDetails(context.Context, *GetSPToPurchaseDetailsRequest) (*GetSPToPurchaseDetailsResponse, error)
 	// Sends savings plan details to be purchased to a Slack channel
 	SendSPToPurchaseDetailsNotification(context.Context, *SendSPToPurchaseDetailsNotificationsRequest) (*SendSPToPurchaseDetailsNotificationsResponse, error)
+	// Create or Update the user account settings.
+	SetUserAccountSettings(context.Context, *SetUserAccountSettingsRequest) (*SetUserAccountSettingsResponse, error)
+	// Gets the user account settings.
+	GetUserAccountSettings(context.Context, *GetUserAccountSettingsRequest) (*GetUserAccountSettingsResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -319,6 +349,12 @@ func (UnimplementedFlowServer) GetSPToPurchaseDetails(context.Context, *GetSPToP
 }
 func (UnimplementedFlowServer) SendSPToPurchaseDetailsNotification(context.Context, *SendSPToPurchaseDetailsNotificationsRequest) (*SendSPToPurchaseDetailsNotificationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SendSPToPurchaseDetailsNotification not implemented")
+}
+func (UnimplementedFlowServer) SetUserAccountSettings(context.Context, *SetUserAccountSettingsRequest) (*SetUserAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetUserAccountSettings not implemented")
+}
+func (UnimplementedFlowServer) GetUserAccountSettings(context.Context, *GetUserAccountSettingsRequest) (*GetUserAccountSettingsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUserAccountSettings not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -603,6 +639,42 @@ func _Flow_SendSPToPurchaseDetailsNotification_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_SetUserAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetUserAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).SetUserAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_SetUserAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).SetUserAccountSettings(ctx, req.(*SetUserAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Flow_GetUserAccountSettings_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUserAccountSettingsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).GetUserAccountSettings(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_GetUserAccountSettings_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).GetUserAccountSettings(ctx, req.(*GetUserAccountSettingsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -669,6 +741,14 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SendSPToPurchaseDetailsNotification",
 			Handler:    _Flow_SendSPToPurchaseDetailsNotification_Handler,
+		},
+		{
+			MethodName: "SetUserAccountSettings",
+			Handler:    _Flow_SetUserAccountSettings_Handler,
+		},
+		{
+			MethodName: "GetUserAccountSettings",
+			Handler:    _Flow_GetUserAccountSettings_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -3739,6 +3739,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.flow.v1.GetUserAccountSettingsRequest"><span class="badge">M</span>GetUserAccountSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.GetUserAccountSettingsResponse"><span class="badge">M</span>GetUserAccountSettingsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.flow.v1.MonthlyCosts"><span class="badge">M</span>MonthlyCosts</a>
                 </li>
               
@@ -3772,6 +3780,14 @@
               
                 <li>
                   <a href="#blueapi.flow.v1.SetSettingsResponse"><span class="badge">M</span>SetSettingsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SetUserAccountSettingsRequest"><span class="badge">M</span>SetUserAccountSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flow.v1.SetUserAccountSettingsResponse"><span class="badge">M</span>SetUserAccountSettingsResponse</a>
                 </li>
               
                 <li>
@@ -44027,6 +44043,75 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.GetUserAccountSettingsRequest">GetUserAccountSettingsRequest</h3>
+        <p>Request message for the Flow.GetUserAccountSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The payer ID of the user. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.GetUserAccountSettingsResponse">GetUserAccountSettingsResponse</h3>
+        <p>Response message for the Flow.GetUserAccountSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The payer ID of the user. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>emails</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of email addresses to send notifications to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>theme</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>User interface preferences. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Preferred language for the user interface. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.MonthlyCosts">MonthlyCosts</h3>
         <p>Summary of monthly cost values associated with a single Savings Plan.</p>
 
@@ -44677,6 +44762,75 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
 
         
       
+        <h3 id="blueapi.flow.v1.SetUserAccountSettingsRequest">SetUserAccountSettingsRequest</h3>
+        <p>Request message for the Flow.SetUserAccountSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The payer ID of the user. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>emails</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. List of email addresses to send notifications to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>theme</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. User interface preferences. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Preferred language for the user interface. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flow.v1.SetUserAccountSettingsResponse">SetUserAccountSettingsResponse</h3>
+        <p>Response message for the Flow.SetUserAccountSettings rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>response</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.flow.v1.SettingsHistory">SettingsHistory</h3>
         <p>Settings history message.</p>
 
@@ -45116,6 +45270,20 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td><p>Sends savings plan details to be purchased to a Slack channel</p></td>
               </tr>
             
+              <tr>
+                <td>SetUserAccountSettings</td>
+                <td><a href="#blueapi.flow.v1.SetUserAccountSettingsRequest">SetUserAccountSettingsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.SetUserAccountSettingsResponse">SetUserAccountSettingsResponse</a></td>
+                <td><p>Create or Update the user account settings.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetUserAccountSettings</td>
+                <td><a href="#blueapi.flow.v1.GetUserAccountSettingsRequest">GetUserAccountSettingsRequest</a></td>
+                <td><a href="#blueapi.flow.v1.GetUserAccountSettingsResponse">GetUserAccountSettingsResponse</a></td>
+                <td><p>Gets the user account settings.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -45280,6 +45448,26 @@ For usage information, visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pr
                 <td>SendSPToPurchaseDetailsNotification</td>
                 <td>POST</td>
                 <td>/v1/sp/purchaseDetails/notification</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetUserAccountSettings</td>
+                <td>PUT</td>
+                <td>/v1/user/settings</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetUserAccountSettings</td>
+                <td>GET</td>
+                <td>/v1/user/settings</td>
                 <td></td>
               </tr>
               
