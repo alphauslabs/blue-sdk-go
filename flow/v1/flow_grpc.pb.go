@@ -72,7 +72,7 @@ type FlowClient interface {
 	CreateSPRecommendationNotification(ctx context.Context, in *CreateSPRecommendationNotificationRequest, opts ...grpc.CallOption) (*CreateSPRecommendationNotificationResponse, error)
 	// Get savings plan details to be purchased .
 	GetSPToPurchaseDetails(ctx context.Context, in *GetSPToPurchaseDetailsRequest, opts ...grpc.CallOption) (*GetSPToPurchaseDetailsResponse, error)
-	// Sends savings plan details to be purchased to a Slack channel
+	// Sends savings plan details to be purchased to a Slack channel or user email
 	SendSPToPurchaseDetailsNotification(ctx context.Context, in *SendSPToPurchaseDetailsNotificationsRequest, opts ...grpc.CallOption) (*SendSPToPurchaseDetailsNotificationsResponse, error)
 	// Create or Update the user account settings.
 	SetUserAccountSettings(ctx context.Context, in *SetUserAccountSettingsRequest, opts ...grpc.CallOption) (*SetUserAccountSettingsResponse, error)
@@ -292,7 +292,7 @@ type FlowServer interface {
 	CreateSPRecommendationNotification(context.Context, *CreateSPRecommendationNotificationRequest) (*CreateSPRecommendationNotificationResponse, error)
 	// Get savings plan details to be purchased .
 	GetSPToPurchaseDetails(context.Context, *GetSPToPurchaseDetailsRequest) (*GetSPToPurchaseDetailsResponse, error)
-	// Sends savings plan details to be purchased to a Slack channel
+	// Sends savings plan details to be purchased to a Slack channel or user email
 	SendSPToPurchaseDetailsNotification(context.Context, *SendSPToPurchaseDetailsNotificationsRequest) (*SendSPToPurchaseDetailsNotificationsResponse, error)
 	// Create or Update the user account settings.
 	SetUserAccountSettings(context.Context, *SetUserAccountSettingsRequest) (*SetUserAccountSettingsResponse, error)
