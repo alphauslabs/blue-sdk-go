@@ -36,6 +36,7 @@ const (
 	Flow_SendSPToPurchaseDetailsNotification_FullMethodName = "/blueapi.flow.v1.Flow/SendSPToPurchaseDetailsNotification"
 	Flow_SetUserAccountSettings_FullMethodName              = "/blueapi.flow.v1.Flow/SetUserAccountSettings"
 	Flow_GetUserAccountSettings_FullMethodName              = "/blueapi.flow.v1.Flow/GetUserAccountSettings"
+	Flow_CheckSPToPurchaseDetailsLinkExpiry_FullMethodName  = "/blueapi.flow.v1.Flow/CheckSPToPurchaseDetailsLinkExpiry"
 )
 
 // FlowClient is the client API for Flow service.
@@ -78,6 +79,8 @@ type FlowClient interface {
 	SetUserAccountSettings(ctx context.Context, in *SetUserAccountSettingsRequest, opts ...grpc.CallOption) (*SetUserAccountSettingsResponse, error)
 	// Gets the user account settings.
 	GetUserAccountSettings(ctx context.Context, in *GetUserAccountSettingsRequest, opts ...grpc.CallOption) (*GetUserAccountSettingsResponse, error)
+	// Checks the expiry of the link in the SP to purchase details notification
+	CheckSPToPurchaseDetailsLinkExpiry(ctx context.Context, in *CheckSPToPurchaseDetailsLinkExpiryRequest, opts ...grpc.CallOption) (*CheckSPToPurchaseDetailsLinkExpiryResponse, error)
 }
 
 type flowClient struct {
@@ -258,6 +261,16 @@ func (c *flowClient) GetUserAccountSettings(ctx context.Context, in *GetUserAcco
 	return out, nil
 }
 
+func (c *flowClient) CheckSPToPurchaseDetailsLinkExpiry(ctx context.Context, in *CheckSPToPurchaseDetailsLinkExpiryRequest, opts ...grpc.CallOption) (*CheckSPToPurchaseDetailsLinkExpiryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CheckSPToPurchaseDetailsLinkExpiryResponse)
+	err := c.cc.Invoke(ctx, Flow_CheckSPToPurchaseDetailsLinkExpiry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlowServer is the server API for Flow service.
 // All implementations must embed UnimplementedFlowServer
 // for forward compatibility
@@ -298,6 +311,8 @@ type FlowServer interface {
 	SetUserAccountSettings(context.Context, *SetUserAccountSettingsRequest) (*SetUserAccountSettingsResponse, error)
 	// Gets the user account settings.
 	GetUserAccountSettings(context.Context, *GetUserAccountSettingsRequest) (*GetUserAccountSettingsResponse, error)
+	// Checks the expiry of the link in the SP to purchase details notification
+	CheckSPToPurchaseDetailsLinkExpiry(context.Context, *CheckSPToPurchaseDetailsLinkExpiryRequest) (*CheckSPToPurchaseDetailsLinkExpiryResponse, error)
 	mustEmbedUnimplementedFlowServer()
 }
 
@@ -355,6 +370,9 @@ func (UnimplementedFlowServer) SetUserAccountSettings(context.Context, *SetUserA
 }
 func (UnimplementedFlowServer) GetUserAccountSettings(context.Context, *GetUserAccountSettingsRequest) (*GetUserAccountSettingsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserAccountSettings not implemented")
+}
+func (UnimplementedFlowServer) CheckSPToPurchaseDetailsLinkExpiry(context.Context, *CheckSPToPurchaseDetailsLinkExpiryRequest) (*CheckSPToPurchaseDetailsLinkExpiryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckSPToPurchaseDetailsLinkExpiry not implemented")
 }
 func (UnimplementedFlowServer) mustEmbedUnimplementedFlowServer() {}
 
@@ -675,6 +693,24 @@ func _Flow_GetUserAccountSettings_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flow_CheckSPToPurchaseDetailsLinkExpiry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CheckSPToPurchaseDetailsLinkExpiryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlowServer).CheckSPToPurchaseDetailsLinkExpiry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flow_CheckSPToPurchaseDetailsLinkExpiry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlowServer).CheckSPToPurchaseDetailsLinkExpiry(ctx, req.(*CheckSPToPurchaseDetailsLinkExpiryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flow_ServiceDesc is the grpc.ServiceDesc for Flow service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -749,6 +785,10 @@ var Flow_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetUserAccountSettings",
 			Handler:    _Flow_GetUserAccountSettings_Handler,
+		},
+		{
+			MethodName: "CheckSPToPurchaseDetailsLinkExpiry",
+			Handler:    _Flow_CheckSPToPurchaseDetailsLinkExpiry_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
