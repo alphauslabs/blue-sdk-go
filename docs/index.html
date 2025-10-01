@@ -2905,6 +2905,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListNonperformingRateRequest"><span class="badge">M</span>ListNonperformingRateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListNonperformingRateResponse"><span class="badge">M</span>ListNonperformingRateResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ListRecommendationRequest"><span class="badge">M</span>ListRecommendationRequest</a>
                 </li>
               
@@ -33676,6 +33684,103 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.ListNonperformingRateRequest">ListNonperformingRateRequest</h3>
+        <p>Request message for ListNonperformingRate</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Cost Group Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fromDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The start date of the displayed data. If not set, the first day of the current month will be used. Format: yyyy-mm-dd. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>toDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The end date of the displayed data. If not set, current date will be used. Format: yyyy-mm-dd. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The type of optimization; `ri`, `sp`, or `all`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListNonperformingRateResponse">ListNonperformingRateResponse</h3>
+        <p>Response message for ListNonperformingRate</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>account</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>utilization</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>waste</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.ListRecommendationRequest">ListRecommendationRequest</h3>
         <p></p>
 
@@ -40378,6 +40483,13 @@ file in bytes </p></td>
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ListNonperformingRate</td>
+                <td><a href="#blueapi.cover.v1.ListNonperformingRateRequest">ListNonperformingRateRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListNonperformingRateResponse">ListNonperformingRateResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -42242,6 +42354,16 @@ file in bytes </p></td>
                 <td>GetCostUsageV2</td>
                 <td>POST</td>
                 <td>/v1/costusage</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListNonperformingRate</td>
+                <td>POST</td>
+                <td>/v1/reports/rate/nonperforming:read</td>
                 <td>*</td>
               </tr>
               
