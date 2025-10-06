@@ -70,7 +70,9 @@ type PrismClient interface {
 	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WIP: Lists all projects
 	ListProjects(ctx context.Context, in *ListProjectsRequest, opts ...grpc.CallOption) (Prism_ListProjectsClient, error)
+	// Creates a new organization.
 	CreateOrganization(ctx context.Context, in *CreateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Gets information about an organization by ID.
 	GetOrganization(ctx context.Context, in *GetOrganizationRequest, opts ...grpc.CallOption) (*GetOrganizationResponse, error)
 	UpdateOrganization(ctx context.Context, in *UpdateOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	DeleteOrganization(ctx context.Context, in *DeleteOrganizationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -650,7 +652,9 @@ type PrismServer interface {
 	DeleteProject(context.Context, *DeleteProjectRequest) (*emptypb.Empty, error)
 	// WIP: Lists all projects
 	ListProjects(*ListProjectsRequest, Prism_ListProjectsServer) error
+	// Creates a new organization.
 	CreateOrganization(context.Context, *CreateOrganizationRequest) (*emptypb.Empty, error)
+	// Gets information about an organization by ID.
 	GetOrganization(context.Context, *GetOrganizationRequest) (*GetOrganizationResponse, error)
 	UpdateOrganization(context.Context, *UpdateOrganizationRequest) (*emptypb.Empty, error)
 	DeleteOrganization(context.Context, *DeleteOrganizationRequest) (*emptypb.Empty, error)
