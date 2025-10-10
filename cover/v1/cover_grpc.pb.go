@@ -207,6 +207,11 @@ const (
 	Cover_GetDiscountPlan_FullMethodName                         = "/blueapi.cover.v1.Cover/GetDiscountPlan"
 	Cover_GetCostUsageV2_FullMethodName                          = "/blueapi.cover.v1.Cover/GetCostUsageV2"
 	Cover_ListNonperformingRate_FullMethodName                   = "/blueapi.cover.v1.Cover/ListNonperformingRate"
+	Cover_ListForecasts_FullMethodName                           = "/blueapi.cover.v1.Cover/ListForecasts"
+	Cover_CreateCostForecast_FullMethodName                      = "/blueapi.cover.v1.Cover/CreateCostForecast"
+	Cover_GetCostForecast_FullMethodName                         = "/blueapi.cover.v1.Cover/GetCostForecast"
+	Cover_UpdateCostForecast_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateCostForecast"
+	Cover_DeleteCostForecast_FullMethodName                      = "/blueapi.cover.v1.Cover/DeleteCostForecast"
 )
 
 // CoverClient is the client API for Cover service.
@@ -581,6 +586,11 @@ type CoverClient interface {
 	GetDiscountPlan(ctx context.Context, in *GetDiscountPlanRequest, opts ...grpc.CallOption) (*GetDiscountPlanResponse, error)
 	GetCostUsageV2(ctx context.Context, in *GetCostUsageV2Request, opts ...grpc.CallOption) (Cover_GetCostUsageV2Client, error)
 	ListNonperformingRate(ctx context.Context, in *ListNonperformingRateRequest, opts ...grpc.CallOption) (*ListNonperformingRateResponse, error)
+	ListForecasts(ctx context.Context, in *ListForecastsRequest, opts ...grpc.CallOption) (*ListForecastsResponse, error)
+	CreateCostForecast(ctx context.Context, in *CreateCostForecastRequest, opts ...grpc.CallOption) (*CreateCostForecastResponse, error)
+	GetCostForecast(ctx context.Context, in *GetCostForecastRequest, opts ...grpc.CallOption) (*GetCostForecastResponse, error)
+	UpdateCostForecast(ctx context.Context, in *UpdateCostForecastRequest, opts ...grpc.CallOption) (*UpdateCostForecastResponse, error)
+	DeleteCostForecast(ctx context.Context, in *DeleteCostForecastRequest, opts ...grpc.CallOption) (*DeleteCostForecastResponse, error)
 }
 
 type coverClient struct {
@@ -3097,6 +3107,56 @@ func (c *coverClient) ListNonperformingRate(ctx context.Context, in *ListNonperf
 	return out, nil
 }
 
+func (c *coverClient) ListForecasts(ctx context.Context, in *ListForecastsRequest, opts ...grpc.CallOption) (*ListForecastsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListForecastsResponse)
+	err := c.cc.Invoke(ctx, Cover_ListForecasts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) CreateCostForecast(ctx context.Context, in *CreateCostForecastRequest, opts ...grpc.CallOption) (*CreateCostForecastResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateCostForecastResponse)
+	err := c.cc.Invoke(ctx, Cover_CreateCostForecast_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) GetCostForecast(ctx context.Context, in *GetCostForecastRequest, opts ...grpc.CallOption) (*GetCostForecastResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetCostForecastResponse)
+	err := c.cc.Invoke(ctx, Cover_GetCostForecast_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateCostForecast(ctx context.Context, in *UpdateCostForecastRequest, opts ...grpc.CallOption) (*UpdateCostForecastResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateCostForecastResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateCostForecast_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteCostForecast(ctx context.Context, in *DeleteCostForecastRequest, opts ...grpc.CallOption) (*DeleteCostForecastResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteCostForecastResponse)
+	err := c.cc.Invoke(ctx, Cover_DeleteCostForecast_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3469,6 +3529,11 @@ type CoverServer interface {
 	GetDiscountPlan(context.Context, *GetDiscountPlanRequest) (*GetDiscountPlanResponse, error)
 	GetCostUsageV2(*GetCostUsageV2Request, Cover_GetCostUsageV2Server) error
 	ListNonperformingRate(context.Context, *ListNonperformingRateRequest) (*ListNonperformingRateResponse, error)
+	ListForecasts(context.Context, *ListForecastsRequest) (*ListForecastsResponse, error)
+	CreateCostForecast(context.Context, *CreateCostForecastRequest) (*CreateCostForecastResponse, error)
+	GetCostForecast(context.Context, *GetCostForecastRequest) (*GetCostForecastResponse, error)
+	UpdateCostForecast(context.Context, *UpdateCostForecastRequest) (*UpdateCostForecastResponse, error)
+	DeleteCostForecast(context.Context, *DeleteCostForecastRequest) (*DeleteCostForecastResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -4033,6 +4098,21 @@ func (UnimplementedCoverServer) GetCostUsageV2(*GetCostUsageV2Request, Cover_Get
 }
 func (UnimplementedCoverServer) ListNonperformingRate(context.Context, *ListNonperformingRateRequest) (*ListNonperformingRateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListNonperformingRate not implemented")
+}
+func (UnimplementedCoverServer) ListForecasts(context.Context, *ListForecastsRequest) (*ListForecastsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListForecasts not implemented")
+}
+func (UnimplementedCoverServer) CreateCostForecast(context.Context, *CreateCostForecastRequest) (*CreateCostForecastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCostForecast not implemented")
+}
+func (UnimplementedCoverServer) GetCostForecast(context.Context, *GetCostForecastRequest) (*GetCostForecastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCostForecast not implemented")
+}
+func (UnimplementedCoverServer) UpdateCostForecast(context.Context, *UpdateCostForecastRequest) (*UpdateCostForecastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateCostForecast not implemented")
+}
+func (UnimplementedCoverServer) DeleteCostForecast(context.Context, *DeleteCostForecastRequest) (*DeleteCostForecastResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteCostForecast not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7484,6 +7564,96 @@ func _Cover_ListNonperformingRate_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListForecasts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListForecastsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListForecasts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListForecasts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListForecasts(ctx, req.(*ListForecastsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_CreateCostForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCostForecastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).CreateCostForecast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_CreateCostForecast_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).CreateCostForecast(ctx, req.(*CreateCostForecastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_GetCostForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCostForecastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).GetCostForecast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_GetCostForecast_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).GetCostForecast(ctx, req.(*GetCostForecastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateCostForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateCostForecastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateCostForecast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateCostForecast_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateCostForecast(ctx, req.(*UpdateCostForecastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteCostForecast_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteCostForecastRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteCostForecast(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteCostForecast_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteCostForecast(ctx, req.(*DeleteCostForecastRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -8122,6 +8292,26 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListNonperformingRate",
 			Handler:    _Cover_ListNonperformingRate_Handler,
+		},
+		{
+			MethodName: "ListForecasts",
+			Handler:    _Cover_ListForecasts_Handler,
+		},
+		{
+			MethodName: "CreateCostForecast",
+			Handler:    _Cover_CreateCostForecast_Handler,
+		},
+		{
+			MethodName: "GetCostForecast",
+			Handler:    _Cover_GetCostForecast_Handler,
+		},
+		{
+			MethodName: "UpdateCostForecast",
+			Handler:    _Cover_UpdateCostForecast_Handler,
+		},
+		{
+			MethodName: "DeleteCostForecast",
+			Handler:    _Cover_DeleteCostForecast_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

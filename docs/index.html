@@ -2221,6 +2221,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.CreateCostForecastRequest"><span class="badge">M</span>CreateCostForecastRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.CreateCostForecastResponse"><span class="badge">M</span>CreateCostForecastResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.CreateCostGroupRequest"><span class="badge">M</span>CreateCostGroupRequest</a>
                 </li>
               
@@ -2338,6 +2346,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.DeleteChannelResponse"><span class="badge">M</span>DeleteChannelResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteCostForecastRequest"><span class="badge">M</span>DeleteCostForecastRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteCostForecastResponse"><span class="badge">M</span>DeleteCostForecastResponse</a>
                 </li>
               
                 <li>
@@ -2574,6 +2590,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.GetCloudwatchMetadataResponse.Dimension"><span class="badge">M</span>GetCloudwatchMetadataResponse.Dimension</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCostForecastRequest"><span class="badge">M</span>GetCostForecastRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetCostForecastResponse"><span class="badge">M</span>GetCostForecastResponse</a>
                 </li>
               
                 <li>
@@ -2902,6 +2926,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ListFeesRequest"><span class="badge">M</span>ListFeesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListForecastsRequest"><span class="badge">M</span>ListForecastsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListForecastsResponse"><span class="badge">M</span>ListForecastsResponse</a>
                 </li>
               
                 <li>
@@ -3270,6 +3302,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.UpdateChannelDetailsResponse"><span class="badge">M</span>UpdateChannelDetailsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateCostForecastRequest"><span class="badge">M</span>UpdateCostForecastRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateCostForecastResponse"><span class="badge">M</span>UpdateCostForecastResponse</a>
                 </li>
               
                 <li>
@@ -28053,6 +28093,131 @@ Example: If groupBy is set to &#34;Environment&#34;, this field might include va
 
         
       
+        <h3 id="blueapi.cover.v1.CreateCostForecastRequest">CreateCostForecastRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>forecastName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Name of the forecast </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Description of the forecast </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#blueapi.api.cover.CostGroup">blueapi.api.cover.CostGroup</a></td>
+                  <td></td>
+                  <td><p>Required. Cost Group Id and Name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pastActualCostRange</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Required. The range of past actual cost to be used in forecasting. Valid values are: &#39;1&#39;, &#39;3&#39;, &#39;6&#39;, and &#39;12&#39; (in months) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookForwardPeriod</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Required. The number of months to look forward in the forecast. Valid values are: &#39;1&#39;, &#39;3&#39;, &#39;6&#39;, and &#39;12&#39; (in months) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalAdjustments</td>
+                  <td><a href="#blueapi.api.cover.ExternalAdjustment">blueapi.api.cover.ExternalAdjustment</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.CreateCostForecastResponse">CreateCostForecastResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>forecastName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#blueapi.api.cover.CostGroup">blueapi.api.cover.CostGroup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pastActualCostRange</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookForwardPeriod</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalAdjustments</td>
+                  <td><a href="#blueapi.api.cover.ExternalAdjustment">blueapi.api.cover.ExternalAdjustment</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.CreateCostGroupRequest">CreateCostGroupRequest</h3>
         <p>Request message for CreateCostGroup</p>
 
@@ -29100,6 +29265,54 @@ Supported values are the following:
       
         <h3 id="blueapi.cover.v1.DeleteChannelResponse">DeleteChannelResponse</h3>
         <p>Response message for DeleteChannel</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteCostForecastRequest">DeleteCostForecastRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Forecast Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteCostForecastResponse">DeleteCostForecastResponse</h3>
+        <p></p>
 
         
           <table class="field-table">
@@ -31037,6 +31250,117 @@ Example: &#34;CPUUtilization&#34;, &#34;Invocations&#34;, etc. </p></td>
                   <td>values</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCostForecastRequest">GetCostForecastRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Forecast Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetCostForecastResponse">GetCostForecastResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>forecastName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#blueapi.api.cover.CostGroup">blueapi.api.cover.CostGroup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pastActualCostRange</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookForwardPeriod</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalAdjustments</td>
+                  <td><a href="#blueapi.api.cover.ExternalAdjustment">blueapi.api.cover.ExternalAdjustment</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>creationDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdatedDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -33694,6 +34018,37 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>month</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListForecastsRequest">ListForecastsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListForecastsResponse">ListForecastsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>costForecastDetails</td>
+                  <td><a href="#blueapi.api.cover.CostForecastDetails">blueapi.api.cover.CostForecastDetails</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -36941,6 +37296,159 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
                 <tr>
                   <td>channelData</td>
                   <td><a href="#blueapi.api.cover.ChannelData">blueapi.api.cover.ChannelData</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateCostForecastRequest">UpdateCostForecastRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Forecast Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>forecastName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Name of the forecast </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Description of the forecast </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#blueapi.api.cover.CostGroup">blueapi.api.cover.CostGroup</a></td>
+                  <td></td>
+                  <td><p>Optional. Cost Group Id and Name </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pastActualCostRange</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Optional. The range of past actual cost to be used in forecasting. Valid values are: &#39;1&#39;, &#39;3&#39;, &#39;6&#39;, and &#39;12&#39; (in months) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookForwardPeriod</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Optional. The number of months to look forward in the forecast. Valid values are: &#39;1&#39;, &#39;3&#39;, &#39;6&#39;, and &#39;12&#39; (in months) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalAdjustments</td>
+                  <td><a href="#blueapi.api.cover.ExternalAdjustment">blueapi.api.cover.ExternalAdjustment</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateCostForecastResponse">UpdateCostForecastResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>forecastName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
+                  <td><a href="#blueapi.api.cover.CostGroup">blueapi.api.cover.CostGroup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pastActualCostRange</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lookForwardPeriod</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalAdjustments</td>
+                  <td><a href="#blueapi.api.cover.ExternalAdjustment">blueapi.api.cover.ExternalAdjustment</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>creationDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdatedDate</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -40534,6 +41042,41 @@ file in bytes </p></td>
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ListForecasts</td>
+                <td><a href="#blueapi.cover.v1.ListForecastsRequest">ListForecastsRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListForecastsResponse">ListForecastsResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateCostForecast</td>
+                <td><a href="#blueapi.cover.v1.CreateCostForecastRequest">CreateCostForecastRequest</a></td>
+                <td><a href="#blueapi.cover.v1.CreateCostForecastResponse">CreateCostForecastResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>GetCostForecast</td>
+                <td><a href="#blueapi.cover.v1.GetCostForecastRequest">GetCostForecastRequest</a></td>
+                <td><a href="#blueapi.cover.v1.GetCostForecastResponse">GetCostForecastResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateCostForecast</td>
+                <td><a href="#blueapi.cover.v1.UpdateCostForecastRequest">UpdateCostForecastRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateCostForecastResponse">UpdateCostForecastResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteCostForecast</td>
+                <td><a href="#blueapi.cover.v1.DeleteCostForecastRequest">DeleteCostForecastRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DeleteCostForecastResponse">DeleteCostForecastResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -42409,6 +42952,56 @@ file in bytes </p></td>
                 <td>POST</td>
                 <td>/v1/reports/rate/nonperforming:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListForecasts</td>
+                <td>POST</td>
+                <td>/v1/forecasts:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateCostForecast</td>
+                <td>POST</td>
+                <td>/v1/forecasts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCostForecast</td>
+                <td>GET</td>
+                <td>/v1/forecasts/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateCostForecast</td>
+                <td>PUT</td>
+                <td>/v1/forecasts/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteCostForecast</td>
+                <td>DELETE</td>
+                <td>/v1/forecasts/{id}</td>
+                <td></td>
               </tr>
               
             
