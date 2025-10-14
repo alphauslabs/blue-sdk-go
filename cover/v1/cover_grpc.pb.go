@@ -207,6 +207,7 @@ const (
 	Cover_GetDiscountPlan_FullMethodName                         = "/blueapi.cover.v1.Cover/GetDiscountPlan"
 	Cover_GetCostUsageV2_FullMethodName                          = "/blueapi.cover.v1.Cover/GetCostUsageV2"
 	Cover_ListNonperformingRate_FullMethodName                   = "/blueapi.cover.v1.Cover/ListNonperformingRate"
+	Cover_ListUntaggedResources_FullMethodName                   = "/blueapi.cover.v1.Cover/ListUntaggedResources"
 	Cover_ListForecasts_FullMethodName                           = "/blueapi.cover.v1.Cover/ListForecasts"
 	Cover_CreateCostForecast_FullMethodName                      = "/blueapi.cover.v1.Cover/CreateCostForecast"
 	Cover_GetCostForecast_FullMethodName                         = "/blueapi.cover.v1.Cover/GetCostForecast"
@@ -586,6 +587,7 @@ type CoverClient interface {
 	GetDiscountPlan(ctx context.Context, in *GetDiscountPlanRequest, opts ...grpc.CallOption) (*GetDiscountPlanResponse, error)
 	GetCostUsageV2(ctx context.Context, in *GetCostUsageV2Request, opts ...grpc.CallOption) (Cover_GetCostUsageV2Client, error)
 	ListNonperformingRate(ctx context.Context, in *ListNonperformingRateRequest, opts ...grpc.CallOption) (*ListNonperformingRateResponse, error)
+	ListUntaggedResources(ctx context.Context, in *ListUntaggedResourcesRequest, opts ...grpc.CallOption) (*ListUntaggedResourcesResponse, error)
 	ListForecasts(ctx context.Context, in *ListForecastsRequest, opts ...grpc.CallOption) (*ListForecastsResponse, error)
 	CreateCostForecast(ctx context.Context, in *CreateCostForecastRequest, opts ...grpc.CallOption) (*CreateCostForecastResponse, error)
 	GetCostForecast(ctx context.Context, in *GetCostForecastRequest, opts ...grpc.CallOption) (*GetCostForecastResponse, error)
@@ -3107,6 +3109,16 @@ func (c *coverClient) ListNonperformingRate(ctx context.Context, in *ListNonperf
 	return out, nil
 }
 
+func (c *coverClient) ListUntaggedResources(ctx context.Context, in *ListUntaggedResourcesRequest, opts ...grpc.CallOption) (*ListUntaggedResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUntaggedResourcesResponse)
+	err := c.cc.Invoke(ctx, Cover_ListUntaggedResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *coverClient) ListForecasts(ctx context.Context, in *ListForecastsRequest, opts ...grpc.CallOption) (*ListForecastsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListForecastsResponse)
@@ -3529,6 +3541,7 @@ type CoverServer interface {
 	GetDiscountPlan(context.Context, *GetDiscountPlanRequest) (*GetDiscountPlanResponse, error)
 	GetCostUsageV2(*GetCostUsageV2Request, Cover_GetCostUsageV2Server) error
 	ListNonperformingRate(context.Context, *ListNonperformingRateRequest) (*ListNonperformingRateResponse, error)
+	ListUntaggedResources(context.Context, *ListUntaggedResourcesRequest) (*ListUntaggedResourcesResponse, error)
 	ListForecasts(context.Context, *ListForecastsRequest) (*ListForecastsResponse, error)
 	CreateCostForecast(context.Context, *CreateCostForecastRequest) (*CreateCostForecastResponse, error)
 	GetCostForecast(context.Context, *GetCostForecastRequest) (*GetCostForecastResponse, error)
@@ -4098,6 +4111,9 @@ func (UnimplementedCoverServer) GetCostUsageV2(*GetCostUsageV2Request, Cover_Get
 }
 func (UnimplementedCoverServer) ListNonperformingRate(context.Context, *ListNonperformingRateRequest) (*ListNonperformingRateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListNonperformingRate not implemented")
+}
+func (UnimplementedCoverServer) ListUntaggedResources(context.Context, *ListUntaggedResourcesRequest) (*ListUntaggedResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUntaggedResources not implemented")
 }
 func (UnimplementedCoverServer) ListForecasts(context.Context, *ListForecastsRequest) (*ListForecastsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListForecasts not implemented")
@@ -7564,6 +7580,24 @@ func _Cover_ListNonperformingRate_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_ListUntaggedResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUntaggedResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListUntaggedResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListUntaggedResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListUntaggedResources(ctx, req.(*ListUntaggedResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cover_ListForecasts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListForecastsRequest)
 	if err := dec(in); err != nil {
@@ -8292,6 +8326,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListNonperformingRate",
 			Handler:    _Cover_ListNonperformingRate_Handler,
+		},
+		{
+			MethodName: "ListUntaggedResources",
+			Handler:    _Cover_ListUntaggedResources_Handler,
 		},
 		{
 			MethodName: "ListForecasts",
