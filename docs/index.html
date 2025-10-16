@@ -34911,7 +34911,7 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                  <td><p>Required. </p></td>
                 </tr>
               
                 <tr>
@@ -34933,6 +34933,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. The end date of the displayed data. If not set, current date will be used. Format: yyyy-mm-dd. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>limit</td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p>Optional. The number of top untagged resources to be displayed. If not set, top 10 untagged resources are returned. </p></td>
                 </tr>
               
             </tbody>
@@ -34991,7 +34998,14 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 </tr>
               
                 <tr>
-                  <td>account</td>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costGroup</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -35000,6 +35014,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                 <tr>
                   <td>cost</td>
                   <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
