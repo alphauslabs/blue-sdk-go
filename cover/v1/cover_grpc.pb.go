@@ -213,6 +213,7 @@ const (
 	Cover_GetCostForecast_FullMethodName                         = "/blueapi.cover.v1.Cover/GetCostForecast"
 	Cover_UpdateCostForecast_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateCostForecast"
 	Cover_DeleteCostForecast_FullMethodName                      = "/blueapi.cover.v1.Cover/DeleteCostForecast"
+	Cover_GetCostForecastsData_FullMethodName                    = "/blueapi.cover.v1.Cover/GetCostForecastsData"
 )
 
 // CoverClient is the client API for Cover service.
@@ -593,6 +594,7 @@ type CoverClient interface {
 	GetCostForecast(ctx context.Context, in *GetCostForecastRequest, opts ...grpc.CallOption) (*GetCostForecastResponse, error)
 	UpdateCostForecast(ctx context.Context, in *UpdateCostForecastRequest, opts ...grpc.CallOption) (*UpdateCostForecastResponse, error)
 	DeleteCostForecast(ctx context.Context, in *DeleteCostForecastRequest, opts ...grpc.CallOption) (*DeleteCostForecastResponse, error)
+	GetCostForecastsData(ctx context.Context, in *GetCostForecastsDataRequest, opts ...grpc.CallOption) (Cover_GetCostForecastsDataClient, error)
 }
 
 type coverClient struct {
@@ -3169,6 +3171,39 @@ func (c *coverClient) DeleteCostForecast(ctx context.Context, in *DeleteCostFore
 	return out, nil
 }
 
+func (c *coverClient) GetCostForecastsData(ctx context.Context, in *GetCostForecastsDataRequest, opts ...grpc.CallOption) (Cover_GetCostForecastsDataClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[28], Cover_GetCostForecastsData_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &coverGetCostForecastsDataClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cover_GetCostForecastsDataClient interface {
+	Recv() (*GetCostForecastsDataResponse, error)
+	grpc.ClientStream
+}
+
+type coverGetCostForecastsDataClient struct {
+	grpc.ClientStream
+}
+
+func (x *coverGetCostForecastsDataClient) Recv() (*GetCostForecastsDataResponse, error) {
+	m := new(GetCostForecastsDataResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3547,6 +3582,7 @@ type CoverServer interface {
 	GetCostForecast(context.Context, *GetCostForecastRequest) (*GetCostForecastResponse, error)
 	UpdateCostForecast(context.Context, *UpdateCostForecastRequest) (*UpdateCostForecastResponse, error)
 	DeleteCostForecast(context.Context, *DeleteCostForecastRequest) (*DeleteCostForecastResponse, error)
+	GetCostForecastsData(*GetCostForecastsDataRequest, Cover_GetCostForecastsDataServer) error
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -4129,6 +4165,9 @@ func (UnimplementedCoverServer) UpdateCostForecast(context.Context, *UpdateCostF
 }
 func (UnimplementedCoverServer) DeleteCostForecast(context.Context, *DeleteCostForecastRequest) (*DeleteCostForecastResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCostForecast not implemented")
+}
+func (UnimplementedCoverServer) GetCostForecastsData(*GetCostForecastsDataRequest, Cover_GetCostForecastsDataServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetCostForecastsData not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7688,6 +7727,27 @@ func _Cover_DeleteCostForecast_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_GetCostForecastsData_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetCostForecastsDataRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CoverServer).GetCostForecastsData(m, &coverGetCostForecastsDataServer{ServerStream: stream})
+}
+
+type Cover_GetCostForecastsDataServer interface {
+	Send(*GetCostForecastsDataResponse) error
+	grpc.ServerStream
+}
+
+type coverGetCostForecastsDataServer struct {
+	grpc.ServerStream
+}
+
+func (x *coverGetCostForecastsDataServer) Send(m *GetCostForecastsDataResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -8491,6 +8551,11 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetCostUsageV2",
 			Handler:       _Cover_GetCostUsageV2_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetCostForecastsData",
+			Handler:       _Cover_GetCostForecastsData_Handler,
 			ServerStreams: true,
 		},
 	},
