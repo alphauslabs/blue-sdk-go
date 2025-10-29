@@ -1675,6 +1675,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListBillingGroupsPaginatedRequest"><span class="badge">M</span>ListBillingGroupsPaginatedRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListBillingGroupsPaginatedResponse"><span class="badge">M</span>ListBillingGroupsPaginatedResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListBillingGroupsRequest"><span class="badge">M</span>ListBillingGroupsRequest</a>
                 </li>
               
@@ -1744,6 +1752,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.NonTagSetting"><span class="badge">M</span>NonTagSetting</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.PaginationLinks"><span class="badge">M</span>PaginationLinks</a>
                 </li>
               
                 <li>
@@ -20531,6 +20543,145 @@ leave empty to get all group id custom field </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ListBillingGroupsPaginatedRequest">ListBillingGroupsPaginatedRequest</h3>
+        <p>Request message for the Billing.ListBillingGroupsPaginated rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. Get only the value that set fieldMask.
+
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendors</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter vendor accounts included in BillingGroup. Format: vendors=vendor1,vendor2,vendor3.
+For example, When Aws and Gcp to be filtered vendors=aws,gcp
+If you want to get all vendors, not set parameter. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>calcType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by calcType. Format: calType=account
+Valid values: account, tag </p></td>
+                </tr>
+              
+                <tr>
+                  <td>displayCost</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by displayCost. Format: displayCost=unblended_cost
+valid values: unblended_cost, true_unblended_cost </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bgType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. For aws only, filter will be ignored for other vendors.
+Valid values: default, imported </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by company name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by billing group name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by billing group id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pageSize</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Page size for pagination. Default is 50, maximum is 1000. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pageToken</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Page token for pagination. Use the next_page_token from the previous response. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListBillingGroupsPaginatedResponse">ListBillingGroupsPaginatedResponse</h3>
+        <p>Response message for the Billing.ListBillingGroupsPaginated rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroups</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroup">BillingGroup</a></td>
+                  <td>repeated</td>
+                  <td><p>List of billing groups. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total count of billing groups matching the filters. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pageSize</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Current page size. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>links</td>
+                  <td><a href="#blueapi.billing.v1.PaginationLinks">PaginationLinks</a></td>
+                  <td></td>
+                  <td><p>Links for pagination navigation. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListBillingGroupsRequest">ListBillingGroupsRequest</h3>
         <p>Request message for the Billing.ListBillingGroups rpc.</p>
 
@@ -21213,6 +21364,51 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Amount value (percentage or fixed amount) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.PaginationLinks">PaginationLinks</h3>
+        <p>Pagination links for navigation.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>next</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>URL for the next page. Empty if no more pages. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prev</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>URL for the previous page. Empty if on the first page. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>first</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>URL for the first page. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>last</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>URL for the last page. </p></td>
                 </tr>
               
             </tbody>
@@ -23455,7 +23651,14 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
                 <td>ListBillingGroups</td>
                 <td><a href="#blueapi.billing.v1.ListBillingGroupsRequest">ListBillingGroupsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BillingGroup">BillingGroup</a> stream</td>
-                <td><p>Lists all billing groups.</p></td>
+                <td><p>Lists all billing groups (streamed).</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListBillingGroupsPaginated</td>
+                <td><a href="#blueapi.billing.v1.ListBillingGroupsPaginatedRequest">ListBillingGroupsPaginatedRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListBillingGroupsPaginatedResponse">ListBillingGroupsPaginatedResponse</a></td>
+                <td><p>Lists all billing groups with pagination support.</p></td>
               </tr>
             
               <tr>
@@ -24300,6 +24503,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListBillingGroups</td>
                 <td>GET</td>
                 <td>/v1/billinggroups</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListBillingGroupsPaginated</td>
+                <td>GET</td>
+                <td>/v1/billinggroups/paginated</td>
                 <td></td>
               </tr>
               

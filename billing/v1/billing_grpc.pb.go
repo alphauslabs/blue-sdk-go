@@ -25,6 +25,7 @@ const _ = grpc.SupportPackageIsVersion8
 
 const (
 	Billing_ListBillingGroups_FullMethodName                          = "/blueapi.billing.v1.Billing/ListBillingGroups"
+	Billing_ListBillingGroupsPaginated_FullMethodName                 = "/blueapi.billing.v1.Billing/ListBillingGroupsPaginated"
 	Billing_CreateBillingGroup_FullMethodName                         = "/blueapi.billing.v1.Billing/CreateBillingGroup"
 	Billing_CreateBillingGroupMerged_FullMethodName                   = "/blueapi.billing.v1.Billing/CreateBillingGroupMerged"
 	Billing_DeleteBillinGroup_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteBillinGroup"
@@ -148,8 +149,10 @@ const (
 //
 // Billing service definition.
 type BillingClient interface {
-	// Lists all billing groups.
+	// Lists all billing groups (streamed).
 	ListBillingGroups(ctx context.Context, in *ListBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListBillingGroupsClient, error)
+	// Lists all billing groups with pagination support.
+	ListBillingGroupsPaginated(ctx context.Context, in *ListBillingGroupsPaginatedRequest, opts ...grpc.CallOption) (*ListBillingGroupsPaginatedResponse, error)
 	// Registers a billing group.
 	CreateBillingGroup(ctx context.Context, in *CreateBillingGroupRequest, opts ...grpc.CallOption) (*BillingGroup, error)
 	// Registers a billing group with Merged Endpoints. Only available in Ripple. WORK IN PROGRESS
@@ -432,6 +435,16 @@ func (x *billingListBillingGroupsClient) Recv() (*BillingGroup, error) {
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *billingClient) ListBillingGroupsPaginated(ctx context.Context, in *ListBillingGroupsPaginatedRequest, opts ...grpc.CallOption) (*ListBillingGroupsPaginatedResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBillingGroupsPaginatedResponse)
+	err := c.cc.Invoke(ctx, Billing_ListBillingGroupsPaginated_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *billingClient) CreateBillingGroup(ctx context.Context, in *CreateBillingGroupRequest, opts ...grpc.CallOption) (*BillingGroup, error) {
@@ -2211,8 +2224,10 @@ func (x *billingGetCsvSettingsClient) Recv() (*CsvSetting, error) {
 //
 // Billing service definition.
 type BillingServer interface {
-	// Lists all billing groups.
+	// Lists all billing groups (streamed).
 	ListBillingGroups(*ListBillingGroupsRequest, Billing_ListBillingGroupsServer) error
+	// Lists all billing groups with pagination support.
+	ListBillingGroupsPaginated(context.Context, *ListBillingGroupsPaginatedRequest) (*ListBillingGroupsPaginatedResponse, error)
 	// Registers a billing group.
 	CreateBillingGroup(context.Context, *CreateBillingGroupRequest) (*BillingGroup, error)
 	// Registers a billing group with Merged Endpoints. Only available in Ripple. WORK IN PROGRESS
@@ -2463,6 +2478,9 @@ type UnimplementedBillingServer struct {
 
 func (UnimplementedBillingServer) ListBillingGroups(*ListBillingGroupsRequest, Billing_ListBillingGroupsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListBillingGroups not implemented")
+}
+func (UnimplementedBillingServer) ListBillingGroupsPaginated(context.Context, *ListBillingGroupsPaginatedRequest) (*ListBillingGroupsPaginatedResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillingGroupsPaginated not implemented")
 }
 func (UnimplementedBillingServer) CreateBillingGroup(context.Context, *CreateBillingGroupRequest) (*BillingGroup, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBillingGroup not implemented")
@@ -2841,6 +2859,24 @@ type billingListBillingGroupsServer struct {
 
 func (x *billingListBillingGroupsServer) Send(m *BillingGroup) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _Billing_ListBillingGroupsPaginated_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingGroupsPaginatedRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ListBillingGroupsPaginated(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ListBillingGroupsPaginated_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ListBillingGroupsPaginated(ctx, req.(*ListBillingGroupsPaginatedRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Billing_CreateBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -5001,6 +5037,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.billing.v1.Billing",
 	HandlerType: (*BillingServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "ListBillingGroupsPaginated",
+			Handler:    _Billing_ListBillingGroupsPaginated_Handler,
+		},
 		{
 			MethodName: "CreateBillingGroup",
 			Handler:    _Billing_CreateBillingGroup_Handler,
