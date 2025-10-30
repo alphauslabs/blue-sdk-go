@@ -1755,10 +1755,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.PaginationLinks"><span class="badge">M</span>PaginationLinks</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.ReadAdjustmentEntriesRequest"><span class="badge">M</span>ReadAdjustmentEntriesRequest</a>
                 </li>
               
@@ -20624,10 +20620,10 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
-                  <td>pageToken</td>
-                  <td><a href="#string">string</a></td>
+                  <td>pageNumber</td>
+                  <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Page token for pagination. Use the next_page_token from the previous response. </p></td>
+                  <td><p>Optional. Page number for pagination. Starts from 1. Default is 1. </p></td>
                 </tr>
               
             </tbody>
@@ -20662,6 +20658,13 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
+                  <td>currentPage</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Current page number (1-based). </p></td>
+                </tr>
+              
+                <tr>
                   <td>pageSize</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
@@ -20669,10 +20672,10 @@ Valid values: default, imported </p></td>
                 </tr>
               
                 <tr>
-                  <td>links</td>
-                  <td><a href="#blueapi.billing.v1.PaginationLinks">PaginationLinks</a></td>
+                  <td>totalPages</td>
+                  <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Links for pagination navigation. </p></td>
+                  <td><p>Total number of pages. </p></td>
                 </tr>
               
             </tbody>
@@ -21364,51 +21367,6 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Amount value (percentage or fixed amount) </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.PaginationLinks">PaginationLinks</h3>
-        <p>Pagination links for navigation.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>next</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>URL for the next page. Empty if no more pages. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>prev</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>URL for the previous page. Empty if on the first page. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>first</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>URL for the first page. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>last</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>URL for the last page. </p></td>
                 </tr>
               
             </tbody>
