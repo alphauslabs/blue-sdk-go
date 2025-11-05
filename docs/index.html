@@ -1319,6 +1319,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BillingGroupListItem"><span class="badge">M</span>BillingGroupListItem</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BillingGroupListItem.BillingGroupVendor"><span class="badge">M</span>BillingGroupListItem.BillingGroupVendor</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BillingGroupVendoredInvoiceSetting"><span class="badge">M</span>BillingGroupVendoredInvoiceSetting</a>
                 </li>
               
@@ -17015,6 +17023,96 @@ At the moment, only `aws` is supported. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.BillingGroupListItem">BillingGroupListItem</h3>
+        <p>Response row for paginated billing groups table.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Billing group display name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Billing group internal identifier. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Company name tied to the billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Billing group classification (e.g., ACCOUNT, TAG). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendors</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupListItem.BillingGroupVendor">BillingGroupListItem.BillingGroupVendor</a></td>
+                  <td>repeated</td>
+                  <td><p>Per-vendor availability list. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Billing group&#39;s internal id reference. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BillingGroupListItem.BillingGroupVendor">BillingGroupListItem.BillingGroupVendor</h3>
+        <p>Vendor availability entries.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Vendor identifier, e.g., aws, azure, gcp. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Indicates whether the billing group has this vendor active. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BillingGroupVendoredInvoiceSetting">BillingGroupVendoredInvoiceSetting</h3>
         <p>Invoice settings that are vendor-specific for each billing group.</p>
 
@@ -20645,9 +20743,9 @@ Valid values: default, imported </p></td>
               
                 <tr>
                   <td>billingGroups</td>
-                  <td><a href="#blueapi.billing.v1.BillingGroup">BillingGroup</a></td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupListItem">BillingGroupListItem</a></td>
                   <td>repeated</td>
-                  <td><p>List of billing groups. </p></td>
+                  <td><p>Flattened rows for the billing groups table. </p></td>
                 </tr>
               
                 <tr>
