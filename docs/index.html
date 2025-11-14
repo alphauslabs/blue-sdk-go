@@ -1044,6 +1044,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.PayerAccountExtended"><span class="badge">M</span>PayerAccountExtended</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.PeriodRange"><span class="badge">M</span>PeriodRange</a>
                 </li>
               
@@ -12348,7 +12352,7 @@ Default: &#39;combined&#39; </p></td>
         
       
         <h3 id="blueapi.cost.v1.ListCalculationPrerequisitesResponse">ListCalculationPrerequisitesResponse</h3>
-        <p></p>
+        <p>Response message for the ListCalculationPrerequisites rpc.</p>
 
         
           <table class="field-table">
@@ -12802,6 +12806,121 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.PayerAccountExtended">PayerAccountExtended</h3>
+        <p>Extended payer account information with additional metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payer</td>
+                  <td><a href="#blueapi.api.ripple.Payer">blueapi.api.ripple.Payer</a></td>
+                  <td></td>
+                  <td><p>Standard payer account information includes: vendor, id, name, orgId, billingInternalId, and metadata array </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The target payer account ID (from extended response). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleArn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The IAM role ARN for cost access (from payer.metadata or extended response). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>externalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The external ID used for assuming the role (if applicable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The CloudFormation stack ID (if using stack-based deployment). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>stackRegion</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The AWS region where the CloudFormation stack is deployed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>templateUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The CloudFormation template URL used for deployment. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current status of the payer setup. Comma-separated values such as &#39;curOnly,manualExport&#39;, etc. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The timestamp when the payer configuration was last updated in RFC3339 format. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bucketName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>S3 bucket name (from payer.metadata). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>S3 prefix (from payer.metadata). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reportName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>CUR report name (from payer.metadata). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>defaultCostAccessRoleArn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Default cost access role ARN (from payer.metadata). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>curType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The CUR type for AWS payers. Valid values are `legacy` and `2.0` (from payer.metadata). </p></td>
                 </tr>
               
             </tbody>
@@ -14576,6 +14695,26 @@ This API includes all of the account&#39;s metadata. See (https://alphauslabs.gi
               </tr>
             
               <tr>
+                <td>ListPayerAccountsExtended</td>
+                <td><a href="#blueapi.cost.v1.ListPayerAccountsRequest">ListPayerAccountsRequest</a></td>
+                <td><a href="#blueapi.cost.v1.PayerAccountExtended">PayerAccountExtended</a> stream</td>
+                <td><p>Lists vendor payer accounts with extended information. WORK IN PROGRESS
+
+This endpoint returns additional fields beyond the standard ListPayerAccounts response.
+For AWS, these are management accounts (formerly known as master or payer accounts); for Azure, these are subscriptions, for GCP, these are projects.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetPayerAccountExtended</td>
+                <td><a href="#blueapi.cost.v1.GetPayerAccountRequest">GetPayerAccountRequest</a></td>
+                <td><a href="#blueapi.cost.v1.PayerAccountExtended">PayerAccountExtended</a></td>
+                <td><p>Gets a vendor payer account with extended information. WORK IN PROGRESS
+
+This endpoint returns additional fields beyond the standard GetPayerAccount response.
+For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetPayerAccountImportHistory</td>
                 <td><a href="#blueapi.cost.v1.GetPayerAccountImportHistoryRequest">GetPayerAccountImportHistoryRequest</a></td>
                 <td><a href="#blueapi.cost.v1.GetPayerAccountImportHistoryResponse">GetPayerAccountImportHistoryResponse</a> stream</td>
@@ -15107,6 +15246,26 @@ Only available in Wave(Pro).</p></td>
                 <td>GetPayerAccount</td>
                 <td>GET</td>
                 <td>/v1/{vendor}/payers/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListPayerAccountsExtended</td>
+                <td>GET</td>
+                <td>/v1/{vendor}/payers/extended</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetPayerAccountExtended</td>
+                <td>GET</td>
+                <td>/v1/{vendor}/payers/{id}/extended</td>
                 <td></td>
               </tr>
               

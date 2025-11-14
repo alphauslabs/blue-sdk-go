@@ -27,6 +27,8 @@ const _ = grpc.SupportPackageIsVersion8
 const (
 	Cost_ListPayerAccounts_FullMethodName             = "/blueapi.cost.v1.Cost/ListPayerAccounts"
 	Cost_GetPayerAccount_FullMethodName               = "/blueapi.cost.v1.Cost/GetPayerAccount"
+	Cost_ListPayerAccountsExtended_FullMethodName     = "/blueapi.cost.v1.Cost/ListPayerAccountsExtended"
+	Cost_GetPayerAccountExtended_FullMethodName       = "/blueapi.cost.v1.Cost/GetPayerAccountExtended"
 	Cost_GetPayerAccountImportHistory_FullMethodName  = "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory"
 	Cost_GetPayerProformaReports_FullMethodName       = "/blueapi.cost.v1.Cost/GetPayerProformaReports"
 	Cost_CreatePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/CreatePayerAccount"
@@ -108,6 +110,16 @@ type CostClient interface {
 	//
 	// This API includes all of the account's metadata. See (https://alphauslabs.github.io/blueapi/)[https://alphauslabs.github.io/blueapi/] for the list of supported attributes. For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.
 	GetPayerAccount(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*ripple.Payer, error)
+	// Lists vendor payer accounts with extended information. WORK IN PROGRESS
+	//
+	// This endpoint returns additional fields beyond the standard ListPayerAccounts response.
+	// For AWS, these are management accounts (formerly known as master or payer accounts); for Azure, these are subscriptions, for GCP, these are projects.
+	ListPayerAccountsExtended(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (Cost_ListPayerAccountsExtendedClient, error)
+	// Gets a vendor payer account with extended information. WORK IN PROGRESS
+	//
+	// This endpoint returns additional fields beyond the standard GetPayerAccount response.
+	// For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.
+	GetPayerAccountExtended(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*PayerAccountExtended, error)
 	// Gets a payer account's import history.
 	//
 	// Import history is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set `{id}` to `*` to return all payers' information under the organization.
@@ -335,9 +347,52 @@ func (c *costClient) GetPayerAccount(ctx context.Context, in *GetPayerAccountReq
 	return out, nil
 }
 
+func (c *costClient) ListPayerAccountsExtended(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (Cost_ListPayerAccountsExtendedClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], Cost_ListPayerAccountsExtended_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &costListPayerAccountsExtendedClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Cost_ListPayerAccountsExtendedClient interface {
+	Recv() (*PayerAccountExtended, error)
+	grpc.ClientStream
+}
+
+type costListPayerAccountsExtendedClient struct {
+	grpc.ClientStream
+}
+
+func (x *costListPayerAccountsExtendedClient) Recv() (*PayerAccountExtended, error) {
+	m := new(PayerAccountExtended)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *costClient) GetPayerAccountExtended(ctx context.Context, in *GetPayerAccountRequest, opts ...grpc.CallOption) (*PayerAccountExtended, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PayerAccountExtended)
+	err := c.cc.Invoke(ctx, Cost_GetPayerAccountExtended_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *costClient) GetPayerAccountImportHistory(ctx context.Context, in *GetPayerAccountImportHistoryRequest, opts ...grpc.CallOption) (Cost_GetPayerAccountImportHistoryClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[1], Cost_GetPayerAccountImportHistory_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], Cost_GetPayerAccountImportHistory_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -420,7 +475,7 @@ func (c *costClient) DeletePayerAccount(ctx context.Context, in *DeletePayerAcco
 
 func (c *costClient) ListAccounts(ctx context.Context, in *ListAccountsRequest, opts ...grpc.CallOption) (Cost_ListAccountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[2], Cost_ListAccounts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], Cost_ListAccounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -493,7 +548,7 @@ func (c *costClient) DeleteAccount(ctx context.Context, in *DeleteAccountRequest
 
 func (c *costClient) ReadAccountOriginalResources(ctx context.Context, in *ReadAccountOriginalResourcesRequest, opts ...grpc.CallOption) (Cost_ReadAccountOriginalResourcesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[3], Cost_ReadAccountOriginalResources_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], Cost_ReadAccountOriginalResources_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -526,7 +581,7 @@ func (x *costReadAccountOriginalResourcesClient) Recv() (*api.AccountOriginalRes
 
 func (c *costClient) ListTags(ctx context.Context, in *ListTagsRequest, opts ...grpc.CallOption) (Cost_ListTagsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[4], Cost_ListTags_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], Cost_ListTags_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -559,7 +614,7 @@ func (x *costListTagsClient) Recv() (*api.CostTag, error) {
 
 func (c *costClient) ListCalculatorRunningAccounts(ctx context.Context, in *ListCalculatorRunningAccountsRequest, opts ...grpc.CallOption) (Cost_ListCalculatorRunningAccountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[5], Cost_ListCalculatorRunningAccounts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], Cost_ListCalculatorRunningAccounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -602,7 +657,7 @@ func (c *costClient) GetCalculatorConfig(ctx context.Context, in *GetCalculatorC
 
 func (c *costClient) ListCalculatorCostModifiers(ctx context.Context, in *ListCalculatorCostModifiersRequest, opts ...grpc.CallOption) (Cost_ListCalculatorCostModifiersClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[6], Cost_ListCalculatorCostModifiers_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], Cost_ListCalculatorCostModifiers_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -765,7 +820,7 @@ func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFi
 
 func (c *costClient) ReadCostAttributes(ctx context.Context, in *ReadCostAttributesRequest, opts ...grpc.CallOption) (Cost_ReadCostAttributesClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[7], Cost_ReadCostAttributes_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], Cost_ReadCostAttributes_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -808,7 +863,7 @@ func (c *costClient) GetCostAttributes(ctx context.Context, in *GetCostAttribute
 
 func (c *costClient) ReadCosts(ctx context.Context, in *ReadCostsRequest, opts ...grpc.CallOption) (Cost_ReadCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[8], Cost_ReadCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], Cost_ReadCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -841,7 +896,7 @@ func (x *costReadCostsClient) Recv() (*CostItem, error) {
 
 func (c *costClient) ReadAdjustments(ctx context.Context, in *ReadAdjustmentsRequest, opts ...grpc.CallOption) (Cost_ReadAdjustmentsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[9], Cost_ReadAdjustments_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[10], Cost_ReadAdjustments_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -874,7 +929,7 @@ func (x *costReadAdjustmentsClient) Recv() (*CostItem, error) {
 
 func (c *costClient) ReadTagCosts(ctx context.Context, in *ReadTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadTagCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[10], Cost_ReadTagCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[11], Cost_ReadTagCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -907,7 +962,7 @@ func (x *costReadTagCostsClient) Recv() (*CostItem, error) {
 
 func (c *costClient) ReadNonTagCosts(ctx context.Context, in *ReadNonTagCostsRequest, opts ...grpc.CallOption) (Cost_ReadNonTagCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[11], Cost_ReadNonTagCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[12], Cost_ReadNonTagCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1060,7 +1115,7 @@ func (c *costClient) DeleteAccountBudgetAlerts(ctx context.Context, in *DeleteAc
 
 func (c *costClient) ReadBudgetAlerts(ctx context.Context, in *ReadBudgetAlertsRequest, opts ...grpc.CallOption) (Cost_ReadBudgetAlertsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[12], Cost_ReadBudgetAlerts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[13], Cost_ReadBudgetAlerts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1213,7 +1268,7 @@ func (c *costClient) CheckAccountsBelongToMsp(ctx context.Context, in *CheckAcco
 
 func (c *costClient) ReadInvoiceIds(ctx context.Context, in *ReadInvoiceIdsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceIdsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[13], Cost_ReadInvoiceIds_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[14], Cost_ReadInvoiceIds_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1246,7 +1301,7 @@ func (x *costReadInvoiceIdsClient) Recv() (*ReadInvoiceIdsResponse, error) {
 
 func (c *costClient) ReadInvoiceOverViews(ctx context.Context, in *ReadInvoiceOverviewsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceOverViewsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[14], Cost_ReadInvoiceOverViews_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[15], Cost_ReadInvoiceOverViews_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1279,7 +1334,7 @@ func (x *costReadInvoiceOverViewsClient) Recv() (*v1.OverViewSection, error) {
 
 func (c *costClient) ReadInvoiceCosts(ctx context.Context, in *ReadInvoiceCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[15], Cost_ReadInvoiceCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[16], Cost_ReadInvoiceCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1312,7 +1367,7 @@ func (x *costReadInvoiceCostsClient) Recv() (*v1.TotalSection, error) {
 
 func (c *costClient) ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceGroupCostsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[16], Cost_ReadInvoiceGroupCosts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cost_ServiceDesc.Streams[17], Cost_ReadInvoiceGroupCosts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1367,6 +1422,16 @@ type CostServer interface {
 	//
 	// This API includes all of the account's metadata. See (https://alphauslabs.github.io/blueapi/)[https://alphauslabs.github.io/blueapi/] for the list of supported attributes. For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.
 	GetPayerAccount(context.Context, *GetPayerAccountRequest) (*ripple.Payer, error)
+	// Lists vendor payer accounts with extended information. WORK IN PROGRESS
+	//
+	// This endpoint returns additional fields beyond the standard ListPayerAccounts response.
+	// For AWS, these are management accounts (formerly known as master or payer accounts); for Azure, these are subscriptions, for GCP, these are projects.
+	ListPayerAccountsExtended(*ListPayerAccountsRequest, Cost_ListPayerAccountsExtendedServer) error
+	// Gets a vendor payer account with extended information. WORK IN PROGRESS
+	//
+	// This endpoint returns additional fields beyond the standard GetPayerAccount response.
+	// For AWS, this means a management account (formerly known as master or payer account); for Azure, this means a subscription, for GCP, this means a project.
+	GetPayerAccountExtended(context.Context, *GetPayerAccountRequest) (*PayerAccountExtended, error)
 	// Gets a payer account's import history.
 	//
 	// Import history is a list of timestamps our system tracks when the account's data are imported to our system, which in turn, triggers processing. At the moment, this only supports AWS (CUR files). You can also set `{id}` to `*` to return all payers' information under the organization.
@@ -1553,6 +1618,12 @@ func (UnimplementedCostServer) ListPayerAccounts(*ListPayerAccountsRequest, Cost
 }
 func (UnimplementedCostServer) GetPayerAccount(context.Context, *GetPayerAccountRequest) (*ripple.Payer, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccount not implemented")
+}
+func (UnimplementedCostServer) ListPayerAccountsExtended(*ListPayerAccountsRequest, Cost_ListPayerAccountsExtendedServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListPayerAccountsExtended not implemented")
+}
+func (UnimplementedCostServer) GetPayerAccountExtended(context.Context, *GetPayerAccountRequest) (*PayerAccountExtended, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccountExtended not implemented")
 }
 func (UnimplementedCostServer) GetPayerAccountImportHistory(*GetPayerAccountImportHistoryRequest, Cost_GetPayerAccountImportHistoryServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetPayerAccountImportHistory not implemented")
@@ -1797,6 +1868,45 @@ func _Cost_GetPayerAccount_Handler(srv interface{}, ctx context.Context, dec fun
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).GetPayerAccount(ctx, req.(*GetPayerAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ListPayerAccountsExtended_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListPayerAccountsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(CostServer).ListPayerAccountsExtended(m, &costListPayerAccountsExtendedServer{ServerStream: stream})
+}
+
+type Cost_ListPayerAccountsExtendedServer interface {
+	Send(*PayerAccountExtended) error
+	grpc.ServerStream
+}
+
+type costListPayerAccountsExtendedServer struct {
+	grpc.ServerStream
+}
+
+func (x *costListPayerAccountsExtendedServer) Send(m *PayerAccountExtended) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Cost_GetPayerAccountExtended_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPayerAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetPayerAccountExtended(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_GetPayerAccountExtended_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetPayerAccountExtended(ctx, req.(*GetPayerAccountRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3031,6 +3141,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cost_GetPayerAccount_Handler,
 		},
 		{
+			MethodName: "GetPayerAccountExtended",
+			Handler:    _Cost_GetPayerAccountExtended_Handler,
+		},
+		{
 			MethodName: "GetPayerProformaReports",
 			Handler:    _Cost_GetPayerProformaReports_Handler,
 		},
@@ -3231,6 +3345,11 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListPayerAccounts",
 			Handler:       _Cost_ListPayerAccounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListPayerAccountsExtended",
+			Handler:       _Cost_ListPayerAccountsExtended_Handler,
 			ServerStreams: true,
 		},
 		{
