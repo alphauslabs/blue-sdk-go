@@ -3535,7 +3535,7 @@ func RegisterCostHandlerServer(ctx context.Context, mux *runtime.ServeMux, serve
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetPayerAccountExtended", runtime.WithHTTPPathPattern("/v1/{vendor}/payers/{id}/extended"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetPayerAccountExtended", runtime.WithHTTPPathPattern("/v1/{vendor}/payersextended/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4733,7 +4733,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListPayerAccountsExtended", runtime.WithHTTPPathPattern("/v1/{vendor}/payers/extended"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/ListPayerAccountsExtended", runtime.WithHTTPPathPattern("/v1/{vendor}/payersextended"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -4750,7 +4750,7 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetPayerAccountExtended", runtime.WithHTTPPathPattern("/v1/{vendor}/payers/{id}/extended"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.cost.v1.Cost/GetPayerAccountExtended", runtime.WithHTTPPathPattern("/v1/{vendor}/payersextended/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -5908,8 +5908,8 @@ func RegisterCostHandlerClient(ctx context.Context, mux *runtime.ServeMux, clien
 var (
 	pattern_Cost_ListPayerAccounts_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "payers"}, ""))
 	pattern_Cost_GetPayerAccount_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "payers", "id"}, ""))
-	pattern_Cost_ListPayerAccountsExtended_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3}, []string{"v1", "vendor", "payers", "extended"}, ""))
-	pattern_Cost_GetPayerAccountExtended_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "vendor", "payers", "id", "extended"}, ""))
+	pattern_Cost_ListPayerAccountsExtended_0     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "payersextended"}, ""))
+	pattern_Cost_GetPayerAccountExtended_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "vendor", "payersextended", "id"}, ""))
 	pattern_Cost_GetPayerAccountImportHistory_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "vendor", "payers", "id", "importhistory"}, ""))
 	pattern_Cost_GetPayerProformaReports_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "vendor", "payers", "id", "proforma"}, ""))
 	pattern_Cost_CreatePayerAccount_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2}, []string{"v1", "vendor", "payers"}, ""))
