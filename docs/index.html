@@ -2805,6 +2805,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.GetRecommendationV3Request"><span class="badge">M</span>GetRecommendationV3Request</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetRecommendationV3Response"><span class="badge">M</span>GetRecommendationV3Response</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.GetRecommendationV3Response.RecommendationDetail"><span class="badge">M</span>GetRecommendationV3Response.RecommendationDetail</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.GetRegionsRequest"><span class="badge">M</span>GetRegionsRequest</a>
                 </li>
               
@@ -2997,6 +3009,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListRecommendationsV3Request"><span class="badge">M</span>ListRecommendationsV3Request</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ListSharedResourcesRequest"><span class="badge">M</span>ListSharedResourcesRequest</a>
                 </li>
               
@@ -3150,6 +3166,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ReadCostsRequestOptionsFilters.AndFiltersEntry"><span class="badge">M</span>ReadCostsRequestOptionsFilters.AndFiltersEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.RecommendationSummary"><span class="badge">M</span>RecommendationSummary</a>
                 </li>
               
                 <li>
@@ -33546,6 +33566,218 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.GetRecommendationV3Request">GetRecommendationV3Request</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetRecommendationV3Response">GetRecommendationV3Response</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>recommendations</td>
+                  <td><a href="#blueapi.cover.v1.GetRecommendationV3Response.RecommendationDetail">GetRecommendationV3Response.RecommendationDetail</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.GetRecommendationV3Response.RecommendationDetail">GetRecommendationV3Response.RecommendationDetail</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>targetName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dateDetected</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlyBeforeCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlyAfterCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlySavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>category</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastUpdated</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>risk</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>effort</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>details</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.GetRegionsRequest">GetRegionsRequest</h3>
         <p>Request message for GetRegions</p>
 
@@ -35227,6 +35459,51 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.ListRecommendationsV3Request">ListRecommendationsV3Request</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>costgroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dateDetected</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dateStart</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dateEnd</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.ListSharedResourcesRequest">ListSharedResourcesRequest</h3>
         <p></p>
 
@@ -36324,6 +36601,149 @@ Example: &#34;A1:Z100&#34; </p></td>
                 <tr>
                   <td>value</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.RecommendationSummary">RecommendationSummary</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>target</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>targetName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>category</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlySavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlyBeforeCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>estimatedMonthlyAfterCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>risk</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>effort</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>additionalDetails</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -41790,6 +42210,20 @@ file in bytes </p></td>
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>GetRecommendationV3</td>
+                <td><a href="#blueapi.cover.v1.GetRecommendationV3Request">GetRecommendationV3Request</a></td>
+                <td><a href="#blueapi.cover.v1.GetRecommendationV3Response">GetRecommendationV3Response</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ListRecommendationsV3</td>
+                <td><a href="#blueapi.cover.v1.ListRecommendationsV3Request">ListRecommendationsV3Request</a></td>
+                <td><a href="#blueapi.cover.v1.RecommendationSummary">RecommendationSummary</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -43734,6 +44168,26 @@ file in bytes </p></td>
                 <td>GetCostForecastsData</td>
                 <td>POST</td>
                 <td>/v1/forecasts/data:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetRecommendationV3</td>
+                <td>GET</td>
+                <td>/v1/recommendations</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListRecommendationsV3</td>
+                <td>POST</td>
+                <td>/v1/recommendations/summaries</td>
                 <td>*</td>
               </tr>
               
