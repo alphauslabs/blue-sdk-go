@@ -216,6 +216,7 @@ const (
 	Cover_GetCostForecastsData_FullMethodName                    = "/blueapi.cover.v1.Cover/GetCostForecastsData"
 	Cover_GetRecommendationV3_FullMethodName                     = "/blueapi.cover.v1.Cover/GetRecommendationV3"
 	Cover_ListRecommendationsV3_FullMethodName                   = "/blueapi.cover.v1.Cover/ListRecommendationsV3"
+	Cover_ExecuteRecommendationV3_FullMethodName                 = "/blueapi.cover.v1.Cover/ExecuteRecommendationV3"
 )
 
 // CoverClient is the client API for Cover service.
@@ -599,6 +600,7 @@ type CoverClient interface {
 	GetCostForecastsData(ctx context.Context, in *GetCostForecastsDataRequest, opts ...grpc.CallOption) (Cover_GetCostForecastsDataClient, error)
 	GetRecommendationV3(ctx context.Context, in *GetRecommendationV3Request, opts ...grpc.CallOption) (*GetRecommendationV3Response, error)
 	ListRecommendationsV3(ctx context.Context, in *ListRecommendationsV3Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV3Client, error)
+	ExecuteRecommendationV3(ctx context.Context, in *ExecuteRecommendationV3Request, opts ...grpc.CallOption) (*ExecuteRecommendationV3Response, error)
 }
 
 type coverClient struct {
@@ -3251,6 +3253,16 @@ func (x *coverListRecommendationsV3Client) Recv() (*RecommendationSummary, error
 	return m, nil
 }
 
+func (c *coverClient) ExecuteRecommendationV3(ctx context.Context, in *ExecuteRecommendationV3Request, opts ...grpc.CallOption) (*ExecuteRecommendationV3Response, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExecuteRecommendationV3Response)
+	err := c.cc.Invoke(ctx, Cover_ExecuteRecommendationV3_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3632,6 +3644,7 @@ type CoverServer interface {
 	GetCostForecastsData(*GetCostForecastsDataRequest, Cover_GetCostForecastsDataServer) error
 	GetRecommendationV3(context.Context, *GetRecommendationV3Request) (*GetRecommendationV3Response, error)
 	ListRecommendationsV3(*ListRecommendationsV3Request, Cover_ListRecommendationsV3Server) error
+	ExecuteRecommendationV3(context.Context, *ExecuteRecommendationV3Request) (*ExecuteRecommendationV3Response, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -4223,6 +4236,9 @@ func (UnimplementedCoverServer) GetRecommendationV3(context.Context, *GetRecomme
 }
 func (UnimplementedCoverServer) ListRecommendationsV3(*ListRecommendationsV3Request, Cover_ListRecommendationsV3Server) error {
 	return status.Errorf(codes.Unimplemented, "method ListRecommendationsV3 not implemented")
+}
+func (UnimplementedCoverServer) ExecuteRecommendationV3(context.Context, *ExecuteRecommendationV3Request) (*ExecuteRecommendationV3Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExecuteRecommendationV3 not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7842,6 +7858,24 @@ func (x *coverListRecommendationsV3Server) Send(m *RecommendationSummary) error 
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Cover_ExecuteRecommendationV3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExecuteRecommendationV3Request)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ExecuteRecommendationV3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ExecuteRecommendationV3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ExecuteRecommendationV3(ctx, req.(*ExecuteRecommendationV3Request))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -8508,6 +8542,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetRecommendationV3",
 			Handler:    _Cover_GetRecommendationV3_Handler,
+		},
+		{
+			MethodName: "ExecuteRecommendationV3",
+			Handler:    _Cover_ExecuteRecommendationV3_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

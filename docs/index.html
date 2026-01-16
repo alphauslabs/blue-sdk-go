@@ -2453,6 +2453,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ExecuteRecommendationV3Request"><span class="badge">M</span>ExecuteRecommendationV3Request</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ExecuteRecommendationV3Response"><span class="badge">M</span>ExecuteRecommendationV3Response</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.FeeDetails"><span class="badge">M</span>FeeDetails</a>
                 </li>
               
@@ -3639,6 +3647,10 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.ContainerCostUsageRequest.TimeGranularity"><span class="badge">E</span>ContainerCostUsageRequest.TimeGranularity</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ExecuteRecommendationV3Request.ExecuteType"><span class="badge">E</span>ExecuteRecommendationV3Request.ExecuteType</a>
                 </li>
               
                 <li>
@@ -30343,6 +30355,44 @@ Supported values are the following:
 
         
       
+        <h3 id="blueapi.cover.v1.ExecuteRecommendationV3Request">ExecuteRecommendationV3Request</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>recommendationIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>executeType</td>
+                  <td><a href="#blueapi.cover.v1.ExecuteRecommendationV3Request.ExecuteType">ExecuteRecommendationV3Request.ExecuteType</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ExecuteRecommendationV3Response">ExecuteRecommendationV3Response</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.FeeDetails">FeeDetails</h3>
         <p>Response message for GetFeeDetails, CreateFeeReallocation rpc.</p>
 
@@ -35517,6 +35567,13 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
                   <td>dateEnd</td>
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>statuses</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -40697,6 +40754,35 @@ file in bytes </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.cover.v1.ExecuteRecommendationV3Request.ExecuteType">ExecuteRecommendationV3Request.ExecuteType</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>DEFAULT</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>MARK_AS_EXECUTED</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>UNDO_EXECUTED</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.cover.v1.GetAICostAndUsageRequest.Filter.Operator">GetAICostAndUsageRequest.Filter.Operator</h3>
         <p></p>
         <table class="enum-table">
@@ -42251,6 +42337,13 @@ file in bytes </p></td>
                 <td>ListRecommendationsV3</td>
                 <td><a href="#blueapi.cover.v1.ListRecommendationsV3Request">ListRecommendationsV3Request</a></td>
                 <td><a href="#blueapi.cover.v1.RecommendationSummary">RecommendationSummary</a> stream</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ExecuteRecommendationV3</td>
+                <td><a href="#blueapi.cover.v1.ExecuteRecommendationV3Request">ExecuteRecommendationV3Request</a></td>
+                <td><a href="#blueapi.cover.v1.ExecuteRecommendationV3Response">ExecuteRecommendationV3Response</a></td>
                 <td><p></p></td>
               </tr>
             
@@ -44218,6 +44311,16 @@ file in bytes </p></td>
                 <td>ListRecommendationsV3</td>
                 <td>POST</td>
                 <td>/v1/recommendations/summaries</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExecuteRecommendationV3</td>
+                <td>POST</td>
+                <td>/v1/recommendation/execute</td>
                 <td>*</td>
               </tr>
               
