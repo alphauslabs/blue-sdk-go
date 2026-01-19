@@ -19,7 +19,21 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Archera_ListOrgs_FullMethodName = "/blueapi.archera.v1.Archera/ListOrgs"
+	Archera_ListOrgs_FullMethodName                          = "/blueapi.archera.v1.Archera/ListOrgs"
+	Archera_GetCommitmentPlanDetails_FullMethodName          = "/blueapi.archera.v1.Archera/GetCommitmentPlanDetails"
+	Archera_CommitmentPlanApply_FullMethodName               = "/blueapi.archera.v1.Archera/CommitmentPlanApply"
+	Archera_ListDefaultCommitmentPlans_FullMethodName        = "/blueapi.archera.v1.Archera/ListDefaultCommitmentPlans"
+	Archera_GetRecommendedCommitmentPlan_FullMethodName      = "/blueapi.archera.v1.Archera/GetRecommendedCommitmentPlan"
+	Archera_ListCommitmentPlanLineItems_FullMethodName       = "/blueapi.archera.v1.Archera/ListCommitmentPlanLineItems"
+	Archera_ListCommitmentPlanResourceMatches_FullMethodName = "/blueapi.archera.v1.Archera/ListCommitmentPlanResourceMatches"
+	Archera_ListCommitments_FullMethodName                   = "/blueapi.archera.v1.Archera/ListCommitments"
+	Archera_GetCommitmentsChart_FullMethodName               = "/blueapi.archera.v1.Archera/GetCommitmentsChart"
+	Archera_GetMetrics_FullMethodName                        = "/blueapi.archera.v1.Archera/GetMetrics"
+	Archera_ListResources_FullMethodName                     = "/blueapi.archera.v1.Archera/ListResources"
+	Archera_GetResourceDailyUsage_FullMethodName             = "/blueapi.archera.v1.Archera/GetResourceDailyUsage"
+	Archera_ListSegments_FullMethodName                      = "/blueapi.archera.v1.Archera/ListSegments"
+	Archera_GetSegmentDetails_FullMethodName                 = "/blueapi.archera.v1.Archera/GetSegmentDetails"
+	Archera_ListDefaultPurchasePlans_FullMethodName          = "/blueapi.archera.v1.Archera/ListDefaultPurchasePlans"
 )
 
 // ArcheraClient is the client API for Archera service.
@@ -29,6 +43,34 @@ const (
 // Archera service definition.
 type ArcheraClient interface {
 	ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (Archera_ListOrgsClient, error)
+	// Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
+	GetCommitmentPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
+	// Executes a commitment purchase plan, initiating the commitment purchase process.
+	CommitmentPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
+	// Retrieves the three default Archera commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
+	ListDefaultCommitmentPlans(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error)
+	// Retrieves only the recommended Archera commitment plan for the specified cloud provider.
+	GetRecommendedCommitmentPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
+	// Retrieves line items for a specific commitment plan.
+	ListCommitmentPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error)
+	// Retrieves resource matches for a specific commitment plan.
+	ListCommitmentPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error)
+	// Retrieves a paginated list of commitments for the specified organization and time period.
+	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
+	// Generates time-series chart data for commitment metrics over the specified time period.
+	GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error)
+	// Retrieves key performance metrics for cloud commitments.
+	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error)
+	// Retrieves a list of infrastructure resources for the organization.
+	ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
+	// Retrieves daily usage data for a specific resource within the specified date range.
+	GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error)
+	// Retrieves all segments for the specified organization and provider.
+	ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error)
+	// Retrieves detailed information about a specific segment.
+	GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error)
+	// Retrieves default purchase plans for a specific segment.
+	ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error)
 }
 
 type archeraClient struct {
@@ -72,6 +114,146 @@ func (x *archeraListOrgsClient) Recv() (*Org, error) {
 	return m, nil
 }
 
+func (c *archeraClient) GetCommitmentPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CommitmentPlanDetails)
+	err := c.cc.Invoke(ctx, Archera_GetCommitmentPlanDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) CommitmentPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CommitmentPlanDetails)
+	err := c.cc.Invoke(ctx, Archera_CommitmentPlanApply_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) ListDefaultCommitmentPlans(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDefaultCommitmentPlansResponse)
+	err := c.cc.Invoke(ctx, Archera_ListDefaultCommitmentPlans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) GetRecommendedCommitmentPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CommitmentPlanDetails)
+	err := c.cc.Invoke(ctx, Archera_GetRecommendedCommitmentPlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) ListCommitmentPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCommitmentPlanLineItemsResponse)
+	err := c.cc.Invoke(ctx, Archera_ListCommitmentPlanLineItems_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) ListCommitmentPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCommitmentPlanResourceMatchesResponse)
+	err := c.cc.Invoke(ctx, Archera_ListCommitmentPlanResourceMatches_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListCommitmentsResponse)
+	err := c.cc.Invoke(ctx, Archera_ListCommitments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CommitmentsChartResponse)
+	err := c.cc.Invoke(ctx, Archera_GetCommitmentsChart_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(MetricsResponse)
+	err := c.cc.Invoke(ctx, Archera_GetMetrics_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListResourcesResponse)
+	err := c.cc.Invoke(ctx, Archera_ListResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetResourceDailyUsageResponse)
+	err := c.cc.Invoke(ctx, Archera_GetResourceDailyUsage_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListSegmentsResponse)
+	err := c.cc.Invoke(ctx, Archera_ListSegments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SegmentDetails)
+	err := c.cc.Invoke(ctx, Archera_GetSegmentDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListDefaultPurchasePlansResponse)
+	err := c.cc.Invoke(ctx, Archera_ListDefaultPurchasePlans_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ArcheraServer is the server API for Archera service.
 // All implementations must embed UnimplementedArcheraServer
 // for forward compatibility
@@ -79,6 +261,34 @@ func (x *archeraListOrgsClient) Recv() (*Org, error) {
 // Archera service definition.
 type ArcheraServer interface {
 	ListOrgs(*ListOrgsRequest, Archera_ListOrgsServer) error
+	// Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
+	GetCommitmentPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error)
+	// Executes a commitment purchase plan, initiating the commitment purchase process.
+	CommitmentPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error)
+	// Retrieves the three default Archera commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
+	ListDefaultCommitmentPlans(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error)
+	// Retrieves only the recommended Archera commitment plan for the specified cloud provider.
+	GetRecommendedCommitmentPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error)
+	// Retrieves line items for a specific commitment plan.
+	ListCommitmentPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error)
+	// Retrieves resource matches for a specific commitment plan.
+	ListCommitmentPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error)
+	// Retrieves a paginated list of commitments for the specified organization and time period.
+	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
+	// Generates time-series chart data for commitment metrics over the specified time period.
+	GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error)
+	// Retrieves key performance metrics for cloud commitments.
+	GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error)
+	// Retrieves a list of infrastructure resources for the organization.
+	ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
+	// Retrieves daily usage data for a specific resource within the specified date range.
+	GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error)
+	// Retrieves all segments for the specified organization and provider.
+	ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error)
+	// Retrieves detailed information about a specific segment.
+	GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error)
+	// Retrieves default purchase plans for a specific segment.
+	ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error)
 	mustEmbedUnimplementedArcheraServer()
 }
 
@@ -88,6 +298,48 @@ type UnimplementedArcheraServer struct {
 
 func (UnimplementedArcheraServer) ListOrgs(*ListOrgsRequest, Archera_ListOrgsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListOrgs not implemented")
+}
+func (UnimplementedArcheraServer) GetCommitmentPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentPlanDetails not implemented")
+}
+func (UnimplementedArcheraServer) CommitmentPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CommitmentPlanApply not implemented")
+}
+func (UnimplementedArcheraServer) ListDefaultCommitmentPlans(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDefaultCommitmentPlans not implemented")
+}
+func (UnimplementedArcheraServer) GetRecommendedCommitmentPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendedCommitmentPlan not implemented")
+}
+func (UnimplementedArcheraServer) ListCommitmentPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCommitmentPlanLineItems not implemented")
+}
+func (UnimplementedArcheraServer) ListCommitmentPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCommitmentPlanResourceMatches not implemented")
+}
+func (UnimplementedArcheraServer) ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListCommitments not implemented")
+}
+func (UnimplementedArcheraServer) GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentsChart not implemented")
+}
+func (UnimplementedArcheraServer) GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMetrics not implemented")
+}
+func (UnimplementedArcheraServer) ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListResources not implemented")
+}
+func (UnimplementedArcheraServer) GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetResourceDailyUsage not implemented")
+}
+func (UnimplementedArcheraServer) ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListSegments not implemented")
+}
+func (UnimplementedArcheraServer) GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSegmentDetails not implemented")
+}
+func (UnimplementedArcheraServer) ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListDefaultPurchasePlans not implemented")
 }
 func (UnimplementedArcheraServer) mustEmbedUnimplementedArcheraServer() {}
 
@@ -123,13 +375,322 @@ func (x *archeraListOrgsServer) Send(m *Org) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Archera_GetCommitmentPlanDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommitmentPlanDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetCommitmentPlanDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetCommitmentPlanDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetCommitmentPlanDetails(ctx, req.(*GetCommitmentPlanDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_CommitmentPlanApply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CommitmentPlanApplyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).CommitmentPlanApply(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_CommitmentPlanApply_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).CommitmentPlanApply(ctx, req.(*CommitmentPlanApplyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_ListDefaultCommitmentPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDefaultCommitmentPlansRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).ListDefaultCommitmentPlans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_ListDefaultCommitmentPlans_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).ListDefaultCommitmentPlans(ctx, req.(*ListDefaultCommitmentPlansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_GetRecommendedCommitmentPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetRecommendedCommitmentPlanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetRecommendedCommitmentPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetRecommendedCommitmentPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetRecommendedCommitmentPlan(ctx, req.(*GetRecommendedCommitmentPlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_ListCommitmentPlanLineItems_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCommitmentPlanLineItemsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).ListCommitmentPlanLineItems(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_ListCommitmentPlanLineItems_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).ListCommitmentPlanLineItems(ctx, req.(*ListCommitmentPlanLineItemsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_ListCommitmentPlanResourceMatches_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCommitmentPlanResourceMatchesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).ListCommitmentPlanResourceMatches(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_ListCommitmentPlanResourceMatches_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).ListCommitmentPlanResourceMatches(ctx, req.(*ListCommitmentPlanResourceMatchesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_ListCommitments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListCommitmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).ListCommitments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_ListCommitments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).ListCommitments(ctx, req.(*ListCommitmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_GetCommitmentsChart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommitmentsChartRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetCommitmentsChart(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetCommitmentsChart_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetCommitmentsChart(ctx, req.(*GetCommitmentsChartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetMetricsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetMetrics(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetMetrics_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetMetrics(ctx, req.(*GetMetricsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_ListResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).ListResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_ListResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).ListResources(ctx, req.(*ListResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_GetResourceDailyUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetResourceDailyUsageRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetResourceDailyUsage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetResourceDailyUsage_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetResourceDailyUsage(ctx, req.(*GetResourceDailyUsageRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_ListSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListSegmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).ListSegments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_ListSegments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).ListSegments(ctx, req.(*ListSegmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_GetSegmentDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSegmentDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetSegmentDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetSegmentDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetSegmentDetails(ctx, req.(*GetSegmentDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_ListDefaultPurchasePlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListDefaultPurchasePlansRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).ListDefaultPurchasePlans(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_ListDefaultPurchasePlans_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).ListDefaultPurchasePlans(ctx, req.(*ListDefaultPurchasePlansRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Archera_ServiceDesc is the grpc.ServiceDesc for Archera service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Archera_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.archera.v1.Archera",
 	HandlerType: (*ArcheraServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetCommitmentPlanDetails",
+			Handler:    _Archera_GetCommitmentPlanDetails_Handler,
+		},
+		{
+			MethodName: "CommitmentPlanApply",
+			Handler:    _Archera_CommitmentPlanApply_Handler,
+		},
+		{
+			MethodName: "ListDefaultCommitmentPlans",
+			Handler:    _Archera_ListDefaultCommitmentPlans_Handler,
+		},
+		{
+			MethodName: "GetRecommendedCommitmentPlan",
+			Handler:    _Archera_GetRecommendedCommitmentPlan_Handler,
+		},
+		{
+			MethodName: "ListCommitmentPlanLineItems",
+			Handler:    _Archera_ListCommitmentPlanLineItems_Handler,
+		},
+		{
+			MethodName: "ListCommitmentPlanResourceMatches",
+			Handler:    _Archera_ListCommitmentPlanResourceMatches_Handler,
+		},
+		{
+			MethodName: "ListCommitments",
+			Handler:    _Archera_ListCommitments_Handler,
+		},
+		{
+			MethodName: "GetCommitmentsChart",
+			Handler:    _Archera_GetCommitmentsChart_Handler,
+		},
+		{
+			MethodName: "GetMetrics",
+			Handler:    _Archera_GetMetrics_Handler,
+		},
+		{
+			MethodName: "ListResources",
+			Handler:    _Archera_ListResources_Handler,
+		},
+		{
+			MethodName: "GetResourceDailyUsage",
+			Handler:    _Archera_GetResourceDailyUsage_Handler,
+		},
+		{
+			MethodName: "ListSegments",
+			Handler:    _Archera_ListSegments_Handler,
+		},
+		{
+			MethodName: "GetSegmentDetails",
+			Handler:    _Archera_GetSegmentDetails_Handler,
+		},
+		{
+			MethodName: "ListDefaultPurchasePlans",
+			Handler:    _Archera_ListDefaultPurchasePlans_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ListOrgs",
