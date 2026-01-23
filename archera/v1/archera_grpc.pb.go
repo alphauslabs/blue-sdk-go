@@ -34,6 +34,11 @@ const (
 	Archera_ListSegments_FullMethodName                      = "/blueapi.archera.v1.Archera/ListSegments"
 	Archera_GetSegmentDetails_FullMethodName                 = "/blueapi.archera.v1.Archera/GetSegmentDetails"
 	Archera_ListDefaultPurchasePlans_FullMethodName          = "/blueapi.archera.v1.Archera/ListDefaultPurchasePlans"
+	Archera_RegisterOrg_FullMethodName                       = "/blueapi.archera.v1.Archera/RegisterOrg"
+	Archera_StartAwsOnboarding_FullMethodName                = "/blueapi.archera.v1.Archera/StartAwsOnboarding"
+	Archera_GetAwsCloudFormationTemplate_FullMethodName      = "/blueapi.archera.v1.Archera/GetAwsCloudFormationTemplate"
+	Archera_GetAwsLaunchStackUrl_FullMethodName              = "/blueapi.archera.v1.Archera/GetAwsLaunchStackUrl"
+	Archera_VerifyAwsOnboarding_FullMethodName               = "/blueapi.archera.v1.Archera/VerifyAwsOnboarding"
 )
 
 // ArcheraClient is the client API for Archera service.
@@ -71,6 +76,22 @@ type ArcheraClient interface {
 	GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error)
 	// Retrieves default purchase plans for a specific segment.
 	ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error)
+	// Registers a new child organization under the channel partner.
+	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
+	RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error)
+	// Starts the onboarding process for an organization.
+	// Creates or retrieves an onboarding record and sets the provider to AWS.
+	StartAwsOnboarding(ctx context.Context, in *StartAwsOnboardingRequest, opts ...grpc.CallOption) (*StartAwsOnboardingResponse, error)
+	// Generates CloudFormation template for AWS integration.
+	// Creates the necessary IAM role and policy template for setting up AWS access.
+	GetAwsCloudFormationTemplate(ctx context.Context, in *GetAwsCloudFormationTemplateRequest, opts ...grpc.CallOption) (*GetAwsCloudFormationTemplateResponse, error)
+	// Generates AWS CloudFormation launch stack URL.
+	// Creates a pre-configured URL to deploy the CloudFormation stack in the AWS console.
+	GetAwsLaunchStackUrl(ctx context.Context, in *GetAwsLaunchStackUrlRequest, opts ...grpc.CallOption) (*GetAwsLaunchStackUrlResponse, error)
+	// Runs AWS onboarding verification process.
+	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
+	// and returns validation status for all required features.
+	VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error)
 }
 
 type archeraClient struct {
@@ -254,6 +275,56 @@ func (c *archeraClient) ListDefaultPurchasePlans(ctx context.Context, in *ListDe
 	return out, nil
 }
 
+func (c *archeraClient) RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegisterOrgResponse)
+	err := c.cc.Invoke(ctx, Archera_RegisterOrg_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) StartAwsOnboarding(ctx context.Context, in *StartAwsOnboardingRequest, opts ...grpc.CallOption) (*StartAwsOnboardingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartAwsOnboardingResponse)
+	err := c.cc.Invoke(ctx, Archera_StartAwsOnboarding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) GetAwsCloudFormationTemplate(ctx context.Context, in *GetAwsCloudFormationTemplateRequest, opts ...grpc.CallOption) (*GetAwsCloudFormationTemplateResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAwsCloudFormationTemplateResponse)
+	err := c.cc.Invoke(ctx, Archera_GetAwsCloudFormationTemplate_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) GetAwsLaunchStackUrl(ctx context.Context, in *GetAwsLaunchStackUrlRequest, opts ...grpc.CallOption) (*GetAwsLaunchStackUrlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAwsLaunchStackUrlResponse)
+	err := c.cc.Invoke(ctx, Archera_GetAwsLaunchStackUrl_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *archeraClient) VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(VerifyAwsOnboardingResponse)
+	err := c.cc.Invoke(ctx, Archera_VerifyAwsOnboarding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ArcheraServer is the server API for Archera service.
 // All implementations must embed UnimplementedArcheraServer
 // for forward compatibility
@@ -289,6 +360,22 @@ type ArcheraServer interface {
 	GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error)
 	// Retrieves default purchase plans for a specific segment.
 	ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error)
+	// Registers a new child organization under the channel partner.
+	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
+	RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error)
+	// Starts the onboarding process for an organization.
+	// Creates or retrieves an onboarding record and sets the provider to AWS.
+	StartAwsOnboarding(context.Context, *StartAwsOnboardingRequest) (*StartAwsOnboardingResponse, error)
+	// Generates CloudFormation template for AWS integration.
+	// Creates the necessary IAM role and policy template for setting up AWS access.
+	GetAwsCloudFormationTemplate(context.Context, *GetAwsCloudFormationTemplateRequest) (*GetAwsCloudFormationTemplateResponse, error)
+	// Generates AWS CloudFormation launch stack URL.
+	// Creates a pre-configured URL to deploy the CloudFormation stack in the AWS console.
+	GetAwsLaunchStackUrl(context.Context, *GetAwsLaunchStackUrlRequest) (*GetAwsLaunchStackUrlResponse, error)
+	// Runs AWS onboarding verification process.
+	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
+	// and returns validation status for all required features.
+	VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error)
 	mustEmbedUnimplementedArcheraServer()
 }
 
@@ -340,6 +427,21 @@ func (UnimplementedArcheraServer) GetSegmentDetails(context.Context, *GetSegment
 }
 func (UnimplementedArcheraServer) ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDefaultPurchasePlans not implemented")
+}
+func (UnimplementedArcheraServer) RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrg not implemented")
+}
+func (UnimplementedArcheraServer) StartAwsOnboarding(context.Context, *StartAwsOnboardingRequest) (*StartAwsOnboardingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartAwsOnboarding not implemented")
+}
+func (UnimplementedArcheraServer) GetAwsCloudFormationTemplate(context.Context, *GetAwsCloudFormationTemplateRequest) (*GetAwsCloudFormationTemplateResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAwsCloudFormationTemplate not implemented")
+}
+func (UnimplementedArcheraServer) GetAwsLaunchStackUrl(context.Context, *GetAwsLaunchStackUrlRequest) (*GetAwsLaunchStackUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAwsLaunchStackUrl not implemented")
+}
+func (UnimplementedArcheraServer) VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method VerifyAwsOnboarding not implemented")
 }
 func (UnimplementedArcheraServer) mustEmbedUnimplementedArcheraServer() {}
 
@@ -627,6 +729,96 @@ func _Archera_ListDefaultPurchasePlans_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Archera_RegisterOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegisterOrgRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).RegisterOrg(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_RegisterOrg_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).RegisterOrg(ctx, req.(*RegisterOrgRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_StartAwsOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartAwsOnboardingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).StartAwsOnboarding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_StartAwsOnboarding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).StartAwsOnboarding(ctx, req.(*StartAwsOnboardingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_GetAwsCloudFormationTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAwsCloudFormationTemplateRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetAwsCloudFormationTemplate(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetAwsCloudFormationTemplate_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetAwsCloudFormationTemplate(ctx, req.(*GetAwsCloudFormationTemplateRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_GetAwsLaunchStackUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAwsLaunchStackUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).GetAwsLaunchStackUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_GetAwsLaunchStackUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).GetAwsLaunchStackUrl(ctx, req.(*GetAwsLaunchStackUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Archera_VerifyAwsOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(VerifyAwsOnboardingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ArcheraServer).VerifyAwsOnboarding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Archera_VerifyAwsOnboarding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ArcheraServer).VerifyAwsOnboarding(ctx, req.(*VerifyAwsOnboardingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Archera_ServiceDesc is the grpc.ServiceDesc for Archera service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -689,6 +881,26 @@ var Archera_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListDefaultPurchasePlans",
 			Handler:    _Archera_ListDefaultPurchasePlans_Handler,
+		},
+		{
+			MethodName: "RegisterOrg",
+			Handler:    _Archera_RegisterOrg_Handler,
+		},
+		{
+			MethodName: "StartAwsOnboarding",
+			Handler:    _Archera_StartAwsOnboarding_Handler,
+		},
+		{
+			MethodName: "GetAwsCloudFormationTemplate",
+			Handler:    _Archera_GetAwsCloudFormationTemplate_Handler,
+		},
+		{
+			MethodName: "GetAwsLaunchStackUrl",
+			Handler:    _Archera_GetAwsLaunchStackUrl_Handler,
+		},
+		{
+			MethodName: "VerifyAwsOnboarding",
+			Handler:    _Archera_VerifyAwsOnboarding_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -4232,11 +4232,19 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.archera.v1.Address"><span class="badge">M</span>Address</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.archera.v1.AggregateMetrics"><span class="badge">M</span>AggregateMetrics</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.archera.v1.AggregateMetrics.SummariesEntry"><span class="badge">M</span>AggregateMetrics.SummariesEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.AwsExistingCur"><span class="badge">M</span>AwsExistingCur</a>
                 </li>
               
                 <li>
@@ -4277,6 +4285,22 @@
               
                 <li>
                   <a href="#blueapi.archera.v1.DefaultPurchasePlan"><span class="badge">M</span>DefaultPurchasePlan</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.GetAwsCloudFormationTemplateRequest"><span class="badge">M</span>GetAwsCloudFormationTemplateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.GetAwsCloudFormationTemplateResponse"><span class="badge">M</span>GetAwsCloudFormationTemplateResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.GetAwsLaunchStackUrlRequest"><span class="badge">M</span>GetAwsLaunchStackUrlRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.GetAwsLaunchStackUrlResponse"><span class="badge">M</span>GetAwsLaunchStackUrlResponse</a>
                 </li>
               
                 <li>
@@ -4372,6 +4396,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.archera.v1.Membership"><span class="badge">M</span>Membership</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.archera.v1.MetricsResponse"><span class="badge">M</span>MetricsResponse</a>
                 </li>
               
@@ -4380,11 +4408,23 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.archera.v1.OrgUser"><span class="badge">M</span>OrgUser</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.archera.v1.PlanSummary"><span class="badge">M</span>PlanSummary</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.archera.v1.PurchasePlan"><span class="badge">M</span>PurchasePlan</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.RegisterOrgRequest"><span class="badge">M</span>RegisterOrgRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.RegisterOrgResponse"><span class="badge">M</span>RegisterOrgResponse</a>
                 </li>
               
                 <li>
@@ -4411,6 +4451,26 @@
                   <a href="#blueapi.archera.v1.ServiceSummary"><span class="badge">M</span>ServiceSummary</a>
                 </li>
               
+                <li>
+                  <a href="#blueapi.archera.v1.StartAwsOnboardingRequest"><span class="badge">M</span>StartAwsOnboardingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.StartAwsOnboardingResponse"><span class="badge">M</span>StartAwsOnboardingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.VerifyAwsOnboardingRequest"><span class="badge">M</span>VerifyAwsOnboardingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.VerifyAwsOnboardingResponse"><span class="badge">M</span>VerifyAwsOnboardingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck"><span class="badge">M</span>VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck</a>
+                </li>
+              
               
                 <li>
                   <a href="#blueapi.archera.v1.CommitmentInventoryStatus"><span class="badge">E</span>CommitmentInventoryStatus</a>
@@ -4430,6 +4490,10 @@
               
                 <li>
                   <a href="#blueapi.archera.v1.UsageType"><span class="badge">E</span>UsageType</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.archera.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck.AwsOnboardingFeatureStatus"><span class="badge">E</span>VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck.AwsOnboardingFeatureStatus</a>
                 </li>
               
               
@@ -50544,6 +50608,65 @@ The URL to check for expiration </p></td>
       <p></p>
 
       
+        <h3 id="blueapi.archera.v1.Address">Address</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>line1</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required: ex. &#34;123 Main St&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>city</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required: ex. &#34;Springfield&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>state</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required: ex. &#34;IL&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>zip</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required: ex. &#34;62701&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>country</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required: ex. &#34;USA&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>line2</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>optional: ex. &#34;Apt 4B&#34; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.archera.v1.AggregateMetrics">AggregateMetrics</h3>
         <p></p>
 
@@ -50604,6 +50727,53 @@ The URL to check for expiration </p></td>
                   <td><a href="#blueapi.archera.v1.ServiceSummary">ServiceSummary</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.AwsExistingCur">AwsExistingCur</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required if existingCur is provided </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bucket</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required if existingCur is provided </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required if existingCur is provided </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reportName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required if existingCur is provided
+
+maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
             </tbody>
@@ -52169,6 +52339,130 @@ The URL to check for expiration </p></td>
 
         
       
+        <h3 id="blueapi.archera.v1.GetAwsCloudFormationTemplateRequest">GetAwsCloudFormationTemplateRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to Archera) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: if present =&gt; MSP customer (3rd layer), else MSP-level org (2nd layer) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>archeraOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.GetAwsCloudFormationTemplateResponse">GetAwsCloudFormationTemplateResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>template</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>CloudFormation template JSON object </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.GetAwsLaunchStackUrlRequest">GetAwsLaunchStackUrlRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to Archera) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: if present =&gt; MSP customer (3rd layer), else MSP-level org (2nd layer) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>archeraOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.GetAwsLaunchStackUrlResponse">GetAwsLaunchStackUrlResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.archera.v1.GetCommitmentPlanDetailsRequest">GetCommitmentPlanDetailsRequest</h3>
         <p></p>
 
@@ -53117,6 +53411,37 @@ The URL to check for expiration </p></td>
 
         
       
+        <h3 id="blueapi.archera.v1.Membership">Membership</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>username</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.archera.v1.MetricsResponse">MetricsResponse</h3>
         <p></p>
 
@@ -53272,6 +53597,37 @@ The URL to check for expiration </p></td>
               
                 <tr>
                   <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.OrgUser">OrgUser</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -53440,6 +53796,167 @@ The URL to check for expiration </p></td>
                 <tr>
                   <td>isRenewal</td>
                   <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.RegisterOrgRequest">RegisterOrgRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple context (not sent to Archera; used for mapping/persistence) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>If present =&gt; we&#39;re onboarding an MSP customer/org (3rd layer )
+If empty =&gt; MSP-level org (2nd layer). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>required </p></td>
+                </tr>
+              
+                <tr>
+                  <td>labraSubscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>users</td>
+                  <td><a href="#blueapi.archera.v1.OrgUser">OrgUser</a></td>
+                  <td>repeated</td>
+                  <td><p>required </p></td>
+                </tr>
+              
+                <tr>
+                  <td>domain</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>primaryAddress</td>
+                  <td><a href="#blueapi.archera.v1.Address">Address</a></td>
+                  <td></td>
+                  <td><p>required </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsMarketplaceOfferLink</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureMarketplaceOfferLink</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpMarketplaceOfferLink</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.RegisterOrgResponse">RegisterOrgResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memberships</td>
+                  <td><a href="#blueapi.archera.v1.Membership">Membership</a></td>
+                  <td>repeated</td>
+                  <td><p>Archera create-org response fields </p></td>
+                </tr>
+              
+                <tr>
+                  <td>domain</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>primaryAddress</td>
+                  <td><a href="#blueapi.archera.v1.Address">Address</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsMarketplaceOfferLink</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureMarketplaceOfferLink</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpMarketplaceOfferLink</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -54316,6 +54833,182 @@ The URL to check for expiration </p></td>
 
         
       
+        <h3 id="blueapi.archera.v1.StartAwsOnboardingRequest">StartAwsOnboardingRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to Archera) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: if present =&gt; MSP customer (3rd layer), else MSP-level org (2nd layer) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>archeraOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.StartAwsOnboardingResponse">StartAwsOnboardingResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.VerifyAwsOnboardingRequest">VerifyAwsOnboardingRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to Archera) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional: if present =&gt; MSP customer (3rd layer), else MSP-level org (2nd layer) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>archeraOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>From /start response </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>AWS account id being onboarded/verified </p></td>
+                </tr>
+              
+                <tr>
+                  <td>existingCur</td>
+                  <td><a href="#blueapi.archera.v1.AwsExistingCur">AwsExistingCur</a></td>
+                  <td></td>
+                  <td><p>Optional: if set, Archera will use this existing CUR. If omitted, Archera may create a new CUR. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.VerifyAwsOnboardingResponse">VerifyAwsOnboardingResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>checks</td>
+                  <td><a href="#blueapi.archera.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck">VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.archera.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck">VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>feature</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#blueapi.archera.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck.AwsOnboardingFeatureStatus">VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck.AwsOnboardingFeatureStatus</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
 
       
         <h3 id="blueapi.archera.v1.CommitmentInventoryStatus">CommitmentInventoryStatus</h3>
@@ -54529,6 +55222,47 @@ The URL to check for expiration </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.archera.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck.AwsOnboardingFeatureStatus">VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck.AwsOnboardingFeatureStatus</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>AWS_ONBOARDING_FEATURE_STATUS_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AWS_ONBOARDING_FEATURE_STATUS_AVAILABLE</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AWS_ONBOARDING_FEATURE_STATUS_WARNING</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AWS_ONBOARDING_FEATURE_STATUS_MISSING</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>AWS_ONBOARDING_FEATURE_STATUS_UNKNOWN</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
 
       
 
@@ -54644,6 +55378,47 @@ The URL to check for expiration </p></td>
                 <td><a href="#blueapi.archera.v1.ListDefaultPurchasePlansRequest">ListDefaultPurchasePlansRequest</a></td>
                 <td><a href="#blueapi.archera.v1.ListDefaultPurchasePlansResponse">ListDefaultPurchasePlansResponse</a></td>
                 <td><p>Retrieves default purchase plans for a specific segment.</p></td>
+              </tr>
+            
+              <tr>
+                <td>RegisterOrg</td>
+                <td><a href="#blueapi.archera.v1.RegisterOrgRequest">RegisterOrgRequest</a></td>
+                <td><a href="#blueapi.archera.v1.RegisterOrgResponse">RegisterOrgResponse</a></td>
+                <td><p>Registers a new child organization under the channel partner.
+Creates the organization, sets up user memberships, and establishes the partnership relationship.</p></td>
+              </tr>
+            
+              <tr>
+                <td>StartAwsOnboarding</td>
+                <td><a href="#blueapi.archera.v1.StartAwsOnboardingRequest">StartAwsOnboardingRequest</a></td>
+                <td><a href="#blueapi.archera.v1.StartAwsOnboardingResponse">StartAwsOnboardingResponse</a></td>
+                <td><p>Starts the onboarding process for an organization.
+Creates or retrieves an onboarding record and sets the provider to AWS.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetAwsCloudFormationTemplate</td>
+                <td><a href="#blueapi.archera.v1.GetAwsCloudFormationTemplateRequest">GetAwsCloudFormationTemplateRequest</a></td>
+                <td><a href="#blueapi.archera.v1.GetAwsCloudFormationTemplateResponse">GetAwsCloudFormationTemplateResponse</a></td>
+                <td><p>Generates CloudFormation template for AWS integration.
+Creates the necessary IAM role and policy template for setting up AWS access.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetAwsLaunchStackUrl</td>
+                <td><a href="#blueapi.archera.v1.GetAwsLaunchStackUrlRequest">GetAwsLaunchStackUrlRequest</a></td>
+                <td><a href="#blueapi.archera.v1.GetAwsLaunchStackUrlResponse">GetAwsLaunchStackUrlResponse</a></td>
+                <td><p>Generates AWS CloudFormation launch stack URL.
+Creates a pre-configured URL to deploy the CloudFormation stack in the AWS console.</p></td>
+              </tr>
+            
+              <tr>
+                <td>VerifyAwsOnboarding</td>
+                <td><a href="#blueapi.archera.v1.VerifyAwsOnboardingRequest">VerifyAwsOnboardingRequest</a></td>
+                <td><a href="#blueapi.archera.v1.VerifyAwsOnboardingResponse">VerifyAwsOnboardingResponse</a></td>
+                <td><p>Runs AWS onboarding verification process.
+Creates a new CUR or uses an existing CUR and verifies AWS integration setup
+and returns validation status for all required features.</p></td>
               </tr>
             
           </tbody>
@@ -54811,6 +55586,56 @@ The URL to check for expiration </p></td>
                 <td>GET</td>
                 <td>/v1/org/{orgId}/purchase-plans-v1/default</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>RegisterOrg</td>
+                <td>POST</td>
+                <td>/v1/onboarding</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>StartAwsOnboarding</td>
+                <td>POST</td>
+                <td>/v1/onboarding/aws/start</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAwsCloudFormationTemplate</td>
+                <td>GET</td>
+                <td>/v1/onboarding/aws/cloudformation-template</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAwsLaunchStackUrl</td>
+                <td>GET</td>
+                <td>/v1/onboarding/aws/launch-stack-url</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>VerifyAwsOnboarding</td>
+                <td>POST</td>
+                <td>/v1/onboarding/aws/verify</td>
+                <td>*</td>
               </tr>
               
             
