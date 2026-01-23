@@ -17738,7 +17738,14 @@ At the moment, only `aws` is supported. </p></td>
                   <td>parentId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Parent id. </p></td>
+                  <td><p>Required. Parent internal Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rootParentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Root parent internal Id. If parentId and rootParentId are the same, it means this child is the 1st level after root. </p></td>
                 </tr>
               
                 <tr>
