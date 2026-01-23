@@ -141,6 +141,7 @@ const (
 	Billing_GetBillingGroupAnnouncements_FullMethodName               = "/blueapi.billing.v1.Billing/GetBillingGroupAnnouncements"
 	Billing_GetCredits_FullMethodName                                 = "/blueapi.billing.v1.Billing/GetCredits"
 	Billing_GetCsvSettings_FullMethodName                             = "/blueapi.billing.v1.Billing/GetCsvSettings"
+	Billing_CreateChildBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateChildBillingGroup"
 )
 
 // BillingClient is the client API for Billing service.
@@ -394,6 +395,8 @@ type BillingClient interface {
 	GetCredits(ctx context.Context, in *GetCreditsRequest, opts ...grpc.CallOption) (Billing_GetCreditsClient, error)
 	// Gets the csv column settings
 	GetCsvSettings(ctx context.Context, in *GetCsvSettingsRequest, opts ...grpc.CallOption) (Billing_GetCsvSettingsClient, error)
+	// Creates a child billing group under a parent billing group
+	CreateChildBillingGroup(ctx context.Context, in *CreateChildBillingGroupRequest, opts ...grpc.CallOption) (*CreateChildBillingGroupResponse, error)
 }
 
 type billingClient struct {
@@ -2218,6 +2221,16 @@ func (x *billingGetCsvSettingsClient) Recv() (*CsvSetting, error) {
 	return m, nil
 }
 
+func (c *billingClient) CreateChildBillingGroup(ctx context.Context, in *CreateChildBillingGroupRequest, opts ...grpc.CallOption) (*CreateChildBillingGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateChildBillingGroupResponse)
+	err := c.cc.Invoke(ctx, Billing_CreateChildBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -2469,6 +2482,8 @@ type BillingServer interface {
 	GetCredits(*GetCreditsRequest, Billing_GetCreditsServer) error
 	// Gets the csv column settings
 	GetCsvSettings(*GetCsvSettingsRequest, Billing_GetCsvSettingsServer) error
+	// Creates a child billing group under a parent billing group
+	CreateChildBillingGroup(context.Context, *CreateChildBillingGroupRequest) (*CreateChildBillingGroupResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2826,6 +2841,9 @@ func (UnimplementedBillingServer) GetCredits(*GetCreditsRequest, Billing_GetCred
 }
 func (UnimplementedBillingServer) GetCsvSettings(*GetCsvSettingsRequest, Billing_GetCsvSettingsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetCsvSettings not implemented")
+}
+func (UnimplementedBillingServer) CreateChildBillingGroup(context.Context, *CreateChildBillingGroupRequest) (*CreateChildBillingGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateChildBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -5030,6 +5048,24 @@ func (x *billingGetCsvSettingsServer) Send(m *CsvSetting) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_CreateChildBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateChildBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateChildBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateChildBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateChildBillingGroup(ctx, req.(*CreateChildBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5392,6 +5428,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteAnnouncement",
 			Handler:    _Billing_DeleteAnnouncement_Handler,
+		},
+		{
+			MethodName: "CreateChildBillingGroup",
+			Handler:    _Billing_CreateChildBillingGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

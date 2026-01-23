@@ -1335,6 +1335,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ChildBillingGroup"><span class="badge">M</span>ChildBillingGroup</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ChildBillingGroupBasicInformation"><span class="badge">M</span>ChildBillingGroupBasicInformation</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ChildBillingGroupInvoiceSettings"><span class="badge">M</span>ChildBillingGroupInvoiceSettings</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ConvertInvoiceToPdfRequest"><span class="badge">M</span>ConvertInvoiceToPdfRequest</a>
                 </li>
               
@@ -1391,6 +1403,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateChildBillingGroupRequest"><span class="badge">M</span>CreateChildBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CreateChildBillingGroupResponse"><span class="badge">M</span>CreateChildBillingGroupResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateCustomFieldRequest"><span class="badge">M</span>CreateCustomFieldRequest</a>
                 </li>
               
@@ -1428,6 +1448,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.CustomField"><span class="badge">M</span>CustomField</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CustomizedBillingServiceBillingGroup"><span class="badge">M</span>CustomizedBillingServiceBillingGroup</a>
                 </li>
               
                 <li>
@@ -17641,6 +17665,141 @@ At the moment, only `aws` is supported. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>childBillingGroupInternalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Internal Id. Only visible internally. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>basicInformation</td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroupBasicInformation">ChildBillingGroupBasicInformation</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceSettings</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupInvoiceSettings">BillingGroupInvoiceSettings</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>serviceDiscounts</td>
+                  <td><a href="#blueapi.billing.v1.AccountInvoiceServiceDiscounts">AccountInvoiceServiceDiscounts</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customizedBillingServices</td>
+                  <td><a href="#blueapi.billing.v1.CustomizedBillingServiceBillingGroup">CustomizedBillingServiceBillingGroup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ChildBillingGroupBasicInformation">ChildBillingGroupBasicInformation</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Child billing group id that is created by the client. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>parentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Parent id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Child billing group name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Company name. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ChildBillingGroupInvoiceSettings">ChildBillingGroupInvoiceSettings</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>aws</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroupVendoredInvoiceSetting">BillingGroupVendoredInvoiceSetting</a></td>
+                  <td></td>
+                  <td><p>AWS invoice settings </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountSupportPlanEnabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountSupportPlanSettings</td>
+                  <td><a href="#blueapi.api.ripple.v1.BillingGroupAccountSupportPlan">blueapi.api.ripple.v1.BillingGroupAccountSupportPlan</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Only required when accountSupportPlanEnabled is true. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ConvertInvoiceToPdfRequest">ConvertInvoiceToPdfRequest</h3>
         <p></p>
 
@@ -18536,6 +18695,44 @@ Service discount id. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.CreateChildBillingGroupRequest">CreateChildBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>basicInformation</td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroupBasicInformation">ChildBillingGroupBasicInformation</a></td>
+                  <td></td>
+                  <td><p>Required. Basic information for the child billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceSettings</td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroupInvoiceSettings">ChildBillingGroupInvoiceSettings</a></td>
+                  <td></td>
+                  <td><p>Required. Invoice settings for the child billing group. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CreateChildBillingGroupResponse">CreateChildBillingGroupResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateCustomFieldRequest">CreateCustomFieldRequest</h3>
         <p></p>
 
@@ -18988,6 +19185,51 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Detailed description of the custom field </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CustomizedBillingServiceBillingGroup">CustomizedBillingServiceBillingGroup</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. vendor that applied to the CustomizedBillingService　config. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>chargingTarget</td>
+                  <td><a href="#blueapi.api.ripple.ChargingTarget">blueapi.api.ripple.ChargingTarget</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.ChargingTarget] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.api.Account">blueapi.api.Account</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. accounts that applied to the CustomizedBillingService　config. </p></td>
                 </tr>
               
             </tbody>
@@ -24934,6 +25176,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Gets the csv column settings</p></td>
               </tr>
             
+              <tr>
+                <td>CreateChildBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.CreateChildBillingGroupRequest">CreateChildBillingGroupRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CreateChildBillingGroupResponse">CreateChildBillingGroupResponse</a></td>
+                <td><p>Creates a child billing group under a parent billing group</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -26119,6 +26368,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>GET</td>
                 <td>/v1/csvsettings</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateChildBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/billinggroup/child</td>
+                <td>*</td>
               </tr>
               
             
