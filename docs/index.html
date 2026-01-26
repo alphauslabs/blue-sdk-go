@@ -1607,6 +1607,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetChildBillingGroupRequest"><span class="badge">M</span>GetChildBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetChildBillingGroupResponse"><span class="badge">M</span>GetChildBillingGroupResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetCreditsRequest"><span class="badge">M</span>GetCreditsRequest</a>
                 </li>
               
@@ -17730,7 +17738,7 @@ At the moment, only `aws` is supported. </p></td>
         
       
         <h3 id="blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</h3>
-        <p></p>
+        <p>Contains basic information and invoice settings related data.</p>
 
         
           <table class="field-table">
@@ -17738,13 +17746,6 @@ At the moment, only `aws` is supported. </p></td>
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
-              
-                <tr>
-                  <td>childBillingGroupInternalId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Internal Id. Only visible internally. </p></td>
-                </tr>
               
                 <tr>
                   <td>basicInformation</td>
@@ -17755,21 +17756,7 @@ At the moment, only `aws` is supported. </p></td>
               
                 <tr>
                   <td>invoiceSettings</td>
-                  <td><a href="#blueapi.billing.v1.BillingGroupInvoiceSettings">BillingGroupInvoiceSettings</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>serviceDiscounts</td>
-                  <td><a href="#blueapi.billing.v1.AccountInvoiceServiceDiscounts">AccountInvoiceServiceDiscounts</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>customizedBillingServices</td>
-                  <td><a href="#blueapi.billing.v1.CustomizedBillingServiceBillingGroup">CustomizedBillingServiceBillingGroup</a></td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroupInvoiceSettings">ChildBillingGroupInvoiceSettings</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -20454,6 +20441,54 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>List of available currency. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetChildBillingGroupRequest">GetChildBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Internal Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetChildBillingGroupResponse">GetChildBillingGroupResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>details</td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -25254,6 +25289,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Creates a child billing group under a parent billing group</p></td>
               </tr>
             
+              <tr>
+                <td>GetChildBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.GetChildBillingGroupRequest">GetChildBillingGroupRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetChildBillingGroupResponse">GetChildBillingGroupResponse</a></td>
+                <td><p>Gets child billing group info</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -26449,6 +26491,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/billinggroup/child</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetChildBillingGroup</td>
+                <td>GET</td>
+                <td>/v1/billinggroup/child</td>
+                <td></td>
               </tr>
               
             
