@@ -47,6 +47,7 @@ const (
 //
 // GuaranteedCommitment service definition.
 type GuaranteedCommitmentClient interface {
+	// List all the registered orgs
 	ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (GuaranteedCommitment_ListOrgsClient, error)
 	// Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
 	GetCommitmentPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
@@ -331,6 +332,7 @@ func (c *guaranteedCommitmentClient) VerifyAwsOnboarding(ctx context.Context, in
 //
 // GuaranteedCommitment service definition.
 type GuaranteedCommitmentServer interface {
+	// List all the registered orgs
 	ListOrgs(*ListOrgsRequest, GuaranteedCommitment_ListOrgsServer) error
 	// Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
 	GetCommitmentPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error)
