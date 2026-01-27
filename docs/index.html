@@ -1747,10 +1747,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ListChildBillingGroupsResponse"><span class="badge">M</span>ListChildBillingGroupsResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.ListCustomFieldRequest"><span class="badge">M</span>ListCustomFieldRequest</a>
                 </li>
               
@@ -21753,30 +21749,6 @@ If both root and parent are empty returns all child billing groups under the MSP
 
         
       
-        <h3 id="blueapi.billing.v1.ListChildBillingGroupsResponse">ListChildBillingGroupsResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>childBillingGroups</td>
-                  <td><a href="#blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.ListCustomFieldRequest">ListCustomFieldRequest</h3>
         <p></p>
 
@@ -25487,7 +25459,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>ListChildBillingGroups</td>
                 <td><a href="#blueapi.billing.v1.ListChildBillingGroupsRequest">ListChildBillingGroupsRequest</a></td>
-                <td><a href="#blueapi.billing.v1.ListChildBillingGroupsResponse">ListChildBillingGroupsResponse</a> stream</td>
+                <td><a href="#blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</a> stream</td>
                 <td><p>Lists child billing groups under a specific filter</p></td>
               </tr>
             

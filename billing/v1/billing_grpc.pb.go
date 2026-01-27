@@ -2267,7 +2267,7 @@ func (c *billingClient) ListChildBillingGroups(ctx context.Context, in *ListChil
 }
 
 type Billing_ListChildBillingGroupsClient interface {
-	Recv() (*ListChildBillingGroupsResponse, error)
+	Recv() (*ChildBillingGroup, error)
 	grpc.ClientStream
 }
 
@@ -2275,8 +2275,8 @@ type billingListChildBillingGroupsClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingListChildBillingGroupsClient) Recv() (*ListChildBillingGroupsResponse, error) {
-	m := new(ListChildBillingGroupsResponse)
+func (x *billingListChildBillingGroupsClient) Recv() (*ChildBillingGroup, error) {
+	m := new(ChildBillingGroup)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
 	}
@@ -5193,7 +5193,7 @@ func _Billing_ListChildBillingGroups_Handler(srv interface{}, stream grpc.Server
 }
 
 type Billing_ListChildBillingGroupsServer interface {
-	Send(*ListChildBillingGroupsResponse) error
+	Send(*ChildBillingGroup) error
 	grpc.ServerStream
 }
 
@@ -5201,7 +5201,7 @@ type billingListChildBillingGroupsServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingListChildBillingGroupsServer) Send(m *ListChildBillingGroupsResponse) error {
+func (x *billingListChildBillingGroupsServer) Send(m *ChildBillingGroup) error {
 	return x.ServerStream.SendMsg(m)
 }
 
