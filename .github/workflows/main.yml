@@ -13,24 +13,21 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Setup golang
-      uses: actions/setup-go@v5
+    - uses: actions/setup-go@v5
       with:
-        go-version: '1.20'
+        go-version: '1.25'
 
-    - name: Configure Git for private modules
-      run: |
-        git config --global url."https://${{ secrets.GH_TOKEN }}@github.com/".insteadOf "https://github.com/"
-
-    - name: Download and test
+    - name: 'Download and test'
       env:
+        DEPLOYER_TOKEN: ${{secrets.GH_TOKEN}}
         GOPRIVATE: github.com/alphauslabs/*
       run: |
+        git config --global url."https://$DEPLOYER_TOKEN@github.com/".insteadOf "https://github.com/"
         go get github.com/alphauslabs/blue-internal-go/protos@latest
         go mod tidy
         go test -v ./...
 
-    - name: Generate functions
+    - name: 'Generate functions'
       env:
         DEPLOYER_TOKEN: ${{secrets.GH_TOKEN}}
         UPLOAD_FUNCSFILE_KEY: ${{secrets.UPLOAD_FUNCSFILE_KEY}}
