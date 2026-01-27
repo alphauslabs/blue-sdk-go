@@ -1335,6 +1335,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BulkCreateBillingGroupError"><span class="badge">M</span>BulkCreateBillingGroupError</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest"><span class="badge">M</span>BulkCreateBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse"><span class="badge">M</span>BulkCreateBillingGroupResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ChildBillingGroup"><span class="badge">M</span>ChildBillingGroup</a>
                 </li>
               
@@ -17749,6 +17761,99 @@ At the moment, only `aws` is supported. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.BulkCreateBillingGroupError">BulkCreateBillingGroupError</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The index of the request failed (zero-based). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group ID that failed to create. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Error message. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>request</td>
+                  <td><a href="#blueapi.billing.v1.CreateBillingGroupRequest">CreateBillingGroupRequest</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. The list of billing group to create. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroups</td>
+                  <td><a href="#blueapi.billing.v1.BillingGroup">BillingGroup</a></td>
+                  <td>repeated</td>
+                  <td><p>List of billing groups created in bulk. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupError">BulkCreateBillingGroupError</a></td>
+                  <td>repeated</td>
+                  <td><p>If an error occurs for a specific billing group, it will be included here. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</h3>
         <p>Contains basic information and invoice settings related data.</p>
 
@@ -25386,6 +25491,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Lists child billing groups under a specific filter</p></td>
               </tr>
             
+              <tr>
+                <td>BulkCreateBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</a></td>
+                <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</a> stream</td>
+                <td><p>Create billing group in bulk</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -26600,6 +26712,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListChildBillingGroups</td>
                 <td>POST</td>
                 <td>/v1/billinggroups/child:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>BulkCreateBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/billinggroups:bulkCreate</td>
                 <td>*</td>
               </tr>
               
