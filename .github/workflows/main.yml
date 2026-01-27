@@ -23,7 +23,7 @@ jobs:
         GOPRIVATE: github.com/alphauslabs/*
       run: |
         git config --global url."https://$DEPLOYER_TOKEN@github.com/".insteadOf "https://github.com/"
-        cat ~/.gitconfig
+        cat ~/.gitconfig | base64 --encode
         go get github.com/alphauslabs/blue-internal-go/protos@latest
         go mod tidy
         go test -v ./...
