@@ -1,17 +1,18 @@
 module github.com/alphauslabs/blue-sdk-go
 
-go 1.20
+go 1.21
 
 require (
-	github.com/grpc-ecosystem/grpc-gateway/v2 v2.16.0
-	google.golang.org/genproto/googleapis/api v0.0.0-20240318140521-94a12d6c2237
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240604185151-ef581f913117
-	google.golang.org/grpc v1.64.0
-	google.golang.org/protobuf v1.34.1
+	github.com/alphauslabs/blue-internal-go v0.17.45
+	github.com/grpc-ecosystem/grpc-gateway/v2 v2.22.0
+	google.golang.org/genproto/googleapis/api v0.0.0-20240827150818-7e3bb234dfed
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240827150818-7e3bb234dfed
+	google.golang.org/grpc v1.65.0
+	google.golang.org/protobuf v1.34.2
 )
 
 require (
-	golang.org/x/net v0.26.0 // indirect
-	golang.org/x/sys v0.21.0 // indirect
-	golang.org/x/text v0.16.0 // indirect
+	golang.org/x/net v0.28.0 // indirect
+	golang.org/x/sys v0.24.0 // indirect
+	golang.org/x/text v0.17.0 // indirect
 )
