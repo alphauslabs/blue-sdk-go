@@ -1731,6 +1731,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListChildBillingGroupsRequest"><span class="badge">M</span>ListChildBillingGroupsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListChildBillingGroupsResponse"><span class="badge">M</span>ListChildBillingGroupsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListCustomFieldRequest"><span class="badge">M</span>ListCustomFieldRequest</a>
                 </li>
               
@@ -20479,7 +20487,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
             <tbody>
               
                 <tr>
-                  <td>id</td>
+                  <td>internalId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Internal Id </p></td>
@@ -21598,6 +21606,63 @@ valid values: unblended_cost, true_unblended_cost </p></td>
                   <td></td>
                   <td><p>Optional. For aws only, filter will be ignored for other vendors.
 Valid values: default, imported </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListChildBillingGroupsRequest">ListChildBillingGroupsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>rootId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Root parent Id. If not empty return all child billing group under the root parent.
+If both root and parent are empty returns all child billing groups under the MSP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>parentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Parent Id. If not empty return all child billing group under the parent only, 
+If both root and parent are empty returns all child billing groups under the MSP. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListChildBillingGroupsResponse">ListChildBillingGroupsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>childBillingGroups</td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -25314,6 +25379,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Gets child billing group info</p></td>
               </tr>
             
+              <tr>
+                <td>ListChildBillingGroups</td>
+                <td><a href="#blueapi.billing.v1.ListChildBillingGroupsRequest">ListChildBillingGroupsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListChildBillingGroupsResponse">ListChildBillingGroupsResponse</a> stream</td>
+                <td><p>Lists child billing groups under a specific filter</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -26507,7 +26579,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>CreateChildBillingGroup</td>
                 <td>POST</td>
-                <td>/v1/billinggroup/child</td>
+                <td>/v1/billinggroups/child</td>
                 <td>*</td>
               </tr>
               
@@ -26517,8 +26589,18 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetChildBillingGroup</td>
                 <td>GET</td>
-                <td>/v1/billinggroup/child</td>
+                <td>/v1/billinggroups/child/{internalId}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListChildBillingGroups</td>
+                <td>POST</td>
+                <td>/v1/billinggroups/child:read</td>
+                <td>*</td>
               </tr>
               
             

@@ -143,6 +143,7 @@ const (
 	Billing_GetCsvSettings_FullMethodName                             = "/blueapi.billing.v1.Billing/GetCsvSettings"
 	Billing_CreateChildBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateChildBillingGroup"
 	Billing_GetChildBillingGroup_FullMethodName                       = "/blueapi.billing.v1.Billing/GetChildBillingGroup"
+	Billing_ListChildBillingGroups_FullMethodName                     = "/blueapi.billing.v1.Billing/ListChildBillingGroups"
 )
 
 // BillingClient is the client API for Billing service.
@@ -400,6 +401,8 @@ type BillingClient interface {
 	CreateChildBillingGroup(ctx context.Context, in *CreateChildBillingGroupRequest, opts ...grpc.CallOption) (*CreateChildBillingGroupResponse, error)
 	// Gets child billing group info
 	GetChildBillingGroup(ctx context.Context, in *GetChildBillingGroupRequest, opts ...grpc.CallOption) (*GetChildBillingGroupResponse, error)
+	// Lists child billing groups under a specific filter
+	ListChildBillingGroups(ctx context.Context, in *ListChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupsClient, error)
 }
 
 type billingClient struct {
@@ -2244,6 +2247,39 @@ func (c *billingClient) GetChildBillingGroup(ctx context.Context, in *GetChildBi
 	return out, nil
 }
 
+func (c *billingClient) ListChildBillingGroups(ctx context.Context, in *ListChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[28], Billing_ListChildBillingGroups_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListChildBillingGroupsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListChildBillingGroupsClient interface {
+	Recv() (*ListChildBillingGroupsResponse, error)
+	grpc.ClientStream
+}
+
+type billingListChildBillingGroupsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListChildBillingGroupsClient) Recv() (*ListChildBillingGroupsResponse, error) {
+	m := new(ListChildBillingGroupsResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -2499,6 +2535,8 @@ type BillingServer interface {
 	CreateChildBillingGroup(context.Context, *CreateChildBillingGroupRequest) (*CreateChildBillingGroupResponse, error)
 	// Gets child billing group info
 	GetChildBillingGroup(context.Context, *GetChildBillingGroupRequest) (*GetChildBillingGroupResponse, error)
+	// Lists child billing groups under a specific filter
+	ListChildBillingGroups(*ListChildBillingGroupsRequest, Billing_ListChildBillingGroupsServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2862,6 +2900,9 @@ func (UnimplementedBillingServer) CreateChildBillingGroup(context.Context, *Crea
 }
 func (UnimplementedBillingServer) GetChildBillingGroup(context.Context, *GetChildBillingGroupRequest) (*GetChildBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) ListChildBillingGroups(*ListChildBillingGroupsRequest, Billing_ListChildBillingGroupsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListChildBillingGroups not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -5102,6 +5143,27 @@ func _Billing_GetChildBillingGroup_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ListChildBillingGroups_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListChildBillingGroupsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListChildBillingGroups(m, &billingListChildBillingGroupsServer{ServerStream: stream})
+}
+
+type Billing_ListChildBillingGroupsServer interface {
+	Send(*ListChildBillingGroupsResponse) error
+	grpc.ServerStream
+}
+
+type billingListChildBillingGroupsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListChildBillingGroupsServer) Send(m *ListChildBillingGroupsResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5613,6 +5675,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetCsvSettings",
 			Handler:       _Billing_GetCsvSettings_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListChildBillingGroups",
+			Handler:       _Billing_ListChildBillingGroups_Handler,
 			ServerStreams: true,
 		},
 	},
