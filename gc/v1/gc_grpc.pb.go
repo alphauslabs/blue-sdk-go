@@ -47,49 +47,49 @@ const (
 //
 // GuaranteedCommitment service definition.
 type GuaranteedCommitmentClient interface {
-	// List all the registered orgs
+	// WORK-IN-PROGRESS: List all the registered orgs
 	ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (GuaranteedCommitment_ListOrgsClient, error)
-	// Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
+	// WORK-IN-PROGRESS: Do not use. Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
 	GetCommitmentPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
-	// Executes a commitment purchase plan, initiating the commitment purchase process.
+	// WORK-IN-PROGRESS: Do not use. Executes a commitment purchase plan, initiating the commitment purchase process.
 	CommitmentPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
-	// Retrieves the three default GuaranteedCommitment commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitment commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
 	ListDefaultCommitmentPlans(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error)
-	// Retrieves only the recommended GuaranteedCommitment commitment plan for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitment commitment plan for the specified cloud provider.
 	GetRecommendedCommitmentPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
-	// Retrieves line items for a specific commitment plan.
+	// WORK-IN-PROGRESS: Do not use. Retrieves line items for a specific commitment plan.
 	ListCommitmentPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error)
-	// Retrieves resource matches for a specific commitment plan.
+	// WORK-IN-PROGRESS: Do not use. Retrieves resource matches for a specific commitment plan.
 	ListCommitmentPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error)
-	// Retrieves a paginated list of commitments for the specified organization and time period.
+	// WORK-IN-PROGRESS: Do not use. Retrieves a paginated list of commitments for the specified organization and time period.
 	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
-	// Generates time-series chart data for commitment metrics over the specified time period.
+	// WORK-IN-PROGRESS: Do not use. Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error)
-	// Retrieves key performance metrics for cloud commitments.
+	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error)
-	// Retrieves a list of infrastructure resources for the organization.
+	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
 	ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
-	// Retrieves daily usage data for a specific resource within the specified date range.
+	// WORK-IN-PROGRESS: Do not use. Retrieves daily usage data for a specific resource within the specified date range.
 	GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error)
-	// Retrieves all segments for the specified organization and provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves all segments for the specified organization and provider.
 	ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error)
-	// Retrieves detailed information about a specific segment.
+	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
 	GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error)
-	// Retrieves default purchase plans for a specific segment.
+	// WORK-IN-PROGRESS: Do not use. Retrieves default purchase plans for a specific segment.
 	ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error)
-	// Registers a new child organization under the channel partner.
+	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error)
-	// Starts the onboarding process for an organization.
+	// WORK-IN-PROGRESS: Starts the onboarding process for an organization.
 	// Creates or retrieves an onboarding record and sets the provider to AWS.
 	StartAwsOnboarding(ctx context.Context, in *StartAwsOnboardingRequest, opts ...grpc.CallOption) (*StartAwsOnboardingResponse, error)
-	// Generates CloudFormation template for AWS integration.
+	// WORK-IN-PROGRESS: Generates CloudFormation template for AWS integration.
 	// Creates the necessary IAM role and policy template for setting up AWS access.
 	GetAwsCloudFormationTemplate(ctx context.Context, in *GetAwsCloudFormationTemplateRequest, opts ...grpc.CallOption) (*GetAwsCloudFormationTemplateResponse, error)
-	// Generates AWS CloudFormation launch stack URL.
+	// WORK-IN-PROGRESS: Generates AWS CloudFormation launch stack URL.
 	// Creates a pre-configured URL to deploy the CloudFormation stack in the AWS console.
 	GetAwsLaunchStackUrl(ctx context.Context, in *GetAwsLaunchStackUrlRequest, opts ...grpc.CallOption) (*GetAwsLaunchStackUrlResponse, error)
-	// Runs AWS onboarding verification process.
+	// WORK-IN-PROGRESS: Runs AWS onboarding verification process.
 	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 	// and returns validation status for all required features.
 	VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error)
@@ -332,49 +332,49 @@ func (c *guaranteedCommitmentClient) VerifyAwsOnboarding(ctx context.Context, in
 //
 // GuaranteedCommitment service definition.
 type GuaranteedCommitmentServer interface {
-	// List all the registered orgs
+	// WORK-IN-PROGRESS: List all the registered orgs
 	ListOrgs(*ListOrgsRequest, GuaranteedCommitment_ListOrgsServer) error
-	// Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
+	// WORK-IN-PROGRESS: Do not use. Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
 	GetCommitmentPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error)
-	// Executes a commitment purchase plan, initiating the commitment purchase process.
+	// WORK-IN-PROGRESS: Do not use. Executes a commitment purchase plan, initiating the commitment purchase process.
 	CommitmentPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error)
-	// Retrieves the three default GuaranteedCommitment commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitment commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
 	ListDefaultCommitmentPlans(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error)
-	// Retrieves only the recommended GuaranteedCommitment commitment plan for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitment commitment plan for the specified cloud provider.
 	GetRecommendedCommitmentPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error)
-	// Retrieves line items for a specific commitment plan.
+	// WORK-IN-PROGRESS: Do not use. Retrieves line items for a specific commitment plan.
 	ListCommitmentPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error)
-	// Retrieves resource matches for a specific commitment plan.
+	// WORK-IN-PROGRESS: Do not use. Retrieves resource matches for a specific commitment plan.
 	ListCommitmentPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error)
-	// Retrieves a paginated list of commitments for the specified organization and time period.
+	// WORK-IN-PROGRESS: Do not use. Retrieves a paginated list of commitments for the specified organization and time period.
 	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
-	// Generates time-series chart data for commitment metrics over the specified time period.
+	// WORK-IN-PROGRESS: Do not use. Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error)
-	// Retrieves key performance metrics for cloud commitments.
+	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error)
-	// Retrieves a list of infrastructure resources for the organization.
+	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
 	ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
-	// Retrieves daily usage data for a specific resource within the specified date range.
+	// WORK-IN-PROGRESS: Do not use. Retrieves daily usage data for a specific resource within the specified date range.
 	GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error)
-	// Retrieves all segments for the specified organization and provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves all segments for the specified organization and provider.
 	ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error)
-	// Retrieves detailed information about a specific segment.
+	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
 	GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error)
-	// Retrieves default purchase plans for a specific segment.
+	// WORK-IN-PROGRESS: Do not use. Retrieves default purchase plans for a specific segment.
 	ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error)
-	// Registers a new child organization under the channel partner.
+	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error)
-	// Starts the onboarding process for an organization.
+	// WORK-IN-PROGRESS: Starts the onboarding process for an organization.
 	// Creates or retrieves an onboarding record and sets the provider to AWS.
 	StartAwsOnboarding(context.Context, *StartAwsOnboardingRequest) (*StartAwsOnboardingResponse, error)
-	// Generates CloudFormation template for AWS integration.
+	// WORK-IN-PROGRESS: Generates CloudFormation template for AWS integration.
 	// Creates the necessary IAM role and policy template for setting up AWS access.
 	GetAwsCloudFormationTemplate(context.Context, *GetAwsCloudFormationTemplateRequest) (*GetAwsCloudFormationTemplateResponse, error)
-	// Generates AWS CloudFormation launch stack URL.
+	// WORK-IN-PROGRESS: Generates AWS CloudFormation launch stack URL.
 	// Creates a pre-configured URL to deploy the CloudFormation stack in the AWS console.
 	GetAwsLaunchStackUrl(context.Context, *GetAwsLaunchStackUrlRequest) (*GetAwsLaunchStackUrlResponse, error)
-	// Runs AWS onboarding verification process.
+	// WORK-IN-PROGRESS: Runs AWS onboarding verification process.
 	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 	// and returns validation status for all required features.
 	VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error)
