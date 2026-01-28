@@ -144,7 +144,7 @@ const (
 	Billing_CreateChildBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/CreateChildBillingGroup"
 	Billing_GetChildBillingGroup_FullMethodName                       = "/blueapi.billing.v1.Billing/GetChildBillingGroup"
 	Billing_ListChildBillingGroups_FullMethodName                     = "/blueapi.billing.v1.Billing/ListChildBillingGroups"
-	Billing_UpdateChildBillingGroupBasicInformation_FullMethodName    = "/blueapi.billing.v1.Billing/UpdateChildBillingGroupBasicInformation"
+	Billing_UpdateChildBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateChildBillingGroup"
 	Billing_BulkCreateBillingGroup_FullMethodName                     = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
 )
 
@@ -405,8 +405,8 @@ type BillingClient interface {
 	GetChildBillingGroup(ctx context.Context, in *GetChildBillingGroupRequest, opts ...grpc.CallOption) (*GetChildBillingGroupResponse, error)
 	// Lists child billing groups under a specific filter
 	ListChildBillingGroups(ctx context.Context, in *ListChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupsClient, error)
-	// Updates child billing group's basic information
-	UpdateChildBillingGroupBasicInformation(ctx context.Context, in *UpdateChildBillingGroupBasicInformationRequest, opts ...grpc.CallOption) (*UpdateChildBillingGroupBasicInformationResponse, error)
+	// Updates child billing group's basic info
+	UpdateChildBillingGroup(ctx context.Context, in *UpdateChildBillingGroupRequest, opts ...grpc.CallOption) (*UpdateChildBillingGroupResponse, error)
 	// Create billing group in bulk
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
 }
@@ -2286,10 +2286,10 @@ func (x *billingListChildBillingGroupsClient) Recv() (*ChildBillingGroup, error)
 	return m, nil
 }
 
-func (c *billingClient) UpdateChildBillingGroupBasicInformation(ctx context.Context, in *UpdateChildBillingGroupBasicInformationRequest, opts ...grpc.CallOption) (*UpdateChildBillingGroupBasicInformationResponse, error) {
+func (c *billingClient) UpdateChildBillingGroup(ctx context.Context, in *UpdateChildBillingGroupRequest, opts ...grpc.CallOption) (*UpdateChildBillingGroupResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateChildBillingGroupBasicInformationResponse)
-	err := c.cc.Invoke(ctx, Billing_UpdateChildBillingGroupBasicInformation_FullMethodName, in, out, cOpts...)
+	out := new(UpdateChildBillingGroupResponse)
+	err := c.cc.Invoke(ctx, Billing_UpdateChildBillingGroup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2586,8 +2586,8 @@ type BillingServer interface {
 	GetChildBillingGroup(context.Context, *GetChildBillingGroupRequest) (*GetChildBillingGroupResponse, error)
 	// Lists child billing groups under a specific filter
 	ListChildBillingGroups(*ListChildBillingGroupsRequest, Billing_ListChildBillingGroupsServer) error
-	// Updates child billing group's basic information
-	UpdateChildBillingGroupBasicInformation(context.Context, *UpdateChildBillingGroupBasicInformationRequest) (*UpdateChildBillingGroupBasicInformationResponse, error)
+	// Updates child billing group's basic info
+	UpdateChildBillingGroup(context.Context, *UpdateChildBillingGroupRequest) (*UpdateChildBillingGroupResponse, error)
 	// Create billing group in bulk
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
 	mustEmbedUnimplementedBillingServer()
@@ -2957,8 +2957,8 @@ func (UnimplementedBillingServer) GetChildBillingGroup(context.Context, *GetChil
 func (UnimplementedBillingServer) ListChildBillingGroups(*ListChildBillingGroupsRequest, Billing_ListChildBillingGroupsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListChildBillingGroups not implemented")
 }
-func (UnimplementedBillingServer) UpdateChildBillingGroupBasicInformation(context.Context, *UpdateChildBillingGroupBasicInformationRequest) (*UpdateChildBillingGroupBasicInformationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateChildBillingGroupBasicInformation not implemented")
+func (UnimplementedBillingServer) UpdateChildBillingGroup(context.Context, *UpdateChildBillingGroupRequest) (*UpdateChildBillingGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateChildBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
@@ -5223,20 +5223,20 @@ func (x *billingListChildBillingGroupsServer) Send(m *ChildBillingGroup) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Billing_UpdateChildBillingGroupBasicInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateChildBillingGroupBasicInformationRequest)
+func _Billing_UpdateChildBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateChildBillingGroupRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BillingServer).UpdateChildBillingGroupBasicInformation(ctx, in)
+		return srv.(BillingServer).UpdateChildBillingGroup(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Billing_UpdateChildBillingGroupBasicInformation_FullMethodName,
+		FullMethod: Billing_UpdateChildBillingGroup_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).UpdateChildBillingGroupBasicInformation(ctx, req.(*UpdateChildBillingGroupBasicInformationRequest))
+		return srv.(BillingServer).UpdateChildBillingGroup(ctx, req.(*UpdateChildBillingGroupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5634,8 +5634,8 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Billing_GetChildBillingGroup_Handler,
 		},
 		{
-			MethodName: "UpdateChildBillingGroupBasicInformation",
-			Handler:    _Billing_UpdateChildBillingGroupBasicInformation_Handler,
+			MethodName: "UpdateChildBillingGroup",
+			Handler:    _Billing_UpdateChildBillingGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

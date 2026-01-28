@@ -1995,11 +1995,11 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationRequest"><span class="badge">M</span>UpdateChildBillingGroupBasicInformationRequest</a>
+                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupRequest"><span class="badge">M</span>UpdateChildBillingGroupRequest</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationResponse"><span class="badge">M</span>UpdateChildBillingGroupBasicInformationResponse</a>
+                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupResponse"><span class="badge">M</span>UpdateChildBillingGroupResponse</a>
                 </li>
               
                 <li>
@@ -17917,7 +17917,7 @@ At the moment, only `aws` is supported. </p></td>
                   <td>internalId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Child billing group internal Id. </p></td>
+                  <td><p>Child billing group internal Id. Required for get and list, optional for create and update. </p></td>
                 </tr>
               
                 <tr>
@@ -24064,7 +24064,7 @@ Service discount id. </p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupBasicInformationRequest">UpdateChildBillingGroupBasicInformationRequest</h3>
+        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupRequest">UpdateChildBillingGroupRequest</h3>
         <p></p>
 
         
@@ -24075,10 +24075,24 @@ Service discount id. </p></td>
             <tbody>
               
                 <tr>
+                  <td>internalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Internal Id </p></td>
+                </tr>
+              
+                <tr>
                   <td>basicInformation</td>
                   <td><a href="#blueapi.billing.v1.ChildBillingGroupBasicInformation">ChildBillingGroupBasicInformation</a></td>
                   <td></td>
                   <td><p>Required. Basic information for the child billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingInfo</td>
+                  <td><a href="#blueapi.api.ripple.BillingGroupInfo">blueapi.api.ripple.BillingGroupInfo</a></td>
+                  <td></td>
+                  <td><p>Required. Billing info for the child billing group. </p></td>
                 </tr>
               
             </tbody>
@@ -24088,7 +24102,7 @@ Service discount id. </p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupBasicInformationResponse">UpdateChildBillingGroupBasicInformationResponse</h3>
+        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupResponse">UpdateChildBillingGroupResponse</h3>
         <p></p>
 
         
@@ -25503,10 +25517,10 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
-                <td>UpdateChildBillingGroupBasicInformation</td>
-                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationRequest">UpdateChildBillingGroupBasicInformationRequest</a></td>
-                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationResponse">UpdateChildBillingGroupBasicInformationResponse</a></td>
-                <td><p>Updates child billing group&#39;s basic information</p></td>
+                <td>UpdateChildBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupRequest">UpdateChildBillingGroupRequest</a></td>
+                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupResponse">UpdateChildBillingGroupResponse</a></td>
+                <td><p>Updates child billing group&#39;s basic info</p></td>
               </tr>
             
               <tr>
@@ -26737,9 +26751,9 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               
               
               <tr>
-                <td>UpdateChildBillingGroupBasicInformation</td>
+                <td>UpdateChildBillingGroup</td>
                 <td>PUT</td>
-                <td>/v1/billinggroups/child</td>
+                <td>/v1/billinggroups/child/{internalId}</td>
                 <td>*</td>
               </tr>
               
