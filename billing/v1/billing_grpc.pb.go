@@ -145,6 +145,7 @@ const (
 	Billing_GetChildBillingGroup_FullMethodName                       = "/blueapi.billing.v1.Billing/GetChildBillingGroup"
 	Billing_ListChildBillingGroups_FullMethodName                     = "/blueapi.billing.v1.Billing/ListChildBillingGroups"
 	Billing_UpdateChildBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateChildBillingGroup"
+	Billing_DeleteChildBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteChildBillingGroup"
 	Billing_BulkCreateBillingGroup_FullMethodName                     = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
 )
 
@@ -407,6 +408,8 @@ type BillingClient interface {
 	ListChildBillingGroups(ctx context.Context, in *ListChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupsClient, error)
 	// Updates child billing group's basic info
 	UpdateChildBillingGroup(ctx context.Context, in *UpdateChildBillingGroupRequest, opts ...grpc.CallOption) (*UpdateChildBillingGroupResponse, error)
+	// Deletes all child billing group info
+	DeleteChildBillingGroup(ctx context.Context, in *DeleteChildBillingGroupRequest, opts ...grpc.CallOption) (*DeleteChildBillingGroupResponse, error)
 	// Create billing group in bulk
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
 }
@@ -2296,6 +2299,16 @@ func (c *billingClient) UpdateChildBillingGroup(ctx context.Context, in *UpdateC
 	return out, nil
 }
 
+func (c *billingClient) DeleteChildBillingGroup(ctx context.Context, in *DeleteChildBillingGroupRequest, opts ...grpc.CallOption) (*DeleteChildBillingGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteChildBillingGroupResponse)
+	err := c.cc.Invoke(ctx, Billing_DeleteChildBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[29], Billing_BulkCreateBillingGroup_FullMethodName, cOpts...)
@@ -2588,6 +2601,8 @@ type BillingServer interface {
 	ListChildBillingGroups(*ListChildBillingGroupsRequest, Billing_ListChildBillingGroupsServer) error
 	// Updates child billing group's basic info
 	UpdateChildBillingGroup(context.Context, *UpdateChildBillingGroupRequest) (*UpdateChildBillingGroupResponse, error)
+	// Deletes all child billing group info
+	DeleteChildBillingGroup(context.Context, *DeleteChildBillingGroupRequest) (*DeleteChildBillingGroupResponse, error)
 	// Create billing group in bulk
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
 	mustEmbedUnimplementedBillingServer()
@@ -2959,6 +2974,9 @@ func (UnimplementedBillingServer) ListChildBillingGroups(*ListChildBillingGroups
 }
 func (UnimplementedBillingServer) UpdateChildBillingGroup(context.Context, *UpdateChildBillingGroupRequest) (*UpdateChildBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChildBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) DeleteChildBillingGroup(context.Context, *DeleteChildBillingGroupRequest) (*DeleteChildBillingGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteChildBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
@@ -5241,6 +5259,24 @@ func _Billing_UpdateChildBillingGroup_Handler(srv interface{}, ctx context.Conte
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_DeleteChildBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteChildBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteChildBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteChildBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteChildBillingGroup(ctx, req.(*DeleteChildBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_BulkCreateBillingGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(BulkCreateBillingGroupRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -5636,6 +5672,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateChildBillingGroup",
 			Handler:    _Billing_UpdateChildBillingGroup_Handler,
+		},
+		{
+			MethodName: "DeleteChildBillingGroup",
+			Handler:    _Billing_DeleteChildBillingGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

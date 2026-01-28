@@ -1495,6 +1495,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.DeleteChildBillingGroupRequest"><span class="badge">M</span>DeleteChildBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteChildBillingGroupResponse"><span class="badge">M</span>DeleteChildBillingGroupResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteCustomFieldRequest"><span class="badge">M</span>DeleteCustomFieldRequest</a>
                 </li>
               
@@ -19615,6 +19623,37 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.DeleteChildBillingGroupRequest">DeleteChildBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>internalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Child billing group&#39;s internal Id </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteChildBillingGroupResponse">DeleteChildBillingGroupResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteCustomFieldRequest">DeleteCustomFieldRequest</h3>
         <p></p>
 
@@ -25524,6 +25563,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>DeleteChildBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.DeleteChildBillingGroupRequest">DeleteChildBillingGroupRequest</a></td>
+                <td><a href="#blueapi.billing.v1.DeleteChildBillingGroupResponse">DeleteChildBillingGroupResponse</a></td>
+                <td><p>Deletes all child billing group info</p></td>
+              </tr>
+            
+              <tr>
                 <td>BulkCreateBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</a> stream</td>
@@ -26755,6 +26801,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>PUT</td>
                 <td>/v1/billinggroups/child/{internalId}</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteChildBillingGroup</td>
+                <td>DELETE</td>
+                <td>/v1/billinggroups/child/{internalId}</td>
+                <td></td>
               </tr>
               
             
