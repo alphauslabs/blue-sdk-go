@@ -1431,6 +1431,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateExcludeServiceEntryRequest"><span class="badge">M</span>CreateExcludeServiceEntryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CreateExcludeServiceEntryResponse"><span class="badge">M</span>CreateExcludeServiceEntryResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateFreeFormatRequest"><span class="badge">M</span>CreateFreeFormatRequest</a>
                 </li>
               
@@ -1515,6 +1523,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.DeleteExcludeServiceEntryRequest"><span class="badge">M</span>DeleteExcludeServiceEntryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.DeleteExcludeServiceEntryResponse"><span class="badge">M</span>DeleteExcludeServiceEntryResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteFreeFormatRequest"><span class="badge">M</span>DeleteFreeFormatRequest</a>
                 </li>
               
@@ -1524,6 +1540,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.DeleteResellerRequest"><span class="badge">M</span>DeleteResellerRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ExcludeServiceEntry"><span class="badge">M</span>ExcludeServiceEntry</a>
                 </li>
               
                 <li>
@@ -1764,6 +1784,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListExchangeRatesResponse"><span class="badge">M</span>ListExchangeRatesResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListExcludeServicesRequest"><span class="badge">M</span>ListExcludeServicesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListExcludeServicesResponse"><span class="badge">M</span>ListExcludeServicesResponse</a>
                 </li>
               
                 <li>
@@ -2024,6 +2052,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateCustomizedBillingServiceRequest"><span class="badge">M</span>UpdateCustomizedBillingServiceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateExcludeServiceEntryRequest"><span class="badge">M</span>UpdateExcludeServiceEntryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateExcludeServiceEntryResponse"><span class="badge">M</span>UpdateExcludeServiceEntryResponse</a>
                 </li>
               
                 <li>
@@ -19011,6 +19047,89 @@ Service discount id. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.CreateExcludeServiceEntryRequest">CreateExcludeServiceEntryRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msp_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>MSP (Managed Service Provider) ID. Partition key for the exclude service entry. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud vendor (e.g., &#34;aws&#34;, &#34;gcp&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Payer/account ID to exclude. Use &#34;all&#34; or &#34;*&#34; to apply to all accounts. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud service name (e.g., &#34;EC2&#34;, &#34;BigQuery&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Product or SKU code (used for GCP or detailed exclusions). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>except_payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of payer IDs to be excepted from exclusion (used when payer_id is &#34;all&#34;). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CreateExcludeServiceEntryResponse">CreateExcludeServiceEntryResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entry</td>
+                  <td><a href="#blueapi.billing.v1.ExcludeServiceEntry">ExcludeServiceEntry</a></td>
+                  <td></td>
+                  <td><p>The created exclude service entry. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateFreeFormatRequest">CreateFreeFormatRequest</h3>
         <p>BillingGroup FreeFormat: Also known as miscellaneous</p>
 
@@ -19741,6 +19860,82 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.DeleteExcludeServiceEntryRequest">DeleteExcludeServiceEntryRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msp_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>MSP (Managed Service Provider) ID. Partition key for the exclude service entry. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud vendor (e.g., &#34;aws&#34;, &#34;gcp&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Payer/account ID to delete. Use &#34;all&#34; or &#34;*&#34; to apply to all accounts. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud service name (e.g., &#34;EC2&#34;, &#34;BigQuery&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Product or SKU code (used for GCP or detailed exclusions). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.DeleteExcludeServiceEntryResponse">DeleteExcludeServiceEntryResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entry</td>
+                  <td><a href="#blueapi.billing.v1.ExcludeServiceEntry">ExcludeServiceEntry</a></td>
+                  <td></td>
+                  <td><p>The deleted exclude service entry (or just status). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteFreeFormatRequest">DeleteFreeFormatRequest</h3>
         <p></p>
 
@@ -19811,6 +20006,86 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. reseller id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ExcludeServiceEntry">ExcludeServiceEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msp_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>MSP (Managed Service Provider) ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud vendor (e.g., &#34;aws&#34;, &#34;gcp&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Payer/account ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud service name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Product or SKU code. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>except_payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of payer IDs excepted from exclusion. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>action</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Action performed (e.g., &#34;added&#34;, &#34;updated&#34;, &#34;deleted&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Operation status (e.g., &#34;success&#34;, &#34;error&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>error_message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional error message if operation failed. </p></td>
                 </tr>
               
             </tbody>
@@ -21878,6 +22153,61 @@ If both root and parent are empty returns all child billing groups under the MSP
                   <td><a href="#blueapi.api.ripple.VendorPayerExchangeRate">blueapi.api.ripple.VendorPayerExchangeRate</a></td>
                   <td></td>
                   <td><p>The payer exchange rate. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListExcludeServicesRequest">ListExcludeServicesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msp_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>MSP (Managed Service Provider) ID. Partition key for the exclude service entries. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud vendor (e.g., &#34;aws&#34;, &#34;gcp&#34;). If empty, returns all vendors for the MSP. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListExcludeServicesResponse">ListExcludeServicesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entries</td>
+                  <td><a href="#blueapi.billing.v1.ExcludeServiceEntry">ExcludeServiceEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>List of all exclude service entries for the request. </p></td>
                 </tr>
               
             </tbody>
@@ -24271,6 +24601,89 @@ specified and non-empty. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateExcludeServiceEntryRequest">UpdateExcludeServiceEntryRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>msp_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>MSP (Managed Service Provider) ID. Partition key for the exclude service entry. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud vendor (e.g., &#34;aws&#34;, &#34;gcp&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Payer/account ID to update. Use &#34;all&#34; or &#34;*&#34; to apply to all accounts. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud service name (e.g., &#34;EC2&#34;, &#34;BigQuery&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Product or SKU code (used for GCP or detailed exclusions). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>except_payer_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of payer IDs to be excepted from exclusion (used when payer_id is &#34;all&#34;). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateExcludeServiceEntryResponse">UpdateExcludeServiceEntryResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entry</td>
+                  <td><a href="#blueapi.billing.v1.ExcludeServiceEntry">ExcludeServiceEntry</a></td>
+                  <td></td>
+                  <td><p>The updated exclude service entry. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateInvoiceDisplaySettingsRequest">UpdateInvoiceDisplaySettingsRequest</h3>
         <p>Request message for UpdateInvoiceDisplaySettings rpc.</p>
 
@@ -25629,6 +26042,34 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>Create billing group in bulk</p></td>
               </tr>
             
+              <tr>
+                <td>CreateExcludeServiceEntry</td>
+                <td><a href="#blueapi.billing.v1.CreateExcludeServiceEntryRequest">CreateExcludeServiceEntryRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CreateExcludeServiceEntryResponse">CreateExcludeServiceEntryResponse</a></td>
+                <td><p>Create Exclude Service Entry</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateExcludeServiceEntry</td>
+                <td><a href="#blueapi.billing.v1.UpdateExcludeServiceEntryRequest">UpdateExcludeServiceEntryRequest</a></td>
+                <td><a href="#blueapi.billing.v1.UpdateExcludeServiceEntryResponse">UpdateExcludeServiceEntryResponse</a></td>
+                <td><p>Update Exclude Service Entry</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteExcludeServiceEntry</td>
+                <td><a href="#blueapi.billing.v1.DeleteExcludeServiceEntryRequest">DeleteExcludeServiceEntryRequest</a></td>
+                <td><a href="#blueapi.billing.v1.DeleteExcludeServiceEntryResponse">DeleteExcludeServiceEntryResponse</a></td>
+                <td><p>Delete Exclude Service Entry</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListExcludeServices</td>
+                <td><a href="#blueapi.billing.v1.ListExcludeServicesRequest">ListExcludeServicesRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListExcludeServicesResponse">ListExcludeServicesResponse</a></td>
+                <td><p>List Exclude Service Entries</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -26884,6 +27325,46 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/billinggroups:bulkCreate</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateExcludeServiceEntry</td>
+                <td>POST</td>
+                <td>/v1/billinggroups/exclude-service-settings</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateExcludeServiceEntry</td>
+                <td>PUT</td>
+                <td>/v1/billinggroups/exclude-service-settings</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteExcludeServiceEntry</td>
+                <td>DELETE</td>
+                <td>/v1/billinggroups/exclude-service-settings</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListExcludeServices</td>
+                <td>GET</td>
+                <td>/v1/billinggroups/exclude-service-settings</td>
+                <td></td>
               </tr>
               
             

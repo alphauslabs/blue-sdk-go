@@ -148,6 +148,10 @@ const (
 	Billing_DeleteChildBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/DeleteChildBillingGroup"
 	Billing_UpdateChildBillingGroupInvoiceSettings_FullMethodName     = "/blueapi.billing.v1.Billing/UpdateChildBillingGroupInvoiceSettings"
 	Billing_BulkCreateBillingGroup_FullMethodName                     = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
+	Billing_CreateExcludeServiceEntry_FullMethodName                  = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
+	Billing_UpdateExcludeServiceEntry_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
+	Billing_DeleteExcludeServiceEntry_FullMethodName                  = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
+	Billing_ListExcludeServices_FullMethodName                        = "/blueapi.billing.v1.Billing/ListExcludeServices"
 )
 
 // BillingClient is the client API for Billing service.
@@ -415,6 +419,14 @@ type BillingClient interface {
 	UpdateChildBillingGroupInvoiceSettings(ctx context.Context, in *UpdateChildBillingGroupInvoiceSettingsRequest, opts ...grpc.CallOption) (*UpdateChildBillingGroupInvoiceSettingsResponse, error)
 	// Create billing group in bulk
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
+	// Create Exclude Service Entry
+	CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error)
+	// Update Exclude Service Entry
+	UpdateExcludeServiceEntry(ctx context.Context, in *UpdateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*UpdateExcludeServiceEntryResponse, error)
+	// Delete Exclude Service Entry
+	DeleteExcludeServiceEntry(ctx context.Context, in *DeleteExcludeServiceEntryRequest, opts ...grpc.CallOption) (*DeleteExcludeServiceEntryResponse, error)
+	// List Exclude Service Entries
+	ListExcludeServices(ctx context.Context, in *ListExcludeServicesRequest, opts ...grpc.CallOption) (*ListExcludeServicesResponse, error)
 }
 
 type billingClient struct {
@@ -2355,6 +2367,46 @@ func (x *billingBulkCreateBillingGroupClient) Recv() (*BulkCreateBillingGroupRes
 	return m, nil
 }
 
+func (c *billingClient) CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateExcludeServiceEntryResponse)
+	err := c.cc.Invoke(ctx, Billing_CreateExcludeServiceEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateExcludeServiceEntry(ctx context.Context, in *UpdateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*UpdateExcludeServiceEntryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateExcludeServiceEntryResponse)
+	err := c.cc.Invoke(ctx, Billing_UpdateExcludeServiceEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) DeleteExcludeServiceEntry(ctx context.Context, in *DeleteExcludeServiceEntryRequest, opts ...grpc.CallOption) (*DeleteExcludeServiceEntryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteExcludeServiceEntryResponse)
+	err := c.cc.Invoke(ctx, Billing_DeleteExcludeServiceEntry_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ListExcludeServices(ctx context.Context, in *ListExcludeServicesRequest, opts ...grpc.CallOption) (*ListExcludeServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListExcludeServicesResponse)
+	err := c.cc.Invoke(ctx, Billing_ListExcludeServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -2620,6 +2672,14 @@ type BillingServer interface {
 	UpdateChildBillingGroupInvoiceSettings(context.Context, *UpdateChildBillingGroupInvoiceSettingsRequest) (*UpdateChildBillingGroupInvoiceSettingsResponse, error)
 	// Create billing group in bulk
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
+	// Create Exclude Service Entry
+	CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error)
+	// Update Exclude Service Entry
+	UpdateExcludeServiceEntry(context.Context, *UpdateExcludeServiceEntryRequest) (*UpdateExcludeServiceEntryResponse, error)
+	// Delete Exclude Service Entry
+	DeleteExcludeServiceEntry(context.Context, *DeleteExcludeServiceEntryRequest) (*DeleteExcludeServiceEntryResponse, error)
+	// List Exclude Service Entries
+	ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -2998,6 +3058,18 @@ func (UnimplementedBillingServer) UpdateChildBillingGroupInvoiceSettings(context
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateExcludeServiceEntry not implemented")
+}
+func (UnimplementedBillingServer) UpdateExcludeServiceEntry(context.Context, *UpdateExcludeServiceEntryRequest) (*UpdateExcludeServiceEntryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateExcludeServiceEntry not implemented")
+}
+func (UnimplementedBillingServer) DeleteExcludeServiceEntry(context.Context, *DeleteExcludeServiceEntryRequest) (*DeleteExcludeServiceEntryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteExcludeServiceEntry not implemented")
+}
+func (UnimplementedBillingServer) ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExcludeServices not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -5334,6 +5406,78 @@ func (x *billingBulkCreateBillingGroupServer) Send(m *BulkCreateBillingGroupResp
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_CreateExcludeServiceEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateExcludeServiceEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateExcludeServiceEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateExcludeServiceEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateExcludeServiceEntry(ctx, req.(*CreateExcludeServiceEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateExcludeServiceEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateExcludeServiceEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateExcludeServiceEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateExcludeServiceEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateExcludeServiceEntry(ctx, req.(*UpdateExcludeServiceEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_DeleteExcludeServiceEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteExcludeServiceEntryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteExcludeServiceEntry(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteExcludeServiceEntry_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteExcludeServiceEntry(ctx, req.(*DeleteExcludeServiceEntryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ListExcludeServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExcludeServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ListExcludeServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ListExcludeServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ListExcludeServices(ctx, req.(*ListExcludeServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -5716,6 +5860,22 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateChildBillingGroupInvoiceSettings",
 			Handler:    _Billing_UpdateChildBillingGroupInvoiceSettings_Handler,
+		},
+		{
+			MethodName: "CreateExcludeServiceEntry",
+			Handler:    _Billing_CreateExcludeServiceEntry_Handler,
+		},
+		{
+			MethodName: "UpdateExcludeServiceEntry",
+			Handler:    _Billing_UpdateExcludeServiceEntry_Handler,
+		},
+		{
+			MethodName: "DeleteExcludeServiceEntry",
+			Handler:    _Billing_DeleteExcludeServiceEntry_Handler,
+		},
+		{
+			MethodName: "ListExcludeServices",
+			Handler:    _Billing_ListExcludeServices_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
