@@ -1995,6 +1995,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationRequest"><span class="badge">M</span>UpdateChildBillingGroupBasicInformationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationResponse"><span class="badge">M</span>UpdateChildBillingGroupBasicInformationResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateCustomFieldRequest"><span class="badge">M</span>UpdateCustomFieldRequest</a>
                 </li>
               
@@ -24056,6 +24064,37 @@ Service discount id. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupBasicInformationRequest">UpdateChildBillingGroupBasicInformationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>basicInformation</td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroupBasicInformation">ChildBillingGroupBasicInformation</a></td>
+                  <td></td>
+                  <td><p>Required. Basic information for the child billing group. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupBasicInformationResponse">UpdateChildBillingGroupBasicInformationResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateCustomFieldRequest">UpdateCustomFieldRequest</h3>
         <p></p>
 
@@ -25464,6 +25503,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>UpdateChildBillingGroupBasicInformation</td>
+                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationRequest">UpdateChildBillingGroupBasicInformationRequest</a></td>
+                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupBasicInformationResponse">UpdateChildBillingGroupBasicInformationResponse</a></td>
+                <td><p>Updates child billing group&#39;s basic information</p></td>
+              </tr>
+            
+              <tr>
                 <td>BulkCreateBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</a> stream</td>
@@ -26684,6 +26730,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListChildBillingGroups</td>
                 <td>POST</td>
                 <td>/v1/billinggroups/child:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateChildBillingGroupBasicInformation</td>
+                <td>PUT</td>
+                <td>/v1/billinggroups/child</td>
                 <td>*</td>
               </tr>
               
