@@ -2003,6 +2003,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupInvoiceSettingsRequest"><span class="badge">M</span>UpdateChildBillingGroupInvoiceSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateChildBillingGroupInvoiceSettingsResponse"><span class="badge">M</span>UpdateChildBillingGroupInvoiceSettingsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.UpdateChildBillingGroupRequest"><span class="badge">M</span>UpdateChildBillingGroupRequest</a>
                 </li>
               
@@ -24103,6 +24111,44 @@ Service discount id. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupInvoiceSettingsRequest">UpdateChildBillingGroupInvoiceSettingsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>internalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Internal Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceSettings</td>
+                  <td><a href="#blueapi.billing.v1.ChildBillingGroupInvoiceSettings">ChildBillingGroupInvoiceSettings</a></td>
+                  <td></td>
+                  <td><p>Required. Invoice settings for the child billing group. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.UpdateChildBillingGroupInvoiceSettingsResponse">UpdateChildBillingGroupInvoiceSettingsResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateChildBillingGroupRequest">UpdateChildBillingGroupRequest</h3>
         <p></p>
 
@@ -25570,6 +25616,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>UpdateChildBillingGroupInvoiceSettings</td>
+                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupInvoiceSettingsRequest">UpdateChildBillingGroupInvoiceSettingsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.UpdateChildBillingGroupInvoiceSettingsResponse">UpdateChildBillingGroupInvoiceSettingsResponse</a></td>
+                <td><p>Updates child billing group&#39;s invoice settings</p></td>
+              </tr>
+            
+              <tr>
                 <td>BulkCreateBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</a> stream</td>
@@ -26811,6 +26864,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>DELETE</td>
                 <td>/v1/billinggroups/child/{internalId}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateChildBillingGroupInvoiceSettings</td>
+                <td>PUT</td>
+                <td>/v1/billinggroups/child/{internalId}/invoiceSettings</td>
+                <td>*</td>
               </tr>
               
             
