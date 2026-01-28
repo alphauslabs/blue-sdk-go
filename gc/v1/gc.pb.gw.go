@@ -35,7 +35,7 @@ var (
 	_ = metadata.Join
 )
 
-func request_GuaranteedCommitment_ListOrgs_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (GuaranteedCommitment_ListOrgsClient, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListOrgs_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (GuaranteedCommitments_ListOrgsClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListOrgsRequest
 		metadata runtime.ServerMetadata
@@ -58,9 +58,9 @@ func request_GuaranteedCommitment_ListOrgs_0(ctx context.Context, marshaler runt
 	return stream, metadata, nil
 }
 
-var filter_GuaranteedCommitment_GetCommitmentPlanDetails_0 = &utilities.DoubleArray{Encoding: map[string]int{"planId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+var filter_GuaranteedCommitments_GetCommitmentPlanDetails_0 = &utilities.DoubleArray{Encoding: map[string]int{"planId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 
-func request_GuaranteedCommitment_GetCommitmentPlanDetails_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetCommitmentPlanDetails_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetCommitmentPlanDetailsRequest
 		metadata runtime.ServerMetadata
@@ -80,14 +80,14 @@ func request_GuaranteedCommitment_GetCommitmentPlanDetails_0(ctx context.Context
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetCommitmentPlanDetails_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetCommitmentPlanDetails_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetCommitmentPlanDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetCommitmentPlanDetails_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetCommitmentPlanDetails_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetCommitmentPlanDetailsRequest
 		metadata runtime.ServerMetadata
@@ -104,14 +104,14 @@ func local_request_GuaranteedCommitment_GetCommitmentPlanDetails_0(ctx context.C
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetCommitmentPlanDetails_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetCommitmentPlanDetails_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetCommitmentPlanDetails(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_GuaranteedCommitment_CommitmentPlanApply_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_CommitmentPlanApply_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq CommitmentPlanApplyRequest
 		metadata runtime.ServerMetadata
@@ -135,7 +135,7 @@ func request_GuaranteedCommitment_CommitmentPlanApply_0(ctx context.Context, mar
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_CommitmentPlanApply_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_CommitmentPlanApply_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq CommitmentPlanApplyRequest
 		metadata runtime.ServerMetadata
@@ -156,9 +156,9 @@ func local_request_GuaranteedCommitment_CommitmentPlanApply_0(ctx context.Contex
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_ListDefaultCommitmentPlans_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_ListDefaultCommitmentPlans_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_ListDefaultCommitmentPlans_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListDefaultCommitmentPlans_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListDefaultCommitmentPlansRequest
 		metadata runtime.ServerMetadata
@@ -169,14 +169,14 @@ func request_GuaranteedCommitment_ListDefaultCommitmentPlans_0(ctx context.Conte
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListDefaultCommitmentPlans_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListDefaultCommitmentPlans_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.ListDefaultCommitmentPlans(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_ListDefaultCommitmentPlans_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_ListDefaultCommitmentPlans_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListDefaultCommitmentPlansRequest
 		metadata runtime.ServerMetadata
@@ -184,16 +184,16 @@ func local_request_GuaranteedCommitment_ListDefaultCommitmentPlans_0(ctx context
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListDefaultCommitmentPlans_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListDefaultCommitmentPlans_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.ListDefaultCommitmentPlans(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_GetRecommendedCommitmentPlan_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_GetRecommendedCommitmentPlan_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetRecommendedCommitmentPlan_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetRecommendedCommitmentPlanRequest
 		metadata runtime.ServerMetadata
@@ -204,14 +204,14 @@ func request_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(ctx context.Con
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetRecommendedCommitmentPlan_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetRecommendedCommitmentPlan_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetRecommendedCommitmentPlan(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetRecommendedCommitmentPlan_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetRecommendedCommitmentPlanRequest
 		metadata runtime.ServerMetadata
@@ -219,16 +219,16 @@ func local_request_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(ctx conte
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetRecommendedCommitmentPlan_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetRecommendedCommitmentPlan_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetRecommendedCommitmentPlan(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_ListCommitmentPlanLineItems_0 = &utilities.DoubleArray{Encoding: map[string]int{"planId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+var filter_GuaranteedCommitments_ListCommitmentPlanLineItems_0 = &utilities.DoubleArray{Encoding: map[string]int{"planId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 
-func request_GuaranteedCommitment_ListCommitmentPlanLineItems_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListCommitmentPlanLineItems_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListCommitmentPlanLineItemsRequest
 		metadata runtime.ServerMetadata
@@ -248,14 +248,14 @@ func request_GuaranteedCommitment_ListCommitmentPlanLineItems_0(ctx context.Cont
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListCommitmentPlanLineItems_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListCommitmentPlanLineItems_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.ListCommitmentPlanLineItems(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_ListCommitmentPlanLineItems_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_ListCommitmentPlanLineItems_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListCommitmentPlanLineItemsRequest
 		metadata runtime.ServerMetadata
@@ -272,16 +272,16 @@ func local_request_GuaranteedCommitment_ListCommitmentPlanLineItems_0(ctx contex
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListCommitmentPlanLineItems_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListCommitmentPlanLineItems_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.ListCommitmentPlanLineItems(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0 = &utilities.DoubleArray{Encoding: map[string]int{"planId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+var filter_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0 = &utilities.DoubleArray{Encoding: map[string]int{"planId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 
-func request_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListCommitmentPlanResourceMatchesRequest
 		metadata runtime.ServerMetadata
@@ -301,14 +301,14 @@ func request_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(ctx contex
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.ListCommitmentPlanResourceMatches(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListCommitmentPlanResourceMatchesRequest
 		metadata runtime.ServerMetadata
@@ -325,16 +325,14 @@ func local_request_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(ctx 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.ListCommitmentPlanResourceMatches(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_ListCommitments_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
-
-func request_GuaranteedCommitment_ListCommitments_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListCommitments_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListCommitmentsRequest
 		metadata runtime.ServerMetadata
@@ -342,34 +340,22 @@ func request_GuaranteedCommitment_ListCommitments_0(ctx context.Context, marshal
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListCommitments_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 	msg, err := client.ListCommitments(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_ListCommitments_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_ListCommitments_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListCommitmentsRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := req.ParseForm(); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListCommitments_0); err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
-	}
 	msg, err := server.ListCommitments(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_GetCommitmentsChart_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_GetCommitmentsChart_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_GetCommitmentsChart_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetCommitmentsChart_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetCommitmentsChartRequest
 		metadata runtime.ServerMetadata
@@ -380,14 +366,14 @@ func request_GuaranteedCommitment_GetCommitmentsChart_0(ctx context.Context, mar
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetCommitmentsChart_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetCommitmentsChart_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetCommitmentsChart(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetCommitmentsChart_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetCommitmentsChart_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetCommitmentsChartRequest
 		metadata runtime.ServerMetadata
@@ -395,16 +381,16 @@ func local_request_GuaranteedCommitment_GetCommitmentsChart_0(ctx context.Contex
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetCommitmentsChart_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetCommitmentsChart_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetCommitmentsChart(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_GetMetrics_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_GetMetrics_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_GetMetrics_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetMetrics_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetMetricsRequest
 		metadata runtime.ServerMetadata
@@ -415,14 +401,14 @@ func request_GuaranteedCommitment_GetMetrics_0(ctx context.Context, marshaler ru
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetMetrics_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetMetrics_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetMetrics(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetMetrics_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetMetrics_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetMetricsRequest
 		metadata runtime.ServerMetadata
@@ -430,16 +416,16 @@ func local_request_GuaranteedCommitment_GetMetrics_0(ctx context.Context, marsha
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetMetrics_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetMetrics_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetMetrics(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_ListResources_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_ListResources_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_ListResources_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListResources_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListResourcesRequest
 		metadata runtime.ServerMetadata
@@ -450,14 +436,14 @@ func request_GuaranteedCommitment_ListResources_0(ctx context.Context, marshaler
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListResources_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListResources_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.ListResources(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_ListResources_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_ListResources_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListResourcesRequest
 		metadata runtime.ServerMetadata
@@ -465,16 +451,16 @@ func local_request_GuaranteedCommitment_ListResources_0(ctx context.Context, mar
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListResources_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListResources_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.ListResources(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_GetResourceDailyUsage_0 = &utilities.DoubleArray{Encoding: map[string]int{"resourceId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+var filter_GuaranteedCommitments_GetResourceDailyUsage_0 = &utilities.DoubleArray{Encoding: map[string]int{"resourceId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 
-func request_GuaranteedCommitment_GetResourceDailyUsage_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetResourceDailyUsage_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetResourceDailyUsageRequest
 		metadata runtime.ServerMetadata
@@ -494,14 +480,14 @@ func request_GuaranteedCommitment_GetResourceDailyUsage_0(ctx context.Context, m
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetResourceDailyUsage_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetResourceDailyUsage_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetResourceDailyUsage(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetResourceDailyUsage_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetResourceDailyUsage_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetResourceDailyUsageRequest
 		metadata runtime.ServerMetadata
@@ -518,16 +504,16 @@ func local_request_GuaranteedCommitment_GetResourceDailyUsage_0(ctx context.Cont
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetResourceDailyUsage_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetResourceDailyUsage_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetResourceDailyUsage(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_ListSegments_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_ListSegments_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_ListSegments_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListSegments_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListSegmentsRequest
 		metadata runtime.ServerMetadata
@@ -538,14 +524,14 @@ func request_GuaranteedCommitment_ListSegments_0(ctx context.Context, marshaler 
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListSegments_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListSegments_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.ListSegments(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_ListSegments_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_ListSegments_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListSegmentsRequest
 		metadata runtime.ServerMetadata
@@ -553,16 +539,16 @@ func local_request_GuaranteedCommitment_ListSegments_0(ctx context.Context, mars
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListSegments_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListSegments_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.ListSegments(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_GetSegmentDetails_0 = &utilities.DoubleArray{Encoding: map[string]int{"segmentId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+var filter_GuaranteedCommitments_GetSegmentDetails_0 = &utilities.DoubleArray{Encoding: map[string]int{"segmentId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 
-func request_GuaranteedCommitment_GetSegmentDetails_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetSegmentDetails_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetSegmentDetailsRequest
 		metadata runtime.ServerMetadata
@@ -582,14 +568,14 @@ func request_GuaranteedCommitment_GetSegmentDetails_0(ctx context.Context, marsh
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetSegmentDetails_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetSegmentDetails_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetSegmentDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetSegmentDetails_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetSegmentDetails_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetSegmentDetailsRequest
 		metadata runtime.ServerMetadata
@@ -606,16 +592,16 @@ func local_request_GuaranteedCommitment_GetSegmentDetails_0(ctx context.Context,
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetSegmentDetails_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetSegmentDetails_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetSegmentDetails(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_ListDefaultPurchasePlans_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_ListDefaultPurchasePlans_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_ListDefaultPurchasePlans_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_ListDefaultPurchasePlans_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListDefaultPurchasePlansRequest
 		metadata runtime.ServerMetadata
@@ -626,14 +612,14 @@ func request_GuaranteedCommitment_ListDefaultPurchasePlans_0(ctx context.Context
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListDefaultPurchasePlans_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListDefaultPurchasePlans_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.ListDefaultPurchasePlans(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_ListDefaultPurchasePlans_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_ListDefaultPurchasePlans_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq ListDefaultPurchasePlansRequest
 		metadata runtime.ServerMetadata
@@ -641,14 +627,14 @@ func local_request_GuaranteedCommitment_ListDefaultPurchasePlans_0(ctx context.C
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_ListDefaultPurchasePlans_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_ListDefaultPurchasePlans_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.ListDefaultPurchasePlans(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_GuaranteedCommitment_RegisterOrg_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_RegisterOrg_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq RegisterOrgRequest
 		metadata runtime.ServerMetadata
@@ -663,7 +649,7 @@ func request_GuaranteedCommitment_RegisterOrg_0(ctx context.Context, marshaler r
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_RegisterOrg_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_RegisterOrg_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq RegisterOrgRequest
 		metadata runtime.ServerMetadata
@@ -675,7 +661,7 @@ func local_request_GuaranteedCommitment_RegisterOrg_0(ctx context.Context, marsh
 	return msg, metadata, err
 }
 
-func request_GuaranteedCommitment_StartAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_StartAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq StartAwsOnboardingRequest
 		metadata runtime.ServerMetadata
@@ -690,7 +676,7 @@ func request_GuaranteedCommitment_StartAwsOnboarding_0(ctx context.Context, mars
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_StartAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_StartAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq StartAwsOnboardingRequest
 		metadata runtime.ServerMetadata
@@ -702,9 +688,9 @@ func local_request_GuaranteedCommitment_StartAwsOnboarding_0(ctx context.Context
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_GetAwsCloudFormationTemplate_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_GetAwsCloudFormationTemplate_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetAwsCloudFormationTemplate_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetAwsCloudFormationTemplateRequest
 		metadata runtime.ServerMetadata
@@ -715,14 +701,14 @@ func request_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(ctx context.Con
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetAwsCloudFormationTemplate_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetAwsCloudFormationTemplate_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetAwsCloudFormationTemplate(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetAwsCloudFormationTemplate_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetAwsCloudFormationTemplateRequest
 		metadata runtime.ServerMetadata
@@ -730,16 +716,16 @@ func local_request_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(ctx conte
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetAwsCloudFormationTemplate_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetAwsCloudFormationTemplate_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetAwsCloudFormationTemplate(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitment_GetAwsLaunchStackUrl_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_GetAwsLaunchStackUrl_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
 
-func request_GuaranteedCommitment_GetAwsLaunchStackUrl_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetAwsLaunchStackUrl_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetAwsLaunchStackUrlRequest
 		metadata runtime.ServerMetadata
@@ -750,14 +736,14 @@ func request_GuaranteedCommitment_GetAwsLaunchStackUrl_0(ctx context.Context, ma
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetAwsLaunchStackUrl_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetAwsLaunchStackUrl_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := client.GetAwsLaunchStackUrl(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_GetAwsLaunchStackUrl_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetAwsLaunchStackUrl_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetAwsLaunchStackUrlRequest
 		metadata runtime.ServerMetadata
@@ -765,14 +751,14 @@ func local_request_GuaranteedCommitment_GetAwsLaunchStackUrl_0(ctx context.Conte
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitment_GetAwsLaunchStackUrl_0); err != nil {
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_GetAwsLaunchStackUrl_0); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
 	msg, err := server.GetAwsLaunchStackUrl(ctx, &protoReq)
 	return msg, metadata, err
 }
 
-func request_GuaranteedCommitment_VerifyAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_VerifyAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq VerifyAwsOnboardingRequest
 		metadata runtime.ServerMetadata
@@ -787,7 +773,7 @@ func request_GuaranteedCommitment_VerifyAwsOnboarding_0(ctx context.Context, mar
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitment_VerifyAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_VerifyAwsOnboarding_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq VerifyAwsOnboardingRequest
 		metadata runtime.ServerMetadata
@@ -799,405 +785,405 @@ func local_request_GuaranteedCommitment_VerifyAwsOnboarding_0(ctx context.Contex
 	return msg, metadata, err
 }
 
-// RegisterGuaranteedCommitmentHandlerServer registers the http handlers for service GuaranteedCommitment to "mux".
-// UnaryRPC     :call GuaranteedCommitmentServer directly.
+// RegisterGuaranteedCommitmentsHandlerServer registers the http handlers for service GuaranteedCommitments to "mux".
+// UnaryRPC     :call GuaranteedCommitmentsServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
-// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterGuaranteedCommitmentHandlerFromEndpoint instead.
+// Note that using this registration option will cause many gRPC library features to stop working. Consider using RegisterGuaranteedCommitmentsHandlerFromEndpoint instead.
 // GRPC interceptors will not work for this type of registration. To use interceptors, you must use the "runtime.WithMiddlewares" option in the "runtime.NewServeMux" call.
-func RegisterGuaranteedCommitmentHandlerServer(ctx context.Context, mux *runtime.ServeMux, server GuaranteedCommitmentServer) error {
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_ListOrgs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtime.ServeMux, server GuaranteedCommitmentsServer) error {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_ListOrgs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
 		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 		return
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetCommitmentPlanDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetCommitmentPlanDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetCommitmentPlanDetails", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentPlanDetails", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetCommitmentPlanDetails_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetCommitmentPlanDetails_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetCommitmentPlanDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetCommitmentPlanDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_CommitmentPlanApply_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_CommitmentPlanApply_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/CommitmentPlanApply", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/apply"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/CommitmentPlanApply", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/apply"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_CommitmentPlanApply_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_CommitmentPlanApply_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_CommitmentPlanApply_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_CommitmentPlanApply_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListDefaultCommitmentPlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListDefaultCommitmentPlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListDefaultCommitmentPlans", runtime.WithHTTPPathPattern("/v1/commitment-plans/default"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultCommitmentPlans", runtime.WithHTTPPathPattern("/v1/commitment-plans/default"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_ListDefaultCommitmentPlans_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_ListDefaultCommitmentPlans_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListDefaultCommitmentPlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListDefaultCommitmentPlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetRecommendedCommitmentPlan_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetRecommendedCommitmentPlan_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetRecommendedCommitmentPlan", runtime.WithHTTPPathPattern("/v1/commitment-plans/recommended"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetRecommendedCommitmentPlan", runtime.WithHTTPPathPattern("/v1/commitment-plans/recommended"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetRecommendedCommitmentPlan_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetRecommendedCommitmentPlan_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListCommitmentPlanLineItems_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListCommitmentPlanLineItems_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListCommitmentPlanLineItems", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/line-items"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentPlanLineItems", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/line-items"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_ListCommitmentPlanLineItems_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_ListCommitmentPlanLineItems_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListCommitmentPlanLineItems_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListCommitmentPlanLineItems_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListCommitmentPlanResourceMatches", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/resource-matches"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentPlanResourceMatches", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/resource-matches"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListCommitments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListCommitments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListCommitments", runtime.WithHTTPPathPattern("/v1/commitments"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments", runtime.WithHTTPPathPattern("/v1/commitments"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_ListCommitments_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_ListCommitments_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListCommitments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListCommitments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetCommitmentsChart_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetCommitmentsChart_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/chart"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/chart"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetCommitmentsChart_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetCommitmentsChart_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetCommitmentsChart_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetCommitmentsChart_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetMetrics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetMetrics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetMetrics", runtime.WithHTTPPathPattern("/v1/metrics"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics", runtime.WithHTTPPathPattern("/v1/metrics"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetMetrics_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetMetrics_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetMetrics_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetMetrics_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListResources_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListResources_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListResources", runtime.WithHTTPPathPattern("/v1/resources"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListResources", runtime.WithHTTPPathPattern("/v1/resources"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_ListResources_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_ListResources_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListResources_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListResources_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetResourceDailyUsage_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetResourceDailyUsage_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetResourceDailyUsage", runtime.WithHTTPPathPattern("/v1/resources/{resourceId}/daily-usage"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage", runtime.WithHTTPPathPattern("/v1/resources/{resourceId}/daily-usage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetResourceDailyUsage_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetResourceDailyUsage_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetResourceDailyUsage_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetResourceDailyUsage_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListSegments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListSegments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListSegments", runtime.WithHTTPPathPattern("/v1/segments/info"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListSegments", runtime.WithHTTPPathPattern("/v1/segments/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_ListSegments_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_ListSegments_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListSegments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListSegments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetSegmentDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetSegmentDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetSegmentDetails", runtime.WithHTTPPathPattern("/v1/segments/{segmentId}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetSegmentDetails", runtime.WithHTTPPathPattern("/v1/segments/{segmentId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetSegmentDetails_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetSegmentDetails_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetSegmentDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetSegmentDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListDefaultPurchasePlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListDefaultPurchasePlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/purchase-plans-v1/default"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/purchase-plans-v1/default"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_ListDefaultPurchasePlans_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_ListDefaultPurchasePlans_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListDefaultPurchasePlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListDefaultPurchasePlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_RegisterOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_RegisterOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/RegisterOrg", runtime.WithHTTPPathPattern("/v1/onboarding"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg", runtime.WithHTTPPathPattern("/v1/onboarding"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_RegisterOrg_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_RegisterOrg_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_RegisterOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_RegisterOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_StartAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_StartAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/StartAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/start"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/start"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_StartAwsOnboarding_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_StartAwsOnboarding_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_StartAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_StartAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetAwsCloudFormationTemplate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetAwsCloudFormationTemplate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation-template"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation-template"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetAwsCloudFormationTemplate_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetAwsCloudFormationTemplate_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetAwsLaunchStackUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetAwsLaunchStackUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/launch-stack-url"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/launch-stack-url"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_GetAwsLaunchStackUrl_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetAwsLaunchStackUrl_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetAwsLaunchStackUrl_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetAwsLaunchStackUrl_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_VerifyAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_VerifyAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/VerifyAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/verify"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/VerifyAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/verify"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitment_VerifyAwsOnboarding_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_VerifyAwsOnboarding_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_VerifyAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_VerifyAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
 	return nil
 }
 
-// RegisterGuaranteedCommitmentHandlerFromEndpoint is same as RegisterGuaranteedCommitmentHandler but
+// RegisterGuaranteedCommitmentsHandlerFromEndpoint is same as RegisterGuaranteedCommitmentsHandler but
 // automatically dials to "endpoint" and closes the connection when "ctx" gets done.
-func RegisterGuaranteedCommitmentHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
+func RegisterGuaranteedCommitmentsHandlerFromEndpoint(ctx context.Context, mux *runtime.ServeMux, endpoint string, opts []grpc.DialOption) (err error) {
 	conn, err := grpc.NewClient(endpoint, opts...)
 	if err != nil {
 		return err
@@ -1216,406 +1202,406 @@ func RegisterGuaranteedCommitmentHandlerFromEndpoint(ctx context.Context, mux *r
 			}
 		}()
 	}()
-	return RegisterGuaranteedCommitmentHandler(ctx, mux, conn)
+	return RegisterGuaranteedCommitmentsHandler(ctx, mux, conn)
 }
 
-// RegisterGuaranteedCommitmentHandler registers the http handlers for service GuaranteedCommitment to "mux".
+// RegisterGuaranteedCommitmentsHandler registers the http handlers for service GuaranteedCommitments to "mux".
 // The handlers forward requests to the grpc endpoint over "conn".
-func RegisterGuaranteedCommitmentHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
-	return RegisterGuaranteedCommitmentHandlerClient(ctx, mux, NewGuaranteedCommitmentClient(conn))
+func RegisterGuaranteedCommitmentsHandler(ctx context.Context, mux *runtime.ServeMux, conn *grpc.ClientConn) error {
+	return RegisterGuaranteedCommitmentsHandlerClient(ctx, mux, NewGuaranteedCommitmentsClient(conn))
 }
 
-// RegisterGuaranteedCommitmentHandlerClient registers the http handlers for service GuaranteedCommitment
-// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "GuaranteedCommitmentClient".
-// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "GuaranteedCommitmentClient"
+// RegisterGuaranteedCommitmentsHandlerClient registers the http handlers for service GuaranteedCommitments
+// to "mux". The handlers forward requests to the grpc endpoint over the given implementation of "GuaranteedCommitmentsClient".
+// Note: the gRPC framework executes interceptors within the gRPC handler. If the passed in "GuaranteedCommitmentsClient"
 // doesn't go through the normal gRPC flow (creating a gRPC client etc.) then it will be up to the passed in
-// "GuaranteedCommitmentClient" to call the correct interceptors. This client ignores the HTTP middlewares.
-func RegisterGuaranteedCommitmentHandlerClient(ctx context.Context, mux *runtime.ServeMux, client GuaranteedCommitmentClient) error {
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_ListOrgs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+// "GuaranteedCommitmentsClient" to call the correct interceptors. This client ignores the HTTP middlewares.
+func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtime.ServeMux, client GuaranteedCommitmentsClient) error {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_ListOrgs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListOrgs", runtime.WithHTTPPathPattern("/v1/organizations:read"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListOrgs", runtime.WithHTTPPathPattern("/v1/organizations:read"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListOrgs_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListOrgs_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListOrgs_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListOrgs_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetCommitmentPlanDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetCommitmentPlanDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetCommitmentPlanDetails", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentPlanDetails", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetCommitmentPlanDetails_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetCommitmentPlanDetails_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetCommitmentPlanDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetCommitmentPlanDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_CommitmentPlanApply_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_CommitmentPlanApply_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/CommitmentPlanApply", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/apply"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/CommitmentPlanApply", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/apply"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_CommitmentPlanApply_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_CommitmentPlanApply_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_CommitmentPlanApply_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_CommitmentPlanApply_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListDefaultCommitmentPlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListDefaultCommitmentPlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListDefaultCommitmentPlans", runtime.WithHTTPPathPattern("/v1/commitment-plans/default"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultCommitmentPlans", runtime.WithHTTPPathPattern("/v1/commitment-plans/default"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListDefaultCommitmentPlans_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListDefaultCommitmentPlans_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListDefaultCommitmentPlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListDefaultCommitmentPlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetRecommendedCommitmentPlan_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetRecommendedCommitmentPlan_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetRecommendedCommitmentPlan", runtime.WithHTTPPathPattern("/v1/commitment-plans/recommended"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetRecommendedCommitmentPlan", runtime.WithHTTPPathPattern("/v1/commitment-plans/recommended"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetRecommendedCommitmentPlan_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetRecommendedCommitmentPlan_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetRecommendedCommitmentPlan_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListCommitmentPlanLineItems_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListCommitmentPlanLineItems_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListCommitmentPlanLineItems", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/line-items"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentPlanLineItems", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/line-items"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListCommitmentPlanLineItems_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListCommitmentPlanLineItems_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListCommitmentPlanLineItems_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListCommitmentPlanLineItems_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListCommitmentPlanResourceMatches", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/resource-matches"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentPlanResourceMatches", runtime.WithHTTPPathPattern("/v1/commitment-plans/{planId}/resource-matches"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListCommitments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListCommitments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListCommitments", runtime.WithHTTPPathPattern("/v1/commitments"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments", runtime.WithHTTPPathPattern("/v1/commitments"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListCommitments_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListCommitments_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListCommitments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListCommitments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetCommitmentsChart_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetCommitmentsChart_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/chart"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/chart"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetCommitmentsChart_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetCommitmentsChart_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetCommitmentsChart_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetCommitmentsChart_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetMetrics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetMetrics_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetMetrics", runtime.WithHTTPPathPattern("/v1/metrics"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics", runtime.WithHTTPPathPattern("/v1/metrics"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetMetrics_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetMetrics_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetMetrics_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetMetrics_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListResources_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListResources_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListResources", runtime.WithHTTPPathPattern("/v1/resources"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListResources", runtime.WithHTTPPathPattern("/v1/resources"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListResources_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListResources_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListResources_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListResources_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetResourceDailyUsage_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetResourceDailyUsage_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetResourceDailyUsage", runtime.WithHTTPPathPattern("/v1/resources/{resourceId}/daily-usage"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage", runtime.WithHTTPPathPattern("/v1/resources/{resourceId}/daily-usage"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetResourceDailyUsage_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetResourceDailyUsage_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetResourceDailyUsage_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetResourceDailyUsage_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListSegments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListSegments_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListSegments", runtime.WithHTTPPathPattern("/v1/segments/info"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListSegments", runtime.WithHTTPPathPattern("/v1/segments/info"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListSegments_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListSegments_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListSegments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListSegments_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetSegmentDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetSegmentDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetSegmentDetails", runtime.WithHTTPPathPattern("/v1/segments/{segmentId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetSegmentDetails", runtime.WithHTTPPathPattern("/v1/segments/{segmentId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetSegmentDetails_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetSegmentDetails_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetSegmentDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetSegmentDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_ListDefaultPurchasePlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListDefaultPurchasePlans_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/purchase-plans-v1/default"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/purchase-plans-v1/default"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_ListDefaultPurchasePlans_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_ListDefaultPurchasePlans_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_ListDefaultPurchasePlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_ListDefaultPurchasePlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_RegisterOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_RegisterOrg_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/RegisterOrg", runtime.WithHTTPPathPattern("/v1/onboarding"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg", runtime.WithHTTPPathPattern("/v1/onboarding"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_RegisterOrg_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_RegisterOrg_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_RegisterOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_RegisterOrg_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_StartAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_StartAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/StartAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/start"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/start"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_StartAwsOnboarding_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_StartAwsOnboarding_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_StartAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_StartAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetAwsCloudFormationTemplate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetAwsCloudFormationTemplate_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation-template"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation-template"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetAwsCloudFormationTemplate_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetAwsCloudFormationTemplate_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetAwsCloudFormationTemplate_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitment_GetAwsLaunchStackUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetAwsLaunchStackUrl_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/launch-stack-url"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/launch-stack-url"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_GetAwsLaunchStackUrl_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetAwsLaunchStackUrl_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_GetAwsLaunchStackUrl_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetAwsLaunchStackUrl_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodPost, pattern_GuaranteedCommitment_VerifyAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_VerifyAwsOnboarding_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitment/VerifyAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/verify"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/VerifyAwsOnboarding", runtime.WithHTTPPathPattern("/v1/onboarding/aws/verify"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitment_VerifyAwsOnboarding_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_VerifyAwsOnboarding_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitment_VerifyAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_VerifyAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	return nil
 }
 
 var (
-	pattern_GuaranteedCommitment_ListOrgs_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "organizations"}, "read"))
-	pattern_GuaranteedCommitment_GetCommitmentPlanDetails_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "commitment-plans", "planId"}, ""))
-	pattern_GuaranteedCommitment_CommitmentPlanApply_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "commitment-plans", "planId", "apply"}, ""))
-	pattern_GuaranteedCommitment_ListDefaultCommitmentPlans_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitment-plans", "default"}, ""))
-	pattern_GuaranteedCommitment_GetRecommendedCommitmentPlan_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitment-plans", "recommended"}, ""))
-	pattern_GuaranteedCommitment_ListCommitmentPlanLineItems_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "commitment-plans", "planId", "line-items"}, ""))
-	pattern_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "commitment-plans", "planId", "resource-matches"}, ""))
-	pattern_GuaranteedCommitment_ListCommitments_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "commitments"}, ""))
-	pattern_GuaranteedCommitment_GetCommitmentsChart_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitments", "chart"}, ""))
-	pattern_GuaranteedCommitment_GetMetrics_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "metrics"}, ""))
-	pattern_GuaranteedCommitment_ListResources_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resources"}, ""))
-	pattern_GuaranteedCommitment_GetResourceDailyUsage_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "resources", "resourceId", "daily-usage"}, ""))
-	pattern_GuaranteedCommitment_ListSegments_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "segments", "info"}, ""))
-	pattern_GuaranteedCommitment_GetSegmentDetails_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "segments", "segmentId"}, ""))
-	pattern_GuaranteedCommitment_ListDefaultPurchasePlans_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "purchase-plans-v1", "default"}, ""))
-	pattern_GuaranteedCommitment_RegisterOrg_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "onboarding"}, ""))
-	pattern_GuaranteedCommitment_StartAwsOnboarding_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "start"}, ""))
-	pattern_GuaranteedCommitment_GetAwsCloudFormationTemplate_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "cloudformation-template"}, ""))
-	pattern_GuaranteedCommitment_GetAwsLaunchStackUrl_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "launch-stack-url"}, ""))
-	pattern_GuaranteedCommitment_VerifyAwsOnboarding_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "verify"}, ""))
+	pattern_GuaranteedCommitments_ListOrgs_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "organizations"}, "read"))
+	pattern_GuaranteedCommitments_GetCommitmentPlanDetails_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "commitment-plans", "planId"}, ""))
+	pattern_GuaranteedCommitments_CommitmentPlanApply_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "commitment-plans", "planId", "apply"}, ""))
+	pattern_GuaranteedCommitments_ListDefaultCommitmentPlans_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitment-plans", "default"}, ""))
+	pattern_GuaranteedCommitments_GetRecommendedCommitmentPlan_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitment-plans", "recommended"}, ""))
+	pattern_GuaranteedCommitments_ListCommitmentPlanLineItems_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "commitment-plans", "planId", "line-items"}, ""))
+	pattern_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "commitment-plans", "planId", "resource-matches"}, ""))
+	pattern_GuaranteedCommitments_ListCommitments_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "commitments"}, ""))
+	pattern_GuaranteedCommitments_GetCommitmentsChart_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitments", "chart"}, ""))
+	pattern_GuaranteedCommitments_GetMetrics_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "metrics"}, ""))
+	pattern_GuaranteedCommitments_ListResources_0                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resources"}, ""))
+	pattern_GuaranteedCommitments_GetResourceDailyUsage_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "resources", "resourceId", "daily-usage"}, ""))
+	pattern_GuaranteedCommitments_ListSegments_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "segments", "info"}, ""))
+	pattern_GuaranteedCommitments_GetSegmentDetails_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "segments", "segmentId"}, ""))
+	pattern_GuaranteedCommitments_ListDefaultPurchasePlans_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "purchase-plans-v1", "default"}, ""))
+	pattern_GuaranteedCommitments_RegisterOrg_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "onboarding"}, ""))
+	pattern_GuaranteedCommitments_StartAwsOnboarding_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "start"}, ""))
+	pattern_GuaranteedCommitments_GetAwsCloudFormationTemplate_0      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "cloudformation-template"}, ""))
+	pattern_GuaranteedCommitments_GetAwsLaunchStackUrl_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "launch-stack-url"}, ""))
+	pattern_GuaranteedCommitments_VerifyAwsOnboarding_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "verify"}, ""))
 )
 
 var (
-	forward_GuaranteedCommitment_ListOrgs_0                          = runtime.ForwardResponseStream
-	forward_GuaranteedCommitment_GetCommitmentPlanDetails_0          = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_CommitmentPlanApply_0               = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_ListDefaultCommitmentPlans_0        = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_GetRecommendedCommitmentPlan_0      = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_ListCommitmentPlanLineItems_0       = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_ListCommitmentPlanResourceMatches_0 = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_ListCommitments_0                   = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_GetCommitmentsChart_0               = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_GetMetrics_0                        = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_ListResources_0                     = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_GetResourceDailyUsage_0             = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_ListSegments_0                      = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_GetSegmentDetails_0                 = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_ListDefaultPurchasePlans_0          = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_RegisterOrg_0                       = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_StartAwsOnboarding_0                = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_GetAwsCloudFormationTemplate_0      = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_GetAwsLaunchStackUrl_0              = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitment_VerifyAwsOnboarding_0               = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListOrgs_0                          = runtime.ForwardResponseStream
+	forward_GuaranteedCommitments_GetCommitmentPlanDetails_0          = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_CommitmentPlanApply_0               = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListDefaultCommitmentPlans_0        = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetRecommendedCommitmentPlan_0      = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListCommitmentPlanLineItems_0       = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListCommitmentPlanResourceMatches_0 = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListCommitments_0                   = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetCommitmentsChart_0               = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetMetrics_0                        = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListResources_0                     = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetResourceDailyUsage_0             = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListSegments_0                      = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetSegmentDetails_0                 = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_ListDefaultPurchasePlans_0          = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_RegisterOrg_0                       = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_StartAwsOnboarding_0                = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetAwsCloudFormationTemplate_0      = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetAwsLaunchStackUrl_0              = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_VerifyAwsOnboarding_0               = runtime.ForwardResponseMessage
 )

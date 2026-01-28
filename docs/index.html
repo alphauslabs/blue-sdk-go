@@ -4587,7 +4587,7 @@
               
               
                 <li>
-                  <a href="#blueapi.gc.v1.GuaranteedCommitment"><span class="badge">S</span>GuaranteedCommitment</a>
+                  <a href="#blueapi.gc.v1.GuaranteedCommitments"><span class="badge">S</span>GuaranteedCommitments</a>
                 </li>
               
             </ul>
@@ -51777,34 +51777,6 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>provider</td>
-                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>displayName</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>leasedDisplayName</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>providerReservationId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>accountId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -51812,8 +51784,8 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>masterAccountId</td>
-                  <td><a href="#string">string</a></td>
+                  <td>amortizedCost</td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -51826,14 +51798,21 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>type</td>
+                  <td>canRebate</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>contractTerm</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>region</td>
+                  <td>displayName</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -51841,42 +51820,14 @@ maps to &#34;report_name&#34; conceptually </p></td>
               
                 <tr>
                   <td>durationSeconds</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>effectiveInstanceCount</td>
                   <td><a href="#int64">int64</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>reservationEnd</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>reservationStart</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>transferReservationStart</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>transferReservationEnd</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>startDate</td>
-                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -51889,106 +51840,8 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>isLeased</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>isActive</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>lease</td>
-                  <td><a href="#blueapi.gc.v1.Lease">Lease</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>leaseStart</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>leaseLockinDate</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>upfrontCost</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>recurringCost</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>isFlexible</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>paymentOption</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>offeringClass</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>offeringId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>instanceCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>effectiveInstanceCount</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>productDescription</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#int64">int64</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -52008,15 +51861,22 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>tenancy</td>
-                  <td><a href="#string">string</a></td>
+                  <td>isActive</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>az</td>
-                  <td><a href="#string">string</a></td>
+                  <td>isFlexible</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isLeased</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -52029,49 +51889,28 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>planType</td>
+                  <td>leaseLockinDate</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>scope</td>
-                  <td><a href="#blueapi.gc.v1.Scope">Scope</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>name</td>
+                  <td>leaseStart</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>orderId</td>
+                  <td>leasedDisplayName</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>resourceGroup</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>instanceFlexibility</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>savings</td>
+                  <td>monthlyCost</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -52085,6 +51924,13 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>netSavings</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
@@ -52092,8 +51938,15 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>utilization</td>
-                  <td><a href="#double">double</a></td>
+                  <td>offeringId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>paymentOption</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -52106,6 +51959,62 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
+                  <td>productDescription</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerReservation_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recurringCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>renewalPlan</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservationEnd</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservationStart</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>runningHours</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
@@ -52113,16 +52022,58 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>amortizedCost</td>
+                  <td>savings</td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>dailyUtilizations</td>
-                  <td><a href="#blueapi.gc.v1.DailyUtilization">DailyUtilization</a></td>
-                  <td>repeated</td>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transferReservationEnd</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>transferReservationStart</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>upfrontCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>utilization</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -53329,7 +53280,7 @@ maps to &#34;report_name&#34; conceptually </p></td>
                   <td>mspId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitment) </p></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitments) </p></td>
                 </tr>
               
                 <tr>
@@ -53391,7 +53342,7 @@ maps to &#34;report_name&#34; conceptually </p></td>
                   <td>mspId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitment) </p></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitments) </p></td>
                 </tr>
               
                 <tr>
@@ -54011,86 +53962,6 @@ maps to &#34;report_name&#34; conceptually </p></td>
         <p></p>
 
         
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>orgId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>search</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>filter</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>desc</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>orderBy</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>provider</td>
-                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>startDate</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>endDate</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>page</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>pageSize</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
 
         
       
@@ -54797,7 +54668,7 @@ maps to &#34;report_name&#34; conceptually </p></td>
                   <td>mspId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Ripple context (not sent to GuaranteedCommitment; used for mapping/persistence) </p></td>
+                  <td><p>Ripple context (not sent to GuaranteedCommitments; used for mapping/persistence) </p></td>
                 </tr>
               
                 <tr>
@@ -54899,7 +54770,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                   <td>memberships</td>
                   <td><a href="#blueapi.gc.v1.Membership">Membership</a></td>
                   <td>repeated</td>
-                  <td><p>GuaranteedCommitment create-org response fields </p></td>
+                  <td><p>GuaranteedCommitments create-org response fields </p></td>
                 </tr>
               
                 <tr>
@@ -55823,7 +55694,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                   <td>mspId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitment) </p></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitments) </p></td>
                 </tr>
               
                 <tr>
@@ -55885,7 +55756,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                   <td>mspId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitment) </p></td>
+                  <td><p>Ripple context (used for lookup/mapping; not sent to GuaranteedCommitments) </p></td>
                 </tr>
               
                 <tr>
@@ -55920,7 +55791,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                   <td>existingCur</td>
                   <td><a href="#blueapi.gc.v1.AwsExistingCur">AwsExistingCur</a></td>
                   <td></td>
-                  <td><p>Optional: if set, GuaranteedCommitment will use this existing CUR. If omitted, GuaranteedCommitment may create a new CUR. </p></td>
+                  <td><p>Optional: if set, GuaranteedCommitments will use this existing CUR. If omitted, GuaranteedCommitments may create a new CUR. </p></td>
                 </tr>
               
             </tbody>
@@ -56243,8 +56114,8 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
       
 
       
-        <h3 id="blueapi.gc.v1.GuaranteedCommitment">GuaranteedCommitment</h3>
-        <p>GuaranteedCommitment service definition.</p>
+        <h3 id="blueapi.gc.v1.GuaranteedCommitments">GuaranteedCommitments</h3>
+        <p>GuaranteedCommitments service definition.</p>
         <table class="enum-table">
           <thead>
             <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
@@ -56276,14 +56147,14 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td>ListDefaultCommitmentPlans</td>
                 <td><a href="#blueapi.gc.v1.ListDefaultCommitmentPlansRequest">ListDefaultCommitmentPlansRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ListDefaultCommitmentPlansResponse">ListDefaultCommitmentPlansResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitment commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.</p></td>
+                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitments commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.</p></td>
               </tr>
             
               <tr>
                 <td>GetRecommendedCommitmentPlan</td>
                 <td><a href="#blueapi.gc.v1.GetRecommendedCommitmentPlanRequest">GetRecommendedCommitmentPlanRequest</a></td>
                 <td><a href="#blueapi.gc.v1.CommitmentPlanDetails">CommitmentPlanDetails</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitment commitment plan for the specified cloud provider.</p></td>
+                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitments commitment plan for the specified cloud provider.</p></td>
               </tr>
             
               <tr>
@@ -56304,7 +56175,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td>ListCommitments</td>
                 <td><a href="#blueapi.gc.v1.ListCommitmentsRequest">ListCommitmentsRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ListCommitmentsResponse">ListCommitmentsResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves a paginated list of commitments for the specified organization and time period.</p></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves a list of commitments.</p></td>
               </tr>
             
               <tr>

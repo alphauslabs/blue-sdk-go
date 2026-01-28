@@ -19,49 +19,49 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	GuaranteedCommitment_ListOrgs_FullMethodName                          = "/blueapi.gc.v1.GuaranteedCommitment/ListOrgs"
-	GuaranteedCommitment_GetCommitmentPlanDetails_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitment/GetCommitmentPlanDetails"
-	GuaranteedCommitment_CommitmentPlanApply_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitment/CommitmentPlanApply"
-	GuaranteedCommitment_ListDefaultCommitmentPlans_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitment/ListDefaultCommitmentPlans"
-	GuaranteedCommitment_GetRecommendedCommitmentPlan_FullMethodName      = "/blueapi.gc.v1.GuaranteedCommitment/GetRecommendedCommitmentPlan"
-	GuaranteedCommitment_ListCommitmentPlanLineItems_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitment/ListCommitmentPlanLineItems"
-	GuaranteedCommitment_ListCommitmentPlanResourceMatches_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitment/ListCommitmentPlanResourceMatches"
-	GuaranteedCommitment_ListCommitments_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitment/ListCommitments"
-	GuaranteedCommitment_GetCommitmentsChart_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitment/GetCommitmentsChart"
-	GuaranteedCommitment_GetMetrics_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitment/GetMetrics"
-	GuaranteedCommitment_ListResources_FullMethodName                     = "/blueapi.gc.v1.GuaranteedCommitment/ListResources"
-	GuaranteedCommitment_GetResourceDailyUsage_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitment/GetResourceDailyUsage"
-	GuaranteedCommitment_ListSegments_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitment/ListSegments"
-	GuaranteedCommitment_GetSegmentDetails_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitment/GetSegmentDetails"
-	GuaranteedCommitment_ListDefaultPurchasePlans_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitment/ListDefaultPurchasePlans"
-	GuaranteedCommitment_RegisterOrg_FullMethodName                       = "/blueapi.gc.v1.GuaranteedCommitment/RegisterOrg"
-	GuaranteedCommitment_StartAwsOnboarding_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitment/StartAwsOnboarding"
-	GuaranteedCommitment_GetAwsCloudFormationTemplate_FullMethodName      = "/blueapi.gc.v1.GuaranteedCommitment/GetAwsCloudFormationTemplate"
-	GuaranteedCommitment_GetAwsLaunchStackUrl_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitment/GetAwsLaunchStackUrl"
-	GuaranteedCommitment_VerifyAwsOnboarding_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitment/VerifyAwsOnboarding"
+	GuaranteedCommitments_ListOrgs_FullMethodName                          = "/blueapi.gc.v1.GuaranteedCommitments/ListOrgs"
+	GuaranteedCommitments_GetCommitmentPlanDetails_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentPlanDetails"
+	GuaranteedCommitments_CommitmentPlanApply_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/CommitmentPlanApply"
+	GuaranteedCommitments_ListDefaultCommitmentPlans_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultCommitmentPlans"
+	GuaranteedCommitments_GetRecommendedCommitmentPlan_FullMethodName      = "/blueapi.gc.v1.GuaranteedCommitments/GetRecommendedCommitmentPlan"
+	GuaranteedCommitments_ListCommitmentPlanLineItems_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentPlanLineItems"
+	GuaranteedCommitments_ListCommitmentPlanResourceMatches_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentPlanResourceMatches"
+	GuaranteedCommitments_ListCommitments_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments"
+	GuaranteedCommitments_GetCommitmentsChart_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart"
+	GuaranteedCommitments_GetMetrics_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
+	GuaranteedCommitments_ListResources_FullMethodName                     = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
+	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
+	GuaranteedCommitments_ListSegments_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListSegments"
+	GuaranteedCommitments_GetSegmentDetails_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/GetSegmentDetails"
+	GuaranteedCommitments_ListDefaultPurchasePlans_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans"
+	GuaranteedCommitments_RegisterOrg_FullMethodName                       = "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg"
+	GuaranteedCommitments_StartAwsOnboarding_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding"
+	GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName      = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate"
+	GuaranteedCommitments_GetAwsLaunchStackUrl_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl"
+	GuaranteedCommitments_VerifyAwsOnboarding_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/VerifyAwsOnboarding"
 )
 
-// GuaranteedCommitmentClient is the client API for GuaranteedCommitment service.
+// GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// GuaranteedCommitment service definition.
-type GuaranteedCommitmentClient interface {
+// GuaranteedCommitments service definition.
+type GuaranteedCommitmentsClient interface {
 	// WORK-IN-PROGRESS: List all the registered orgs
-	ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (GuaranteedCommitment_ListOrgsClient, error)
+	ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ListOrgsClient, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
 	GetCommitmentPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
 	// WORK-IN-PROGRESS: Do not use. Executes a commitment purchase plan, initiating the commitment purchase process.
 	CommitmentPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitment commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitments commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
 	ListDefaultCommitmentPlans(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitment commitment plan for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitments commitment plan for the specified cloud provider.
 	GetRecommendedCommitmentPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves line items for a specific commitment plan.
 	ListCommitmentPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves resource matches for a specific commitment plan.
 	ListCommitmentPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves a paginated list of commitments for the specified organization and time period.
+	// WORK-IN-PROGRESS: Retrieves a list of commitments.
 	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error)
@@ -95,21 +95,21 @@ type GuaranteedCommitmentClient interface {
 	VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error)
 }
 
-type guaranteedCommitmentClient struct {
+type guaranteedCommitmentsClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewGuaranteedCommitmentClient(cc grpc.ClientConnInterface) GuaranteedCommitmentClient {
-	return &guaranteedCommitmentClient{cc}
+func NewGuaranteedCommitmentsClient(cc grpc.ClientConnInterface) GuaranteedCommitmentsClient {
+	return &guaranteedCommitmentsClient{cc}
 }
 
-func (c *guaranteedCommitmentClient) ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (GuaranteedCommitment_ListOrgsClient, error) {
+func (c *guaranteedCommitmentsClient) ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ListOrgsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &GuaranteedCommitment_ServiceDesc.Streams[0], GuaranteedCommitment_ListOrgs_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &GuaranteedCommitments_ServiceDesc.Streams[0], GuaranteedCommitments_ListOrgs_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &guaranteedCommitmentListOrgsClient{ClientStream: stream}
+	x := &guaranteedCommitmentsListOrgsClient{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -119,16 +119,16 @@ func (c *guaranteedCommitmentClient) ListOrgs(ctx context.Context, in *ListOrgsR
 	return x, nil
 }
 
-type GuaranteedCommitment_ListOrgsClient interface {
+type GuaranteedCommitments_ListOrgsClient interface {
 	Recv() (*Org, error)
 	grpc.ClientStream
 }
 
-type guaranteedCommitmentListOrgsClient struct {
+type guaranteedCommitmentsListOrgsClient struct {
 	grpc.ClientStream
 }
 
-func (x *guaranteedCommitmentListOrgsClient) Recv() (*Org, error) {
+func (x *guaranteedCommitmentsListOrgsClient) Recv() (*Org, error) {
 	m := new(Org)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -136,217 +136,217 @@ func (x *guaranteedCommitmentListOrgsClient) Recv() (*Org, error) {
 	return m, nil
 }
 
-func (c *guaranteedCommitmentClient) GetCommitmentPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
+func (c *guaranteedCommitmentsClient) GetCommitmentPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CommitmentPlanDetails)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetCommitmentPlanDetails_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetCommitmentPlanDetails_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) CommitmentPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
+func (c *guaranteedCommitmentsClient) CommitmentPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CommitmentPlanDetails)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_CommitmentPlanApply_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_CommitmentPlanApply_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) ListDefaultCommitmentPlans(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error) {
+func (c *guaranteedCommitmentsClient) ListDefaultCommitmentPlans(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDefaultCommitmentPlansResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_ListDefaultCommitmentPlans_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListDefaultCommitmentPlans_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) GetRecommendedCommitmentPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
+func (c *guaranteedCommitmentsClient) GetRecommendedCommitmentPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CommitmentPlanDetails)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetRecommendedCommitmentPlan_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetRecommendedCommitmentPlan_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) ListCommitmentPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error) {
+func (c *guaranteedCommitmentsClient) ListCommitmentPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListCommitmentPlanLineItemsResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_ListCommitmentPlanLineItems_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListCommitmentPlanLineItems_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) ListCommitmentPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error) {
+func (c *guaranteedCommitmentsClient) ListCommitmentPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListCommitmentPlanResourceMatchesResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_ListCommitmentPlanResourceMatches_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListCommitmentPlanResourceMatches_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error) {
+func (c *guaranteedCommitmentsClient) ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListCommitmentsResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_ListCommitments_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListCommitments_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error) {
+func (c *guaranteedCommitmentsClient) GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CommitmentsChartResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetCommitmentsChart_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetCommitmentsChart_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error) {
+func (c *guaranteedCommitmentsClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(MetricsResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetMetrics_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetMetrics_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error) {
+func (c *guaranteedCommitmentsClient) ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListResourcesResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_ListResources_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListResources_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error) {
+func (c *guaranteedCommitmentsClient) GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetResourceDailyUsageResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetResourceDailyUsage_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetResourceDailyUsage_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error) {
+func (c *guaranteedCommitmentsClient) ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListSegmentsResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_ListSegments_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListSegments_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error) {
+func (c *guaranteedCommitmentsClient) GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(SegmentDetails)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetSegmentDetails_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetSegmentDetails_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error) {
+func (c *guaranteedCommitmentsClient) ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListDefaultPurchasePlansResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_ListDefaultPurchasePlans_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListDefaultPurchasePlans_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error) {
+func (c *guaranteedCommitmentsClient) RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(RegisterOrgResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_RegisterOrg_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_RegisterOrg_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) StartAwsOnboarding(ctx context.Context, in *StartAwsOnboardingRequest, opts ...grpc.CallOption) (*StartAwsOnboardingResponse, error) {
+func (c *guaranteedCommitmentsClient) StartAwsOnboarding(ctx context.Context, in *StartAwsOnboardingRequest, opts ...grpc.CallOption) (*StartAwsOnboardingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(StartAwsOnboardingResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_StartAwsOnboarding_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_StartAwsOnboarding_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) GetAwsCloudFormationTemplate(ctx context.Context, in *GetAwsCloudFormationTemplateRequest, opts ...grpc.CallOption) (*GetAwsCloudFormationTemplateResponse, error) {
+func (c *guaranteedCommitmentsClient) GetAwsCloudFormationTemplate(ctx context.Context, in *GetAwsCloudFormationTemplateRequest, opts ...grpc.CallOption) (*GetAwsCloudFormationTemplateResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAwsCloudFormationTemplateResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetAwsCloudFormationTemplate_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) GetAwsLaunchStackUrl(ctx context.Context, in *GetAwsLaunchStackUrlRequest, opts ...grpc.CallOption) (*GetAwsLaunchStackUrlResponse, error) {
+func (c *guaranteedCommitmentsClient) GetAwsLaunchStackUrl(ctx context.Context, in *GetAwsLaunchStackUrlRequest, opts ...grpc.CallOption) (*GetAwsLaunchStackUrlResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAwsLaunchStackUrlResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_GetAwsLaunchStackUrl_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetAwsLaunchStackUrl_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *guaranteedCommitmentClient) VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error) {
+func (c *guaranteedCommitmentsClient) VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(VerifyAwsOnboardingResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitment_VerifyAwsOnboarding_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_VerifyAwsOnboarding_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// GuaranteedCommitmentServer is the server API for GuaranteedCommitment service.
-// All implementations must embed UnimplementedGuaranteedCommitmentServer
+// GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
+// All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
 //
-// GuaranteedCommitment service definition.
-type GuaranteedCommitmentServer interface {
+// GuaranteedCommitments service definition.
+type GuaranteedCommitmentsServer interface {
 	// WORK-IN-PROGRESS: List all the registered orgs
-	ListOrgs(*ListOrgsRequest, GuaranteedCommitment_ListOrgsServer) error
+	ListOrgs(*ListOrgsRequest, GuaranteedCommitments_ListOrgsServer) error
 	// WORK-IN-PROGRESS: Do not use. Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
 	GetCommitmentPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error)
 	// WORK-IN-PROGRESS: Do not use. Executes a commitment purchase plan, initiating the commitment purchase process.
 	CommitmentPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitment commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitments commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
 	ListDefaultCommitmentPlans(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitment commitment plan for the specified cloud provider.
+	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitments commitment plan for the specified cloud provider.
 	GetRecommendedCommitmentPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves line items for a specific commitment plan.
 	ListCommitmentPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves resource matches for a specific commitment plan.
 	ListCommitmentPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves a paginated list of commitments for the specified organization and time period.
+	// WORK-IN-PROGRESS: Retrieves a list of commitments.
 	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error)
@@ -378,537 +378,537 @@ type GuaranteedCommitmentServer interface {
 	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 	// and returns validation status for all required features.
 	VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error)
-	mustEmbedUnimplementedGuaranteedCommitmentServer()
+	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
-// UnimplementedGuaranteedCommitmentServer must be embedded to have forward compatible implementations.
-type UnimplementedGuaranteedCommitmentServer struct {
+// UnimplementedGuaranteedCommitmentsServer must be embedded to have forward compatible implementations.
+type UnimplementedGuaranteedCommitmentsServer struct {
 }
 
-func (UnimplementedGuaranteedCommitmentServer) ListOrgs(*ListOrgsRequest, GuaranteedCommitment_ListOrgsServer) error {
+func (UnimplementedGuaranteedCommitmentsServer) ListOrgs(*ListOrgsRequest, GuaranteedCommitments_ListOrgsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListOrgs not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetCommitmentPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetCommitmentPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentPlanDetails not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) CommitmentPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error) {
+func (UnimplementedGuaranteedCommitmentsServer) CommitmentPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitmentPlanApply not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) ListDefaultCommitmentPlans(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) ListDefaultCommitmentPlans(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDefaultCommitmentPlans not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetRecommendedCommitmentPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetRecommendedCommitmentPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendedCommitmentPlan not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) ListCommitmentPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) ListCommitmentPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCommitmentPlanLineItems not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) ListCommitmentPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) ListCommitmentPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCommitmentPlanResourceMatches not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCommitments not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentsChart not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMetrics not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListResources not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResourceDailyUsage not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListSegments not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSegmentDetails not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListDefaultPurchasePlans not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrg not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) StartAwsOnboarding(context.Context, *StartAwsOnboardingRequest) (*StartAwsOnboardingResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) StartAwsOnboarding(context.Context, *StartAwsOnboardingRequest) (*StartAwsOnboardingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method StartAwsOnboarding not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetAwsCloudFormationTemplate(context.Context, *GetAwsCloudFormationTemplateRequest) (*GetAwsCloudFormationTemplateResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetAwsCloudFormationTemplate(context.Context, *GetAwsCloudFormationTemplateRequest) (*GetAwsCloudFormationTemplateResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAwsCloudFormationTemplate not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) GetAwsLaunchStackUrl(context.Context, *GetAwsLaunchStackUrlRequest) (*GetAwsLaunchStackUrlResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) GetAwsLaunchStackUrl(context.Context, *GetAwsLaunchStackUrlRequest) (*GetAwsLaunchStackUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAwsLaunchStackUrl not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error) {
+func (UnimplementedGuaranteedCommitmentsServer) VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAwsOnboarding not implemented")
 }
-func (UnimplementedGuaranteedCommitmentServer) mustEmbedUnimplementedGuaranteedCommitmentServer() {}
+func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
-// UnsafeGuaranteedCommitmentServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to GuaranteedCommitmentServer will
+// UnsafeGuaranteedCommitmentsServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to GuaranteedCommitmentsServer will
 // result in compilation errors.
-type UnsafeGuaranteedCommitmentServer interface {
-	mustEmbedUnimplementedGuaranteedCommitmentServer()
+type UnsafeGuaranteedCommitmentsServer interface {
+	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
-func RegisterGuaranteedCommitmentServer(s grpc.ServiceRegistrar, srv GuaranteedCommitmentServer) {
-	s.RegisterService(&GuaranteedCommitment_ServiceDesc, srv)
+func RegisterGuaranteedCommitmentsServer(s grpc.ServiceRegistrar, srv GuaranteedCommitmentsServer) {
+	s.RegisterService(&GuaranteedCommitments_ServiceDesc, srv)
 }
 
-func _GuaranteedCommitment_ListOrgs_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _GuaranteedCommitments_ListOrgs_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListOrgsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(GuaranteedCommitmentServer).ListOrgs(m, &guaranteedCommitmentListOrgsServer{ServerStream: stream})
+	return srv.(GuaranteedCommitmentsServer).ListOrgs(m, &guaranteedCommitmentsListOrgsServer{ServerStream: stream})
 }
 
-type GuaranteedCommitment_ListOrgsServer interface {
+type GuaranteedCommitments_ListOrgsServer interface {
 	Send(*Org) error
 	grpc.ServerStream
 }
 
-type guaranteedCommitmentListOrgsServer struct {
+type guaranteedCommitmentsListOrgsServer struct {
 	grpc.ServerStream
 }
 
-func (x *guaranteedCommitmentListOrgsServer) Send(m *Org) error {
+func (x *guaranteedCommitmentsListOrgsServer) Send(m *Org) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _GuaranteedCommitment_GetCommitmentPlanDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetCommitmentPlanDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetCommitmentPlanDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetCommitmentPlanDetails(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetCommitmentPlanDetails(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetCommitmentPlanDetails_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetCommitmentPlanDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetCommitmentPlanDetails(ctx, req.(*GetCommitmentPlanDetailsRequest))
+		return srv.(GuaranteedCommitmentsServer).GetCommitmentPlanDetails(ctx, req.(*GetCommitmentPlanDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_CommitmentPlanApply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_CommitmentPlanApply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommitmentPlanApplyRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).CommitmentPlanApply(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).CommitmentPlanApply(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_CommitmentPlanApply_FullMethodName,
+		FullMethod: GuaranteedCommitments_CommitmentPlanApply_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).CommitmentPlanApply(ctx, req.(*CommitmentPlanApplyRequest))
+		return srv.(GuaranteedCommitmentsServer).CommitmentPlanApply(ctx, req.(*CommitmentPlanApplyRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_ListDefaultCommitmentPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_ListDefaultCommitmentPlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDefaultCommitmentPlansRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).ListDefaultCommitmentPlans(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListDefaultCommitmentPlans(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_ListDefaultCommitmentPlans_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListDefaultCommitmentPlans_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).ListDefaultCommitmentPlans(ctx, req.(*ListDefaultCommitmentPlansRequest))
+		return srv.(GuaranteedCommitmentsServer).ListDefaultCommitmentPlans(ctx, req.(*ListDefaultCommitmentPlansRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_GetRecommendedCommitmentPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetRecommendedCommitmentPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRecommendedCommitmentPlanRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetRecommendedCommitmentPlan(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetRecommendedCommitmentPlan(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetRecommendedCommitmentPlan_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetRecommendedCommitmentPlan_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetRecommendedCommitmentPlan(ctx, req.(*GetRecommendedCommitmentPlanRequest))
+		return srv.(GuaranteedCommitmentsServer).GetRecommendedCommitmentPlan(ctx, req.(*GetRecommendedCommitmentPlanRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_ListCommitmentPlanLineItems_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_ListCommitmentPlanLineItems_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListCommitmentPlanLineItemsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).ListCommitmentPlanLineItems(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListCommitmentPlanLineItems(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_ListCommitmentPlanLineItems_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListCommitmentPlanLineItems_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).ListCommitmentPlanLineItems(ctx, req.(*ListCommitmentPlanLineItemsRequest))
+		return srv.(GuaranteedCommitmentsServer).ListCommitmentPlanLineItems(ctx, req.(*ListCommitmentPlanLineItemsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_ListCommitmentPlanResourceMatches_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_ListCommitmentPlanResourceMatches_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListCommitmentPlanResourceMatchesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).ListCommitmentPlanResourceMatches(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListCommitmentPlanResourceMatches(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_ListCommitmentPlanResourceMatches_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListCommitmentPlanResourceMatches_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).ListCommitmentPlanResourceMatches(ctx, req.(*ListCommitmentPlanResourceMatchesRequest))
+		return srv.(GuaranteedCommitmentsServer).ListCommitmentPlanResourceMatches(ctx, req.(*ListCommitmentPlanResourceMatchesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_ListCommitments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_ListCommitments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListCommitmentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).ListCommitments(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListCommitments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_ListCommitments_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListCommitments_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).ListCommitments(ctx, req.(*ListCommitmentsRequest))
+		return srv.(GuaranteedCommitmentsServer).ListCommitments(ctx, req.(*ListCommitmentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_GetCommitmentsChart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetCommitmentsChart_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetCommitmentsChartRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetCommitmentsChart(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetCommitmentsChart(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetCommitmentsChart_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetCommitmentsChart_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetCommitmentsChart(ctx, req.(*GetCommitmentsChartRequest))
+		return srv.(GuaranteedCommitmentsServer).GetCommitmentsChart(ctx, req.(*GetCommitmentsChartRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetMetricsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetMetrics(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetMetrics(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetMetrics_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetMetrics_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetMetrics(ctx, req.(*GetMetricsRequest))
+		return srv.(GuaranteedCommitmentsServer).GetMetrics(ctx, req.(*GetMetricsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_ListResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_ListResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListResourcesRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).ListResources(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListResources(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_ListResources_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListResources_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).ListResources(ctx, req.(*ListResourcesRequest))
+		return srv.(GuaranteedCommitmentsServer).ListResources(ctx, req.(*ListResourcesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_GetResourceDailyUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetResourceDailyUsage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetResourceDailyUsageRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetResourceDailyUsage(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetResourceDailyUsage(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetResourceDailyUsage_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetResourceDailyUsage_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetResourceDailyUsage(ctx, req.(*GetResourceDailyUsageRequest))
+		return srv.(GuaranteedCommitmentsServer).GetResourceDailyUsage(ctx, req.(*GetResourceDailyUsageRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_ListSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_ListSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListSegmentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).ListSegments(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListSegments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_ListSegments_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListSegments_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).ListSegments(ctx, req.(*ListSegmentsRequest))
+		return srv.(GuaranteedCommitmentsServer).ListSegments(ctx, req.(*ListSegmentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_GetSegmentDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetSegmentDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetSegmentDetailsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetSegmentDetails(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetSegmentDetails(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetSegmentDetails_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetSegmentDetails_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetSegmentDetails(ctx, req.(*GetSegmentDetailsRequest))
+		return srv.(GuaranteedCommitmentsServer).GetSegmentDetails(ctx, req.(*GetSegmentDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_ListDefaultPurchasePlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_ListDefaultPurchasePlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListDefaultPurchasePlansRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).ListDefaultPurchasePlans(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListDefaultPurchasePlans(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_ListDefaultPurchasePlans_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListDefaultPurchasePlans_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).ListDefaultPurchasePlans(ctx, req.(*ListDefaultPurchasePlansRequest))
+		return srv.(GuaranteedCommitmentsServer).ListDefaultPurchasePlans(ctx, req.(*ListDefaultPurchasePlansRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_RegisterOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_RegisterOrg_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(RegisterOrgRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).RegisterOrg(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).RegisterOrg(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_RegisterOrg_FullMethodName,
+		FullMethod: GuaranteedCommitments_RegisterOrg_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).RegisterOrg(ctx, req.(*RegisterOrgRequest))
+		return srv.(GuaranteedCommitmentsServer).RegisterOrg(ctx, req.(*RegisterOrgRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_StartAwsOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_StartAwsOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(StartAwsOnboardingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).StartAwsOnboarding(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).StartAwsOnboarding(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_StartAwsOnboarding_FullMethodName,
+		FullMethod: GuaranteedCommitments_StartAwsOnboarding_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).StartAwsOnboarding(ctx, req.(*StartAwsOnboardingRequest))
+		return srv.(GuaranteedCommitmentsServer).StartAwsOnboarding(ctx, req.(*StartAwsOnboardingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_GetAwsCloudFormationTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetAwsCloudFormationTemplate_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAwsCloudFormationTemplateRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetAwsCloudFormationTemplate(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetAwsCloudFormationTemplate(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetAwsCloudFormationTemplate_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetAwsCloudFormationTemplate(ctx, req.(*GetAwsCloudFormationTemplateRequest))
+		return srv.(GuaranteedCommitmentsServer).GetAwsCloudFormationTemplate(ctx, req.(*GetAwsCloudFormationTemplateRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_GetAwsLaunchStackUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_GetAwsLaunchStackUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetAwsLaunchStackUrlRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).GetAwsLaunchStackUrl(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).GetAwsLaunchStackUrl(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_GetAwsLaunchStackUrl_FullMethodName,
+		FullMethod: GuaranteedCommitments_GetAwsLaunchStackUrl_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).GetAwsLaunchStackUrl(ctx, req.(*GetAwsLaunchStackUrlRequest))
+		return srv.(GuaranteedCommitmentsServer).GetAwsLaunchStackUrl(ctx, req.(*GetAwsLaunchStackUrlRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitment_VerifyAwsOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _GuaranteedCommitments_VerifyAwsOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(VerifyAwsOnboardingRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentServer).VerifyAwsOnboarding(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).VerifyAwsOnboarding(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitment_VerifyAwsOnboarding_FullMethodName,
+		FullMethod: GuaranteedCommitments_VerifyAwsOnboarding_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentServer).VerifyAwsOnboarding(ctx, req.(*VerifyAwsOnboardingRequest))
+		return srv.(GuaranteedCommitmentsServer).VerifyAwsOnboarding(ctx, req.(*VerifyAwsOnboardingRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// GuaranteedCommitment_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitment service.
+// GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var GuaranteedCommitment_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "blueapi.gc.v1.GuaranteedCommitment",
-	HandlerType: (*GuaranteedCommitmentServer)(nil),
+var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "blueapi.gc.v1.GuaranteedCommitments",
+	HandlerType: (*GuaranteedCommitmentsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetCommitmentPlanDetails",
-			Handler:    _GuaranteedCommitment_GetCommitmentPlanDetails_Handler,
+			Handler:    _GuaranteedCommitments_GetCommitmentPlanDetails_Handler,
 		},
 		{
 			MethodName: "CommitmentPlanApply",
-			Handler:    _GuaranteedCommitment_CommitmentPlanApply_Handler,
+			Handler:    _GuaranteedCommitments_CommitmentPlanApply_Handler,
 		},
 		{
 			MethodName: "ListDefaultCommitmentPlans",
-			Handler:    _GuaranteedCommitment_ListDefaultCommitmentPlans_Handler,
+			Handler:    _GuaranteedCommitments_ListDefaultCommitmentPlans_Handler,
 		},
 		{
 			MethodName: "GetRecommendedCommitmentPlan",
-			Handler:    _GuaranteedCommitment_GetRecommendedCommitmentPlan_Handler,
+			Handler:    _GuaranteedCommitments_GetRecommendedCommitmentPlan_Handler,
 		},
 		{
 			MethodName: "ListCommitmentPlanLineItems",
-			Handler:    _GuaranteedCommitment_ListCommitmentPlanLineItems_Handler,
+			Handler:    _GuaranteedCommitments_ListCommitmentPlanLineItems_Handler,
 		},
 		{
 			MethodName: "ListCommitmentPlanResourceMatches",
-			Handler:    _GuaranteedCommitment_ListCommitmentPlanResourceMatches_Handler,
+			Handler:    _GuaranteedCommitments_ListCommitmentPlanResourceMatches_Handler,
 		},
 		{
 			MethodName: "ListCommitments",
-			Handler:    _GuaranteedCommitment_ListCommitments_Handler,
+			Handler:    _GuaranteedCommitments_ListCommitments_Handler,
 		},
 		{
 			MethodName: "GetCommitmentsChart",
-			Handler:    _GuaranteedCommitment_GetCommitmentsChart_Handler,
+			Handler:    _GuaranteedCommitments_GetCommitmentsChart_Handler,
 		},
 		{
 			MethodName: "GetMetrics",
-			Handler:    _GuaranteedCommitment_GetMetrics_Handler,
+			Handler:    _GuaranteedCommitments_GetMetrics_Handler,
 		},
 		{
 			MethodName: "ListResources",
-			Handler:    _GuaranteedCommitment_ListResources_Handler,
+			Handler:    _GuaranteedCommitments_ListResources_Handler,
 		},
 		{
 			MethodName: "GetResourceDailyUsage",
-			Handler:    _GuaranteedCommitment_GetResourceDailyUsage_Handler,
+			Handler:    _GuaranteedCommitments_GetResourceDailyUsage_Handler,
 		},
 		{
 			MethodName: "ListSegments",
-			Handler:    _GuaranteedCommitment_ListSegments_Handler,
+			Handler:    _GuaranteedCommitments_ListSegments_Handler,
 		},
 		{
 			MethodName: "GetSegmentDetails",
-			Handler:    _GuaranteedCommitment_GetSegmentDetails_Handler,
+			Handler:    _GuaranteedCommitments_GetSegmentDetails_Handler,
 		},
 		{
 			MethodName: "ListDefaultPurchasePlans",
-			Handler:    _GuaranteedCommitment_ListDefaultPurchasePlans_Handler,
+			Handler:    _GuaranteedCommitments_ListDefaultPurchasePlans_Handler,
 		},
 		{
 			MethodName: "RegisterOrg",
-			Handler:    _GuaranteedCommitment_RegisterOrg_Handler,
+			Handler:    _GuaranteedCommitments_RegisterOrg_Handler,
 		},
 		{
 			MethodName: "StartAwsOnboarding",
-			Handler:    _GuaranteedCommitment_StartAwsOnboarding_Handler,
+			Handler:    _GuaranteedCommitments_StartAwsOnboarding_Handler,
 		},
 		{
 			MethodName: "GetAwsCloudFormationTemplate",
-			Handler:    _GuaranteedCommitment_GetAwsCloudFormationTemplate_Handler,
+			Handler:    _GuaranteedCommitments_GetAwsCloudFormationTemplate_Handler,
 		},
 		{
 			MethodName: "GetAwsLaunchStackUrl",
-			Handler:    _GuaranteedCommitment_GetAwsLaunchStackUrl_Handler,
+			Handler:    _GuaranteedCommitments_GetAwsLaunchStackUrl_Handler,
 		},
 		{
 			MethodName: "VerifyAwsOnboarding",
-			Handler:    _GuaranteedCommitment_VerifyAwsOnboarding_Handler,
+			Handler:    _GuaranteedCommitments_VerifyAwsOnboarding_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ListOrgs",
-			Handler:       _GuaranteedCommitment_ListOrgs_Handler,
+			Handler:       _GuaranteedCommitments_ListOrgs_Handler,
 			ServerStreams: true,
 		},
 	},
