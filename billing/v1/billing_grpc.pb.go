@@ -423,7 +423,7 @@ type BillingClient interface {
 	SetChildBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *SetChildBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Sets the customized billing service in child billing group. Only available in Ripple.
 	SetChildBillingGroupCustomizedBillingService(ctx context.Context, in *SetChildBillingGroupCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// Create billing group in bulk
+	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error)
@@ -2700,7 +2700,7 @@ type BillingServer interface {
 	SetChildBillingGroupInvoiceServiceDiscounts(context.Context, *SetChildBillingGroupInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Sets the customized billing service in child billing group. Only available in Ripple.
 	SetChildBillingGroupCustomizedBillingService(context.Context, *SetChildBillingGroupCustomizedBillingServiceRequest) (*emptypb.Empty, error)
-	// Create billing group in bulk
+	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error)

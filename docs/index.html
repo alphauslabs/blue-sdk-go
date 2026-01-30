@@ -17882,10 +17882,24 @@ At the moment, only `aws` is supported. </p></td>
             <tbody>
               
                 <tr>
-                  <td>request</td>
-                  <td><a href="#blueapi.billing.v1.CreateBillingGroupRequest">CreateBillingGroupRequest</a></td>
-                  <td>repeated</td>
-                  <td><p>Required. The list of billing group to create. </p></td>
+                  <td>csvContent</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Required. The CSV file content as bytes. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>delimiter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The delimiter used in the CSV file. Defaults to comma (,). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasHeader</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Whether the CSV file has a header row. Defaults to true. </p></td>
                 </tr>
               
             </tbody>
@@ -26187,7 +26201,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>BulkCreateBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</a> stream</td>
-                <td><p>Create billing group in bulk</p></td>
+                <td><p>Create billing group in bulk from CSV file</p></td>
               </tr>
             
               <tr>
