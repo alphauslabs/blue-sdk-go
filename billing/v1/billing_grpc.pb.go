@@ -150,6 +150,7 @@ const (
 	Billing_SetChildBillingGroupInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/SetChildBillingGroupInvoiceServiceDiscounts"
 	Billing_SetChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/SetChildBillingGroupAccountInvoiceServiceDiscounts"
 	Billing_SetChildBillingGroupCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService"
+	Billing_GetChildBillingGroupCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/GetChildBillingGroupCustomizedBillingService"
 	Billing_BulkCreateBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
 	Billing_CreateExcludeServiceEntry_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
 	Billing_UpdateExcludeServiceEntry_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
@@ -426,6 +427,8 @@ type BillingClient interface {
 	SetChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *SetChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Sets the customized billing service in child billing group. Only available in Ripple.
 	SetChildBillingGroupCustomizedBillingService(ctx context.Context, in *SetChildBillingGroupCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Gets the customized billing service in child billing group. Only available in Ripple.
+	GetChildBillingGroupCustomizedBillingService(ctx context.Context, in *GetChildBillingGroupCustomizedBillingServiceRequest, opts ...grpc.CallOption) (Billing_GetChildBillingGroupCustomizedBillingServiceClient, error)
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
 	// Create Exclude Service Entry
@@ -2373,9 +2376,42 @@ func (c *billingClient) SetChildBillingGroupCustomizedBillingService(ctx context
 	return out, nil
 }
 
+func (c *billingClient) GetChildBillingGroupCustomizedBillingService(ctx context.Context, in *GetChildBillingGroupCustomizedBillingServiceRequest, opts ...grpc.CallOption) (Billing_GetChildBillingGroupCustomizedBillingServiceClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[29], Billing_GetChildBillingGroupCustomizedBillingService_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingGetChildBillingGroupCustomizedBillingServiceClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_GetChildBillingGroupCustomizedBillingServiceClient interface {
+	Recv() (*GetChildBillingGroupCustomizedBillingServiceResponse, error)
+	grpc.ClientStream
+}
+
+type billingGetChildBillingGroupCustomizedBillingServiceClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingGetChildBillingGroupCustomizedBillingServiceClient) Recv() (*GetChildBillingGroupCustomizedBillingServiceResponse, error) {
+	m := new(GetChildBillingGroupCustomizedBillingServiceResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *billingClient) BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[29], Billing_BulkCreateBillingGroup_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[30], Billing_BulkCreateBillingGroup_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2715,6 +2751,8 @@ type BillingServer interface {
 	SetChildBillingGroupAccountInvoiceServiceDiscounts(context.Context, *SetChildBillingGroupAccountInvoiceServiceDiscountsRequest) (*emptypb.Empty, error)
 	// Sets the customized billing service in child billing group. Only available in Ripple.
 	SetChildBillingGroupCustomizedBillingService(context.Context, *SetChildBillingGroupCustomizedBillingServiceRequest) (*emptypb.Empty, error)
+	// Gets the customized billing service in child billing group. Only available in Ripple.
+	GetChildBillingGroupCustomizedBillingService(*GetChildBillingGroupCustomizedBillingServiceRequest, Billing_GetChildBillingGroupCustomizedBillingServiceServer) error
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
 	// Create Exclude Service Entry
@@ -3109,6 +3147,9 @@ func (UnimplementedBillingServer) SetChildBillingGroupAccountInvoiceServiceDisco
 }
 func (UnimplementedBillingServer) SetChildBillingGroupCustomizedBillingService(context.Context, *SetChildBillingGroupCustomizedBillingServiceRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetChildBillingGroupCustomizedBillingService not implemented")
+}
+func (UnimplementedBillingServer) GetChildBillingGroupCustomizedBillingService(*GetChildBillingGroupCustomizedBillingServiceRequest, Billing_GetChildBillingGroupCustomizedBillingServiceServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetChildBillingGroupCustomizedBillingService not implemented")
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
@@ -5493,6 +5534,27 @@ func _Billing_SetChildBillingGroupCustomizedBillingService_Handler(srv interface
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetChildBillingGroupCustomizedBillingService_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetChildBillingGroupCustomizedBillingServiceRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).GetChildBillingGroupCustomizedBillingService(m, &billingGetChildBillingGroupCustomizedBillingServiceServer{ServerStream: stream})
+}
+
+type Billing_GetChildBillingGroupCustomizedBillingServiceServer interface {
+	Send(*GetChildBillingGroupCustomizedBillingServiceResponse) error
+	grpc.ServerStream
+}
+
+type billingGetChildBillingGroupCustomizedBillingServiceServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingGetChildBillingGroupCustomizedBillingServiceServer) Send(m *GetChildBillingGroupCustomizedBillingServiceResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Billing_BulkCreateBillingGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(BulkCreateBillingGroupRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -6142,6 +6204,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListChildBillingGroups",
 			Handler:       _Billing_ListChildBillingGroups_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "GetChildBillingGroupCustomizedBillingService",
+			Handler:       _Billing_GetChildBillingGroupCustomizedBillingService_Handler,
 			ServerStreams: true,
 		},
 		{

@@ -1647,6 +1647,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceRequest"><span class="badge">M</span>GetChildBillingGroupCustomizedBillingServiceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceResponse"><span class="badge">M</span>GetChildBillingGroupCustomizedBillingServiceResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetChildBillingGroupRequest"><span class="badge">M</span>GetChildBillingGroupRequest</a>
                 </li>
               
@@ -20949,6 +20957,82 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceRequest">GetChildBillingGroupCustomizedBillingServiceRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>internalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Internal Id </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, `aws` is supported. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceResponse">GetChildBillingGroupCustomizedBillingServiceResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.CustomizedBillingService.id] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. vendor that applied to the CustomizedBillingService　config. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>chargingTarget</td>
+                  <td><a href="#blueapi.api.ripple.ChargingTarget">blueapi.api.ripple.ChargingTarget</a></td>
+                  <td></td>
+                  <td><p>Required. [blueapi.api.ripple.ChargingTarget] </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.api.Account">blueapi.api.Account</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. accounts that applied to the CustomizedBillingService　config. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetChildBillingGroupRequest">GetChildBillingGroupRequest</h3>
         <p></p>
 
@@ -26248,6 +26332,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>GetChildBillingGroupCustomizedBillingService</td>
+                <td><a href="#blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceRequest">GetChildBillingGroupCustomizedBillingServiceRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceResponse">GetChildBillingGroupCustomizedBillingServiceResponse</a> stream</td>
+                <td><p>Gets the customized billing service in child billing group. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>BulkCreateBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</a></td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</a> stream</td>
@@ -27557,6 +27648,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/billinggroups/child/{internalId}/customizedbillingservice/{vendor}</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetChildBillingGroupCustomizedBillingService</td>
+                <td>GET</td>
+                <td>/v1/billinggroups/child/{internalId}/customizedbillingservice/{vendor}</td>
+                <td></td>
               </tr>
               
             

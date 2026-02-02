@@ -5009,6 +5009,43 @@ func local_request_Billing_SetChildBillingGroupCustomizedBillingService_0(ctx co
 	return msg, metadata, err
 }
 
+func request_Billing_GetChildBillingGroupCustomizedBillingService_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_GetChildBillingGroupCustomizedBillingServiceClient, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetChildBillingGroupCustomizedBillingServiceRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["internalId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "internalId")
+	}
+	protoReq.InternalId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "internalId", err)
+	}
+	val, ok = pathParams["vendor"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
+	}
+	protoReq.Vendor, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	stream, err := client.GetChildBillingGroupCustomizedBillingService(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+}
+
 func request_Billing_BulkCreateBillingGroup_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_BulkCreateBillingGroupClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq BulkCreateBillingGroupRequest
@@ -7305,6 +7342,13 @@ func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		forward_Billing_SetChildBillingGroupCustomizedBillingService_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
+	mux.Handle(http.MethodGet, pattern_Billing_GetChildBillingGroupCustomizedBillingService_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
+
 	mux.Handle(http.MethodPost, pattern_Billing_BulkCreateBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
 		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
@@ -9573,6 +9617,23 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		}
 		forward_Billing_SetChildBillingGroupCustomizedBillingService_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_Billing_GetChildBillingGroupCustomizedBillingService_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetChildBillingGroupCustomizedBillingService", runtime.WithHTTPPathPattern("/v1/billinggroups/child/{internalId}/customizedbillingservice/{vendor}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Billing_GetChildBillingGroupCustomizedBillingService_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Billing_GetChildBillingGroupCustomizedBillingService_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPost, pattern_Billing_BulkCreateBillingGroup_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -9788,6 +9849,7 @@ var (
 	pattern_Billing_SetChildBillingGroupInvoiceServiceDiscounts_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "billinggroups", "child", "internalId", "servicediscounts"}, ""))
 	pattern_Billing_SetChildBillingGroupAccountInvoiceServiceDiscounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 2, 5}, []string{"v1", "billinggroups", "child", "internalId", "servicediscounts", "account"}, ""))
 	pattern_Billing_SetChildBillingGroupCustomizedBillingService_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "billinggroups", "child", "internalId", "customizedbillingservice", "vendor"}, ""))
+	pattern_Billing_GetChildBillingGroupCustomizedBillingService_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "billinggroups", "child", "internalId", "customizedbillingservice", "vendor"}, ""))
 	pattern_Billing_BulkCreateBillingGroup_0                             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "billinggroups"}, "bulkCreate"))
 	pattern_Billing_CreateExcludeServiceEntry_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "billinggroups", "exclude-service-settings"}, ""))
 	pattern_Billing_UpdateExcludeServiceEntry_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "billinggroups", "exclude-service-settings"}, ""))
@@ -9922,6 +9984,7 @@ var (
 	forward_Billing_SetChildBillingGroupInvoiceServiceDiscounts_0        = runtime.ForwardResponseMessage
 	forward_Billing_SetChildBillingGroupAccountInvoiceServiceDiscounts_0 = runtime.ForwardResponseMessage
 	forward_Billing_SetChildBillingGroupCustomizedBillingService_0       = runtime.ForwardResponseMessage
+	forward_Billing_GetChildBillingGroupCustomizedBillingService_0       = runtime.ForwardResponseStream
 	forward_Billing_BulkCreateBillingGroup_0                             = runtime.ForwardResponseStream
 	forward_Billing_CreateExcludeServiceEntry_0                          = runtime.ForwardResponseMessage
 	forward_Billing_UpdateExcludeServiceEntry_0                          = runtime.ForwardResponseMessage
