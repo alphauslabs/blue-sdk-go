@@ -24,138 +24,140 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Billing_ListBillingGroups_FullMethodName                                  = "/blueapi.billing.v1.Billing/ListBillingGroups"
-	Billing_ListBillingGroupsPaginated_FullMethodName                         = "/blueapi.billing.v1.Billing/ListBillingGroupsPaginated"
-	Billing_CreateBillingGroup_FullMethodName                                 = "/blueapi.billing.v1.Billing/CreateBillingGroup"
-	Billing_CreateBillingGroupMerged_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateBillingGroupMerged"
-	Billing_DeleteBillinGroup_FullMethodName                                  = "/blueapi.billing.v1.Billing/DeleteBillinGroup"
-	Billing_AddAccountToBillingGroup_FullMethodName                           = "/blueapi.billing.v1.Billing/AddAccountToBillingGroup"
-	Billing_GetBillingGroup_FullMethodName                                    = "/blueapi.billing.v1.Billing/GetBillingGroup"
-	Billing_GetAccessGroup_FullMethodName                                     = "/blueapi.billing.v1.Billing/GetAccessGroup"
-	Billing_ListAwsDailyRunHistory_FullMethodName                             = "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory"
-	Billing_ListUsageCostsDrift_FullMethodName                                = "/blueapi.billing.v1.Billing/ListUsageCostsDrift"
-	Billing_CreateInvoice_FullMethodName                                      = "/blueapi.billing.v1.Billing/CreateInvoice"
-	Billing_CreateInvoiceWithSettings_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateInvoiceWithSettings"
-	Billing_SaveInvoiceSettings_FullMethodName                                = "/blueapi.billing.v1.Billing/SaveInvoiceSettings"
-	Billing_ConvertInvoiceToPdf_FullMethodName                                = "/blueapi.billing.v1.Billing/ConvertInvoiceToPdf"
-	Billing_GetInvoiceStatus_FullMethodName                                   = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
-	Billing_ListInvoiceStatus_FullMethodName                                  = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
-	Billing_GetInvoice_FullMethodName                                         = "/blueapi.billing.v1.Billing/GetInvoice"
-	Billing_ListInvoice_FullMethodName                                        = "/blueapi.billing.v1.Billing/ListInvoice"
-	Billing_UpdateInvoicePreviews_FullMethodName                              = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
-	Billing_ExportInvoiceFile_FullMethodName                                  = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
-	Billing_ListInvoiceTemplate_FullMethodName                                = "/blueapi.billing.v1.Billing/ListInvoiceTemplate"
-	Billing_GetInvoiceDisplaySettings_FullMethodName                          = "/blueapi.billing.v1.Billing/GetInvoiceDisplaySettings"
-	Billing_UpdateInvoiceDisplaySettings_FullMethodName                       = "/blueapi.billing.v1.Billing/UpdateInvoiceDisplaySettings"
-	Billing_UpdateInvoiceExchangeRate_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateInvoiceExchangeRate"
-	Billing_UpdateBillingGroupInvoiceTemplate_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceTemplate"
-	Billing_ReadServiceDiscountsServices_FullMethodName                       = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
-	Billing_CreateInvoiceServiceDiscounts_FullMethodName                      = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
-	Billing_UpdateInvoiceServiceDiscounts_FullMethodName                      = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
-	Billing_DeleteInvoiceServiceDiscounts_FullMethodName                      = "/blueapi.billing.v1.Billing/DeleteInvoiceServiceDiscounts"
-	Billing_ListInvoiceServiceDiscounts_FullMethodName                        = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
-	Billing_GetInvoiceServiceDiscounts_FullMethodName                         = "/blueapi.billing.v1.Billing/GetInvoiceServiceDiscounts"
-	Billing_ExportServiceDiscounts_FullMethodName                             = "/blueapi.billing.v1.Billing/ExportServiceDiscounts"
-	Billing_CreateBillingGroupInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/CreateBillingGroupInvoiceServiceDiscounts"
-	Billing_UpdateBillingGroupInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceServiceDiscounts"
-	Billing_DeleteBillingGroupInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/DeleteBillingGroupInvoiceServiceDiscounts"
-	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName                 = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
-	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName               = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
-	Billing_UpdateAccountInvoiceServiceDiscounts_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateAccountInvoiceServiceDiscounts"
-	Billing_RemoveAccountInvoiceServiceDiscounts_FullMethodName               = "/blueapi.billing.v1.Billing/RemoveAccountInvoiceServiceDiscounts"
-	Billing_DeleteAccountInvoiceServiceDiscounts_FullMethodName               = "/blueapi.billing.v1.Billing/DeleteAccountInvoiceServiceDiscounts"
-	Billing_ExportAccountInvoiceServiceDiscounts_FullMethodName               = "/blueapi.billing.v1.Billing/ExportAccountInvoiceServiceDiscounts"
-	Billing_ExportBillingGroupInvoiceServiceDiscounts_FullMethodName          = "/blueapi.billing.v1.Billing/ExportBillingGroupInvoiceServiceDiscounts"
-	Billing_GetBillingGroupInvoiceServiceDiscounts_FullMethodName             = "/blueapi.billing.v1.Billing/GetBillingGroupInvoiceServiceDiscounts"
-	Billing_CreateReseller_FullMethodName                                     = "/blueapi.billing.v1.Billing/CreateReseller"
-	Billing_ListResellers_FullMethodName                                      = "/blueapi.billing.v1.Billing/ListResellers"
-	Billing_GetReseller_FullMethodName                                        = "/blueapi.billing.v1.Billing/GetReseller"
-	Billing_UpdateReseller_FullMethodName                                     = "/blueapi.billing.v1.Billing/UpdateReseller"
-	Billing_DeleteReseller_FullMethodName                                     = "/blueapi.billing.v1.Billing/DeleteReseller"
-	Billing_GetBillingSetting_FullMethodName                                  = "/blueapi.billing.v1.Billing/GetBillingSetting"
-	Billing_ListExchangeRates_FullMethodName                                  = "/blueapi.billing.v1.Billing/ListExchangeRates"
-	Billing_SetGlobalExchangeRate_FullMethodName                              = "/blueapi.billing.v1.Billing/SetGlobalExchangeRate"
-	Billing_SetPayerExchangeRate_FullMethodName                               = "/blueapi.billing.v1.Billing/SetPayerExchangeRate"
-	Billing_SetBillingGroupExchangeRate_FullMethodName                        = "/blueapi.billing.v1.Billing/SetBillingGroupExchangeRate"
-	Billing_ListAccessGroups_FullMethodName                                   = "/blueapi.billing.v1.Billing/ListAccessGroups"
-	Billing_CreateAccessGroup_FullMethodName                                  = "/blueapi.billing.v1.Billing/CreateAccessGroup"
-	Billing_UpdateAccessGroup_FullMethodName                                  = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
-	Billing_DeleteAccessGroup_FullMethodName                                  = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
-	Billing_ListAbcBillingGroups_FullMethodName                               = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
-	Billing_ListAbcBillingGroupAccounts_FullMethodName                        = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
-	Billing_ReadInvoiceAdjustments_FullMethodName                             = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
-	Billing_ReadAdjustmentEntries_FullMethodName                              = "/blueapi.billing.v1.Billing/ReadAdjustmentEntries"
-	Billing_GetAdjustmentEntry_FullMethodName                                 = "/blueapi.billing.v1.Billing/GetAdjustmentEntry"
-	Billing_ApplyAdjustmentEntry_FullMethodName                               = "/blueapi.billing.v1.Billing/ApplyAdjustmentEntry"
-	Billing_RestoreAdjustmentEntry_FullMethodName                             = "/blueapi.billing.v1.Billing/RestoreAdjustmentEntry"
-	Billing_SplitAdjustmentEntry_FullMethodName                               = "/blueapi.billing.v1.Billing/SplitAdjustmentEntry"
-	Billing_AllocateAdjustmentEntry_FullMethodName                            = "/blueapi.billing.v1.Billing/AllocateAdjustmentEntry"
-	Billing_RestoreSplitAdjustmentEntry_FullMethodName                        = "/blueapi.billing.v1.Billing/RestoreSplitAdjustmentEntry"
-	Billing_RestoreAllocateAdjustmentEntry_FullMethodName                     = "/blueapi.billing.v1.Billing/RestoreAllocateAdjustmentEntry"
-	Billing_ListAccountResources_FullMethodName                               = "/blueapi.billing.v1.Billing/ListAccountResources"
-	Billing_GetAdjustmentConfig_FullMethodName                                = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
-	Billing_CreateAdjustmentConfig_FullMethodName                             = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
-	Billing_UpdateAdjustmentConfig_FullMethodName                             = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
-	Billing_DeleteAdjustmentConfig_FullMethodName                             = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
-	Billing_ReadUntaggedGroups_FullMethodName                                 = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
-	Billing_ReadCustomizedBillingServices_FullMethodName                      = "/blueapi.billing.v1.Billing/ReadCustomizedBillingServices"
-	Billing_GetCustomizedBillingService_FullMethodName                        = "/blueapi.billing.v1.Billing/GetCustomizedBillingService"
-	Billing_CreateCustomizedBillingService_FullMethodName                     = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
-	Billing_UpdateCustomizedBillingService_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
-	Billing_DeleteCustomizedBillingService_FullMethodName                     = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
-	Billing_GetCustomizedBillingServiceBillingGroup_FullMethodName            = "/blueapi.billing.v1.Billing/GetCustomizedBillingServiceBillingGroup"
-	Billing_SetCustomizedBillingServiceBillingGroup_FullMethodName            = "/blueapi.billing.v1.Billing/SetCustomizedBillingServiceBillingGroup"
-	Billing_DeleteCustomizedBillingServiceBillingGroup_FullMethodName         = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingServiceBillingGroup"
-	Billing_GetTags_FullMethodName                                            = "/blueapi.billing.v1.Billing/GetTags"
-	Billing_CreateCustomField_FullMethodName                                  = "/blueapi.billing.v1.Billing/CreateCustomField"
-	Billing_ListCustomField_FullMethodName                                    = "/blueapi.billing.v1.Billing/ListCustomField"
-	Billing_AddBillingGroupCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/AddBillingGroupCustomField"
-	Billing_ListBillingGroupCustomField_FullMethodName                        = "/blueapi.billing.v1.Billing/ListBillingGroupCustomField"
-	Billing_AddTagsToBillingGroup_FullMethodName                              = "/blueapi.billing.v1.Billing/AddTagsToBillingGroup"
-	Billing_UpdateNonTagGroupToBillingGroup_FullMethodName                    = "/blueapi.billing.v1.Billing/UpdateNonTagGroupToBillingGroup"
-	Billing_DeleteBillingGroupCustomField_FullMethodName                      = "/blueapi.billing.v1.Billing/DeleteBillingGroupCustomField"
-	Billing_UpdateCustomField_FullMethodName                                  = "/blueapi.billing.v1.Billing/UpdateCustomField"
-	Billing_DeleteCustomField_FullMethodName                                  = "/blueapi.billing.v1.Billing/DeleteCustomField"
-	Billing_CreateFreeFormat_FullMethodName                                   = "/blueapi.billing.v1.Billing/CreateFreeFormat"
-	Billing_DeleteFreeFormat_FullMethodName                                   = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
-	Billing_GetFreeFormat_FullMethodName                                      = "/blueapi.billing.v1.Billing/GetFreeFormat"
-	Billing_GetTagsAddingSetting_FullMethodName                               = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
-	Billing_UpdateTagsAddingSetting_FullMethodName                            = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
-	Billing_ExportBillingGroupCsv_FullMethodName                              = "/blueapi.billing.v1.Billing/ExportBillingGroupCsv"
-	Billing_ExportInvoiceSettingCsv_FullMethodName                            = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
-	Billing_UpdateBillingGroupBasicInformation_FullMethodName                 = "/blueapi.billing.v1.Billing/UpdateBillingGroupBasicInformation"
-	Billing_UpdateBillingGroupCustomFields_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateBillingGroupCustomFields"
-	Billing_UpdateBillingGroupFreeFormat_FullMethodName                       = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
-	Billing_UpdateBillingGroupLinkedResources_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateBillingGroupLinkedResources"
-	Billing_UpdateBillingGroupInvoiceSettings_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceSettings"
-	Billing_UpdateBillingGroupResellerCharges_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateBillingGroupResellerCharges"
-	Billing_UpdateBillingGroupAdditionalCharges_FullMethodName                = "/blueapi.billing.v1.Billing/UpdateBillingGroupAdditionalCharges"
-	Billing_GetBillingGroupAccountSupportPlan_FullMethodName                  = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
-	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName               = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
-	Billing_CreateAnnouncement_FullMethodName                                 = "/blueapi.billing.v1.Billing/CreateAnnouncement"
-	Billing_UpdateAnnouncement_FullMethodName                                 = "/blueapi.billing.v1.Billing/UpdateAnnouncement"
-	Billing_UpdateAnnouncementsStatus_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateAnnouncementsStatus"
-	Billing_UpdateAnnouncementDate_FullMethodName                             = "/blueapi.billing.v1.Billing/UpdateAnnouncementDate"
-	Billing_DeleteAnnouncement_FullMethodName                                 = "/blueapi.billing.v1.Billing/DeleteAnnouncement"
-	Billing_GetAnnouncements_FullMethodName                                   = "/blueapi.billing.v1.Billing/GetAnnouncements"
-	Billing_GetBillingGroupAnnouncements_FullMethodName                       = "/blueapi.billing.v1.Billing/GetBillingGroupAnnouncements"
-	Billing_GetCredits_FullMethodName                                         = "/blueapi.billing.v1.Billing/GetCredits"
-	Billing_GetCsvSettings_FullMethodName                                     = "/blueapi.billing.v1.Billing/GetCsvSettings"
-	Billing_CreateChildBillingGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/CreateChildBillingGroup"
-	Billing_GetChildBillingGroup_FullMethodName                               = "/blueapi.billing.v1.Billing/GetChildBillingGroup"
-	Billing_ListChildBillingGroups_FullMethodName                             = "/blueapi.billing.v1.Billing/ListChildBillingGroups"
-	Billing_UpdateChildBillingGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/UpdateChildBillingGroup"
-	Billing_DeleteChildBillingGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/DeleteChildBillingGroup"
-	Billing_UpdateChildBillingGroupInvoiceSettings_FullMethodName             = "/blueapi.billing.v1.Billing/UpdateChildBillingGroupInvoiceSettings"
-	Billing_SetChildBillingGroupInvoiceServiceDiscounts_FullMethodName        = "/blueapi.billing.v1.Billing/SetChildBillingGroupInvoiceServiceDiscounts"
-	Billing_SetChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/SetChildBillingGroupAccountInvoiceServiceDiscounts"
-	Billing_SetChildBillingGroupCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService"
-	Billing_GetChildBillingGroupCustomizedBillingService_FullMethodName       = "/blueapi.billing.v1.Billing/GetChildBillingGroupCustomizedBillingService"
-	Billing_BulkCreateBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
-	Billing_CreateExcludeServiceEntry_FullMethodName                          = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
-	Billing_UpdateExcludeServiceEntry_FullMethodName                          = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
-	Billing_DeleteExcludeServiceEntry_FullMethodName                          = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
-	Billing_ListExcludeServices_FullMethodName                                = "/blueapi.billing.v1.Billing/ListExcludeServices"
+	Billing_ListBillingGroups_FullMethodName                                   = "/blueapi.billing.v1.Billing/ListBillingGroups"
+	Billing_ListBillingGroupsPaginated_FullMethodName                          = "/blueapi.billing.v1.Billing/ListBillingGroupsPaginated"
+	Billing_CreateBillingGroup_FullMethodName                                  = "/blueapi.billing.v1.Billing/CreateBillingGroup"
+	Billing_CreateBillingGroupMerged_FullMethodName                            = "/blueapi.billing.v1.Billing/CreateBillingGroupMerged"
+	Billing_DeleteBillinGroup_FullMethodName                                   = "/blueapi.billing.v1.Billing/DeleteBillinGroup"
+	Billing_AddAccountToBillingGroup_FullMethodName                            = "/blueapi.billing.v1.Billing/AddAccountToBillingGroup"
+	Billing_GetBillingGroup_FullMethodName                                     = "/blueapi.billing.v1.Billing/GetBillingGroup"
+	Billing_GetAccessGroup_FullMethodName                                      = "/blueapi.billing.v1.Billing/GetAccessGroup"
+	Billing_ListAwsDailyRunHistory_FullMethodName                              = "/blueapi.billing.v1.Billing/ListAwsDailyRunHistory"
+	Billing_ListUsageCostsDrift_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListUsageCostsDrift"
+	Billing_CreateInvoice_FullMethodName                                       = "/blueapi.billing.v1.Billing/CreateInvoice"
+	Billing_CreateInvoiceWithSettings_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateInvoiceWithSettings"
+	Billing_SaveInvoiceSettings_FullMethodName                                 = "/blueapi.billing.v1.Billing/SaveInvoiceSettings"
+	Billing_ConvertInvoiceToPdf_FullMethodName                                 = "/blueapi.billing.v1.Billing/ConvertInvoiceToPdf"
+	Billing_GetInvoiceStatus_FullMethodName                                    = "/blueapi.billing.v1.Billing/GetInvoiceStatus"
+	Billing_ListInvoiceStatus_FullMethodName                                   = "/blueapi.billing.v1.Billing/ListInvoiceStatus"
+	Billing_GetInvoice_FullMethodName                                          = "/blueapi.billing.v1.Billing/GetInvoice"
+	Billing_ListInvoice_FullMethodName                                         = "/blueapi.billing.v1.Billing/ListInvoice"
+	Billing_UpdateInvoicePreviews_FullMethodName                               = "/blueapi.billing.v1.Billing/UpdateInvoicePreviews"
+	Billing_ExportInvoiceFile_FullMethodName                                   = "/blueapi.billing.v1.Billing/ExportInvoiceFile"
+	Billing_ListInvoiceTemplate_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListInvoiceTemplate"
+	Billing_GetInvoiceDisplaySettings_FullMethodName                           = "/blueapi.billing.v1.Billing/GetInvoiceDisplaySettings"
+	Billing_UpdateInvoiceDisplaySettings_FullMethodName                        = "/blueapi.billing.v1.Billing/UpdateInvoiceDisplaySettings"
+	Billing_UpdateInvoiceExchangeRate_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateInvoiceExchangeRate"
+	Billing_UpdateBillingGroupInvoiceTemplate_FullMethodName                   = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceTemplate"
+	Billing_ReadServiceDiscountsServices_FullMethodName                        = "/blueapi.billing.v1.Billing/ReadServiceDiscountsServices"
+	Billing_CreateInvoiceServiceDiscounts_FullMethodName                       = "/blueapi.billing.v1.Billing/CreateInvoiceServiceDiscounts"
+	Billing_UpdateInvoiceServiceDiscounts_FullMethodName                       = "/blueapi.billing.v1.Billing/UpdateInvoiceServiceDiscounts"
+	Billing_DeleteInvoiceServiceDiscounts_FullMethodName                       = "/blueapi.billing.v1.Billing/DeleteInvoiceServiceDiscounts"
+	Billing_ListInvoiceServiceDiscounts_FullMethodName                         = "/blueapi.billing.v1.Billing/ListInvoiceServiceDiscounts"
+	Billing_GetInvoiceServiceDiscounts_FullMethodName                          = "/blueapi.billing.v1.Billing/GetInvoiceServiceDiscounts"
+	Billing_ExportServiceDiscounts_FullMethodName                              = "/blueapi.billing.v1.Billing/ExportServiceDiscounts"
+	Billing_CreateBillingGroupInvoiceServiceDiscounts_FullMethodName           = "/blueapi.billing.v1.Billing/CreateBillingGroupInvoiceServiceDiscounts"
+	Billing_UpdateBillingGroupInvoiceServiceDiscounts_FullMethodName           = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceServiceDiscounts"
+	Billing_DeleteBillingGroupInvoiceServiceDiscounts_FullMethodName           = "/blueapi.billing.v1.Billing/DeleteBillingGroupInvoiceServiceDiscounts"
+	Billing_ListAccountInvoiceServiceDiscounts_FullMethodName                  = "/blueapi.billing.v1.Billing/ListAccountInvoiceServiceDiscounts"
+	Billing_CreateAccountInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/CreateAccountInvoiceServiceDiscounts"
+	Billing_UpdateAccountInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/UpdateAccountInvoiceServiceDiscounts"
+	Billing_RemoveAccountInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/RemoveAccountInvoiceServiceDiscounts"
+	Billing_DeleteAccountInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/DeleteAccountInvoiceServiceDiscounts"
+	Billing_ExportAccountInvoiceServiceDiscounts_FullMethodName                = "/blueapi.billing.v1.Billing/ExportAccountInvoiceServiceDiscounts"
+	Billing_ExportBillingGroupInvoiceServiceDiscounts_FullMethodName           = "/blueapi.billing.v1.Billing/ExportBillingGroupInvoiceServiceDiscounts"
+	Billing_GetBillingGroupInvoiceServiceDiscounts_FullMethodName              = "/blueapi.billing.v1.Billing/GetBillingGroupInvoiceServiceDiscounts"
+	Billing_CreateReseller_FullMethodName                                      = "/blueapi.billing.v1.Billing/CreateReseller"
+	Billing_ListResellers_FullMethodName                                       = "/blueapi.billing.v1.Billing/ListResellers"
+	Billing_GetReseller_FullMethodName                                         = "/blueapi.billing.v1.Billing/GetReseller"
+	Billing_UpdateReseller_FullMethodName                                      = "/blueapi.billing.v1.Billing/UpdateReseller"
+	Billing_DeleteReseller_FullMethodName                                      = "/blueapi.billing.v1.Billing/DeleteReseller"
+	Billing_GetBillingSetting_FullMethodName                                   = "/blueapi.billing.v1.Billing/GetBillingSetting"
+	Billing_ListExchangeRates_FullMethodName                                   = "/blueapi.billing.v1.Billing/ListExchangeRates"
+	Billing_SetGlobalExchangeRate_FullMethodName                               = "/blueapi.billing.v1.Billing/SetGlobalExchangeRate"
+	Billing_SetPayerExchangeRate_FullMethodName                                = "/blueapi.billing.v1.Billing/SetPayerExchangeRate"
+	Billing_SetBillingGroupExchangeRate_FullMethodName                         = "/blueapi.billing.v1.Billing/SetBillingGroupExchangeRate"
+	Billing_ListAccessGroups_FullMethodName                                    = "/blueapi.billing.v1.Billing/ListAccessGroups"
+	Billing_CreateAccessGroup_FullMethodName                                   = "/blueapi.billing.v1.Billing/CreateAccessGroup"
+	Billing_UpdateAccessGroup_FullMethodName                                   = "/blueapi.billing.v1.Billing/UpdateAccessGroup"
+	Billing_DeleteAccessGroup_FullMethodName                                   = "/blueapi.billing.v1.Billing/DeleteAccessGroup"
+	Billing_ListAbcBillingGroups_FullMethodName                                = "/blueapi.billing.v1.Billing/ListAbcBillingGroups"
+	Billing_ListAbcBillingGroupAccounts_FullMethodName                         = "/blueapi.billing.v1.Billing/ListAbcBillingGroupAccounts"
+	Billing_ReadInvoiceAdjustments_FullMethodName                              = "/blueapi.billing.v1.Billing/ReadInvoiceAdjustments"
+	Billing_ReadAdjustmentEntries_FullMethodName                               = "/blueapi.billing.v1.Billing/ReadAdjustmentEntries"
+	Billing_GetAdjustmentEntry_FullMethodName                                  = "/blueapi.billing.v1.Billing/GetAdjustmentEntry"
+	Billing_ApplyAdjustmentEntry_FullMethodName                                = "/blueapi.billing.v1.Billing/ApplyAdjustmentEntry"
+	Billing_RestoreAdjustmentEntry_FullMethodName                              = "/blueapi.billing.v1.Billing/RestoreAdjustmentEntry"
+	Billing_SplitAdjustmentEntry_FullMethodName                                = "/blueapi.billing.v1.Billing/SplitAdjustmentEntry"
+	Billing_AllocateAdjustmentEntry_FullMethodName                             = "/blueapi.billing.v1.Billing/AllocateAdjustmentEntry"
+	Billing_RestoreSplitAdjustmentEntry_FullMethodName                         = "/blueapi.billing.v1.Billing/RestoreSplitAdjustmentEntry"
+	Billing_RestoreAllocateAdjustmentEntry_FullMethodName                      = "/blueapi.billing.v1.Billing/RestoreAllocateAdjustmentEntry"
+	Billing_ListAccountResources_FullMethodName                                = "/blueapi.billing.v1.Billing/ListAccountResources"
+	Billing_GetAdjustmentConfig_FullMethodName                                 = "/blueapi.billing.v1.Billing/GetAdjustmentConfig"
+	Billing_CreateAdjustmentConfig_FullMethodName                              = "/blueapi.billing.v1.Billing/CreateAdjustmentConfig"
+	Billing_UpdateAdjustmentConfig_FullMethodName                              = "/blueapi.billing.v1.Billing/UpdateAdjustmentConfig"
+	Billing_DeleteAdjustmentConfig_FullMethodName                              = "/blueapi.billing.v1.Billing/DeleteAdjustmentConfig"
+	Billing_ReadUntaggedGroups_FullMethodName                                  = "/blueapi.billing.v1.Billing/ReadUntaggedGroups"
+	Billing_ReadCustomizedBillingServices_FullMethodName                       = "/blueapi.billing.v1.Billing/ReadCustomizedBillingServices"
+	Billing_GetCustomizedBillingService_FullMethodName                         = "/blueapi.billing.v1.Billing/GetCustomizedBillingService"
+	Billing_CreateCustomizedBillingService_FullMethodName                      = "/blueapi.billing.v1.Billing/CreateCustomizedBillingService"
+	Billing_UpdateCustomizedBillingService_FullMethodName                      = "/blueapi.billing.v1.Billing/UpdateCustomizedBillingService"
+	Billing_DeleteCustomizedBillingService_FullMethodName                      = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingService"
+	Billing_GetCustomizedBillingServiceBillingGroup_FullMethodName             = "/blueapi.billing.v1.Billing/GetCustomizedBillingServiceBillingGroup"
+	Billing_SetCustomizedBillingServiceBillingGroup_FullMethodName             = "/blueapi.billing.v1.Billing/SetCustomizedBillingServiceBillingGroup"
+	Billing_DeleteCustomizedBillingServiceBillingGroup_FullMethodName          = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingServiceBillingGroup"
+	Billing_GetTags_FullMethodName                                             = "/blueapi.billing.v1.Billing/GetTags"
+	Billing_CreateCustomField_FullMethodName                                   = "/blueapi.billing.v1.Billing/CreateCustomField"
+	Billing_ListCustomField_FullMethodName                                     = "/blueapi.billing.v1.Billing/ListCustomField"
+	Billing_AddBillingGroupCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/AddBillingGroupCustomField"
+	Billing_ListBillingGroupCustomField_FullMethodName                         = "/blueapi.billing.v1.Billing/ListBillingGroupCustomField"
+	Billing_AddTagsToBillingGroup_FullMethodName                               = "/blueapi.billing.v1.Billing/AddTagsToBillingGroup"
+	Billing_UpdateNonTagGroupToBillingGroup_FullMethodName                     = "/blueapi.billing.v1.Billing/UpdateNonTagGroupToBillingGroup"
+	Billing_DeleteBillingGroupCustomField_FullMethodName                       = "/blueapi.billing.v1.Billing/DeleteBillingGroupCustomField"
+	Billing_UpdateCustomField_FullMethodName                                   = "/blueapi.billing.v1.Billing/UpdateCustomField"
+	Billing_DeleteCustomField_FullMethodName                                   = "/blueapi.billing.v1.Billing/DeleteCustomField"
+	Billing_CreateFreeFormat_FullMethodName                                    = "/blueapi.billing.v1.Billing/CreateFreeFormat"
+	Billing_DeleteFreeFormat_FullMethodName                                    = "/blueapi.billing.v1.Billing/DeleteFreeFormat"
+	Billing_GetFreeFormat_FullMethodName                                       = "/blueapi.billing.v1.Billing/GetFreeFormat"
+	Billing_GetTagsAddingSetting_FullMethodName                                = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
+	Billing_UpdateTagsAddingSetting_FullMethodName                             = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
+	Billing_ExportBillingGroupCsv_FullMethodName                               = "/blueapi.billing.v1.Billing/ExportBillingGroupCsv"
+	Billing_ExportInvoiceSettingCsv_FullMethodName                             = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
+	Billing_UpdateBillingGroupBasicInformation_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateBillingGroupBasicInformation"
+	Billing_UpdateBillingGroupCustomFields_FullMethodName                      = "/blueapi.billing.v1.Billing/UpdateBillingGroupCustomFields"
+	Billing_UpdateBillingGroupFreeFormat_FullMethodName                        = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
+	Billing_UpdateBillingGroupLinkedResources_FullMethodName                   = "/blueapi.billing.v1.Billing/UpdateBillingGroupLinkedResources"
+	Billing_UpdateBillingGroupInvoiceSettings_FullMethodName                   = "/blueapi.billing.v1.Billing/UpdateBillingGroupInvoiceSettings"
+	Billing_UpdateBillingGroupResellerCharges_FullMethodName                   = "/blueapi.billing.v1.Billing/UpdateBillingGroupResellerCharges"
+	Billing_UpdateBillingGroupAdditionalCharges_FullMethodName                 = "/blueapi.billing.v1.Billing/UpdateBillingGroupAdditionalCharges"
+	Billing_GetBillingGroupAccountSupportPlan_FullMethodName                   = "/blueapi.billing.v1.Billing/GetBillingGroupAccountSupportPlan"
+	Billing_UpdateBillingGroupAccountSupportPlan_FullMethodName                = "/blueapi.billing.v1.Billing/UpdateBillingGroupAccountSupportPlan"
+	Billing_CreateAnnouncement_FullMethodName                                  = "/blueapi.billing.v1.Billing/CreateAnnouncement"
+	Billing_UpdateAnnouncement_FullMethodName                                  = "/blueapi.billing.v1.Billing/UpdateAnnouncement"
+	Billing_UpdateAnnouncementsStatus_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateAnnouncementsStatus"
+	Billing_UpdateAnnouncementDate_FullMethodName                              = "/blueapi.billing.v1.Billing/UpdateAnnouncementDate"
+	Billing_DeleteAnnouncement_FullMethodName                                  = "/blueapi.billing.v1.Billing/DeleteAnnouncement"
+	Billing_GetAnnouncements_FullMethodName                                    = "/blueapi.billing.v1.Billing/GetAnnouncements"
+	Billing_GetBillingGroupAnnouncements_FullMethodName                        = "/blueapi.billing.v1.Billing/GetBillingGroupAnnouncements"
+	Billing_GetCredits_FullMethodName                                          = "/blueapi.billing.v1.Billing/GetCredits"
+	Billing_GetCsvSettings_FullMethodName                                      = "/blueapi.billing.v1.Billing/GetCsvSettings"
+	Billing_CreateChildBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/CreateChildBillingGroup"
+	Billing_GetChildBillingGroup_FullMethodName                                = "/blueapi.billing.v1.Billing/GetChildBillingGroup"
+	Billing_ListChildBillingGroups_FullMethodName                              = "/blueapi.billing.v1.Billing/ListChildBillingGroups"
+	Billing_UpdateChildBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/UpdateChildBillingGroup"
+	Billing_DeleteChildBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/DeleteChildBillingGroup"
+	Billing_UpdateChildBillingGroupInvoiceSettings_FullMethodName              = "/blueapi.billing.v1.Billing/UpdateChildBillingGroupInvoiceSettings"
+	Billing_SetChildBillingGroupInvoiceServiceDiscounts_FullMethodName         = "/blueapi.billing.v1.Billing/SetChildBillingGroupInvoiceServiceDiscounts"
+	Billing_SetChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName  = "/blueapi.billing.v1.Billing/SetChildBillingGroupAccountInvoiceServiceDiscounts"
+	Billing_SetChildBillingGroupCustomizedBillingService_FullMethodName        = "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService"
+	Billing_GetChildBillingGroupCustomizedBillingService_FullMethodName        = "/blueapi.billing.v1.Billing/GetChildBillingGroupCustomizedBillingService"
+	Billing_GetChildBillingGroupInvoiceServiceDiscounts_FullMethodName         = "/blueapi.billing.v1.Billing/GetChildBillingGroupInvoiceServiceDiscounts"
+	Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ListChildBillingGroupAccountInvoiceServiceDiscounts"
+	Billing_BulkCreateBillingGroup_FullMethodName                              = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
+	Billing_CreateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
+	Billing_UpdateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
+	Billing_DeleteExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
+	Billing_ListExcludeServices_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListExcludeServices"
 )
 
 // BillingClient is the client API for Billing service.
@@ -429,6 +431,10 @@ type BillingClient interface {
 	SetChildBillingGroupCustomizedBillingService(ctx context.Context, in *SetChildBillingGroupCustomizedBillingServiceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Gets the customized billing service in child billing group. Only available in Ripple.
 	GetChildBillingGroupCustomizedBillingService(ctx context.Context, in *GetChildBillingGroupCustomizedBillingServiceRequest, opts ...grpc.CallOption) (Billing_GetChildBillingGroupCustomizedBillingServiceClient, error)
+	// Returns the service discount associated with the billing group id
+	GetChildBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *GetChildBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
+	// Returns the account's service discounts associated with the child billing group id
+	ListChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsClient, error)
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
 	// Create Exclude Service Entry
@@ -2409,9 +2415,52 @@ func (x *billingGetChildBillingGroupCustomizedBillingServiceClient) Recv() (*Get
 	return m, nil
 }
 
+func (c *billingClient) GetChildBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *GetChildBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetChildBillingGroupInvoiceServiceDiscountsResponse)
+	err := c.cc.Invoke(ctx, Billing_GetChildBillingGroupInvoiceServiceDiscounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ListChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[30], Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingListChildBillingGroupAccountInvoiceServiceDiscountsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsClient interface {
+	Recv() (*AccountInvoiceServiceDiscounts, error)
+	grpc.ClientStream
+}
+
+type billingListChildBillingGroupAccountInvoiceServiceDiscountsClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingListChildBillingGroupAccountInvoiceServiceDiscountsClient) Recv() (*AccountInvoiceServiceDiscounts, error) {
+	m := new(AccountInvoiceServiceDiscounts)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *billingClient) BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[30], Billing_BulkCreateBillingGroup_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[31], Billing_BulkCreateBillingGroup_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2753,6 +2802,10 @@ type BillingServer interface {
 	SetChildBillingGroupCustomizedBillingService(context.Context, *SetChildBillingGroupCustomizedBillingServiceRequest) (*emptypb.Empty, error)
 	// Gets the customized billing service in child billing group. Only available in Ripple.
 	GetChildBillingGroupCustomizedBillingService(*GetChildBillingGroupCustomizedBillingServiceRequest, Billing_GetChildBillingGroupCustomizedBillingServiceServer) error
+	// Returns the service discount associated with the billing group id
+	GetChildBillingGroupInvoiceServiceDiscounts(context.Context, *GetChildBillingGroupInvoiceServiceDiscountsRequest) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
+	// Returns the account's service discounts associated with the child billing group id
+	ListChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsServer) error
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
 	// Create Exclude Service Entry
@@ -3150,6 +3203,12 @@ func (UnimplementedBillingServer) SetChildBillingGroupCustomizedBillingService(c
 }
 func (UnimplementedBillingServer) GetChildBillingGroupCustomizedBillingService(*GetChildBillingGroupCustomizedBillingServiceRequest, Billing_GetChildBillingGroupCustomizedBillingServiceServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetChildBillingGroupCustomizedBillingService not implemented")
+}
+func (UnimplementedBillingServer) GetChildBillingGroupInvoiceServiceDiscounts(context.Context, *GetChildBillingGroupInvoiceServiceDiscountsRequest) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetChildBillingGroupInvoiceServiceDiscounts not implemented")
+}
+func (UnimplementedBillingServer) ListChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListChildBillingGroupAccountInvoiceServiceDiscounts not implemented")
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
@@ -5555,6 +5614,45 @@ func (x *billingGetChildBillingGroupCustomizedBillingServiceServer) Send(m *GetC
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_GetChildBillingGroupInvoiceServiceDiscounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetChildBillingGroupInvoiceServiceDiscountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetChildBillingGroupInvoiceServiceDiscounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetChildBillingGroupInvoiceServiceDiscounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetChildBillingGroupInvoiceServiceDiscounts(ctx, req.(*GetChildBillingGroupInvoiceServiceDiscountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ListChildBillingGroupAccountInvoiceServiceDiscountsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ListChildBillingGroupAccountInvoiceServiceDiscounts(m, &billingListChildBillingGroupAccountInvoiceServiceDiscountsServer{ServerStream: stream})
+}
+
+type Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsServer interface {
+	Send(*AccountInvoiceServiceDiscounts) error
+	grpc.ServerStream
+}
+
+type billingListChildBillingGroupAccountInvoiceServiceDiscountsServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingListChildBillingGroupAccountInvoiceServiceDiscountsServer) Send(m *AccountInvoiceServiceDiscounts) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Billing_BulkCreateBillingGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(BulkCreateBillingGroupRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -6044,6 +6142,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Billing_SetChildBillingGroupCustomizedBillingService_Handler,
 		},
 		{
+			MethodName: "GetChildBillingGroupInvoiceServiceDiscounts",
+			Handler:    _Billing_GetChildBillingGroupInvoiceServiceDiscounts_Handler,
+		},
+		{
 			MethodName: "CreateExcludeServiceEntry",
 			Handler:    _Billing_CreateExcludeServiceEntry_Handler,
 		},
@@ -6209,6 +6311,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetChildBillingGroupCustomizedBillingService",
 			Handler:       _Billing_GetChildBillingGroupCustomizedBillingService_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ListChildBillingGroupAccountInvoiceServiceDiscounts",
+			Handler:       _Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_Handler,
 			ServerStreams: true,
 		},
 		{
