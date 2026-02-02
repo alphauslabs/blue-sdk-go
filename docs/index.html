@@ -1911,6 +1911,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.SetChildBillingGroupAccountInvoiceServiceDiscountsRequest"><span class="badge">M</span>SetChildBillingGroupAccountInvoiceServiceDiscountsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.SetChildBillingGroupCustomizedBillingServiceRequest"><span class="badge">M</span>SetChildBillingGroupCustomizedBillingServiceRequest</a>
                 </li>
               
@@ -23320,6 +23324,37 @@ Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeR
 
         
       
+        <h3 id="blueapi.billing.v1.SetChildBillingGroupAccountInvoiceServiceDiscountsRequest">SetChildBillingGroupAccountInvoiceServiceDiscountsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>internalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. child billing group&#39;s internal Id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.billing.v1.AccountServiceDiscounts">AccountServiceDiscounts</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.SetChildBillingGroupCustomizedBillingServiceRequest">SetChildBillingGroupCustomizedBillingServiceRequest</h3>
         <p></p>
 
@@ -26191,6 +26226,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>SetChildBillingGroupAccountInvoiceServiceDiscounts</td>
+                <td><a href="#blueapi.billing.v1.SetChildBillingGroupAccountInvoiceServiceDiscountsRequest">SetChildBillingGroupAccountInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Sets the child billing group&#39;s account invoice service discounts. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>SetChildBillingGroupCustomizedBillingService</td>
                 <td><a href="#blueapi.billing.v1.SetChildBillingGroupCustomizedBillingServiceRequest">SetChildBillingGroupCustomizedBillingServiceRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
@@ -27486,6 +27528,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>SetChildBillingGroupInvoiceServiceDiscounts</td>
                 <td>POST</td>
                 <td>/v1/billinggroups/child/{internalId}/servicediscounts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetChildBillingGroupAccountInvoiceServiceDiscounts</td>
+                <td>POST</td>
+                <td>/v1/billinggroups/child/{internalId}/servicediscounts/account</td>
                 <td>*</td>
               </tr>
               
