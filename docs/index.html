@@ -4444,6 +4444,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.GetOnboardingStatusRequest"><span class="badge">M</span>GetOnboardingStatusRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetOnboardingStatusResponse"><span class="badge">M</span>GetOnboardingStatusResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.GetRecommendedCommitmentPlanRequest"><span class="badge">M</span>GetRecommendedCommitmentPlanRequest</a>
                 </li>
               
@@ -4606,6 +4614,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.CommitmentStatus"><span class="badge">E</span>CommitmentStatus</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetOnboardingStatusResponse.OnboardingStatus"><span class="badge">E</span>GetOnboardingStatusResponse.OnboardingStatus</a>
                 </li>
               
                 <li>
@@ -53947,6 +53959,107 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.GetOnboardingStatusRequest">GetOnboardingStatusRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>mspId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple context </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional:
+- empty =&gt; MSP-level onboarding row (isMsp = true)
+- non-empty =&gt; company under MSP (isMsp = false) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetOnboardingStatusResponse">GetOnboardingStatusResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>found</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether we found a corresponding row </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isMsp</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Convenience: derived from whether billingId is empty </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
+                  <td></td>
+                  <td><p>Vendor saved at registration (aws/azure/gcp). Optional. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The org id to use for Archera upstream calls:
+- MSP: mspArcheraOrgId
+- company: archeraOrgId </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Latest persisted onboarding ID (if any) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardingStatus</td>
+                  <td><a href="#blueapi.gc.v1.GetOnboardingStatusResponse.OnboardingStatus">GetOnboardingStatusResponse.OnboardingStatus</a></td>
+                  <td></td>
+                  <td><p>Latest persisted onboarding status </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Latest persisted AWS account id (if any) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetRecommendedCommitmentPlanRequest">GetRecommendedCommitmentPlanRequest</h3>
         <p></p>
 
@@ -56321,6 +56434,59 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.gc.v1.GetOnboardingStatusResponse.OnboardingStatus">GetOnboardingStatusResponse.OnboardingStatus</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ONBOARDING_STATUS_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ONBOARDING_STATUS_NOT_REGISTERED</td>
+                <td>1</td>
+                <td><p>No row found in archera_users (org not registered yet)</p></td>
+              </tr>
+            
+              <tr>
+                <td>ONBOARDING_STATUS_REGISTERED</td>
+                <td>2</td>
+                <td><p>Existing statuses you already persist</p></td>
+              </tr>
+            
+              <tr>
+                <td>ONBOARDING_STATUS_ONBOARDING_STARTED</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ONBOARDING_STATUS_VERIFIED</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ONBOARDING_STATUS_VERIFY_INCOMPLETE</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>ONBOARDING_STATUS_VERIFY_FAILED</td>
+                <td>6</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.gc.v1.Provider">Provider</h3>
         <p></p>
         <table class="enum-table">
@@ -56631,6 +56797,14 @@ Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 and returns validation status for all required features.</p></td>
               </tr>
             
+              <tr>
+                <td>GetOnboardingStatus</td>
+                <td><a href="#blueapi.gc.v1.GetOnboardingStatusRequest">GetOnboardingStatusRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetOnboardingStatusResponse">GetOnboardingStatusResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves the latest onboarding status for an MSP or a company under an MSP.
+Retrieves the latest onboarding status for an MSP or a company under an MSP.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -56824,7 +56998,7 @@ and returns validation status for all required features.</p></td>
               <tr>
                 <td>GetAwsCloudFormationTemplate</td>
                 <td>GET</td>
-                <td>/v1/onboarding/aws/cloudformation-template</td>
+                <td>/v1/onboarding/aws/cloudformation/template</td>
                 <td></td>
               </tr>
               
@@ -56834,7 +57008,7 @@ and returns validation status for all required features.</p></td>
               <tr>
                 <td>GetAwsLaunchStackUrl</td>
                 <td>GET</td>
-                <td>/v1/onboarding/aws/launch-stack-url</td>
+                <td>/v1/onboarding/aws/cloudformation/launchstackurl</td>
                 <td></td>
               </tr>
               
@@ -56845,6 +57019,16 @@ and returns validation status for all required features.</p></td>
                 <td>VerifyAwsOnboarding</td>
                 <td>POST</td>
                 <td>/v1/onboarding/aws/verify</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetOnboardingStatus</td>
+                <td>POST</td>
+                <td>/v1/onboarding/status:read</td>
                 <td>*</td>
               </tr>
               

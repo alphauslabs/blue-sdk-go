@@ -743,6 +743,33 @@ func local_request_GuaranteedCommitments_VerifyAwsOnboarding_0(ctx context.Conte
 	return msg, metadata, err
 }
 
+func request_GuaranteedCommitments_GetOnboardingStatus_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetOnboardingStatusRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	msg, err := client.GetOnboardingStatus(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_GuaranteedCommitments_GetOnboardingStatus_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetOnboardingStatusRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	msg, err := server.GetOnboardingStatus(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 // RegisterGuaranteedCommitmentsHandlerServer registers the http handlers for service GuaranteedCommitments to "mux".
 // UnaryRPC     :call GuaranteedCommitmentsServer directly.
 // StreamingRPC :currently unsupported pending https://github.com/grpc/grpc-go/issues/906.
@@ -1081,7 +1108,7 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation-template"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation/template"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1101,7 +1128,7 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/launch-stack-url"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation/launchstackurl"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1134,6 +1161,26 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 			return
 		}
 		forward_GuaranteedCommitments_VerifyAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_GetOnboardingStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetOnboardingStatus", runtime.WithHTTPPathPattern("/v1/onboarding/status:read"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_GuaranteedCommitments_GetOnboardingStatus_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_GuaranteedCommitments_GetOnboardingStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
 	return nil
@@ -1468,7 +1515,7 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation-template"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation/template"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1485,7 +1532,7 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/launch-stack-url"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl", runtime.WithHTTPPathPattern("/v1/onboarding/aws/cloudformation/launchstackurl"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1515,6 +1562,23 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		}
 		forward_GuaranteedCommitments_VerifyAwsOnboarding_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_GetOnboardingStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetOnboardingStatus", runtime.WithHTTPPathPattern("/v1/onboarding/status:read"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_GuaranteedCommitments_GetOnboardingStatus_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_GuaranteedCommitments_GetOnboardingStatus_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	return nil
 }
 
@@ -1536,9 +1600,10 @@ var (
 	pattern_GuaranteedCommitments_ListDefaultPurchasePlans_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "commitments", "purchaseplan", "default"}, ""))
 	pattern_GuaranteedCommitments_RegisterOrg_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "onboarding"}, ""))
 	pattern_GuaranteedCommitments_StartAwsOnboarding_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "start"}, ""))
-	pattern_GuaranteedCommitments_GetAwsCloudFormationTemplate_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "cloudformation-template"}, ""))
-	pattern_GuaranteedCommitments_GetAwsLaunchStackUrl_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "launch-stack-url"}, ""))
+	pattern_GuaranteedCommitments_GetAwsCloudFormationTemplate_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"v1", "onboarding", "aws", "cloudformation", "template"}, ""))
+	pattern_GuaranteedCommitments_GetAwsLaunchStackUrl_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"v1", "onboarding", "aws", "cloudformation", "launchstackurl"}, ""))
 	pattern_GuaranteedCommitments_VerifyAwsOnboarding_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "verify"}, ""))
+	pattern_GuaranteedCommitments_GetOnboardingStatus_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "onboarding", "status"}, "read"))
 )
 
 var (
@@ -1562,4 +1627,5 @@ var (
 	forward_GuaranteedCommitments_GetAwsCloudFormationTemplate_0       = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_GetAwsLaunchStackUrl_0               = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_VerifyAwsOnboarding_0                = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetOnboardingStatus_0                = runtime.ForwardResponseMessage
 )

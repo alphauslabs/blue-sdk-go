@@ -39,6 +39,7 @@ const (
 	GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate"
 	GuaranteedCommitments_GetAwsLaunchStackUrl_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl"
 	GuaranteedCommitments_VerifyAwsOnboarding_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/VerifyAwsOnboarding"
+	GuaranteedCommitments_GetOnboardingStatus_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetOnboardingStatus"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -93,6 +94,9 @@ type GuaranteedCommitmentsClient interface {
 	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 	// and returns validation status for all required features.
 	VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error)
+	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for an MSP or a company under an MSP.
+	// Retrieves the latest onboarding status for an MSP or a company under an MSP.
+	GetOnboardingStatus(ctx context.Context, in *GetOnboardingStatusRequest, opts ...grpc.CallOption) (*GetOnboardingStatusResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -326,6 +330,16 @@ func (c *guaranteedCommitmentsClient) VerifyAwsOnboarding(ctx context.Context, i
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) GetOnboardingStatus(ctx context.Context, in *GetOnboardingStatusRequest, opts ...grpc.CallOption) (*GetOnboardingStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetOnboardingStatusResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetOnboardingStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -378,6 +392,9 @@ type GuaranteedCommitmentsServer interface {
 	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 	// and returns validation status for all required features.
 	VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error)
+	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for an MSP or a company under an MSP.
+	// Retrieves the latest onboarding status for an MSP or a company under an MSP.
+	GetOnboardingStatus(context.Context, *GetOnboardingStatusRequest) (*GetOnboardingStatusResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -444,6 +461,9 @@ func (UnimplementedGuaranteedCommitmentsServer) GetAwsLaunchStackUrl(context.Con
 }
 func (UnimplementedGuaranteedCommitmentsServer) VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method VerifyAwsOnboarding not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetOnboardingStatus(context.Context, *GetOnboardingStatusRequest) (*GetOnboardingStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetOnboardingStatus not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -821,6 +841,24 @@ func _GuaranteedCommitments_VerifyAwsOnboarding_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_GetOnboardingStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetOnboardingStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetOnboardingStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetOnboardingStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetOnboardingStatus(ctx, req.(*GetOnboardingStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -903,6 +941,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "VerifyAwsOnboarding",
 			Handler:    _GuaranteedCommitments_VerifyAwsOnboarding_Handler,
+		},
+		{
+			MethodName: "GetOnboardingStatus",
+			Handler:    _GuaranteedCommitments_GetOnboardingStatus_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
