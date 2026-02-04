@@ -575,9 +575,18 @@ func request_GuaranteedCommitments_ListDefaultPurchasePlans_0(ctx context.Contex
 	var (
 		protoReq ListDefaultPurchasePlansRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["segmentId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "segmentId")
+	}
+	protoReq.SegmentId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "segmentId", err)
 	}
 	msg, err := client.ListDefaultPurchasePlans(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -587,7 +596,16 @@ func local_request_GuaranteedCommitments_ListDefaultPurchasePlans_0(ctx context.
 	var (
 		protoReq ListDefaultPurchasePlansRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
+	val, ok := pathParams["segmentId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "segmentId")
+	}
+	protoReq.SegmentId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "segmentId", err)
+	}
 	msg, err := server.ListDefaultPurchasePlans(ctx, &protoReq)
 	return msg, metadata, err
 }
@@ -1048,7 +1066,7 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplan/default"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplan/{segmentId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1464,7 +1482,7 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplan/default"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplan/{segmentId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1597,7 +1615,7 @@ var (
 	pattern_GuaranteedCommitments_GetResourceDailyUsage_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "resources", "resourceId", "daily-usage"}, ""))
 	pattern_GuaranteedCommitments_ListSegments_0                       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "segments", "info"}, ""))
 	pattern_GuaranteedCommitments_GetSegmentDetails_0                  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "segments", "segmentId"}, ""))
-	pattern_GuaranteedCommitments_ListDefaultPurchasePlans_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "commitments", "purchaseplan", "default"}, ""))
+	pattern_GuaranteedCommitments_ListDefaultPurchasePlans_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "commitments", "purchaseplan", "segmentId"}, ""))
 	pattern_GuaranteedCommitments_RegisterOrg_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "onboarding"}, ""))
 	pattern_GuaranteedCommitments_StartAwsOnboarding_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "start"}, ""))
 	pattern_GuaranteedCommitments_GetAwsCloudFormationTemplate_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 2, 4}, []string{"v1", "onboarding", "aws", "cloudformation", "template"}, ""))
