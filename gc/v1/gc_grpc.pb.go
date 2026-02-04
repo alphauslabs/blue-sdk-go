@@ -33,7 +33,7 @@ const (
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
 	GuaranteedCommitments_ListSegments_FullMethodName                       = "/blueapi.gc.v1.GuaranteedCommitments/ListSegments"
 	GuaranteedCommitments_GetSegmentDetails_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/GetSegmentDetails"
-	GuaranteedCommitments_ListDefaultPurchasePlans_FullMethodName           = "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultPurchasePlans"
+	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
 	GuaranteedCommitments_RegisterOrg_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg"
 	GuaranteedCommitments_StartAwsOnboarding_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding"
 	GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate"
@@ -77,7 +77,7 @@ type GuaranteedCommitmentsClient interface {
 	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
 	GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves default purchase plans of a company.
-	ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error)
+	ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error)
@@ -270,10 +270,10 @@ func (c *guaranteedCommitmentsClient) GetSegmentDetails(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *guaranteedCommitmentsClient) ListDefaultPurchasePlans(ctx context.Context, in *ListDefaultPurchasePlansRequest, opts ...grpc.CallOption) (*ListDefaultPurchasePlansResponse, error) {
+func (c *guaranteedCommitmentsClient) ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListDefaultPurchasePlansResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListDefaultPurchasePlans_FullMethodName, in, out, cOpts...)
+	out := new(ListPurchasePlansBySegmentResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -375,7 +375,7 @@ type GuaranteedCommitmentsServer interface {
 	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
 	GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves default purchase plans of a company.
-	ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error)
+	ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error)
@@ -444,8 +444,8 @@ func (UnimplementedGuaranteedCommitmentsServer) ListSegments(context.Context, *L
 func (UnimplementedGuaranteedCommitmentsServer) GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSegmentDetails not implemented")
 }
-func (UnimplementedGuaranteedCommitmentsServer) ListDefaultPurchasePlans(context.Context, *ListDefaultPurchasePlansRequest) (*ListDefaultPurchasePlansResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListDefaultPurchasePlans not implemented")
+func (UnimplementedGuaranteedCommitmentsServer) ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPurchasePlansBySegment not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrg not implemented")
@@ -733,20 +733,20 @@ func _GuaranteedCommitments_GetSegmentDetails_Handler(srv interface{}, ctx conte
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitments_ListDefaultPurchasePlans_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListDefaultPurchasePlansRequest)
+func _GuaranteedCommitments_ListPurchasePlansBySegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPurchasePlansBySegmentRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).ListDefaultPurchasePlans(ctx, in)
+		return srv.(GuaranteedCommitmentsServer).ListPurchasePlansBySegment(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: GuaranteedCommitments_ListDefaultPurchasePlans_FullMethodName,
+		FullMethod: GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).ListDefaultPurchasePlans(ctx, req.(*ListDefaultPurchasePlansRequest))
+		return srv.(GuaranteedCommitmentsServer).ListPurchasePlansBySegment(ctx, req.(*ListPurchasePlansBySegmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -919,8 +919,8 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GuaranteedCommitments_GetSegmentDetails_Handler,
 		},
 		{
-			MethodName: "ListDefaultPurchasePlans",
-			Handler:    _GuaranteedCommitments_ListDefaultPurchasePlans_Handler,
+			MethodName: "ListPurchasePlansBySegment",
+			Handler:    _GuaranteedCommitments_ListPurchasePlansBySegment_Handler,
 		},
 		{
 			MethodName: "RegisterOrg",
