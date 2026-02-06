@@ -12,6 +12,7 @@ import (
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -20,7 +21,11 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Luster_ReadSpaces_FullMethodName = "/blueapi.luster.v1.Luster/ReadSpaces"
+	Luster_ReadSpaces_FullMethodName  = "/blueapi.luster.v1.Luster/ReadSpaces"
+	Luster_GetSpace_FullMethodName    = "/blueapi.luster.v1.Luster/GetSpace"
+	Luster_CreateSpace_FullMethodName = "/blueapi.luster.v1.Luster/CreateSpace"
+	Luster_UpdateSpace_FullMethodName = "/blueapi.luster.v1.Luster/UpdateSpace"
+	Luster_DeleteSpace_FullMethodName = "/blueapi.luster.v1.Luster/DeleteSpace"
 )
 
 // LusterClient is the client API for Luster service.
@@ -29,8 +34,16 @@ const (
 //
 // Luster service definition.
 type LusterClient interface {
-	// (ALPHA) Read spaces.
+	// (ALPHA) Reads spaces.
 	ReadSpaces(ctx context.Context, in *ReadSpacesRequest, opts ...grpc.CallOption) (Luster_ReadSpacesClient, error)
+	// (ALPHA) Gets space.
+	GetSpace(ctx context.Context, in *GetSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
+	// (ALPHA) Creates space.
+	CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
+	// (ALPHA) Updates space.
+	UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
+	// (ALPHA) Deletes space.
+	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type lusterClient struct {
@@ -74,14 +87,62 @@ func (x *lusterReadSpacesClient) Recv() (*luster.Space, error) {
 	return m, nil
 }
 
+func (c *lusterClient) GetSpace(ctx context.Context, in *GetSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Space)
+	err := c.cc.Invoke(ctx, Luster_GetSpace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Space)
+	err := c.cc.Invoke(ctx, Luster_CreateSpace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Space)
+	err := c.cc.Invoke(ctx, Luster_UpdateSpace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Luster_DeleteSpace_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LusterServer is the server API for Luster service.
 // All implementations must embed UnimplementedLusterServer
 // for forward compatibility
 //
 // Luster service definition.
 type LusterServer interface {
-	// (ALPHA) Read spaces.
+	// (ALPHA) Reads spaces.
 	ReadSpaces(*ReadSpacesRequest, Luster_ReadSpacesServer) error
+	// (ALPHA) Gets space.
+	GetSpace(context.Context, *GetSpaceRequest) (*luster.Space, error)
+	// (ALPHA) Creates space.
+	CreateSpace(context.Context, *CreateSpaceRequest) (*luster.Space, error)
+	// (ALPHA) Updates space.
+	UpdateSpace(context.Context, *UpdateSpaceRequest) (*luster.Space, error)
+	// (ALPHA) Deletes space.
+	DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedLusterServer()
 }
 
@@ -91,6 +152,18 @@ type UnimplementedLusterServer struct {
 
 func (UnimplementedLusterServer) ReadSpaces(*ReadSpacesRequest, Luster_ReadSpacesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadSpaces not implemented")
+}
+func (UnimplementedLusterServer) GetSpace(context.Context, *GetSpaceRequest) (*luster.Space, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSpace not implemented")
+}
+func (UnimplementedLusterServer) CreateSpace(context.Context, *CreateSpaceRequest) (*luster.Space, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateSpace not implemented")
+}
+func (UnimplementedLusterServer) UpdateSpace(context.Context, *UpdateSpaceRequest) (*luster.Space, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateSpace not implemented")
+}
+func (UnimplementedLusterServer) DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteSpace not implemented")
 }
 func (UnimplementedLusterServer) mustEmbedUnimplementedLusterServer() {}
 
@@ -126,13 +199,102 @@ func (x *lusterReadSpacesServer) Send(m *luster.Space) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Luster_GetSpace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSpaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).GetSpace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_GetSpace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).GetSpace(ctx, req.(*GetSpaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_CreateSpace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateSpaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).CreateSpace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_CreateSpace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).CreateSpace(ctx, req.(*CreateSpaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_UpdateSpace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateSpaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).UpdateSpace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_UpdateSpace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).UpdateSpace(ctx, req.(*UpdateSpaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_DeleteSpace_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteSpaceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).DeleteSpace(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_DeleteSpace_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).DeleteSpace(ctx, req.(*DeleteSpaceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Luster_ServiceDesc is the grpc.ServiceDesc for Luster service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Luster_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "blueapi.luster.v1.Luster",
 	HandlerType: (*LusterServer)(nil),
-	Methods:     []grpc.MethodDesc{},
+	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetSpace",
+			Handler:    _Luster_GetSpace_Handler,
+		},
+		{
+			MethodName: "CreateSpace",
+			Handler:    _Luster_CreateSpace_Handler,
+		},
+		{
+			MethodName: "UpdateSpace",
+			Handler:    _Luster_UpdateSpace_Handler,
+		},
+		{
+			MethodName: "DeleteSpace",
+			Handler:    _Luster_DeleteSpace_Handler,
+		},
+	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ReadSpaces",

@@ -4647,7 +4647,23 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.luster.v1.CreateSpaceRequest"><span class="badge">M</span>CreateSpaceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.DeleteSpaceRequest"><span class="badge">M</span>DeleteSpaceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.GetSpaceRequest"><span class="badge">M</span>GetSpaceRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.luster.v1.ReadSpacesRequest"><span class="badge">M</span>ReadSpacesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.UpdateSpaceRequest"><span class="badge">M</span>UpdateSpaceRequest</a>
                 </li>
               
               
@@ -57036,8 +57052,36 @@ Retrieves the latest onboarding status for an MSP or a company under an MSP.</p>
       <p></p>
 
       
+        <h3 id="blueapi.luster.v1.CreateSpaceRequest">CreateSpaceRequest</h3>
+        <p>Request message for the Luster.CreateSpace rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.luster.v1.DeleteSpaceRequest">DeleteSpaceRequest</h3>
+        <p>Request message for the Luster.DeleteSpace rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.luster.v1.GetSpaceRequest">GetSpaceRequest</h3>
+        <p>Request message for the Luster.GetSpace rpc.</p>
+
+        
+
+        
+      
         <h3 id="blueapi.luster.v1.ReadSpacesRequest">ReadSpacesRequest</h3>
-        <p>The space read request.</p>
+        <p>Request message for the Luster.ReadSpaces rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.luster.v1.UpdateSpaceRequest">UpdateSpaceRequest</h3>
+        <p>Request message for the Luster.UpdateSpace rpc.</p>
 
         
 
@@ -57061,7 +57105,35 @@ Retrieves the latest onboarding status for an MSP or a company under an MSP.</p>
                 <td>ReadSpaces</td>
                 <td><a href="#blueapi.luster.v1.ReadSpacesRequest">ReadSpacesRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a> stream</td>
-                <td><p>(ALPHA) Read spaces.</p></td>
+                <td><p>(ALPHA) Reads spaces.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetSpace</td>
+                <td><a href="#blueapi.luster.v1.GetSpaceRequest">GetSpaceRequest</a></td>
+                <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
+                <td><p>(ALPHA) Gets space.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateSpace</td>
+                <td><a href="#blueapi.luster.v1.CreateSpaceRequest">CreateSpaceRequest</a></td>
+                <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
+                <td><p>(ALPHA) Creates space.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateSpace</td>
+                <td><a href="#blueapi.luster.v1.UpdateSpaceRequest">UpdateSpaceRequest</a></td>
+                <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
+                <td><p>(ALPHA) Updates space.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteSpace</td>
+                <td><a href="#blueapi.luster.v1.DeleteSpaceRequest">DeleteSpaceRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>(ALPHA) Deletes space.</p></td>
               </tr>
             
           </tbody>
@@ -57086,8 +57158,48 @@ Retrieves the latest onboarding status for an MSP or a company under an MSP.</p>
               
               <tr>
                 <td>ReadSpaces</td>
+                <td>POST</td>
+                <td>/v1/spaces:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetSpace</td>
                 <td>GET</td>
+                <td>/v1/spaces/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateSpace</td>
+                <td>POST</td>
                 <td>/v1/spaces</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateSpace</td>
+                <td>PUT</td>
+                <td>/v1/spaces/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteSpace</td>
+                <td>DELETE</td>
+                <td>/v1/spaces/{id}</td>
                 <td></td>
               </tr>
               
