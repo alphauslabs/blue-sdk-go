@@ -76,7 +76,7 @@ type GuaranteedCommitmentsClient interface {
 	ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error)
 	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
 	GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves default purchase plans of a company.
+	// WORK-IN-PROGRESS:  Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
@@ -374,7 +374,7 @@ type GuaranteedCommitmentsServer interface {
 	ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error)
 	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
 	GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves default purchase plans of a company.
+	// WORK-IN-PROGRESS:  Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
