@@ -4504,6 +4504,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.ListPayerAccountsRequest"><span class="badge">M</span>ListPayerAccountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListPayerAccountsResponse"><span class="badge">M</span>ListPayerAccountsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount"><span class="badge">M</span>ListPayerAccountsResponse.PayerAccount</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.ListPurchasePlansBySegmentRequest"><span class="badge">M</span>ListPurchasePlansBySegmentRequest</a>
                 </li>
               
@@ -4614,6 +4626,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.GetOnboardingStatusResponse.OnboardingStatus"><span class="badge">E</span>GetOnboardingStatusResponse.OnboardingStatus</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListPayerAccountsResponse.PayerAccountStatus"><span class="badge">E</span>ListPayerAccountsResponse.PayerAccountStatus</a>
                 </li>
               
                 <li>
@@ -54572,6 +54588,89 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.ListPayerAccountsRequest">ListPayerAccountsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListPayerAccountsResponse">ListPayerAccountsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerAccounts</td>
+                  <td><a href="#blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount">ListPayerAccountsResponse.PayerAccount</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount">ListPayerAccountsResponse.PayerAccount</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>segmentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#blueapi.gc.v1.ListPayerAccountsResponse.PayerAccountStatus">ListPayerAccountsResponse.PayerAccountStatus</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ListPurchasePlansBySegmentRequest">ListPurchasePlansBySegmentRequest</h3>
         <p></p>
 
@@ -56494,6 +56593,35 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.gc.v1.ListPayerAccountsResponse.PayerAccountStatus">ListPayerAccountsResponse.PayerAccountStatus</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>PAYER_ACCOUNT_STATUS_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PAYER_ACCOUNT_STATUS_ENABLED</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>PAYER_ACCOUNT_STATUS_DISABLED</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.gc.v1.Provider">Provider</h3>
         <p></p>
         <table class="enum-table">
@@ -56812,6 +56940,14 @@ and returns validation status for all required features.</p></td>
 Retrieves the latest onboarding status for an MSP or a company under an MSP.</p></td>
               </tr>
             
+              <tr>
+                <td>ListPayerAccounts</td>
+                <td><a href="#blueapi.gc.v1.ListPayerAccountsRequest">ListPayerAccountsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ListPayerAccountsResponse">ListPayerAccountsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Lists payer accounts associated with the organization.
+Retrieves all payer accounts linked to the organization, including their status and associated segments.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -57037,6 +57173,16 @@ Retrieves the latest onboarding status for an MSP or a company under an MSP.</p>
                 <td>POST</td>
                 <td>/v1/onboarding/status:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListPayerAccounts</td>
+                <td>GET</td>
+                <td>/v1/managements/accounts</td>
+                <td></td>
               </tr>
               
             

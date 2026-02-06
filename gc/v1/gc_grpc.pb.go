@@ -40,6 +40,7 @@ const (
 	GuaranteedCommitments_GetAwsLaunchStackUrl_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl"
 	GuaranteedCommitments_VerifyAwsOnboarding_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/VerifyAwsOnboarding"
 	GuaranteedCommitments_GetOnboardingStatus_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetOnboardingStatus"
+	GuaranteedCommitments_ListPayerAccounts_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListPayerAccounts"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -97,6 +98,9 @@ type GuaranteedCommitmentsClient interface {
 	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for an MSP or a company under an MSP.
 	// Retrieves the latest onboarding status for an MSP or a company under an MSP.
 	GetOnboardingStatus(ctx context.Context, in *GetOnboardingStatusRequest, opts ...grpc.CallOption) (*GetOnboardingStatusResponse, error)
+	// WORK-IN-PROGRESS: Lists payer accounts associated with the organization.
+	// Retrieves all payer accounts linked to the organization, including their status and associated segments.
+	ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (*ListPayerAccountsResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -340,6 +344,16 @@ func (c *guaranteedCommitmentsClient) GetOnboardingStatus(ctx context.Context, i
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (*ListPayerAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPayerAccountsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListPayerAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -395,6 +409,9 @@ type GuaranteedCommitmentsServer interface {
 	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for an MSP or a company under an MSP.
 	// Retrieves the latest onboarding status for an MSP or a company under an MSP.
 	GetOnboardingStatus(context.Context, *GetOnboardingStatusRequest) (*GetOnboardingStatusResponse, error)
+	// WORK-IN-PROGRESS: Lists payer accounts associated with the organization.
+	// Retrieves all payer accounts linked to the organization, including their status and associated segments.
+	ListPayerAccounts(context.Context, *ListPayerAccountsRequest) (*ListPayerAccountsResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -464,6 +481,9 @@ func (UnimplementedGuaranteedCommitmentsServer) VerifyAwsOnboarding(context.Cont
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetOnboardingStatus(context.Context, *GetOnboardingStatusRequest) (*GetOnboardingStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOnboardingStatus not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ListPayerAccounts(context.Context, *ListPayerAccountsRequest) (*ListPayerAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPayerAccounts not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -859,6 +879,24 @@ func _GuaranteedCommitments_GetOnboardingStatus_Handler(srv interface{}, ctx con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_ListPayerAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPayerAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ListPayerAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ListPayerAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ListPayerAccounts(ctx, req.(*ListPayerAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -945,6 +983,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetOnboardingStatus",
 			Handler:    _GuaranteedCommitments_GetOnboardingStatus_Handler,
+		},
+		{
+			MethodName: "ListPayerAccounts",
+			Handler:    _GuaranteedCommitments_ListPayerAccounts_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
