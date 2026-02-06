@@ -4643,6 +4643,25 @@
         
           
           <li>
+            <a href="#luster%2fv1%2fluster.proto">luster/v1/luster.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.ReadSpacesRequest"><span class="badge">M</span>ReadSpacesRequest</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#blueapi.luster.v1.Luster"><span class="badge">S</span>Luster</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#preferences%2fv1%2fpreferences.proto">preferences/v1/preferences.proto</a>
             <ul>
               
@@ -57002,6 +57021,74 @@ Retrieves the latest onboarding status for an MSP or a company under an MSP.</p>
                 <td>POST</td>
                 <td>/v1/onboarding/status:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="luster/v1/luster.proto">luster/v1/luster.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="blueapi.luster.v1.ReadSpacesRequest">ReadSpacesRequest</h3>
+        <p>The space read request.</p>
+
+        
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="blueapi.luster.v1.Luster">Luster</h3>
+        <p>Luster service definition.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ReadSpaces</td>
+                <td><a href="#blueapi.luster.v1.ReadSpacesRequest">ReadSpacesRequest</a></td>
+                <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a> stream</td>
+                <td><p>(ALPHA) Read spaces.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>ReadSpaces</td>
+                <td>GET</td>
+                <td>/v1/spaces</td>
+                <td></td>
               </tr>
               
             
