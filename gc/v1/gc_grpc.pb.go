@@ -65,7 +65,7 @@ type GuaranteedCommitmentsClient interface {
 	ListCommitmentsPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error)
 	// WORK-IN-PROGRESS: Retrieves a list of commitments.
 	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Generates time-series chart data for commitment metrics over the specified time period.
+	// WORK-IN-PROGRESS: Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error)
@@ -376,7 +376,7 @@ type GuaranteedCommitmentsServer interface {
 	ListCommitmentsPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error)
 	// WORK-IN-PROGRESS: Retrieves a list of commitments.
 	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Generates time-series chart data for commitment metrics over the specified time period.
+	// WORK-IN-PROGRESS: Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error)

@@ -339,15 +339,24 @@ func local_request_GuaranteedCommitments_ListCommitments_0(ctx context.Context, 
 	return msg, metadata, err
 }
 
-var filter_GuaranteedCommitments_GetCommitmentsChart_0 = &utilities.DoubleArray{Encoding: map[string]int{}, Base: []int(nil), Check: []int(nil)}
+var filter_GuaranteedCommitments_GetCommitmentsChart_0 = &utilities.DoubleArray{Encoding: map[string]int{"commitmentId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
 
 func request_GuaranteedCommitments_GetCommitmentsChart_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetCommitmentsChartRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["commitmentId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "commitmentId")
+	}
+	protoReq.CommitmentId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "commitmentId", err)
 	}
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
@@ -363,7 +372,16 @@ func local_request_GuaranteedCommitments_GetCommitmentsChart_0(ctx context.Conte
 	var (
 		protoReq GetCommitmentsChartRequest
 		metadata runtime.ServerMetadata
+		err      error
 	)
+	val, ok := pathParams["commitmentId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "commitmentId")
+	}
+	protoReq.CommitmentId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "commitmentId", err)
+	}
 	if err := req.ParseForm(); err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
@@ -949,7 +967,7 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/chart"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/{commitmentId}/chart"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1403,7 +1421,7 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/chart"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart", runtime.WithHTTPPathPattern("/v1/commitments/{commitmentId}/chart"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1649,7 +1667,7 @@ var (
 	pattern_GuaranteedCommitments_ListCommitmentsPlanLineItems_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "commitments", "plan", "planId", "line-items"}, ""))
 	pattern_GuaranteedCommitments_ListCommitmentsPlanResourceMatches_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "commitments", "plan", "planId", "resource-matches"}, ""))
 	pattern_GuaranteedCommitments_ListCommitments_0                    = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "commitments"}, ""))
-	pattern_GuaranteedCommitments_GetCommitmentsChart_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitments", "chart"}, ""))
+	pattern_GuaranteedCommitments_GetCommitmentsChart_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "commitments", "commitmentId", "chart"}, ""))
 	pattern_GuaranteedCommitments_GetMetrics_0                         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "metrics"}, ""))
 	pattern_GuaranteedCommitments_ListResources_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resources"}, ""))
 	pattern_GuaranteedCommitments_GetResourceDailyUsage_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "resources", "resourceId", "daily-usage"}, ""))

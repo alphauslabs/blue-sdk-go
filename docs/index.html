@@ -4392,7 +4392,7 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.gc.v1.CommitmentsChartDataPoint"><span class="badge">M</span>CommitmentsChartDataPoint</a>
+                  <a href="#blueapi.gc.v1.CommitmentsChartData"><span class="badge">M</span>CommitmentsChartData</a>
                 </li>
               
                 <li>
@@ -53211,7 +53211,7 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
-        <h3 id="blueapi.gc.v1.CommitmentsChartDataPoint">CommitmentsChartDataPoint</h3>
+        <h3 id="blueapi.gc.v1.CommitmentsChartData">CommitmentsChartData</h3>
         <p></p>
 
         
@@ -53229,43 +53229,15 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 </tr>
               
                 <tr>
-                  <td>commitmentSpend</td>
-                  <td><a href="#double">double</a></td>
+                  <td>chartKey</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>utilization</td>
+                  <td>chartValue</td>
                   <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>lockedCommitments</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>unlockedCommitments</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>realizedSavings</td>
-                  <td><a href="#double">double</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>isProjection</td>
-                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -53289,7 +53261,7 @@ maps to &#34;report_name&#34; conceptually </p></td>
               
                 <tr>
                   <td>data</td>
-                  <td><a href="#blueapi.gc.v1.CommitmentsChartDataPoint">CommitmentsChartDataPoint</a></td>
+                  <td><a href="#blueapi.gc.v1.CommitmentsChartData">CommitmentsChartData</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -53924,17 +53896,17 @@ maps to &#34;report_name&#34; conceptually </p></td>
             <tbody>
               
                 <tr>
-                  <td>filter</td>
-                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td>commitmentId</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The commitment id. </p></td>
                 </tr>
               
                 <tr>
-                  <td>provider</td>
-                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
+                  <td>groupBy</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The group filter. Available filters include `region`, `service`, `instanceType`, `instanceTypeFamily`, `usageType` and `operation`. </p></td>
                 </tr>
               
                 <tr>
@@ -56846,7 +56818,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td>GetCommitmentsChart</td>
                 <td><a href="#blueapi.gc.v1.GetCommitmentsChartRequest">GetCommitmentsChartRequest</a></td>
                 <td><a href="#blueapi.gc.v1.CommitmentsChartResponse">CommitmentsChartResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Generates time-series chart data for commitment metrics over the specified time period.</p></td>
+                <td><p>WORK-IN-PROGRESS: Generates time-series chart data for commitment metrics over the specified time period.</p></td>
               </tr>
             
               <tr>
@@ -57051,7 +57023,7 @@ Retrieves all payer accounts linked to the organization, including their status 
               <tr>
                 <td>GetCommitmentsChart</td>
                 <td>GET</td>
-                <td>/v1/commitments/chart</td>
+                <td>/v1/commitments/{commitmentId}/chart</td>
                 <td></td>
               </tr>
               
