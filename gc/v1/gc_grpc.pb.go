@@ -31,8 +31,6 @@ const (
 	GuaranteedCommitments_GetMetrics_FullMethodName                         = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
 	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
-	GuaranteedCommitments_ListSegments_FullMethodName                       = "/blueapi.gc.v1.GuaranteedCommitments/ListSegments"
-	GuaranteedCommitments_GetSegmentDetails_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/GetSegmentDetails"
 	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
 	GuaranteedCommitments_RegisterOrg_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg"
 	GuaranteedCommitments_StartAwsOnboarding_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding"
@@ -73,10 +71,6 @@ type GuaranteedCommitmentsClient interface {
 	ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves daily usage data for a specific resource within the specified date range.
 	GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves all segments for the specified organization and provider.
-	ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error)
-	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
-	GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error)
 	// WORK-IN-PROGRESS:  Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
@@ -254,26 +248,6 @@ func (c *guaranteedCommitmentsClient) GetResourceDailyUsage(ctx context.Context,
 	return out, nil
 }
 
-func (c *guaranteedCommitmentsClient) ListSegments(ctx context.Context, in *ListSegmentsRequest, opts ...grpc.CallOption) (*ListSegmentsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListSegmentsResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListSegments_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *guaranteedCommitmentsClient) GetSegmentDetails(ctx context.Context, in *GetSegmentDetailsRequest, opts ...grpc.CallOption) (*SegmentDetails, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(SegmentDetails)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetSegmentDetails_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *guaranteedCommitmentsClient) ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPurchasePlansBySegmentResponse)
@@ -384,10 +358,6 @@ type GuaranteedCommitmentsServer interface {
 	ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves daily usage data for a specific resource within the specified date range.
 	GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves all segments for the specified organization and provider.
-	ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error)
-	// WORK-IN-PROGRESS: Retrieves detailed information about a specific segment.
-	GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error)
 	// WORK-IN-PROGRESS:  Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
@@ -454,12 +424,6 @@ func (UnimplementedGuaranteedCommitmentsServer) ListResources(context.Context, *
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResourceDailyUsage not implemented")
-}
-func (UnimplementedGuaranteedCommitmentsServer) ListSegments(context.Context, *ListSegmentsRequest) (*ListSegmentsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListSegments not implemented")
-}
-func (UnimplementedGuaranteedCommitmentsServer) GetSegmentDetails(context.Context, *GetSegmentDetailsRequest) (*SegmentDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSegmentDetails not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPurchasePlansBySegment not implemented")
@@ -717,42 +681,6 @@ func _GuaranteedCommitments_GetResourceDailyUsage_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
-func _GuaranteedCommitments_ListSegments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListSegmentsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).ListSegments(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GuaranteedCommitments_ListSegments_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).ListSegments(ctx, req.(*ListSegmentsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GuaranteedCommitments_GetSegmentDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSegmentDetailsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).GetSegmentDetails(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GuaranteedCommitments_GetSegmentDetails_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).GetSegmentDetails(ctx, req.(*GetSegmentDetailsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _GuaranteedCommitments_ListPurchasePlansBySegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListPurchasePlansBySegmentRequest)
 	if err := dec(in); err != nil {
@@ -947,14 +875,6 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetResourceDailyUsage",
 			Handler:    _GuaranteedCommitments_GetResourceDailyUsage_Handler,
-		},
-		{
-			MethodName: "ListSegments",
-			Handler:    _GuaranteedCommitments_ListSegments_Handler,
-		},
-		{
-			MethodName: "GetSegmentDetails",
-			Handler:    _GuaranteedCommitments_GetSegmentDetails_Handler,
 		},
 		{
 			MethodName: "ListPurchasePlansBySegment",
