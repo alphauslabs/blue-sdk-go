@@ -40,6 +40,7 @@ const (
 	GuaranteedCommitments_GetOnboardingStatus_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetOnboardingStatus"
 	GuaranteedCommitments_ListPayerAccounts_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListPayerAccounts"
 	GuaranteedCommitments_SetPayerAccountEnabled_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/SetPayerAccountEnabled"
+	GuaranteedCommitments_GetPayerAccountStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetPayerAccountStatus"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -97,6 +98,7 @@ type GuaranteedCommitmentsClient interface {
 	// Retrieves all payer accounts linked to the organization, including their status and associated segments.
 	ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (*ListPayerAccountsResponse, error)
 	SetPayerAccountEnabled(ctx context.Context, in *SetPayerAccountEnabledRequest, opts ...grpc.CallOption) (*SetPayerAccountEnabledResponse, error)
+	GetPayerAccountStatus(ctx context.Context, in *GetPayerAccountStatusRequest, opts ...grpc.CallOption) (*GetPayerAccountStatusResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -340,6 +342,16 @@ func (c *guaranteedCommitmentsClient) SetPayerAccountEnabled(ctx context.Context
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) GetPayerAccountStatus(ctx context.Context, in *GetPayerAccountStatusRequest, opts ...grpc.CallOption) (*GetPayerAccountStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPayerAccountStatusResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetPayerAccountStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -395,6 +407,7 @@ type GuaranteedCommitmentsServer interface {
 	// Retrieves all payer accounts linked to the organization, including their status and associated segments.
 	ListPayerAccounts(context.Context, *ListPayerAccountsRequest) (*ListPayerAccountsResponse, error)
 	SetPayerAccountEnabled(context.Context, *SetPayerAccountEnabledRequest) (*SetPayerAccountEnabledResponse, error)
+	GetPayerAccountStatus(context.Context, *GetPayerAccountStatusRequest) (*GetPayerAccountStatusResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -464,6 +477,9 @@ func (UnimplementedGuaranteedCommitmentsServer) ListPayerAccounts(context.Contex
 }
 func (UnimplementedGuaranteedCommitmentsServer) SetPayerAccountEnabled(context.Context, *SetPayerAccountEnabledRequest) (*SetPayerAccountEnabledResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetPayerAccountEnabled not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetPayerAccountStatus(context.Context, *GetPayerAccountStatusRequest) (*GetPayerAccountStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccountStatus not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -859,6 +875,24 @@ func _GuaranteedCommitments_SetPayerAccountEnabled_Handler(srv interface{}, ctx 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_GetPayerAccountStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPayerAccountStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetPayerAccountStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetPayerAccountStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetPayerAccountStatus(ctx, req.(*GetPayerAccountStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -945,6 +979,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "SetPayerAccountEnabled",
 			Handler:    _GuaranteedCommitments_SetPayerAccountEnabled_Handler,
+		},
+		{
+			MethodName: "GetPayerAccountStatus",
+			Handler:    _GuaranteedCommitments_GetPayerAccountStatus_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -4452,6 +4452,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.GetPayerAccountStatusRequest"><span class="badge">M</span>GetPayerAccountStatusRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetPayerAccountStatusResponse"><span class="badge">M</span>GetPayerAccountStatusResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.GetRecommendedCommitmentPlanRequest"><span class="badge">M</span>GetRecommendedCommitmentPlanRequest</a>
                 </li>
               
@@ -54119,6 +54127,37 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.GetPayerAccountStatusRequest">GetPayerAccountStatusRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetPayerAccountStatusResponse">GetPayerAccountStatusResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerAccount</td>
+                  <td><a href="#blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount">ListPayerAccountsResponse.PayerAccount</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetRecommendedCommitmentPlanRequest">GetRecommendedCommitmentPlanRequest</h3>
         <p></p>
 
@@ -57039,6 +57078,13 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>GetPayerAccountStatus</td>
+                <td><a href="#blueapi.gc.v1.GetPayerAccountStatusRequest">GetPayerAccountStatusRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetPayerAccountStatusResponse">GetPayerAccountStatusResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -57264,6 +57310,16 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td>POST</td>
                 <td>/v1/managements/accounts/{companyId}</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetPayerAccountStatus</td>
+                <td>GET</td>
+                <td>/v1/managements/accounts/status</td>
+                <td></td>
               </tr>
               
             
