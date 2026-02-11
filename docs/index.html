@@ -4404,6 +4404,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.CommitmentsUtilizationData"><span class="badge">M</span>CommitmentsUtilizationData</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.CommitmentsUtilizationResponse"><span class="badge">M</span>CommitmentsUtilizationResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.ContractSpec"><span class="badge">M</span>ContractSpec</a>
                 </li>
               
@@ -4445,6 +4453,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.GetCommitmentsChartRequest"><span class="badge">M</span>GetCommitmentsChartRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetCommitmentsUtilizationRequest"><span class="badge">M</span>GetCommitmentsUtilizationRequest</a>
                 </li>
               
                 <li>
@@ -53351,6 +53363,117 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.CommitmentsUtilizationData">CommitmentsUtilizationData</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>utilizationDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>coveredCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>griFees</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>netSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>potentialSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservationUtilization</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>runningHours</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>savings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unutilizedCommitment</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.CommitmentsUtilizationResponse">CommitmentsUtilizationResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#blueapi.gc.v1.CommitmentsUtilizationData">CommitmentsUtilizationData</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ContractSpec">ContractSpec</h3>
         <p></p>
 
@@ -54054,6 +54177,30 @@ maps to &#34;report_name&#34; conceptually </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetCommitmentsUtilizationRequest">GetCommitmentsUtilizationRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>commitmentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The commitment id. </p></td>
                 </tr>
               
             </tbody>
@@ -57348,6 +57495,13 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
               </tr>
             
               <tr>
+                <td>GetCommitmentsUtilization</td>
+                <td><a href="#blueapi.gc.v1.GetCommitmentsUtilizationRequest">GetCommitmentsUtilizationRequest</a></td>
+                <td><a href="#blueapi.gc.v1.CommitmentsUtilizationResponse">CommitmentsUtilizationResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Generates utilization data for commitment over the active period.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetMetrics</td>
                 <td><a href="#blueapi.gc.v1.GetMetricsRequest">GetMetricsRequest</a></td>
                 <td><a href="#blueapi.gc.v1.MetricsResponse">MetricsResponse</a></td>
@@ -57571,6 +57725,16 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td>GetCommitmentsChart</td>
                 <td>GET</td>
                 <td>/v1/commitments/{commitmentId}/chart</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetCommitmentsUtilization</td>
+                <td>GET</td>
+                <td>/v1/commitments/{commitmentId}/utilization</td>
                 <td></td>
               </tr>
               

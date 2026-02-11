@@ -28,6 +28,7 @@ const (
 	GuaranteedCommitments_ListCommitmentsPlanResourceMatches_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentsPlanResourceMatches"
 	GuaranteedCommitments_ListCommitments_FullMethodName                    = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments"
 	GuaranteedCommitments_GetCommitmentsChart_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart"
+	GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsUtilization"
 	GuaranteedCommitments_GetMetrics_FullMethodName                         = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
 	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
@@ -70,6 +71,8 @@ type GuaranteedCommitmentsClient interface {
 	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
 	// WORK-IN-PROGRESS: Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error)
+	// WORK-IN-PROGRESS: Generates utilization data for commitment over the active period.
+	GetCommitmentsUtilization(ctx context.Context, in *GetCommitmentsUtilizationRequest, opts ...grpc.CallOption) (*CommitmentsUtilizationResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
@@ -225,6 +228,16 @@ func (c *guaranteedCommitmentsClient) GetCommitmentsChart(ctx context.Context, i
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CommitmentsChartResponse)
 	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetCommitmentsChart_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetCommitmentsUtilization(ctx context.Context, in *GetCommitmentsUtilizationRequest, opts ...grpc.CallOption) (*CommitmentsUtilizationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CommitmentsUtilizationResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -415,6 +428,8 @@ type GuaranteedCommitmentsServer interface {
 	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
 	// WORK-IN-PROGRESS: Generates time-series chart data for commitment metrics over the specified time period.
 	GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error)
+	// WORK-IN-PROGRESS: Generates utilization data for commitment over the active period.
+	GetCommitmentsUtilization(context.Context, *GetCommitmentsUtilizationRequest) (*CommitmentsUtilizationResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
@@ -486,6 +501,9 @@ func (UnimplementedGuaranteedCommitmentsServer) ListCommitments(context.Context,
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentsChart not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetCommitmentsUtilization(context.Context, *GetCommitmentsUtilizationRequest) (*CommitmentsUtilizationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentsUtilization not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMetrics not implemented")
@@ -709,6 +727,24 @@ func _GuaranteedCommitments_GetCommitmentsChart_Handler(srv interface{}, ctx con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuaranteedCommitmentsServer).GetCommitmentsChart(ctx, req.(*GetCommitmentsChartRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetCommitmentsUtilization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetCommitmentsUtilizationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetCommitmentsUtilization(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetCommitmentsUtilization(ctx, req.(*GetCommitmentsUtilizationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1039,6 +1075,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCommitmentsChart",
 			Handler:    _GuaranteedCommitments_GetCommitmentsChart_Handler,
+		},
+		{
+			MethodName: "GetCommitmentsUtilization",
+			Handler:    _GuaranteedCommitments_GetCommitmentsUtilization_Handler,
 		},
 		{
 			MethodName: "GetMetrics",
