@@ -4416,6 +4416,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.DeleteDraftPurchasePlanRequest"><span class="badge">M</span>DeleteDraftPurchasePlanRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.DeleteDraftPurchasePlanResponse"><span class="badge">M</span>DeleteDraftPurchasePlanResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.GetAwsCloudFormationTemplateRequest"><span class="badge">M</span>GetAwsCloudFormationTemplateRequest</a>
                 </li>
               
@@ -4512,6 +4520,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.ListDraftPurchasePlansRequest"><span class="badge">M</span>ListDraftPurchasePlansRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListDraftPurchasePlansResponse"><span class="badge">M</span>ListDraftPurchasePlansResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.ListOrgsRequest"><span class="badge">M</span>ListOrgsRequest</a>
                 </li>
               
@@ -4589,6 +4605,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.ResourceDailyUsage"><span class="badge">M</span>ResourceDailyUsage</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.SaveCommitmentsPlanAsDraftRequest"><span class="badge">M</span>SaveCommitmentsPlanAsDraftRequest</a>
                 </li>
               
                 <li>
@@ -53795,6 +53815,61 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.DeleteDraftPurchasePlanRequest">DeleteDraftPurchasePlanRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>planId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The plan ID to delete. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.DeleteDraftPurchasePlanResponse">DeleteDraftPurchasePlanResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>planId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The ID of the deleted plan </p></td>
+                </tr>
+              
+                <tr>
+                  <td>success</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Indicates if the plan was successfully deleted </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetAwsCloudFormationTemplateRequest">GetAwsCloudFormationTemplateRequest</h3>
         <p></p>
 
@@ -54645,6 +54720,37 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 <tr>
                   <td>plans</td>
                   <td><a href="#blueapi.gc.v1.CommitmentPlanDetails">CommitmentPlanDetails</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListDraftPurchasePlansRequest">ListDraftPurchasePlansRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListDraftPurchasePlansResponse">ListDraftPurchasePlansResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>plans</td>
+                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -55933,6 +56039,261 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.SaveCommitmentsPlanAsDraftRequest">SaveCommitmentsPlanAsDraftRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>planId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservationIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>maxUpfrontCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>segmentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>preferredPaymentOption</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>includedContractTerms</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>includedContractSpecs</td>
+                  <td><a href="#blueapi.gc.v1.ContractSpec">ContractSpec</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>coverageId</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dataSource</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>executionPolicy</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>flaggedActions</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isCalculating</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isDefault</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isLocked</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isRecommended</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isRenewal</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isSaved</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lastModified</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>metaPlanId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>minimumUpfrontInterestRate</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>recommendWithinCoveredAccounts</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>segment</td>
+                  <td><a href="#blueapi.gc.v1.Segment">Segment</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.Segment">Segment</h3>
         <p></p>
 
@@ -56941,7 +57302,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td>CommitmentsPlanApply</td>
                 <td><a href="#blueapi.gc.v1.CommitmentPlanApplyRequest">CommitmentPlanApplyRequest</a></td>
                 <td><a href="#blueapi.gc.v1.CommitmentPlanDetails">CommitmentPlanDetails</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Executes a commitment purchase plan, initiating the commitment purchase process.</p></td>
+                <td><p>WORK-IN-PROGRESS: Executes a commitment purchase plan, initiating the commitment purchase process.</p></td>
               </tr>
             
               <tr>
@@ -57011,7 +57372,28 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td>ListPurchasePlansBySegment</td>
                 <td><a href="#blueapi.gc.v1.ListPurchasePlansBySegmentRequest">ListPurchasePlansBySegmentRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ListPurchasePlansBySegmentResponse">ListPurchasePlansBySegmentResponse</a></td>
-                <td><p>WORK-IN-PROGRESS:  Retrieves purchase plan of a company.</p></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves purchase plan of a company.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SaveCommitmentsPlanAsDraft</td>
+                <td><a href="#blueapi.gc.v1.SaveCommitmentsPlanAsDraftRequest">SaveCommitmentsPlanAsDraftRequest</a></td>
+                <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                <td><p>WORK-IN-PROGRESS: Saves a commitment purchase plan as draft.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListDraftPurchasePlans</td>
+                <td><a href="#blueapi.gc.v1.ListDraftPurchasePlansRequest">ListDraftPurchasePlansRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ListDraftPurchasePlansResponse">ListDraftPurchasePlansResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves the drafted purchase plans</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteDraftPurchasePlan</td>
+                <td><a href="#blueapi.gc.v1.DeleteDraftPurchasePlanRequest">DeleteDraftPurchasePlanRequest</a></td>
+                <td><a href="#blueapi.gc.v1.DeleteDraftPurchasePlanResponse">DeleteDraftPurchasePlanResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Deletes a draft purchase plan.</p></td>
               </tr>
             
               <tr>
@@ -57158,7 +57540,7 @@ Retrieves all payer accounts linked to the organization, including their status 
               <tr>
                 <td>ListCommitmentsPlanLineItems</td>
                 <td>GET</td>
-                <td>/v1/commitments/plan/{planId}/line-items</td>
+                <td>/v1/commitments/plan/{planId}/lineitems</td>
                 <td></td>
               </tr>
               
@@ -57168,7 +57550,7 @@ Retrieves all payer accounts linked to the organization, including their status 
               <tr>
                 <td>ListCommitmentsPlanResourceMatches</td>
                 <td>GET</td>
-                <td>/v1/commitments/plan/{planId}/resource-matches</td>
+                <td>/v1/commitments/plan/{planId}/resourcematches</td>
                 <td></td>
               </tr>
               
@@ -57218,7 +57600,7 @@ Retrieves all payer accounts linked to the organization, including their status 
               <tr>
                 <td>GetResourceDailyUsage</td>
                 <td>GET</td>
-                <td>/v1/resources/{resourceId}/daily-usage</td>
+                <td>/v1/resources/{resourceId}/dailyusage</td>
                 <td></td>
               </tr>
               
@@ -57229,6 +57611,36 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td>ListPurchasePlansBySegment</td>
                 <td>GET</td>
                 <td>/v1/commitments/purchaseplan</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SaveCommitmentsPlanAsDraft</td>
+                <td>POST</td>
+                <td>/v1/commitments/purchaseplan/{planId}/draft</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListDraftPurchasePlans</td>
+                <td>GET</td>
+                <td>/v1/commitments/purchaseplan/draft</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteDraftPurchasePlan</td>
+                <td>DELETE</td>
+                <td>/v1/commitments/purchaseplan/{planId}/draft</td>
                 <td></td>
               </tr>
               
