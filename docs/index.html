@@ -1651,6 +1651,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobRequest"><span class="badge">M</span>GetBulkCreateBillingGroupJobRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobResponse"><span class="badge">M</span>GetBulkCreateBillingGroupJobResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceRequest"><span class="badge">M</span>GetChildBillingGroupCustomizedBillingServiceRequest</a>
                 </li>
               
@@ -21158,6 +21166,117 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.GetBulkCreateBillingGroupJobRequest">GetBulkCreateBillingGroupJobRequest</h3>
+        <p>Request message for the GetBulkCreateBillingGroupJob rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>jobId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The job ID returned by BulkCreateBillingGroup. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBulkCreateBillingGroupJobResponse">GetBulkCreateBillingGroupJobResponse</h3>
+        <p>Response message for the GetBulkCreateBillingGroupJob rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>jobId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The job ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of billing groups to create. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processedCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of billing groups processed so far. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>successCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of billing groups successfully created. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of billing groups that failed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupError">BulkCreateBillingGroupError</a></td>
+                  <td>repeated</td>
+                  <td><p>Details of failed billing groups (reuses existing BulkCreateBillingGroupError). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job start timestamp. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job end timestamp. Empty if still running. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional status message. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.GetChildBillingGroupCustomizedBillingServiceRequest">GetChildBillingGroupCustomizedBillingServiceRequest</h3>
         <p></p>
 
@@ -26633,6 +26752,13 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
+                <td>GetBulkCreateBillingGroupJob</td>
+                <td><a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobRequest">GetBulkCreateBillingGroupJobRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobResponse">GetBulkCreateBillingGroupJobResponse</a></td>
+                <td><p>Gets the status of a bulk create billing group job.</p></td>
+              </tr>
+            
+              <tr>
                 <td>CreateExcludeServiceEntry</td>
                 <td><a href="#blueapi.billing.v1.CreateExcludeServiceEntryRequest">CreateExcludeServiceEntryRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CreateExcludeServiceEntryResponse">CreateExcludeServiceEntryResponse</a></td>
@@ -27975,6 +28101,16 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/billinggroups:bulkCreate</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBulkCreateBillingGroupJob</td>
+                <td>GET</td>
+                <td>/v1/billinggroups:bulkCreate/{jobId}</td>
+                <td></td>
               </tr>
               
             

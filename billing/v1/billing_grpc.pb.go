@@ -154,6 +154,7 @@ const (
 	Billing_GetChildBillingGroupInvoiceServiceDiscounts_FullMethodName         = "/blueapi.billing.v1.Billing/GetChildBillingGroupInvoiceServiceDiscounts"
 	Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ListChildBillingGroupAccountInvoiceServiceDiscounts"
 	Billing_BulkCreateBillingGroup_FullMethodName                              = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
+	Billing_GetBulkCreateBillingGroupJob_FullMethodName                        = "/blueapi.billing.v1.Billing/GetBulkCreateBillingGroupJob"
 	Billing_CreateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
 	Billing_UpdateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
 	Billing_DeleteExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
@@ -437,6 +438,8 @@ type BillingClient interface {
 	ListChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsClient, error)
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
+	// Gets the status of a bulk create billing group job.
+	GetBulkCreateBillingGroupJob(ctx context.Context, in *GetBulkCreateBillingGroupJobRequest, opts ...grpc.CallOption) (*GetBulkCreateBillingGroupJobResponse, error)
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error)
 	// Update Exclude Service Entry
@@ -2491,6 +2494,16 @@ func (x *billingBulkCreateBillingGroupClient) Recv() (*BulkCreateBillingGroupRes
 	return m, nil
 }
 
+func (c *billingClient) GetBulkCreateBillingGroupJob(ctx context.Context, in *GetBulkCreateBillingGroupJobRequest, opts ...grpc.CallOption) (*GetBulkCreateBillingGroupJobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBulkCreateBillingGroupJobResponse)
+	err := c.cc.Invoke(ctx, Billing_GetBulkCreateBillingGroupJob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateExcludeServiceEntryResponse)
@@ -2808,6 +2821,8 @@ type BillingServer interface {
 	ListChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsServer) error
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
+	// Gets the status of a bulk create billing group job.
+	GetBulkCreateBillingGroupJob(context.Context, *GetBulkCreateBillingGroupJobRequest) (*GetBulkCreateBillingGroupJobResponse, error)
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error)
 	// Update Exclude Service Entry
@@ -3212,6 +3227,9 @@ func (UnimplementedBillingServer) ListChildBillingGroupAccountInvoiceServiceDisc
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) GetBulkCreateBillingGroupJob(context.Context, *GetBulkCreateBillingGroupJobRequest) (*GetBulkCreateBillingGroupJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBulkCreateBillingGroupJob not implemented")
 }
 func (UnimplementedBillingServer) CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateExcludeServiceEntry not implemented")
@@ -5674,6 +5692,24 @@ func (x *billingBulkCreateBillingGroupServer) Send(m *BulkCreateBillingGroupResp
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_GetBulkCreateBillingGroupJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBulkCreateBillingGroupJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetBulkCreateBillingGroupJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetBulkCreateBillingGroupJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetBulkCreateBillingGroupJob(ctx, req.(*GetBulkCreateBillingGroupJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_CreateExcludeServiceEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateExcludeServiceEntryRequest)
 	if err := dec(in); err != nil {
@@ -6144,6 +6180,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetChildBillingGroupInvoiceServiceDiscounts",
 			Handler:    _Billing_GetChildBillingGroupInvoiceServiceDiscounts_Handler,
+		},
+		{
+			MethodName: "GetBulkCreateBillingGroupJob",
+			Handler:    _Billing_GetBulkCreateBillingGroupJob_Handler,
 		},
 		{
 			MethodName: "CreateExcludeServiceEntry",
