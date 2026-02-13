@@ -21,11 +21,20 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Luster_ReadSpaces_FullMethodName  = "/blueapi.luster.v1.Luster/ReadSpaces"
-	Luster_GetSpace_FullMethodName    = "/blueapi.luster.v1.Luster/GetSpace"
-	Luster_CreateSpace_FullMethodName = "/blueapi.luster.v1.Luster/CreateSpace"
-	Luster_UpdateSpace_FullMethodName = "/blueapi.luster.v1.Luster/UpdateSpace"
-	Luster_DeleteSpace_FullMethodName = "/blueapi.luster.v1.Luster/DeleteSpace"
+	Luster_ReadSpaces_FullMethodName           = "/blueapi.luster.v1.Luster/ReadSpaces"
+	Luster_GetSpace_FullMethodName             = "/blueapi.luster.v1.Luster/GetSpace"
+	Luster_CreateSpace_FullMethodName          = "/blueapi.luster.v1.Luster/CreateSpace"
+	Luster_UpdateSpace_FullMethodName          = "/blueapi.luster.v1.Luster/UpdateSpace"
+	Luster_DeleteSpace_FullMethodName          = "/blueapi.luster.v1.Luster/DeleteSpace"
+	Luster_ReadContexts_FullMethodName         = "/blueapi.luster.v1.Luster/ReadContexts"
+	Luster_GetContext_FullMethodName           = "/blueapi.luster.v1.Luster/GetContext"
+	Luster_CreateContext_FullMethodName        = "/blueapi.luster.v1.Luster/CreateContext"
+	Luster_UpdateContext_FullMethodName        = "/blueapi.luster.v1.Luster/UpdateContext"
+	Luster_DeleteContext_FullMethodName        = "/blueapi.luster.v1.Luster/DeleteContext"
+	Luster_CreateContextComment_FullMethodName = "/blueapi.luster.v1.Luster/CreateContextComment"
+	Luster_UpdateContextComment_FullMethodName = "/blueapi.luster.v1.Luster/UpdateContextComment"
+	Luster_DeleteContextComment_FullMethodName = "/blueapi.luster.v1.Luster/DeleteContextComment"
+	Luster_CreateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/CreateLabel"
 )
 
 // LusterClient is the client API for Luster service.
@@ -35,15 +44,39 @@ const (
 // Luster service definition.
 type LusterClient interface {
 	// (ALPHA) Reads spaces.
+	// スペースの読み取り。
 	ReadSpaces(ctx context.Context, in *ReadSpacesRequest, opts ...grpc.CallOption) (Luster_ReadSpacesClient, error)
 	// (ALPHA) Gets space.
+	// スペースの取得。
 	GetSpace(ctx context.Context, in *GetSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
 	// (ALPHA) Creates space.
+	// スペースの作成。
 	CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
 	// (ALPHA) Updates space.
+	// スペースの更新。
 	UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
 	// (ALPHA) Deletes space.
+	// スペースの削除。 削除する場合はスペース内で作成したコンテクストも削除され閲覧できなくなります。
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// (ALPHA) Reads contexts.
+	// スペースの読み取り。
+	ReadContexts(ctx context.Context, in *ReadContextsRequest, opts ...grpc.CallOption) (Luster_ReadContextsClient, error)
+	// (ALPHA) Gets context.
+	GetContext(ctx context.Context, in *GetContextRequest, opts ...grpc.CallOption) (*GetContextResponse, error)
+	// (ALPHA) Creates context.
+	CreateContext(ctx context.Context, in *CreateContextRequest, opts ...grpc.CallOption) (*luster.Context, error)
+	// (ALPHA) Updates context.
+	UpdateContext(ctx context.Context, in *UpdateContextRequest, opts ...grpc.CallOption) (*luster.Context, error)
+	// (ALPHA) Deletes context.
+	DeleteContext(ctx context.Context, in *DeleteContextRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// (ALPHA) Creates comment in context.
+	CreateContextComment(ctx context.Context, in *CreateContextCommentRequest, opts ...grpc.CallOption) (*luster.Comment, error)
+	// (ALPHA) Updates comment in context.
+	UpdateContextComment(ctx context.Context, in *UpdateContextCommentRequest, opts ...grpc.CallOption) (*luster.Comment, error)
+	// (ALPHA) Deletes comment in context.
+	DeleteContextComment(ctx context.Context, in *DeleteContextCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// (ALPHA) Creates label.
+	CreateLabel(ctx context.Context, in *CreateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error)
 }
 
 type lusterClient struct {
@@ -127,6 +160,119 @@ func (c *lusterClient) DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, 
 	return out, nil
 }
 
+func (c *lusterClient) ReadContexts(ctx context.Context, in *ReadContextsRequest, opts ...grpc.CallOption) (Luster_ReadContextsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Luster_ServiceDesc.Streams[1], Luster_ReadContexts_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &lusterReadContextsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Luster_ReadContextsClient interface {
+	Recv() (*luster.Context, error)
+	grpc.ClientStream
+}
+
+type lusterReadContextsClient struct {
+	grpc.ClientStream
+}
+
+func (x *lusterReadContextsClient) Recv() (*luster.Context, error) {
+	m := new(luster.Context)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *lusterClient) GetContext(ctx context.Context, in *GetContextRequest, opts ...grpc.CallOption) (*GetContextResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetContextResponse)
+	err := c.cc.Invoke(ctx, Luster_GetContext_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) CreateContext(ctx context.Context, in *CreateContextRequest, opts ...grpc.CallOption) (*luster.Context, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Context)
+	err := c.cc.Invoke(ctx, Luster_CreateContext_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) UpdateContext(ctx context.Context, in *UpdateContextRequest, opts ...grpc.CallOption) (*luster.Context, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Context)
+	err := c.cc.Invoke(ctx, Luster_UpdateContext_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) DeleteContext(ctx context.Context, in *DeleteContextRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Luster_DeleteContext_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) CreateContextComment(ctx context.Context, in *CreateContextCommentRequest, opts ...grpc.CallOption) (*luster.Comment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Comment)
+	err := c.cc.Invoke(ctx, Luster_CreateContextComment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) UpdateContextComment(ctx context.Context, in *UpdateContextCommentRequest, opts ...grpc.CallOption) (*luster.Comment, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Comment)
+	err := c.cc.Invoke(ctx, Luster_UpdateContextComment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) DeleteContextComment(ctx context.Context, in *DeleteContextCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Luster_DeleteContextComment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) CreateLabel(ctx context.Context, in *CreateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Label)
+	err := c.cc.Invoke(ctx, Luster_CreateLabel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LusterServer is the server API for Luster service.
 // All implementations must embed UnimplementedLusterServer
 // for forward compatibility
@@ -134,15 +280,39 @@ func (c *lusterClient) DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, 
 // Luster service definition.
 type LusterServer interface {
 	// (ALPHA) Reads spaces.
+	// スペースの読み取り。
 	ReadSpaces(*ReadSpacesRequest, Luster_ReadSpacesServer) error
 	// (ALPHA) Gets space.
+	// スペースの取得。
 	GetSpace(context.Context, *GetSpaceRequest) (*luster.Space, error)
 	// (ALPHA) Creates space.
+	// スペースの作成。
 	CreateSpace(context.Context, *CreateSpaceRequest) (*luster.Space, error)
 	// (ALPHA) Updates space.
+	// スペースの更新。
 	UpdateSpace(context.Context, *UpdateSpaceRequest) (*luster.Space, error)
 	// (ALPHA) Deletes space.
+	// スペースの削除。 削除する場合はスペース内で作成したコンテクストも削除され閲覧できなくなります。
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error)
+	// (ALPHA) Reads contexts.
+	// スペースの読み取り。
+	ReadContexts(*ReadContextsRequest, Luster_ReadContextsServer) error
+	// (ALPHA) Gets context.
+	GetContext(context.Context, *GetContextRequest) (*GetContextResponse, error)
+	// (ALPHA) Creates context.
+	CreateContext(context.Context, *CreateContextRequest) (*luster.Context, error)
+	// (ALPHA) Updates context.
+	UpdateContext(context.Context, *UpdateContextRequest) (*luster.Context, error)
+	// (ALPHA) Deletes context.
+	DeleteContext(context.Context, *DeleteContextRequest) (*emptypb.Empty, error)
+	// (ALPHA) Creates comment in context.
+	CreateContextComment(context.Context, *CreateContextCommentRequest) (*luster.Comment, error)
+	// (ALPHA) Updates comment in context.
+	UpdateContextComment(context.Context, *UpdateContextCommentRequest) (*luster.Comment, error)
+	// (ALPHA) Deletes comment in context.
+	DeleteContextComment(context.Context, *DeleteContextCommentRequest) (*emptypb.Empty, error)
+	// (ALPHA) Creates label.
+	CreateLabel(context.Context, *CreateLabelRequest) (*luster.Label, error)
 	mustEmbedUnimplementedLusterServer()
 }
 
@@ -164,6 +334,33 @@ func (UnimplementedLusterServer) UpdateSpace(context.Context, *UpdateSpaceReques
 }
 func (UnimplementedLusterServer) DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteSpace not implemented")
+}
+func (UnimplementedLusterServer) ReadContexts(*ReadContextsRequest, Luster_ReadContextsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadContexts not implemented")
+}
+func (UnimplementedLusterServer) GetContext(context.Context, *GetContextRequest) (*GetContextResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetContext not implemented")
+}
+func (UnimplementedLusterServer) CreateContext(context.Context, *CreateContextRequest) (*luster.Context, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateContext not implemented")
+}
+func (UnimplementedLusterServer) UpdateContext(context.Context, *UpdateContextRequest) (*luster.Context, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateContext not implemented")
+}
+func (UnimplementedLusterServer) DeleteContext(context.Context, *DeleteContextRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteContext not implemented")
+}
+func (UnimplementedLusterServer) CreateContextComment(context.Context, *CreateContextCommentRequest) (*luster.Comment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateContextComment not implemented")
+}
+func (UnimplementedLusterServer) UpdateContextComment(context.Context, *UpdateContextCommentRequest) (*luster.Comment, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateContextComment not implemented")
+}
+func (UnimplementedLusterServer) DeleteContextComment(context.Context, *DeleteContextCommentRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteContextComment not implemented")
+}
+func (UnimplementedLusterServer) CreateLabel(context.Context, *CreateLabelRequest) (*luster.Label, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateLabel not implemented")
 }
 func (UnimplementedLusterServer) mustEmbedUnimplementedLusterServer() {}
 
@@ -271,6 +468,171 @@ func _Luster_DeleteSpace_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Luster_ReadContexts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadContextsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(LusterServer).ReadContexts(m, &lusterReadContextsServer{ServerStream: stream})
+}
+
+type Luster_ReadContextsServer interface {
+	Send(*luster.Context) error
+	grpc.ServerStream
+}
+
+type lusterReadContextsServer struct {
+	grpc.ServerStream
+}
+
+func (x *lusterReadContextsServer) Send(m *luster.Context) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _Luster_GetContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).GetContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_GetContext_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).GetContext(ctx, req.(*GetContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_CreateContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).CreateContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_CreateContext_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).CreateContext(ctx, req.(*CreateContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_UpdateContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).UpdateContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_UpdateContext_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).UpdateContext(ctx, req.(*UpdateContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_DeleteContext_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteContextRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).DeleteContext(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_DeleteContext_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).DeleteContext(ctx, req.(*DeleteContextRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_CreateContextComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateContextCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).CreateContextComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_CreateContextComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).CreateContextComment(ctx, req.(*CreateContextCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_UpdateContextComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateContextCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).UpdateContextComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_UpdateContextComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).UpdateContextComment(ctx, req.(*UpdateContextCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_DeleteContextComment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteContextCommentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).DeleteContextComment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_DeleteContextComment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).DeleteContextComment(ctx, req.(*DeleteContextCommentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_CreateLabel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateLabelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).CreateLabel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_CreateLabel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).CreateLabel(ctx, req.(*CreateLabelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Luster_ServiceDesc is the grpc.ServiceDesc for Luster service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -294,11 +656,48 @@ var Luster_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "DeleteSpace",
 			Handler:    _Luster_DeleteSpace_Handler,
 		},
+		{
+			MethodName: "GetContext",
+			Handler:    _Luster_GetContext_Handler,
+		},
+		{
+			MethodName: "CreateContext",
+			Handler:    _Luster_CreateContext_Handler,
+		},
+		{
+			MethodName: "UpdateContext",
+			Handler:    _Luster_UpdateContext_Handler,
+		},
+		{
+			MethodName: "DeleteContext",
+			Handler:    _Luster_DeleteContext_Handler,
+		},
+		{
+			MethodName: "CreateContextComment",
+			Handler:    _Luster_CreateContextComment_Handler,
+		},
+		{
+			MethodName: "UpdateContextComment",
+			Handler:    _Luster_UpdateContextComment_Handler,
+		},
+		{
+			MethodName: "DeleteContextComment",
+			Handler:    _Luster_DeleteContextComment_Handler,
+		},
+		{
+			MethodName: "CreateLabel",
+			Handler:    _Luster_CreateLabel_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
 			StreamName:    "ReadSpaces",
 			Handler:       _Luster_ReadSpaces_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadContexts",
+			Handler:       _Luster_ReadContexts_Handler,
 			ServerStreams: true,
 		},
 	},

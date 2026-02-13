@@ -4715,7 +4715,27 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.luster.v1.CreateContextCommentRequest"><span class="badge">M</span>CreateContextCommentRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.CreateContextRequest"><span class="badge">M</span>CreateContextRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.CreateLabelRequest"><span class="badge">M</span>CreateLabelRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.luster.v1.CreateSpaceRequest"><span class="badge">M</span>CreateSpaceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.DeleteContextCommentRequest"><span class="badge">M</span>DeleteContextCommentRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.DeleteContextRequest"><span class="badge">M</span>DeleteContextRequest</a>
                 </li>
               
                 <li>
@@ -4723,11 +4743,31 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.luster.v1.GetContextRequest"><span class="badge">M</span>GetContextRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.GetContextResponse"><span class="badge">M</span>GetContextResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.luster.v1.GetSpaceRequest"><span class="badge">M</span>GetSpaceRequest</a>
                 </li>
               
                 <li>
+                  <a href="#blueapi.luster.v1.ReadContextsRequest"><span class="badge">M</span>ReadContextsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.luster.v1.ReadSpacesRequest"><span class="badge">M</span>ReadSpacesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.UpdateContextCommentRequest"><span class="badge">M</span>UpdateContextCommentRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.luster.v1.UpdateContextRequest"><span class="badge">M</span>UpdateContextRequest</a>
                 </li>
               
                 <li>
@@ -57911,10 +57951,189 @@ Retrieves all payer accounts linked to the organization, including their status 
       <p></p>
 
       
+        <h3 id="blueapi.luster.v1.CreateContextCommentRequest">CreateContextCommentRequest</h3>
+        <p>Request message for the Luster.CreateContextComment rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The comment content. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.CreateContextRequest">CreateContextRequest</h3>
+        <p>Request message for the Luster.CreateContext rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The context title. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The context content. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.CreateLabelRequest">CreateLabelRequest</h3>
+        <p>Request message for the Luster.CreateLabel rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The label name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>color</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The label color. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The label description. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.luster.v1.CreateSpaceRequest">CreateSpaceRequest</h3>
         <p>Request message for the Luster.CreateSpace rpc.</p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the space name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the space description. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.DeleteContextCommentRequest">DeleteContextCommentRequest</h3>
+        <p>Request message for the Luster.DeleteContextComment rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>commentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context comment id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.DeleteContextRequest">DeleteContextRequest</h3>
+        <p>Request message for the Luster.DeleteContext rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -57922,11 +58141,114 @@ Retrieves all payer accounts linked to the organization, including their status 
         <p>Request message for the Luster.DeleteSpace rpc.</p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the space id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.GetContextRequest">GetContextRequest</h3>
+        <p>Request message for the Luster.GetContext rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.GetContextResponse">GetContextResponse</h3>
+        <p>Response message for the Luster.GetContextResponse rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>space</td>
+                  <td><a href="#blueapi.api.luster.Space">blueapi.api.luster.Space</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>context</td>
+                  <td><a href="#blueapi.api.luster.Context">blueapi.api.luster.Context</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>comment</td>
+                  <td><a href="#blueapi.api.luster.Comment">blueapi.api.luster.Comment</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
         <h3 id="blueapi.luster.v1.GetSpaceRequest">GetSpaceRequest</h3>
         <p>Request message for the Luster.GetSpace rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the space id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.ReadContextsRequest">ReadContextsRequest</h3>
+        <p>Request message for the Luster.ReadContexts rpc.</p>
 
         
 
@@ -57939,10 +58261,82 @@ Retrieves all payer accounts linked to the organization, including their status 
 
         
       
+        <h3 id="blueapi.luster.v1.UpdateContextCommentRequest">UpdateContextCommentRequest</h3>
+        <p>Request message for the Luster.UpdateContextComment rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>commentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context comment id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.luster.v1.UpdateContextRequest">UpdateContextRequest</h3>
+        <p>Request message for the Luster.UpdateContext rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the context id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.luster.v1.UpdateSpaceRequest">UpdateSpaceRequest</h3>
         <p>Request message for the Luster.UpdateSpace rpc.</p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>the space id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -57964,35 +58358,104 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td>ReadSpaces</td>
                 <td><a href="#blueapi.luster.v1.ReadSpacesRequest">ReadSpacesRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a> stream</td>
-                <td><p>(ALPHA) Reads spaces.</p></td>
+                <td><p>(ALPHA) Reads spaces.
+スペースの読み取り。</p></td>
               </tr>
             
               <tr>
                 <td>GetSpace</td>
                 <td><a href="#blueapi.luster.v1.GetSpaceRequest">GetSpaceRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
-                <td><p>(ALPHA) Gets space.</p></td>
+                <td><p>(ALPHA) Gets space.
+スペースの取得。</p></td>
               </tr>
             
               <tr>
                 <td>CreateSpace</td>
                 <td><a href="#blueapi.luster.v1.CreateSpaceRequest">CreateSpaceRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
-                <td><p>(ALPHA) Creates space.</p></td>
+                <td><p>(ALPHA) Creates space.
+スペースの作成。</p></td>
               </tr>
             
               <tr>
                 <td>UpdateSpace</td>
                 <td><a href="#blueapi.luster.v1.UpdateSpaceRequest">UpdateSpaceRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
-                <td><p>(ALPHA) Updates space.</p></td>
+                <td><p>(ALPHA) Updates space.
+スペースの更新。</p></td>
               </tr>
             
               <tr>
                 <td>DeleteSpace</td>
                 <td><a href="#blueapi.luster.v1.DeleteSpaceRequest">DeleteSpaceRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>(ALPHA) Deletes space.</p></td>
+                <td><p>(ALPHA) Deletes space.
+スペースの削除。 削除する場合はスペース内で作成したコンテクストも削除され閲覧できなくなります。</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadContexts</td>
+                <td><a href="#blueapi.luster.v1.ReadContextsRequest">ReadContextsRequest</a></td>
+                <td><a href="#blueapi.api.luster.Context">.blueapi.api.luster.Context</a> stream</td>
+                <td><p>(ALPHA) Reads contexts.
+スペースの読み取り。</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetContext</td>
+                <td><a href="#blueapi.luster.v1.GetContextRequest">GetContextRequest</a></td>
+                <td><a href="#blueapi.luster.v1.GetContextResponse">GetContextResponse</a></td>
+                <td><p>(ALPHA) Gets context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateContext</td>
+                <td><a href="#blueapi.luster.v1.CreateContextRequest">CreateContextRequest</a></td>
+                <td><a href="#blueapi.api.luster.Context">.blueapi.api.luster.Context</a></td>
+                <td><p>(ALPHA) Creates context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateContext</td>
+                <td><a href="#blueapi.luster.v1.UpdateContextRequest">UpdateContextRequest</a></td>
+                <td><a href="#blueapi.api.luster.Context">.blueapi.api.luster.Context</a></td>
+                <td><p>(ALPHA) Updates context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteContext</td>
+                <td><a href="#blueapi.luster.v1.DeleteContextRequest">DeleteContextRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>(ALPHA) Deletes context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateContextComment</td>
+                <td><a href="#blueapi.luster.v1.CreateContextCommentRequest">CreateContextCommentRequest</a></td>
+                <td><a href="#blueapi.api.luster.Comment">.blueapi.api.luster.Comment</a></td>
+                <td><p>(ALPHA) Creates comment in context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateContextComment</td>
+                <td><a href="#blueapi.luster.v1.UpdateContextCommentRequest">UpdateContextCommentRequest</a></td>
+                <td><a href="#blueapi.api.luster.Comment">.blueapi.api.luster.Comment</a></td>
+                <td><p>(ALPHA) Updates comment in context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteContextComment</td>
+                <td><a href="#blueapi.luster.v1.DeleteContextCommentRequest">DeleteContextCommentRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>(ALPHA) Deletes comment in context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateLabel</td>
+                <td><a href="#blueapi.luster.v1.CreateLabelRequest">CreateLabelRequest</a></td>
+                <td><a href="#blueapi.api.luster.Label">.blueapi.api.luster.Label</a></td>
+                <td><p>(ALPHA) Creates label.</p></td>
               </tr>
             
           </tbody>
@@ -58060,6 +58523,96 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td>DELETE</td>
                 <td>/v1/spaces/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadContexts</td>
+                <td>POST</td>
+                <td>/v1/contexts:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetContext</td>
+                <td>GET</td>
+                <td>/v1/contexts/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateContext</td>
+                <td>POST</td>
+                <td>/v1/contexts</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateContext</td>
+                <td>PUT</td>
+                <td>/v1/contexts/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteContext</td>
+                <td>DELETE</td>
+                <td>/v1/contexts/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateContextComment</td>
+                <td>POST</td>
+                <td>/v1/contexts/{id}/comment</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateContextComment</td>
+                <td>PUT</td>
+                <td>/v1/contexts/{id}/comment/{commentId}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteContextComment</td>
+                <td>DELETE</td>
+                <td>/v1/contexts/{id}/comment/{commentId}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateLabel</td>
+                <td>POST</td>
+                <td>/v1/contexts/label</td>
+                <td>*</td>
               </tr>
               
             
