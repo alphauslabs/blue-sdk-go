@@ -102,7 +102,7 @@ func RegisterFlaggerHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flagger.v1.Flagger/GetBooleanFlag", runtime.WithHTTPPathPattern("/v1/namespace/{namespace_id}/flags/boolean/{id}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.flagger.v1.Flagger/GetBooleanFlag", runtime.WithHTTPPathPattern("/flagger/v1/namespace/{namespace_id}/flags/boolean/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -160,7 +160,7 @@ func RegisterFlaggerHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flagger.v1.Flagger/GetBooleanFlag", runtime.WithHTTPPathPattern("/v1/namespace/{namespace_id}/flags/boolean/{id}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.flagger.v1.Flagger/GetBooleanFlag", runtime.WithHTTPPathPattern("/flagger/v1/namespace/{namespace_id}/flags/boolean/{id}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -177,7 +177,7 @@ func RegisterFlaggerHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 }
 
 var (
-	pattern_Flagger_GetBooleanFlag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "namespace", "namespace_id", "flags", "boolean", "id"}, ""))
+	pattern_Flagger_GetBooleanFlag_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 2, 5, 1, 0, 4, 1, 5, 6}, []string{"flagger", "v1", "namespace", "namespace_id", "flags", "boolean", "id"}, ""))
 )
 
 var (

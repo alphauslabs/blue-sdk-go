@@ -26,7 +26,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 //
-// Flag service definition.
+// Flagger service definition.
 type FlaggerClient interface {
 	GetBooleanFlag(ctx context.Context, in *GetBooleanFlagRequest, opts ...grpc.CallOption) (*GetBooleanFlagResponse, error)
 }
@@ -53,7 +53,7 @@ func (c *flaggerClient) GetBooleanFlag(ctx context.Context, in *GetBooleanFlagRe
 // All implementations must embed UnimplementedFlaggerServer
 // for forward compatibility
 //
-// Flag service definition.
+// Flagger service definition.
 type FlaggerServer interface {
 	GetBooleanFlag(context.Context, *GetBooleanFlagRequest) (*GetBooleanFlagResponse, error)
 	mustEmbedUnimplementedFlaggerServer()
