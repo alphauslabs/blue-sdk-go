@@ -28,6 +28,7 @@ const (
 //
 // Flagger service definition.
 type FlaggerClient interface {
+	// GetBooleanFlag returns the boolean value of a flag for a given namespace.
 	GetBooleanFlag(ctx context.Context, in *GetBooleanFlagRequest, opts ...grpc.CallOption) (*GetBooleanFlagResponse, error)
 }
 
@@ -55,6 +56,7 @@ func (c *flaggerClient) GetBooleanFlag(ctx context.Context, in *GetBooleanFlagRe
 //
 // Flagger service definition.
 type FlaggerServer interface {
+	// GetBooleanFlag returns the boolean value of a flag for a given namespace.
 	GetBooleanFlag(context.Context, *GetBooleanFlagRequest) (*GetBooleanFlagResponse, error)
 	mustEmbedUnimplementedFlaggerServer()
 }
