@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Flagger_GetBooleanFlag_FullMethodName = "/blueapi.flagger.v1.Flagger/GetBooleanFlag"
+	Flagger_EvaluateBooleanFlag_FullMethodName = "/blueapi.flagger.v1.Flagger/EvaluateBooleanFlag"
 )
 
 // FlaggerClient is the client API for Flagger service.
@@ -28,8 +28,8 @@ const (
 //
 // Flagger service definition.
 type FlaggerClient interface {
-	// GetBooleanFlag returns the boolean value of a flag for a given namespace.
-	GetBooleanFlag(ctx context.Context, in *GetBooleanFlagRequest, opts ...grpc.CallOption) (*GetBooleanFlagResponse, error)
+	// EvaluateBooleanFlag returns the boolean value of a flag for a given namespace.
+	EvaluateBooleanFlag(ctx context.Context, in *EvaluateBooleanFlagRequest, opts ...grpc.CallOption) (*EvaluateBooleanFlagResponse, error)
 }
 
 type flaggerClient struct {
@@ -40,10 +40,10 @@ func NewFlaggerClient(cc grpc.ClientConnInterface) FlaggerClient {
 	return &flaggerClient{cc}
 }
 
-func (c *flaggerClient) GetBooleanFlag(ctx context.Context, in *GetBooleanFlagRequest, opts ...grpc.CallOption) (*GetBooleanFlagResponse, error) {
+func (c *flaggerClient) EvaluateBooleanFlag(ctx context.Context, in *EvaluateBooleanFlagRequest, opts ...grpc.CallOption) (*EvaluateBooleanFlagResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBooleanFlagResponse)
-	err := c.cc.Invoke(ctx, Flagger_GetBooleanFlag_FullMethodName, in, out, cOpts...)
+	out := new(EvaluateBooleanFlagResponse)
+	err := c.cc.Invoke(ctx, Flagger_EvaluateBooleanFlag_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,8 +56,8 @@ func (c *flaggerClient) GetBooleanFlag(ctx context.Context, in *GetBooleanFlagRe
 //
 // Flagger service definition.
 type FlaggerServer interface {
-	// GetBooleanFlag returns the boolean value of a flag for a given namespace.
-	GetBooleanFlag(context.Context, *GetBooleanFlagRequest) (*GetBooleanFlagResponse, error)
+	// EvaluateBooleanFlag returns the boolean value of a flag for a given namespace.
+	EvaluateBooleanFlag(context.Context, *EvaluateBooleanFlagRequest) (*EvaluateBooleanFlagResponse, error)
 	mustEmbedUnimplementedFlaggerServer()
 }
 
@@ -65,8 +65,8 @@ type FlaggerServer interface {
 type UnimplementedFlaggerServer struct {
 }
 
-func (UnimplementedFlaggerServer) GetBooleanFlag(context.Context, *GetBooleanFlagRequest) (*GetBooleanFlagResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBooleanFlag not implemented")
+func (UnimplementedFlaggerServer) EvaluateBooleanFlag(context.Context, *EvaluateBooleanFlagRequest) (*EvaluateBooleanFlagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EvaluateBooleanFlag not implemented")
 }
 func (UnimplementedFlaggerServer) mustEmbedUnimplementedFlaggerServer() {}
 
@@ -81,20 +81,20 @@ func RegisterFlaggerServer(s grpc.ServiceRegistrar, srv FlaggerServer) {
 	s.RegisterService(&Flagger_ServiceDesc, srv)
 }
 
-func _Flagger_GetBooleanFlag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBooleanFlagRequest)
+func _Flagger_EvaluateBooleanFlag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EvaluateBooleanFlagRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FlaggerServer).GetBooleanFlag(ctx, in)
+		return srv.(FlaggerServer).EvaluateBooleanFlag(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Flagger_GetBooleanFlag_FullMethodName,
+		FullMethod: Flagger_EvaluateBooleanFlag_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FlaggerServer).GetBooleanFlag(ctx, req.(*GetBooleanFlagRequest))
+		return srv.(FlaggerServer).EvaluateBooleanFlag(ctx, req.(*EvaluateBooleanFlagRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -107,8 +107,8 @@ var Flagger_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*FlaggerServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetBooleanFlag",
-			Handler:    _Flagger_GetBooleanFlag_Handler,
+			MethodName: "EvaluateBooleanFlag",
+			Handler:    _Flagger_EvaluateBooleanFlag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
