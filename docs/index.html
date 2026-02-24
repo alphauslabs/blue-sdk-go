@@ -2604,6 +2604,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.DeleteUserRequest"><span class="badge">M</span>DeleteUserRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.DeleteUserResponse"><span class="badge">M</span>DeleteUserResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.DeleteViewRequest"><span class="badge">M</span>DeleteViewRequest</a>
                 </li>
               
@@ -3108,6 +3116,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.InviteUsersRequest"><span class="badge">M</span>InviteUsersRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.InviteUsersResponse"><span class="badge">M</span>InviteUsersResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ListAccountAccessRequest"><span class="badge">M</span>ListAccountAccessRequest</a>
                 </li>
               
@@ -3264,6 +3280,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cover.v1.ListUsersRequest"><span class="badge">M</span>ListUsersRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListUsersResponse"><span class="badge">M</span>ListUsersResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ListUsersResponse.UserSummary"><span class="badge">M</span>ListUsersResponse.UserSummary</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cover.v1.ManipulateAnomalyAlertRequest"><span class="badge">M</span>ManipulateAnomalyAlertRequest</a>
                 </li>
               
@@ -3385,6 +3413,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.RegisterNewUserResponse"><span class="badge">M</span>RegisterNewUserResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ReinviteUserRequest"><span class="badge">M</span>ReinviteUserRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.ReinviteUserResponse"><span class="badge">M</span>ReinviteUserResponse</a>
                 </li>
               
                 <li>
@@ -3757,6 +3793,14 @@
               
                 <li>
                   <a href="#blueapi.cover.v1.UpdateUserProfileResponse"><span class="badge">M</span>UpdateUserProfileResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateUserRoleRequest"><span class="badge">M</span>UpdateUserRoleRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cover.v1.UpdateUserRoleResponse"><span class="badge">M</span>UpdateUserRoleResponse</a>
                 </li>
               
                 <li>
@@ -32568,6 +32612,37 @@ Supported values are the following:
 
         
       
+        <h3 id="blueapi.cover.v1.DeleteUserRequest">DeleteUserRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.DeleteUserResponse">DeleteUserResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.DeleteViewRequest">DeleteViewRequest</h3>
         <p>Request message for DeleteView</p>
 
@@ -37057,6 +37132,51 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.InviteUsersRequest">InviteUsersRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>emails</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cost_group_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.InviteUsersResponse">InviteUsersResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.ListAccountAccessRequest">ListAccountAccessRequest</h3>
         <p>Request message for the ListAccountAccess rpc.</p>
 
@@ -38439,6 +38559,103 @@ Multiple filter items will use the logical &#39;or&#39; operator, e.g. filter1 |
 
         
       
+        <h3 id="blueapi.cover.v1.ListUsersRequest">ListUsersRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListUsersResponse">ListUsersResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>users</td>
+                  <td><a href="#blueapi.cover.v1.ListUsersResponse.UserSummary">ListUsersResponse.UserSummary</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ListUsersResponse.UserSummary">ListUsersResponse.UserSummary</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roles</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>activated</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>avatar</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>color_theme</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cover.v1.ManipulateAnomalyAlertRequest">ManipulateAnomalyAlertRequest</h3>
         <p></p>
 
@@ -39553,6 +39770,37 @@ Example: &#34;A1:Z100&#34; </p></td>
           </table>
 
           
+
+        
+      
+        <h3 id="blueapi.cover.v1.ReinviteUserRequest">ReinviteUserRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.ReinviteUserResponse">ReinviteUserResponse</h3>
+        <p></p>
+
+        
 
         
       
@@ -42635,6 +42883,51 @@ Optional. Either actual email address or slack/msteams channel name </p></td>
 
         
       
+        <h3 id="blueapi.cover.v1.UpdateUserRoleRequest">UpdateUserRoleRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>user_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cost_group_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cover.v1.UpdateUserRoleResponse">UpdateUserRoleResponse</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.cover.v1.UpdateUserTimezoneRequest">UpdateUserTimezoneRequest</h3>
         <p>Request message for UpdateUserTimezone</p>
 
@@ -44886,9 +45179,85 @@ file in bytes </p></td>
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>InviteUsers</td>
+                <td><a href="#blueapi.cover.v1.InviteUsersRequest">InviteUsersRequest</a></td>
+                <td><a href="#blueapi.cover.v1.InviteUsersResponse">InviteUsersResponse</a></td>
+                <td><p>Invites users to join the organization and assigns them roles.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteUser</td>
+                <td><a href="#blueapi.cover.v1.DeleteUserRequest">DeleteUserRequest</a></td>
+                <td><a href="#blueapi.cover.v1.DeleteUserResponse">DeleteUserResponse</a></td>
+                <td><p>Deletes a user from the organization.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateUserRole</td>
+                <td><a href="#blueapi.cover.v1.UpdateUserRoleRequest">UpdateUserRoleRequest</a></td>
+                <td><a href="#blueapi.cover.v1.UpdateUserRoleResponse">UpdateUserRoleResponse</a></td>
+                <td><p>Updates a user&#39;s role and cost group access.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListUsers</td>
+                <td><a href="#blueapi.cover.v1.ListUsersRequest">ListUsersRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ListUsersResponse">ListUsersResponse</a></td>
+                <td><p>Lists all users in the organization</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReinviteUser</td>
+                <td><a href="#blueapi.cover.v1.ReinviteUserRequest">ReinviteUserRequest</a></td>
+                <td><a href="#blueapi.cover.v1.ReinviteUserResponse">ReinviteUserResponse</a></td>
+                <td><p>Reinvites a user to join the organization. This can be used when the user did not receive or lost the original invitation email.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
+        
+          
+          
+          <h4>Methods with deprecated option</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Option</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              <tr>
+                <td>InviteMember</td>
+                <td><p>true</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetMembers</td>
+                <td><p>true</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetMemberDetails</td>
+                <td><p>true</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetMemberCostGroup</td>
+                <td><p>true</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateMemberPermission</td>
+                <td><p>true</p></td>
+              </tr>
+            
+            </tbody>
+          </table>
+          
         
           
           
@@ -46860,6 +47229,56 @@ file in bytes </p></td>
                 <td>ExecuteRecommendationV3</td>
                 <td>POST</td>
                 <td>/v1/recommendation/execute</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>InviteUsers</td>
+                <td>POST</td>
+                <td>/v1/user/invite</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteUser</td>
+                <td>DELETE</td>
+                <td>/v1/user/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateUserRole</td>
+                <td>PUT</td>
+                <td>/v1/user/{user_id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListUsers</td>
+                <td>GET</td>
+                <td>/v1/users</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReinviteUser</td>
+                <td>POST</td>
+                <td>/v1/user/{id}/reinvite</td>
                 <td>*</td>
               </tr>
               

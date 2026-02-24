@@ -217,6 +217,11 @@ const (
 	Cover_GetRecommendationV3_FullMethodName                     = "/blueapi.cover.v1.Cover/GetRecommendationV3"
 	Cover_ListRecommendationsV3_FullMethodName                   = "/blueapi.cover.v1.Cover/ListRecommendationsV3"
 	Cover_ExecuteRecommendationV3_FullMethodName                 = "/blueapi.cover.v1.Cover/ExecuteRecommendationV3"
+	Cover_InviteUsers_FullMethodName                             = "/blueapi.cover.v1.Cover/InviteUsers"
+	Cover_DeleteUser_FullMethodName                              = "/blueapi.cover.v1.Cover/DeleteUser"
+	Cover_UpdateUserRole_FullMethodName                          = "/blueapi.cover.v1.Cover/UpdateUserRole"
+	Cover_ListUsers_FullMethodName                               = "/blueapi.cover.v1.Cover/ListUsers"
+	Cover_ReinviteUser_FullMethodName                            = "/blueapi.cover.v1.Cover/ReinviteUser"
 )
 
 // CoverClient is the client API for Cover service.
@@ -227,18 +232,23 @@ const (
 type CoverClient interface {
 	// Onboard an organization with an admin account and default cost group
 	OnboardOrg(ctx context.Context, in *OnboardOrgRequest, opts ...grpc.CallOption) (*OnboardOrgResponse, error)
+	// Deprecated: Do not use.
 	// Invite members to the system
 	InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error)
 	// Activate the added user
 	ActivateUser(ctx context.Context, in *ActivateUserRequest, opts ...grpc.CallOption) (*ActivateUserResponse, error)
 	// Create a member
 	CreateMember(ctx context.Context, in *CreateMemberRequest, opts ...grpc.CallOption) (*CreateMemberResponse, error)
+	// Deprecated: Do not use.
 	// Get all the members/subusers of the company
 	GetMembers(ctx context.Context, in *GetMembersRequest, opts ...grpc.CallOption) (*GetMembersResponse, error)
+	// Deprecated: Do not use.
 	// Get the details of the user
 	GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error)
+	// Deprecated: Do not use.
 	// Get the cost group to which the member is attached
 	GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error)
+	// Deprecated: Do not use.
 	// Modify member's permission
 	UpdateMemberPermission(ctx context.Context, in *UpdateMemberPermissionRequest, opts ...grpc.CallOption) (*UpdateMemberPermissionResponse, error)
 	// Get the details of the logged-in user
@@ -601,6 +611,16 @@ type CoverClient interface {
 	GetRecommendationV3(ctx context.Context, in *GetRecommendationV3Request, opts ...grpc.CallOption) (*GetRecommendationV3Response, error)
 	ListRecommendationsV3(ctx context.Context, in *ListRecommendationsV3Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV3Client, error)
 	ExecuteRecommendationV3(ctx context.Context, in *ExecuteRecommendationV3Request, opts ...grpc.CallOption) (*ExecuteRecommendationV3Response, error)
+	// Invites users to join the organization and assigns them roles.
+	InviteUsers(ctx context.Context, in *InviteUsersRequest, opts ...grpc.CallOption) (*InviteUsersResponse, error)
+	// Deletes a user from the organization.
+	DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error)
+	// Updates a user's role and cost group access.
+	UpdateUserRole(ctx context.Context, in *UpdateUserRoleRequest, opts ...grpc.CallOption) (*UpdateUserRoleResponse, error)
+	// Lists all users in the organization
+	ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error)
+	// Reinvites a user to join the organization. This can be used when the user did not receive or lost the original invitation email.
+	ReinviteUser(ctx context.Context, in *ReinviteUserRequest, opts ...grpc.CallOption) (*ReinviteUserResponse, error)
 }
 
 type coverClient struct {
@@ -621,6 +641,7 @@ func (c *coverClient) OnboardOrg(ctx context.Context, in *OnboardOrgRequest, opt
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *coverClient) InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(InviteMemberResponse)
@@ -651,6 +672,7 @@ func (c *coverClient) CreateMember(ctx context.Context, in *CreateMemberRequest,
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *coverClient) GetMembers(ctx context.Context, in *GetMembersRequest, opts ...grpc.CallOption) (*GetMembersResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetMembersResponse)
@@ -661,6 +683,7 @@ func (c *coverClient) GetMembers(ctx context.Context, in *GetMembersRequest, opt
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *coverClient) GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetMemberDetailsResponse)
@@ -671,6 +694,7 @@ func (c *coverClient) GetMemberDetails(ctx context.Context, in *GetMemberDetails
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *coverClient) GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetMemberCostGroupResponse)
@@ -681,6 +705,7 @@ func (c *coverClient) GetMemberCostGroup(ctx context.Context, in *GetMemberCostG
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *coverClient) UpdateMemberPermission(ctx context.Context, in *UpdateMemberPermissionRequest, opts ...grpc.CallOption) (*UpdateMemberPermissionResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateMemberPermissionResponse)
@@ -3263,6 +3288,56 @@ func (c *coverClient) ExecuteRecommendationV3(ctx context.Context, in *ExecuteRe
 	return out, nil
 }
 
+func (c *coverClient) InviteUsers(ctx context.Context, in *InviteUsersRequest, opts ...grpc.CallOption) (*InviteUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(InviteUsersResponse)
+	err := c.cc.Invoke(ctx, Cover_InviteUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) DeleteUser(ctx context.Context, in *DeleteUserRequest, opts ...grpc.CallOption) (*DeleteUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DeleteUserResponse)
+	err := c.cc.Invoke(ctx, Cover_DeleteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) UpdateUserRole(ctx context.Context, in *UpdateUserRoleRequest, opts ...grpc.CallOption) (*UpdateUserRoleResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateUserRoleResponse)
+	err := c.cc.Invoke(ctx, Cover_UpdateUserRole_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ListUsers(ctx context.Context, in *ListUsersRequest, opts ...grpc.CallOption) (*ListUsersResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListUsersResponse)
+	err := c.cc.Invoke(ctx, Cover_ListUsers_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *coverClient) ReinviteUser(ctx context.Context, in *ReinviteUserRequest, opts ...grpc.CallOption) (*ReinviteUserResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ReinviteUserResponse)
+	err := c.cc.Invoke(ctx, Cover_ReinviteUser_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CoverServer is the server API for Cover service.
 // All implementations must embed UnimplementedCoverServer
 // for forward compatibility
@@ -3271,18 +3346,23 @@ func (c *coverClient) ExecuteRecommendationV3(ctx context.Context, in *ExecuteRe
 type CoverServer interface {
 	// Onboard an organization with an admin account and default cost group
 	OnboardOrg(context.Context, *OnboardOrgRequest) (*OnboardOrgResponse, error)
+	// Deprecated: Do not use.
 	// Invite members to the system
 	InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error)
 	// Activate the added user
 	ActivateUser(context.Context, *ActivateUserRequest) (*ActivateUserResponse, error)
 	// Create a member
 	CreateMember(context.Context, *CreateMemberRequest) (*CreateMemberResponse, error)
+	// Deprecated: Do not use.
 	// Get all the members/subusers of the company
 	GetMembers(context.Context, *GetMembersRequest) (*GetMembersResponse, error)
+	// Deprecated: Do not use.
 	// Get the details of the user
 	GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error)
+	// Deprecated: Do not use.
 	// Get the cost group to which the member is attached
 	GetMemberCostGroup(context.Context, *GetMemberCostGroupRequest) (*GetMemberCostGroupResponse, error)
+	// Deprecated: Do not use.
 	// Modify member's permission
 	UpdateMemberPermission(context.Context, *UpdateMemberPermissionRequest) (*UpdateMemberPermissionResponse, error)
 	// Get the details of the logged-in user
@@ -3645,6 +3725,16 @@ type CoverServer interface {
 	GetRecommendationV3(context.Context, *GetRecommendationV3Request) (*GetRecommendationV3Response, error)
 	ListRecommendationsV3(*ListRecommendationsV3Request, Cover_ListRecommendationsV3Server) error
 	ExecuteRecommendationV3(context.Context, *ExecuteRecommendationV3Request) (*ExecuteRecommendationV3Response, error)
+	// Invites users to join the organization and assigns them roles.
+	InviteUsers(context.Context, *InviteUsersRequest) (*InviteUsersResponse, error)
+	// Deletes a user from the organization.
+	DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error)
+	// Updates a user's role and cost group access.
+	UpdateUserRole(context.Context, *UpdateUserRoleRequest) (*UpdateUserRoleResponse, error)
+	// Lists all users in the organization
+	ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error)
+	// Reinvites a user to join the organization. This can be used when the user did not receive or lost the original invitation email.
+	ReinviteUser(context.Context, *ReinviteUserRequest) (*ReinviteUserResponse, error)
 	mustEmbedUnimplementedCoverServer()
 }
 
@@ -4239,6 +4329,21 @@ func (UnimplementedCoverServer) ListRecommendationsV3(*ListRecommendationsV3Requ
 }
 func (UnimplementedCoverServer) ExecuteRecommendationV3(context.Context, *ExecuteRecommendationV3Request) (*ExecuteRecommendationV3Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecuteRecommendationV3 not implemented")
+}
+func (UnimplementedCoverServer) InviteUsers(context.Context, *InviteUsersRequest) (*InviteUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method InviteUsers not implemented")
+}
+func (UnimplementedCoverServer) DeleteUser(context.Context, *DeleteUserRequest) (*DeleteUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteUser not implemented")
+}
+func (UnimplementedCoverServer) UpdateUserRole(context.Context, *UpdateUserRoleRequest) (*UpdateUserRoleResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserRole not implemented")
+}
+func (UnimplementedCoverServer) ListUsers(context.Context, *ListUsersRequest) (*ListUsersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListUsers not implemented")
+}
+func (UnimplementedCoverServer) ReinviteUser(context.Context, *ReinviteUserRequest) (*ReinviteUserResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ReinviteUser not implemented")
 }
 func (UnimplementedCoverServer) mustEmbedUnimplementedCoverServer() {}
 
@@ -7876,6 +7981,96 @@ func _Cover_ExecuteRecommendationV3_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cover_InviteUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(InviteUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).InviteUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_InviteUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).InviteUsers(ctx, req.(*InviteUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_DeleteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).DeleteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_DeleteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).DeleteUser(ctx, req.(*DeleteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_UpdateUserRole_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateUserRoleRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).UpdateUserRole(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_UpdateUserRole_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).UpdateUserRole(ctx, req.(*UpdateUserRoleRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ListUsers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListUsersRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ListUsers(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListUsers_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListUsers(ctx, req.(*ListUsersRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cover_ReinviteUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ReinviteUserRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CoverServer).ReinviteUser(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ReinviteUser_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ReinviteUser(ctx, req.(*ReinviteUserRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cover_ServiceDesc is the grpc.ServiceDesc for Cover service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -8546,6 +8741,26 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExecuteRecommendationV3",
 			Handler:    _Cover_ExecuteRecommendationV3_Handler,
+		},
+		{
+			MethodName: "InviteUsers",
+			Handler:    _Cover_InviteUsers_Handler,
+		},
+		{
+			MethodName: "DeleteUser",
+			Handler:    _Cover_DeleteUser_Handler,
+		},
+		{
+			MethodName: "UpdateUserRole",
+			Handler:    _Cover_UpdateUserRole_Handler,
+		},
+		{
+			MethodName: "ListUsers",
+			Handler:    _Cover_ListUsers_Handler,
+		},
+		{
+			MethodName: "ReinviteUser",
+			Handler:    _Cover_ReinviteUser_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
