@@ -640,10 +640,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.flags.v1.EvaluateBooleanFlagRequest.KvEntry"><span class="badge">M</span>EvaluateBooleanFlagRequest.KvEntry</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.flags.v1.EvaluateBooleanFlagResponse"><span class="badge">M</span>EvaluateBooleanFlagResponse</a>
                 </li>
               
@@ -652,15 +648,7 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.flags.v1.EvaluateVariantFlagRequest.KvEntry"><span class="badge">M</span>EvaluateVariantFlagRequest.KvEntry</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.flags.v1.EvaluateVariantFlagResponse"><span class="badge">M</span>EvaluateVariantFlagResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.flags.v1.EvaluateVariantFlagResponse.AttachmentEntry"><span class="badge">M</span>EvaluateVariantFlagResponse.AttachmentEntry</a>
                 </li>
               
               
@@ -9383,41 +9371,10 @@ Valid values:
                 </tr>
               
                 <tr>
-                  <td>kv</td>
-                  <td><a href="#blueapi.flags.v1.EvaluateBooleanFlagRequest.KvEntry">EvaluateBooleanFlagRequest.KvEntry</a></td>
-                  <td>repeated</td>
+                  <td>attributes</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
                   <td><p>Optional. Key-value pairs for additional context when evaluating the flag. Must be provided if segment is present. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flags.v1.EvaluateBooleanFlagRequest.KvEntry">EvaluateBooleanFlagRequest.KvEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -9476,41 +9433,10 @@ Valid values:
                 </tr>
               
                 <tr>
-                  <td>kv</td>
-                  <td><a href="#blueapi.flags.v1.EvaluateVariantFlagRequest.KvEntry">EvaluateVariantFlagRequest.KvEntry</a></td>
-                  <td>repeated</td>
+                  <td>attributes</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
                   <td><p>Optional. Key-value pairs for additional context when evaluating the flag. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flags.v1.EvaluateVariantFlagRequest.KvEntry">EvaluateVariantFlagRequest.KvEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -9539,40 +9465,9 @@ Valid values:
               
                 <tr>
                   <td>attachment</td>
-                  <td><a href="#blueapi.flags.v1.EvaluateVariantFlagResponse.AttachmentEntry">EvaluateVariantFlagResponse.AttachmentEntry</a></td>
-                  <td>repeated</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
                   <td><p>Optional. The attachment attached to the returned variant. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.flags.v1.EvaluateVariantFlagResponse.AttachmentEntry">EvaluateVariantFlagResponse.AttachmentEntry</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>value</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
                 </tr>
               
             </tbody>
