@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion8
 
 const (
 	Flagger_EvaluateBooleanFlag_FullMethodName = "/blueapi.flagger.v1.Flagger/EvaluateBooleanFlag"
+	Flagger_EvaluateVariantFlag_FullMethodName = "/blueapi.flagger.v1.Flagger/EvaluateVariantFlag"
 )
 
 // FlaggerClient is the client API for Flagger service.
@@ -30,6 +31,8 @@ const (
 type FlaggerClient interface {
 	// EvaluateBooleanFlag returns the boolean value of a flag for a given namespace.
 	EvaluateBooleanFlag(ctx context.Context, in *EvaluateBooleanFlagRequest, opts ...grpc.CallOption) (*EvaluateBooleanFlagResponse, error)
+	// EvaluateVariantFlag returns the variant value of a flag for a given namespace.
+	EvaluateVariantFlag(ctx context.Context, in *EvaluateVariantFlagRequest, opts ...grpc.CallOption) (*EvaluateVariantFlagResponse, error)
 }
 
 type flaggerClient struct {
@@ -50,6 +53,16 @@ func (c *flaggerClient) EvaluateBooleanFlag(ctx context.Context, in *EvaluateBoo
 	return out, nil
 }
 
+func (c *flaggerClient) EvaluateVariantFlag(ctx context.Context, in *EvaluateVariantFlagRequest, opts ...grpc.CallOption) (*EvaluateVariantFlagResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(EvaluateVariantFlagResponse)
+	err := c.cc.Invoke(ctx, Flagger_EvaluateVariantFlag_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // FlaggerServer is the server API for Flagger service.
 // All implementations must embed UnimplementedFlaggerServer
 // for forward compatibility
@@ -58,6 +71,8 @@ func (c *flaggerClient) EvaluateBooleanFlag(ctx context.Context, in *EvaluateBoo
 type FlaggerServer interface {
 	// EvaluateBooleanFlag returns the boolean value of a flag for a given namespace.
 	EvaluateBooleanFlag(context.Context, *EvaluateBooleanFlagRequest) (*EvaluateBooleanFlagResponse, error)
+	// EvaluateVariantFlag returns the variant value of a flag for a given namespace.
+	EvaluateVariantFlag(context.Context, *EvaluateVariantFlagRequest) (*EvaluateVariantFlagResponse, error)
 	mustEmbedUnimplementedFlaggerServer()
 }
 
@@ -67,6 +82,9 @@ type UnimplementedFlaggerServer struct {
 
 func (UnimplementedFlaggerServer) EvaluateBooleanFlag(context.Context, *EvaluateBooleanFlagRequest) (*EvaluateBooleanFlagResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method EvaluateBooleanFlag not implemented")
+}
+func (UnimplementedFlaggerServer) EvaluateVariantFlag(context.Context, *EvaluateVariantFlagRequest) (*EvaluateVariantFlagResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method EvaluateVariantFlag not implemented")
 }
 func (UnimplementedFlaggerServer) mustEmbedUnimplementedFlaggerServer() {}
 
@@ -99,6 +117,24 @@ func _Flagger_EvaluateBooleanFlag_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Flagger_EvaluateVariantFlag_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(EvaluateVariantFlagRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FlaggerServer).EvaluateVariantFlag(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Flagger_EvaluateVariantFlag_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FlaggerServer).EvaluateVariantFlag(ctx, req.(*EvaluateVariantFlagRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Flagger_ServiceDesc is the grpc.ServiceDesc for Flagger service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -109,6 +145,10 @@ var Flagger_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "EvaluateBooleanFlag",
 			Handler:    _Flagger_EvaluateBooleanFlag_Handler,
+		},
+		{
+			MethodName: "EvaluateVariantFlag",
+			Handler:    _Flagger_EvaluateVariantFlag_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
