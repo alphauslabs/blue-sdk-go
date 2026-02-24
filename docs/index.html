@@ -4695,6 +4695,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.ValidateBillingGroupRequest"><span class="badge">M</span>ValidateBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ValidateBillingGroupResponse"><span class="badge">M</span>ValidateBillingGroupResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.VerifyAwsOnboardingRequest"><span class="badge">M</span>VerifyAwsOnboardingRequest</a>
                 </li>
               
@@ -57426,6 +57434,61 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.ValidateBillingGroupRequest">ValidateBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Company identifier. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ValidateBillingGroupResponse">ValidateBillingGroupResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ok</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True if the company is allowed to proceed with onboarding; false otherwise. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional human-readable reason when ok=false. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.VerifyAwsOnboardingRequest">VerifyAwsOnboardingRequest</h3>
         <p></p>
 
@@ -58078,6 +58141,13 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td><p></p></td>
               </tr>
             
+              <tr>
+                <td>ValidateBillingGroup</td>
+                <td><a href="#blueapi.gc.v1.ValidateBillingGroupRequest">ValidateBillingGroupRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ValidateBillingGroupResponse">ValidateBillingGroupResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -58353,6 +58423,16 @@ Retrieves all payer accounts linked to the organization, including their status 
                 <td>GET</td>
                 <td>/v1/managements/accounts/status</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ValidateBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/onboarding/billinggroup:validate</td>
+                <td>*</td>
               </tr>
               
             

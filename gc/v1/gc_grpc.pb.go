@@ -45,6 +45,7 @@ const (
 	GuaranteedCommitments_ListPayerAccounts_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListPayerAccounts"
 	GuaranteedCommitments_SetPayerAccountEnabled_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/SetPayerAccountEnabled"
 	GuaranteedCommitments_GetPayerAccountStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetPayerAccountStatus"
+	GuaranteedCommitments_ValidateBillingGroup_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/ValidateBillingGroup"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -111,6 +112,7 @@ type GuaranteedCommitmentsClient interface {
 	ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (*ListPayerAccountsResponse, error)
 	SetPayerAccountEnabled(ctx context.Context, in *SetPayerAccountEnabledRequest, opts ...grpc.CallOption) (*SetPayerAccountEnabledResponse, error)
 	GetPayerAccountStatus(ctx context.Context, in *GetPayerAccountStatusRequest, opts ...grpc.CallOption) (*GetPayerAccountStatusResponse, error)
+	ValidateBillingGroup(ctx context.Context, in *ValidateBillingGroupRequest, opts ...grpc.CallOption) (*ValidateBillingGroupResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -404,6 +406,16 @@ func (c *guaranteedCommitmentsClient) GetPayerAccountStatus(ctx context.Context,
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) ValidateBillingGroup(ctx context.Context, in *ValidateBillingGroupRequest, opts ...grpc.CallOption) (*ValidateBillingGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ValidateBillingGroupResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ValidateBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -468,6 +480,7 @@ type GuaranteedCommitmentsServer interface {
 	ListPayerAccounts(context.Context, *ListPayerAccountsRequest) (*ListPayerAccountsResponse, error)
 	SetPayerAccountEnabled(context.Context, *SetPayerAccountEnabledRequest) (*SetPayerAccountEnabledResponse, error)
 	GetPayerAccountStatus(context.Context, *GetPayerAccountStatusRequest) (*GetPayerAccountStatusResponse, error)
+	ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -552,6 +565,9 @@ func (UnimplementedGuaranteedCommitmentsServer) SetPayerAccountEnabled(context.C
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetPayerAccountStatus(context.Context, *GetPayerAccountStatusRequest) (*GetPayerAccountStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccountStatus not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateBillingGroup not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -1037,6 +1053,24 @@ func _GuaranteedCommitments_GetPayerAccountStatus_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_ValidateBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ValidateBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ValidateBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ValidateBillingGroup(ctx, req.(*ValidateBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1143,6 +1177,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPayerAccountStatus",
 			Handler:    _GuaranteedCommitments_GetPayerAccountStatus_Handler,
+		},
+		{
+			MethodName: "ValidateBillingGroup",
+			Handler:    _GuaranteedCommitments_ValidateBillingGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
