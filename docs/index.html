@@ -632,6 +632,49 @@
         
           
           <li>
+            <a href="#flags%2fv1%2fflags.proto">flags/v1/flags.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#blueapi.flags.v1.EvaluateBooleanFlagRequest"><span class="badge">M</span>EvaluateBooleanFlagRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flags.v1.EvaluateBooleanFlagRequest.KvEntry"><span class="badge">M</span>EvaluateBooleanFlagRequest.KvEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flags.v1.EvaluateBooleanFlagResponse"><span class="badge">M</span>EvaluateBooleanFlagResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flags.v1.EvaluateVariantFlagRequest"><span class="badge">M</span>EvaluateVariantFlagRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flags.v1.EvaluateVariantFlagRequest.KvEntry"><span class="badge">M</span>EvaluateVariantFlagRequest.KvEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flags.v1.EvaluateVariantFlagResponse"><span class="badge">M</span>EvaluateVariantFlagResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.flags.v1.EvaluateVariantFlagResponse.AttachmentEntry"><span class="badge">M</span>EvaluateVariantFlagResponse.AttachmentEntry</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#blueapi.flags.v1.Flags"><span class="badge">S</span>Flags</a>
+                </li>
+              
+            </ul>
+          </li>
+        
+          
+          <li>
             <a href="#cost%2fv1%2fcost.proto">cost/v1/cost.proto</a>
             <ul>
               
@@ -9292,6 +9335,315 @@ Valid values:
                 <td>UpdateMSPDefaultMeta</td>
                 <td>PUT</td>
                 <td>/admin/v1/defaultmeta</td>
+                <td>*</td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="flags/v1/flags.proto">flags/v1/flags.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="blueapi.flags.v1.EvaluateBooleanFlagRequest">EvaluateBooleanFlagRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>namespace_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The namespaceId that the flag belongs to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The flagId </p></td>
+                </tr>
+              
+                <tr>
+                  <td>segment</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. The segment to evaluate the flag for. If not provided, the default value of the flag will be returned. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kv</td>
+                  <td><a href="#blueapi.flags.v1.EvaluateBooleanFlagRequest.KvEntry">EvaluateBooleanFlagRequest.KvEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Key-value pairs for additional context when evaluating the flag. Must be provided if segment is present. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flags.v1.EvaluateBooleanFlagRequest.KvEntry">EvaluateBooleanFlagRequest.KvEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flags.v1.EvaluateBooleanFlagResponse">EvaluateBooleanFlagResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>The boolean value of the flag. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flags.v1.EvaluateVariantFlagRequest">EvaluateVariantFlagRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>namespace_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The namespaceId that the flag belongs to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The flagId </p></td>
+                </tr>
+              
+                <tr>
+                  <td>kv</td>
+                  <td><a href="#blueapi.flags.v1.EvaluateVariantFlagRequest.KvEntry">EvaluateVariantFlagRequest.KvEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Key-value pairs for additional context when evaluating the flag. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flags.v1.EvaluateVariantFlagRequest.KvEntry">EvaluateVariantFlagRequest.KvEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flags.v1.EvaluateVariantFlagResponse">EvaluateVariantFlagResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The variant value of the flag. Empty string if no match is found. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>attachment</td>
+                  <td><a href="#blueapi.flags.v1.EvaluateVariantFlagResponse.AttachmentEntry">EvaluateVariantFlagResponse.AttachmentEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. The attachment attached to the returned variant. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.flags.v1.EvaluateVariantFlagResponse.AttachmentEntry">EvaluateVariantFlagResponse.AttachmentEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="blueapi.flags.v1.Flags">Flags</h3>
+        <p>Flags service definition.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EvaluateBooleanFlag</td>
+                <td><a href="#blueapi.flags.v1.EvaluateBooleanFlagRequest">EvaluateBooleanFlagRequest</a></td>
+                <td><a href="#blueapi.flags.v1.EvaluateBooleanFlagResponse">EvaluateBooleanFlagResponse</a></td>
+                <td><p>EvaluateBooleanFlag returns the boolean value of a flag for a given namespace.</p></td>
+              </tr>
+            
+              <tr>
+                <td>EvaluateVariantFlag</td>
+                <td><a href="#blueapi.flags.v1.EvaluateVariantFlagRequest">EvaluateVariantFlagRequest</a></td>
+                <td><a href="#blueapi.flags.v1.EvaluateVariantFlagResponse">EvaluateVariantFlagResponse</a></td>
+                <td><p>EvaluateVariantFlag returns the variant value of a flag for a given namespace.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>EvaluateBooleanFlag</td>
+                <td>POST</td>
+                <td>/flags/v1/namespace/{namespace_id}/boolean/{id}:eval</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>EvaluateVariantFlag</td>
+                <td>POST</td>
+                <td>/flags/v1/namespace/{namespace_id}/variant/{id}:eval</td>
                 <td>*</td>
               </tr>
               
