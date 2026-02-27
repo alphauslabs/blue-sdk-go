@@ -398,6 +398,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.iam.v1.UnlockUserAccountRequest"><span class="badge">M</span>UnlockUserAccountRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.iam.v1.UpdateFeatureFlagsRequest"><span class="badge">M</span>UpdateFeatureFlagsRequest</a>
                 </li>
               
@@ -6514,6 +6518,44 @@ for the list of supported attributes.</p></td>
 
         
       
+        <h3 id="blueapi.iam.v1.UnlockUserAccountRequest">UnlockUserAccountRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>domain</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Valid values are &#39;ripple&#39; and &#39;wave&#39; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>email</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The email of the user account to unlock. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>is_root</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>IsRoot is true if Ripple or Wave root user, false if sub user. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.iam.v1.UpdateFeatureFlagsRequest">UpdateFeatureFlagsRequest</h3>
         <p>Request message for the Iam.UpdateFeatureFlags rpc.</p>
 
@@ -7057,6 +7099,13 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                 <td><p>WORK-IN-PROGRESS: Reset ripple password using code from email</p></td>
               </tr>
             
+              <tr>
+                <td>UnlockUserAccount</td>
+                <td><a href="#blueapi.iam.v1.UnlockUserAccountRequest">UnlockUserAccountRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Unlocks ripple or wave user account.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -7431,6 +7480,16 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                 <td>ResetRipplePassword</td>
                 <td>POST</td>
                 <td>/iam/v1/ripple/password:reset</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UnlockUserAccount</td>
+                <td>POST</td>
+                <td>/iam/v1/{domain}/account/{email}:unlock</td>
                 <td>*</td>
               </tr>
               

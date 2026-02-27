@@ -57,6 +57,7 @@ const (
 	Iam_GetMFAUsers_FullMethodName                                = "/blueapi.iam.v1.Iam/GetMFAUsers"
 	Iam_SendRipplePasswordResetCode_FullMethodName                = "/blueapi.iam.v1.Iam/SendRipplePasswordResetCode"
 	Iam_ResetRipplePassword_FullMethodName                        = "/blueapi.iam.v1.Iam/ResetRipplePassword"
+	Iam_UnlockUserAccount_FullMethodName                          = "/blueapi.iam.v1.Iam/UnlockUserAccount"
 )
 
 // IamClient is the client API for Iam service.
@@ -145,6 +146,8 @@ type IamClient interface {
 	SendRipplePasswordResetCode(ctx context.Context, in *SendRipplePasswordResetCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reset ripple password using code from email
 	ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*ResetRipplePasswordResponse, error)
+	// WORK-IN-PROGRESS: Unlocks ripple or wave user account.
+	UnlockUserAccount(ctx context.Context, in *UnlockUserAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type iamClient struct {
@@ -607,6 +610,16 @@ func (c *iamClient) ResetRipplePassword(ctx context.Context, in *ResetRipplePass
 	return out, nil
 }
 
+func (c *iamClient) UnlockUserAccount(ctx context.Context, in *UnlockUserAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Iam_UnlockUserAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // IamServer is the server API for Iam service.
 // All implementations must embed UnimplementedIamServer
 // for forward compatibility
@@ -693,6 +706,8 @@ type IamServer interface {
 	SendRipplePasswordResetCode(context.Context, *SendRipplePasswordResetCodeRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reset ripple password using code from email
 	ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*ResetRipplePasswordResponse, error)
+	// WORK-IN-PROGRESS: Unlocks ripple or wave user account.
+	UnlockUserAccount(context.Context, *UnlockUserAccountRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIamServer()
 }
 
@@ -807,6 +822,9 @@ func (UnimplementedIamServer) SendRipplePasswordResetCode(context.Context, *Send
 }
 func (UnimplementedIamServer) ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*ResetRipplePasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetRipplePassword not implemented")
+}
+func (UnimplementedIamServer) UnlockUserAccount(context.Context, *UnlockUserAccountRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UnlockUserAccount not implemented")
 }
 func (UnimplementedIamServer) mustEmbedUnimplementedIamServer() {}
 
@@ -1481,6 +1499,24 @@ func _Iam_ResetRipplePassword_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_UnlockUserAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UnlockUserAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).UnlockUserAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_UnlockUserAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).UnlockUserAccount(ctx, req.(*UnlockUserAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Iam_ServiceDesc is the grpc.ServiceDesc for Iam service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1615,6 +1651,10 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetRipplePassword",
 			Handler:    _Iam_ResetRipplePassword_Handler,
+		},
+		{
+			MethodName: "UnlockUserAccount",
+			Handler:    _Iam_UnlockUserAccount_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
