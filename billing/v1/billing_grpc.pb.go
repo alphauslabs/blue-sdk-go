@@ -159,6 +159,8 @@ const (
 	Billing_UpdateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
 	Billing_DeleteExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
 	Billing_ListExcludeServices_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListExcludeServices"
+	Billing_BulkLinkAccount_FullMethodName                                     = "/blueapi.billing.v1.Billing/BulkLinkAccount"
+	Billing_GetBulkLinkAccountJob_FullMethodName                               = "/blueapi.billing.v1.Billing/GetBulkLinkAccountJob"
 )
 
 // BillingClient is the client API for Billing service.
@@ -448,6 +450,10 @@ type BillingClient interface {
 	DeleteExcludeServiceEntry(ctx context.Context, in *DeleteExcludeServiceEntryRequest, opts ...grpc.CallOption) (*DeleteExcludeServiceEntryResponse, error)
 	// List Exclude Service Entries
 	ListExcludeServices(ctx context.Context, in *ListExcludeServicesRequest, opts ...grpc.CallOption) (*ListExcludeServicesResponse, error)
+	// Link accounts to a billing group in bulk from a CSV file.
+	BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*BulkLinkAccountResponse, error)
+	// Gets the status of a bulk link account job.
+	GetBulkLinkAccountJob(ctx context.Context, in *GetBulkLinkAccountJobRequest, opts ...grpc.CallOption) (*GetBulkLinkAccountJobResponse, error)
 }
 
 type billingClient struct {
@@ -2544,6 +2550,26 @@ func (c *billingClient) ListExcludeServices(ctx context.Context, in *ListExclude
 	return out, nil
 }
 
+func (c *billingClient) BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*BulkLinkAccountResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BulkLinkAccountResponse)
+	err := c.cc.Invoke(ctx, Billing_BulkLinkAccount_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) GetBulkLinkAccountJob(ctx context.Context, in *GetBulkLinkAccountJobRequest, opts ...grpc.CallOption) (*GetBulkLinkAccountJobResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBulkLinkAccountJobResponse)
+	err := c.cc.Invoke(ctx, Billing_GetBulkLinkAccountJob_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -2831,6 +2857,10 @@ type BillingServer interface {
 	DeleteExcludeServiceEntry(context.Context, *DeleteExcludeServiceEntryRequest) (*DeleteExcludeServiceEntryResponse, error)
 	// List Exclude Service Entries
 	ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error)
+	// Link accounts to a billing group in bulk from a CSV file.
+	BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*BulkLinkAccountResponse, error)
+	// Gets the status of a bulk link account job.
+	GetBulkLinkAccountJob(context.Context, *GetBulkLinkAccountJobRequest) (*GetBulkLinkAccountJobResponse, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -3242,6 +3272,12 @@ func (UnimplementedBillingServer) DeleteExcludeServiceEntry(context.Context, *De
 }
 func (UnimplementedBillingServer) ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListExcludeServices not implemented")
+}
+func (UnimplementedBillingServer) BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*BulkLinkAccountResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BulkLinkAccount not implemented")
+}
+func (UnimplementedBillingServer) GetBulkLinkAccountJob(context.Context, *GetBulkLinkAccountJobRequest) (*GetBulkLinkAccountJobResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBulkLinkAccountJob not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -5782,6 +5818,42 @@ func _Billing_ListExcludeServices_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_BulkLinkAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BulkLinkAccountRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).BulkLinkAccount(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_BulkLinkAccount_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).BulkLinkAccount(ctx, req.(*BulkLinkAccountRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_GetBulkLinkAccountJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBulkLinkAccountJobRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetBulkLinkAccountJob(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetBulkLinkAccountJob_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetBulkLinkAccountJob(ctx, req.(*GetBulkLinkAccountJobRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6200,6 +6272,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListExcludeServices",
 			Handler:    _Billing_ListExcludeServices_Handler,
+		},
+		{
+			MethodName: "BulkLinkAccount",
+			Handler:    _Billing_BulkLinkAccount_Handler,
+		},
+		{
+			MethodName: "GetBulkLinkAccountJob",
+			Handler:    _Billing_GetBulkLinkAccountJob_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

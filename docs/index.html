@@ -1382,6 +1382,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BulkLinkAccountError"><span class="badge">M</span>BulkLinkAccountError</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkLinkAccountRequest"><span class="badge">M</span>BulkLinkAccountRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkLinkAccountResponse"><span class="badge">M</span>BulkLinkAccountResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ChildBillingGroup"><span class="badge">M</span>ChildBillingGroup</a>
                 </li>
               
@@ -1691,6 +1703,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobResponse"><span class="badge">M</span>GetBulkCreateBillingGroupJobResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBulkLinkAccountJobRequest"><span class="badge">M</span>GetBulkLinkAccountJobRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBulkLinkAccountJobResponse"><span class="badge">M</span>GetBulkLinkAccountJobResponse</a>
                 </li>
               
                 <li>
@@ -18496,6 +18516,128 @@ Useful for validating CSV format and data before performing the actual bulk crea
 
         
       
+        <h3 id="blueapi.billing.v1.BulkLinkAccountError">BulkLinkAccountError</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The row index of the failed entry in the CSV (zero-based, excluding header). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group ID from the failed row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The account ID from the failed row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Human-readable error message. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkLinkAccountRequest">BulkLinkAccountRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>csvContent</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Required. The CSV file content as bytes. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>delimiter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The delimiter used in the CSV file. Defaults to comma (,). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasHeader</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Whether the CSV file has a header row. Defaults to true. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dryRun</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If true, validate the CSV and check for errors without actually linking accounts.
+Useful for validating CSV format and data before performing the actual bulk operation. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkLinkAccountResponse">BulkLinkAccountResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>jobId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The job ID for polling status via GetBulkLinkAccountJob. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Initial status of the job (&#34;pending&#34;). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</h3>
         <p>Contains basic information and invoice settings related data.</p>
 
@@ -21640,6 +21782,117 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional status message. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBulkLinkAccountJobRequest">GetBulkLinkAccountJobRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>jobId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The job ID returned by BulkLinkAccount. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBulkLinkAccountJobResponse">GetBulkLinkAccountJobResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>jobId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The job ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of account-link entries to process. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processedCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries processed so far. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>successCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries successfully linked. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries that failed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#blueapi.billing.v1.BulkLinkAccountError">BulkLinkAccountError</a></td>
+                  <td>repeated</td>
+                  <td><p>Details of failed entries. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job start timestamp (RFC 3339 / ISO 8601). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job end timestamp. Empty if still running. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional human-readable status message. </p></td>
                 </tr>
               
             </tbody>
@@ -27158,6 +27411,20 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td><p>List Exclude Service Entries</p></td>
               </tr>
             
+              <tr>
+                <td>BulkLinkAccount</td>
+                <td><a href="#blueapi.billing.v1.BulkLinkAccountRequest">BulkLinkAccountRequest</a></td>
+                <td><a href="#blueapi.billing.v1.BulkLinkAccountResponse">BulkLinkAccountResponse</a></td>
+                <td><p>Link accounts to a billing group in bulk from a CSV file.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetBulkLinkAccountJob</td>
+                <td><a href="#blueapi.billing.v1.GetBulkLinkAccountJobRequest">GetBulkLinkAccountJobRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetBulkLinkAccountJobResponse">GetBulkLinkAccountJobResponse</a></td>
+                <td><p>Gets the status of a bulk link account job.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -28522,6 +28789,26 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>ListExcludeServices</td>
                 <td>GET</td>
                 <td>/v1/billinggroups/exclude-service-settings</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>BulkLinkAccount</td>
+                <td>POST</td>
+                <td>/v1/billinggroups:bulkLinkAccount</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBulkLinkAccountJob</td>
+                <td>GET</td>
+                <td>/v1/billinggroups:bulkLinkAccount/{jobId}</td>
                 <td></td>
               </tr>
               
