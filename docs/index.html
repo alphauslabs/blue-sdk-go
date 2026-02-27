@@ -6569,6 +6569,13 @@ for the list of supported attributes.</p></td>
                   <td><p>IsRoot is true if Ripple or Wave root user, false if sub user. </p></td>
                 </tr>
               
+                <tr>
+                  <td>user_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required if wave sub user. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -7509,7 +7516,7 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
               <tr>
                 <td>UnlockUserAccount</td>
                 <td>POST</td>
-                <td>/iam/v1/{domain}/account/{email}:unlock</td>
+                <td>/iam/v1/{domain}/account:unlock</td>
                 <td>*</td>
               </tr>
               

@@ -1269,14 +1269,6 @@ func request_Iam_UnlockUserAccount_0(ctx context.Context, marshaler runtime.Mars
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "domain", err)
 	}
-	val, ok = pathParams["email"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "email")
-	}
-	protoReq.Email, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "email", err)
-	}
 	msg, err := client.UnlockUserAccount(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
@@ -1297,14 +1289,6 @@ func local_request_Iam_UnlockUserAccount_0(ctx context.Context, marshaler runtim
 	protoReq.Domain, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "domain", err)
-	}
-	val, ok = pathParams["email"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "email")
-	}
-	protoReq.Email, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "email", err)
 	}
 	msg, err := server.UnlockUserAccount(ctx, &protoReq)
 	return msg, metadata, err
@@ -1990,7 +1974,7 @@ func RegisterIamHandlerServer(ctx context.Context, mux *runtime.ServeMux, server
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/UnlockUserAccount", runtime.WithHTTPPathPattern("/iam/v1/{domain}/account/{email}:unlock"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.iam.v1.Iam/UnlockUserAccount", runtime.WithHTTPPathPattern("/iam/v1/{domain}/account:unlock"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2660,7 +2644,7 @@ func RegisterIamHandlerClient(ctx context.Context, mux *runtime.ServeMux, client
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/UnlockUserAccount", runtime.WithHTTPPathPattern("/iam/v1/{domain}/account/{email}:unlock"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.iam.v1.Iam/UnlockUserAccount", runtime.WithHTTPPathPattern("/iam/v1/{domain}/account:unlock"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -2713,7 +2697,7 @@ var (
 	pattern_Iam_GetMFAUsers_0                                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"iam", "v1", "mfausers"}, ""))
 	pattern_Iam_SendRipplePasswordResetCode_0                = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"iam", "v1", "ripple", "password"}, "requestresetcode"))
 	pattern_Iam_ResetRipplePassword_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"iam", "v1", "ripple", "password"}, "reset"))
-	pattern_Iam_UnlockUserAccount_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"iam", "v1", "domain", "account", "email"}, "unlock"))
+	pattern_Iam_UnlockUserAccount_0                          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"iam", "v1", "domain", "account"}, "unlock"))
 )
 
 var (
