@@ -114,7 +114,7 @@ func (s *Session) AccessToken() (string, error) {
 	defer resp.Body.Close()
 	body, err = io.ReadAll(resp.Body)
 	if (resp.StatusCode / 100) != 2 {
-		return token, fmt.Errorf(resp.Status)
+		return token, fmt.Errorf("%v", resp.Status)
 	}
 
 	var m map[string]interface{}
