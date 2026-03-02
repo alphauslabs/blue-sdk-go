@@ -46,6 +46,8 @@ const (
 	GuaranteedCommitments_SetPayerAccountEnabled_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/SetPayerAccountEnabled"
 	GuaranteedCommitments_GetPayerAccountStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetPayerAccountStatus"
 	GuaranteedCommitments_ValidateBillingGroup_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/ValidateBillingGroup"
+	GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/GetGuaranteedCommitmentTemplateUrl"
+	GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/CreateGuaranteedCommitmentAccess"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -113,6 +115,11 @@ type GuaranteedCommitmentsClient interface {
 	SetPayerAccountEnabled(ctx context.Context, in *SetPayerAccountEnabledRequest, opts ...grpc.CallOption) (*SetPayerAccountEnabledResponse, error)
 	GetPayerAccountStatus(ctx context.Context, in *GetPayerAccountStatusRequest, opts ...grpc.CallOption) (*GetPayerAccountStatusResponse, error)
 	ValidateBillingGroup(ctx context.Context, in *ValidateBillingGroupRequest, opts ...grpc.CallOption) (*ValidateBillingGroupResponse, error)
+	// GetGuaranteedCommitmentTemplateUrl returns a CloudFormation launch URL for deploying
+	// both Alphaus (Ripple) and Archera IAM roles in a single stack.
+	GetGuaranteedCommitmentTemplateUrl(ctx context.Context, in *GetGuaranteedCommitmentTemplateUrlRequest, opts ...grpc.CallOption) (*GetGuaranteedCommitmentTemplateUrlResponse, error)
+	// CreateGuaranteedCommitmentAccess verifies and registers a deployed guaranteed CloudFormation stack.
+	CreateGuaranteedCommitmentAccess(ctx context.Context, in *CreateGuaranteedCommitmentAccessRequest, opts ...grpc.CallOption) (*CreateGuaranteedCommitmentAccessResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -416,6 +423,26 @@ func (c *guaranteedCommitmentsClient) ValidateBillingGroup(ctx context.Context, 
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) GetGuaranteedCommitmentTemplateUrl(ctx context.Context, in *GetGuaranteedCommitmentTemplateUrlRequest, opts ...grpc.CallOption) (*GetGuaranteedCommitmentTemplateUrlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGuaranteedCommitmentTemplateUrlResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) CreateGuaranteedCommitmentAccess(ctx context.Context, in *CreateGuaranteedCommitmentAccessRequest, opts ...grpc.CallOption) (*CreateGuaranteedCommitmentAccessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateGuaranteedCommitmentAccessResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -481,6 +508,11 @@ type GuaranteedCommitmentsServer interface {
 	SetPayerAccountEnabled(context.Context, *SetPayerAccountEnabledRequest) (*SetPayerAccountEnabledResponse, error)
 	GetPayerAccountStatus(context.Context, *GetPayerAccountStatusRequest) (*GetPayerAccountStatusResponse, error)
 	ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error)
+	// GetGuaranteedCommitmentTemplateUrl returns a CloudFormation launch URL for deploying
+	// both Alphaus (Ripple) and Archera IAM roles in a single stack.
+	GetGuaranteedCommitmentTemplateUrl(context.Context, *GetGuaranteedCommitmentTemplateUrlRequest) (*GetGuaranteedCommitmentTemplateUrlResponse, error)
+	// CreateGuaranteedCommitmentAccess verifies and registers a deployed guaranteed CloudFormation stack.
+	CreateGuaranteedCommitmentAccess(context.Context, *CreateGuaranteedCommitmentAccessRequest) (*CreateGuaranteedCommitmentAccessResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -568,6 +600,12 @@ func (UnimplementedGuaranteedCommitmentsServer) GetPayerAccountStatus(context.Co
 }
 func (UnimplementedGuaranteedCommitmentsServer) ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateBillingGroup not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetGuaranteedCommitmentTemplateUrl(context.Context, *GetGuaranteedCommitmentTemplateUrlRequest) (*GetGuaranteedCommitmentTemplateUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGuaranteedCommitmentTemplateUrl not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) CreateGuaranteedCommitmentAccess(context.Context, *CreateGuaranteedCommitmentAccessRequest) (*CreateGuaranteedCommitmentAccessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateGuaranteedCommitmentAccess not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -1071,6 +1109,42 @@ func _GuaranteedCommitments_ValidateBillingGroup_Handler(srv interface{}, ctx co
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGuaranteedCommitmentTemplateUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetGuaranteedCommitmentTemplateUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetGuaranteedCommitmentTemplateUrl(ctx, req.(*GetGuaranteedCommitmentTemplateUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_CreateGuaranteedCommitmentAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateGuaranteedCommitmentAccessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).CreateGuaranteedCommitmentAccess(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).CreateGuaranteedCommitmentAccess(ctx, req.(*CreateGuaranteedCommitmentAccessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1181,6 +1255,14 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ValidateBillingGroup",
 			Handler:    _GuaranteedCommitments_ValidateBillingGroup_Handler,
+		},
+		{
+			MethodName: "GetGuaranteedCommitmentTemplateUrl",
+			Handler:    _GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_Handler,
+		},
+		{
+			MethodName: "CreateGuaranteedCommitmentAccess",
+			Handler:    _GuaranteedCommitments_CreateGuaranteedCommitmentAccess_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
