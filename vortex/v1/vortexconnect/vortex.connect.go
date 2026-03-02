@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	vortex "github.com/alphauslabs/blueapi/vortex"
+	vortex "github.com/alphauslabs/blue-sdk-go/vortex"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	http "net/http"
 	strings "strings"
