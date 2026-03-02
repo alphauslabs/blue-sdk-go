@@ -4,7 +4,7 @@
 > [!IMPORTANT]
 > The main branch can be broken. Make sure to use tagged releases.
 
-This repo contains Blue's (mostly auto-generated) client library for the Go programming language.
+This repo contains [Blue's](https://github.com/alphauslabs/blueapi) (mostly auto-generated) client library for the Go programming language.
 
 For authentication, check out this [document](https://alphauslabs.github.io/docs/blueapi/authentication/).
 
