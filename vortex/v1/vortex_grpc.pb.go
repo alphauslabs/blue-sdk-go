@@ -35,7 +35,7 @@ const (
 // Vortex service definition.
 type VortexClient interface {
 	// Test endpoint only
-	Test(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TestResponse, error)
+	Test(ctx context.Context, in *TestRequest, opts ...grpc.CallOption) (*TestResponse, error)
 	// Create an org in Vortex
 	CreateOrg(ctx context.Context, in *CreateOrgRequest, opts ...grpc.CallOption) (*CreateOrgResponse, error)
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
@@ -52,7 +52,7 @@ func NewVortexClient(cc grpc.ClientConnInterface) VortexClient {
 	return &vortexClient{cc}
 }
 
-func (c *vortexClient) Test(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TestResponse, error) {
+func (c *vortexClient) Test(ctx context.Context, in *TestRequest, opts ...grpc.CallOption) (*TestResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(TestResponse)
 	err := c.cc.Invoke(ctx, Vortex_Test_FullMethodName, in, out, cOpts...)
@@ -142,7 +142,7 @@ func (c *vortexClient) VerifyInvitedUser(ctx context.Context, in *VerifyInvitedU
 // Vortex service definition.
 type VortexServer interface {
 	// Test endpoint only
-	Test(context.Context, *emptypb.Empty) (*TestResponse, error)
+	Test(context.Context, *TestRequest) (*TestResponse, error)
 	// Create an org in Vortex
 	CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error)
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
@@ -156,7 +156,7 @@ type VortexServer interface {
 type UnimplementedVortexServer struct {
 }
 
-func (UnimplementedVortexServer) Test(context.Context, *emptypb.Empty) (*TestResponse, error) {
+func (UnimplementedVortexServer) Test(context.Context, *TestRequest) (*TestResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Test not implemented")
 }
 func (UnimplementedVortexServer) CreateOrg(context.Context, *CreateOrgRequest) (*CreateOrgResponse, error) {
@@ -188,7 +188,7 @@ func RegisterVortexServer(s grpc.ServiceRegistrar, srv VortexServer) {
 }
 
 func _Vortex_Test_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(emptypb.Empty)
+	in := new(TestRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -200,7 +200,7 @@ func _Vortex_Test_Handler(srv interface{}, ctx context.Context, dec func(interfa
 		FullMethod: Vortex_Test_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VortexServer).Test(ctx, req.(*emptypb.Empty))
+		return srv.(VortexServer).Test(ctx, req.(*TestRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }

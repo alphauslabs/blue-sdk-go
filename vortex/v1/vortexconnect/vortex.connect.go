@@ -52,7 +52,7 @@ const (
 // VortexClient is a client for the blueapi.vortex.v1.Vortex service.
 type VortexClient interface {
 	// Test endpoint only
-	Test(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[vortex.TestResponse], error)
+	Test(context.Context, *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error)
 	// Create an org in Vortex
 	CreateOrg(context.Context, *connect.Request[vortex.CreateOrgRequest]) (*connect.Response[vortex.CreateOrgResponse], error)
 	GetUser(context.Context, *connect.Request[vortex.GetUserRequest]) (*connect.Response[vortex.GetUserResponse], error)
@@ -72,7 +72,7 @@ func NewVortexClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 	baseURL = strings.TrimRight(baseURL, "/")
 	vortexMethods := vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods()
 	return &vortexClient{
-		test: connect.NewClient[emptypb.Empty, vortex.TestResponse](
+		test: connect.NewClient[vortex.TestRequest, vortex.TestResponse](
 			httpClient,
 			baseURL+VortexTestProcedure,
 			connect.WithSchema(vortexMethods.ByName("Test")),
@@ -113,7 +113,7 @@ func NewVortexClient(httpClient connect.HTTPClient, baseURL string, opts ...conn
 
 // vortexClient implements VortexClient.
 type vortexClient struct {
-	test              *connect.Client[emptypb.Empty, vortex.TestResponse]
+	test              *connect.Client[vortex.TestRequest, vortex.TestResponse]
 	createOrg         *connect.Client[vortex.CreateOrgRequest, vortex.CreateOrgResponse]
 	getUser           *connect.Client[vortex.GetUserRequest, vortex.GetUserResponse]
 	listPrompts       *connect.Client[vortex.ListPromptsRequest, vortex.Prompt]
@@ -122,7 +122,7 @@ type vortexClient struct {
 }
 
 // Test calls blueapi.vortex.v1.Vortex.Test.
-func (c *vortexClient) Test(ctx context.Context, req *connect.Request[emptypb.Empty]) (*connect.Response[vortex.TestResponse], error) {
+func (c *vortexClient) Test(ctx context.Context, req *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error) {
 	return c.test.CallUnary(ctx, req)
 }
 
@@ -154,7 +154,7 @@ func (c *vortexClient) VerifyInvitedUser(ctx context.Context, req *connect.Reque
 // VortexHandler is an implementation of the blueapi.vortex.v1.Vortex service.
 type VortexHandler interface {
 	// Test endpoint only
-	Test(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[vortex.TestResponse], error)
+	Test(context.Context, *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error)
 	// Create an org in Vortex
 	CreateOrg(context.Context, *connect.Request[vortex.CreateOrgRequest]) (*connect.Response[vortex.CreateOrgResponse], error)
 	GetUser(context.Context, *connect.Request[vortex.GetUserRequest]) (*connect.Response[vortex.GetUserResponse], error)
@@ -229,7 +229,7 @@ func NewVortexHandler(svc VortexHandler, opts ...connect.HandlerOption) (string,
 // UnimplementedVortexHandler returns CodeUnimplemented from all methods.
 type UnimplementedVortexHandler struct{}
 
-func (UnimplementedVortexHandler) Test(context.Context, *connect.Request[emptypb.Empty]) (*connect.Response[vortex.TestResponse], error) {
+func (UnimplementedVortexHandler) Test(context.Context, *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("blueapi.vortex.v1.Vortex.Test is not implemented"))
 }
 
