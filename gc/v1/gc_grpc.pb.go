@@ -33,6 +33,7 @@ const (
 	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
 	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
+	GuaranteedCommitments_ListPurchasePlansDetails_FullMethodName           = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansDetails"
 	GuaranteedCommitments_SaveCommitmentsPlanAsDraft_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/SaveCommitmentsPlanAsDraft"
 	GuaranteedCommitments_ListDraftPurchasePlans_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ListDraftPurchasePlans"
 	GuaranteedCommitments_DeleteDraftPurchasePlan_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/DeleteDraftPurchasePlan"
@@ -84,6 +85,8 @@ type GuaranteedCommitmentsClient interface {
 	GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error)
 	// WORK-IN-PROGRESS: Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error)
+	// WORK-IN-PROGRESS: Retrieves details of a specific purchase plan of a company.
+	ListPurchasePlansDetails(ctx context.Context, in *ListPurchasePlansDetailsRequest, opts ...grpc.CallOption) (*ListPurchasePlansDetailsResponse, error)
 	// WORK-IN-PROGRESS: Saves a commitment purchase plan as draft.
 	SaveCommitmentsPlanAsDraft(ctx context.Context, in *SaveCommitmentsPlanAsDraftRequest, opts ...grpc.CallOption) (*DefaultPurchasePlan, error)
 	// WORK-IN-PROGRESS: Retrieves the drafted purchase plans
@@ -293,6 +296,16 @@ func (c *guaranteedCommitmentsClient) ListPurchasePlansBySegment(ctx context.Con
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) ListPurchasePlansDetails(ctx context.Context, in *ListPurchasePlansDetailsRequest, opts ...grpc.CallOption) (*ListPurchasePlansDetailsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListPurchasePlansDetailsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListPurchasePlansDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *guaranteedCommitmentsClient) SaveCommitmentsPlanAsDraft(ctx context.Context, in *SaveCommitmentsPlanAsDraftRequest, opts ...grpc.CallOption) (*DefaultPurchasePlan, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DefaultPurchasePlan)
@@ -477,6 +490,8 @@ type GuaranteedCommitmentsServer interface {
 	GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error)
 	// WORK-IN-PROGRESS: Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error)
+	// WORK-IN-PROGRESS: Retrieves details of a specific purchase plan of a company.
+	ListPurchasePlansDetails(context.Context, *ListPurchasePlansDetailsRequest) (*ListPurchasePlansDetailsResponse, error)
 	// WORK-IN-PROGRESS: Saves a commitment purchase plan as draft.
 	SaveCommitmentsPlanAsDraft(context.Context, *SaveCommitmentsPlanAsDraftRequest) (*DefaultPurchasePlan, error)
 	// WORK-IN-PROGRESS: Retrieves the drafted purchase plans
@@ -561,6 +576,9 @@ func (UnimplementedGuaranteedCommitmentsServer) GetResourceDailyUsage(context.Co
 }
 func (UnimplementedGuaranteedCommitmentsServer) ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPurchasePlansBySegment not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ListPurchasePlansDetails(context.Context, *ListPurchasePlansDetailsRequest) (*ListPurchasePlansDetailsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListPurchasePlansDetails not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) SaveCommitmentsPlanAsDraft(context.Context, *SaveCommitmentsPlanAsDraftRequest) (*DefaultPurchasePlan, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveCommitmentsPlanAsDraft not implemented")
@@ -871,6 +889,24 @@ func _GuaranteedCommitments_ListPurchasePlansBySegment_Handler(srv interface{}, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuaranteedCommitmentsServer).ListPurchasePlansBySegment(ctx, req.(*ListPurchasePlansBySegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_ListPurchasePlansDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListPurchasePlansDetailsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ListPurchasePlansDetails(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ListPurchasePlansDetails_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ListPurchasePlansDetails(ctx, req.(*ListPurchasePlansDetailsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1203,6 +1239,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPurchasePlansBySegment",
 			Handler:    _GuaranteedCommitments_ListPurchasePlansBySegment_Handler,
+		},
+		{
+			MethodName: "ListPurchasePlansDetails",
+			Handler:    _GuaranteedCommitments_ListPurchasePlansDetails_Handler,
 		},
 		{
 			MethodName: "SaveCommitmentsPlanAsDraft",

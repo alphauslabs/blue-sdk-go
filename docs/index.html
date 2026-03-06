@@ -4711,6 +4711,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.ListPurchasePlansDetailsRequest"><span class="badge">M</span>ListPurchasePlansDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListPurchasePlansDetailsResponse"><span class="badge">M</span>ListPurchasePlansDetailsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.ListResourcesRequest"><span class="badge">M</span>ListResourcesRequest</a>
                 </li>
               
@@ -56765,6 +56773,54 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
 
         
       
+        <h3 id="blueapi.gc.v1.ListPurchasePlansDetailsRequest">ListPurchasePlansDetailsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>planId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListPurchasePlansDetailsResponse">ListPurchasePlansDetailsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>plans</td>
+                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ListResourcesRequest">ListResourcesRequest</h3>
         <p></p>
 
@@ -59313,6 +59369,13 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
               </tr>
             
               <tr>
+                <td>ListPurchasePlansDetails</td>
+                <td><a href="#blueapi.gc.v1.ListPurchasePlansDetailsRequest">ListPurchasePlansDetailsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ListPurchasePlansDetailsResponse">ListPurchasePlansDetailsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves details of a specific purchase plan of a company.</p></td>
+              </tr>
+            
+              <tr>
                 <td>SaveCommitmentsPlanAsDraft</td>
                 <td><a href="#blueapi.gc.v1.SaveCommitmentsPlanAsDraftRequest">SaveCommitmentsPlanAsDraftRequest</a></td>
                 <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
@@ -59579,7 +59642,17 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>ListPurchasePlansBySegment</td>
                 <td>GET</td>
-                <td>/v1/commitments/purchaseplan</td>
+                <td>/v1/commitments/purchaseplans</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListPurchasePlansDetails</td>
+                <td>GET</td>
+                <td>/v1/commitments/purchaseplans/{planId}</td>
                 <td></td>
               </tr>
               
@@ -59589,7 +59662,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>SaveCommitmentsPlanAsDraft</td>
                 <td>POST</td>
-                <td>/v1/commitments/purchaseplan/{planId}/draft</td>
+                <td>/v1/commitments/purchaseplans/{planId}/draft</td>
                 <td>*</td>
               </tr>
               
@@ -59599,7 +59672,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>ListDraftPurchasePlans</td>
                 <td>GET</td>
-                <td>/v1/commitments/purchaseplan/draft</td>
+                <td>/v1/commitments/purchaseplans/draft</td>
                 <td></td>
               </tr>
               
@@ -59609,7 +59682,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>DeleteDraftPurchasePlan</td>
                 <td>DELETE</td>
-                <td>/v1/commitments/purchaseplan/{planId}/draft</td>
+                <td>/v1/commitments/purchaseplans/{planId}/draft</td>
                 <td></td>
               </tr>
               
