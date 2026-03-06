@@ -7681,7 +7681,7 @@ func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetBulkLinkAccountJob", runtime.WithHTTPPathPattern("/v1/billinggroups:bulkLinkAccount/{jobId}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetBulkLinkAccountJob", runtime.WithHTTPPathPattern("/v1/billinggroups/bulklinkaccountjobs/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -10051,7 +10051,7 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetBulkLinkAccountJob", runtime.WithHTTPPathPattern("/v1/billinggroups:bulkLinkAccount/{jobId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetBulkLinkAccountJob", runtime.WithHTTPPathPattern("/v1/billinggroups/bulklinkaccountjobs/{jobId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -10204,7 +10204,7 @@ var (
 	pattern_Billing_DeleteExcludeServiceEntry_0                           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "billinggroups", "exclude-service-settings"}, ""))
 	pattern_Billing_ListExcludeServices_0                                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "billinggroups", "exclude-service-settings"}, ""))
 	pattern_Billing_BulkLinkAccount_0                                     = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "billinggroups"}, "bulkLinkAccount"))
-	pattern_Billing_GetBulkLinkAccountJob_0                               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "billinggroups:bulkLinkAccount", "jobId"}, ""))
+	pattern_Billing_GetBulkLinkAccountJob_0                               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "billinggroups", "bulklinkaccountjobs", "jobId"}, ""))
 )
 
 var (

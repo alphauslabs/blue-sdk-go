@@ -18627,6 +18627,14 @@ Useful for validating CSV format and data before performing the actual bulk crea
             <tbody>
               
                 <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The cloud vendor for all accounts in this CSV.
+Must be one of: aws, azure, gcp. </p></td>
+                </tr>
+              
+                <tr>
                   <td>csvContent</td>
                   <td><a href="#bytes">bytes</a></td>
                   <td></td>
@@ -28863,7 +28871,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetBulkLinkAccountJob</td>
                 <td>GET</td>
-                <td>/v1/billinggroups:bulkLinkAccount/{jobId}</td>
+                <td>/v1/billinggroups/bulklinkaccountjobs/{jobId}</td>
                 <td></td>
               </tr>
               
