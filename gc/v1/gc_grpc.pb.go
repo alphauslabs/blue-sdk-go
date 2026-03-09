@@ -20,12 +20,7 @@ const _ = grpc.SupportPackageIsVersion8
 
 const (
 	GuaranteedCommitments_ListOrgs_FullMethodName                           = "/blueapi.gc.v1.GuaranteedCommitments/ListOrgs"
-	GuaranteedCommitments_GetCommitmentsPlanDetails_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsPlanDetails"
 	GuaranteedCommitments_CommitmentsPlanApply_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/CommitmentsPlanApply"
-	GuaranteedCommitments_ListDefaultCommitmentsPlan_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ListDefaultCommitmentsPlan"
-	GuaranteedCommitments_GetRecommendedCommitmentsPlan_FullMethodName      = "/blueapi.gc.v1.GuaranteedCommitments/GetRecommendedCommitmentsPlan"
-	GuaranteedCommitments_ListCommitmentsPlanLineItems_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentsPlanLineItems"
-	GuaranteedCommitments_ListCommitmentsPlanResourceMatches_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitmentsPlanResourceMatches"
 	GuaranteedCommitments_ListCommitments_FullMethodName                    = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments"
 	GuaranteedCommitments_GetCommitmentsChart_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart"
 	GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsUtilization"
@@ -60,18 +55,8 @@ const (
 type GuaranteedCommitmentsClient interface {
 	// WORK-IN-PROGRESS: List all the registered orgs
 	ListOrgs(ctx context.Context, in *ListOrgsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ListOrgsClient, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
-	GetCommitmentsPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
 	// WORK-IN-PROGRESS: Executes a commitment purchase plan, initiating the commitment purchase process.
 	CommitmentsPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitments commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
-	ListDefaultCommitmentsPlan(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitments commitment plan for the specified cloud provider.
-	GetRecommendedCommitmentsPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves line items for a specific commitment plan.
-	ListCommitmentsPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves resource matches for a specific commitment plan.
-	ListCommitmentsPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error)
 	// WORK-IN-PROGRESS: Retrieves a list of commitments.
 	ListCommitments(ctx context.Context, in *ListCommitmentsRequest, opts ...grpc.CallOption) (*ListCommitmentsResponse, error)
 	// WORK-IN-PROGRESS: Generates time-series chart data for commitment metrics over the specified time period.
@@ -94,7 +79,7 @@ type GuaranteedCommitmentsClient interface {
 	ListDraftPurchasePlans(ctx context.Context, in *ListDraftPurchasePlansRequest, opts ...grpc.CallOption) (*ListDraftPurchasePlansResponse, error)
 	// WORK-IN-PROGRESS: Retrieves the details of a specific draft plan.
 	GetDraftPurchasePlansDetails(ctx context.Context, in *GetDraftPurchasePlansDetailsRequest, opts ...grpc.CallOption) (*GetDraftPurchasePlansDetailsResponse, error)
-	// WORK-IN-PROGRESS: Deletes a draft purchase plan.
+	// WORK-IN-PROGRESS: Deletes a drafted purchase plan.
 	DeleteDraftPurchasePlan(ctx context.Context, in *DeleteDraftPurchasePlanRequest, opts ...grpc.CallOption) (*DeleteDraftPurchasePlanResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
@@ -169,60 +154,10 @@ func (x *guaranteedCommitmentsListOrgsClient) Recv() (*Org, error) {
 	return m, nil
 }
 
-func (c *guaranteedCommitmentsClient) GetCommitmentsPlanDetails(ctx context.Context, in *GetCommitmentPlanDetailsRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommitmentPlanDetails)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetCommitmentsPlanDetails_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *guaranteedCommitmentsClient) CommitmentsPlanApply(ctx context.Context, in *CommitmentPlanApplyRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CommitmentPlanDetails)
 	err := c.cc.Invoke(ctx, GuaranteedCommitments_CommitmentsPlanApply_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *guaranteedCommitmentsClient) ListDefaultCommitmentsPlan(ctx context.Context, in *ListDefaultCommitmentPlansRequest, opts ...grpc.CallOption) (*ListDefaultCommitmentPlansResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListDefaultCommitmentPlansResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListDefaultCommitmentsPlan_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *guaranteedCommitmentsClient) GetRecommendedCommitmentsPlan(ctx context.Context, in *GetRecommendedCommitmentPlanRequest, opts ...grpc.CallOption) (*CommitmentPlanDetails, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CommitmentPlanDetails)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetRecommendedCommitmentsPlan_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *guaranteedCommitmentsClient) ListCommitmentsPlanLineItems(ctx context.Context, in *ListCommitmentPlanLineItemsRequest, opts ...grpc.CallOption) (*ListCommitmentPlanLineItemsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCommitmentPlanLineItemsResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListCommitmentsPlanLineItems_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *guaranteedCommitmentsClient) ListCommitmentsPlanResourceMatches(ctx context.Context, in *ListCommitmentPlanResourceMatchesRequest, opts ...grpc.CallOption) (*ListCommitmentPlanResourceMatchesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ListCommitmentPlanResourceMatchesResponse)
-	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListCommitmentsPlanResourceMatches_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -477,18 +412,8 @@ func (c *guaranteedCommitmentsClient) CreateGuaranteedCommitmentAccess(ctx conte
 type GuaranteedCommitmentsServer interface {
 	// WORK-IN-PROGRESS: List all the registered orgs
 	ListOrgs(*ListOrgsRequest, GuaranteedCommitments_ListOrgsServer) error
-	// WORK-IN-PROGRESS: Do not use. Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.
-	GetCommitmentsPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error)
 	// WORK-IN-PROGRESS: Executes a commitment purchase plan, initiating the commitment purchase process.
 	CommitmentsPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitments commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.
-	ListDefaultCommitmentsPlan(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitments commitment plan for the specified cloud provider.
-	GetRecommendedCommitmentsPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves line items for a specific commitment plan.
-	ListCommitmentsPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error)
-	// WORK-IN-PROGRESS: Do not use. Retrieves resource matches for a specific commitment plan.
-	ListCommitmentsPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error)
 	// WORK-IN-PROGRESS: Retrieves a list of commitments.
 	ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error)
 	// WORK-IN-PROGRESS: Generates time-series chart data for commitment metrics over the specified time period.
@@ -511,7 +436,7 @@ type GuaranteedCommitmentsServer interface {
 	ListDraftPurchasePlans(context.Context, *ListDraftPurchasePlansRequest) (*ListDraftPurchasePlansResponse, error)
 	// WORK-IN-PROGRESS: Retrieves the details of a specific draft plan.
 	GetDraftPurchasePlansDetails(context.Context, *GetDraftPurchasePlansDetailsRequest) (*GetDraftPurchasePlansDetailsResponse, error)
-	// WORK-IN-PROGRESS: Deletes a draft purchase plan.
+	// WORK-IN-PROGRESS: Deletes a drafted purchase plan.
 	DeleteDraftPurchasePlan(context.Context, *DeleteDraftPurchasePlanRequest) (*DeleteDraftPurchasePlanResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
@@ -553,23 +478,8 @@ type UnimplementedGuaranteedCommitmentsServer struct {
 func (UnimplementedGuaranteedCommitmentsServer) ListOrgs(*ListOrgsRequest, GuaranteedCommitments_ListOrgsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListOrgs not implemented")
 }
-func (UnimplementedGuaranteedCommitmentsServer) GetCommitmentsPlanDetails(context.Context, *GetCommitmentPlanDetailsRequest) (*CommitmentPlanDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentsPlanDetails not implemented")
-}
 func (UnimplementedGuaranteedCommitmentsServer) CommitmentsPlanApply(context.Context, *CommitmentPlanApplyRequest) (*CommitmentPlanDetails, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CommitmentsPlanApply not implemented")
-}
-func (UnimplementedGuaranteedCommitmentsServer) ListDefaultCommitmentsPlan(context.Context, *ListDefaultCommitmentPlansRequest) (*ListDefaultCommitmentPlansResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListDefaultCommitmentsPlan not implemented")
-}
-func (UnimplementedGuaranteedCommitmentsServer) GetRecommendedCommitmentsPlan(context.Context, *GetRecommendedCommitmentPlanRequest) (*CommitmentPlanDetails, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendedCommitmentsPlan not implemented")
-}
-func (UnimplementedGuaranteedCommitmentsServer) ListCommitmentsPlanLineItems(context.Context, *ListCommitmentPlanLineItemsRequest) (*ListCommitmentPlanLineItemsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCommitmentsPlanLineItems not implemented")
-}
-func (UnimplementedGuaranteedCommitmentsServer) ListCommitmentsPlanResourceMatches(context.Context, *ListCommitmentPlanResourceMatchesRequest) (*ListCommitmentPlanResourceMatchesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListCommitmentsPlanResourceMatches not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) ListCommitments(context.Context, *ListCommitmentsRequest) (*ListCommitmentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCommitments not implemented")
@@ -677,24 +587,6 @@ func (x *guaranteedCommitmentsListOrgsServer) Send(m *Org) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _GuaranteedCommitments_GetCommitmentsPlanDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetCommitmentPlanDetailsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).GetCommitmentsPlanDetails(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GuaranteedCommitments_GetCommitmentsPlanDetails_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).GetCommitmentsPlanDetails(ctx, req.(*GetCommitmentPlanDetailsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _GuaranteedCommitments_CommitmentsPlanApply_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CommitmentPlanApplyRequest)
 	if err := dec(in); err != nil {
@@ -709,78 +601,6 @@ func _GuaranteedCommitments_CommitmentsPlanApply_Handler(srv interface{}, ctx co
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuaranteedCommitmentsServer).CommitmentsPlanApply(ctx, req.(*CommitmentPlanApplyRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GuaranteedCommitments_ListDefaultCommitmentsPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListDefaultCommitmentPlansRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).ListDefaultCommitmentsPlan(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GuaranteedCommitments_ListDefaultCommitmentsPlan_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).ListDefaultCommitmentsPlan(ctx, req.(*ListDefaultCommitmentPlansRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GuaranteedCommitments_GetRecommendedCommitmentsPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRecommendedCommitmentPlanRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).GetRecommendedCommitmentsPlan(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GuaranteedCommitments_GetRecommendedCommitmentsPlan_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).GetRecommendedCommitmentsPlan(ctx, req.(*GetRecommendedCommitmentPlanRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GuaranteedCommitments_ListCommitmentsPlanLineItems_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCommitmentPlanLineItemsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).ListCommitmentsPlanLineItems(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GuaranteedCommitments_ListCommitmentsPlanLineItems_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).ListCommitmentsPlanLineItems(ctx, req.(*ListCommitmentPlanLineItemsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _GuaranteedCommitments_ListCommitmentsPlanResourceMatches_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ListCommitmentPlanResourceMatchesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(GuaranteedCommitmentsServer).ListCommitmentsPlanResourceMatches(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: GuaranteedCommitments_ListCommitmentsPlanResourceMatches_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(GuaranteedCommitmentsServer).ListCommitmentsPlanResourceMatches(ctx, req.(*ListCommitmentPlanResourceMatchesRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1225,28 +1045,8 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*GuaranteedCommitmentsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetCommitmentsPlanDetails",
-			Handler:    _GuaranteedCommitments_GetCommitmentsPlanDetails_Handler,
-		},
-		{
 			MethodName: "CommitmentsPlanApply",
 			Handler:    _GuaranteedCommitments_CommitmentsPlanApply_Handler,
-		},
-		{
-			MethodName: "ListDefaultCommitmentsPlan",
-			Handler:    _GuaranteedCommitments_ListDefaultCommitmentsPlan_Handler,
-		},
-		{
-			MethodName: "GetRecommendedCommitmentsPlan",
-			Handler:    _GuaranteedCommitments_GetRecommendedCommitmentsPlan_Handler,
-		},
-		{
-			MethodName: "ListCommitmentsPlanLineItems",
-			Handler:    _GuaranteedCommitments_ListCommitmentsPlanLineItems_Handler,
-		},
-		{
-			MethodName: "ListCommitmentsPlanResourceMatches",
-			Handler:    _GuaranteedCommitments_ListCommitmentsPlanResourceMatches_Handler,
 		},
 		{
 			MethodName: "ListCommitments",

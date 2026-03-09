@@ -4587,10 +4587,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.gc.v1.GetCommitmentPlanDetailsRequest"><span class="badge">M</span>GetCommitmentPlanDetailsRequest</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.gc.v1.GetCommitmentsChartRequest"><span class="badge">M</span>GetCommitmentsChartRequest</a>
                 </li>
               
@@ -4643,10 +4639,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.gc.v1.GetRecommendedCommitmentPlanRequest"><span class="badge">M</span>GetRecommendedCommitmentPlanRequest</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.gc.v1.GetResourceDailyUsageRequest"><span class="badge">M</span>GetResourceDailyUsageRequest</a>
                 </li>
               
@@ -4655,27 +4647,7 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.gc.v1.GetSegmentDetailsRequest"><span class="badge">M</span>GetSegmentDetailsRequest</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.gc.v1.Lease"><span class="badge">M</span>Lease</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListCommitmentPlanLineItemsRequest"><span class="badge">M</span>ListCommitmentPlanLineItemsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListCommitmentPlanLineItemsResponse"><span class="badge">M</span>ListCommitmentPlanLineItemsResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListCommitmentPlanResourceMatchesRequest"><span class="badge">M</span>ListCommitmentPlanResourceMatchesRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListCommitmentPlanResourceMatchesResponse"><span class="badge">M</span>ListCommitmentPlanResourceMatchesResponse</a>
                 </li>
               
                 <li>
@@ -4684,14 +4656,6 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.ListCommitmentsResponse"><span class="badge">M</span>ListCommitmentsResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListDefaultCommitmentPlansRequest"><span class="badge">M</span>ListDefaultCommitmentPlansRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListDefaultCommitmentPlansResponse"><span class="badge">M</span>ListDefaultCommitmentPlansResponse</a>
                 </li>
               
                 <li>
@@ -4732,14 +4696,6 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.ListResourcesResponse"><span class="badge">M</span>ListResourcesResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListSegmentsRequest"><span class="badge">M</span>ListSegmentsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListSegmentsResponse"><span class="badge">M</span>ListSegmentsResponse</a>
                 </li>
               
                 <li>
@@ -55584,10 +55540,10 @@ maps to &#34;report_name&#34; conceptually </p></td>
             <tbody>
               
                 <tr>
-                  <td>planId</td>
+                  <td>draftPlanId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The plan ID to delete. </p></td>
+                  <td><p>Required. The draft plan ID to delete. </p></td>
                 </tr>
               
             </tbody>
@@ -55752,30 +55708,6 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
-        <h3 id="blueapi.gc.v1.GetCommitmentPlanDetailsRequest">GetCommitmentPlanDetailsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>planId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.gc.v1.GetCommitmentsChartRequest">GetCommitmentsChartRequest</h3>
         <p></p>
 
@@ -55856,10 +55788,10 @@ maps to &#34;report_name&#34; conceptually </p></td>
             <tbody>
               
                 <tr>
-                  <td>planId</td>
+                  <td>draftPlanId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The draft plan ID to retrieve details for. </p></td>
                 </tr>
               
             </tbody>
@@ -56211,30 +56143,6 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
 
         
       
-        <h3 id="blueapi.gc.v1.GetRecommendedCommitmentPlanRequest">GetRecommendedCommitmentPlanRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>provider</td>
-                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.gc.v1.GetResourceDailyUsageRequest">GetResourceDailyUsageRequest</h3>
         <p></p>
 
@@ -56308,30 +56216,6 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td>dailyUsage</td>
                   <td><a href="#blueapi.gc.v1.ResourceDailyUsage">ResourceDailyUsage</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.GetSegmentDetailsRequest">GetSegmentDetailsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>segmentId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -56443,193 +56327,6 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
 
         
       
-        <h3 id="blueapi.gc.v1.ListCommitmentPlanLineItemsRequest">ListCommitmentPlanLineItemsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>planId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>orderBy</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>desc</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>segmentId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>resourceMatchIds</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>page</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>pageSize</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListCommitmentPlanLineItemsResponse">ListCommitmentPlanLineItemsResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>lineItems</td>
-                  <td><a href="#blueapi.gc.v1.CommitmentPlanLineItem">CommitmentPlanLineItem</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListCommitmentPlanResourceMatchesRequest">ListCommitmentPlanResourceMatchesRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>planId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>orderBy</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>desc</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>startDate</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>endDate</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>lineItemIds</td>
-                  <td><a href="#string">string</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>page</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>pageSize</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListCommitmentPlanResourceMatchesResponse">ListCommitmentPlanResourceMatchesResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>resourceMatches</td>
-                  <td><a href="#blueapi.gc.v1.CommitmentPlanResourceMatch">CommitmentPlanResourceMatch</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.gc.v1.ListCommitmentsRequest">ListCommitmentsRequest</h3>
         <p></p>
 
@@ -56650,54 +56347,6 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                 <tr>
                   <td>commitments</td>
                   <td><a href="#blueapi.gc.v1.Commitment">Commitment</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListDefaultCommitmentPlansRequest">ListDefaultCommitmentPlansRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>provider</td>
-                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListDefaultCommitmentPlansResponse">ListDefaultCommitmentPlansResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>plans</td>
-                  <td><a href="#blueapi.gc.v1.CommitmentPlanDetails">CommitmentPlanDetails</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -56964,54 +56613,6 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                 <tr>
                   <td>resources</td>
                   <td><a href="#blueapi.gc.v1.Resource">Resource</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListSegmentsRequest">ListSegmentsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>provider</td>
-                  <td><a href="#blueapi.gc.v1.Provider">Provider</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListSegmentsResponse">ListSegmentsResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>segments</td>
-                  <td><a href="#blueapi.gc.v1.Segment">Segment</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -58048,7 +57649,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                   <td>planId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. The commitment purchase plan ID to save as draft. </p></td>
                 </tr>
               
                 <tr>
@@ -58104,21 +57705,21 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                   <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. </p></td>
                 </tr>
               
                 <tr>
                   <td>description</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. </p></td>
                 </tr>
               
                 <tr>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. </p></td>
                 </tr>
               
                 <tr>
@@ -59342,45 +58943,10 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
               </tr>
             
               <tr>
-                <td>GetCommitmentsPlanDetails</td>
-                <td><a href="#blueapi.gc.v1.GetCommitmentPlanDetailsRequest">GetCommitmentPlanDetailsRequest</a></td>
-                <td><a href="#blueapi.gc.v1.CommitmentPlanDetails">CommitmentPlanDetails</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves detailed information about a specific commitment plan, including costs, savings projections, and commitment coverage.</p></td>
-              </tr>
-            
-              <tr>
                 <td>CommitmentsPlanApply</td>
                 <td><a href="#blueapi.gc.v1.CommitmentPlanApplyRequest">CommitmentPlanApplyRequest</a></td>
                 <td><a href="#blueapi.gc.v1.CommitmentPlanDetails">CommitmentPlanDetails</a></td>
                 <td><p>WORK-IN-PROGRESS: Executes a commitment purchase plan, initiating the commitment purchase process.</p></td>
-              </tr>
-            
-              <tr>
-                <td>ListDefaultCommitmentsPlan</td>
-                <td><a href="#blueapi.gc.v1.ListDefaultCommitmentPlansRequest">ListDefaultCommitmentPlansRequest</a></td>
-                <td><a href="#blueapi.gc.v1.ListDefaultCommitmentPlansResponse">ListDefaultCommitmentPlansResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves the three default GuaranteedCommitments commitment plans (High Savings, Balanced, Recommended) for the specified cloud provider.</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetRecommendedCommitmentsPlan</td>
-                <td><a href="#blueapi.gc.v1.GetRecommendedCommitmentPlanRequest">GetRecommendedCommitmentPlanRequest</a></td>
-                <td><a href="#blueapi.gc.v1.CommitmentPlanDetails">CommitmentPlanDetails</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves only the recommended GuaranteedCommitments commitment plan for the specified cloud provider.</p></td>
-              </tr>
-            
-              <tr>
-                <td>ListCommitmentsPlanLineItems</td>
-                <td><a href="#blueapi.gc.v1.ListCommitmentPlanLineItemsRequest">ListCommitmentPlanLineItemsRequest</a></td>
-                <td><a href="#blueapi.gc.v1.ListCommitmentPlanLineItemsResponse">ListCommitmentPlanLineItemsResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves line items for a specific commitment plan.</p></td>
-              </tr>
-            
-              <tr>
-                <td>ListCommitmentsPlanResourceMatches</td>
-                <td><a href="#blueapi.gc.v1.ListCommitmentPlanResourceMatchesRequest">ListCommitmentPlanResourceMatchesRequest</a></td>
-                <td><a href="#blueapi.gc.v1.ListCommitmentPlanResourceMatchesResponse">ListCommitmentPlanResourceMatchesResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Do not use. Retrieves resource matches for a specific commitment plan.</p></td>
               </tr>
             
               <tr>
@@ -59464,7 +59030,7 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td>DeleteDraftPurchasePlan</td>
                 <td><a href="#blueapi.gc.v1.DeleteDraftPurchasePlanRequest">DeleteDraftPurchasePlanRequest</a></td>
                 <td><a href="#blueapi.gc.v1.DeleteDraftPurchasePlanResponse">DeleteDraftPurchasePlanResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Deletes a draft purchase plan.</p></td>
+                <td><p>WORK-IN-PROGRESS: Deletes a drafted purchase plan.</p></td>
               </tr>
             
               <tr>
@@ -59591,60 +59157,10 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               
               
               <tr>
-                <td>GetCommitmentsPlanDetails</td>
-                <td>GET</td>
-                <td>/v1/commitments/plan/{planId}</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
                 <td>CommitmentsPlanApply</td>
                 <td>POST</td>
                 <td>/v1/commitments/plan/{planId}/apply</td>
                 <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>ListDefaultCommitmentsPlan</td>
-                <td>GET</td>
-                <td>/v1/commitments/plan/default</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetRecommendedCommitmentsPlan</td>
-                <td>GET</td>
-                <td>/v1/commitments/plan/recommended</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>ListCommitmentsPlanLineItems</td>
-                <td>GET</td>
-                <td>/v1/commitments/plan/{planId}/lineitems</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>ListCommitmentsPlanResourceMatches</td>
-                <td>GET</td>
-                <td>/v1/commitments/plan/{planId}/resourcematches</td>
-                <td></td>
               </tr>
               
             
@@ -59733,7 +59249,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>SaveCommitmentsPlanAsDraft</td>
                 <td>POST</td>
-                <td>/v1/commitments/purchaseplans/{planId}/draft</td>
+                <td>/v1/commitments/purchaseplans/draft/{planId}</td>
                 <td>*</td>
               </tr>
               
@@ -59753,7 +59269,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>GetDraftPurchasePlansDetails</td>
                 <td>GET</td>
-                <td>/v1/commitments/purchaseplans/draft/{planId}</td>
+                <td>/v1/commitments/purchaseplans/draft/{draftPlanId}</td>
                 <td></td>
               </tr>
               
@@ -59763,7 +59279,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>DeleteDraftPurchasePlan</td>
                 <td>DELETE</td>
-                <td>/v1/commitments/purchaseplans/{planId}/draft</td>
+                <td>/v1/commitments/purchaseplans/draft/{draftPlanId}</td>
                 <td></td>
               </tr>
               
