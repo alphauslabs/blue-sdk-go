@@ -4599,6 +4599,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsRequest"><span class="badge">M</span>GetDraftPurchasePlansDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsResponse"><span class="badge">M</span>GetDraftPurchasePlansDetailsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest"><span class="badge">M</span>GetGuaranteedCommitmentTemplateUrlRequest</a>
                 </li>
               
@@ -4624,6 +4632,14 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.GetPayerAccountStatusResponse"><span class="badge">M</span>GetPayerAccountStatusResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetPurchasePlansDetailsRequest"><span class="badge">M</span>GetPurchasePlansDetailsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetPurchasePlansDetailsResponse"><span class="badge">M</span>GetPurchasePlansDetailsResponse</a>
                 </li>
               
                 <li>
@@ -4708,14 +4724,6 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.ListPurchasePlansBySegmentResponse"><span class="badge">M</span>ListPurchasePlansBySegmentResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListPurchasePlansDetailsRequest"><span class="badge">M</span>ListPurchasePlansDetailsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.ListPurchasePlansDetailsResponse"><span class="badge">M</span>ListPurchasePlansDetailsResponse</a>
                 </li>
               
                 <li>
@@ -55837,6 +55845,54 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.GetDraftPurchasePlansDetailsRequest">GetDraftPurchasePlansDetailsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>planId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetDraftPurchasePlansDetailsResponse">GetDraftPurchasePlansDetailsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>plans</td>
+                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest">GetGuaranteedCommitmentTemplateUrlRequest</h3>
         <p></p>
 
@@ -56097,6 +56153,54 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td>payerAccount</td>
                   <td><a href="#blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount">ListPayerAccountsResponse.PayerAccount</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetPurchasePlansDetailsRequest">GetPurchasePlansDetailsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>planId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetPurchasePlansDetailsResponse">GetPurchasePlansDetailsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>plans</td>
+                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -56758,54 +56862,6 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
         
       
         <h3 id="blueapi.gc.v1.ListPurchasePlansBySegmentResponse">ListPurchasePlansBySegmentResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>plans</td>
-                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListPurchasePlansDetailsRequest">ListPurchasePlansDetailsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>planId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.ListPurchasePlansDetailsResponse">ListPurchasePlansDetailsResponse</h3>
         <p></p>
 
         
@@ -59377,9 +59433,9 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
               </tr>
             
               <tr>
-                <td>ListPurchasePlansDetails</td>
-                <td><a href="#blueapi.gc.v1.ListPurchasePlansDetailsRequest">ListPurchasePlansDetailsRequest</a></td>
-                <td><a href="#blueapi.gc.v1.ListPurchasePlansDetailsResponse">ListPurchasePlansDetailsResponse</a></td>
+                <td>GetPurchasePlansDetails</td>
+                <td><a href="#blueapi.gc.v1.GetPurchasePlansDetailsRequest">GetPurchasePlansDetailsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetPurchasePlansDetailsResponse">GetPurchasePlansDetailsResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Retrieves details of a specific purchase plan of a company.</p></td>
               </tr>
             
@@ -59395,6 +59451,13 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td><a href="#blueapi.gc.v1.ListDraftPurchasePlansRequest">ListDraftPurchasePlansRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ListDraftPurchasePlansResponse">ListDraftPurchasePlansResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Retrieves the drafted purchase plans</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetDraftPurchasePlansDetails</td>
+                <td><a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsRequest">GetDraftPurchasePlansDetailsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsResponse">GetDraftPurchasePlansDetailsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves the details of a specific draft plan.</p></td>
               </tr>
             
               <tr>
@@ -59658,7 +59721,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               
               
               <tr>
-                <td>ListPurchasePlansDetails</td>
+                <td>GetPurchasePlansDetails</td>
                 <td>GET</td>
                 <td>/v1/commitments/purchaseplans/{planId}</td>
                 <td></td>
@@ -59681,6 +59744,16 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                 <td>ListDraftPurchasePlans</td>
                 <td>GET</td>
                 <td>/v1/commitments/purchaseplans/draft</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetDraftPurchasePlansDetails</td>
+                <td>GET</td>
+                <td>/v1/commitments/purchaseplans/draft/{planId}</td>
                 <td></td>
               </tr>
               

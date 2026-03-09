@@ -575,9 +575,9 @@ func local_request_GuaranteedCommitments_ListPurchasePlansBySegment_0(ctx contex
 	return msg, metadata, err
 }
 
-func request_GuaranteedCommitments_ListPurchasePlansDetails_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func request_GuaranteedCommitments_GetPurchasePlansDetails_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq ListPurchasePlansDetailsRequest
+		protoReq GetPurchasePlansDetailsRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -592,13 +592,13 @@ func request_GuaranteedCommitments_ListPurchasePlansDetails_0(ctx context.Contex
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "planId", err)
 	}
-	msg, err := client.ListPurchasePlansDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	msg, err := client.GetPurchasePlansDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
 }
 
-func local_request_GuaranteedCommitments_ListPurchasePlansDetails_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+func local_request_GuaranteedCommitments_GetPurchasePlansDetails_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
-		protoReq ListPurchasePlansDetailsRequest
+		protoReq GetPurchasePlansDetailsRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -610,7 +610,7 @@ func local_request_GuaranteedCommitments_ListPurchasePlansDetails_0(ctx context.
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "planId", err)
 	}
-	msg, err := server.ListPurchasePlansDetails(ctx, &protoReq)
+	msg, err := server.GetPurchasePlansDetails(ctx, &protoReq)
 	return msg, metadata, err
 }
 
@@ -677,6 +677,45 @@ func local_request_GuaranteedCommitments_ListDraftPurchasePlans_0(ctx context.Co
 		metadata runtime.ServerMetadata
 	)
 	msg, err := server.ListDraftPurchasePlans(ctx, &protoReq)
+	return msg, metadata, err
+}
+
+func request_GuaranteedCommitments_GetDraftPurchasePlansDetails_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetDraftPurchasePlansDetailsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["planId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "planId")
+	}
+	protoReq.PlanId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "planId", err)
+	}
+	msg, err := client.GetDraftPurchasePlansDetails(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_GuaranteedCommitments_GetDraftPurchasePlansDetails_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetDraftPurchasePlansDetailsRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["planId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "planId")
+	}
+	protoReq.PlanId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "planId", err)
+	}
+	msg, err := server.GetDraftPurchasePlansDetails(ctx, &protoReq)
 	return msg, metadata, err
 }
 
@@ -1345,25 +1384,25 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 		}
 		forward_GuaranteedCommitments_ListPurchasePlansBySegment_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListPurchasePlansDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetPurchasePlansDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansDetails", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/{planId}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlansDetails", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/{planId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := local_request_GuaranteedCommitments_ListPurchasePlansDetails_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		resp, md, err := local_request_GuaranteedCommitments_GetPurchasePlansDetails_0(annotatedContext, inboundMarshaler, server, req, pathParams)
 		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitments_ListPurchasePlansDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetPurchasePlansDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_SaveCommitmentsPlanAsDraft_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -1404,6 +1443,26 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 			return
 		}
 		forward_GuaranteedCommitments_ListDraftPurchasePlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetDraftPurchasePlansDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetDraftPurchasePlansDetails", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/draft/{planId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_GuaranteedCommitments_GetDraftPurchasePlansDetails_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_GuaranteedCommitments_GetDraftPurchasePlansDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodDelete, pattern_GuaranteedCommitments_DeleteDraftPurchasePlan_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -1943,22 +2002,22 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		}
 		forward_GuaranteedCommitments_ListPurchasePlansBySegment_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_ListPurchasePlansDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetPurchasePlansDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansDetails", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/{planId}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlansDetails", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/{planId}"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		resp, md, err := request_GuaranteedCommitments_ListPurchasePlansDetails_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		resp, md, err := request_GuaranteedCommitments_GetPurchasePlansDetails_0(annotatedContext, inboundMarshaler, client, req, pathParams)
 		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
 		if err != nil {
 			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
 			return
 		}
-		forward_GuaranteedCommitments_ListPurchasePlansDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+		forward_GuaranteedCommitments_GetPurchasePlansDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_SaveCommitmentsPlanAsDraft_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -1993,6 +2052,23 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 			return
 		}
 		forward_GuaranteedCommitments_ListDraftPurchasePlans_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetDraftPurchasePlansDetails_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetDraftPurchasePlansDetails", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/draft/{planId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_GuaranteedCommitments_GetDraftPurchasePlansDetails_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_GuaranteedCommitments_GetDraftPurchasePlansDetails_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 	mux.Handle(http.MethodDelete, pattern_GuaranteedCommitments_DeleteDraftPurchasePlan_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
@@ -2233,9 +2309,10 @@ var (
 	pattern_GuaranteedCommitments_ListResources_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resources"}, ""))
 	pattern_GuaranteedCommitments_GetResourceDailyUsage_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "resources", "resourceId", "dailyusage"}, ""))
 	pattern_GuaranteedCommitments_ListPurchasePlansBySegment_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitments", "purchaseplans"}, ""))
-	pattern_GuaranteedCommitments_ListPurchasePlansDetails_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "commitments", "purchaseplans", "planId"}, ""))
+	pattern_GuaranteedCommitments_GetPurchasePlansDetails_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "commitments", "purchaseplans", "planId"}, ""))
 	pattern_GuaranteedCommitments_SaveCommitmentsPlanAsDraft_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "commitments", "purchaseplans", "planId", "draft"}, ""))
 	pattern_GuaranteedCommitments_ListDraftPurchasePlans_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "commitments", "purchaseplans", "draft"}, ""))
+	pattern_GuaranteedCommitments_GetDraftPurchasePlansDetails_0       = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "commitments", "purchaseplans", "draft", "planId"}, ""))
 	pattern_GuaranteedCommitments_DeleteDraftPurchasePlan_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "commitments", "purchaseplans", "planId", "draft"}, ""))
 	pattern_GuaranteedCommitments_RegisterOrg_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "onboarding"}, ""))
 	pattern_GuaranteedCommitments_StartAwsOnboarding_0                 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "aws", "start"}, ""))
@@ -2266,9 +2343,10 @@ var (
 	forward_GuaranteedCommitments_ListResources_0                      = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_GetResourceDailyUsage_0              = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_ListPurchasePlansBySegment_0         = runtime.ForwardResponseMessage
-	forward_GuaranteedCommitments_ListPurchasePlansDetails_0           = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetPurchasePlansDetails_0            = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_SaveCommitmentsPlanAsDraft_0         = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_ListDraftPurchasePlans_0             = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_GetDraftPurchasePlansDetails_0       = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_DeleteDraftPurchasePlan_0            = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_RegisterOrg_0                        = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_StartAwsOnboarding_0                 = runtime.ForwardResponseMessage
