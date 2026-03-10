@@ -4960,21 +4960,21 @@ func request_Billing_SetChildBillingGroupCustomizedBillingService_0(ctx context.
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	val, ok := pathParams["internalId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "internalId")
-	}
-	protoReq.InternalId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "internalId", err)
-	}
-	val, ok = pathParams["vendor"]
+	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
 	}
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	val, ok = pathParams["internalId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "internalId")
+	}
+	protoReq.InternalId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "internalId", err)
 	}
 	msg, err := client.SetChildBillingGroupCustomizedBillingService(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
 	return msg, metadata, err
@@ -4989,21 +4989,21 @@ func local_request_Billing_SetChildBillingGroupCustomizedBillingService_0(ctx co
 	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
-	val, ok := pathParams["internalId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "internalId")
-	}
-	protoReq.InternalId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "internalId", err)
-	}
-	val, ok = pathParams["vendor"]
+	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
 	}
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	val, ok = pathParams["internalId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "internalId")
+	}
+	protoReq.InternalId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "internalId", err)
 	}
 	msg, err := server.SetChildBillingGroupCustomizedBillingService(ctx, &protoReq)
 	return msg, metadata, err
@@ -5018,21 +5018,21 @@ func request_Billing_GetChildBillingGroupCustomizedBillingService_0(ctx context.
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
-	val, ok := pathParams["internalId"]
-	if !ok {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "internalId")
-	}
-	protoReq.InternalId, err = runtime.String(val)
-	if err != nil {
-		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "internalId", err)
-	}
-	val, ok = pathParams["vendor"]
+	val, ok := pathParams["vendor"]
 	if !ok {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "vendor")
 	}
 	protoReq.Vendor, err = runtime.String(val)
 	if err != nil {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "vendor", err)
+	}
+	val, ok = pathParams["internalId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "internalId")
+	}
+	protoReq.InternalId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "internalId", err)
 	}
 	stream, err := client.GetChildBillingGroupCustomizedBillingService(ctx, &protoReq)
 	if err != nil {
@@ -5087,7 +5087,7 @@ func local_request_Billing_GetChildBillingGroupInvoiceServiceDiscounts_0(ctx con
 
 func request_Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_0(ctx context.Context, marshaler runtime.Marshaler, client BillingClient, req *http.Request, pathParams map[string]string) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, runtime.ServerMetadata, error) {
 	var (
-		protoReq ListChildBillingGroupAccountInvoiceServiceDiscountsRequest
+		protoReq ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest
 		metadata runtime.ServerMetadata
 		err      error
 	)
@@ -7500,7 +7500,7 @@ func RegisterBillingHandlerServer(ctx context.Context, mux *runtime.ServeMux, se
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService", runtime.WithHTTPPathPattern("/v1/billinggroups/children/{internalId}/customizedBillingService/{vendor}"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService", runtime.WithHTTPPathPattern("/v1/{vendor}/billinggroups/children/{internalId}/customizedBillingService"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -9864,7 +9864,7 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService", runtime.WithHTTPPathPattern("/v1/billinggroups/children/{internalId}/customizedBillingService/{vendor}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService", runtime.WithHTTPPathPattern("/v1/{vendor}/billinggroups/children/{internalId}/customizedBillingService"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -9881,7 +9881,7 @@ func RegisterBillingHandlerClient(ctx context.Context, mux *runtime.ServeMux, cl
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetChildBillingGroupCustomizedBillingService", runtime.WithHTTPPathPattern("/v1/billinggroups/children/{internalId}/customizedBillingService/{vendor}"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.billing.v1.Billing/GetChildBillingGroupCustomizedBillingService", runtime.WithHTTPPathPattern("/v1/{vendor}/billinggroups/children/{internalId}/customizedBillingService"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -10193,8 +10193,8 @@ var (
 	pattern_Billing_UpdateChildBillingGroupInvoiceSettings_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "billinggroups", "children", "internalId", "invoiceSettings"}, ""))
 	pattern_Billing_SetChildBillingGroupInvoiceServiceDiscounts_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "billinggroups", "children", "internalId", "serviceDiscounts"}, ""))
 	pattern_Billing_SetChildBillingGroupAccountInvoiceServiceDiscounts_0  = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 2, 5}, []string{"v1", "billinggroups", "children", "internalId", "serviceDiscounts", "accounts"}, "set"))
-	pattern_Billing_SetChildBillingGroupCustomizedBillingService_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "billinggroups", "children", "internalId", "customizedBillingService", "vendor"}, ""))
-	pattern_Billing_GetChildBillingGroupCustomizedBillingService_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "billinggroups", "children", "internalId", "customizedBillingService", "vendor"}, ""))
+	pattern_Billing_SetChildBillingGroupCustomizedBillingService_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "vendor", "billinggroups", "children", "internalId", "customizedBillingService"}, ""))
+	pattern_Billing_GetChildBillingGroupCustomizedBillingService_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 1, 0, 4, 1, 5, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4, 2, 5}, []string{"v1", "vendor", "billinggroups", "children", "internalId", "customizedBillingService"}, ""))
 	pattern_Billing_GetChildBillingGroupInvoiceServiceDiscounts_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "billinggroups", "children", "internalId", "serviceDiscounts"}, ""))
 	pattern_Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4, 2, 5}, []string{"v1", "billinggroups", "children", "internalId", "serviceDiscounts", "accounts"}, "read"))
 	pattern_Billing_BulkCreateBillingGroup_0                              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "billinggroups"}, "bulkCreate"))

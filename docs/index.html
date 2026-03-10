@@ -1854,10 +1854,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ListChildBillingGroupAccountInvoiceServiceDiscountsRequest"><span class="badge">M</span>ListChildBillingGroupAccountInvoiceServiceDiscountsRequest</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.ListCustomFieldRequest"><span class="badge">M</span>ListCustomFieldRequest</a>
                 </li>
               
@@ -1939,6 +1935,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ReadAdjustmentEntriesRequest.AdjustmentEntriesRequestAwsOptions"><span class="badge">M</span>ReadAdjustmentEntriesRequest.AdjustmentEntriesRequestAwsOptions</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest"><span class="badge">M</span>ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest</a>
                 </li>
               
                 <li>
@@ -23192,30 +23192,6 @@ Valid values: default, imported </p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.ListChildBillingGroupAccountInvoiceServiceDiscountsRequest">ListChildBillingGroupAccountInvoiceServiceDiscountsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>internalId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Child Billing Group Internal Id </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.ListCustomFieldRequest">ListCustomFieldRequest</h3>
         <p></p>
 
@@ -23956,6 +23932,30 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest">ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>internalId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Child Billing Group Internal Id </p></td>
                 </tr>
               
             </tbody>
@@ -27391,7 +27391,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
             
               <tr>
                 <td>ReadChildBillingGroupAccountInvoiceServiceDiscounts</td>
-                <td><a href="#blueapi.billing.v1.ListChildBillingGroupAccountInvoiceServiceDiscountsRequest">ListChildBillingGroupAccountInvoiceServiceDiscountsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest">ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.AccountInvoiceServiceDiscounts">AccountInvoiceServiceDiscounts</a> stream</td>
                 <td><p>Returns the account&#39;s service discounts associated with the child billing group id</p></td>
               </tr>
@@ -28725,7 +28725,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>SetChildBillingGroupCustomizedBillingService</td>
                 <td>POST</td>
-                <td>/v1/billinggroups/children/{internalId}/customizedBillingService/{vendor}</td>
+                <td>/v1/{vendor}/billinggroups/children/{internalId}/customizedBillingService</td>
                 <td>*</td>
               </tr>
               
@@ -28735,7 +28735,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetChildBillingGroupCustomizedBillingService</td>
                 <td>GET</td>
-                <td>/v1/billinggroups/children/{internalId}/customizedBillingService/{vendor}</td>
+                <td>/v1/{vendor}/billinggroups/children/{internalId}/customizedBillingService</td>
                 <td></td>
               </tr>
               

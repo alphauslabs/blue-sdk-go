@@ -437,7 +437,7 @@ type BillingClient interface {
 	// Returns the service discount associated with the billing group id
 	GetChildBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *GetChildBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
 	// Returns the account's service discounts associated with the child billing group id
-	ReadChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, error)
+	ReadChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, error)
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
 	// Gets the status of a bulk create billing group job.
@@ -2434,7 +2434,7 @@ func (c *billingClient) GetChildBillingGroupInvoiceServiceDiscounts(ctx context.
 	return out, nil
 }
 
-func (c *billingClient) ReadChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, error) {
+func (c *billingClient) ReadChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[30], Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName, cOpts...)
 	if err != nil {
@@ -2844,7 +2844,7 @@ type BillingServer interface {
 	// Returns the service discount associated with the billing group id
 	GetChildBillingGroupInvoiceServiceDiscounts(context.Context, *GetChildBillingGroupInvoiceServiceDiscountsRequest) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
 	// Returns the account's service discounts associated with the child billing group id
-	ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error
+	ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
 	// Gets the status of a bulk create billing group job.
@@ -3252,7 +3252,7 @@ func (UnimplementedBillingServer) GetChildBillingGroupCustomizedBillingService(*
 func (UnimplementedBillingServer) GetChildBillingGroupInvoiceServiceDiscounts(context.Context, *GetChildBillingGroupInvoiceServiceDiscountsRequest) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildBillingGroupInvoiceServiceDiscounts not implemented")
 }
-func (UnimplementedBillingServer) ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error {
+func (UnimplementedBillingServer) ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadChildBillingGroupAccountInvoiceServiceDiscounts not implemented")
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
@@ -5687,7 +5687,7 @@ func _Billing_GetChildBillingGroupInvoiceServiceDiscounts_Handler(srv interface{
 }
 
 func _Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListChildBillingGroupAccountInvoiceServiceDiscountsRequest)
+	m := new(ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
