@@ -4595,14 +4595,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsRequest"><span class="badge">M</span>GetDraftPurchasePlansDetailsRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsResponse"><span class="badge">M</span>GetDraftPurchasePlansDetailsResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest"><span class="badge">M</span>GetGuaranteedCommitmentTemplateUrlRequest</a>
                 </li>
               
@@ -4712,6 +4704,14 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.OrgUser"><span class="badge">M</span>OrgUser</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.PlanHistoryEntry"><span class="badge">M</span>PlanHistoryEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.PlanHistoryUser"><span class="badge">M</span>PlanHistoryUser</a>
                 </li>
               
                 <li>
@@ -54582,6 +54582,27 @@ maps to &#34;report_name&#34; conceptually </p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>renewalReservationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>coveredUnits</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amortizedCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -54756,6 +54777,34 @@ maps to &#34;report_name&#34; conceptually </p></td>
                 <tr>
                   <td>resource</td>
                   <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>coveredUnits</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>explanationUnmatched</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ondemandCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reservedCost</td>
+                  <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -55777,54 +55826,6 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
-        <h3 id="blueapi.gc.v1.GetDraftPurchasePlansDetailsRequest">GetDraftPurchasePlansDetailsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>draftPlanId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The draft plan ID to retrieve details for. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.gc.v1.GetDraftPurchasePlansDetailsResponse">GetDraftPurchasePlansDetailsResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>plans</td>
-                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
-                  <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest">GetGuaranteedCommitmentTemplateUrlRequest</h3>
         <p></p>
 
@@ -56130,10 +56131,31 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
             <tbody>
               
                 <tr>
-                  <td>plans</td>
+                  <td>plan</td>
                   <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                  <td></td>
+                  <td><p>Plan basic info and detailed metrics </p></td>
+                </tr>
+              
+                <tr>
+                  <td>lineItems</td>
+                  <td><a href="#blueapi.gc.v1.CommitmentPlanLineItem">CommitmentPlanLineItem</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Commitment line item </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceMatches</td>
+                  <td><a href="#blueapi.gc.v1.CommitmentPlanResourceMatch">CommitmentPlanResourceMatch</a></td>
+                  <td>repeated</td>
+                  <td><p>Covered infrastructure resource matches </p></td>
+                </tr>
+              
+                <tr>
+                  <td>history</td>
+                  <td><a href="#blueapi.gc.v1.PlanHistoryEntry">PlanHistoryEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Audit history of the plan </p></td>
                 </tr>
               
             </tbody>
@@ -56841,6 +56863,131 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
               
                 <tr>
                   <td>role</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.PlanHistoryEntry">PlanHistoryEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>relatedObjectId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>relatedObjectType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timestamp</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>user</td>
+                  <td><a href="#blueapi.gc.v1.PlanHistoryUser">PlanHistoryUser</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.PlanHistoryUser">PlanHistoryUser</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>username</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fullName</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -59002,7 +59149,8 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td>GetPurchasePlansDetails</td>
                 <td><a href="#blueapi.gc.v1.GetPurchasePlansDetailsRequest">GetPurchasePlansDetailsRequest</a></td>
                 <td><a href="#blueapi.gc.v1.GetPurchasePlansDetailsResponse">GetPurchasePlansDetailsResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Retrieves details of a specific purchase plan of a company.</p></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves full details of a specific purchase plan of a company.
+Includes the basic info, detailed metrics, commitment line items, covered infrastructure resource matches, and audit history.</p></td>
               </tr>
             
               <tr>
@@ -59017,13 +59165,6 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
                 <td><a href="#blueapi.gc.v1.ListDraftPurchasePlansRequest">ListDraftPurchasePlansRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ListDraftPurchasePlansResponse">ListDraftPurchasePlansResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Retrieves the drafted purchase plans</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetDraftPurchasePlansDetails</td>
-                <td><a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsRequest">GetDraftPurchasePlansDetailsRequest</a></td>
-                <td><a href="#blueapi.gc.v1.GetDraftPurchasePlansDetailsResponse">GetDraftPurchasePlansDetailsResponse</a></td>
-                <td><p>WORK-IN-PROGRESS: Retrieves the details of a specific draft plan.</p></td>
               </tr>
             
               <tr>
@@ -59260,16 +59401,6 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                 <td>ListDraftPurchasePlans</td>
                 <td>GET</td>
                 <td>/v1/commitments/purchaseplans/draft</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetDraftPurchasePlansDetails</td>
-                <td>GET</td>
-                <td>/v1/commitments/purchaseplans/draft/{draftPlanId}</td>
                 <td></td>
               </tr>
               
