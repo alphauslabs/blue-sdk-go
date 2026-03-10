@@ -190,7 +190,7 @@ type CostClient interface {
 	// Deletes the usage-based cost filter condition. Only available in Wave(Pro).
 	DeleteCostFilters(ctx context.Context, in *DeleteCostFiltersRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Exports the usage-based cost filter condition. Only available in Wave(Pro).
-	ExportCostFiltersFile(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*ExportCostFiltersFileResponse, error)
+	ExportCostFiltersFile(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
 	//
 	// Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported `{vendor}` is `aws`. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -808,9 +808,9 @@ func (c *costClient) DeleteCostFilters(ctx context.Context, in *DeleteCostFilter
 	return out, nil
 }
 
-func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*ExportCostFiltersFileResponse, error) {
+func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ExportCostFiltersFileResponse)
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Cost_ExportCostFiltersFile_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -1502,7 +1502,7 @@ type CostServer interface {
 	// Deletes the usage-based cost filter condition. Only available in Wave(Pro).
 	DeleteCostFilters(context.Context, *DeleteCostFiltersRequest) (*emptypb.Empty, error)
 	// Exports the usage-based cost filter condition. Only available in Wave(Pro).
-	ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*ExportCostFiltersFileResponse, error)
+	ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*protos.Operation, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
 	//
 	// Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported `{vendor}` is `aws`. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -1709,7 +1709,7 @@ func (UnimplementedCostServer) UpdateCostFilters(context.Context, *UpdateCostFil
 func (UnimplementedCostServer) DeleteCostFilters(context.Context, *DeleteCostFiltersRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCostFilters not implemented")
 }
-func (UnimplementedCostServer) ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*ExportCostFiltersFileResponse, error) {
+func (UnimplementedCostServer) ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportCostFiltersFile not implemented")
 }
 func (UnimplementedCostServer) ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error {
