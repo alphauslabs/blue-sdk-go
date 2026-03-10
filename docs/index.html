@@ -1858,10 +1858,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ListChildBillingGroupsRequest"><span class="badge">M</span>ListChildBillingGroupsRequest</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.ListCustomFieldRequest"><span class="badge">M</span>ListCustomFieldRequest</a>
                 </li>
               
@@ -1943,6 +1939,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ReadAdjustmentEntriesRequest.AdjustmentEntriesRequestAwsOptions"><span class="badge">M</span>ReadAdjustmentEntriesRequest.AdjustmentEntriesRequestAwsOptions</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ReadChildBillingGroupsRequest"><span class="badge">M</span>ReadChildBillingGroupsRequest</a>
                 </li>
               
                 <li>
@@ -23216,39 +23216,6 @@ Valid values: default, imported </p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.ListChildBillingGroupsRequest">ListChildBillingGroupsRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>rootId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Root parent Id. If not empty return all child billing group under the root parent.
-If both root and parent are empty returns all child billing groups under the MSP. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>parentId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Parent Id. If not empty return all child billing group under the parent only, 
-If both root and parent are empty returns all child billing groups under the MSP. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.ListCustomFieldRequest">ListCustomFieldRequest</h3>
         <p></p>
 
@@ -23989,6 +23956,39 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ReadChildBillingGroupsRequest">ReadChildBillingGroupsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>rootId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Root parent Id. If not empty return all child billing group under the root parent.
+If both root and parent are empty returns all child billing groups under the MSP. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>parentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Parent Id. If not empty return all child billing group under the parent only, 
+If both root and parent are empty returns all child billing groups under the MSP. </p></td>
                 </tr>
               
             </tbody>
@@ -27327,8 +27327,8 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
-                <td>ListChildBillingGroups</td>
-                <td><a href="#blueapi.billing.v1.ListChildBillingGroupsRequest">ListChildBillingGroupsRequest</a></td>
+                <td>ReadChildBillingGroups</td>
+                <td><a href="#blueapi.billing.v1.ReadChildBillingGroupsRequest">ReadChildBillingGroupsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</a> stream</td>
                 <td><p>Lists child billing groups under a specific filter</p></td>
               </tr>
@@ -27390,7 +27390,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               </tr>
             
               <tr>
-                <td>ListChildBillingGroupAccountInvoiceServiceDiscounts</td>
+                <td>ReadChildBillingGroupAccountInvoiceServiceDiscounts</td>
                 <td><a href="#blueapi.billing.v1.ListChildBillingGroupAccountInvoiceServiceDiscountsRequest">ListChildBillingGroupAccountInvoiceServiceDiscountsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.AccountInvoiceServiceDiscounts">AccountInvoiceServiceDiscounts</a> stream</td>
                 <td><p>Returns the account&#39;s service discounts associated with the child billing group id</p></td>
@@ -28645,7 +28645,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>CreateChildBillingGroup</td>
                 <td>POST</td>
-                <td>/v1/billinggroups/child</td>
+                <td>/v1/billinggroups/children</td>
                 <td>*</td>
               </tr>
               
@@ -28655,7 +28655,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetChildBillingGroup</td>
                 <td>GET</td>
-                <td>/v1/billinggroups/child/{internalId}</td>
+                <td>/v1/billinggroups/children/{internalId}</td>
                 <td></td>
               </tr>
               
@@ -28663,9 +28663,9 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               
               
               <tr>
-                <td>ListChildBillingGroups</td>
+                <td>ReadChildBillingGroups</td>
                 <td>POST</td>
-                <td>/v1/billinggroups/child:read</td>
+                <td>/v1/billinggroups/children:read</td>
                 <td>*</td>
               </tr>
               
@@ -28675,7 +28675,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>UpdateChildBillingGroup</td>
                 <td>PUT</td>
-                <td>/v1/billinggroups/child/{internalId}</td>
+                <td>/v1/billinggroups/children/{internalId}</td>
                 <td>*</td>
               </tr>
               
@@ -28685,7 +28685,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>DeleteChildBillingGroup</td>
                 <td>DELETE</td>
-                <td>/v1/billinggroups/child/{internalId}</td>
+                <td>/v1/billinggroups/children/{internalId}</td>
                 <td></td>
               </tr>
               
@@ -28695,7 +28695,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>UpdateChildBillingGroupInvoiceSettings</td>
                 <td>PUT</td>
-                <td>/v1/billinggroups/child/{internalId}/invoiceSettings</td>
+                <td>/v1/billinggroups/children/{internalId}/invoiceSettings</td>
                 <td>*</td>
               </tr>
               
@@ -28705,7 +28705,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>SetChildBillingGroupInvoiceServiceDiscounts</td>
                 <td>POST</td>
-                <td>/v1/billinggroups/child/{internalId}/servicediscounts</td>
+                <td>/v1/billinggroups/children/{internalId}/serviceDiscounts</td>
                 <td>*</td>
               </tr>
               
@@ -28715,7 +28715,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>SetChildBillingGroupAccountInvoiceServiceDiscounts</td>
                 <td>POST</td>
-                <td>/v1/billinggroups/child/{internalId}/servicediscounts:account</td>
+                <td>/v1/billinggroups/children/{internalId}/serviceDiscounts/accounts:set</td>
                 <td>*</td>
               </tr>
               
@@ -28725,7 +28725,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>SetChildBillingGroupCustomizedBillingService</td>
                 <td>POST</td>
-                <td>/v1/billinggroups/child/{internalId}/customizedbillingservice/{vendor}</td>
+                <td>/v1/billinggroups/children/{internalId}/customizedBillingService/{vendor}</td>
                 <td>*</td>
               </tr>
               
@@ -28735,7 +28735,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetChildBillingGroupCustomizedBillingService</td>
                 <td>GET</td>
-                <td>/v1/billinggroups/child/{internalId}/customizedbillingservice/{vendor}</td>
+                <td>/v1/billinggroups/children/{internalId}/customizedBillingService/{vendor}</td>
                 <td></td>
               </tr>
               
@@ -28745,7 +28745,7 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>GetChildBillingGroupInvoiceServiceDiscounts</td>
                 <td>GET</td>
-                <td>/v1/billinggroups/child/{internalId}/servicediscounts</td>
+                <td>/v1/billinggroups/children/{internalId}/serviceDiscounts</td>
                 <td></td>
               </tr>
               
@@ -28753,9 +28753,9 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               
               
               <tr>
-                <td>ListChildBillingGroupAccountInvoiceServiceDiscounts</td>
+                <td>ReadChildBillingGroupAccountInvoiceServiceDiscounts</td>
                 <td>GET</td>
-                <td>/v1/billinggroups/child/{internalId}/servicediscounts:account</td>
+                <td>/v1/billinggroups/children/{internalId}/serviceDiscounts/accounts:read</td>
                 <td></td>
               </tr>
               

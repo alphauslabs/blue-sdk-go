@@ -143,7 +143,7 @@ const (
 	Billing_GetCsvSettings_FullMethodName                                      = "/blueapi.billing.v1.Billing/GetCsvSettings"
 	Billing_CreateChildBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/CreateChildBillingGroup"
 	Billing_GetChildBillingGroup_FullMethodName                                = "/blueapi.billing.v1.Billing/GetChildBillingGroup"
-	Billing_ListChildBillingGroups_FullMethodName                              = "/blueapi.billing.v1.Billing/ListChildBillingGroups"
+	Billing_ReadChildBillingGroups_FullMethodName                              = "/blueapi.billing.v1.Billing/ReadChildBillingGroups"
 	Billing_UpdateChildBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/UpdateChildBillingGroup"
 	Billing_DeleteChildBillingGroup_FullMethodName                             = "/blueapi.billing.v1.Billing/DeleteChildBillingGroup"
 	Billing_UpdateChildBillingGroupInvoiceSettings_FullMethodName              = "/blueapi.billing.v1.Billing/UpdateChildBillingGroupInvoiceSettings"
@@ -152,7 +152,7 @@ const (
 	Billing_SetChildBillingGroupCustomizedBillingService_FullMethodName        = "/blueapi.billing.v1.Billing/SetChildBillingGroupCustomizedBillingService"
 	Billing_GetChildBillingGroupCustomizedBillingService_FullMethodName        = "/blueapi.billing.v1.Billing/GetChildBillingGroupCustomizedBillingService"
 	Billing_GetChildBillingGroupInvoiceServiceDiscounts_FullMethodName         = "/blueapi.billing.v1.Billing/GetChildBillingGroupInvoiceServiceDiscounts"
-	Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ListChildBillingGroupAccountInvoiceServiceDiscounts"
+	Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ReadChildBillingGroupAccountInvoiceServiceDiscounts"
 	Billing_BulkCreateBillingGroup_FullMethodName                              = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
 	Billing_GetBulkCreateBillingGroupJob_FullMethodName                        = "/blueapi.billing.v1.Billing/GetBulkCreateBillingGroupJob"
 	Billing_CreateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
@@ -419,7 +419,7 @@ type BillingClient interface {
 	// Gets child billing group info
 	GetChildBillingGroup(ctx context.Context, in *GetChildBillingGroupRequest, opts ...grpc.CallOption) (*GetChildBillingGroupResponse, error)
 	// Lists child billing groups under a specific filter
-	ListChildBillingGroups(ctx context.Context, in *ListChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupsClient, error)
+	ReadChildBillingGroups(ctx context.Context, in *ReadChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupsClient, error)
 	// Updates child billing group's basic info
 	UpdateChildBillingGroup(ctx context.Context, in *UpdateChildBillingGroupRequest, opts ...grpc.CallOption) (*UpdateChildBillingGroupResponse, error)
 	// Deletes all child billing group info
@@ -437,7 +437,7 @@ type BillingClient interface {
 	// Returns the service discount associated with the billing group id
 	GetChildBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *GetChildBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
 	// Returns the account's service discounts associated with the child billing group id
-	ListChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsClient, error)
+	ReadChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, error)
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
 	// Gets the status of a bulk create billing group job.
@@ -2298,13 +2298,13 @@ func (c *billingClient) GetChildBillingGroup(ctx context.Context, in *GetChildBi
 	return out, nil
 }
 
-func (c *billingClient) ListChildBillingGroups(ctx context.Context, in *ListChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupsClient, error) {
+func (c *billingClient) ReadChildBillingGroups(ctx context.Context, in *ReadChildBillingGroupsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[28], Billing_ListChildBillingGroups_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[28], Billing_ReadChildBillingGroups_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &billingListChildBillingGroupsClient{ClientStream: stream}
+	x := &billingReadChildBillingGroupsClient{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -2314,16 +2314,16 @@ func (c *billingClient) ListChildBillingGroups(ctx context.Context, in *ListChil
 	return x, nil
 }
 
-type Billing_ListChildBillingGroupsClient interface {
+type Billing_ReadChildBillingGroupsClient interface {
 	Recv() (*ChildBillingGroup, error)
 	grpc.ClientStream
 }
 
-type billingListChildBillingGroupsClient struct {
+type billingReadChildBillingGroupsClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingListChildBillingGroupsClient) Recv() (*ChildBillingGroup, error) {
+func (x *billingReadChildBillingGroupsClient) Recv() (*ChildBillingGroup, error) {
 	m := new(ChildBillingGroup)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -2434,13 +2434,13 @@ func (c *billingClient) GetChildBillingGroupInvoiceServiceDiscounts(ctx context.
 	return out, nil
 }
 
-func (c *billingClient) ListChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsClient, error) {
+func (c *billingClient) ReadChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[30], Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[30], Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &billingListChildBillingGroupAccountInvoiceServiceDiscountsClient{ClientStream: stream}
+	x := &billingReadChildBillingGroupAccountInvoiceServiceDiscountsClient{ClientStream: stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -2450,16 +2450,16 @@ func (c *billingClient) ListChildBillingGroupAccountInvoiceServiceDiscounts(ctx 
 	return x, nil
 }
 
-type Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsClient interface {
+type Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient interface {
 	Recv() (*AccountInvoiceServiceDiscounts, error)
 	grpc.ClientStream
 }
 
-type billingListChildBillingGroupAccountInvoiceServiceDiscountsClient struct {
+type billingReadChildBillingGroupAccountInvoiceServiceDiscountsClient struct {
 	grpc.ClientStream
 }
 
-func (x *billingListChildBillingGroupAccountInvoiceServiceDiscountsClient) Recv() (*AccountInvoiceServiceDiscounts, error) {
+func (x *billingReadChildBillingGroupAccountInvoiceServiceDiscountsClient) Recv() (*AccountInvoiceServiceDiscounts, error) {
 	m := new(AccountInvoiceServiceDiscounts)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -2826,7 +2826,7 @@ type BillingServer interface {
 	// Gets child billing group info
 	GetChildBillingGroup(context.Context, *GetChildBillingGroupRequest) (*GetChildBillingGroupResponse, error)
 	// Lists child billing groups under a specific filter
-	ListChildBillingGroups(*ListChildBillingGroupsRequest, Billing_ListChildBillingGroupsServer) error
+	ReadChildBillingGroups(*ReadChildBillingGroupsRequest, Billing_ReadChildBillingGroupsServer) error
 	// Updates child billing group's basic info
 	UpdateChildBillingGroup(context.Context, *UpdateChildBillingGroupRequest) (*UpdateChildBillingGroupResponse, error)
 	// Deletes all child billing group info
@@ -2844,7 +2844,7 @@ type BillingServer interface {
 	// Returns the service discount associated with the billing group id
 	GetChildBillingGroupInvoiceServiceDiscounts(context.Context, *GetChildBillingGroupInvoiceServiceDiscountsRequest) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
 	// Returns the account's service discounts associated with the child billing group id
-	ListChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsServer) error
+	ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error
 	// Create billing group in bulk from CSV file
 	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
 	// Gets the status of a bulk create billing group job.
@@ -3225,8 +3225,8 @@ func (UnimplementedBillingServer) CreateChildBillingGroup(context.Context, *Crea
 func (UnimplementedBillingServer) GetChildBillingGroup(context.Context, *GetChildBillingGroupRequest) (*GetChildBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildBillingGroup not implemented")
 }
-func (UnimplementedBillingServer) ListChildBillingGroups(*ListChildBillingGroupsRequest, Billing_ListChildBillingGroupsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListChildBillingGroups not implemented")
+func (UnimplementedBillingServer) ReadChildBillingGroups(*ReadChildBillingGroupsRequest, Billing_ReadChildBillingGroupsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadChildBillingGroups not implemented")
 }
 func (UnimplementedBillingServer) UpdateChildBillingGroup(context.Context, *UpdateChildBillingGroupRequest) (*UpdateChildBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChildBillingGroup not implemented")
@@ -3252,8 +3252,8 @@ func (UnimplementedBillingServer) GetChildBillingGroupCustomizedBillingService(*
 func (UnimplementedBillingServer) GetChildBillingGroupInvoiceServiceDiscounts(context.Context, *GetChildBillingGroupInvoiceServiceDiscountsRequest) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetChildBillingGroupInvoiceServiceDiscounts not implemented")
 }
-func (UnimplementedBillingServer) ListChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListChildBillingGroupAccountInvoiceServiceDiscounts not implemented")
+func (UnimplementedBillingServer) ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ListChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadChildBillingGroupAccountInvoiceServiceDiscounts not implemented")
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
@@ -5518,24 +5518,24 @@ func _Billing_GetChildBillingGroup_Handler(srv interface{}, ctx context.Context,
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Billing_ListChildBillingGroups_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListChildBillingGroupsRequest)
+func _Billing_ReadChildBillingGroups_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadChildBillingGroupsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(BillingServer).ListChildBillingGroups(m, &billingListChildBillingGroupsServer{ServerStream: stream})
+	return srv.(BillingServer).ReadChildBillingGroups(m, &billingReadChildBillingGroupsServer{ServerStream: stream})
 }
 
-type Billing_ListChildBillingGroupsServer interface {
+type Billing_ReadChildBillingGroupsServer interface {
 	Send(*ChildBillingGroup) error
 	grpc.ServerStream
 }
 
-type billingListChildBillingGroupsServer struct {
+type billingReadChildBillingGroupsServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingListChildBillingGroupsServer) Send(m *ChildBillingGroup) error {
+func (x *billingReadChildBillingGroupsServer) Send(m *ChildBillingGroup) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -5686,24 +5686,24 @@ func _Billing_GetChildBillingGroupInvoiceServiceDiscounts_Handler(srv interface{
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListChildBillingGroupAccountInvoiceServiceDiscountsRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(BillingServer).ListChildBillingGroupAccountInvoiceServiceDiscounts(m, &billingListChildBillingGroupAccountInvoiceServiceDiscountsServer{ServerStream: stream})
+	return srv.(BillingServer).ReadChildBillingGroupAccountInvoiceServiceDiscounts(m, &billingReadChildBillingGroupAccountInvoiceServiceDiscountsServer{ServerStream: stream})
 }
 
-type Billing_ListChildBillingGroupAccountInvoiceServiceDiscountsServer interface {
+type Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer interface {
 	Send(*AccountInvoiceServiceDiscounts) error
 	grpc.ServerStream
 }
 
-type billingListChildBillingGroupAccountInvoiceServiceDiscountsServer struct {
+type billingReadChildBillingGroupAccountInvoiceServiceDiscountsServer struct {
 	grpc.ServerStream
 }
 
-func (x *billingListChildBillingGroupAccountInvoiceServiceDiscountsServer) Send(m *AccountInvoiceServiceDiscounts) error {
+func (x *billingReadChildBillingGroupAccountInvoiceServiceDiscountsServer) Send(m *AccountInvoiceServiceDiscounts) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -6424,8 +6424,8 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ListChildBillingGroups",
-			Handler:       _Billing_ListChildBillingGroups_Handler,
+			StreamName:    "ReadChildBillingGroups",
+			Handler:       _Billing_ReadChildBillingGroups_Handler,
 			ServerStreams: true,
 		},
 		{
@@ -6434,8 +6434,8 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ListChildBillingGroupAccountInvoiceServiceDiscounts",
-			Handler:       _Billing_ListChildBillingGroupAccountInvoiceServiceDiscounts_Handler,
+			StreamName:    "ReadChildBillingGroupAccountInvoiceServiceDiscounts",
+			Handler:       _Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_Handler,
 			ServerStreams: true,
 		},
 		{
