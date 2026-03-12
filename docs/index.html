@@ -59551,17 +59551,24 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
             <tbody>
               
                 <tr>
-                  <td>id</td>
+                  <td>space_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the context id. </p></td>
+                  <td><p>Required. the space id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>context_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. the context id. </p></td>
                 </tr>
               
                 <tr>
                   <td>content</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The comment content. </p></td>
+                  <td><p>Required. The comment content. </p></td>
                 </tr>
               
             </tbody>
@@ -59582,17 +59589,24 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
             <tbody>
               
                 <tr>
+                  <td>space_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The space id. </p></td>
+                </tr>
+              
+                <tr>
                   <td>title</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The context title. </p></td>
+                  <td><p>Required. The context title. </p></td>
                 </tr>
               
                 <tr>
                   <td>content</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>The context content. </p></td>
+                  <td><p>Required. The context content. </p></td>
                 </tr>
               
             </tbody>
@@ -59654,14 +59668,21 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td>name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the space name. </p></td>
+                  <td><p>Required. the space name. </p></td>
                 </tr>
               
                 <tr>
                   <td>description</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the space description. </p></td>
+                  <td><p>Optional. the space description. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>members</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. the member ids. </p></td>
                 </tr>
               
             </tbody>
@@ -59685,14 +59706,21 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the context id. </p></td>
+                  <td><p>Required. the comment id. </p></td>
                 </tr>
               
                 <tr>
-                  <td>commentId</td>
+                  <td>space_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the context comment id. </p></td>
+                  <td><p>Required. the space id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>context_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. the context id. </p></td>
                 </tr>
               
             </tbody>
@@ -59716,7 +59744,14 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the context id. </p></td>
+                  <td><p>Required. the context id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>space_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The space id. </p></td>
                 </tr>
               
             </tbody>
@@ -59765,6 +59800,14 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>the context id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. field_mask
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
                 </tr>
               
             </tbody>
@@ -59829,6 +59872,14 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td><p>the space id. </p></td>
                 </tr>
               
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. field_mask
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -59840,6 +59891,23 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
         <p>Request message for the Luster.ReadContexts rpc.</p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. field_mask </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -59847,6 +59915,24 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
         <p>Request message for the Luster.ReadSpaces rpc.</p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. field_mask
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -59864,14 +59950,36 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the context id. </p></td>
+                  <td><p>Required. the comment id. </p></td>
                 </tr>
               
                 <tr>
-                  <td>commentId</td>
+                  <td>space_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the context comment id. </p></td>
+                  <td><p>Required. the space id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>context_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. the context id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The comment content. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Required.
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
                 </tr>
               
             </tbody>
@@ -59895,7 +60003,36 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the context id. </p></td>
+                  <td><p>Required. the context id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>space_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The space id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>title</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The context title. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>content</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The context content. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Required.
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
                 </tr>
               
             </tbody>
@@ -59919,7 +60056,36 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>the space id. </p></td>
+                  <td><p>Required. the space id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. the space name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. the space description. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>members</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. the member ids. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>update_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Required.
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
                 </tr>
               
             </tbody>
@@ -59987,8 +60153,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                 <td>ReadContexts</td>
                 <td><a href="#blueapi.luster.v1.ReadContextsRequest">ReadContextsRequest</a></td>
                 <td><a href="#blueapi.api.luster.Context">.blueapi.api.luster.Context</a> stream</td>
-                <td><p>(ALPHA) Reads contexts.
-スペースの読み取り。</p></td>
+                <td><p>(ALPHA) Reads contexts.</p></td>
               </tr>
             
               <tr>
@@ -60120,7 +60285,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>ReadContexts</td>
                 <td>POST</td>
-                <td>/v1/contexts:read</td>
+                <td>/v1/contexts/{space_id}:read</td>
                 <td>*</td>
               </tr>
               
@@ -60130,7 +60295,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>GetContext</td>
                 <td>GET</td>
-                <td>/v1/contexts/{id}</td>
+                <td>/v1/contexts/{space_id}/{id}</td>
                 <td></td>
               </tr>
               
@@ -60140,7 +60305,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>CreateContext</td>
                 <td>POST</td>
-                <td>/v1/contexts</td>
+                <td>/v1/contexts/{space_id}</td>
                 <td>*</td>
               </tr>
               
@@ -60150,7 +60315,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>UpdateContext</td>
                 <td>PUT</td>
-                <td>/v1/contexts/{id}</td>
+                <td>/v1/contexts/{space_id}/{id}</td>
                 <td>*</td>
               </tr>
               
@@ -60160,7 +60325,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>DeleteContext</td>
                 <td>DELETE</td>
-                <td>/v1/contexts/{id}</td>
+                <td>/v1/contexts/{space_id}/{id}</td>
                 <td></td>
               </tr>
               
@@ -60170,7 +60335,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>CreateContextComment</td>
                 <td>POST</td>
-                <td>/v1/contexts/{id}/comment</td>
+                <td>/v1/contexts/{space_id}/{context_id}/comment</td>
                 <td>*</td>
               </tr>
               
@@ -60180,7 +60345,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>UpdateContextComment</td>
                 <td>PUT</td>
-                <td>/v1/contexts/{id}/comment/{commentId}</td>
+                <td>/v1/contexts/{space_id}/{context_id}/comment/{id}</td>
                 <td>*</td>
               </tr>
               
@@ -60190,7 +60355,7 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
               <tr>
                 <td>DeleteContextComment</td>
                 <td>DELETE</td>
-                <td>/v1/contexts/{id}/comment/{commentId}</td>
+                <td>/v1/contexts/{space_id}/{context_id}/comment/{id}</td>
                 <td></td>
               </tr>
               

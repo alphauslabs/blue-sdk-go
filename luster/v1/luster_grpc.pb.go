@@ -59,7 +59,6 @@ type LusterClient interface {
 	// スペースの削除。 削除する場合はスペース内で作成したコンテクストも削除され閲覧できなくなります。
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// (ALPHA) Reads contexts.
-	// スペースの読み取り。
 	ReadContexts(ctx context.Context, in *ReadContextsRequest, opts ...grpc.CallOption) (Luster_ReadContextsClient, error)
 	// (ALPHA) Gets context.
 	GetContext(ctx context.Context, in *GetContextRequest, opts ...grpc.CallOption) (*GetContextResponse, error)
@@ -295,7 +294,6 @@ type LusterServer interface {
 	// スペースの削除。 削除する場合はスペース内で作成したコンテクストも削除され閲覧できなくなります。
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error)
 	// (ALPHA) Reads contexts.
-	// スペースの読み取り。
 	ReadContexts(*ReadContextsRequest, Luster_ReadContextsServer) error
 	// (ALPHA) Gets context.
 	GetContext(context.Context, *GetContextRequest) (*GetContextResponse, error)
