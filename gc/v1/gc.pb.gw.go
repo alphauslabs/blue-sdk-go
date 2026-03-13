@@ -365,6 +365,9 @@ func request_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0(ctx contex
 		protoReq GetUpdatedPurchasePlansBySegmentRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
@@ -377,6 +380,9 @@ func local_request_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0(ctx 
 		protoReq GetUpdatedPurchasePlansBySegmentRequest
 		metadata runtime.ServerMetadata
 	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
 	msg, err := server.GetUpdatedPurchasePlansBySegment(ctx, &protoReq)
 	return msg, metadata, err
 }
@@ -1051,13 +1057,13 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 		}
 		forward_GuaranteedCommitments_ListPurchasePlansBySegment_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		var stream runtime.ServerTransportStream
 		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/updated"))
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans:update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1584,11 +1590,11 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		}
 		forward_GuaranteedCommitments_ListPurchasePlansBySegment_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
-	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+	mux.Handle(http.MethodPost, pattern_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
 		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
-		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans/updated"))
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment", runtime.WithHTTPPathPattern("/v1/commitments/purchaseplans:update"))
 		if err != nil {
 			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
 			return
@@ -1886,7 +1892,7 @@ var (
 	pattern_GuaranteedCommitments_ListResources_0                      = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "resources"}, ""))
 	pattern_GuaranteedCommitments_GetResourceDailyUsage_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 2, 3}, []string{"v1", "resources", "resourceId", "dailyusage"}, ""))
 	pattern_GuaranteedCommitments_ListPurchasePlansBySegment_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitments", "purchaseplans"}, ""))
-	pattern_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "commitments", "purchaseplans", "updated"}, ""))
+	pattern_GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_0   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "commitments", "purchaseplans"}, "update"))
 	pattern_GuaranteedCommitments_GetPurchasePlansDetails_0            = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "commitments", "purchaseplans", "planId"}, ""))
 	pattern_GuaranteedCommitments_SaveCommitmentsPlanAsDraft_0         = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "commitments", "purchaseplans", "draft", "planId"}, ""))
 	pattern_GuaranteedCommitments_ListDraftPurchasePlans_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "commitments", "purchaseplans", "draft"}, ""))
