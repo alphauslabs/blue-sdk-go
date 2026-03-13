@@ -18018,6 +18018,13 @@ At the moment, only `aws` is supported. </p></td>
                 </tr>
               
                 <tr>
+                  <td>hasChild</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Indicates if this billing group has child billing groups. AWS only for now. </p></td>
+                </tr>
+              
+                <tr>
                   <td>billingGroupInfo</td>
                   <td><a href="#blueapi.api.ripple.BillingGroupInfo">blueapi.api.ripple.BillingGroupInfo</a></td>
                   <td></td>
@@ -18672,21 +18679,30 @@ Useful for validating CSV format and data before performing the actual bulk oper
                   <td>basicInformation</td>
                   <td><a href="#blueapi.billing.v1.ChildBillingGroupBasicInformation">ChildBillingGroupBasicInformation</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Basic information for the child billing group. </p></td>
                 </tr>
               
                 <tr>
                   <td>invoiceSettings</td>
                   <td><a href="#blueapi.billing.v1.ChildBillingGroupInvoiceSettings">ChildBillingGroupInvoiceSettings</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Required. Invoice settings for the child billing group. </p></td>
                 </tr>
               
                 <tr>
                   <td>billingInfo</td>
                   <td><a href="#blueapi.api.ripple.BillingGroupInfo">blueapi.api.ripple.BillingGroupInfo</a></td>
                   <td></td>
-                  <td><p>AccountInvoiceServiceDiscounts serviceDiscounts = 3; </p></td>
+                  <td><p>Required. Billing info for the child billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasChild</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Indicates whether this child billing group has another child under it.
+
+AccountInvoiceServiceDiscounts serviceDiscounts = 3; </p></td>
                 </tr>
               
             </tbody>
