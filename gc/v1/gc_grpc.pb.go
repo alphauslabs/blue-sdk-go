@@ -28,6 +28,7 @@ const (
 	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
 	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
+	GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment"
 	GuaranteedCommitments_GetPurchasePlansDetails_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlansDetails"
 	GuaranteedCommitments_SaveCommitmentsPlanAsDraft_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/SaveCommitmentsPlanAsDraft"
 	GuaranteedCommitments_ListDraftPurchasePlans_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ListDraftPurchasePlans"
@@ -70,6 +71,8 @@ type GuaranteedCommitmentsClient interface {
 	GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error)
 	// WORK-IN-PROGRESS: Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error)
+	// WORK-IN-PROGRESS: Get the updated details of the plan after the apply plan.
+	GetUpdatedPurchasePlansBySegment(ctx context.Context, in *GetUpdatedPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*GetUpdatedPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Retrieves full details of a specific purchase plan of a company.
 	// Includes the basic info, detailed metrics, commitment line items, covered infrastructure resource matches, and audit history.
 	GetPurchasePlansDetails(ctx context.Context, in *GetPurchasePlansDetailsRequest, opts ...grpc.CallOption) (*GetPurchasePlansDetailsResponse, error)
@@ -226,6 +229,16 @@ func (c *guaranteedCommitmentsClient) ListPurchasePlansBySegment(ctx context.Con
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPurchasePlansBySegmentResponse)
 	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetUpdatedPurchasePlansBySegment(ctx context.Context, in *GetUpdatedPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*GetUpdatedPurchasePlansBySegmentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetUpdatedPurchasePlansBySegmentResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -416,6 +429,8 @@ type GuaranteedCommitmentsServer interface {
 	GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error)
 	// WORK-IN-PROGRESS: Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error)
+	// WORK-IN-PROGRESS: Get the updated details of the plan after the apply plan.
+	GetUpdatedPurchasePlansBySegment(context.Context, *GetUpdatedPurchasePlansBySegmentRequest) (*GetUpdatedPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Retrieves full details of a specific purchase plan of a company.
 	// Includes the basic info, detailed metrics, commitment line items, covered infrastructure resource matches, and audit history.
 	GetPurchasePlansDetails(context.Context, *GetPurchasePlansDetailsRequest) (*GetPurchasePlansDetailsResponse, error)
@@ -488,6 +503,9 @@ func (UnimplementedGuaranteedCommitmentsServer) GetResourceDailyUsage(context.Co
 }
 func (UnimplementedGuaranteedCommitmentsServer) ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPurchasePlansBySegment not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetUpdatedPurchasePlansBySegment(context.Context, *GetUpdatedPurchasePlansBySegmentRequest) (*GetUpdatedPurchasePlansBySegmentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetUpdatedPurchasePlansBySegment not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetPurchasePlansDetails(context.Context, *GetPurchasePlansDetailsRequest) (*GetPurchasePlansDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPurchasePlansDetails not implemented")
@@ -711,6 +729,24 @@ func _GuaranteedCommitments_ListPurchasePlansBySegment_Handler(srv interface{}, 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuaranteedCommitmentsServer).ListPurchasePlansBySegment(ctx, req.(*ListPurchasePlansBySegmentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetUpdatedPurchasePlansBySegmentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetUpdatedPurchasePlansBySegment(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetUpdatedPurchasePlansBySegment(ctx, req.(*GetUpdatedPurchasePlansBySegmentRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1041,6 +1077,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListPurchasePlansBySegment",
 			Handler:    _GuaranteedCommitments_ListPurchasePlansBySegment_Handler,
+		},
+		{
+			MethodName: "GetUpdatedPurchasePlansBySegment",
+			Handler:    _GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_Handler,
 		},
 		{
 			MethodName: "GetPurchasePlansDetails",

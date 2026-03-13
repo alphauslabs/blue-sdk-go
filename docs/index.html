@@ -4639,6 +4639,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentRequest"><span class="badge">M</span>GetUpdatedPurchasePlansBySegmentRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentResponse"><span class="badge">M</span>GetUpdatedPurchasePlansBySegmentResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.Lease"><span class="badge">M</span>Lease</a>
                 </li>
               
@@ -56257,6 +56265,37 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
 
         
       
+        <h3 id="blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentRequest">GetUpdatedPurchasePlansBySegmentRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentResponse">GetUpdatedPurchasePlansBySegmentResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>plans</td>
+                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.Lease">Lease</h3>
         <p></p>
 
@@ -59155,6 +59194,13 @@ If empty =&gt; MSP-level org (2nd layer). </p></td>
               </tr>
             
               <tr>
+                <td>GetUpdatedPurchasePlansBySegment</td>
+                <td><a href="#blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentRequest">GetUpdatedPurchasePlansBySegmentRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentResponse">GetUpdatedPurchasePlansBySegmentResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Get the updated details of the plan after the apply plan.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetPurchasePlansDetails</td>
                 <td><a href="#blueapi.gc.v1.GetPurchasePlansDetailsRequest">GetPurchasePlansDetailsRequest</a></td>
                 <td><a href="#blueapi.gc.v1.GetPurchasePlansDetailsResponse">GetPurchasePlansDetailsResponse</a></td>
@@ -59380,6 +59426,16 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                 <td>ListPurchasePlansBySegment</td>
                 <td>GET</td>
                 <td>/v1/commitments/purchaseplans</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetUpdatedPurchasePlansBySegment</td>
+                <td>GET</td>
+                <td>/v1/commitments/purchaseplans/updated</td>
                 <td></td>
               </tr>
               
