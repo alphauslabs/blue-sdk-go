@@ -1374,11 +1374,11 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest"><span class="badge">M</span>BulkCreateBillingGroupRequest</a>
+                  <a href="#blueapi.billing.v1.BulkCreateBillingGroupMetadata"><span class="badge">M</span>BulkCreateBillingGroupMetadata</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse"><span class="badge">M</span>BulkCreateBillingGroupResponse</a>
+                  <a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest"><span class="badge">M</span>BulkCreateBillingGroupRequest</a>
                 </li>
               
                 <li>
@@ -1386,11 +1386,11 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.BulkLinkAccountRequest"><span class="badge">M</span>BulkLinkAccountRequest</a>
+                  <a href="#blueapi.billing.v1.BulkLinkAccountMetadata"><span class="badge">M</span>BulkLinkAccountMetadata</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.BulkLinkAccountResponse"><span class="badge">M</span>BulkLinkAccountResponse</a>
+                  <a href="#blueapi.billing.v1.BulkLinkAccountRequest"><span class="badge">M</span>BulkLinkAccountRequest</a>
                 </li>
               
                 <li>
@@ -1695,22 +1695,6 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.GetBillingSettingResponse"><span class="badge">M</span>GetBillingSettingResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobRequest"><span class="badge">M</span>GetBulkCreateBillingGroupJobRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobResponse"><span class="badge">M</span>GetBulkCreateBillingGroupJobResponse</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.GetBulkLinkAccountJobRequest"><span class="badge">M</span>GetBulkLinkAccountJobRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.GetBulkLinkAccountJobResponse"><span class="badge">M</span>GetBulkLinkAccountJobResponse</a>
                 </li>
               
                 <li>
@@ -18442,7 +18426,7 @@ At the moment, only `aws` is supported. </p></td>
                   <td>index</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>The index of the request failed (zero-based). </p></td>
+                  <td><p>The index of the row that failed (zero-based). </p></td>
                 </tr>
               
                 <tr>
@@ -18466,6 +18450,79 @@ At the moment, only `aws` is supported. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.BulkCreateBillingGroupMetadata">BulkCreateBillingGroupMetadata</h3>
+        <p>Metadata for the BulkCreateBillingGroup long-running operation.</p><p>Stored in protos.Operation.metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of billing groups to create. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processedCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of billing groups processed so far. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>successCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of billing groups successfully created. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of billing groups that failed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupError">BulkCreateBillingGroupError</a></td>
+                  <td>repeated</td>
+                  <td><p>Details of failed billing groups. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job start timestamp (RFC 3339). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job end timestamp. Empty if still running. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</h3>
         <p></p>
 
@@ -18475,6 +18532,14 @@ At the moment, only `aws` is supported. </p></td>
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The cloud vendor for all billing groups in this CSV.
+Must be one of: aws, azure, gcp. </p></td>
+                </tr>
               
                 <tr>
                   <td>csvContent</td>
@@ -18503,44 +18568,6 @@ At the moment, only `aws` is supported. </p></td>
                   <td></td>
                   <td><p>Optional. If true, validate the CSV and check for errors without actually creating billing groups.
 Useful for validating CSV format and data before performing the actual bulk creation. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>billingGroups</td>
-                  <td><a href="#blueapi.billing.v1.BillingGroup">BillingGroup</a></td>
-                  <td>repeated</td>
-                  <td><p>List of billing groups created in bulk. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>errors</td>
-                  <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupError">BulkCreateBillingGroupError</a></td>
-                  <td>repeated</td>
-                  <td><p>If an error occurs for a specific billing group, it will be included here. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>jobId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The job ID for polling status via GetBulkCreateBillingGroupJob. </p></td>
                 </tr>
               
             </tbody>
@@ -18595,6 +18622,79 @@ Useful for validating CSV format and data before performing the actual bulk crea
 
         
       
+        <h3 id="blueapi.billing.v1.BulkLinkAccountMetadata">BulkLinkAccountMetadata</h3>
+        <p>Metadata for the BulkLinkAccount long-running operation.</p><p>Stored in protos.Operation.metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of account-link entries to process. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processedCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries processed so far. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>successCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries successfully linked. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries that failed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#blueapi.billing.v1.BulkLinkAccountError">BulkLinkAccountError</a></td>
+                  <td>repeated</td>
+                  <td><p>Details of failed entries. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job start timestamp (RFC 3339 / ISO 8601). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job end timestamp. Empty if still running. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BulkLinkAccountRequest">BulkLinkAccountRequest</h3>
         <p></p>
 
@@ -18640,37 +18740,6 @@ Must be one of: aws, azure, gcp. </p></td>
                   <td></td>
                   <td><p>Optional. If true, validate the CSV and check for errors without actually linking accounts.
 Useful for validating CSV format and data before performing the actual bulk operation. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.BulkLinkAccountResponse">BulkLinkAccountResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>jobId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The job ID for polling status via GetBulkLinkAccountJob. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Initial status of the job (&#34;pending&#34;). </p></td>
                 </tr>
               
             </tbody>
@@ -21722,228 +21791,6 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p>List of available currency. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.GetBulkCreateBillingGroupJobRequest">GetBulkCreateBillingGroupJobRequest</h3>
-        <p>Request message for the GetBulkCreateBillingGroupJob rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>jobId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. The job ID returned by BulkCreateBillingGroup. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.GetBulkCreateBillingGroupJobResponse">GetBulkCreateBillingGroupJobResponse</h3>
-        <p>Response message for the GetBulkCreateBillingGroupJob rpc.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>jobId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The job ID. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>totalCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Total number of billing groups to create. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>processedCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Number of billing groups processed so far. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>successCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Number of billing groups successfully created. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>failureCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Number of billing groups that failed. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>errors</td>
-                  <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupError">BulkCreateBillingGroupError</a></td>
-                  <td>repeated</td>
-                  <td><p>Details of failed billing groups (reuses existing BulkCreateBillingGroupError). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>startTime</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Job start timestamp. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>endTime</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Job end timestamp. Empty if still running. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>message</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional status message. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.GetBulkLinkAccountJobRequest">GetBulkLinkAccountJobRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>jobId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. The job ID returned by BulkLinkAccount. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.GetBulkLinkAccountJobResponse">GetBulkLinkAccountJobResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>jobId</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The job ID. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>totalCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Total number of account-link entries to process. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>processedCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Number of entries processed so far. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>successCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Number of entries successfully linked. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>failureCount</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p>Number of entries that failed. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>errors</td>
-                  <td><a href="#blueapi.billing.v1.BulkLinkAccountError">BulkLinkAccountError</a></td>
-                  <td>repeated</td>
-                  <td><p>Details of failed entries. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>startTime</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Job start timestamp (RFC 3339 / ISO 8601). </p></td>
-                </tr>
-              
-                <tr>
-                  <td>endTime</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Job end timestamp. Empty if still running. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>message</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional human-readable status message. </p></td>
                 </tr>
               
             </tbody>
@@ -27423,15 +27270,9 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>BulkCreateBillingGroup</td>
                 <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupRequest">BulkCreateBillingGroupRequest</a></td>
-                <td><a href="#blueapi.billing.v1.BulkCreateBillingGroupResponse">BulkCreateBillingGroupResponse</a> stream</td>
-                <td><p>Create billing group in bulk from CSV file</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetBulkCreateBillingGroupJob</td>
-                <td><a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobRequest">GetBulkCreateBillingGroupJobRequest</a></td>
-                <td><a href="#blueapi.billing.v1.GetBulkCreateBillingGroupJobResponse">GetBulkCreateBillingGroupJobResponse</a></td>
-                <td><p>Gets the status of a bulk create billing group job.</p></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
+                <td><p>Create billing group in bulk from CSV file.
+Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).</p></td>
               </tr>
             
               <tr>
@@ -27465,15 +27306,9 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>BulkLinkAccount</td>
                 <td><a href="#blueapi.billing.v1.BulkLinkAccountRequest">BulkLinkAccountRequest</a></td>
-                <td><a href="#blueapi.billing.v1.BulkLinkAccountResponse">BulkLinkAccountResponse</a></td>
-                <td><p>Link accounts to a billing group in bulk from a CSV file.</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetBulkLinkAccountJob</td>
-                <td><a href="#blueapi.billing.v1.GetBulkLinkAccountJobRequest">GetBulkLinkAccountJobRequest</a></td>
-                <td><a href="#blueapi.billing.v1.GetBulkLinkAccountJobResponse">GetBulkLinkAccountJobResponse</a></td>
-                <td><p>Gets the status of a bulk link account job.</p></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
+                <td><p>Link accounts to a billing group in bulk from a CSV file.
+Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).</p></td>
               </tr>
             
           </tbody>
@@ -28797,16 +28632,6 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               
               
               <tr>
-                <td>GetBulkCreateBillingGroupJob</td>
-                <td>GET</td>
-                <td>/v1/billinggroups:bulkCreate/{jobId}</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
                 <td>CreateExcludeServiceEntry</td>
                 <td>POST</td>
                 <td>/v1/billinggroups/exclude-service-settings</td>
@@ -28851,16 +28676,6 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>POST</td>
                 <td>/v1/billinggroups:bulkLinkAccount</td>
                 <td>*</td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetBulkLinkAccountJob</td>
-                <td>GET</td>
-                <td>/v1/billinggroups/bulklinkaccountjobs/{jobId}</td>
-                <td></td>
               </tr>
               
             

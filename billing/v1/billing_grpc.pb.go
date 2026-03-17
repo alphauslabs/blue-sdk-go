@@ -12,6 +12,7 @@ import (
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	v1 "github.com/alphauslabs/blue-sdk-go/api/ripple/v1"
 	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
+	protos "github.com/alphauslabs/blue-internal-go/protos"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -154,13 +155,11 @@ const (
 	Billing_GetChildBillingGroupInvoiceServiceDiscounts_FullMethodName         = "/blueapi.billing.v1.Billing/GetChildBillingGroupInvoiceServiceDiscounts"
 	Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ReadChildBillingGroupAccountInvoiceServiceDiscounts"
 	Billing_BulkCreateBillingGroup_FullMethodName                              = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
-	Billing_GetBulkCreateBillingGroupJob_FullMethodName                        = "/blueapi.billing.v1.Billing/GetBulkCreateBillingGroupJob"
 	Billing_CreateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
 	Billing_UpdateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
 	Billing_DeleteExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
 	Billing_ListExcludeServices_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListExcludeServices"
 	Billing_BulkLinkAccount_FullMethodName                                     = "/blueapi.billing.v1.Billing/BulkLinkAccount"
-	Billing_GetBulkLinkAccountJob_FullMethodName                               = "/blueapi.billing.v1.Billing/GetBulkLinkAccountJob"
 )
 
 // BillingClient is the client API for Billing service.
@@ -438,10 +437,9 @@ type BillingClient interface {
 	GetChildBillingGroupInvoiceServiceDiscounts(ctx context.Context, in *GetChildBillingGroupInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
 	// Returns the account's service discounts associated with the child billing group id
 	ReadChildBillingGroupAccountInvoiceServiceDiscounts(ctx context.Context, in *ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest, opts ...grpc.CallOption) (Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsClient, error)
-	// Create billing group in bulk from CSV file
-	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error)
-	// Gets the status of a bulk create billing group job.
-	GetBulkCreateBillingGroupJob(ctx context.Context, in *GetBulkCreateBillingGroupJobRequest, opts ...grpc.CallOption) (*GetBulkCreateBillingGroupJobResponse, error)
+	// Create billing group in bulk from CSV file.
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error)
 	// Update Exclude Service Entry
@@ -451,9 +449,8 @@ type BillingClient interface {
 	// List Exclude Service Entries
 	ListExcludeServices(ctx context.Context, in *ListExcludeServicesRequest, opts ...grpc.CallOption) (*ListExcludeServicesResponse, error)
 	// Link accounts to a billing group in bulk from a CSV file.
-	BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*BulkLinkAccountResponse, error)
-	// Gets the status of a bulk link account job.
-	GetBulkLinkAccountJob(ctx context.Context, in *GetBulkLinkAccountJobRequest, opts ...grpc.CallOption) (*GetBulkLinkAccountJobResponse, error)
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 }
 
 type billingClient struct {
@@ -2467,43 +2464,10 @@ func (x *billingReadChildBillingGroupAccountInvoiceServiceDiscountsClient) Recv(
 	return m, nil
 }
 
-func (c *billingClient) BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (Billing_BulkCreateBillingGroupClient, error) {
+func (c *billingClient) BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[31], Billing_BulkCreateBillingGroup_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &billingBulkCreateBillingGroupClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Billing_BulkCreateBillingGroupClient interface {
-	Recv() (*BulkCreateBillingGroupResponse, error)
-	grpc.ClientStream
-}
-
-type billingBulkCreateBillingGroupClient struct {
-	grpc.ClientStream
-}
-
-func (x *billingBulkCreateBillingGroupClient) Recv() (*BulkCreateBillingGroupResponse, error) {
-	m := new(BulkCreateBillingGroupResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *billingClient) GetBulkCreateBillingGroupJob(ctx context.Context, in *GetBulkCreateBillingGroupJobRequest, opts ...grpc.CallOption) (*GetBulkCreateBillingGroupJobResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBulkCreateBillingGroupJobResponse)
-	err := c.cc.Invoke(ctx, Billing_GetBulkCreateBillingGroupJob_FullMethodName, in, out, cOpts...)
+	out := new(protos.Operation)
+	err := c.cc.Invoke(ctx, Billing_BulkCreateBillingGroup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2550,20 +2514,10 @@ func (c *billingClient) ListExcludeServices(ctx context.Context, in *ListExclude
 	return out, nil
 }
 
-func (c *billingClient) BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*BulkLinkAccountResponse, error) {
+func (c *billingClient) BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(BulkLinkAccountResponse)
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Billing_BulkLinkAccount_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *billingClient) GetBulkLinkAccountJob(ctx context.Context, in *GetBulkLinkAccountJobRequest, opts ...grpc.CallOption) (*GetBulkLinkAccountJobResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetBulkLinkAccountJobResponse)
-	err := c.cc.Invoke(ctx, Billing_GetBulkLinkAccountJob_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2845,10 +2799,9 @@ type BillingServer interface {
 	GetChildBillingGroupInvoiceServiceDiscounts(context.Context, *GetChildBillingGroupInvoiceServiceDiscountsRequest) (*GetChildBillingGroupInvoiceServiceDiscountsResponse, error)
 	// Returns the account's service discounts associated with the child billing group id
 	ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error
-	// Create billing group in bulk from CSV file
-	BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error
-	// Gets the status of a bulk create billing group job.
-	GetBulkCreateBillingGroupJob(context.Context, *GetBulkCreateBillingGroupJobRequest) (*GetBulkCreateBillingGroupJobResponse, error)
+	// Create billing group in bulk from CSV file.
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkCreateBillingGroup(context.Context, *BulkCreateBillingGroupRequest) (*protos.Operation, error)
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error)
 	// Update Exclude Service Entry
@@ -2858,9 +2811,8 @@ type BillingServer interface {
 	// List Exclude Service Entries
 	ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error)
 	// Link accounts to a billing group in bulk from a CSV file.
-	BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*BulkLinkAccountResponse, error)
-	// Gets the status of a bulk link account job.
-	GetBulkLinkAccountJob(context.Context, *GetBulkLinkAccountJobRequest) (*GetBulkLinkAccountJobResponse, error)
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*protos.Operation, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -3255,11 +3207,8 @@ func (UnimplementedBillingServer) GetChildBillingGroupInvoiceServiceDiscounts(co
 func (UnimplementedBillingServer) ReadChildBillingGroupAccountInvoiceServiceDiscounts(*ReadChildBillingGroupAccountInvoiceServiceDiscountsRequest, Billing_ReadChildBillingGroupAccountInvoiceServiceDiscountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadChildBillingGroupAccountInvoiceServiceDiscounts not implemented")
 }
-func (UnimplementedBillingServer) BulkCreateBillingGroup(*BulkCreateBillingGroupRequest, Billing_BulkCreateBillingGroupServer) error {
-	return status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
-}
-func (UnimplementedBillingServer) GetBulkCreateBillingGroupJob(context.Context, *GetBulkCreateBillingGroupJobRequest) (*GetBulkCreateBillingGroupJobResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBulkCreateBillingGroupJob not implemented")
+func (UnimplementedBillingServer) BulkCreateBillingGroup(context.Context, *BulkCreateBillingGroupRequest) (*protos.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateExcludeServiceEntry not implemented")
@@ -3273,11 +3222,8 @@ func (UnimplementedBillingServer) DeleteExcludeServiceEntry(context.Context, *De
 func (UnimplementedBillingServer) ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListExcludeServices not implemented")
 }
-func (UnimplementedBillingServer) BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*BulkLinkAccountResponse, error) {
+func (UnimplementedBillingServer) BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BulkLinkAccount not implemented")
-}
-func (UnimplementedBillingServer) GetBulkLinkAccountJob(context.Context, *GetBulkLinkAccountJobRequest) (*GetBulkLinkAccountJobResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetBulkLinkAccountJob not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -5707,41 +5653,20 @@ func (x *billingReadChildBillingGroupAccountInvoiceServiceDiscountsServer) Send(
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Billing_BulkCreateBillingGroup_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(BulkCreateBillingGroupRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(BillingServer).BulkCreateBillingGroup(m, &billingBulkCreateBillingGroupServer{ServerStream: stream})
-}
-
-type Billing_BulkCreateBillingGroupServer interface {
-	Send(*BulkCreateBillingGroupResponse) error
-	grpc.ServerStream
-}
-
-type billingBulkCreateBillingGroupServer struct {
-	grpc.ServerStream
-}
-
-func (x *billingBulkCreateBillingGroupServer) Send(m *BulkCreateBillingGroupResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Billing_GetBulkCreateBillingGroupJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBulkCreateBillingGroupJobRequest)
+func _Billing_BulkCreateBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BulkCreateBillingGroupRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(BillingServer).GetBulkCreateBillingGroupJob(ctx, in)
+		return srv.(BillingServer).BulkCreateBillingGroup(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Billing_GetBulkCreateBillingGroupJob_FullMethodName,
+		FullMethod: Billing_BulkCreateBillingGroup_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).GetBulkCreateBillingGroupJob(ctx, req.(*GetBulkCreateBillingGroupJobRequest))
+		return srv.(BillingServer).BulkCreateBillingGroup(ctx, req.(*BulkCreateBillingGroupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5832,24 +5757,6 @@ func _Billing_BulkLinkAccount_Handler(srv interface{}, ctx context.Context, dec 
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(BillingServer).BulkLinkAccount(ctx, req.(*BulkLinkAccountRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Billing_GetBulkLinkAccountJob_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetBulkLinkAccountJobRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BillingServer).GetBulkLinkAccountJob(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Billing_GetBulkLinkAccountJob_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).GetBulkLinkAccountJob(ctx, req.(*GetBulkLinkAccountJobRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6254,8 +6161,8 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Billing_GetChildBillingGroupInvoiceServiceDiscounts_Handler,
 		},
 		{
-			MethodName: "GetBulkCreateBillingGroupJob",
-			Handler:    _Billing_GetBulkCreateBillingGroupJob_Handler,
+			MethodName: "BulkCreateBillingGroup",
+			Handler:    _Billing_BulkCreateBillingGroup_Handler,
 		},
 		{
 			MethodName: "CreateExcludeServiceEntry",
@@ -6276,10 +6183,6 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BulkLinkAccount",
 			Handler:    _Billing_BulkLinkAccount_Handler,
-		},
-		{
-			MethodName: "GetBulkLinkAccountJob",
-			Handler:    _Billing_GetBulkLinkAccountJob_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
@@ -6436,11 +6339,6 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadChildBillingGroupAccountInvoiceServiceDiscounts",
 			Handler:       _Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "BulkCreateBillingGroup",
-			Handler:       _Billing_BulkCreateBillingGroup_Handler,
 			ServerStreams: true,
 		},
 	},
