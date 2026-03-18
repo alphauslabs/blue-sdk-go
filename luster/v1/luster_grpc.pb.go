@@ -35,6 +35,8 @@ const (
 	Luster_UpdateContextComment_FullMethodName = "/blueapi.luster.v1.Luster/UpdateContextComment"
 	Luster_DeleteContextComment_FullMethodName = "/blueapi.luster.v1.Luster/DeleteContextComment"
 	Luster_CreateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/CreateLabel"
+	Luster_UpdateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/UpdateLabel"
+	Luster_DeleteLabel_FullMethodName          = "/blueapi.luster.v1.Luster/DeleteLabel"
 )
 
 // LusterClient is the client API for Luster service.
@@ -44,19 +46,14 @@ const (
 // Luster service definition.
 type LusterClient interface {
 	// (ALPHA) Reads spaces.
-	// スペースの読み取り。
 	ReadSpaces(ctx context.Context, in *ReadSpacesRequest, opts ...grpc.CallOption) (Luster_ReadSpacesClient, error)
 	// (ALPHA) Gets space.
-	// スペースの取得。
 	GetSpace(ctx context.Context, in *GetSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
 	// (ALPHA) Creates space.
-	// スペースの作成。
 	CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
 	// (ALPHA) Updates space.
-	// スペースの更新。
 	UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
-	// (ALPHA) Deletes space.
-	// スペースの削除。 削除する場合はスペース内で作成したコンテクストも削除され閲覧できなくなります。
+	// (ALPHA) Deletes space. When deleted, contexts created within the space will also be deleted and cannot be viewed.
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// (ALPHA) Reads contexts.
 	ReadContexts(ctx context.Context, in *ReadContextsRequest, opts ...grpc.CallOption) (Luster_ReadContextsClient, error)
@@ -76,6 +73,10 @@ type LusterClient interface {
 	DeleteContextComment(ctx context.Context, in *DeleteContextCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// (ALPHA) Creates label.
 	CreateLabel(ctx context.Context, in *CreateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error)
+	// (ALPHA) Updates label.
+	UpdateLabel(ctx context.Context, in *UpdateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error)
+	// (ALPHA) Deletes label.
+	DeleteLabel(ctx context.Context, in *DeleteLabelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type lusterClient struct {
@@ -272,6 +273,26 @@ func (c *lusterClient) CreateLabel(ctx context.Context, in *CreateLabelRequest, 
 	return out, nil
 }
 
+func (c *lusterClient) UpdateLabel(ctx context.Context, in *UpdateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Label)
+	err := c.cc.Invoke(ctx, Luster_UpdateLabel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *lusterClient) DeleteLabel(ctx context.Context, in *DeleteLabelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Luster_DeleteLabel_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // LusterServer is the server API for Luster service.
 // All implementations must embed UnimplementedLusterServer
 // for forward compatibility
@@ -279,19 +300,14 @@ func (c *lusterClient) CreateLabel(ctx context.Context, in *CreateLabelRequest, 
 // Luster service definition.
 type LusterServer interface {
 	// (ALPHA) Reads spaces.
-	// スペースの読み取り。
 	ReadSpaces(*ReadSpacesRequest, Luster_ReadSpacesServer) error
 	// (ALPHA) Gets space.
-	// スペースの取得。
 	GetSpace(context.Context, *GetSpaceRequest) (*luster.Space, error)
 	// (ALPHA) Creates space.
-	// スペースの作成。
 	CreateSpace(context.Context, *CreateSpaceRequest) (*luster.Space, error)
 	// (ALPHA) Updates space.
-	// スペースの更新。
 	UpdateSpace(context.Context, *UpdateSpaceRequest) (*luster.Space, error)
-	// (ALPHA) Deletes space.
-	// スペースの削除。 削除する場合はスペース内で作成したコンテクストも削除され閲覧できなくなります。
+	// (ALPHA) Deletes space. When deleted, contexts created within the space will also be deleted and cannot be viewed.
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error)
 	// (ALPHA) Reads contexts.
 	ReadContexts(*ReadContextsRequest, Luster_ReadContextsServer) error
@@ -311,6 +327,10 @@ type LusterServer interface {
 	DeleteContextComment(context.Context, *DeleteContextCommentRequest) (*emptypb.Empty, error)
 	// (ALPHA) Creates label.
 	CreateLabel(context.Context, *CreateLabelRequest) (*luster.Label, error)
+	// (ALPHA) Updates label.
+	UpdateLabel(context.Context, *UpdateLabelRequest) (*luster.Label, error)
+	// (ALPHA) Deletes label.
+	DeleteLabel(context.Context, *DeleteLabelRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedLusterServer()
 }
 
@@ -359,6 +379,12 @@ func (UnimplementedLusterServer) DeleteContextComment(context.Context, *DeleteCo
 }
 func (UnimplementedLusterServer) CreateLabel(context.Context, *CreateLabelRequest) (*luster.Label, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateLabel not implemented")
+}
+func (UnimplementedLusterServer) UpdateLabel(context.Context, *UpdateLabelRequest) (*luster.Label, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateLabel not implemented")
+}
+func (UnimplementedLusterServer) DeleteLabel(context.Context, *DeleteLabelRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteLabel not implemented")
 }
 func (UnimplementedLusterServer) mustEmbedUnimplementedLusterServer() {}
 
@@ -631,6 +657,42 @@ func _Luster_CreateLabel_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Luster_UpdateLabel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateLabelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).UpdateLabel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_UpdateLabel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).UpdateLabel(ctx, req.(*UpdateLabelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Luster_DeleteLabel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteLabelRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).DeleteLabel(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_DeleteLabel_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).DeleteLabel(ctx, req.(*DeleteLabelRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Luster_ServiceDesc is the grpc.ServiceDesc for Luster service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -685,6 +747,14 @@ var Luster_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateLabel",
 			Handler:    _Luster_CreateLabel_Handler,
+		},
+		{
+			MethodName: "UpdateLabel",
+			Handler:    _Luster_UpdateLabel_Handler,
+		},
+		{
+			MethodName: "DeleteLabel",
+			Handler:    _Luster_DeleteLabel_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
