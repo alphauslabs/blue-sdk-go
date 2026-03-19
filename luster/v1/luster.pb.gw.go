@@ -693,6 +693,29 @@ func local_request_Luster_DeleteContextComment_0(ctx context.Context, marshaler 
 	return msg, metadata, err
 }
 
+func request_Luster_ReadLabels_0(ctx context.Context, marshaler runtime.Marshaler, client LusterClient, req *http.Request, pathParams map[string]string) (Luster_ReadLabelsClient, runtime.ServerMetadata, error) {
+	var (
+		protoReq ReadLabelsRequest
+		metadata runtime.ServerMetadata
+	)
+	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	stream, err := client.ReadLabels(ctx, &protoReq)
+	if err != nil {
+		return nil, metadata, err
+	}
+	header, err := stream.Header()
+	if err != nil {
+		return nil, metadata, err
+	}
+	metadata.HeaderMD = header
+	return stream, metadata, nil
+}
+
 func request_Luster_CreateLabel_0(ctx context.Context, marshaler runtime.Marshaler, client LusterClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq CreateLabelRequest
@@ -1043,6 +1066,13 @@ func RegisterLusterHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 		}
 		forward_Luster_DeleteContextComment_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+
+	mux.Handle(http.MethodPost, pattern_Luster_ReadLabels_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		err := status.Error(codes.Unimplemented, "streaming calls are not yet supported in the in-process transport")
+		_, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+		return
+	})
 	mux.Handle(http.MethodPost, pattern_Luster_CreateLabel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1364,6 +1394,23 @@ func RegisterLusterHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 		}
 		forward_Luster_DeleteContextComment_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodPost, pattern_Luster_ReadLabels_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.luster.v1.Luster/ReadLabels", runtime.WithHTTPPathPattern("/v1/contexts/label:read"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Luster_ReadLabels_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Luster_ReadLabels_0(annotatedContext, mux, outboundMarshaler, w, req, func() (proto.Message, error) { return resp.Recv() }, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPost, pattern_Luster_CreateLabel_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1432,6 +1479,7 @@ var (
 	pattern_Luster_CreateContextComment_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "contexts", "space_id", "context_id", "comment"}, ""))
 	pattern_Luster_UpdateContextComment_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "contexts", "space_id", "context_id", "comment", "id"}, ""))
 	pattern_Luster_DeleteContextComment_0 = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2, 1, 0, 4, 1, 5, 3, 2, 4, 1, 0, 4, 1, 5, 5}, []string{"v1", "contexts", "space_id", "context_id", "comment", "id"}, ""))
+	pattern_Luster_ReadLabels_0           = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "contexts", "label"}, "read"))
 	pattern_Luster_CreateLabel_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "contexts", "label"}, ""))
 	pattern_Luster_UpdateLabel_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "contexts", "label", "id"}, ""))
 	pattern_Luster_DeleteLabel_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "contexts", "label", "id"}, ""))
@@ -1451,6 +1499,7 @@ var (
 	forward_Luster_CreateContextComment_0 = runtime.ForwardResponseMessage
 	forward_Luster_UpdateContextComment_0 = runtime.ForwardResponseMessage
 	forward_Luster_DeleteContextComment_0 = runtime.ForwardResponseMessage
+	forward_Luster_ReadLabels_0           = runtime.ForwardResponseStream
 	forward_Luster_CreateLabel_0          = runtime.ForwardResponseMessage
 	forward_Luster_UpdateLabel_0          = runtime.ForwardResponseMessage
 	forward_Luster_DeleteLabel_0          = runtime.ForwardResponseMessage

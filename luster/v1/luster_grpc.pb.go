@@ -34,6 +34,7 @@ const (
 	Luster_CreateContextComment_FullMethodName = "/blueapi.luster.v1.Luster/CreateContextComment"
 	Luster_UpdateContextComment_FullMethodName = "/blueapi.luster.v1.Luster/UpdateContextComment"
 	Luster_DeleteContextComment_FullMethodName = "/blueapi.luster.v1.Luster/DeleteContextComment"
+	Luster_ReadLabels_FullMethodName           = "/blueapi.luster.v1.Luster/ReadLabels"
 	Luster_CreateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/CreateLabel"
 	Luster_UpdateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/UpdateLabel"
 	Luster_DeleteLabel_FullMethodName          = "/blueapi.luster.v1.Luster/DeleteLabel"
@@ -45,37 +46,40 @@ const (
 //
 // Luster service definition.
 type LusterClient interface {
-	// (ALPHA) Reads spaces.
+	// (ALPHA) [SPACE] Reads spaces.
 	ReadSpaces(ctx context.Context, in *ReadSpacesRequest, opts ...grpc.CallOption) (Luster_ReadSpacesClient, error)
-	// (ALPHA) Gets space.
+	// (ALPHA) [SPACE] Gets space.
 	GetSpace(ctx context.Context, in *GetSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
-	// (ALPHA) Creates space.
+	// (ALPHA) [SPACE] Creates space.
 	CreateSpace(ctx context.Context, in *CreateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
-	// (ALPHA) Updates space.
+	// (ALPHA) [SPACE] Updates space.
 	UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
-	// (ALPHA) Deletes space. When deleted, contexts created within the space will also be deleted and cannot be viewed.
+	// (ALPHA) [SPACE] Deletes space.
+	// When deleted, contexts created within the space will also be deleted and cannot be viewed.
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// (ALPHA) Reads contexts.
+	// (ALPHA) [CONTEXT] Reads contexts.
 	ReadContexts(ctx context.Context, in *ReadContextsRequest, opts ...grpc.CallOption) (Luster_ReadContextsClient, error)
-	// (ALPHA) Gets context.
+	// (ALPHA [CONTEXT]) Gets context.
 	GetContext(ctx context.Context, in *GetContextRequest, opts ...grpc.CallOption) (*GetContextResponse, error)
-	// (ALPHA) Creates context.
+	// (ALPHA) [CONTEXT] Creates context.
 	CreateContext(ctx context.Context, in *CreateContextRequest, opts ...grpc.CallOption) (*luster.Context, error)
-	// (ALPHA) Updates context.
+	// (ALPHA) [CONTEXT] Updates context.
 	UpdateContext(ctx context.Context, in *UpdateContextRequest, opts ...grpc.CallOption) (*luster.Context, error)
-	// (ALPHA) Deletes context.
+	// (ALPHA) [CONTEXT] Deletes context.
 	DeleteContext(ctx context.Context, in *DeleteContextRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// (ALPHA) Creates comment in context.
+	// (ALPHA) [COMMENT] Creates comment in context.
 	CreateContextComment(ctx context.Context, in *CreateContextCommentRequest, opts ...grpc.CallOption) (*luster.Comment, error)
-	// (ALPHA) Updates comment in context.
+	// (ALPHA) [COMMENT] Updates comment in context.
 	UpdateContextComment(ctx context.Context, in *UpdateContextCommentRequest, opts ...grpc.CallOption) (*luster.Comment, error)
-	// (ALPHA) Deletes comment in context.
+	// (ALPHA) [COMMENT] Deletes comment in context.
 	DeleteContextComment(ctx context.Context, in *DeleteContextCommentRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// (ALPHA) Creates label.
+	// (ALPHA) [LABEL] Reads labels.
+	ReadLabels(ctx context.Context, in *ReadLabelsRequest, opts ...grpc.CallOption) (Luster_ReadLabelsClient, error)
+	// (ALPHA) [LABEL] Creates label.
 	CreateLabel(ctx context.Context, in *CreateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error)
-	// (ALPHA) Updates label.
+	// (ALPHA) [LABEL] Updates label.
 	UpdateLabel(ctx context.Context, in *UpdateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error)
-	// (ALPHA) Deletes label.
+	// (ALPHA) [LABEL] Deletes label.
 	DeleteLabel(ctx context.Context, in *DeleteLabelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -263,6 +267,39 @@ func (c *lusterClient) DeleteContextComment(ctx context.Context, in *DeleteConte
 	return out, nil
 }
 
+func (c *lusterClient) ReadLabels(ctx context.Context, in *ReadLabelsRequest, opts ...grpc.CallOption) (Luster_ReadLabelsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Luster_ServiceDesc.Streams[2], Luster_ReadLabels_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &lusterReadLabelsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Luster_ReadLabelsClient interface {
+	Recv() (*luster.Label, error)
+	grpc.ClientStream
+}
+
+type lusterReadLabelsClient struct {
+	grpc.ClientStream
+}
+
+func (x *lusterReadLabelsClient) Recv() (*luster.Label, error) {
+	m := new(luster.Label)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 func (c *lusterClient) CreateLabel(ctx context.Context, in *CreateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(luster.Label)
@@ -299,37 +336,40 @@ func (c *lusterClient) DeleteLabel(ctx context.Context, in *DeleteLabelRequest, 
 //
 // Luster service definition.
 type LusterServer interface {
-	// (ALPHA) Reads spaces.
+	// (ALPHA) [SPACE] Reads spaces.
 	ReadSpaces(*ReadSpacesRequest, Luster_ReadSpacesServer) error
-	// (ALPHA) Gets space.
+	// (ALPHA) [SPACE] Gets space.
 	GetSpace(context.Context, *GetSpaceRequest) (*luster.Space, error)
-	// (ALPHA) Creates space.
+	// (ALPHA) [SPACE] Creates space.
 	CreateSpace(context.Context, *CreateSpaceRequest) (*luster.Space, error)
-	// (ALPHA) Updates space.
+	// (ALPHA) [SPACE] Updates space.
 	UpdateSpace(context.Context, *UpdateSpaceRequest) (*luster.Space, error)
-	// (ALPHA) Deletes space. When deleted, contexts created within the space will also be deleted and cannot be viewed.
+	// (ALPHA) [SPACE] Deletes space.
+	// When deleted, contexts created within the space will also be deleted and cannot be viewed.
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error)
-	// (ALPHA) Reads contexts.
+	// (ALPHA) [CONTEXT] Reads contexts.
 	ReadContexts(*ReadContextsRequest, Luster_ReadContextsServer) error
-	// (ALPHA) Gets context.
+	// (ALPHA [CONTEXT]) Gets context.
 	GetContext(context.Context, *GetContextRequest) (*GetContextResponse, error)
-	// (ALPHA) Creates context.
+	// (ALPHA) [CONTEXT] Creates context.
 	CreateContext(context.Context, *CreateContextRequest) (*luster.Context, error)
-	// (ALPHA) Updates context.
+	// (ALPHA) [CONTEXT] Updates context.
 	UpdateContext(context.Context, *UpdateContextRequest) (*luster.Context, error)
-	// (ALPHA) Deletes context.
+	// (ALPHA) [CONTEXT] Deletes context.
 	DeleteContext(context.Context, *DeleteContextRequest) (*emptypb.Empty, error)
-	// (ALPHA) Creates comment in context.
+	// (ALPHA) [COMMENT] Creates comment in context.
 	CreateContextComment(context.Context, *CreateContextCommentRequest) (*luster.Comment, error)
-	// (ALPHA) Updates comment in context.
+	// (ALPHA) [COMMENT] Updates comment in context.
 	UpdateContextComment(context.Context, *UpdateContextCommentRequest) (*luster.Comment, error)
-	// (ALPHA) Deletes comment in context.
+	// (ALPHA) [COMMENT] Deletes comment in context.
 	DeleteContextComment(context.Context, *DeleteContextCommentRequest) (*emptypb.Empty, error)
-	// (ALPHA) Creates label.
+	// (ALPHA) [LABEL] Reads labels.
+	ReadLabels(*ReadLabelsRequest, Luster_ReadLabelsServer) error
+	// (ALPHA) [LABEL] Creates label.
 	CreateLabel(context.Context, *CreateLabelRequest) (*luster.Label, error)
-	// (ALPHA) Updates label.
+	// (ALPHA) [LABEL] Updates label.
 	UpdateLabel(context.Context, *UpdateLabelRequest) (*luster.Label, error)
-	// (ALPHA) Deletes label.
+	// (ALPHA) [LABEL] Deletes label.
 	DeleteLabel(context.Context, *DeleteLabelRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedLusterServer()
 }
@@ -376,6 +416,9 @@ func (UnimplementedLusterServer) UpdateContextComment(context.Context, *UpdateCo
 }
 func (UnimplementedLusterServer) DeleteContextComment(context.Context, *DeleteContextCommentRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteContextComment not implemented")
+}
+func (UnimplementedLusterServer) ReadLabels(*ReadLabelsRequest, Luster_ReadLabelsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadLabels not implemented")
 }
 func (UnimplementedLusterServer) CreateLabel(context.Context, *CreateLabelRequest) (*luster.Label, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateLabel not implemented")
@@ -639,6 +682,27 @@ func _Luster_DeleteContextComment_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Luster_ReadLabels_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadLabelsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(LusterServer).ReadLabels(m, &lusterReadLabelsServer{ServerStream: stream})
+}
+
+type Luster_ReadLabelsServer interface {
+	Send(*luster.Label) error
+	grpc.ServerStream
+}
+
+type lusterReadLabelsServer struct {
+	grpc.ServerStream
+}
+
+func (x *lusterReadLabelsServer) Send(m *luster.Label) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 func _Luster_CreateLabel_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateLabelRequest)
 	if err := dec(in); err != nil {
@@ -766,6 +830,11 @@ var Luster_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadContexts",
 			Handler:       _Luster_ReadContexts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadLabels",
+			Handler:       _Luster_ReadLabels_Handler,
 			ServerStreams: true,
 		},
 	},

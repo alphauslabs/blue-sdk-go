@@ -4882,6 +4882,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.luster.v1.ReadLabelsRequest"><span class="badge">M</span>ReadLabelsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.luster.v1.ReadSpacesRequest"><span class="badge">M</span>ReadSpacesRequest</a>
                 </li>
               
@@ -59884,6 +59888,30 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.luster.v1.ReadLabelsRequest">ReadLabelsRequest</h3>
+        <p>Request message for the Luster.ReadLabels rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. field_mask </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.luster.v1.ReadSpacesRequest">ReadSpacesRequest</h3>
         <p>Request message for the Luster.ReadSpaces rpc.</p>
 
@@ -60178,112 +60206,120 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                 <td>ReadSpaces</td>
                 <td><a href="#blueapi.luster.v1.ReadSpacesRequest">ReadSpacesRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a> stream</td>
-                <td><p>(ALPHA) Reads spaces.</p></td>
+                <td><p>(ALPHA) [SPACE] Reads spaces.</p></td>
               </tr>
             
               <tr>
                 <td>GetSpace</td>
                 <td><a href="#blueapi.luster.v1.GetSpaceRequest">GetSpaceRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
-                <td><p>(ALPHA) Gets space.</p></td>
+                <td><p>(ALPHA) [SPACE] Gets space.</p></td>
               </tr>
             
               <tr>
                 <td>CreateSpace</td>
                 <td><a href="#blueapi.luster.v1.CreateSpaceRequest">CreateSpaceRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
-                <td><p>(ALPHA) Creates space.</p></td>
+                <td><p>(ALPHA) [SPACE] Creates space.</p></td>
               </tr>
             
               <tr>
                 <td>UpdateSpace</td>
                 <td><a href="#blueapi.luster.v1.UpdateSpaceRequest">UpdateSpaceRequest</a></td>
                 <td><a href="#blueapi.api.luster.Space">.blueapi.api.luster.Space</a></td>
-                <td><p>(ALPHA) Updates space.</p></td>
+                <td><p>(ALPHA) [SPACE] Updates space.</p></td>
               </tr>
             
               <tr>
                 <td>DeleteSpace</td>
                 <td><a href="#blueapi.luster.v1.DeleteSpaceRequest">DeleteSpaceRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>(ALPHA) Deletes space. When deleted, contexts created within the space will also be deleted and cannot be viewed.</p></td>
+                <td><p>(ALPHA) [SPACE] Deletes space. 
+When deleted, contexts created within the space will also be deleted and cannot be viewed.</p></td>
               </tr>
             
               <tr>
                 <td>ReadContexts</td>
                 <td><a href="#blueapi.luster.v1.ReadContextsRequest">ReadContextsRequest</a></td>
                 <td><a href="#blueapi.api.luster.Context">.blueapi.api.luster.Context</a> stream</td>
-                <td><p>(ALPHA) Reads contexts.</p></td>
+                <td><p>(ALPHA) [CONTEXT] Reads contexts.</p></td>
               </tr>
             
               <tr>
                 <td>GetContext</td>
                 <td><a href="#blueapi.luster.v1.GetContextRequest">GetContextRequest</a></td>
                 <td><a href="#blueapi.luster.v1.GetContextResponse">GetContextResponse</a></td>
-                <td><p>(ALPHA) Gets context.</p></td>
+                <td><p>(ALPHA [CONTEXT]) Gets context.</p></td>
               </tr>
             
               <tr>
                 <td>CreateContext</td>
                 <td><a href="#blueapi.luster.v1.CreateContextRequest">CreateContextRequest</a></td>
                 <td><a href="#blueapi.api.luster.Context">.blueapi.api.luster.Context</a></td>
-                <td><p>(ALPHA) Creates context.</p></td>
+                <td><p>(ALPHA) [CONTEXT] Creates context.</p></td>
               </tr>
             
               <tr>
                 <td>UpdateContext</td>
                 <td><a href="#blueapi.luster.v1.UpdateContextRequest">UpdateContextRequest</a></td>
                 <td><a href="#blueapi.api.luster.Context">.blueapi.api.luster.Context</a></td>
-                <td><p>(ALPHA) Updates context.</p></td>
+                <td><p>(ALPHA) [CONTEXT] Updates context.</p></td>
               </tr>
             
               <tr>
                 <td>DeleteContext</td>
                 <td><a href="#blueapi.luster.v1.DeleteContextRequest">DeleteContextRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>(ALPHA) Deletes context.</p></td>
+                <td><p>(ALPHA) [CONTEXT] Deletes context.</p></td>
               </tr>
             
               <tr>
                 <td>CreateContextComment</td>
                 <td><a href="#blueapi.luster.v1.CreateContextCommentRequest">CreateContextCommentRequest</a></td>
                 <td><a href="#blueapi.api.luster.Comment">.blueapi.api.luster.Comment</a></td>
-                <td><p>(ALPHA) Creates comment in context.</p></td>
+                <td><p>(ALPHA) [COMMENT] Creates comment in context.</p></td>
               </tr>
             
               <tr>
                 <td>UpdateContextComment</td>
                 <td><a href="#blueapi.luster.v1.UpdateContextCommentRequest">UpdateContextCommentRequest</a></td>
                 <td><a href="#blueapi.api.luster.Comment">.blueapi.api.luster.Comment</a></td>
-                <td><p>(ALPHA) Updates comment in context.</p></td>
+                <td><p>(ALPHA) [COMMENT] Updates comment in context.</p></td>
               </tr>
             
               <tr>
                 <td>DeleteContextComment</td>
                 <td><a href="#blueapi.luster.v1.DeleteContextCommentRequest">DeleteContextCommentRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>(ALPHA) Deletes comment in context.</p></td>
+                <td><p>(ALPHA) [COMMENT] Deletes comment in context.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadLabels</td>
+                <td><a href="#blueapi.luster.v1.ReadLabelsRequest">ReadLabelsRequest</a></td>
+                <td><a href="#blueapi.api.luster.Label">.blueapi.api.luster.Label</a> stream</td>
+                <td><p>(ALPHA) [LABEL] Reads labels.</p></td>
               </tr>
             
               <tr>
                 <td>CreateLabel</td>
                 <td><a href="#blueapi.luster.v1.CreateLabelRequest">CreateLabelRequest</a></td>
                 <td><a href="#blueapi.api.luster.Label">.blueapi.api.luster.Label</a></td>
-                <td><p>(ALPHA) Creates label.</p></td>
+                <td><p>(ALPHA) [LABEL] Creates label.</p></td>
               </tr>
             
               <tr>
                 <td>UpdateLabel</td>
                 <td><a href="#blueapi.luster.v1.UpdateLabelRequest">UpdateLabelRequest</a></td>
                 <td><a href="#blueapi.api.luster.Label">.blueapi.api.luster.Label</a></td>
-                <td><p>(ALPHA) Updates label.</p></td>
+                <td><p>(ALPHA) [LABEL] Updates label.</p></td>
               </tr>
             
               <tr>
                 <td>DeleteLabel</td>
                 <td><a href="#blueapi.luster.v1.DeleteLabelRequest">DeleteLabelRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>(ALPHA) Deletes label.</p></td>
+                <td><p>(ALPHA) [LABEL] Deletes label.</p></td>
               </tr>
             
           </tbody>
@@ -60431,6 +60467,16 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                 <td>DELETE</td>
                 <td>/v1/contexts/{space_id}/{context_id}/comment/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadLabels</td>
+                <td>POST</td>
+                <td>/v1/contexts/label:read</td>
+                <td>*</td>
               </tr>
               
             
