@@ -55,6 +55,7 @@ type LusterClient interface {
 	// (ALPHA) [SPACE] Updates space.
 	UpdateSpace(ctx context.Context, in *UpdateSpaceRequest, opts ...grpc.CallOption) (*luster.Space, error)
 	// (ALPHA) [SPACE] Deletes space.
+	//
 	// When deleted, contexts created within the space will also be deleted and cannot be viewed.
 	DeleteSpace(ctx context.Context, in *DeleteSpaceRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// (ALPHA) [CONTEXT] Reads contexts.
@@ -345,6 +346,7 @@ type LusterServer interface {
 	// (ALPHA) [SPACE] Updates space.
 	UpdateSpace(context.Context, *UpdateSpaceRequest) (*luster.Space, error)
 	// (ALPHA) [SPACE] Deletes space.
+	//
 	// When deleted, contexts created within the space will also be deleted and cannot be viewed.
 	DeleteSpace(context.Context, *DeleteSpaceRequest) (*emptypb.Empty, error)
 	// (ALPHA) [CONTEXT] Reads contexts.

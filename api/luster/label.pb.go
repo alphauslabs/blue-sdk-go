@@ -30,6 +30,7 @@ type Label struct {
 	// The label name.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	// The label color.
+	// format: HEX color code ( #FF0000 ).
 	Color string `protobuf:"bytes,3,opt,name=color,proto3" json:"color,omitempty"`
 	// The label description.
 	Description string `protobuf:"bytes,4,opt,name=description,proto3" json:"description,omitempty"`
