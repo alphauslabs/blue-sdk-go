@@ -4882,6 +4882,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.luster.v1.ReadHubsRequest"><span class="badge">M</span>ReadHubsRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.luster.v1.ReadLabelsRequest"><span class="badge">M</span>ReadLabelsRequest</a>
                 </li>
               
@@ -59922,6 +59926,31 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.luster.v1.ReadHubsRequest">ReadHubsRequest</h3>
+        <p>Request message for the Luster.ReadHubs rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. field_mask
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.luster.v1.ReadLabelsRequest">ReadLabelsRequest</h3>
         <p>Request message for the Luster.ReadLabels rpc.</p>
 
@@ -59961,7 +59990,8 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
                   <td></td>
                   <td><p>Optional. field_mask
-see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto
+Available fields: id,name,description,members,created_at,updated_at </p></td>
                 </tr>
               
             </tbody>
@@ -60268,7 +60298,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                 <td>DeleteSpace</td>
                 <td><a href="#blueapi.luster.v1.DeleteSpaceRequest">DeleteSpaceRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>(ALPHA) [SPACE] Deletes space. 
+                <td><p>(ALPHA) [SPACE] Deletes space.
 
 When deleted, contexts created within the space will also be deleted and cannot be viewed.</p></td>
               </tr>
@@ -60355,6 +60385,13 @@ When deleted, contexts created within the space will also be deleted and cannot 
                 <td><a href="#blueapi.luster.v1.DeleteLabelRequest">DeleteLabelRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
                 <td><p>(ALPHA) [LABEL] Deletes label.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadHubs</td>
+                <td><a href="#blueapi.luster.v1.ReadHubsRequest">ReadHubsRequest</a></td>
+                <td><a href="#blueapi.api.luster.Hub">.blueapi.api.luster.Hub</a> stream</td>
+                <td><p>(ALPHA) [HUB] Reads hubs.</p></td>
               </tr>
             
           </tbody>
@@ -60542,6 +60579,16 @@ When deleted, contexts created within the space will also be deleted and cannot 
                 <td>DELETE</td>
                 <td>/v1/contexts/label/{id}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadHubs</td>
+                <td>POST</td>
+                <td>/v1/hubs:read</td>
+                <td>*</td>
               </tr>
               
             

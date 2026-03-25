@@ -38,6 +38,7 @@ const (
 	Luster_CreateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/CreateLabel"
 	Luster_UpdateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/UpdateLabel"
 	Luster_DeleteLabel_FullMethodName          = "/blueapi.luster.v1.Luster/DeleteLabel"
+	Luster_ReadHubs_FullMethodName             = "/blueapi.luster.v1.Luster/ReadHubs"
 )
 
 // LusterClient is the client API for Luster service.
@@ -82,6 +83,8 @@ type LusterClient interface {
 	UpdateLabel(ctx context.Context, in *UpdateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error)
 	// (ALPHA) [LABEL] Deletes label.
 	DeleteLabel(ctx context.Context, in *DeleteLabelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// (ALPHA) [HUB] Reads hubs.
+	ReadHubs(ctx context.Context, in *ReadHubsRequest, opts ...grpc.CallOption) (Luster_ReadHubsClient, error)
 }
 
 type lusterClient struct {
@@ -331,6 +334,39 @@ func (c *lusterClient) DeleteLabel(ctx context.Context, in *DeleteLabelRequest, 
 	return out, nil
 }
 
+func (c *lusterClient) ReadHubs(ctx context.Context, in *ReadHubsRequest, opts ...grpc.CallOption) (Luster_ReadHubsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Luster_ServiceDesc.Streams[3], Luster_ReadHubs_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &lusterReadHubsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Luster_ReadHubsClient interface {
+	Recv() (*luster.Hub, error)
+	grpc.ClientStream
+}
+
+type lusterReadHubsClient struct {
+	grpc.ClientStream
+}
+
+func (x *lusterReadHubsClient) Recv() (*luster.Hub, error) {
+	m := new(luster.Hub)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // LusterServer is the server API for Luster service.
 // All implementations must embed UnimplementedLusterServer
 // for forward compatibility
@@ -373,6 +409,8 @@ type LusterServer interface {
 	UpdateLabel(context.Context, *UpdateLabelRequest) (*luster.Label, error)
 	// (ALPHA) [LABEL] Deletes label.
 	DeleteLabel(context.Context, *DeleteLabelRequest) (*emptypb.Empty, error)
+	// (ALPHA) [HUB] Reads hubs.
+	ReadHubs(*ReadHubsRequest, Luster_ReadHubsServer) error
 	mustEmbedUnimplementedLusterServer()
 }
 
@@ -430,6 +468,9 @@ func (UnimplementedLusterServer) UpdateLabel(context.Context, *UpdateLabelReques
 }
 func (UnimplementedLusterServer) DeleteLabel(context.Context, *DeleteLabelRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLabel not implemented")
+}
+func (UnimplementedLusterServer) ReadHubs(*ReadHubsRequest, Luster_ReadHubsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadHubs not implemented")
 }
 func (UnimplementedLusterServer) mustEmbedUnimplementedLusterServer() {}
 
@@ -759,6 +800,27 @@ func _Luster_DeleteLabel_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Luster_ReadHubs_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadHubsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(LusterServer).ReadHubs(m, &lusterReadHubsServer{ServerStream: stream})
+}
+
+type Luster_ReadHubsServer interface {
+	Send(*luster.Hub) error
+	grpc.ServerStream
+}
+
+type lusterReadHubsServer struct {
+	grpc.ServerStream
+}
+
+func (x *lusterReadHubsServer) Send(m *luster.Hub) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Luster_ServiceDesc is the grpc.ServiceDesc for Luster service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -837,6 +899,11 @@ var Luster_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadLabels",
 			Handler:       _Luster_ReadLabels_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadHubs",
+			Handler:       _Luster_ReadHubs_Handler,
 			ServerStreams: true,
 		},
 	},
