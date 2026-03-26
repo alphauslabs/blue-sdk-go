@@ -5354,6 +5354,17 @@ type GetExportRISPRequest struct {
 	Language string `protobuf:"bytes,2,opt,name=language,proto3" json:"language,omitempty"`
 	// Required. Include expired
 	IncludeExpired bool `protobuf:"varint,3,opt,name=includeExpired,proto3" json:"includeExpired,omitempty"`
+	// Target export month in YYYY-MM format. Defaults to current month if empty.
+	Month string `protobuf:"bytes,4,opt,name=month,proto3" json:"month,omitempty"`
+	// Columns to include in the CSV output. Empty slice means all columns.
+	Columns []string `protobuf:"bytes,5,rep,name=columns,proto3" json:"columns,omitempty"`
+	// Optional report names to generate.
+	// Valid values: ri_summary, sp_summary, ri_usageaccount, sp_usageaccount.
+	Queries []string `json:"queries,omitempty"`
+	// Optional per-query columns map. When set, values override `Columns` for the matching query.
+	ColumnsByQuery map[string][]string `json:"columnsByQuery,omitempty"`
+	// When true, only the invoice-finalization gate is checked and no export email is sent.
+	CheckOnly bool `json:"checkOnly,omitempty"`
 	unknownFields  protoimpl.UnknownFields
 	sizeCache      protoimpl.SizeCache
 }
@@ -5409,12 +5420,49 @@ func (x *GetExportRISPRequest) GetIncludeExpired() bool {
 	return false
 }
 
+func (x *GetExportRISPRequest) GetMonth() string {
+	if x != nil {
+		return x.Month
+	}
+	return ""
+}
+
+func (x *GetExportRISPRequest) GetColumns() []string {
+	if x != nil {
+		return x.Columns
+	}
+	return nil
+}
+
+func (x *GetExportRISPRequest) GetQueries() []string {
+	if x != nil {
+		return x.Queries
+	}
+	return nil
+}
+
+func (x *GetExportRISPRequest) GetColumnsByQuery() map[string][]string {
+	if x != nil {
+		return x.ColumnsByQuery
+	}
+	return nil
+}
+
+func (x *GetExportRISPRequest) GetCheckOnly() bool {
+	if x != nil {
+		return x.CheckOnly
+	}
+	return false
+}
+
 // Request message for the ExportBillingGroupInvoiceServiceDiscounts rpc.
 type GetExportRISPResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// csv direct download link
 	// expires in 10 minutes
-	DownloadLink  string `protobuf:"bytes,1,opt,name=downloadLink,proto3" json:"downloadLink,omitempty"`
+	DownloadLink string `protobuf:"bytes,1,opt,name=downloadLink,proto3" json:"downloadLink,omitempty"`
+	// True when the export CSV was sent as an email attachment to configured recipients.
+	EmailSent     bool   `protobuf:"varint,2,opt,name=emailSent,proto3" json:"emailSent,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -5454,6 +5502,13 @@ func (x *GetExportRISPResponse) GetDownloadLink() string {
 		return x.DownloadLink
 	}
 	return ""
+}
+
+func (x *GetExportRISPResponse) GetEmailSent() bool {
+	if x != nil {
+		return x.EmailSent
+	}
+	return false
 }
 
 // Request message for GetUtilization
@@ -6672,9 +6727,11 @@ type ExportCostFiltersFileRequest struct {
 	// For example, if you only want the services and region data, you can set this field to `productCode,region`. Your input sequence doesn't matter (although the sequence above is recommended) as the actual sequence is already fixed in the return data (see the definition in https://github.com/alphauslabs/blueapi/blob/main/api/aws/cost.proto), which is generic to specific, top to bottom. Invalid values are discarded. Excluded columns will be empty.
 	GroupByColumns string `protobuf:"bytes,6,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
 	// Optional. If set to true, stream will include resource tags.
-	IncludeTags   bool `protobuf:"varint,7,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	IncludeTags bool `protobuf:"varint,7,opt,name=includeTags,proto3" json:"includeTags,omitempty"`
+	// Optional. List of notification channel IDs to send the export result to.
+	NotificationChannelIds []string `json:"notificationChannelIds,omitempty"`
+	unknownFields          protoimpl.UnknownFields
+	sizeCache              protoimpl.SizeCache
 }
 
 func (x *ExportCostFiltersFileRequest) Reset() {
@@ -6754,6 +6811,13 @@ func (x *ExportCostFiltersFileRequest) GetIncludeTags() bool {
 		return x.IncludeTags
 	}
 	return false
+}
+
+func (x *ExportCostFiltersFileRequest) GetNotificationChannelIds() []string {
+	if x != nil {
+		return x.NotificationChannelIds
+	}
+	return nil
 }
 
 // Response message for the ExportCostFiltersFile rpc.

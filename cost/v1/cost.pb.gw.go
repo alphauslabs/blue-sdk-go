@@ -10,6 +10,7 @@ package cost
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"io"
 	"net/http"
@@ -3007,9 +3008,28 @@ func request_Cost_GetExportRISP_0(ctx context.Context, marshaler runtime.Marshal
 		protoReq GetExportRISPRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	type exportRISPRequestBody struct {
+		Type           string              `json:"type,omitempty"`
+		Language       string              `json:"language,omitempty"`
+		IncludeExpired bool                `json:"includeExpired,omitempty"`
+		Month          string              `json:"month,omitempty"`
+		Columns        []string            `json:"columns,omitempty"`
+		Queries        []string            `json:"queries,omitempty"`
+		ColumnsByQuery map[string][]string `json:"columnsByQuery,omitempty"`
+		CheckOnly      bool                `json:"checkOnly,omitempty"`
+	}
+	var body exportRISPRequestBody
+	if err := json.NewDecoder(req.Body).Decode(&body); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
+	protoReq.Type = body.Type
+	protoReq.Language = body.Language
+	protoReq.IncludeExpired = body.IncludeExpired
+	protoReq.Month = body.Month
+	protoReq.Columns = body.Columns
+	protoReq.Queries = body.Queries
+	protoReq.ColumnsByQuery = body.ColumnsByQuery
+	protoReq.CheckOnly = body.CheckOnly
 	if req.Body != nil {
 		_, _ = io.Copy(io.Discard, req.Body)
 	}
@@ -3022,9 +3042,28 @@ func local_request_Cost_GetExportRISP_0(ctx context.Context, marshaler runtime.M
 		protoReq GetExportRISPRequest
 		metadata runtime.ServerMetadata
 	)
-	if err := marshaler.NewDecoder(req.Body).Decode(&protoReq); err != nil && !errors.Is(err, io.EOF) {
+	type exportRISPRequestBody struct {
+		Type           string              `json:"type,omitempty"`
+		Language       string              `json:"language,omitempty"`
+		IncludeExpired bool                `json:"includeExpired,omitempty"`
+		Month          string              `json:"month,omitempty"`
+		Columns        []string            `json:"columns,omitempty"`
+		Queries        []string            `json:"queries,omitempty"`
+		ColumnsByQuery map[string][]string `json:"columnsByQuery,omitempty"`
+		CheckOnly      bool                `json:"checkOnly,omitempty"`
+	}
+	var body exportRISPRequestBody
+	if err := json.NewDecoder(req.Body).Decode(&body); err != nil && !errors.Is(err, io.EOF) {
 		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
 	}
+	protoReq.Type = body.Type
+	protoReq.Language = body.Language
+	protoReq.IncludeExpired = body.IncludeExpired
+	protoReq.Month = body.Month
+	protoReq.Columns = body.Columns
+	protoReq.Queries = body.Queries
+	protoReq.ColumnsByQuery = body.ColumnsByQuery
+	protoReq.CheckOnly = body.CheckOnly
 	msg, err := server.GetExportRISP(ctx, &protoReq)
 	return msg, metadata, err
 }
