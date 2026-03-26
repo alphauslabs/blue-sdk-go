@@ -42,6 +42,9 @@ const (
 	GuaranteedCommitments_ListPayerAccounts_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListPayerAccounts"
 	GuaranteedCommitments_SetPayerAccountEnabled_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/SetPayerAccountEnabled"
 	GuaranteedCommitments_GetPayerAccountStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetPayerAccountStatus"
+	GuaranteedCommitments_ListBillingGroups_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListBillingGroups"
+	GuaranteedCommitments_SetBillingGroupStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/SetBillingGroupStatus"
+	GuaranteedCommitments_GetBillingGroupStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupStatus"
 	GuaranteedCommitments_ValidateBillingGroup_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/ValidateBillingGroup"
 	GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/GetGuaranteedCommitmentTemplateUrl"
 	GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/CreateGuaranteedCommitmentAccess"
@@ -98,14 +101,19 @@ type GuaranteedCommitmentsClient interface {
 	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 	// and returns validation status for all required features.
 	VerifyAwsOnboarding(ctx context.Context, in *VerifyAwsOnboardingRequest, opts ...grpc.CallOption) (*VerifyAwsOnboardingResponse, error)
-	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for an MSP or a company under an MSP.
-	// Retrieves the latest onboarding status for an MSP or a company under an MSP.
+	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for:
+	// - an MSP
+	// - a company under an MSP
+	// - a payer account under an MSP
 	GetOnboardingStatus(ctx context.Context, in *GetOnboardingStatusRequest, opts ...grpc.CallOption) (*GetOnboardingStatusResponse, error)
 	// WORK-IN-PROGRESS: Lists payer accounts associated with the organization.
 	// Retrieves all payer accounts linked to the organization, including their status and associated segments.
 	ListPayerAccounts(ctx context.Context, in *ListPayerAccountsRequest, opts ...grpc.CallOption) (*ListPayerAccountsResponse, error)
 	SetPayerAccountEnabled(ctx context.Context, in *SetPayerAccountEnabledRequest, opts ...grpc.CallOption) (*SetPayerAccountEnabledResponse, error)
 	GetPayerAccountStatus(ctx context.Context, in *GetPayerAccountStatusRequest, opts ...grpc.CallOption) (*GetPayerAccountStatusResponse, error)
+	ListBillingGroups(ctx context.Context, in *ListBillingGroupsRequest, opts ...grpc.CallOption) (*ListBillingGroupsResponse, error)
+	SetBillingGroupStatus(ctx context.Context, in *SetBillingGroupStatusRequest, opts ...grpc.CallOption) (*SetBillingGroupStatusResponse, error)
+	GetBillingGroupStatus(ctx context.Context, in *GetBillingGroupStatusRequest, opts ...grpc.CallOption) (*GetBillingGroupStatusResponse, error)
 	ValidateBillingGroup(ctx context.Context, in *ValidateBillingGroupRequest, opts ...grpc.CallOption) (*ValidateBillingGroupResponse, error)
 	// GetGuaranteedCommitmentTemplateUrl returns a CloudFormation launch URL for deploying
 	// both Alphaus (Ripple) and Archera IAM roles in a single stack.
@@ -375,6 +383,36 @@ func (c *guaranteedCommitmentsClient) GetPayerAccountStatus(ctx context.Context,
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) ListBillingGroups(ctx context.Context, in *ListBillingGroupsRequest, opts ...grpc.CallOption) (*ListBillingGroupsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListBillingGroupsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListBillingGroups_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) SetBillingGroupStatus(ctx context.Context, in *SetBillingGroupStatusRequest, opts ...grpc.CallOption) (*SetBillingGroupStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SetBillingGroupStatusResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_SetBillingGroupStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetBillingGroupStatus(ctx context.Context, in *GetBillingGroupStatusRequest, opts ...grpc.CallOption) (*GetBillingGroupStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBillingGroupStatusResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetBillingGroupStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *guaranteedCommitmentsClient) ValidateBillingGroup(ctx context.Context, in *ValidateBillingGroupRequest, opts ...grpc.CallOption) (*ValidateBillingGroupResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ValidateBillingGroupResponse)
@@ -456,14 +494,19 @@ type GuaranteedCommitmentsServer interface {
 	// Creates a new CUR or uses an existing CUR and verifies AWS integration setup
 	// and returns validation status for all required features.
 	VerifyAwsOnboarding(context.Context, *VerifyAwsOnboardingRequest) (*VerifyAwsOnboardingResponse, error)
-	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for an MSP or a company under an MSP.
-	// Retrieves the latest onboarding status for an MSP or a company under an MSP.
+	// WORK-IN-PROGRESS: Retrieves the latest onboarding status for:
+	// - an MSP
+	// - a company under an MSP
+	// - a payer account under an MSP
 	GetOnboardingStatus(context.Context, *GetOnboardingStatusRequest) (*GetOnboardingStatusResponse, error)
 	// WORK-IN-PROGRESS: Lists payer accounts associated with the organization.
 	// Retrieves all payer accounts linked to the organization, including their status and associated segments.
 	ListPayerAccounts(context.Context, *ListPayerAccountsRequest) (*ListPayerAccountsResponse, error)
 	SetPayerAccountEnabled(context.Context, *SetPayerAccountEnabledRequest) (*SetPayerAccountEnabledResponse, error)
 	GetPayerAccountStatus(context.Context, *GetPayerAccountStatusRequest) (*GetPayerAccountStatusResponse, error)
+	ListBillingGroups(context.Context, *ListBillingGroupsRequest) (*ListBillingGroupsResponse, error)
+	SetBillingGroupStatus(context.Context, *SetBillingGroupStatusRequest) (*SetBillingGroupStatusResponse, error)
+	GetBillingGroupStatus(context.Context, *GetBillingGroupStatusRequest) (*GetBillingGroupStatusResponse, error)
 	ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error)
 	// GetGuaranteedCommitmentTemplateUrl returns a CloudFormation launch URL for deploying
 	// both Alphaus (Ripple) and Archera IAM roles in a single stack.
@@ -545,6 +588,15 @@ func (UnimplementedGuaranteedCommitmentsServer) SetPayerAccountEnabled(context.C
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetPayerAccountStatus(context.Context, *GetPayerAccountStatusRequest) (*GetPayerAccountStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPayerAccountStatus not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ListBillingGroups(context.Context, *ListBillingGroupsRequest) (*ListBillingGroupsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListBillingGroups not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) SetBillingGroupStatus(context.Context, *SetBillingGroupStatusRequest) (*SetBillingGroupStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetBillingGroupStatus not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetBillingGroupStatus(context.Context, *GetBillingGroupStatusRequest) (*GetBillingGroupStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroupStatus not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateBillingGroup not implemented")
@@ -985,6 +1037,60 @@ func _GuaranteedCommitments_GetPayerAccountStatus_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_ListBillingGroups_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListBillingGroupsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ListBillingGroups(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ListBillingGroups_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ListBillingGroups(ctx, req.(*ListBillingGroupsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_SetBillingGroupStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetBillingGroupStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).SetBillingGroupStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_SetBillingGroupStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).SetBillingGroupStatus(ctx, req.(*SetBillingGroupStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetBillingGroupStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingGroupStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetBillingGroupStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetBillingGroupStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetBillingGroupStatus(ctx, req.(*GetBillingGroupStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GuaranteedCommitments_ValidateBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidateBillingGroupRequest)
 	if err := dec(in); err != nil {
@@ -1133,6 +1239,18 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPayerAccountStatus",
 			Handler:    _GuaranteedCommitments_GetPayerAccountStatus_Handler,
+		},
+		{
+			MethodName: "ListBillingGroups",
+			Handler:    _GuaranteedCommitments_ListBillingGroups_Handler,
+		},
+		{
+			MethodName: "SetBillingGroupStatus",
+			Handler:    _GuaranteedCommitments_SetBillingGroupStatus_Handler,
+		},
+		{
+			MethodName: "GetBillingGroupStatus",
+			Handler:    _GuaranteedCommitments_GetBillingGroupStatus_Handler,
 		},
 		{
 			MethodName: "ValidateBillingGroup",
