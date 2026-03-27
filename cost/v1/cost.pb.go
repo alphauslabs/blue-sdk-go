@@ -7225,7 +7225,7 @@ func (x *DeleteAccountBudgetAlertsRequest) GetId() string {
 // Azure-specific options for ReadCostsRequest.
 type ReadCostsRequestAzureOptions struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Optional. A comma-separated list of columns to aggregate the data into. Valid values are `serviceName`, `productName`, `region`, `chargeType`, `description`, `billableQuantity`, `effectiveUnitPrice`, `timeInterval`, `billingType`, `alternateId` and `domainName`. A special value of `none` is also supported, which means query by date or month per account only.
+	// Optional. A comma-separated list of columns to aggregate the data into. Valid values are `serviceName`, `productName`, `region`, `chargeType`, `description`, `billableQuantity`, `effectiveUnitPrice`, `timeInterval`, `billingType`, `alternateId`, `domainName` and `resourceGroup`. A special value of `none` is also supported, which means query by date or month per account only.
 	//
 	// For example, if you only want the services and region data, you can set this field to `serviceName,region`. Your input sequence doesn't matter (although the sequence above is recommended) as the actual sequence is already fixed in the return data (see the definition in https://github.com/alphauslabs/blueapi/blob/main/api/azure/cost.proto), which is generic to specific, top to bottom. Invalid values are discarded. Excluded columns will be empty.
 	GroupByColumns string `protobuf:"bytes,1,opt,name=groupByColumns,proto3" json:"groupByColumns,omitempty"`
