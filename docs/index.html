@@ -4715,6 +4715,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.PayerAccountDetails"><span class="badge">M</span>PayerAccountDetails</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.PlanHistoryEntry"><span class="badge">M</span>PlanHistoryEntry</a>
                 </li>
               
@@ -56370,6 +56374,13 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                 </tr>
               
                 <tr>
+                  <td>companyName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>payerAccountId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -56385,6 +56396,13 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
               
                 <tr>
                   <td>segmentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceType</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -56507,6 +56525,13 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                 <tr>
                   <td>payerAccounts</td>
                   <td><a href="#blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount">ListPayerAccountsResponse.PayerAccount</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerAccountDetails</td>
+                  <td><a href="#blueapi.gc.v1.PayerAccountDetails">PayerAccountDetails</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
@@ -56935,6 +56960,61 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.PayerAccountDetails">PayerAccountDetails</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rippleRegistrationStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcSetupStatus</td>
+                  <td><a href="#blueapi.gc.v1.GetOnboardingStatusResponse.OnboardingStatus">GetOnboardingStatusResponse.OnboardingStatus</a></td>
+                  <td></td>
+                  <td><p>Latest persisted guaranteed commitment setup/onboarding status for this payer account (if any) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>verificationChecks</td>
+                  <td><a href="#blueapi.gc.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck">VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck</a></td>
+                  <td>repeated</td>
+                  <td><p>Detailed AWS verification results (best-effort) returned from the last VerifyAwsOnboarding call.
+This is used by the UI to &#34;resume&#34; the onboarding flow and show which verification checks
+passed/failed when a user comes back later (e.g., after stopping at verification).
+Empty when verification hasn&#39;t been attempted yet or when no checks were persisted. </p></td>
                 </tr>
               
             </tbody>
@@ -58526,6 +58606,15 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>newVersion</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>temporarily required until we fully transition to the new onboarding flow.
+This is to avoid any breaks or crash during the transition. Will be removed once the transition is complete.
+Default value is false. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -58703,6 +58792,15 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. Company identifier. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>newVersion</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>temporarily required until we fully transition to the new onboarding flow.
+This is to avoid any breaks or crash during the transition. Will be removed once the transition is complete.
+Default value is false. </p></td>
                 </tr>
               
             </tbody>
