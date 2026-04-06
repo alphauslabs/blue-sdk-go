@@ -4487,6 +4487,30 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.AzureAccount"><span class="badge">M</span>AzureAccount</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureIntegration"><span class="badge">M</span>AzureIntegration</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureIntegrationFeatureStatus"><span class="badge">M</span>AzureIntegrationFeatureStatus</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureIntegrationOnboarding"><span class="badge">M</span>AzureIntegrationOnboarding</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureOnboardingCreatedBy"><span class="badge">M</span>AzureOnboardingCreatedBy</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureOnboardingState"><span class="badge">M</span>AzureOnboardingState</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.Commitment"><span class="badge">M</span>Commitment</a>
                 </li>
               
@@ -4527,6 +4551,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.CreateAzureIntegrationRequest"><span class="badge">M</span>CreateAzureIntegrationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.CreateAzureIntegrationResponse"><span class="badge">M</span>CreateAzureIntegrationResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.CreateGuaranteedCommitmentAccessRequest"><span class="badge">M</span>CreateGuaranteedCommitmentAccessRequest</a>
                 </li>
               
@@ -4564,6 +4596,14 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.GetAwsLaunchStackUrlResponse"><span class="badge">M</span>GetAwsLaunchStackUrlResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetAzureOnboardingAuthUrlRequest"><span class="badge">M</span>GetAzureOnboardingAuthUrlRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetAzureOnboardingAuthUrlResponse"><span class="badge">M</span>GetAzureOnboardingAuthUrlResponse</a>
                 </li>
               
                 <li>
@@ -4636,6 +4676,22 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.Lease"><span class="badge">M</span>Lease</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListAzureIntegrationsRequest"><span class="badge">M</span>ListAzureIntegrationsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListAzureIntegrationsResponse"><span class="badge">M</span>ListAzureIntegrationsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListAzureOnboardingAccountsRequest"><span class="badge">M</span>ListAzureOnboardingAccountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListAzureOnboardingAccountsResponse"><span class="badge">M</span>ListAzureOnboardingAccountsResponse</a>
                 </li>
               
                 <li>
@@ -4792,6 +4848,22 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.StartAwsOnboardingResponse"><span class="badge">M</span>StartAwsOnboardingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.StartAzureOnboardingRequest"><span class="badge">M</span>StartAzureOnboardingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.StartAzureOnboardingResponse"><span class="badge">M</span>StartAzureOnboardingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.UpdateAzureOnboardingRequest"><span class="badge">M</span>UpdateAzureOnboardingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ValidateAzureAppInstallRequest"><span class="badge">M</span>ValidateAzureAppInstallRequest</a>
                 </li>
               
                 <li>
@@ -53684,6 +53756,577 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.AzureAccount">AzureAccount</h3>
+        <p>AzureAccount is one available subscription or billing account (Step 6).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountStatus</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure account type, e.g. &#34;FreeTrial_2014-09-01&#34;, &#34;PayAsYouGo&#34;, etc. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isEligible</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether this account is eligible for Archera onboarding. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureIntegration">AzureIntegration</h3>
+        <p>AzureIntegration is the full Azure cloud integration record from Archera.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>active</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Always &#34;cloud/azure&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updatedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>managementSubscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure-specific </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerOrganizationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure tenant ID (stored as provider_organization_id in Archera). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>blobContainer</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccount</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>costExportFormat</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;FOCUS&#34; or &#34;ActualCost&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>curEarliestData</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>CUR/data state </p></td>
+                </tr>
+              
+                <tr>
+                  <td>curReportName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>curUsable</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasCurAccess</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasFullReservationAccess</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>featureStatuses</td>
+                  <td><a href="#blueapi.gc.v1.AzureIntegrationFeatureStatus">AzureIntegrationFeatureStatus</a></td>
+                  <td>repeated</td>
+                  <td><p>Feature verification checks </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardings</td>
+                  <td><a href="#blueapi.gc.v1.AzureIntegrationOnboarding">AzureIntegrationOnboarding</a></td>
+                  <td>repeated</td>
+                  <td><p>Linked onboarding records </p></td>
+                </tr>
+              
+                <tr>
+                  <td>config</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p>Flexible config blob (etl_enabled, use_vm_ris_not_sps, etc.) </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureIntegrationFeatureStatus">AzureIntegrationFeatureStatus</h3>
+        <p>AzureIntegrationFeatureStatus is a single feature check for an Azure integration (Step 9).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>feature</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;available&#34;, &#34;missing&#34;, &#34;warning&#34;, &#34;unknown&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>detail</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Detail strings or JSON describing why a feature is missing/warning. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureIntegrationOnboarding">AzureIntegrationOnboarding</h3>
+        <p>AzureIntegrationOnboarding is a summary of the onboarding linked to an integration.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integrationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>completed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#blueapi.gc.v1.AzureOnboardingCreatedBy">AzureOnboardingCreatedBy</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureOnboardingCreatedBy">AzureOnboardingCreatedBy</h3>
+        <p>AzureOnboardingCreatedBy identifies who triggered the onboarding.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>username</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fullName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureOnboardingState">AzureOnboardingState</h3>
+        <p>AzureOnboardingState is the full Archera onboarding record state.</p><p>Returned by StartAzureOnboarding, UpdateAzureOnboarding, ValidateAzureAppInstall.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Archera onboarding record ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>orgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Archera org ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>completed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#blueapi.gc.v1.AzureOnboardingCreatedBy">AzureOnboardingCreatedBy</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integration</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Linked integration object (null until integration is created). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integrationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>archeraOutboundIps</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Outbound IPs Archera will use with this onboarding. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenantId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure identity </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountKind</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;subscription&#34; or &#34;billing_account&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>appAuthValidated</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Authorization state (nullable, use Value for JSON null interop) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>appAuthorized</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>blobContainer</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure resource configuration </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccount</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createResources</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>marketplaceCompleted</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>permissionLevel</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.Commitment">Commitment</h3>
         <p></p>
 
@@ -54897,6 +55540,216 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.CreateAzureIntegrationRequest">CreateAzureIntegrationRequest</h3>
+        <p>CreateAzureIntegrationRequest creates the final Azure integration (Step 8).</p><p>Ripple fields are stored alongside Archera integration data to link</p><p>the Azure tenant to the correct Ripple billing group/company/payer context.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera org ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple billing group ID — links this Azure integration to the Ripple billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple company ID — links this Azure integration to the Ripple company/customer. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple payer account ID — if applicable, the payer account this Azure spend rolls up to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Integration type, always &#34;cloud/azure&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenantId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountKind</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;subscription&#34; or &#34;billing_account&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>blobContainer</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccount</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.CreateAzureIntegrationResponse">CreateAzureIntegrationResponse</h3>
+        <p>CreateAzureIntegrationResponse is returned after creating the Azure integration (Step 8).</p><p>A "tenant_already_connected" error_code is treated as success.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>success</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True if the integration was successfully created or already existed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errorCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Set when the Archera API returned an error (e.g. &#34;tenant_already_connected&#34;).
+&#34;tenant_already_connected&#34; is still considered success. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errorMessage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integrationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The Archera integration ID, if available. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple billing group ID stored with this integration. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple company ID stored with this integration. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple payer account ID echoed back. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.CreateGuaranteedCommitmentAccessRequest">CreateGuaranteedCommitmentAccessRequest</h3>
         <p></p>
 
@@ -55648,6 +56501,75 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.GetAzureOnboardingAuthUrlRequest">GetAzureOnboardingAuthUrlRequest</h3>
+        <p>GetAzureOnboardingAuthUrlRequest fetches the OAuth authorization URL (Step 4).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The onboarding ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera org ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenantId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure tenant ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure management subscription ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetAzureOnboardingAuthUrlResponse">GetAzureOnboardingAuthUrlResponse</h3>
+        <p>GetAzureOnboardingAuthUrlResponse contains the OAuth URL (Step 4).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The Microsoft OAuth URL the user must open to authorize Archera. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetBillingGroupStatusRequest">GetBillingGroupStatusRequest</h3>
         <p></p>
 
@@ -56301,6 +57223,109 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td>updatedAt</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListAzureIntegrationsRequest">ListAzureIntegrationsRequest</h3>
+        <p>ListAzureIntegrationsRequest lists integrations to verify completion (Step 9).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera org ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListAzureIntegrationsResponse">ListAzureIntegrationsResponse</h3>
+        <p>ListAzureIntegrationsResponse contains all Azure integrations for the org (Step 9).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>integrations</td>
+                  <td><a href="#blueapi.gc.v1.AzureIntegration">AzureIntegration</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListAzureOnboardingAccountsRequest">ListAzureOnboardingAccountsRequest</h3>
+        <p>ListAzureOnboardingAccountsRequest lists available Azure accounts (Step 6).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The onboarding ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera org ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListAzureOnboardingAccountsResponse">ListAzureOnboardingAccountsResponse</h3>
+        <p>ListAzureOnboardingAccountsResponse returns accounts the user can select.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accounts</td>
+                  <td><a href="#blueapi.gc.v1.AzureAccount">AzureAccount</a></td>
+                  <td>repeated</td>
                   <td><p> </p></td>
                 </tr>
               
@@ -58777,6 +59802,354 @@ Default value is false. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.StartAzureOnboardingRequest">StartAzureOnboardingRequest</h3>
+        <p>StartAzureOnboardingRequest initiates Azure onboarding (Step 1).</p><p>Ripple fields are required to link this Azure tenant to the correct</p><p>Ripple billing group and company for cost attribution and management.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple billing group ID. If present =&gt; MSP customer (3rd layer), else MSP-level org (2nd layer). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple company ID within the billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera / GuaranteedCommitments org ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenantId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure tenant ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure management subscription ID. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.StartAzureOnboardingResponse">StartAzureOnboardingResponse</h3>
+        <p>StartAzureOnboardingResponse is returned from StartAzureOnboarding.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Archera onboarding ID — pass this to all subsequent Azure onboarding RPCs. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>state</td>
+                  <td><a href="#blueapi.gc.v1.AzureOnboardingState">AzureOnboardingState</a></td>
+                  <td></td>
+                  <td><p>Full onboarding state. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple billing group ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple company ID </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.UpdateAzureOnboardingRequest">UpdateAzureOnboardingRequest</h3>
+        <p>UpdateAzureOnboardingRequest updates the onboarding record (Steps 2, 5.5, 7).</p><p>Covers: setting azure resource config, choosing account kind, and selecting accounts.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The onboarding ID returned from StartAzureOnboarding. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera org ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple billing group ID (needed to persist Ripple context). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Ripple company ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenantId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Azure fields — set only those that are being updated for this step. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountKind</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;subscription&#34; or &#34;billing_account&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>blobContainer</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccount</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ValidateAzureAppInstallRequest">ValidateAzureAppInstallRequest</h3>
+        <p>ValidateAzureAppInstallRequest validates app install after user authorizes (Step 5).</p><p>Contains the full azure resource config so Archera can verify permissions.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The onboarding ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera org ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Integration type, e.g. &#34;cloud/azure&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenantId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountKind</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;subscription&#34; or &#34;billing_account&#34; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>blobContainer</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroup</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccount</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>roleName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountRegion</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroupTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storageAccountTags</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ValidateBillingGroupRequest">ValidateBillingGroupRequest</h3>
         <p></p>
 
@@ -59547,6 +60920,58 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                 <td><p>CreateGuaranteedCommitmentAccess verifies and registers a deployed guaranteed CloudFormation stack.</p></td>
               </tr>
             
+              <tr>
+                <td>StartAzureOnboarding</td>
+                <td><a href="#blueapi.gc.v1.StartAzureOnboardingRequest">StartAzureOnboardingRequest</a></td>
+                <td><a href="#blueapi.gc.v1.StartAzureOnboardingResponse">StartAzureOnboardingResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Starts the Azure onboarding process.
+Creates an onboarding record in Archera for the given org and returns the onboardingId.
+Stores the Ripple billingGroupId/companyId association for later use.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAzureOnboarding</td>
+                <td><a href="#blueapi.gc.v1.UpdateAzureOnboardingRequest">UpdateAzureOnboardingRequest</a></td>
+                <td><a href="#blueapi.gc.v1.AzureOnboardingState">AzureOnboardingState</a></td>
+                <td><p>WORK-IN-PROGRESS: Updates the Azure onboarding record.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetAzureOnboardingAuthUrl</td>
+                <td><a href="#blueapi.gc.v1.GetAzureOnboardingAuthUrlRequest">GetAzureOnboardingAuthUrlRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetAzureOnboardingAuthUrlResponse">GetAzureOnboardingAuthUrlResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Returns the Azure OAuth URL the user must visit to authorize Archera.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ValidateAzureAppInstall</td>
+                <td><a href="#blueapi.gc.v1.ValidateAzureAppInstallRequest">ValidateAzureAppInstallRequest</a></td>
+                <td><a href="#blueapi.gc.v1.AzureOnboardingState">AzureOnboardingState</a></td>
+                <td><p>WORK-IN-PROGRESS: Validates that the Azure app was installed and the user authorized it.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListAzureOnboardingAccounts</td>
+                <td><a href="#blueapi.gc.v1.ListAzureOnboardingAccountsRequest">ListAzureOnboardingAccountsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ListAzureOnboardingAccountsResponse">ListAzureOnboardingAccountsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Lists the available Azure subscriptions or billing accounts
+for the user to select during onboarding.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateAzureIntegration</td>
+                <td><a href="#blueapi.gc.v1.CreateAzureIntegrationRequest">CreateAzureIntegrationRequest</a></td>
+                <td><a href="#blueapi.gc.v1.CreateAzureIntegrationResponse">CreateAzureIntegrationResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Creates the Azure cloud integration after all onboarding steps complete.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListAzureIntegrations</td>
+                <td><a href="#blueapi.gc.v1.ListAzureIntegrationsRequest">ListAzureIntegrationsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ListAzureIntegrationsResponse">ListAzureIntegrationsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -59852,6 +61277,76 @@ both Alphaus (Ripple) and Archera IAM roles in a single stack.</p></td>
                 <td>POST</td>
                 <td>/v1/onboarding/aws/cftemplate/guaranteed</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>StartAzureOnboarding</td>
+                <td>POST</td>
+                <td>/v1/onboarding/azure/start</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAzureOnboarding</td>
+                <td>POST</td>
+                <td>/v1/onboarding/azure/{onboardingId}:update</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAzureOnboardingAuthUrl</td>
+                <td>GET</td>
+                <td>/v1/onboarding/azure/{onboardingId}/authurl</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ValidateAzureAppInstall</td>
+                <td>POST</td>
+                <td>/v1/onboarding/azure/{onboardingId}/validate</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListAzureOnboardingAccounts</td>
+                <td>GET</td>
+                <td>/v1/onboarding/azure/{onboardingId}/accounts</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateAzureIntegration</td>
+                <td>POST</td>
+                <td>/v1/onboarding/azure/integration</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListAzureIntegrations</td>
+                <td>GET</td>
+                <td>/v1/onboarding/azure/integrations</td>
+                <td></td>
               </tr>
               
             

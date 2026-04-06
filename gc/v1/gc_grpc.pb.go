@@ -48,6 +48,13 @@ const (
 	GuaranteedCommitments_ValidateBillingGroup_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/ValidateBillingGroup"
 	GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/GetGuaranteedCommitmentTemplateUrl"
 	GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/CreateGuaranteedCommitmentAccess"
+	GuaranteedCommitments_StartAzureOnboarding_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/StartAzureOnboarding"
+	GuaranteedCommitments_UpdateAzureOnboarding_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/UpdateAzureOnboarding"
+	GuaranteedCommitments_GetAzureOnboardingAuthUrl_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetAzureOnboardingAuthUrl"
+	GuaranteedCommitments_ValidateAzureAppInstall_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/ValidateAzureAppInstall"
+	GuaranteedCommitments_ListAzureOnboardingAccounts_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureOnboardingAccounts"
+	GuaranteedCommitments_CreateAzureIntegration_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/CreateAzureIntegration"
+	GuaranteedCommitments_ListAzureIntegrations_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureIntegrations"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -120,6 +127,23 @@ type GuaranteedCommitmentsClient interface {
 	GetGuaranteedCommitmentTemplateUrl(ctx context.Context, in *GetGuaranteedCommitmentTemplateUrlRequest, opts ...grpc.CallOption) (*GetGuaranteedCommitmentTemplateUrlResponse, error)
 	// CreateGuaranteedCommitmentAccess verifies and registers a deployed guaranteed CloudFormation stack.
 	CreateGuaranteedCommitmentAccess(ctx context.Context, in *CreateGuaranteedCommitmentAccessRequest, opts ...grpc.CallOption) (*CreateGuaranteedCommitmentAccessResponse, error)
+	// WORK-IN-PROGRESS: Starts the Azure onboarding process.
+	// Creates an onboarding record in Archera for the given org and returns the onboardingId.
+	// Stores the Ripple billingGroupId/companyId association for later use.
+	StartAzureOnboarding(ctx context.Context, in *StartAzureOnboardingRequest, opts ...grpc.CallOption) (*StartAzureOnboardingResponse, error)
+	// WORK-IN-PROGRESS: Updates the Azure onboarding record.
+	UpdateAzureOnboarding(ctx context.Context, in *UpdateAzureOnboardingRequest, opts ...grpc.CallOption) (*AzureOnboardingState, error)
+	// WORK-IN-PROGRESS: Returns the Azure OAuth URL the user must visit to authorize Archera.
+	GetAzureOnboardingAuthUrl(ctx context.Context, in *GetAzureOnboardingAuthUrlRequest, opts ...grpc.CallOption) (*GetAzureOnboardingAuthUrlResponse, error)
+	// WORK-IN-PROGRESS: Validates that the Azure app was installed and the user authorized it.
+	ValidateAzureAppInstall(ctx context.Context, in *ValidateAzureAppInstallRequest, opts ...grpc.CallOption) (*AzureOnboardingState, error)
+	// WORK-IN-PROGRESS: Lists the available Azure subscriptions or billing accounts
+	// for the user to select during onboarding.
+	ListAzureOnboardingAccounts(ctx context.Context, in *ListAzureOnboardingAccountsRequest, opts ...grpc.CallOption) (*ListAzureOnboardingAccountsResponse, error)
+	// WORK-IN-PROGRESS: Creates the Azure cloud integration after all onboarding steps complete.
+	CreateAzureIntegration(ctx context.Context, in *CreateAzureIntegrationRequest, opts ...grpc.CallOption) (*CreateAzureIntegrationResponse, error)
+	// WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.
+	ListAzureIntegrations(ctx context.Context, in *ListAzureIntegrationsRequest, opts ...grpc.CallOption) (*ListAzureIntegrationsResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -443,6 +467,76 @@ func (c *guaranteedCommitmentsClient) CreateGuaranteedCommitmentAccess(ctx conte
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) StartAzureOnboarding(ctx context.Context, in *StartAzureOnboardingRequest, opts ...grpc.CallOption) (*StartAzureOnboardingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(StartAzureOnboardingResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_StartAzureOnboarding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) UpdateAzureOnboarding(ctx context.Context, in *UpdateAzureOnboardingRequest, opts ...grpc.CallOption) (*AzureOnboardingState, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AzureOnboardingState)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_UpdateAzureOnboarding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetAzureOnboardingAuthUrl(ctx context.Context, in *GetAzureOnboardingAuthUrlRequest, opts ...grpc.CallOption) (*GetAzureOnboardingAuthUrlResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAzureOnboardingAuthUrlResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetAzureOnboardingAuthUrl_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) ValidateAzureAppInstall(ctx context.Context, in *ValidateAzureAppInstallRequest, opts ...grpc.CallOption) (*AzureOnboardingState, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AzureOnboardingState)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ValidateAzureAppInstall_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) ListAzureOnboardingAccounts(ctx context.Context, in *ListAzureOnboardingAccountsRequest, opts ...grpc.CallOption) (*ListAzureOnboardingAccountsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAzureOnboardingAccountsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListAzureOnboardingAccounts_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) CreateAzureIntegration(ctx context.Context, in *CreateAzureIntegrationRequest, opts ...grpc.CallOption) (*CreateAzureIntegrationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAzureIntegrationResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_CreateAzureIntegration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) ListAzureIntegrations(ctx context.Context, in *ListAzureIntegrationsRequest, opts ...grpc.CallOption) (*ListAzureIntegrationsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListAzureIntegrationsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListAzureIntegrations_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -513,6 +607,23 @@ type GuaranteedCommitmentsServer interface {
 	GetGuaranteedCommitmentTemplateUrl(context.Context, *GetGuaranteedCommitmentTemplateUrlRequest) (*GetGuaranteedCommitmentTemplateUrlResponse, error)
 	// CreateGuaranteedCommitmentAccess verifies and registers a deployed guaranteed CloudFormation stack.
 	CreateGuaranteedCommitmentAccess(context.Context, *CreateGuaranteedCommitmentAccessRequest) (*CreateGuaranteedCommitmentAccessResponse, error)
+	// WORK-IN-PROGRESS: Starts the Azure onboarding process.
+	// Creates an onboarding record in Archera for the given org and returns the onboardingId.
+	// Stores the Ripple billingGroupId/companyId association for later use.
+	StartAzureOnboarding(context.Context, *StartAzureOnboardingRequest) (*StartAzureOnboardingResponse, error)
+	// WORK-IN-PROGRESS: Updates the Azure onboarding record.
+	UpdateAzureOnboarding(context.Context, *UpdateAzureOnboardingRequest) (*AzureOnboardingState, error)
+	// WORK-IN-PROGRESS: Returns the Azure OAuth URL the user must visit to authorize Archera.
+	GetAzureOnboardingAuthUrl(context.Context, *GetAzureOnboardingAuthUrlRequest) (*GetAzureOnboardingAuthUrlResponse, error)
+	// WORK-IN-PROGRESS: Validates that the Azure app was installed and the user authorized it.
+	ValidateAzureAppInstall(context.Context, *ValidateAzureAppInstallRequest) (*AzureOnboardingState, error)
+	// WORK-IN-PROGRESS: Lists the available Azure subscriptions or billing accounts
+	// for the user to select during onboarding.
+	ListAzureOnboardingAccounts(context.Context, *ListAzureOnboardingAccountsRequest) (*ListAzureOnboardingAccountsResponse, error)
+	// WORK-IN-PROGRESS: Creates the Azure cloud integration after all onboarding steps complete.
+	CreateAzureIntegration(context.Context, *CreateAzureIntegrationRequest) (*CreateAzureIntegrationResponse, error)
+	// WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.
+	ListAzureIntegrations(context.Context, *ListAzureIntegrationsRequest) (*ListAzureIntegrationsResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -606,6 +717,27 @@ func (UnimplementedGuaranteedCommitmentsServer) GetGuaranteedCommitmentTemplateU
 }
 func (UnimplementedGuaranteedCommitmentsServer) CreateGuaranteedCommitmentAccess(context.Context, *CreateGuaranteedCommitmentAccessRequest) (*CreateGuaranteedCommitmentAccessResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateGuaranteedCommitmentAccess not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) StartAzureOnboarding(context.Context, *StartAzureOnboardingRequest) (*StartAzureOnboardingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StartAzureOnboarding not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) UpdateAzureOnboarding(context.Context, *UpdateAzureOnboardingRequest) (*AzureOnboardingState, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAzureOnboarding not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetAzureOnboardingAuthUrl(context.Context, *GetAzureOnboardingAuthUrlRequest) (*GetAzureOnboardingAuthUrlResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAzureOnboardingAuthUrl not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ValidateAzureAppInstall(context.Context, *ValidateAzureAppInstallRequest) (*AzureOnboardingState, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ValidateAzureAppInstall not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ListAzureOnboardingAccounts(context.Context, *ListAzureOnboardingAccountsRequest) (*ListAzureOnboardingAccountsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAzureOnboardingAccounts not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) CreateAzureIntegration(context.Context, *CreateAzureIntegrationRequest) (*CreateAzureIntegrationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAzureIntegration not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ListAzureIntegrations(context.Context, *ListAzureIntegrationsRequest) (*ListAzureIntegrationsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListAzureIntegrations not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -1145,6 +1277,132 @@ func _GuaranteedCommitments_CreateGuaranteedCommitmentAccess_Handler(srv interfa
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_StartAzureOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(StartAzureOnboardingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).StartAzureOnboarding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_StartAzureOnboarding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).StartAzureOnboarding(ctx, req.(*StartAzureOnboardingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_UpdateAzureOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAzureOnboardingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).UpdateAzureOnboarding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_UpdateAzureOnboarding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).UpdateAzureOnboarding(ctx, req.(*UpdateAzureOnboardingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetAzureOnboardingAuthUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAzureOnboardingAuthUrlRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetAzureOnboardingAuthUrl(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetAzureOnboardingAuthUrl_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetAzureOnboardingAuthUrl(ctx, req.(*GetAzureOnboardingAuthUrlRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_ValidateAzureAppInstall_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ValidateAzureAppInstallRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ValidateAzureAppInstall(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ValidateAzureAppInstall_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ValidateAzureAppInstall(ctx, req.(*ValidateAzureAppInstallRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_ListAzureOnboardingAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAzureOnboardingAccountsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ListAzureOnboardingAccounts(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ListAzureOnboardingAccounts_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ListAzureOnboardingAccounts(ctx, req.(*ListAzureOnboardingAccountsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_CreateAzureIntegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAzureIntegrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).CreateAzureIntegration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_CreateAzureIntegration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).CreateAzureIntegration(ctx, req.(*CreateAzureIntegrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_ListAzureIntegrations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListAzureIntegrationsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ListAzureIntegrations(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ListAzureIntegrations_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ListAzureIntegrations(ctx, req.(*ListAzureIntegrationsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1263,6 +1521,34 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CreateGuaranteedCommitmentAccess",
 			Handler:    _GuaranteedCommitments_CreateGuaranteedCommitmentAccess_Handler,
+		},
+		{
+			MethodName: "StartAzureOnboarding",
+			Handler:    _GuaranteedCommitments_StartAzureOnboarding_Handler,
+		},
+		{
+			MethodName: "UpdateAzureOnboarding",
+			Handler:    _GuaranteedCommitments_UpdateAzureOnboarding_Handler,
+		},
+		{
+			MethodName: "GetAzureOnboardingAuthUrl",
+			Handler:    _GuaranteedCommitments_GetAzureOnboardingAuthUrl_Handler,
+		},
+		{
+			MethodName: "ValidateAzureAppInstall",
+			Handler:    _GuaranteedCommitments_ValidateAzureAppInstall_Handler,
+		},
+		{
+			MethodName: "ListAzureOnboardingAccounts",
+			Handler:    _GuaranteedCommitments_ListAzureOnboardingAccounts_Handler,
+		},
+		{
+			MethodName: "CreateAzureIntegration",
+			Handler:    _GuaranteedCommitments_CreateAzureIntegration_Handler,
+		},
+		{
+			MethodName: "ListAzureIntegrations",
+			Handler:    _GuaranteedCommitments_ListAzureIntegrations_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
