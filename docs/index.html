@@ -4491,6 +4491,22 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.AzureArcheraOrg"><span class="badge">M</span>AzureArcheraOrg</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureArcheraOrg.ProviderRootSegmentIdsEntry"><span class="badge">M</span>AzureArcheraOrg.ProviderRootSegmentIdsEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureArcheraOrgFeatureStatus"><span class="badge">M</span>AzureArcheraOrgFeatureStatus</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AzureArcheraOrgLeaseBudget"><span class="badge">M</span>AzureArcheraOrgLeaseBudget</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.AzureIntegration"><span class="badge">M</span>AzureIntegration</a>
                 </li>
               
@@ -53808,6 +53824,403 @@ maps to &#34;report_name&#34; conceptually </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.AzureArcheraOrg">AzureArcheraOrg</h3>
+        <p>AzureArcheraOrg is the full Archera org object.</p><p>Received from StartAzureOnboarding response and must be echoed back verbatim</p><p>on every UpdateAzureOnboarding and ValidateAzureAppInstall call.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>applyBalanceToPremiums</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>authSsoOnly</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>awsMarketplaceOfferLink</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>azureMarketplaceOfferLink</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>balance</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingActive</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>channelPartnerType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>channelPartnership</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>contractEnd</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>defaultUserRole</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discountInfo</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>domain</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>effectiveDate</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>featureStatuses</td>
+                  <td><a href="#blueapi.gc.v1.AzureArcheraOrgFeatureStatus">AzureArcheraOrgFeatureStatus</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>features</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>frugalMode</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>gcpMarketplaceOfferLink</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasDiscount</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasGris</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasTdsPacProxyCredentials</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isLeaseBuybackAutomated</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isLeaseSwapAutomated</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isTdsPacProxy</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>leaseBudget</td>
+                  <td><a href="#blueapi.gc.v1.AzureArcheraOrgLeaseBudget">AzureArcheraOrgLeaseBudget</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>leaseBuybackLookbackDays</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>leaseSwapLookbackDays</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>partnerId</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTrial</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTrialExpires</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTypeChosen</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>planTypeEffective</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>primaryAddress</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>promotionCode</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerRootSegmentIds</td>
+                  <td><a href="#blueapi.gc.v1.AzureArcheraOrg.ProviderRootSegmentIdsEntry">AzureArcheraOrg.ProviderRootSegmentIdsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Maps provider name to segment ID, e.g. {&#34;aws&#34;: &#34;...&#34;, &#34;azure&#34;: &#34;...&#34;, &#34;unknown&#34;: &#34;...&#34;} </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureArcheraOrg.ProviderRootSegmentIdsEntry">AzureArcheraOrg.ProviderRootSegmentIdsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureArcheraOrgFeatureStatus">AzureArcheraOrgFeatureStatus</h3>
+        <p>AzureArcheraOrgFeatureStatus is a single feature status entry within the Archera org object.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>detail</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>feature</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updatedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AzureArcheraOrgLeaseBudget">AzureArcheraOrgLeaseBudget</h3>
+        <p>AzureArcheraOrgLeaseBudget is the lease budget config within the Archera org object.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>budget</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>minTermMonths</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.AzureIntegration">AzureIntegration</h3>
         <p>AzureIntegration is the full Azure cloud integration record from Archera.</p>
 
@@ -54318,6 +54731,14 @@ maps to &#34;report_name&#34; conceptually </p></td>
                   <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>org</td>
+                  <td><a href="#blueapi.gc.v1.AzureArcheraOrg">AzureArcheraOrg</a></td>
+                  <td></td>
+                  <td><p>The full Archera org object returned from Archera. Store this and pass it
+back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. </p></td>
                 </tr>
               
             </tbody>
@@ -59900,7 +60321,7 @@ Default value is false. </p></td>
         
       
         <h3 id="blueapi.gc.v1.UpdateAzureOnboardingRequest">UpdateAzureOnboardingRequest</h3>
-        <p>UpdateAzureOnboardingRequest updates the onboarding record (Steps 2, 5.5, 7).</p><p>Covers: setting azure resource config, choosing account kind, and selecting accounts.</p>
+        <p></p>
 
         
           <table class="field-table">
@@ -60021,6 +60442,56 @@ Default value is false. </p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>completed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>---- Archera onboarding state fields (echo back from start/get response) ---- </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#blueapi.gc.v1.AzureOnboardingCreatedBy">AzureOnboardingCreatedBy</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integration</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Linked integration object; null until integration is created. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integrationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Always &#34;azure&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>org</td>
+                  <td><a href="#blueapi.gc.v1.AzureArcheraOrg">AzureArcheraOrg</a></td>
+                  <td></td>
+                  <td><p>The full Archera org object received from StartAzureOnboarding response.
+Must be echoed back verbatim on every PATCH call. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -60029,7 +60500,7 @@ Default value is false. </p></td>
         
       
         <h3 id="blueapi.gc.v1.ValidateAzureAppInstallRequest">ValidateAzureAppInstallRequest</h3>
-        <p>ValidateAzureAppInstallRequest validates app install after user authorizes (Step 5).</p><p>Contains the full azure resource config so Archera can verify permissions.</p>
+        <p></p>
 
         
           <table class="field-table">
@@ -60049,14 +60520,15 @@ Default value is false. </p></td>
                   <td>gcOrgId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Archera org ID. </p></td>
+                  <td><p>Required. The Archera org ID. </p></td>
                 </tr>
               
                 <tr>
                   <td>type</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Integration type, e.g. &#34;cloud/azure&#34;. </p></td>
+                  <td><p>---- Azure resource config fields ----
+Integration type, always &#34;cloud/azure&#34;. </p></td>
                 </tr>
               
                 <tr>
@@ -60141,6 +60613,56 @@ Default value is false. </p></td>
                   <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>completed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>---- Archera onboarding state fields (echo back from start/get response) ---- </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdBy</td>
+                  <td><a href="#blueapi.gc.v1.AzureOnboardingCreatedBy">AzureOnboardingCreatedBy</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integration</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integrationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Always &#34;azure&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>org</td>
+                  <td><a href="#blueapi.gc.v1.AzureArcheraOrg">AzureArcheraOrg</a></td>
+                  <td></td>
+                  <td><p>The full Archera org object received from StartAzureOnboarding response.
+Must be echoed back verbatim. </p></td>
                 </tr>
               
             </tbody>
