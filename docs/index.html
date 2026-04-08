@@ -1898,6 +1898,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListServicesRequest"><span class="badge">M</span>ListServicesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListServicesResponse"><span class="badge">M</span>ListServicesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListUsageCostsDriftRequest"><span class="badge">M</span>ListUsageCostsDriftRequest</a>
                 </li>
               
@@ -1971,6 +1979,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.SaveTagInvoiceSettingResponse"><span class="badge">M</span>SaveTagInvoiceSettingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ServiceItem"><span class="badge">M</span>ServiceItem</a>
                 </li>
               
                 <li>
@@ -23748,6 +23760,64 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ListServicesRequest">ListServicesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Cloud vendor (e.g., &#34;gcp&#34;). Bound from the URL path. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Service code to filter by.
+Example values: &#34;6F81-5844-456A&#34; (Cloud Storage), &#34;95FF-2EF5-5EA1&#34; (Compute Engine),
+&#34;152E-C115-5142&#34; (Cloud SQL).
+Use ListServices without this field to retrieve all available service codes. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListServicesResponse">ListServicesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>data</td>
+                  <td><a href="#blueapi.billing.v1.ServiceItem">ServiceItem</a></td>
+                  <td>repeated</td>
+                  <td><p>List of services. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListUsageCostsDriftRequest">ListUsageCostsDriftRequest</h3>
         <p>Request message for the Billing.ListUsageCostsDrift rpc.</p>
 
@@ -24388,6 +24458,51 @@ this is ignored if allGroups is true. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional error message if operation failed </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ServiceItem">ServiceItem</h3>
+        <p>Represents a single service with its associated names and SKUs.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Service ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>code</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Service code. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>names</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of display names for this service. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>skus</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of SKU codes under this service. </p></td>
                 </tr>
               
             </tbody>
@@ -27416,6 +27531,14 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
               </tr>
             
               <tr>
+                <td>ListServices</td>
+                <td><a href="#blueapi.billing.v1.ListServicesRequest">ListServicesRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListServicesResponse">ListServicesResponse</a></td>
+                <td><p>Lists available cloud services and their associated SKUs for a given vendor.
+Use this to retrieve service codes and names that can be referenced in exclude service settings.</p></td>
+              </tr>
+            
+              <tr>
                 <td>BulkLinkAccount</td>
                 <td><a href="#blueapi.billing.v1.BulkLinkAccountRequest">BulkLinkAccountRequest</a></td>
                 <td><a href="#protos.Operation">.protos.Operation</a></td>
@@ -28777,6 +28900,16 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>ListExcludeServices</td>
                 <td>GET</td>
                 <td>/v1/billinggroups/exclude-service-settings</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListServices</td>
+                <td>GET</td>
+                <td>/v1/{vendor}/services</td>
                 <td></td>
               </tr>
               

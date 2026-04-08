@@ -159,6 +159,7 @@ const (
 	Billing_UpdateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
 	Billing_DeleteExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
 	Billing_ListExcludeServices_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListExcludeServices"
+	Billing_ListServices_FullMethodName                                        = "/blueapi.billing.v1.Billing/ListServices"
 	Billing_BulkLinkAccount_FullMethodName                                     = "/blueapi.billing.v1.Billing/BulkLinkAccount"
 )
 
@@ -448,6 +449,9 @@ type BillingClient interface {
 	DeleteExcludeServiceEntry(ctx context.Context, in *DeleteExcludeServiceEntryRequest, opts ...grpc.CallOption) (*DeleteExcludeServiceEntryResponse, error)
 	// List Exclude Service Entries
 	ListExcludeServices(ctx context.Context, in *ListExcludeServicesRequest, opts ...grpc.CallOption) (*ListExcludeServicesResponse, error)
+	// Lists available cloud services and their associated SKUs for a given vendor.
+	// Use this to retrieve service codes and names that can be referenced in exclude service settings.
+	ListServices(ctx context.Context, in *ListServicesRequest, opts ...grpc.CallOption) (*ListServicesResponse, error)
 	// Link accounts to a billing group in bulk from a CSV file.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*protos.Operation, error)
@@ -2514,6 +2518,16 @@ func (c *billingClient) ListExcludeServices(ctx context.Context, in *ListExclude
 	return out, nil
 }
 
+func (c *billingClient) ListServices(ctx context.Context, in *ListServicesRequest, opts ...grpc.CallOption) (*ListServicesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListServicesResponse)
+	err := c.cc.Invoke(ctx, Billing_ListServices_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(protos.Operation)
@@ -2810,6 +2824,9 @@ type BillingServer interface {
 	DeleteExcludeServiceEntry(context.Context, *DeleteExcludeServiceEntryRequest) (*DeleteExcludeServiceEntryResponse, error)
 	// List Exclude Service Entries
 	ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error)
+	// Lists available cloud services and their associated SKUs for a given vendor.
+	// Use this to retrieve service codes and names that can be referenced in exclude service settings.
+	ListServices(context.Context, *ListServicesRequest) (*ListServicesResponse, error)
 	// Link accounts to a billing group in bulk from a CSV file.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*protos.Operation, error)
@@ -3221,6 +3238,9 @@ func (UnimplementedBillingServer) DeleteExcludeServiceEntry(context.Context, *De
 }
 func (UnimplementedBillingServer) ListExcludeServices(context.Context, *ListExcludeServicesRequest) (*ListExcludeServicesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListExcludeServices not implemented")
+}
+func (UnimplementedBillingServer) ListServices(context.Context, *ListServicesRequest) (*ListServicesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListServices not implemented")
 }
 func (UnimplementedBillingServer) BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BulkLinkAccount not implemented")
@@ -5743,6 +5763,24 @@ func _Billing_ListExcludeServices_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_ListServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListServicesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ListServices(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ListServices_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ListServices(ctx, req.(*ListServicesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_BulkLinkAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(BulkLinkAccountRequest)
 	if err := dec(in); err != nil {
@@ -6179,6 +6217,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListExcludeServices",
 			Handler:    _Billing_ListExcludeServices_Handler,
+		},
+		{
+			MethodName: "ListServices",
+			Handler:    _Billing_ListServices_Handler,
 		},
 		{
 			MethodName: "BulkLinkAccount",
