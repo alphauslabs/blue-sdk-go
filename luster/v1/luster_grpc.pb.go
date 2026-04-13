@@ -38,6 +38,7 @@ const (
 	Luster_CreateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/CreateLabel"
 	Luster_UpdateLabel_FullMethodName          = "/blueapi.luster.v1.Luster/UpdateLabel"
 	Luster_DeleteLabel_FullMethodName          = "/blueapi.luster.v1.Luster/DeleteLabel"
+	Luster_GetHub_FullMethodName               = "/blueapi.luster.v1.Luster/GetHub"
 	Luster_ReadHubs_FullMethodName             = "/blueapi.luster.v1.Luster/ReadHubs"
 )
 
@@ -83,6 +84,8 @@ type LusterClient interface {
 	UpdateLabel(ctx context.Context, in *UpdateLabelRequest, opts ...grpc.CallOption) (*luster.Label, error)
 	// (ALPHA) [LABEL] Deletes label.
 	DeleteLabel(ctx context.Context, in *DeleteLabelRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// (ALPHA) [HUB] Gets hub.
+	GetHub(ctx context.Context, in *GetHubRequest, opts ...grpc.CallOption) (*luster.Hub, error)
 	// (ALPHA) [HUB] Reads hubs.
 	ReadHubs(ctx context.Context, in *ReadHubsRequest, opts ...grpc.CallOption) (Luster_ReadHubsClient, error)
 }
@@ -334,6 +337,16 @@ func (c *lusterClient) DeleteLabel(ctx context.Context, in *DeleteLabelRequest, 
 	return out, nil
 }
 
+func (c *lusterClient) GetHub(ctx context.Context, in *GetHubRequest, opts ...grpc.CallOption) (*luster.Hub, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(luster.Hub)
+	err := c.cc.Invoke(ctx, Luster_GetHub_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *lusterClient) ReadHubs(ctx context.Context, in *ReadHubsRequest, opts ...grpc.CallOption) (Luster_ReadHubsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	stream, err := c.cc.NewStream(ctx, &Luster_ServiceDesc.Streams[3], Luster_ReadHubs_FullMethodName, cOpts...)
@@ -409,6 +422,8 @@ type LusterServer interface {
 	UpdateLabel(context.Context, *UpdateLabelRequest) (*luster.Label, error)
 	// (ALPHA) [LABEL] Deletes label.
 	DeleteLabel(context.Context, *DeleteLabelRequest) (*emptypb.Empty, error)
+	// (ALPHA) [HUB] Gets hub.
+	GetHub(context.Context, *GetHubRequest) (*luster.Hub, error)
 	// (ALPHA) [HUB] Reads hubs.
 	ReadHubs(*ReadHubsRequest, Luster_ReadHubsServer) error
 	mustEmbedUnimplementedLusterServer()
@@ -468,6 +483,9 @@ func (UnimplementedLusterServer) UpdateLabel(context.Context, *UpdateLabelReques
 }
 func (UnimplementedLusterServer) DeleteLabel(context.Context, *DeleteLabelRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteLabel not implemented")
+}
+func (UnimplementedLusterServer) GetHub(context.Context, *GetHubRequest) (*luster.Hub, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetHub not implemented")
 }
 func (UnimplementedLusterServer) ReadHubs(*ReadHubsRequest, Luster_ReadHubsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadHubs not implemented")
@@ -800,6 +818,24 @@ func _Luster_DeleteLabel_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Luster_GetHub_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetHubRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(LusterServer).GetHub(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Luster_GetHub_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(LusterServer).GetHub(ctx, req.(*GetHubRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Luster_ReadHubs_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ReadHubsRequest)
 	if err := stream.RecvMsg(m); err != nil {
@@ -883,6 +919,10 @@ var Luster_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteLabel",
 			Handler:    _Luster_DeleteLabel_Handler,
+		},
+		{
+			MethodName: "GetHub",
+			Handler:    _Luster_GetHub_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

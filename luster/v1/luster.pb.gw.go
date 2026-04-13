@@ -827,6 +827,59 @@ func local_request_Luster_DeleteLabel_0(ctx context.Context, marshaler runtime.M
 	return msg, metadata, err
 }
 
+var filter_Luster_GetHub_0 = &utilities.DoubleArray{Encoding: map[string]int{"hub_type": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+
+func request_Luster_GetHub_0(ctx context.Context, marshaler runtime.Marshaler, client LusterClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetHubRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	val, ok := pathParams["hub_type"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "hub_type")
+	}
+	protoReq.HubType, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "hub_type", err)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Luster_GetHub_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	msg, err := client.GetHub(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_Luster_GetHub_0(ctx context.Context, marshaler runtime.Marshaler, server LusterServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq GetHubRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["hub_type"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "hub_type")
+	}
+	protoReq.HubType, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "hub_type", err)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_Luster_GetHub_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	msg, err := server.GetHub(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 func request_Luster_ReadHubs_0(ctx context.Context, marshaler runtime.Marshaler, client LusterClient, req *http.Request, pathParams map[string]string) (Luster_ReadHubsClient, runtime.ServerMetadata, error) {
 	var (
 		protoReq ReadHubsRequest
@@ -1155,6 +1208,26 @@ func RegisterLusterHandlerServer(ctx context.Context, mux *runtime.ServeMux, ser
 			return
 		}
 		forward_Luster_DeleteLabel_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
+	mux.Handle(http.MethodGet, pattern_Luster_GetHub_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.luster.v1.Luster/GetHub", runtime.WithHTTPPathPattern("/v1/hubs/{hub_type}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_Luster_GetHub_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Luster_GetHub_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
 
 	mux.Handle(http.MethodPost, pattern_Luster_ReadHubs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
@@ -1492,6 +1565,23 @@ func RegisterLusterHandlerClient(ctx context.Context, mux *runtime.ServeMux, cli
 		}
 		forward_Luster_DeleteLabel_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodGet, pattern_Luster_GetHub_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.luster.v1.Luster/GetHub", runtime.WithHTTPPathPattern("/v1/hubs/{hub_type}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_Luster_GetHub_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_Luster_GetHub_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodPost, pattern_Luster_ReadHubs_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -1530,6 +1620,7 @@ var (
 	pattern_Luster_CreateLabel_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "contexts", "label"}, ""))
 	pattern_Luster_UpdateLabel_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "contexts", "label", "id"}, ""))
 	pattern_Luster_DeleteLabel_0          = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "contexts", "label", "id"}, ""))
+	pattern_Luster_GetHub_0               = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 1, 0, 4, 1, 5, 2}, []string{"v1", "hubs", "hub_type"}, ""))
 	pattern_Luster_ReadHubs_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "hubs"}, "read"))
 )
 
@@ -1551,5 +1642,6 @@ var (
 	forward_Luster_CreateLabel_0          = runtime.ForwardResponseMessage
 	forward_Luster_UpdateLabel_0          = runtime.ForwardResponseMessage
 	forward_Luster_DeleteLabel_0          = runtime.ForwardResponseMessage
+	forward_Luster_GetHub_0               = runtime.ForwardResponseMessage
 	forward_Luster_ReadHubs_0             = runtime.ForwardResponseStream
 )

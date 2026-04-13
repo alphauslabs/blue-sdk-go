@@ -5006,6 +5006,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.luster.v1.GetHubRequest"><span class="badge">M</span>GetHubRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.luster.v1.GetSpaceRequest"><span class="badge">M</span>GetSpaceRequest</a>
                 </li>
               
@@ -62427,6 +62431,38 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.luster.v1.GetHubRequest">GetHubRequest</h3>
+        <p>Request message for the Luster.GetHub rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>hub_type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. the hub type. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>field_mask</td>
+                  <td><a href="#google.protobuf.FieldMask">google.protobuf.FieldMask</a></td>
+                  <td></td>
+                  <td><p>Optional. field_mask
+see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/field_mask.proto </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.luster.v1.GetSpaceRequest">GetSpaceRequest</h3>
         <p>Request message for the Luster.GetSpace rpc.</p>
 
@@ -62952,6 +62988,13 @@ When deleted, contexts created within the space will also be deleted and cannot 
               </tr>
             
               <tr>
+                <td>GetHub</td>
+                <td><a href="#blueapi.luster.v1.GetHubRequest">GetHubRequest</a></td>
+                <td><a href="#blueapi.api.luster.Hub">.blueapi.api.luster.Hub</a></td>
+                <td><p>(ALPHA) [HUB] Gets hub.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ReadHubs</td>
                 <td><a href="#blueapi.luster.v1.ReadHubsRequest">ReadHubsRequest</a></td>
                 <td><a href="#blueapi.api.luster.Hub">.blueapi.api.luster.Hub</a> stream</td>
@@ -63142,6 +63185,16 @@ When deleted, contexts created within the space will also be deleted and cannot 
                 <td>DeleteLabel</td>
                 <td>DELETE</td>
                 <td>/v1/contexts/label/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetHub</td>
+                <td>GET</td>
+                <td>/v1/hubs/{hub_type}</td>
                 <td></td>
               </tr>
               
