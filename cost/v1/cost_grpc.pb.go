@@ -84,6 +84,7 @@ const (
 	Cost_GetRecommendations_FullMethodName            = "/blueapi.cost.v1.Cost/GetRecommendations"
 	Cost_GetCostReduction_FullMethodName              = "/blueapi.cost.v1.Cost/GetCostReduction"
 	Cost_GetExportRISP_FullMethodName                 = "/blueapi.cost.v1.Cost/GetExportRISP"
+	Cost_ExportReport_FullMethodName                  = "/blueapi.cost.v1.Cost/ExportReport"
 	Cost_GetUtilization_FullMethodName                = "/blueapi.cost.v1.Cost/GetUtilization"
 	Cost_GetCoverageOptions_FullMethodName            = "/blueapi.cost.v1.Cost/GetCoverageOptions"
 	Cost_GetCoverageOndemand_FullMethodName           = "/blueapi.cost.v1.Cost/GetCoverageOndemand"
@@ -274,6 +275,9 @@ type CostClient interface {
 	GetCostReduction(ctx context.Context, in *GetCostReductionRequest, opts ...grpc.CallOption) (*GetCostReductionResponse, error)
 	// Exports RI and SP for all payers.
 	GetExportRISP(ctx context.Context, in *GetExportRISPRequest, opts ...grpc.CallOption) (*GetExportRISPResponse, error)
+	// Exports a vendor report and delivers results via email notification channel.
+	// Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.
+	ExportReport(ctx context.Context, in *ExportReportRequest, opts ...grpc.CallOption) (*ExportReportResponse, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1216,6 +1220,16 @@ func (c *costClient) GetExportRISP(ctx context.Context, in *GetExportRISPRequest
 	return out, nil
 }
 
+func (c *costClient) ExportReport(ctx context.Context, in *ExportReportRequest, opts ...grpc.CallOption) (*ExportReportResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportReportResponse)
+	err := c.cc.Invoke(ctx, Cost_ExportReport_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *costClient) GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUtilizationResponse)
@@ -1586,6 +1600,9 @@ type CostServer interface {
 	GetCostReduction(context.Context, *GetCostReductionRequest) (*GetCostReductionResponse, error)
 	// Exports RI and SP for all payers.
 	GetExportRISP(context.Context, *GetExportRISPRequest) (*GetExportRISPResponse, error)
+	// Exports a vendor report and delivers results via email notification channel.
+	// Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.
+	ExportReport(context.Context, *ExportReportRequest) (*ExportReportResponse, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1789,6 +1806,9 @@ func (UnimplementedCostServer) GetCostReduction(context.Context, *GetCostReducti
 }
 func (UnimplementedCostServer) GetExportRISP(context.Context, *GetExportRISPRequest) (*GetExportRISPResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetExportRISP not implemented")
+}
+func (UnimplementedCostServer) ExportReport(context.Context, *ExportReportRequest) (*ExportReportResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportReport not implemented")
 }
 func (UnimplementedCostServer) GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUtilization not implemented")
@@ -2937,6 +2957,24 @@ func _Cost_GetExportRISP_Handler(srv interface{}, ctx context.Context, dec func(
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_ExportReport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportReportRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).ExportReport(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_ExportReport_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).ExportReport(ctx, req.(*ExportReportRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cost_GetUtilization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUtilizationRequest)
 	if err := dec(in); err != nil {
@@ -3315,6 +3353,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetExportRISP",
 			Handler:    _Cost_GetExportRISP_Handler,
+		},
+		{
+			MethodName: "ExportReport",
+			Handler:    _Cost_ExportReport_Handler,
 		},
 		{
 			MethodName: "GetUtilization",

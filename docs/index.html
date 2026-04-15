@@ -671,6 +671,18 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.cost.v1.AwsRispExportOptions"><span class="badge">M</span>AwsRispExportOptions</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.AwsRispExportOptions.Columns"><span class="badge">M</span>AwsRispExportOptions.Columns</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.AwsRispExportOptions.ColumnsByQueryEntry"><span class="badge">M</span>AwsRispExportOptions.ColumnsByQueryEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.BudgetAlerts"><span class="badge">M</span>BudgetAlerts</a>
                 </li>
               
@@ -856,6 +868,14 @@
               
                 <li>
                   <a href="#blueapi.cost.v1.ExportCostFiltersFileResponse"><span class="badge">M</span>ExportCostFiltersFileResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.ExportReportRequest"><span class="badge">M</span>ExportReportRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.ExportReportResponse"><span class="badge">M</span>ExportReportResponse</a>
                 </li>
               
                 <li>
@@ -9842,6 +9862,117 @@ Valid values:
       <p></p>
 
       
+        <h3 id="blueapi.cost.v1.AwsRispExportOptions">AwsRispExportOptions</h3>
+        <p>AWS RI/SP export options for ExportReport.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>include_expired</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Include expired RIs/SPs in the results. Default: false. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. CSV header language: &#34;en&#34; or &#34;ja&#34;.
+If empty, defaults to the MSP or login user&#39;s language. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>queries</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Report queries to include in the export. Must contain at least 1 value.
+Valid values: &#34;ri_summary&#34;, &#34;sp_summary&#34;, &#34;ri_usageaccount&#34;, &#34;sp_usageaccount&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>columns</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Global column filter applied to all reports.
+Superseded per-report by columns_by_query if that key is present. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>columns_by_query</td>
+                  <td><a href="#blueapi.cost.v1.AwsRispExportOptions.ColumnsByQueryEntry">AwsRispExportOptions.ColumnsByQueryEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Per-report column overrides.
+Keys must be valid query names (ri_summary, sp_summary, ri_usageaccount, sp_usageaccount). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.AwsRispExportOptions.Columns">AwsRispExportOptions.Columns</h3>
+        <p>Per-report column filter container.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>values</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.AwsRispExportOptions.ColumnsByQueryEntry">AwsRispExportOptions.ColumnsByQueryEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#blueapi.cost.v1.AwsRispExportOptions.Columns">AwsRispExportOptions.Columns</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.BudgetAlerts">BudgetAlerts</h3>
         <p>Request message for the BudgetAlerts rpc.</p>
 
@@ -11798,6 +11929,80 @@ For example, if you only want the services and region data, you can set this fie
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. URL of exported file. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ExportReportRequest">ExportReportRequest</h3>
+        <p>Request message for ExportReport.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Billing month in YYYY-MM format. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Cloud vendor.
+Accepted values: &#34;aws&#34;, &#34;gcp&#34;, &#34;azure&#34;.
+If empty, defaults to &#34;aws&#34; for backward compatibility. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notification_channel_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Notification channel IDs to deliver the report.
+If empty, the MSP default notification channel configured in DynamoDB is used. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>aws_options</td>
+                  <td><a href="#blueapi.cost.v1.AwsRispExportOptions">AwsRispExportOptions</a></td>
+                  <td></td>
+                  <td><p>Optional. Valid only for the `aws` vendor. AWS RI/SP export options.
+
+Future vendor-specific options follow the same pattern (e.g. gcp_options, azure_options). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.ExportReportResponse">ExportReportResponse</h3>
+        <p>Response message for ExportReport.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>email_sent</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True if the export email was successfully queued for delivery. </p></td>
                 </tr>
               
             </tbody>
@@ -16292,6 +16497,14 @@ Only available in Wave(Pro).</p></td>
               </tr>
             
               <tr>
+                <td>ExportReport</td>
+                <td><a href="#blueapi.cost.v1.ExportReportRequest">ExportReportRequest</a></td>
+                <td><a href="#blueapi.cost.v1.ExportReportResponse">ExportReportResponse</a></td>
+                <td><p>Exports a vendor report and delivers results via email notification channel.
+Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetUtilization</td>
                 <td><a href="#blueapi.cost.v1.GetUtilizationRequest">GetUtilizationRequest</a></td>
                 <td><a href="#blueapi.cost.v1.GetUtilizationResponse">GetUtilizationResponse</a></td>
@@ -16979,6 +17192,16 @@ Only available in Wave(Pro).</p></td>
                 <td>GetExportRISP</td>
                 <td>POST</td>
                 <td>/v1/exportcsv/payers:export</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportReport</td>
+                <td>POST</td>
+                <td>/v1/reports:export</td>
                 <td>*</td>
               </tr>
               
