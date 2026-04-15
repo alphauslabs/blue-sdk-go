@@ -1414,6 +1414,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BulkTagBillingGroupError"><span class="badge">M</span>BulkTagBillingGroupError</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkTagBillingGroupMetadata"><span class="badge">M</span>BulkTagBillingGroupMetadata</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkTagBillingGroupRequest"><span class="badge">M</span>BulkTagBillingGroupRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ChildBillingGroup"><span class="badge">M</span>ChildBillingGroup</a>
                 </li>
               
@@ -19124,6 +19136,171 @@ Useful for validating CSV format and data before performing the actual bulk oper
 
         
       
+        <h3 id="blueapi.billing.v1.BulkTagBillingGroupError">BulkTagBillingGroupError</h3>
+        <p>Describes a single failed row in a BulkTagBillingGroup operation.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The row index of the failed entry in the CSV (zero-based, excluding header). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group ID from the failed row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The customer ID from the failed row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The tag key from the failed row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The tag value from the failed row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Human-readable error message. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkTagBillingGroupMetadata">BulkTagBillingGroupMetadata</h3>
+        <p>Metadata for the BulkTagBillingGroup long-running operation.</p><p>Stored in protos.Operation.metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of tag entries to process. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processedCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries processed so far. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>successCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries successfully processed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of entries that failed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#blueapi.billing.v1.BulkTagBillingGroupError">BulkTagBillingGroupError</a></td>
+                  <td>repeated</td>
+                  <td><p>Details of failed entries. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job start timestamp (RFC 3339). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job end timestamp. Empty if still running. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkTagBillingGroupRequest">BulkTagBillingGroupRequest</h3>
+        <p>Request for BulkTagBillingGroup.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>csvContent</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Required. The CSV file content as bytes.
+Expected columns: billing_group_id, customer_id, key, value </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The operation mode.
+One of: &#34;add&#34; (default), &#34;delete&#34;, &#34;dry-run&#34;. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ChildBillingGroup">ChildBillingGroup</h3>
         <p>Contains basic information and invoice settings related data.</p>
 
@@ -27773,6 +27950,15 @@ Use this to retrieve service codes and names that can be referenced in exclude s
 Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).</p></td>
               </tr>
             
+              <tr>
+                <td>BulkTagBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.BulkTagBillingGroupRequest">BulkTagBillingGroupRequest</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
+                <td><p>Bulk-tag multiple billing groups from a CSV file.
+Supports add, delete, and dry-run modes.
+Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -29147,6 +29333,16 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>BulkLinkAccount</td>
                 <td>POST</td>
                 <td>/v1/billinggroups:bulkLinkAccount</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>BulkTagBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/billinggroups:bulkTag</td>
                 <td>*</td>
               </tr>
               

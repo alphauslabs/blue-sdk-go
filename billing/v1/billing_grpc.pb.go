@@ -161,6 +161,7 @@ const (
 	Billing_ListExcludeServices_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListExcludeServices"
 	Billing_ListServices_FullMethodName                                        = "/blueapi.billing.v1.Billing/ListServices"
 	Billing_BulkLinkAccount_FullMethodName                                     = "/blueapi.billing.v1.Billing/BulkLinkAccount"
+	Billing_BulkTagBillingGroup_FullMethodName                                 = "/blueapi.billing.v1.Billing/BulkTagBillingGroup"
 )
 
 // BillingClient is the client API for Billing service.
@@ -455,6 +456,10 @@ type BillingClient interface {
 	// Link accounts to a billing group in bulk from a CSV file.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkLinkAccount(ctx context.Context, in *BulkLinkAccountRequest, opts ...grpc.CallOption) (*protos.Operation, error)
+	// Bulk-tag multiple billing groups from a CSV file.
+	// Supports add, delete, and dry-run modes.
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkTagBillingGroup(ctx context.Context, in *BulkTagBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 }
 
 type billingClient struct {
@@ -2538,6 +2543,16 @@ func (c *billingClient) BulkLinkAccount(ctx context.Context, in *BulkLinkAccount
 	return out, nil
 }
 
+func (c *billingClient) BulkTagBillingGroup(ctx context.Context, in *BulkTagBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(protos.Operation)
+	err := c.cc.Invoke(ctx, Billing_BulkTagBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -2830,6 +2845,10 @@ type BillingServer interface {
 	// Link accounts to a billing group in bulk from a CSV file.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*protos.Operation, error)
+	// Bulk-tag multiple billing groups from a CSV file.
+	// Supports add, delete, and dry-run modes.
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkTagBillingGroup(context.Context, *BulkTagBillingGroupRequest) (*protos.Operation, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -3244,6 +3263,9 @@ func (UnimplementedBillingServer) ListServices(context.Context, *ListServicesReq
 }
 func (UnimplementedBillingServer) BulkLinkAccount(context.Context, *BulkLinkAccountRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BulkLinkAccount not implemented")
+}
+func (UnimplementedBillingServer) BulkTagBillingGroup(context.Context, *BulkTagBillingGroupRequest) (*protos.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BulkTagBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -5799,6 +5821,24 @@ func _Billing_BulkLinkAccount_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_BulkTagBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BulkTagBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).BulkTagBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_BulkTagBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).BulkTagBillingGroup(ctx, req.(*BulkTagBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6225,6 +6265,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BulkLinkAccount",
 			Handler:    _Billing_BulkLinkAccount_Handler,
+		},
+		{
+			MethodName: "BulkTagBillingGroup",
+			Handler:    _Billing_BulkTagBillingGroup_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
