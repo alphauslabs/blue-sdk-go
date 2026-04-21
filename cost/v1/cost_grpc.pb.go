@@ -25,76 +25,77 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	Cost_ListPayerAccounts_FullMethodName             = "/blueapi.cost.v1.Cost/ListPayerAccounts"
-	Cost_GetPayerAccount_FullMethodName               = "/blueapi.cost.v1.Cost/GetPayerAccount"
-	Cost_ListPayerAccountsExtended_FullMethodName     = "/blueapi.cost.v1.Cost/ListPayerAccountsExtended"
-	Cost_GetPayerAccountExtended_FullMethodName       = "/blueapi.cost.v1.Cost/GetPayerAccountExtended"
-	Cost_GetPayerAccountImportHistory_FullMethodName  = "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory"
-	Cost_GetPayerProformaReports_FullMethodName       = "/blueapi.cost.v1.Cost/GetPayerProformaReports"
-	Cost_CreatePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/CreatePayerAccount"
-	Cost_RegisterPayerAccount_FullMethodName          = "/blueapi.cost.v1.Cost/RegisterPayerAccount"
-	Cost_UpdatePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/UpdatePayerAccount"
-	Cost_DeletePayerAccount_FullMethodName            = "/blueapi.cost.v1.Cost/DeletePayerAccount"
-	Cost_ListAccounts_FullMethodName                  = "/blueapi.cost.v1.Cost/ListAccounts"
-	Cost_GetAccount_FullMethodName                    = "/blueapi.cost.v1.Cost/GetAccount"
-	Cost_CreateAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/CreateAccount"
-	Cost_UpdateAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/UpdateAccount"
-	Cost_DeleteAccount_FullMethodName                 = "/blueapi.cost.v1.Cost/DeleteAccount"
-	Cost_ReadAccountOriginalResources_FullMethodName  = "/blueapi.cost.v1.Cost/ReadAccountOriginalResources"
-	Cost_ListTags_FullMethodName                      = "/blueapi.cost.v1.Cost/ListTags"
-	Cost_ListCalculatorRunningAccounts_FullMethodName = "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts"
-	Cost_GetCalculatorConfig_FullMethodName           = "/blueapi.cost.v1.Cost/GetCalculatorConfig"
-	Cost_ListCalculatorCostModifiers_FullMethodName   = "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers"
-	Cost_CreateCalculatorCostModifier_FullMethodName  = "/blueapi.cost.v1.Cost/CreateCalculatorCostModifier"
-	Cost_DeleteCalculatorCostModifier_FullMethodName  = "/blueapi.cost.v1.Cost/DeleteCalculatorCostModifier"
-	Cost_ImportCurFiles_FullMethodName                = "/blueapi.cost.v1.Cost/ImportCurFiles"
-	Cost_CalculateCosts_FullMethodName                = "/blueapi.cost.v1.Cost/CalculateCosts"
-	Cost_ListCalculationsHistory_FullMethodName       = "/blueapi.cost.v1.Cost/ListCalculationsHistory"
-	Cost_ListCalculationsSchedules_FullMethodName     = "/blueapi.cost.v1.Cost/ListCalculationsSchedules"
-	Cost_CreateCalculationsSchedule_FullMethodName    = "/blueapi.cost.v1.Cost/CreateCalculationsSchedule"
-	Cost_DeleteCalculationsSchedule_FullMethodName    = "/blueapi.cost.v1.Cost/DeleteCalculationsSchedule"
-	Cost_ListCostFilters_FullMethodName               = "/blueapi.cost.v1.Cost/ListCostFilters"
-	Cost_CreateCostFilters_FullMethodName             = "/blueapi.cost.v1.Cost/CreateCostFilters"
-	Cost_UpdateCostFilters_FullMethodName             = "/blueapi.cost.v1.Cost/UpdateCostFilters"
-	Cost_DeleteCostFilters_FullMethodName             = "/blueapi.cost.v1.Cost/DeleteCostFilters"
-	Cost_ExportCostFiltersFile_FullMethodName         = "/blueapi.cost.v1.Cost/ExportCostFiltersFile"
-	Cost_ReadCostAttributes_FullMethodName            = "/blueapi.cost.v1.Cost/ReadCostAttributes"
-	Cost_GetCostAttributes_FullMethodName             = "/blueapi.cost.v1.Cost/GetCostAttributes"
-	Cost_ReadCosts_FullMethodName                     = "/blueapi.cost.v1.Cost/ReadCosts"
-	Cost_ReadAdjustments_FullMethodName               = "/blueapi.cost.v1.Cost/ReadAdjustments"
-	Cost_ReadTagCosts_FullMethodName                  = "/blueapi.cost.v1.Cost/ReadTagCosts"
-	Cost_ReadNonTagCosts_FullMethodName               = "/blueapi.cost.v1.Cost/ReadNonTagCosts"
-	Cost_GetForecasts_FullMethodName                  = "/blueapi.cost.v1.Cost/GetForecasts"
-	Cost_GetMonthlyCostForecast_FullMethodName        = "/blueapi.cost.v1.Cost/GetMonthlyCostForecast"
-	Cost_GetMonthOnMonthCostForecast_FullMethodName   = "/blueapi.cost.v1.Cost/GetMonthOnMonthCostForecast"
-	Cost_GetMonthToDateCostForecast_FullMethodName    = "/blueapi.cost.v1.Cost/GetMonthToDateCostForecast"
-	Cost_GetAccountBudget_FullMethodName              = "/blueapi.cost.v1.Cost/GetAccountBudget"
-	Cost_CreateAccountBudget_FullMethodName           = "/blueapi.cost.v1.Cost/CreateAccountBudget"
-	Cost_UpdateAccountBudget_FullMethodName           = "/blueapi.cost.v1.Cost/UpdateAccountBudget"
-	Cost_DeleteAccountBudget_FullMethodName           = "/blueapi.cost.v1.Cost/DeleteAccountBudget"
-	Cost_GetAccountBudgetAlerts_FullMethodName        = "/blueapi.cost.v1.Cost/GetAccountBudgetAlerts"
-	Cost_CreateAccountBudgetAlerts_FullMethodName     = "/blueapi.cost.v1.Cost/CreateAccountBudgetAlerts"
-	Cost_UpdateAccountBudgetAlerts_FullMethodName     = "/blueapi.cost.v1.Cost/UpdateAccountBudgetAlerts"
-	Cost_DeleteAccountBudgetAlerts_FullMethodName     = "/blueapi.cost.v1.Cost/DeleteAccountBudgetAlerts"
-	Cost_ReadBudgetAlerts_FullMethodName              = "/blueapi.cost.v1.Cost/ReadBudgetAlerts"
-	Cost_GetBudgetAlerts_FullMethodName               = "/blueapi.cost.v1.Cost/GetBudgetAlerts"
-	Cost_CreateBudgetAlerts_FullMethodName            = "/blueapi.cost.v1.Cost/CreateBudgetAlerts"
-	Cost_UpdateBudgetAlerts_FullMethodName            = "/blueapi.cost.v1.Cost/UpdateBudgetAlerts"
-	Cost_DeleteBudgetAlerts_FullMethodName            = "/blueapi.cost.v1.Cost/DeleteBudgetAlerts"
-	Cost_GetRecommendations_FullMethodName            = "/blueapi.cost.v1.Cost/GetRecommendations"
-	Cost_GetCostReduction_FullMethodName              = "/blueapi.cost.v1.Cost/GetCostReduction"
-	Cost_GetExportRISP_FullMethodName                 = "/blueapi.cost.v1.Cost/GetExportRISP"
-	Cost_ExportReport_FullMethodName                  = "/blueapi.cost.v1.Cost/ExportReport"
-	Cost_GetUtilization_FullMethodName                = "/blueapi.cost.v1.Cost/GetUtilization"
-	Cost_GetCoverageOptions_FullMethodName            = "/blueapi.cost.v1.Cost/GetCoverageOptions"
-	Cost_GetCoverageOndemand_FullMethodName           = "/blueapi.cost.v1.Cost/GetCoverageOndemand"
-	Cost_GetBreakevenPoint_FullMethodName             = "/blueapi.cost.v1.Cost/GetBreakevenPoint"
-	Cost_CheckAccountsBelongToMsp_FullMethodName      = "/blueapi.cost.v1.Cost/CheckAccountsBelongToMsp"
-	Cost_ReadInvoiceIds_FullMethodName                = "/blueapi.cost.v1.Cost/ReadInvoiceIds"
-	Cost_ReadInvoiceOverViews_FullMethodName          = "/blueapi.cost.v1.Cost/ReadInvoiceOverViews"
-	Cost_ReadInvoiceCosts_FullMethodName              = "/blueapi.cost.v1.Cost/ReadInvoiceCosts"
-	Cost_ReadInvoiceGroupCosts_FullMethodName         = "/blueapi.cost.v1.Cost/ReadInvoiceGroupCosts"
-	Cost_ListCalculationPrerequisites_FullMethodName  = "/blueapi.cost.v1.Cost/ListCalculationPrerequisites"
+	Cost_ListPayerAccounts_FullMethodName                = "/blueapi.cost.v1.Cost/ListPayerAccounts"
+	Cost_GetPayerAccount_FullMethodName                  = "/blueapi.cost.v1.Cost/GetPayerAccount"
+	Cost_ListPayerAccountsExtended_FullMethodName        = "/blueapi.cost.v1.Cost/ListPayerAccountsExtended"
+	Cost_GetPayerAccountExtended_FullMethodName          = "/blueapi.cost.v1.Cost/GetPayerAccountExtended"
+	Cost_GetPayerAccountImportHistory_FullMethodName     = "/blueapi.cost.v1.Cost/GetPayerAccountImportHistory"
+	Cost_GetPayerProformaReports_FullMethodName          = "/blueapi.cost.v1.Cost/GetPayerProformaReports"
+	Cost_CreatePayerAccount_FullMethodName               = "/blueapi.cost.v1.Cost/CreatePayerAccount"
+	Cost_RegisterPayerAccount_FullMethodName             = "/blueapi.cost.v1.Cost/RegisterPayerAccount"
+	Cost_UpdatePayerAccount_FullMethodName               = "/blueapi.cost.v1.Cost/UpdatePayerAccount"
+	Cost_DeletePayerAccount_FullMethodName               = "/blueapi.cost.v1.Cost/DeletePayerAccount"
+	Cost_ListAccounts_FullMethodName                     = "/blueapi.cost.v1.Cost/ListAccounts"
+	Cost_GetAccount_FullMethodName                       = "/blueapi.cost.v1.Cost/GetAccount"
+	Cost_CreateAccount_FullMethodName                    = "/blueapi.cost.v1.Cost/CreateAccount"
+	Cost_UpdateAccount_FullMethodName                    = "/blueapi.cost.v1.Cost/UpdateAccount"
+	Cost_DeleteAccount_FullMethodName                    = "/blueapi.cost.v1.Cost/DeleteAccount"
+	Cost_ReadAccountOriginalResources_FullMethodName     = "/blueapi.cost.v1.Cost/ReadAccountOriginalResources"
+	Cost_ListTags_FullMethodName                         = "/blueapi.cost.v1.Cost/ListTags"
+	Cost_ListCalculatorRunningAccounts_FullMethodName    = "/blueapi.cost.v1.Cost/ListCalculatorRunningAccounts"
+	Cost_GetCalculatorConfig_FullMethodName              = "/blueapi.cost.v1.Cost/GetCalculatorConfig"
+	Cost_ListCalculatorCostModifiers_FullMethodName      = "/blueapi.cost.v1.Cost/ListCalculatorCostModifiers"
+	Cost_CreateCalculatorCostModifier_FullMethodName     = "/blueapi.cost.v1.Cost/CreateCalculatorCostModifier"
+	Cost_DeleteCalculatorCostModifier_FullMethodName     = "/blueapi.cost.v1.Cost/DeleteCalculatorCostModifier"
+	Cost_ImportCurFiles_FullMethodName                   = "/blueapi.cost.v1.Cost/ImportCurFiles"
+	Cost_CalculateCosts_FullMethodName                   = "/blueapi.cost.v1.Cost/CalculateCosts"
+	Cost_ListCalculationsHistory_FullMethodName          = "/blueapi.cost.v1.Cost/ListCalculationsHistory"
+	Cost_ListCalculationsSchedules_FullMethodName        = "/blueapi.cost.v1.Cost/ListCalculationsSchedules"
+	Cost_CreateCalculationsSchedule_FullMethodName       = "/blueapi.cost.v1.Cost/CreateCalculationsSchedule"
+	Cost_DeleteCalculationsSchedule_FullMethodName       = "/blueapi.cost.v1.Cost/DeleteCalculationsSchedule"
+	Cost_ListCostFilters_FullMethodName                  = "/blueapi.cost.v1.Cost/ListCostFilters"
+	Cost_CreateCostFilters_FullMethodName                = "/blueapi.cost.v1.Cost/CreateCostFilters"
+	Cost_UpdateCostFilters_FullMethodName                = "/blueapi.cost.v1.Cost/UpdateCostFilters"
+	Cost_DeleteCostFilters_FullMethodName                = "/blueapi.cost.v1.Cost/DeleteCostFilters"
+	Cost_ExportCostFiltersFile_FullMethodName            = "/blueapi.cost.v1.Cost/ExportCostFiltersFile"
+	Cost_ReadCostAttributes_FullMethodName               = "/blueapi.cost.v1.Cost/ReadCostAttributes"
+	Cost_GetCostAttributes_FullMethodName                = "/blueapi.cost.v1.Cost/GetCostAttributes"
+	Cost_ReadCosts_FullMethodName                        = "/blueapi.cost.v1.Cost/ReadCosts"
+	Cost_ReadAdjustments_FullMethodName                  = "/blueapi.cost.v1.Cost/ReadAdjustments"
+	Cost_ReadTagCosts_FullMethodName                     = "/blueapi.cost.v1.Cost/ReadTagCosts"
+	Cost_ReadNonTagCosts_FullMethodName                  = "/blueapi.cost.v1.Cost/ReadNonTagCosts"
+	Cost_GetForecasts_FullMethodName                     = "/blueapi.cost.v1.Cost/GetForecasts"
+	Cost_GetMonthlyCostForecast_FullMethodName           = "/blueapi.cost.v1.Cost/GetMonthlyCostForecast"
+	Cost_GetMonthOnMonthCostForecast_FullMethodName      = "/blueapi.cost.v1.Cost/GetMonthOnMonthCostForecast"
+	Cost_GetMonthToDateCostForecast_FullMethodName       = "/blueapi.cost.v1.Cost/GetMonthToDateCostForecast"
+	Cost_GetAccountBudget_FullMethodName                 = "/blueapi.cost.v1.Cost/GetAccountBudget"
+	Cost_CreateAccountBudget_FullMethodName              = "/blueapi.cost.v1.Cost/CreateAccountBudget"
+	Cost_UpdateAccountBudget_FullMethodName              = "/blueapi.cost.v1.Cost/UpdateAccountBudget"
+	Cost_DeleteAccountBudget_FullMethodName              = "/blueapi.cost.v1.Cost/DeleteAccountBudget"
+	Cost_GetAccountBudgetAlerts_FullMethodName           = "/blueapi.cost.v1.Cost/GetAccountBudgetAlerts"
+	Cost_CreateAccountBudgetAlerts_FullMethodName        = "/blueapi.cost.v1.Cost/CreateAccountBudgetAlerts"
+	Cost_UpdateAccountBudgetAlerts_FullMethodName        = "/blueapi.cost.v1.Cost/UpdateAccountBudgetAlerts"
+	Cost_DeleteAccountBudgetAlerts_FullMethodName        = "/blueapi.cost.v1.Cost/DeleteAccountBudgetAlerts"
+	Cost_ReadBudgetAlerts_FullMethodName                 = "/blueapi.cost.v1.Cost/ReadBudgetAlerts"
+	Cost_GetBudgetAlerts_FullMethodName                  = "/blueapi.cost.v1.Cost/GetBudgetAlerts"
+	Cost_CreateBudgetAlerts_FullMethodName               = "/blueapi.cost.v1.Cost/CreateBudgetAlerts"
+	Cost_UpdateBudgetAlerts_FullMethodName               = "/blueapi.cost.v1.Cost/UpdateBudgetAlerts"
+	Cost_DeleteBudgetAlerts_FullMethodName               = "/blueapi.cost.v1.Cost/DeleteBudgetAlerts"
+	Cost_GetRecommendations_FullMethodName               = "/blueapi.cost.v1.Cost/GetRecommendations"
+	Cost_GetCostReduction_FullMethodName                 = "/blueapi.cost.v1.Cost/GetCostReduction"
+	Cost_GetExportRISP_FullMethodName                    = "/blueapi.cost.v1.Cost/GetExportRISP"
+	Cost_ExportReport_FullMethodName                     = "/blueapi.cost.v1.Cost/ExportReport"
+	Cost_GetUtilization_FullMethodName                   = "/blueapi.cost.v1.Cost/GetUtilization"
+	Cost_GetCoverageOptions_FullMethodName               = "/blueapi.cost.v1.Cost/GetCoverageOptions"
+	Cost_GetCoverageOndemand_FullMethodName              = "/blueapi.cost.v1.Cost/GetCoverageOndemand"
+	Cost_GetBreakevenPoint_FullMethodName                = "/blueapi.cost.v1.Cost/GetBreakevenPoint"
+	Cost_CheckAccountsBelongToMsp_FullMethodName         = "/blueapi.cost.v1.Cost/CheckAccountsBelongToMsp"
+	Cost_ReadInvoiceIds_FullMethodName                   = "/blueapi.cost.v1.Cost/ReadInvoiceIds"
+	Cost_ReadInvoiceOverViews_FullMethodName             = "/blueapi.cost.v1.Cost/ReadInvoiceOverViews"
+	Cost_ReadInvoiceCosts_FullMethodName                 = "/blueapi.cost.v1.Cost/ReadInvoiceCosts"
+	Cost_ReadInvoiceGroupCosts_FullMethodName            = "/blueapi.cost.v1.Cost/ReadInvoiceGroupCosts"
+	Cost_ListCalculationPrerequisites_FullMethodName     = "/blueapi.cost.v1.Cost/ListCalculationPrerequisites"
+	Cost_SetupPayerAccountBillingTransfer_FullMethodName = "/blueapi.cost.v1.Cost/SetupPayerAccountBillingTransfer"
 )
 
 // CostClient is the client API for Cost service.
@@ -298,6 +299,8 @@ type CostClient interface {
 	ReadInvoiceGroupCosts(ctx context.Context, in *ReadInvoiceGroupCostsRequest, opts ...grpc.CallOption) (Cost_ReadInvoiceGroupCostsClient, error)
 	// WORK-IN-PROGRESS: List the prerequisites for cost calculations.
 	ListCalculationPrerequisites(ctx context.Context, in *ListCalculationPrerequisitesRequest, opts ...grpc.CallOption) (*ListCalculationPrerequisitesResponse, error)
+	// WORK-IN-PROGRESS: Setup payer's billing transfer information
+	SetupPayerAccountBillingTransfer(ctx context.Context, in *SetupPayerAccountBillingTransferRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type costClient struct {
@@ -1422,6 +1425,16 @@ func (c *costClient) ListCalculationPrerequisites(ctx context.Context, in *ListC
 	return out, nil
 }
 
+func (c *costClient) SetupPayerAccountBillingTransfer(ctx context.Context, in *SetupPayerAccountBillingTransferRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Cost_SetupPayerAccountBillingTransfer_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CostServer is the server API for Cost service.
 // All implementations must embed UnimplementedCostServer
 // for forward compatibility
@@ -1623,6 +1636,8 @@ type CostServer interface {
 	ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsRequest, Cost_ReadInvoiceGroupCostsServer) error
 	// WORK-IN-PROGRESS: List the prerequisites for cost calculations.
 	ListCalculationPrerequisites(context.Context, *ListCalculationPrerequisitesRequest) (*ListCalculationPrerequisitesResponse, error)
+	// WORK-IN-PROGRESS: Setup payer's billing transfer information
+	SetupPayerAccountBillingTransfer(context.Context, *SetupPayerAccountBillingTransferRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedCostServer()
 }
 
@@ -1839,6 +1854,9 @@ func (UnimplementedCostServer) ReadInvoiceGroupCosts(*ReadInvoiceGroupCostsReque
 }
 func (UnimplementedCostServer) ListCalculationPrerequisites(context.Context, *ListCalculationPrerequisitesRequest) (*ListCalculationPrerequisitesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCalculationPrerequisites not implemented")
+}
+func (UnimplementedCostServer) SetupPayerAccountBillingTransfer(context.Context, *SetupPayerAccountBillingTransferRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetupPayerAccountBillingTransfer not implemented")
 }
 func (UnimplementedCostServer) mustEmbedUnimplementedCostServer() {}
 
@@ -3167,6 +3185,24 @@ func _Cost_ListCalculationPrerequisites_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_SetupPayerAccountBillingTransfer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetupPayerAccountBillingTransferRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).SetupPayerAccountBillingTransfer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_SetupPayerAccountBillingTransfer_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).SetupPayerAccountBillingTransfer(ctx, req.(*SetupPayerAccountBillingTransferRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Cost_ServiceDesc is the grpc.ServiceDesc for Cost service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -3381,6 +3417,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListCalculationPrerequisites",
 			Handler:    _Cost_ListCalculationPrerequisites_Handler,
+		},
+		{
+			MethodName: "SetupPayerAccountBillingTransfer",
+			Handler:    _Cost_SetupPayerAccountBillingTransfer_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

@@ -1223,6 +1223,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.SetupPayerAccountBillingTransferRequest"><span class="badge">M</span>SetupPayerAccountBillingTransferRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.UpdateAccountBudgetAlertsRequest"><span class="badge">M</span>UpdateAccountBudgetAlertsRequest</a>
                 </li>
               
@@ -15662,6 +15666,79 @@ Only applicable if vendor is set to `aws`. Do not provide if `gcp` or `azure`. <
 
         
       
+        <h3 id="blueapi.cost.v1.SetupPayerAccountBillingTransferRequest">SetupPayerAccountBillingTransferRequest</h3>
+        <p>Request message for SetupPayerAccountBillingTransfer</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The vendor. Only &#39;aws&#39; is supported for now. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The Payer account ID </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing transfer month. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>s3_bucket</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The s3 bucket where the cost and usage report can be downloaded. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>report_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The actual name of the cost and usage report. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>role_arn</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The Role ARN needed to access the s3 bucket. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cur_type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The type of cur. Valid values are: &#39;legacy&#39; and &#39;2.0&#39; </p></td>
+                </tr>
+              
+                <tr>
+                  <td>prefix</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Prefix of the report inside the bucket </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.UpdateAccountBudgetAlertsRequest">UpdateAccountBudgetAlertsRequest</h3>
         <p>Request message for UpdateAccountBudgetAlerts</p>
 
@@ -16586,6 +16663,13 @@ Supports multiple report types per vendor. For AWS, this covers RI/SP utilizatio
                 <td><p>WORK-IN-PROGRESS: List the prerequisites for cost calculations.</p></td>
               </tr>
             
+              <tr>
+                <td>SetupPayerAccountBillingTransfer</td>
+                <td><a href="#blueapi.cost.v1.SetupPayerAccountBillingTransferRequest">SetupPayerAccountBillingTransferRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS: Setup payer&#39;s billing transfer information</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -17315,6 +17399,16 @@ Supports multiple report types per vendor. For AWS, this covers RI/SP utilizatio
                 <td>GET</td>
                 <td>/v1/{vendor}/calculation/prerequisites/{month}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetupPayerAccountBillingTransfer</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/payers/{id}/billingtransfer</td>
+                <td>*</td>
               </tr>
               
             
