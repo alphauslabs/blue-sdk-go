@@ -27,12 +27,15 @@ const (
 	GuaranteedCommitments_GetMetrics_FullMethodName                         = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
 	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
+	GuaranteedCommitments_ListReservableResources_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/ListReservableResources"
 	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
 	GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment"
 	GuaranteedCommitments_GetPurchasePlansDetails_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlansDetails"
 	GuaranteedCommitments_SaveCommitmentsPlanAsDraft_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/SaveCommitmentsPlanAsDraft"
 	GuaranteedCommitments_ListDraftPurchasePlans_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ListDraftPurchasePlans"
 	GuaranteedCommitments_DeleteDraftPurchasePlan_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/DeleteDraftPurchasePlan"
+	GuaranteedCommitments_GetAvailableCommitmentTypes_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/GetAvailableCommitmentTypes"
+	GuaranteedCommitments_CreateCustomCommitmentPlan_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/CreateCustomCommitmentPlan"
 	GuaranteedCommitments_RegisterOrg_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg"
 	GuaranteedCommitments_StartAwsOnboarding_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding"
 	GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate"
@@ -79,6 +82,9 @@ type GuaranteedCommitmentsClient interface {
 	ListResources(ctx context.Context, in *ListResourcesRequest, opts ...grpc.CallOption) (*ListResourcesResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves daily usage data for a specific resource within the specified date range.
 	GetResourceDailyUsage(ctx context.Context, in *GetResourceDailyUsageRequest, opts ...grpc.CallOption) (*GetResourceDailyUsageResponse, error)
+	// WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves a paginated list of reservable infrastructure resources for a segment.
+	// Supports filtering, sorting, and a date range for usage aggregation.
+	ListReservableResources(ctx context.Context, in *ListReservableResourcesRequest, opts ...grpc.CallOption) (*ListReservableResourcesResponse, error)
 	// WORK-IN-PROGRESS: Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Get the updated details of the plan after the apply plan.
@@ -92,6 +98,10 @@ type GuaranteedCommitmentsClient interface {
 	ListDraftPurchasePlans(ctx context.Context, in *ListDraftPurchasePlansRequest, opts ...grpc.CallOption) (*ListDraftPurchasePlansResponse, error)
 	// WORK-IN-PROGRESS: Deletes a drafted purchase plan.
 	DeleteDraftPurchasePlan(ctx context.Context, in *DeleteDraftPurchasePlanRequest, opts ...grpc.CallOption) (*DeleteDraftPurchasePlanResponse, error)
+	// WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves the available commitment types for a given provider.
+	GetAvailableCommitmentTypes(ctx context.Context, in *GetAvailableCommitmentTypesRequest, opts ...grpc.CallOption) (*GetAvailableCommitmentTypesResponse, error)
+	// WORK-IN-PROGRESS: Only works for Alphaus for now. Creates a custom (top-down) commitment purchase plan.
+	CreateCustomCommitmentPlan(ctx context.Context, in *CreateCustomCommitmentPlanRequest, opts ...grpc.CallOption) (*DefaultPurchasePlan, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error)
@@ -257,6 +267,16 @@ func (c *guaranteedCommitmentsClient) GetResourceDailyUsage(ctx context.Context,
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) ListReservableResources(ctx context.Context, in *ListReservableResourcesRequest, opts ...grpc.CallOption) (*ListReservableResourcesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListReservableResourcesResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListReservableResources_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *guaranteedCommitmentsClient) ListPurchasePlansBySegment(ctx context.Context, in *ListPurchasePlansBySegmentRequest, opts ...grpc.CallOption) (*ListPurchasePlansBySegmentResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListPurchasePlansBySegmentResponse)
@@ -311,6 +331,26 @@ func (c *guaranteedCommitmentsClient) DeleteDraftPurchasePlan(ctx context.Contex
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteDraftPurchasePlanResponse)
 	err := c.cc.Invoke(ctx, GuaranteedCommitments_DeleteDraftPurchasePlan_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetAvailableCommitmentTypes(ctx context.Context, in *GetAvailableCommitmentTypesRequest, opts ...grpc.CallOption) (*GetAvailableCommitmentTypesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetAvailableCommitmentTypesResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetAvailableCommitmentTypes_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) CreateCustomCommitmentPlan(ctx context.Context, in *CreateCustomCommitmentPlanRequest, opts ...grpc.CallOption) (*DefaultPurchasePlan, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(DefaultPurchasePlan)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_CreateCustomCommitmentPlan_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -559,6 +599,9 @@ type GuaranteedCommitmentsServer interface {
 	ListResources(context.Context, *ListResourcesRequest) (*ListResourcesResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves daily usage data for a specific resource within the specified date range.
 	GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error)
+	// WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves a paginated list of reservable infrastructure resources for a segment.
+	// Supports filtering, sorting, and a date range for usage aggregation.
+	ListReservableResources(context.Context, *ListReservableResourcesRequest) (*ListReservableResourcesResponse, error)
 	// WORK-IN-PROGRESS: Retrieves purchase plan of a company.
 	ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error)
 	// WORK-IN-PROGRESS: Get the updated details of the plan after the apply plan.
@@ -572,6 +615,10 @@ type GuaranteedCommitmentsServer interface {
 	ListDraftPurchasePlans(context.Context, *ListDraftPurchasePlansRequest) (*ListDraftPurchasePlansResponse, error)
 	// WORK-IN-PROGRESS: Deletes a drafted purchase plan.
 	DeleteDraftPurchasePlan(context.Context, *DeleteDraftPurchasePlanRequest) (*DeleteDraftPurchasePlanResponse, error)
+	// WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves the available commitment types for a given provider.
+	GetAvailableCommitmentTypes(context.Context, *GetAvailableCommitmentTypesRequest) (*GetAvailableCommitmentTypesResponse, error)
+	// WORK-IN-PROGRESS: Only works for Alphaus for now. Creates a custom (top-down) commitment purchase plan.
+	CreateCustomCommitmentPlan(context.Context, *CreateCustomCommitmentPlanRequest) (*DefaultPurchasePlan, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error)
@@ -655,6 +702,9 @@ func (UnimplementedGuaranteedCommitmentsServer) ListResources(context.Context, *
 func (UnimplementedGuaranteedCommitmentsServer) GetResourceDailyUsage(context.Context, *GetResourceDailyUsageRequest) (*GetResourceDailyUsageResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetResourceDailyUsage not implemented")
 }
+func (UnimplementedGuaranteedCommitmentsServer) ListReservableResources(context.Context, *ListReservableResourcesRequest) (*ListReservableResourcesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListReservableResources not implemented")
+}
 func (UnimplementedGuaranteedCommitmentsServer) ListPurchasePlansBySegment(context.Context, *ListPurchasePlansBySegmentRequest) (*ListPurchasePlansBySegmentResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListPurchasePlansBySegment not implemented")
 }
@@ -672,6 +722,12 @@ func (UnimplementedGuaranteedCommitmentsServer) ListDraftPurchasePlans(context.C
 }
 func (UnimplementedGuaranteedCommitmentsServer) DeleteDraftPurchasePlan(context.Context, *DeleteDraftPurchasePlanRequest) (*DeleteDraftPurchasePlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteDraftPurchasePlan not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetAvailableCommitmentTypes(context.Context, *GetAvailableCommitmentTypesRequest) (*GetAvailableCommitmentTypesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetAvailableCommitmentTypes not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) CreateCustomCommitmentPlan(context.Context, *CreateCustomCommitmentPlanRequest) (*DefaultPurchasePlan, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateCustomCommitmentPlan not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RegisterOrg not implemented")
@@ -899,6 +955,24 @@ func _GuaranteedCommitments_GetResourceDailyUsage_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_ListReservableResources_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListReservableResourcesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ListReservableResources(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ListReservableResources_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ListReservableResources(ctx, req.(*ListReservableResourcesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GuaranteedCommitments_ListPurchasePlansBySegment_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListPurchasePlansBySegmentRequest)
 	if err := dec(in); err != nil {
@@ -1003,6 +1077,42 @@ func _GuaranteedCommitments_DeleteDraftPurchasePlan_Handler(srv interface{}, ctx
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuaranteedCommitmentsServer).DeleteDraftPurchasePlan(ctx, req.(*DeleteDraftPurchasePlanRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetAvailableCommitmentTypes_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetAvailableCommitmentTypesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetAvailableCommitmentTypes(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetAvailableCommitmentTypes_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetAvailableCommitmentTypes(ctx, req.(*GetAvailableCommitmentTypesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_CreateCustomCommitmentPlan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateCustomCommitmentPlanRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).CreateCustomCommitmentPlan(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_CreateCustomCommitmentPlan_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).CreateCustomCommitmentPlan(ctx, req.(*CreateCustomCommitmentPlanRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1439,6 +1549,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _GuaranteedCommitments_GetResourceDailyUsage_Handler,
 		},
 		{
+			MethodName: "ListReservableResources",
+			Handler:    _GuaranteedCommitments_ListReservableResources_Handler,
+		},
+		{
 			MethodName: "ListPurchasePlansBySegment",
 			Handler:    _GuaranteedCommitments_ListPurchasePlansBySegment_Handler,
 		},
@@ -1461,6 +1575,14 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteDraftPurchasePlan",
 			Handler:    _GuaranteedCommitments_DeleteDraftPurchasePlan_Handler,
+		},
+		{
+			MethodName: "GetAvailableCommitmentTypes",
+			Handler:    _GuaranteedCommitments_GetAvailableCommitmentTypes_Handler,
+		},
+		{
+			MethodName: "CreateCustomCommitmentPlan",
+			Handler:    _GuaranteedCommitments_CreateCustomCommitmentPlan_Handler,
 		},
 		{
 			MethodName: "RegisterOrg",

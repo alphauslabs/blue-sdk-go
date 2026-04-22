@@ -4623,6 +4623,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.CreateCustomCommitmentPlanRequest"><span class="badge">M</span>CreateCustomCommitmentPlanRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.CreateGuaranteedCommitmentAccessRequest"><span class="badge">M</span>CreateGuaranteedCommitmentAccessRequest</a>
                 </li>
               
@@ -4644,6 +4648,14 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.DeleteDraftPurchasePlanResponse"><span class="badge">M</span>DeleteDraftPurchasePlanResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetAvailableCommitmentTypesRequest"><span class="badge">M</span>GetAvailableCommitmentTypesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetAvailableCommitmentTypesResponse"><span class="badge">M</span>GetAvailableCommitmentTypesResponse</a>
                 </li>
               
                 <li>
@@ -4811,6 +4823,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.ListReservableResourcesRequest"><span class="badge">M</span>ListReservableResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ListReservableResourcesResponse"><span class="badge">M</span>ListReservableResourcesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.ListResourcesRequest"><span class="badge">M</span>ListResourcesRequest</a>
                 </li>
               
@@ -4860,6 +4880,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.RegisterOrgResponse"><span class="badge">M</span>RegisterOrgResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ReservableResource"><span class="badge">M</span>ReservableResource</a>
                 </li>
               
                 <li>
@@ -56830,6 +56854,117 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
 
         
       
+        <h3 id="blueapi.gc.v1.CreateCustomCommitmentPlanRequest">CreateCustomCommitmentPlanRequest</h3>
+        <p>CreateCustomCommitmentPlanRequest creates a new top-down custom commitment plan.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The cloud provider. Acceptable values: &#34;aws&#34;, &#34;azure&#34;, &#34;gcp&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. ISO 8601 lookback window start timestamp (e.g. &#34;2026-04-09T02:43:39.717Z&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. ISO 8601 lookback window end timestamp (e.g. &#34;2026-04-16T02:43:39.717Z&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>segmentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The segment ID to scope the plan to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Plan status. Use &#34;draft&#34; to save without submitting.
+Acceptable values: &#34;draft&#34;, &#34;submitted&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Human-readable description for the plan. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Human-readable name for the plan. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>includedContractSpecs</td>
+                  <td><a href="#blueapi.gc.v1.ContractSpec">ContractSpec</a></td>
+                  <td>repeated</td>
+                  <td><p>List of contract specifications to include in the plan.
+Each entry selects a commitment category, term, payment option, and optional properties.
+
+Acceptable commitment_type values:
+  &#34;aws/AmazonEC2&#34;, &#34;aws/AmazonRDS&#34;, &#34;aws/AmazonElastiCache&#34;,
+  &#34;aws/savingsplan/Compute&#34;, &#34;aws/savingsplan/EC2Instance&#34;, &#34;aws/savingsplan/Database&#34;
+
+Acceptable term values:
+  &#34;thirty_day_gris&#34;  - 30-day Archera Insured (leased: true)
+  &#34;one_year_gris&#34;    - 1-year Archera Insured (leased: true)
+  &#34;one_year&#34;         - 1-year Native Uninsured (leased: false)
+  &#34;three_year&#34;       - 3-year Native Uninsured (leased: false)
+
+Acceptable payment_option values:
+  &#34;no_upfront&#34;, &#34;partial_upfront&#34;, &#34;all_upfront&#34;
+  Note: &#34;partial_upfront&#34; and &#34;all_upfront&#34; are not available for 30-day terms.
+
+Acceptable properties keys:
+  &#34;leased&#34; (bool)          - true for Archera Insured terms, false for Native terms.
+  &#34;offering_class&#34; (string) - only for &#34;aws/AmazonEC2&#34;; &#34;convertible&#34; or &#34;standard&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>includedContractTerms</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of contract term keys included in the plan.
+Acceptable values: &#34;thirty_day_gris&#34;, &#34;one_year_gris&#34;, &#34;one_year&#34;, &#34;three_year&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Specific resource IDs to pin the plan to selected infrastructure resources.
+When populated, the server returns plan_type &#34;infrastructure&#34;; omit for a top-down
+&#34;purchase&#34; plan. IDs are composite strings in the format
+&#34;{resource_id}|{catalog_sku_org_id}|{catalog_sku_id}&#34; as returned by ListReservableResources. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.CreateGuaranteedCommitmentAccessRequest">CreateGuaranteedCommitmentAccessRequest</h3>
         <p></p>
 
@@ -57367,6 +57502,41 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>monthlyAfterCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Monthly cost breakdowns (returned by CreateCustomCommitmentPlan and related endpoints) </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyAmortizedCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyBeforeCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>monthlyFee</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>allTerms</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>All term keys present across the plan&#39;s line items. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -57420,6 +57590,57 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
                   <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p>Indicates if the plan was successfully deleted </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetAvailableCommitmentTypesRequest">GetAvailableCommitmentTypesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The cloud provider to query available types for.
+Acceptable values: &#34;aws&#34;, &#34;azure&#34;, &#34;gcp&#34;. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetAvailableCommitmentTypesResponse">GetAvailableCommitmentTypesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>types</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>List of available commitment type identifiers for the requested provider.
+Example values: &#34;aws/AmazonEC2&#34;, &#34;aws/AmazonRDS&#34;, &#34;aws/AmazonElastiCache&#34;,
+&#34;aws/savingsplan/Compute&#34;, &#34;aws/savingsplan/EC2Instance&#34;, &#34;aws/savingsplan/Database&#34;. </p></td>
                 </tr>
               
             </tbody>
@@ -58772,6 +58993,70 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
 
         
       
+        <h3 id="blueapi.gc.v1.ListReservableResourcesRequest">ListReservableResourcesRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>segmentId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The segment ID to scope the query to.
+
+// Optional. Field to sort by. Example: &#34;ondemand_cost&#34;.
+string orderBy = 2;
+// Optional. If true, sort in descending order.
+bool desc = 3;
+// Optional. URL-encoded JSON filter expression.
+// Example (decoded): {&#34;and&#34;:[{&#34;and&#34;:[{&#34;field&#34;:&#34;covered_usage&#34;,&#34;op&#34;:&#34;&lt;&#34;,&#34;value&#34;:1}]},{&#34;and&#34;:[{&#34;field&#34;:&#34;is_reservable&#34;,&#34;op&#34;:&#34;=&#34;,&#34;value&#34;:&#34;true&#34;}]}]}
+string filter = 4;
+// Required. Start of the usage lookback window (YYYY-MM-DD).
+string startDate = 5;
+// Required. End of the usage lookback window (YYYY-MM-DD).
+string endDate = 6;
+// Optional. Page number (1-based).
+int32 page = 7;
+// Optional. Number of results per page.
+int32 pageSize = 8; </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ListReservableResourcesResponse">ListReservableResourcesResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>resources</td>
+                  <td><a href="#blueapi.gc.v1.ReservableResource">ReservableResource</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ListResourcesRequest">ListResourcesRequest</h3>
         <p></p>
 
@@ -59584,6 +59869,562 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
 
         
       
+        <h3 id="blueapi.gc.v1.ReservableResource">ReservableResource</h3>
+        <p>ReservableResource is a fully-detailed infrastructure resource returned by ListReservableResources.</p><p>It extends the basic resource shape with usage metrics, daily usage breakdown,</p><p>and hardware/catalog attributes needed for the Reservable Infrastructure view.</p><p>Composite ID formatted as</p><p>"{url_encoded_resource_id}|{url_encoded_catalog_sku_org_id}|{url_encoded_catalog_sku_id}".</p><p>Each component must be URL/percent-encoded before concatenation so embedded "|"</p><p>characters do not break parsing. Consumers must split on "|" and URL-decode each part.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Cloud provider string, e.g. &#34;aws&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerResourceId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerService</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerSkuId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isSpot</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isReservable</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Display name (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>resourceGroup</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Resource group (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usageEnd</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usageStart</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tags</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerTags</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>userTags</td>
+                  <td><a href="#google.protobuf.Struct">google.protobuf.Struct</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updatedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>availabilityZone</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Availability zone (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cacheEngine</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Cache engine (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>catalogSkuId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>catalogSkuOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>classicNetworkingSupport</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>clockSpeed</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>commonUsageType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>coveredUsage</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Fraction of usage covered by existing commitments (0.0–1.0). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>databaseEngine</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Database engine (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dedicatedEbsThroughput</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Description (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ecu</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enhancedNetworkingSupported</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>family</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>fullRegionName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasOndemandTerms</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>iconUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integrationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intelAvx2Available</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intelAvxAvailable</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>intelTurboAvailable</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>io</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>IO descriptor (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isCurrentGeneration</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>isMultiAz</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Multi-AZ flag (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>licenseModel</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>locationType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>memory</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Memory in bytes as a string, e.g. &#34;11274289152.0&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>skuName</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>SKU name (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>skuTitle</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>netCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>netSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>networkPerformance</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>normalizationSizeFactor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ondemandCost</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>ondemandUsageUnit</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operatingSystem</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>operation</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>physicalProcessor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>preInstalledSw</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>priceCurrency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processorArchitecture</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processorFeatures</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>publicationDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>region</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>service</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>storage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>taxType</td>
+                  <td><a href="#google.protobuf.Value">google.protobuf.Value</a></td>
+                  <td></td>
+                  <td><p>Tax type (nullable). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenancy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>uptime</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Fraction of time the resource was running during the lookback period. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usageType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vcpu</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>version</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vpcNetworkingSupport</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>instanceTypeFamily</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dailyUsages</td>
+                  <td><a href="#blueapi.gc.v1.ResourceDailyUsage">ResourceDailyUsage</a></td>
+                  <td>repeated</td>
+                  <td><p>Per-day usage breakdown for the requested date range. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.Resource">Resource</h3>
         <p></p>
 
@@ -60029,6 +60870,13 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>providerUsageType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Provider-specific usage type label (e.g. &#34;BoxUsage:c5n.xlarge&#34;). </p></td>
                 </tr>
               
             </tbody>
@@ -61974,6 +62822,14 @@ Default value is false. </p></td>
               </tr>
             
               <tr>
+                <td>ListReservableResources</td>
+                <td><a href="#blueapi.gc.v1.ListReservableResourcesRequest">ListReservableResourcesRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ListReservableResourcesResponse">ListReservableResourcesResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves a paginated list of reservable infrastructure resources for a segment.
+Supports filtering, sorting, and a date range for usage aggregation.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListPurchasePlansBySegment</td>
                 <td><a href="#blueapi.gc.v1.ListPurchasePlansBySegmentRequest">ListPurchasePlansBySegmentRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ListPurchasePlansBySegmentResponse">ListPurchasePlansBySegmentResponse</a></td>
@@ -62014,6 +62870,20 @@ Includes the basic info, detailed metrics, commitment line items, covered infras
                 <td><a href="#blueapi.gc.v1.DeleteDraftPurchasePlanRequest">DeleteDraftPurchasePlanRequest</a></td>
                 <td><a href="#blueapi.gc.v1.DeleteDraftPurchasePlanResponse">DeleteDraftPurchasePlanResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Deletes a drafted purchase plan.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetAvailableCommitmentTypes</td>
+                <td><a href="#blueapi.gc.v1.GetAvailableCommitmentTypesRequest">GetAvailableCommitmentTypesRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetAvailableCommitmentTypesResponse">GetAvailableCommitmentTypesResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves the available commitment types for a given provider.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateCustomCommitmentPlan</td>
+                <td><a href="#blueapi.gc.v1.CreateCustomCommitmentPlanRequest">CreateCustomCommitmentPlanRequest</a></td>
+                <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                <td><p>WORK-IN-PROGRESS: Only works for Alphaus for now. Creates a custom (top-down) commitment purchase plan.</p></td>
               </tr>
             
               <tr>
@@ -62285,6 +63155,16 @@ for the user to select during onboarding.</p></td>
               
               
               <tr>
+                <td>ListReservableResources</td>
+                <td>GET</td>
+                <td>/v1/commitments/resources</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
                 <td>ListPurchasePlansBySegment</td>
                 <td>GET</td>
                 <td>/v1/commitments/purchaseplans</td>
@@ -62339,6 +63219,26 @@ for the user to select during onboarding.</p></td>
                 <td>DELETE</td>
                 <td>/v1/commitments/purchaseplans/draft/{draftPlanId}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAvailableCommitmentTypes</td>
+                <td>GET</td>
+                <td>/v1/commitments/purchaseplans/availabletypes</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateCustomCommitmentPlan</td>
+                <td>POST</td>
+                <td>/v1/commitments/purchaseplans/custom</td>
+                <td>*</td>
               </tr>
               
             
