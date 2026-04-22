@@ -1318,6 +1318,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.AdjustmentEntryItem"><span class="badge">M</span>AdjustmentEntryItem</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.AdjustmentEntryItem.MetaEntry"><span class="badge">M</span>AdjustmentEntryItem.MetaEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.AllocateAdjustmentEntryRequest"><span class="badge">M</span>AllocateAdjustmentEntryRequest</a>
                 </li>
               
@@ -1506,6 +1514,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateCustomFeeRequest"><span class="badge">M</span>CreateCustomFeeRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CreateCustomFeeResponse"><span class="badge">M</span>CreateCustomFeeResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateCustomFieldRequest"><span class="badge">M</span>CreateCustomFieldRequest</a>
                 </li>
               
@@ -1547,6 +1563,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.CsvSetting.Column"><span class="badge">M</span>CsvSetting.Column</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CustomFeeEntry"><span class="badge">M</span>CustomFeeEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CustomFeeEntry.MetaEntry"><span class="badge">M</span>CustomFeeEntry.MetaEntry</a>
                 </li>
               
                 <li>
@@ -1843,6 +1867,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.ListAccountResourcesRequest"><span class="badge">M</span>ListAccountResourcesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListAdjustmentEntryItemsRequest"><span class="badge">M</span>ListAdjustmentEntryItemsRequest</a>
                 </li>
               
                 <li>
@@ -17887,6 +17915,68 @@ Supports multiple report types per vendor. For AWS, this covers RI/SP utilizatio
 
         
       
+        <h3 id="blueapi.billing.v1.AdjustmentEntryItem">AdjustmentEntryItem</h3>
+        <p>An adjustment entry item with additional metadata for the Guaranteed Commitment Entries UI.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>entry</td>
+                  <td><a href="#blueapi.api.ripple.v1.AdjustmentEntry">blueapi.api.ripple.v1.AdjustmentEntry</a></td>
+                  <td></td>
+                  <td><p>The standard adjustment entry fields (id, account info, entry info, settings). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>meta</td>
+                  <td><a href="#blueapi.billing.v1.AdjustmentEntryItem.MetaEntry">AdjustmentEntryItem.MetaEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Additional metadata as key-value pairs. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.AdjustmentEntryItem.MetaEntry">AdjustmentEntryItem.MetaEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.AllocateAdjustmentEntryRequest">AllocateAdjustmentEntryRequest</h3>
         <p>Request message for the Billing.AllocateAdjustmentEntry rpc.</p>
 
@@ -20503,6 +20593,68 @@ Service discount id. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.CreateCustomFeeRequest">CreateCustomFeeRequest</h3>
+        <p>Request message for the Billing.CreateCustomFee rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing month. Format is `yyyymm`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>entries</td>
+                  <td><a href="#blueapi.billing.v1.CustomFeeEntry">CustomFeeEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. The fee entries to create. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CreateCustomFeeResponse">CreateCustomFeeResponse</h3>
+        <p>Response message for the Billing.CreateCustomFee rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>created</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The number of entries successfully created. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateCustomFieldRequest">CreateCustomFieldRequest</h3>
         <p></p>
 
@@ -20998,6 +21150,146 @@ We recommend a password length of 8~32 characters. If you send 0 characters, a p
                 <tr>
                   <td>enabled</td>
                   <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CustomFeeEntry">CustomFeeEntry</h3>
+        <p>A single custom fee entry to write to the adjustments table.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The linked account ID (customer_id in the fee table sort key). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>payerAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The payer account ID (account_id in the fee table sort key). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>feeType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The fee type for the sort key type segment.
+Determines the main Type column value in Adjusting Entries (e.g., &#34;Fee&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mobingiType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The entry type stored in the mobingi_type column.
+Used for filtering and categorization (e.g., &#34;COMMITMENT&#34; for Guaranteed Commitments, &#34;CUSTOM&#34; for Custom Fees).
+Accepted values: UPFRONT, SUPPORT, REGISTRAR, OTHERS, CREDIT, REFUND, COMMITMENT, CUSTOM. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>amount</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>Required. The fee amount (cost). Positive for charges, negative for rebates. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currencyCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The currency code (e.g., &#34;USD&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>description</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Human-readable description of the fee.
+For commitment entries: e.g., &#34;Guaranteed Compute Savings Plan - Premium&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>productCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The product/service code (e.g., &#34;aws/savingsplan&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>productName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The product/service display name (e.g., &#34;Compute Savings Plan&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usageStart</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The usage start time in RFC 3339 format. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>timeInterval</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The time interval in ISO 8601 interval format. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>meta</td>
+                  <td><a href="#blueapi.billing.v1.CustomFeeEntry.MetaEntry">CustomFeeEntry.MetaEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. Additional metadata as key-value pairs.
+For Guaranteed Commitment entries, may contain: commitment_id, invoice_id,
+contract_term, fee_rate, monthly_commitment, monthly_savings, net_savings,
+utilization, billing_account_id, commitment_display_name,
+commitment_leased_name, provider, commitment_type. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CustomFeeEntry.MetaEntry">CustomFeeEntry.MetaEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -23394,6 +23686,54 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListAdjustmentEntryItemsRequest">ListAdjustmentEntryItemsRequest</h3>
+        <p>Request message for the Billing.ListAdjustmentEntryItems rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing month. Format is `yyyymm`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mobingiType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by entry type (mobingi_type column).
+If not specified, returns all adjustment entry items. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Filter by apply status.
+&#34;applied&#34; returns entries where apply=true, &#34;pending&#34; returns entries where apply=false.
+If empty, returns all entries regardless of status. </p></td>
                 </tr>
               
             </tbody>
@@ -27592,6 +27932,23 @@ Lists all exchange rate.
               </tr>
             
               <tr>
+                <td>CreateCustomFee</td>
+                <td><a href="#blueapi.billing.v1.CreateCustomFeeRequest">CreateCustomFeeRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CreateCustomFeeResponse">CreateCustomFeeResponse</a></td>
+                <td><p>Creates custom fee entries in the RIPPLE_FEES table.
+Used to write Guaranteed Commitment entries and Custom Fee entries directly to the fee table. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListAdjustmentEntryItems</td>
+                <td><a href="#blueapi.billing.v1.ListAdjustmentEntryItemsRequest">ListAdjustmentEntryItemsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.AdjustmentEntryItem">AdjustmentEntryItem</a> stream</td>
+                <td><p>Lists adjustment entry items from the fee table.
+Reads fee entries from the RIPPLE_FEES table, optionally filtered by mobingi_type.
+Note: Commitment entries (mobingi_type=&#34;COMMITMENT&#34;) are excluded from ReadAdjustmentEntries to avoid duplication with the Adjusting Entries UI. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ListAccountResources</td>
                 <td><a href="#blueapi.billing.v1.ListAccountResourcesRequest">ListAccountResourcesRequest</a></td>
                 <td><a href="#blueapi.billing.v1.ResourceAccount">ResourceAccount</a> stream</td>
@@ -28780,6 +29137,26 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>RestoreAllocateAdjustmentEntry</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/adjustmententries/{id}/allocate:restore</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateCustomFee</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententries/customfees</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListAdjustmentEntryItems</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/adjustmententryitems:read</td>
                 <td>*</td>
               </tr>
               
