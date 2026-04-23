@@ -278,7 +278,8 @@ type CostClient interface {
 	GetExportRISP(ctx context.Context, in *GetExportRISPRequest, opts ...grpc.CallOption) (*GetExportRISPResponse, error)
 	// Exports a vendor report and delivers results via email notification channel.
 	// Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.
-	ExportReport(ctx context.Context, in *ExportReportRequest, opts ...grpc.CallOption) (*ExportReportResponse, error)
+	// Returns a long-running operation; use GetOperation to poll for completion.
+	ExportReport(ctx context.Context, in *ExportReportRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1223,9 +1224,9 @@ func (c *costClient) GetExportRISP(ctx context.Context, in *GetExportRISPRequest
 	return out, nil
 }
 
-func (c *costClient) ExportReport(ctx context.Context, in *ExportReportRequest, opts ...grpc.CallOption) (*ExportReportResponse, error) {
+func (c *costClient) ExportReport(ctx context.Context, in *ExportReportRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ExportReportResponse)
+	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Cost_ExportReport_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -1615,7 +1616,8 @@ type CostServer interface {
 	GetExportRISP(context.Context, *GetExportRISPRequest) (*GetExportRISPResponse, error)
 	// Exports a vendor report and delivers results via email notification channel.
 	// Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.
-	ExportReport(context.Context, *ExportReportRequest) (*ExportReportResponse, error)
+	// Returns a long-running operation; use GetOperation to poll for completion.
+	ExportReport(context.Context, *ExportReportRequest) (*protos.Operation, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1822,7 +1824,7 @@ func (UnimplementedCostServer) GetCostReduction(context.Context, *GetCostReducti
 func (UnimplementedCostServer) GetExportRISP(context.Context, *GetExportRISPRequest) (*GetExportRISPResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetExportRISP not implemented")
 }
-func (UnimplementedCostServer) ExportReport(context.Context, *ExportReportRequest) (*ExportReportResponse, error) {
+func (UnimplementedCostServer) ExportReport(context.Context, *ExportReportRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportReport not implemented")
 }
 func (UnimplementedCostServer) GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error) {

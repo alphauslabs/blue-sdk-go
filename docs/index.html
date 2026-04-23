@@ -875,10 +875,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.cost.v1.ExportReportResponse"><span class="badge">M</span>ExportReportResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.cost.v1.GetAccountBudgetAlertsRequest"><span class="badge">M</span>GetAccountBudgetAlertsRequest</a>
                 </li>
               
@@ -12056,30 +12052,6 @@ Future vendor-specific options follow the same pattern (e.g. gcp_options, azure_
 
         
       
-        <h3 id="blueapi.cost.v1.ExportReportResponse">ExportReportResponse</h3>
-        <p>Response message for ExportReport.</p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>email_sent</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p>True if the export email was successfully queued for delivery. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.cost.v1.GetAccountBudgetAlertsRequest">GetAccountBudgetAlertsRequest</h3>
         <p>Request message for GetAccountBudgetAlerts</p>
 
@@ -16640,9 +16612,10 @@ Only available in Wave(Pro).</p></td>
               <tr>
                 <td>ExportReport</td>
                 <td><a href="#blueapi.cost.v1.ExportReportRequest">ExportReportRequest</a></td>
-                <td><a href="#blueapi.cost.v1.ExportReportResponse">ExportReportResponse</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
                 <td><p>Exports a vendor report and delivers results via email notification channel.
-Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.</p></td>
+Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.
+Returns a long-running operation; use GetOperation to poll for completion.</p></td>
               </tr>
             
               <tr>
