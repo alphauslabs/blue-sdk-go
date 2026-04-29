@@ -4699,6 +4699,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.GetAwsPrivateOfferRequest"><span class="badge">M</span>GetAwsPrivateOfferRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetAwsPrivateOfferResponse"><span class="badge">M</span>GetAwsPrivateOfferResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.GetAzureOnboardingAuthUrlRequest"><span class="badge">M</span>GetAzureOnboardingAuthUrlRequest</a>
                 </li>
               
@@ -58159,6 +58167,110 @@ Example values: &#34;aws/AmazonEC2&#34;, &#34;aws/AmazonRDS&#34;, &#34;aws/Amazo
 
         
       
+        <h3 id="blueapi.gc.v1.GetAwsPrivateOfferRequest">GetAwsPrivateOfferRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The AWS payer account ID that the private offer targets. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetAwsPrivateOfferResponse">GetAwsPrivateOfferResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>payerAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>offerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>AWS Marketplace offer identifier, e.g. offer-qb7i32am664jw. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>offerName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Display name of the offer shown in the UI. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Current offer status, e.g. PENDING / ACCEPTED / EXPIRED / CREATING / FAILED. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>offerUrl</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>productId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pricePerUnit</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>createdAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expirationDate</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetAzureOnboardingAuthUrlRequest">GetAzureOnboardingAuthUrlRequest</h3>
         <p>GetAzureOnboardingAuthUrlRequest fetches the OAuth authorization URL (Step 4).</p>
 
@@ -63345,6 +63457,14 @@ Retrieves all payer accounts linked to the organization, including their status 
               </tr>
             
               <tr>
+                <td>GetAwsPrivateOffer</td>
+                <td><a href="#blueapi.gc.v1.GetAwsPrivateOfferRequest">GetAwsPrivateOfferRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetAwsPrivateOfferResponse">GetAwsPrivateOfferResponse</a></td>
+                <td><p>Retrieves the AWS Marketplace private offer details for a payer account.
+Used by the onboarding &#34;Accept Private Offer&#34; step.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetGuaranteedCommitmentTemplateUrl</td>
                 <td><a href="#blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest">GetGuaranteedCommitmentTemplateUrlRequest</a></td>
                 <td><a href="#blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlResponse">GetGuaranteedCommitmentTemplateUrlResponse</a></td>
@@ -63726,6 +63846,16 @@ for the user to select during onboarding.</p></td>
                 <td>POST</td>
                 <td>/v1/onboarding/billinggroup:validate</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetAwsPrivateOffer</td>
+                <td>GET</td>
+                <td>/v1/onboarding/aws/privateoffer/{payerAccountId}</td>
+                <td></td>
               </tr>
               
             
