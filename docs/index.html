@@ -286,6 +286,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.iam.v1.ExperimentalUIPreference"><span class="badge">M</span>ExperimentalUIPreference</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.iam.v1.GetExperimentalUIPreferencesRequest"><span class="badge">M</span>GetExperimentalUIPreferencesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.iam.v1.GetExperimentalUIPreferencesResponse"><span class="badge">M</span>GetExperimentalUIPreferencesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.iam.v1.GetFeatureFlagsRequest"><span class="badge">M</span>GetFeatureFlagsRequest</a>
                 </li>
               
@@ -415,6 +427,14 @@
               
                 <li>
                   <a href="#blueapi.iam.v1.UpdateUserRoleMappingResponse"><span class="badge">M</span>UpdateUserRoleMappingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.iam.v1.UpsertExperimentalUIPreferenceRequest"><span class="badge">M</span>UpsertExperimentalUIPreferenceRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.iam.v1.UpsertExperimentalUIPreferenceResponse"><span class="badge">M</span>UpsertExperimentalUIPreferenceResponse</a>
                 </li>
               
                 <li>
@@ -6087,6 +6107,82 @@ for the list of supported attributes.</p></td>
 
         
       
+        <h3 id="blueapi.iam.v1.ExperimentalUIPreference">ExperimentalUIPreference</h3>
+        <p>ExperimentalUIPreference holds the UI version preference and banner state for a single component.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>component_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The component identifier this preference applies to. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>version</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The selected UI version for the component (e.g. &#34;v1&#34; or &#34;v2&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>banner_dismissed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the experimental banner has been dismissed for this component. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updated_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>The timestamp of the last update. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.iam.v1.GetExperimentalUIPreferencesRequest">GetExperimentalUIPreferencesRequest</h3>
+        <p>Request message for the Iam.GetExperimentalUIPreferences rpc.</p><p>The MSP identity is derived from the auth token server-side.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.iam.v1.GetExperimentalUIPreferencesResponse">GetExperimentalUIPreferencesResponse</h3>
+        <p>Response message for the Iam.GetExperimentalUIPreferences rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>preferences</td>
+                  <td><a href="#blueapi.iam.v1.ExperimentalUIPreference">ExperimentalUIPreference</a></td>
+                  <td>repeated</td>
+                  <td><p>The list of experimental UI preferences for the authenticated MSP. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.iam.v1.GetFeatureFlagsRequest">GetFeatureFlagsRequest</h3>
         <p>Request message for the Iam.GetUpdateFeatureFlags rpc.</p>
 
@@ -6976,6 +7072,68 @@ for the list of supported attributes.</p></td>
 
         
       
+        <h3 id="blueapi.iam.v1.UpsertExperimentalUIPreferenceRequest">UpsertExperimentalUIPreferenceRequest</h3>
+        <p>Request message for the Iam.UpsertExperimentalUIPreference rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>component_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The component identifier to create or update a preference for. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>version</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The selected UI version for the component (e.g. &#34;v1&#34; or &#34;v2&#34;). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>banner_dismissed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the experimental banner has been dismissed for this component. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.iam.v1.UpsertExperimentalUIPreferenceResponse">UpsertExperimentalUIPreferenceResponse</h3>
+        <p>Response message for the Iam.UpsertExperimentalUIPreference rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>preference</td>
+                  <td><a href="#blueapi.iam.v1.ExperimentalUIPreference">ExperimentalUIPreference</a></td>
+                  <td></td>
+                  <td><p>The created or updated preference. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.iam.v1.ValidateResetPasswordLinkAndChangePasswordRequest">ValidateResetPasswordLinkAndChangePasswordRequest</h3>
         <p>Request for message Iam.ValidateVerificationCode rpc.</p>
 
@@ -7375,6 +7533,20 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
               </tr>
             
               <tr>
+                <td>GetExperimentalUIPreferences</td>
+                <td><a href="#blueapi.iam.v1.GetExperimentalUIPreferencesRequest">GetExperimentalUIPreferencesRequest</a></td>
+                <td><a href="#blueapi.iam.v1.GetExperimentalUIPreferencesResponse">GetExperimentalUIPreferencesResponse</a></td>
+                <td><p>Gets experimental UI preferences for the authenticated MSP.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpsertExperimentalUIPreference</td>
+                <td><a href="#blueapi.iam.v1.UpsertExperimentalUIPreferenceRequest">UpsertExperimentalUIPreferenceRequest</a></td>
+                <td><a href="#blueapi.iam.v1.UpsertExperimentalUIPreferenceResponse">UpsertExperimentalUIPreferenceResponse</a></td>
+                <td><p>Creates or updates an experimental UI preference for a specific component.</p></td>
+              </tr>
+            
+              <tr>
                 <td>UnlockUserAccount</td>
                 <td><a href="#blueapi.iam.v1.UnlockUserAccountRequest">UnlockUserAccountRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
@@ -7755,6 +7927,26 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
                 <td>ResetRipplePassword</td>
                 <td>POST</td>
                 <td>/iam/v1/ripple/password:reset</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetExperimentalUIPreferences</td>
+                <td>GET</td>
+                <td>/iam/v1/experimentalui/preferences</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpsertExperimentalUIPreference</td>
+                <td>PUT</td>
+                <td>/iam/v1/experimentalui/preferences/{component_id}</td>
                 <td>*</td>
               </tr>
               

@@ -57,6 +57,8 @@ const (
 	Iam_GetMFAUsers_FullMethodName                                = "/blueapi.iam.v1.Iam/GetMFAUsers"
 	Iam_SendRipplePasswordResetCode_FullMethodName                = "/blueapi.iam.v1.Iam/SendRipplePasswordResetCode"
 	Iam_ResetRipplePassword_FullMethodName                        = "/blueapi.iam.v1.Iam/ResetRipplePassword"
+	Iam_GetExperimentalUIPreferences_FullMethodName               = "/blueapi.iam.v1.Iam/GetExperimentalUIPreferences"
+	Iam_UpsertExperimentalUIPreference_FullMethodName             = "/blueapi.iam.v1.Iam/UpsertExperimentalUIPreference"
 	Iam_UnlockUserAccount_FullMethodName                          = "/blueapi.iam.v1.Iam/UnlockUserAccount"
 )
 
@@ -146,6 +148,10 @@ type IamClient interface {
 	SendRipplePasswordResetCode(ctx context.Context, in *SendRipplePasswordResetCodeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reset ripple password using code from email
 	ResetRipplePassword(ctx context.Context, in *ResetRipplePasswordRequest, opts ...grpc.CallOption) (*ResetRipplePasswordResponse, error)
+	// Gets experimental UI preferences for the authenticated MSP.
+	GetExperimentalUIPreferences(ctx context.Context, in *GetExperimentalUIPreferencesRequest, opts ...grpc.CallOption) (*GetExperimentalUIPreferencesResponse, error)
+	// Creates or updates an experimental UI preference for a specific component.
+	UpsertExperimentalUIPreference(ctx context.Context, in *UpsertExperimentalUIPreferenceRequest, opts ...grpc.CallOption) (*UpsertExperimentalUIPreferenceResponse, error)
 	// WORK-IN-PROGRESS: Unlocks ripple or wave user account.
 	UnlockUserAccount(ctx context.Context, in *UnlockUserAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
@@ -610,6 +616,26 @@ func (c *iamClient) ResetRipplePassword(ctx context.Context, in *ResetRipplePass
 	return out, nil
 }
 
+func (c *iamClient) GetExperimentalUIPreferences(ctx context.Context, in *GetExperimentalUIPreferencesRequest, opts ...grpc.CallOption) (*GetExperimentalUIPreferencesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetExperimentalUIPreferencesResponse)
+	err := c.cc.Invoke(ctx, Iam_GetExperimentalUIPreferences_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *iamClient) UpsertExperimentalUIPreference(ctx context.Context, in *UpsertExperimentalUIPreferenceRequest, opts ...grpc.CallOption) (*UpsertExperimentalUIPreferenceResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpsertExperimentalUIPreferenceResponse)
+	err := c.cc.Invoke(ctx, Iam_UpsertExperimentalUIPreference_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *iamClient) UnlockUserAccount(ctx context.Context, in *UnlockUserAccountRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(emptypb.Empty)
@@ -706,6 +732,10 @@ type IamServer interface {
 	SendRipplePasswordResetCode(context.Context, *SendRipplePasswordResetCodeRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Reset ripple password using code from email
 	ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*ResetRipplePasswordResponse, error)
+	// Gets experimental UI preferences for the authenticated MSP.
+	GetExperimentalUIPreferences(context.Context, *GetExperimentalUIPreferencesRequest) (*GetExperimentalUIPreferencesResponse, error)
+	// Creates or updates an experimental UI preference for a specific component.
+	UpsertExperimentalUIPreference(context.Context, *UpsertExperimentalUIPreferenceRequest) (*UpsertExperimentalUIPreferenceResponse, error)
 	// WORK-IN-PROGRESS: Unlocks ripple or wave user account.
 	UnlockUserAccount(context.Context, *UnlockUserAccountRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedIamServer()
@@ -822,6 +852,12 @@ func (UnimplementedIamServer) SendRipplePasswordResetCode(context.Context, *Send
 }
 func (UnimplementedIamServer) ResetRipplePassword(context.Context, *ResetRipplePasswordRequest) (*ResetRipplePasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetRipplePassword not implemented")
+}
+func (UnimplementedIamServer) GetExperimentalUIPreferences(context.Context, *GetExperimentalUIPreferencesRequest) (*GetExperimentalUIPreferencesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetExperimentalUIPreferences not implemented")
+}
+func (UnimplementedIamServer) UpsertExperimentalUIPreference(context.Context, *UpsertExperimentalUIPreferenceRequest) (*UpsertExperimentalUIPreferenceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpsertExperimentalUIPreference not implemented")
 }
 func (UnimplementedIamServer) UnlockUserAccount(context.Context, *UnlockUserAccountRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UnlockUserAccount not implemented")
@@ -1499,6 +1535,42 @@ func _Iam_ResetRipplePassword_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Iam_GetExperimentalUIPreferences_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetExperimentalUIPreferencesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).GetExperimentalUIPreferences(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_GetExperimentalUIPreferences_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).GetExperimentalUIPreferences(ctx, req.(*GetExperimentalUIPreferencesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Iam_UpsertExperimentalUIPreference_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpsertExperimentalUIPreferenceRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(IamServer).UpsertExperimentalUIPreference(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Iam_UpsertExperimentalUIPreference_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(IamServer).UpsertExperimentalUIPreference(ctx, req.(*UpsertExperimentalUIPreferenceRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Iam_UnlockUserAccount_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UnlockUserAccountRequest)
 	if err := dec(in); err != nil {
@@ -1651,6 +1723,14 @@ var Iam_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ResetRipplePassword",
 			Handler:    _Iam_ResetRipplePassword_Handler,
+		},
+		{
+			MethodName: "GetExperimentalUIPreferences",
+			Handler:    _Iam_GetExperimentalUIPreferences_Handler,
+		},
+		{
+			MethodName: "UpsertExperimentalUIPreference",
+			Handler:    _Iam_UpsertExperimentalUIPreference_Handler,
 		},
 		{
 			MethodName: "UnlockUserAccount",
