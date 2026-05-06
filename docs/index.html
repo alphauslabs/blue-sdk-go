@@ -57457,10 +57457,10 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
                 </tr>
               
                 <tr>
-                  <td>segmentId</td>
+                  <td>companyId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The segment ID to scope the plan to. </p></td>
+                  <td><p>Required. The company ID to scope the plan to. </p></td>
                 </tr>
               
                 <tr>
@@ -58130,6 +58130,13 @@ When populated, the server returns plan_type &#34;infrastructure&#34;; omit for 
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The draft plan ID to delete. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -59485,6 +59492,13 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td><p>If set to true, returns plans with Draft status. If set to false, returns plans with Submitted and Executed status. </p></td>
                 </tr>
               
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -59679,10 +59693,10 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
             <tbody>
               
                 <tr>
-                  <td>segmentId</td>
+                  <td>companyId</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The segment ID to scope the query to.
+                  <td><p>Required. The company ID to scope the query to.
 
 // Optional. Field to sort by. Example: &#34;ondemand_cost&#34;.
 string orderBy = 2;
