@@ -613,7 +613,7 @@ type CoverClient interface {
 	DeleteCostForecast(ctx context.Context, in *DeleteCostForecastRequest, opts ...grpc.CallOption) (*DeleteCostForecastResponse, error)
 	GetCostForecastsData(ctx context.Context, in *GetCostForecastsDataRequest, opts ...grpc.CallOption) (Cover_GetCostForecastsDataClient, error)
 	GetRecommendationV3(ctx context.Context, in *GetRecommendationV3Request, opts ...grpc.CallOption) (*GetRecommendationV3Response, error)
-	ListRecommendationsV3(ctx context.Context, in *ListRecommendationsV3Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV3Client, error)
+	ListRecommendationsV3(ctx context.Context, in *ListRecommendationsV3Request, opts ...grpc.CallOption) (*ListRecommendationsV3Response, error)
 	ExecuteRecommendationV3(ctx context.Context, in *ExecuteRecommendationV3Request, opts ...grpc.CallOption) (*ExecuteRecommendationV3Response, error)
 	// Invites users to join the organization and assigns them roles.
 	InviteUsers(ctx context.Context, in *InviteUsersRequest, opts ...grpc.CallOption) (*InviteUsersResponse, error)
@@ -3255,37 +3255,14 @@ func (c *coverClient) GetRecommendationV3(ctx context.Context, in *GetRecommenda
 	return out, nil
 }
 
-func (c *coverClient) ListRecommendationsV3(ctx context.Context, in *ListRecommendationsV3Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV3Client, error) {
+func (c *coverClient) ListRecommendationsV3(ctx context.Context, in *ListRecommendationsV3Request, opts ...grpc.CallOption) (*ListRecommendationsV3Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[29], Cover_ListRecommendationsV3_FullMethodName, cOpts...)
+	out := new(ListRecommendationsV3Response)
+	err := c.cc.Invoke(ctx, Cover_ListRecommendationsV3_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &coverListRecommendationsV3Client{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_ListRecommendationsV3Client interface {
-	Recv() (*RecommendationSummary, error)
-	grpc.ClientStream
-}
-
-type coverListRecommendationsV3Client struct {
-	grpc.ClientStream
-}
-
-func (x *coverListRecommendationsV3Client) Recv() (*RecommendationSummary, error) {
-	m := new(RecommendationSummary)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 func (c *coverClient) ExecuteRecommendationV3(ctx context.Context, in *ExecuteRecommendationV3Request, opts ...grpc.CallOption) (*ExecuteRecommendationV3Response, error) {
@@ -3755,7 +3732,7 @@ type CoverServer interface {
 	DeleteCostForecast(context.Context, *DeleteCostForecastRequest) (*DeleteCostForecastResponse, error)
 	GetCostForecastsData(*GetCostForecastsDataRequest, Cover_GetCostForecastsDataServer) error
 	GetRecommendationV3(context.Context, *GetRecommendationV3Request) (*GetRecommendationV3Response, error)
-	ListRecommendationsV3(*ListRecommendationsV3Request, Cover_ListRecommendationsV3Server) error
+	ListRecommendationsV3(context.Context, *ListRecommendationsV3Request) (*ListRecommendationsV3Response, error)
 	ExecuteRecommendationV3(context.Context, *ExecuteRecommendationV3Request) (*ExecuteRecommendationV3Response, error)
 	// Invites users to join the organization and assigns them roles.
 	InviteUsers(context.Context, *InviteUsersRequest) (*InviteUsersResponse, error)
@@ -4360,8 +4337,8 @@ func (UnimplementedCoverServer) GetCostForecastsData(*GetCostForecastsDataReques
 func (UnimplementedCoverServer) GetRecommendationV3(context.Context, *GetRecommendationV3Request) (*GetRecommendationV3Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendationV3 not implemented")
 }
-func (UnimplementedCoverServer) ListRecommendationsV3(*ListRecommendationsV3Request, Cover_ListRecommendationsV3Server) error {
-	return status.Errorf(codes.Unimplemented, "method ListRecommendationsV3 not implemented")
+func (UnimplementedCoverServer) ListRecommendationsV3(context.Context, *ListRecommendationsV3Request) (*ListRecommendationsV3Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListRecommendationsV3 not implemented")
 }
 func (UnimplementedCoverServer) ExecuteRecommendationV3(context.Context, *ExecuteRecommendationV3Request) (*ExecuteRecommendationV3Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExecuteRecommendationV3 not implemented")
@@ -7984,25 +7961,22 @@ func _Cover_GetRecommendationV3_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_ListRecommendationsV3_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListRecommendationsV3Request)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _Cover_ListRecommendationsV3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListRecommendationsV3Request)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(CoverServer).ListRecommendationsV3(m, &coverListRecommendationsV3Server{ServerStream: stream})
-}
-
-type Cover_ListRecommendationsV3Server interface {
-	Send(*RecommendationSummary) error
-	grpc.ServerStream
-}
-
-type coverListRecommendationsV3Server struct {
-	grpc.ServerStream
-}
-
-func (x *coverListRecommendationsV3Server) Send(m *RecommendationSummary) error {
-	return x.ServerStream.SendMsg(m)
+	if interceptor == nil {
+		return srv.(CoverServer).ListRecommendationsV3(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cover_ListRecommendationsV3_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CoverServer).ListRecommendationsV3(ctx, req.(*ListRecommendationsV3Request))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Cover_ExecuteRecommendationV3_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -8817,6 +8791,10 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetRecommendationV3_Handler,
 		},
 		{
+			MethodName: "ListRecommendationsV3",
+			Handler:    _Cover_ListRecommendationsV3_Handler,
+		},
+		{
 			MethodName: "ExecuteRecommendationV3",
 			Handler:    _Cover_ExecuteRecommendationV3_Handler,
 		},
@@ -8993,11 +8971,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "GetCostForecastsData",
 			Handler:       _Cover_GetCostForecastsData_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "ListRecommendationsV3",
-			Handler:       _Cover_ListRecommendationsV3_Handler,
 			ServerStreams: true,
 		},
 	},
