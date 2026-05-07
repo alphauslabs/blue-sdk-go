@@ -4675,6 +4675,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.CreateCustomCommitmentPlanResponse"><span class="badge">M</span>CreateCustomCommitmentPlanResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.CreateGuaranteedCommitmentAccessRequest"><span class="badge">M</span>CreateGuaranteedCommitmentAccessRequest</a>
                 </li>
               
@@ -57557,6 +57561,38 @@ When populated, the server returns plan_type &#34;infrastructure&#34;; omit for 
 &#34;{resource_id}|{catalog_sku_org_id}|{catalog_sku_id}&#34; as returned by ListReservableResources. </p></td>
                 </tr>
               
+                <tr>
+                  <td>companyIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>For top down creation, one or more company IDs to create a plan per segment.
+Mutually exclusive with companyId — do not set both. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.CreateCustomCommitmentPlanResponse">CreateCustomCommitmentPlanResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>plans</td>
+                  <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -63599,7 +63635,7 @@ Includes the basic info, detailed metrics, commitment line items, covered infras
               <tr>
                 <td>CreateCustomCommitmentPlan</td>
                 <td><a href="#blueapi.gc.v1.CreateCustomCommitmentPlanRequest">CreateCustomCommitmentPlanRequest</a></td>
-                <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
+                <td><a href="#blueapi.gc.v1.CreateCustomCommitmentPlanResponse">CreateCustomCommitmentPlanResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Only works for Alphaus for now. Creates a custom (top-down) commitment purchase plan.</p></td>
               </tr>
             

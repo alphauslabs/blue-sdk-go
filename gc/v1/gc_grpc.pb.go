@@ -102,7 +102,7 @@ type GuaranteedCommitmentsClient interface {
 	// WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves the available commitment types for a given provider.
 	GetAvailableCommitmentTypes(ctx context.Context, in *GetAvailableCommitmentTypesRequest, opts ...grpc.CallOption) (*GetAvailableCommitmentTypesResponse, error)
 	// WORK-IN-PROGRESS: Only works for Alphaus for now. Creates a custom (top-down) commitment purchase plan.
-	CreateCustomCommitmentPlan(ctx context.Context, in *CreateCustomCommitmentPlanRequest, opts ...grpc.CallOption) (*DefaultPurchasePlan, error)
+	CreateCustomCommitmentPlan(ctx context.Context, in *CreateCustomCommitmentPlanRequest, opts ...grpc.CallOption) (*CreateCustomCommitmentPlanResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(ctx context.Context, in *RegisterOrgRequest, opts ...grpc.CallOption) (*RegisterOrgResponse, error)
@@ -351,9 +351,9 @@ func (c *guaranteedCommitmentsClient) GetAvailableCommitmentTypes(ctx context.Co
 	return out, nil
 }
 
-func (c *guaranteedCommitmentsClient) CreateCustomCommitmentPlan(ctx context.Context, in *CreateCustomCommitmentPlanRequest, opts ...grpc.CallOption) (*DefaultPurchasePlan, error) {
+func (c *guaranteedCommitmentsClient) CreateCustomCommitmentPlan(ctx context.Context, in *CreateCustomCommitmentPlanRequest, opts ...grpc.CallOption) (*CreateCustomCommitmentPlanResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DefaultPurchasePlan)
+	out := new(CreateCustomCommitmentPlanResponse)
 	err := c.cc.Invoke(ctx, GuaranteedCommitments_CreateCustomCommitmentPlan_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -632,7 +632,7 @@ type GuaranteedCommitmentsServer interface {
 	// WORK-IN-PROGRESS: Only works for Alphaus for now. Retrieves the available commitment types for a given provider.
 	GetAvailableCommitmentTypes(context.Context, *GetAvailableCommitmentTypesRequest) (*GetAvailableCommitmentTypesResponse, error)
 	// WORK-IN-PROGRESS: Only works for Alphaus for now. Creates a custom (top-down) commitment purchase plan.
-	CreateCustomCommitmentPlan(context.Context, *CreateCustomCommitmentPlanRequest) (*DefaultPurchasePlan, error)
+	CreateCustomCommitmentPlan(context.Context, *CreateCustomCommitmentPlanRequest) (*CreateCustomCommitmentPlanResponse, error)
 	// WORK-IN-PROGRESS: Registers a new child organization under the channel partner.
 	// Creates the organization, sets up user memberships, and establishes the partnership relationship.
 	RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error)
@@ -743,7 +743,7 @@ func (UnimplementedGuaranteedCommitmentsServer) DeleteDraftPurchasePlan(context.
 func (UnimplementedGuaranteedCommitmentsServer) GetAvailableCommitmentTypes(context.Context, *GetAvailableCommitmentTypesRequest) (*GetAvailableCommitmentTypesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAvailableCommitmentTypes not implemented")
 }
-func (UnimplementedGuaranteedCommitmentsServer) CreateCustomCommitmentPlan(context.Context, *CreateCustomCommitmentPlanRequest) (*DefaultPurchasePlan, error) {
+func (UnimplementedGuaranteedCommitmentsServer) CreateCustomCommitmentPlan(context.Context, *CreateCustomCommitmentPlanRequest) (*CreateCustomCommitmentPlanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCustomCommitmentPlan not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) RegisterOrg(context.Context, *RegisterOrgRequest) (*RegisterOrgResponse, error) {
