@@ -55608,6 +55608,15 @@ Example values: &#34;aws/AmazonEC2&#34;, &#34;aws/AmazonRDS&#34;, &#34;aws/Amazo
                   <td><p>Required. The AWS payer account ID that the private offer targets. </p></td>
                 </tr>
               
+                <tr>
+                  <td>recreate</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If true, recreate the private offer when the existing row is
+in a retryable terminal state: FAILED, EXPIRED, or WITHDRAWN.
+ACCEPTED, PENDING, and CREATING are not recreated. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
