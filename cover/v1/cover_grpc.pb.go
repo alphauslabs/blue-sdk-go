@@ -22,13 +22,7 @@ const _ = grpc.SupportPackageIsVersion8
 
 const (
 	Cover_OnboardOrg_FullMethodName                              = "/blueapi.cover.v1.Cover/OnboardOrg"
-	Cover_InviteMember_FullMethodName                            = "/blueapi.cover.v1.Cover/InviteMember"
 	Cover_ActivateUser_FullMethodName                            = "/blueapi.cover.v1.Cover/ActivateUser"
-	Cover_CreateMember_FullMethodName                            = "/blueapi.cover.v1.Cover/CreateMember"
-	Cover_GetMembers_FullMethodName                              = "/blueapi.cover.v1.Cover/GetMembers"
-	Cover_GetMemberDetails_FullMethodName                        = "/blueapi.cover.v1.Cover/GetMemberDetails"
-	Cover_GetMemberCostGroup_FullMethodName                      = "/blueapi.cover.v1.Cover/GetMemberCostGroup"
-	Cover_UpdateMemberPermission_FullMethodName                  = "/blueapi.cover.v1.Cover/UpdateMemberPermission"
 	Cover_GetUserDetails_FullMethodName                          = "/blueapi.cover.v1.Cover/GetUserDetails"
 	Cover_UpdateUserAvatar_FullMethodName                        = "/blueapi.cover.v1.Cover/UpdateUserAvatar"
 	Cover_UpdateUserIcon_FullMethodName                          = "/blueapi.cover.v1.Cover/UpdateUserIcon"
@@ -41,7 +35,6 @@ const (
 	Cover_UpdateUserAppTheme_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserAppTheme"
 	Cover_UpdateUserTimezone_FullMethodName                      = "/blueapi.cover.v1.Cover/UpdateUserTimezone"
 	Cover_UpdateUserAttributes_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateUserAttributes"
-	Cover_DeleteMember_FullMethodName                            = "/blueapi.cover.v1.Cover/DeleteMember"
 	Cover_ResetPassword_FullMethodName                           = "/blueapi.cover.v1.Cover/ResetPassword"
 	Cover_CreateView_FullMethodName                              = "/blueapi.cover.v1.Cover/CreateView"
 	Cover_GetViews_FullMethodName                                = "/blueapi.cover.v1.Cover/GetViews"
@@ -73,12 +66,8 @@ const (
 	Cover_UpdateCostGroupColorTheme_FullMethodName               = "/blueapi.cover.v1.Cover/UpdateCostGroupColorTheme"
 	Cover_UpdateCostGroupCombinations_FullMethodName             = "/blueapi.cover.v1.Cover/UpdateCostGroupCombinations"
 	Cover_ResolveCostGroupCombinations_FullMethodName            = "/blueapi.cover.v1.Cover/ResolveCostGroupCombinations"
-	Cover_AssignCostGroupMember_FullMethodName                   = "/blueapi.cover.v1.Cover/AssignCostGroupMember"
-	Cover_RemoveCostGroupMember_FullMethodName                   = "/blueapi.cover.v1.Cover/RemoveCostGroupMember"
 	Cover_DeleteCostGroup_FullMethodName                         = "/blueapi.cover.v1.Cover/DeleteCostGroup"
 	Cover_GetAccountAccessTemplateUrl_FullMethodName             = "/blueapi.cover.v1.Cover/GetAccountAccessTemplateUrl"
-	Cover_ListAccountAccess_FullMethodName                       = "/blueapi.cover.v1.Cover/ListAccountAccess"
-	Cover_GetAccountAccess_FullMethodName                        = "/blueapi.cover.v1.Cover/GetAccountAccess"
 	Cover_GetDataAccess_FullMethodName                           = "/blueapi.cover.v1.Cover/GetDataAccess"
 	Cover_DeleteDataAccess_FullMethodName                        = "/blueapi.cover.v1.Cover/DeleteDataAccess"
 	Cover_CreateAccountAccess_FullMethodName                     = "/blueapi.cover.v1.Cover/CreateAccountAccess"
@@ -95,33 +84,13 @@ const (
 	Cover_ListAssets_FullMethodName                              = "/blueapi.cover.v1.Cover/ListAssets"
 	Cover_GetAssetsSummary_FullMethodName                        = "/blueapi.cover.v1.Cover/GetAssetsSummary"
 	Cover_GetCostUsage_FullMethodName                            = "/blueapi.cover.v1.Cover/GetCostUsage"
-	Cover_GetRightSizingRecommendation_FullMethodName            = "/blueapi.cover.v1.Cover/GetRightSizingRecommendation"
-	Cover_ModifyResourceType_FullMethodName                      = "/blueapi.cover.v1.Cover/ModifyResourceType"
-	Cover_TerminateResource_FullMethodName                       = "/blueapi.cover.v1.Cover/TerminateResource"
-	Cover_UploadChargeCode_FullMethodName                        = "/blueapi.cover.v1.Cover/UploadChargeCode"
 	Cover_AssignPayer_FullMethodName                             = "/blueapi.cover.v1.Cover/AssignPayer"
-	Cover_GetPayers_FullMethodName                               = "/blueapi.cover.v1.Cover/GetPayers"
-	Cover_GetAccounts_FullMethodName                             = "/blueapi.cover.v1.Cover/GetAccounts"
-	Cover_GetServices_FullMethodName                             = "/blueapi.cover.v1.Cover/GetServices"
-	Cover_GetRegions_FullMethodName                              = "/blueapi.cover.v1.Cover/GetRegions"
-	Cover_GetTags_FullMethodName                                 = "/blueapi.cover.v1.Cover/GetTags"
-	Cover_ListFees_FullMethodName                                = "/blueapi.cover.v1.Cover/ListFees"
-	Cover_RestoreFee_FullMethodName                              = "/blueapi.cover.v1.Cover/RestoreFee"
-	Cover_GetCostGroupFee_FullMethodName                         = "/blueapi.cover.v1.Cover/GetCostGroupFee"
 	Cover_ListAllocators_FullMethodName                          = "/blueapi.cover.v1.Cover/ListAllocators"
 	Cover_CreateAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/CreateAllocator"
 	Cover_GetAllocationAttributes_FullMethodName                 = "/blueapi.cover.v1.Cover/GetAllocationAttributes"
 	Cover_GetAllocationSources_FullMethodName                    = "/blueapi.cover.v1.Cover/GetAllocationSources"
 	Cover_UpdateAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/UpdateAllocator"
 	Cover_DeleteAllocator_FullMethodName                         = "/blueapi.cover.v1.Cover/DeleteAllocator"
-	Cover_ProxyCreateCompletion_FullMethodName                   = "/blueapi.cover.v1.Cover/ProxyCreateCompletion"
-	Cover_SimulateFeeAllocator_FullMethodName                    = "/blueapi.cover.v1.Cover/SimulateFeeAllocator"
-	Cover_ListAccountUsage_FullMethodName                        = "/blueapi.cover.v1.Cover/ListAccountUsage"
-	Cover_RestoreAccountUsage_FullMethodName                     = "/blueapi.cover.v1.Cover/RestoreAccountUsage"
-	Cover_SimulateAccountUsage_FullMethodName                    = "/blueapi.cover.v1.Cover/SimulateAccountUsage"
-	Cover_ListSavings_FullMethodName                             = "/blueapi.cover.v1.Cover/ListSavings"
-	Cover_RestoreSavings_FullMethodName                          = "/blueapi.cover.v1.Cover/RestoreSavings"
-	Cover_SimulateSavings_FullMethodName                         = "/blueapi.cover.v1.Cover/SimulateSavings"
 	Cover_GetCostGroupAllocation_FullMethodName                  = "/blueapi.cover.v1.Cover/GetCostGroupAllocation"
 	Cover_ProcessAuth0User_FullMethodName                        = "/blueapi.cover.v1.Cover/ProcessAuth0User"
 	Cover_AddPartnerCenterCredentials_FullMethodName             = "/blueapi.cover.v1.Cover/AddPartnerCenterCredentials"
@@ -137,7 +106,6 @@ const (
 	Cover_GetChannelDetails_FullMethodName                       = "/blueapi.cover.v1.Cover/GetChannelDetails"
 	Cover_DeleteChannel_FullMethodName                           = "/blueapi.cover.v1.Cover/DeleteChannel"
 	Cover_UpdateChannelDetails_FullMethodName                    = "/blueapi.cover.v1.Cover/UpdateChannelDetails"
-	Cover_GetDiscountRecommendations_FullMethodName              = "/blueapi.cover.v1.Cover/GetDiscountRecommendations"
 	Cover_GetAnomalyinCostGroup_FullMethodName                   = "/blueapi.cover.v1.Cover/GetAnomalyinCostGroup"
 	Cover_CreateDiscountExpirationAlert_FullMethodName           = "/blueapi.cover.v1.Cover/CreateDiscountExpirationAlert"
 	Cover_UpdateDiscountExpirationAlert_FullMethodName           = "/blueapi.cover.v1.Cover/UpdateDiscountExpirationAlert"
@@ -162,15 +130,8 @@ const (
 	Cover_CreateProfiling_FullMethodName                         = "/blueapi.cover.v1.Cover/CreateProfiling"
 	Cover_AddInfotoMarketplace_FullMethodName                    = "/blueapi.cover.v1.Cover/AddInfotoMarketplace"
 	Cover_GetReportSummary_FullMethodName                        = "/blueapi.cover.v1.Cover/GetReportSummary"
-	Cover_ListRecommendations_FullMethodName                     = "/blueapi.cover.v1.Cover/ListRecommendations"
 	Cover_ListRecommendationsV2_FullMethodName                   = "/blueapi.cover.v1.Cover/ListRecommendationsV2"
-	Cover_GetRecommendation_FullMethodName                       = "/blueapi.cover.v1.Cover/GetRecommendation"
 	Cover_GetRecommendationV2_FullMethodName                     = "/blueapi.cover.v1.Cover/GetRecommendationV2"
-	Cover_ExecuteOptimization_FullMethodName                     = "/blueapi.cover.v1.Cover/ExecuteOptimization"
-	Cover_GetExecutionStatus_FullMethodName                      = "/blueapi.cover.v1.Cover/GetExecutionStatus"
-	Cover_MarkAsExecuted_FullMethodName                          = "/blueapi.cover.v1.Cover/MarkAsExecuted"
-	Cover_UndoExecutedRecommendation_FullMethodName              = "/blueapi.cover.v1.Cover/UndoExecutedRecommendation"
-	Cover_OptimizationHistory_FullMethodName                     = "/blueapi.cover.v1.Cover/OptimizationHistory"
 	Cover_SetCostGroupEventIndicator_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupEventIndicator"
 	Cover_SetCostGroupAnomalyOptions_FullMethodName              = "/blueapi.cover.v1.Cover/SetCostGroupAnomalyOptions"
 	Cover_SetOrgFiscalMonth_FullMethodName                       = "/blueapi.cover.v1.Cover/SetOrgFiscalMonth"
@@ -234,26 +195,8 @@ const (
 type CoverClient interface {
 	// Onboard an organization with an admin account and default cost group
 	OnboardOrg(ctx context.Context, in *OnboardOrgRequest, opts ...grpc.CallOption) (*OnboardOrgResponse, error)
-	// Deprecated: Do not use.
-	// Invite members to the system
-	InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error)
 	// Activate the added user
 	ActivateUser(ctx context.Context, in *ActivateUserRequest, opts ...grpc.CallOption) (*ActivateUserResponse, error)
-	// Deprecated: Do not use.
-	// Create a member
-	CreateMember(ctx context.Context, in *CreateMemberRequest, opts ...grpc.CallOption) (*CreateMemberResponse, error)
-	// Deprecated: Do not use.
-	// Get all the members/subusers of the company
-	GetMembers(ctx context.Context, in *GetMembersRequest, opts ...grpc.CallOption) (*GetMembersResponse, error)
-	// Deprecated: Do not use.
-	// Get the details of the user
-	GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error)
-	// Deprecated: Do not use.
-	// Get the cost group to which the member is attached
-	GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error)
-	// Deprecated: Do not use.
-	// Modify member's permission
-	UpdateMemberPermission(ctx context.Context, in *UpdateMemberPermissionRequest, opts ...grpc.CallOption) (*UpdateMemberPermissionResponse, error)
 	// Get the details of the logged-in user
 	GetUserDetails(ctx context.Context, in *GetUserDetailsRequest, opts ...grpc.CallOption) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
@@ -278,9 +221,6 @@ type CoverClient interface {
 	UpdateUserTimezone(ctx context.Context, in *UpdateUserTimezoneRequest, opts ...grpc.CallOption) (*UpdateUserTimezoneResponse, error)
 	// Modify attributes
 	UpdateUserAttributes(ctx context.Context, in *UpdateUserAttributesRequest, opts ...grpc.CallOption) (*UpdateUserAttributesResponse, error)
-	// Deprecated: Do not use.
-	// Deletes a user
-	DeleteMember(ctx context.Context, in *DeleteMemberRequest, opts ...grpc.CallOption) (*DeleteMemberResponse, error)
 	// Reset member's password
 	ResetPassword(ctx context.Context, in *ResetPasswordRequest, opts ...grpc.CallOption) (*ResetPasswordResponse, error)
 	// Create a view
@@ -342,18 +282,10 @@ type CoverClient interface {
 	// Update cost group's combinations
 	UpdateCostGroupCombinations(ctx context.Context, in *UpdateCostGroupCombinationsRequest, opts ...grpc.CallOption) (*UpdateCostGroupCombinationsResponse, error)
 	ResolveCostGroupCombinations(ctx context.Context, in *ResolveCostGroupCombinationsRequest, opts ...grpc.CallOption) (*ResolveCostGroupCombinationsResponse, error)
-	// Assign a member to a cost group
-	AssignCostGroupMember(ctx context.Context, in *AssignCostGroupMemberRequest, opts ...grpc.CallOption) (*AssignCostGroupMemberResponse, error)
-	// Remove a member from a cost group
-	RemoveCostGroupMember(ctx context.Context, in *RemoveCostGroupMemberRequest, opts ...grpc.CallOption) (*RemoveCostGroupMemberResponse, error)
 	// Deletes a cost group
 	DeleteCostGroup(ctx context.Context, in *DeleteCostGroupRequest, opts ...grpc.CallOption) (*DeleteCostGroupResponse, error)
 	// Gets a CloudFormation launch URL for enabling the account access.
 	GetAccountAccessTemplateUrl(ctx context.Context, in *GetAccountAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetAccountAccessTemplateUrlResponse, error)
-	// Lists the account access role(s) attached to accounts under caller.
-	ListAccountAccess(ctx context.Context, in *ListAccountAccessRequest, opts ...grpc.CallOption) (Cover_ListAccountAccessClient, error)
-	// Gets the current account role attached to the input target.
-	GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error)
 	// Gets the current account. For GCP and Azure.
 	GetDataAccess(ctx context.Context, in *GetAndDeleteDataAccessRequest, opts ...grpc.CallOption) (*DataAccess, error)
 	// Deletes GCP or Azure accounts based on the provided request.
@@ -386,32 +318,8 @@ type CoverClient interface {
 	GetAssetsSummary(ctx context.Context, in *GetAssetsSummaryRequest, opts ...grpc.CallOption) (*GetAssetsSummaryResponse, error)
 	// WORK-IN-PROGRESS: Get usage and usage-based costs for the specified costgroup
 	GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error)
-	// Gets the right sizing recommendation of all the accounts in the costgroup
-	GetRightSizingRecommendation(ctx context.Context, in *GetRightSizingRecommendationRequest, opts ...grpc.CallOption) (*GetRightSizingRecommendationResponse, error)
-	// Modify resource type from right sizing recommendation
-	ModifyResourceType(ctx context.Context, in *ModifyResourceTypeRequest, opts ...grpc.CallOption) (*ModifyResourceTypeResponse, error)
-	// Terminate a resource from right sizing recommendation
-	TerminateResource(ctx context.Context, in *TerminateResourceRequest, opts ...grpc.CallOption) (*TerminateResourceResponse, error)
-	// Upload charge code
-	UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error)
 	// Assign payer to a linked account
 	AssignPayer(ctx context.Context, in *AssignPayerRequest, opts ...grpc.CallOption) (*AssignPayerResponse, error)
-	// Get list of all payers
-	GetPayers(ctx context.Context, in *GetPayersRequest, opts ...grpc.CallOption) (*GetPayersResponse, error)
-	// Get list of registered accounts
-	GetAccounts(ctx context.Context, in *GetAccountsRequest, opts ...grpc.CallOption) (*GetAccountsResponse, error)
-	// Get list of supported services
-	GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error)
-	// Get list of available regions
-	GetRegions(ctx context.Context, in *GetRegionsRequest, opts ...grpc.CallOption) (*GetRegionsResponse, error)
-	// Get list of available tags
-	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (*GetTagsResponse, error)
-	// Lists the fees
-	ListFees(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListFeesClient, error)
-	// Restore distributed fees
-	RestoreFee(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreFeeClient, error)
-	// Get all available fees for the specified cost group
-	GetCostGroupFee(ctx context.Context, in *GetCostGroupFeeRequest, opts ...grpc.CallOption) (Cover_GetCostGroupFeeClient, error)
 	// WORK-IN-PROGRESS: Lists all the allocators
 	ListAllocators(ctx context.Context, in *ListAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListAllocatorsClient, error)
 	// WORK-IN-PROGRESS: Creates cost allocator item
@@ -424,22 +332,6 @@ type CoverClient interface {
 	UpdateAllocator(ctx context.Context, in *CostAllocatorRequest, opts ...grpc.CallOption) (*CostAllocatorDetails, error)
 	// WORK-IN-PROGRESS: Deletes a cost allocator
 	DeleteAllocator(ctx context.Context, in *DeleteAllocatorRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Do not use.
-	ProxyCreateCompletion(ctx context.Context, in *ProxyCreateCompletionRequest, opts ...grpc.CallOption) (Cover_ProxyCreateCompletionClient, error)
-	// WORK-IN-PROGRESS: Simulate fee allocator
-	SimulateFeeAllocator(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateFeeAllocatorClient, error)
-	// WORK-IN-PROGRESS: Lists the allocated account usages
-	ListAccountUsage(ctx context.Context, in *ListAccountUsageRequest, opts ...grpc.CallOption) (Cover_ListAccountUsageClient, error)
-	// WORK-IN-PROGRESS: Restore the allocated account usages
-	RestoreAccountUsage(ctx context.Context, in *RestoreAccountUsageRequest, opts ...grpc.CallOption) (Cover_RestoreAccountUsageClient, error)
-	// WORK-IN-PROGRESS: Simulate the output of the account usage allocation
-	SimulateAccountUsage(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateAccountUsageClient, error)
-	// WORK-IN-PROGRESS: Lists the allocated ri and sp savings
-	ListSavings(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListSavingsClient, error)
-	// WORK-IN-PROGRESS: Restore the allocated ri and sp savings
-	RestoreSavings(ctx context.Context, in *RestoreSavingsRequest, opts ...grpc.CallOption) (Cover_RestoreSavingsClient, error)
-	// WORK-IN-PROGRESS: Simulate the output of the ri and sp savings allocation
-	SimulateSavings(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateSavingsClient, error)
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
 	GetCostGroupAllocation(ctx context.Context, in *GetCostGroupAllocationRequest, opts ...grpc.CallOption) (Cover_GetCostGroupAllocationClient, error)
 	// WORK-IN-PROGRESS: Add or read user from Auth0
@@ -470,8 +362,6 @@ type CoverClient interface {
 	DeleteChannel(ctx context.Context, in *DeleteChannelRequest, opts ...grpc.CallOption) (*DeleteChannelResponse, error)
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(ctx context.Context, in *UpdateChannelDetailsRequest, opts ...grpc.CallOption) (*UpdateChannelDetailsResponse, error)
-	// Get the discount recommendations for every account in a cost group
-	GetDiscountRecommendations(ctx context.Context, in *GetDiscountRecommendationsRequest, opts ...grpc.CallOption) (*GetDiscountRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
 	GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (Cover_GetAnomalyinCostGroupClient, error)
 	// Create discount Expiration Alert.
@@ -521,23 +411,9 @@ type CoverClient interface {
 	// Get data for insights reports summary
 	GetReportSummary(ctx context.Context, in *GetReportSummaryRequest, opts ...grpc.CallOption) (*GetReportSummaryResponse, error)
 	// Lists recommendations based on specified criteria.
-	ListRecommendations(ctx context.Context, in *ListRecommendationRequest, opts ...grpc.CallOption) (Cover_ListRecommendationsClient, error)
-	// Lists recommendations based on specified criteria.
 	ListRecommendationsV2(ctx context.Context, in *ListRecommendationV2Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV2Client, error)
-	// Retrieves a specific recommendation by its ID.
-	GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error)
 	// Retrieves a specific recommendation by its ID. (Version 2)
 	GetRecommendationV2(ctx context.Context, in *GetRecommendationV2Request, opts ...grpc.CallOption) (*GetRecommendationV2Response, error)
-	// Executes optimization based on a recommendation.
-	ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error)
-	// Get Execution status of a recommendation.
-	GetExecutionStatus(ctx context.Context, in *GetExecutionStatusRequest, opts ...grpc.CallOption) (Cover_GetExecutionStatusClient, error)
-	// Mark a recommendation executed.
-	MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error)
-	// Undo a executed recommendation (For recommendation).
-	UndoExecutedRecommendation(ctx context.Context, in *UndoExecutedRecommendationRequest, opts ...grpc.CallOption) (*UndoExecutedRecommendationResponse, error)
-	// Lists recommendations based on specified criteria.
-	OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error)
 	// Sets Cost group's event indicator
 	SetCostGroupEventIndicator(ctx context.Context, in *SetCostGroupEventIndicatorRequest, opts ...grpc.CallOption) (*SetCostGroupEventIndicatorResponse, error)
 	// Sets Cost group's anomaly options
@@ -649,76 +525,10 @@ func (c *coverClient) OnboardOrg(ctx context.Context, in *OnboardOrgRequest, opt
 	return out, nil
 }
 
-// Deprecated: Do not use.
-func (c *coverClient) InviteMember(ctx context.Context, in *InviteMemberRequest, opts ...grpc.CallOption) (*InviteMemberResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(InviteMemberResponse)
-	err := c.cc.Invoke(ctx, Cover_InviteMember_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *coverClient) ActivateUser(ctx context.Context, in *ActivateUserRequest, opts ...grpc.CallOption) (*ActivateUserResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ActivateUserResponse)
 	err := c.cc.Invoke(ctx, Cover_ActivateUser_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *coverClient) CreateMember(ctx context.Context, in *CreateMemberRequest, opts ...grpc.CallOption) (*CreateMemberResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CreateMemberResponse)
-	err := c.cc.Invoke(ctx, Cover_CreateMember_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *coverClient) GetMembers(ctx context.Context, in *GetMembersRequest, opts ...grpc.CallOption) (*GetMembersResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMembersResponse)
-	err := c.cc.Invoke(ctx, Cover_GetMembers_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *coverClient) GetMemberDetails(ctx context.Context, in *GetMemberDetailsRequest, opts ...grpc.CallOption) (*GetMemberDetailsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMemberDetailsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetMemberDetails_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *coverClient) GetMemberCostGroup(ctx context.Context, in *GetMemberCostGroupRequest, opts ...grpc.CallOption) (*GetMemberCostGroupResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetMemberCostGroupResponse)
-	err := c.cc.Invoke(ctx, Cover_GetMemberCostGroup_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *coverClient) UpdateMemberPermission(ctx context.Context, in *UpdateMemberPermissionRequest, opts ...grpc.CallOption) (*UpdateMemberPermissionResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateMemberPermissionResponse)
-	err := c.cc.Invoke(ctx, Cover_UpdateMemberPermission_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -839,17 +649,6 @@ func (c *coverClient) UpdateUserAttributes(ctx context.Context, in *UpdateUserAt
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(UpdateUserAttributesResponse)
 	err := c.cc.Invoke(ctx, Cover_UpdateUserAttributes_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-// Deprecated: Do not use.
-func (c *coverClient) DeleteMember(ctx context.Context, in *DeleteMemberRequest, opts ...grpc.CallOption) (*DeleteMemberResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(DeleteMemberResponse)
-	err := c.cc.Invoke(ctx, Cover_DeleteMember_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1166,26 +965,6 @@ func (c *coverClient) ResolveCostGroupCombinations(ctx context.Context, in *Reso
 	return out, nil
 }
 
-func (c *coverClient) AssignCostGroupMember(ctx context.Context, in *AssignCostGroupMemberRequest, opts ...grpc.CallOption) (*AssignCostGroupMemberResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AssignCostGroupMemberResponse)
-	err := c.cc.Invoke(ctx, Cover_AssignCostGroupMember_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) RemoveCostGroupMember(ctx context.Context, in *RemoveCostGroupMemberRequest, opts ...grpc.CallOption) (*RemoveCostGroupMemberResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(RemoveCostGroupMemberResponse)
-	err := c.cc.Invoke(ctx, Cover_RemoveCostGroupMember_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *coverClient) DeleteCostGroup(ctx context.Context, in *DeleteCostGroupRequest, opts ...grpc.CallOption) (*DeleteCostGroupResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteCostGroupResponse)
@@ -1200,49 +979,6 @@ func (c *coverClient) GetAccountAccessTemplateUrl(ctx context.Context, in *GetAc
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAccountAccessTemplateUrlResponse)
 	err := c.cc.Invoke(ctx, Cover_GetAccountAccessTemplateUrl_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) ListAccountAccess(ctx context.Context, in *ListAccountAccessRequest, opts ...grpc.CallOption) (Cover_ListAccountAccessClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[0], Cover_ListAccountAccess_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverListAccountAccessClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_ListAccountAccessClient interface {
-	Recv() (*AccountAccess, error)
-	grpc.ClientStream
-}
-
-type coverListAccountAccessClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverListAccountAccessClient) Recv() (*AccountAccess, error) {
-	m := new(AccountAccess)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) GetAccountAccess(ctx context.Context, in *GetAccountAccessRequest, opts ...grpc.CallOption) (*AccountAccess, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(AccountAccess)
-	err := c.cc.Invoke(ctx, Cover_GetAccountAccess_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1351,7 +1087,7 @@ func (c *coverClient) AddBillingAccount(ctx context.Context, in *BillingAccountR
 
 func (c *coverClient) ListDataAccess(ctx context.Context, in *ListDataAccessRequest, opts ...grpc.CallOption) (Cover_ListDataAccessClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[1], Cover_ListDataAccess_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[0], Cover_ListDataAccess_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1404,7 +1140,7 @@ func (c *coverClient) UpdateDataAccess(ctx context.Context, in *UpdateDataAccess
 
 func (c *coverClient) ListAssets(ctx context.Context, in *ListAssetsRequest, opts ...grpc.CallOption) (Cover_ListAssetsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[2], Cover_ListAssets_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[1], Cover_ListAssets_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1447,7 +1183,7 @@ func (c *coverClient) GetAssetsSummary(ctx context.Context, in *GetAssetsSummary
 
 func (c *coverClient) GetCostUsage(ctx context.Context, in *GetCostUsageRequest, opts ...grpc.CallOption) (Cover_GetCostUsageClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[3], Cover_GetCostUsage_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[2], Cover_GetCostUsage_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1478,71 +1214,6 @@ func (x *coverGetCostUsageClient) Recv() (*CostItem, error) {
 	return m, nil
 }
 
-func (c *coverClient) GetRightSizingRecommendation(ctx context.Context, in *GetRightSizingRecommendationRequest, opts ...grpc.CallOption) (*GetRightSizingRecommendationResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRightSizingRecommendationResponse)
-	err := c.cc.Invoke(ctx, Cover_GetRightSizingRecommendation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) ModifyResourceType(ctx context.Context, in *ModifyResourceTypeRequest, opts ...grpc.CallOption) (*ModifyResourceTypeResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ModifyResourceTypeResponse)
-	err := c.cc.Invoke(ctx, Cover_ModifyResourceType_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) TerminateResource(ctx context.Context, in *TerminateResourceRequest, opts ...grpc.CallOption) (*TerminateResourceResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(TerminateResourceResponse)
-	err := c.cc.Invoke(ctx, Cover_TerminateResource_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) UploadChargeCode(ctx context.Context, opts ...grpc.CallOption) (Cover_UploadChargeCodeClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[4], Cover_UploadChargeCode_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverUploadChargeCodeClient{ClientStream: stream}
-	return x, nil
-}
-
-type Cover_UploadChargeCodeClient interface {
-	Send(*UploadChargeCodeRequest) error
-	CloseAndRecv() (*UploadChargeCodeResponse, error)
-	grpc.ClientStream
-}
-
-type coverUploadChargeCodeClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverUploadChargeCodeClient) Send(m *UploadChargeCodeRequest) error {
-	return x.ClientStream.SendMsg(m)
-}
-
-func (x *coverUploadChargeCodeClient) CloseAndRecv() (*UploadChargeCodeResponse, error) {
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	m := new(UploadChargeCodeResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *coverClient) AssignPayer(ctx context.Context, in *AssignPayerRequest, opts ...grpc.CallOption) (*AssignPayerResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(AssignPayerResponse)
@@ -1553,158 +1224,9 @@ func (c *coverClient) AssignPayer(ctx context.Context, in *AssignPayerRequest, o
 	return out, nil
 }
 
-func (c *coverClient) GetPayers(ctx context.Context, in *GetPayersRequest, opts ...grpc.CallOption) (*GetPayersResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetPayersResponse)
-	err := c.cc.Invoke(ctx, Cover_GetPayers_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) GetAccounts(ctx context.Context, in *GetAccountsRequest, opts ...grpc.CallOption) (*GetAccountsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetAccountsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetAccounts_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) GetServices(ctx context.Context, in *GetServicesRequest, opts ...grpc.CallOption) (*GetServicesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetServicesResponse)
-	err := c.cc.Invoke(ctx, Cover_GetServices_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) GetRegions(ctx context.Context, in *GetRegionsRequest, opts ...grpc.CallOption) (*GetRegionsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRegionsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetRegions_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (*GetTagsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetTagsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetTags_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) ListFees(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListFeesClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_ListFees_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverListFeesClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_ListFeesClient interface {
-	Recv() (*FeeDetails, error)
-	grpc.ClientStream
-}
-
-type coverListFeesClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverListFeesClient) Recv() (*FeeDetails, error) {
-	m := new(FeeDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) RestoreFee(ctx context.Context, in *RestoreFeeRequest, opts ...grpc.CallOption) (Cover_RestoreFeeClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_RestoreFee_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverRestoreFeeClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_RestoreFeeClient interface {
-	Recv() (*FeeDetails, error)
-	grpc.ClientStream
-}
-
-type coverRestoreFeeClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverRestoreFeeClient) Recv() (*FeeDetails, error) {
-	m := new(FeeDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) GetCostGroupFee(ctx context.Context, in *GetCostGroupFeeRequest, opts ...grpc.CallOption) (Cover_GetCostGroupFeeClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_GetCostGroupFee_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverGetCostGroupFeeClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_GetCostGroupFeeClient interface {
-	Recv() (*FeeItem, error)
-	grpc.ClientStream
-}
-
-type coverGetCostGroupFeeClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverGetCostGroupFeeClient) Recv() (*FeeItem, error) {
-	m := new(FeeItem)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *coverClient) ListAllocators(ctx context.Context, in *ListAllocatorsRequest, opts ...grpc.CallOption) (Cover_ListAllocatorsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ListAllocators_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[3], Cover_ListAllocators_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1785,273 +1307,9 @@ func (c *coverClient) DeleteAllocator(ctx context.Context, in *DeleteAllocatorRe
 	return out, nil
 }
 
-func (c *coverClient) ProxyCreateCompletion(ctx context.Context, in *ProxyCreateCompletionRequest, opts ...grpc.CallOption) (Cover_ProxyCreateCompletionClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_ProxyCreateCompletion_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverProxyCreateCompletionClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_ProxyCreateCompletionClient interface {
-	Recv() (*ProxyCreateCompletionResponse, error)
-	grpc.ClientStream
-}
-
-type coverProxyCreateCompletionClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverProxyCreateCompletionClient) Recv() (*ProxyCreateCompletionResponse, error) {
-	m := new(ProxyCreateCompletionResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) SimulateFeeAllocator(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateFeeAllocatorClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[10], Cover_SimulateFeeAllocator_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverSimulateFeeAllocatorClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_SimulateFeeAllocatorClient interface {
-	Recv() (*FeeDetails, error)
-	grpc.ClientStream
-}
-
-type coverSimulateFeeAllocatorClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverSimulateFeeAllocatorClient) Recv() (*FeeDetails, error) {
-	m := new(FeeDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) ListAccountUsage(ctx context.Context, in *ListAccountUsageRequest, opts ...grpc.CallOption) (Cover_ListAccountUsageClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[11], Cover_ListAccountUsage_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverListAccountUsageClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_ListAccountUsageClient interface {
-	Recv() (*AccountUsageDetails, error)
-	grpc.ClientStream
-}
-
-type coverListAccountUsageClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverListAccountUsageClient) Recv() (*AccountUsageDetails, error) {
-	m := new(AccountUsageDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) RestoreAccountUsage(ctx context.Context, in *RestoreAccountUsageRequest, opts ...grpc.CallOption) (Cover_RestoreAccountUsageClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[12], Cover_RestoreAccountUsage_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverRestoreAccountUsageClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_RestoreAccountUsageClient interface {
-	Recv() (*AccountUsageDetails, error)
-	grpc.ClientStream
-}
-
-type coverRestoreAccountUsageClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverRestoreAccountUsageClient) Recv() (*AccountUsageDetails, error) {
-	m := new(AccountUsageDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) SimulateAccountUsage(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateAccountUsageClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[13], Cover_SimulateAccountUsage_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverSimulateAccountUsageClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_SimulateAccountUsageClient interface {
-	Recv() (*AccountUsageDetails, error)
-	grpc.ClientStream
-}
-
-type coverSimulateAccountUsageClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverSimulateAccountUsageClient) Recv() (*AccountUsageDetails, error) {
-	m := new(AccountUsageDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) ListSavings(ctx context.Context, in *ListFeesRequest, opts ...grpc.CallOption) (Cover_ListSavingsClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[14], Cover_ListSavings_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverListSavingsClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_ListSavingsClient interface {
-	Recv() (*SavingsDetails, error)
-	grpc.ClientStream
-}
-
-type coverListSavingsClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverListSavingsClient) Recv() (*SavingsDetails, error) {
-	m := new(SavingsDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) RestoreSavings(ctx context.Context, in *RestoreSavingsRequest, opts ...grpc.CallOption) (Cover_RestoreSavingsClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[15], Cover_RestoreSavings_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverRestoreSavingsClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_RestoreSavingsClient interface {
-	Recv() (*SavingsDetails, error)
-	grpc.ClientStream
-}
-
-type coverRestoreSavingsClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverRestoreSavingsClient) Recv() (*SavingsDetails, error) {
-	m := new(SavingsDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) SimulateSavings(ctx context.Context, in *CreateAllocatorRequest, opts ...grpc.CallOption) (Cover_SimulateSavingsClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[16], Cover_SimulateSavings_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverSimulateSavingsClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_SimulateSavingsClient interface {
-	Recv() (*SavingsDetails, error)
-	grpc.ClientStream
-}
-
-type coverSimulateSavingsClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverSimulateSavingsClient) Recv() (*SavingsDetails, error) {
-	m := new(SavingsDetails)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *coverClient) GetCostGroupAllocation(ctx context.Context, in *GetCostGroupAllocationRequest, opts ...grpc.CallOption) (Cover_GetCostGroupAllocationClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[17], Cover_GetCostGroupAllocation_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[4], Cover_GetCostGroupAllocation_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2124,7 +1382,7 @@ func (c *coverClient) GetCostGroupAttribute(ctx context.Context, in *GetCostGrou
 
 func (c *coverClient) GetAlerts(ctx context.Context, in *GetAlertsRequest, opts ...grpc.CallOption) (Cover_GetAlertsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[18], Cover_GetAlerts_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[5], Cover_GetAlerts_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2197,7 +1455,7 @@ func (c *coverClient) UpdateAlertDetails(ctx context.Context, in *UpdateAlertDet
 
 func (c *coverClient) GetChannels(ctx context.Context, in *GetChannelsRequest, opts ...grpc.CallOption) (Cover_GetChannelsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[19], Cover_GetChannels_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[6], Cover_GetChannels_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2268,19 +1526,9 @@ func (c *coverClient) UpdateChannelDetails(ctx context.Context, in *UpdateChanne
 	return out, nil
 }
 
-func (c *coverClient) GetDiscountRecommendations(ctx context.Context, in *GetDiscountRecommendationsRequest, opts ...grpc.CallOption) (*GetDiscountRecommendationsResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDiscountRecommendationsResponse)
-	err := c.cc.Invoke(ctx, Cover_GetDiscountRecommendations_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *coverClient) GetAnomalyinCostGroup(ctx context.Context, in *GetAnomalyinCostGroupRequest, opts ...grpc.CallOption) (Cover_GetAnomalyinCostGroupClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[20], Cover_GetAnomalyinCostGroup_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[7], Cover_GetAnomalyinCostGroup_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2343,7 +1591,7 @@ func (c *coverClient) GetDiscountExpirationAlert(ctx context.Context, in *Manipu
 
 func (c *coverClient) ListDiscountExpirationAlert(ctx context.Context, in *ListDiscountExpirationAlertRequest, opts ...grpc.CallOption) (Cover_ListDiscountExpirationAlertClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[21], Cover_ListDiscountExpirationAlert_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[8], Cover_ListDiscountExpirationAlert_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2406,7 +1654,7 @@ func (c *coverClient) DeleteAnomalyAlert(ctx context.Context, in *ManipulateAnom
 
 func (c *coverClient) ListAnomalyAlert(ctx context.Context, in *ListAnomalyAlertRequest, opts ...grpc.CallOption) (Cover_ListAnomalyAlertClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[22], Cover_ListAnomalyAlert_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[9], Cover_ListAnomalyAlert_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2489,7 +1737,7 @@ func (c *coverClient) UpdateUserProfile(ctx context.Context, in *UpdateUserProfi
 
 func (c *coverClient) ListBudgets(ctx context.Context, in *ListBudgetsRequest, opts ...grpc.CallOption) (Cover_ListBudgetsClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[23], Cover_ListBudgets_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[10], Cover_ListBudgets_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2610,42 +1858,9 @@ func (c *coverClient) GetReportSummary(ctx context.Context, in *GetReportSummary
 	return out, nil
 }
 
-func (c *coverClient) ListRecommendations(ctx context.Context, in *ListRecommendationRequest, opts ...grpc.CallOption) (Cover_ListRecommendationsClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[24], Cover_ListRecommendations_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverListRecommendationsClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_ListRecommendationsClient interface {
-	Recv() (*ListRecommendationResponse, error)
-	grpc.ClientStream
-}
-
-type coverListRecommendationsClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverListRecommendationsClient) Recv() (*ListRecommendationResponse, error) {
-	m := new(ListRecommendationResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func (c *coverClient) ListRecommendationsV2(ctx context.Context, in *ListRecommendationV2Request, opts ...grpc.CallOption) (Cover_ListRecommendationsV2Client, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[25], Cover_ListRecommendationsV2_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[11], Cover_ListRecommendationsV2_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -2676,93 +1891,10 @@ func (x *coverListRecommendationsV2Client) Recv() (*ListRecommendationResponse, 
 	return m, nil
 }
 
-func (c *coverClient) GetRecommendation(ctx context.Context, in *GetRecommendationRequest, opts ...grpc.CallOption) (*GetRecommendationResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetRecommendationResponse)
-	err := c.cc.Invoke(ctx, Cover_GetRecommendation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *coverClient) GetRecommendationV2(ctx context.Context, in *GetRecommendationV2Request, opts ...grpc.CallOption) (*GetRecommendationV2Response, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetRecommendationV2Response)
 	err := c.cc.Invoke(ctx, Cover_GetRecommendationV2_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) ExecuteOptimization(ctx context.Context, in *ExecuteOptimizationRequest, opts ...grpc.CallOption) (*ExecuteOptimizationResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ExecuteOptimizationResponse)
-	err := c.cc.Invoke(ctx, Cover_ExecuteOptimization_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) GetExecutionStatus(ctx context.Context, in *GetExecutionStatusRequest, opts ...grpc.CallOption) (Cover_GetExecutionStatusClient, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[26], Cover_GetExecutionStatus_FullMethodName, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	x := &coverGetExecutionStatusClient{ClientStream: stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type Cover_GetExecutionStatusClient interface {
-	Recv() (*GetExecutionStatusResponse, error)
-	grpc.ClientStream
-}
-
-type coverGetExecutionStatusClient struct {
-	grpc.ClientStream
-}
-
-func (x *coverGetExecutionStatusClient) Recv() (*GetExecutionStatusResponse, error) {
-	m := new(GetExecutionStatusResponse)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *coverClient) MarkAsExecuted(ctx context.Context, in *MarkAsExecutedRequest, opts ...grpc.CallOption) (*MarkAsExecutedResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MarkAsExecutedResponse)
-	err := c.cc.Invoke(ctx, Cover_MarkAsExecuted_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) UndoExecutedRecommendation(ctx context.Context, in *UndoExecutedRecommendationRequest, opts ...grpc.CallOption) (*UndoExecutedRecommendationResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UndoExecutedRecommendationResponse)
-	err := c.cc.Invoke(ctx, Cover_UndoExecutedRecommendation_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *coverClient) OptimizationHistory(ctx context.Context, in *OptimizationHistoryRequest, opts ...grpc.CallOption) (*OptimizationHistoryResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(OptimizationHistoryResponse)
-	err := c.cc.Invoke(ctx, Cover_OptimizationHistory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3111,7 +2243,7 @@ func (c *coverClient) GetDiscountPlan(ctx context.Context, in *GetDiscountPlanRe
 
 func (c *coverClient) GetCostUsageV2(ctx context.Context, in *GetCostUsageV2Request, opts ...grpc.CallOption) (Cover_GetCostUsageV2Client, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[27], Cover_GetCostUsageV2_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[12], Cover_GetCostUsageV2_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3214,7 +2346,7 @@ func (c *coverClient) DeleteCostForecast(ctx context.Context, in *DeleteCostFore
 
 func (c *coverClient) GetCostForecastsData(ctx context.Context, in *GetCostForecastsDataRequest, opts ...grpc.CallOption) (Cover_GetCostForecastsDataClient, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[28], Cover_GetCostForecastsData_FullMethodName, cOpts...)
+	stream, err := c.cc.NewStream(ctx, &Cover_ServiceDesc.Streams[13], Cover_GetCostForecastsData_FullMethodName, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3353,26 +2485,8 @@ func (c *coverClient) GetMyRoles(ctx context.Context, in *GetMyRolesRequest, opt
 type CoverServer interface {
 	// Onboard an organization with an admin account and default cost group
 	OnboardOrg(context.Context, *OnboardOrgRequest) (*OnboardOrgResponse, error)
-	// Deprecated: Do not use.
-	// Invite members to the system
-	InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error)
 	// Activate the added user
 	ActivateUser(context.Context, *ActivateUserRequest) (*ActivateUserResponse, error)
-	// Deprecated: Do not use.
-	// Create a member
-	CreateMember(context.Context, *CreateMemberRequest) (*CreateMemberResponse, error)
-	// Deprecated: Do not use.
-	// Get all the members/subusers of the company
-	GetMembers(context.Context, *GetMembersRequest) (*GetMembersResponse, error)
-	// Deprecated: Do not use.
-	// Get the details of the user
-	GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error)
-	// Deprecated: Do not use.
-	// Get the cost group to which the member is attached
-	GetMemberCostGroup(context.Context, *GetMemberCostGroupRequest) (*GetMemberCostGroupResponse, error)
-	// Deprecated: Do not use.
-	// Modify member's permission
-	UpdateMemberPermission(context.Context, *UpdateMemberPermissionRequest) (*UpdateMemberPermissionResponse, error)
 	// Get the details of the logged-in user
 	GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error)
 	// Modify user's avatar
@@ -3397,9 +2511,6 @@ type CoverServer interface {
 	UpdateUserTimezone(context.Context, *UpdateUserTimezoneRequest) (*UpdateUserTimezoneResponse, error)
 	// Modify attributes
 	UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error)
-	// Deprecated: Do not use.
-	// Deletes a user
-	DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error)
 	// Reset member's password
 	ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error)
 	// Create a view
@@ -3461,18 +2572,10 @@ type CoverServer interface {
 	// Update cost group's combinations
 	UpdateCostGroupCombinations(context.Context, *UpdateCostGroupCombinationsRequest) (*UpdateCostGroupCombinationsResponse, error)
 	ResolveCostGroupCombinations(context.Context, *ResolveCostGroupCombinationsRequest) (*ResolveCostGroupCombinationsResponse, error)
-	// Assign a member to a cost group
-	AssignCostGroupMember(context.Context, *AssignCostGroupMemberRequest) (*AssignCostGroupMemberResponse, error)
-	// Remove a member from a cost group
-	RemoveCostGroupMember(context.Context, *RemoveCostGroupMemberRequest) (*RemoveCostGroupMemberResponse, error)
 	// Deletes a cost group
 	DeleteCostGroup(context.Context, *DeleteCostGroupRequest) (*DeleteCostGroupResponse, error)
 	// Gets a CloudFormation launch URL for enabling the account access.
 	GetAccountAccessTemplateUrl(context.Context, *GetAccountAccessTemplateUrlRequest) (*GetAccountAccessTemplateUrlResponse, error)
-	// Lists the account access role(s) attached to accounts under caller.
-	ListAccountAccess(*ListAccountAccessRequest, Cover_ListAccountAccessServer) error
-	// Gets the current account role attached to the input target.
-	GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error)
 	// Gets the current account. For GCP and Azure.
 	GetDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*DataAccess, error)
 	// Deletes GCP or Azure accounts based on the provided request.
@@ -3505,32 +2608,8 @@ type CoverServer interface {
 	GetAssetsSummary(context.Context, *GetAssetsSummaryRequest) (*GetAssetsSummaryResponse, error)
 	// WORK-IN-PROGRESS: Get usage and usage-based costs for the specified costgroup
 	GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error
-	// Gets the right sizing recommendation of all the accounts in the costgroup
-	GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error)
-	// Modify resource type from right sizing recommendation
-	ModifyResourceType(context.Context, *ModifyResourceTypeRequest) (*ModifyResourceTypeResponse, error)
-	// Terminate a resource from right sizing recommendation
-	TerminateResource(context.Context, *TerminateResourceRequest) (*TerminateResourceResponse, error)
-	// Upload charge code
-	UploadChargeCode(Cover_UploadChargeCodeServer) error
 	// Assign payer to a linked account
 	AssignPayer(context.Context, *AssignPayerRequest) (*AssignPayerResponse, error)
-	// Get list of all payers
-	GetPayers(context.Context, *GetPayersRequest) (*GetPayersResponse, error)
-	// Get list of registered accounts
-	GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error)
-	// Get list of supported services
-	GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error)
-	// Get list of available regions
-	GetRegions(context.Context, *GetRegionsRequest) (*GetRegionsResponse, error)
-	// Get list of available tags
-	GetTags(context.Context, *GetTagsRequest) (*GetTagsResponse, error)
-	// Lists the fees
-	ListFees(*ListFeesRequest, Cover_ListFeesServer) error
-	// Restore distributed fees
-	RestoreFee(*RestoreFeeRequest, Cover_RestoreFeeServer) error
-	// Get all available fees for the specified cost group
-	GetCostGroupFee(*GetCostGroupFeeRequest, Cover_GetCostGroupFeeServer) error
 	// WORK-IN-PROGRESS: Lists all the allocators
 	ListAllocators(*ListAllocatorsRequest, Cover_ListAllocatorsServer) error
 	// WORK-IN-PROGRESS: Creates cost allocator item
@@ -3543,22 +2622,6 @@ type CoverServer interface {
 	UpdateAllocator(context.Context, *CostAllocatorRequest) (*CostAllocatorDetails, error)
 	// WORK-IN-PROGRESS: Deletes a cost allocator
 	DeleteAllocator(context.Context, *DeleteAllocatorRequest) (*emptypb.Empty, error)
-	// WORK-IN-PROGRESS: Do not use.
-	ProxyCreateCompletion(*ProxyCreateCompletionRequest, Cover_ProxyCreateCompletionServer) error
-	// WORK-IN-PROGRESS: Simulate fee allocator
-	SimulateFeeAllocator(*CreateAllocatorRequest, Cover_SimulateFeeAllocatorServer) error
-	// WORK-IN-PROGRESS: Lists the allocated account usages
-	ListAccountUsage(*ListAccountUsageRequest, Cover_ListAccountUsageServer) error
-	// WORK-IN-PROGRESS: Restore the allocated account usages
-	RestoreAccountUsage(*RestoreAccountUsageRequest, Cover_RestoreAccountUsageServer) error
-	// WORK-IN-PROGRESS: Simulate the output of the account usage allocation
-	SimulateAccountUsage(*CreateAllocatorRequest, Cover_SimulateAccountUsageServer) error
-	// WORK-IN-PROGRESS: Lists the allocated ri and sp savings
-	ListSavings(*ListFeesRequest, Cover_ListSavingsServer) error
-	// WORK-IN-PROGRESS: Restore the allocated ri and sp savings
-	RestoreSavings(*RestoreSavingsRequest, Cover_RestoreSavingsServer) error
-	// WORK-IN-PROGRESS: Simulate the output of the ri and sp savings allocation
-	SimulateSavings(*CreateAllocatorRequest, Cover_SimulateSavingsServer) error
 	// WORK-IN-PROGRESS: Get all available allocation items for the specified cost group
 	GetCostGroupAllocation(*GetCostGroupAllocationRequest, Cover_GetCostGroupAllocationServer) error
 	// WORK-IN-PROGRESS: Add or read user from Auth0
@@ -3589,8 +2652,6 @@ type CoverServer interface {
 	DeleteChannel(context.Context, *DeleteChannelRequest) (*DeleteChannelResponse, error)
 	// WORK-IN-PROGRESS: Update Specific Channel under organization
 	UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error)
-	// Get the discount recommendations for every account in a cost group
-	GetDiscountRecommendations(context.Context, *GetDiscountRecommendationsRequest) (*GetDiscountRecommendationsResponse, error)
 	// Get the data of a cost group containing anomaly values
 	GetAnomalyinCostGroup(*GetAnomalyinCostGroupRequest, Cover_GetAnomalyinCostGroupServer) error
 	// Create discount Expiration Alert.
@@ -3640,23 +2701,9 @@ type CoverServer interface {
 	// Get data for insights reports summary
 	GetReportSummary(context.Context, *GetReportSummaryRequest) (*GetReportSummaryResponse, error)
 	// Lists recommendations based on specified criteria.
-	ListRecommendations(*ListRecommendationRequest, Cover_ListRecommendationsServer) error
-	// Lists recommendations based on specified criteria.
 	ListRecommendationsV2(*ListRecommendationV2Request, Cover_ListRecommendationsV2Server) error
-	// Retrieves a specific recommendation by its ID.
-	GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error)
 	// Retrieves a specific recommendation by its ID. (Version 2)
 	GetRecommendationV2(context.Context, *GetRecommendationV2Request) (*GetRecommendationV2Response, error)
-	// Executes optimization based on a recommendation.
-	ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error)
-	// Get Execution status of a recommendation.
-	GetExecutionStatus(*GetExecutionStatusRequest, Cover_GetExecutionStatusServer) error
-	// Mark a recommendation executed.
-	MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error)
-	// Undo a executed recommendation (For recommendation).
-	UndoExecutedRecommendation(context.Context, *UndoExecutedRecommendationRequest) (*UndoExecutedRecommendationResponse, error)
-	// Lists recommendations based on specified criteria.
-	OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error)
 	// Sets Cost group's event indicator
 	SetCostGroupEventIndicator(context.Context, *SetCostGroupEventIndicatorRequest) (*SetCostGroupEventIndicatorResponse, error)
 	// Sets Cost group's anomaly options
@@ -3758,26 +2805,8 @@ type UnimplementedCoverServer struct {
 func (UnimplementedCoverServer) OnboardOrg(context.Context, *OnboardOrgRequest) (*OnboardOrgResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method OnboardOrg not implemented")
 }
-func (UnimplementedCoverServer) InviteMember(context.Context, *InviteMemberRequest) (*InviteMemberResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method InviteMember not implemented")
-}
 func (UnimplementedCoverServer) ActivateUser(context.Context, *ActivateUserRequest) (*ActivateUserResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ActivateUser not implemented")
-}
-func (UnimplementedCoverServer) CreateMember(context.Context, *CreateMemberRequest) (*CreateMemberResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method CreateMember not implemented")
-}
-func (UnimplementedCoverServer) GetMembers(context.Context, *GetMembersRequest) (*GetMembersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMembers not implemented")
-}
-func (UnimplementedCoverServer) GetMemberDetails(context.Context, *GetMemberDetailsRequest) (*GetMemberDetailsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMemberDetails not implemented")
-}
-func (UnimplementedCoverServer) GetMemberCostGroup(context.Context, *GetMemberCostGroupRequest) (*GetMemberCostGroupResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMemberCostGroup not implemented")
-}
-func (UnimplementedCoverServer) UpdateMemberPermission(context.Context, *UpdateMemberPermissionRequest) (*UpdateMemberPermissionResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateMemberPermission not implemented")
 }
 func (UnimplementedCoverServer) GetUserDetails(context.Context, *GetUserDetailsRequest) (*GetUserDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUserDetails not implemented")
@@ -3814,9 +2843,6 @@ func (UnimplementedCoverServer) UpdateUserTimezone(context.Context, *UpdateUserT
 }
 func (UnimplementedCoverServer) UpdateUserAttributes(context.Context, *UpdateUserAttributesRequest) (*UpdateUserAttributesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateUserAttributes not implemented")
-}
-func (UnimplementedCoverServer) DeleteMember(context.Context, *DeleteMemberRequest) (*DeleteMemberResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DeleteMember not implemented")
 }
 func (UnimplementedCoverServer) ResetPassword(context.Context, *ResetPasswordRequest) (*ResetPasswordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResetPassword not implemented")
@@ -3911,23 +2937,11 @@ func (UnimplementedCoverServer) UpdateCostGroupCombinations(context.Context, *Up
 func (UnimplementedCoverServer) ResolveCostGroupCombinations(context.Context, *ResolveCostGroupCombinationsRequest) (*ResolveCostGroupCombinationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ResolveCostGroupCombinations not implemented")
 }
-func (UnimplementedCoverServer) AssignCostGroupMember(context.Context, *AssignCostGroupMemberRequest) (*AssignCostGroupMemberResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method AssignCostGroupMember not implemented")
-}
-func (UnimplementedCoverServer) RemoveCostGroupMember(context.Context, *RemoveCostGroupMemberRequest) (*RemoveCostGroupMemberResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method RemoveCostGroupMember not implemented")
-}
 func (UnimplementedCoverServer) DeleteCostGroup(context.Context, *DeleteCostGroupRequest) (*DeleteCostGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCostGroup not implemented")
 }
 func (UnimplementedCoverServer) GetAccountAccessTemplateUrl(context.Context, *GetAccountAccessTemplateUrlRequest) (*GetAccountAccessTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAccessTemplateUrl not implemented")
-}
-func (UnimplementedCoverServer) ListAccountAccess(*ListAccountAccessRequest, Cover_ListAccountAccessServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListAccountAccess not implemented")
-}
-func (UnimplementedCoverServer) GetAccountAccess(context.Context, *GetAccountAccessRequest) (*AccountAccess, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccountAccess not implemented")
 }
 func (UnimplementedCoverServer) GetDataAccess(context.Context, *GetAndDeleteDataAccessRequest) (*DataAccess, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDataAccess not implemented")
@@ -3977,44 +2991,8 @@ func (UnimplementedCoverServer) GetAssetsSummary(context.Context, *GetAssetsSumm
 func (UnimplementedCoverServer) GetCostUsage(*GetCostUsageRequest, Cover_GetCostUsageServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetCostUsage not implemented")
 }
-func (UnimplementedCoverServer) GetRightSizingRecommendation(context.Context, *GetRightSizingRecommendationRequest) (*GetRightSizingRecommendationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRightSizingRecommendation not implemented")
-}
-func (UnimplementedCoverServer) ModifyResourceType(context.Context, *ModifyResourceTypeRequest) (*ModifyResourceTypeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ModifyResourceType not implemented")
-}
-func (UnimplementedCoverServer) TerminateResource(context.Context, *TerminateResourceRequest) (*TerminateResourceResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TerminateResource not implemented")
-}
-func (UnimplementedCoverServer) UploadChargeCode(Cover_UploadChargeCodeServer) error {
-	return status.Errorf(codes.Unimplemented, "method UploadChargeCode not implemented")
-}
 func (UnimplementedCoverServer) AssignPayer(context.Context, *AssignPayerRequest) (*AssignPayerResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AssignPayer not implemented")
-}
-func (UnimplementedCoverServer) GetPayers(context.Context, *GetPayersRequest) (*GetPayersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetPayers not implemented")
-}
-func (UnimplementedCoverServer) GetAccounts(context.Context, *GetAccountsRequest) (*GetAccountsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAccounts not implemented")
-}
-func (UnimplementedCoverServer) GetServices(context.Context, *GetServicesRequest) (*GetServicesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetServices not implemented")
-}
-func (UnimplementedCoverServer) GetRegions(context.Context, *GetRegionsRequest) (*GetRegionsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRegions not implemented")
-}
-func (UnimplementedCoverServer) GetTags(context.Context, *GetTagsRequest) (*GetTagsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetTags not implemented")
-}
-func (UnimplementedCoverServer) ListFees(*ListFeesRequest, Cover_ListFeesServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListFees not implemented")
-}
-func (UnimplementedCoverServer) RestoreFee(*RestoreFeeRequest, Cover_RestoreFeeServer) error {
-	return status.Errorf(codes.Unimplemented, "method RestoreFee not implemented")
-}
-func (UnimplementedCoverServer) GetCostGroupFee(*GetCostGroupFeeRequest, Cover_GetCostGroupFeeServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetCostGroupFee not implemented")
 }
 func (UnimplementedCoverServer) ListAllocators(*ListAllocatorsRequest, Cover_ListAllocatorsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ListAllocators not implemented")
@@ -4033,30 +3011,6 @@ func (UnimplementedCoverServer) UpdateAllocator(context.Context, *CostAllocatorR
 }
 func (UnimplementedCoverServer) DeleteAllocator(context.Context, *DeleteAllocatorRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAllocator not implemented")
-}
-func (UnimplementedCoverServer) ProxyCreateCompletion(*ProxyCreateCompletionRequest, Cover_ProxyCreateCompletionServer) error {
-	return status.Errorf(codes.Unimplemented, "method ProxyCreateCompletion not implemented")
-}
-func (UnimplementedCoverServer) SimulateFeeAllocator(*CreateAllocatorRequest, Cover_SimulateFeeAllocatorServer) error {
-	return status.Errorf(codes.Unimplemented, "method SimulateFeeAllocator not implemented")
-}
-func (UnimplementedCoverServer) ListAccountUsage(*ListAccountUsageRequest, Cover_ListAccountUsageServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListAccountUsage not implemented")
-}
-func (UnimplementedCoverServer) RestoreAccountUsage(*RestoreAccountUsageRequest, Cover_RestoreAccountUsageServer) error {
-	return status.Errorf(codes.Unimplemented, "method RestoreAccountUsage not implemented")
-}
-func (UnimplementedCoverServer) SimulateAccountUsage(*CreateAllocatorRequest, Cover_SimulateAccountUsageServer) error {
-	return status.Errorf(codes.Unimplemented, "method SimulateAccountUsage not implemented")
-}
-func (UnimplementedCoverServer) ListSavings(*ListFeesRequest, Cover_ListSavingsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListSavings not implemented")
-}
-func (UnimplementedCoverServer) RestoreSavings(*RestoreSavingsRequest, Cover_RestoreSavingsServer) error {
-	return status.Errorf(codes.Unimplemented, "method RestoreSavings not implemented")
-}
-func (UnimplementedCoverServer) SimulateSavings(*CreateAllocatorRequest, Cover_SimulateSavingsServer) error {
-	return status.Errorf(codes.Unimplemented, "method SimulateSavings not implemented")
 }
 func (UnimplementedCoverServer) GetCostGroupAllocation(*GetCostGroupAllocationRequest, Cover_GetCostGroupAllocationServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetCostGroupAllocation not implemented")
@@ -4102,9 +3056,6 @@ func (UnimplementedCoverServer) DeleteChannel(context.Context, *DeleteChannelReq
 }
 func (UnimplementedCoverServer) UpdateChannelDetails(context.Context, *UpdateChannelDetailsRequest) (*UpdateChannelDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateChannelDetails not implemented")
-}
-func (UnimplementedCoverServer) GetDiscountRecommendations(context.Context, *GetDiscountRecommendationsRequest) (*GetDiscountRecommendationsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDiscountRecommendations not implemented")
 }
 func (UnimplementedCoverServer) GetAnomalyinCostGroup(*GetAnomalyinCostGroupRequest, Cover_GetAnomalyinCostGroupServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetAnomalyinCostGroup not implemented")
@@ -4178,32 +3129,11 @@ func (UnimplementedCoverServer) AddInfotoMarketplace(context.Context, *AddInfoto
 func (UnimplementedCoverServer) GetReportSummary(context.Context, *GetReportSummaryRequest) (*GetReportSummaryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetReportSummary not implemented")
 }
-func (UnimplementedCoverServer) ListRecommendations(*ListRecommendationRequest, Cover_ListRecommendationsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ListRecommendations not implemented")
-}
 func (UnimplementedCoverServer) ListRecommendationsV2(*ListRecommendationV2Request, Cover_ListRecommendationsV2Server) error {
 	return status.Errorf(codes.Unimplemented, "method ListRecommendationsV2 not implemented")
 }
-func (UnimplementedCoverServer) GetRecommendation(context.Context, *GetRecommendationRequest) (*GetRecommendationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendation not implemented")
-}
 func (UnimplementedCoverServer) GetRecommendationV2(context.Context, *GetRecommendationV2Request) (*GetRecommendationV2Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRecommendationV2 not implemented")
-}
-func (UnimplementedCoverServer) ExecuteOptimization(context.Context, *ExecuteOptimizationRequest) (*ExecuteOptimizationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExecuteOptimization not implemented")
-}
-func (UnimplementedCoverServer) GetExecutionStatus(*GetExecutionStatusRequest, Cover_GetExecutionStatusServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetExecutionStatus not implemented")
-}
-func (UnimplementedCoverServer) MarkAsExecuted(context.Context, *MarkAsExecutedRequest) (*MarkAsExecutedResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method MarkAsExecuted not implemented")
-}
-func (UnimplementedCoverServer) UndoExecutedRecommendation(context.Context, *UndoExecutedRecommendationRequest) (*UndoExecutedRecommendationResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UndoExecutedRecommendation not implemented")
-}
-func (UnimplementedCoverServer) OptimizationHistory(context.Context, *OptimizationHistoryRequest) (*OptimizationHistoryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method OptimizationHistory not implemented")
 }
 func (UnimplementedCoverServer) SetCostGroupEventIndicator(context.Context, *SetCostGroupEventIndicatorRequest) (*SetCostGroupEventIndicatorResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SetCostGroupEventIndicator not implemented")
@@ -4395,24 +3325,6 @@ func _Cover_OnboardOrg_Handler(srv interface{}, ctx context.Context, dec func(in
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_InviteMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(InviteMemberRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).InviteMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_InviteMember_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).InviteMember(ctx, req.(*InviteMemberRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Cover_ActivateUser_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ActivateUserRequest)
 	if err := dec(in); err != nil {
@@ -4427,96 +3339,6 @@ func _Cover_ActivateUser_Handler(srv interface{}, ctx context.Context, dec func(
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).ActivateUser(ctx, req.(*ActivateUserRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_CreateMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(CreateMemberRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).CreateMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_CreateMember_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).CreateMember(ctx, req.(*CreateMemberRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetMembers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMembersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetMembers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetMembers_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetMembers(ctx, req.(*GetMembersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetMemberDetails_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMemberDetailsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetMemberDetails(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetMemberDetails_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetMemberDetails(ctx, req.(*GetMemberDetailsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetMemberCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMemberCostGroupRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetMemberCostGroup(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetMemberCostGroup_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetMemberCostGroup(ctx, req.(*GetMemberCostGroupRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_UpdateMemberPermission_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateMemberPermissionRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).UpdateMemberPermission(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_UpdateMemberPermission_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UpdateMemberPermission(ctx, req.(*UpdateMemberPermissionRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -4733,24 +3555,6 @@ func _Cover_UpdateUserAttributes_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateUserAttributes(ctx, req.(*UpdateUserAttributesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_DeleteMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(DeleteMemberRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).DeleteMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_DeleteMember_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).DeleteMember(ctx, req.(*DeleteMemberRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5313,42 +4117,6 @@ func _Cover_ResolveCostGroupCombinations_Handler(srv interface{}, ctx context.Co
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_AssignCostGroupMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(AssignCostGroupMemberRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).AssignCostGroupMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_AssignCostGroupMember_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).AssignCostGroupMember(ctx, req.(*AssignCostGroupMemberRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_RemoveCostGroupMember_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(RemoveCostGroupMemberRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).RemoveCostGroupMember(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_RemoveCostGroupMember_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).RemoveCostGroupMember(ctx, req.(*RemoveCostGroupMemberRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Cover_DeleteCostGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteCostGroupRequest)
 	if err := dec(in); err != nil {
@@ -5381,45 +4149,6 @@ func _Cover_GetAccountAccessTemplateUrl_Handler(srv interface{}, ctx context.Con
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).GetAccountAccessTemplateUrl(ctx, req.(*GetAccountAccessTemplateUrlRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_ListAccountAccess_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListAccountAccessRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).ListAccountAccess(m, &coverListAccountAccessServer{ServerStream: stream})
-}
-
-type Cover_ListAccountAccessServer interface {
-	Send(*AccountAccess) error
-	grpc.ServerStream
-}
-
-type coverListAccountAccessServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverListAccountAccessServer) Send(m *AccountAccess) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_GetAccountAccess_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountAccessRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetAccountAccess(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetAccountAccess_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetAccountAccess(ctx, req.(*GetAccountAccessRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -5721,86 +4450,6 @@ func (x *coverGetCostUsageServer) Send(m *CostItem) error {
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cover_GetRightSizingRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRightSizingRecommendationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetRightSizingRecommendation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetRightSizingRecommendation_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetRightSizingRecommendation(ctx, req.(*GetRightSizingRecommendationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_ModifyResourceType_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ModifyResourceTypeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).ModifyResourceType(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_ModifyResourceType_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).ModifyResourceType(ctx, req.(*ModifyResourceTypeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_TerminateResource_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TerminateResourceRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).TerminateResource(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_TerminateResource_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).TerminateResource(ctx, req.(*TerminateResourceRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_UploadChargeCode_Handler(srv interface{}, stream grpc.ServerStream) error {
-	return srv.(CoverServer).UploadChargeCode(&coverUploadChargeCodeServer{ServerStream: stream})
-}
-
-type Cover_UploadChargeCodeServer interface {
-	SendAndClose(*UploadChargeCodeResponse) error
-	Recv() (*UploadChargeCodeRequest, error)
-	grpc.ServerStream
-}
-
-type coverUploadChargeCodeServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverUploadChargeCodeServer) SendAndClose(m *UploadChargeCodeResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func (x *coverUploadChargeCodeServer) Recv() (*UploadChargeCodeRequest, error) {
-	m := new(UploadChargeCodeRequest)
-	if err := x.ServerStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
 func _Cover_AssignPayer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(AssignPayerRequest)
 	if err := dec(in); err != nil {
@@ -5817,159 +4466,6 @@ func _Cover_AssignPayer_Handler(srv interface{}, ctx context.Context, dec func(i
 		return srv.(CoverServer).AssignPayer(ctx, req.(*AssignPayerRequest))
 	}
 	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetPayers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetPayersRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetPayers(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetPayers_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetPayers(ctx, req.(*GetPayersRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetAccounts_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetAccountsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetAccounts(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetAccounts_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetAccounts(ctx, req.(*GetAccountsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetServices_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetServicesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetServices(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetServices_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetServices(ctx, req.(*GetServicesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetRegions_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRegionsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetRegions(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetRegions_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetRegions(ctx, req.(*GetRegionsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetTags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetTagsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetTags(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetTags_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetTags(ctx, req.(*GetTagsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_ListFees_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListFeesRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).ListFees(m, &coverListFeesServer{ServerStream: stream})
-}
-
-type Cover_ListFeesServer interface {
-	Send(*FeeDetails) error
-	grpc.ServerStream
-}
-
-type coverListFeesServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverListFeesServer) Send(m *FeeDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_RestoreFee_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(RestoreFeeRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).RestoreFee(m, &coverRestoreFeeServer{ServerStream: stream})
-}
-
-type Cover_RestoreFeeServer interface {
-	Send(*FeeDetails) error
-	grpc.ServerStream
-}
-
-type coverRestoreFeeServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverRestoreFeeServer) Send(m *FeeDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_GetCostGroupFee_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetCostGroupFeeRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).GetCostGroupFee(m, &coverGetCostGroupFeeServer{ServerStream: stream})
-}
-
-type Cover_GetCostGroupFeeServer interface {
-	Send(*FeeItem) error
-	grpc.ServerStream
-}
-
-type coverGetCostGroupFeeServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverGetCostGroupFeeServer) Send(m *FeeItem) error {
-	return x.ServerStream.SendMsg(m)
 }
 
 func _Cover_ListAllocators_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -6081,174 +4577,6 @@ func _Cover_DeleteAllocator_Handler(srv interface{}, ctx context.Context, dec fu
 		return srv.(CoverServer).DeleteAllocator(ctx, req.(*DeleteAllocatorRequest))
 	}
 	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_ProxyCreateCompletion_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ProxyCreateCompletionRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).ProxyCreateCompletion(m, &coverProxyCreateCompletionServer{ServerStream: stream})
-}
-
-type Cover_ProxyCreateCompletionServer interface {
-	Send(*ProxyCreateCompletionResponse) error
-	grpc.ServerStream
-}
-
-type coverProxyCreateCompletionServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverProxyCreateCompletionServer) Send(m *ProxyCreateCompletionResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_SimulateFeeAllocator_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(CreateAllocatorRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).SimulateFeeAllocator(m, &coverSimulateFeeAllocatorServer{ServerStream: stream})
-}
-
-type Cover_SimulateFeeAllocatorServer interface {
-	Send(*FeeDetails) error
-	grpc.ServerStream
-}
-
-type coverSimulateFeeAllocatorServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverSimulateFeeAllocatorServer) Send(m *FeeDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_ListAccountUsage_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListAccountUsageRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).ListAccountUsage(m, &coverListAccountUsageServer{ServerStream: stream})
-}
-
-type Cover_ListAccountUsageServer interface {
-	Send(*AccountUsageDetails) error
-	grpc.ServerStream
-}
-
-type coverListAccountUsageServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverListAccountUsageServer) Send(m *AccountUsageDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_RestoreAccountUsage_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(RestoreAccountUsageRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).RestoreAccountUsage(m, &coverRestoreAccountUsageServer{ServerStream: stream})
-}
-
-type Cover_RestoreAccountUsageServer interface {
-	Send(*AccountUsageDetails) error
-	grpc.ServerStream
-}
-
-type coverRestoreAccountUsageServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverRestoreAccountUsageServer) Send(m *AccountUsageDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_SimulateAccountUsage_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(CreateAllocatorRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).SimulateAccountUsage(m, &coverSimulateAccountUsageServer{ServerStream: stream})
-}
-
-type Cover_SimulateAccountUsageServer interface {
-	Send(*AccountUsageDetails) error
-	grpc.ServerStream
-}
-
-type coverSimulateAccountUsageServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverSimulateAccountUsageServer) Send(m *AccountUsageDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_ListSavings_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListFeesRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).ListSavings(m, &coverListSavingsServer{ServerStream: stream})
-}
-
-type Cover_ListSavingsServer interface {
-	Send(*SavingsDetails) error
-	grpc.ServerStream
-}
-
-type coverListSavingsServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverListSavingsServer) Send(m *SavingsDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_RestoreSavings_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(RestoreSavingsRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).RestoreSavings(m, &coverRestoreSavingsServer{ServerStream: stream})
-}
-
-type Cover_RestoreSavingsServer interface {
-	Send(*SavingsDetails) error
-	grpc.ServerStream
-}
-
-type coverRestoreSavingsServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverRestoreSavingsServer) Send(m *SavingsDetails) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_SimulateSavings_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(CreateAllocatorRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).SimulateSavings(m, &coverSimulateSavingsServer{ServerStream: stream})
-}
-
-type Cover_SimulateSavingsServer interface {
-	Send(*SavingsDetails) error
-	grpc.ServerStream
-}
-
-type coverSimulateSavingsServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverSimulateSavingsServer) Send(m *SavingsDetails) error {
-	return x.ServerStream.SendMsg(m)
 }
 
 func _Cover_GetCostGroupAllocation_Handler(srv interface{}, stream grpc.ServerStream) error {
@@ -6526,24 +4854,6 @@ func _Cover_UpdateChannelDetails_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).UpdateChannelDetails(ctx, req.(*UpdateChannelDetailsRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetDiscountRecommendations_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDiscountRecommendationsRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetDiscountRecommendations(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetDiscountRecommendations_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetDiscountRecommendations(ctx, req.(*GetDiscountRecommendationsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -6992,27 +5302,6 @@ func _Cover_GetReportSummary_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Cover_ListRecommendations_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ListRecommendationRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).ListRecommendations(m, &coverListRecommendationsServer{ServerStream: stream})
-}
-
-type Cover_ListRecommendationsServer interface {
-	Send(*ListRecommendationResponse) error
-	grpc.ServerStream
-}
-
-type coverListRecommendationsServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverListRecommendationsServer) Send(m *ListRecommendationResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
 func _Cover_ListRecommendationsV2_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListRecommendationV2Request)
 	if err := stream.RecvMsg(m); err != nil {
@@ -7034,24 +5323,6 @@ func (x *coverListRecommendationsV2Server) Send(m *ListRecommendationResponse) e
 	return x.ServerStream.SendMsg(m)
 }
 
-func _Cover_GetRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetRecommendationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).GetRecommendation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_GetRecommendation_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).GetRecommendation(ctx, req.(*GetRecommendationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Cover_GetRecommendationV2_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetRecommendationV2Request)
 	if err := dec(in); err != nil {
@@ -7066,99 +5337,6 @@ func _Cover_GetRecommendationV2_Handler(srv interface{}, ctx context.Context, de
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CoverServer).GetRecommendationV2(ctx, req.(*GetRecommendationV2Request))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_ExecuteOptimization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExecuteOptimizationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).ExecuteOptimization(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_ExecuteOptimization_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).ExecuteOptimization(ctx, req.(*ExecuteOptimizationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_GetExecutionStatus_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(GetExecutionStatusRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
-	}
-	return srv.(CoverServer).GetExecutionStatus(m, &coverGetExecutionStatusServer{ServerStream: stream})
-}
-
-type Cover_GetExecutionStatusServer interface {
-	Send(*GetExecutionStatusResponse) error
-	grpc.ServerStream
-}
-
-type coverGetExecutionStatusServer struct {
-	grpc.ServerStream
-}
-
-func (x *coverGetExecutionStatusServer) Send(m *GetExecutionStatusResponse) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _Cover_MarkAsExecuted_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MarkAsExecutedRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).MarkAsExecuted(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_MarkAsExecuted_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).MarkAsExecuted(ctx, req.(*MarkAsExecutedRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_UndoExecutedRecommendation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UndoExecutedRecommendationRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).UndoExecutedRecommendation(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_UndoExecutedRecommendation_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).UndoExecutedRecommendation(ctx, req.(*UndoExecutedRecommendationRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Cover_OptimizationHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(OptimizationHistoryRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(CoverServer).OptimizationHistory(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Cover_OptimizationHistory_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(CoverServer).OptimizationHistory(ctx, req.(*OptimizationHistoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -8135,32 +6313,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_OnboardOrg_Handler,
 		},
 		{
-			MethodName: "InviteMember",
-			Handler:    _Cover_InviteMember_Handler,
-		},
-		{
 			MethodName: "ActivateUser",
 			Handler:    _Cover_ActivateUser_Handler,
-		},
-		{
-			MethodName: "CreateMember",
-			Handler:    _Cover_CreateMember_Handler,
-		},
-		{
-			MethodName: "GetMembers",
-			Handler:    _Cover_GetMembers_Handler,
-		},
-		{
-			MethodName: "GetMemberDetails",
-			Handler:    _Cover_GetMemberDetails_Handler,
-		},
-		{
-			MethodName: "GetMemberCostGroup",
-			Handler:    _Cover_GetMemberCostGroup_Handler,
-		},
-		{
-			MethodName: "UpdateMemberPermission",
-			Handler:    _Cover_UpdateMemberPermission_Handler,
 		},
 		{
 			MethodName: "GetUserDetails",
@@ -8209,10 +6363,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateUserAttributes",
 			Handler:    _Cover_UpdateUserAttributes_Handler,
-		},
-		{
-			MethodName: "DeleteMember",
-			Handler:    _Cover_DeleteMember_Handler,
 		},
 		{
 			MethodName: "ResetPassword",
@@ -8339,24 +6489,12 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_ResolveCostGroupCombinations_Handler,
 		},
 		{
-			MethodName: "AssignCostGroupMember",
-			Handler:    _Cover_AssignCostGroupMember_Handler,
-		},
-		{
-			MethodName: "RemoveCostGroupMember",
-			Handler:    _Cover_RemoveCostGroupMember_Handler,
-		},
-		{
 			MethodName: "DeleteCostGroup",
 			Handler:    _Cover_DeleteCostGroup_Handler,
 		},
 		{
 			MethodName: "GetAccountAccessTemplateUrl",
 			Handler:    _Cover_GetAccountAccessTemplateUrl_Handler,
-		},
-		{
-			MethodName: "GetAccountAccess",
-			Handler:    _Cover_GetAccountAccess_Handler,
 		},
 		{
 			MethodName: "GetDataAccess",
@@ -8411,40 +6549,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetAssetsSummary_Handler,
 		},
 		{
-			MethodName: "GetRightSizingRecommendation",
-			Handler:    _Cover_GetRightSizingRecommendation_Handler,
-		},
-		{
-			MethodName: "ModifyResourceType",
-			Handler:    _Cover_ModifyResourceType_Handler,
-		},
-		{
-			MethodName: "TerminateResource",
-			Handler:    _Cover_TerminateResource_Handler,
-		},
-		{
 			MethodName: "AssignPayer",
 			Handler:    _Cover_AssignPayer_Handler,
-		},
-		{
-			MethodName: "GetPayers",
-			Handler:    _Cover_GetPayers_Handler,
-		},
-		{
-			MethodName: "GetAccounts",
-			Handler:    _Cover_GetAccounts_Handler,
-		},
-		{
-			MethodName: "GetServices",
-			Handler:    _Cover_GetServices_Handler,
-		},
-		{
-			MethodName: "GetRegions",
-			Handler:    _Cover_GetRegions_Handler,
-		},
-		{
-			MethodName: "GetTags",
-			Handler:    _Cover_GetTags_Handler,
 		},
 		{
 			MethodName: "CreateAllocator",
@@ -8513,10 +6619,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateChannelDetails",
 			Handler:    _Cover_UpdateChannelDetails_Handler,
-		},
-		{
-			MethodName: "GetDiscountRecommendations",
-			Handler:    _Cover_GetDiscountRecommendations_Handler,
 		},
 		{
 			MethodName: "CreateDiscountExpirationAlert",
@@ -8599,28 +6701,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _Cover_GetReportSummary_Handler,
 		},
 		{
-			MethodName: "GetRecommendation",
-			Handler:    _Cover_GetRecommendation_Handler,
-		},
-		{
 			MethodName: "GetRecommendationV2",
 			Handler:    _Cover_GetRecommendationV2_Handler,
-		},
-		{
-			MethodName: "ExecuteOptimization",
-			Handler:    _Cover_ExecuteOptimization_Handler,
-		},
-		{
-			MethodName: "MarkAsExecuted",
-			Handler:    _Cover_MarkAsExecuted_Handler,
-		},
-		{
-			MethodName: "UndoExecutedRecommendation",
-			Handler:    _Cover_UndoExecutedRecommendation_Handler,
-		},
-		{
-			MethodName: "OptimizationHistory",
-			Handler:    _Cover_OptimizationHistory_Handler,
 		},
 		{
 			MethodName: "SetCostGroupEventIndicator",
@@ -8829,11 +6911,6 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "ListAccountAccess",
-			Handler:       _Cover_ListAccountAccess_Handler,
-			ServerStreams: true,
-		},
-		{
 			StreamName:    "ListDataAccess",
 			Handler:       _Cover_ListDataAccess_Handler,
 			ServerStreams: true,
@@ -8849,68 +6926,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "UploadChargeCode",
-			Handler:       _Cover_UploadChargeCode_Handler,
-			ClientStreams: true,
-		},
-		{
-			StreamName:    "ListFees",
-			Handler:       _Cover_ListFees_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "RestoreFee",
-			Handler:       _Cover_RestoreFee_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetCostGroupFee",
-			Handler:       _Cover_GetCostGroupFee_Handler,
-			ServerStreams: true,
-		},
-		{
 			StreamName:    "ListAllocators",
 			Handler:       _Cover_ListAllocators_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "ProxyCreateCompletion",
-			Handler:       _Cover_ProxyCreateCompletion_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SimulateFeeAllocator",
-			Handler:       _Cover_SimulateFeeAllocator_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "ListAccountUsage",
-			Handler:       _Cover_ListAccountUsage_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "RestoreAccountUsage",
-			Handler:       _Cover_RestoreAccountUsage_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SimulateAccountUsage",
-			Handler:       _Cover_SimulateAccountUsage_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "ListSavings",
-			Handler:       _Cover_ListSavings_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "RestoreSavings",
-			Handler:       _Cover_RestoreSavings_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "SimulateSavings",
-			Handler:       _Cover_SimulateSavings_Handler,
 			ServerStreams: true,
 		},
 		{
@@ -8949,18 +6966,8 @@ var Cover_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 		{
-			StreamName:    "ListRecommendations",
-			Handler:       _Cover_ListRecommendations_Handler,
-			ServerStreams: true,
-		},
-		{
 			StreamName:    "ListRecommendationsV2",
 			Handler:       _Cover_ListRecommendationsV2_Handler,
-			ServerStreams: true,
-		},
-		{
-			StreamName:    "GetExecutionStatus",
-			Handler:       _Cover_GetExecutionStatus_Handler,
 			ServerStreams: true,
 		},
 		{
