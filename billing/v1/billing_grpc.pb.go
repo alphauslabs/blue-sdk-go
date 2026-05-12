@@ -164,6 +164,11 @@ const (
 	Billing_ListServices_FullMethodName                                        = "/blueapi.billing.v1.Billing/ListServices"
 	Billing_BulkLinkAccount_FullMethodName                                     = "/blueapi.billing.v1.Billing/BulkLinkAccount"
 	Billing_BulkTagBillingGroup_FullMethodName                                 = "/blueapi.billing.v1.Billing/BulkTagBillingGroup"
+	Billing_GetBillingGroupInvoiceLayoutConfig_FullMethodName                  = "/blueapi.billing.v1.Billing/GetBillingGroupInvoiceLayoutConfig"
+	Billing_SetBillingGroupInvoiceLayoutConfig_FullMethodName                  = "/blueapi.billing.v1.Billing/SetBillingGroupInvoiceLayoutConfig"
+	Billing_CreateInvoiceLayoutConfig_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateInvoiceLayoutConfig"
+	Billing_UpdateInvoiceLayoutConfig_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateInvoiceLayoutConfig"
+	Billing_ReadInvoiceLayoutConfig_FullMethodName                             = "/blueapi.billing.v1.Billing/ReadInvoiceLayoutConfig"
 )
 
 // BillingClient is the client API for Billing service.
@@ -469,6 +474,16 @@ type BillingClient interface {
 	// Supports add, delete, and dry-run modes.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkTagBillingGroup(ctx context.Context, in *BulkTagBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error)
+	// WORK-IN-PROGRESS. Gets the billing group invoice layout configs, used for overriding MSP level configs.
+	GetBillingGroupInvoiceLayoutConfig(ctx context.Context, in *GetBillingGroupInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*GetBillingGroupInvoiceLayoutConfigResponse, error)
+	// WORK-IN-PROGRESS. Sets the billing group invoice layout configs.
+	SetBillingGroupInvoiceLayoutConfig(ctx context.Context, in *SetBillingGroupInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS. Creates an invoice layout config.
+	CreateInvoiceLayoutConfig(ctx context.Context, in *CreateInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*CreateInvoiceLayoutConfigResponse, error)
+	// WORK-IN-PROGRESS. Updates an invoice layout config.
+	UpdateInvoiceLayoutConfig(ctx context.Context, in *UpdateInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS. Reads all invoice layout config under an msp.
+	ReadInvoiceLayoutConfig(ctx context.Context, in *ReadInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceLayoutConfigClient, error)
 }
 
 type billingClient struct {
@@ -2605,6 +2620,79 @@ func (c *billingClient) BulkTagBillingGroup(ctx context.Context, in *BulkTagBill
 	return out, nil
 }
 
+func (c *billingClient) GetBillingGroupInvoiceLayoutConfig(ctx context.Context, in *GetBillingGroupInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*GetBillingGroupInvoiceLayoutConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBillingGroupInvoiceLayoutConfigResponse)
+	err := c.cc.Invoke(ctx, Billing_GetBillingGroupInvoiceLayoutConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) SetBillingGroupInvoiceLayoutConfig(ctx context.Context, in *SetBillingGroupInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_SetBillingGroupInvoiceLayoutConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) CreateInvoiceLayoutConfig(ctx context.Context, in *CreateInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*CreateInvoiceLayoutConfigResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateInvoiceLayoutConfigResponse)
+	err := c.cc.Invoke(ctx, Billing_CreateInvoiceLayoutConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) UpdateInvoiceLayoutConfig(ctx context.Context, in *UpdateInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_UpdateInvoiceLayoutConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ReadInvoiceLayoutConfig(ctx context.Context, in *ReadInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceLayoutConfigClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &Billing_ServiceDesc.Streams[32], Billing_ReadInvoiceLayoutConfig_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &billingReadInvoiceLayoutConfigClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type Billing_ReadInvoiceLayoutConfigClient interface {
+	Recv() (*ReadInvoiceLayoutConfigResponse, error)
+	grpc.ClientStream
+}
+
+type billingReadInvoiceLayoutConfigClient struct {
+	grpc.ClientStream
+}
+
+func (x *billingReadInvoiceLayoutConfigClient) Recv() (*ReadInvoiceLayoutConfigResponse, error) {
+	m := new(ReadInvoiceLayoutConfigResponse)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -2908,6 +2996,16 @@ type BillingServer interface {
 	// Supports add, delete, and dry-run modes.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkTagBillingGroup(context.Context, *BulkTagBillingGroupRequest) (*protos.Operation, error)
+	// WORK-IN-PROGRESS. Gets the billing group invoice layout configs, used for overriding MSP level configs.
+	GetBillingGroupInvoiceLayoutConfig(context.Context, *GetBillingGroupInvoiceLayoutConfigRequest) (*GetBillingGroupInvoiceLayoutConfigResponse, error)
+	// WORK-IN-PROGRESS. Sets the billing group invoice layout configs.
+	SetBillingGroupInvoiceLayoutConfig(context.Context, *SetBillingGroupInvoiceLayoutConfigRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS. Creates an invoice layout config.
+	CreateInvoiceLayoutConfig(context.Context, *CreateInvoiceLayoutConfigRequest) (*CreateInvoiceLayoutConfigResponse, error)
+	// WORK-IN-PROGRESS. Updates an invoice layout config.
+	UpdateInvoiceLayoutConfig(context.Context, *UpdateInvoiceLayoutConfigRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS. Reads all invoice layout config under an msp.
+	ReadInvoiceLayoutConfig(*ReadInvoiceLayoutConfigRequest, Billing_ReadInvoiceLayoutConfigServer) error
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -3331,6 +3429,21 @@ func (UnimplementedBillingServer) BulkLinkAccount(context.Context, *BulkLinkAcco
 }
 func (UnimplementedBillingServer) BulkTagBillingGroup(context.Context, *BulkTagBillingGroupRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BulkTagBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) GetBillingGroupInvoiceLayoutConfig(context.Context, *GetBillingGroupInvoiceLayoutConfigRequest) (*GetBillingGroupInvoiceLayoutConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroupInvoiceLayoutConfig not implemented")
+}
+func (UnimplementedBillingServer) SetBillingGroupInvoiceLayoutConfig(context.Context, *SetBillingGroupInvoiceLayoutConfigRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SetBillingGroupInvoiceLayoutConfig not implemented")
+}
+func (UnimplementedBillingServer) CreateInvoiceLayoutConfig(context.Context, *CreateInvoiceLayoutConfigRequest) (*CreateInvoiceLayoutConfigResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateInvoiceLayoutConfig not implemented")
+}
+func (UnimplementedBillingServer) UpdateInvoiceLayoutConfig(context.Context, *UpdateInvoiceLayoutConfigRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateInvoiceLayoutConfig not implemented")
+}
+func (UnimplementedBillingServer) ReadInvoiceLayoutConfig(*ReadInvoiceLayoutConfigRequest, Billing_ReadInvoiceLayoutConfigServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadInvoiceLayoutConfig not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -5943,6 +6056,99 @@ func _Billing_BulkTagBillingGroup_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_GetBillingGroupInvoiceLayoutConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingGroupInvoiceLayoutConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).GetBillingGroupInvoiceLayoutConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_GetBillingGroupInvoiceLayoutConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).GetBillingGroupInvoiceLayoutConfig(ctx, req.(*GetBillingGroupInvoiceLayoutConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_SetBillingGroupInvoiceLayoutConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SetBillingGroupInvoiceLayoutConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).SetBillingGroupInvoiceLayoutConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_SetBillingGroupInvoiceLayoutConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).SetBillingGroupInvoiceLayoutConfig(ctx, req.(*SetBillingGroupInvoiceLayoutConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_CreateInvoiceLayoutConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateInvoiceLayoutConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).CreateInvoiceLayoutConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_CreateInvoiceLayoutConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).CreateInvoiceLayoutConfig(ctx, req.(*CreateInvoiceLayoutConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_UpdateInvoiceLayoutConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateInvoiceLayoutConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).UpdateInvoiceLayoutConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_UpdateInvoiceLayoutConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).UpdateInvoiceLayoutConfig(ctx, req.(*UpdateInvoiceLayoutConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ReadInvoiceLayoutConfig_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadInvoiceLayoutConfigRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(BillingServer).ReadInvoiceLayoutConfig(m, &billingReadInvoiceLayoutConfigServer{ServerStream: stream})
+}
+
+type Billing_ReadInvoiceLayoutConfigServer interface {
+	Send(*ReadInvoiceLayoutConfigResponse) error
+	grpc.ServerStream
+}
+
+type billingReadInvoiceLayoutConfigServer struct {
+	grpc.ServerStream
+}
+
+func (x *billingReadInvoiceLayoutConfigServer) Send(m *ReadInvoiceLayoutConfigResponse) error {
+	return x.ServerStream.SendMsg(m)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6378,6 +6584,22 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 			MethodName: "BulkTagBillingGroup",
 			Handler:    _Billing_BulkTagBillingGroup_Handler,
 		},
+		{
+			MethodName: "GetBillingGroupInvoiceLayoutConfig",
+			Handler:    _Billing_GetBillingGroupInvoiceLayoutConfig_Handler,
+		},
+		{
+			MethodName: "SetBillingGroupInvoiceLayoutConfig",
+			Handler:    _Billing_SetBillingGroupInvoiceLayoutConfig_Handler,
+		},
+		{
+			MethodName: "CreateInvoiceLayoutConfig",
+			Handler:    _Billing_CreateInvoiceLayoutConfig_Handler,
+		},
+		{
+			MethodName: "UpdateInvoiceLayoutConfig",
+			Handler:    _Billing_UpdateInvoiceLayoutConfig_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
@@ -6538,6 +6760,11 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ReadChildBillingGroupAccountInvoiceServiceDiscounts",
 			Handler:       _Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadInvoiceLayoutConfig",
+			Handler:       _Billing_ReadInvoiceLayoutConfig_Handler,
 			ServerStreams: true,
 		},
 	},

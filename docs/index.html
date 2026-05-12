@@ -1558,6 +1558,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.CreateInvoiceLayoutConfigRequest"><span class="badge">M</span>CreateInvoiceLayoutConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.CreateInvoiceLayoutConfigResponse"><span class="badge">M</span>CreateInvoiceLayoutConfigResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateInvoiceRequest"><span class="badge">M</span>CreateInvoiceRequest</a>
                 </li>
               
@@ -1743,6 +1751,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.GetBillingGroupAnnouncementsResponse"><span class="badge">M</span>GetBillingGroupAnnouncementsResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupInvoiceLayoutConfigRequest"><span class="badge">M</span>GetBillingGroupInvoiceLayoutConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.GetBillingGroupInvoiceLayoutConfigResponse"><span class="badge">M</span>GetBillingGroupInvoiceLayoutConfigResponse</a>
                 </li>
               
                 <li>
@@ -2022,6 +2038,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ReadInvoiceLayoutConfigRequest"><span class="badge">M</span>ReadInvoiceLayoutConfigRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ReadInvoiceLayoutConfigResponse"><span class="badge">M</span>ReadInvoiceLayoutConfigResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ReadServiceDiscountsServicesRequest"><span class="badge">M</span>ReadServiceDiscountsServicesRequest</a>
                 </li>
               
@@ -2067,6 +2091,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.SetBillingGroupExchangeRateRequest"><span class="badge">M</span>SetBillingGroupExchangeRateRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.SetBillingGroupInvoiceLayoutConfigRequest"><span class="badge">M</span>SetBillingGroupInvoiceLayoutConfigRequest</a>
                 </li>
               
                 <li>
@@ -2251,6 +2279,10 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateInvoiceExchangeRateRequest.ExchangeRateEntry"><span class="badge">M</span>UpdateInvoiceExchangeRateRequest.ExchangeRateEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.UpdateInvoiceLayoutConfigRequest"><span class="badge">M</span>UpdateInvoiceLayoutConfigRequest</a>
                 </li>
               
                 <li>
@@ -20791,6 +20823,61 @@ Service discount id. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.CreateInvoiceLayoutConfigRequest">CreateInvoiceLayoutConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The name of the invoice layout. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layout</td>
+                  <td><a href="#blueapi.api.ripple.InvoiceLayout">blueapi.api.ripple.InvoiceLayout</a></td>
+                  <td></td>
+                  <td><p>Required. The actual invoice layout configs. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.CreateInvoiceLayoutConfigResponse">CreateInvoiceLayoutConfigResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>layout_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The id assigned for this layout. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.CreateInvoiceRequest">CreateInvoiceRequest</h3>
         <p>Request message for the CreateInvoice rpc.</p>
 
@@ -22470,6 +22557,54 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>announcements</td>
                   <td><a href="#blueapi.billing.v1.Announcement">Announcement</a></td>
                   <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBillingGroupInvoiceLayoutConfigRequest">GetBillingGroupInvoiceLayoutConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group internal id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.GetBillingGroupInvoiceLayoutConfigResponse">GetBillingGroupInvoiceLayoutConfigResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>layout</td>
+                  <td><a href="#blueapi.api.ripple.InvoiceLayout">blueapi.api.ripple.InvoiceLayout</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -24939,6 +25074,51 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ReadInvoiceLayoutConfigRequest">ReadInvoiceLayoutConfigRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.billing.v1.ReadInvoiceLayoutConfigResponse">ReadInvoiceLayoutConfigResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Invoice layout config id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Invoice layout config name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layout</td>
+                  <td><a href="#blueapi.api.ripple.InvoiceLayout">blueapi.api.ripple.InvoiceLayout</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ReadServiceDiscountsServicesRequest">ReadServiceDiscountsServicesRequest</h3>
         <p>Request message for the ReadServiceDiscountsServices rpc.</p>
 
@@ -25366,6 +25546,37 @@ this is ignored if allGroups is true. </p></td>
                   <td></td>
                   <td><p>Required. exchangerate. the value of 1 usd per currency above
 Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeRate = 150 </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.SetBillingGroupInvoiceLayoutConfigRequest">SetBillingGroupInvoiceLayoutConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group internal id. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layout_id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The layout id. </p></td>
                 </tr>
               
             </tbody>
@@ -27050,6 +27261,44 @@ ex. jpy:100 </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.UpdateInvoiceLayoutConfigRequest">UpdateInvoiceLayoutConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The layout id to be updated </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layout</td>
+                  <td><a href="#blueapi.api.ripple.InvoiceLayout">blueapi.api.ripple.InvoiceLayout</a></td>
+                  <td></td>
+                  <td><p>Required. The new layout values. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The updated name of this invoice layout config. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.UpdateInvoicePreviewsRequest">UpdateInvoicePreviewsRequest</h3>
         <p>Request message for the UpdateInvoicePreviews rpc.</p>
 
@@ -28387,6 +28636,41 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td><p>Bulk-tag multiple billing groups from a CSV file.
 Supports add, delete, and dry-run modes.
 Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetBillingGroupInvoiceLayoutConfig</td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupInvoiceLayoutConfigRequest">GetBillingGroupInvoiceLayoutConfigRequest</a></td>
+                <td><a href="#blueapi.billing.v1.GetBillingGroupInvoiceLayoutConfigResponse">GetBillingGroupInvoiceLayoutConfigResponse</a></td>
+                <td><p>WORK-IN-PROGRESS. Gets the billing group invoice layout configs, used for overriding MSP level configs.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SetBillingGroupInvoiceLayoutConfig</td>
+                <td><a href="#blueapi.billing.v1.SetBillingGroupInvoiceLayoutConfigRequest">SetBillingGroupInvoiceLayoutConfigRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS. Sets the billing group invoice layout configs.</p></td>
+              </tr>
+            
+              <tr>
+                <td>CreateInvoiceLayoutConfig</td>
+                <td><a href="#blueapi.billing.v1.CreateInvoiceLayoutConfigRequest">CreateInvoiceLayoutConfigRequest</a></td>
+                <td><a href="#blueapi.billing.v1.CreateInvoiceLayoutConfigResponse">CreateInvoiceLayoutConfigResponse</a></td>
+                <td><p>WORK-IN-PROGRESS. Creates an invoice layout config.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateInvoiceLayoutConfig</td>
+                <td><a href="#blueapi.billing.v1.UpdateInvoiceLayoutConfigRequest">UpdateInvoiceLayoutConfigRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS. Updates an invoice layout config.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadInvoiceLayoutConfig</td>
+                <td><a href="#blueapi.billing.v1.ReadInvoiceLayoutConfigRequest">ReadInvoiceLayoutConfigRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ReadInvoiceLayoutConfigResponse">ReadInvoiceLayoutConfigResponse</a> stream</td>
+                <td><p>WORK-IN-PROGRESS. Reads all invoice layout config under an msp.</p></td>
               </tr>
             
           </tbody>
@@ -29793,6 +30077,56 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>BulkTagBillingGroup</td>
                 <td>POST</td>
                 <td>/v1/billinggroups:bulkTag</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBillingGroupInvoiceLayoutConfig</td>
+                <td>GET</td>
+                <td>/v1/billinggroups/{id}/invoicelayoutconfig</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SetBillingGroupInvoiceLayoutConfig</td>
+                <td>POST</td>
+                <td>/v1/billinggroups/{id}/invoicelayoutconfig</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateInvoiceLayoutConfig</td>
+                <td>POST</td>
+                <td>/v1/invoicelayoutconfig</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateInvoiceLayoutConfig</td>
+                <td>PUT</td>
+                <td>/v1/invoicelayoutconfig/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadInvoiceLayoutConfig</td>
+                <td>POST</td>
+                <td>/v1/invoicelayoutconfig:read</td>
                 <td>*</td>
               </tr>
               
