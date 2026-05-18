@@ -1626,6 +1626,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.DeleteBillingGroupInvoiceLayoutConfigRequest"><span class="badge">M</span>DeleteBillingGroupInvoiceLayoutConfigRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteBillingGroupInvoiceServiceDiscountsRequest"><span class="badge">M</span>DeleteBillingGroupInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -21562,6 +21566,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.DeleteBillingGroupInvoiceLayoutConfigRequest">DeleteBillingGroupInvoiceLayoutConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group internal id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteBillingGroupInvoiceServiceDiscountsRequest">DeleteBillingGroupInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the DeleteBillingGroupInvoiceServiceDiscounts rpc.</p>
 
@@ -28715,6 +28743,13 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td><p>WORK-IN-PROGRESS. Reads all invoice layout config under an msp.</p></td>
               </tr>
             
+              <tr>
+                <td>DeleteBillingGroupInvoiceLayoutConfig</td>
+                <td><a href="#blueapi.billing.v1.DeleteBillingGroupInvoiceLayoutConfigRequest">DeleteBillingGroupInvoiceLayoutConfigRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS. Unsets the billing group invoice layout config.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -30170,6 +30205,16 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>POST</td>
                 <td>/v1/invoicelayoutconfig:read</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteBillingGroupInvoiceLayoutConfig</td>
+                <td>DELETE</td>
+                <td>/v1/billinggroups/{id}/invoicelayoutconfig</td>
+                <td></td>
               </tr>
               
             
