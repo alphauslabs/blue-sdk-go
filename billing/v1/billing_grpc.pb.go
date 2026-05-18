@@ -170,6 +170,7 @@ const (
 	Billing_UpdateInvoiceLayoutConfig_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateInvoiceLayoutConfig"
 	Billing_ReadInvoiceLayoutConfig_FullMethodName                             = "/blueapi.billing.v1.Billing/ReadInvoiceLayoutConfig"
 	Billing_DeleteBillingGroupInvoiceLayoutConfig_FullMethodName               = "/blueapi.billing.v1.Billing/DeleteBillingGroupInvoiceLayoutConfig"
+	Billing_DeleteInvoiceLayoutConfig_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteInvoiceLayoutConfig"
 )
 
 // BillingClient is the client API for Billing service.
@@ -487,6 +488,8 @@ type BillingClient interface {
 	ReadInvoiceLayoutConfig(ctx context.Context, in *ReadInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (Billing_ReadInvoiceLayoutConfigClient, error)
 	// WORK-IN-PROGRESS. Unsets the billing group invoice layout config.
 	DeleteBillingGroupInvoiceLayoutConfig(ctx context.Context, in *DeleteBillingGroupInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS. Delete an invoice layout config.
+	DeleteInvoiceLayoutConfig(ctx context.Context, in *DeleteInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type billingClient struct {
@@ -2706,6 +2709,16 @@ func (c *billingClient) DeleteBillingGroupInvoiceLayoutConfig(ctx context.Contex
 	return out, nil
 }
 
+func (c *billingClient) DeleteInvoiceLayoutConfig(ctx context.Context, in *DeleteInvoiceLayoutConfigRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Billing_DeleteInvoiceLayoutConfig_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // BillingServer is the server API for Billing service.
 // All implementations must embed UnimplementedBillingServer
 // for forward compatibility
@@ -3021,6 +3034,8 @@ type BillingServer interface {
 	ReadInvoiceLayoutConfig(*ReadInvoiceLayoutConfigRequest, Billing_ReadInvoiceLayoutConfigServer) error
 	// WORK-IN-PROGRESS. Unsets the billing group invoice layout config.
 	DeleteBillingGroupInvoiceLayoutConfig(context.Context, *DeleteBillingGroupInvoiceLayoutConfigRequest) (*emptypb.Empty, error)
+	// WORK-IN-PROGRESS. Delete an invoice layout config.
+	DeleteInvoiceLayoutConfig(context.Context, *DeleteInvoiceLayoutConfigRequest) (*emptypb.Empty, error)
 	mustEmbedUnimplementedBillingServer()
 }
 
@@ -3462,6 +3477,9 @@ func (UnimplementedBillingServer) ReadInvoiceLayoutConfig(*ReadInvoiceLayoutConf
 }
 func (UnimplementedBillingServer) DeleteBillingGroupInvoiceLayoutConfig(context.Context, *DeleteBillingGroupInvoiceLayoutConfigRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteBillingGroupInvoiceLayoutConfig not implemented")
+}
+func (UnimplementedBillingServer) DeleteInvoiceLayoutConfig(context.Context, *DeleteInvoiceLayoutConfigRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteInvoiceLayoutConfig not implemented")
 }
 func (UnimplementedBillingServer) mustEmbedUnimplementedBillingServer() {}
 
@@ -6185,6 +6203,24 @@ func _Billing_DeleteBillingGroupInvoiceLayoutConfig_Handler(srv interface{}, ctx
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_DeleteInvoiceLayoutConfig_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteInvoiceLayoutConfigRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).DeleteInvoiceLayoutConfig(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_DeleteInvoiceLayoutConfig_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).DeleteInvoiceLayoutConfig(ctx, req.(*DeleteInvoiceLayoutConfigRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Billing_ServiceDesc is the grpc.ServiceDesc for Billing service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -6639,6 +6675,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteBillingGroupInvoiceLayoutConfig",
 			Handler:    _Billing_DeleteBillingGroupInvoiceLayoutConfig_Handler,
+		},
+		{
+			MethodName: "DeleteInvoiceLayoutConfig",
+			Handler:    _Billing_DeleteInvoiceLayoutConfig_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

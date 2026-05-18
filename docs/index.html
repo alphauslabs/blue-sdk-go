@@ -1670,6 +1670,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.DeleteInvoiceLayoutConfigRequest"><span class="badge">M</span>DeleteInvoiceLayoutConfigRequest</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.DeleteInvoiceServiceDiscountsRequest"><span class="badge">M</span>DeleteInvoiceServiceDiscountsRequest</a>
                 </li>
               
@@ -21859,6 +21863,30 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.DeleteInvoiceLayoutConfigRequest">DeleteInvoiceLayoutConfigRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The invoice layout config id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.DeleteInvoiceServiceDiscountsRequest">DeleteInvoiceServiceDiscountsRequest</h3>
         <p>Request message for the Billing.DeleteInvoiceServiceDiscounts rpc.</p>
 
@@ -28750,6 +28778,13 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td><p>WORK-IN-PROGRESS. Unsets the billing group invoice layout config.</p></td>
               </tr>
             
+              <tr>
+                <td>DeleteInvoiceLayoutConfig</td>
+                <td><a href="#blueapi.billing.v1.DeleteInvoiceLayoutConfigRequest">DeleteInvoiceLayoutConfigRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>WORK-IN-PROGRESS. Delete an invoice layout config.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -30214,6 +30249,16 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>DeleteBillingGroupInvoiceLayoutConfig</td>
                 <td>DELETE</td>
                 <td>/v1/billinggroups/{id}/invoicelayoutconfig</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteInvoiceLayoutConfig</td>
+                <td>DELETE</td>
+                <td>/v1/invoicelayoutconfig/{id}</td>
                 <td></td>
               </tr>
               
