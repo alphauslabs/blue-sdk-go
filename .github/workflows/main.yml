@@ -35,7 +35,7 @@ jobs:
         UPLOAD_FUNCSFILE_KEY: ${{secrets.UPLOAD_FUNCSFILE_KEY}}
       run: |
         echo "functions:" > /tmp/funcs.yaml
-        grep -o -R -i -E '"/blueapi\..*"' . | awk -F':' '{gsub(/"/, "", $2); print "-", substr($2, 2);}' | sort | uniq >> /tmp/funcs.yaml
+        grep -o -R -i -E '"/blueapi\.[^"]*"' . | awk -F':' '{gsub(/"/, "", $2); print "-", substr($2, 2);}' | sort | uniq >> /tmp/funcs.yaml
         cat /tmp/funcs.yaml
         cd /tmp/ && git clone https://github.com/alphauslabs/blueapi-functions && cd blueapi-functions
         cp -rv /tmp/funcs.yaml . && git status
