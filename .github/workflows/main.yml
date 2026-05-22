@@ -53,10 +53,10 @@ jobs:
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-        git fetch --tags --force
         new="${GITHUB_REF#refs/tags/}"
-        latest=$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname \
-          | grep -v "^${new}$" | head -n1)
+        latest=$(git ls-remote --tags --refs origin 'v[0-9]*.[0-9]*.[0-9]*' \
+          | awk '{sub("refs/tags/", "", $2); print $2}' \
+          | grep -v "^${new}$" | sort -V | tail -n1)
         if [ -z "$latest" ]; then
           echo "No prior tag to compare against; accepting $new."
           exit 0
