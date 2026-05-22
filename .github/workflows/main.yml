@@ -45,3 +45,26 @@ jobs:
         git remote add origin-tmp https://$DEPLOYER_TOKEN@github.com/alphauslabs/blueapi-functions.git > /dev/null 2>&1
         git push --set-upstream origin-tmp
         curl -X POST -F "bluefns=@/tmp/funcs.yaml" https://api.alphaus.cloud/webhook/c27376a8-b868-4589-a287-5dab791fbb81/upbluefns?key=$UPLOAD_FUNCSFILE_KEY
+
+    - name: 'Check if latest tag'
+      if: startsWith(github.event.ref, 'refs/tags/v')
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
+        new="${GITHUB_REF#refs/tags/}"
+        latest=$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname \
+          | grep -v "^${new}$" | head -n1)
+        if [ -z "$latest" ]; then
+          echo "No prior tag to compare against; accepting $new."
+          exit 0
+        fi
+        highest=$(printf '%s\n%s\n' "$latest" "$new" | sort -V | tail -n1)
+        if [ "$highest" != "$new" ] || [ "$latest" = "$new" ]; then
+          echo "::error::Tag $new is not higher than latest $latest. Deleting."
+          curl -sS -X DELETE \
+            -H "Authorization: token ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${GITHUB_REPOSITORY}/git/refs/tags/${new}"
+          exit 1
+        fi
+        echo "Tag $new is higher than $latest. OK."
