@@ -31,6 +31,7 @@ jobs:
         go env && go test -v ./...
 
     - name: 'Generate functions'
+      if: startsWith(github.event.ref, 'refs/tags/v')
       env:
         DEPLOYER_TOKEN: ${{secrets.GH_TOKEN}}
         UPLOAD_FUNCSFILE_KEY: ${{secrets.UPLOAD_FUNCSFILE_KEY}}
