@@ -917,7 +917,8 @@ type RegisterAccounts struct {
 	// For GCP, Register projectId under the specific Sub billing account.
 	// For AWS, Register accountId under the specific payer account into the billing group
 	Enabled bool `protobuf:"varint,1,opt,name=enabled,proto3" json:"enabled,omitempty"`
-	// Optional. AccountId to be used for registration into the billing group.
+	// Optional. AccountIds to be used for registration into the billing group.
+	// Accepts multiple accountIds separated by a comma.
 	AccountId     string `protobuf:"bytes,2,opt,name=accountId,proto3" json:"accountId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
