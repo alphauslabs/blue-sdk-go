@@ -25287,7 +25287,18 @@ For AWS, Register accountId under the specific payer account into the billing gr
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. AccountIds to be used for registration into the billing group.
-Accepts multiple accountIds separated by a comma. </p></td>
+Accepts multiple accountIds separated by a comma.
+Comma separated accountId are only available for aws. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>unLinkOnRemove</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Only available for aws.
+If true all link accounts under the previously registered payer that are no longer included in the accountId field
+will be also removed from this billing group.
+This field is only applicable for RPC request not on response. </p></td>
                 </tr>
               
             </tbody>
