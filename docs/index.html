@@ -4351,6 +4351,14 @@
             <ul>
               
                 <li>
+                  <a href="#blueapi.gc.v1.AcceptBillingGroupTermsRequest"><span class="badge">M</span>AcceptBillingGroupTermsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AcceptBillingGroupTermsResponse"><span class="badge">M</span>AcceptBillingGroupTermsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.Address"><span class="badge">M</span>Address</a>
                 </li>
               
@@ -4788,6 +4796,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.StartAzureOnboardingResponse"><span class="badge">M</span>StartAzureOnboardingResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.TermsAcceptance"><span class="badge">M</span>TermsAcceptance</a>
                 </li>
               
                 <li>
@@ -52181,6 +52193,37 @@ The URL to check for expiration </p></td>
       <p></p>
 
       
+        <h3 id="blueapi.gc.v1.AcceptBillingGroupTermsRequest">AcceptBillingGroupTermsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
+        <h3 id="blueapi.gc.v1.AcceptBillingGroupTermsResponse">AcceptBillingGroupTermsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>termsAcceptance</td>
+                  <td><a href="#blueapi.gc.v1.TermsAcceptance">TermsAcceptance</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.Address">Address</h3>
         <p></p>
 
@@ -55948,6 +55991,13 @@ ACCEPTED, PENDING, and CREATING are not recreated. </p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>termsAcceptance</td>
+                  <td><a href="#blueapi.gc.v1.TermsAcceptance">TermsAcceptance</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -56263,6 +56313,13 @@ billingGroupId may accompany company flow </p></td>
 This is used by the UI to &#34;resume&#34; the onboarding flow and show which verification checks
 passed/failed when a user comes back later (e.g., after stopping at verification).
 Empty when verification hasn&#39;t been attempted yet or when no checks were persisted. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>termsAcceptance</td>
+                  <td><a href="#blueapi.gc.v1.TermsAcceptance">TermsAcceptance</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -59926,6 +59983,44 @@ Default value is false. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.TermsAcceptance">TermsAcceptance</h3>
+        <p>TermsAcceptance represents the current terms acceptance state for an entity.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>accepted</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>acceptedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>acceptedBy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.UpdateAzureOnboardingRequest">UpdateAzureOnboardingRequest</h3>
         <p></p>
 
@@ -61078,6 +61173,13 @@ Used by the onboarding &#34;Accept Private Offer&#34; step.</p></td>
               </tr>
             
               <tr>
+                <td>AcceptBillingGroupTerms</td>
+                <td><a href="#blueapi.gc.v1.AcceptBillingGroupTermsRequest">AcceptBillingGroupTermsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.AcceptBillingGroupTermsResponse">AcceptBillingGroupTermsResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>GetGuaranteedCommitmentTemplateUrl</td>
                 <td><a href="#blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest">GetGuaranteedCommitmentTemplateUrlRequest</a></td>
                 <td><a href="#blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlResponse">GetGuaranteedCommitmentTemplateUrlResponse</a></td>
@@ -61469,6 +61571,16 @@ for the user to select during onboarding.</p></td>
                 <td>GET</td>
                 <td>/v1/onboarding/aws/privateoffer/{payerAccountId}</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AcceptBillingGroupTerms</td>
+                <td>POST</td>
+                <td>/v1/managements/billinggroups/terms:accept</td>
+                <td>*</td>
               </tr>
               
             

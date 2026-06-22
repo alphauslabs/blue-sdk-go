@@ -50,6 +50,7 @@ const (
 	GuaranteedCommitments_GetBillingGroupStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupStatus"
 	GuaranteedCommitments_ValidateBillingGroup_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/ValidateBillingGroup"
 	GuaranteedCommitments_GetAwsPrivateOffer_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsPrivateOffer"
+	GuaranteedCommitments_AcceptBillingGroupTerms_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/AcceptBillingGroupTerms"
 	GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/GetGuaranteedCommitmentTemplateUrl"
 	GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/CreateGuaranteedCommitmentAccess"
 	GuaranteedCommitments_StartAzureOnboarding_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/StartAzureOnboarding"
@@ -136,6 +137,7 @@ type GuaranteedCommitmentsClient interface {
 	// Retrieves the AWS Marketplace private offer details for a payer account.
 	// Used by the onboarding "Accept Private Offer" step.
 	GetAwsPrivateOffer(ctx context.Context, in *GetAwsPrivateOfferRequest, opts ...grpc.CallOption) (*GetAwsPrivateOfferResponse, error)
+	AcceptBillingGroupTerms(ctx context.Context, in *AcceptBillingGroupTermsRequest, opts ...grpc.CallOption) (*AcceptBillingGroupTermsResponse, error)
 	// GetGuaranteedCommitmentTemplateUrl returns a CloudFormation launch URL for deploying
 	// both Alphaus (Ripple) and Archera IAM roles in a single stack.
 	GetGuaranteedCommitmentTemplateUrl(ctx context.Context, in *GetGuaranteedCommitmentTemplateUrlRequest, opts ...grpc.CallOption) (*GetGuaranteedCommitmentTemplateUrlResponse, error)
@@ -501,6 +503,16 @@ func (c *guaranteedCommitmentsClient) GetAwsPrivateOffer(ctx context.Context, in
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) AcceptBillingGroupTerms(ctx context.Context, in *AcceptBillingGroupTermsRequest, opts ...grpc.CallOption) (*AcceptBillingGroupTermsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AcceptBillingGroupTermsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_AcceptBillingGroupTerms_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *guaranteedCommitmentsClient) GetGuaranteedCommitmentTemplateUrl(ctx context.Context, in *GetGuaranteedCommitmentTemplateUrlRequest, opts ...grpc.CallOption) (*GetGuaranteedCommitmentTemplateUrlResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetGuaranteedCommitmentTemplateUrlResponse)
@@ -666,6 +678,7 @@ type GuaranteedCommitmentsServer interface {
 	// Retrieves the AWS Marketplace private offer details for a payer account.
 	// Used by the onboarding "Accept Private Offer" step.
 	GetAwsPrivateOffer(context.Context, *GetAwsPrivateOfferRequest) (*GetAwsPrivateOfferResponse, error)
+	AcceptBillingGroupTerms(context.Context, *AcceptBillingGroupTermsRequest) (*AcceptBillingGroupTermsResponse, error)
 	// GetGuaranteedCommitmentTemplateUrl returns a CloudFormation launch URL for deploying
 	// both Alphaus (Ripple) and Archera IAM roles in a single stack.
 	GetGuaranteedCommitmentTemplateUrl(context.Context, *GetGuaranteedCommitmentTemplateUrlRequest) (*GetGuaranteedCommitmentTemplateUrlResponse, error)
@@ -787,6 +800,9 @@ func (UnimplementedGuaranteedCommitmentsServer) ValidateBillingGroup(context.Con
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetAwsPrivateOffer(context.Context, *GetAwsPrivateOfferRequest) (*GetAwsPrivateOfferResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAwsPrivateOffer not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) AcceptBillingGroupTerms(context.Context, *AcceptBillingGroupTermsRequest) (*AcceptBillingGroupTermsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptBillingGroupTerms not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetGuaranteedCommitmentTemplateUrl(context.Context, *GetGuaranteedCommitmentTemplateUrlRequest) (*GetGuaranteedCommitmentTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetGuaranteedCommitmentTemplateUrl not implemented")
@@ -1389,6 +1405,24 @@ func _GuaranteedCommitments_GetAwsPrivateOffer_Handler(srv interface{}, ctx cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_AcceptBillingGroupTerms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptBillingGroupTermsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).AcceptBillingGroupTerms(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_AcceptBillingGroupTerms_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).AcceptBillingGroupTerms(ctx, req.(*AcceptBillingGroupTermsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetGuaranteedCommitmentTemplateUrlRequest)
 	if err := dec(in); err != nil {
@@ -1677,6 +1711,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAwsPrivateOffer",
 			Handler:    _GuaranteedCommitments_GetAwsPrivateOffer_Handler,
+		},
+		{
+			MethodName: "AcceptBillingGroupTerms",
+			Handler:    _GuaranteedCommitments_AcceptBillingGroupTerms_Handler,
 		},
 		{
 			MethodName: "GetGuaranteedCommitmentTemplateUrl",
