@@ -4435,6 +4435,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.CommitmentReport"><span class="badge">M</span>CommitmentReport</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.CommitmentReportAccount"><span class="badge">M</span>CommitmentReportAccount</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.CommitmentsChartData"><span class="badge">M</span>CommitmentsChartData</a>
                 </li>
               
@@ -4724,6 +4732,14 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.PurchasePlan"><span class="badge">M</span>PurchasePlan</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ReadCommitmentReportAccountsRequest"><span class="badge">M</span>ReadCommitmentReportAccountsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ReadCommitmentReportsRequest"><span class="badge">M</span>ReadCommitmentReportsRequest</a>
                 </li>
               
                 <li>
@@ -54391,6 +54407,173 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
 
         
       
+        <h3 id="blueapi.gc.v1.CommitmentReport">CommitmentReport</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billUnadjusted</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billOptimized</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>grossSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>riskPremium</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rebates</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>netSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>revenueShare</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>revenueShareRate</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.CommitmentReportAccount">CommitmentReportAccount</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cloud</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>grossSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>riskPremium</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rebates</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>netSavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>revenueShare</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.CommitmentsChartData">CommitmentsChartData</h3>
         <p></p>
 
@@ -57883,6 +58066,37 @@ Values: NOT_CREATED, CREATING, PENDING, ACCEPTED, EXPIRED, FAILED, WITHDRAWN. </
 
         
       
+        <h3 id="blueapi.gc.v1.ReadCommitmentReportAccountsRequest">ReadCommitmentReportAccountsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing month. Format: `yyyymm`. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ReadCommitmentReportsRequest">ReadCommitmentReportsRequest</h3>
+        <p></p>
+
+        
+
+        
+      
         <h3 id="blueapi.gc.v1.RegisterOrgRequest">RegisterOrgRequest</h3>
         <p></p>
 
@@ -60999,6 +61213,20 @@ Default value is false. </p></td>
               </tr>
             
               <tr>
+                <td>ReadCommitmentReports</td>
+                <td><a href="#blueapi.gc.v1.ReadCommitmentReportsRequest">ReadCommitmentReportsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.CommitmentReport">CommitmentReport</a> stream</td>
+                <td><p>Reads monthly commitment reports for the MSP. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ReadCommitmentReportAccounts</td>
+                <td><a href="#blueapi.gc.v1.ReadCommitmentReportAccountsRequest">ReadCommitmentReportAccountsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.CommitmentReportAccount">CommitmentReportAccount</a> stream</td>
+                <td><p>Reads per-account commitment report details for a specific month. Only available in Ripple.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetMetrics</td>
                 <td><a href="#blueapi.gc.v1.GetMetricsRequest">GetMetricsRequest</a></td>
                 <td><a href="#blueapi.gc.v1.MetricsResponse">MetricsResponse</a></td>
@@ -61332,6 +61560,26 @@ for the user to select during onboarding.</p></td>
                 <td>GET</td>
                 <td>/v1/commitments/{commitmentId}/utilization</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadCommitmentReports</td>
+                <td>POST</td>
+                <td>/v1/reports/invoice:read</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ReadCommitmentReportAccounts</td>
+                <td>POST</td>
+                <td>/v1/reports/invoice/{month}/accounts:read</td>
+                <td>*</td>
               </tr>
               
             

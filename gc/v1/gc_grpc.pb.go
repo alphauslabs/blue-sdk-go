@@ -24,6 +24,8 @@ const (
 	GuaranteedCommitments_ListCommitments_FullMethodName                    = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments"
 	GuaranteedCommitments_GetCommitmentsChart_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart"
 	GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsUtilization"
+	GuaranteedCommitments_ReadCommitmentReports_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReports"
+	GuaranteedCommitments_ReadCommitmentReportAccounts_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReportAccounts"
 	GuaranteedCommitments_GetMetrics_FullMethodName                         = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
 	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
@@ -78,6 +80,10 @@ type GuaranteedCommitmentsClient interface {
 	GetCommitmentsChart(ctx context.Context, in *GetCommitmentsChartRequest, opts ...grpc.CallOption) (*CommitmentsChartResponse, error)
 	// WORK-IN-PROGRESS: Generates utilization data for commitment over the active period.
 	GetCommitmentsUtilization(ctx context.Context, in *GetCommitmentsUtilizationRequest, opts ...grpc.CallOption) (*CommitmentsUtilizationResponse, error)
+	// Reads monthly commitment reports for the MSP. Only available in Ripple.
+	ReadCommitmentReports(ctx context.Context, in *ReadCommitmentReportsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ReadCommitmentReportsClient, error)
+	// Reads per-account commitment report details for a specific month. Only available in Ripple.
+	ReadCommitmentReportAccounts(ctx context.Context, in *ReadCommitmentReportAccountsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ReadCommitmentReportAccountsClient, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
@@ -241,6 +247,72 @@ func (c *guaranteedCommitmentsClient) GetCommitmentsUtilization(ctx context.Cont
 		return nil, err
 	}
 	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) ReadCommitmentReports(ctx context.Context, in *ReadCommitmentReportsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ReadCommitmentReportsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &GuaranteedCommitments_ServiceDesc.Streams[1], GuaranteedCommitments_ReadCommitmentReports_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &guaranteedCommitmentsReadCommitmentReportsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type GuaranteedCommitments_ReadCommitmentReportsClient interface {
+	Recv() (*CommitmentReport, error)
+	grpc.ClientStream
+}
+
+type guaranteedCommitmentsReadCommitmentReportsClient struct {
+	grpc.ClientStream
+}
+
+func (x *guaranteedCommitmentsReadCommitmentReportsClient) Recv() (*CommitmentReport, error) {
+	m := new(CommitmentReport)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *guaranteedCommitmentsClient) ReadCommitmentReportAccounts(ctx context.Context, in *ReadCommitmentReportAccountsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ReadCommitmentReportAccountsClient, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	stream, err := c.cc.NewStream(ctx, &GuaranteedCommitments_ServiceDesc.Streams[2], GuaranteedCommitments_ReadCommitmentReportAccounts_FullMethodName, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &guaranteedCommitmentsReadCommitmentReportAccountsClient{ClientStream: stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type GuaranteedCommitments_ReadCommitmentReportAccountsClient interface {
+	Recv() (*CommitmentReportAccount, error)
+	grpc.ClientStream
+}
+
+type guaranteedCommitmentsReadCommitmentReportAccountsClient struct {
+	grpc.ClientStream
+}
+
+func (x *guaranteedCommitmentsReadCommitmentReportAccountsClient) Recv() (*CommitmentReportAccount, error) {
+	m := new(CommitmentReportAccount)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
 }
 
 func (c *guaranteedCommitmentsClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error) {
@@ -619,6 +691,10 @@ type GuaranteedCommitmentsServer interface {
 	GetCommitmentsChart(context.Context, *GetCommitmentsChartRequest) (*CommitmentsChartResponse, error)
 	// WORK-IN-PROGRESS: Generates utilization data for commitment over the active period.
 	GetCommitmentsUtilization(context.Context, *GetCommitmentsUtilizationRequest) (*CommitmentsUtilizationResponse, error)
+	// Reads monthly commitment reports for the MSP. Only available in Ripple.
+	ReadCommitmentReports(*ReadCommitmentReportsRequest, GuaranteedCommitments_ReadCommitmentReportsServer) error
+	// Reads per-account commitment report details for a specific month. Only available in Ripple.
+	ReadCommitmentReportAccounts(*ReadCommitmentReportAccountsRequest, GuaranteedCommitments_ReadCommitmentReportAccountsServer) error
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
@@ -722,6 +798,12 @@ func (UnimplementedGuaranteedCommitmentsServer) GetCommitmentsChart(context.Cont
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetCommitmentsUtilization(context.Context, *GetCommitmentsUtilizationRequest) (*CommitmentsUtilizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCommitmentsUtilization not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ReadCommitmentReports(*ReadCommitmentReportsRequest, GuaranteedCommitments_ReadCommitmentReportsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadCommitmentReports not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ReadCommitmentReportAccounts(*ReadCommitmentReportAccountsRequest, GuaranteedCommitments_ReadCommitmentReportAccountsServer) error {
+	return status.Errorf(codes.Unimplemented, "method ReadCommitmentReportAccounts not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMetrics not implemented")
@@ -935,6 +1017,48 @@ func _GuaranteedCommitments_GetCommitmentsUtilization_Handler(srv interface{}, c
 		return srv.(GuaranteedCommitmentsServer).GetCommitmentsUtilization(ctx, req.(*GetCommitmentsUtilizationRequest))
 	}
 	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_ReadCommitmentReports_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadCommitmentReportsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(GuaranteedCommitmentsServer).ReadCommitmentReports(m, &guaranteedCommitmentsReadCommitmentReportsServer{ServerStream: stream})
+}
+
+type GuaranteedCommitments_ReadCommitmentReportsServer interface {
+	Send(*CommitmentReport) error
+	grpc.ServerStream
+}
+
+type guaranteedCommitmentsReadCommitmentReportsServer struct {
+	grpc.ServerStream
+}
+
+func (x *guaranteedCommitmentsReadCommitmentReportsServer) Send(m *CommitmentReport) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _GuaranteedCommitments_ReadCommitmentReportAccounts_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(ReadCommitmentReportAccountsRequest)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(GuaranteedCommitmentsServer).ReadCommitmentReportAccounts(m, &guaranteedCommitmentsReadCommitmentReportAccountsServer{ServerStream: stream})
+}
+
+type GuaranteedCommitments_ReadCommitmentReportAccountsServer interface {
+	Send(*CommitmentReportAccount) error
+	grpc.ServerStream
+}
+
+type guaranteedCommitmentsReadCommitmentReportAccountsServer struct {
+	grpc.ServerStream
+}
+
+func (x *guaranteedCommitmentsReadCommitmentReportAccountsServer) Send(m *CommitmentReportAccount) error {
+	return x.ServerStream.SendMsg(m)
 }
 
 func _GuaranteedCommitments_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1757,6 +1881,16 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			StreamName:    "ListOrgs",
 			Handler:       _GuaranteedCommitments_ListOrgs_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadCommitmentReports",
+			Handler:       _GuaranteedCommitments_ReadCommitmentReports_Handler,
+			ServerStreams: true,
+		},
+		{
+			StreamName:    "ReadCommitmentReportAccounts",
+			Handler:       _GuaranteedCommitments_ReadCommitmentReportAccounts_Handler,
 			ServerStreams: true,
 		},
 	},
