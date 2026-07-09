@@ -691,15 +691,15 @@
             <ul>
               
                 <li>
-                  <a href="#blueapi.cost.v1.AwsRispExportOptions"><span class="badge">M</span>AwsRispExportOptions</a>
+                  <a href="#blueapi.cost.v1.AwsExportReportOptions"><span class="badge">M</span>AwsExportReportOptions</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.cost.v1.AwsRispExportOptions.Columns"><span class="badge">M</span>AwsRispExportOptions.Columns</a>
+                  <a href="#blueapi.cost.v1.AwsExportReportOptions.Columns"><span class="badge">M</span>AwsExportReportOptions.Columns</a>
                 </li>
               
                 <li>
-                  <a href="#blueapi.cost.v1.AwsRispExportOptions.ColumnsByQueryEntry"><span class="badge">M</span>AwsRispExportOptions.ColumnsByQueryEntry</a>
+                  <a href="#blueapi.cost.v1.AwsExportReportOptions.ColumnsByQueryEntry"><span class="badge">M</span>AwsExportReportOptions.ColumnsByQueryEntry</a>
                 </li>
               
                 <li>
@@ -9960,8 +9960,8 @@ Valid values:
       <p></p>
 
       
-        <h3 id="blueapi.cost.v1.AwsRispExportOptions">AwsRispExportOptions</h3>
-        <p>AWS RI/SP export options for ExportReport.</p>
+        <h3 id="blueapi.cost.v1.AwsExportReportOptions">AwsExportReportOptions</h3>
+        <p>AWS export report options for ExportReport.</p>
 
         
           <table class="field-table">
@@ -9989,8 +9989,7 @@ If empty, defaults to the MSP or login user&#39;s language. </p></td>
                   <td>queries</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Required. Report queries to include in the export. Must contain at least 1 value.
-Valid values: &#34;ri_summary&#34;, &#34;sp_summary&#34;, &#34;ri_usageaccount&#34;, &#34;sp_usageaccount&#34;. </p></td>
+                  <td><p>Required. Report queries to include in the export. Must contain at least 1 value. </p></td>
                 </tr>
               
                 <tr>
@@ -10003,10 +10002,10 @@ Superseded per-report by columns_by_query if that key is present. </p></td>
               
                 <tr>
                   <td>columns_by_query</td>
-                  <td><a href="#blueapi.cost.v1.AwsRispExportOptions.ColumnsByQueryEntry">AwsRispExportOptions.ColumnsByQueryEntry</a></td>
+                  <td><a href="#blueapi.cost.v1.AwsExportReportOptions.ColumnsByQueryEntry">AwsExportReportOptions.ColumnsByQueryEntry</a></td>
                   <td>repeated</td>
                   <td><p>Optional. Per-report column overrides.
-Keys must be valid query names (ri_summary, sp_summary, ri_usageaccount, sp_usageaccount). </p></td>
+Keys must be valid query names for registered AWS export-report queries. </p></td>
                 </tr>
               
             </tbody>
@@ -10016,7 +10015,7 @@ Keys must be valid query names (ri_summary, sp_summary, ri_usageaccount, sp_usag
 
         
       
-        <h3 id="blueapi.cost.v1.AwsRispExportOptions.Columns">AwsRispExportOptions.Columns</h3>
+        <h3 id="blueapi.cost.v1.AwsExportReportOptions.Columns">AwsExportReportOptions.Columns</h3>
         <p>Per-report column filter container.</p>
 
         
@@ -10040,7 +10039,7 @@ Keys must be valid query names (ri_summary, sp_summary, ri_usageaccount, sp_usag
 
         
       
-        <h3 id="blueapi.cost.v1.AwsRispExportOptions.ColumnsByQueryEntry">AwsRispExportOptions.ColumnsByQueryEntry</h3>
+        <h3 id="blueapi.cost.v1.AwsExportReportOptions.ColumnsByQueryEntry">AwsExportReportOptions.ColumnsByQueryEntry</h3>
         <p></p>
 
         
@@ -10059,7 +10058,7 @@ Keys must be valid query names (ri_summary, sp_summary, ri_usageaccount, sp_usag
               
                 <tr>
                   <td>value</td>
-                  <td><a href="#blueapi.cost.v1.AwsRispExportOptions.Columns">AwsRispExportOptions.Columns</a></td>
+                  <td><a href="#blueapi.cost.v1.AwsExportReportOptions.Columns">AwsExportReportOptions.Columns</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -12072,9 +12071,10 @@ If empty, the MSP default notification channel configured in DynamoDB is used. <
               
                 <tr>
                   <td>aws_options</td>
-                  <td><a href="#blueapi.cost.v1.AwsRispExportOptions">AwsRispExportOptions</a></td>
+                  <td><a href="#blueapi.cost.v1.AwsExportReportOptions">AwsExportReportOptions</a></td>
                   <td></td>
-                  <td><p>Optional. Valid only for the `aws` vendor. AWS RI/SP export options.
+                  <td><p>Optional. Valid only for the `aws` vendor. AWS export report options.
+Supports all registered export-report queries
 
 Future vendor-specific options follow the same pattern (e.g. gcp_options, azure_options). </p></td>
                 </tr>
