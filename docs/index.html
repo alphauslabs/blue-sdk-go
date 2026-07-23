@@ -1958,6 +1958,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceLayoutConfigBillingGroupsRequest"><span class="badge">M</span>ListInvoiceLayoutConfigBillingGroupsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceLayoutConfigBillingGroupsResponse"><span class="badge">M</span>ListInvoiceLayoutConfigBillingGroupsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListInvoiceRequest"><span class="badge">M</span>ListInvoiceRequest</a>
                 </li>
               
@@ -24394,6 +24402,54 @@ Valid values: default, imported </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ListInvoiceLayoutConfigBillingGroupsRequest">ListInvoiceLayoutConfigBillingGroupsRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The invoice layout config id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceLayoutConfigBillingGroupsResponse">ListInvoiceLayoutConfigBillingGroupsResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billinggroup_ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The internal ids of the billing groups attached to this layout config. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListInvoiceRequest">ListInvoiceRequest</h3>
         <p>Request message for the ListInvoice rpc.</p>
 
@@ -28853,6 +28909,13 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td><p>WORK-IN-PROGRESS. Delete an invoice layout config.</p></td>
               </tr>
             
+              <tr>
+                <td>ListInvoiceLayoutConfigBillingGroups</td>
+                <td><a href="#blueapi.billing.v1.ListInvoiceLayoutConfigBillingGroupsRequest">ListInvoiceLayoutConfigBillingGroupsRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListInvoiceLayoutConfigBillingGroupsResponse">ListInvoiceLayoutConfigBillingGroupsResponse</a></td>
+                <td><p>WORK-IN-PROGRESS. Lists the billing groups attached to an invoice layout config.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -30327,6 +30390,16 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>DeleteInvoiceLayoutConfig</td>
                 <td>DELETE</td>
                 <td>/v1/invoicelayoutconfig/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListInvoiceLayoutConfigBillingGroups</td>
+                <td>GET</td>
+                <td>/v1/invoicelayoutconfig/{id}/billinggroups</td>
                 <td></td>
               </tr>
               
