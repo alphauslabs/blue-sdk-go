@@ -4367,6 +4367,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.AcceptTermsRequest"><span class="badge">M</span>AcceptTermsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.AcceptTermsResponse"><span class="badge">M</span>AcceptTermsResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.Address"><span class="badge">M</span>Address</a>
                 </li>
               
@@ -4611,6 +4619,22 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.GetTermsConsentStatusRequest"><span class="badge">M</span>GetTermsConsentStatusRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetTermsConsentStatusResponse"><span class="badge">M</span>GetTermsConsentStatusResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetTermsDocumentRequest"><span class="badge">M</span>GetTermsDocumentRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetTermsDocumentResponse"><span class="badge">M</span>GetTermsDocumentResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentRequest"><span class="badge">M</span>GetUpdatedPurchasePlansBySegmentRequest</a>
                 </li>
               
@@ -4827,6 +4851,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.TermsConsentRecord"><span class="badge">M</span>TermsConsentRecord</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.TermsOfServiceVersion"><span class="badge">M</span>TermsOfServiceVersion</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.UpdateAzureOnboardingRequest"><span class="badge">M</span>UpdateAzureOnboardingRequest</a>
                 </li>
               
@@ -4881,6 +4913,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.Scope"><span class="badge">E</span>Scope</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.TermsConsentState"><span class="badge">E</span>TermsConsentState</a>
                 </li>
               
                 <li>
@@ -52334,6 +52370,61 @@ The URL to check for expiration </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.AcceptTermsRequest">AcceptTermsRequest</h3>
+        <p>Identifies the active Terms of Service version displayed to the user.</p><p>The backend verifies that this version is still active before recording</p><p>consent. Product and scope are derived from authenticated request context.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>versionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.AcceptTermsResponse">AcceptTermsResponse</h3>
+        <p>Contains the saved consent and updated consent state.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>consent</td>
+                  <td><a href="#blueapi.gc.v1.TermsConsentRecord">TermsConsentRecord</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>consentStatus</td>
+                  <td><a href="#blueapi.gc.v1.GetTermsConsentStatusResponse">GetTermsConsentStatusResponse</a></td>
+                  <td></td>
+                  <td><p>Normally returns TERMS_CONSENT_STATE_CONSENTED after success. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.Address">Address</h3>
         <p></p>
 
@@ -56789,6 +56880,155 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
 
         
       
+        <h3 id="blueapi.gc.v1.GetTermsConsentStatusRequest">GetTermsConsentStatusRequest</h3>
+        <p>Product and consent scope are derived from authenticated request context.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetTermsConsentStatusResponse">GetTermsConsentStatusResponse</h3>
+        <p>Evaluated consent status used by the Ripple and WavePro frontends.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>state</td>
+                  <td><a href="#blueapi.gc.v1.TermsConsentState">TermsConsentState</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accessAllowed</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether GC screen interaction is permitted. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>blocking</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the frontend must display a blocking consent modal. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>showUpdateBanner</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the frontend must display the normal-update banner. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bannerExpiresAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Empty unless showUpdateBanner is true. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>activeVersion</td>
+                  <td><a href="#blueapi.gc.v1.TermsOfServiceVersion">TermsOfServiceVersion</a></td>
+                  <td></td>
+                  <td><p>Absent when no active Terms of Service version exists. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetTermsDocumentRequest">GetTermsDocumentRequest</h3>
+        <p>Selects one language representation of the active Terms of Service.</p><p>Supported values:</p><p>- "en": English</p><p>- "ja": Japanese</p><p>Product and version are derived from authenticated request context.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetTermsDocumentResponse">GetTermsDocumentResponse</h3>
+        <p>Contains temporary read access to one language document of the current</p><p>active Terms of Service version.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>versionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Internal UUID of the active Terms of Service version. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;ripple&#34; or &#34;wavepro&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;en&#34; or &#34;ja&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>contentType</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Currently always &#34;application/pdf&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>url</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Short-lived signed URL for viewing the private PDF. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expiresAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Signed URL expiration time in RFC 3339 format. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentRequest">GetUpdatedPurchasePlansBySegmentRequest</h3>
         <p></p>
 
@@ -60329,6 +60569,103 @@ Default value is false. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.TermsConsentRecord">TermsConsentRecord</h3>
+        <p>Recorded acceptance of one Terms of Service version.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;ripple&#34; or &#34;wavepro&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>acceptedVersionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Accepted Terms of Service version UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>acceptedBy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Authenticated user who accepted the version. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>acceptedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Acceptance timestamp in RFC 3339 format. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.TermsOfServiceVersion">TermsOfServiceVersion</h3>
+        <p>Active published Terms of Service version metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Internal version UUID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>product</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;ripple&#34; or &#34;wavepro&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>versionLabel</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Administrator-defined version label. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>classification</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>&#34;NORMAL&#34; or &#34;RECONSENT&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>publishedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Original publication timestamp in RFC 3339 format. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.UpdateAzureOnboardingRequest">UpdateAzureOnboardingRequest</h3>
         <p></p>
 
@@ -61168,6 +61505,54 @@ Default value is false. </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.gc.v1.TermsConsentState">TermsConsentState</h3>
+        <p>TermsConsentState describes the evaluated user-facing consent state for the</p><p>current product and organizational consent scope.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>TERMS_CONSENT_STATE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>TERMS_CONSENT_STATE_NO_ACTIVE_TOS</td>
+                <td>1</td>
+                <td><p>No active published Terms of Service version exists.</p></td>
+              </tr>
+            
+              <tr>
+                <td>TERMS_CONSENT_STATE_CONSENT_REQUIRED</td>
+                <td>2</td>
+                <td><p>An active version exists, but no version has been accepted for the
+applicable product and consent scope.</p></td>
+              </tr>
+            
+              <tr>
+                <td>TERMS_CONSENT_STATE_CONSENTED</td>
+                <td>3</td>
+                <td><p>The applicable scope has sufficient consent.</p></td>
+              </tr>
+            
+              <tr>
+                <td>TERMS_CONSENT_STATE_UPDATE_AVAILABLE</td>
+                <td>4</td>
+                <td><p>A normal update is available and its 14-day banner period is active.</p></td>
+              </tr>
+            
+              <tr>
+                <td>TERMS_CONSENT_STATE_RECONSENT_REQUIRED</td>
+                <td>5</td>
+                <td><p>The active version requires explicit re-consent.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.gc.v1.UsageType">UsageType</h3>
         <p></p>
         <table class="enum-table">
@@ -61566,6 +61951,41 @@ for the user to select during onboarding.</p></td>
                 <td><a href="#blueapi.gc.v1.ListAzureIntegrationsRequest">ListAzureIntegrationsRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ListAzureIntegrationsResponse">ListAzureIntegrationsResponse</a></td>
                 <td><p>WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetTermsConsentStatus</td>
+                <td><a href="#blueapi.gc.v1.GetTermsConsentStatusRequest">GetTermsConsentStatusRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetTermsConsentStatusResponse">GetTermsConsentStatusResponse</a></td>
+                <td><p>Returns the evaluated Terms of Service consent status for the authenticated
+Ripple MSP or WavePro root customer.
+
+The backend derives the product and consent scope from trusted authentication
+context. The frontend does not provide product or consent-scope identifiers.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetTermsDocument</td>
+                <td><a href="#blueapi.gc.v1.GetTermsDocumentRequest">GetTermsDocumentRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetTermsDocumentResponse">GetTermsDocumentResponse</a></td>
+                <td><p>Returns temporary read access to the active Terms of Service PDF for the
+authenticated Ripple or WavePro product.
+
+The backend derives the product and active version from trusted
+authentication context. The language path parameter selects the English
+or Japanese document for that active version.</p></td>
+              </tr>
+            
+              <tr>
+                <td>AcceptTerms</td>
+                <td><a href="#blueapi.gc.v1.AcceptTermsRequest">AcceptTermsRequest</a></td>
+                <td><a href="#blueapi.gc.v1.AcceptTermsResponse">AcceptTermsResponse</a></td>
+                <td><p>Records explicit acceptance of the currently active Terms of Service version
+for the authenticated Ripple MSP or WavePro root customer.
+
+The frontend submits the version it displayed to the user. The backend
+derives the product, consent scope, accepting user, and acceptance time from
+trusted request context.</p></td>
               </tr>
             
           </tbody>
@@ -62013,6 +62433,36 @@ for the user to select during onboarding.</p></td>
                 <td>GET</td>
                 <td>/v1/onboarding/azure/integrations</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetTermsConsentStatus</td>
+                <td>GET</td>
+                <td>/v1/terms/status</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetTermsDocument</td>
+                <td>GET</td>
+                <td>/v1/terms/document/{language}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>AcceptTerms</td>
+                <td>POST</td>
+                <td>/v1/terms:accept</td>
+                <td>*</td>
               </tr>
               
             

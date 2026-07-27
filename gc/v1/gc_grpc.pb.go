@@ -62,6 +62,9 @@ const (
 	GuaranteedCommitments_ListAzureOnboardingAccounts_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureOnboardingAccounts"
 	GuaranteedCommitments_CreateAzureIntegration_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/CreateAzureIntegration"
 	GuaranteedCommitments_ListAzureIntegrations_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureIntegrations"
+	GuaranteedCommitments_GetTermsConsentStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsConsentStatus"
+	GuaranteedCommitments_GetTermsDocument_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsDocument"
+	GuaranteedCommitments_AcceptTerms_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/AcceptTerms"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -166,6 +169,26 @@ type GuaranteedCommitmentsClient interface {
 	CreateAzureIntegration(ctx context.Context, in *CreateAzureIntegrationRequest, opts ...grpc.CallOption) (*CreateAzureIntegrationResponse, error)
 	// WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.
 	ListAzureIntegrations(ctx context.Context, in *ListAzureIntegrationsRequest, opts ...grpc.CallOption) (*ListAzureIntegrationsResponse, error)
+	// Returns the evaluated Terms of Service consent status for the authenticated
+	// Ripple MSP or WavePro root customer.
+	//
+	// The backend derives the product and consent scope from trusted authentication
+	// context. The frontend does not provide product or consent-scope identifiers.
+	GetTermsConsentStatus(ctx context.Context, in *GetTermsConsentStatusRequest, opts ...grpc.CallOption) (*GetTermsConsentStatusResponse, error)
+	// Returns temporary read access to the active Terms of Service PDF for the
+	// authenticated Ripple or WavePro product.
+	//
+	// The backend derives the product and active version from trusted
+	// authentication context. The language path parameter selects the English
+	// or Japanese document for that active version.
+	GetTermsDocument(ctx context.Context, in *GetTermsDocumentRequest, opts ...grpc.CallOption) (*GetTermsDocumentResponse, error)
+	// Records explicit acceptance of the currently active Terms of Service version
+	// for the authenticated Ripple MSP or WavePro root customer.
+	//
+	// The frontend submits the version it displayed to the user. The backend
+	// derives the product, consent scope, accepting user, and acceptance time from
+	// trusted request context.
+	AcceptTerms(ctx context.Context, in *AcceptTermsRequest, opts ...grpc.CallOption) (*AcceptTermsResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -675,6 +698,36 @@ func (c *guaranteedCommitmentsClient) ListAzureIntegrations(ctx context.Context,
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) GetTermsConsentStatus(ctx context.Context, in *GetTermsConsentStatusRequest, opts ...grpc.CallOption) (*GetTermsConsentStatusResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTermsConsentStatusResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetTermsConsentStatus_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetTermsDocument(ctx context.Context, in *GetTermsDocumentRequest, opts ...grpc.CallOption) (*GetTermsDocumentResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetTermsDocumentResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetTermsDocument_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) AcceptTerms(ctx context.Context, in *AcceptTermsRequest, opts ...grpc.CallOption) (*AcceptTermsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(AcceptTermsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_AcceptTerms_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -777,6 +830,26 @@ type GuaranteedCommitmentsServer interface {
 	CreateAzureIntegration(context.Context, *CreateAzureIntegrationRequest) (*CreateAzureIntegrationResponse, error)
 	// WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.
 	ListAzureIntegrations(context.Context, *ListAzureIntegrationsRequest) (*ListAzureIntegrationsResponse, error)
+	// Returns the evaluated Terms of Service consent status for the authenticated
+	// Ripple MSP or WavePro root customer.
+	//
+	// The backend derives the product and consent scope from trusted authentication
+	// context. The frontend does not provide product or consent-scope identifiers.
+	GetTermsConsentStatus(context.Context, *GetTermsConsentStatusRequest) (*GetTermsConsentStatusResponse, error)
+	// Returns temporary read access to the active Terms of Service PDF for the
+	// authenticated Ripple or WavePro product.
+	//
+	// The backend derives the product and active version from trusted
+	// authentication context. The language path parameter selects the English
+	// or Japanese document for that active version.
+	GetTermsDocument(context.Context, *GetTermsDocumentRequest) (*GetTermsDocumentResponse, error)
+	// Records explicit acceptance of the currently active Terms of Service version
+	// for the authenticated Ripple MSP or WavePro root customer.
+	//
+	// The frontend submits the version it displayed to the user. The backend
+	// derives the product, consent scope, accepting user, and acceptance time from
+	// trusted request context.
+	AcceptTerms(context.Context, *AcceptTermsRequest) (*AcceptTermsResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -912,6 +985,15 @@ func (UnimplementedGuaranteedCommitmentsServer) CreateAzureIntegration(context.C
 }
 func (UnimplementedGuaranteedCommitmentsServer) ListAzureIntegrations(context.Context, *ListAzureIntegrationsRequest) (*ListAzureIntegrationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAzureIntegrations not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetTermsConsentStatus(context.Context, *GetTermsConsentStatusRequest) (*GetTermsConsentStatusResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTermsConsentStatus not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetTermsDocument(context.Context, *GetTermsDocumentRequest) (*GetTermsDocumentResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTermsDocument not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) AcceptTerms(context.Context, *AcceptTermsRequest) (*AcceptTermsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method AcceptTerms not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -1709,6 +1791,60 @@ func _GuaranteedCommitments_ListAzureIntegrations_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_GetTermsConsentStatus_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTermsConsentStatusRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetTermsConsentStatus(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetTermsConsentStatus_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetTermsConsentStatus(ctx, req.(*GetTermsConsentStatusRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetTermsDocument_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetTermsDocumentRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetTermsDocument(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetTermsDocument_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetTermsDocument(ctx, req.(*GetTermsDocumentRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_AcceptTerms_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AcceptTermsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).AcceptTerms(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_AcceptTerms_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).AcceptTerms(ctx, req.(*AcceptTermsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -1875,6 +2011,18 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAzureIntegrations",
 			Handler:    _GuaranteedCommitments_ListAzureIntegrations_Handler,
+		},
+		{
+			MethodName: "GetTermsConsentStatus",
+			Handler:    _GuaranteedCommitments_GetTermsConsentStatus_Handler,
+		},
+		{
+			MethodName: "GetTermsDocument",
+			Handler:    _GuaranteedCommitments_GetTermsDocument_Handler,
+		},
+		{
+			MethodName: "AcceptTerms",
+			Handler:    _GuaranteedCommitments_AcceptTerms_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{
