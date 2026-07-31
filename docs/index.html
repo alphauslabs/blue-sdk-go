@@ -16483,6 +16483,16 @@ You can consider cost filters as predefined/prefiltered queries using the `v1/{v
               </tr>
             
               <tr>
+                <td>ExportCostFiltersFileSync</td>
+                <td><a href="#blueapi.cost.v1.ExportCostFiltersFileRequest">ExportCostFiltersFileRequest</a></td>
+                <td><a href="#blueapi.cost.v1.ExportCostFiltersFileResponse">ExportCostFiltersFileResponse</a></td>
+                <td><p>Exports the usage-based cost filter as a CSV and returns the download URL synchronously.
+Intended for direct browser download with small datasets. For large datasets that may
+exceed the request timeout, use ExportCostFiltersFile with a notification channel instead.
+Only available in Wave(Pro).</p></td>
+              </tr>
+            
+              <tr>
                 <td>ReadCostAttributes</td>
                 <td><a href="#blueapi.cost.v1.ReadCostAttributesRequest">ReadCostAttributesRequest</a></td>
                 <td><a href="#blueapi.cost.v1.CostAttributeItem">CostAttributeItem</a> stream</td>
@@ -17138,6 +17148,16 @@ Returns a long-running operation; use GetOperation to poll for completion.</p></
                 <td>ExportCostFiltersFile</td>
                 <td>POST</td>
                 <td>/v1/{vendor}/costfilters/{filterId}:export</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportCostFiltersFileSync</td>
+                <td>POST</td>
+                <td>/v1/{vendor}/costfilters/{filterId}:exportdirect</td>
                 <td>*</td>
               </tr>
               

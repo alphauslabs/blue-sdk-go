@@ -58,6 +58,7 @@ const (
 	Cost_UpdateCostFilters_FullMethodName                = "/blueapi.cost.v1.Cost/UpdateCostFilters"
 	Cost_DeleteCostFilters_FullMethodName                = "/blueapi.cost.v1.Cost/DeleteCostFilters"
 	Cost_ExportCostFiltersFile_FullMethodName            = "/blueapi.cost.v1.Cost/ExportCostFiltersFile"
+	Cost_ExportCostFiltersFileSync_FullMethodName        = "/blueapi.cost.v1.Cost/ExportCostFiltersFileSync"
 	Cost_ReadCostAttributes_FullMethodName               = "/blueapi.cost.v1.Cost/ReadCostAttributes"
 	Cost_GetCostAttributes_FullMethodName                = "/blueapi.cost.v1.Cost/GetCostAttributes"
 	Cost_ReadCosts_FullMethodName                        = "/blueapi.cost.v1.Cost/ReadCosts"
@@ -193,6 +194,11 @@ type CostClient interface {
 	DeleteCostFilters(ctx context.Context, in *DeleteCostFiltersRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Exports the usage-based cost filter condition. Only available in Wave(Pro).
 	ExportCostFiltersFile(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*protos.Operation, error)
+	// Exports the usage-based cost filter as a CSV and returns the download URL synchronously.
+	// Intended for direct browser download with small datasets. For large datasets that may
+	// exceed the request timeout, use ExportCostFiltersFile with a notification channel instead.
+	// Only available in Wave(Pro).
+	ExportCostFiltersFileSync(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*ExportCostFiltersFileResponse, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
 	//
 	// Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported `{vendor}` is `aws`. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -820,6 +826,16 @@ func (c *costClient) ExportCostFiltersFile(ctx context.Context, in *ExportCostFi
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(protos.Operation)
 	err := c.cc.Invoke(ctx, Cost_ExportCostFiltersFile_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *costClient) ExportCostFiltersFileSync(ctx context.Context, in *ExportCostFiltersFileRequest, opts ...grpc.CallOption) (*ExportCostFiltersFileResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportCostFiltersFileResponse)
+	err := c.cc.Invoke(ctx, Cost_ExportCostFiltersFileSync_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1531,6 +1547,11 @@ type CostServer interface {
 	DeleteCostFilters(context.Context, *DeleteCostFiltersRequest) (*emptypb.Empty, error)
 	// Exports the usage-based cost filter condition. Only available in Wave(Pro).
 	ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*protos.Operation, error)
+	// Exports the usage-based cost filter as a CSV and returns the download URL synchronously.
+	// Intended for direct browser download with small datasets. For large datasets that may
+	// exceed the request timeout, use ExportCostFiltersFile with a notification channel instead.
+	// Only available in Wave(Pro).
+	ExportCostFiltersFileSync(context.Context, *ExportCostFiltersFileRequest) (*ExportCostFiltersFileResponse, error)
 	// Reads the available cost attributes of an organization (Ripple) or billing group (Wave).
 	//
 	// Similar to the `ReadCosts` API but without the aggregated usages and costs. At the moment, the supported `{vendor}` is `aws`. If datetime range parameters are not set, month-to-date (current month) will be returned.
@@ -1745,6 +1766,9 @@ func (UnimplementedCostServer) DeleteCostFilters(context.Context, *DeleteCostFil
 }
 func (UnimplementedCostServer) ExportCostFiltersFile(context.Context, *ExportCostFiltersFileRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportCostFiltersFile not implemented")
+}
+func (UnimplementedCostServer) ExportCostFiltersFileSync(context.Context, *ExportCostFiltersFileRequest) (*ExportCostFiltersFileResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportCostFiltersFileSync not implemented")
 }
 func (UnimplementedCostServer) ReadCostAttributes(*ReadCostAttributesRequest, Cost_ReadCostAttributesServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCostAttributes not implemented")
@@ -2487,6 +2511,24 @@ func _Cost_ExportCostFiltersFile_Handler(srv interface{}, ctx context.Context, d
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(CostServer).ExportCostFiltersFile(ctx, req.(*ExportCostFiltersFileRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Cost_ExportCostFiltersFileSync_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportCostFiltersFileRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).ExportCostFiltersFileSync(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_ExportCostFiltersFileSync_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).ExportCostFiltersFileSync(ctx, req.(*ExportCostFiltersFileRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -3311,6 +3353,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportCostFiltersFile",
 			Handler:    _Cost_ExportCostFiltersFile_Handler,
+		},
+		{
+			MethodName: "ExportCostFiltersFileSync",
+			Handler:    _Cost_ExportCostFiltersFileSync_Handler,
 		},
 		{
 			MethodName: "GetCostAttributes",
