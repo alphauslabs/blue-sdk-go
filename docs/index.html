@@ -979,6 +979,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.GetInvoiceReadinessRequest"><span class="badge">M</span>GetInvoiceReadinessRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.cost.v1.GetInvoiceReadinessResponse"><span class="badge">M</span>GetInvoiceReadinessResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.GetMonthOnMonthCostForecastRequest"><span class="badge">M</span>GetMonthOnMonthCostForecastRequest</a>
                 </li>
               
@@ -13038,6 +13046,69 @@ Default value is `daily`. </p></td>
 
         
       
+        <h3 id="blueapi.cost.v1.GetInvoiceReadinessRequest">GetInvoiceReadinessRequest</h3>
+        <p>Request message for GetInvoiceReadiness.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Bound from the URL path, so it cannot be empty/omitted.
+Accepted values: &#34;aws&#34;, &#34;gcp&#34;, &#34;azure&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Billing month in YYYY-MM format. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.GetInvoiceReadinessResponse">GetInvoiceReadinessResponse</h3>
+        <p>Response message for GetInvoiceReadiness.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ready</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True if all usage for the requested month has an invoice ID (billing is finalized). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reason</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Human-readable explanation when ready is false. Empty when ready is true. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.cost.v1.GetMonthOnMonthCostForecastRequest">GetMonthOnMonthCostForecastRequest</h3>
         <p>Request message for GetMonthOnMonthCostForecast</p>
 
@@ -16722,6 +16793,13 @@ Returns a long-running operation; use GetOperation to poll for completion.</p></
               </tr>
             
               <tr>
+                <td>GetInvoiceReadiness</td>
+                <td><a href="#blueapi.cost.v1.GetInvoiceReadinessRequest">GetInvoiceReadinessRequest</a></td>
+                <td><a href="#blueapi.cost.v1.GetInvoiceReadinessResponse">GetInvoiceReadinessResponse</a></td>
+                <td><p>Synchronously checks billing readiness without triggering an export, email, or long-running operation.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetUtilization</td>
                 <td><a href="#blueapi.cost.v1.GetUtilizationRequest">GetUtilizationRequest</a></td>
                 <td><a href="#blueapi.cost.v1.GetUtilizationResponse">GetUtilizationResponse</a></td>
@@ -17437,6 +17515,16 @@ Returns a long-running operation; use GetOperation to poll for completion.</p></
                 <td>POST</td>
                 <td>/v1/reports:export</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetInvoiceReadiness</td>
+                <td>GET</td>
+                <td>/v1/{vendor}/reports/invoicereadiness</td>
+                <td></td>
               </tr>
               
             

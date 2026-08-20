@@ -86,6 +86,7 @@ const (
 	Cost_GetCostReduction_FullMethodName                 = "/blueapi.cost.v1.Cost/GetCostReduction"
 	Cost_GetExportRISP_FullMethodName                    = "/blueapi.cost.v1.Cost/GetExportRISP"
 	Cost_ExportReport_FullMethodName                     = "/blueapi.cost.v1.Cost/ExportReport"
+	Cost_GetInvoiceReadiness_FullMethodName              = "/blueapi.cost.v1.Cost/GetInvoiceReadiness"
 	Cost_GetUtilization_FullMethodName                   = "/blueapi.cost.v1.Cost/GetUtilization"
 	Cost_GetCoverageOptions_FullMethodName               = "/blueapi.cost.v1.Cost/GetCoverageOptions"
 	Cost_GetCoverageOndemand_FullMethodName              = "/blueapi.cost.v1.Cost/GetCoverageOndemand"
@@ -286,6 +287,8 @@ type CostClient interface {
 	// Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.
 	// Returns a long-running operation; use GetOperation to poll for completion.
 	ExportReport(ctx context.Context, in *ExportReportRequest, opts ...grpc.CallOption) (*protos.Operation, error)
+	// Synchronously checks billing readiness without triggering an export, email, or long-running operation.
+	GetInvoiceReadiness(ctx context.Context, in *GetInvoiceReadinessRequest, opts ...grpc.CallOption) (*GetInvoiceReadinessResponse, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1250,6 +1253,16 @@ func (c *costClient) ExportReport(ctx context.Context, in *ExportReportRequest, 
 	return out, nil
 }
 
+func (c *costClient) GetInvoiceReadiness(ctx context.Context, in *GetInvoiceReadinessRequest, opts ...grpc.CallOption) (*GetInvoiceReadinessResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetInvoiceReadinessResponse)
+	err := c.cc.Invoke(ctx, Cost_GetInvoiceReadiness_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *costClient) GetUtilization(ctx context.Context, in *GetUtilizationRequest, opts ...grpc.CallOption) (*GetUtilizationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetUtilizationResponse)
@@ -1639,6 +1652,8 @@ type CostServer interface {
 	// Supports multiple report types per vendor. For AWS, this covers RI/SP utilization reports.
 	// Returns a long-running operation; use GetOperation to poll for completion.
 	ExportReport(context.Context, *ExportReportRequest) (*protos.Operation, error)
+	// Synchronously checks billing readiness without triggering an export, email, or long-running operation.
+	GetInvoiceReadiness(context.Context, *GetInvoiceReadinessRequest) (*GetInvoiceReadinessResponse, error)
 	// Get the utilization details for an organization (or MSP).
 	GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error)
 	// Get coverage options details for an organization (or MSP).
@@ -1850,6 +1865,9 @@ func (UnimplementedCostServer) GetExportRISP(context.Context, *GetExportRISPRequ
 }
 func (UnimplementedCostServer) ExportReport(context.Context, *ExportReportRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportReport not implemented")
+}
+func (UnimplementedCostServer) GetInvoiceReadiness(context.Context, *GetInvoiceReadinessRequest) (*GetInvoiceReadinessResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInvoiceReadiness not implemented")
 }
 func (UnimplementedCostServer) GetUtilization(context.Context, *GetUtilizationRequest) (*GetUtilizationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetUtilization not implemented")
@@ -3037,6 +3055,24 @@ func _Cost_ExportReport_Handler(srv interface{}, ctx context.Context, dec func(i
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Cost_GetInvoiceReadiness_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetInvoiceReadinessRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CostServer).GetInvoiceReadiness(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Cost_GetInvoiceReadiness_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CostServer).GetInvoiceReadiness(ctx, req.(*GetInvoiceReadinessRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Cost_GetUtilization_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetUtilizationRequest)
 	if err := dec(in); err != nil {
@@ -3441,6 +3477,10 @@ var Cost_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportReport",
 			Handler:    _Cost_ExportReport_Handler,
+		},
+		{
+			MethodName: "GetInvoiceReadiness",
+			Handler:    _Cost_GetInvoiceReadiness_Handler,
 		},
 		{
 			MethodName: "GetUtilization",
