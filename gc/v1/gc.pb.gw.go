@@ -1517,6 +1517,59 @@ func local_request_GuaranteedCommitments_ListAzureIntegrations_0(ctx context.Con
 	return msg, metadata, err
 }
 
+var filter_GuaranteedCommitments_DeleteAzureIntegration_0 = &utilities.DoubleArray{Encoding: map[string]int{"onboardingId": 0}, Base: []int{1, 1, 0}, Check: []int{0, 1, 2}}
+
+func request_GuaranteedCommitments_DeleteAzureIntegration_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeleteAzureIntegrationRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["onboardingId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "onboardingId")
+	}
+	protoReq.OnboardingId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "onboardingId", err)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_DeleteAzureIntegration_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if req.Body != nil {
+		_, _ = io.Copy(io.Discard, req.Body)
+	}
+	msg, err := client.DeleteAzureIntegration(ctx, &protoReq, grpc.Header(&metadata.HeaderMD), grpc.Trailer(&metadata.TrailerMD))
+	return msg, metadata, err
+}
+
+func local_request_GuaranteedCommitments_DeleteAzureIntegration_0(ctx context.Context, marshaler runtime.Marshaler, server GuaranteedCommitmentsServer, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
+	var (
+		protoReq DeleteAzureIntegrationRequest
+		metadata runtime.ServerMetadata
+		err      error
+	)
+	val, ok := pathParams["onboardingId"]
+	if !ok {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "missing parameter %s", "onboardingId")
+	}
+	protoReq.OnboardingId, err = runtime.String(val)
+	if err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "type mismatch, parameter: %s, error: %v", "onboardingId", err)
+	}
+	if err := req.ParseForm(); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	if err := runtime.PopulateQueryParameters(&protoReq, req.Form, filter_GuaranteedCommitments_DeleteAzureIntegration_0); err != nil {
+		return nil, metadata, status.Errorf(codes.InvalidArgument, "%v", err)
+	}
+	msg, err := server.DeleteAzureIntegration(ctx, &protoReq)
+	return msg, metadata, err
+}
+
 func request_GuaranteedCommitments_GetTermsConsentStatus_0(ctx context.Context, marshaler runtime.Marshaler, client GuaranteedCommitmentsClient, req *http.Request, pathParams map[string]string) (proto.Message, runtime.ServerMetadata, error) {
 	var (
 		protoReq GetTermsConsentStatusRequest
@@ -2430,6 +2483,26 @@ func RegisterGuaranteedCommitmentsHandlerServer(ctx context.Context, mux *runtim
 		}
 		forward_GuaranteedCommitments_ListAzureIntegrations_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodDelete, pattern_GuaranteedCommitments_DeleteAzureIntegration_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		var stream runtime.ServerTransportStream
+		ctx = grpc.NewContextWithServerTransportStream(ctx, &stream)
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateIncomingContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/DeleteAzureIntegration", runtime.WithHTTPPathPattern("/v1/onboarding/azure/integration/{onboardingId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := local_request_GuaranteedCommitments_DeleteAzureIntegration_0(annotatedContext, inboundMarshaler, server, req, pathParams)
+		md.HeaderMD, md.TrailerMD = metadata.Join(md.HeaderMD, stream.Header()), metadata.Join(md.TrailerMD, stream.Trailer())
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_GuaranteedCommitments_DeleteAzureIntegration_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetTermsConsentStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -3261,6 +3334,23 @@ func RegisterGuaranteedCommitmentsHandlerClient(ctx context.Context, mux *runtim
 		}
 		forward_GuaranteedCommitments_ListAzureIntegrations_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
 	})
+	mux.Handle(http.MethodDelete, pattern_GuaranteedCommitments_DeleteAzureIntegration_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
+		ctx, cancel := context.WithCancel(req.Context())
+		defer cancel()
+		inboundMarshaler, outboundMarshaler := runtime.MarshalerForRequest(mux, req)
+		annotatedContext, err := runtime.AnnotateContext(ctx, mux, req, "/blueapi.gc.v1.GuaranteedCommitments/DeleteAzureIntegration", runtime.WithHTTPPathPattern("/v1/onboarding/azure/integration/{onboardingId}"))
+		if err != nil {
+			runtime.HTTPError(ctx, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		resp, md, err := request_GuaranteedCommitments_DeleteAzureIntegration_0(annotatedContext, inboundMarshaler, client, req, pathParams)
+		annotatedContext = runtime.NewServerMetadataContext(annotatedContext, md)
+		if err != nil {
+			runtime.HTTPError(annotatedContext, mux, outboundMarshaler, w, req, err)
+			return
+		}
+		forward_GuaranteedCommitments_DeleteAzureIntegration_0(annotatedContext, mux, outboundMarshaler, w, req, resp, mux.GetForwardResponseOptions()...)
+	})
 	mux.Handle(http.MethodGet, pattern_GuaranteedCommitments_GetTermsConsentStatus_0, func(w http.ResponseWriter, req *http.Request, pathParams map[string]string) {
 		ctx, cancel := context.WithCancel(req.Context())
 		defer cancel()
@@ -3359,6 +3449,7 @@ var (
 	pattern_GuaranteedCommitments_ListAzureOnboardingAccounts_0        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3, 2, 4}, []string{"v1", "onboarding", "azure", "onboardingId", "accounts"}, ""))
 	pattern_GuaranteedCommitments_CreateAzureIntegration_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "azure", "integration"}, ""))
 	pattern_GuaranteedCommitments_ListAzureIntegrations_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3}, []string{"v1", "onboarding", "azure", "integrations"}, ""))
+	pattern_GuaranteedCommitments_DeleteAzureIntegration_0             = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 2, 3, 1, 0, 4, 1, 5, 4}, []string{"v1", "onboarding", "azure", "integration", "onboardingId"}, ""))
 	pattern_GuaranteedCommitments_GetTermsConsentStatus_0              = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2}, []string{"v1", "terms", "status"}, ""))
 	pattern_GuaranteedCommitments_GetTermsDocument_0                   = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1, 2, 2, 1, 0, 4, 1, 5, 3}, []string{"v1", "terms", "document", "language"}, ""))
 	pattern_GuaranteedCommitments_AcceptTerms_0                        = runtime.MustPattern(runtime.NewPattern(1, []int{2, 0, 2, 1}, []string{"v1", "terms"}, "accept"))
@@ -3408,6 +3499,7 @@ var (
 	forward_GuaranteedCommitments_ListAzureOnboardingAccounts_0        = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_CreateAzureIntegration_0             = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_ListAzureIntegrations_0              = runtime.ForwardResponseMessage
+	forward_GuaranteedCommitments_DeleteAzureIntegration_0             = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_GetTermsConsentStatus_0              = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_GetTermsDocument_0                   = runtime.ForwardResponseMessage
 	forward_GuaranteedCommitments_AcceptTerms_0                        = runtime.ForwardResponseMessage

@@ -4587,6 +4587,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.DeleteAzureIntegrationRequest"><span class="badge">M</span>DeleteAzureIntegrationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.DeleteAzureIntegrationResponse"><span class="badge">M</span>DeleteAzureIntegrationResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.DeleteDraftPurchasePlanRequest"><span class="badge">M</span>DeleteDraftPurchasePlanRequest</a>
                 </li>
               
@@ -57260,6 +57268,84 @@ Mutually exclusive with companyId — do not set both. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.DeleteAzureIntegrationRequest">DeleteAzureIntegrationRequest</h3>
+        <p>DeleteAzureIntegrationRequest identifies which Azure integration to remove.</p><p>integrationId is intentionally not a request field — it is resolved</p><p>server-side from onboardingId.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>gcOrgId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Archera org ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Identifies which onboarding&#39;s integration to delete. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.DeleteAzureIntegrationResponse">DeleteAzureIntegrationResponse</h3>
+        <p>DeleteAzureIntegrationResponse is returned after removing the Azure integration.</p><p>A "not_found" errorCode is treated as success</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>success</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True only when the operation is fully complete: the integration was
+removed from Archera AND
+all local data for the given onboardingId was cleared. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errorCode</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Set on failure, or on the &#34;not_found&#34;-as-success case </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errorMessage</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>integrationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.DeleteDraftPurchasePlanRequest">DeleteDraftPurchasePlanRequest</h3>
         <p></p>
 
@@ -63340,6 +63426,13 @@ for the user to select during onboarding.</p></td>
               </tr>
             
               <tr>
+                <td>DeleteAzureIntegration</td>
+                <td><a href="#blueapi.gc.v1.DeleteAzureIntegrationRequest">DeleteAzureIntegrationRequest</a></td>
+                <td><a href="#blueapi.gc.v1.DeleteAzureIntegrationResponse">DeleteAzureIntegrationResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Removes an Azure integration from Archera and clears the local record for the given onboardingId.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetTermsConsentStatus</td>
                 <td><a href="#blueapi.gc.v1.GetTermsConsentStatusRequest">GetTermsConsentStatusRequest</a></td>
                 <td><a href="#blueapi.gc.v1.GetTermsConsentStatusResponse">GetTermsConsentStatusResponse</a></td>
@@ -63818,6 +63911,16 @@ trusted request context.</p></td>
                 <td>ListAzureIntegrations</td>
                 <td>GET</td>
                 <td>/v1/onboarding/azure/integrations</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteAzureIntegration</td>
+                <td>DELETE</td>
+                <td>/v1/onboarding/azure/integration/{onboardingId}</td>
                 <td></td>
               </tr>
               
