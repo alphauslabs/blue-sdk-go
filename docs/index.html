@@ -1734,14 +1734,6 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.ExportMonthlyMiscFeesRequest"><span class="badge">M</span>ExportMonthlyMiscFeesRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.ExportMonthlyMiscFeesResponse"><span class="badge">M</span>ExportMonthlyMiscFeesResponse</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.ExportServiceDiscountsRequest"><span class="badge">M</span>ExportServiceDiscountsRequest</a>
                 </li>
               
@@ -1890,15 +1882,7 @@
                 </li>
               
                 <li>
-                  <a href="#blueapi.billing.v1.GetMonthlyMiscFeeImportRequest"><span class="badge">M</span>GetMonthlyMiscFeeImportRequest</a>
-                </li>
-              
-                <li>
                   <a href="#blueapi.billing.v1.GetMonthlyMiscFeeImportTemplateRequest"><span class="badge">M</span>GetMonthlyMiscFeeImportTemplateRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.GetMonthlyMiscFeeRequest"><span class="badge">M</span>GetMonthlyMiscFeeRequest</a>
                 </li>
               
                 <li>
@@ -2067,14 +2051,6 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.MonthlyMiscFee"><span class="badge">M</span>MonthlyMiscFee</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.MonthlyMiscFeeImportFieldRule"><span class="badge">M</span>MonthlyMiscFeeImportFieldRule</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.MonthlyMiscFeeImportPreviousValue"><span class="badge">M</span>MonthlyMiscFeeImportPreviousValue</a>
                 </li>
               
                 <li>
@@ -2391,10 +2367,6 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.UpdateTagsAddingSettingRequest"><span class="badge">M</span>UpdateTagsAddingSettingRequest</a>
-                </li>
-              
-                <li>
-                  <a href="#blueapi.billing.v1.UpsertMonthlyMiscFeeRequest"><span class="badge">M</span>UpsertMonthlyMiscFeeRequest</a>
                 </li>
               
                 <li>
@@ -19443,7 +19415,7 @@ Useful for validating CSV format and data before performing the actual bulk crea
                   <td>billing_month</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Selected billing cycle in YYYY-MM form; YYYYMM is accepted and normalized by the server. </p></td>
+                  <td><p>Required. Selected billing cycle in YYYY-MM form; YYYYMM is normalized. </p></td>
                 </tr>
               
                 <tr>
@@ -19457,35 +19429,28 @@ Useful for validating CSV format and data before performing the actual bulk crea
                   <td>file_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Original upload file name for audit metadata. </p></td>
+                  <td><p>Required. Original upload file name for audit and result display. </p></td>
                 </tr>
               
                 <tr>
                   <td>mode</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. One of &#34;dry-run&#34;, &#34;replace-month&#34;, or &#34;merge&#34;. Empty defaults to &#34;dry-run&#34;. </p></td>
+                  <td><p>Required. &#34;dry-run&#34; validates only; &#34;merge&#34; upserts FreeFormItems by label. </p></td>
                 </tr>
               
                 <tr>
                   <td>format</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Import format. Currently &#34;csv&#34;. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>format_version</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Import format version. Currently &#34;misc_fee_import_v1&#34;. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>idempotency_key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Idempotency key for write-mode imports. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -22276,14 +22241,14 @@ Implied as the parent billing group for Wave(Pro) users. </p></td>
                   <td>row_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Server-owned row ID. </p></td>
+                  <td><p>An opaque ID returned by ListMonthlyMiscFees. </p></td>
                 </tr>
               
                 <tr>
                   <td>billing_month</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Billing month used to reject cross-month deletion mistakes. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -22642,124 +22607,6 @@ In that case, you can use this option to change the language of CSV. </p></td>
                   <td></td>
                   <td><p>csv direct download link
 expires in 10 minutes </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.ExportMonthlyMiscFeesRequest">ExportMonthlyMiscFeesRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>billing_month</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Billing cycle in YYYY-MM form; YYYYMM is accepted and normalized by the server. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billing_group_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Exact billing group ID filter. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billing_group_name_query</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Case-insensitive billing group name query. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>item_query</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Case-insensitive item or fee tag query. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>source</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Source filter, e.g. &#34;csv&#34;, &#34;ui&#34;, or &#34;migration&#34;. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. User identifier that last updated the row. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_after</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. RFC3339 lower bound for updated_at. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_before</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. RFC3339 upper bound for updated_at. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>sort</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Stable sort expression. Defaults to billing_group_name, item_name, row_id. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.ExportMonthlyMiscFeesResponse">ExportMonthlyMiscFeesResponse</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>csv_content</td>
-                  <td><a href="#bytes">bytes</a></td>
-                  <td></td>
-                  <td><p>CSV file bytes when the export is returned inline. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>export_ref</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional staged export reference or direct download URL. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>file_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Export file name suggested to clients. </p></td>
                 </tr>
               
             </tbody>
@@ -23884,30 +23731,6 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
-        <h3 id="blueapi.billing.v1.GetMonthlyMiscFeeImportRequest">GetMonthlyMiscFeeImportRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>import_job_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Import job ID returned by BulkImportMonthlyMiscFees. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.GetMonthlyMiscFeeImportTemplateRequest">GetMonthlyMiscFeeImportTemplateRequest</h3>
         <p></p>
 
@@ -23922,38 +23745,7 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>language</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Template language. Supported values are &#34;en&#34; and &#34;ja&#34;. Empty uses the caller&#39;s language or server default. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.GetMonthlyMiscFeeRequest">GetMonthlyMiscFeeRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>row_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Server-owned row ID. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billing_month</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Billing month used to reject cross-month access or mutation mistakes. </p></td>
+                  <td><p>Optional. Template language. Supported values are &#34;en&#34; and &#34;ja&#34;. </p></td>
                 </tr>
               
             </tbody>
@@ -25432,77 +25224,42 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td>billing_month</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. Billing cycle in YYYY-MM form; YYYYMM is accepted and normalized by the server. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>billing_group_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Exact billing group ID filter. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>billing_group_name_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Case-insensitive billing group name query. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>item_query</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Case-insensitive item or fee tag query. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>source</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Source filter, e.g. &#34;csv&#34;, &#34;ui&#34;, or &#34;migration&#34;. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. User identifier that last updated the row. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_after</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. RFC3339 lower bound for updated_at. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_before</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. RFC3339 upper bound for updated_at. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>page_size</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Optional. Page size for pagination. Default and maximum are server-defined. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>page_token</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Optional. Opaque page token from a previous response. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>sort</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Stable sort expression. Defaults to billing_group_name, item_name, row_id. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -25711,6 +25468,13 @@ Use ListServices without this field to retrieve all available service codes. </p
                 </tr>
               
                 <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>item_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -25719,21 +25483,28 @@ Use ListServices without this field to retrieve all available service codes. </p
               
                 <tr>
                   <td>quantity</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#uint32">uint32</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>unit_cost</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#int64">int64</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>amount</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#int64">int64</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -25742,125 +25513,7 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td>source</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>import_job_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_at</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_at</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.MonthlyMiscFeeImportFieldRule">MonthlyMiscFeeImportFieldRule</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>field</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>required</td>
-                  <td><a href="#bool">bool</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>format</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>description</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
-        <h3 id="blueapi.billing.v1.MonthlyMiscFeeImportPreviousValue">MonthlyMiscFeeImportPreviousValue</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>quantity</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>unit_cost</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>amount</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
+                  <td><p>One of &#34;saved&#34;, &#34;created&#34;, or &#34;default&#34;. </p></td>
                 </tr>
               
             </tbody>
@@ -25881,21 +25534,7 @@ Use ListServices without this field to retrieve all available service codes. </p
             <tbody>
               
                 <tr>
-                  <td>import_job_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>status</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>mode</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -25910,13 +25549,6 @@ Use ListServices without this field to retrieve all available service codes. </p
               
                 <tr>
                   <td>file_name</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>file_hash</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -25958,29 +25590,8 @@ Use ListServices without this field to retrieve all available service codes. </p
                 </tr>
               
                 <tr>
-                  <td>deleted_rows</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>failed_rows</td>
                   <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>replace_month_existing_rows</td>
-                  <td><a href="#int32">int32</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>export_ref</td>
-                  <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -25989,27 +25600,6 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td>row_results</td>
                   <td><a href="#blueapi.billing.v1.MonthlyMiscFeeImportRowResult">MonthlyMiscFeeImportRowResult</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_by</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>created_at</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>updated_at</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -26045,20 +25635,6 @@ Use ListServices without this field to retrieve all available service codes. </p
                 </tr>
               
                 <tr>
-                  <td>row_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>billing_month</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
                   <td>billing_group_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -26073,6 +25649,13 @@ Use ListServices without this field to retrieve all available service codes. </p
                 </tr>
               
                 <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
                   <td>item_name</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
@@ -26081,28 +25664,28 @@ Use ListServices without this field to retrieve all available service codes. </p
               
                 <tr>
                   <td>quantity</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#uint32">uint32</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>unit_cost</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#int64">int64</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>amount</td>
-                  <td><a href="#string">string</a></td>
+                  <td><a href="#int64">int64</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>previous_value</td>
-                  <td><a href="#blueapi.billing.v1.MonthlyMiscFeeImportPreviousValue">MonthlyMiscFeeImportPreviousValue</a></td>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
@@ -26111,13 +25694,6 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td>validation_errors</td>
                   <td><a href="#blueapi.billing.v1.MonthlyMiscFeeValidationError">MonthlyMiscFeeValidationError</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
-                </tr>
-              
-                <tr>
-                  <td>note</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
@@ -26142,56 +25718,49 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td>format</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Supported import format. Currently &#34;csv&#34;. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>format_version</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Supported format version. Currently &#34;misc_fee_import_v1&#34;. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>headers</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>CSV header columns in required order. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>sample_row</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Example CSV row matching the current format version. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>allowed_modes</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>Supported modes: &#34;dry-run&#34;, &#34;replace-month&#34;, and &#34;merge&#34;. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>max_file_size_bytes</td>
                   <td><a href="#int64">int64</a></td>
                   <td></td>
-                  <td><p>Maximum upload size in bytes. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
                 <tr>
                   <td>max_rows</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p>Maximum data rows accepted per CSV file. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>field_rules</td>
-                  <td><a href="#blueapi.billing.v1.MonthlyMiscFeeImportFieldRule">MonthlyMiscFeeImportFieldRule</a></td>
-                  <td>repeated</td>
-                  <td><p>Field-level validation rules for UI guidance. </p></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -28997,44 +28566,6 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
 
         
       
-        <h3 id="blueapi.billing.v1.UpsertMonthlyMiscFeeRequest">UpsertMonthlyMiscFeeRequest</h3>
-        <p></p>
-
-        
-          <table class="field-table">
-            <thead>
-              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
-            </thead>
-            <tbody>
-              
-                <tr>
-                  <td>row_id</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional for create, required for updating an existing server-owned row. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>row</td>
-                  <td><a href="#blueapi.billing.v1.MonthlyMiscFee">MonthlyMiscFee</a></td>
-                  <td></td>
-                  <td><p>Required. Full row value to create or update. </p></td>
-                </tr>
-              
-                <tr>
-                  <td>idempotency_key</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. Idempotency key for UI retry safety. </p></td>
-                </tr>
-              
-            </tbody>
-          </table>
-
-          
-
-        
-      
         <h3 id="blueapi.billing.v1.UsageCostsDrift">UsageCostsDrift</h3>
         <p>Streaming response message for the Billing.ListUsageCostsDrift rpc.</p>
 
@@ -29844,50 +29375,22 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
               <tr>
                 <td>BulkImportMonthlyMiscFees</td>
                 <td><a href="#blueapi.billing.v1.BulkImportMonthlyMiscFeesRequest">BulkImportMonthlyMiscFeesRequest</a></td>
-                <td><a href="#protos.Operation">.protos.Operation</a></td>
-                <td><p>Validates or imports monthly miscellaneous fees from CSV.</p></td>
+                <td><a href="#blueapi.billing.v1.MonthlyMiscFeeImportResult">MonthlyMiscFeeImportResult</a></td>
+                <td><p>Validates or imports monthly FreeFormItems from CSV through invoice settings.</p></td>
               </tr>
             
               <tr>
                 <td>ListMonthlyMiscFees</td>
                 <td><a href="#blueapi.billing.v1.ListMonthlyMiscFeesRequest">ListMonthlyMiscFeesRequest</a></td>
                 <td><a href="#blueapi.billing.v1.ListMonthlyMiscFeesResponse">ListMonthlyMiscFeesResponse</a></td>
-                <td><p>Lists monthly miscellaneous fee rows.</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetMonthlyMiscFee</td>
-                <td><a href="#blueapi.billing.v1.GetMonthlyMiscFeeRequest">GetMonthlyMiscFeeRequest</a></td>
-                <td><a href="#blueapi.billing.v1.MonthlyMiscFee">MonthlyMiscFee</a></td>
-                <td><p>Gets a monthly miscellaneous fee row.</p></td>
-              </tr>
-            
-              <tr>
-                <td>ExportMonthlyMiscFees</td>
-                <td><a href="#blueapi.billing.v1.ExportMonthlyMiscFeesRequest">ExportMonthlyMiscFeesRequest</a></td>
-                <td><a href="#blueapi.billing.v1.ExportMonthlyMiscFeesResponse">ExportMonthlyMiscFeesResponse</a></td>
-                <td><p>Exports monthly miscellaneous fee rows using the list filters.</p></td>
-              </tr>
-            
-              <tr>
-                <td>GetMonthlyMiscFeeImport</td>
-                <td><a href="#blueapi.billing.v1.GetMonthlyMiscFeeImportRequest">GetMonthlyMiscFeeImportRequest</a></td>
-                <td><a href="#blueapi.billing.v1.MonthlyMiscFeeImportResult">MonthlyMiscFeeImportResult</a></td>
-                <td><p>Gets a completed monthly miscellaneous fee import result.</p></td>
-              </tr>
-            
-              <tr>
-                <td>UpsertMonthlyMiscFee</td>
-                <td><a href="#blueapi.billing.v1.UpsertMonthlyMiscFeeRequest">UpsertMonthlyMiscFeeRequest</a></td>
-                <td><a href="#blueapi.billing.v1.MonthlyMiscFee">MonthlyMiscFee</a></td>
-                <td><p>Creates or updates a monthly miscellaneous fee row.</p></td>
+                <td><p>Lists effective monthly FreeFormItems.</p></td>
               </tr>
             
               <tr>
                 <td>DeleteMonthlyMiscFee</td>
                 <td><a href="#blueapi.billing.v1.DeleteMonthlyMiscFeeRequest">DeleteMonthlyMiscFeeRequest</a></td>
                 <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
-                <td><p>Deletes a monthly miscellaneous fee row.</p></td>
+                <td><p>Deletes one monthly FreeFormItem through invoice settings.</p></td>
               </tr>
             
               <tr>
@@ -31260,53 +30763,6 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>GET</td>
                 <td>/v1/monthly-misc-fees</td>
                 <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetMonthlyMiscFee</td>
-                <td>GET</td>
-                <td>/v1/monthly-misc-fees/{row_id}</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>ExportMonthlyMiscFees</td>
-                <td>GET</td>
-                <td>/v1/monthly-misc-fees:export</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>GetMonthlyMiscFeeImport</td>
-                <td>GET</td>
-                <td>/v1/monthly-misc-fee-imports/{import_job_id}</td>
-                <td></td>
-              </tr>
-              
-            
-              
-              
-              <tr>
-                <td>UpsertMonthlyMiscFee</td>
-                <td>PUT</td>
-                <td>/v1/monthly-misc-fees/{row_id}</td>
-                <td>*</td>
-              </tr>
-              
-              <tr>
-                <td>UpsertMonthlyMiscFee</td>
-                <td>PUT</td>
-                <td>/v1/monthly-misc-fees</td>
-                <td>*</td>
               </tr>
               
             

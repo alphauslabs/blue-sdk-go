@@ -125,10 +125,6 @@ const (
 	Billing_GetMonthlyMiscFeeImportTemplate_FullMethodName                     = "/blueapi.billing.v1.Billing/GetMonthlyMiscFeeImportTemplate"
 	Billing_BulkImportMonthlyMiscFees_FullMethodName                           = "/blueapi.billing.v1.Billing/BulkImportMonthlyMiscFees"
 	Billing_ListMonthlyMiscFees_FullMethodName                                 = "/blueapi.billing.v1.Billing/ListMonthlyMiscFees"
-	Billing_GetMonthlyMiscFee_FullMethodName                                   = "/blueapi.billing.v1.Billing/GetMonthlyMiscFee"
-	Billing_ExportMonthlyMiscFees_FullMethodName                               = "/blueapi.billing.v1.Billing/ExportMonthlyMiscFees"
-	Billing_GetMonthlyMiscFeeImport_FullMethodName                             = "/blueapi.billing.v1.Billing/GetMonthlyMiscFeeImport"
-	Billing_UpsertMonthlyMiscFee_FullMethodName                                = "/blueapi.billing.v1.Billing/UpsertMonthlyMiscFee"
 	Billing_DeleteMonthlyMiscFee_FullMethodName                                = "/blueapi.billing.v1.Billing/DeleteMonthlyMiscFee"
 	Billing_GetTagsAddingSetting_FullMethodName                                = "/blueapi.billing.v1.Billing/GetTagsAddingSetting"
 	Billing_UpdateTagsAddingSetting_FullMethodName                             = "/blueapi.billing.v1.Billing/UpdateTagsAddingSetting"
@@ -401,19 +397,11 @@ type BillingClient interface {
 	GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error)
 	// Gets the CSV template metadata for monthly miscellaneous fees.
 	GetMonthlyMiscFeeImportTemplate(ctx context.Context, in *GetMonthlyMiscFeeImportTemplateRequest, opts ...grpc.CallOption) (*MonthlyMiscFeeImportTemplate, error)
-	// Validates or imports monthly miscellaneous fees from CSV.
-	BulkImportMonthlyMiscFees(ctx context.Context, in *BulkImportMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*protos.Operation, error)
-	// Lists monthly miscellaneous fee rows.
+	// Validates or imports monthly FreeFormItems from CSV through invoice settings.
+	BulkImportMonthlyMiscFees(ctx context.Context, in *BulkImportMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*MonthlyMiscFeeImportResult, error)
+	// Lists effective monthly FreeFormItems.
 	ListMonthlyMiscFees(ctx context.Context, in *ListMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*ListMonthlyMiscFeesResponse, error)
-	// Gets a monthly miscellaneous fee row.
-	GetMonthlyMiscFee(ctx context.Context, in *GetMonthlyMiscFeeRequest, opts ...grpc.CallOption) (*MonthlyMiscFee, error)
-	// Exports monthly miscellaneous fee rows using the list filters.
-	ExportMonthlyMiscFees(ctx context.Context, in *ExportMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*ExportMonthlyMiscFeesResponse, error)
-	// Gets a completed monthly miscellaneous fee import result.
-	GetMonthlyMiscFeeImport(ctx context.Context, in *GetMonthlyMiscFeeImportRequest, opts ...grpc.CallOption) (*MonthlyMiscFeeImportResult, error)
-	// Creates or updates a monthly miscellaneous fee row.
-	UpsertMonthlyMiscFee(ctx context.Context, in *UpsertMonthlyMiscFeeRequest, opts ...grpc.CallOption) (*MonthlyMiscFee, error)
-	// Deletes a monthly miscellaneous fee row.
+	// Deletes one monthly FreeFormItem through invoice settings.
 	DeleteMonthlyMiscFee(ctx context.Context, in *DeleteMonthlyMiscFeeRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	GetTagsAddingSetting(ctx context.Context, in *GetTagsAddingSettingRequest, opts ...grpc.CallOption) (Billing_GetTagsAddingSettingClient, error)
 	UpdateTagsAddingSetting(ctx context.Context, in *UpdateTagsAddingSettingRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
@@ -2059,9 +2047,9 @@ func (c *billingClient) GetMonthlyMiscFeeImportTemplate(ctx context.Context, in 
 	return out, nil
 }
 
-func (c *billingClient) BulkImportMonthlyMiscFees(ctx context.Context, in *BulkImportMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+func (c *billingClient) BulkImportMonthlyMiscFees(ctx context.Context, in *BulkImportMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*MonthlyMiscFeeImportResult, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(protos.Operation)
+	out := new(MonthlyMiscFeeImportResult)
 	err := c.cc.Invoke(ctx, Billing_BulkImportMonthlyMiscFees_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -2073,46 +2061,6 @@ func (c *billingClient) ListMonthlyMiscFees(ctx context.Context, in *ListMonthly
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ListMonthlyMiscFeesResponse)
 	err := c.cc.Invoke(ctx, Billing_ListMonthlyMiscFees_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *billingClient) GetMonthlyMiscFee(ctx context.Context, in *GetMonthlyMiscFeeRequest, opts ...grpc.CallOption) (*MonthlyMiscFee, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MonthlyMiscFee)
-	err := c.cc.Invoke(ctx, Billing_GetMonthlyMiscFee_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *billingClient) ExportMonthlyMiscFees(ctx context.Context, in *ExportMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*ExportMonthlyMiscFeesResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(ExportMonthlyMiscFeesResponse)
-	err := c.cc.Invoke(ctx, Billing_ExportMonthlyMiscFees_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *billingClient) GetMonthlyMiscFeeImport(ctx context.Context, in *GetMonthlyMiscFeeImportRequest, opts ...grpc.CallOption) (*MonthlyMiscFeeImportResult, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MonthlyMiscFeeImportResult)
-	err := c.cc.Invoke(ctx, Billing_GetMonthlyMiscFeeImport_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *billingClient) UpsertMonthlyMiscFee(ctx context.Context, in *UpsertMonthlyMiscFeeRequest, opts ...grpc.CallOption) (*MonthlyMiscFee, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(MonthlyMiscFee)
-	err := c.cc.Invoke(ctx, Billing_UpsertMonthlyMiscFee_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3055,19 +3003,11 @@ type BillingServer interface {
 	GetFreeFormat(*GetFreeFormatRequest, Billing_GetFreeFormatServer) error
 	// Gets the CSV template metadata for monthly miscellaneous fees.
 	GetMonthlyMiscFeeImportTemplate(context.Context, *GetMonthlyMiscFeeImportTemplateRequest) (*MonthlyMiscFeeImportTemplate, error)
-	// Validates or imports monthly miscellaneous fees from CSV.
-	BulkImportMonthlyMiscFees(context.Context, *BulkImportMonthlyMiscFeesRequest) (*protos.Operation, error)
-	// Lists monthly miscellaneous fee rows.
+	// Validates or imports monthly FreeFormItems from CSV through invoice settings.
+	BulkImportMonthlyMiscFees(context.Context, *BulkImportMonthlyMiscFeesRequest) (*MonthlyMiscFeeImportResult, error)
+	// Lists effective monthly FreeFormItems.
 	ListMonthlyMiscFees(context.Context, *ListMonthlyMiscFeesRequest) (*ListMonthlyMiscFeesResponse, error)
-	// Gets a monthly miscellaneous fee row.
-	GetMonthlyMiscFee(context.Context, *GetMonthlyMiscFeeRequest) (*MonthlyMiscFee, error)
-	// Exports monthly miscellaneous fee rows using the list filters.
-	ExportMonthlyMiscFees(context.Context, *ExportMonthlyMiscFeesRequest) (*ExportMonthlyMiscFeesResponse, error)
-	// Gets a completed monthly miscellaneous fee import result.
-	GetMonthlyMiscFeeImport(context.Context, *GetMonthlyMiscFeeImportRequest) (*MonthlyMiscFeeImportResult, error)
-	// Creates or updates a monthly miscellaneous fee row.
-	UpsertMonthlyMiscFee(context.Context, *UpsertMonthlyMiscFeeRequest) (*MonthlyMiscFee, error)
-	// Deletes a monthly miscellaneous fee row.
+	// Deletes one monthly FreeFormItem through invoice settings.
 	DeleteMonthlyMiscFee(context.Context, *DeleteMonthlyMiscFeeRequest) (*emptypb.Empty, error)
 	GetTagsAddingSetting(*GetTagsAddingSettingRequest, Billing_GetTagsAddingSettingServer) error
 	UpdateTagsAddingSetting(context.Context, *UpdateTagsAddingSettingRequest) (*emptypb.Empty, error)
@@ -3472,23 +3412,11 @@ func (UnimplementedBillingServer) GetFreeFormat(*GetFreeFormatRequest, Billing_G
 func (UnimplementedBillingServer) GetMonthlyMiscFeeImportTemplate(context.Context, *GetMonthlyMiscFeeImportTemplateRequest) (*MonthlyMiscFeeImportTemplate, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMonthlyMiscFeeImportTemplate not implemented")
 }
-func (UnimplementedBillingServer) BulkImportMonthlyMiscFees(context.Context, *BulkImportMonthlyMiscFeesRequest) (*protos.Operation, error) {
+func (UnimplementedBillingServer) BulkImportMonthlyMiscFees(context.Context, *BulkImportMonthlyMiscFeesRequest) (*MonthlyMiscFeeImportResult, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BulkImportMonthlyMiscFees not implemented")
 }
 func (UnimplementedBillingServer) ListMonthlyMiscFees(context.Context, *ListMonthlyMiscFeesRequest) (*ListMonthlyMiscFeesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListMonthlyMiscFees not implemented")
-}
-func (UnimplementedBillingServer) GetMonthlyMiscFee(context.Context, *GetMonthlyMiscFeeRequest) (*MonthlyMiscFee, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMonthlyMiscFee not implemented")
-}
-func (UnimplementedBillingServer) ExportMonthlyMiscFees(context.Context, *ExportMonthlyMiscFeesRequest) (*ExportMonthlyMiscFeesResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ExportMonthlyMiscFees not implemented")
-}
-func (UnimplementedBillingServer) GetMonthlyMiscFeeImport(context.Context, *GetMonthlyMiscFeeImportRequest) (*MonthlyMiscFeeImportResult, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetMonthlyMiscFeeImport not implemented")
-}
-func (UnimplementedBillingServer) UpsertMonthlyMiscFee(context.Context, *UpsertMonthlyMiscFeeRequest) (*MonthlyMiscFee, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpsertMonthlyMiscFee not implemented")
 }
 func (UnimplementedBillingServer) DeleteMonthlyMiscFee(context.Context, *DeleteMonthlyMiscFeeRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteMonthlyMiscFee not implemented")
@@ -5528,78 +5456,6 @@ func _Billing_ListMonthlyMiscFees_Handler(srv interface{}, ctx context.Context, 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Billing_GetMonthlyMiscFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMonthlyMiscFeeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BillingServer).GetMonthlyMiscFee(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Billing_GetMonthlyMiscFee_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).GetMonthlyMiscFee(ctx, req.(*GetMonthlyMiscFeeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Billing_ExportMonthlyMiscFees_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(ExportMonthlyMiscFeesRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BillingServer).ExportMonthlyMiscFees(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Billing_ExportMonthlyMiscFees_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).ExportMonthlyMiscFees(ctx, req.(*ExportMonthlyMiscFeesRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Billing_GetMonthlyMiscFeeImport_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetMonthlyMiscFeeImportRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BillingServer).GetMonthlyMiscFeeImport(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Billing_GetMonthlyMiscFeeImport_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).GetMonthlyMiscFeeImport(ctx, req.(*GetMonthlyMiscFeeImportRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Billing_UpsertMonthlyMiscFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpsertMonthlyMiscFeeRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(BillingServer).UpsertMonthlyMiscFee(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: Billing_UpsertMonthlyMiscFee_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(BillingServer).UpsertMonthlyMiscFee(ctx, req.(*UpsertMonthlyMiscFeeRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
 func _Billing_DeleteMonthlyMiscFee_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteMonthlyMiscFeeRequest)
 	if err := dec(in); err != nil {
@@ -6855,22 +6711,6 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListMonthlyMiscFees",
 			Handler:    _Billing_ListMonthlyMiscFees_Handler,
-		},
-		{
-			MethodName: "GetMonthlyMiscFee",
-			Handler:    _Billing_GetMonthlyMiscFee_Handler,
-		},
-		{
-			MethodName: "ExportMonthlyMiscFees",
-			Handler:    _Billing_ExportMonthlyMiscFees_Handler,
-		},
-		{
-			MethodName: "GetMonthlyMiscFeeImport",
-			Handler:    _Billing_GetMonthlyMiscFeeImport_Handler,
-		},
-		{
-			MethodName: "UpsertMonthlyMiscFee",
-			Handler:    _Billing_UpsertMonthlyMiscFee_Handler,
 		},
 		{
 			MethodName: "DeleteMonthlyMiscFee",
