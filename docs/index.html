@@ -191,11 +191,23 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.org.v1.FeatureFlagState"><span class="badge">M</span>FeatureFlagState</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.org.v1.GetOrgRequest"><span class="badge">M</span>GetOrgRequest</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.org.v1.SendVerificationRequest"><span class="badge">M</span>SendVerificationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.org.v1.SyncFeatureFlagsRequest"><span class="badge">M</span>SyncFeatureFlagsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.org.v1.SyncFeatureFlagsResponse"><span class="badge">M</span>SyncFeatureFlagsResponse</a>
                 </li>
               
                 <li>
@@ -5254,6 +5266,44 @@
 
         
       
+        <h3 id="blueapi.org.v1.FeatureFlagState">FeatureFlagState</h3>
+        <p>A single Wave feature flag's corrected state.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>featureName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>featureId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The Wave feature UUID, as used by Wave&#39;s own $flag(feature_id) checks. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.org.v1.GetOrgRequest">GetOrgRequest</h3>
         <p>Request message for the Organization.GetOrg rpc.</p>
 
@@ -5265,6 +5315,37 @@
         <p>Request message for the Organization.SendVerification rpc.</p>
 
         
+
+        
+      
+        <h3 id="blueapi.org.v1.SyncFeatureFlagsRequest">SyncFeatureFlagsRequest</h3>
+        <p>Request message for the Organization.SyncFeatureFlags rpc.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.org.v1.SyncFeatureFlagsResponse">SyncFeatureFlagsResponse</h3>
+        <p>Response message for the Organization.SyncFeatureFlags rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>flags</td>
+                  <td><a href="#blueapi.org.v1.FeatureFlagState">FeatureFlagState</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -5420,6 +5501,15 @@ for the list of supported attributes.</p></td>
                 <td><p>WORK-IN-PROGRESS: Deletes the organization.</p></td>
               </tr>
             
+              <tr>
+                <td>SyncFeatureFlags</td>
+                <td><a href="#blueapi.org.v1.SyncFeatureFlagsRequest">SyncFeatureFlagsRequest</a></td>
+                <td><a href="#blueapi.org.v1.SyncFeatureFlagsResponse">SyncFeatureFlagsResponse</a></td>
+                <td><p>Self-heals the caller&#39;s own Wave feature-flag state against the MSP&#39;s
+root Ripple state, correcting any drift caused by a missed or delayed
+sync, and returns the corrected state.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -5504,6 +5594,16 @@ for the list of supported attributes.</p></td>
                 <td>DeleteOrg</td>
                 <td>DELETE</td>
                 <td>/org/v1</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>SyncFeatureFlags</td>
+                <td>POST</td>
+                <td>/org/v1:syncFeatureFlags</td>
                 <td></td>
               </tr>
               

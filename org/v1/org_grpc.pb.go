@@ -28,6 +28,7 @@ const (
 	Organization_UpdateMetadata_FullMethodName   = "/blueapi.org.v1.Organization/UpdateMetadata"
 	Organization_UpdatePassword_FullMethodName   = "/blueapi.org.v1.Organization/UpdatePassword"
 	Organization_DeleteOrg_FullMethodName        = "/blueapi.org.v1.Organization/DeleteOrg"
+	Organization_SyncFeatureFlags_FullMethodName = "/blueapi.org.v1.Organization/SyncFeatureFlags"
 )
 
 // OrganizationClient is the client API for Organization service.
@@ -53,6 +54,10 @@ type OrganizationClient interface {
 	UpdatePassword(ctx context.Context, in *UpdatePasswordRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(ctx context.Context, in *DeleteOrgRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	// Self-heals the caller's own Wave feature-flag state against the MSP's
+	// root Ripple state, correcting any drift caused by a missed or delayed
+	// sync, and returns the corrected state.
+	SyncFeatureFlags(ctx context.Context, in *SyncFeatureFlagsRequest, opts ...grpc.CallOption) (*SyncFeatureFlagsResponse, error)
 }
 
 type organizationClient struct {
@@ -133,6 +138,16 @@ func (c *organizationClient) DeleteOrg(ctx context.Context, in *DeleteOrgRequest
 	return out, nil
 }
 
+func (c *organizationClient) SyncFeatureFlags(ctx context.Context, in *SyncFeatureFlagsRequest, opts ...grpc.CallOption) (*SyncFeatureFlagsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SyncFeatureFlagsResponse)
+	err := c.cc.Invoke(ctx, Organization_SyncFeatureFlags_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // OrganizationServer is the server API for Organization service.
 // All implementations must embed UnimplementedOrganizationServer
 // for forward compatibility
@@ -156,6 +171,10 @@ type OrganizationServer interface {
 	UpdatePassword(context.Context, *UpdatePasswordRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Deletes the organization.
 	DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error)
+	// Self-heals the caller's own Wave feature-flag state against the MSP's
+	// root Ripple state, correcting any drift caused by a missed or delayed
+	// sync, and returns the corrected state.
+	SyncFeatureFlags(context.Context, *SyncFeatureFlagsRequest) (*SyncFeatureFlagsResponse, error)
 	mustEmbedUnimplementedOrganizationServer()
 }
 
@@ -183,6 +202,9 @@ func (UnimplementedOrganizationServer) UpdatePassword(context.Context, *UpdatePa
 }
 func (UnimplementedOrganizationServer) DeleteOrg(context.Context, *DeleteOrgRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrg not implemented")
+}
+func (UnimplementedOrganizationServer) SyncFeatureFlags(context.Context, *SyncFeatureFlagsRequest) (*SyncFeatureFlagsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SyncFeatureFlags not implemented")
 }
 func (UnimplementedOrganizationServer) mustEmbedUnimplementedOrganizationServer() {}
 
@@ -323,6 +345,24 @@ func _Organization_DeleteOrg_Handler(srv interface{}, ctx context.Context, dec f
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Organization_SyncFeatureFlags_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SyncFeatureFlagsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(OrganizationServer).SyncFeatureFlags(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Organization_SyncFeatureFlags_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(OrganizationServer).SyncFeatureFlags(ctx, req.(*SyncFeatureFlagsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // Organization_ServiceDesc is the grpc.ServiceDesc for Organization service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -357,6 +397,10 @@ var Organization_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteOrg",
 			Handler:    _Organization_DeleteOrg_Handler,
+		},
+		{
+			MethodName: "SyncFeatureFlags",
+			Handler:    _Organization_SyncFeatureFlags_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
