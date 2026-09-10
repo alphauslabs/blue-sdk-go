@@ -397,7 +397,9 @@ type BillingClient interface {
 	GetFreeFormat(ctx context.Context, in *GetFreeFormatRequest, opts ...grpc.CallOption) (Billing_GetFreeFormatClient, error)
 	// Gets the CSV template metadata for monthly miscellaneous fees.
 	GetMonthlyMiscFeeImportTemplate(ctx context.Context, in *GetMonthlyMiscFeeImportTemplateRequest, opts ...grpc.CallOption) (*MonthlyMiscFeeImportTemplate, error)
-	// Validates or imports monthly FreeFormItems from CSV through invoice settings.
+	// Validates or imports monthly FreeFormItems from CSV through invoice settings. The CSV
+	// supplies each row's own billing month, billing group, and vendor; there is no
+	// request-level billing_month or vendor to scope the call.
 	BulkImportMonthlyMiscFees(ctx context.Context, in *BulkImportMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*MonthlyMiscFeeImportResult, error)
 	// Lists effective monthly FreeFormItems.
 	ListMonthlyMiscFees(ctx context.Context, in *ListMonthlyMiscFeesRequest, opts ...grpc.CallOption) (*ListMonthlyMiscFeesResponse, error)
@@ -3003,7 +3005,9 @@ type BillingServer interface {
 	GetFreeFormat(*GetFreeFormatRequest, Billing_GetFreeFormatServer) error
 	// Gets the CSV template metadata for monthly miscellaneous fees.
 	GetMonthlyMiscFeeImportTemplate(context.Context, *GetMonthlyMiscFeeImportTemplateRequest) (*MonthlyMiscFeeImportTemplate, error)
-	// Validates or imports monthly FreeFormItems from CSV through invoice settings.
+	// Validates or imports monthly FreeFormItems from CSV through invoice settings. The CSV
+	// supplies each row's own billing month, billing group, and vendor; there is no
+	// request-level billing_month or vendor to scope the call.
 	BulkImportMonthlyMiscFees(context.Context, *BulkImportMonthlyMiscFeesRequest) (*MonthlyMiscFeeImportResult, error)
 	// Lists effective monthly FreeFormItems.
 	ListMonthlyMiscFees(context.Context, *ListMonthlyMiscFeesRequest) (*ListMonthlyMiscFeesResponse, error)

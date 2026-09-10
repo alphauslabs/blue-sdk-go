@@ -2066,6 +2066,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.MonthlyMiscFeeImportGroupSummary"><span class="badge">M</span>MonthlyMiscFeeImportGroupSummary</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.MonthlyMiscFeeImportResult"><span class="badge">M</span>MonthlyMiscFeeImportResult</a>
                 </li>
               
@@ -19502,7 +19506,7 @@ Useful for validating CSV format and data before performing the actual bulk crea
         
       
         <h3 id="blueapi.billing.v1.BulkImportMonthlyMiscFeesRequest">BulkImportMonthlyMiscFeesRequest</h3>
-        <p></p>
+        <p>No billing_month or vendor field: each CSV row supplies its own, so one upload can span</p><p>any combination of billing groups, vendors, and invoice months.</p>
 
         
           <table class="field-table">
@@ -19510,13 +19514,6 @@ Useful for validating CSV format and data before performing the actual bulk crea
               <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
             </thead>
             <tbody>
-              
-                <tr>
-                  <td>billing_month</td>
-                  <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Required. Selected billing cycle in YYYY-MM form; YYYYMM is normalized. </p></td>
-                </tr>
               
                 <tr>
                   <td>csv_content</td>
@@ -19536,7 +19533,12 @@ Useful for validating CSV format and data before performing the actual bulk crea
                   <td>mode</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. &#34;dry-run&#34; validates only; &#34;merge&#34; upserts FreeFormItems by label. </p></td>
+                  <td><p>Required. &#34;merge&#34; upserts each row&#39;s item by label, leaving every other existing item for
+that billing group and vendor untouched. &#34;replace&#34; sets the complete additional-item list
+for each (billing_month, billing_group_id, vendor) combination the CSV names to exactly
+that combination&#39;s CSV rows, removing any existing item the CSV omits for it; a
+&#34;replace&#34; CSV must contain rows for exactly one billing_month, and the request is
+rejected before saving anything if it spans more than one. </p></td>
                 </tr>
               
                 <tr>
@@ -19551,6 +19553,14 @@ Useful for validating CSV format and data before performing the actual bulk crea
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dry_run</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. When true, validates and returns the planned result for either mode without
+saving anything. </p></td>
                 </tr>
               
             </tbody>
@@ -25623,7 +25633,7 @@ Use ListServices without this field to retrieve all available service codes. </p
 
         
       
-        <h3 id="blueapi.billing.v1.MonthlyMiscFeeImportResult">MonthlyMiscFeeImportResult</h3>
+        <h3 id="blueapi.billing.v1.MonthlyMiscFeeImportGroupSummary">MonthlyMiscFeeImportGroupSummary</h3>
         <p></p>
 
         
@@ -25634,14 +25644,38 @@ Use ListServices without this field to retrieve all available service codes. </p
             <tbody>
               
                 <tr>
-                  <td>status</td>
+                  <td>billing_group_id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
               
                 <tr>
-                  <td>billing_month</td>
+                  <td>billing_group_name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.MonthlyMiscFeeImportResult">MonthlyMiscFeeImportResult</h3>
+        <p>No singular billing_month field: a result can now span multiple billing months. See</p><p>billing_months below.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
@@ -25703,6 +25737,35 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>removed_rows</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Existing items removed because a &#34;replace&#34;-mode CSV omitted them from a combination it
+touched. Always 0 in &#34;merge&#34; mode. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billing_months</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Every distinct billing month, in &#34;YYYY-MM&#34; form, a valid row in this file touches. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendors</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Every distinct vendor a valid row in this file touches. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billing_groups</td>
+                  <td><a href="#blueapi.billing.v1.MonthlyMiscFeeImportGroupSummary">MonthlyMiscFeeImportGroupSummary</a></td>
+                  <td>repeated</td>
+                  <td><p>Every distinct billing group a valid row in this file touches. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -25724,14 +25787,17 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td>csv_row_number</td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>The 1-based CSV row this result corresponds to. 0 when action is &#34;remove&#34;, since a
+removal has no corresponding CSV row. </p></td>
                 </tr>
               
                 <tr>
                   <td>action</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>One of &#34;insert&#34;, &#34;update&#34;, &#34;unchanged&#34;, &#34;invalid&#34;, or &#34;remove&#34;. &#34;remove&#34; only appears in
+&#34;replace&#34; mode, for an existing item the CSV silently drops from a combination it
+otherwise touches. </p></td>
                 </tr>
               
                 <tr>
@@ -25797,6 +25863,14 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>billing_month</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The row&#39;s own billing month in &#34;YYYY-MM&#34; form. Always populated, including for &#34;remove&#34;
+results, since a request can span multiple months. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -25832,7 +25906,8 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td>headers</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>CSV header columns in required order. Has no &#34;enabled&#34; column: every item the
+workflow imports is saved as enabled. </p></td>
                 </tr>
               
                 <tr>
@@ -25846,7 +25921,9 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td>allowed_modes</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p> </p></td>
+                  <td><p>Supported values for BulkImportMonthlyMiscFeesRequest.mode: &#34;merge&#34; and &#34;replace&#34;.
+Preview vs. apply is controlled separately by BulkImportMonthlyMiscFeesRequest.dry_run,
+not by this field. </p></td>
                 </tr>
               
                 <tr>
@@ -29476,7 +29553,9 @@ Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
                 <td>BulkImportMonthlyMiscFees</td>
                 <td><a href="#blueapi.billing.v1.BulkImportMonthlyMiscFeesRequest">BulkImportMonthlyMiscFeesRequest</a></td>
                 <td><a href="#blueapi.billing.v1.MonthlyMiscFeeImportResult">MonthlyMiscFeeImportResult</a></td>
-                <td><p>Validates or imports monthly FreeFormItems from CSV through invoice settings.</p></td>
+                <td><p>Validates or imports monthly FreeFormItems from CSV through invoice settings. The CSV
+supplies each row&#39;s own billing month, billing group, and vendor; there is no
+request-level billing_month or vendor to scope the call.</p></td>
               </tr>
             
               <tr>
