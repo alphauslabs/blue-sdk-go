@@ -1438,6 +1438,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.BulkBillingGroupInvoiceSettingsRow"><span class="badge">M</span>BulkBillingGroupInvoiceSettingsRow</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.BulkCreateBillingGroupError"><span class="badge">M</span>BulkCreateBillingGroupError</a>
                 </li>
               
@@ -1475,6 +1479,18 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.BulkTagBillingGroupRequest"><span class="badge">M</span>BulkTagBillingGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkUpdateBillingGroupError"><span class="badge">M</span>BulkUpdateBillingGroupError</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkUpdateBillingGroupMetadata"><span class="badge">M</span>BulkUpdateBillingGroupMetadata</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.BulkUpdateBillingGroupRequest"><span class="badge">M</span>BulkUpdateBillingGroupRequest</a>
                 </li>
               
                 <li>
@@ -2091,6 +2107,14 @@
               
                 <li>
                   <a href="#blueapi.billing.v1.NonTagSetting"><span class="badge">M</span>NonTagSetting</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.NormalizedInvoiceSettingField"><span class="badge">M</span>NormalizedInvoiceSettingField</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.NormalizedInvoiceSettings"><span class="badge">M</span>NormalizedInvoiceSettings</a>
                 </li>
               
                 <li>
@@ -19340,6 +19364,86 @@ At the moment, only `aws` is supported. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.BulkBillingGroupInvoiceSettingsRow">BulkBillingGroupInvoiceSettingsRow</h3>
+        <p>Per-row result for a bulk Create or Update Invoice Settings operation.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The canonical logical data-row index in the original CSV (zero-based,
+excluding the header when hasHeader is true). This index is preserved for
+valid rows, parse errors, and worker results; it is never compressed after
+a malformed or missing row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group ID. For Update, the resolved existing billing group. For Create,
+populated once known (empty for a row that has not yet been processed on a dryRun). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Row status: &#34;valid&#34; (Dry-run row ready), &#34;invalid&#34; (parse/validation failure),
+&#34;not_found&#34; (referenced billing group does not exist), &#34;updated&#34; (execution
+succeeded), &#34;failed&#34; (row-level failure during execution). &#34;created&#34; is reserved
+for the Create side of this shared row-result shape. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Human-readable error message(s) for this row, if any. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>normalizedSettings</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettings">NormalizedInvoiceSettings</a></td>
+                  <td></td>
+                  <td><p>The normalized Invoice Settings this row will produce (dryRun) or produced (execution). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>disposition</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Explicit row disposition. Values: &#34;ready&#34; (Dry-run row will update), &#34;invalid&#34;
+(parse/validation failure), &#34;not_found&#34; (referenced billing group does not exist),
+&#34;connection_resolution_failed&#34; (service-discount connection resolution failed),
+&#34;unsupported_field&#34; (a requested setting is not supported, e.g. non-blank
+custom_service), &#34;updated&#34; (execution succeeded), &#34;failed&#34; (any other row-level
+execution failure). It is separate from status so a terminal operation status
+cannot be mistaken for row success. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>csvLineNumber</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>One-based physical CSV line number when known, including a header line.
+Zero means the line number was not available. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.BulkCreateBillingGroupError">BulkCreateBillingGroupError</h3>
         <p></p>
 
@@ -19442,6 +19546,15 @@ At the moment, only `aws` is supported. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Job end timestamp. Empty if still running. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rows</td>
+                  <td><a href="#blueapi.billing.v1.BulkBillingGroupInvoiceSettingsRow">BulkBillingGroupInvoiceSettingsRow</a></td>
+                  <td>repeated</td>
+                  <td><p>Per-row normalized Invoice Settings results, populated for dryRun requests and for
+completed executions. Reused by BulkUpdateBillingGroupMetadata so Dry-run and execution
+for both Create and Update share one row-result shape. </p></td>
                 </tr>
               
             </tbody>
@@ -19898,6 +20011,199 @@ Expected columns: billing_group_id, customer_id, key, value </p></td>
                   <td></td>
                   <td><p>Optional. The operation mode.
 One of: &#34;add&#34; (default), &#34;delete&#34;, &#34;dry-run&#34;. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkUpdateBillingGroupError">BulkUpdateBillingGroupError</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>index</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>The canonical logical data-row index of the failed row (zero-based, excluding
+the header line when hasHeader is true). Same definition as
+BulkBillingGroupInvoiceSettingsRow.index: preserved for parse errors and worker
+results, never compressed after a malformed or missing row. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group ID from the failed row, if present in the CSV. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>message</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Error message. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>reason</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Failure reason code: &#34;not_found&#34; (billing group does not exist),
+&#34;validation_failed&#34; (CSV parse or validation failure),
+&#34;connection_resolution_failed&#34; (service-discount connection resolution failed),
+or &#34;unsupported_field&#34; (a requested setting is not supported, e.g. non-blank
+custom_service). </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkUpdateBillingGroupMetadata">BulkUpdateBillingGroupMetadata</h3>
+        <p>Metadata for the BulkUpdateBillingGroup long-running operation.</p><p>Stored in protos.Operation.metadata.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>status</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The current status: &#34;pending&#34;, &#34;processing&#34;, &#34;completed&#34;, &#34;partial_failed&#34;, &#34;failed&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of rows to process. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>processedCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of rows processed so far. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>successCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of rows successfully updated. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>failureCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Number of rows that failed (including not-found billing groups). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>errors</td>
+                  <td><a href="#blueapi.billing.v1.BulkUpdateBillingGroupError">BulkUpdateBillingGroupError</a></td>
+                  <td>repeated</td>
+                  <td><p>Details of failed rows. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>startTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job start timestamp (RFC 3339). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>endTime</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Job end timestamp. Empty if still running. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>rows</td>
+                  <td><a href="#blueapi.billing.v1.BulkBillingGroupInvoiceSettingsRow">BulkBillingGroupInvoiceSettingsRow</a></td>
+                  <td>repeated</td>
+                  <td><p>Per-row normalized Invoice Settings results, populated for dryRun requests and for
+completed executions. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.BulkUpdateBillingGroupRequest">BulkUpdateBillingGroupRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The cloud vendor for all billing groups in this CSV.
+Must be one of: aws, azure, gcp. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>csvContent</td>
+                  <td><a href="#bytes">bytes</a></td>
+                  <td></td>
+                  <td><p>Required. The CSV file content as bytes. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>delimiter</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. The delimiter used in the CSV file. Defaults to comma (,). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>hasHeader</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Whether the first CSV line names the columns. When true, the first
+line is read as a header and columns are matched by name. When false OR omitted
+(proto3 scalar default), the CSV is interpreted using the canonical bulk-update
+column order (the same order as the downloadable template, headerless).
+Callers SHOULD set this field explicitly. Unlike BulkCreateBillingGroup — which
+always interprets the first CSV line as a header — Bulk Update honors this field
+as given, and the value is preserved on the async execution payload. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dryRun</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If true, validate the CSV and resolve/merge against existing billing group
+state, returning the normalized result, without persisting any change. </p></td>
                 </tr>
               
             </tbody>
@@ -26061,6 +26367,215 @@ not by this field. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</h3>
+        <p>A single Invoice Settings field's normalized value together with where that value came from.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Canonical string-encoded normalized value. Empty if the setting has no value. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Where this value came from. One of: &#34;uploaded&#34;, &#34;existing&#34;, &#34;default_derived&#34;,
+&#34;org_derived&#34;, &#34;connection_resolved&#34;. &#34;existing&#34; means the value was carried
+forward unchanged from the billing group&#39;s current stored state (the common case
+for a blank Update CSV cell — see BulkUpdateBillingGroup&#39;s merge semantics).
+Omitted (empty) if the server cannot determine a classification.
+A field the Bulk CSV schema does not accept as an input column (e.g. support_amount_target)
+must never be classified as &#34;uploaded&#34;. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.NormalizedInvoiceSettings">NormalizedInvoiceSettings</h3>
+        <p>Server-normalized Invoice Settings for a single bulk row, as they will be (Dry-run) or were</p><p>(execution) applied. Shared by BulkCreateBillingGroup and BulkUpdateBillingGroup results.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>calcType</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>displayCost</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportAmountTarget</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportFeeCalcTarget</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFeeCalcTarget</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>invoiceTemplate</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customService</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>serviceDiscounts</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p>Complete per-vendor normalized invoice settings. These fields are additive;
+fields 1-8 above retain their original numbers. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>taxRate</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discountRate</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discountTargetUsage</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>discountCalcLogic</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFee</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionRate</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFix</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFeeTargetUsage</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>substitutionFeeCalcType</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportFee</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportRate</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportFix</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>supportFeeAdjustment</td>
+                  <td><a href="#blueapi.billing.v1.NormalizedInvoiceSettingField">NormalizedInvoiceSettingField</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ReadAdjustmentEntriesRequest">ReadAdjustmentEntriesRequest</h3>
         <p>Request message for the Billing.ReadAdjustmentEntries rpc.</p>
 
@@ -29819,6 +30334,17 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
               </tr>
             
               <tr>
+                <td>BulkUpdateBillingGroup</td>
+                <td><a href="#blueapi.billing.v1.BulkUpdateBillingGroupRequest">BulkUpdateBillingGroupRequest</a></td>
+                <td><a href="#protos.Operation">.protos.Operation</a></td>
+                <td><p>Update invoice settings on existing billing groups in bulk from a CSV file.
+Unlike BulkCreateBillingGroup, a blank CSV cell preserves the billing group&#39;s existing
+value for that setting rather than clearing it, and a row referencing a billing group
+that does not exist fails only that row (no implicit create).
+Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).</p></td>
+              </tr>
+            
+              <tr>
                 <td>CreateExcludeServiceEntry</td>
                 <td><a href="#blueapi.billing.v1.CreateExcludeServiceEntryRequest">CreateExcludeServiceEntryRequest</a></td>
                 <td><a href="#blueapi.billing.v1.CreateExcludeServiceEntryResponse">CreateExcludeServiceEntryResponse</a></td>
@@ -31301,6 +31827,16 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>BulkCreateBillingGroup</td>
                 <td>POST</td>
                 <td>/v1/billinggroups:bulkCreate</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>BulkUpdateBillingGroup</td>
+                <td>POST</td>
+                <td>/v1/billinggroups:bulkUpdate</td>
                 <td>*</td>
               </tr>
               

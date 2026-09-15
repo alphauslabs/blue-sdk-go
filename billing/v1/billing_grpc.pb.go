@@ -161,6 +161,7 @@ const (
 	Billing_GetChildBillingGroupInvoiceServiceDiscounts_FullMethodName         = "/blueapi.billing.v1.Billing/GetChildBillingGroupInvoiceServiceDiscounts"
 	Billing_ReadChildBillingGroupAccountInvoiceServiceDiscounts_FullMethodName = "/blueapi.billing.v1.Billing/ReadChildBillingGroupAccountInvoiceServiceDiscounts"
 	Billing_BulkCreateBillingGroup_FullMethodName                              = "/blueapi.billing.v1.Billing/BulkCreateBillingGroup"
+	Billing_BulkUpdateBillingGroup_FullMethodName                              = "/blueapi.billing.v1.Billing/BulkUpdateBillingGroup"
 	Billing_CreateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/CreateExcludeServiceEntry"
 	Billing_UpdateExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/UpdateExcludeServiceEntry"
 	Billing_DeleteExcludeServiceEntry_FullMethodName                           = "/blueapi.billing.v1.Billing/DeleteExcludeServiceEntry"
@@ -473,6 +474,12 @@ type BillingClient interface {
 	// Create billing group in bulk from CSV file.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkCreateBillingGroup(ctx context.Context, in *BulkCreateBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error)
+	// Update invoice settings on existing billing groups in bulk from a CSV file.
+	// Unlike BulkCreateBillingGroup, a blank CSV cell preserves the billing group's existing
+	// value for that setting rather than clearing it, and a row referencing a billing group
+	// that does not exist fails only that row (no implicit create).
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkUpdateBillingGroup(ctx context.Context, in *BulkUpdateBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error)
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error)
 	// Update Exclude Service Entry
@@ -2613,6 +2620,16 @@ func (c *billingClient) BulkCreateBillingGroup(ctx context.Context, in *BulkCrea
 	return out, nil
 }
 
+func (c *billingClient) BulkUpdateBillingGroup(ctx context.Context, in *BulkUpdateBillingGroupRequest, opts ...grpc.CallOption) (*protos.Operation, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(protos.Operation)
+	err := c.cc.Invoke(ctx, Billing_BulkUpdateBillingGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) CreateExcludeServiceEntry(ctx context.Context, in *CreateExcludeServiceEntryRequest, opts ...grpc.CallOption) (*CreateExcludeServiceEntryResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CreateExcludeServiceEntryResponse)
@@ -3081,6 +3098,12 @@ type BillingServer interface {
 	// Create billing group in bulk from CSV file.
 	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
 	BulkCreateBillingGroup(context.Context, *BulkCreateBillingGroupRequest) (*protos.Operation, error)
+	// Update invoice settings on existing billing groups in bulk from a CSV file.
+	// Unlike BulkCreateBillingGroup, a blank CSV cell preserves the billing group's existing
+	// value for that setting rather than clearing it, and a row referencing a billing group
+	// that does not exist fails only that row (no implicit create).
+	// Returns a long-running operation. Poll status via the Operations service (GET /ops/v1/{name}).
+	BulkUpdateBillingGroup(context.Context, *BulkUpdateBillingGroupRequest) (*protos.Operation, error)
 	// Create Exclude Service Entry
 	CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error)
 	// Update Exclude Service Entry
@@ -3529,6 +3552,9 @@ func (UnimplementedBillingServer) ReadChildBillingGroupAccountInvoiceServiceDisc
 }
 func (UnimplementedBillingServer) BulkCreateBillingGroup(context.Context, *BulkCreateBillingGroupRequest) (*protos.Operation, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method BulkCreateBillingGroup not implemented")
+}
+func (UnimplementedBillingServer) BulkUpdateBillingGroup(context.Context, *BulkUpdateBillingGroupRequest) (*protos.Operation, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BulkUpdateBillingGroup not implemented")
 }
 func (UnimplementedBillingServer) CreateExcludeServiceEntry(context.Context, *CreateExcludeServiceEntryRequest) (*CreateExcludeServiceEntryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateExcludeServiceEntry not implemented")
@@ -6132,6 +6158,24 @@ func _Billing_BulkCreateBillingGroup_Handler(srv interface{}, ctx context.Contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_BulkUpdateBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BulkUpdateBillingGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).BulkUpdateBillingGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_BulkUpdateBillingGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).BulkUpdateBillingGroup(ctx, req.(*BulkUpdateBillingGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_CreateExcludeServiceEntry_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateExcludeServiceEntryRequest)
 	if err := dec(in); err != nil {
@@ -6827,6 +6871,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "BulkCreateBillingGroup",
 			Handler:    _Billing_BulkCreateBillingGroup_Handler,
+		},
+		{
+			MethodName: "BulkUpdateBillingGroup",
+			Handler:    _Billing_BulkUpdateBillingGroup_Handler,
 		},
 		{
 			MethodName: "CreateExcludeServiceEntry",
