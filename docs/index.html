@@ -56786,7 +56786,9 @@ Each entry selects a commitment category, term, payment option, and optional pro
 
 Acceptable commitment_type values:
   &#34;aws/AmazonEC2&#34;, &#34;aws/AmazonRDS&#34;, &#34;aws/AmazonElastiCache&#34;,
-  &#34;aws/savingsplan/Compute&#34;, &#34;aws/savingsplan/EC2Instance&#34;, &#34;aws/savingsplan/Database&#34;
+  &#34;aws/savingsplan/Compute&#34;, &#34;aws/savingsplan/EC2Instance&#34;, &#34;aws/savingsplan/Database&#34;,
+  &#34;azure/savingsplan/Compute&#34;, &#34;azure/savingsplan/Database&#34;,
+  &#34;azure/Virtual Machines&#34;, &#34;azure/SQL Database&#34;, &#34;azure/Storage&#34;, &#34;azure/Azure Monitor&#34;
 
 Acceptable term values:
   &#34;thirty_day_gris&#34;  - 30-day Archera Insured (leased: true)
@@ -59008,6 +59010,13 @@ Empty when verification hasn&#39;t been attempted yet or when no checks were per
                   <td>verificationChecks</td>
                   <td><a href="#blueapi.gc.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck">VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck</a></td>
                   <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>provider</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
                   <td><p> </p></td>
                 </tr>
               
