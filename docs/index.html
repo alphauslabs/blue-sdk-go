@@ -2074,6 +2074,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListTagValuesRequest"><span class="badge">M</span>ListTagValuesRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListTagValuesResponse"><span class="badge">M</span>ListTagValuesResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListUsageCostsDriftRequest"><span class="badge">M</span>ListUsageCostsDriftRequest</a>
                 </li>
               
@@ -25807,6 +25815,111 @@ Use ListServices without this field to retrieve all available service codes. </p
 
         
       
+        <h3 id="blueapi.billing.v1.ListTagValuesRequest">ListTagValuesRequest</h3>
+        <p>Request message for the Billing.ListTagValues rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>customerId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tagKey</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pageNumber</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Page number for pagination. Starts from 1. Default is 1. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pageSize</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Optional. Page size for pagination. Default is 50, maximum is 1000. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListTagValuesResponse">ListTagValuesResponse</h3>
+        <p>Response message for the Billing.ListTagValues rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>values</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>This page&#39;s distinct values. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalValueCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total distinct-value count for this (customerId, tagKey), consistent
+with Tags.totalValueCount. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pageNumber</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pageSize</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalPages</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListUsageCostsDriftRequest">ListUsageCostsDriftRequest</h3>
         <p>Request message for the Billing.ListUsageCostsDrift rpc.</p>
 
@@ -27790,6 +27903,23 @@ Example: If the invoice currency is &#34;jpy&#34; and 1 USD = 150 jpy, exchangeR
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>totalValueCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Total number of distinct values recorded for this key, regardless of how
+many are present in `values` above. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>truncated</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>True if `values` does not contain all of this key&#39;s distinct values (its
+count exceeds the server-side per-key cap). Use ListTagValues to page
+through the full list. </p></td>
                 </tr>
               
             </tbody>
@@ -29969,8 +30099,16 @@ Note: Commitment entries (mobingi_type=&#34;COMMITMENT&#34;) are excluded from R
                 <td>GetTags</td>
                 <td><a href="#blueapi.billing.v1.GetTagsRequest">GetTagsRequest</a></td>
                 <td><a href="#blueapi.billing.v1.TagData">TagData</a> stream</td>
-                <td><p>Returns the customer details and its tags. 
+                <td><p>Returns the customer details and its tags.
 Port for: m/ripple/tags/vendor/{vendor}?type={type}</p></td>
+              </tr>
+            
+              <tr>
+                <td>ListTagValues</td>
+                <td><a href="#blueapi.billing.v1.ListTagValuesRequest">ListTagValuesRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ListTagValuesResponse">ListTagValuesResponse</a></td>
+                <td><p>Returns one page of the distinct values for a single customer&#39;s tag key, for
+drilling down into a key beyond GetTags&#39; per-key cap (see Tags.truncated).</p></td>
               </tr>
             
               <tr>
@@ -31317,6 +31455,16 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>GetTags</td>
                 <td>GET</td>
                 <td>/v1/tags</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ListTagValues</td>
+                <td>GET</td>
+                <td>/v1/tags:values</td>
                 <td></td>
               </tr>
               

@@ -110,6 +110,7 @@ const (
 	Billing_SetCustomizedBillingServiceBillingGroup_FullMethodName             = "/blueapi.billing.v1.Billing/SetCustomizedBillingServiceBillingGroup"
 	Billing_DeleteCustomizedBillingServiceBillingGroup_FullMethodName          = "/blueapi.billing.v1.Billing/DeleteCustomizedBillingServiceBillingGroup"
 	Billing_GetTags_FullMethodName                                             = "/blueapi.billing.v1.Billing/GetTags"
+	Billing_ListTagValues_FullMethodName                                       = "/blueapi.billing.v1.Billing/ListTagValues"
 	Billing_CreateCustomField_FullMethodName                                   = "/blueapi.billing.v1.Billing/CreateCustomField"
 	Billing_ListCustomField_FullMethodName                                     = "/blueapi.billing.v1.Billing/ListCustomField"
 	Billing_AddBillingGroupCustomField_FullMethodName                          = "/blueapi.billing.v1.Billing/AddBillingGroupCustomField"
@@ -372,6 +373,9 @@ type BillingClient interface {
 	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(ctx context.Context, in *GetTagsRequest, opts ...grpc.CallOption) (Billing_GetTagsClient, error)
+	// Returns one page of the distinct values for a single customer's tag key, for
+	// drilling down into a key beyond GetTags' per-key cap (see Tags.truncated).
+	ListTagValues(ctx context.Context, in *ListTagValuesRequest, opts ...grpc.CallOption) (*ListTagValuesResponse, error)
 	// Creates new customfield
 	CreateCustomField(ctx context.Context, in *CreateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error)
 	// Returns all registered customfields
@@ -1857,6 +1861,16 @@ func (x *billingGetTagsClient) Recv() (*TagData, error) {
 	return m, nil
 }
 
+func (c *billingClient) ListTagValues(ctx context.Context, in *ListTagValuesRequest, opts ...grpc.CallOption) (*ListTagValuesResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListTagValuesResponse)
+	err := c.cc.Invoke(ctx, Billing_ListTagValues_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *billingClient) CreateCustomField(ctx context.Context, in *CreateCustomFieldRequest, opts ...grpc.CallOption) (*CustomField, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(CustomField)
@@ -2996,6 +3010,9 @@ type BillingServer interface {
 	// Returns the customer details and its tags.
 	// Port for: m/ripple/tags/vendor/{vendor}?type={type}
 	GetTags(*GetTagsRequest, Billing_GetTagsServer) error
+	// Returns one page of the distinct values for a single customer's tag key, for
+	// drilling down into a key beyond GetTags' per-key cap (see Tags.truncated).
+	ListTagValues(context.Context, *ListTagValuesRequest) (*ListTagValuesResponse, error)
 	// Creates new customfield
 	CreateCustomField(context.Context, *CreateCustomFieldRequest) (*CustomField, error)
 	// Returns all registered customfields
@@ -3399,6 +3416,9 @@ func (UnimplementedBillingServer) DeleteCustomizedBillingServiceBillingGroup(con
 }
 func (UnimplementedBillingServer) GetTags(*GetTagsRequest, Billing_GetTagsServer) error {
 	return status.Errorf(codes.Unimplemented, "method GetTags not implemented")
+}
+func (UnimplementedBillingServer) ListTagValues(context.Context, *ListTagValuesRequest) (*ListTagValuesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListTagValues not implemented")
 }
 func (UnimplementedBillingServer) CreateCustomField(context.Context, *CreateCustomFieldRequest) (*CustomField, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCustomField not implemented")
@@ -5207,6 +5227,24 @@ func (x *billingGetTagsServer) Send(m *TagData) error {
 	return x.ServerStream.SendMsg(m)
 }
 
+func _Billing_ListTagValues_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListTagValuesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ListTagValues(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ListTagValues_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ListTagValues(ctx, req.(*ListTagValuesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_CreateCustomField_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(CreateCustomFieldRequest)
 	if err := dec(in); err != nil {
@@ -6711,6 +6749,10 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteCustomizedBillingServiceBillingGroup",
 			Handler:    _Billing_DeleteCustomizedBillingServiceBillingGroup_Handler,
+		},
+		{
+			MethodName: "ListTagValues",
+			Handler:    _Billing_ListTagValues_Handler,
 		},
 		{
 			MethodName: "CreateCustomField",
