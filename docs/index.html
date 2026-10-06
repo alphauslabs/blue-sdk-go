@@ -16232,8 +16232,11 @@ The same goes for notification. If you want to change only email value, set `{&#
                 <tr>
                   <td>note</td>
                   <td><a href="#string">string</a></td>
-                  <td></td>
-                  <td><p>Optional. A free-text note/memo about this account. </p></td>
+                  <td>optional</td>
+                  <td><p>Optional. A free-text note/memo about this account. Left out of the
+update entirely when not set, so this field can distinguish &#34;don&#39;t
+touch the note&#34; from &#34;clear it to empty&#34; - unlike CreateAccountRequest&#39;s
+note (a plain `string`, where there&#39;s no existing value to preserve). </p></td>
                 </tr>
               
             </tbody>
