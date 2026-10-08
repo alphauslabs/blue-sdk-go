@@ -26147,7 +26147,16 @@ with Tags.totalValueCount. </p></td>
                   <td>source</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>One of &#34;saved&#34;, &#34;created&#34;, or &#34;default&#34;. </p></td>
+                  <td><p>&#34;saved&#34; when the month has a saved invoice setting for this billing group and vendor,
+otherwise &#34;default&#34; (the billing group&#39;s enabled default items). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The currency of the effective invoice setting, e.g. &#34;JPY&#34; or &#34;USD&#34;. unit_cost and amount
+are in this currency. </p></td>
                 </tr>
               
             </tbody>
@@ -26312,7 +26321,11 @@ touched. Always 0 in &#34;merge&#34; mode. </p></td>
                   <td><a href="#int32">int32</a></td>
                   <td></td>
                   <td><p>The 1-based CSV row this result corresponds to. 0 when action is &#34;remove&#34;, since a
-removal has no corresponding CSV row. </p></td>
+removal has no corresponding CSV row.
+
+For &#34;invalid&#34; results, billing_month, billing_group_id, vendor, item_name, quantity and
+unit_cost hold the row&#39;s values as written in the file, wherever they could be read, so a
+client can show which row failed. </p></td>
                 </tr>
               
                 <tr>
@@ -26393,6 +26406,23 @@ otherwise touches. </p></td>
                   <td></td>
                   <td><p>The row&#39;s own billing month in &#34;YYYY-MM&#34; form. Always populated, including for &#34;remove&#34;
 results, since a request can span multiple months. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>currency</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The currency of the billing group and vendor&#39;s effective invoice setting. unit_cost and
+amount are in this currency. Empty for &#34;invalid&#34; results. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>source</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Where the billing group and vendor&#39;s items come from before this import: &#34;saved&#34; or
+&#34;default&#34;. An import saves every &#34;default&#34; combination it names as the month&#39;s first
+saved setting. Empty for &#34;invalid&#34; results. </p></td>
                 </tr>
               
             </tbody>

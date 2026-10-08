@@ -5,250 +5,308 @@
 package vortexconnect
 
 import (
-	connect "connectrpc.com/connect"
+	connect "connectrpc.com/connect/v2"
 	context "context"
-	errors "errors"
 	vortex "github.com/alphauslabs/blue-sdk-go/vortex/v1"
 	emptypb "google.golang.org/protobuf/types/known/emptypb"
-	http "net/http"
-	strings "strings"
+	sync "sync"
 )
-
-// This is a compile-time assertion to ensure that this generated file and the connect package are
-// compatible. If you get a compiler error that this constant is not defined, this code was
-// generated with a version of connect newer than the one compiled into your binary. You can fix the
-// problem by either regenerating this code with an older version of connect or updating the connect
-// version compiled into your binary.
-const _ = connect.IsAtLeastVersion1_13_0
 
 const (
 	// VortexName is the fully-qualified name of the Vortex service.
 	VortexName = "blueapi.vortex.v1.Vortex"
 )
 
-// These constants are the fully-qualified names of the RPCs defined in this package. They're
-// exposed at runtime as Spec.Procedure and as the final two segments of the HTTP route.
+// These constants are the procedure names of the RPCs defined in this package. They're exposed at
+// runtime as Spec.Procedure and as the final two segments of the HTTP route.
 //
 // Note that these are different from the fully-qualified method names used by
 // google.golang.org/protobuf/reflect/protoreflect. To convert from these constants to
 // reflection-formatted method names, remove the leading slash and convert the remaining slash to a
 // period.
 const (
-	// VortexTestProcedure is the fully-qualified name of the Vortex's Test RPC.
+	// VortexTestProcedure is the procedure name of the Vortex's Test RPC.
 	VortexTestProcedure = "/blueapi.vortex.v1.Vortex/Test"
-	// VortexCreateOrgProcedure is the fully-qualified name of the Vortex's CreateOrg RPC.
+	// VortexCreateOrgProcedure is the procedure name of the Vortex's CreateOrg RPC.
 	VortexCreateOrgProcedure = "/blueapi.vortex.v1.Vortex/CreateOrg"
-	// VortexGetUserProcedure is the fully-qualified name of the Vortex's GetUser RPC.
+	// VortexGetUserProcedure is the procedure name of the Vortex's GetUser RPC.
 	VortexGetUserProcedure = "/blueapi.vortex.v1.Vortex/GetUser"
-	// VortexListPromptsProcedure is the fully-qualified name of the Vortex's ListPrompts RPC.
+	// VortexListPromptsProcedure is the procedure name of the Vortex's ListPrompts RPC.
 	VortexListPromptsProcedure = "/blueapi.vortex.v1.Vortex/ListPrompts"
-	// VortexInviteUserProcedure is the fully-qualified name of the Vortex's InviteUser RPC.
+	// VortexInviteUserProcedure is the procedure name of the Vortex's InviteUser RPC.
 	VortexInviteUserProcedure = "/blueapi.vortex.v1.Vortex/InviteUser"
-	// VortexVerifyInvitedUserProcedure is the fully-qualified name of the Vortex's VerifyInvitedUser
-	// RPC.
+	// VortexVerifyInvitedUserProcedure is the procedure name of the Vortex's VerifyInvitedUser RPC.
 	VortexVerifyInvitedUserProcedure = "/blueapi.vortex.v1.Vortex/VerifyInvitedUser"
+)
+
+var (
+	vortexTestSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods().ByName("Test"),
+			Procedure:  VortexTestProcedure,
+		}
+	})
+	vortexCreateOrgSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods().ByName("CreateOrg"),
+			Procedure:  VortexCreateOrgProcedure,
+		}
+	})
+	vortexGetUserSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods().ByName("GetUser"),
+			Procedure:  VortexGetUserProcedure,
+		}
+	})
+	vortexListPromptsSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeServer,
+			Schema:     vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods().ByName("ListPrompts"),
+			Procedure:  VortexListPromptsProcedure,
+		}
+	})
+	vortexInviteUserSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods().ByName("InviteUser"),
+			Procedure:  VortexInviteUserProcedure,
+		}
+	})
+	vortexVerifyInvitedUserSpec = sync.OnceValue(func() connect.Spec {
+		return connect.Spec{
+			StreamType: connect.StreamTypeUnary,
+			Schema:     vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods().ByName("VerifyInvitedUser"),
+			Procedure:  VortexVerifyInvitedUserProcedure,
+		}
+	})
 )
 
 // VortexClient is a client for the blueapi.vortex.v1.Vortex service.
 type VortexClient interface {
 	// Test endpoint only
-	Test(context.Context, *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error)
+	Test(context.Context, *vortex.TestRequest) (*vortex.TestResponse, error)
 	// Create an org in Vortex
-	CreateOrg(context.Context, *connect.Request[vortex.CreateOrgRequest]) (*connect.Response[vortex.CreateOrgResponse], error)
-	GetUser(context.Context, *connect.Request[vortex.GetUserRequest]) (*connect.Response[vortex.GetUserResponse], error)
-	ListPrompts(context.Context, *connect.Request[vortex.ListPromptsRequest]) (*connect.ServerStreamForClient[vortex.Prompt], error)
-	InviteUser(context.Context, *connect.Request[vortex.InviteUserRequest]) (*connect.Response[emptypb.Empty], error)
-	VerifyInvitedUser(context.Context, *connect.Request[vortex.VerifyInvitedUserRequest]) (*connect.Response[emptypb.Empty], error)
+	CreateOrg(context.Context, *vortex.CreateOrgRequest) (*vortex.CreateOrgResponse, error)
+	GetUser(context.Context, *vortex.GetUserRequest) (*vortex.GetUserResponse, error)
+	ListPrompts(context.Context, *vortex.ListPromptsRequest) (VortexListPromptsClientStream, error)
+	InviteUser(context.Context, *vortex.InviteUserRequest) (*emptypb.Empty, error)
+	VerifyInvitedUser(context.Context, *vortex.VerifyInvitedUserRequest) (*emptypb.Empty, error)
 }
 
-// NewVortexClient constructs a client for the blueapi.vortex.v1.Vortex service. By default, it uses
-// the Connect protocol with the binary Protobuf Codec, asks for gzipped responses, and sends
-// uncompressed requests. To use the gRPC or gRPC-Web protocols, supply the connect.WithGRPC() or
-// connect.WithGRPCWeb() options.
-//
-// The URL supplied here should be the base URL for the Connect or gRPC server (for example,
-// http://api.acme.com or https://acme.com/grpc).
-func NewVortexClient(httpClient connect.HTTPClient, baseURL string, opts ...connect.ClientOption) VortexClient {
-	baseURL = strings.TrimRight(baseURL, "/")
-	vortexMethods := vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods()
-	return &vortexClient{
-		test: connect.NewClient[vortex.TestRequest, vortex.TestResponse](
-			httpClient,
-			baseURL+VortexTestProcedure,
-			connect.WithSchema(vortexMethods.ByName("Test")),
-			connect.WithClientOptions(opts...),
-		),
-		createOrg: connect.NewClient[vortex.CreateOrgRequest, vortex.CreateOrgResponse](
-			httpClient,
-			baseURL+VortexCreateOrgProcedure,
-			connect.WithSchema(vortexMethods.ByName("CreateOrg")),
-			connect.WithClientOptions(opts...),
-		),
-		getUser: connect.NewClient[vortex.GetUserRequest, vortex.GetUserResponse](
-			httpClient,
-			baseURL+VortexGetUserProcedure,
-			connect.WithSchema(vortexMethods.ByName("GetUser")),
-			connect.WithClientOptions(opts...),
-		),
-		listPrompts: connect.NewClient[vortex.ListPromptsRequest, vortex.Prompt](
-			httpClient,
-			baseURL+VortexListPromptsProcedure,
-			connect.WithSchema(vortexMethods.ByName("ListPrompts")),
-			connect.WithClientOptions(opts...),
-		),
-		inviteUser: connect.NewClient[vortex.InviteUserRequest, emptypb.Empty](
-			httpClient,
-			baseURL+VortexInviteUserProcedure,
-			connect.WithSchema(vortexMethods.ByName("InviteUser")),
-			connect.WithClientOptions(opts...),
-		),
-		verifyInvitedUser: connect.NewClient[vortex.VerifyInvitedUserRequest, emptypb.Empty](
-			httpClient,
-			baseURL+VortexVerifyInvitedUserProcedure,
-			connect.WithSchema(vortexMethods.ByName("VerifyInvitedUser")),
-			connect.WithClientOptions(opts...),
-		),
+// NewVortexClient constructs a client for the blueapi.vortex.v1.Vortex service. Multiple service
+// clients may share a single connect.Client.
+func NewVortexClient(client *connect.Client) VortexClient {
+	return &vortexClient{client: client}
+}
+
+// VortexListPromptsClientStream is the client stream for the Vortex's ListPrompts RPC.
+type VortexListPromptsClientStream struct {
+	stream connect.ClientStream
+}
+
+// Receive returns the next response message from the server.
+func (s VortexListPromptsClientStream) Receive() (*vortex.Prompt, error) {
+	var res vortex.Prompt
+	if err := s.stream.Receive(&res); err != nil {
+		return nil, err
 	}
+	return &res, nil
 }
 
-// vortexClient implements VortexClient.
-type vortexClient struct {
-	test              *connect.Client[vortex.TestRequest, vortex.TestResponse]
-	createOrg         *connect.Client[vortex.CreateOrgRequest, vortex.CreateOrgResponse]
-	getUser           *connect.Client[vortex.GetUserRequest, vortex.GetUserResponse]
-	listPrompts       *connect.Client[vortex.ListPromptsRequest, vortex.Prompt]
-	inviteUser        *connect.Client[vortex.InviteUserRequest, emptypb.Empty]
-	verifyInvitedUser *connect.Client[vortex.VerifyInvitedUserRequest, emptypb.Empty]
-}
-
-// Test calls blueapi.vortex.v1.Vortex.Test.
-func (c *vortexClient) Test(ctx context.Context, req *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error) {
-	return c.test.CallUnary(ctx, req)
-}
-
-// CreateOrg calls blueapi.vortex.v1.Vortex.CreateOrg.
-func (c *vortexClient) CreateOrg(ctx context.Context, req *connect.Request[vortex.CreateOrgRequest]) (*connect.Response[vortex.CreateOrgResponse], error) {
-	return c.createOrg.CallUnary(ctx, req)
-}
-
-// GetUser calls blueapi.vortex.v1.Vortex.GetUser.
-func (c *vortexClient) GetUser(ctx context.Context, req *connect.Request[vortex.GetUserRequest]) (*connect.Response[vortex.GetUserResponse], error) {
-	return c.getUser.CallUnary(ctx, req)
-}
-
-// ListPrompts calls blueapi.vortex.v1.Vortex.ListPrompts.
-func (c *vortexClient) ListPrompts(ctx context.Context, req *connect.Request[vortex.ListPromptsRequest]) (*connect.ServerStreamForClient[vortex.Prompt], error) {
-	return c.listPrompts.CallServerStream(ctx, req)
-}
-
-// InviteUser calls blueapi.vortex.v1.Vortex.InviteUser.
-func (c *vortexClient) InviteUser(ctx context.Context, req *connect.Request[vortex.InviteUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return c.inviteUser.CallUnary(ctx, req)
-}
-
-// VerifyInvitedUser calls blueapi.vortex.v1.Vortex.VerifyInvitedUser.
-func (c *vortexClient) VerifyInvitedUser(ctx context.Context, req *connect.Request[vortex.VerifyInvitedUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return c.verifyInvitedUser.CallUnary(ctx, req)
+// Close releases the stream's resources. It is idempotent and is typically deferred to clean up a
+// stream abandoned before io.EOF.
+func (s VortexListPromptsClientStream) Close() error {
+	return s.stream.Close()
 }
 
 // VortexHandler is an implementation of the blueapi.vortex.v1.Vortex service.
 type VortexHandler interface {
 	// Test endpoint only
-	Test(context.Context, *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error)
+	Test(context.Context, *vortex.TestRequest) (*vortex.TestResponse, error)
 	// Create an org in Vortex
-	CreateOrg(context.Context, *connect.Request[vortex.CreateOrgRequest]) (*connect.Response[vortex.CreateOrgResponse], error)
-	GetUser(context.Context, *connect.Request[vortex.GetUserRequest]) (*connect.Response[vortex.GetUserResponse], error)
-	ListPrompts(context.Context, *connect.Request[vortex.ListPromptsRequest], *connect.ServerStream[vortex.Prompt]) error
-	InviteUser(context.Context, *connect.Request[vortex.InviteUserRequest]) (*connect.Response[emptypb.Empty], error)
-	VerifyInvitedUser(context.Context, *connect.Request[vortex.VerifyInvitedUserRequest]) (*connect.Response[emptypb.Empty], error)
+	CreateOrg(context.Context, *vortex.CreateOrgRequest) (*vortex.CreateOrgResponse, error)
+	GetUser(context.Context, *vortex.GetUserRequest) (*vortex.GetUserResponse, error)
+	ListPrompts(context.Context, *vortex.ListPromptsRequest, VortexListPromptsServerStream) error
+	InviteUser(context.Context, *vortex.InviteUserRequest) (*emptypb.Empty, error)
+	VerifyInvitedUser(context.Context, *vortex.VerifyInvitedUserRequest) (*emptypb.Empty, error)
 }
 
-// NewVortexHandler builds an HTTP handler from the service implementation. It returns the path on
-// which to mount the handler and the handler itself.
-//
-// By default, handlers support the Connect, gRPC, and gRPC-Web protocols with the binary Protobuf
-// and JSON codecs. They also support gzip compression.
-func NewVortexHandler(svc VortexHandler, opts ...connect.HandlerOption) (string, http.Handler) {
-	vortexMethods := vortex.File_vortex_v1_vortex_proto.Services().ByName("Vortex").Methods()
-	vortexTestHandler := connect.NewUnaryHandler(
-		VortexTestProcedure,
-		svc.Test,
-		connect.WithSchema(vortexMethods.ByName("Test")),
-		connect.WithHandlerOptions(opts...),
+// RegisterVortexHandler registers svc as the blueapi.vortex.v1.Vortex implementation on server.
+func RegisterVortexHandler(server *connect.Server, svc VortexHandler) {
+	adapter := vortexHandler{svc: svc}
+	server.Register(
+		connect.Method{Spec: vortexTestSpec(), Handler: adapter.test},
+		connect.Method{Spec: vortexCreateOrgSpec(), Handler: adapter.createOrg},
+		connect.Method{Spec: vortexGetUserSpec(), Handler: adapter.getUser},
+		connect.Method{Spec: vortexListPromptsSpec(), Handler: adapter.listPrompts},
+		connect.Method{Spec: vortexInviteUserSpec(), Handler: adapter.inviteUser},
+		connect.Method{Spec: vortexVerifyInvitedUserSpec(), Handler: adapter.verifyInvitedUser},
 	)
-	vortexCreateOrgHandler := connect.NewUnaryHandler(
-		VortexCreateOrgProcedure,
-		svc.CreateOrg,
-		connect.WithSchema(vortexMethods.ByName("CreateOrg")),
-		connect.WithHandlerOptions(opts...),
-	)
-	vortexGetUserHandler := connect.NewUnaryHandler(
-		VortexGetUserProcedure,
-		svc.GetUser,
-		connect.WithSchema(vortexMethods.ByName("GetUser")),
-		connect.WithHandlerOptions(opts...),
-	)
-	vortexListPromptsHandler := connect.NewServerStreamHandler(
-		VortexListPromptsProcedure,
-		svc.ListPrompts,
-		connect.WithSchema(vortexMethods.ByName("ListPrompts")),
-		connect.WithHandlerOptions(opts...),
-	)
-	vortexInviteUserHandler := connect.NewUnaryHandler(
-		VortexInviteUserProcedure,
-		svc.InviteUser,
-		connect.WithSchema(vortexMethods.ByName("InviteUser")),
-		connect.WithHandlerOptions(opts...),
-	)
-	vortexVerifyInvitedUserHandler := connect.NewUnaryHandler(
-		VortexVerifyInvitedUserProcedure,
-		svc.VerifyInvitedUser,
-		connect.WithSchema(vortexMethods.ByName("VerifyInvitedUser")),
-		connect.WithHandlerOptions(opts...),
-	)
-	return "/blueapi.vortex.v1.Vortex/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		switch r.URL.Path {
-		case VortexTestProcedure:
-			vortexTestHandler.ServeHTTP(w, r)
-		case VortexCreateOrgProcedure:
-			vortexCreateOrgHandler.ServeHTTP(w, r)
-		case VortexGetUserProcedure:
-			vortexGetUserHandler.ServeHTTP(w, r)
-		case VortexListPromptsProcedure:
-			vortexListPromptsHandler.ServeHTTP(w, r)
-		case VortexInviteUserProcedure:
-			vortexInviteUserHandler.ServeHTTP(w, r)
-		case VortexVerifyInvitedUserProcedure:
-			vortexVerifyInvitedUserHandler.ServeHTTP(w, r)
-		default:
-			http.NotFound(w, r)
-		}
-	})
+}
+
+// VortexListPromptsServerStream is the server stream for the Vortex's ListPrompts RPC.
+type VortexListPromptsServerStream struct {
+	stream connect.ServerStream
+}
+
+// SendHeaders flushes the response headers without a message. The first Send does this implicitly.
+func (s VortexListPromptsServerStream) SendHeaders() error {
+	return s.stream.SendHeaders()
+}
+
+// Send sends a response message to the client.
+func (s VortexListPromptsServerStream) Send(res *vortex.Prompt) error {
+	return s.stream.Send(res)
 }
 
 // UnimplementedVortexHandler returns CodeUnimplemented from all methods.
 type UnimplementedVortexHandler struct{}
 
-func (UnimplementedVortexHandler) Test(context.Context, *connect.Request[vortex.TestRequest]) (*connect.Response[vortex.TestResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("blueapi.vortex.v1.Vortex.Test is not implemented"))
+func (UnimplementedVortexHandler) Test(context.Context, *vortex.TestRequest) (*vortex.TestResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "blueapi.vortex.v1.Vortex.Test is not implemented")
 }
 
-func (UnimplementedVortexHandler) CreateOrg(context.Context, *connect.Request[vortex.CreateOrgRequest]) (*connect.Response[vortex.CreateOrgResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("blueapi.vortex.v1.Vortex.CreateOrg is not implemented"))
+func (UnimplementedVortexHandler) CreateOrg(context.Context, *vortex.CreateOrgRequest) (*vortex.CreateOrgResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "blueapi.vortex.v1.Vortex.CreateOrg is not implemented")
 }
 
-func (UnimplementedVortexHandler) GetUser(context.Context, *connect.Request[vortex.GetUserRequest]) (*connect.Response[vortex.GetUserResponse], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("blueapi.vortex.v1.Vortex.GetUser is not implemented"))
+func (UnimplementedVortexHandler) GetUser(context.Context, *vortex.GetUserRequest) (*vortex.GetUserResponse, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "blueapi.vortex.v1.Vortex.GetUser is not implemented")
 }
 
-func (UnimplementedVortexHandler) ListPrompts(context.Context, *connect.Request[vortex.ListPromptsRequest], *connect.ServerStream[vortex.Prompt]) error {
-	return connect.NewError(connect.CodeUnimplemented, errors.New("blueapi.vortex.v1.Vortex.ListPrompts is not implemented"))
+func (UnimplementedVortexHandler) ListPrompts(context.Context, *vortex.ListPromptsRequest, VortexListPromptsServerStream) error {
+	return connect.NewError(connect.CodeUnimplemented, "blueapi.vortex.v1.Vortex.ListPrompts is not implemented")
 }
 
-func (UnimplementedVortexHandler) InviteUser(context.Context, *connect.Request[vortex.InviteUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("blueapi.vortex.v1.Vortex.InviteUser is not implemented"))
+func (UnimplementedVortexHandler) InviteUser(context.Context, *vortex.InviteUserRequest) (*emptypb.Empty, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "blueapi.vortex.v1.Vortex.InviteUser is not implemented")
 }
 
-func (UnimplementedVortexHandler) VerifyInvitedUser(context.Context, *connect.Request[vortex.VerifyInvitedUserRequest]) (*connect.Response[emptypb.Empty], error) {
-	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("blueapi.vortex.v1.Vortex.VerifyInvitedUser is not implemented"))
+func (UnimplementedVortexHandler) VerifyInvitedUser(context.Context, *vortex.VerifyInvitedUserRequest) (*emptypb.Empty, error) {
+	return nil, connect.NewError(connect.CodeUnimplemented, "blueapi.vortex.v1.Vortex.VerifyInvitedUser is not implemented")
+}
+
+type vortexClient struct {
+	client *connect.Client
+}
+
+func (c *vortexClient) Test(ctx context.Context, req *vortex.TestRequest) (*vortex.TestResponse, error) {
+	var res vortex.TestResponse
+	if err := c.client.CallUnary(ctx, vortexTestSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *vortexClient) CreateOrg(ctx context.Context, req *vortex.CreateOrgRequest) (*vortex.CreateOrgResponse, error) {
+	var res vortex.CreateOrgResponse
+	if err := c.client.CallUnary(ctx, vortexCreateOrgSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *vortexClient) GetUser(ctx context.Context, req *vortex.GetUserRequest) (*vortex.GetUserResponse, error) {
+	var res vortex.GetUserResponse
+	if err := c.client.CallUnary(ctx, vortexGetUserSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *vortexClient) ListPrompts(ctx context.Context, req *vortex.ListPromptsRequest) (VortexListPromptsClientStream, error) {
+	stream, err := c.client.CallServerStream(ctx, vortexListPromptsSpec(), req)
+	if err != nil {
+		return VortexListPromptsClientStream{}, err
+	}
+	return VortexListPromptsClientStream{stream: stream}, nil
+}
+
+func (c *vortexClient) InviteUser(ctx context.Context, req *vortex.InviteUserRequest) (*emptypb.Empty, error) {
+	var res emptypb.Empty
+	if err := c.client.CallUnary(ctx, vortexInviteUserSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+func (c *vortexClient) VerifyInvitedUser(ctx context.Context, req *vortex.VerifyInvitedUserRequest) (*emptypb.Empty, error) {
+	var res emptypb.Empty
+	if err := c.client.CallUnary(ctx, vortexVerifyInvitedUserSpec(), req, &res); err != nil {
+		return nil, err
+	}
+	return &res, nil
+}
+
+type vortexHandler struct{ svc VortexHandler }
+
+func (h vortexHandler) test(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req vortex.TestRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.Test(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h vortexHandler) createOrg(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req vortex.CreateOrgRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.CreateOrg(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h vortexHandler) getUser(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req vortex.GetUserRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.GetUser(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h vortexHandler) listPrompts(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req vortex.ListPromptsRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	return h.svc.ListPrompts(ctx, &req, VortexListPromptsServerStream{stream: stream})
+}
+
+func (h vortexHandler) inviteUser(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req vortex.InviteUserRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.InviteUser(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
+}
+
+func (h vortexHandler) verifyInvitedUser(ctx context.Context, _ connect.Spec, stream connect.ServerStream) error {
+	var req vortex.VerifyInvitedUserRequest
+	if err := stream.Receive(&req); err != nil {
+		return err
+	}
+	res, err := h.svc.VerifyInvitedUser(ctx, &req)
+	if err != nil {
+		return err
+	}
+	return stream.Send(res)
 }
