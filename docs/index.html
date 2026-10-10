@@ -25965,6 +25965,14 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td><p>Optional. Page size for pagination. Default is 50, maximum is 1000. </p></td>
                 </tr>
               
+                <tr>
+                  <td>search</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Only return values containing this text, case-insensitive.
+When set, totalValueCount and totalPages describe the matching values. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -25994,7 +26002,7 @@ Use ListServices without this field to retrieve all available service codes. </p
                   <td><a href="#int32">int32</a></td>
                   <td></td>
                   <td><p>Total distinct-value count for this (customerId, tagKey), consistent
-with Tags.totalValueCount. </p></td>
+with Tags.totalValueCount. With search set, the count of matching values. </p></td>
                 </tr>
               
                 <tr>
