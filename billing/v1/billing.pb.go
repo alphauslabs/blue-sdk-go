@@ -5151,7 +5151,7 @@ type ListInvoiceResponse struct {
 	DefaultVendorInvoiceSetting map[string]*InvoiceSettings `protobuf:"bytes,18,rep,name=defaultVendorInvoiceSetting,proto3" json:"defaultVendorInvoiceSetting,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// True if this invoice/company has a child.
 	HasChild bool `protobuf:"varint,19,opt,name=hasChild,proto3" json:"hasChild,omitempty"`
-	// Vendors with a cloud account attached to this billing group, independent of invoice status or usage.
+	// Vendors with a cloud account or tag rule attached to this billing group, independent of invoice status or usage.
 	AttachedVendors []string `protobuf:"bytes,20,rep,name=attachedVendors,proto3" json:"attachedVendors,omitempty"`
 	unknownFields   protoimpl.UnknownFields
 	sizeCache       protoimpl.SizeCache
