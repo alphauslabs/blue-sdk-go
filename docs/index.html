@@ -489,6 +489,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.admin.v1.CreateAccountGroupRequest"><span class="badge">M</span>CreateAccountGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.CreateAccountGroupResponse"><span class="badge">M</span>CreateAccountGroupResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.admin.v1.CreateCloudWatchMetricsStreamRequest"><span class="badge">M</span>CreateCloudWatchMetricsStreamRequest</a>
                 </li>
               
@@ -514,6 +522,10 @@
               
                 <li>
                   <a href="#blueapi.admin.v1.DefaultCostAccess"><span class="badge">M</span>DefaultCostAccess</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.DeleteAccountGroupRequest"><span class="badge">M</span>DeleteAccountGroupRequest</a>
                 </li>
               
                 <li>
@@ -630,6 +642,14 @@
               
                 <li>
                   <a href="#blueapi.admin.v1.SaveNotificationSettingsRequest"><span class="badge">M</span>SaveNotificationSettingsRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.UpdateAccountGroupRequest"><span class="badge">M</span>UpdateAccountGroupRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.admin.v1.UpdateAccountGroupResponse"><span class="badge">M</span>UpdateAccountGroupResponse</a>
                 </li>
               
                 <li>
@@ -8119,6 +8139,68 @@ For a list of valid feature flags, see our documentation at https://labs.alphaus
 
         
       
+        <h3 id="blueapi.admin.v1.CreateAccountGroupRequest">CreateAccountGroupRequest</h3>
+        <p>Request message for the Admin.CreateAccountGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required for Wave callers (one of &#39;aws&#39;, &#39;azure&#39;, &#39;gcp&#39;). No effect for Ripple callers. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.admin.v1.CreateAccountGroupResponse">CreateAccountGroupResponse</h3>
+        <p>Response message for the Admin.CreateAccountGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>acctGroup</td>
+                  <td><a href="#blueapi.api.AccountGroup">blueapi.api.AccountGroup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.CreateCloudWatchMetricsStreamRequest">CreateCloudWatchMetricsStreamRequest</h3>
         <p>Request message for the Admin.CreateCloudWatchMetricsStream rpc.</p>
 
@@ -8422,6 +8504,37 @@ Valid values:
 
         
       
+        <h3 id="blueapi.admin.v1.DeleteAccountGroupRequest">DeleteAccountGroupRequest</h3>
+        <p>Request message for the Admin.DeleteAccountGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required for Wave callers (one of &#39;aws&#39;, &#39;azure&#39;, &#39;gcp&#39;). No effect for Ripple callers. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.admin.v1.DeleteDefaultCostAccessRequest">DeleteDefaultCostAccessRequest</h3>
         <p>Request message for the Admin.DeleteDefaultCostAccess rpc.</p>
 
@@ -8604,6 +8717,13 @@ Valid values:
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required for Wave callers (one of &#39;aws&#39;, &#39;azure&#39;, &#39;gcp&#39;); needed to resolve the group&#39;s storage key. No effect for Ripple callers. </p></td>
                 </tr>
               
             </tbody>
@@ -8975,6 +9095,23 @@ Valid values:
         <p>Request message for the Admin.ListAccountGroups rpc.</p>
 
         
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Scopes the list to a single vendor for Wave callers (one of &#39;aws&#39;, &#39;azure&#39;, &#39;gcp&#39;); lists across all vendors when empty. No effect for Ripple callers. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
 
         
       
@@ -9190,6 +9327,75 @@ Valid values:
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. If non-empty, set this notification channel id as the default channel. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.admin.v1.UpdateAccountGroupRequest">UpdateAccountGroupRequest</h3>
+        <p>Request message for the Admin.UpdateAccountGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>The complete new membership of the group. Fully replaces the current members; not a delta. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>vendor</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required for Wave callers (one of &#39;aws&#39;, &#39;azure&#39;, &#39;gcp&#39;). No effect for Ripple callers. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.admin.v1.UpdateAccountGroupResponse">UpdateAccountGroupResponse</h3>
+        <p>Response message for the Admin.UpdateAccountGroup rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>acctGroup</td>
+                  <td><a href="#blueapi.api.AccountGroup">blueapi.api.AccountGroup</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
@@ -9503,6 +9709,27 @@ Valid values:
               </tr>
             
               <tr>
+                <td>CreateAccountGroup</td>
+                <td><a href="#blueapi.admin.v1.CreateAccountGroupRequest">CreateAccountGroupRequest</a></td>
+                <td><a href="#blueapi.admin.v1.CreateAccountGroupResponse">CreateAccountGroupResponse</a></td>
+                <td><p>Creates an account group.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateAccountGroup</td>
+                <td><a href="#blueapi.admin.v1.UpdateAccountGroupRequest">UpdateAccountGroupRequest</a></td>
+                <td><a href="#blueapi.admin.v1.UpdateAccountGroupResponse">UpdateAccountGroupResponse</a></td>
+                <td><p>Updates an account group. The account id list fully replaces the group&#39;s current membership.</p></td>
+              </tr>
+            
+              <tr>
+                <td>DeleteAccountGroup</td>
+                <td><a href="#blueapi.admin.v1.DeleteAccountGroupRequest">DeleteAccountGroupRequest</a></td>
+                <td><a href="#google.protobuf.Empty">.google.protobuf.Empty</a></td>
+                <td><p>Deletes an account group.</p></td>
+              </tr>
+            
+              <tr>
                 <td>GetDefaultCostAccessTemplateUrl</td>
                 <td><a href="#blueapi.admin.v1.GetDefaultCostAccessTemplateUrlRequest">GetDefaultCostAccessTemplateUrlRequest</a></td>
                 <td><a href="#blueapi.admin.v1.GetDefaultCostAccessTemplateUrlResponse">GetDefaultCostAccessTemplateUrlResponse</a></td>
@@ -9724,6 +9951,36 @@ Valid values:
               <tr>
                 <td>GetAccountGroup</td>
                 <td>GET</td>
+                <td>/admin/v1/acctgroups/{id}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>CreateAccountGroup</td>
+                <td>POST</td>
+                <td>/admin/v1/acctgroups</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateAccountGroup</td>
+                <td>PUT</td>
+                <td>/admin/v1/acctgroups/{id}</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>DeleteAccountGroup</td>
+                <td>DELETE</td>
                 <td>/admin/v1/acctgroups/{id}</td>
                 <td></td>
               </tr>

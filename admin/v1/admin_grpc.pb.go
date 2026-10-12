@@ -24,6 +24,9 @@ const _ = grpc.SupportPackageIsVersion8
 const (
 	Admin_ListAccountGroups_FullMethodName                     = "/blueapi.admin.v1.Admin/ListAccountGroups"
 	Admin_GetAccountGroup_FullMethodName                       = "/blueapi.admin.v1.Admin/GetAccountGroup"
+	Admin_CreateAccountGroup_FullMethodName                    = "/blueapi.admin.v1.Admin/CreateAccountGroup"
+	Admin_UpdateAccountGroup_FullMethodName                    = "/blueapi.admin.v1.Admin/UpdateAccountGroup"
+	Admin_DeleteAccountGroup_FullMethodName                    = "/blueapi.admin.v1.Admin/DeleteAccountGroup"
 	Admin_GetDefaultCostAccessTemplateUrl_FullMethodName       = "/blueapi.admin.v1.Admin/GetDefaultCostAccessTemplateUrl"
 	Admin_ListDefaultCostAccess_FullMethodName                 = "/blueapi.admin.v1.Admin/ListDefaultCostAccess"
 	Admin_GetDefaultCostAccess_FullMethodName                  = "/blueapi.admin.v1.Admin/GetDefaultCostAccess"
@@ -63,6 +66,12 @@ type AdminClient interface {
 	ListAccountGroups(ctx context.Context, in *ListAccountGroupsRequest, opts ...grpc.CallOption) (Admin_ListAccountGroupsClient, error)
 	// Gets an account group.
 	GetAccountGroup(ctx context.Context, in *GetAccountGroupRequest, opts ...grpc.CallOption) (*GetAccountGroupResponse, error)
+	// Creates an account group.
+	CreateAccountGroup(ctx context.Context, in *CreateAccountGroupRequest, opts ...grpc.CallOption) (*CreateAccountGroupResponse, error)
+	// Updates an account group. The account id list fully replaces the group's current membership.
+	UpdateAccountGroup(ctx context.Context, in *UpdateAccountGroupRequest, opts ...grpc.CallOption) (*UpdateAccountGroupResponse, error)
+	// Deletes an account group.
+	DeleteAccountGroup(ctx context.Context, in *DeleteAccountGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type. See comments on the type for more information on what each template does.
 	GetDefaultCostAccessTemplateUrl(ctx context.Context, in *GetDefaultCostAccessTemplateUrlRequest, opts ...grpc.CallOption) (*GetDefaultCostAccessTemplateUrlResponse, error)
 	// Lists the default cross-account access role(s) attached to accounts under caller.
@@ -164,6 +173,36 @@ func (c *adminClient) GetAccountGroup(ctx context.Context, in *GetAccountGroupRe
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetAccountGroupResponse)
 	err := c.cc.Invoke(ctx, Admin_GetAccountGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) CreateAccountGroup(ctx context.Context, in *CreateAccountGroupRequest, opts ...grpc.CallOption) (*CreateAccountGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CreateAccountGroupResponse)
+	err := c.cc.Invoke(ctx, Admin_CreateAccountGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) UpdateAccountGroup(ctx context.Context, in *UpdateAccountGroupRequest, opts ...grpc.CallOption) (*UpdateAccountGroupResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateAccountGroupResponse)
+	err := c.cc.Invoke(ctx, Admin_UpdateAccountGroup_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *adminClient) DeleteAccountGroup(ctx context.Context, in *DeleteAccountGroupRequest, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Admin_DeleteAccountGroup_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -473,6 +512,12 @@ type AdminServer interface {
 	ListAccountGroups(*ListAccountGroupsRequest, Admin_ListAccountGroupsServer) error
 	// Gets an account group.
 	GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error)
+	// Creates an account group.
+	CreateAccountGroup(context.Context, *CreateAccountGroupRequest) (*CreateAccountGroupResponse, error)
+	// Updates an account group. The account id list fully replaces the group's current membership.
+	UpdateAccountGroup(context.Context, *UpdateAccountGroupRequest) (*UpdateAccountGroupResponse, error)
+	// Deletes an account group.
+	DeleteAccountGroup(context.Context, *DeleteAccountGroupRequest) (*emptypb.Empty, error)
 	// Gets a CloudFormation launch URL for enabling the default cross-account access to your account's cost information based on type. See comments on the type for more information on what each template does.
 	GetDefaultCostAccessTemplateUrl(context.Context, *GetDefaultCostAccessTemplateUrlRequest) (*GetDefaultCostAccessTemplateUrlResponse, error)
 	// Lists the default cross-account access role(s) attached to accounts under caller.
@@ -539,6 +584,15 @@ func (UnimplementedAdminServer) ListAccountGroups(*ListAccountGroupsRequest, Adm
 }
 func (UnimplementedAdminServer) GetAccountGroup(context.Context, *GetAccountGroupRequest) (*GetAccountGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccountGroup not implemented")
+}
+func (UnimplementedAdminServer) CreateAccountGroup(context.Context, *CreateAccountGroupRequest) (*CreateAccountGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateAccountGroup not implemented")
+}
+func (UnimplementedAdminServer) UpdateAccountGroup(context.Context, *UpdateAccountGroupRequest) (*UpdateAccountGroupResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateAccountGroup not implemented")
+}
+func (UnimplementedAdminServer) DeleteAccountGroup(context.Context, *DeleteAccountGroupRequest) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteAccountGroup not implemented")
 }
 func (UnimplementedAdminServer) GetDefaultCostAccessTemplateUrl(context.Context, *GetDefaultCostAccessTemplateUrlRequest) (*GetDefaultCostAccessTemplateUrlResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDefaultCostAccessTemplateUrl not implemented")
@@ -669,6 +723,60 @@ func _Admin_GetAccountGroup_Handler(srv interface{}, ctx context.Context, dec fu
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(AdminServer).GetAccountGroup(ctx, req.(*GetAccountGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_CreateAccountGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateAccountGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).CreateAccountGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Admin_CreateAccountGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).CreateAccountGroup(ctx, req.(*CreateAccountGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_UpdateAccountGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateAccountGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).UpdateAccountGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Admin_UpdateAccountGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).UpdateAccountGroup(ctx, req.(*UpdateAccountGroupRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Admin_DeleteAccountGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteAccountGroupRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(AdminServer).DeleteAccountGroup(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Admin_DeleteAccountGroup_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(AdminServer).DeleteAccountGroup(ctx, req.(*DeleteAccountGroupRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1172,6 +1280,18 @@ var Admin_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAccountGroup",
 			Handler:    _Admin_GetAccountGroup_Handler,
+		},
+		{
+			MethodName: "CreateAccountGroup",
+			Handler:    _Admin_CreateAccountGroup_Handler,
+		},
+		{
+			MethodName: "UpdateAccountGroup",
+			Handler:    _Admin_UpdateAccountGroup_Handler,
+		},
+		{
+			MethodName: "DeleteAccountGroup",
+			Handler:    _Admin_DeleteAccountGroup_Handler,
 		},
 		{
 			MethodName: "GetDefaultCostAccessTemplateUrl",
