@@ -4571,6 +4571,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.ConfigureAzureEaGCResponse"><span class="badge">M</span>ConfigureAzureEaGCResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ConfigureAzureEaOnboardingRequest"><span class="badge">M</span>ConfigureAzureEaOnboardingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ConfigureAzureEaOnboardingResponse"><span class="badge">M</span>ConfigureAzureEaOnboardingResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.ContractSpec"><span class="badge">M</span>ContractSpec</a>
                 </li>
               
@@ -4997,6 +5009,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.CommitmentStatus"><span class="badge">E</span>CommitmentStatus</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ConfigureAzureEaOnboardingRequest.Action"><span class="badge">E</span>ConfigureAzureEaOnboardingRequest.Action</a>
                 </li>
               
                 <li>
@@ -56753,6 +56769,134 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
 
         
       
+        <h3 id="blueapi.gc.v1.ConfigureAzureEaGCResponse">ConfigureAzureEaGCResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ConfigureAzureEaOnboardingRequest">ConfigureAzureEaOnboardingRequest</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>action</td>
+                  <td><a href="#blueapi.gc.v1.ConfigureAzureEaOnboardingRequest.Action">ConfigureAzureEaOnboardingRequest.Action</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingName</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>appId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>tenantId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>clientSecret</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountScopes</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>subscriptionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ConfigureAzureEaOnboardingResponse">ConfigureAzureEaOnboardingResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ContractSpec">ContractSpec</h3>
         <p></p>
 
@@ -60041,7 +60185,7 @@ Values: NOT_CREATED, CREATING, PENDING, ACCEPTED, EXPIRED, FAILED, WITHDRAWN. </
                   <td>agreementType</td>
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
-                  <td><p>Optional. Agreement type, e.g. &#34;Enterprise Agreement&#34;. Only populated when vendor is AZURE; empty otherwise. </p></td>
+                  <td><p>Optional. Agreement type, e.g. &#34;azureea&#34;. Only populated when vendor is AZURE; empty otherwise. </p></td>
                 </tr>
               
             </tbody>
@@ -63276,6 +63420,53 @@ Default value is false. </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.gc.v1.ConfigureAzureEaOnboardingRequest.Action">ConfigureAzureEaOnboardingRequest.Action</h3>
+        <p></p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>START_ONBOARDING</td>
+                <td>0</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SUBMIT_PAYER_DETAILS</td>
+                <td>1</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CONFIGURE_GC_RESOURCE_STORAGE</td>
+                <td>2</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>CHECK_AUTHORIZATION</td>
+                <td>3</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>SUBMIT_ACCOUNT_SCOPE</td>
+                <td>4</td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
+                <td>COMPLETE_ONBOARDING</td>
+                <td>5</td>
+                <td><p></p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.gc.v1.GetOnboardingStatusResponse.OnboardingStatus">GetOnboardingStatusResponse.OnboardingStatus</h3>
         <p></p>
         <table class="enum-table">
@@ -63918,6 +64109,13 @@ for the user to select during onboarding.</p></td>
               </tr>
             
               <tr>
+                <td>ConfigureAzureEaOnboarding</td>
+                <td><a href="#blueapi.gc.v1.ConfigureAzureEaOnboardingRequest">ConfigureAzureEaOnboardingRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ConfigureAzureEaOnboardingResponse">ConfigureAzureEaOnboardingResponse</a></td>
+                <td><p></p></td>
+              </tr>
+            
+              <tr>
                 <td>DeleteAzureIntegration</td>
                 <td><a href="#blueapi.gc.v1.DeleteAzureIntegrationRequest">DeleteAzureIntegrationRequest</a></td>
                 <td><a href="#blueapi.gc.v1.DeleteAzureIntegrationResponse">DeleteAzureIntegrationResponse</a></td>
@@ -64404,6 +64602,16 @@ trusted request context.</p></td>
                 <td>GET</td>
                 <td>/v1/onboarding/azure/integrations</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ConfigureAzureEaOnboarding</td>
+                <td>POST</td>
+                <td>/v1/onboarding/azure/ea/configure</td>
+                <td>*</td>
               </tr>
               
             

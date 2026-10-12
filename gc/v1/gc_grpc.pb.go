@@ -62,6 +62,7 @@ const (
 	GuaranteedCommitments_ListAzureOnboardingAccounts_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureOnboardingAccounts"
 	GuaranteedCommitments_CreateAzureIntegration_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/CreateAzureIntegration"
 	GuaranteedCommitments_ListAzureIntegrations_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureIntegrations"
+	GuaranteedCommitments_ConfigureAzureEaOnboarding_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ConfigureAzureEaOnboarding"
 	GuaranteedCommitments_DeleteAzureIntegration_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/DeleteAzureIntegration"
 	GuaranteedCommitments_GetTermsConsentStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsConsentStatus"
 	GuaranteedCommitments_GetTermsDocument_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsDocument"
@@ -170,6 +171,7 @@ type GuaranteedCommitmentsClient interface {
 	CreateAzureIntegration(ctx context.Context, in *CreateAzureIntegrationRequest, opts ...grpc.CallOption) (*CreateAzureIntegrationResponse, error)
 	// WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.
 	ListAzureIntegrations(ctx context.Context, in *ListAzureIntegrationsRequest, opts ...grpc.CallOption) (*ListAzureIntegrationsResponse, error)
+	ConfigureAzureEaOnboarding(ctx context.Context, in *ConfigureAzureEaOnboardingRequest, opts ...grpc.CallOption) (*ConfigureAzureEaOnboardingResponse, error)
 	// WORK-IN-PROGRESS: Removes an Azure integration from Archera and clears the local record for the given onboardingId.
 	DeleteAzureIntegration(ctx context.Context, in *DeleteAzureIntegrationRequest, opts ...grpc.CallOption) (*DeleteAzureIntegrationResponse, error)
 	// Returns the evaluated Terms of Service consent status for the authenticated
@@ -701,6 +703,16 @@ func (c *guaranteedCommitmentsClient) ListAzureIntegrations(ctx context.Context,
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) ConfigureAzureEaOnboarding(ctx context.Context, in *ConfigureAzureEaOnboardingRequest, opts ...grpc.CallOption) (*ConfigureAzureEaOnboardingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfigureAzureEaOnboardingResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ConfigureAzureEaOnboarding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *guaranteedCommitmentsClient) DeleteAzureIntegration(ctx context.Context, in *DeleteAzureIntegrationRequest, opts ...grpc.CallOption) (*DeleteAzureIntegrationResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(DeleteAzureIntegrationResponse)
@@ -843,6 +855,7 @@ type GuaranteedCommitmentsServer interface {
 	CreateAzureIntegration(context.Context, *CreateAzureIntegrationRequest) (*CreateAzureIntegrationResponse, error)
 	// WORK-IN-PROGRESS: Lists Azure integrations to verify onboarding completion.
 	ListAzureIntegrations(context.Context, *ListAzureIntegrationsRequest) (*ListAzureIntegrationsResponse, error)
+	ConfigureAzureEaOnboarding(context.Context, *ConfigureAzureEaOnboardingRequest) (*ConfigureAzureEaOnboardingResponse, error)
 	// WORK-IN-PROGRESS: Removes an Azure integration from Archera and clears the local record for the given onboardingId.
 	DeleteAzureIntegration(context.Context, *DeleteAzureIntegrationRequest) (*DeleteAzureIntegrationResponse, error)
 	// Returns the evaluated Terms of Service consent status for the authenticated
@@ -1000,6 +1013,9 @@ func (UnimplementedGuaranteedCommitmentsServer) CreateAzureIntegration(context.C
 }
 func (UnimplementedGuaranteedCommitmentsServer) ListAzureIntegrations(context.Context, *ListAzureIntegrationsRequest) (*ListAzureIntegrationsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListAzureIntegrations not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ConfigureAzureEaOnboarding(context.Context, *ConfigureAzureEaOnboardingRequest) (*ConfigureAzureEaOnboardingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigureAzureEaOnboarding not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) DeleteAzureIntegration(context.Context, *DeleteAzureIntegrationRequest) (*DeleteAzureIntegrationResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAzureIntegration not implemented")
@@ -1809,6 +1825,24 @@ func _GuaranteedCommitments_ListAzureIntegrations_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_ConfigureAzureEaOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureAzureEaOnboardingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ConfigureAzureEaOnboarding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ConfigureAzureEaOnboarding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ConfigureAzureEaOnboarding(ctx, req.(*ConfigureAzureEaOnboardingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GuaranteedCommitments_DeleteAzureIntegration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(DeleteAzureIntegrationRequest)
 	if err := dec(in); err != nil {
@@ -2047,6 +2081,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ListAzureIntegrations",
 			Handler:    _GuaranteedCommitments_ListAzureIntegrations_Handler,
+		},
+		{
+			MethodName: "ConfigureAzureEaOnboarding",
+			Handler:    _GuaranteedCommitments_ConfigureAzureEaOnboarding_Handler,
 		},
 		{
 			MethodName: "DeleteAzureIntegration",
