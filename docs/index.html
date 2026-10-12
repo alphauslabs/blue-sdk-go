@@ -21713,6 +21713,15 @@ If this parameter is not set, The list set to `groups` is used. </p></td>
                   <td><p>Optional. You can set it to a list of billing internal group id </p></td>
                 </tr>
               
+                <tr>
+                  <td>excludeDescendants</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. By default, each billing group in `groups` also creates the
+invoices of all its child billing groups. If true, only the billing
+groups in `groups` are created. Ignored when `allGroups` is true. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
