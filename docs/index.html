@@ -1534,6 +1534,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ConvertInvoiceToPdfResponse.LayerCountsEntry"><span class="badge">M</span>ConvertInvoiceToPdfResponse.LayerCountsEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.CreateAccessGroupRequest"><span class="badge">M</span>CreateAccessGroupRequest</a>
                 </li>
               
@@ -20683,15 +20687,46 @@ AccountInvoiceServiceDiscounts serviceDiscounts = 3; </p></td>
                   <td>billinggroups</td>
                   <td><a href="#string">string</a></td>
                   <td>repeated</td>
-                  <td><p>billingInternalId of invoice to download
-ignored if allBillingGroups is set to true </p></td>
+                  <td><p>Optional. Billing internal IDs of invoices to download.
+Ignored if allBillingGroups is true. Cannot be combined with non-empty layers. </p></td>
                 </tr>
               
                 <tr>
                   <td>allBillingGroups</td>
                   <td><a href="#bool">bool</a></td>
                   <td></td>
-                  <td><p>If true, download all created invoice </p></td>
+                  <td><p>Optional. If true, download all created invoices.
+Cannot be true when layers is non-empty. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layers</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>Optional. MSP-wide layers to export: 0 = Root, 1-4 = child layers.
+Resolved across the caller&#39;s accessible roots, independent of table filters.
+Only groups with a created invoice for date are converted.
+Values must be in 0-4; duplicates count once. Invalid values or combinations
+with billinggroups or allBillingGroups=true return InvalidArgument.
+Empty layers retain the existing billinggroups/allBillingGroups behavior.
+Layer exports require the authenticated MSP to be enabled for hierarchy;
+otherwise the service returns PermissionDenied, including for Root only.
+Multiple distinct layers use localized layer folders in the zip; one layer
+uses a flat layout. Layer-export filenames include the billing internal ID
+so groups with the same name have distinct entries. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>preview_only</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. If true, return layerCounts without converting PDFs, creating
+progress markers, or looking up or writing zip artifacts.
+Requires non-empty layers; otherwise returns InvalidArgument.
+Uses the same hierarchy eligibility, access and created-invoice selection
+as conversion. A preview with no eligible invoices succeeds with zero counts;
+conversion with no eligible invoices returns an error instead of an empty zip.
+Omit or set false for conversion and subsequent progress polling. </p></td>
                 </tr>
               
             </tbody>
@@ -20715,15 +20750,56 @@ ignored if allBillingGroups is set to true </p></td>
                   <td>progress</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p> </p></td>
+                  <td><p>Conversion progress. Empty for preview-only responses. </p></td>
                 </tr>
               
                 <tr>
                   <td>downloadUrl</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>returns &#34;&#34; when not ready
-returns the direct download link </p></td>
+                  <td><p>Direct download link when conversion is ready; empty otherwise, including
+for preview-only responses. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layer_counts</td>
+                  <td><a href="#blueapi.billing.v1.ConvertInvoiceToPdfResponse.LayerCountsEntry">ConvertInvoiceToPdfResponse.LayerCountsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Distinct billing groups with a created invoice at each requested layer.
+Populated only for preview_only=true, with an entry for every requested
+layer (0 = Root, 1-4 = child layers), including zero counts.
+Counts billing groups, not vendors or CSV rows. Empty for conversion responses. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ConvertInvoiceToPdfResponse.LayerCountsEntry">ConvertInvoiceToPdfResponse.LayerCountsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
                 </tr>
               
             </tbody>
