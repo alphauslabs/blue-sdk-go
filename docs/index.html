@@ -1786,6 +1786,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ExportPreviewedBillingGroupCsvRequest"><span class="badge">M</span>ExportPreviewedBillingGroupCsvRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ExportPreviewedBillingGroupCsvResponse"><span class="badge">M</span>ExportPreviewedBillingGroupCsvResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ExportServiceDiscountsRequest"><span class="badge">M</span>ExportServiceDiscountsRequest</a>
                 </li>
               
@@ -2150,6 +2158,18 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportRequest"><span class="badge">M</span>PreviewBillingGroupCsvExportRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportResponse"><span class="badge">M</span>PreviewBillingGroupCsvExportResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportResponse.LayerCountsEntry"><span class="badge">M</span>PreviewBillingGroupCsvExportResponse.LayerCountsEntry</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ReadAdjustmentEntriesRequest"><span class="badge">M</span>ReadAdjustmentEntriesRequest</a>
                 </li>
               
@@ -2449,6 +2469,10 @@
                   <a href="#blueapi.billing.v1.VendorAccounts"><span class="badge">M</span>VendorAccounts</a>
                 </li>
               
+              
+                <li>
+                  <a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportRequest.ExportType"><span class="badge">E</span>PreviewBillingGroupCsvExportRequest.ExportType</a>
+                </li>
               
               
               
@@ -23503,6 +23527,73 @@ expires in 10 minutes </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.ExportPreviewedBillingGroupCsvRequest">ExportPreviewedBillingGroupCsvRequest</h3>
+        <p>Exports saved IDs/layers with current settings and authorization checks.</p><p>Does not rediscover membership. Missing/expired/consumed tokens or deleted/</p><p>ineligible groups return FailedPrecondition; lost access returns PermissionDenied.</p><p>Concurrent claims return Aborted. Failed exports may retry before token expiry.</p><p>Confirm durable consumption before returning a link, then delete the selection.</p><p>Persistence/write/upload/signing failures must not return a success link.</p><p>Default request budget: 34 minutes (2 preparation + 30 export + 2 response).</p><p>Pre-claim is manifest metadata only; chunk/group checks run after the claim.</p><p>Cap accepted work at min(claim time + 30 minutes, caller deadline - 2 minutes).</p><p>Honor shorter caller deadlines and cancellation; exhausted preparation fails</p><p>with DeadlineExceeded before claiming. Claim release/cleanup use a detached</p><p>bounded context. Detailed lease/cleanup rules are in OpenSpec.</p><p>Existing export RPCs remain supported without preview tokens.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>preview_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Token from PreviewBillingGroupCsvExport, sent in the request body. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layers</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Non-empty subset of previewed layers, 0 = Root and 1-4 = children.
+Invalid/uncovered values return InvalidArgument; duplicates count once.
+Root uses saved root IDs. A zero-group selection returns FailedPrecondition. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>language</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. en or ja; empty uses the user&#39;s language. Other values are invalid.
+Does not change the selection or token-bound options. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ExportPreviewedBillingGroupCsvResponse">ExportPreviewedBillingGroupCsvResponse</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>download_link</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Signed CSV link after successful artifact creation and durable consumption.
+Includes the localized Layer column, even for Root only. The saved selection
+is deleted; another export needs a new preview. Link expiry is independent. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ExportServiceDiscountsRequest">ExportServiceDiscountsRequest</h3>
         <p>Request message for the ExportServiceDiscounts rpc.</p>
 
@@ -27198,6 +27289,120 @@ fields 1-8 above retain their original numbers. </p></td>
 
         
       
+        <h3 id="blueapi.billing.v1.PreviewBillingGroupCsvExportRequest">PreviewBillingGroupCsvExportRequest</h3>
+        <p>Stores eligible groups for a layer-scoped CSV export.</p><p>Invalid type/options/layers return InvalidArgument; denied access returns</p><p>PermissionDenied. Capacity overflow returns ResourceExhausted. Read or storage</p><p>failures return an error, never partial counts or a usable token.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>export_type</td>
+                  <td><a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportRequest.ExportType">PreviewBillingGroupCsvExportRequest.ExportType</a></td>
+                  <td></td>
+                  <td><p>Required. Supported CSV exporter. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>layers</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td>repeated</td>
+                  <td><p>Required. Non-empty MSP-wide layers: 0 = Root, 1-4 = children.
+Values outside 0-4 are invalid; duplicates count once.
+Membership is resolved by the backend, independent of UI filters/flags. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>include_miscellaneous</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Include miscellaneous items. Defaults to false.
+True is valid only for EXPORT_TYPE_INVOICE_SETTINGS. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.PreviewBillingGroupCsvExportResponse">PreviewBillingGroupCsvExportResponse</h3>
+        <p>Returned after the complete eligible selection is stored.</p><p>Preview generates no CSV or download link.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>layer_counts</td>
+                  <td><a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportResponse.LayerCountsEntry">PreviewBillingGroupCsvExportResponse.LayerCountsEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Distinct groups contributing CSV rows per requested layer, including zero.
+Counts groups once despite multiple vendor/account rows. No extra layers. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>preview_token</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Sensitive opaque token bound to the authenticated MSP/principal and export
+type/options. Single-use on successful export; contains no group IDs.
+Do not log it or send it in URLs. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expires_at</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Acceptance expiry: 10 minutes after preview completion.
+Storage cleanup is separate; accepted exports may finish after this time. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.PreviewBillingGroupCsvExportResponse.LayerCountsEntry">PreviewBillingGroupCsvExportResponse.LayerCountsEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ReadAdjustmentEntriesRequest">ReadAdjustmentEntriesRequest</h3>
         <p>Request message for the Billing.ReadAdjustmentEntries rpc.</p>
 
@@ -29989,6 +30194,47 @@ If only waveConfig or aquaConfig is changed, it is ignored. </p></td>
       
 
       
+        <h3 id="blueapi.billing.v1.PreviewBillingGroupCsvExportRequest.ExportType">PreviewBillingGroupCsvExportRequest.ExportType</h3>
+        <p>Exporter whose row eligibility rules determine the selection.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>EXPORT_TYPE_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Invalid; choose a supported exporter.</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXPORT_TYPE_BILLING_GROUP_DETAIL</td>
+                <td>1</td>
+                <td><p>ExportBillingGroupCsv.</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXPORT_TYPE_INVOICE_SETTINGS</td>
+                <td>2</td>
+                <td><p>ExportInvoiceSettingCsv, also used for reseller charges.</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXPORT_TYPE_BILLING_GROUP_SERVICE_DISCOUNTS</td>
+                <td>3</td>
+                <td><p>ExportBillingGroupInvoiceServiceDiscounts, CSV format.</p></td>
+              </tr>
+            
+              <tr>
+                <td>EXPORT_TYPE_ACCOUNT_SERVICE_DISCOUNTS</td>
+                <td>4</td>
+                <td><p>ExportAccountInvoiceServiceDiscounts, CSV format.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
 
       
 
@@ -30760,6 +31006,23 @@ request-level billing_month or vendor to scope the call.</p></td>
                 <td><a href="#blueapi.billing.v1.ExportInvoiceSettingCsvRequest">ExportInvoiceSettingCsvRequest</a></td>
                 <td><a href="#blueapi.billing.v1.ExportInvoiceSettingCsvResponse">ExportInvoiceSettingCsvResponse</a></td>
                 <td><p>Exports the invoice settings into csv format</p></td>
+              </tr>
+            
+              <tr>
+                <td>PreviewBillingGroupCsvExport</td>
+                <td><a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportRequest">PreviewBillingGroupCsvExportRequest</a></td>
+                <td><a href="#blueapi.billing.v1.PreviewBillingGroupCsvExportResponse">PreviewBillingGroupCsvExportResponse</a></td>
+                <td><p>(BETA) Previews eligible billing group counts for a layer-scoped CSV export.
+Stores a short-lived selection; does not generate CSVs or download links.</p></td>
+              </tr>
+            
+              <tr>
+                <td>ExportPreviewedBillingGroupCsv</td>
+                <td><a href="#blueapi.billing.v1.ExportPreviewedBillingGroupCsvRequest">ExportPreviewedBillingGroupCsvRequest</a></td>
+                <td><a href="#blueapi.billing.v1.ExportPreviewedBillingGroupCsvResponse">ExportPreviewedBillingGroupCsvResponse</a></td>
+                <td><p>(BETA) Exports a previously previewed billing group selection.
+Uses the saved root/child IDs and layer assignments without rediscovering
+hierarchy membership. All export types return a signed CSV download link.</p></td>
               </tr>
             
               <tr>
@@ -32175,6 +32438,26 @@ Returns a long-running operation. Poll status via the Operations service (GET /o
                 <td>GET</td>
                 <td>/v1/exportcsv/invoice-setting</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>PreviewBillingGroupCsvExport</td>
+                <td>POST</td>
+                <td>/v1/exportcsv/billing-group:preview</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ExportPreviewedBillingGroupCsv</td>
+                <td>POST</td>
+                <td>/v1/exportcsv/billing-group:exportPreviewed</td>
+                <td>*</td>
               </tr>
               
             
