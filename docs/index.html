@@ -2062,11 +2062,19 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceResponse.Payers"><span class="badge">M</span>ListInvoiceResponse.Payers</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.billing.v1.ListInvoiceResponse.SavedVendorInvoiceSettingEntry"><span class="badge">M</span>ListInvoiceResponse.SavedVendorInvoiceSettingEntry</a>
                 </li>
               
                 <li>
                   <a href="#blueapi.billing.v1.ListInvoiceResponse.VendorBillingAmountEntry"><span class="badge">M</span>ListInvoiceResponse.VendorBillingAmountEntry</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.billing.v1.ListInvoiceResponse.VendorPayersEntry"><span class="badge">M</span>ListInvoiceResponse.VendorPayersEntry</a>
                 </li>
               
                 <li>
@@ -25954,6 +25962,16 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                   <td><p>Vendors with a cloud account or tag rule attached to this billing group, independent of invoice status or usage. </p></td>
                 </tr>
               
+                <tr>
+                  <td>vendorPayers</td>
+                  <td><a href="#blueapi.billing.v1.ListInvoiceResponse.VendorPayersEntry">ListInvoiceResponse.VendorPayersEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Map of vendor (aws, azure, gcp) to the payer accounts linked to this billing group. Only available in Ripple.
+For a vendor with a created invoice, these are the payers found in that month&#39;s usage data when the invoice
+was created. Otherwise (no invoice yet, or an invoice created before payers were saved), these are the payers
+of the cloud accounts currently attached to the billing group. Respects the `vendor` filter of the request. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -26023,6 +26041,30 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
 
         
       
+        <h3 id="blueapi.billing.v1.ListInvoiceResponse.Payers">ListInvoiceResponse.Payers</h3>
+        <p>Payer account ids of a vendor.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>ids</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>AWS: management (payer) account ids. GCP: billing account ids. Azure: account ids. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.billing.v1.ListInvoiceResponse.SavedVendorInvoiceSettingEntry">ListInvoiceResponse.SavedVendorInvoiceSettingEntry</h3>
         <p></p>
 
@@ -26074,6 +26116,37 @@ see more info: https://github.com/protocolbuffers/protobuf/blob/main/src/google/
                 <tr>
                   <td>value</td>
                   <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.billing.v1.ListInvoiceResponse.VendorPayersEntry">ListInvoiceResponse.VendorPayersEntry</h3>
+        <p></p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>key</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p> </p></td>
+                </tr>
+              
+                <tr>
+                  <td>value</td>
+                  <td><a href="#blueapi.billing.v1.ListInvoiceResponse.Payers">ListInvoiceResponse.Payers</a></td>
                   <td></td>
                   <td><p> </p></td>
                 </tr>
