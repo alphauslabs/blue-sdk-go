@@ -8,11 +8,11 @@ package billing
 
 import (
 	context "context"
+	protos "github.com/alphauslabs/blue-internal-go/protos"
 	api "github.com/alphauslabs/blue-sdk-go/api"
 	ripple "github.com/alphauslabs/blue-sdk-go/api/ripple"
 	v1 "github.com/alphauslabs/blue-sdk-go/api/ripple/v1"
 	wave "github.com/alphauslabs/blue-sdk-go/api/wave"
-	protos "github.com/alphauslabs/blue-internal-go/protos"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -133,6 +133,8 @@ const (
 	Billing_ExportInvoiceSettingCsv_FullMethodName                             = "/blueapi.billing.v1.Billing/ExportInvoiceSettingCsv"
 	Billing_PreviewBillingGroupCsvExport_FullMethodName                        = "/blueapi.billing.v1.Billing/PreviewBillingGroupCsvExport"
 	Billing_ExportPreviewedBillingGroupCsv_FullMethodName                      = "/blueapi.billing.v1.Billing/ExportPreviewedBillingGroupCsv"
+	Billing_PreviewBillingGroupCsvHierarchy_FullMethodName                     = "/blueapi.billing.v1.Billing/PreviewBillingGroupCsvHierarchy"
+	Billing_ExportBillingGroupCsvHierarchy_FullMethodName                      = "/blueapi.billing.v1.Billing/ExportBillingGroupCsvHierarchy"
 	Billing_UpdateBillingGroupBasicInformation_FullMethodName                  = "/blueapi.billing.v1.Billing/UpdateBillingGroupBasicInformation"
 	Billing_UpdateBillingGroupCustomFields_FullMethodName                      = "/blueapi.billing.v1.Billing/UpdateBillingGroupCustomFields"
 	Billing_UpdateBillingGroupFreeFormat_FullMethodName                        = "/blueapi.billing.v1.Billing/UpdateBillingGroupFreeFormat"
@@ -418,13 +420,21 @@ type BillingClient interface {
 	ExportBillingGroupCsv(ctx context.Context, in *ExportBillingGroupCsvRequest, opts ...grpc.CallOption) (*ExportBillingGroupCsvResponse, error)
 	// Exports the invoice settings into csv format
 	ExportInvoiceSettingCsv(ctx context.Context, in *ExportInvoiceSettingCsvRequest, opts ...grpc.CallOption) (*ExportInvoiceSettingCsvResponse, error)
+	// Deprecated: Do not use.
 	// (BETA) Previews eligible billing group counts for a layer-scoped CSV export.
 	// Stores a short-lived selection; does not generate CSVs or download links.
 	PreviewBillingGroupCsvExport(ctx context.Context, in *PreviewBillingGroupCsvExportRequest, opts ...grpc.CallOption) (*PreviewBillingGroupCsvExportResponse, error)
+	// Deprecated: Do not use.
 	// (BETA) Exports a previously previewed billing group selection.
 	// Uses the saved root/child IDs and layer assignments without rediscovering
 	// hierarchy membership. All export types return a signed CSV download link.
 	ExportPreviewedBillingGroupCsv(ctx context.Context, in *ExportPreviewedBillingGroupCsvRequest, opts ...grpc.CallOption) (*ExportPreviewedBillingGroupCsvResponse, error)
+	// (BETA) Returns eligible internal IDs grouped by root/layer and distinct counts.
+	// Stateless: no CSV, saved selection or token. Uses the exporter's row eligibility.
+	PreviewBillingGroupCsvHierarchy(ctx context.Context, in *PreviewBillingGroupCsvHierarchyRequest, opts ...grpc.CallOption) (*PreviewBillingGroupCsvHierarchyResponse, error)
+	// (BETA) Exports an exact client-held grouped selection with current data/access.
+	// Validates parent chains without rediscovering the full MSP. No preview required.
+	ExportBillingGroupCsvHierarchy(ctx context.Context, in *ExportBillingGroupCsvHierarchyRequest, opts ...grpc.CallOption) (*ExportBillingGroupCsvHierarchyResponse, error)
 	// Update billing group basic information
 	UpdateBillingGroupBasicInformation(ctx context.Context, in *UpdateBillingGroupBasicInformationRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Update billing group custom fields information
@@ -2172,6 +2182,7 @@ func (c *billingClient) ExportInvoiceSettingCsv(ctx context.Context, in *ExportI
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *billingClient) PreviewBillingGroupCsvExport(ctx context.Context, in *PreviewBillingGroupCsvExportRequest, opts ...grpc.CallOption) (*PreviewBillingGroupCsvExportResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(PreviewBillingGroupCsvExportResponse)
@@ -2182,10 +2193,31 @@ func (c *billingClient) PreviewBillingGroupCsvExport(ctx context.Context, in *Pr
 	return out, nil
 }
 
+// Deprecated: Do not use.
 func (c *billingClient) ExportPreviewedBillingGroupCsv(ctx context.Context, in *ExportPreviewedBillingGroupCsvRequest, opts ...grpc.CallOption) (*ExportPreviewedBillingGroupCsvResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ExportPreviewedBillingGroupCsvResponse)
 	err := c.cc.Invoke(ctx, Billing_ExportPreviewedBillingGroupCsv_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) PreviewBillingGroupCsvHierarchy(ctx context.Context, in *PreviewBillingGroupCsvHierarchyRequest, opts ...grpc.CallOption) (*PreviewBillingGroupCsvHierarchyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PreviewBillingGroupCsvHierarchyResponse)
+	err := c.cc.Invoke(ctx, Billing_PreviewBillingGroupCsvHierarchy_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *billingClient) ExportBillingGroupCsvHierarchy(ctx context.Context, in *ExportBillingGroupCsvHierarchyRequest, opts ...grpc.CallOption) (*ExportBillingGroupCsvHierarchyResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ExportBillingGroupCsvHierarchyResponse)
+	err := c.cc.Invoke(ctx, Billing_ExportBillingGroupCsvHierarchy_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -3082,13 +3114,21 @@ type BillingServer interface {
 	ExportBillingGroupCsv(context.Context, *ExportBillingGroupCsvRequest) (*ExportBillingGroupCsvResponse, error)
 	// Exports the invoice settings into csv format
 	ExportInvoiceSettingCsv(context.Context, *ExportInvoiceSettingCsvRequest) (*ExportInvoiceSettingCsvResponse, error)
+	// Deprecated: Do not use.
 	// (BETA) Previews eligible billing group counts for a layer-scoped CSV export.
 	// Stores a short-lived selection; does not generate CSVs or download links.
 	PreviewBillingGroupCsvExport(context.Context, *PreviewBillingGroupCsvExportRequest) (*PreviewBillingGroupCsvExportResponse, error)
+	// Deprecated: Do not use.
 	// (BETA) Exports a previously previewed billing group selection.
 	// Uses the saved root/child IDs and layer assignments without rediscovering
 	// hierarchy membership. All export types return a signed CSV download link.
 	ExportPreviewedBillingGroupCsv(context.Context, *ExportPreviewedBillingGroupCsvRequest) (*ExportPreviewedBillingGroupCsvResponse, error)
+	// (BETA) Returns eligible internal IDs grouped by root/layer and distinct counts.
+	// Stateless: no CSV, saved selection or token. Uses the exporter's row eligibility.
+	PreviewBillingGroupCsvHierarchy(context.Context, *PreviewBillingGroupCsvHierarchyRequest) (*PreviewBillingGroupCsvHierarchyResponse, error)
+	// (BETA) Exports an exact client-held grouped selection with current data/access.
+	// Validates parent chains without rediscovering the full MSP. No preview required.
+	ExportBillingGroupCsvHierarchy(context.Context, *ExportBillingGroupCsvHierarchyRequest) (*ExportBillingGroupCsvHierarchyResponse, error)
 	// Update billing group basic information
 	UpdateBillingGroupBasicInformation(context.Context, *UpdateBillingGroupBasicInformationRequest) (*emptypb.Empty, error)
 	// WORK-IN-PROGRESS: Update billing group custom fields information
@@ -3521,6 +3561,12 @@ func (UnimplementedBillingServer) PreviewBillingGroupCsvExport(context.Context, 
 }
 func (UnimplementedBillingServer) ExportPreviewedBillingGroupCsv(context.Context, *ExportPreviewedBillingGroupCsvRequest) (*ExportPreviewedBillingGroupCsvResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ExportPreviewedBillingGroupCsv not implemented")
+}
+func (UnimplementedBillingServer) PreviewBillingGroupCsvHierarchy(context.Context, *PreviewBillingGroupCsvHierarchyRequest) (*PreviewBillingGroupCsvHierarchyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method PreviewBillingGroupCsvHierarchy not implemented")
+}
+func (UnimplementedBillingServer) ExportBillingGroupCsvHierarchy(context.Context, *ExportBillingGroupCsvHierarchyRequest) (*ExportBillingGroupCsvHierarchyResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ExportBillingGroupCsvHierarchy not implemented")
 }
 func (UnimplementedBillingServer) UpdateBillingGroupBasicInformation(context.Context, *UpdateBillingGroupBasicInformationRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupBasicInformation not implemented")
@@ -5695,6 +5741,42 @@ func _Billing_ExportPreviewedBillingGroupCsv_Handler(srv interface{}, ctx contex
 	return interceptor(ctx, in, info, handler)
 }
 
+func _Billing_PreviewBillingGroupCsvHierarchy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(PreviewBillingGroupCsvHierarchyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).PreviewBillingGroupCsvHierarchy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_PreviewBillingGroupCsvHierarchy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).PreviewBillingGroupCsvHierarchy(ctx, req.(*PreviewBillingGroupCsvHierarchyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Billing_ExportBillingGroupCsvHierarchy_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ExportBillingGroupCsvHierarchyRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(BillingServer).ExportBillingGroupCsvHierarchy(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Billing_ExportBillingGroupCsvHierarchy_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(BillingServer).ExportBillingGroupCsvHierarchy(ctx, req.(*ExportBillingGroupCsvHierarchyRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _Billing_UpdateBillingGroupBasicInformation_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(UpdateBillingGroupBasicInformationRequest)
 	if err := dec(in); err != nil {
@@ -6903,6 +6985,14 @@ var Billing_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "ExportPreviewedBillingGroupCsv",
 			Handler:    _Billing_ExportPreviewedBillingGroupCsv_Handler,
+		},
+		{
+			MethodName: "PreviewBillingGroupCsvHierarchy",
+			Handler:    _Billing_PreviewBillingGroupCsvHierarchy_Handler,
+		},
+		{
+			MethodName: "ExportBillingGroupCsvHierarchy",
+			Handler:    _Billing_ExportBillingGroupCsvHierarchy_Handler,
 		},
 		{
 			MethodName: "UpdateBillingGroupBasicInformation",
