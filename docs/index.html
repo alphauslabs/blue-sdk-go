@@ -847,6 +847,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.cost.v1.CreateAccountRequestAzureOptions"><span class="badge">M</span>CreateAccountRequestAzureOptions</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.cost.v1.CreateAccountRequestGcpOptions"><span class="badge">M</span>CreateAccountRequestGcpOptions</a>
                 </li>
               
@@ -11758,14 +11762,14 @@ You can check out this [guide](https://alphauslabs.github.io/docs/guides/aws-cos
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                  <td><p>Required. The supported vendors are `aws`, `gcp` and `azure`. </p></td>
                 </tr>
               
                 <tr>
                   <td>id</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. The account id to register. </p></td>
+                  <td><p>Required. The account id to register. For `azure`, this is the subscription id. </p></td>
                 </tr>
               
                 <tr>
@@ -11803,6 +11807,13 @@ You can check out this [guide](https://alphauslabs.github.io/docs/guides/aws-cos
                   <td><p>Optional. A free-text note/memo about this account. </p></td>
                 </tr>
               
+                <tr>
+                  <td>azureOptions</td>
+                  <td><a href="#blueapi.cost.v1.CreateAccountRequestAzureOptions">CreateAccountRequestAzureOptions</a></td>
+                  <td></td>
+                  <td><p>Required for the `azure` vendor. Azure-specific options. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
@@ -11825,6 +11836,30 @@ You can check out this [guide](https://alphauslabs.github.io/docs/guides/aws-cos
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Optional. The management account id (formerly known as master, or payer) to which an account belongs to, initially. If the account is moved to another management account, the system is able to detect it and set this value accordingly. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.cost.v1.CreateAccountRequestAzureOptions">CreateAccountRequestAzureOptions</h3>
+        <p>Azure-specific options for registering an account.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>managementAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The payer (management) account of the Azure account. </p></td>
                 </tr>
               
             </tbody>
@@ -14827,7 +14862,7 @@ For AWS, setting this will override `groupId`. Set this and `groupId` to `*` to 
                   <td>vendor</td>
                   <td><a href="#string">string</a></td>
                   <td></td>
-                  <td><p>Required. At the moment, only `aws` is supported. </p></td>
+                  <td><p>Required. The supported vendors are `aws`, `gcp` and `azure`. Only available in Ripple for `gcp` and `azure`. </p></td>
                 </tr>
               
                 <tr>
