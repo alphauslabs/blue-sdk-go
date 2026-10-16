@@ -5238,6 +5238,33 @@
             </ul>
           </li>
         
+          
+          <li>
+            <a href="#feedback%2fv1%2ffeedback.proto">feedback/v1/feedback.proto</a>
+            <ul>
+              
+                <li>
+                  <a href="#blueapi.feedback.v1.CreateFeedbackRequest"><span class="badge">M</span>CreateFeedbackRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.feedback.v1.CreateFeedbackResponse"><span class="badge">M</span>CreateFeedbackResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.feedback.v1.Viewport"><span class="badge">M</span>Viewport</a>
+                </li>
+              
+              
+              
+              
+                <li>
+                  <a href="#blueapi.feedback.v1.Feedback"><span class="badge">S</span>Feedback</a>
+                </li>
+              
+            </ul>
+          </li>
+        
         <li><a href="#scalar-value-types">Scalar Value Types</a></li>
       </ul>
     </div>
@@ -66686,6 +66713,199 @@ When deleted, contexts created within the space will also be deleted and cannot 
                 <td>GET</td>
                 <td>/prefs/v1</td>
                 <td></td>
+              </tr>
+              
+            
+            </tbody>
+          </table>
+          
+        
+    
+      
+      <div class="file-heading">
+        <h2 id="feedback/v1/feedback.proto">feedback/v1/feedback.proto</h2><a href="#title">Top</a>
+      </div>
+      <p></p>
+
+      
+        <h3 id="blueapi.feedback.v1.CreateFeedbackRequest">CreateFeedbackRequest</h3>
+        <p>CreateFeedbackRequest is one feedback submission.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>submissionId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Client-generated UUID (RFC 4122) that identifies this submission.
+Used as the idempotency key: a retry with the same id does not create a
+second record. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>category</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. One of: `bug`, `hard_to_use`, `request`, `question`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>body</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. Free-text body written by the user. 1 to 5000 characters. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>route</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Path of the screen the user was on (for example `/invoices`). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>mfe</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Name of the micro-frontend that rendered the screen
+(for example `billing`). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>locale</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. UI language at submission time (for example `ja`, `en`). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>appRelease</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Release identifier of the UI build. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>telemetryEnv</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Optional. Deployment environment reported by the UI (for example `dev`, `next`, `prod`). </p></td>
+                </tr>
+              
+                <tr>
+                  <td>viewport</td>
+                  <td><a href="#blueapi.feedback.v1.Viewport">Viewport</a></td>
+                  <td></td>
+                  <td><p>Optional. Browser viewport size at submission time. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>clientSentAt</td>
+                  <td><a href="#google.protobuf.Timestamp">google.protobuf.Timestamp</a></td>
+                  <td></td>
+                  <td><p>Optional. Client clock at submission time. In JSON this is an RFC 3339 string. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.feedback.v1.CreateFeedbackResponse">CreateFeedbackResponse</h3>
+        <p>CreateFeedbackResponse is empty; success is indicated by the status code.</p>
+
+        
+
+        
+      
+        <h3 id="blueapi.feedback.v1.Viewport">Viewport</h3>
+        <p>Viewport is the size of the browser viewport at submission time, in CSS pixels.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>width</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Width in CSS pixels. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>height</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>Height in CSS pixels. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+
+      
+
+      
+
+      
+        <h3 id="blueapi.feedback.v1.Feedback">Feedback</h3>
+        <p>Feedback service definition.</p><p>Receives in-product feedback (bug reports, usability issues, requests,</p><p>questions) written by a signed-in user from inside the Wave / Ripple UI.</p><p>The sender is identified from the access token on the server side; the</p><p>request carries no identity fields. Submissions are write-only through this</p><p>API (there is no read or reply RPC).</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Method Name</td><td>Request Type</td><td>Response Type</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>CreateFeedback</td>
+                <td><a href="#blueapi.feedback.v1.CreateFeedbackRequest">CreateFeedbackRequest</a></td>
+                <td><a href="#blueapi.feedback.v1.CreateFeedbackResponse">CreateFeedbackResponse</a></td>
+                <td><p>CreateFeedback stores one feedback submission.
+
+The call is idempotent on `submissionId`: sending the same id again
+(for example, a client retry after a timeout) returns success without
+creating a second record. Applies to both Wave and Ripple.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+
+        
+          
+          
+          <h4>Methods with HTTP bindings</h4>
+          <table>
+            <thead>
+              <tr>
+                <td>Method Name</td>
+                <td>Method</td>
+                <td>Pattern</td>
+                <td>Body</td>
+              </tr>
+            </thead>
+            <tbody>
+            
+              
+              
+              <tr>
+                <td>CreateFeedback</td>
+                <td>POST</td>
+                <td>/v1/feedbacks</td>
+                <td>*</td>
               </tr>
               
             
