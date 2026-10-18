@@ -26,6 +26,12 @@ const (
 	GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsUtilization"
 	GuaranteedCommitments_ReadCommitmentReports_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReports"
 	GuaranteedCommitments_ReadCommitmentReportAccounts_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReportAccounts"
+	GuaranteedCommitments_GetBillingGroupRegistration_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupRegistration"
+	GuaranteedCommitments_GetPerformanceSummary_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetPerformanceSummary"
+	GuaranteedCommitments_GetSavingsOpportunities_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/GetSavingsOpportunities"
+	GuaranteedCommitments_ListExpiringCommitments_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/ListExpiringCommitments"
+	GuaranteedCommitments_GetSimulatorInputs_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/GetSimulatorInputs"
+	GuaranteedCommitments_CalculateProjectedRevenue_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/CalculateProjectedRevenue"
 	GuaranteedCommitments_GetMetrics_FullMethodName                         = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
 	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
 	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
@@ -89,6 +95,24 @@ type GuaranteedCommitmentsClient interface {
 	ReadCommitmentReports(ctx context.Context, in *ReadCommitmentReportsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ReadCommitmentReportsClient, error)
 	// Reads per-account commitment report details for a specific month. Only available in Ripple.
 	ReadCommitmentReportAccounts(ctx context.Context, in *ReadCommitmentReportAccountsRequest, opts ...grpc.CallOption) (GuaranteedCommitments_ReadCommitmentReportAccountsClient, error)
+	// Gets the MSP's billing groups grouped into registration buckets (Registered, Partially Registered,
+	// Unregistered), with each billing group's payer onboarding progress. Only available in Ripple.
+	GetBillingGroupRegistration(ctx context.Context, in *GetBillingGroupRegistrationRequest, opts ...grpc.CallOption) (*BillingGroupRegistration, error)
+	// Gets Archera performance totals (net savings, risk premium, rebates, revenue share) for a month range,
+	// and for the equal-length range immediately before it. Covers every billing group with Archera activity
+	// in the range. Only available in Ripple.
+	GetPerformanceSummary(ctx context.Context, in *GetPerformanceSummaryRequest, opts ...grpc.CallOption) (*PerformanceSummary, error)
+	// Gets the savings opportunity summary for RIs/SPs expiring within 90 days in billing groups that are
+	// not Registered. Only available in Ripple.
+	GetSavingsOpportunities(ctx context.Context, in *GetSavingsOpportunitiesRequest, opts ...grpc.CallOption) (*SavingsOpportunities, error)
+	// Lists the MSP's expiring RIs/SPs, filtered, ordered and paginated server-side. Only available in Ripple.
+	ListExpiringCommitments(ctx context.Context, in *ListExpiringCommitmentsRequest, opts ...grpc.CallOption) (*ListExpiringCommitmentsResponse, error)
+	// Gets the pricing inputs the simulator needs for the selected expiring RIs/SPs. Only available in Ripple.
+	GetSimulatorInputs(ctx context.Context, in *GetSimulatorInputsRequest, opts ...grpc.CallOption) (*GetSimulatorInputsResponse, error)
+	// Calculates projected MSP revenue share from simulated risk premiums, applying the MSP's revenue-share
+	// rate for each month (0.20 for months with no configured rate). Returns an error, rather than a figure
+	// at the default rate, when the rate cannot be read. Only available in Ripple.
+	CalculateProjectedRevenue(ctx context.Context, in *CalculateProjectedRevenueRequest, opts ...grpc.CallOption) (*CalculateProjectedRevenueResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
@@ -341,6 +365,66 @@ func (x *guaranteedCommitmentsReadCommitmentReportAccountsClient) Recv() (*Commi
 		return nil, err
 	}
 	return m, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetBillingGroupRegistration(ctx context.Context, in *GetBillingGroupRegistrationRequest, opts ...grpc.CallOption) (*BillingGroupRegistration, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BillingGroupRegistration)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetBillingGroupRegistration_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetPerformanceSummary(ctx context.Context, in *GetPerformanceSummaryRequest, opts ...grpc.CallOption) (*PerformanceSummary, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(PerformanceSummary)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetPerformanceSummary_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetSavingsOpportunities(ctx context.Context, in *GetSavingsOpportunitiesRequest, opts ...grpc.CallOption) (*SavingsOpportunities, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(SavingsOpportunities)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetSavingsOpportunities_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) ListExpiringCommitments(ctx context.Context, in *ListExpiringCommitmentsRequest, opts ...grpc.CallOption) (*ListExpiringCommitmentsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ListExpiringCommitmentsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ListExpiringCommitments_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetSimulatorInputs(ctx context.Context, in *GetSimulatorInputsRequest, opts ...grpc.CallOption) (*GetSimulatorInputsResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetSimulatorInputsResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetSimulatorInputs_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) CalculateProjectedRevenue(ctx context.Context, in *CalculateProjectedRevenueRequest, opts ...grpc.CallOption) (*CalculateProjectedRevenueResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CalculateProjectedRevenueResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_CalculateProjectedRevenue_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *guaranteedCommitmentsClient) GetMetrics(ctx context.Context, in *GetMetricsRequest, opts ...grpc.CallOption) (*MetricsResponse, error) {
@@ -773,6 +857,24 @@ type GuaranteedCommitmentsServer interface {
 	ReadCommitmentReports(*ReadCommitmentReportsRequest, GuaranteedCommitments_ReadCommitmentReportsServer) error
 	// Reads per-account commitment report details for a specific month. Only available in Ripple.
 	ReadCommitmentReportAccounts(*ReadCommitmentReportAccountsRequest, GuaranteedCommitments_ReadCommitmentReportAccountsServer) error
+	// Gets the MSP's billing groups grouped into registration buckets (Registered, Partially Registered,
+	// Unregistered), with each billing group's payer onboarding progress. Only available in Ripple.
+	GetBillingGroupRegistration(context.Context, *GetBillingGroupRegistrationRequest) (*BillingGroupRegistration, error)
+	// Gets Archera performance totals (net savings, risk premium, rebates, revenue share) for a month range,
+	// and for the equal-length range immediately before it. Covers every billing group with Archera activity
+	// in the range. Only available in Ripple.
+	GetPerformanceSummary(context.Context, *GetPerformanceSummaryRequest) (*PerformanceSummary, error)
+	// Gets the savings opportunity summary for RIs/SPs expiring within 90 days in billing groups that are
+	// not Registered. Only available in Ripple.
+	GetSavingsOpportunities(context.Context, *GetSavingsOpportunitiesRequest) (*SavingsOpportunities, error)
+	// Lists the MSP's expiring RIs/SPs, filtered, ordered and paginated server-side. Only available in Ripple.
+	ListExpiringCommitments(context.Context, *ListExpiringCommitmentsRequest) (*ListExpiringCommitmentsResponse, error)
+	// Gets the pricing inputs the simulator needs for the selected expiring RIs/SPs. Only available in Ripple.
+	GetSimulatorInputs(context.Context, *GetSimulatorInputsRequest) (*GetSimulatorInputsResponse, error)
+	// Calculates projected MSP revenue share from simulated risk premiums, applying the MSP's revenue-share
+	// rate for each month (0.20 for months with no configured rate). Returns an error, rather than a figure
+	// at the default rate, when the rate cannot be read. Only available in Ripple.
+	CalculateProjectedRevenue(context.Context, *CalculateProjectedRevenueRequest) (*CalculateProjectedRevenueResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves key performance metrics for cloud commitments.
 	GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error)
 	// WORK-IN-PROGRESS: Do not use. Retrieves a list of infrastructure resources for the organization.
@@ -905,6 +1007,24 @@ func (UnimplementedGuaranteedCommitmentsServer) ReadCommitmentReports(*ReadCommi
 }
 func (UnimplementedGuaranteedCommitmentsServer) ReadCommitmentReportAccounts(*ReadCommitmentReportAccountsRequest, GuaranteedCommitments_ReadCommitmentReportAccountsServer) error {
 	return status.Errorf(codes.Unimplemented, "method ReadCommitmentReportAccounts not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetBillingGroupRegistration(context.Context, *GetBillingGroupRegistrationRequest) (*BillingGroupRegistration, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroupRegistration not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetPerformanceSummary(context.Context, *GetPerformanceSummaryRequest) (*PerformanceSummary, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPerformanceSummary not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetSavingsOpportunities(context.Context, *GetSavingsOpportunitiesRequest) (*SavingsOpportunities, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSavingsOpportunities not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ListExpiringCommitments(context.Context, *ListExpiringCommitmentsRequest) (*ListExpiringCommitmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListExpiringCommitments not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetSimulatorInputs(context.Context, *GetSimulatorInputsRequest) (*GetSimulatorInputsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSimulatorInputs not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) CalculateProjectedRevenue(context.Context, *CalculateProjectedRevenueRequest) (*CalculateProjectedRevenueResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CalculateProjectedRevenue not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetMetrics(context.Context, *GetMetricsRequest) (*MetricsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetMetrics not implemented")
@@ -1175,6 +1295,114 @@ type guaranteedCommitmentsReadCommitmentReportAccountsServer struct {
 
 func (x *guaranteedCommitmentsReadCommitmentReportAccountsServer) Send(m *CommitmentReportAccount) error {
 	return x.ServerStream.SendMsg(m)
+}
+
+func _GuaranteedCommitments_GetBillingGroupRegistration_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingGroupRegistrationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetBillingGroupRegistration(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetBillingGroupRegistration_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetBillingGroupRegistration(ctx, req.(*GetBillingGroupRegistrationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetPerformanceSummary_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPerformanceSummaryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetPerformanceSummary(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetPerformanceSummary_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetPerformanceSummary(ctx, req.(*GetPerformanceSummaryRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetSavingsOpportunities_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSavingsOpportunitiesRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetSavingsOpportunities(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetSavingsOpportunities_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetSavingsOpportunities(ctx, req.(*GetSavingsOpportunitiesRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_ListExpiringCommitments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListExpiringCommitmentsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ListExpiringCommitments(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ListExpiringCommitments_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ListExpiringCommitments(ctx, req.(*ListExpiringCommitmentsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetSimulatorInputs_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetSimulatorInputsRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetSimulatorInputs(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetSimulatorInputs_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetSimulatorInputs(ctx, req.(*GetSimulatorInputsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_CalculateProjectedRevenue_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CalculateProjectedRevenueRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).CalculateProjectedRevenue(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_CalculateProjectedRevenue_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).CalculateProjectedRevenue(ctx, req.(*CalculateProjectedRevenueRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _GuaranteedCommitments_GetMetrics_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -1937,6 +2165,30 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetCommitmentsUtilization",
 			Handler:    _GuaranteedCommitments_GetCommitmentsUtilization_Handler,
+		},
+		{
+			MethodName: "GetBillingGroupRegistration",
+			Handler:    _GuaranteedCommitments_GetBillingGroupRegistration_Handler,
+		},
+		{
+			MethodName: "GetPerformanceSummary",
+			Handler:    _GuaranteedCommitments_GetPerformanceSummary_Handler,
+		},
+		{
+			MethodName: "GetSavingsOpportunities",
+			Handler:    _GuaranteedCommitments_GetSavingsOpportunities_Handler,
+		},
+		{
+			MethodName: "ListExpiringCommitments",
+			Handler:    _GuaranteedCommitments_ListExpiringCommitments_Handler,
+		},
+		{
+			MethodName: "GetSimulatorInputs",
+			Handler:    _GuaranteedCommitments_GetSimulatorInputs_Handler,
+		},
+		{
+			MethodName: "CalculateProjectedRevenue",
+			Handler:    _GuaranteedCommitments_CalculateProjectedRevenue_Handler,
 		},
 		{
 			MethodName: "GetMetrics",
