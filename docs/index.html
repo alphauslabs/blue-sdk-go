@@ -29692,6 +29692,18 @@ Service discount id. </p></td>
                   <td><p> </p></td>
                 </tr>
               
+                <tr>
+                  <td>replaceAccounts</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Optional. Explicit account membership replacement for `byAccounts`
+selection. When true, `accounts` is the complete desired membership for
+`vendor`, including an empty list, which removes all of the vendor&#39;s
+accounts from the billing group without deleting the account records.
+When false (default), an empty `accounts` together with `accountOptions`
+is treated as an options-only update and membership is left unchanged. </p></td>
+                </tr>
+              
             </tbody>
           </table>
 
