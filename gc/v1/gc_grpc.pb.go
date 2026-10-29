@@ -73,6 +73,8 @@ const (
 	GuaranteedCommitments_GetTermsConsentStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsConsentStatus"
 	GuaranteedCommitments_GetTermsDocument_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsDocument"
 	GuaranteedCommitments_AcceptTerms_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/AcceptTerms"
+	GuaranteedCommitments_ConfigureGCPOnboarding_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ConfigureGCPOnboarding"
+	GuaranteedCommitments_GetGCPDeploymentScript_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/GetGCPDeploymentScript"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -218,6 +220,10 @@ type GuaranteedCommitmentsClient interface {
 	// derives the product, consent scope, accepting user, and acceptance time from
 	// trusted request context.
 	AcceptTerms(ctx context.Context, in *AcceptTermsRequest, opts ...grpc.CallOption) (*AcceptTermsResponse, error)
+	// WORK-IN-PROGRESS: ConfigureGCPOnboarding configures the GCP onboarding process for the authenticated user.
+	ConfigureGCPOnboarding(ctx context.Context, in *ConfigureGCPOnboardingRequest, opts ...grpc.CallOption) (*ConfigureGCPOnboardingResponse, error)
+	// WORK-IN-PROGRESS: GetGCPDeploymentScript retrieves the GCP deployment script for the given onboarding ID.
+	GetGCPDeploymentScript(ctx context.Context, in *GetGCPDeploymentScriptRequest, opts ...grpc.CallOption) (*GetGCPDeploymentScriptResponse, error)
 }
 
 type guaranteedCommitmentsClient struct {
@@ -837,6 +843,26 @@ func (c *guaranteedCommitmentsClient) AcceptTerms(ctx context.Context, in *Accep
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) ConfigureGCPOnboarding(ctx context.Context, in *ConfigureGCPOnboardingRequest, opts ...grpc.CallOption) (*ConfigureGCPOnboardingResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(ConfigureGCPOnboardingResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_ConfigureGCPOnboarding_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetGCPDeploymentScript(ctx context.Context, in *GetGCPDeploymentScriptRequest, opts ...grpc.CallOption) (*GetGCPDeploymentScriptResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetGCPDeploymentScriptResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetGCPDeploymentScript_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // GuaranteedCommitmentsServer is the server API for GuaranteedCommitments service.
 // All implementations must embed UnimplementedGuaranteedCommitmentsServer
 // for forward compatibility
@@ -980,6 +1006,10 @@ type GuaranteedCommitmentsServer interface {
 	// derives the product, consent scope, accepting user, and acceptance time from
 	// trusted request context.
 	AcceptTerms(context.Context, *AcceptTermsRequest) (*AcceptTermsResponse, error)
+	// WORK-IN-PROGRESS: ConfigureGCPOnboarding configures the GCP onboarding process for the authenticated user.
+	ConfigureGCPOnboarding(context.Context, *ConfigureGCPOnboardingRequest) (*ConfigureGCPOnboardingResponse, error)
+	// WORK-IN-PROGRESS: GetGCPDeploymentScript retrieves the GCP deployment script for the given onboarding ID.
+	GetGCPDeploymentScript(context.Context, *GetGCPDeploymentScriptRequest) (*GetGCPDeploymentScriptResponse, error)
 	mustEmbedUnimplementedGuaranteedCommitmentsServer()
 }
 
@@ -1148,6 +1178,12 @@ func (UnimplementedGuaranteedCommitmentsServer) GetTermsDocument(context.Context
 }
 func (UnimplementedGuaranteedCommitmentsServer) AcceptTerms(context.Context, *AcceptTermsRequest) (*AcceptTermsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method AcceptTerms not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) ConfigureGCPOnboarding(context.Context, *ConfigureGCPOnboardingRequest) (*ConfigureGCPOnboardingResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ConfigureGCPOnboarding not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetGCPDeploymentScript(context.Context, *GetGCPDeploymentScriptRequest) (*GetGCPDeploymentScriptResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetGCPDeploymentScript not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) mustEmbedUnimplementedGuaranteedCommitmentsServer() {}
 
@@ -2143,6 +2179,42 @@ func _GuaranteedCommitments_AcceptTerms_Handler(srv interface{}, ctx context.Con
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_ConfigureGCPOnboarding_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ConfigureGCPOnboardingRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).ConfigureGCPOnboarding(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_ConfigureGCPOnboarding_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).ConfigureGCPOnboarding(ctx, req.(*ConfigureGCPOnboardingRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetGCPDeploymentScript_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetGCPDeploymentScriptRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetGCPDeploymentScript(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetGCPDeploymentScript_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetGCPDeploymentScript(ctx, req.(*GetGCPDeploymentScriptRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // GuaranteedCommitments_ServiceDesc is the grpc.ServiceDesc for GuaranteedCommitments service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -2353,6 +2425,14 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "AcceptTerms",
 			Handler:    _GuaranteedCommitments_AcceptTerms_Handler,
+		},
+		{
+			MethodName: "ConfigureGCPOnboarding",
+			Handler:    _GuaranteedCommitments_ConfigureGCPOnboarding_Handler,
+		},
+		{
+			MethodName: "GetGCPDeploymentScript",
+			Handler:    _GuaranteedCommitments_GetGCPDeploymentScript_Handler,
 		},
 	},
 	Streams: []grpc.StreamDesc{

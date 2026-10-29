@@ -4663,6 +4663,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.ConfigureGCPOnboardingRequest"><span class="badge">M</span>ConfigureGCPOnboardingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ConfigureGCPOnboardingResponse"><span class="badge">M</span>ConfigureGCPOnboardingResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.ContractSpec"><span class="badge">M</span>ContractSpec</a>
                 </li>
               
@@ -4780,6 +4788,14 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.GetCommitmentsUtilizationRequest"><span class="badge">M</span>GetCommitmentsUtilizationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetGCPDeploymentScriptRequest"><span class="badge">M</span>GetGCPDeploymentScriptRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetGCPDeploymentScriptResponse"><span class="badge">M</span>GetGCPDeploymentScriptResponse</a>
                 </li>
               
                 <li>
@@ -5169,6 +5185,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.ConfigureAzureEaOnboardingRequest.Action"><span class="badge">E</span>ConfigureAzureEaOnboardingRequest.Action</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.ConfigureGCPOnboardingRequest.Action"><span class="badge">E</span>ConfigureGCPOnboardingRequest.Action</a>
                 </li>
               
                 <li>
@@ -58071,6 +58091,117 @@ empty, and every billing group that is not enabled is Unregistered. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.ConfigureGCPOnboardingRequest">ConfigureGCPOnboardingRequest</h3>
+        <p>Request message for configuring GCP onboarding.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>action</td>
+                  <td><a href="#blueapi.gc.v1.ConfigureGCPOnboardingRequest.Action">ConfigureGCPOnboardingRequest.Action</a></td>
+                  <td></td>
+                  <td><p>Action to be performed for GCP onboarding. This determines the step in the onboarding process that will be executed. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Onboarding ID generated in the previous step of the GCP onboarding process. Required for subsequent actions. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingAccountId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Billing account ID associated with the GCP onboarding. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>accountName</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Name of the GCP account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>organizationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>GCP organization ID associated with the onboarding. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>projectId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>GCP project ID associated with the onboarding. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingDataset</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Name of the billing dataset that contains the billing data for this GCP account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dataLocation</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Location of the billing data for this GCP account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pricingDataset</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Name of the pricing dataset for this GCP account. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cudDataset</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Name of the committed use discount (CUD) dataset for this GCP account. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.ConfigureGCPOnboardingResponse">ConfigureGCPOnboardingResponse</h3>
+        <p>Response message for configuring GCP onboarding.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Onboarding ID generated for the GCP account during the onboarding process. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ContractSpec">ContractSpec</h3>
         <p></p>
 
@@ -59840,6 +59971,54 @@ ACCEPTED, PENDING, and CREATING are not recreated. </p></td>
                   <td><a href="#string">string</a></td>
                   <td></td>
                   <td><p>Required. The commitment id. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetGCPDeploymentScriptRequest">GetGCPDeploymentScriptRequest</h3>
+        <p>Request message for retrieving the GCP deployment script.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>onboardingId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Onboarding ID for the GCP account. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetGCPDeploymentScriptResponse">GetGCPDeploymentScriptResponse</h3>
+        <p>Response message containing the GCP deployment script.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>deploymentScript</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Generated deployment script that can be used to deploy the necessary resources for GCP onboarding. </p></td>
                 </tr>
               
             </tbody>
@@ -61762,6 +61941,54 @@ Values: NOT_CREATED, CREATING, PENDING, ACCEPTED, EXPIRED, FAILED, WITHDRAWN. </
                   <td><a href="#string">string</a></td>
                   <td>optional</td>
                   <td><p>Optional. Agreement type, e.g. &#34;azureea&#34;. Only populated when vendor is AZURE; empty otherwise. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>projectId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. GCP project ID associated with this payer account.
+Only populated when vendor is GCP; empty otherwise. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>organizationId</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. GCP organization ID associated with this payer account.
+Only populated when vendor is GCP; empty otherwise. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingDataset</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Name of the BigQuery dataset that contains the billing data for
+this GCP account. Only populated when vendor is GCP; empty otherwise. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>dataLocation</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Location of the billing data for this GCP account.
+Only populated when vendor is GCP; empty otherwise. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pricingDataset</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Name of the pricing dataset for this GCP account.
+Only populated when vendor is GCP; empty otherwise. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>cudDataset</td>
+                  <td><a href="#string">string</a></td>
+                  <td>optional</td>
+                  <td><p>Optional. Name of the committed use discount (CUD) dataset for this GCP
+account. Only populated when vendor is GCP; empty otherwise. </p></td>
                 </tr>
               
             </tbody>
@@ -65535,6 +65762,42 @@ Default value is false. </p></td>
           </tbody>
         </table>
       
+        <h3 id="blueapi.gc.v1.ConfigureGCPOnboardingRequest.Action">ConfigureGCPOnboardingRequest.Action</h3>
+        <p>Action to be performed for GCP onboarding.</p>
+        <table class="enum-table">
+          <thead>
+            <tr><td>Name</td><td>Number</td><td>Description</td></tr>
+          </thead>
+          <tbody>
+            
+              <tr>
+                <td>ACTION_UNSPECIFIED</td>
+                <td>0</td>
+                <td><p>Unspecified action for GCP onboarding. This should not be used in practice.</p></td>
+              </tr>
+            
+              <tr>
+                <td>START_ONBOARDING</td>
+                <td>1</td>
+                <td><p>Starts the GCP onboarding process. This generates onboarding ID that will be used in subsequent steps.</p></td>
+              </tr>
+            
+              <tr>
+                <td>SUBMIT_PAYER_DETAILS</td>
+                <td>2</td>
+                <td><p>Submits the payer details for GCP onboarding. This step requires the onboarding ID generated in the previous step.
+This step involves providing the necessary payer information to proceed with GCP onboarding.</p></td>
+              </tr>
+            
+              <tr>
+                <td>COMPLETE_ONBOARDING</td>
+                <td>3</td>
+                <td><p>Verifies the provided information and completes the GCP onboarding process.</p></td>
+              </tr>
+            
+          </tbody>
+        </table>
+      
         <h3 id="blueapi.gc.v1.ExpiringCommitmentType">ExpiringCommitmentType</h3>
         <p>The kind of an expiring commitment.</p>
         <table class="enum-table">
@@ -66337,6 +66600,20 @@ derives the product, consent scope, accepting user, and acceptance time from
 trusted request context.</p></td>
               </tr>
             
+              <tr>
+                <td>ConfigureGCPOnboarding</td>
+                <td><a href="#blueapi.gc.v1.ConfigureGCPOnboardingRequest">ConfigureGCPOnboardingRequest</a></td>
+                <td><a href="#blueapi.gc.v1.ConfigureGCPOnboardingResponse">ConfigureGCPOnboardingResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: ConfigureGCPOnboarding configures the GCP onboarding process for the authenticated user.</p></td>
+              </tr>
+            
+              <tr>
+                <td>GetGCPDeploymentScript</td>
+                <td><a href="#blueapi.gc.v1.GetGCPDeploymentScriptRequest">GetGCPDeploymentScriptRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetGCPDeploymentScriptResponse">GetGCPDeploymentScriptResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: GetGCPDeploymentScript retrieves the GCP deployment script for the given onboarding ID.</p></td>
+              </tr>
+            
           </tbody>
         </table>
 
@@ -66892,6 +67169,26 @@ trusted request context.</p></td>
                 <td>POST</td>
                 <td>/v1/terms:accept</td>
                 <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>ConfigureGCPOnboarding</td>
+                <td>POST</td>
+                <td>/v1/onboarding/gcp/configure</td>
+                <td>*</td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetGCPDeploymentScript</td>
+                <td>GET</td>
+                <td>/v1/onboarding/gcp/{onboardingId}/deploymentscript</td>
+                <td></td>
               </tr>
               
             
