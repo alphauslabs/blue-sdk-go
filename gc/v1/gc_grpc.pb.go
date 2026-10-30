@@ -19,62 +19,64 @@ import (
 const _ = grpc.SupportPackageIsVersion8
 
 const (
-	GuaranteedCommitments_ListOrgs_FullMethodName                           = "/blueapi.gc.v1.GuaranteedCommitments/ListOrgs"
-	GuaranteedCommitments_CommitmentsPlanApply_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/CommitmentsPlanApply"
-	GuaranteedCommitments_ListCommitments_FullMethodName                    = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments"
-	GuaranteedCommitments_GetCommitmentsChart_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart"
-	GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsUtilization"
-	GuaranteedCommitments_ReadCommitmentReports_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReports"
-	GuaranteedCommitments_ReadCommitmentReportAccounts_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReportAccounts"
-	GuaranteedCommitments_GetBillingGroupRegistration_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupRegistration"
-	GuaranteedCommitments_GetPerformanceSummary_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetPerformanceSummary"
-	GuaranteedCommitments_GetSavingsOpportunities_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/GetSavingsOpportunities"
-	GuaranteedCommitments_ListExpiringCommitments_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/ListExpiringCommitments"
-	GuaranteedCommitments_GetSimulatorInputs_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/GetSimulatorInputs"
-	GuaranteedCommitments_CalculateProjectedRevenue_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/CalculateProjectedRevenue"
-	GuaranteedCommitments_GetMetrics_FullMethodName                         = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
-	GuaranteedCommitments_ListResources_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
-	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
-	GuaranteedCommitments_ListReservableResources_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/ListReservableResources"
-	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
-	GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment"
-	GuaranteedCommitments_GetPurchasePlansDetails_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlansDetails"
-	GuaranteedCommitments_SaveCommitmentsPlanAsDraft_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/SaveCommitmentsPlanAsDraft"
-	GuaranteedCommitments_ListDraftPurchasePlans_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ListDraftPurchasePlans"
-	GuaranteedCommitments_DeleteDraftPurchasePlan_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/DeleteDraftPurchasePlan"
-	GuaranteedCommitments_GetAvailableCommitmentTypes_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/GetAvailableCommitmentTypes"
-	GuaranteedCommitments_CreateCustomCommitmentPlan_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/CreateCustomCommitmentPlan"
-	GuaranteedCommitments_RegisterOrg_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg"
-	GuaranteedCommitments_StartAwsOnboarding_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding"
-	GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate"
-	GuaranteedCommitments_GetAwsLaunchStackUrl_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl"
-	GuaranteedCommitments_VerifyAwsOnboarding_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/VerifyAwsOnboarding"
-	GuaranteedCommitments_GetOnboardingStatus_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetOnboardingStatus"
-	GuaranteedCommitments_ListPayerAccounts_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListPayerAccounts"
-	GuaranteedCommitments_SetPayerAccountEnabled_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/SetPayerAccountEnabled"
-	GuaranteedCommitments_GetPayerAccountStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetPayerAccountStatus"
-	GuaranteedCommitments_ListBillingGroups_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListBillingGroups"
-	GuaranteedCommitments_SetBillingGroupStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/SetBillingGroupStatus"
-	GuaranteedCommitments_GetBillingGroupStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupStatus"
-	GuaranteedCommitments_ValidateBillingGroup_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/ValidateBillingGroup"
-	GuaranteedCommitments_GetAwsPrivateOffer_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsPrivateOffer"
-	GuaranteedCommitments_AcceptBillingGroupTerms_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/AcceptBillingGroupTerms"
-	GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/GetGuaranteedCommitmentTemplateUrl"
-	GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName   = "/blueapi.gc.v1.GuaranteedCommitments/CreateGuaranteedCommitmentAccess"
-	GuaranteedCommitments_StartAzureOnboarding_FullMethodName               = "/blueapi.gc.v1.GuaranteedCommitments/StartAzureOnboarding"
-	GuaranteedCommitments_UpdateAzureOnboarding_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/UpdateAzureOnboarding"
-	GuaranteedCommitments_GetAzureOnboardingAuthUrl_FullMethodName          = "/blueapi.gc.v1.GuaranteedCommitments/GetAzureOnboardingAuthUrl"
-	GuaranteedCommitments_ValidateAzureAppInstall_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/ValidateAzureAppInstall"
-	GuaranteedCommitments_ListAzureOnboardingAccounts_FullMethodName        = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureOnboardingAccounts"
-	GuaranteedCommitments_CreateAzureIntegration_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/CreateAzureIntegration"
-	GuaranteedCommitments_ListAzureIntegrations_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureIntegrations"
-	GuaranteedCommitments_ConfigureAzureEaOnboarding_FullMethodName         = "/blueapi.gc.v1.GuaranteedCommitments/ConfigureAzureEaOnboarding"
-	GuaranteedCommitments_DeleteAzureIntegration_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/DeleteAzureIntegration"
-	GuaranteedCommitments_GetTermsConsentStatus_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsConsentStatus"
-	GuaranteedCommitments_GetTermsDocument_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsDocument"
-	GuaranteedCommitments_AcceptTerms_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/AcceptTerms"
-	GuaranteedCommitments_ConfigureGCPOnboarding_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ConfigureGCPOnboarding"
-	GuaranteedCommitments_GetGCPDeploymentScript_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/GetGCPDeploymentScript"
+	GuaranteedCommitments_ListOrgs_FullMethodName                               = "/blueapi.gc.v1.GuaranteedCommitments/ListOrgs"
+	GuaranteedCommitments_CommitmentsPlanApply_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/CommitmentsPlanApply"
+	GuaranteedCommitments_ListCommitments_FullMethodName                        = "/blueapi.gc.v1.GuaranteedCommitments/ListCommitments"
+	GuaranteedCommitments_GetCommitmentsChart_FullMethodName                    = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsChart"
+	GuaranteedCommitments_GetCommitmentsUtilization_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetCommitmentsUtilization"
+	GuaranteedCommitments_ReadCommitmentReports_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReports"
+	GuaranteedCommitments_ReadCommitmentReportAccounts_FullMethodName           = "/blueapi.gc.v1.GuaranteedCommitments/ReadCommitmentReportAccounts"
+	GuaranteedCommitments_GetBillingGroupRegistration_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupRegistration"
+	GuaranteedCommitments_GetPerformanceSummary_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/GetPerformanceSummary"
+	GuaranteedCommitments_GetSavingsOpportunities_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetSavingsOpportunities"
+	GuaranteedCommitments_ListExpiringCommitments_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/ListExpiringCommitments"
+	GuaranteedCommitments_GetSimulatorInputs_FullMethodName                     = "/blueapi.gc.v1.GuaranteedCommitments/GetSimulatorInputs"
+	GuaranteedCommitments_CalculateProjectedRevenue_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/CalculateProjectedRevenue"
+	GuaranteedCommitments_GetMetrics_FullMethodName                             = "/blueapi.gc.v1.GuaranteedCommitments/GetMetrics"
+	GuaranteedCommitments_ListResources_FullMethodName                          = "/blueapi.gc.v1.GuaranteedCommitments/ListResources"
+	GuaranteedCommitments_GetResourceDailyUsage_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/GetResourceDailyUsage"
+	GuaranteedCommitments_ListReservableResources_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/ListReservableResources"
+	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
+	GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment"
+	GuaranteedCommitments_GetPurchasePlansDetails_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlansDetails"
+	GuaranteedCommitments_SaveCommitmentsPlanAsDraft_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/SaveCommitmentsPlanAsDraft"
+	GuaranteedCommitments_ListDraftPurchasePlans_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/ListDraftPurchasePlans"
+	GuaranteedCommitments_DeleteDraftPurchasePlan_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/DeleteDraftPurchasePlan"
+	GuaranteedCommitments_GetAvailableCommitmentTypes_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/GetAvailableCommitmentTypes"
+	GuaranteedCommitments_CreateCustomCommitmentPlan_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/CreateCustomCommitmentPlan"
+	GuaranteedCommitments_RegisterOrg_FullMethodName                            = "/blueapi.gc.v1.GuaranteedCommitments/RegisterOrg"
+	GuaranteedCommitments_StartAwsOnboarding_FullMethodName                     = "/blueapi.gc.v1.GuaranteedCommitments/StartAwsOnboarding"
+	GuaranteedCommitments_GetAwsCloudFormationTemplate_FullMethodName           = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsCloudFormationTemplate"
+	GuaranteedCommitments_GetAwsLaunchStackUrl_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsLaunchStackUrl"
+	GuaranteedCommitments_VerifyAwsOnboarding_FullMethodName                    = "/blueapi.gc.v1.GuaranteedCommitments/VerifyAwsOnboarding"
+	GuaranteedCommitments_GetOnboardingStatus_FullMethodName                    = "/blueapi.gc.v1.GuaranteedCommitments/GetOnboardingStatus"
+	GuaranteedCommitments_ListPayerAccounts_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListPayerAccounts"
+	GuaranteedCommitments_SetPayerAccountEnabled_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/SetPayerAccountEnabled"
+	GuaranteedCommitments_GetPayerAccountStatus_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/GetPayerAccountStatus"
+	GuaranteedCommitments_ListBillingGroups_FullMethodName                      = "/blueapi.gc.v1.GuaranteedCommitments/ListBillingGroups"
+	GuaranteedCommitments_SetBillingGroupStatus_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/SetBillingGroupStatus"
+	GuaranteedCommitments_GetBillingGroupStatus_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupStatus"
+	GuaranteedCommitments_GetBillingGroupPurchaseNotification_FullMethodName    = "/blueapi.gc.v1.GuaranteedCommitments/GetBillingGroupPurchaseNotification"
+	GuaranteedCommitments_UpdateBillingGroupPurchaseNotification_FullMethodName = "/blueapi.gc.v1.GuaranteedCommitments/UpdateBillingGroupPurchaseNotification"
+	GuaranteedCommitments_ValidateBillingGroup_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/ValidateBillingGroup"
+	GuaranteedCommitments_GetAwsPrivateOffer_FullMethodName                     = "/blueapi.gc.v1.GuaranteedCommitments/GetAwsPrivateOffer"
+	GuaranteedCommitments_AcceptBillingGroupTerms_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/AcceptBillingGroupTerms"
+	GuaranteedCommitments_GetGuaranteedCommitmentTemplateUrl_FullMethodName     = "/blueapi.gc.v1.GuaranteedCommitments/GetGuaranteedCommitmentTemplateUrl"
+	GuaranteedCommitments_CreateGuaranteedCommitmentAccess_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/CreateGuaranteedCommitmentAccess"
+	GuaranteedCommitments_StartAzureOnboarding_FullMethodName                   = "/blueapi.gc.v1.GuaranteedCommitments/StartAzureOnboarding"
+	GuaranteedCommitments_UpdateAzureOnboarding_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/UpdateAzureOnboarding"
+	GuaranteedCommitments_GetAzureOnboardingAuthUrl_FullMethodName              = "/blueapi.gc.v1.GuaranteedCommitments/GetAzureOnboardingAuthUrl"
+	GuaranteedCommitments_ValidateAzureAppInstall_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/ValidateAzureAppInstall"
+	GuaranteedCommitments_ListAzureOnboardingAccounts_FullMethodName            = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureOnboardingAccounts"
+	GuaranteedCommitments_CreateAzureIntegration_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/CreateAzureIntegration"
+	GuaranteedCommitments_ListAzureIntegrations_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/ListAzureIntegrations"
+	GuaranteedCommitments_ConfigureAzureEaOnboarding_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ConfigureAzureEaOnboarding"
+	GuaranteedCommitments_DeleteAzureIntegration_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/DeleteAzureIntegration"
+	GuaranteedCommitments_GetTermsConsentStatus_FullMethodName                  = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsConsentStatus"
+	GuaranteedCommitments_GetTermsDocument_FullMethodName                       = "/blueapi.gc.v1.GuaranteedCommitments/GetTermsDocument"
+	GuaranteedCommitments_AcceptTerms_FullMethodName                            = "/blueapi.gc.v1.GuaranteedCommitments/AcceptTerms"
+	GuaranteedCommitments_ConfigureGCPOnboarding_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/ConfigureGCPOnboarding"
+	GuaranteedCommitments_GetGCPDeploymentScript_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/GetGCPDeploymentScript"
 )
 
 // GuaranteedCommitmentsClient is the client API for GuaranteedCommitments service.
@@ -170,6 +172,16 @@ type GuaranteedCommitmentsClient interface {
 	ListBillingGroups(ctx context.Context, in *ListBillingGroupsRequest, opts ...grpc.CallOption) (*ListBillingGroupsResponse, error)
 	SetBillingGroupStatus(ctx context.Context, in *SetBillingGroupStatusRequest, opts ...grpc.CallOption) (*SetBillingGroupStatusResponse, error)
 	GetBillingGroupStatus(ctx context.Context, in *GetBillingGroupStatusRequest, opts ...grpc.CallOption) (*GetBillingGroupStatusResponse, error)
+	// Ripple only. Gets a billing group's GC purchase notification setting, together with
+	// the MSP's Ripple notification channels to choose from. When none has been saved, the
+	// setting is disabled with empty notificationChannelIds; availableChannels lists all of
+	// the MSP's channels whether or not a setting was saved. Wave callers get PERMISSION_DENIED.
+	GetBillingGroupPurchaseNotification(ctx context.Context, in *GetBillingGroupPurchaseNotificationRequest, opts ...grpc.CallOption) (*GetBillingGroupPurchaseNotificationResponse, error)
+	// Ripple only. Replaces a billing group's GC purchase notification setting. Newly added
+	// channel IDs must exist and belong to the caller's MSP; channels already saved are not
+	// re-checked. When enabled, at least one channel must be enabled and have a destination.
+	// Wave callers get PERMISSION_DENIED.
+	UpdateBillingGroupPurchaseNotification(ctx context.Context, in *UpdateBillingGroupPurchaseNotificationRequest, opts ...grpc.CallOption) (*BillingGroupPurchaseNotification, error)
 	ValidateBillingGroup(ctx context.Context, in *ValidateBillingGroupRequest, opts ...grpc.CallOption) (*ValidateBillingGroupResponse, error)
 	// Retrieves the AWS Marketplace private offer details for a payer account.
 	// Used by the onboarding "Accept Private Offer" step.
@@ -673,6 +685,26 @@ func (c *guaranteedCommitmentsClient) GetBillingGroupStatus(ctx context.Context,
 	return out, nil
 }
 
+func (c *guaranteedCommitmentsClient) GetBillingGroupPurchaseNotification(ctx context.Context, in *GetBillingGroupPurchaseNotificationRequest, opts ...grpc.CallOption) (*GetBillingGroupPurchaseNotificationResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetBillingGroupPurchaseNotificationResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetBillingGroupPurchaseNotification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) UpdateBillingGroupPurchaseNotification(ctx context.Context, in *UpdateBillingGroupPurchaseNotificationRequest, opts ...grpc.CallOption) (*BillingGroupPurchaseNotification, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(BillingGroupPurchaseNotification)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_UpdateBillingGroupPurchaseNotification_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *guaranteedCommitmentsClient) ValidateBillingGroup(ctx context.Context, in *ValidateBillingGroupRequest, opts ...grpc.CallOption) (*ValidateBillingGroupResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(ValidateBillingGroupResponse)
@@ -956,6 +988,16 @@ type GuaranteedCommitmentsServer interface {
 	ListBillingGroups(context.Context, *ListBillingGroupsRequest) (*ListBillingGroupsResponse, error)
 	SetBillingGroupStatus(context.Context, *SetBillingGroupStatusRequest) (*SetBillingGroupStatusResponse, error)
 	GetBillingGroupStatus(context.Context, *GetBillingGroupStatusRequest) (*GetBillingGroupStatusResponse, error)
+	// Ripple only. Gets a billing group's GC purchase notification setting, together with
+	// the MSP's Ripple notification channels to choose from. When none has been saved, the
+	// setting is disabled with empty notificationChannelIds; availableChannels lists all of
+	// the MSP's channels whether or not a setting was saved. Wave callers get PERMISSION_DENIED.
+	GetBillingGroupPurchaseNotification(context.Context, *GetBillingGroupPurchaseNotificationRequest) (*GetBillingGroupPurchaseNotificationResponse, error)
+	// Ripple only. Replaces a billing group's GC purchase notification setting. Newly added
+	// channel IDs must exist and belong to the caller's MSP; channels already saved are not
+	// re-checked. When enabled, at least one channel must be enabled and have a destination.
+	// Wave callers get PERMISSION_DENIED.
+	UpdateBillingGroupPurchaseNotification(context.Context, *UpdateBillingGroupPurchaseNotificationRequest) (*BillingGroupPurchaseNotification, error)
 	ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error)
 	// Retrieves the AWS Marketplace private offer details for a payer account.
 	// Used by the onboarding "Accept Private Offer" step.
@@ -1127,6 +1169,12 @@ func (UnimplementedGuaranteedCommitmentsServer) SetBillingGroupStatus(context.Co
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetBillingGroupStatus(context.Context, *GetBillingGroupStatusRequest) (*GetBillingGroupStatusResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroupStatus not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetBillingGroupPurchaseNotification(context.Context, *GetBillingGroupPurchaseNotificationRequest) (*GetBillingGroupPurchaseNotificationResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetBillingGroupPurchaseNotification not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) UpdateBillingGroupPurchaseNotification(context.Context, *UpdateBillingGroupPurchaseNotificationRequest) (*BillingGroupPurchaseNotification, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateBillingGroupPurchaseNotification not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) ValidateBillingGroup(context.Context, *ValidateBillingGroupRequest) (*ValidateBillingGroupResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ValidateBillingGroup not implemented")
@@ -1873,6 +1921,42 @@ func _GuaranteedCommitments_GetBillingGroupStatus_Handler(srv interface{}, ctx c
 	return interceptor(ctx, in, info, handler)
 }
 
+func _GuaranteedCommitments_GetBillingGroupPurchaseNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetBillingGroupPurchaseNotificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetBillingGroupPurchaseNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetBillingGroupPurchaseNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetBillingGroupPurchaseNotification(ctx, req.(*GetBillingGroupPurchaseNotificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_UpdateBillingGroupPurchaseNotification_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateBillingGroupPurchaseNotificationRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).UpdateBillingGroupPurchaseNotification(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_UpdateBillingGroupPurchaseNotification_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).UpdateBillingGroupPurchaseNotification(ctx, req.(*UpdateBillingGroupPurchaseNotificationRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 func _GuaranteedCommitments_ValidateBillingGroup_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ValidateBillingGroupRequest)
 	if err := dec(in); err != nil {
@@ -2357,6 +2441,14 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetBillingGroupStatus",
 			Handler:    _GuaranteedCommitments_GetBillingGroupStatus_Handler,
+		},
+		{
+			MethodName: "GetBillingGroupPurchaseNotification",
+			Handler:    _GuaranteedCommitments_GetBillingGroupPurchaseNotification_Handler,
+		},
+		{
+			MethodName: "UpdateBillingGroupPurchaseNotification",
+			Handler:    _GuaranteedCommitments_UpdateBillingGroupPurchaseNotification_Handler,
 		},
 		{
 			MethodName: "ValidateBillingGroup",

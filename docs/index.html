@@ -4591,6 +4591,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.BillingGroupPurchaseNotification"><span class="badge">M</span>BillingGroupPurchaseNotification</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.BillingGroupRegistration"><span class="badge">M</span>BillingGroupRegistration</a>
                 </li>
               
@@ -4768,6 +4772,14 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.GetAzureOnboardingAuthUrlResponse"><span class="badge">M</span>GetAzureOnboardingAuthUrlResponse</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetBillingGroupPurchaseNotificationRequest"><span class="badge">M</span>GetBillingGroupPurchaseNotificationRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetBillingGroupPurchaseNotificationResponse"><span class="badge">M</span>GetBillingGroupPurchaseNotificationResponse</a>
                 </li>
               
                 <li>
@@ -4991,6 +5003,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.NotificationChannelSummary"><span class="badge">M</span>NotificationChannelSummary</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.Org"><span class="badge">M</span>Org</a>
                 </li>
               
@@ -5148,6 +5164,10 @@
               
                 <li>
                   <a href="#blueapi.gc.v1.UpdateAzureOnboardingRequest"><span class="badge">M</span>UpdateAzureOnboardingRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.UpdateBillingGroupPurchaseNotificationRequest"><span class="badge">M</span>UpdateBillingGroupPurchaseNotificationRequest</a>
                 </li>
               
                 <li>
@@ -56425,6 +56445,59 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
 
         
       
+        <h3 id="blueapi.gc.v1.BillingGroupPurchaseNotification">BillingGroupPurchaseNotification</h3>
+        <p>A billing group's GC purchase notification setting (Ripple only).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group&#39;s company ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether GC purchases from this billing group are notified. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannelIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ripple notification channel IDs, as stored. An ID missing from the MSP&#39;s available
+channels refers to a channel that has since been deleted. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updatedBy</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Who last updated the setting. Empty if never saved. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>updatedAt</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>When the setting was last updated, RFC3339. Empty if never saved. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.BillingGroupRegistration">BillingGroupRegistration</h3>
         <p>The MSP's billing groups grouped into registration buckets.</p>
 
@@ -59866,6 +59939,61 @@ ACCEPTED, PENDING, and CREATING are not recreated. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.GetBillingGroupPurchaseNotificationRequest">GetBillingGroupPurchaseNotificationRequest</h3>
+        <p>Request message for the GuaranteedCommitments.GetBillingGroupPurchaseNotification rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group&#39;s company ID. Must be one of the caller&#39;s MSP companies. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetBillingGroupPurchaseNotificationResponse">GetBillingGroupPurchaseNotificationResponse</h3>
+        <p>Response message for the GuaranteedCommitments.GetBillingGroupPurchaseNotification rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>setting</td>
+                  <td><a href="#blueapi.gc.v1.BillingGroupPurchaseNotification">BillingGroupPurchaseNotification</a></td>
+                  <td></td>
+                  <td><p>The billing group&#39;s setting. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>availableChannels</td>
+                  <td><a href="#blueapi.gc.v1.NotificationChannelSummary">NotificationChannelSummary</a></td>
+                  <td>repeated</td>
+                  <td><p>The MSP&#39;s Ripple notification channels. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetBillingGroupRegistrationRequest">GetBillingGroupRegistrationRequest</h3>
         <p>Request for GetBillingGroupRegistration. The MSP is taken from the caller.</p>
 
@@ -61767,6 +61895,58 @@ int32 pageSize = 8; </p></td>
                   <td><a href="#double">double</a></td>
                   <td></td>
                   <td><p>Simulated risk premium for the month. USD. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.NotificationChannelSummary">NotificationChannelSummary</h3>
+        <p>A Ripple notification channel the MSP can choose. Never includes destinations</p><p>(email addresses or webhook URLs).</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>id</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The channel ID. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>name</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The channel&#39;s display name. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>type</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The channel type: &#34;email&#34;, &#34;slack&#34; or &#34;msteams&#34;. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the channel is enabled in Ripple. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>usable</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether the channel can receive notifications: enabled and has a destination. </p></td>
                 </tr>
               
             </tbody>
@@ -65248,6 +65428,44 @@ Must be echoed back verbatim on every PATCH call. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.UpdateBillingGroupPurchaseNotificationRequest">UpdateBillingGroupPurchaseNotificationRequest</h3>
+        <p>Request message for the GuaranteedCommitments.UpdateBillingGroupPurchaseNotification rpc.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>companyId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The billing group&#39;s company ID. Must be one of the caller&#39;s MSP companies. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>enabled</td>
+                  <td><a href="#bool">bool</a></td>
+                  <td></td>
+                  <td><p>Whether to notify on GC purchases made from this billing group. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>notificationChannelIds</td>
+                  <td><a href="#string">string</a></td>
+                  <td>repeated</td>
+                  <td><p>Ripple notification channel IDs to notify. Replaces the stored list. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.ValidateAzureAppInstallRequest">ValidateAzureAppInstallRequest</h3>
         <p></p>
 
@@ -66463,6 +66681,26 @@ Retrieves all payer accounts linked to the organization, including their status 
               </tr>
             
               <tr>
+                <td>GetBillingGroupPurchaseNotification</td>
+                <td><a href="#blueapi.gc.v1.GetBillingGroupPurchaseNotificationRequest">GetBillingGroupPurchaseNotificationRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetBillingGroupPurchaseNotificationResponse">GetBillingGroupPurchaseNotificationResponse</a></td>
+                <td><p>Ripple only. Gets a billing group&#39;s GC purchase notification setting, together with
+the MSP&#39;s Ripple notification channels to choose from. When none has been saved, the
+setting is disabled with empty notificationChannelIds; availableChannels lists all of
+the MSP&#39;s channels whether or not a setting was saved. Wave callers get PERMISSION_DENIED.</p></td>
+              </tr>
+            
+              <tr>
+                <td>UpdateBillingGroupPurchaseNotification</td>
+                <td><a href="#blueapi.gc.v1.UpdateBillingGroupPurchaseNotificationRequest">UpdateBillingGroupPurchaseNotificationRequest</a></td>
+                <td><a href="#blueapi.gc.v1.BillingGroupPurchaseNotification">BillingGroupPurchaseNotification</a></td>
+                <td><p>Ripple only. Replaces a billing group&#39;s GC purchase notification setting. Newly added
+channel IDs must exist and belong to the caller&#39;s MSP; channels already saved are not
+re-checked. When enabled, at least one channel must be enabled and have a destination.
+Wave callers get PERMISSION_DENIED.</p></td>
+              </tr>
+            
+              <tr>
                 <td>ValidateBillingGroup</td>
                 <td><a href="#blueapi.gc.v1.ValidateBillingGroupRequest">ValidateBillingGroupRequest</a></td>
                 <td><a href="#blueapi.gc.v1.ValidateBillingGroupResponse">ValidateBillingGroupResponse</a></td>
@@ -66999,6 +67237,26 @@ trusted request context.</p></td>
                 <td>GET</td>
                 <td>/v1/managements/billinggroups/status</td>
                 <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetBillingGroupPurchaseNotification</td>
+                <td>GET</td>
+                <td>/v1/notifications/billinggroups/{companyId}/purchase</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>UpdateBillingGroupPurchaseNotification</td>
+                <td>PUT</td>
+                <td>/v1/notifications/billinggroups/{companyId}/purchase</td>
+                <td>*</td>
               </tr>
               
             
