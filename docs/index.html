@@ -4591,6 +4591,10 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.BillingGroupOpportunity"><span class="badge">M</span>BillingGroupOpportunity</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.BillingGroupPurchaseNotification"><span class="badge">M</span>BillingGroupPurchaseNotification</a>
                 </li>
               
@@ -56445,6 +56449,66 @@ back verbatim on every UpdateAzureOnboarding and ValidateAzureAppInstall call. <
 
         
       
+        <h3 id="blueapi.gc.v1.BillingGroupOpportunity">BillingGroupOpportunity</h3>
+        <p>One billing group's share of the Savings Opportunities figures.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>billingGroupId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group ID shown in Ripple. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroupName</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>The billing group name shown in Ripple. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>bucket</td>
+                  <td><a href="#blueapi.gc.v1.RegistrationBucket">RegistrationBucket</a></td>
+                  <td></td>
+                  <td><p>The billing group&#39;s registration bucket. Partially Registered or Unregistered. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>potentialMonthlySavings</td>
+                  <td><a href="#double">double</a></td>
+                  <td></td>
+                  <td><p>This billing group&#39;s share of `SavingsOpportunities.potentialMonthlySavings`: the sum over its
+priced commitments. USD. Unset when `pricedCommitmentCount` is 0. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>expiringCommitmentCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>This billing group&#39;s expiring RIs/SPs counted in `SavingsOpportunities.expiringCommitmentCount`. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>pricedCommitmentCount</td>
+                  <td><a href="#int32">int32</a></td>
+                  <td></td>
+                  <td><p>How many of those could be priced. When 0, the billing group has no savings figure. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.BillingGroupPurchaseNotification">BillingGroupPurchaseNotification</h3>
         <p>A billing group's GC purchase notification setting (Ripple only).</p>
 
@@ -64273,6 +64337,15 @@ summed. USD. Unset when `revenueShareAvailable` is false. </p></td>
                   <td><a href="#blueapi.gc.v1.DataFreshness">DataFreshness</a></td>
                   <td>repeated</td>
                   <td><p>When the Archera and Aqua data was last synced. </p></td>
+                </tr>
+              
+                <tr>
+                  <td>billingGroups</td>
+                  <td><a href="#blueapi.gc.v1.BillingGroupOpportunity">BillingGroupOpportunity</a></td>
+                  <td>repeated</td>
+                  <td><p>The billing groups behind these figures, one per billing group with a counted commitment.
+Sorted by `potentialMonthlySavings`, highest first, then by name; billing groups with no
+priced commitment come last. </p></td>
                 </tr>
               
             </tbody>
