@@ -109,7 +109,7 @@ func (x *GetInfoResponse) GetResponse() string {
 // Request message for Pricing.GetPricing rpc.
 type GetPricingRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Cloud vendor, only `aws` and `azure` are currently supported.
+	//Required. Cloud vendor, only `aws` and `azure` are currently supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	// Required. Cloud vendor service.
 	// Supported services can be listed using `/{vendor}/services` endpoint. For usage information visit https://labs.alphaus.cloud/blueapidocs/#/Pricing/Pricing_GetSupportedServices.
@@ -130,21 +130,17 @@ type GetPricingRequest struct {
 	// Multiple key-value pairs are supported but keys should not be duplicated.
 	// For example, for AWS EC2, the following is valid,
 	// ```
-	//
-	//	"filters": {
-	//	  "purchaseOption": "All Upfront",
-	//	  "operatingSystem": "Windows"
-	//	}
-	//
+	// "filters": {
+	//   "purchaseOption": "All Upfront",
+	//   "operatingSystem": "Windows"
+	// }
 	// ```
 	// but not the following,
 	// ```
-	//
-	//	"filters": {
-	//	  "purchaseOption": "All Upfront",
-	//	  "purchaseOption": "Partial Upfront"
-	//	}
-	//
+	// "filters": {
+	//   "purchaseOption": "All Upfront",
+	//   "purchaseOption": "Partial Upfront"
+	// }
 	// ```
 	Filters map[string]string `protobuf:"bytes,6,rep,name=filters,proto3" json:"filters,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	// Optional. Only specified columns will be returned, if provided.

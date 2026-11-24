@@ -416,7 +416,7 @@ type GetDailyUsageCostDetailsRequest struct {
 	PayerId string `protobuf:"bytes,1,opt,name=payerId,proto3" json:"payerId,omitempty"`
 	// Required. The start date of the range for the savings plan details.
 	StartDate string `protobuf:"bytes,2,opt,name=startDate,proto3" json:"startDate,omitempty"`
-	// Required. The end date of the range for the savings plan details.
+	//  Required. The end date of the range for the savings plan details.
 	EndDate       string `protobuf:"bytes,3,opt,name=endDate,proto3" json:"endDate,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

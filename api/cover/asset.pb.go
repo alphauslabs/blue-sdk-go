@@ -23,7 +23,7 @@ const (
 
 type Asset struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Possible values: `account`, `subscription` or `project`
+	//Possible values: `account`, `subscription` or `project`
 	Key           string            `protobuf:"bytes,1,opt,name=key,proto3" json:"key,omitempty"`
 	Attributes    map[string]string `protobuf:"bytes,2,rep,name=attributes,proto3" json:"attributes,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"bytes,2,opt,name=value"`
 	unknownFields protoimpl.UnknownFields
@@ -157,7 +157,7 @@ type EC2Instance struct {
 	VirtualizationType string `protobuf:"bytes,28,opt,name=virtualizationType,proto3" json:"virtualizationType,omitempty"`
 	// [EC2-VPC] The ID of the VPC in which the instance is running.
 	VpcId string `protobuf:"bytes,29,opt,name=vpcId,proto3" json:"vpcId,omitempty"`
-	// Format: `yyyy-mm`
+	//Format: `yyyy-mm`
 	Date          string `protobuf:"bytes,30,opt,name=date,proto3" json:"date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

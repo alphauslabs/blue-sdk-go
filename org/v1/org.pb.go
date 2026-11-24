@@ -34,7 +34,7 @@ type CreateOrgRequest struct {
 	Description string `protobuf:"bytes,2,opt,name=description,proto3" json:"description,omitempty"`
 	// Optional. User can decide to let the system generates the password.
 	Password string `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
-	// To be used for onboarding profile
+	//To be used for onboarding profile
 	Name          string `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
 	Role          string `protobuf:"bytes,5,opt,name=role,proto3" json:"role,omitempty"`
 	Usage         string `protobuf:"bytes,6,opt,name=usage,proto3" json:"usage,omitempty"`

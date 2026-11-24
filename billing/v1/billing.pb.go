@@ -6601,7 +6601,7 @@ type ListAccountResourcesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Required. At the moment, only `aws`,`azure`,`gcp` is supported.
 	Vendor string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
-	// Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`.
+	//Optional. The UTC month to query. If empty, defaults to current month. Format is `yyyymm`.
 	Month         string `protobuf:"bytes,2,opt,name=month,proto3" json:"month,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

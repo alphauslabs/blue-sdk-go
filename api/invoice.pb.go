@@ -259,28 +259,22 @@ type AccountDetails struct {
 	// The keys included in the account total column have the following values
 	//
 	// substitution:
-	//
-	//	Total amount of agency fee costs
+	//    Total amount of agency fee costs
 	//
 	// supportFee:
-	//
-	//	Total amount of Support Fee costs
+	//    Total amount of Support Fee costs
 	//
 	// usageOnlyTotal:
-	//
-	//	Total amount of vendor usage fee only costs
+	//    Total amount of vendor usage fee only costs
 	//
 	// usageTotal:
-	//
-	//	Total amount of vendor usage fee costs
+	//    Total amount of vendor usage fee costs
 	//
 	// marketplace:
-	//
-	//	Total amount of vendor marketplace usage costs
+	//    Total amount of vendor marketplace usage costs
 	//
 	// marketplaceFees:
-	//
-	//	Total amount of vendor marketplace fee costs
+	//    Total amount of vendor marketplace fee costs
 	Total         []*AccountTotal `protobuf:"bytes,6,rep,name=total,proto3" json:"total,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -608,60 +602,46 @@ type InvoiceTotal struct {
 	// Key names related to the total. Each key is described in the following detail
 	//
 	// supportFee:
-	//
-	//	Total amount of Support Fee costs
+	//    Total amount of Support Fee costs
 	//
 	// substitution:
-	//
-	//	Total amount of agency fee costs
+	//    Total amount of agency fee costs
 	//
 	// chargeOnly:
-	//
-	//	Total amount of vendor usage fee only costs
+	//    Total amount of vendor usage fee only costs
 	//
 	// marketplace:
-	//
-	//	Total amount of vendor marketplace usage costs
+	//    Total amount of vendor marketplace usage costs
 	//
 	// marketplaceFees:
-	//
-	//	Total amount of vendor marketplace fee costs
+	//    Total amount of vendor marketplace fee costs
 	//
 	// charge:
-	//
-	//	Total amount of vendor usage fee costs
+	//    Total amount of vendor usage fee costs
 	//
 	// discount:
-	//
-	//	Total amount after discounts. Inculuded Support fee costs
+	//    Total amount after discounts. Inculuded Support fee costs
 	//
 	// discountWithSubstitution:
-	//
-	//	Total Discounts plus agency fee costs
+	//    Total Discounts plus agency fee costs
 	//
 	// chargeTaxFree:
-	//
-	//	Amounts not included in consumption tax
+	//    Amounts not included in consumption tax
 	//
 	// additionalItem:
-	//
-	//	Total amount of additional item costs
+	//    Total amount of additional item costs
 	//
 	// customService:
-	//
-	//	Total amount of custom service item costs
+	//    Total amount of custom service item costs
 	//
 	// sumOfBeforeTax:
-	//
-	//	Total amount before consumption tax
+	//    Total amount before consumption tax
 	//
 	// tax:
-	//
-	//	Consumption tax amount on the total amount
+	//    Consumption tax amount on the total amount
 	//
 	// total:
-	//
-	//	Total billing amount including tax
+	//    Total billing amount including tax
 	Name          string  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Currency      string  `protobuf:"bytes,2,opt,name=currency,proto3" json:"currency,omitempty"`
 	Amount        float64 `protobuf:"fixed64,3,opt,name=amount,proto3" json:"amount,omitempty"`

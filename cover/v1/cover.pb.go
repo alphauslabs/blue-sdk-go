@@ -9607,7 +9607,7 @@ func (x *ReadCostsRequestOptionsFilters) GetAndFilters() map[string]string {
 // Response message wrapper for cloud costs.
 type CostItem struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// `aws`, `azure`, `azureea` or `gcp`
+	//`aws`, `azure`, `azureea` or `gcp`
 	Vendor  string `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	Date    string `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
 	Product string `protobuf:"bytes,3,opt,name=product,proto3" json:"product,omitempty"`
@@ -9635,7 +9635,7 @@ type CostItem struct {
 	Category string `protobuf:"bytes,13,opt,name=category,proto3" json:"category,omitempty"`
 	// Indicates whether the item is tagged (true) or not (false).
 	Tagged bool `protobuf:"varint,14,opt,name=tagged,proto3" json:"tagged,omitempty"`
-	// Contains the number of units for unit metric. Only used when feature flag for unit cost metric is enabled.
+	//Contains the number of units for unit metric. Only used when feature flag for unit cost metric is enabled.
 	NumberOfUnits float64 `protobuf:"fixed64,18,opt,name=numberOfUnits,proto3" json:"numberOfUnits,omitempty"`
 	// Contains the unit cost metric. Only used when feature flag for unit cost metric is enabled.
 	Unitcostmetric map[string]float64 `protobuf:"bytes,15,rep,name=unitcostmetric,proto3" json:"unitcostmetric,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"fixed64,2,opt,name=value"`
@@ -11940,9 +11940,9 @@ type GetCostGroupAttributeRequest struct {
 	Vendor        string                 `protobuf:"bytes,1,opt,name=vendor,proto3" json:"vendor,omitempty"`
 	AttributeType string                 `protobuf:"bytes,2,opt,name=attributeType,proto3" json:"attributeType,omitempty"`
 	CostGroupId   string                 `protobuf:"bytes,3,opt,name=costGroupId,proto3" json:"costGroupId,omitempty"`
-	// Optional, This is for Unit Cost. When present, the api will return all attributes except the combination in this item.
+	//Optional, This is for Unit Cost. When present, the api will return all attributes except the combination in this item.
 	ExistingCombinations []*cover.Combinations `protobuf:"bytes,4,rep,name=existingCombinations,proto3" json:"existingCombinations,omitempty"`
-	// Optional, This is for Unit Cost.
+	//Optional, This is for Unit Cost.
 	// When present, the currentCombination field represents a combination that is not yet finalized.
 	// This field is used to compare with existingCombinations to analyze both sets
 	// and determine the appropriate attributes to return.
@@ -14101,19 +14101,19 @@ func (x *UpdateAnomalyAlertRequest) GetCostGroupId() string {
 // Request message for RegisterNewUser
 type RegisterNewUserRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// required email
+	//required email
 	Email string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
-	// required password
+	//required password
 	Password string `protobuf:"bytes,2,opt,name=password,proto3" json:"password,omitempty"`
-	// required user Name
+	//required user Name
 	Name string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	// required company name
+	//required company name
 	Company string `protobuf:"bytes,4,opt,name=company,proto3" json:"company,omitempty"`
-	// required company role
+	//required company role
 	Role string `protobuf:"bytes,5,opt,name=role,proto3" json:"role,omitempty"`
-	// optional company monthly cloud usage
+	//optional company monthly cloud usage
 	Amount string `protobuf:"bytes,6,opt,name=amount,proto3" json:"amount,omitempty"`
-	// optional intention
+	//optional intention
 	Intention     string `protobuf:"bytes,7,opt,name=intention,proto3" json:"intention,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -14245,7 +14245,7 @@ func (x *RegisterNewUserResponse) GetIsAuthorized() bool {
 // Request message for GetUserProfile
 type GetUserProfileRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// required email
+	//required email
 	Email         string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -14399,7 +14399,7 @@ func (x *GetUserProfileResponse) GetHasSubscribedUpdates() bool {
 // Request message for UpdateUserProfile
 type UpdateUserProfileRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// required email
+	//required email
 	Email                string `protobuf:"bytes,1,opt,name=email,proto3" json:"email,omitempty"`
 	Name                 string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	Role                 string `protobuf:"bytes,3,opt,name=role,proto3" json:"role,omitempty"`
@@ -16823,7 +16823,7 @@ func (x *CreateUnitTypeResponse) GetUnitCostData() *cover.UnitCostData {
 
 type GetUnitTypeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Unit Type Id
+	//Required. Unit Type Id
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -16912,15 +16912,15 @@ func (x *GetUnitTypeResponse) GetUnitCostData() *cover.UnitCostData {
 
 type UpdateUnitTypeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Unit Type Id
+	//Required. Unit Type Id
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional
+	//Optional
 	UnitName string `protobuf:"bytes,2,opt,name=unitName,proto3" json:"unitName,omitempty"`
-	// Optional
+	//Optional
 	UnitItems []*cover.UnitItem `protobuf:"bytes,3,rep,name=unitItems,proto3" json:"unitItems,omitempty"`
-	// Optional
+	//Optional
 	SharedResources []*cover.SharedResourcesCombination `protobuf:"bytes,4,rep,name=sharedResources,proto3" json:"sharedResources,omitempty"`
-	// Optional
+	//Optional
 	Description   string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -17037,7 +17037,7 @@ func (x *UpdateUnitTypeResponse) GetUnitCostData() *cover.UnitCostData {
 
 type DeleteUnitTypeRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Unit Type Id
+	//Required. Unit Type Id
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -17719,7 +17719,7 @@ func (x *CreateSharedResourcesResponse) GetSharedResources() *cover.SharedResour
 
 type GetSharedResourcesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Shared Resource Id
+	//Required. Shared Resource Id
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -17808,19 +17808,19 @@ func (x *GetSharedResourcesResponse) GetSharedResources() *cover.SharedResources
 
 type UpdateSharedResourcesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Shared Resource Id
+	//Required. Shared Resource Id
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional
+	//Optional
 	SharedResourceName string `protobuf:"bytes,2,opt,name=sharedResourceName,proto3" json:"sharedResourceName,omitempty"`
-	// Optional
+	//Optional
 	SharedResourcesCombinations *cover.ResourcesCombinations `protobuf:"bytes,3,opt,name=sharedResourcesCombinations,proto3" json:"sharedResourcesCombinations,omitempty"`
-	// Optional
+	//Optional
 	Distribution map[string]float64 `protobuf:"bytes,4,rep,name=distribution,proto3" json:"distribution,omitempty" protobuf_key:"bytes,1,opt,name=key" protobuf_val:"fixed64,2,opt,name=value"`
-	// Optional
+	//Optional
 	Allocated float64 `protobuf:"fixed64,5,opt,name=allocated,proto3" json:"allocated,omitempty"`
-	// Optional
+	//Optional
 	Unallocated float64 `protobuf:"fixed64,6,opt,name=unallocated,proto3" json:"unallocated,omitempty"`
-	// Optional
+	//Optional
 	Description   string `protobuf:"bytes,7,opt,name=description,proto3" json:"description,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -17951,7 +17951,7 @@ func (x *UpdateSharedResourcesResponse) GetSharedResources() *cover.SharedResour
 
 type DeleteSharedResourcesRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Shared Resource Id
+	//Required. Shared Resource Id
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -18147,7 +18147,7 @@ func (x *ListUnitMetricsResponse) GetUnitMetrics() []*cover.UnitMetric {
 
 type CreateUnitMetricRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Unit Metric Name
+	//Required. Unit Metric Name
 	MetricName        string            `protobuf:"bytes,1,opt,name=metricName,proto3" json:"metricName,omitempty"`
 	AggregationMethod string            `protobuf:"bytes,2,opt,name=aggregationMethod,proto3" json:"aggregationMethod,omitempty"`
 	DataSource        string            `protobuf:"bytes,3,opt,name=dataSource,proto3" json:"dataSource,omitempty"`
@@ -18276,7 +18276,7 @@ func (x *CreateUnitMetricResponse) GetUnitMetric() *cover.UnitMetric {
 
 type GetUnitMetricRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Unit Metric Id
+	//Required. Unit Metric Id
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -18365,19 +18365,19 @@ func (x *GetUnitMetricResponse) GetUnitMetric() *cover.UnitMetric {
 
 type UpdateUnitMetricRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Unit Metric Id
+	//Required. Unit Metric Id
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional
+	//Optional
 	MetricName string `protobuf:"bytes,2,opt,name=metricName,proto3" json:"metricName,omitempty"`
-	// Optional
+	//Optional
 	AggregationMethod string `protobuf:"bytes,3,opt,name=aggregationMethod,proto3" json:"aggregationMethod,omitempty"`
-	// Optional
+	//Optional
 	DataSource string `protobuf:"bytes,4,opt,name=dataSource,proto3" json:"dataSource,omitempty"`
-	// Optional
+	//Optional
 	Description string `protobuf:"bytes,5,opt,name=description,proto3" json:"description,omitempty"`
-	// Optional
+	//Optional
 	CostgroupId []string `protobuf:"bytes,6,rep,name=costgroupId,proto3" json:"costgroupId,omitempty"`
-	// Optional
+	//Optional
 	SourceInfo    *cover.SourceInfo `protobuf:"bytes,7,opt,name=sourceInfo,proto3" json:"sourceInfo,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -18508,7 +18508,7 @@ func (x *UpdateUnitMetricResponse) GetUnitMetric() *cover.UnitMetric {
 
 type DeleteUnitMetricRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. Unit Metric Id
+	//Required. Unit Metric Id
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -18673,9 +18673,9 @@ func (x *PreviewGoogleSheetRequest) GetRange() string {
 
 type PreviewGoogleSheetResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Contains the column headers of the Google Sheet.
+	//Contains the column headers of the Google Sheet.
 	Header []string `protobuf:"bytes,1,rep,name=header,proto3" json:"header,omitempty"`
-	// Contains the data rows of the Google Sheet.
+	//Contains the data rows of the Google Sheet.
 	RowData       []*cover.RowData `protobuf:"bytes,2,rep,name=rowData,proto3" json:"rowData,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

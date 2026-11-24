@@ -4242,28 +4242,24 @@ type CreateCustomCommitmentPlanRequest struct {
 	// Each entry selects a commitment category, term, payment option, and optional properties.
 	//
 	// Acceptable commitment_type values:
-	//
-	//	"aws/AmazonEC2", "aws/AmazonRDS", "aws/AmazonElastiCache",
-	//	"aws/savingsplan/Compute", "aws/savingsplan/EC2Instance", "aws/savingsplan/Database",
-	//	"azure/savingsplan/Compute", "azure/savingsplan/Database",
-	//	"azure/Virtual Machines", "azure/SQL Database", "azure/Storage", "azure/Azure Monitor"
+	//   "aws/AmazonEC2", "aws/AmazonRDS", "aws/AmazonElastiCache",
+	//   "aws/savingsplan/Compute", "aws/savingsplan/EC2Instance", "aws/savingsplan/Database",
+	//   "azure/savingsplan/Compute", "azure/savingsplan/Database",
+	//   "azure/Virtual Machines", "azure/SQL Database", "azure/Storage", "azure/Azure Monitor"
 	//
 	// Acceptable term values:
-	//
-	//	"thirty_day_gris"  - 30-day Archera Insured (leased: true)
-	//	"one_year_gris"    - 1-year Archera Insured (leased: true)
-	//	"one_year"         - 1-year Native Uninsured (leased: false)
-	//	"three_year"       - 3-year Native Uninsured (leased: false)
+	//   "thirty_day_gris"  - 30-day Archera Insured (leased: true)
+	//   "one_year_gris"    - 1-year Archera Insured (leased: true)
+	//   "one_year"         - 1-year Native Uninsured (leased: false)
+	//   "three_year"       - 3-year Native Uninsured (leased: false)
 	//
 	// Acceptable payment_option values:
-	//
-	//	"no_upfront", "partial_upfront", "all_upfront"
-	//	Note: "partial_upfront" and "all_upfront" are not available for 30-day terms.
+	//   "no_upfront", "partial_upfront", "all_upfront"
+	//   Note: "partial_upfront" and "all_upfront" are not available for 30-day terms.
 	//
 	// Acceptable properties keys:
-	//
-	//	"leased" (bool)          - true for Archera Insured terms, false for Native terms.
-	//	"offering_class" (string) - only for "aws/AmazonEC2"; "convertible" or "standard".
+	//   "leased" (bool)          - true for Archera Insured terms, false for Native terms.
+	//   "offering_class" (string) - only for "aws/AmazonEC2"; "convertible" or "standard".
 	IncludedContractSpecs []*ContractSpec `protobuf:"bytes,8,rep,name=includedContractSpecs,proto3" json:"includedContractSpecs,omitempty"`
 	// List of contract term keys included in the plan.
 	// Acceptable values: "thirty_day_gris", "one_year_gris", "one_year", "three_year".
@@ -20340,145 +20336,145 @@ var file_gc_v1_gc_proto_goTypes = []any{
 	(*ListPurchasePlansBySegmentRequest)(nil),                                             // 41: blueapi.gc.v1.ListPurchasePlansBySegmentRequest
 	(*GetPurchasePlansDetailsRequest)(nil),                                                // 42: blueapi.gc.v1.GetPurchasePlansDetailsRequest
 	(*GetUpdatedPurchasePlansBySegmentRequest)(nil),                                       // 43: blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentRequest
-	(*OrgUser)(nil),                                               // 44: blueapi.gc.v1.OrgUser
-	(*Membership)(nil),                                            // 45: blueapi.gc.v1.Membership
-	(*Address)(nil),                                               // 46: blueapi.gc.v1.Address
-	(*AwsExistingCur)(nil),                                        // 47: blueapi.gc.v1.AwsExistingCur
-	(*TermsAcceptance)(nil),                                       // 48: blueapi.gc.v1.TermsAcceptance
-	(*RegisterOrgRequest)(nil),                                    // 49: blueapi.gc.v1.RegisterOrgRequest
-	(*StartAwsOnboardingRequest)(nil),                             // 50: blueapi.gc.v1.StartAwsOnboardingRequest
-	(*GetAwsCloudFormationTemplateRequest)(nil),                   // 51: blueapi.gc.v1.GetAwsCloudFormationTemplateRequest
-	(*GetAwsLaunchStackUrlRequest)(nil),                           // 52: blueapi.gc.v1.GetAwsLaunchStackUrlRequest
-	(*VerifyAwsOnboardingRequest)(nil),                            // 53: blueapi.gc.v1.VerifyAwsOnboardingRequest
-	(*GetOnboardingStatusRequest)(nil),                            // 54: blueapi.gc.v1.GetOnboardingStatusRequest
-	(*ListPayerAccountsRequest)(nil),                              // 55: blueapi.gc.v1.ListPayerAccountsRequest
-	(*SetPayerAccountEnabledRequest)(nil),                         // 56: blueapi.gc.v1.SetPayerAccountEnabledRequest
-	(*GetPayerAccountStatusRequest)(nil),                          // 57: blueapi.gc.v1.GetPayerAccountStatusRequest
-	(*ListBillingGroupsRequest)(nil),                              // 58: blueapi.gc.v1.ListBillingGroupsRequest
-	(*SetBillingGroupStatusRequest)(nil),                          // 59: blueapi.gc.v1.SetBillingGroupStatusRequest
-	(*GetBillingGroupStatusRequest)(nil),                          // 60: blueapi.gc.v1.GetBillingGroupStatusRequest
-	(*GetBillingGroupPurchaseNotificationRequest)(nil),            // 61: blueapi.gc.v1.GetBillingGroupPurchaseNotificationRequest
-	(*UpdateBillingGroupPurchaseNotificationRequest)(nil),         // 62: blueapi.gc.v1.UpdateBillingGroupPurchaseNotificationRequest
-	(*ValidateBillingGroupRequest)(nil),                           // 63: blueapi.gc.v1.ValidateBillingGroupRequest
-	(*GetAwsPrivateOfferRequest)(nil),                             // 64: blueapi.gc.v1.GetAwsPrivateOfferRequest
-	(*AcceptBillingGroupTermsRequest)(nil),                        // 65: blueapi.gc.v1.AcceptBillingGroupTermsRequest
-	(*SaveCommitmentsPlanAsDraftRequest)(nil),                     // 66: blueapi.gc.v1.SaveCommitmentsPlanAsDraftRequest
-	(*ListDraftPurchasePlansRequest)(nil),                         // 67: blueapi.gc.v1.ListDraftPurchasePlansRequest
-	(*DeleteDraftPurchasePlanRequest)(nil),                        // 68: blueapi.gc.v1.DeleteDraftPurchasePlanRequest
-	(*GetAvailableCommitmentTypesRequest)(nil),                    // 69: blueapi.gc.v1.GetAvailableCommitmentTypesRequest
-	(*CreateCustomCommitmentPlanRequest)(nil),                     // 70: blueapi.gc.v1.CreateCustomCommitmentPlanRequest
-	(*GetGuaranteedCommitmentTemplateUrlRequest)(nil),             // 71: blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest
-	(*CreateGuaranteedCommitmentAccessRequest)(nil),               // 72: blueapi.gc.v1.CreateGuaranteedCommitmentAccessRequest
-	(*StartAzureOnboardingRequest)(nil),                           // 73: blueapi.gc.v1.StartAzureOnboardingRequest
-	(*UpdateAzureOnboardingRequest)(nil),                          // 74: blueapi.gc.v1.UpdateAzureOnboardingRequest
-	(*GetAzureOnboardingAuthUrlRequest)(nil),                      // 75: blueapi.gc.v1.GetAzureOnboardingAuthUrlRequest
-	(*ValidateAzureAppInstallRequest)(nil),                        // 76: blueapi.gc.v1.ValidateAzureAppInstallRequest
-	(*ListAzureOnboardingAccountsRequest)(nil),                    // 77: blueapi.gc.v1.ListAzureOnboardingAccountsRequest
-	(*CreateAzureIntegrationRequest)(nil),                         // 78: blueapi.gc.v1.CreateAzureIntegrationRequest
-	(*ListAzureIntegrationsRequest)(nil),                          // 79: blueapi.gc.v1.ListAzureIntegrationsRequest
-	(*DeleteAzureIntegrationRequest)(nil),                         // 80: blueapi.gc.v1.DeleteAzureIntegrationRequest
-	(*TermsOfServiceVersion)(nil),                                 // 81: blueapi.gc.v1.TermsOfServiceVersion
-	(*GetTermsConsentStatusResponse)(nil),                         // 82: blueapi.gc.v1.GetTermsConsentStatusResponse
-	(*GetTermsDocumentResponse)(nil),                              // 83: blueapi.gc.v1.GetTermsDocumentResponse
-	(*TermsConsentRecord)(nil),                                    // 84: blueapi.gc.v1.TermsConsentRecord
-	(*AcceptTermsResponse)(nil),                                   // 85: blueapi.gc.v1.AcceptTermsResponse
-	(*Org)(nil),                                                   // 86: blueapi.gc.v1.Org
-	(*CommitmentPlanDetails)(nil),                                 // 87: blueapi.gc.v1.CommitmentPlanDetails
-	(*CommitmentPlanLineItem)(nil),                                // 88: blueapi.gc.v1.CommitmentPlanLineItem
-	(*CommitmentPlanResourceMatch)(nil),                           // 89: blueapi.gc.v1.CommitmentPlanResourceMatch
-	(*Lease)(nil),                                                 // 90: blueapi.gc.v1.Lease
-	(*DailyUtilization)(nil),                                      // 91: blueapi.gc.v1.DailyUtilization
-	(*Commitment)(nil),                                            // 92: blueapi.gc.v1.Commitment
-	(*ListCommitmentsResponse)(nil),                               // 93: blueapi.gc.v1.ListCommitmentsResponse
-	(*CommitmentsChartData)(nil),                                  // 94: blueapi.gc.v1.CommitmentsChartData
-	(*CommitmentsChartResponse)(nil),                              // 95: blueapi.gc.v1.CommitmentsChartResponse
-	(*CommitmentsUtilizationData)(nil),                            // 96: blueapi.gc.v1.CommitmentsUtilizationData
-	(*CommitmentsUtilizationResponse)(nil),                        // 97: blueapi.gc.v1.CommitmentsUtilizationResponse
-	(*CommitmentReport)(nil),                                      // 98: blueapi.gc.v1.CommitmentReport
-	(*CommitmentReportAccount)(nil),                               // 99: blueapi.gc.v1.CommitmentReportAccount
-	(*DataFreshness)(nil),                                         // 100: blueapi.gc.v1.DataFreshness
-	(*BillingGroupRegistration)(nil),                              // 101: blueapi.gc.v1.BillingGroupRegistration
-	(*BillingGroupRegistrationItem)(nil),                          // 102: blueapi.gc.v1.BillingGroupRegistrationItem
-	(*PerformanceTotals)(nil),                                     // 103: blueapi.gc.v1.PerformanceTotals
-	(*PercentChange)(nil),                                         // 104: blueapi.gc.v1.PercentChange
-	(*PerformanceSummary)(nil),                                    // 105: blueapi.gc.v1.PerformanceSummary
-	(*SavingsOpportunities)(nil),                                  // 106: blueapi.gc.v1.SavingsOpportunities
-	(*BillingGroupOpportunity)(nil),                               // 107: blueapi.gc.v1.BillingGroupOpportunity
-	(*ExpiringCommitment)(nil),                                    // 108: blueapi.gc.v1.ExpiringCommitment
-	(*ListExpiringCommitmentsResponse)(nil),                       // 109: blueapi.gc.v1.ListExpiringCommitmentsResponse
-	(*ReservationPrice)(nil),                                      // 110: blueapi.gc.v1.ReservationPrice
-	(*TermPricing)(nil),                                           // 111: blueapi.gc.v1.TermPricing
-	(*SimulatorInput)(nil),                                        // 112: blueapi.gc.v1.SimulatorInput
-	(*GetSimulatorInputsResponse)(nil),                            // 113: blueapi.gc.v1.GetSimulatorInputsResponse
-	(*MonthlyPremium)(nil),                                        // 114: blueapi.gc.v1.MonthlyPremium
-	(*ProjectedPremiumSeries)(nil),                                // 115: blueapi.gc.v1.ProjectedPremiumSeries
-	(*ProjectedRevenue)(nil),                                      // 116: blueapi.gc.v1.ProjectedRevenue
-	(*CalculateProjectedRevenueResponse)(nil),                     // 117: blueapi.gc.v1.CalculateProjectedRevenueResponse
-	(*MetricsResponse)(nil),                                       // 118: blueapi.gc.v1.MetricsResponse
-	(*Resource)(nil),                                              // 119: blueapi.gc.v1.Resource
-	(*ListResourcesResponse)(nil),                                 // 120: blueapi.gc.v1.ListResourcesResponse
-	(*ResourceDailyUsage)(nil),                                    // 121: blueapi.gc.v1.ResourceDailyUsage
-	(*GetResourceDailyUsageResponse)(nil),                         // 122: blueapi.gc.v1.GetResourceDailyUsageResponse
-	(*ReservableResource)(nil),                                    // 123: blueapi.gc.v1.ReservableResource
-	(*ListReservableResourcesResponse)(nil),                       // 124: blueapi.gc.v1.ListReservableResourcesResponse
-	(*Segment)(nil),                                               // 125: blueapi.gc.v1.Segment
-	(*SegmentCreator)(nil),                                        // 126: blueapi.gc.v1.SegmentCreator
-	(*PurchasePlan)(nil),                                          // 127: blueapi.gc.v1.PurchasePlan
-	(*SegmentDetails)(nil),                                        // 128: blueapi.gc.v1.SegmentDetails
-	(*ContractSpec)(nil),                                          // 129: blueapi.gc.v1.ContractSpec
-	(*PlanSummary)(nil),                                           // 130: blueapi.gc.v1.PlanSummary
-	(*ServiceSummary)(nil),                                        // 131: blueapi.gc.v1.ServiceSummary
-	(*AggregateMetrics)(nil),                                      // 132: blueapi.gc.v1.AggregateMetrics
-	(*DefaultPurchasePlan)(nil),                                   // 133: blueapi.gc.v1.DefaultPurchasePlan
-	(*ListPurchasePlansBySegmentResponse)(nil),                    // 134: blueapi.gc.v1.ListPurchasePlansBySegmentResponse
-	(*GetUpdatedPurchasePlansBySegmentResponse)(nil),              // 135: blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentResponse
-	(*PlanHistoryUser)(nil),                                       // 136: blueapi.gc.v1.PlanHistoryUser
-	(*PlanHistoryEntry)(nil),                                      // 137: blueapi.gc.v1.PlanHistoryEntry
-	(*RegisterOrgResponse)(nil),                                   // 138: blueapi.gc.v1.RegisterOrgResponse
-	(*StartAwsOnboardingResponse)(nil),                            // 139: blueapi.gc.v1.StartAwsOnboardingResponse
-	(*GetAwsCloudFormationTemplateResponse)(nil),                  // 140: blueapi.gc.v1.GetAwsCloudFormationTemplateResponse
-	(*GetAwsLaunchStackUrlResponse)(nil),                          // 141: blueapi.gc.v1.GetAwsLaunchStackUrlResponse
-	(*VerifyAwsOnboardingResponse)(nil),                           // 142: blueapi.gc.v1.VerifyAwsOnboardingResponse
-	(*GetOnboardingStatusResponse)(nil),                           // 143: blueapi.gc.v1.GetOnboardingStatusResponse
-	(*PayerAccountDetails)(nil),                                   // 144: blueapi.gc.v1.PayerAccountDetails
-	(*ListPayerAccountsResponse)(nil),                             // 145: blueapi.gc.v1.ListPayerAccountsResponse
-	(*SetPayerAccountEnabledResponse)(nil),                        // 146: blueapi.gc.v1.SetPayerAccountEnabledResponse
-	(*GetPayerAccountStatusResponse)(nil),                         // 147: blueapi.gc.v1.GetPayerAccountStatusResponse
-	(*ListBillingGroupsResponse)(nil),                             // 148: blueapi.gc.v1.ListBillingGroupsResponse
-	(*SetBillingGroupStatusResponse)(nil),                         // 149: blueapi.gc.v1.SetBillingGroupStatusResponse
-	(*GetBillingGroupStatusResponse)(nil),                         // 150: blueapi.gc.v1.GetBillingGroupStatusResponse
-	(*BillingGroupPurchaseNotification)(nil),                      // 151: blueapi.gc.v1.BillingGroupPurchaseNotification
-	(*NotificationChannelSummary)(nil),                            // 152: blueapi.gc.v1.NotificationChannelSummary
-	(*GetBillingGroupPurchaseNotificationResponse)(nil),           // 153: blueapi.gc.v1.GetBillingGroupPurchaseNotificationResponse
-	(*ValidateBillingGroupResponse)(nil),                          // 154: blueapi.gc.v1.ValidateBillingGroupResponse
-	(*GetAwsPrivateOfferResponse)(nil),                            // 155: blueapi.gc.v1.GetAwsPrivateOfferResponse
-	(*AcceptBillingGroupTermsResponse)(nil),                       // 156: blueapi.gc.v1.AcceptBillingGroupTermsResponse
-	(*ListDraftPurchasePlansResponse)(nil),                        // 157: blueapi.gc.v1.ListDraftPurchasePlansResponse
-	(*DeleteDraftPurchasePlanResponse)(nil),                       // 158: blueapi.gc.v1.DeleteDraftPurchasePlanResponse
-	(*GetAvailableCommitmentTypesResponse)(nil),                   // 159: blueapi.gc.v1.GetAvailableCommitmentTypesResponse
-	(*GetGuaranteedCommitmentTemplateUrlResponse)(nil),            // 160: blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlResponse
-	(*CreateGuaranteedCommitmentAccessResponse)(nil),              // 161: blueapi.gc.v1.CreateGuaranteedCommitmentAccessResponse
-	(*GetPurchasePlansDetailsResponse)(nil),                       // 162: blueapi.gc.v1.GetPurchasePlansDetailsResponse
-	(*CreateCustomCommitmentPlanResponse)(nil),                    // 163: blueapi.gc.v1.CreateCustomCommitmentPlanResponse
-	(*AzureArcheraOrgFeatureStatus)(nil),                          // 164: blueapi.gc.v1.AzureArcheraOrgFeatureStatus
-	(*AzureArcheraOrgLeaseBudget)(nil),                            // 165: blueapi.gc.v1.AzureArcheraOrgLeaseBudget
-	(*AzureArcheraOrg)(nil),                                       // 166: blueapi.gc.v1.AzureArcheraOrg
-	(*AzureOnboardingCreatedBy)(nil),                              // 167: blueapi.gc.v1.AzureOnboardingCreatedBy
-	(*AzureOnboardingState)(nil),                                  // 168: blueapi.gc.v1.AzureOnboardingState
-	(*StartAzureOnboardingResponse)(nil),                          // 169: blueapi.gc.v1.StartAzureOnboardingResponse
-	(*GetAzureOnboardingAuthUrlResponse)(nil),                     // 170: blueapi.gc.v1.GetAzureOnboardingAuthUrlResponse
-	(*AzureAccount)(nil),                                          // 171: blueapi.gc.v1.AzureAccount
-	(*ListAzureOnboardingAccountsResponse)(nil),                   // 172: blueapi.gc.v1.ListAzureOnboardingAccountsResponse
-	(*AzureIntegrationFeatureStatus)(nil),                         // 173: blueapi.gc.v1.AzureIntegrationFeatureStatus
-	(*AzureIntegrationOnboarding)(nil),                            // 174: blueapi.gc.v1.AzureIntegrationOnboarding
-	(*AzureIntegration)(nil),                                      // 175: blueapi.gc.v1.AzureIntegration
-	(*CreateAzureIntegrationResponse)(nil),                        // 176: blueapi.gc.v1.CreateAzureIntegrationResponse
-	(*ListAzureIntegrationsResponse)(nil),                         // 177: blueapi.gc.v1.ListAzureIntegrationsResponse
-	(*DeleteAzureIntegrationResponse)(nil),                        // 178: blueapi.gc.v1.DeleteAzureIntegrationResponse
-	nil,                                                           // 179: blueapi.gc.v1.AggregateMetrics.SummariesEntry
-	(*VerifyAwsOnboardingResponse_AwsOnboardingFeatureCheck)(nil), // 180: blueapi.gc.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck
-	(*ListPayerAccountsResponse_PayerAccount)(nil),                // 181: blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount
-	(*ListBillingGroupsResponse_BillingGroup)(nil),                // 182: blueapi.gc.v1.ListBillingGroupsResponse.BillingGroup
+	(*OrgUser)(nil),                                                                       // 44: blueapi.gc.v1.OrgUser
+	(*Membership)(nil),                                                                    // 45: blueapi.gc.v1.Membership
+	(*Address)(nil),                                                                       // 46: blueapi.gc.v1.Address
+	(*AwsExistingCur)(nil),                                                                // 47: blueapi.gc.v1.AwsExistingCur
+	(*TermsAcceptance)(nil),                                                               // 48: blueapi.gc.v1.TermsAcceptance
+	(*RegisterOrgRequest)(nil),                                                            // 49: blueapi.gc.v1.RegisterOrgRequest
+	(*StartAwsOnboardingRequest)(nil),                                                     // 50: blueapi.gc.v1.StartAwsOnboardingRequest
+	(*GetAwsCloudFormationTemplateRequest)(nil),                                           // 51: blueapi.gc.v1.GetAwsCloudFormationTemplateRequest
+	(*GetAwsLaunchStackUrlRequest)(nil),                                                   // 52: blueapi.gc.v1.GetAwsLaunchStackUrlRequest
+	(*VerifyAwsOnboardingRequest)(nil),                                                    // 53: blueapi.gc.v1.VerifyAwsOnboardingRequest
+	(*GetOnboardingStatusRequest)(nil),                                                    // 54: blueapi.gc.v1.GetOnboardingStatusRequest
+	(*ListPayerAccountsRequest)(nil),                                                      // 55: blueapi.gc.v1.ListPayerAccountsRequest
+	(*SetPayerAccountEnabledRequest)(nil),                                                 // 56: blueapi.gc.v1.SetPayerAccountEnabledRequest
+	(*GetPayerAccountStatusRequest)(nil),                                                  // 57: blueapi.gc.v1.GetPayerAccountStatusRequest
+	(*ListBillingGroupsRequest)(nil),                                                      // 58: blueapi.gc.v1.ListBillingGroupsRequest
+	(*SetBillingGroupStatusRequest)(nil),                                                  // 59: blueapi.gc.v1.SetBillingGroupStatusRequest
+	(*GetBillingGroupStatusRequest)(nil),                                                  // 60: blueapi.gc.v1.GetBillingGroupStatusRequest
+	(*GetBillingGroupPurchaseNotificationRequest)(nil),                                    // 61: blueapi.gc.v1.GetBillingGroupPurchaseNotificationRequest
+	(*UpdateBillingGroupPurchaseNotificationRequest)(nil),                                 // 62: blueapi.gc.v1.UpdateBillingGroupPurchaseNotificationRequest
+	(*ValidateBillingGroupRequest)(nil),                                                   // 63: blueapi.gc.v1.ValidateBillingGroupRequest
+	(*GetAwsPrivateOfferRequest)(nil),                                                     // 64: blueapi.gc.v1.GetAwsPrivateOfferRequest
+	(*AcceptBillingGroupTermsRequest)(nil),                                                // 65: blueapi.gc.v1.AcceptBillingGroupTermsRequest
+	(*SaveCommitmentsPlanAsDraftRequest)(nil),                                             // 66: blueapi.gc.v1.SaveCommitmentsPlanAsDraftRequest
+	(*ListDraftPurchasePlansRequest)(nil),                                                 // 67: blueapi.gc.v1.ListDraftPurchasePlansRequest
+	(*DeleteDraftPurchasePlanRequest)(nil),                                                // 68: blueapi.gc.v1.DeleteDraftPurchasePlanRequest
+	(*GetAvailableCommitmentTypesRequest)(nil),                                            // 69: blueapi.gc.v1.GetAvailableCommitmentTypesRequest
+	(*CreateCustomCommitmentPlanRequest)(nil),                                             // 70: blueapi.gc.v1.CreateCustomCommitmentPlanRequest
+	(*GetGuaranteedCommitmentTemplateUrlRequest)(nil),                                     // 71: blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlRequest
+	(*CreateGuaranteedCommitmentAccessRequest)(nil),                                       // 72: blueapi.gc.v1.CreateGuaranteedCommitmentAccessRequest
+	(*StartAzureOnboardingRequest)(nil),                                                   // 73: blueapi.gc.v1.StartAzureOnboardingRequest
+	(*UpdateAzureOnboardingRequest)(nil),                                                  // 74: blueapi.gc.v1.UpdateAzureOnboardingRequest
+	(*GetAzureOnboardingAuthUrlRequest)(nil),                                              // 75: blueapi.gc.v1.GetAzureOnboardingAuthUrlRequest
+	(*ValidateAzureAppInstallRequest)(nil),                                                // 76: blueapi.gc.v1.ValidateAzureAppInstallRequest
+	(*ListAzureOnboardingAccountsRequest)(nil),                                            // 77: blueapi.gc.v1.ListAzureOnboardingAccountsRequest
+	(*CreateAzureIntegrationRequest)(nil),                                                 // 78: blueapi.gc.v1.CreateAzureIntegrationRequest
+	(*ListAzureIntegrationsRequest)(nil),                                                  // 79: blueapi.gc.v1.ListAzureIntegrationsRequest
+	(*DeleteAzureIntegrationRequest)(nil),                                                 // 80: blueapi.gc.v1.DeleteAzureIntegrationRequest
+	(*TermsOfServiceVersion)(nil),                                                         // 81: blueapi.gc.v1.TermsOfServiceVersion
+	(*GetTermsConsentStatusResponse)(nil),                                                 // 82: blueapi.gc.v1.GetTermsConsentStatusResponse
+	(*GetTermsDocumentResponse)(nil),                                                      // 83: blueapi.gc.v1.GetTermsDocumentResponse
+	(*TermsConsentRecord)(nil),                                                            // 84: blueapi.gc.v1.TermsConsentRecord
+	(*AcceptTermsResponse)(nil),                                                           // 85: blueapi.gc.v1.AcceptTermsResponse
+	(*Org)(nil),                                                                           // 86: blueapi.gc.v1.Org
+	(*CommitmentPlanDetails)(nil),                                                         // 87: blueapi.gc.v1.CommitmentPlanDetails
+	(*CommitmentPlanLineItem)(nil),                                                        // 88: blueapi.gc.v1.CommitmentPlanLineItem
+	(*CommitmentPlanResourceMatch)(nil),                                                   // 89: blueapi.gc.v1.CommitmentPlanResourceMatch
+	(*Lease)(nil),                                                                         // 90: blueapi.gc.v1.Lease
+	(*DailyUtilization)(nil),                                                              // 91: blueapi.gc.v1.DailyUtilization
+	(*Commitment)(nil),                                                                    // 92: blueapi.gc.v1.Commitment
+	(*ListCommitmentsResponse)(nil),                                                       // 93: blueapi.gc.v1.ListCommitmentsResponse
+	(*CommitmentsChartData)(nil),                                                          // 94: blueapi.gc.v1.CommitmentsChartData
+	(*CommitmentsChartResponse)(nil),                                                      // 95: blueapi.gc.v1.CommitmentsChartResponse
+	(*CommitmentsUtilizationData)(nil),                                                    // 96: blueapi.gc.v1.CommitmentsUtilizationData
+	(*CommitmentsUtilizationResponse)(nil),                                                // 97: blueapi.gc.v1.CommitmentsUtilizationResponse
+	(*CommitmentReport)(nil),                                                              // 98: blueapi.gc.v1.CommitmentReport
+	(*CommitmentReportAccount)(nil),                                                       // 99: blueapi.gc.v1.CommitmentReportAccount
+	(*DataFreshness)(nil),                                                                 // 100: blueapi.gc.v1.DataFreshness
+	(*BillingGroupRegistration)(nil),                                                      // 101: blueapi.gc.v1.BillingGroupRegistration
+	(*BillingGroupRegistrationItem)(nil),                                                  // 102: blueapi.gc.v1.BillingGroupRegistrationItem
+	(*PerformanceTotals)(nil),                                                             // 103: blueapi.gc.v1.PerformanceTotals
+	(*PercentChange)(nil),                                                                 // 104: blueapi.gc.v1.PercentChange
+	(*PerformanceSummary)(nil),                                                            // 105: blueapi.gc.v1.PerformanceSummary
+	(*SavingsOpportunities)(nil),                                                          // 106: blueapi.gc.v1.SavingsOpportunities
+	(*BillingGroupOpportunity)(nil),                                                       // 107: blueapi.gc.v1.BillingGroupOpportunity
+	(*ExpiringCommitment)(nil),                                                            // 108: blueapi.gc.v1.ExpiringCommitment
+	(*ListExpiringCommitmentsResponse)(nil),                                               // 109: blueapi.gc.v1.ListExpiringCommitmentsResponse
+	(*ReservationPrice)(nil),                                                              // 110: blueapi.gc.v1.ReservationPrice
+	(*TermPricing)(nil),                                                                   // 111: blueapi.gc.v1.TermPricing
+	(*SimulatorInput)(nil),                                                                // 112: blueapi.gc.v1.SimulatorInput
+	(*GetSimulatorInputsResponse)(nil),                                                    // 113: blueapi.gc.v1.GetSimulatorInputsResponse
+	(*MonthlyPremium)(nil),                                                                // 114: blueapi.gc.v1.MonthlyPremium
+	(*ProjectedPremiumSeries)(nil),                                                        // 115: blueapi.gc.v1.ProjectedPremiumSeries
+	(*ProjectedRevenue)(nil),                                                              // 116: blueapi.gc.v1.ProjectedRevenue
+	(*CalculateProjectedRevenueResponse)(nil),                                             // 117: blueapi.gc.v1.CalculateProjectedRevenueResponse
+	(*MetricsResponse)(nil),                                                               // 118: blueapi.gc.v1.MetricsResponse
+	(*Resource)(nil),                                                                      // 119: blueapi.gc.v1.Resource
+	(*ListResourcesResponse)(nil),                                                         // 120: blueapi.gc.v1.ListResourcesResponse
+	(*ResourceDailyUsage)(nil),                                                            // 121: blueapi.gc.v1.ResourceDailyUsage
+	(*GetResourceDailyUsageResponse)(nil),                                                 // 122: blueapi.gc.v1.GetResourceDailyUsageResponse
+	(*ReservableResource)(nil),                                                            // 123: blueapi.gc.v1.ReservableResource
+	(*ListReservableResourcesResponse)(nil),                                               // 124: blueapi.gc.v1.ListReservableResourcesResponse
+	(*Segment)(nil),                                                                       // 125: blueapi.gc.v1.Segment
+	(*SegmentCreator)(nil),                                                                // 126: blueapi.gc.v1.SegmentCreator
+	(*PurchasePlan)(nil),                                                                  // 127: blueapi.gc.v1.PurchasePlan
+	(*SegmentDetails)(nil),                                                                // 128: blueapi.gc.v1.SegmentDetails
+	(*ContractSpec)(nil),                                                                  // 129: blueapi.gc.v1.ContractSpec
+	(*PlanSummary)(nil),                                                                   // 130: blueapi.gc.v1.PlanSummary
+	(*ServiceSummary)(nil),                                                                // 131: blueapi.gc.v1.ServiceSummary
+	(*AggregateMetrics)(nil),                                                              // 132: blueapi.gc.v1.AggregateMetrics
+	(*DefaultPurchasePlan)(nil),                                                           // 133: blueapi.gc.v1.DefaultPurchasePlan
+	(*ListPurchasePlansBySegmentResponse)(nil),                                            // 134: blueapi.gc.v1.ListPurchasePlansBySegmentResponse
+	(*GetUpdatedPurchasePlansBySegmentResponse)(nil),                                      // 135: blueapi.gc.v1.GetUpdatedPurchasePlansBySegmentResponse
+	(*PlanHistoryUser)(nil),                                                               // 136: blueapi.gc.v1.PlanHistoryUser
+	(*PlanHistoryEntry)(nil),                                                              // 137: blueapi.gc.v1.PlanHistoryEntry
+	(*RegisterOrgResponse)(nil),                                                           // 138: blueapi.gc.v1.RegisterOrgResponse
+	(*StartAwsOnboardingResponse)(nil),                                                    // 139: blueapi.gc.v1.StartAwsOnboardingResponse
+	(*GetAwsCloudFormationTemplateResponse)(nil),                                          // 140: blueapi.gc.v1.GetAwsCloudFormationTemplateResponse
+	(*GetAwsLaunchStackUrlResponse)(nil),                                                  // 141: blueapi.gc.v1.GetAwsLaunchStackUrlResponse
+	(*VerifyAwsOnboardingResponse)(nil),                                                   // 142: blueapi.gc.v1.VerifyAwsOnboardingResponse
+	(*GetOnboardingStatusResponse)(nil),                                                   // 143: blueapi.gc.v1.GetOnboardingStatusResponse
+	(*PayerAccountDetails)(nil),                                                           // 144: blueapi.gc.v1.PayerAccountDetails
+	(*ListPayerAccountsResponse)(nil),                                                     // 145: blueapi.gc.v1.ListPayerAccountsResponse
+	(*SetPayerAccountEnabledResponse)(nil),                                                // 146: blueapi.gc.v1.SetPayerAccountEnabledResponse
+	(*GetPayerAccountStatusResponse)(nil),                                                 // 147: blueapi.gc.v1.GetPayerAccountStatusResponse
+	(*ListBillingGroupsResponse)(nil),                                                     // 148: blueapi.gc.v1.ListBillingGroupsResponse
+	(*SetBillingGroupStatusResponse)(nil),                                                 // 149: blueapi.gc.v1.SetBillingGroupStatusResponse
+	(*GetBillingGroupStatusResponse)(nil),                                                 // 150: blueapi.gc.v1.GetBillingGroupStatusResponse
+	(*BillingGroupPurchaseNotification)(nil),                                              // 151: blueapi.gc.v1.BillingGroupPurchaseNotification
+	(*NotificationChannelSummary)(nil),                                                    // 152: blueapi.gc.v1.NotificationChannelSummary
+	(*GetBillingGroupPurchaseNotificationResponse)(nil),                                   // 153: blueapi.gc.v1.GetBillingGroupPurchaseNotificationResponse
+	(*ValidateBillingGroupResponse)(nil),                                                  // 154: blueapi.gc.v1.ValidateBillingGroupResponse
+	(*GetAwsPrivateOfferResponse)(nil),                                                    // 155: blueapi.gc.v1.GetAwsPrivateOfferResponse
+	(*AcceptBillingGroupTermsResponse)(nil),                                               // 156: blueapi.gc.v1.AcceptBillingGroupTermsResponse
+	(*ListDraftPurchasePlansResponse)(nil),                                                // 157: blueapi.gc.v1.ListDraftPurchasePlansResponse
+	(*DeleteDraftPurchasePlanResponse)(nil),                                               // 158: blueapi.gc.v1.DeleteDraftPurchasePlanResponse
+	(*GetAvailableCommitmentTypesResponse)(nil),                                           // 159: blueapi.gc.v1.GetAvailableCommitmentTypesResponse
+	(*GetGuaranteedCommitmentTemplateUrlResponse)(nil),                                    // 160: blueapi.gc.v1.GetGuaranteedCommitmentTemplateUrlResponse
+	(*CreateGuaranteedCommitmentAccessResponse)(nil),                                      // 161: blueapi.gc.v1.CreateGuaranteedCommitmentAccessResponse
+	(*GetPurchasePlansDetailsResponse)(nil),                                               // 162: blueapi.gc.v1.GetPurchasePlansDetailsResponse
+	(*CreateCustomCommitmentPlanResponse)(nil),                                            // 163: blueapi.gc.v1.CreateCustomCommitmentPlanResponse
+	(*AzureArcheraOrgFeatureStatus)(nil),                                                  // 164: blueapi.gc.v1.AzureArcheraOrgFeatureStatus
+	(*AzureArcheraOrgLeaseBudget)(nil),                                                    // 165: blueapi.gc.v1.AzureArcheraOrgLeaseBudget
+	(*AzureArcheraOrg)(nil),                                                               // 166: blueapi.gc.v1.AzureArcheraOrg
+	(*AzureOnboardingCreatedBy)(nil),                                                      // 167: blueapi.gc.v1.AzureOnboardingCreatedBy
+	(*AzureOnboardingState)(nil),                                                          // 168: blueapi.gc.v1.AzureOnboardingState
+	(*StartAzureOnboardingResponse)(nil),                                                  // 169: blueapi.gc.v1.StartAzureOnboardingResponse
+	(*GetAzureOnboardingAuthUrlResponse)(nil),                                             // 170: blueapi.gc.v1.GetAzureOnboardingAuthUrlResponse
+	(*AzureAccount)(nil),                                                                  // 171: blueapi.gc.v1.AzureAccount
+	(*ListAzureOnboardingAccountsResponse)(nil),                                           // 172: blueapi.gc.v1.ListAzureOnboardingAccountsResponse
+	(*AzureIntegrationFeatureStatus)(nil),                                                 // 173: blueapi.gc.v1.AzureIntegrationFeatureStatus
+	(*AzureIntegrationOnboarding)(nil),                                                    // 174: blueapi.gc.v1.AzureIntegrationOnboarding
+	(*AzureIntegration)(nil),                                                              // 175: blueapi.gc.v1.AzureIntegration
+	(*CreateAzureIntegrationResponse)(nil),                                                // 176: blueapi.gc.v1.CreateAzureIntegrationResponse
+	(*ListAzureIntegrationsResponse)(nil),                                                 // 177: blueapi.gc.v1.ListAzureIntegrationsResponse
+	(*DeleteAzureIntegrationResponse)(nil),                                                // 178: blueapi.gc.v1.DeleteAzureIntegrationResponse
+	nil,                                                                                   // 179: blueapi.gc.v1.AggregateMetrics.SummariesEntry
+	(*VerifyAwsOnboardingResponse_AwsOnboardingFeatureCheck)(nil),                         // 180: blueapi.gc.v1.VerifyAwsOnboardingResponse.AwsOnboardingFeatureCheck
+	(*ListPayerAccountsResponse_PayerAccount)(nil),                                        // 181: blueapi.gc.v1.ListPayerAccountsResponse.PayerAccount
+	(*ListBillingGroupsResponse_BillingGroup)(nil),                                        // 182: blueapi.gc.v1.ListBillingGroupsResponse.BillingGroup
 	nil,                     // 183: blueapi.gc.v1.AzureArcheraOrg.ProviderRootSegmentIdsEntry
 	(*structpb.Value)(nil),  // 184: google.protobuf.Value
 	(*structpb.Struct)(nil), // 185: google.protobuf.Struct

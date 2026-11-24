@@ -4339,7 +4339,7 @@ type GetMonthOnMonthCostForecastRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional. Default is current month. Format: `yyyymm`.
+	//Optional. Default is current month. Format: `yyyymm`.
 	Date          string `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4473,7 +4473,7 @@ type GetMonthToDateCostForecastRequest struct {
 	Level string `protobuf:"bytes,2,opt,name=level,proto3" json:"level,omitempty"`
 	// Required. Account or AccountGroup Id
 	Id string `protobuf:"bytes,3,opt,name=id,proto3" json:"id,omitempty"`
-	// Optional. Default is current month. Format: `yyyymm`.
+	//Optional. Default is current month. Format: `yyyymm`.
 	Date          string `protobuf:"bytes,4,opt,name=date,proto3" json:"date,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -4799,7 +4799,7 @@ func (x *CreateAccountBudgetRequest) GetData() *api.Budget {
 // Response message for CreateAccountBudget
 type CreateAccountBudgetResponse struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Budget Id
+	//Budget Id
 	BudgetId      string `protobuf:"bytes,1,opt,name=budgetId,proto3" json:"budgetId,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -7749,9 +7749,9 @@ type BudgetAlerts struct {
 	DailyRate *api.DailyRateIncreaseBudgetAlert `protobuf:"bytes,7,opt,name=dailyRate,proto3" json:"dailyRate,omitempty"`
 	// Monthly setting for budget alert.
 	Monthly *api.MonthlyBudgetAlert `protobuf:"bytes,6,opt,name=monthly,proto3" json:"monthly,omitempty"`
-	// Custom Period setting for budget alert.
+	//  Custom Period setting for budget alert.
 	CustomPeriod *api.CustomPeriodBudgetAlert `protobuf:"bytes,8,opt,name=customPeriod,proto3" json:"customPeriod,omitempty"`
-	// Custom Month setting for budget alert.
+	//  Custom Month setting for budget alert.
 	CustomMonth   *api.CustomMonthBudgetAlert `protobuf:"bytes,9,opt,name=customMonth,proto3" json:"customMonth,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -9320,12 +9320,11 @@ type CalculatorCostModifierAwsOptions_Modifier struct {
 	//
 	// Supported operators are `*`, `/`, `+`, `-`, and `%`. You can use parenthesis `()` to control precedence. Additional supported operators include `==`, `!=`, `!`, `>`, `<`, `>=`, `<=`, and the ternary operator `? :`, or `cond ? expr1 : expr2`.
 	// Examples:
-	//
-	//	`1 + 2 * 3` = 7
-	//	`(1 + 2) * 3` = 9
-	//	`7.8 % 5` = 2.8
-	//	`true ? 1.1 : 2.2` = 1.1
-	//	`1 > 2 ? 1.1 : 2.2` = 2.2
+	//  `1 + 2 * 3` = 7
+	//  `(1 + 2) * 3` = 9
+	//  `7.8 % 5` = 2.8
+	//  `true ? 1.1 : 2.2` = 1.1
+	//  `1 > 2 ? 1.1 : 2.2` = 2.2
 	//
 	// You can use the `cost` variable to reference the original lineitem cost. For example, if you want to add $10 to the cost, you can use the formula: `cost + 10`. For trueunblended-type billing groups, `cost` refers to the calculated trueunblended cost.
 	//
@@ -9514,12 +9513,11 @@ type CalculatorCostModifierAzureOptions_Modifier struct {
 	//
 	// Supported operators are `*`, `/`, `+`, `-`, and `%`. You can use parenthesis `()` to control precedence. Additional supported operators include `==`, `!=`, `!`, `>`, `<`, `>=`, `<=`, and the ternary operator `? :`, or `cond ? expr1 : expr2`.
 	// Examples:
-	//
-	//	`1 + 2 * 3` = 7
-	//	`(1 + 2) * 3` = 9
-	//	`7.8 % 5` = 2.8
-	//	`true ? 1.1 : 2.2` = 1.1
-	//	`1 > 2 ? 1.1 : 2.2` = 2.2
+	//  `1 + 2 * 3` = 7
+	//  `(1 + 2) * 3` = 9
+	//  `7.8 % 5` = 2.8
+	//  `true ? 1.1 : 2.2` = 1.1
+	//  `1 > 2 ? 1.1 : 2.2` = 2.2
 	//
 	// You can use the `cost` variable to reference the original lineitem cost. For example, if you want to add $10 to the cost, you can use the formula: `cost + 10`. For trueunblended-type billing groups, `cost` refers to the calculated trueunblended cost.
 	//

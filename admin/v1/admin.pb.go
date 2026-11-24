@@ -1588,7 +1588,7 @@ func (*CreateDefaultNotificationChannelRequest) Descriptor() ([]byte, []int) {
 // Request message for the Admin.UpdateNotificationChannel rpc.
 type UpdateNotificationChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the notification channel to update.
+	//Required. ID of the notification channel to update.
 	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	// Required. Name of the notification channel.
 	Name string `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
@@ -1688,7 +1688,7 @@ func (x *UpdateNotificationChannelRequest) GetProduct() string {
 // Request message for the Admin.DeleteNotificationChannel rpc.
 type DeleteNotificationChannelRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required. ID of the notification channel to delete.
+	//Required. ID of the notification channel to delete.
 	Id            string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -2155,17 +2155,17 @@ func (x *DeleteNotificationRequest) GetNotificationType() string {
 // Request message for Admin.CreateProformaCur rpc
 type CreateProformaCurRequest struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Required.
+	//Required.
 	PayerId string `protobuf:"bytes,1,opt,name=payerId,proto3" json:"payerId,omitempty"`
-	// Required.
+	//Required.
 	BillingInternalId string `protobuf:"bytes,2,opt,name=billingInternalId,proto3" json:"billingInternalId,omitempty"`
 	// Required.
 	ReportName string `protobuf:"bytes,3,opt,name=reportName,proto3" json:"reportName,omitempty"`
-	// Optional. Default value: `alphaus-proforma-cur-export`
+	//Optional. Default value: `alphaus-proforma-cur-export`
 	S3BucketName string `protobuf:"bytes,4,opt,name=s3BucketName,proto3" json:"s3BucketName,omitempty"`
-	// Optional. Default value: `pre`
+	//Optional. Default value: `pre`
 	S3Prefix string `protobuf:"bytes,5,opt,name=s3Prefix,proto3" json:"s3Prefix,omitempty"`
-	// Optional. Default value: `us-east-1`
+	//Optional. Default value: `us-east-1`
 	S3Region      string `protobuf:"bytes,6,opt,name=s3Region,proto3" json:"s3Region,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache

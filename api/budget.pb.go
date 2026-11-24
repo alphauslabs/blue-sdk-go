@@ -84,7 +84,7 @@ func (x *Budget) GetMonthlyBudget() []*MonthlyBudget {
 
 type MonthlyBudget struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
-	// Format: yyyymm
+	//Format: yyyymm
 	YearMonth     string  `protobuf:"bytes,1,opt,name=yearMonth,proto3" json:"yearMonth,omitempty"`
 	Amount        float64 `protobuf:"fixed64,2,opt,name=amount,proto3" json:"amount,omitempty"`
 	unknownFields protoimpl.UnknownFields

@@ -323,8 +323,8 @@ type ServiceDiscountsExport struct {
 	// data is [blueapi.api.ripple.v1.ExportData]
 	//
 	// content. Base64 encoded value.
-	// For example, content :“
-	// Decoding this value, get “.
+	// For example, content :``
+	// Decoding this value, get ``.
 	//
 	// downloadedRows. Downloaded content lines.
 	//
