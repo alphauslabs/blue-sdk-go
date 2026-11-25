@@ -39,6 +39,7 @@ const (
 	GuaranteedCommitments_ListPurchasePlansBySegment_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/ListPurchasePlansBySegment"
 	GuaranteedCommitments_GetUpdatedPurchasePlansBySegment_FullMethodName       = "/blueapi.gc.v1.GuaranteedCommitments/GetUpdatedPurchasePlansBySegment"
 	GuaranteedCommitments_GetPurchasePlansDetails_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlansDetails"
+	GuaranteedCommitments_GetPurchasePlanHistory_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/GetPurchasePlanHistory"
 	GuaranteedCommitments_SaveCommitmentsPlanAsDraft_FullMethodName             = "/blueapi.gc.v1.GuaranteedCommitments/SaveCommitmentsPlanAsDraft"
 	GuaranteedCommitments_ListDraftPurchasePlans_FullMethodName                 = "/blueapi.gc.v1.GuaranteedCommitments/ListDraftPurchasePlans"
 	GuaranteedCommitments_DeleteDraftPurchasePlan_FullMethodName                = "/blueapi.gc.v1.GuaranteedCommitments/DeleteDraftPurchasePlan"
@@ -133,6 +134,9 @@ type GuaranteedCommitmentsClient interface {
 	// WORK-IN-PROGRESS: Retrieves full details of a specific purchase plan of a company.
 	// Includes the basic info, detailed metrics, commitment line items, covered infrastructure resource matches, and audit history.
 	GetPurchasePlansDetails(ctx context.Context, in *GetPurchasePlansDetailsRequest, opts ...grpc.CallOption) (*GetPurchasePlansDetailsResponse, error)
+	// WORK-IN-PROGRESS: Retrieves the activity history of a specific purchase plan.
+	// Returns only plan activity events (no comments), oldest first.
+	GetPurchasePlanHistory(ctx context.Context, in *GetPurchasePlanHistoryRequest, opts ...grpc.CallOption) (*GetPurchasePlanHistoryResponse, error)
 	// WORK-IN-PROGRESS: Saves a commitment purchase plan as draft.
 	SaveCommitmentsPlanAsDraft(ctx context.Context, in *SaveCommitmentsPlanAsDraftRequest, opts ...grpc.CallOption) (*DefaultPurchasePlan, error)
 	// WORK-IN-PROGRESS: Retrieves the drafted purchase plans
@@ -509,6 +513,16 @@ func (c *guaranteedCommitmentsClient) GetPurchasePlansDetails(ctx context.Contex
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetPurchasePlansDetailsResponse)
 	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetPurchasePlansDetails_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *guaranteedCommitmentsClient) GetPurchasePlanHistory(ctx context.Context, in *GetPurchasePlanHistoryRequest, opts ...grpc.CallOption) (*GetPurchasePlanHistoryResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetPurchasePlanHistoryResponse)
+	err := c.cc.Invoke(ctx, GuaranteedCommitments_GetPurchasePlanHistory_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -949,6 +963,9 @@ type GuaranteedCommitmentsServer interface {
 	// WORK-IN-PROGRESS: Retrieves full details of a specific purchase plan of a company.
 	// Includes the basic info, detailed metrics, commitment line items, covered infrastructure resource matches, and audit history.
 	GetPurchasePlansDetails(context.Context, *GetPurchasePlansDetailsRequest) (*GetPurchasePlansDetailsResponse, error)
+	// WORK-IN-PROGRESS: Retrieves the activity history of a specific purchase plan.
+	// Returns only plan activity events (no comments), oldest first.
+	GetPurchasePlanHistory(context.Context, *GetPurchasePlanHistoryRequest) (*GetPurchasePlanHistoryResponse, error)
 	// WORK-IN-PROGRESS: Saves a commitment purchase plan as draft.
 	SaveCommitmentsPlanAsDraft(context.Context, *SaveCommitmentsPlanAsDraftRequest) (*DefaultPurchasePlan, error)
 	// WORK-IN-PROGRESS: Retrieves the drafted purchase plans
@@ -1118,6 +1135,9 @@ func (UnimplementedGuaranteedCommitmentsServer) GetUpdatedPurchasePlansBySegment
 }
 func (UnimplementedGuaranteedCommitmentsServer) GetPurchasePlansDetails(context.Context, *GetPurchasePlansDetailsRequest) (*GetPurchasePlansDetailsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetPurchasePlansDetails not implemented")
+}
+func (UnimplementedGuaranteedCommitmentsServer) GetPurchasePlanHistory(context.Context, *GetPurchasePlanHistoryRequest) (*GetPurchasePlanHistoryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetPurchasePlanHistory not implemented")
 }
 func (UnimplementedGuaranteedCommitmentsServer) SaveCommitmentsPlanAsDraft(context.Context, *SaveCommitmentsPlanAsDraftRequest) (*DefaultPurchasePlan, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SaveCommitmentsPlanAsDraft not implemented")
@@ -1611,6 +1631,24 @@ func _GuaranteedCommitments_GetPurchasePlansDetails_Handler(srv interface{}, ctx
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(GuaranteedCommitmentsServer).GetPurchasePlansDetails(ctx, req.(*GetPurchasePlansDetailsRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _GuaranteedCommitments_GetPurchasePlanHistory_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetPurchasePlanHistoryRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(GuaranteedCommitmentsServer).GetPurchasePlanHistory(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: GuaranteedCommitments_GetPurchasePlanHistory_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(GuaranteedCommitmentsServer).GetPurchasePlanHistory(ctx, req.(*GetPurchasePlanHistoryRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -2373,6 +2411,10 @@ var GuaranteedCommitments_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetPurchasePlansDetails",
 			Handler:    _GuaranteedCommitments_GetPurchasePlansDetails_Handler,
+		},
+		{
+			MethodName: "GetPurchasePlanHistory",
+			Handler:    _GuaranteedCommitments_GetPurchasePlanHistory_Handler,
 		},
 		{
 			MethodName: "SaveCommitmentsPlanAsDraft",

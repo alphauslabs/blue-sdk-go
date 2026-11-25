@@ -4847,6 +4847,14 @@
                 </li>
               
                 <li>
+                  <a href="#blueapi.gc.v1.GetPurchasePlanHistoryRequest"><span class="badge">M</span>GetPurchasePlanHistoryRequest</a>
+                </li>
+              
+                <li>
+                  <a href="#blueapi.gc.v1.GetPurchasePlanHistoryResponse"><span class="badge">M</span>GetPurchasePlanHistoryResponse</a>
+                </li>
+              
+                <li>
                   <a href="#blueapi.gc.v1.GetPurchasePlansDetailsRequest"><span class="badge">M</span>GetPurchasePlansDetailsRequest</a>
                 </li>
               
@@ -60580,6 +60588,55 @@ clamped to the current month. </p></td>
 
         
       
+        <h3 id="blueapi.gc.v1.GetPurchasePlanHistoryRequest">GetPurchasePlanHistoryRequest</h3>
+        <p>Request message for the GuaranteedCommitments.GetPurchasePlanHistory rpc.</p><p>Available to Ripple and Wave callers, with the same plan access rules</p><p>as applying a plan.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>planId</td>
+                  <td><a href="#string">string</a></td>
+                  <td></td>
+                  <td><p>Required. The purchase plan ID whose activity history to return.
+Returns NOT_FOUND if the plan doesn&#39;t exist. </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
+        <h3 id="blueapi.gc.v1.GetPurchasePlanHistoryResponse">GetPurchasePlanHistoryResponse</h3>
+        <p>Response message for the GuaranteedCommitments.GetPurchasePlanHistory rpc.</p><p>Lists the plan's activity events (no comments), oldest first.</p>
+
+        
+          <table class="field-table">
+            <thead>
+              <tr><td>Field</td><td>Type</td><td>Label</td><td>Description</td></tr>
+            </thead>
+            <tbody>
+              
+                <tr>
+                  <td>history</td>
+                  <td><a href="#blueapi.gc.v1.PlanHistoryEntry">PlanHistoryEntry</a></td>
+                  <td>repeated</td>
+                  <td><p>Plan activity events only, oldest first </p></td>
+                </tr>
+              
+            </tbody>
+          </table>
+
+          
+
+        
+      
         <h3 id="blueapi.gc.v1.GetPurchasePlansDetailsRequest">GetPurchasePlansDetailsRequest</h3>
         <p></p>
 
@@ -66667,6 +66724,14 @@ Includes the basic info, detailed metrics, commitment line items, covered infras
               </tr>
             
               <tr>
+                <td>GetPurchasePlanHistory</td>
+                <td><a href="#blueapi.gc.v1.GetPurchasePlanHistoryRequest">GetPurchasePlanHistoryRequest</a></td>
+                <td><a href="#blueapi.gc.v1.GetPurchasePlanHistoryResponse">GetPurchasePlanHistoryResponse</a></td>
+                <td><p>WORK-IN-PROGRESS: Retrieves the activity history of a specific purchase plan.
+Returns only plan activity events (no comments), oldest first.</p></td>
+              </tr>
+            
+              <tr>
                 <td>SaveCommitmentsPlanAsDraft</td>
                 <td><a href="#blueapi.gc.v1.SaveCommitmentsPlanAsDraftRequest">SaveCommitmentsPlanAsDraftRequest</a></td>
                 <td><a href="#blueapi.gc.v1.DefaultPurchasePlan">DefaultPurchasePlan</a></td>
@@ -67181,6 +67246,16 @@ trusted request context.</p></td>
                 <td>GetPurchasePlansDetails</td>
                 <td>GET</td>
                 <td>/v1/commitments/purchaseplans/{planId}</td>
+                <td></td>
+              </tr>
+              
+            
+              
+              
+              <tr>
+                <td>GetPurchasePlanHistory</td>
+                <td>GET</td>
+                <td>/v1/commitments/purchaseplans/{planId}/history</td>
                 <td></td>
               </tr>
               
